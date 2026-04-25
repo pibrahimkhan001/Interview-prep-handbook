@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Interview Prep Mastery — Structured Web Development Interview Guide</title>
+<meta name="description" content="A structured, beginner-friendly interview preparation guide covering JavaScript, Python, HTML, CSS, React, Node.js, databases, system design, and DevOps with thousands of detailed questions and answers.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%239a6b1d'/%3E%3Ctext x='50' y='68' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold' font-size='48'%3EIP%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="site-header">
+  <div class="site-header__inner">
+    <button class="menu-toggle" aria-label="Open menu" type="button">☰ Menu</button>
+    <a class="brand" href="index.html">
+      <span class="brand__mark">IP</span>
+      <span class="brand__text">
+        <span class="brand__title">Interview Prep Mastery</span>
+        <span class="brand__subtitle">Interactive learning guide</span>
+      </span>
+    </a>
+    <nav class="header-nav">
+      <a href="index.html#roadmap">Roadmap</a>
+      <a href="index.html#chapters">All chapters</a>
+      <button class="theme-toggle" type="button" aria-label="Toggle color scheme">☾ Dark</button>
+    </nav>
+  </div>
+</header>
+<div class="layout">
+<aside class="sidebar" aria-label="Site navigation">
+  <div class="sidebar__header">Chapter Navigator</div>
+  
+        <div class="nav-part">
+          <div class="nav-part__label">Part 1</div>
+          <div class="nav-part__title">Core Programming Languages</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">JavaScript</li><li><a class="" href="chapters/javascript-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="chapters/javascript-tricky.html"><span class="nav-item__title">Tricky</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="chapters/javascript-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="chapters/javascript-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="chapters/javascript-advanced-coding.html"><span class="nav-item__title">Advanced Coding</span><span class="nav-item__meta">100 questions · 100 min read</span></a></li><li><a class="" href="chapters/javascript-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="chapters/javascript-advanced-scenario.html"><span class="nav-item__title">Advanced Scenario Based</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Python</li><li><a class="" href="chapters/python-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="chapters/python-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="chapters/python-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="chapters/python-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-part">
+          <div class="nav-part__label">Part 2</div>
+          <div class="nav-part__title">Web Fundamentals</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">HTML</li><li><a class="" href="chapters/html-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="chapters/html-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="chapters/html-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CSS</li><li><a class="" href="chapters/css-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">102 questions · 60 min read</span></a></li><li><a class="" href="chapters/css-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="chapters/css-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">101 questions · 90 min read</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-part">
+          <div class="nav-part__label">Part 3</div>
+          <div class="nav-part__title">Backend Technologies</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Node.Js</li><li><a class="" href="chapters/nodejs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="chapters/nodejs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="chapters/nodejs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="chapters/nodejs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ExpressJS</li><li><a class="" href="chapters/expressjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="chapters/expressjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="chapters/expressjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">API</li><li><a class="" href="chapters/api-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="chapters/api-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="chapters/api-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="chapters/api-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-part">
+          <div class="nav-part__label">Part 4</div>
+          <div class="nav-part__title">Frontend Frameworks</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ReactJS</li><li><a class="" href="chapters/reactjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">101 questions · 60 min read</span></a></li><li><a class="" href="chapters/reactjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="chapters/reactjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="chapters/reactjs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-part">
+          <div class="nav-part__label">Part 5</div>
+          <div class="nav-part__title">Databases</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MYSQL</li><li><a class="" href="chapters/mysql-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="chapters/mysql-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="chapters/mysql-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="chapters/mysql-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MongoDB</li><li><a class="" href="chapters/mongodb-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="chapters/mongodb-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="chapters/mongodb-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="chapters/mongodb-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-part">
+          <div class="nav-part__label">Part 6</div>
+          <div class="nav-part__title">System Design &amp; DevOps</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">System Design MERN Stack</li><li><a class="" href="chapters/system-design-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="chapters/system-design-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="chapters/system-design-mern-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Infrastructure MERN Stack</li><li><a class="" href="chapters/infrastructure-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="chapters/infrastructure-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CI/CD Pipeline</li><li><a class="" href="chapters/cicd-pipeline-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="chapters/cicd-pipeline-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="chapters/cicd-pipeline-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="chapters/cicd-pipeline-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
+          </ul>
+        </div>
+</aside>
+<main class="main" id="main">
+
+  <section class="hero">
+    <div class="hero__eyebrow">A structured roadmap for interview-ready engineers</div>
+    <h1 class="hero__title">Interview Prep Mastery</h1>
+    <p class="hero__lede">
+      Learn web development from fundamentals to advanced system design through
+      a curated library of 4,904+ interview questions and answers. Every topic includes
+      beginner-friendly explanations, working code examples, architectural diagrams,
+      and real-world trade-off discussions.
+    </p>
+    <div class="hero__actions">
+      <a class="btn btn--primary" href="chapters/javascript-basic.html">Start with JavaScript Basics →</a>
+      <a class="btn btn--secondary" href="#chapters">Browse the full curriculum</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="stat__value">4,904</div><div class="stat__label">Detailed Q&amp;A</div></div>
+      <div class="stat"><div class="stat__value">13</div><div class="stat__label">Topics covered</div></div>
+      <div class="stat"><div class="stat__value">49</div><div class="stat__label">Chapters</div></div>
+      <div class="stat"><div class="stat__value">Beginner</div><div class="stat__label">To advanced</div></div>
+    </div>
+  </section>
+
+  <section class="section" id="who">
+    <div class="section__eyebrow">Who this is for</div>
+    <h2 class="section__title">Designed for engineers preparing for real interviews</h2>
+    <p class="section__lede">
+      Whether you are looking for your first developer role, transitioning stacks, or preparing
+      for senior-level system design rounds — the material progresses from first principles
+      all the way up to architect-grade reasoning.
+    </p>
+    <div class="card-grid">
+      <div class="card"><div class="card__title">Junior developers</div><div class="card__desc">Lock in the fundamentals of JavaScript, HTML, CSS, and databases before your first technical interview.</div></div>
+      <div class="card"><div class="card__title">MERN stack candidates</div><div class="card__desc">MongoDB, Express, React, and Node — plus the system design knowledge needed to reason about them together.</div></div>
+      <div class="card"><div class="card__title">Python full-stack engineers</div><div class="card__desc">Deep Python topics alongside web fundamentals — everything from list comprehensions to concurrency patterns.</div></div>
+      <div class="card"><div class="card__title">Senior engineers</div><div class="card__desc">Advanced scenario-based questions, DevOps pipelines, and Infrastructure design for architect-level interviews.</div></div>
+    </div>
+  </section>
+
+  <section class="section" id="roadmap">
+    <div class="section__eyebrow">Learning journey</div>
+    <h2 class="section__title">A step-by-step path from fundamentals to architect-grade thinking</h2>
+    <p class="section__lede">
+      The curriculum is organized into six parts. Start at Part 1 if you are new, or jump directly
+      to the topic you need. Every chapter stands on its own, but the sequence is designed to build
+      intuition progressively.
+    </p>
+    <div class="card-grid">
+      
+        <a class="card" href="#part-1">
+          <div class="card__eyebrow">Part 1</div>
+          <div class="card__title">Core Programming Languages</div>
+          <div class="card__desc">Build mastery of the languages that power modern web applications. JavaScript for everything client and server, Python for versatility.</div>
+          <div class="card__meta"><span>2 topics</span><span>11 chapters</span></div>
+        </a>
+        <a class="card" href="#part-2">
+          <div class="card__eyebrow">Part 2</div>
+          <div class="card__title">Web Fundamentals</div>
+          <div class="card__desc">Structure and style: the two pillars every web developer must know deeply.</div>
+          <div class="card__meta"><span>2 topics</span><span>6 chapters</span></div>
+        </a>
+        <a class="card" href="#part-3">
+          <div class="card__eyebrow">Part 3</div>
+          <div class="card__title">Backend Technologies</div>
+          <div class="card__desc">Server-side runtimes, web frameworks, and API design — from listening on a port to building a production-ready REST service.</div>
+          <div class="card__meta"><span>3 topics</span><span>11 chapters</span></div>
+        </a>
+        <a class="card" href="#part-4">
+          <div class="card__eyebrow">Part 4</div>
+          <div class="card__title">Frontend Frameworks</div>
+          <div class="card__desc">Modern component architecture, state management, and the React ecosystem.</div>
+          <div class="card__meta"><span>1 topic</span><span>4 chapters</span></div>
+        </a>
+        <a class="card" href="#part-5">
+          <div class="card__eyebrow">Part 5</div>
+          <div class="card__title">Databases</div>
+          <div class="card__desc">Relational and document stores — when to use which, how to design schemas, and how to query them efficiently.</div>
+          <div class="card__meta"><span>2 topics</span><span>8 chapters</span></div>
+        </a>
+        <a class="card" href="#part-6">
+          <div class="card__eyebrow">Part 6</div>
+          <div class="card__title">System Design &amp; DevOps</div>
+          <div class="card__desc">Architect MERN applications at scale, set up cloud infrastructure, and automate delivery with modern CI/CD pipelines.</div>
+          <div class="card__meta"><span>3 topics</span><span>9 chapters</span></div>
+        </a>
+    </div>
+  </section>
+
+  <section class="section" id="how">
+    <div class="section__eyebrow">How to study</div>
+    <h2 class="section__title">How to get the most out of this guide</h2>
+    <p class="section__lede">
+      Passive reading is the slow path. Here is the study loop that interview-winning candidates follow.
+    </p>
+    <div class="card-grid">
+      <div class="card"><div class="card__eyebrow">Step 1</div><div class="card__title">Attempt first, read second</div><div class="card__desc">Before expanding the answer, spend 60 seconds thinking through the question yourself. Active recall cements learning.</div></div>
+      <div class="card"><div class="card__eyebrow">Step 2</div><div class="card__title">Trace the examples</div><div class="card__desc">For every code snippet, mentally execute it line by line. Predict the output before you read the explanation.</div></div>
+      <div class="card"><div class="card__eyebrow">Step 3</div><div class="card__title">Explain it aloud</div><div class="card__desc">If you cannot explain a concept in your own words without looking, you do not fully understand it yet.</div></div>
+      <div class="card"><div class="card__eyebrow">Step 4</div><div class="card__title">Revisit tricky topics</div><div class="card__desc">Spaced repetition works. Bookmark tough questions and return after a day, a week, and a month.</div></div>
+    </div>
+  </section>
+
+  <section id="chapters" class="section" style="border-bottom: none;">
+    <div class="section__eyebrow">Chapter directory</div>
+    <h2 class="section__title">Browse every chapter</h2>
+    <p class="section__lede">
+      The full curriculum in one page. Click any chapter to jump straight into the questions.
+    </p>
+  </section>
+  
+        <section class="part-directory" id="part-1">
+          <div class="part-directory__header">
+            <div class="part-directory__eyebrow">Part 1</div>
+            <h2 class="part-directory__title">Core Programming Languages</h2>
+            <p class="part-directory__desc">Build mastery of the languages that power modern web applications. JavaScript for everything client and server, Python for versatility.</p>
+          </div>
+          
+            <div style="margin-bottom: 2.5rem;">
+              <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--text);">JavaScript</h3>
+              <div class="card-grid">
+                <a class="card" href="chapters/javascript-basic.html">
+                  <div class="card__eyebrow">JavaScript · Basic</div>
+                  <div class="card__title">JavaScript — Basic</div>
+                  <div class="card__desc">Foundational knowledge — definitions, syntax, and core mechanics every beginner should know.</div>
+                  <div class="card__meta"><span>100 questions</span><span>60 min read</span></div>
+                </a>
+                <a class="card" href="chapters/javascript-tricky.html">
+                  <div class="card__eyebrow">JavaScript · Tricky</div>
+                  <div class="card__title">JavaScript — Tricky</div>
+                  <div class="card__desc">Nuanced questions that separate strong candidates from ordinary ones. Edge cases, gotchas, and conceptual subtleties.</div>
+                  <div class="card__meta"><span>100 questions</span><span>75 min read</span></div>
+                </a>
+                <a class="card" href="chapters/javascript-coding.html">
+                  <div class="card__eyebrow">JavaScript · Coding</div>
+                  <div class="card__title">JavaScript — Coding</div>
+                  <div class="card__desc">Practical coding problems with full solutions and line-by-line explanations.</div>
+                  <div class="card__meta"><span>100 questions</span><span>90 min read</span></div>
+                </a>
+                <a class="card" href="chapters/javascript-advanced.html">
+                  <div class="card__eyebrow">JavaScript · Advanced</div>
+                  <div class="card__title">JavaScript — Advanced</div>
+                  <div class="card__desc">Deep internals, architecture decisions, and questions typical of senior-level interviews.</div>
+                  <div class="card__meta"><span>100 questions</span><span>90 min read</span></div>
+                </a>
+                <a class="card" href="chapters/javascript-advanced-coding.html">
+                  <div class="card__eyebrow">JavaScript · Advanced Coding</div>
+                  <div class="card__title">JavaScript — Advanced Coding</div>
+                  <div class="card__desc">Algorithmically challenging problems — data structures, performance optimization, and tricky logic.</div>
+                  <div class="card__meta"><span>100 questions</span><span>100 min read</span></div>
+                </a>
+                <a class="card" href="chapters/javascript-scenario.html">
+                  <div class="card__eyebrow">JavaScript · Scenario Based</div>
+                  <div class="card__title">JavaScript — Scenario Based</div>
+                  <div class="card__desc">Real-world situational questions — how you&#x27;d approach a concrete design or debugging problem.</div>
+                  <div class="card__meta"><span>100 questions</span><span>75 min read</span></div>
+                </a>
+                <a class="card" href="chapters/javascript-advanced-scenario.html">
+                  <div class="card__eyebrow">JavaScript · Advanced Scenario Based</div>
+                  <div class="card__title">JavaScript — Advanced Scenario Based</div>
+                  <div class="card__desc">Senior-level system design scenarios — trade-offs, scalability, and architectural reasoning.</div>
+                  <div class="card__meta"><span>100 questions</span><span>90 min read</span></div>
+                </a></div>
+            </div>
+            <div style="margin-bottom: 2.5rem;">
+              <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--text);">Python</h3>
+              <div class="card-grid">
+                <a class="card" href="chapters/python-basic.html">
+                  <div class="card__eyebrow">Python · Basic</div>
+                  <div class="card__title">Python — Basic</div>
+                  <div class="card__desc">Foundational knowledge — definitions, syntax, and core mechanics every beginner should know.</div>
+                  <div class="card__meta"><span>100 questions</span><span>60 min read</span></div>
+                </a>
+                <a class="card" href="chapters/python-coding.html">
+                  <div class="card__eyebrow">Python · Coding</div>
+                  <div class="card__title">Python — Coding</div>
+                  <div class="card__desc">Practical coding problems with full solutions and line-by-line explanations.</div>
+                  <div class="card__meta"><span>100 questions</span><span>90 min read</span></div>
+                </a>
+                <a class="card" href="chapters/python-advanced.html">
+                  <div class="card__eyebrow">Python · Advanced</div>
+                  <div class="card__title">Python — Advanced</div>
+                  <div class="card__desc">Deep internals, architecture decisions, and questions typical of senior-level interviews.</div>
+                  <div class="card__meta"><span>100 questions</span><span>90 min read</span></div>
+                </a>
+                <a class="card" href="chapters/python-scenario.html">
+                  <div class="card__eyebrow">Python · Scenario Based</div>
+                  <div class="card__title">Python — Scenario Based</div>
+                  <div class="card__desc">Real-world situational questions — how you&#x27;d approach a concrete design or debugging problem.</div>
+                  <div class="card__meta"><span>100 questions</span><span>75 min read</span></div>
+                </a></div>
+            </div>
+        </section>
+        <section class="part-directory" id="part-2">
+          <div class="part-directory__header">
+            <div class="part-directory__eyebrow">Part 2</div>
+            <h2 class="part-directory__title">Web Fundamentals</h2>
+            <p class="part-directory__desc">Structure and style: the two pillars every web developer must know deeply.</p>
+          </div>
+          
+            <div style="margin-bottom: 2.5rem;">
+              <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--text);">HTML</h3>
+              <div class="card-grid">
+                <a class="card" href="chapters/html-basic.html">
+                  <div class="card__eyebrow">HTML · Basic</div>
+                  <div class="card__title">HTML — Basic</div>
+                  <div class="card__desc">Foundational knowledge — definitions, syntax, and core mechanics every beginner should know.</div>
+                  <div class="card__meta"><span>100 questions</span><span>60 min read</span></div>
+                </a>
+                <a class="card" href="chapters/html-coding.html">
+                  <div class="card__eyebrow">HTML · Coding</div>
+                  <div class="card__title">HTML — Coding</div>
+                  <div class="card__desc">Practical coding problems with full solutions and line-by-line explanations.</div>
+                  <div class="card__meta"><span>100 questions</span><span>90 min read</span></div>
+                </a>
+                <a class="card" href="chapters/html-advanced.html">
+                  <div class="card__eyebrow">HTML · Advanced</div>
+                  <div class="card__title">HTML — Advanced</div>
+                  <div class="card__desc">Deep internals, architecture decisions, and questions typical of senior-level interviews.</div>
+                  <div class="card__meta"><span>100 questions</span><span>90 min read</span></div>
+                </a></div>
+            </div>
+            <div style="margin-bottom: 2.5rem;">
+              <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--text);">CSS</h3>
+              <div class="card-grid">
+                <a class="card" href="chapters/css-basic.html">
+                  <div class="card__eyebrow">CSS · Basic</div>
+                  <div class="card__title">CSS — Basic</div>
+                  <div class="card__desc">Foundational knowledge — definitions, syntax, and core mechanics every beginner should know.</div>
+                  <div class="card__meta"><span>102 questions</span><span>60 min read</span></div>
+                </a>
+                <a class="card" href="chapters/css-coding.html">
+                  <div class="card__eyebrow">CSS · Coding</div>
+                  <div class="card__title">CSS — Coding</div>
+                  <div class="card__desc">Practical coding problems with full solutions and line-by-line explanations.</div>
+                  <div class="card__meta"><span>100 questions</span><span>90 min read</span></div>
+                </a>
+                <a class="card" href="chapters/css-advanced.html">
+                  <div class="card__eyebrow">CSS · Advanced</div>
+                  <div class="card__title">CSS — Advanced</div>
+                  <div class="card__desc">Deep internals, architecture decisions, and questions typical of senior-level interviews.</div>
+                  <div class="card__meta"><span>101 questions</span><span>90 min read</span></div>
+                </a></div>
+            </div>
+        </section>
+        <section class="part-directory" id="part-3">
+          <div class="part-directory__header">
+            <div class="part-directory__eyebrow">Part 3</div>
+            <h2 class="part-directory__title">Backend Technologies</h2>
+            <p class="part-directory__desc">Server-side runtimes, web frameworks, and API design — from listening on a port to building a production-ready REST service.</p>
+          </div>
+          
+            <div style="margin-bottom: 2.5rem;">
+              <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--text);">Node.Js</h3>
+              <div class="card-grid">
+                <a class="card" href="chapters/nodejs-basic.html">
+                  <div class="card__eyebrow">Node.Js · Basic</div>
+                  <div class="card__title">Node.Js — Basic</div>
+                  <div class="card__desc">Foundational knowledge — definitions, syntax, and core mechanics every beginner should know.</div>
+                  <div class="card__meta"><span>100 questions</span><span>60 min read</span></div>
+                </a>
+                <a class="card" href="chapters/nodejs-coding.html">
+                  <div class="card__eyebrow">Node.Js · Coding</div>
+                  <div class="card__title">Node.Js — Coding</div>
+                  <div class="card__desc">Practical coding problems with full solutions and line-by-line explanations.</div>
+                  <div class="card__meta"><span>100 questions</span><span>90 min read</span></div>
+                </a>
+                <a class="card" href="chapters/nodejs-advanced.html">
+                  <div class="card__eyebrow">Node.Js · Advanced</div>
+                  <div class="card__title">Node.Js — Advanced</div>
+                  <div class="card__desc">Deep internals, architecture decisions, and questions typical of senior-level interviews.</div>
+                  <div class="card__meta"><span>100 questions</span><span>90 min read</span></div>
+                </a>
+                <a class="card" href="chapters/nodejs-scenario.html">
+                  <div class="card__eyebrow">Node.Js · Scenario Based</div>
+                  <div class="card__title">Node.Js — Scenario Based</div>
+                  <div class="card__desc">Real-world situational questions — how you&#x27;d approach a concrete design or debugging problem.</div>
+                  <div class="card__meta"><span>100 questions</span><span>75 min read</span></div>
+                </a></div>
+            </div>
+            <div style="margin-bottom: 2.5rem;">
+              <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--text);">ExpressJS</h3>
+              <div class="card-grid">
+                <a class="card" href="chapters/expressjs-basic.html">
+                  <div class="card__eyebrow">ExpressJS · Basic</div>
+                  <div class="card__title">ExpressJS — Basic</div>
+                  <div class="card__desc">Foundational knowledge — definitions, syntax, and core mechanics every beginner should know.</div>
+                  <div class="card__meta"><span>100 questions</span><span>60 min read</span></div>
+                </a>
+                <a class="card" href="chapters/expressjs-coding.html">
+                  <div class="card__eyebrow">ExpressJS · Coding</div>
+                  <div class="card__title">ExpressJS — Coding</div>
+                  <div class="card__desc">Practical coding problems with full solutions and line-by-line explanations.</div>
+                  <div class="card__meta"><span>100 questions</span><span>90 min read</span></div>
+                </a>
+                <a class="card" href="chapters/expressjs-advanced.html">
+                  <div class="card__eyebrow">ExpressJS · Advanced</div>
+                  <div class="card__title">ExpressJS — Advanced</div>
+                  <div class="card__desc">Deep internals, architecture decisions, and questions typical of senior-level interviews.</div>
+                  <div class="card__meta"><span>100 questions</span><span>90 min read</span></div>
+                </a></div>
+            </div>
+            <div style="margin-bottom: 2.5rem;">
+              <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--text);">API</h3>
+              <div class="card-grid">
+                <a class="card" href="chapters/api-basic.html">
+                  <div class="card__eyebrow">API · Basic</div>
+                  <div class="card__title">API — Basic</div>
+                  <div class="card__desc">Foundational knowledge — definitions, syntax, and core mechanics every beginner should know.</div>
+                  <div class="card__meta"><span>100 questions</span><span>60 min read</span></div>
+                </a>
+                <a class="card" href="chapters/api-coding.html">
+                  <div class="card__eyebrow">API · Coding</div>
+                  <div class="card__title">API — Coding</div>
+                  <div class="card__desc">Practical coding problems with full solutions and line-by-line explanations.</div>
+                  <div class="card__meta"><span>100 questions</span><span>90 min read</span></div>
+                </a>
+                <a class="card" href="chapters/api-advanced.html">
+                  <div class="card__eyebrow">API · Advanced</div>
+                  <div class="card__title">API — Advanced</div>
+                  <div class="card__desc">Deep internals, architecture decisions, and questions typical of senior-level interviews.</div>
+                  <div class="card__meta"><span>100 questions</span><span>90 min read</span></div>
+                </a>
+                <a class="card" href="chapters/api-scenario.html">
+                  <div class="card__eyebrow">API · Scenario Based</div>
+                  <div class="card__title">API — Scenario Based</div>
+                  <div class="card__desc">Real-world situational questions — how you&#x27;d approach a concrete design or debugging problem.</div>
+                  <div class="card__meta"><span>100 questions</span><span>75 min read</span></div>
+                </a></div>
+            </div>
+        </section>
+        <section class="part-directory" id="part-4">
+          <div class="part-directory__header">
+            <div class="part-directory__eyebrow">Part 4</div>
+            <h2 class="part-directory__title">Frontend Frameworks</h2>
+            <p class="part-directory__desc">Modern component architecture, state management, and the React ecosystem.</p>
+          </div>
+          
+            <div style="margin-bottom: 2.5rem;">
+              <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--text);">ReactJS</h3>
+              <div class="card-grid">
+                <a class="card" href="chapters/reactjs-basic.html">
+                  <div class="card__eyebrow">ReactJS · Basic</div>
+                  <div class="card__title">ReactJS — Basic</div>
+                  <div class="card__desc">Foundational knowledge — definitions, syntax, and core mechanics every beginner should know.</div>
+                  <div class="card__meta"><span>101 questions</span><span>60 min read</span></div>
+                </a>
+                <a class="card" href="chapters/reactjs-coding.html">
+                  <div class="card__eyebrow">ReactJS · Coding</div>
+                  <div class="card__title">ReactJS — Coding</div>
+                  <div class="card__desc">Practical coding problems with full solutions and line-by-line explanations.</div>
+                  <div class="card__meta"><span>100 questions</span><span>90 min read</span></div>
+                </a>
+                <a class="card" href="chapters/reactjs-advanced.html">
+                  <div class="card__eyebrow">ReactJS · Advanced</div>
+                  <div class="card__title">ReactJS — Advanced</div>
+                  <div class="card__desc">Deep internals, architecture decisions, and questions typical of senior-level interviews.</div>
+                  <div class="card__meta"><span>100 questions</span><span>90 min read</span></div>
+                </a>
+                <a class="card" href="chapters/reactjs-scenario.html">
+                  <div class="card__eyebrow">ReactJS · Scenario Based</div>
+                  <div class="card__title">ReactJS — Scenario Based</div>
+                  <div class="card__desc">Real-world situational questions — how you&#x27;d approach a concrete design or debugging problem.</div>
+                  <div class="card__meta"><span>100 questions</span><span>75 min read</span></div>
+                </a></div>
+            </div>
+        </section>
+        <section class="part-directory" id="part-5">
+          <div class="part-directory__header">
+            <div class="part-directory__eyebrow">Part 5</div>
+            <h2 class="part-directory__title">Databases</h2>
+            <p class="part-directory__desc">Relational and document stores — when to use which, how to design schemas, and how to query them efficiently.</p>
+          </div>
+          
+            <div style="margin-bottom: 2.5rem;">
+              <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--text);">MYSQL</h3>
+              <div class="card-grid">
+                <a class="card" href="chapters/mysql-basic.html">
+                  <div class="card__eyebrow">MYSQL · Basic</div>
+                  <div class="card__title">MYSQL — Basic</div>
+                  <div class="card__desc">Foundational knowledge — definitions, syntax, and core mechanics every beginner should know.</div>
+                  <div class="card__meta"><span>100 questions</span><span>60 min read</span></div>
+                </a>
+                <a class="card" href="chapters/mysql-coding.html">
+                  <div class="card__eyebrow">MYSQL · Coding</div>
+                  <div class="card__title">MYSQL — Coding</div>
+                  <div class="card__desc">Practical coding problems with full solutions and line-by-line explanations.</div>
+                  <div class="card__meta"><span>100 questions</span><span>90 min read</span></div>
+                </a>
+                <a class="card" href="chapters/mysql-advanced.html">
+                  <div class="card__eyebrow">MYSQL · Advanced</div>
+                  <div class="card__title">MYSQL — Advanced</div>
+                  <div class="card__desc">Deep internals, architecture decisions, and questions typical of senior-level interviews.</div>
+                  <div class="card__meta"><span>100 questions</span><span>90 min read</span></div>
+                </a>
+                <a class="card" href="chapters/mysql-scenario.html">
+                  <div class="card__eyebrow">MYSQL · Scenario Based</div>
+                  <div class="card__title">MYSQL — Scenario Based</div>
+                  <div class="card__desc">Real-world situational questions — how you&#x27;d approach a concrete design or debugging problem.</div>
+                  <div class="card__meta"><span>100 questions</span><span>75 min read</span></div>
+                </a></div>
+            </div>
+            <div style="margin-bottom: 2.5rem;">
+              <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--text);">MongoDB</h3>
+              <div class="card-grid">
+                <a class="card" href="chapters/mongodb-basic.html">
+                  <div class="card__eyebrow">MongoDB · Basic</div>
+                  <div class="card__title">MongoDB — Basic</div>
+                  <div class="card__desc">Foundational knowledge — definitions, syntax, and core mechanics every beginner should know.</div>
+                  <div class="card__meta"><span>100 questions</span><span>60 min read</span></div>
+                </a>
+                <a class="card" href="chapters/mongodb-coding.html">
+                  <div class="card__eyebrow">MongoDB · Coding</div>
+                  <div class="card__title">MongoDB — Coding</div>
+                  <div class="card__desc">Practical coding problems with full solutions and line-by-line explanations.</div>
+                  <div class="card__meta"><span>100 questions</span><span>90 min read</span></div>
+                </a>
+                <a class="card" href="chapters/mongodb-advanced.html">
+                  <div class="card__eyebrow">MongoDB · Advanced</div>
+                  <div class="card__title">MongoDB — Advanced</div>
+                  <div class="card__desc">Deep internals, architecture decisions, and questions typical of senior-level interviews.</div>
+                  <div class="card__meta"><span>100 questions</span><span>90 min read</span></div>
+                </a>
+                <a class="card" href="chapters/mongodb-scenario.html">
+                  <div class="card__eyebrow">MongoDB · Scenario Based</div>
+                  <div class="card__title">MongoDB — Scenario Based</div>
+                  <div class="card__desc">Real-world situational questions — how you&#x27;d approach a concrete design or debugging problem.</div>
+                  <div class="card__meta"><span>100 questions</span><span>75 min read</span></div>
+                </a></div>
+            </div>
+        </section>
+        <section class="part-directory" id="part-6">
+          <div class="part-directory__header">
+            <div class="part-directory__eyebrow">Part 6</div>
+            <h2 class="part-directory__title">System Design &amp; DevOps</h2>
+            <p class="part-directory__desc">Architect MERN applications at scale, set up cloud infrastructure, and automate delivery with modern CI/CD pipelines.</p>
+          </div>
+          
+            <div style="margin-bottom: 2.5rem;">
+              <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--text);">System Design MERN Stack</h3>
+              <div class="card-grid">
+                <a class="card" href="chapters/system-design-mern-basic.html">
+                  <div class="card__eyebrow">System Design MERN Stack · Basic</div>
+                  <div class="card__title">System Design MERN Stack — Basic</div>
+                  <div class="card__desc">Foundational knowledge — definitions, syntax, and core mechanics every beginner should know.</div>
+                  <div class="card__meta"><span>100 questions</span><span>60 min read</span></div>
+                </a>
+                <a class="card" href="chapters/system-design-mern-advanced.html">
+                  <div class="card__eyebrow">System Design MERN Stack · Advanced</div>
+                  <div class="card__title">System Design MERN Stack — Advanced</div>
+                  <div class="card__desc">Deep internals, architecture decisions, and questions typical of senior-level interviews.</div>
+                  <div class="card__meta"><span>100 questions</span><span>90 min read</span></div>
+                </a>
+                <a class="card" href="chapters/system-design-mern-scenario.html">
+                  <div class="card__eyebrow">System Design MERN Stack · Scenario Based</div>
+                  <div class="card__title">System Design MERN Stack — Scenario Based</div>
+                  <div class="card__desc">Real-world situational questions — how you&#x27;d approach a concrete design or debugging problem.</div>
+                  <div class="card__meta"><span>100 questions</span><span>75 min read</span></div>
+                </a></div>
+            </div>
+            <div style="margin-bottom: 2.5rem;">
+              <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--text);">Infrastructure MERN Stack</h3>
+              <div class="card-grid">
+                <a class="card" href="chapters/infrastructure-mern-basic.html">
+                  <div class="card__eyebrow">Infrastructure MERN Stack · Basic</div>
+                  <div class="card__title">Infrastructure MERN Stack — Basic</div>
+                  <div class="card__desc">Foundational knowledge — definitions, syntax, and core mechanics every beginner should know.</div>
+                  <div class="card__meta"><span>100 questions</span><span>60 min read</span></div>
+                </a>
+                <a class="card" href="chapters/infrastructure-mern-advanced.html">
+                  <div class="card__eyebrow">Infrastructure MERN Stack · Advanced</div>
+                  <div class="card__title">Infrastructure MERN Stack — Advanced</div>
+                  <div class="card__desc">Deep internals, architecture decisions, and questions typical of senior-level interviews.</div>
+                  <div class="card__meta"><span>100 questions</span><span>90 min read</span></div>
+                </a></div>
+            </div>
+            <div style="margin-bottom: 2.5rem;">
+              <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--text);">CI/CD Pipeline</h3>
+              <div class="card-grid">
+                <a class="card" href="chapters/cicd-pipeline-basic.html">
+                  <div class="card__eyebrow">CI/CD Pipeline · Basic</div>
+                  <div class="card__title">CI/CD Pipeline — Basic</div>
+                  <div class="card__desc">Foundational knowledge — definitions, syntax, and core mechanics every beginner should know.</div>
+                  <div class="card__meta"><span>100 questions</span><span>60 min read</span></div>
+                </a>
+                <a class="card" href="chapters/cicd-pipeline-coding.html">
+                  <div class="card__eyebrow">CI/CD Pipeline · Coding</div>
+                  <div class="card__title">CI/CD Pipeline — Coding</div>
+                  <div class="card__desc">Practical coding problems with full solutions and line-by-line explanations.</div>
+                  <div class="card__meta"><span>100 questions</span><span>90 min read</span></div>
+                </a>
+                <a class="card" href="chapters/cicd-pipeline-advanced.html">
+                  <div class="card__eyebrow">CI/CD Pipeline · Advanced</div>
+                  <div class="card__title">CI/CD Pipeline — Advanced</div>
+                  <div class="card__desc">Deep internals, architecture decisions, and questions typical of senior-level interviews.</div>
+                  <div class="card__meta"><span>100 questions</span><span>90 min read</span></div>
+                </a>
+                <a class="card" href="chapters/cicd-pipeline-scenario.html">
+                  <div class="card__eyebrow">CI/CD Pipeline · Scenario Based</div>
+                  <div class="card__title">CI/CD Pipeline — Scenario Based</div>
+                  <div class="card__desc">Real-world situational questions — how you&#x27;d approach a concrete design or debugging problem.</div>
+                  <div class="card__meta"><span>100 questions</span><span>75 min read</span></div>
+                </a></div>
+            </div>
+        </section>
+
+</main>
+</div>
+
+<script src="assets/script.js"></script>
+</body>
+</html>

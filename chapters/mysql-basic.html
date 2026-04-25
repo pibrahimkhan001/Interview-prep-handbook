@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MYSQL — Basic · Interview Prep Mastery</title>
+<meta name="description" content="100 basic interview questions on MYSQL, with detailed explanations and examples.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/styles.css">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%239a6b1d'/%3E%3Ctext x='50' y='68' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold' font-size='48'%3EIP%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="site-header">
+  <div class="site-header__inner">
+    <button class="menu-toggle" aria-label="Open menu" type="button">☰ Menu</button>
+    <a class="brand" href="../index.html">
+      <span class="brand__mark">IP</span>
+      <span class="brand__text">
+        <span class="brand__title">Interview Prep Mastery</span>
+        <span class="brand__subtitle">Interactive learning guide</span>
+      </span>
+    </a>
+    <nav class="header-nav">
+      <a href="../index.html#roadmap">Roadmap</a>
+      <a href="../index.html#chapters">All chapters</a>
+      <button class="theme-toggle" type="button" aria-label="Toggle color scheme">☾ Dark</button>
+    </nav>
+  </div>
+</header>
+<div class="layout">
+<aside class="sidebar" aria-label="Site navigation">
+  <div class="sidebar__header">Chapter Navigator</div>
+  
+        <div class="nav-part">
+          <div class="nav-part__label">Part 1</div>
+          <div class="nav-part__title">Core Programming Languages</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">JavaScript</li><li><a class="" href="../chapters/javascript-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/javascript-tricky.html"><span class="nav-item__title">Tricky</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-coding.html"><span class="nav-item__title">Advanced Coding</span><span class="nav-item__meta">100 questions · 100 min read</span></a></li><li><a class="" href="../chapters/javascript-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-scenario.html"><span class="nav-item__title">Advanced Scenario Based</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Python</li><li><a class="" href="../chapters/python-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/python-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-part">
+          <div class="nav-part__label">Part 2</div>
+          <div class="nav-part__title">Web Fundamentals</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">HTML</li><li><a class="" href="../chapters/html-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/html-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/html-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CSS</li><li><a class="" href="../chapters/css-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">102 questions · 60 min read</span></a></li><li><a class="" href="../chapters/css-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/css-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">101 questions · 90 min read</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-part">
+          <div class="nav-part__label">Part 3</div>
+          <div class="nav-part__title">Backend Technologies</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Node.Js</li><li><a class="" href="../chapters/nodejs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/nodejs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ExpressJS</li><li><a class="" href="../chapters/expressjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/expressjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/expressjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">API</li><li><a class="" href="../chapters/api-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/api-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-part">
+          <div class="nav-part__label">Part 4</div>
+          <div class="nav-part__title">Frontend Frameworks</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ReactJS</li><li><a class="" href="../chapters/reactjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">101 questions · 60 min read</span></a></li><li><a class="" href="../chapters/reactjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-part">
+          <div class="nav-part__label">Part 5</div>
+          <div class="nav-part__title">Databases</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MYSQL</li><li><a class="active" href="../chapters/mysql-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mysql-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MongoDB</li><li><a class="" href="../chapters/mongodb-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mongodb-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-part">
+          <div class="nav-part__label">Part 6</div>
+          <div class="nav-part__title">System Design &amp; DevOps</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">System Design MERN Stack</li><li><a class="" href="../chapters/system-design-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Infrastructure MERN Stack</li><li><a class="" href="../chapters/infrastructure-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/infrastructure-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CI/CD Pipeline</li><li><a class="" href="../chapters/cicd-pipeline-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
+          </ul>
+        </div>
+</aside>
+<main class="main" id="main">
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="../index.html">Home</a>
+    <span class="breadcrumb__sep">›</span>
+    <a href="../index.html#part-5">Databases</a>
+    <span class="breadcrumb__sep">›</span>
+    <span>MYSQL — Basic</span>
+  </nav>
+
+  <header class="chapter-header">
+    <div class="chapter-label">MYSQL · Basic</div>
+    <h1 class="chapter-title">Basic MYSQL Interview Questions</h1>
+    <p class="chapter-lede">Foundational knowledge — definitions, syntax, and core mechanics every beginner should know.</p>
+    <div class="chapter-meta">
+      <div class="chapter-meta__item"><span class="chapter-meta__label">Questions</span><span class="chapter-meta__value">100</span></div>
+      <div class="chapter-meta__item"><span class="chapter-meta__label">Level</span><span class="chapter-meta__value">Basic</span></div>
+      <div class="chapter-meta__item"><span class="chapter-meta__label">Estimated reading</span><span class="chapter-meta__value">60 min read</span></div>
+    </div>
+    
+        <div class="callout callout--info" style="margin-top: 1.2rem;">
+          <div class="callout__title">Listing mode</div>
+          <p style="margin: 0;">This chapter shows the full question list. Detailed beginner-friendly explanations with code examples and diagrams will be added progressively. Use the questions below as a study checklist — research each one, write your own answer, then verify.</p>
+        </div>
+  </header>
+
+  <section class="prose">
+
+    <div class="toc" id="toc">
+      <div class="toc__title">All questions in this chapter</div>
+      <ul class="toc__list">
+        <li><a href="#q1"><span class="toc__num">1.</span>What is MySQL?</a></li><li><a href="#q2"><span class="toc__num">2.</span>How do you install MySQL on your system?</a></li><li><a href="#q3"><span class="toc__num">3.</span>How do you start and stop the MySQL service?</a></li><li><a href="#q4"><span class="toc__num">4.</span>What is the default port for MySQL?</a></li><li><a href="#q5"><span class="toc__num">5.</span>How do you create a new database in MySQL?</a></li><li><a href="#q6"><span class="toc__num">6.</span>How do you delete a database in MySQL?</a></li><li><a href="#q7"><span class="toc__num">7.</span>How do you create a new table in MySQL?</a></li><li><a href="#q8"><span class="toc__num">8.</span>How do you delete a table in MySQL?</a></li><li><a href="#q9"><span class="toc__num">9.</span>What are the different data types available in MySQL?</a></li><li><a href="#q10"><span class="toc__num">10.</span>How do you insert data into a table in MySQL?</a></li><li><a href="#q11"><span class="toc__num">11.</span>How do you update data in a MySQL table?</a></li><li><a href="#q12"><span class="toc__num">12.</span>How do you delete data from a MySQL table?</a></li><li><a href="#q13"><span class="toc__num">13.</span>How do you retrieve data from a MySQL table?</a></li><li><a href="#q14"><span class="toc__num">14.</span>What is a primary key in MySQL?</a></li><li><a href="#q15"><span class="toc__num">15.</span>How do you set a primary key in a MySQL table?</a></li><li><a href="#q16"><span class="toc__num">16.</span>What is a foreign key in MySQL?</a></li><li><a href="#q17"><span class="toc__num">17.</span>How do you create a foreign key in MySQL?</a></li><li><a href="#q18"><span class="toc__num">18.</span>What are indexes in MySQL, and why are they used?</a></li><li><a href="#q19"><span class="toc__num">19.</span>How do you create an index in MySQL?</a></li><li><a href="#q20"><span class="toc__num">20.</span>How do you delete an index in MySQL?</a></li><li><a href="#q21"><span class="toc__num">21.</span>What is a unique key in MySQL?</a></li><li><a href="#q22"><span class="toc__num">22.</span>How do you create a unique key in MySQL?</a></li><li><a href="#q23"><span class="toc__num">23.</span>How do you join two tables in MySQL?</a></li><li><a href="#q24"><span class="toc__num">24.</span>What are the different types of joins in MySQL?</a></li><li><a href="#q25"><span class="toc__num">25.</span>How do you perform an inner join in MySQL?</a></li><li><a href="#q26"><span class="toc__num">26.</span>How do you perform a left join in MySQL?</a></li><li><a href="#q27"><span class="toc__num">27.</span>How do you perform a right join in MySQL?</a></li><li><a href="#q28"><span class="toc__num">28.</span>How do you perform a full join in MySQL?</a></li><li><a href="#q29"><span class="toc__num">29.</span>What is a subquery in MySQL?</a></li><li><a href="#q30"><span class="toc__num">30.</span>How do you write a subquery in MySQL?</a></li><li><a href="#q31"><span class="toc__num">31.</span>What is a stored procedure in MySQL?</a></li><li><a href="#q32"><span class="toc__num">32.</span>How do you create a stored procedure in MySQL?</a></li><li><a href="#q33"><span class="toc__num">33.</span>How do you execute a stored procedure in MySQL?</a></li><li><a href="#q34"><span class="toc__num">34.</span>How do you delete a stored procedure in MySQL?</a></li><li><a href="#q35"><span class="toc__num">35.</span>What is a trigger in MySQL?</a></li><li><a href="#q36"><span class="toc__num">36.</span>How do you create a trigger in MySQL?</a></li><li><a href="#q37"><span class="toc__num">37.</span>How do you delete a trigger in MySQL?</a></li><li><a href="#q38"><span class="toc__num">38.</span>What is a view in MySQL?</a></li><li><a href="#q39"><span class="toc__num">39.</span>How do you create a view in MySQL?</a></li><li><a href="#q40"><span class="toc__num">40.</span>How do you delete a view in MySQL?</a></li><li><a href="#q41"><span class="toc__num">41.</span>What is a transaction in MySQL?</a></li><li><a href="#q42"><span class="toc__num">42.</span>How do you start a transaction in MySQL?</a></li><li><a href="#q43"><span class="toc__num">43.</span>How do you commit a transaction in MySQL?</a></li><li><a href="#q44"><span class="toc__num">44.</span>How do you roll back a transaction in MySQL?</a></li><li><a href="#q45"><span class="toc__num">45.</span>What are the ACID properties in MySQL?</a></li><li><a href="#q46"><span class="toc__num">46.</span>How do you set auto-increment in MySQL?</a></li><li><a href="#q47"><span class="toc__num">47.</span>How do you retrieve the last inserted ID in MySQL?</a></li><li><a href="#q48"><span class="toc__num">48.</span>What is a default constraint in MySQL?</a></li><li><a href="#q49"><span class="toc__num">49.</span>How do you set a default value for a column in MySQL?</a></li><li><a href="#q50"><span class="toc__num">50.</span>What is a composite key in MySQL?</a></li><li><a href="#q51"><span class="toc__num">51.</span>How do you create a composite key in MySQL?</a></li><li><a href="#q52"><span class="toc__num">52.</span>What is normalization in MySQL?</a></li><li><a href="#q53"><span class="toc__num">53.</span>What are the different normal forms in MySQL?</a></li><li><a href="#q54"><span class="toc__num">54.</span>What is denormalization in MySQL?</a></li><li><a href="#q55"><span class="toc__num">55.</span>What is a MySQL schema?</a></li><li><a href="#q56"><span class="toc__num">56.</span>How do you switch between databases in MySQL?</a></li><li><a href="#q57"><span class="toc__num">57.</span>How do you list all tables in a MySQL database?</a></li><li><a href="#q58"><span class="toc__num">58.</span>How do you describe the structure of a table in MySQL?</a></li><li><a href="#q59"><span class="toc__num">59.</span>How do you rename a table in MySQL?</a></li><li><a href="#q60"><span class="toc__num">60.</span>How do you add a column to an existing table in MySQL?</a></li><li><a href="#q61"><span class="toc__num">61.</span>How do you drop a column from a table in MySQL?</a></li><li><a href="#q62"><span class="toc__num">62.</span>How do you modify a column in a MySQL table?</a></li><li><a href="#q63"><span class="toc__num">63.</span>What is the difference between CHAR and VARCHAR in MySQL?</a></li><li><a href="#q64"><span class="toc__num">64.</span>How do you use the CONCAT function in MySQL?</a></li><li><a href="#q65"><span class="toc__num">65.</span>How do you use the LIKE operator in MySQL?</a></li><li><a href="#q66"><span class="toc__num">66.</span>How do you use the IN operator in MySQL?</a></li><li><a href="#q67"><span class="toc__num">67.</span>What is the difference between WHERE and HAVING clauses in MySQL?</a></li><li><a href="#q68"><span class="toc__num">68.</span>How do you use the GROUP BY clause in MySQL?</a></li><li><a href="#q69"><span class="toc__num">69.</span>How do you use the ORDER BY clause in MySQL?</a></li><li><a href="#q70"><span class="toc__num">70.</span>How do you use the LIMIT clause in MySQL?</a></li><li><a href="#q71"><span class="toc__num">71.</span>How do you find the maximum value in a column in MySQL?</a></li><li><a href="#q72"><span class="toc__num">72.</span>How do you find the minimum value in a column in MySQL?</a></li><li><a href="#q73"><span class="toc__num">73.</span>How do you calculate the average value of a column in MySQL?</a></li><li><a href="#q74"><span class="toc__num">74.</span>How do you count the number of rows in a table in MySQL?</a></li><li><a href="#q75"><span class="toc__num">75.</span>How do you sum the values of a column in MySQL?</a></li><li><a href="#q76"><span class="toc__num">76.</span>How do you use the DISTINCT keyword in MySQL?</a></li><li><a href="#q77"><span class="toc__num">77.</span>How do you create a backup of a MySQL database?</a></li><li><a href="#q78"><span class="toc__num">78.</span>How do you restore a MySQL database from a backup?</a></li><li><a href="#q79"><span class="toc__num">79.</span>How do you import data from a CSV file into a MySQL table?</a></li><li><a href="#q80"><span class="toc__num">80.</span>How do you export data from a MySQL table to a CSV file?</a></li><li><a href="#q81"><span class="toc__num">81.</span>What is a MySQL client, and how do you use it?</a></li><li><a href="#q82"><span class="toc__num">82.</span>How do you set user privileges in MySQL?</a></li><li><a href="#q83"><span class="toc__num">83.</span>How do you create a new user in MySQL?</a></li><li><a href="#q84"><span class="toc__num">84.</span>How do you delete a user in MySQL?</a></li><li><a href="#q85"><span class="toc__num">85.</span>How do you change a user&#x27;s password in MySQL?</a></li><li><a href="#q86"><span class="toc__num">86.</span>How do you grant all privileges to a user in MySQL?</a></li><li><a href="#q87"><span class="toc__num">87.</span>How do you revoke privileges from a user in MySQL?</a></li><li><a href="#q88"><span class="toc__num">88.</span>How do you list all users in MySQL?</a></li><li><a href="#q89"><span class="toc__num">89.</span>How do you check the MySQL version?</a></li><li><a href="#q90"><span class="toc__num">90.</span>How do you optimize a MySQL database?</a></li><li><a href="#q91"><span class="toc__num">91.</span>How do you repair a MySQL table?</a></li><li><a href="#q92"><span class="toc__num">92.</span>How do you check the status of a MySQL server?</a></li><li><a href="#q93"><span class="toc__num">93.</span>How do you enable slow query logging in MySQL?</a></li><li><a href="#q94"><span class="toc__num">94.</span>What are MySQL storage engines?</a></li><li><a href="#q95"><span class="toc__num">95.</span>How do you change the storage engine of a table in MySQL?</a></li><li><a href="#q96"><span class="toc__num">96.</span>What is MySQL replication?</a></li><li><a href="#q97"><span class="toc__num">97.</span>How do you set up master-slave replication in MySQL?</a></li><li><a href="#q98"><span class="toc__num">98.</span>How do you monitor MySQL performance?</a></li><li><a href="#q99"><span class="toc__num">99.</span>How do you handle NULL values in MySQL?</a></li><li><a href="#q100"><span class="toc__num">100.</span>How do you use the IFNULL function in MySQL?</a></li>
+      </ul>
+    </div>
+
+    
+<article class="qa" id="q1">
+  <div class="qa__number">Question 1</div>
+  <h3 class="qa__question">What is MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q2">
+  <div class="qa__number">Question 2</div>
+  <h3 class="qa__question">How do you install MySQL on your system?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q3">
+  <div class="qa__number">Question 3</div>
+  <h3 class="qa__question">How do you start and stop the MySQL service?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q4">
+  <div class="qa__number">Question 4</div>
+  <h3 class="qa__question">What is the default port for MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q5">
+  <div class="qa__number">Question 5</div>
+  <h3 class="qa__question">How do you create a new database in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q6">
+  <div class="qa__number">Question 6</div>
+  <h3 class="qa__question">How do you delete a database in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q7">
+  <div class="qa__number">Question 7</div>
+  <h3 class="qa__question">How do you create a new table in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q8">
+  <div class="qa__number">Question 8</div>
+  <h3 class="qa__question">How do you delete a table in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q9">
+  <div class="qa__number">Question 9</div>
+  <h3 class="qa__question">What are the different data types available in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q10">
+  <div class="qa__number">Question 10</div>
+  <h3 class="qa__question">How do you insert data into a table in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q11">
+  <div class="qa__number">Question 11</div>
+  <h3 class="qa__question">How do you update data in a MySQL table?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q12">
+  <div class="qa__number">Question 12</div>
+  <h3 class="qa__question">How do you delete data from a MySQL table?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q13">
+  <div class="qa__number">Question 13</div>
+  <h3 class="qa__question">How do you retrieve data from a MySQL table?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q14">
+  <div class="qa__number">Question 14</div>
+  <h3 class="qa__question">What is a primary key in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q15">
+  <div class="qa__number">Question 15</div>
+  <h3 class="qa__question">How do you set a primary key in a MySQL table?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q16">
+  <div class="qa__number">Question 16</div>
+  <h3 class="qa__question">What is a foreign key in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q17">
+  <div class="qa__number">Question 17</div>
+  <h3 class="qa__question">How do you create a foreign key in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q18">
+  <div class="qa__number">Question 18</div>
+  <h3 class="qa__question">What are indexes in MySQL, and why are they used?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q19">
+  <div class="qa__number">Question 19</div>
+  <h3 class="qa__question">How do you create an index in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q20">
+  <div class="qa__number">Question 20</div>
+  <h3 class="qa__question">How do you delete an index in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q21">
+  <div class="qa__number">Question 21</div>
+  <h3 class="qa__question">What is a unique key in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q22">
+  <div class="qa__number">Question 22</div>
+  <h3 class="qa__question">How do you create a unique key in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q23">
+  <div class="qa__number">Question 23</div>
+  <h3 class="qa__question">How do you join two tables in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q24">
+  <div class="qa__number">Question 24</div>
+  <h3 class="qa__question">What are the different types of joins in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q25">
+  <div class="qa__number">Question 25</div>
+  <h3 class="qa__question">How do you perform an inner join in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q26">
+  <div class="qa__number">Question 26</div>
+  <h3 class="qa__question">How do you perform a left join in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q27">
+  <div class="qa__number">Question 27</div>
+  <h3 class="qa__question">How do you perform a right join in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q28">
+  <div class="qa__number">Question 28</div>
+  <h3 class="qa__question">How do you perform a full join in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q29">
+  <div class="qa__number">Question 29</div>
+  <h3 class="qa__question">What is a subquery in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q30">
+  <div class="qa__number">Question 30</div>
+  <h3 class="qa__question">How do you write a subquery in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q31">
+  <div class="qa__number">Question 31</div>
+  <h3 class="qa__question">What is a stored procedure in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q32">
+  <div class="qa__number">Question 32</div>
+  <h3 class="qa__question">How do you create a stored procedure in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q33">
+  <div class="qa__number">Question 33</div>
+  <h3 class="qa__question">How do you execute a stored procedure in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q34">
+  <div class="qa__number">Question 34</div>
+  <h3 class="qa__question">How do you delete a stored procedure in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q35">
+  <div class="qa__number">Question 35</div>
+  <h3 class="qa__question">What is a trigger in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q36">
+  <div class="qa__number">Question 36</div>
+  <h3 class="qa__question">How do you create a trigger in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q37">
+  <div class="qa__number">Question 37</div>
+  <h3 class="qa__question">How do you delete a trigger in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q38">
+  <div class="qa__number">Question 38</div>
+  <h3 class="qa__question">What is a view in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q39">
+  <div class="qa__number">Question 39</div>
+  <h3 class="qa__question">How do you create a view in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q40">
+  <div class="qa__number">Question 40</div>
+  <h3 class="qa__question">How do you delete a view in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q41">
+  <div class="qa__number">Question 41</div>
+  <h3 class="qa__question">What is a transaction in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q42">
+  <div class="qa__number">Question 42</div>
+  <h3 class="qa__question">How do you start a transaction in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q43">
+  <div class="qa__number">Question 43</div>
+  <h3 class="qa__question">How do you commit a transaction in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q44">
+  <div class="qa__number">Question 44</div>
+  <h3 class="qa__question">How do you roll back a transaction in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q45">
+  <div class="qa__number">Question 45</div>
+  <h3 class="qa__question">What are the ACID properties in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q46">
+  <div class="qa__number">Question 46</div>
+  <h3 class="qa__question">How do you set auto-increment in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q47">
+  <div class="qa__number">Question 47</div>
+  <h3 class="qa__question">How do you retrieve the last inserted ID in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q48">
+  <div class="qa__number">Question 48</div>
+  <h3 class="qa__question">What is a default constraint in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q49">
+  <div class="qa__number">Question 49</div>
+  <h3 class="qa__question">How do you set a default value for a column in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q50">
+  <div class="qa__number">Question 50</div>
+  <h3 class="qa__question">What is a composite key in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q51">
+  <div class="qa__number">Question 51</div>
+  <h3 class="qa__question">How do you create a composite key in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q52">
+  <div class="qa__number">Question 52</div>
+  <h3 class="qa__question">What is normalization in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q53">
+  <div class="qa__number">Question 53</div>
+  <h3 class="qa__question">What are the different normal forms in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q54">
+  <div class="qa__number">Question 54</div>
+  <h3 class="qa__question">What is denormalization in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q55">
+  <div class="qa__number">Question 55</div>
+  <h3 class="qa__question">What is a MySQL schema?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q56">
+  <div class="qa__number">Question 56</div>
+  <h3 class="qa__question">How do you switch between databases in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q57">
+  <div class="qa__number">Question 57</div>
+  <h3 class="qa__question">How do you list all tables in a MySQL database?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q58">
+  <div class="qa__number">Question 58</div>
+  <h3 class="qa__question">How do you describe the structure of a table in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q59">
+  <div class="qa__number">Question 59</div>
+  <h3 class="qa__question">How do you rename a table in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q60">
+  <div class="qa__number">Question 60</div>
+  <h3 class="qa__question">How do you add a column to an existing table in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q61">
+  <div class="qa__number">Question 61</div>
+  <h3 class="qa__question">How do you drop a column from a table in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q62">
+  <div class="qa__number">Question 62</div>
+  <h3 class="qa__question">How do you modify a column in a MySQL table?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q63">
+  <div class="qa__number">Question 63</div>
+  <h3 class="qa__question">What is the difference between CHAR and VARCHAR in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q64">
+  <div class="qa__number">Question 64</div>
+  <h3 class="qa__question">How do you use the CONCAT function in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q65">
+  <div class="qa__number">Question 65</div>
+  <h3 class="qa__question">How do you use the LIKE operator in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q66">
+  <div class="qa__number">Question 66</div>
+  <h3 class="qa__question">How do you use the IN operator in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q67">
+  <div class="qa__number">Question 67</div>
+  <h3 class="qa__question">What is the difference between WHERE and HAVING clauses in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q68">
+  <div class="qa__number">Question 68</div>
+  <h3 class="qa__question">How do you use the GROUP BY clause in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q69">
+  <div class="qa__number">Question 69</div>
+  <h3 class="qa__question">How do you use the ORDER BY clause in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q70">
+  <div class="qa__number">Question 70</div>
+  <h3 class="qa__question">How do you use the LIMIT clause in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q71">
+  <div class="qa__number">Question 71</div>
+  <h3 class="qa__question">How do you find the maximum value in a column in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q72">
+  <div class="qa__number">Question 72</div>
+  <h3 class="qa__question">How do you find the minimum value in a column in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q73">
+  <div class="qa__number">Question 73</div>
+  <h3 class="qa__question">How do you calculate the average value of a column in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q74">
+  <div class="qa__number">Question 74</div>
+  <h3 class="qa__question">How do you count the number of rows in a table in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q75">
+  <div class="qa__number">Question 75</div>
+  <h3 class="qa__question">How do you sum the values of a column in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q76">
+  <div class="qa__number">Question 76</div>
+  <h3 class="qa__question">How do you use the DISTINCT keyword in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q77">
+  <div class="qa__number">Question 77</div>
+  <h3 class="qa__question">How do you create a backup of a MySQL database?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q78">
+  <div class="qa__number">Question 78</div>
+  <h3 class="qa__question">How do you restore a MySQL database from a backup?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q79">
+  <div class="qa__number">Question 79</div>
+  <h3 class="qa__question">How do you import data from a CSV file into a MySQL table?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q80">
+  <div class="qa__number">Question 80</div>
+  <h3 class="qa__question">How do you export data from a MySQL table to a CSV file?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q81">
+  <div class="qa__number">Question 81</div>
+  <h3 class="qa__question">What is a MySQL client, and how do you use it?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q82">
+  <div class="qa__number">Question 82</div>
+  <h3 class="qa__question">How do you set user privileges in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q83">
+  <div class="qa__number">Question 83</div>
+  <h3 class="qa__question">How do you create a new user in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q84">
+  <div class="qa__number">Question 84</div>
+  <h3 class="qa__question">How do you delete a user in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q85">
+  <div class="qa__number">Question 85</div>
+  <h3 class="qa__question">How do you change a user&#x27;s password in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q86">
+  <div class="qa__number">Question 86</div>
+  <h3 class="qa__question">How do you grant all privileges to a user in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q87">
+  <div class="qa__number">Question 87</div>
+  <h3 class="qa__question">How do you revoke privileges from a user in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q88">
+  <div class="qa__number">Question 88</div>
+  <h3 class="qa__question">How do you list all users in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q89">
+  <div class="qa__number">Question 89</div>
+  <h3 class="qa__question">How do you check the MySQL version?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q90">
+  <div class="qa__number">Question 90</div>
+  <h3 class="qa__question">How do you optimize a MySQL database?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q91">
+  <div class="qa__number">Question 91</div>
+  <h3 class="qa__question">How do you repair a MySQL table?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q92">
+  <div class="qa__number">Question 92</div>
+  <h3 class="qa__question">How do you check the status of a MySQL server?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q93">
+  <div class="qa__number">Question 93</div>
+  <h3 class="qa__question">How do you enable slow query logging in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q94">
+  <div class="qa__number">Question 94</div>
+  <h3 class="qa__question">What are MySQL storage engines?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q95">
+  <div class="qa__number">Question 95</div>
+  <h3 class="qa__question">How do you change the storage engine of a table in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q96">
+  <div class="qa__number">Question 96</div>
+  <h3 class="qa__question">What is MySQL replication?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q97">
+  <div class="qa__number">Question 97</div>
+  <h3 class="qa__question">How do you set up master-slave replication in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q98">
+  <div class="qa__number">Question 98</div>
+  <h3 class="qa__question">How do you monitor MySQL performance?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q99">
+  <div class="qa__number">Question 99</div>
+  <h3 class="qa__question">How do you handle NULL values in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q100">
+  <div class="qa__number">Question 100</div>
+  <h3 class="qa__question">How do you use the IFNULL function in MySQL?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+
+    <nav class="chapter-nav" aria-label="Chapter navigation">
+      <a class="chapter-nav__prev" href="reactjs-scenario.html">
+      <span class="chapter-nav__dir">← Previous</span>
+      <span class="chapter-nav__title">ReactJS — Scenario Based</span>
+    </a>
+      <a class="chapter-nav__next" href="mysql-coding.html">
+      <span class="chapter-nav__dir">Next →</span>
+      <span class="chapter-nav__title">MYSQL — Coding</span>
+    </a>
+    </nav>
+
+  </section>
+
+</main>
+</div>
+
+<script src="../assets/script.js"></script>
+</body>
+</html>

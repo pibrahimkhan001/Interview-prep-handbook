@@ -1,0 +1,2772 @@
+"""Python · Coding · Detailed answers. Each value is an HTML snippet."""
+
+ANSWERS = {}
+
+ANSWERS[1] = r'''
+<pre><code>def reverse_string(s: str) -&gt; str:
+    return s[::-1]
+
+# Alternative — reversed() + join
+def reverse_string_alt(s: str) -&gt; str:
+    return "".join(reversed(s))
+
+reverse_string("hello")   # "olleh"
+reverse_string("")        # ""
+reverse_string("a")       # "a"</code></pre>
+<p>The slice <code>[::-1]</code> is the idiomatic Python reversal — O(n) time and space. Strings are immutable, so any approach allocates a new string.</p>
+<p>For reversing iteration without building a new string, use <code>reversed(s)</code> directly in a loop.</p>
+'''
+
+ANSWERS[2] = r'''
+<pre><code>def is_palindrome(s: str) -&gt; bool:
+    return s == s[::-1]
+
+# Case-insensitive, alphanumeric only
+def is_palindrome_loose(s: str) -&gt; bool:
+    cleaned = [c.lower() for c in s if c.isalnum()]
+    return cleaned == cleaned[::-1]
+
+# Two-pointer — O(1) extra space
+def is_palindrome_two_pointer(s: str) -&gt; bool:
+    left, right = 0, len(s) - 1
+    while left &lt; right:
+        if s[left] != s[right]:
+            return False
+        left += 1
+        right -= 1
+    return True
+
+is_palindrome("racecar")                  # True
+is_palindrome_loose("A man, a plan!")    # False (not a real palindrome)
+is_palindrome_loose("A man, a plan, a canal: Panama")  # True</code></pre>
+<p>The slice approach is O(n) time and O(n) space. The two-pointer version is O(n) time and O(1) space — prefer it for very long strings.</p>
+'''
+
+ANSWERS[3] = r'''
+<pre><code>import math
+
+# Built-in — always the right answer in practice
+math.factorial(5)        # 120
+
+# Iterative — O(n), constant stack space
+def factorial(n: int) -&gt; int:
+    if n &lt; 0:
+        raise ValueError("n must be non-negative")
+    result = 1
+    for i in range(2, n + 1):
+        result *= i
+    return result
+
+# Recursive — elegant but blows the stack around n=1000
+def factorial_rec(n: int) -&gt; int:
+    if n &lt; 0:
+        raise ValueError("n must be non-negative")
+    return 1 if n &lt;= 1 else n * factorial_rec(n - 1)
+
+factorial(5)    # 120
+factorial(0)    # 1 (0! = 1 by definition)</code></pre>
+<p>Python's <code>math.factorial</code> is implemented in C and handles arbitrarily large integers thanks to Python's built-in bignum arithmetic. Factorials grow extremely fast — <code>factorial(20)</code> already exceeds 2 quintillion.</p>
+'''
+
+ANSWERS[4] = r'''
+<pre><code>def is_prime(n: int) -&gt; bool:
+    if n &lt; 2:
+        return False
+    if n &lt; 4:             # 2 and 3 are prime
+        return True
+    if n % 2 == 0 or n % 3 == 0:
+        return False
+    # Check 6k±1 pattern up to sqrt(n)
+    i = 5
+    while i * i &lt;= n:
+        if n % i == 0 or n % (i + 2) == 0:
+            return False
+        i += 6
+    return True
+
+is_prime(2)      # True
+is_prime(17)     # True
+is_prime(1)      # False
+is_prime(100)    # False</code></pre>
+<p>Only checking divisors up to √n suffices — if n has a divisor greater than √n, it must also have one less than √n. Skipping even numbers and multiples of 3 with the <strong>6k±1 pattern</strong> makes this roughly 3× faster than naive trial division. For large n or many primality checks, use the Miller-Rabin probabilistic test or <code>sympy.isprime</code>.</p>
+'''
+
+ANSWERS[5] = r'''
+<pre><code>import math
+
+# Built-in — prefer this
+math.gcd(48, 18)        # 6
+math.gcd(12, 18, 24)    # 6 (Python 3.9+ accepts multiple args)
+
+# Euclidean algorithm — the classic
+def gcd(a: int, b: int) -&gt; int:
+    while b:
+        a, b = b, a % b
+    return abs(a)
+
+# Recursive variant
+def gcd_rec(a: int, b: int) -&gt; int:
+    return abs(a) if b == 0 else gcd_rec(b, a % b)
+
+gcd(48, 18)     # 6
+gcd(100, 75)    # 25
+gcd(17, 13)     # 1 (coprime)</code></pre>
+<p>The Euclidean algorithm runs in O(log min(a, b)) — astonishingly fast. The key insight: gcd(a, b) = gcd(b, a mod b), repeated until b is zero. Python's <code>math.gcd</code> is implemented in C and handles negative numbers (returning the absolute value).</p>
+'''
+
+ANSWERS[6] = r'''
+<pre><code># Iterative — O(n) time, O(1) space (ignoring output list)
+def fibonacci(n: int) -&gt; list[int]:
+    if n &lt;= 0:
+        return []
+    if n == 1:
+        return [0]
+    seq = [0, 1]
+    for _ in range(2, n):
+        seq.append(seq[-1] + seq[-2])
+    return seq
+
+# Generator — lazy, great for streaming
+def fib_gen(n: int):
+    a, b = 0, 1
+    for _ in range(n):
+        yield a
+        a, b = b, a + b
+
+fibonacci(10)            # [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+list(fib_gen(10))        # same result
+fibonacci(0)             # []
+fibonacci(1)             # [0]</code></pre>
+<p>Don't use naive recursion <code>f(n-1) + f(n-2)</code> — it has exponential time complexity due to repeated sub-computations. For just the nth term, see Q24 (recursion with memoization).</p>
+'''
+
+ANSWERS[7] = r'''
+<pre><code># Built-in — use this
+sorted([3, 1, 4, 1, 5, 9, 2, 6])    # [1, 1, 2, 3, 4, 5, 6, 9]
+
+# In-place
+lst = [3, 1, 4]
+lst.sort()      # lst is now [1, 3, 4]
+
+# Custom sort — by absolute value
+sorted([-3, 1, -4, 2], key=abs)     # [1, 2, -3, -4]
+
+# Descending
+sorted([3, 1, 4], reverse=True)     # [4, 3, 1]
+
+# If you must implement it — quicksort in one expression
+def quicksort(a: list) -&gt; list:
+    if len(a) &lt;= 1:
+        return a
+    pivot = a[len(a) // 2]
+    return (quicksort([x for x in a if x &lt; pivot])
+            + [x for x in a if x == pivot]
+            + quicksort([x for x in a if x &gt; pivot]))</code></pre>
+<p>Python's built-in sort (Timsort) is O(n log n) worst case, stable, and extensively optimized. Never write your own for production — the one-liner quicksort above is for learning only (uses O(n) extra space and isn't in-place).</p>
+'''
+
+ANSWERS[8] = r'''
+<pre><code>def merge_sorted(a: list, b: list) -&gt; list:
+    result = []
+    i = j = 0
+    while i &lt; len(a) and j &lt; len(b):
+        if a[i] &lt;= b[j]:
+            result.append(a[i])
+            i += 1
+        else:
+            result.append(b[j])
+            j += 1
+    result.extend(a[i:])        # whichever list has items left
+    result.extend(b[j:])
+    return result
+
+# stdlib one-liner (heap-based, works on any number of sorted inputs)
+import heapq
+list(heapq.merge([1, 4, 7], [2, 3, 8]))   # [1, 2, 3, 4, 7, 8]
+
+merge_sorted([1, 3, 5], [2, 4, 6])        # [1, 2, 3, 4, 5, 6]</code></pre>
+<p>Two-pointer merge runs in O(n + m) time and space. This is the merge step of mergesort. For multiple sorted streams, <code>heapq.merge</code> is O((n+m) log k) where k is the number of streams.</p>
+'''
+
+ANSWERS[9] = r'''
+<pre><code># O(n) single pass — don't sort the whole list
+def second_largest(nums: list) -&gt; int | None:
+    first = second = float("-inf")
+    for n in nums:
+        if n &gt; first:
+            second = first
+            first = n
+        elif first &gt; n &gt; second:
+            second = n
+    return None if second == float("-inf") else second
+
+# Handle duplicates of the largest
+second_largest([5, 1, 5, 3])     # 3 (not 5)
+second_largest([1, 2])            # 1
+second_largest([5])               # None
+second_largest([])                # None
+
+# Simpler but O(n log n)
+def second_largest_sorted(nums: list):
+    unique = sorted(set(nums), reverse=True)
+    return unique[1] if len(unique) &gt; 1 else None</code></pre>
+<p>The single-pass version maintains two running records. Use <code>float("-inf")</code> as sentinels so any real number beats them. The sorted-set approach is shorter but allocates extra memory and runs in O(n log n).</p>
+'''
+
+ANSWERS[10] = r'''
+<pre><code># Order NOT preserved — fastest
+def unique(lst: list) -&gt; list:
+    return list(set(lst))
+
+# Order PRESERVED — Python 3.7+ dicts are ordered
+def unique_ordered(lst: list) -&gt; list:
+    return list(dict.fromkeys(lst))
+
+# Manual, also preserves order, O(n)
+def unique_manual(lst: list) -&gt; list:
+    seen = set()
+    result = []
+    for x in lst:
+        if x not in seen:
+            seen.add(x)
+            result.append(x)
+    return result
+
+unique([1, 2, 2, 3, 1])              # [1, 2, 3] (order may vary)
+unique_ordered([1, 2, 2, 3, 1])      # [1, 2, 3] (order preserved)</code></pre>
+<p><code>dict.fromkeys(lst)</code> is the shortest order-preserving idiom. All three approaches require hashable elements; for unhashable items (dicts, lists), nest a loop that uses <code>==</code> comparison — O(n²).</p>
+'''
+
+ANSWERS[11] = r'''
+<pre><code># Set intersection — O(n + m)
+def intersection(a: list, b: list) -&gt; list:
+    return list(set(a) & set(b))
+
+# Preserve order of first list, remove duplicates
+def intersection_ordered(a: list, b: list) -&gt; list:
+    b_set = set(b)
+    seen = set()
+    result = []
+    for x in a:
+        if x in b_set and x not in seen:
+            seen.add(x)
+            result.append(x)
+    return result
+
+# Preserve duplicates (multiset intersection)
+from collections import Counter
+def intersection_multi(a: list, b: list) -&gt; list:
+    return list((Counter(a) & Counter(b)).elements())
+
+intersection([1, 2, 2, 3], [2, 3, 4])            # [2, 3]
+intersection_multi([1, 2, 2, 3], [2, 2, 4])      # [2, 2]</code></pre>
+<p><code>set.intersection()</code> (or the <code>&amp;</code> operator) is fastest but loses duplicates and order. <code>Counter</code> handles multisets correctly. The naive O(n·m) nested loop is a pitfall — always hash one side first.</p>
+'''
+
+ANSWERS[12] = r'''
+<pre><code># Set union — ignores duplicates, loses order
+def union(a: list, b: list) -&gt; list:
+    return list(set(a) | set(b))
+
+# Preserve order + uniqueness
+def union_ordered(a: list, b: list) -&gt; list:
+    return list(dict.fromkeys(a + b))
+
+# Multiset union — keep max multiplicity per element
+from collections import Counter
+def union_multi(a: list, b: list) -&gt; list:
+    return list((Counter(a) | Counter(b)).elements())
+
+union([1, 2, 3], [3, 4, 5])                   # [1, 2, 3, 4, 5]
+union_ordered([1, 2, 3], [3, 4, 5])           # [1, 2, 3, 4, 5]
+union_multi([1, 1, 2], [1, 2, 2])             # [1, 1, 2, 2]</code></pre>
+<p>The <code>|</code> operator on sets and Counters is the cleanest syntax. <code>dict.fromkeys</code> preserves insertion order while deduping — a nice trick before you reach for a set. Concatenation + set would also work but adds a pass.</p>
+'''
+
+ANSWERS[13] = r'''
+<pre><code># One level deep — fine for list-of-lists
+def flatten_one(lst: list) -&gt; list:
+    return [item for sub in lst for item in sub]
+
+# Arbitrary nesting — recursive
+def flatten_deep(lst) -&gt; list:
+    result = []
+    for item in lst:
+        if isinstance(item, list):
+            result.extend(flatten_deep(item))
+        else:
+            result.append(item)
+    return result
+
+# Generator version — lazy
+def flatten_gen(lst):
+    for item in lst:
+        if isinstance(item, list):
+            yield from flatten_gen(item)
+        else:
+            yield item
+
+flatten_one([[1, 2], [3, 4], [5]])                # [1, 2, 3, 4, 5]
+flatten_deep([1, [2, [3, [4, [5]]]]])             # [1, 2, 3, 4, 5]
+list(flatten_gen([1, [2, [3]]]))                  # [1, 2, 3]</code></pre>
+<p>For deep nesting, <code>yield from</code> in a generator is cleanest. Checking <code>isinstance(item, list)</code> keeps strings intact (strings are iterable but usually shouldn't be flattened). Use <code>collections.abc.Iterable</code> if you want to handle tuples too.</p>
+'''
+
+ANSWERS[14] = r'''
+<pre><code>from collections import Counter
+
+def frequency(lst: list) -&gt; dict:
+    return dict(Counter(lst))
+
+# Manual — educational
+def frequency_manual(lst: list) -&gt; dict:
+    counts = {}
+    for item in lst:
+        counts[item] = counts.get(item, 0) + 1
+    return counts
+
+# With defaultdict
+from collections import defaultdict
+def frequency_dd(lst: list) -&gt; dict:
+    counts = defaultdict(int)
+    for item in lst:
+        counts[item] += 1
+    return dict(counts)
+
+frequency(["a", "b", "a", "c", "b", "a"])
+# {"a": 3, "b": 2, "c": 1}
+
+Counter("mississippi").most_common(2)
+# [('i', 4), ('s', 4)]</code></pre>
+<p><code>Counter</code> is the idiomatic choice — it's a <code>dict</code> subclass with extra methods like <code>most_common()</code>, arithmetic (<code>c1 + c2</code>, <code>c1 - c2</code>), and conversion (<code>elements()</code>). All approaches are O(n).</p>
+'''
+
+ANSWERS[15] = r'''
+<pre><code>def longest_common_prefix(strs: list[str]) -&gt; str:
+    if not strs:
+        return ""
+    # zip stops at shortest string
+    prefix = []
+    for chars in zip(*strs):
+        if len(set(chars)) == 1:
+            prefix.append(chars[0])
+        else:
+            break
+    return "".join(prefix)
+
+# Alternative — compare min and max lexicographically
+def lcp_min_max(strs: list[str]) -&gt; str:
+    if not strs:
+        return ""
+    s1, s2 = min(strs), max(strs)
+    for i, c in enumerate(s1):
+        if c != s2[i]:
+            return s1[:i]
+    return s1
+
+longest_common_prefix(["flower", "flow", "flight"])  # "fl"
+longest_common_prefix(["dog", "racecar", "car"])     # ""
+longest_common_prefix([])                             # ""
+longest_common_prefix(["single"])                     # "single"</code></pre>
+<p>The <code>zip(*strs)</code> trick transposes the list into columns — each column is the ith character across all strings. Both approaches are O(S) where S is total characters. The min-max version is clever: the common prefix of all strings equals the common prefix of just the lex-smallest and lex-largest.</p>
+'''
+
+ANSWERS[16] = r'''
+<pre><code># Sorting — O(n log n), simple
+def is_anagram(a: str, b: str) -&gt; bool:
+    return sorted(a) == sorted(b)
+
+# Counter — O(n), cleaner
+from collections import Counter
+def is_anagram_counter(a: str, b: str) -&gt; bool:
+    return Counter(a) == Counter(b)
+
+# Ignore case and spaces
+def is_anagram_loose(a: str, b: str) -&gt; bool:
+    clean = lambda s: Counter(c for c in s.lower() if c.isalnum())
+    return clean(a) == clean(b)
+
+is_anagram("listen", "silent")                        # True
+is_anagram("hello", "world")                          # False
+is_anagram_loose("Conversation", "Voices rant on")    # True</code></pre>
+<p><code>Counter</code> comparison is O(n) and handles any Unicode. Sorting is O(n log n) but shorter. For byte-level Latin text, fixed-size arrays of length 26 are even faster, but rarely worth the complexity.</p>
+'''
+
+ANSWERS[17] = r'''
+<pre><code># String approach — works for any int
+def sum_digits(n: int) -&gt; int:
+    return sum(int(c) for c in str(abs(n)))
+
+# Modular arithmetic — no string conversion
+def sum_digits_math(n: int) -&gt; int:
+    n = abs(n)
+    total = 0
+    while n &gt; 0:
+        total += n % 10
+        n //= 10
+    return total
+
+# Recursive
+def sum_digits_rec(n: int) -&gt; int:
+    n = abs(n)
+    return n if n &lt; 10 else (n % 10) + sum_digits_rec(n // 10)
+
+sum_digits(12345)         # 15
+sum_digits(-123)          # 6
+sum_digits(0)             # 0</code></pre>
+<p>Both are O(log n) — the number of digits. The string version is Pythonic and readable; the math version avoids the int→str conversion which can matter for huge numbers. <code>abs()</code> handles negatives.</p>
+'''
+
+ANSWERS[18] = r'''
+<pre><code># Built-in — returns a string with "0b" prefix
+bin(13)             # "0b1101"
+bin(13)[2:]         # "1101"
+
+# Format spec — no prefix
+f"{13:b}"           # "1101"
+f"{13:08b}"         # "00001101" (zero-padded to 8 chars)
+
+# Manual — the algorithm
+def to_binary(n: int) -&gt; str:
+    if n == 0:
+        return "0"
+    neg = n &lt; 0
+    n = abs(n)
+    bits = []
+    while n &gt; 0:
+        bits.append(str(n % 2))
+        n //= 2
+    return ("-" if neg else "") + "".join(reversed(bits))
+
+to_binary(13)        # "1101"
+to_binary(0)         # "0"
+to_binary(-5)        # "-101"</code></pre>
+<p>The idiomatic answer is <code>bin(n)</code> or an f-string with the <code>b</code> format specifier. Manual implementation divides by 2 and collects remainders, then reverses. All approaches are O(log n).</p>
+'''
+
+ANSWERS[19] = r'''
+<pre><code># Built-ins — two passes
+def min_max(lst: list) -&gt; tuple:
+    return min(lst), max(lst)
+
+# Single pass — useful for iterators you can only consume once
+def min_max_single(lst: list) -&gt; tuple:
+    it = iter(lst)
+    try:
+        lo = hi = next(it)
+    except StopIteration:
+        raise ValueError("empty sequence")
+    for x in it:
+        if x &lt; lo:
+            lo = x
+        elif x &gt; hi:
+            hi = x
+    return lo, hi
+
+min_max([3, 1, 4, 1, 5, 9, 2, 6])     # (1, 9)
+min_max([])                           # ValueError
+
+# With a key function
+max(["apple", "banana", "cherry"], key=len)    # "banana"</code></pre>
+<p><code>min()</code> and <code>max()</code> each do one pass of O(n). The combined single-pass version does ~1.5n comparisons — better for expensive iterators (network streams, generators). For pure lists, two calls are fine.</p>
+'''
+
+ANSWERS[20] = r'''
+<pre><code># statistics module — handles edge cases
+import statistics
+statistics.mean([1, 2, 3, 4, 5])          # 3
+
+# Manual — simple
+def average(lst: list) -&gt; float:
+    if not lst:
+        raise ValueError("empty list")
+    return sum(lst) / len(lst)
+
+# Running average — for streaming data
+def running_average():
+    total = count = 0
+    while True:
+        x = yield (total / count) if count else 0
+        total += x
+        count += 1
+
+average([1, 2, 3, 4, 5])        # 3.0
+average([1, 2])                 # 1.5
+
+# Weighted average
+def weighted_average(values, weights):
+    return sum(v * w for v, w in zip(values, weights)) / sum(weights)</code></pre>
+<p><code>statistics.mean()</code> is safer than <code>sum/len</code> for floats — it minimizes floating-point rounding error by using a different algorithm internally. For integer data or performance-critical paths, <code>sum(lst) / len(lst)</code> is fine.</p>
+'''
+
+ANSWERS[21] = r'''
+<pre><code>import statistics
+statistics.median([1, 3, 5])              # 3
+statistics.median([1, 2, 3, 4])           # 2.5 (average of 2 middle values)
+
+# Manual — O(n log n) sort + O(1) indexing
+def median(lst: list) -&gt; float:
+    if not lst:
+        raise ValueError("empty")
+    s = sorted(lst)
+    n = len(s)
+    mid = n // 2
+    if n % 2 == 1:
+        return s[mid]
+    return (s[mid - 1] + s[mid]) / 2
+
+median([7, 1, 3])                         # 3
+median([1, 2, 3, 4])                      # 2.5
+
+# O(n) median using quickselect — for huge lists
+import heapq
+def median_quickselect(lst):
+    # statistics.median is C-implemented and fast enough in practice
+    return statistics.median(lst)</code></pre>
+<p>For most cases, <code>statistics.median()</code> is optimal. True O(n) median via the median-of-medians algorithm exists but is rarely worth it in Python — the sort is in C and beats pure-Python quickselect for typical sizes.</p>
+'''
+
+ANSWERS[22] = r'''
+<pre><code>import statistics
+
+# Returns the first mode if multiple
+statistics.mode([1, 2, 2, 3, 3, 3])              # 3
+
+# All modes (Python 3.8+)
+statistics.multimode([1, 1, 2, 2, 3])            # [1, 2]
+
+# Manual with Counter
+from collections import Counter
+def mode(lst: list):
+    if not lst:
+        raise ValueError("empty")
+    counts = Counter(lst)
+    max_count = max(counts.values())
+    return [val for val, cnt in counts.items() if cnt == max_count]
+
+mode([1, 2, 2, 3])           # [2]
+mode(["a", "b", "a", "b"])   # ["a", "b"]</code></pre>
+<p><code>statistics.multimode</code> is the modern idiomatic choice — it correctly handles multi-modal distributions (where two or more values tie). <code>Counter.most_common(1)</code> picks only one; use <code>multimode</code> when ties matter. All approaches are O(n).</p>
+'''
+
+ANSWERS[23] = r'''
+<pre><code>import statistics
+
+# Population standard deviation (all data)
+statistics.pstdev([1, 2, 3, 4, 5])        # 1.4142...
+
+# Sample standard deviation (n-1 denominator — unbiased estimator)
+statistics.stdev([1, 2, 3, 4, 5])         # 1.5811...
+
+# Manual
+def stdev(lst: list, sample: bool = True) -&gt; float:
+    if len(lst) &lt; (2 if sample else 1):
+        raise ValueError("need more data")
+    mean = sum(lst) / len(lst)
+    var = sum((x - mean) ** 2 for x in lst) / (len(lst) - (1 if sample else 0))
+    return var ** 0.5
+
+stdev([1, 2, 3, 4, 5])        # 1.5811...
+stdev([1, 2, 3], sample=False) # 0.8165...</code></pre>
+<p><strong>Choose the right denominator</strong>: use n when your data represents the entire population; use n-1 (sample stdev / Bessel's correction) when it's a sample from a larger population. Most applied statistics wants sample stdev. For numerical arrays, <code>numpy.std</code> is faster and handles axis-wise operations.</p>
+'''
+
+ANSWERS[24] = r'''
+<pre><code># Naive recursion — EXPONENTIAL time, educational only
+def fib_naive(n: int) -&gt; int:
+    if n &lt; 2:
+        return n
+    return fib_naive(n - 1) + fib_naive(n - 2)
+
+# Memoized — O(n)
+from functools import lru_cache
+
+@lru_cache(maxsize=None)
+def fib(n: int) -&gt; int:
+    if n &lt; 2:
+        return n
+    return fib(n - 1) + fib(n - 2)
+
+# Iterative — O(n) time, O(1) space (best for large n)
+def fib_iter(n: int) -&gt; int:
+    a, b = 0, 1
+    for _ in range(n):
+        a, b = b, a + b
+    return a
+
+fib(30)           # 832040
+fib_iter(100)     # 354224848179261915075 (Python bignum handles huge results)</code></pre>
+<p>Naive recursion is O(2^n) — <code>fib_naive(40)</code> already takes seconds. Adding <code>@lru_cache</code> drops it to O(n). For production, the iterative version uses only constant extra space. Matrix exponentiation can compute the nth Fibonacci in O(log n).</p>
+'''
+
+ANSWERS[25] = r'''
+<pre><code>import math
+
+# Integer sqrt — exact for any non-negative int
+def is_perfect_square(n: int) -&gt; bool:
+    if n &lt; 0:
+        return False
+    root = math.isqrt(n)        # integer square root, no floating-point errors
+    return root * root == n
+
+# Floating-point — avoid, loses precision for huge numbers
+def is_perfect_square_float(n: int) -&gt; bool:
+    if n &lt; 0:
+        return False
+    return math.sqrt(n).is_integer()
+
+is_perfect_square(16)       # True
+is_perfect_square(15)       # False
+is_perfect_square(0)        # True
+is_perfect_square(10**30)   # True (would fail with floats!)</code></pre>
+<p><code>math.isqrt</code> (Python 3.8+) returns the floor of √n as an integer — no floating-point rounding. This is the only reliable method for very large integers. The <code>sqrt</code> approach works up to around 2^53 but silently fails beyond.</p>
+'''
+
+ANSWERS[26] = r'''
+<pre><code>def prime_factors(n: int) -&gt; list[int]:
+    if n &lt; 2:
+        return []
+    factors = []
+    # Factor out 2s
+    while n % 2 == 0:
+        factors.append(2)
+        n //= 2
+    # Odd factors up to sqrt(n)
+    i = 3
+    while i * i &lt;= n:
+        while n % i == 0:
+            factors.append(i)
+            n //= i
+        i += 2
+    # What's left is either 1 or a prime &gt; sqrt(original)
+    if n &gt; 1:
+        factors.append(n)
+    return factors
+
+prime_factors(84)      # [2, 2, 3, 7]
+prime_factors(17)      # [17]
+prime_factors(1)       # []
+prime_factors(2**10)   # [2, 2, 2, 2, 2, 2, 2, 2, 2, 2]</code></pre>
+<p>Trial division up to √n is O(√n). The key optimizations: strip out 2s first, then only check odd candidates (step by 2). Any leftover n &gt; 1 at the end is itself prime. For very large numbers, use Pollard's rho or <code>sympy.factorint</code>.</p>
+'''
+
+ANSWERS[27] = r'''
+<pre><code># Naive recursion — O(n) calls
+def power(base: float, exp: int) -&gt; float:
+    if exp == 0:
+        return 1
+    if exp &lt; 0:
+        return 1 / power(base, -exp)
+    return base * power(base, exp - 1)
+
+# Fast exponentiation — O(log n)
+def power_fast(base: float, exp: int) -&gt; float:
+    if exp == 0:
+        return 1
+    if exp &lt; 0:
+        return 1 / power_fast(base, -exp)
+    half = power_fast(base, exp // 2)
+    return half * half if exp % 2 == 0 else half * half * base
+
+# Python built-in — use this in production
+pow(2, 10)           # 1024
+pow(2, -3)           # 0.125
+pow(2, 10, 1000)     # 24 — modular exponentiation: (2^10) mod 1000
+
+power_fast(2, 100)   # 1267650600228229401496703205376</code></pre>
+<p>The fast version halves the exponent at each step — hence O(log n). Python's built-in <code>pow(base, exp, mod)</code> does modular exponentiation in C, essential for cryptography (RSA, Diffie-Hellman). For floating-point use the <code>**</code> operator.</p>
+'''
+
+ANSWERS[28] = r'''
+<pre><code>def sum_of_primes(n: int) -&gt; int:
+    if n &lt; 2:
+        return 0
+    # Sieve of Eratosthenes
+    sieve = [True] * (n + 1)
+    sieve[0] = sieve[1] = False
+    for i in range(2, int(n ** 0.5) + 1):
+        if sieve[i]:
+            for j in range(i * i, n + 1, i):
+                sieve[j] = False
+    return sum(i for i, is_prime in enumerate(sieve) if is_prime)
+
+sum_of_primes(10)     # 17 (2 + 3 + 5 + 7)
+sum_of_primes(100)    # 1060
+sum_of_primes(1)      # 0</code></pre>
+<p>The sieve is O(n log log n) — effectively linear for practical inputs. Much faster than checking each number individually for primality. Starts crossing out multiples from <code>i*i</code> because smaller multiples were already handled by smaller primes.</p>
+'''
+
+ANSWERS[29] = r'''
+<pre><code>def is_armstrong(n: int) -&gt; bool:
+    digits = str(n)
+    power = len(digits)
+    return sum(int(d) ** power for d in digits) == n
+
+is_armstrong(153)      # True  (1³ + 5³ + 3³ = 153)
+is_armstrong(9474)     # True  (9⁴ + 4⁴ + 7⁴ + 4⁴ = 9474)
+is_armstrong(123)      # False
+is_armstrong(9)        # True  (any single digit is an Armstrong number)
+
+# All Armstrong numbers up to n
+def armstrong_up_to(n: int) -&gt; list[int]:
+    return [i for i in range(n + 1) if is_armstrong(i)]
+
+armstrong_up_to(10000)
+# [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 153, 370, 371, 407, 1634, 8208, 9474]</code></pre>
+<p>An Armstrong (narcissistic) number equals the sum of its own digits each raised to the power of the digit count. There are only <strong>88 Armstrong numbers in base 10</strong>, the largest being 39 digits long.</p>
+'''
+
+ANSWERS[30] = r'''
+<pre><code>import math
+
+# LCM via GCD — lcm(a, b) = |a*b| / gcd(a, b)
+def lcm(a: int, b: int) -&gt; int:
+    return abs(a * b) // math.gcd(a, b) if a and b else 0
+
+# Python 3.9+ — built-in
+math.lcm(4, 6)               # 12
+math.lcm(12, 18, 24)         # 72  (accepts multiple args)
+
+lcm(4, 6)      # 12
+lcm(21, 6)     # 42
+lcm(0, 5)      # 0</code></pre>
+<p>The identity <code>lcm(a, b) × gcd(a, b) = a × b</code> gives us LCM cheaply once we have GCD. Divide first (<code>a // gcd × b</code>) to avoid overflow in bounded-integer languages — Python doesn't care, but it's good practice.</p>
+'''
+
+ANSWERS[31] = r'''
+<pre><code>def max_subarray(nums: list[int]) -&gt; int:
+    if not nums:
+        raise ValueError("empty list")
+    max_ending_here = max_so_far = nums[0]
+    for x in nums[1:]:
+        max_ending_here = max(x, max_ending_here + x)
+        max_so_far = max(max_so_far, max_ending_here)
+    return max_so_far
+
+# Return the subarray itself, not just the sum
+def max_subarray_with_range(nums):
+    best_sum = current = nums[0]
+    best_start = best_end = start = 0
+    for i, x in enumerate(nums[1:], 1):
+        if current + x &lt; x:
+            current = x
+            start = i
+        else:
+            current += x
+        if current &gt; best_sum:
+            best_sum = current
+            best_start, best_end = start, i
+    return best_sum, nums[best_start:best_end + 1]
+
+max_subarray([-2, 1, -3, 4, -1, 2, 1, -5, 4])   # 6 → [4, -1, 2, 1]
+max_subarray([-1, -2, -3])                       # -1
+max_subarray([1, 2, 3])                          # 6</code></pre>
+<p>Kadane's algorithm runs in O(n) time and O(1) space. At each position, decide: start fresh or extend the current subarray — whichever gives a larger running sum. Handles all-negative arrays correctly by returning the largest single element.</p>
+'''
+
+ANSWERS[32] = r'''
+<pre><code>def binary_search(arr: list, target) -&gt; int:
+    left, right = 0, len(arr) - 1
+    while left &lt;= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] &lt; target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return -1
+
+# Recursive version
+def binary_search_rec(arr, target, lo=0, hi=None):
+    if hi is None:
+        hi = len(arr) - 1
+    if lo &gt; hi:
+        return -1
+    mid = (lo + hi) // 2
+    if arr[mid] == target:
+        return mid
+    elif arr[mid] &lt; target:
+        return binary_search_rec(arr, target, mid + 1, hi)
+    return binary_search_rec(arr, target, lo, mid - 1)
+
+# Standard library — bisect (returns insertion point)
+import bisect
+bisect.bisect_left([1, 3, 5, 7, 9], 5)      # 2 (index where 5 would go)
+
+binary_search([1, 3, 5, 7, 9, 11], 7)       # 3
+binary_search([1, 3, 5, 7, 9, 11], 4)       # -1</code></pre>
+<p>O(log n) time, O(1) space iterative / O(log n) space recursive. The <code>bisect</code> module is production-ready and handles insertion-point searches efficiently. Use <code>(lo + hi) // 2</code> in Python — no integer overflow concerns.</p>
+'''
+
+ANSWERS[33] = r'''
+<pre><code>def rotate(lst: list, k: int) -&gt; list:
+    n = len(lst)
+    if n == 0:
+        return lst
+    k %= n                    # handle k &gt; n and negative k
+    return lst[-k:] + lst[:-k]
+
+# In-place rotation — O(1) extra space
+def rotate_inplace(lst: list, k: int) -&gt; None:
+    n = len(lst)
+    if n == 0:
+        return
+    k %= n
+    # Reverse entire, then reverse parts
+    lst.reverse()
+    lst[:k] = lst[:k][::-1]   # reverse first k
+    lst[k:] = lst[k:][::-1]   # reverse rest
+
+# collections.deque — rotate built in
+from collections import deque
+d = deque([1, 2, 3, 4, 5])
+d.rotate(2)                   # deque([4, 5, 1, 2, 3])
+
+rotate([1, 2, 3, 4, 5], 2)    # [4, 5, 1, 2, 3]
+rotate([1, 2, 3], -1)         # [2, 3, 1]  (left rotation)</code></pre>
+<p>Slice-based rotation is O(n) time and space — idiomatic Python. The in-place version uses the reverse-trick (O(1) extra space). <code>deque.rotate()</code> is O(k) and most natural when you're already working with a deque.</p>
+'''
+
+ANSWERS[34] = r'''
+<pre><code># Boyer-Moore voting — O(n) time, O(1) space
+def majority_element(nums: list) -&gt; int | None:
+    candidate = count = 0
+    for x in nums:
+        if count == 0:
+            candidate = x
+        count += 1 if x == candidate else -1
+    # Verify (in case no majority exists)
+    return candidate if nums.count(candidate) &gt; len(nums) // 2 else None
+
+# Counter approach — cleaner, O(n) time and space
+from collections import Counter
+def majority_counter(nums: list):
+    if not nums:
+        return None
+    val, cnt = Counter(nums).most_common(1)[0]
+    return val if cnt &gt; len(nums) // 2 else None
+
+majority_element([3, 2, 3])              # 3
+majority_element([2, 2, 1, 1, 1, 2, 2])  # 2
+majority_element([1, 2, 3])              # None</code></pre>
+<p>Boyer-Moore is a classic algorithm: a majority element (appearing &gt; n/2 times) cancels out all others. Track one candidate; whenever count hits 0, try the next element. Verification is needed because the algorithm finds a candidate even when no true majority exists.</p>
+'''
+
+ANSWERS[35] = r'''
+<pre><code># XOR trick — O(n) time, O(1) space
+def find_missing(nums: list[int]) -&gt; int:
+    # Works for nums containing 0..n with exactly one missing
+    result = len(nums)
+    for i, n in enumerate(nums):
+        result ^= i ^ n
+    return result
+
+# Arithmetic — sum of 0..n minus actual sum
+def find_missing_sum(nums: list[int]) -&gt; int:
+    n = len(nums)
+    return n * (n + 1) // 2 - sum(nums)
+
+# Set — works even with missing range 1..n or arbitrary range
+def find_missing_set(nums: list[int], lo: int, hi: int) -&gt; int:
+    return (set(range(lo, hi + 1)) - set(nums)).pop()
+
+find_missing([3, 0, 1])        # 2
+find_missing_sum([9, 6, 4, 2, 3, 5, 7, 0, 1])   # 8</code></pre>
+<p>Both XOR and arithmetic are O(n) time and O(1) space. The arithmetic approach is simpler; XOR avoids overflow concerns (not relevant in Python but important in C/Java). For finding multiple missing numbers, use a set difference.</p>
+'''
+
+ANSWERS[36] = r'''
+<pre><code># Floyd's cycle detection (if values are in range [1, n] and list has n+1 elements)
+def find_duplicate(nums: list[int]) -&gt; int:
+    slow = fast = nums[0]
+    # Phase 1 — find meeting point
+    while True:
+        slow = nums[slow]
+        fast = nums[nums[fast]]
+        if slow == fast:
+            break
+    # Phase 2 — find cycle entry (= duplicate)
+    slow = nums[0]
+    while slow != fast:
+        slow = nums[slow]
+        fast = nums[fast]
+    return slow
+
+# Set — simpler, uses O(n) space
+def find_duplicate_set(nums: list[int]) -&gt; int:
+    seen = set()
+    for n in nums:
+        if n in seen:
+            return n
+        seen.add(n)
+
+find_duplicate([1, 3, 4, 2, 2])    # 2
+find_duplicate([3, 1, 3, 4, 2])    # 3</code></pre>
+<p>Floyd's trick treats the array as a linked list where <code>i → nums[i]</code>. A duplicate creates a cycle; the cycle entry point is the duplicate. It's O(n) time, O(1) space, and doesn't mutate the input — beautiful but subtle. The set approach is O(n) space but much easier to explain.</p>
+'''
+
+ANSWERS[37] = r'''
+<pre><code>from collections import Counter
+
+def first_non_repeating(s: str) -&gt; str | None:
+    counts = Counter(s)
+    for c in s:             # iterate original order
+        if counts[c] == 1:
+            return c
+    return None
+
+# OrderedDict approach — educational, showing the mechanics
+from collections import OrderedDict
+def first_non_repeating_od(s: str):
+    counts = OrderedDict()
+    for c in s:
+        counts[c] = counts.get(c, 0) + 1
+    for c, n in counts.items():
+        if n == 1:
+            return c
+    return None
+
+first_non_repeating("leetcode")        # "l"
+first_non_repeating("loveleetcode")    # "v"
+first_non_repeating("aabb")            # None</code></pre>
+<p>Two-pass O(n): count each character, then scan in order until finding one with count 1. Since Python 3.7+ dict preserves insertion order, a plain <code>Counter</code> works — no need for <code>OrderedDict</code>. Both passes use O(k) space where k is the alphabet size.</p>
+'''
+
+ANSWERS[38] = r'''
+<pre><code># Length comparison — simplest
+def all_unique(s: str) -&gt; bool:
+    return len(set(s)) == len(s)
+
+# Early exit — faster when duplicates are likely near the start
+def all_unique_early(s: str) -&gt; bool:
+    seen = set()
+    for c in s:
+        if c in seen:
+            return False
+        seen.add(c)
+    return True
+
+# Bit vector — for ASCII, O(1) space
+def all_unique_ascii(s: str) -&gt; bool:
+    if len(s) &gt; 128:
+        return False
+    bits = 0
+    for c in s:
+        mask = 1 &lt;&lt; ord(c)
+        if bits & mask:
+            return False
+        bits |= mask
+    return True
+
+all_unique("abcdef")     # True
+all_unique("hello")      # False</code></pre>
+<p>The <code>len(set(s)) == len(s)</code> version is Pythonic and O(n). The early-exit version avoids processing the rest of the string once a duplicate is found — beneficial for long strings with likely duplicates.</p>
+'''
+
+ANSWERS[39] = r'''
+<pre><code>VOWELS = set("aeiouAEIOU")
+
+def count_vowels(s: str) -&gt; int:
+    return sum(1 for c in s if c in VOWELS)
+
+# Include accented vowels
+import unicodedata
+def count_vowels_unicode(s: str) -&gt; int:
+    # Decompose so accented chars → base + combining mark
+    normalized = unicodedata.normalize("NFD", s)
+    return sum(1 for c in normalized if c in VOWELS)
+
+# With y counted conditionally
+def count_vowels_with_y(s: str) -&gt; int:
+    v = set("aeiouAEIOU")
+    return sum(1 for c in s if c in v or c in "yY")
+
+count_vowels("hello world")               # 3
+count_vowels("AEIOU")                      # 5
+count_vowels_unicode("café naïve")         # 4 (a, é→e, a, ï→i)</code></pre>
+<p>Using a <code>set</code> makes membership tests O(1). For internationalized text, NFD normalization separates base characters from diacritical marks so "é" matches "e". Adapt the vowel set per language as needed.</p>
+'''
+
+ANSWERS[40] = r'''
+<pre><code># Two pointers — O(n) time, O(1) space
+def is_palindrome(s: str) -&gt; bool:
+    left, right = 0, len(s) - 1
+    while left &lt; right:
+        while left &lt; right and not s[left].isalnum():
+            left += 1
+        while left &lt; right and not s[right].isalnum():
+            right -= 1
+        if s[left].lower() != s[right].lower():
+            return False
+        left += 1
+        right -= 1
+    return True
+
+# Simpler — O(n) space
+def is_palindrome_simple(s: str) -&gt; bool:
+    cleaned = [c.lower() for c in s if c.isalnum()]
+    return cleaned == cleaned[::-1]
+
+is_palindrome("A man, a plan, a canal: Panama")    # True
+is_palindrome("race a car")                         # False
+is_palindrome(" ")                                   # True
+is_palindrome(".,")                                  # True</code></pre>
+<p>The two-pointer approach scans inward, skipping non-alphanumeric characters on each side and comparing case-folded letters. Both approaches are O(n) time; the two-pointer version saves space by not allocating a cleaned copy.</p>
+'''
+
+ANSWERS[41] = r'''
+<pre><code>def sieve_of_eratosthenes(n: int) -&gt; list[int]:
+    if n &lt; 2:
+        return []
+    is_prime = [True] * (n + 1)
+    is_prime[0] = is_prime[1] = False
+    for i in range(2, int(n ** 0.5) + 1):
+        if is_prime[i]:
+            # Start from i*i — smaller multiples already crossed out
+            for j in range(i * i, n + 1, i):
+                is_prime[j] = False
+    return [i for i, prime in enumerate(is_prime) if prime]
+
+# Segmented sieve — for enormous n (say 10^9+), avoids huge memory
+# Uses blocks of sqrt(n) — an advanced variant
+
+sieve_of_eratosthenes(30)    # [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
+sieve_of_eratosthenes(1)     # []
+len(sieve_of_eratosthenes(10**6))   # 78498 primes below 1M</code></pre>
+<p>O(n log log n) time — practically linear. Once a number is confirmed prime, cross off all its multiples starting from i² (smaller multiples share a factor with some smaller prime, so they're already crossed off). Remarkably efficient.</p>
+'''
+
+ANSWERS[42] = r'''
+<pre><code>def longest_palindromic_substring(s: str) -&gt; str:
+    if not s:
+        return ""
+
+    def expand(l: int, r: int) -&gt; str:
+        while l &gt;= 0 and r &lt; len(s) and s[l] == s[r]:
+            l -= 1
+            r += 1
+        return s[l + 1:r]
+
+    best = ""
+    for i in range(len(s)):
+        # odd-length palindrome centered at i
+        p1 = expand(i, i)
+        # even-length palindrome centered between i and i+1
+        p2 = expand(i, i + 1)
+        longer = p1 if len(p1) &gt;= len(p2) else p2
+        if len(longer) &gt; len(best):
+            best = longer
+    return best
+
+longest_palindromic_substring("babad")       # "bab" or "aba"
+longest_palindromic_substring("cbbd")        # "bb"
+longest_palindromic_substring("a")           # "a"
+longest_palindromic_substring("")            # ""</code></pre>
+<p>"Expand around center" runs in O(n²) time and O(1) space. Try each of 2n-1 possible centers (each character, each gap) and expand outward. Manacher's algorithm solves this in O(n) but is significantly more complex and rarely worth it.</p>
+'''
+
+ANSWERS[43] = r'''
+<pre><code># Built-in — use this
+from itertools import permutations
+
+list(permutations([1, 2, 3]))
+# [(1,2,3), (1,3,2), (2,1,3), (2,3,1), (3,1,2), (3,2,1)]
+
+list(permutations([1, 2, 3], 2))    # permutations of size 2
+# [(1,2), (1,3), (2,1), (2,3), (3,1), (3,2)]
+
+# Manual — recursive
+def permute(lst: list) -&gt; list:
+    if len(lst) &lt;= 1:
+        return [lst[:]]
+    result = []
+    for i in range(len(lst)):
+        rest = lst[:i] + lst[i + 1:]
+        for p in permute(rest):
+            result.append([lst[i]] + p)
+    return result
+
+# Manual — iterative with backtracking
+def permute_bt(lst: list) -&gt; list:
+    result = []
+    def backtrack(path, remaining):
+        if not remaining:
+            result.append(path[:])
+            return
+        for i in range(len(remaining)):
+            path.append(remaining[i])
+            backtrack(path, remaining[:i] + remaining[i + 1:])
+            path.pop()
+    backtrack([], lst)
+    return result
+
+permute([1, 2, 3])    # 6 permutations</code></pre>
+<p>O(n!) permutations exist — the output size dominates. <code>itertools.permutations</code> is a C-implemented generator that produces them lazily, which matters because the full list explodes fast (10! = 3.6M; 13! = 6.2B).</p>
+'''
+
+ANSWERS[44] = r'''
+<pre><code># O(n²) dynamic programming — easier to understand
+def lis_dp(nums: list[int]) -&gt; int:
+    if not nums:
+        return 0
+    dp = [1] * len(nums)
+    for i in range(1, len(nums)):
+        for j in range(i):
+            if nums[j] &lt; nums[i]:
+                dp[i] = max(dp[i], dp[j] + 1)
+    return max(dp)
+
+# O(n log n) — patience sorting with binary search
+from bisect import bisect_left
+
+def lis_fast(nums: list[int]) -&gt; int:
+    tails = []
+    for n in nums:
+        pos = bisect_left(tails, n)
+        if pos == len(tails):
+            tails.append(n)
+        else:
+            tails[pos] = n
+    return len(tails)     # length only, not the actual subsequence
+
+lis_fast([10, 9, 2, 5, 3, 7, 101, 18])    # 4 → [2, 3, 7, 101]
+lis_fast([0, 1, 0, 3, 2, 3])               # 4 → [0, 1, 2, 3]
+lis_fast([])                                # 0</code></pre>
+<p>The O(n log n) solution maintains <code>tails</code> — the smallest possible tail value for any LIS of each length. Binary-search inserts maintain the invariant. Length of <code>tails</code> equals LIS length (but the array itself may not be a valid LIS).</p>
+'''
+
+ANSWERS[45] = r'''
+<pre><code>def tower_of_hanoi(n: int, source: str, target: str, auxiliary: str, moves=None) -&gt; list:
+    if moves is None:
+        moves = []
+    if n == 1:
+        moves.append(f"Move disk 1 from {source} to {target}")
+        return moves
+    tower_of_hanoi(n - 1, source, auxiliary, target, moves)
+    moves.append(f"Move disk {n} from {source} to {target}")
+    tower_of_hanoi(n - 1, auxiliary, target, source, moves)
+    return moves
+
+moves = tower_of_hanoi(3, "A", "C", "B")
+for m in moves:
+    print(m)
+# Move disk 1 from A to C
+# Move disk 2 from A to B
+# Move disk 1 from C to B
+# Move disk 3 from A to C
+# Move disk 1 from B to A
+# Move disk 2 from B to C
+# Move disk 1 from A to C
+
+# Number of moves = 2^n - 1 (always)
+len(tower_of_hanoi(10, "A", "C", "B"))    # 1023</code></pre>
+<p>The classic recursive puzzle: move n disks from source to target, using auxiliary as a temporary. The solution requires exactly 2ⁿ - 1 moves — a lower bound that's tight. A 64-disk tower would require 2⁶⁴-1 ≈ 1.8×10¹⁹ moves.</p>
+'''
+
+ANSWERS[46] = r'''
+<pre><code># Graph as adjacency list
+graph = {
+    "A": ["B", "C"],
+    "B": ["D", "E"],
+    "C": ["F"],
+    "D": [], "E": ["F"], "F": [],
+}
+
+# Recursive DFS
+def dfs(graph: dict, start, visited=None) -&gt; list:
+    if visited is None:
+        visited = []
+    visited.append(start)
+    for neighbor in graph.get(start, []):
+        if neighbor not in visited:
+            dfs(graph, neighbor, visited)
+    return visited
+
+# Iterative DFS — uses explicit stack
+def dfs_iter(graph: dict, start) -&gt; list:
+    visited = []
+    stack = [start]
+    seen = set()
+    while stack:
+        node = stack.pop()
+        if node in seen:
+            continue
+        seen.add(node)
+        visited.append(node)
+        # Add neighbors in reverse so they come off the stack in original order
+        stack.extend(reversed(graph.get(node, [])))
+    return visited
+
+dfs(graph, "A")         # ['A', 'B', 'D', 'E', 'F', 'C']
+dfs_iter(graph, "A")    # same</code></pre>
+<p>DFS explores as deep as possible before backtracking. O(V + E) time. Use iterative form to avoid recursion-depth issues on deep graphs (Python's default limit is ~1000). DFS is the basis for cycle detection, topological sort, and connected-components algorithms.</p>
+'''
+
+ANSWERS[47] = r'''
+<pre><code>from collections import deque
+
+def bfs(graph: dict, start) -&gt; list:
+    visited = []
+    seen = {start}
+    queue = deque([start])
+    while queue:
+        node = queue.popleft()
+        visited.append(node)
+        for neighbor in graph.get(node, []):
+            if neighbor not in seen:
+                seen.add(neighbor)
+                queue.append(neighbor)
+    return visited
+
+# Shortest path (unweighted)
+def shortest_path(graph: dict, start, end) -&gt; list | None:
+    queue = deque([[start]])
+    seen = {start}
+    while queue:
+        path = queue.popleft()
+        node = path[-1]
+        if node == end:
+            return path
+        for neighbor in graph.get(node, []):
+            if neighbor not in seen:
+                seen.add(neighbor)
+                queue.append(path + [neighbor])
+    return None
+
+graph = {"A": ["B", "C"], "B": ["D"], "C": ["D"], "D": []}
+bfs(graph, "A")                    # ['A', 'B', 'C', 'D']
+shortest_path(graph, "A", "D")     # ['A', 'B', 'D']</code></pre>
+<p>BFS explores layer by layer — neighbors before neighbors' neighbors. Uses a queue (<code>deque.popleft()</code> is O(1); <code>list.pop(0)</code> is O(n) — don't use a list as a queue). Finds shortest paths in unweighted graphs.</p>
+'''
+
+ANSWERS[48] = r'''
+<pre><code>class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val, self.left, self.right = val, left, right
+
+def is_balanced(root) -&gt; bool:
+    def height(node):
+        if not node:
+            return 0
+        left = height(node.left)
+        if left == -1:
+            return -1
+        right = height(node.right)
+        if right == -1:
+            return -1
+        if abs(left - right) &gt; 1:
+            return -1
+        return 1 + max(left, right)
+
+    return height(root) != -1
+
+#    1              1
+#   / \            /
+#  2   3          2
+#                /
+#               3
+# balanced    not balanced</code></pre>
+<p>A balanced tree has the heights of the two subtrees of every node differing by at most 1. The trick is returning -1 as a sentinel to short-circuit once we find imbalance — avoids the O(n²) naive approach that recomputes heights. This runs in O(n) time and O(h) space where h is the tree height.</p>
+'''
+
+ANSWERS[49] = r'''
+<pre><code>class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val, self.left, self.right = val, left, right
+
+def lowest_common_ancestor(root, p, q) -&gt; TreeNode:
+    if root is None or root is p or root is q:
+        return root
+    left = lowest_common_ancestor(root.left, p, q)
+    right = lowest_common_ancestor(root.right, p, q)
+    if left and right:
+        return root            # p and q split here → root is the LCA
+    return left or right        # both in one subtree, or neither found
+
+# For a BST — can do better using the ordering property
+def lca_bst(root, p, q):
+    while root:
+        if p.val &lt; root.val and q.val &lt; root.val:
+            root = root.left
+        elif p.val &gt; root.val and q.val &gt; root.val:
+            root = root.right
+        else:
+            return root</code></pre>
+<p>For a general binary tree: post-order recursion. If both subtrees return a node, the current root is the split point → it's the LCA. O(n) time, O(h) recursion space. For a BST, exploit the ordering to get O(h) time — often O(log n) for balanced trees.</p>
+'''
+
+ANSWERS[50] = r'''
+<pre><code>def is_same_tree(p, q) -&gt; bool:
+    if p is None and q is None:
+        return True
+    if p is None or q is None:
+        return False
+    return (p.val == q.val
+            and is_same_tree(p.left, q.left)
+            and is_same_tree(p.right, q.right))
+
+# Iterative with two stacks
+def is_same_iter(p, q) -&gt; bool:
+    stack = [(p, q)]
+    while stack:
+        a, b = stack.pop()
+        if a is None and b is None:
+            continue
+        if a is None or b is None or a.val != b.val:
+            return False
+        stack.append((a.left, b.left))
+        stack.append((a.right, b.right))
+    return True
+
+# Testing
+#    1         1
+#   / \       / \
+#  2   3     2   3   → True
+</code></pre>
+<p>Traverse both trees in lockstep and compare corresponding nodes. O(min(m, n)) time where m and n are the tree sizes — short-circuits on first mismatch. O(h) space for recursion stack.</p>
+'''
+
+ANSWERS[51] = r'''
+<pre><code>def tree_height(root) -&gt; int:
+    if root is None:
+        return 0
+    return 1 + max(tree_height(root.left), tree_height(root.right))
+
+# Iterative — BFS level counting
+from collections import deque
+def tree_height_iter(root) -&gt; int:
+    if root is None:
+        return 0
+    queue = deque([root])
+    height = 0
+    while queue:
+        for _ in range(len(queue)):
+            node = queue.popleft()
+            if node.left:  queue.append(node.left)
+            if node.right: queue.append(node.right)
+        height += 1
+    return height
+
+#    1
+#   / \        height = 3
+#  2   3
+# /
+# 4</code></pre>
+<p>"Height" conventions vary — single-node trees have height 0 or 1 depending on the source. The code above counts nodes on the longest path (height of empty = 0, single node = 1). O(n) time, O(h) space for recursion.</p>
+'''
+
+ANSWERS[52] = r'''
+<pre><code>from collections import deque
+
+def level_order(root) -&gt; list[list]:
+    if root is None:
+        return []
+    result = []
+    queue = deque([root])
+    while queue:
+        level = []
+        for _ in range(len(queue)):
+            node = queue.popleft()
+            level.append(node.val)
+            if node.left:  queue.append(node.left)
+            if node.right: queue.append(node.right)
+        result.append(level)
+    return result
+
+# Zigzag order — alternating left-right
+def zigzag_order(root) -&gt; list[list]:
+    if root is None:
+        return []
+    result, queue, reverse = [], deque([root]), False
+    while queue:
+        level = deque()
+        for _ in range(len(queue)):
+            node = queue.popleft()
+            if reverse: level.appendleft(node.val)
+            else:       level.append(node.val)
+            if node.left:  queue.append(node.left)
+            if node.right: queue.append(node.right)
+        result.append(list(level))
+        reverse = not reverse
+    return result
+
+#    3          [[3], [9, 20], [15, 7]]
+#   / \
+#  9   20
+#     /  \
+#    15   7</code></pre>
+<p>BFS naturally groups nodes by level. The inner <code>for _ in range(len(queue))</code> captures the current level's size before we start adding the next level's children. O(n) time and space.</p>
+'''
+
+ANSWERS[53] = r'''
+<pre><code>def diameter(root) -&gt; int:
+    best = [0]            # mutable container — lets inner fn update
+
+    def depth(node) -&gt; int:
+        if node is None:
+            return 0
+        left = depth(node.left)
+        right = depth(node.right)
+        # diameter through this node = left + right
+        best[0] = max(best[0], left + right)
+        return 1 + max(left, right)
+
+    depth(root)
+    return best[0]
+
+#    1
+#   / \       diameter = 3 (edges: 4 → 2 → 1 → 3)
+#  2   3
+# / \
+#4   5</code></pre>
+<p>The diameter is the longest path between any two leaves (measured in edges). At each node, the longest path through it is <code>left_depth + right_depth</code>. We track the global max while computing depths in one O(n) pass. Using a list (<code>best[0]</code>) as a mutable reference is a common Python trick for closures that pre-dates <code>nonlocal</code>.</p>
+'''
+
+ANSWERS[54] = r'''
+<pre><code>def invert_tree(root):
+    if root is None:
+        return None
+    root.left, root.right = invert_tree(root.right), invert_tree(root.left)
+    return root
+
+# Iterative — BFS
+from collections import deque
+def invert_iter(root):
+    if root is None:
+        return None
+    queue = deque([root])
+    while queue:
+        node = queue.popleft()
+        node.left, node.right = node.right, node.left
+        if node.left:  queue.append(node.left)
+        if node.right: queue.append(node.right)
+    return root
+
+#     4                 4
+#    / \               / \
+#   2   7             7   2
+#  / \ / \    →      / \ / \
+# 1  3 6  9         9  6 3  1</code></pre>
+<p>Famously, a candidate in 2015 failed the "invert a binary tree on a whiteboard" question at Google — Max Howell (Homebrew creator). The recursive solution is four lines, elegant, O(n) time and O(h) stack space. Simultaneous assignment avoids needing a temp variable.</p>
+'''
+
+ANSWERS[55] = r'''
+<pre><code>def merge_trees(t1, t2):
+    if t1 is None:
+        return t2
+    if t2 is None:
+        return t1
+    merged = TreeNode(t1.val + t2.val)
+    merged.left  = merge_trees(t1.left,  t2.left)
+    merged.right = merge_trees(t1.right, t2.right)
+    return merged
+
+# In-place version — mutate t1 instead of allocating new nodes
+def merge_trees_inplace(t1, t2):
+    if t1 is None or t2 is None:
+        return t1 or t2
+    t1.val += t2.val
+    t1.left  = merge_trees_inplace(t1.left,  t2.left)
+    t1.right = merge_trees_inplace(t1.right, t2.right)
+    return t1
+
+#   1         2           3
+#  / \       / \         / \
+# 3   2     1   3       4   5
+#/           \ \       / \   \
+#5            4 7     5   4   7</code></pre>
+<p>Merge two binary trees by summing overlapping nodes. Where one tree has a subtree and the other has <code>None</code>, the result uses the existing subtree. O(min(m, n)) time — only visits nodes present in both trees; pointer assignments for mismatched subtrees are O(1).</p>
+'''
+
+ANSWERS[56] = r'''
+<pre><code>def max_path_sum(root) -&gt; int:
+    best = [float("-inf")]
+
+    def gain(node):
+        if node is None:
+            return 0
+        # If a child's contribution is negative, drop it
+        left  = max(gain(node.left),  0)
+        right = max(gain(node.right), 0)
+        # Path that bends at this node
+        best[0] = max(best[0], node.val + left + right)
+        # What we can contribute to parent — pick better child, add self
+        return node.val + max(left, right)
+
+    gain(root)
+    return best[0]
+
+#   -10          Path: 15 → 20 → 7  = 42
+#    / \
+#   9   20
+#      /  \
+#     15   7</code></pre>
+<p>A path can start and end at any nodes. At each node, two things happen: (1) consider the "bent" path through this node using both children, and (2) return the best one-child extension to the parent. We drop negative contributions by comparing with 0. O(n) time, O(h) stack space.</p>
+'''
+
+ANSWERS[57] = r'''
+<pre><code># In-order traversal of a BST yields sorted values
+def kth_smallest(root, k: int):
+    stack = []
+    node = root
+    count = 0
+    while stack or node:
+        while node:
+            stack.append(node)
+            node = node.left
+        node = stack.pop()
+        count += 1
+        if count == k:
+            return node.val
+        node = node.right
+    return None
+
+# Recursive with generator
+def inorder(node):
+    if node:
+        yield from inorder(node.left)
+        yield node.val
+        yield from inorder(node.right)
+
+def kth_smallest_gen(root, k: int):
+    import itertools
+    return next(itertools.islice(inorder(root), k - 1, k), None)
+
+#     3            kth_smallest(root, 2) = 2
+#    / \
+#   1   4
+#    \
+#     2</code></pre>
+<p>Iterative in-order traversal is O(H + k) time where H is the height — we only process the first k nodes in sorted order. For repeated queries, augmenting each node with a subtree-size counter enables O(log n) lookups.</p>
+'''
+
+ANSWERS[58] = r'''
+<pre><code>def delete_node(root, key):
+    if root is None:
+        return None
+    if key &lt; root.val:
+        root.left = delete_node(root.left, key)
+    elif key &gt; root.val:
+        root.right = delete_node(root.right, key)
+    else:
+        # Found the node to delete
+        if root.left is None:
+            return root.right
+        if root.right is None:
+            return root.left
+        # Two children — find in-order successor (smallest in right subtree)
+        succ = root.right
+        while succ.left:
+            succ = succ.left
+        root.val = succ.val
+        root.right = delete_node(root.right, succ.val)
+    return root</code></pre>
+<p>Three cases:</p>
+<ul>
+  <li><strong>Leaf or one child</strong> — replace with the single child (or None).</li>
+  <li><strong>Two children</strong> — find the in-order successor (smallest node in the right subtree), copy its value up, then delete it from the right subtree.</li>
+</ul>
+<p>O(h) time. For balanced BSTs, that's O(log n). Self-balancing trees (AVL, red-black) maintain O(log n) across deletions.</p>
+'''
+
+ANSWERS[59] = r'''
+<pre><code>def sorted_array_to_bst(nums: list):
+    if not nums:
+        return None
+    mid = len(nums) // 2
+    root = TreeNode(nums[mid])
+    root.left  = sorted_array_to_bst(nums[:mid])
+    root.right = sorted_array_to_bst(nums[mid + 1:])
+    return root
+
+# Without slicing (more memory-efficient)
+def build(nums, lo, hi):
+    if lo &gt; hi:
+        return None
+    mid = (lo + hi) // 2
+    node = TreeNode(nums[mid])
+    node.left  = build(nums, lo, mid - 1)
+    node.right = build(nums, mid + 1, hi)
+    return node
+
+def sorted_array_to_bst_v2(nums):
+    return build(nums, 0, len(nums) - 1)
+
+sorted_array_to_bst([-10, -3, 0, 5, 9])
+#       0
+#      / \
+#    -3   9
+#    /   /
+#  -10  5</code></pre>
+<p>Picking the middle element as root guarantees height-balance. O(n) time. The version without slicing passes indices instead of sublists — same time but avoids O(n²) copying overhead when the input is very large.</p>
+'''
+
+ANSWERS[60] = r'''
+<pre><code>class ListNode:
+    def __init__(self, val=0, nxt=None):
+        self.val, self.next = val, nxt
+
+# Floyd's tortoise and hare — O(n) time, O(1) space
+def has_cycle(head) -&gt; bool:
+    slow = fast = head
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+        if slow is fast:
+            return True
+    return False
+
+# Using a set — O(n) space, simpler to explain
+def has_cycle_set(head) -&gt; bool:
+    seen = set()
+    while head:
+        if id(head) in seen:
+            return True
+        seen.add(id(head))
+        head = head.next
+    return False
+
+# a → b → c → d
+#         ↑___|       has_cycle = True</code></pre>
+<p>Floyd's algorithm: if there's a cycle, a pointer moving twice as fast must eventually meet the slower one. If no cycle, the fast pointer reaches the end. O(n) time, O(1) extra space — elegant. The set version is more obviously correct but uses O(n) space.</p>
+'''
+
+ANSWERS[61] = r'''
+<pre><code>def find_middle(head):
+    slow = fast = head
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+    return slow
+
+# 1 → 2 → 3 → 4 → 5           slow ends at 3
+# 1 → 2 → 3 → 4 → 5 → 6       slow ends at 4 (right middle)</code></pre>
+<p>Two pointers: slow advances one step, fast advances two. When fast reaches the end, slow is at the middle. For even-length lists, this returns the <em>second</em> of the two middle nodes (LeetCode convention). If you need the <em>first</em>, change the loop condition to <code>while fast.next and fast.next.next</code>.</p>
+<p>O(n) time, O(1) space. One-pass, no need to count length first.</p>
+'''
+
+ANSWERS[62] = r'''
+<pre><code># Iterative — O(1) space
+def reverse_list(head):
+    prev = None
+    curr = head
+    while curr:
+        nxt = curr.next
+        curr.next = prev
+        prev = curr
+        curr = nxt
+    return prev
+
+# Recursive — O(n) stack space
+def reverse_list_rec(head):
+    if head is None or head.next is None:
+        return head
+    new_head = reverse_list_rec(head.next)
+    head.next.next = head
+    head.next = None
+    return new_head
+
+# 1 → 2 → 3 → 4 → None
+#   becomes
+# 4 → 3 → 2 → 1 → None</code></pre>
+<p>The iterative version threads three pointers: <code>prev</code>, <code>curr</code>, and a temporary <code>nxt</code>. Reverses the pointer direction as it walks forward. O(n) time, O(1) space — much preferred over the recursive version (which hits recursion limits on long lists).</p>
+'''
+
+ANSWERS[63] = r'''
+<pre><code>def merge_sorted_lists(l1, l2):
+    dummy = ListNode()
+    tail = dummy
+    while l1 and l2:
+        if l1.val &lt;= l2.val:
+            tail.next = l1
+            l1 = l1.next
+        else:
+            tail.next = l2
+            l2 = l2.next
+        tail = tail.next
+    tail.next = l1 or l2           # whichever isn't exhausted
+    return dummy.next
+
+# Recursive — elegant but O(n) stack
+def merge_rec(l1, l2):
+    if l1 is None: return l2
+    if l2 is None: return l1
+    if l1.val &lt;= l2.val:
+        l1.next = merge_rec(l1.next, l2)
+        return l1
+    l2.next = merge_rec(l1, l2.next)
+    return l2
+
+# 1 → 2 → 4
+# 1 → 3 → 4
+#   merges to
+# 1 → 1 → 2 → 3 → 4 → 4</code></pre>
+<p>The dummy-node pattern simplifies the edge case of an empty starting list. Compare heads; take the smaller; advance. O(n + m) time, O(1) space. To merge k lists efficiently, use a heap (O(N log k)).</p>
+'''
+
+ANSWERS[64] = r'''
+<pre><code>def remove_nth_from_end(head, n: int):
+    dummy = ListNode(0, head)
+    slow = fast = dummy
+    # Advance fast by n+1 so the gap is right
+    for _ in range(n + 1):
+        fast = fast.next
+    # Move both until fast reaches the end
+    while fast:
+        slow = slow.next
+        fast = fast.next
+    # slow is now at the node BEFORE the one to remove
+    slow.next = slow.next.next
+    return dummy.next
+
+# 1 → 2 → 3 → 4 → 5, n=2
+# Remove 4:  1 → 2 → 3 → 5</code></pre>
+<p>Two pointers with a gap of n. When fast reaches the end, slow is exactly n nodes from the end — specifically, at the node before the target. The dummy node handles the edge case where the target is the head itself. O(n) time, one pass.</p>
+'''
+
+ANSWERS[65] = r'''
+<pre><code># Phase 1: detect cycle with Floyd's
+# Phase 2: find entry point
+# Phase 3: unlink it
+
+def detect_and_remove_loop(head):
+    slow = fast = head
+    # Detect
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+        if slow is fast:
+            break
+    else:
+        return head      # no cycle
+
+    # Find entry: reset slow, step together
+    slow = head
+    if slow is fast:     # cycle starts at head
+        while fast.next is not slow:
+            fast = fast.next
+    else:
+        while slow.next is not fast.next:
+            slow = slow.next
+            fast = fast.next
+    # Now fast.next is the cycle-entry node; break the link
+    fast.next = None
+    return head</code></pre>
+<p>Floyd's detection gets us a point inside the cycle. The key fact: moving one pointer from the head and another from the meeting point, both at speed 1, they meet at the cycle entry. That gives us the node to unlink. O(n) time, O(1) space.</p>
+'''
+
+ANSWERS[66] = r'''
+<pre><code># Two-pointer: align lengths implicitly by swapping heads
+def get_intersection(headA, headB):
+    if headA is None or headB is None:
+        return None
+    a, b = headA, headB
+    while a is not b:
+        a = a.next if a else headB
+        b = b.next if b else headA
+    return a    # either the intersection node or None (both reach end)
+
+# Length-based approach — explicit and clear
+def get_intersection_len(headA, headB):
+    def length(n):
+        c = 0
+        while n:
+            n = n.next
+            c += 1
+        return c
+    la, lb = length(headA), length(headB)
+    while la &gt; lb: headA = headA.next; la -= 1
+    while lb &gt; la: headB = headB.next; lb -= 1
+    while headA is not headB:
+        headA, headB = headA.next, headB.next
+    return headA</code></pre>
+<p>Two lists of length m and n that share a suffix will have their pointers converge at the intersection after each pointer walks m+n steps (by swapping heads on reaching null). O(m + n) time, O(1) space. Elegant — worth memorizing.</p>
+'''
+
+ANSWERS[67] = r'''
+<pre><code>def is_palindrome(head) -&gt; bool:
+    # Find middle
+    slow = fast = head
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+
+    # Reverse second half
+    prev = None
+    while slow:
+        nxt = slow.next
+        slow.next = prev
+        prev = slow
+        slow = nxt
+
+    # Compare halves
+    first, second = head, prev
+    while second:
+        if first.val != second.val:
+            return False
+        first  = first.next
+        second = second.next
+    return True
+
+# 1 → 2 → 2 → 1            → True
+# 1 → 2 → 3 → 2 → 1        → True (odd length, middle ignored in comparison)</code></pre>
+<p>O(n) time, O(1) space. Find the middle with two-pointer, reverse the second half, compare. Alternative: copy to a list and check with <code>lst == lst[::-1]</code> — O(n) space but one line.</p>
+'''
+
+ANSWERS[68] = r'''
+<pre><code>class Node:
+    def __init__(self, val, nxt=None, rand=None):
+        self.val, self.next, self.random = val, nxt, rand
+
+def clone_list(head):
+    if head is None:
+        return None
+    # Map old → new
+    old_to_new = {}
+    curr = head
+    while curr:
+        old_to_new[curr] = Node(curr.val)
+        curr = curr.next
+    # Wire up next and random
+    curr = head
+    while curr:
+        old_to_new[curr].next   = old_to_new.get(curr.next)
+        old_to_new[curr].random = old_to_new.get(curr.random)
+        curr = curr.next
+    return old_to_new[head]
+
+# O(1) space — interleave clone nodes between originals
+def clone_list_o1(head):
+    if head is None:
+        return None
+    # 1. Insert clones: A → A' → B → B'
+    curr = head
+    while curr:
+        clone = Node(curr.val, curr.next)
+        curr.next = clone
+        curr = clone.next
+    # 2. Assign random pointers
+    curr = head
+    while curr:
+        if curr.random:
+            curr.next.random = curr.random.next
+        curr = curr.next.next
+    # 3. Separate the two lists
+    new_head = head.next
+    curr = head
+    while curr:
+        clone = curr.next
+        curr.next = clone.next
+        clone.next = clone.next.next if clone.next else None
+        curr = curr.next
+    return new_head</code></pre>
+<p>The hashmap approach is clearer and O(n) time + space. The interleaving trick achieves O(n) time and O(1) extra space — impressive but complex; know both.</p>
+'''
+
+ANSWERS[69] = r'''
+<pre><code>class Stack:
+    def __init__(self):
+        self._data = []
+
+    def push(self, value):
+        self._data.append(value)
+
+    def pop(self):
+        if not self._data:
+            raise IndexError("pop from empty stack")
+        return self._data.pop()
+
+    def peek(self):
+        if not self._data:
+            raise IndexError("peek on empty stack")
+        return self._data[-1]
+
+    def is_empty(self) -&gt; bool:
+        return len(self._data) == 0
+
+    def __len__(self):
+        return len(self._data)
+
+s = Stack()
+s.push(1); s.push(2); s.push(3)
+s.pop()       # 3
+s.peek()      # 2
+len(s)        # 2</code></pre>
+<p>Python lists support stack operations (<code>append</code>, <code>pop</code>) in amortized O(1). The class is just a thin wrapper with clearer names and exceptions. In practice, you don't need a wrapper — <code>stack = []</code>, then <code>stack.append(x)</code> and <code>stack.pop()</code> suffice.</p>
+'''
+
+ANSWERS[70] = r'''
+<pre><code># Using collections.deque — O(1) for both ends
+from collections import deque
+
+class Queue:
+    def __init__(self):
+        self._data = deque()
+
+    def enqueue(self, value):
+        self._data.append(value)
+
+    def dequeue(self):
+        if not self._data:
+            raise IndexError("dequeue from empty queue")
+        return self._data.popleft()
+
+    def peek(self):
+        if not self._data:
+            raise IndexError("peek on empty queue")
+        return self._data[0]
+
+    def is_empty(self) -&gt; bool:
+        return len(self._data) == 0
+
+    def __len__(self):
+        return len(self._data)
+
+q = Queue()
+q.enqueue(1); q.enqueue(2); q.enqueue(3)
+q.dequeue()   # 1
+q.peek()      # 2</code></pre>
+<p><strong>Use <code>deque</code>, never a list</strong> — <code>list.pop(0)</code> is O(n) because it shifts everything down. <code>deque.popleft()</code> is O(1). For thread-safe or inter-process queues, see <code>queue.Queue</code> and <code>multiprocessing.Queue</code>.</p>
+'''
+
+ANSWERS[71] = r'''
+<pre><code>import heapq
+
+class PriorityQueue:
+    def __init__(self):
+        self._heap = []
+        self._counter = 0      # tiebreaker for equal priorities
+
+    def push(self, item, priority):
+        heapq.heappush(self._heap, (priority, self._counter, item))
+        self._counter += 1
+
+    def pop(self):
+        if not self._heap:
+            raise IndexError("pop from empty queue")
+        priority, _, item = heapq.heappop(self._heap)
+        return item
+
+    def peek(self):
+        return self._heap[0][2] if self._heap else None
+
+    def __len__(self):
+        return len(self._heap)
+
+pq = PriorityQueue()
+pq.push("low task", 3)
+pq.push("urgent", 1)
+pq.push("medium", 2)
+pq.pop()    # "urgent"
+pq.pop()    # "medium"</code></pre>
+<p>Python's <code>heapq</code> is a min-heap — smallest priority pops first. For a max-heap, negate priorities. The counter breaks ties when priorities are equal and keeps items in FIFO order within the same priority. For most needs, use <code>queue.PriorityQueue</code> (thread-safe) or <code>heapq</code> directly. O(log n) push/pop, O(1) peek.</p>
+'''
+
+ANSWERS[72] = r'''
+<pre><code>def evaluate_postfix(expr: str) -&gt; float:
+    stack = []
+    ops = {"+": lambda a, b: a + b,
+           "-": lambda a, b: a - b,
+           "*": lambda a, b: a * b,
+           "/": lambda a, b: a / b}
+
+    for token in expr.split():
+        if token in ops:
+            b = stack.pop()
+            a = stack.pop()
+            stack.append(ops[token](a, b))
+        else:
+            stack.append(float(token))
+    return stack.pop()
+
+evaluate_postfix("3 4 +")              # 7.0
+evaluate_postfix("5 1 2 + 4 * + 3 -")  # 14.0   (equivalent to 5 + ((1+2)*4) - 3)
+evaluate_postfix("2 3 *")              # 6.0</code></pre>
+<p>Postfix (RPN) eliminates parentheses and precedence — evaluation is just a stack walk. For each operand, push; for each operator, pop two operands, apply, push result. O(n) time. This is how HP calculators and the PostScript language work internally.</p>
+'''
+
+ANSWERS[73] = r'''
+<pre><code>def infix_to_postfix(expr: str) -&gt; str:
+    prec = {"+": 1, "-": 1, "*": 2, "/": 2, "^": 3}
+    output = []
+    stack = []
+
+    for token in expr.split():
+        if token.isalnum():             # operand
+            output.append(token)
+        elif token == "(":
+            stack.append(token)
+        elif token == ")":
+            while stack and stack[-1] != "(":
+                output.append(stack.pop())
+            stack.pop()                 # discard "("
+        else:                            # operator
+            while stack and stack[-1] != "(" and prec.get(stack[-1], 0) &gt;= prec[token]:
+                output.append(stack.pop())
+            stack.append(token)
+
+    while stack:
+        output.append(stack.pop())
+    return " ".join(output)
+
+infix_to_postfix("a + b * c")          # "a b c * +"
+infix_to_postfix("( a + b ) * c")      # "a b + c *"
+infix_to_postfix("a + b * c - d")      # "a b c * + d -"</code></pre>
+<p>The <strong>Shunting Yard Algorithm</strong> by Dijkstra. Operands go straight to output; operators go on a stack, but before pushing, pop any higher-or-equal-precedence operators already there. Parentheses act as a fence. O(n) time. For right-associative operators like <code>^</code>, use <code>&gt;</code> instead of <code>&gt;=</code>.</p>
+'''
+
+ANSWERS[74] = r'''
+<pre><code>def solve_n_queens(n: int) -&gt; list[list[str]]:
+    def backtrack(row: int, cols: set, diag1: set, diag2: set, board: list):
+        if row == n:
+            solutions.append([row for row in board])
+            return
+        for col in range(n):
+            if col in cols or (row - col) in diag1 or (row + col) in diag2:
+                continue
+            board.append("." * col + "Q" + "." * (n - col - 1))
+            backtrack(row + 1,
+                      cols | {col},
+                      diag1 | {row - col},
+                      diag2 | {row + col},
+                      board)
+            board.pop()
+
+    solutions = []
+    backtrack(0, set(), set(), set(), [])
+    return solutions
+
+solve_n_queens(4)
+# [[".Q..", "...Q", "Q...", "..Q."],
+#  ["..Q.", "Q...", "...Q", ".Q.."]]
+len(solve_n_queens(8))    # 92 solutions</code></pre>
+<p>Classic backtracking. For each row, try every column; skip if it conflicts on column or either diagonal (stored as row±col). Prune early. Time complexity grows roughly as O(n!) but pruning keeps real runs fast for n up to ~15.</p>
+'''
+
+ANSWERS[75] = r'''
+<pre><code># One transaction — "buy low, sell high"
+def max_profit_1(prices: list[int]) -&gt; int:
+    min_price = float("inf")
+    max_profit = 0
+    for p in prices:
+        min_price = min(min_price, p)
+        max_profit = max(max_profit, p - min_price)
+    return max_profit
+
+# Unlimited transactions — sum all upward swings
+def max_profit_unlimited(prices: list[int]) -&gt; int:
+    return sum(max(0, prices[i] - prices[i - 1]) for i in range(1, len(prices)))
+
+max_profit_1([7, 1, 5, 3, 6, 4])            # 5 → buy at 1, sell at 6
+max_profit_1([7, 6, 4, 3, 1])               # 0 → always declining
+max_profit_unlimited([7, 1, 5, 3, 6, 4])    # 7 → buy 1 sell 5, buy 3 sell 6</code></pre>
+<p>For single transaction: track the minimum seen so far; at each day, compute potential profit. O(n) time, O(1) space. For unlimited transactions: any increase can be captured — sum all positive day-over-day deltas. For "at most two transactions," see Q97.</p>
+'''
+
+ANSWERS[76] = r'''
+<pre><code>import re
+
+# Using a regex — concise
+NUMBER_RE = re.compile(r"^[+-]?(\d+\.?\d*|\.\d+)([eE][+-]?\d+)?$")
+def is_valid_number(s: str) -&gt; bool:
+    return bool(NUMBER_RE.match(s.strip()))
+
+# Using float() — catches any valid Python numeric literal
+def is_number_float(s: str) -&gt; bool:
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False
+
+is_valid_number("0")          # True
+is_valid_number("3.14")       # True
+is_valid_number("-.5")        # True
+is_valid_number("2e10")       # True
+is_valid_number("1e")         # False
+is_valid_number("abc")        # False
+is_valid_number("  42 ")      # True (stripped)</code></pre>
+<p>The <code>float()</code> approach is pragmatic and handles all Python-accepted formats (including "inf", "nan" — filter if unwanted). The regex gives precise control over what's accepted. Edge cases to consider: leading/trailing whitespace, signs, hex/octal prefixes, special values.</p>
+'''
+
+ANSWERS[77] = r'''
+<pre><code># itertools.combinations — idiomatic
+from itertools import chain, combinations
+
+def power_set(s: list) -&gt; list[tuple]:
+    return list(chain.from_iterable(combinations(s, r) for r in range(len(s) + 1)))
+
+# Bitmask approach — for sets of size ≤ ~20
+def power_set_bits(s: list) -&gt; list[list]:
+    n = len(s)
+    return [[s[i] for i in range(n) if mask &amp; (1 &lt;&lt; i)] for mask in range(1 &lt;&lt; n)]
+
+# Recursive
+def power_set_rec(s: list) -&gt; list[list]:
+    if not s:
+        return [[]]
+    rest = power_set_rec(s[1:])
+    return rest + [[s[0]] + subset for subset in rest]
+
+power_set([1, 2, 3])
+# [(), (1,), (2,), (3,), (1,2), (1,3), (2,3), (1,2,3)]</code></pre>
+<p>A set of size n has 2ⁿ subsets — the output is exponential. The bitmask approach maps each subset to a binary number whose bits indicate membership. For n &gt; 20 or so, the full power set becomes impractical; generate lazily.</p>
+'''
+
+ANSWERS[78] = r'''
+<pre><code># Sliding window with set
+def longest_unique_substring(s: str) -&gt; int:
+    seen = set()
+    left = 0
+    best = 0
+    for right, c in enumerate(s):
+        while c in seen:
+            seen.remove(s[left])
+            left += 1
+        seen.add(c)
+        best = max(best, right - left + 1)
+    return best
+
+# Sliding window with last-seen dict — skips faster on repeats
+def longest_unique_dict(s: str) -&gt; int:
+    last_seen = {}
+    left = 0
+    best = 0
+    for right, c in enumerate(s):
+        if c in last_seen and last_seen[c] &gt;= left:
+            left = last_seen[c] + 1
+        last_seen[c] = right
+        best = max(best, right - left + 1)
+    return best
+
+longest_unique_substring("abcabcbb")    # 3  ("abc")
+longest_unique_substring("bbbbb")       # 1  ("b")
+longest_unique_substring("pwwkew")      # 3  ("wke")</code></pre>
+<p>Classic sliding-window problem. Expand the window on the right; when a duplicate appears, shrink from the left until it's gone. The dict variant jumps the left pointer past the previous occurrence in one step — amortized O(n) either way.</p>
+'''
+
+ANSWERS[79] = r'''
+<pre><code>def longest_consecutive(nums: list[int]) -&gt; int:
+    num_set = set(nums)
+    best = 0
+    for n in num_set:
+        # Only start counting at the beginning of a sequence
+        if n - 1 not in num_set:
+            length = 1
+            while n + length in num_set:
+                length += 1
+            best = max(best, length)
+    return best
+
+longest_consecutive([100, 4, 200, 1, 3, 2])    # 4 → [1, 2, 3, 4]
+longest_consecutive([0, 3, 7, 2, 5, 8, 4, 6, 0, 1])   # 9
+longest_consecutive([])                         # 0</code></pre>
+<p>O(n) time and space. The key trick: only start counting when <code>n - 1</code> isn't in the set — that guarantees we only traverse each sequence once. Despite the nested loop, the total work is bounded by n. Naive sort-based solution is O(n log n).</p>
+'''
+
+ANSWERS[80] = r'''
+<p>Same as Q66. Repeated here because the question list has two near-identical entries:</p>
+<pre><code>def get_intersection(headA, headB):
+    if headA is None or headB is None:
+        return None
+    a, b = headA, headB
+    while a is not b:
+        a = a.next if a else headB
+        b = b.next if b else headA
+    return a      # the intersection node, or None if no intersection
+
+# Each pointer traverses m + n nodes total; they meet at the intersection
+# or both reach None simultaneously.</code></pre>
+<p>Two pointers walk each list; when one hits the end, it jumps to the head of the other. After m + n steps, both pointers have traversed the same total distance and must be at the intersection (if any) or both at None. O(m + n) time, O(1) space.</p>
+'''
+
+ANSWERS[81] = r'''
+<pre><code>def num_islands(grid: list[list[str]]) -&gt; int:
+    if not grid:
+        return 0
+    rows, cols = len(grid), len(grid[0])
+    count = 0
+
+    def dfs(r: int, c: int):
+        if r &lt; 0 or r &gt;= rows or c &lt; 0 or c &gt;= cols or grid[r][c] != "1":
+            return
+        grid[r][c] = "0"        # mark as visited by sinking
+        dfs(r + 1, c); dfs(r - 1, c)
+        dfs(r, c + 1); dfs(r, c - 1)
+
+    for r in range(rows):
+        for c in range(cols):
+            if grid[r][c] == "1":
+                count += 1
+                dfs(r, c)
+    return count
+
+# Test
+grid = [
+    ["1","1","0","0","0"],
+    ["1","1","0","0","0"],
+    ["0","0","1","0","0"],
+    ["0","0","0","1","1"],
+]
+num_islands(grid)    # 3</code></pre>
+<p>DFS flood-fills each connected component of land cells and counts them. Mutating the grid to mark visited cells avoids allocating a visited set. O(rows × cols) time and space (recursion stack for worst-case connected grid).</p>
+'''
+
+ANSWERS[82] = r'''
+<pre><code>def coin_change(coins: list[int], amount: int) -&gt; int:
+    # dp[i] = min coins to make amount i, or inf if impossible
+    dp = [float("inf")] * (amount + 1)
+    dp[0] = 0
+    for i in range(1, amount + 1):
+        for coin in coins:
+            if coin &lt;= i and dp[i - coin] + 1 &lt; dp[i]:
+                dp[i] = dp[i - coin] + 1
+    return dp[amount] if dp[amount] != float("inf") else -1
+
+coin_change([1, 2, 5], 11)      # 3   (5 + 5 + 1)
+coin_change([2], 3)             # -1  (impossible)
+coin_change([1], 0)             # 0
+coin_change([1, 2, 5], 100)     # 20  (20 coins of 5)</code></pre>
+<p>Bottom-up DP. <code>dp[i]</code> is the minimum number of coins to make amount <em>i</em>. For each amount, try subtracting each coin and use the best sub-result. O(amount × len(coins)) time and O(amount) space. A greedy approach fails on arbitrary coin denominations (e.g., {1, 3, 4} amount 6 → greedy gives 4+1+1 = 3 but optimal is 3+3 = 2).</p>
+'''
+
+ANSWERS[83] = r'''
+<pre><code># 0/1 Knapsack — each item taken at most once
+def knapsack_01(weights: list[int], values: list[int], capacity: int) -&gt; int:
+    n = len(weights)
+    dp = [[0] * (capacity + 1) for _ in range(n + 1)]
+    for i in range(1, n + 1):
+        for w in range(capacity + 1):
+            if weights[i - 1] &lt;= w:
+                dp[i][w] = max(dp[i - 1][w],
+                               dp[i - 1][w - weights[i - 1]] + values[i - 1])
+            else:
+                dp[i][w] = dp[i - 1][w]
+    return dp[n][capacity]
+
+# Space-optimized — 1D DP
+def knapsack_01_1d(weights, values, capacity):
+    dp = [0] * (capacity + 1)
+    for i in range(len(weights)):
+        # Iterate RIGHT-to-LEFT to prevent reusing an item
+        for w in range(capacity, weights[i] - 1, -1):
+            dp[w] = max(dp[w], dp[w - weights[i]] + values[i])
+    return dp[capacity]
+
+knapsack_01([1, 3, 4, 5], [1, 4, 5, 7], 7)   # 9 → take items with weights 3 and 4</code></pre>
+<p>Classic 0/1 knapsack. O(n × W) time where W is capacity — this is "pseudo-polynomial" (polynomial in W's value, not its bit-length). For <strong>unbounded</strong> knapsack (unlimited items), iterate left-to-right instead. The problem is NP-hard in general; the DP exploits integer weights.</p>
+'''
+
+ANSWERS[84] = r'''
+<pre><code>def edit_distance(s1: str, s2: str) -&gt; int:
+    m, n = len(s1), len(s2)
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+    for i in range(m + 1):
+        dp[i][0] = i          # delete all chars of s1
+    for j in range(n + 1):
+        dp[0][j] = j          # insert all chars of s2
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            if s1[i - 1] == s2[j - 1]:
+                dp[i][j] = dp[i - 1][j - 1]
+            else:
+                dp[i][j] = 1 + min(dp[i - 1][j],        # delete
+                                   dp[i][j - 1],        # insert
+                                   dp[i - 1][j - 1])    # replace
+    return dp[m][n]
+
+edit_distance("horse", "ros")        # 3 (h→r, remove r, remove e)
+edit_distance("intention", "execution")   # 5
+edit_distance("", "abc")             # 3</code></pre>
+<p>Also called Levenshtein distance. O(m × n) time and space. Space can be reduced to O(min(m, n)) by keeping only the current and previous row. Used in spell checkers, DNA sequence alignment, and fuzzy string matching.</p>
+'''
+
+ANSWERS[85] = r'''
+<pre><code>def max_product_subarray(nums: list[int]) -&gt; int:
+    if not nums:
+        return 0
+    # Track both max and min — because a negative × negative = big positive
+    max_here = min_here = best = nums[0]
+    for x in nums[1:]:
+        if x &lt; 0:
+            max_here, min_here = min_here, max_here
+        max_here = max(x, max_here * x)
+        min_here = min(x, min_here * x)
+        best = max(best, max_here)
+    return best
+
+max_product_subarray([2, 3, -2, 4])          # 6 → [2, 3]
+max_product_subarray([-2, 0, -1])            # 0
+max_product_subarray([-2, 3, -4])            # 24 → whole array
+max_product_subarray([0, 2])                 # 2</code></pre>
+<p>Similar to Kadane's but tracks both max and min running product. When encountering a negative, the roles swap (the old minimum × negative becomes a candidate for new max). O(n) time, O(1) space.</p>
+'''
+
+ANSWERS[86] = r'''
+<pre><code>from collections import deque
+
+def word_ladder_length(begin: str, end: str, word_list: list[str]) -&gt; int:
+    word_set = set(word_list)
+    if end not in word_set:
+        return 0
+    queue = deque([(begin, 1)])
+    visited = {begin}
+    while queue:
+        word, length = queue.popleft()
+        if word == end:
+            return length
+        for i in range(len(word)):
+            for c in "abcdefghijklmnopqrstuvwxyz":
+                nxt = word[:i] + c + word[i + 1:]
+                if nxt in word_set and nxt not in visited:
+                    visited.add(nxt)
+                    queue.append((nxt, length + 1))
+    return 0
+
+word_ladder_length("hit", "cog", ["hot","dot","dog","lot","log","cog"])
+# 5 → hit → hot → dot → dog → cog</code></pre>
+<p>BFS on an implicit graph — nodes are words, edges connect words that differ by exactly one letter. BFS gives the shortest path. The inner loop tries all 26 × len(word) single-letter mutations. Bidirectional BFS cuts this roughly in half for large word lists.</p>
+'''
+
+ANSWERS[87] = r'''
+<pre><code>def lcs(s1: str, s2: str) -&gt; int:
+    m, n = len(s1), len(s2)
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            if s1[i - 1] == s2[j - 1]:
+                dp[i][j] = dp[i - 1][j - 1] + 1
+            else:
+                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
+    return dp[m][n]
+
+# Return the actual subsequence, not just length
+def lcs_string(s1, s2):
+    m, n = len(s1), len(s2)
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            if s1[i - 1] == s2[j - 1]:
+                dp[i][j] = dp[i - 1][j - 1] + 1
+            else:
+                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
+    # Reconstruct
+    result = []
+    i, j = m, n
+    while i &gt; 0 and j &gt; 0:
+        if s1[i - 1] == s2[j - 1]:
+            result.append(s1[i - 1])
+            i -= 1; j -= 1
+        elif dp[i - 1][j] &gt; dp[i][j - 1]:
+            i -= 1
+        else:
+            j -= 1
+    return "".join(reversed(result))
+
+lcs_string("ABCBDAB", "BDCABA")   # "BCBA" or similar — length 4</code></pre>
+<p>Subsequence (not substring) — characters don't need to be consecutive. O(m × n) time and space; space can be reduced to O(min(m, n)) if you only need the length. Foundational in diff tools, DNA comparison, and version control.</p>
+'''
+
+ANSWERS[88] = r'''
+<pre><code>def maximal_rectangle(matrix: list[list[str]]) -&gt; int:
+    if not matrix or not matrix[0]:
+        return 0
+    cols = len(matrix[0])
+    heights = [0] * cols
+    best = 0
+    for row in matrix:
+        for c in range(cols):
+            heights[c] = heights[c] + 1 if row[c] == "1" else 0
+        best = max(best, largest_rectangle_in_histogram(heights))
+    return best
+
+def largest_rectangle_in_histogram(heights: list[int]) -&gt; int:
+    # Monotonic-increasing stack approach — O(n)
+    stack = []
+    best = 0
+    heights = heights + [0]       # sentinel to flush the stack
+    for i, h in enumerate(heights):
+        while stack and heights[stack[-1]] &gt;= h:
+            top = stack.pop()
+            width = i if not stack else i - stack[-1] - 1
+            best = max(best, heights[top] * width)
+        stack.append(i)
+    return best
+
+matrix = [["1","0","1","0","0"],
+          ["1","0","1","1","1"],
+          ["1","1","1","1","1"],
+          ["1","0","0","1","0"]]
+maximal_rectangle(matrix)   # 6</code></pre>
+<p>Reduce to the histogram problem: for each row, compute column heights (consecutive 1s from above), then find the max rectangle in that histogram. The monotonic stack histogram solution is O(n); total time is O(rows × cols).</p>
+'''
+
+ANSWERS[89] = r'''
+<pre><code># Different from Q82 — here we count the NUMBER of ways
+def coin_change_ways(coins: list[int], amount: int) -&gt; int:
+    dp = [0] * (amount + 1)
+    dp[0] = 1
+    for coin in coins:        # outer loop — each coin processed once (unordered combos)
+        for i in range(coin, amount + 1):
+            dp[i] += dp[i - coin]
+    return dp[amount]
+
+coin_change_ways([1, 2, 5], 5)    # 4  → [5], [2,2,1], [2,1,1,1], [1,1,1,1,1]
+coin_change_ways([2], 3)          # 0
+
+# If the problem is MINIMUM coins (like Q82):
+#   use the inner loop as "for each coin" and take the min — different answer
+
+# If ORDER matters (e.g., [1,2] and [2,1] count separately):
+#   swap the loops — outer is amount, inner is coins</code></pre>
+<p>The outer-coin / inner-amount loop order guarantees we count combinations (unordered), not permutations. Swapping the loop order gives ordered sequences. O(amount × len(coins)) time and O(amount) space.</p>
+'''
+
+ANSWERS[90] = r'''
+<pre><code># DP — O(m × n) time and space
+def unique_paths(m: int, n: int) -&gt; int:
+    dp = [[1] * n for _ in range(m)]
+    for i in range(1, m):
+        for j in range(1, n):
+            dp[i][j] = dp[i - 1][j] + dp[i][j - 1]
+    return dp[m - 1][n - 1]
+
+# Space-optimized — O(n) space
+def unique_paths_1d(m: int, n: int) -&gt; int:
+    dp = [1] * n
+    for _ in range(1, m):
+        for j in range(1, n):
+            dp[j] += dp[j - 1]
+    return dp[n - 1]
+
+# Math — binomial coefficient: C(m+n-2, m-1)
+from math import comb
+def unique_paths_math(m: int, n: int) -&gt; int:
+    return comb(m + n - 2, m - 1)
+
+unique_paths(3, 7)       # 28
+unique_paths(3, 2)       # 3
+unique_paths_math(23, 12) # 193536720</code></pre>
+<p>Can only move right or down. Each cell's count is the sum of paths from above and from the left. The math approach: any path is (m-1) downs and (n-1) rights, a total of m+n-2 moves, so count is C(m+n-2, m-1).</p>
+'''
+
+ANSWERS[91] = r'''
+<pre><code>def subset_sum(nums: list[int], target: int) -&gt; list[list[int]]:
+    result = []
+
+    def backtrack(start: int, path: list, remaining: int):
+        if remaining == 0:
+            result.append(path[:])
+            return
+        for i in range(start, len(nums)):
+            if nums[i] &gt; remaining:
+                continue
+            path.append(nums[i])
+            backtrack(i + 1, path, remaining - nums[i])
+            path.pop()
+
+    backtrack(0, [], target)
+    return result
+
+# Boolean version — does ANY subset sum to target?
+def can_sum(nums: list[int], target: int) -&gt; bool:
+    dp = [False] * (target + 1)
+    dp[0] = True
+    for n in nums:
+        for i in range(target, n - 1, -1):
+            if dp[i - n]:
+                dp[i] = True
+    return dp[target]
+
+subset_sum([2, 3, 5, 6, 8, 10], 10)
+# [[2, 3, 5], [2, 8], [10]]
+
+can_sum([3, 34, 4, 12, 5, 2], 9)   # True  (4 + 5 or 3 + 4 + 2)</code></pre>
+<p>Backtracking enumerates all solutions — exponential in the worst case. The DP version answers "is any subset possible?" in O(n × target). Sorting input first enables pruning (<code>if nums[i] &gt; remaining: continue</code>) which greatly speeds up backtracking on sorted input.</p>
+'''
+
+ANSWERS[92] = r'''
+<pre><code>def minimum_path_sum(triangle: list[list[int]]) -&gt; int:
+    # Bottom-up — modify in place (or use a copy)
+    dp = list(triangle[-1])
+    for row in range(len(triangle) - 2, -1, -1):
+        for col in range(len(triangle[row])):
+            dp[col] = triangle[row][col] + min(dp[col], dp[col + 1])
+    return dp[0]
+
+def maximum_path_sum(triangle: list[list[int]]) -&gt; int:
+    dp = list(triangle[-1])
+    for row in range(len(triangle) - 2, -1, -1):
+        for col in range(len(triangle[row])):
+            dp[col] = triangle[row][col] + max(dp[col], dp[col + 1])
+    return dp[0]
+
+triangle = [
+    [2],
+    [3, 4],
+    [6, 5, 7],
+    [4, 1, 8, 3]
+]
+minimum_path_sum(triangle)   # 11  (2 → 3 → 5 → 1)
+maximum_path_sum(triangle)   # 23  (2 → 4 → 7 → 8 or similar)</code></pre>
+<p>Work bottom-up. Each cell's optimal sum is its value plus the best of the two cells below. Only needs O(n) space (one row). Top-down DP works too but requires handling first-and-last column edge cases.</p>
+'''
+
+ANSWERS[93] = r'''
+<pre><code># Classic job scheduling with deadlines and profits — greedy
+def job_schedule(jobs: list[tuple]) -&gt; tuple:
+    # jobs = [(job_id, deadline, profit), ...]
+    jobs.sort(key=lambda j: j[2], reverse=True)   # highest profit first
+    max_deadline = max(j[1] for j in jobs)
+    slots = [None] * (max_deadline + 1)
+    total_profit = 0
+    for job_id, deadline, profit in jobs:
+        # Try to place in the latest available slot ≤ deadline
+        for slot in range(deadline, 0, -1):
+            if slots[slot] is None:
+                slots[slot] = job_id
+                total_profit += profit
+                break
+    scheduled = [j for j in slots if j is not None]
+    return scheduled, total_profit
+
+# Interval scheduling — earliest-finish-time first
+def max_non_overlapping(intervals: list[tuple]) -&gt; int:
+    # intervals = [(start, end), ...]
+    intervals.sort(key=lambda i: i[1])
+    count = 0
+    last_end = float("-inf")
+    for start, end in intervals:
+        if start &gt;= last_end:
+            count += 1
+            last_end = end
+    return count
+
+jobs = [("A", 4, 20), ("B", 1, 10), ("C", 1, 40), ("D", 1, 30)]
+job_schedule(jobs)   # (['C', ..., ..., 'A'], 60)</code></pre>
+<p>Two famous variants. Jobs with deadlines: sort by profit, greedily place in latest available slot — O(n²) naive, O(n log n) with a disjoint-set structure. Interval scheduling: sort by end time, greedily pick non-overlapping — optimal in O(n log n).</p>
+'''
+
+ANSWERS[94] = r'''
+<pre><code>def longest_palindromic_subsequence(s: str) -&gt; int:
+    # This is just LCS of s and s reversed
+    n = len(s)
+    if n == 0:
+        return 0
+    dp = [[0] * n for _ in range(n)]
+    for i in range(n):
+        dp[i][i] = 1                # every single char is a palindrome
+    # length = 2 up to n
+    for length in range(2, n + 1):
+        for i in range(n - length + 1):
+            j = i + length - 1
+            if s[i] == s[j]:
+                dp[i][j] = (dp[i + 1][j - 1] if length &gt; 2 else 0) + 2
+            else:
+                dp[i][j] = max(dp[i + 1][j], dp[i][j - 1])
+    return dp[0][n - 1]
+
+longest_palindromic_subsequence("bbbab")   # 4 → "bbbb"
+longest_palindromic_subsequence("cbbd")    # 2 → "bb"
+longest_palindromic_subsequence("a")       # 1</code></pre>
+<p>Palindromic <em>subsequence</em> (characters not necessarily contiguous) vs <em>substring</em>. O(n²) time and space. The length of the longest palindromic subsequence equals the LCS of the string with its reverse — same answer via two different DPs.</p>
+'''
+
+ANSWERS[95] = r'''
+<pre><code>def tsp_dp(dist: list[list[int]]) -&gt; int:
+    n = len(dist)
+    # dp[mask][i] = min cost to visit cities in mask, ending at i
+    INF = float("inf")
+    dp = [[INF] * n for _ in range(1 &lt;&lt; n)]
+    dp[1][0] = 0                      # start at city 0
+
+    for mask in range(1 &lt;&lt; n):
+        for last in range(n):
+            if not (mask &amp; (1 &lt;&lt; last)) or dp[mask][last] == INF:
+                continue
+            for nxt in range(n):
+                if mask &amp; (1 &lt;&lt; nxt):
+                    continue
+                new_mask = mask | (1 &lt;&lt; nxt)
+                cost = dp[mask][last] + dist[last][nxt]
+                if cost &lt; dp[new_mask][nxt]:
+                    dp[new_mask][nxt] = cost
+
+    full = (1 &lt;&lt; n) - 1
+    return min(dp[full][i] + dist[i][0] for i in range(1, n))
+
+dist = [
+    [0, 10, 15, 20],
+    [10, 0, 35, 25],
+    [15, 35, 0, 30],
+    [20, 25, 30, 0],
+]
+tsp_dp(dist)    # 80</code></pre>
+<p>Held-Karp bitmask DP — O(n² × 2ⁿ) time and O(n × 2ⁿ) space. Limits to about n ≤ 20 in practice. Exact solutions for larger instances require integer programming (CPLEX, Gurobi) or heuristics (Christofides, Lin-Kernighan, or LKH). TSP is NP-hard.</p>
+'''
+
+ANSWERS[96] = r'''
+<pre><code># O(n) greedy — think "farthest reachable"
+def min_jumps(nums: list[int]) -&gt; int:
+    if len(nums) &lt;= 1:
+        return 0
+    jumps = 1
+    current_end = nums[0]        # end of current jump
+    farthest = nums[0]           # farthest we can reach with one more jump
+    for i in range(1, len(nums)):
+        if i == len(nums) - 1:
+            return jumps
+        farthest = max(farthest, i + nums[i])
+        if i == current_end:
+            jumps += 1
+            current_end = farthest
+            if current_end &gt;= len(nums) - 1:
+                return jumps
+    return jumps
+
+min_jumps([2, 3, 1, 1, 4])    # 2 → 2→3→end
+min_jumps([2, 3, 0, 1, 4])    # 2
+min_jumps([1])                 # 0</code></pre>
+<p>Greedy: track the end of the current "jump region" and the farthest reachable. When we exhaust the current region, we must jump — pick the option that reached farthest. O(n) time, O(1) space. DP solution is O(n²).</p>
+'''
+
+ANSWERS[97] = r'''
+<pre><code>def max_profit_2_transactions(prices: list[int]) -&gt; int:
+    if len(prices) &lt; 2:
+        return 0
+    # Four states — before first buy, after first buy, after first sell, etc.
+    first_buy  = float("-inf")
+    first_sell = 0
+    second_buy = float("-inf")
+    second_sell = 0
+    for p in prices:
+        first_buy  = max(first_buy, -p)
+        first_sell = max(first_sell, first_buy + p)
+        second_buy = max(second_buy, first_sell - p)
+        second_sell = max(second_sell, second_buy + p)
+    return second_sell
+
+max_profit_2_transactions([3, 3, 5, 0, 0, 3, 1, 4])   # 6 (buy 0, sell 3; buy 1, sell 4)
+max_profit_2_transactions([1, 2, 3, 4, 5])            # 4
+max_profit_2_transactions([7, 6, 4, 3, 1])            # 0</code></pre>
+<p>Model as a state machine with 4 states: held_first, sold_first, held_second, sold_second. Update all 4 in a single pass. O(n) time, O(1) space. Generalizes to k transactions in O(n × k) time by maintaining 2k states.</p>
+'''
+
+ANSWERS[98] = r'''
+<pre><code># Stack-based — track indices
+def longest_valid_parentheses(s: str) -&gt; int:
+    stack = [-1]                # sentinel: "position before start"
+    best = 0
+    for i, c in enumerate(s):
+        if c == "(":
+            stack.append(i)
+        else:
+            stack.pop()
+            if not stack:
+                stack.append(i)
+            else:
+                best = max(best, i - stack[-1])
+    return best
+
+# Two-pass counting — O(1) space
+def longest_valid_pass(s: str) -&gt; int:
+    best = 0
+    # Left-to-right: counts ( and ) — if ) &gt; (, reset
+    open_n = close_n = 0
+    for c in s:
+        if c == "(": open_n += 1
+        else:         close_n += 1
+        if open_n == close_n:
+            best = max(best, 2 * close_n)
+        elif close_n &gt; open_n:
+            open_n = close_n = 0
+    # Right-to-left: same logic but reset when ( &gt; )
+    open_n = close_n = 0
+    for c in reversed(s):
+        if c == "(": open_n += 1
+        else:         close_n += 1
+        if open_n == close_n:
+            best = max(best, 2 * open_n)
+        elif open_n &gt; close_n:
+            open_n = close_n = 0
+    return best
+
+longest_valid_parentheses("(()")          # 2 → "()"
+longest_valid_parentheses(")()())")       # 4 → "()()"
+longest_valid_parentheses("")             # 0</code></pre>
+<p>Stack tracks unmatched positions. A sentinel <code>-1</code> lets us compute valid-substring lengths as <code>i - stack[-1]</code> after pops. O(n) time and space. The two-pass counting approach achieves O(1) space but is trickier to explain.</p>
+'''
+
+ANSWERS[99] = r'''
+<pre><code>def word_break(s: str, word_dict: list[str]) -&gt; bool:
+    word_set = set(word_dict)
+    dp = [False] * (len(s) + 1)
+    dp[0] = True
+    for i in range(1, len(s) + 1):
+        for j in range(i):
+            if dp[j] and s[j:i] in word_set:
+                dp[i] = True
+                break
+    return dp[len(s)]
+
+# Return all possible breakings — not just yes/no
+def word_break_all(s: str, word_dict: list[str]) -&gt; list[str]:
+    word_set = set(word_dict)
+    memo = {}
+
+    def helper(start):
+        if start in memo:
+            return memo[start]
+        if start == len(s):
+            return [""]
+        result = []
+        for end in range(start + 1, len(s) + 1):
+            word = s[start:end]
+            if word in word_set:
+                for rest in helper(end):
+                    result.append(word + (" " + rest if rest else ""))
+        memo[start] = result
+        return result
+
+    return helper(0)
+
+word_break("leetcode", ["leet", "code"])               # True
+word_break("applepenapple", ["apple", "pen"])          # True
+word_break("catsandog", ["cats", "dog", "sand", "and", "cat"])  # False
+word_break_all("catsanddog", ["cat","cats","and","sand","dog"])
+# ["cat sand dog", "cats and dog"]</code></pre>
+<p>DP: <code>dp[i]</code> = whether <code>s[:i]</code> can be segmented. O(n²) segmenting work × O(k) string hash per lookup. For listing all breakings, use memoized recursion — but beware exponential output size in pathological cases.</p>
+'''
+
+ANSWERS[100] = r'''
+<pre><code>def num_distinct_subsequences(s: str, t: str) -&gt; int:
+    m, n = len(s), len(t)
+    if m &lt; n:
+        return 0
+    # dp[i][j] = # ways s[:i] can form t[:j]
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+    for i in range(m + 1):
+        dp[i][0] = 1                  # empty t is a subsequence of any s
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            dp[i][j] = dp[i - 1][j]    # skip s[i-1]
+            if s[i - 1] == t[j - 1]:
+                dp[i][j] += dp[i - 1][j - 1]    # match s[i-1] with t[j-1]
+    return dp[m][n]
+
+# Space-optimized — O(n)
+def num_distinct_1d(s, t):
+    n = len(t)
+    dp = [0] * (n + 1)
+    dp[0] = 1
+    for c in s:
+        for j in range(n, 0, -1):
+            if c == t[j - 1]:
+                dp[j] += dp[j - 1]
+    return dp[n]
+
+num_distinct_subsequences("rabbbit", "rabbit")   # 3
+num_distinct_subsequences("babgbag", "bag")      # 5</code></pre>
+<p>Counts how many ways <code>t</code> appears as a subsequence of <code>s</code>. Classic 2D DP in O(m × n). The 1D optimization iterates the inner loop right-to-left to preserve state across iterations. Useful in NLP alignment and biological sequence analysis.</p>
+'''

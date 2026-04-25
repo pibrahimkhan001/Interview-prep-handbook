@@ -1,0 +1,3610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JavaScript — Basic · Interview Prep Mastery</title>
+<meta name="description" content="100 basic interview questions on JavaScript, with detailed explanations and examples.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/styles.css">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%239a6b1d'/%3E%3Ctext x='50' y='68' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold' font-size='48'%3EIP%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="site-header">
+  <div class="site-header__inner">
+    <button class="menu-toggle" aria-label="Open menu" type="button">☰ Menu</button>
+    <a class="brand" href="../index.html">
+      <span class="brand__mark">IP</span>
+      <span class="brand__text">
+        <span class="brand__title">Interview Prep Mastery</span>
+        <span class="brand__subtitle">Interactive learning guide</span>
+      </span>
+    </a>
+    <nav class="header-nav">
+      <a href="../index.html#roadmap">Roadmap</a>
+      <a href="../index.html#chapters">All chapters</a>
+      <button class="theme-toggle" type="button" aria-label="Toggle color scheme">☾ Dark</button>
+    </nav>
+  </div>
+</header>
+<div class="layout">
+<aside class="sidebar" aria-label="Site navigation">
+  <div class="sidebar__header">Chapter Navigator</div>
+  
+        <div class="nav-part">
+          <div class="nav-part__label">Part 1</div>
+          <div class="nav-part__title">Core Programming Languages</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">JavaScript</li><li><a class="active" href="../chapters/javascript-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/javascript-tricky.html"><span class="nav-item__title">Tricky</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-coding.html"><span class="nav-item__title">Advanced Coding</span><span class="nav-item__meta">100 questions · 100 min read</span></a></li><li><a class="" href="../chapters/javascript-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-scenario.html"><span class="nav-item__title">Advanced Scenario Based</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Python</li><li><a class="" href="../chapters/python-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/python-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-part">
+          <div class="nav-part__label">Part 2</div>
+          <div class="nav-part__title">Web Fundamentals</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">HTML</li><li><a class="" href="../chapters/html-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/html-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/html-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CSS</li><li><a class="" href="../chapters/css-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">102 questions · 60 min read</span></a></li><li><a class="" href="../chapters/css-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/css-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">101 questions · 90 min read</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-part">
+          <div class="nav-part__label">Part 3</div>
+          <div class="nav-part__title">Backend Technologies</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Node.Js</li><li><a class="" href="../chapters/nodejs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/nodejs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ExpressJS</li><li><a class="" href="../chapters/expressjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/expressjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/expressjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">API</li><li><a class="" href="../chapters/api-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/api-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-part">
+          <div class="nav-part__label">Part 4</div>
+          <div class="nav-part__title">Frontend Frameworks</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ReactJS</li><li><a class="" href="../chapters/reactjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">101 questions · 60 min read</span></a></li><li><a class="" href="../chapters/reactjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-part">
+          <div class="nav-part__label">Part 5</div>
+          <div class="nav-part__title">Databases</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MYSQL</li><li><a class="" href="../chapters/mysql-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mysql-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MongoDB</li><li><a class="" href="../chapters/mongodb-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mongodb-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-part">
+          <div class="nav-part__label">Part 6</div>
+          <div class="nav-part__title">System Design &amp; DevOps</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">System Design MERN Stack</li><li><a class="" href="../chapters/system-design-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Infrastructure MERN Stack</li><li><a class="" href="../chapters/infrastructure-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/infrastructure-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CI/CD Pipeline</li><li><a class="" href="../chapters/cicd-pipeline-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
+          </ul>
+        </div>
+</aside>
+<main class="main" id="main">
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="../index.html">Home</a>
+    <span class="breadcrumb__sep">›</span>
+    <a href="../index.html#part-1">Core Programming Languages</a>
+    <span class="breadcrumb__sep">›</span>
+    <span>JavaScript — Basic</span>
+  </nav>
+
+  <header class="chapter-header">
+    <div class="chapter-label">JavaScript · Basic</div>
+    <h1 class="chapter-title">Basic JavaScript Interview Questions</h1>
+    <p class="chapter-lede">Foundational knowledge — definitions, syntax, and core mechanics every beginner should know.</p>
+    <div class="chapter-meta">
+      <div class="chapter-meta__item"><span class="chapter-meta__label">Questions</span><span class="chapter-meta__value">100</span></div>
+      <div class="chapter-meta__item"><span class="chapter-meta__label">Level</span><span class="chapter-meta__value">Basic</span></div>
+      <div class="chapter-meta__item"><span class="chapter-meta__label">Estimated reading</span><span class="chapter-meta__value">60 min read</span></div>
+    </div>
+    
+  </header>
+
+  <section class="prose">
+
+    <div class="toc" id="toc">
+      <div class="toc__title">All questions in this chapter</div>
+      <ul class="toc__list">
+        <li><a href="#q1"><span class="toc__num">1.</span>What is JavaScript?</a></li><li><a href="#q2"><span class="toc__num">2.</span>How is JavaScript different from Java?</a></li><li><a href="#q3"><span class="toc__num">3.</span>What are the data types in JavaScript?</a></li><li><a href="#q4"><span class="toc__num">4.</span>Explain var, let, and const.</a></li><li><a href="#q5"><span class="toc__num">5.</span>What is hoisting in JavaScript?</a></li><li><a href="#q6"><span class="toc__num">6.</span>Explain the concept of closures in JavaScript.</a></li><li><a href="#q7"><span class="toc__num">7.</span>What is the difference between == and ===?</a></li><li><a href="#q8"><span class="toc__num">8.</span>What is the use of typeof operator?</a></li><li><a href="#q9"><span class="toc__num">9.</span>Explain the concept of promises in JavaScript.</a></li><li><a href="#q10"><span class="toc__num">10.</span>What are arrow functions?</a></li><li><a href="#q11"><span class="toc__num">11.</span>How does the this keyword work in JavaScript?</a></li><li><a href="#q12"><span class="toc__num">12.</span>Explain the event loop in JavaScript.</a></li><li><a href="#q13"><span class="toc__num">13.</span>What is the difference between null and undefined?</a></li><li><a href="#q14"><span class="toc__num">14.</span>What are template literals in JavaScript?</a></li><li><a href="#q15"><span class="toc__num">15.</span>What are default parameters in JavaScript?</a></li><li><a href="#q16"><span class="toc__num">16.</span>What is a callback function?</a></li><li><a href="#q17"><span class="toc__num">17.</span>Explain async/await.</a></li><li><a href="#q18"><span class="toc__num">18.</span>What is the difference between synchronous and asynchronous code?</a></li><li><a href="#q19"><span class="toc__num">19.</span>How do you create an object in JavaScript?</a></li><li><a href="#q20"><span class="toc__num">20.</span>What is a prototype in JavaScript?</a></li><li><a href="#q21"><span class="toc__num">21.</span>What is the difference between forEach and map?</a></li><li><a href="#q22"><span class="toc__num">22.</span>Explain the concept of inheritance in JavaScript.</a></li><li><a href="#q23"><span class="toc__num">23.</span>What are modules in JavaScript?</a></li><li><a href="#q24"><span class="toc__num">24.</span>What is the difference between slice and splice?</a></li><li><a href="#q25"><span class="toc__num">25.</span>How do you handle errors in JavaScript?</a></li><li><a href="#q26"><span class="toc__num">26.</span>What is the purpose of use strict?</a></li><li><a href="#q27"><span class="toc__num">27.</span>Explain the concept of scope in JavaScript.</a></li><li><a href="#q28"><span class="toc__num">28.</span>What is a higher-order function?</a></li><li><a href="#q29"><span class="toc__num">29.</span>How do you convert a string to a number in JavaScript?</a></li><li><a href="#q30"><span class="toc__num">30.</span>What is the difference between apply and call?</a></li><li><a href="#q31"><span class="toc__num">31.</span>What are pure functions?</a></li><li><a href="#q32"><span class="toc__num">32.</span>Explain the concept of immutability in JavaScript.</a></li><li><a href="#q33"><span class="toc__num">33.</span>What is the difference between setTimeout and setInterval?</a></li><li><a href="#q34"><span class="toc__num">34.</span>How do you create a class in JavaScript?</a></li><li><a href="#q35"><span class="toc__num">35.</span>What are destructuring assignments?</a></li><li><a href="#q36"><span class="toc__num">36.</span>What is a generator function?</a></li><li><a href="#q37"><span class="toc__num">37.</span>Explain the concept of event delegation.</a></li><li><a href="#q38"><span class="toc__num">38.</span>What are regular expressions in JavaScript?</a></li><li><a href="#q39"><span class="toc__num">39.</span>How do you check if a variable is an array in JavaScript?</a></li><li><a href="#q40"><span class="toc__num">40.</span>What is the spread operator?</a></li><li><a href="#q41"><span class="toc__num">41.</span>How do you clone an object in JavaScript?</a></li><li><a href="#q42"><span class="toc__num">42.</span>What is the difference between Object.freeze and Object.seal?</a></li><li><a href="#q43"><span class="toc__num">43.</span>What is a promise chain?</a></li><li><a href="#q44"><span class="toc__num">44.</span>How do you merge two arrays in JavaScript?</a></li><li><a href="#q45"><span class="toc__num">45.</span>What is a singleton pattern in JavaScript?</a></li><li><a href="#q46"><span class="toc__num">46.</span>Explain the difference between push and pop.</a></li><li><a href="#q47"><span class="toc__num">47.</span>What is the difference between shift and unshift?</a></li><li><a href="#q48"><span class="toc__num">48.</span>What is the purpose of Object.keys?</a></li><li><a href="#q49"><span class="toc__num">49.</span>How do you create a shallow copy of an object in JavaScript?</a></li><li><a href="#q50"><span class="toc__num">50.</span>What are immediately invoked function expressions (IIFE)?</a></li><li><a href="#q51"><span class="toc__num">51.</span>What is the difference between querySelector and getElementById?</a></li><li><a href="#q52"><span class="toc__num">52.</span>How do you debounce a function in JavaScript?</a></li><li><a href="#q53"><span class="toc__num">53.</span>What is the instanceof operator?</a></li><li><a href="#q54"><span class="toc__num">54.</span>How do you add an event listener to an element?</a></li><li><a href="#q55"><span class="toc__num">55.</span>What is the purpose of the classList property?</a></li><li><a href="#q56"><span class="toc__num">56.</span>Explain the difference between innerHTML and textContent.</a></li><li><a href="#q57"><span class="toc__num">57.</span>What is the difference between localStorage and sessionStorage?</a></li><li><a href="#q58"><span class="toc__num">58.</span>How do you make an AJAX call in JavaScript?</a></li><li><a href="#q59"><span class="toc__num">59.</span>What is the purpose of the fetch API?</a></li><li><a href="#q60"><span class="toc__num">60.</span>How do you handle JSON data in JavaScript?</a></li><li><a href="#q61"><span class="toc__num">61.</span>What is the difference between bind and apply?</a></li><li><a href="#q62"><span class="toc__num">62.</span>What is event bubbling and capturing?</a></li><li><a href="#q63"><span class="toc__num">63.</span>How do you create a custom event in JavaScript?</a></li><li><a href="#q64"><span class="toc__num">64.</span>What are the different ways to iterate over an array in JavaScript?</a></li><li><a href="#q65"><span class="toc__num">65.</span>How do you remove duplicates from an array in JavaScript?</a></li><li><a href="#q66"><span class="toc__num">66.</span>What is the purpose of the finally block in a try-catch statement?</a></li><li><a href="#q67"><span class="toc__num">67.</span>How do you check if a property exists in an object?</a></li><li><a href="#q68"><span class="toc__num">68.</span>What are promises and how do you use them?</a></li><li><a href="#q69"><span class="toc__num">69.</span>Explain the reduce method in JavaScript.</a></li><li><a href="#q70"><span class="toc__num">70.</span>What is the difference between some and every methods?</a></li><li><a href="#q71"><span class="toc__num">71.</span>How do you flatten a multi-dimensional array in JavaScript?</a></li><li><a href="#q72"><span class="toc__num">72.</span>What is the purpose of the then method in promises?</a></li><li><a href="#q73"><span class="toc__num">73.</span>What is the purpose of the catch method in promises?</a></li><li><a href="#q74"><span class="toc__num">74.</span>Explain the concept of currying in JavaScript.</a></li><li><a href="#q75"><span class="toc__num">75.</span>How do you create a promise in JavaScript?</a></li><li><a href="#q76"><span class="toc__num">76.</span>What is the purpose of the await keyword?</a></li><li><a href="#q77"><span class="toc__num">77.</span>Explain the concept of tail call optimization.</a></li><li><a href="#q78"><span class="toc__num">78.</span>How do you find the largest number in an array in JavaScript?</a></li><li><a href="#q79"><span class="toc__num">79.</span>What is the difference between a function expression and a function declaration?</a></li><li><a href="#q80"><span class="toc__num">80.</span>What is the purpose of the hasOwnProperty method?</a></li><li><a href="#q81"><span class="toc__num">81.</span>How do you get the current timestamp in JavaScript?</a></li><li><a href="#q82"><span class="toc__num">82.</span>How do you randomize the order of elements in an array?</a></li><li><a href="#q83"><span class="toc__num">83.</span>What is the purpose of the new keyword?</a></li><li><a href="#q84"><span class="toc__num">84.</span>How do you create an infinite loop in JavaScript?</a></li><li><a href="#q85"><span class="toc__num">85.</span>What is the difference between == and === in JavaScript?</a></li><li><a href="#q86"><span class="toc__num">86.</span>How do you remove an element from an array?</a></li><li><a href="#q87"><span class="toc__num">87.</span>What are destructuring assignments in JavaScript?</a></li><li><a href="#q88"><span class="toc__num">88.</span>Explain the concept of object-oriented programming in JavaScript.</a></li><li><a href="#q89"><span class="toc__num">89.</span>How do you check if a string contains a substring?</a></li><li><a href="#q90"><span class="toc__num">90.</span>What is the purpose of the filter method in arrays?</a></li><li><a href="#q91"><span class="toc__num">91.</span>How do you convert an object to a JSON string?</a></li><li><a href="#q92"><span class="toc__num">92.</span>What is the purpose of the JSON.parse method?</a></li><li><a href="#q93"><span class="toc__num">93.</span>How do you create a deep copy of an object?</a></li><li><a href="#q94"><span class="toc__num">94.</span>What is the difference between alert, prompt, and confirm?</a></li><li><a href="#q95"><span class="toc__num">95.</span>How do you handle asynchronous code in JavaScript?</a></li><li><a href="#q96"><span class="toc__num">96.</span>What is the purpose of the import statement?</a></li><li><a href="#q97"><span class="toc__num">97.</span>How do you export a module in JavaScript?</a></li><li><a href="#q98"><span class="toc__num">98.</span>What is the purpose of the yield keyword?</a></li><li><a href="#q99"><span class="toc__num">99.</span>How do you create a named function in JavaScript?</a></li><li><a href="#q100"><span class="toc__num">100.</span>Explain the concept of callback hell and how to avoid it.</a></li>
+      </ul>
+    </div>
+
+    
+<article class="qa" id="q1">
+  <div class="qa__number">Question 1</div>
+  <h3 class="qa__question">What is JavaScript?</h3>
+  <div class="qa__answer">
+    
+<p><strong>JavaScript</strong> is a high-level, dynamically-typed, interpreted programming language. Originally built to add interactivity to web pages in 1995, it now runs on servers (Node.js, Deno, Bun), embedded devices, desktops (Electron), and more.</p>
+<ul>
+  <li><strong>Dynamically typed:</strong> variables can hold any type; no declaration needed.</li>
+  <li><strong>Single-threaded + event loop:</strong> one main thread, async I/O handled through queues.</li>
+  <li><strong>First-class functions:</strong> functions are values you can pass around, return, and store.</li>
+  <li><strong>Prototype-based OOP:</strong> objects inherit from other objects (not from classes blueprint-style).</li>
+</ul>
+<pre><code>const greet = name =&gt; `Hello, ${name}!`;
+console.log(greet("world"));  // "Hello, world!"</code></pre>
+<div class="callout callout-tip">
+  <div class="callout-icon">💡</div>
+  <div>JavaScript and Java are unrelated. The name was a marketing decision in 1995.</div>
+</div>
+
+    
+  </div>
+</article>
+<article class="qa" id="q2">
+  <div class="qa__number">Question 2</div>
+  <h3 class="qa__question">How is JavaScript different from Java?</h3>
+  <div class="qa__answer">
+    
+<p>They share C-family syntax but almost nothing else. A compact comparison:</p>
+<table>
+  <thead><tr><th>Aspect</th><th>JavaScript</th><th>Java</th></tr></thead>
+  <tbody>
+    <tr><td>Types</td><td>Dynamic, checked at runtime</td><td>Static, checked at compile time</td></tr>
+    <tr><td>Execution</td><td>Interpreted / JIT in a runtime (V8, SpiderMonkey)</td><td>Compiled to bytecode, runs on JVM</td></tr>
+    <tr><td>Concurrency</td><td>Single-threaded + event loop</td><td>Multi-threaded, shared memory</td></tr>
+    <tr><td>Object model</td><td>Prototype-based</td><td>Class-based</td></tr>
+    <tr><td>Main uses</td><td>Browser, Node servers, tools</td><td>Enterprise, Android</td></tr>
+  </tbody>
+</table>
+<p><code>"5" + 3</code> is <code>"53"</code> in JavaScript (implicit coercion) but wouldn't compile in Java. That one difference summarizes their philosophies.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q3">
+  <div class="qa__number">Question 3</div>
+  <h3 class="qa__question">What are the data types in JavaScript?</h3>
+  <div class="qa__answer">
+    
+<p>JavaScript has <strong>seven primitives</strong> and one umbrella <strong>object</strong> type.</p>
+<h4>Primitives (immutable, compared by value)</h4>
+<ul>
+  <li><code>string</code>: <code>"hello"</code></li>
+  <li><code>number</code>: 64-bit float — <code>42</code>, <code>3.14</code>, <code>NaN</code>, <code>Infinity</code></li>
+  <li><code>bigint</code>: arbitrary-precision integers — <code>123n</code></li>
+  <li><code>boolean</code>: <code>true</code>, <code>false</code></li>
+  <li><code>undefined</code>: "not assigned"</li>
+  <li><code>null</code>: "intentionally empty"</li>
+  <li><code>symbol</code>: unique identifier — <code>Symbol("id")</code></li>
+</ul>
+<h4>Object (compared by reference)</h4>
+<p>Everything else: plain objects, arrays, functions, dates, regex, maps, sets.</p>
+<pre><code>typeof "hi";      // "string"
+typeof 42;        // "number"
+typeof null;      // "object"  (historical bug)
+typeof [];        // "object"
+typeof function(){}; // "function"</code></pre>
+
+    
+  </div>
+</article>
+<article class="qa" id="q4">
+  <div class="qa__number">Question 4</div>
+  <h3 class="qa__question">Explain var, let, and const.</h3>
+  <div class="qa__answer">
+    
+<p>All three declare variables, but they differ in <strong>scope</strong>, <strong>reassignment</strong>, and <strong>hoisting</strong>.</p>
+<table>
+  <thead><tr><th>Feature</th><th><code>var</code></th><th><code>let</code></th><th><code>const</code></th></tr></thead>
+  <tbody>
+    <tr><td>Scope</td><td>Function</td><td>Block</td><td>Block</td></tr>
+    <tr><td>Reassign?</td><td>Yes</td><td>Yes</td><td>No</td></tr>
+    <tr><td>Redeclare?</td><td>Yes</td><td>No</td><td>No</td></tr>
+    <tr><td>Hoisted</td><td>Yes (as <code>undefined</code>)</td><td>TDZ</td><td>TDZ</td></tr>
+  </tbody>
+</table>
+<pre><code>function demo() {
+  if (true) {
+    var a = 1;
+    let b = 2;
+    const c = 3;
+  }
+  console.log(a);  // 1
+  console.log(b);  // ReferenceError
+}</code></pre>
+<p><strong>Rule:</strong> use <code>const</code> by default, <code>let</code> when you must reassign, and avoid <code>var</code> in new code.</p>
+<div class="callout callout-warning">
+  <div class="callout-icon">⚠</div>
+  <div><code>const</code> prevents rebinding, not mutation. <code>const obj = {}; obj.x = 1;</code> is legal. Use <code>Object.freeze</code> for real immutability.</div>
+</div>
+
+    
+  </div>
+</article>
+<article class="qa" id="q5">
+  <div class="qa__number">Question 5</div>
+  <h3 class="qa__question">What is hoisting in JavaScript?</h3>
+  <div class="qa__answer">
+    
+<p><strong>Hoisting</strong> is JavaScript's behavior of moving declarations to the top of their scope before execution. Only declarations are hoisted, not initializations.</p>
+<ul>
+  <li><strong>Function declarations</strong> — fully hoisted (usable before their line).</li>
+  <li><strong><code>var</code></strong> — hoisted but initialized as <code>undefined</code>.</li>
+  <li><strong><code>let</code> / <code>const</code></strong> — hoisted into the Temporal Dead Zone (TDZ); accessing them before declaration throws <code>ReferenceError</code>.</li>
+</ul>
+<pre><code>greet();           // works — function declaration hoisted
+console.log(a);    // undefined
+console.log(b);    // ReferenceError (TDZ)
+
+function greet() { console.log("hi"); }
+var a = 1;
+let b = 2;</code></pre>
+<p>Always declare before you use. Hoisting is mostly a trap to understand, not a feature to lean on.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q6">
+  <div class="qa__number">Question 6</div>
+  <h3 class="qa__question">Explain the concept of closures in JavaScript.</h3>
+  <div class="qa__answer">
+    
+<p>A <strong>closure</strong> is a function bundled with references to its surrounding lexical scope. Inner functions "remember" outer variables even after the outer function has returned.</p>
+<pre><code>function makeCounter() {
+  let count = 0;
+  return function () { return ++count; };
+}
+
+const counter = makeCounter();
+counter();  // 1
+counter();  // 2
+// `count` survives because the inner function still holds it.</code></pre>
+<h4>Why closures matter</h4>
+<ul>
+  <li><strong>Data privacy:</strong> variables captured by closure aren't accessible from outside.</li>
+  <li><strong>Factories:</strong> produce customized functions (<code>makeGreeter("Hi")</code>).</li>
+  <li><strong>Callbacks &amp; event handlers:</strong> naturally capture surrounding state.</li>
+  <li><strong>Module pattern:</strong> the pre-ES6 way to create private module state.</li>
+</ul>
+<div class="callout callout-tip">
+  <div class="callout-icon">💡</div>
+  <div>Classic interview: why does <code>for (var i = 0; i &lt; 3; i++) setTimeout(() =&gt; log(i), 0)</code> print <code>3, 3, 3</code>? One shared <code>var</code> binding. Using <code>let</code> creates a fresh binding per iteration.</div>
+</div>
+
+    
+  </div>
+</article>
+<article class="qa" id="q7">
+  <div class="qa__number">Question 7</div>
+  <h3 class="qa__question">What is the difference between == and ===?</h3>
+  <div class="qa__answer">
+    
+<p>Both compare values; the difference is <strong>type coercion</strong>.</p>
+<ul>
+  <li><code>==</code> (loose) converts both sides to the same type first.</li>
+  <li><code>===</code> (strict) requires type and value to match.</li>
+</ul>
+<pre><code>5 == "5";      // true    (string coerced)
+5 === "5";     // false
+
+true == 1;     // true
+true === 1;    // false
+
+null == undefined;   // true   (special case)
+null === undefined;  // false
+
+NaN == NaN;    // false — NaN never equals anything
+[] == false;   // true   — surprising coercion!</code></pre>
+<p><strong>Always use <code>===</code>.</strong> Loose equality has too many surprising rules. The one defensible shorthand is <code>x == null</code> meaning "null or undefined," but most style guides prefer being explicit.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q8">
+  <div class="qa__number">Question 8</div>
+  <h3 class="qa__question">What is the use of typeof operator?</h3>
+  <div class="qa__answer">
+    
+<p><code>typeof</code> returns a string describing its operand's type. Unlike most operators, it never throws — even on undeclared variables.</p>
+<pre><code>typeof "hi";          // "string"
+typeof 42;            // "number"
+typeof true;          // "boolean"
+typeof undefined;     // "undefined"
+typeof null;          // "object"    ← historical quirk
+typeof Symbol();      // "symbol"
+typeof 10n;           // "bigint"
+typeof {};            // "object"
+typeof [];            // "object"    ← use Array.isArray
+typeof function(){};  // "function"
+typeof undeclared;    // "undefined" — safe check</code></pre>
+<h4>Uses</h4>
+<ul>
+  <li>Feature detection: <code>if (typeof window !== "undefined")</code></li>
+  <li>Argument validation: <code>if (typeof x !== "string") throw ...</code></li>
+  <li>Check variable existence without a <code>ReferenceError</code>.</li>
+</ul>
+<p>For arrays, prefer <code>Array.isArray(x)</code>. For null, compare directly: <code>x === null</code>.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q9">
+  <div class="qa__number">Question 9</div>
+  <h3 class="qa__question">Explain the concept of promises in JavaScript.</h3>
+  <div class="qa__answer">
+    
+<p>A <strong>Promise</strong> is an object representing a future value. It's always in one of three states: <em>pending</em>, <em>fulfilled</em>, or <em>rejected</em>.</p>
+<pre><code>const p = new Promise((resolve, reject) =&gt; {
+  setTimeout(() =&gt; Math.random() &gt; 0.5 ? resolve("ok") : reject(new Error("no")), 500);
+});
+
+p.then(v =&gt; console.log(v))
+ .catch(err =&gt; console.error(err))
+ .finally(() =&gt; console.log("done"));</code></pre>
+<h4>Why they beat callbacks</h4>
+<ul>
+  <li><strong>Composable:</strong> <code>.then</code> chains naturally.</li>
+  <li><strong>Unified errors:</strong> one <code>.catch</code> handles the whole chain.</li>
+  <li><strong>Parallelism:</strong> <code>Promise.all</code>, <code>Promise.race</code>, <code>Promise.allSettled</code>.</li>
+  <li><strong>Foundation for async/await</strong> — modern async code is promises under the hood.</li>
+</ul>
+
+    
+  </div>
+</article>
+<article class="qa" id="q10">
+  <div class="qa__number">Question 10</div>
+  <h3 class="qa__question">What are arrow functions?</h3>
+  <div class="qa__answer">
+    
+<p><strong>Arrow functions</strong> (ES6) are a shorter syntax that also inherits <code>this</code> from the surrounding scope instead of having its own.</p>
+<pre><code>const double = x =&gt; x * 2;                  // implicit return
+const add = (a, b) =&gt; a + b;
+const log = () =&gt; console.log("hi");
+const makePair = (a, b) =&gt; ({ a, b });      // object literal needs parens
+const multi = x =&gt; {
+  const y = x * 2;
+  return y + 1;                              // explicit return when using braces
+};</code></pre>
+<h4>Key differences from regular functions</h4>
+<ul>
+  <li><strong>No own <code>this</code>:</strong> inherits from outer scope — great for callbacks, bad for object methods.</li>
+  <li><strong>No <code>arguments</code> object</strong> — use rest params instead: <code>(...args) =&gt; args</code>.</li>
+  <li><strong>Cannot be used with <code>new</code>.</strong></li>
+  <li><strong>No <code>prototype</code> property.</strong></li>
+</ul>
+<div class="callout callout-warning">
+  <div class="callout-icon">⚠</div>
+  <div>Don't use arrows for object methods that need <code>this</code>: <code>{ greet: () =&gt; this.name }</code> won't find <code>this.name</code> — <code>this</code> is the enclosing scope's, not the object's.</div>
+</div>
+
+    
+  </div>
+</article>
+<article class="qa" id="q11">
+  <div class="qa__number">Question 11</div>
+  <h3 class="qa__question">How does the this keyword work in JavaScript?</h3>
+  <div class="qa__answer">
+    
+<p><code>this</code> depends on <em>how</em> a function is called, not where it's defined. For regular functions, five rules:</p>
+<ol>
+  <li><strong>Method call</strong> — <code>obj.fn()</code>: <code>this</code> is <code>obj</code>.</li>
+  <li><strong>Standalone</strong> — <code>fn()</code>: <code>this</code> is <code>undefined</code> (strict) or the global object (sloppy).</li>
+  <li><strong>Constructor</strong> — <code>new Fn()</code>: <code>this</code> is the new instance.</li>
+  <li><strong>Explicit</strong> — <code>fn.call(ctx)</code>, <code>.apply(ctx)</code>, <code>.bind(ctx)</code>: whatever you pass.</li>
+  <li><strong>Event handler</strong> — usually the element that fired the event.</li>
+</ol>
+<p><strong>Arrow functions break the rules</strong> — they inherit <code>this</code> from the enclosing scope at creation time.</p>
+<pre><code>class Timer {
+  constructor() {
+    this.count = 0;
+    setInterval(() =&gt; this.count++, 1000);  // arrow: `this` is the Timer
+  }
+}</code></pre>
+
+    
+  </div>
+</article>
+<article class="qa" id="q12">
+  <div class="qa__number">Question 12</div>
+  <h3 class="qa__question">Explain the event loop in JavaScript.</h3>
+  <div class="qa__answer">
+    
+<p>JavaScript runs on a single thread, yet handles async work without freezing — thanks to the <strong>event loop</strong>.</p>
+<h4>Parts</h4>
+<ul>
+  <li><strong>Call stack</strong> — tracks synchronous function calls.</li>
+  <li><strong>Web/Node APIs</strong> — run timers, network, DOM events outside the JS engine.</li>
+  <li><strong>Macrotask queue</strong> — holds callbacks from timers, I/O, UI events.</li>
+  <li><strong>Microtask queue</strong> — higher priority; holds promise callbacks and <code>queueMicrotask</code>.</li>
+  <li><strong>The loop</strong> — when stack is empty, drain <em>all</em> microtasks, then take one macrotask, repeat.</li>
+</ul>
+<pre><code>console.log("A");
+setTimeout(() =&gt; console.log("B"), 0);
+Promise.resolve().then(() =&gt; console.log("C"));
+console.log("D");
+
+// Output: A, D, C, B
+// Sync first, then microtasks (C), then macrotasks (B).</code></pre>
+<div class="callout callout-tip">
+  <div class="callout-icon">💡</div>
+  <div>Microtasks always run to completion before the next macrotask. A runaway promise chain can starve timers and UI.</div>
+</div>
+
+    
+  </div>
+</article>
+<article class="qa" id="q13">
+  <div class="qa__number">Question 13</div>
+  <h3 class="qa__question">What is the difference between null and undefined?</h3>
+  <div class="qa__answer">
+    
+<p>Both mean "no value" but carry different intent.</p>
+<ul>
+  <li><strong><code>undefined</code></strong> — the default when JavaScript hasn't assigned a value (uninitialized variable, missing argument, missing property).</li>
+  <li><strong><code>null</code></strong> — a value you explicitly assign to mean "deliberately empty."</li>
+</ul>
+<pre><code>let x;              // undefined
+let y = null;       // null
+
+typeof undefined;   // "undefined"
+typeof null;        // "object"   — historical bug
+
+null == undefined;  // true (special loose rule)
+null === undefined; // false
+
+Boolean(null);      // false
+Boolean(undefined); // false</code></pre>
+<h4>When to use which</h4>
+<ul>
+  <li>Let JavaScript give you <code>undefined</code> for missing/uninitialized.</li>
+  <li>Assign <code>null</code> when "deliberately empty" is part of the domain meaning.</li>
+</ul>
+
+    
+  </div>
+</article>
+<article class="qa" id="q14">
+  <div class="qa__number">Question 14</div>
+  <h3 class="qa__question">What are template literals in JavaScript?</h3>
+  <div class="qa__answer">
+    
+<p><strong>Template literals</strong> use backticks and add three features over regular strings.</p>
+<h4>1. Interpolation</h4>
+<pre><code>const name = "Ada";
+`Hello, ${name}!`;            // "Hello, Ada!"
+`Total: ${price * quantity}`;  // any expression</code></pre>
+<h4>2. Multi-line</h4>
+<pre><code>const html = `
+  &lt;div&gt;
+    &lt;h1&gt;${title}&lt;/h1&gt;
+  &lt;/div&gt;
+`;</code></pre>
+<h4>3. Tagged templates</h4>
+<pre><code>function tag(strings, ...values) {
+  return strings.raw.map((s, i) =&gt; s + (values[i] ?? "")).join("").toUpperCase();
+}
+tag`Hi, ${name}!`;   // "HI, ADA!"</code></pre>
+<p>Tagged templates enable safe HTML/SQL building, localization, and styled-components-style CSS-in-JS.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q15">
+  <div class="qa__number">Question 15</div>
+  <h3 class="qa__question">What are default parameters in JavaScript?</h3>
+  <div class="qa__answer">
+    
+<p><strong>Default parameters</strong> (ES6) supply a value when the caller omits an argument or passes <code>undefined</code>.</p>
+<pre><code>function greet(name = "friend", greeting = "Hello") {
+  return `${greeting}, ${name}!`;
+}
+greet();                // "Hello, friend!"
+greet("Ada");           // "Hello, Ada!"
+greet(undefined, "Hi"); // "Hi, friend!" (undefined triggers default)
+greet(null);            // "Hello, null!" (null does NOT trigger default)</code></pre>
+<p>Defaults can reference earlier parameters and are evaluated per call:</p>
+<pre><code>function create(x, y = x * 2) { return y; }
+create(5);   // 10</code></pre>
+<p>Unlike the old <code>b = b || 10</code> trick, defaults only fire on <code>undefined</code>, so <code>0</code>, <code>""</code>, and <code>false</code> are preserved.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q16">
+  <div class="qa__number">Question 16</div>
+  <h3 class="qa__question">What is a callback function?</h3>
+  <div class="qa__answer">
+    
+<p>A <strong>callback</strong> is a function passed as an argument to be called later — either synchronously (array methods) or asynchronously (timers, I/O, events).</p>
+<pre><code>// Synchronous
+[1, 2, 3].map(n =&gt; n * 2);
+// The arrow is a callback.
+
+// Asynchronous
+setTimeout(() =&gt; console.log("later"), 1000);
+button.addEventListener("click", handler);</code></pre>
+<h4>Callback hell</h4>
+<pre><code>getUser(id, (u) =&gt; {
+  getOrders(u, (o) =&gt; {
+    getItems(o[0], (i) =&gt; { /* pyramid of doom */ });
+  });
+});</code></pre>
+<p>Promises and async/await were introduced to flatten this nesting and unify error handling.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q17">
+  <div class="qa__number">Question 17</div>
+  <h3 class="qa__question">Explain async/await.</h3>
+  <div class="qa__answer">
+    
+<p><code>async/await</code> is syntactic sugar over promises. It lets async code read top-to-bottom like sync code.</p>
+<pre><code>// Promise style
+function load(id) {
+  return fetch(`/user/${id}`)
+    .then(r =&gt; r.json())
+    .then(user =&gt; fetch(`/orders/${user.id}`))
+    .then(r =&gt; r.json());
+}
+
+// async/await — same behavior, clearer flow
+async function load(id) {
+  const u = await fetch(`/user/${id}`).then(r =&gt; r.json());
+  const o = await fetch(`/orders/${u.id}`).then(r =&gt; r.json());
+  return o;
+}</code></pre>
+<h4>Error handling with try/catch</h4>
+<pre><code>async function safeLoad(id) {
+  try {
+    const res = await fetch(`/user/${id}`);
+    return await res.json();
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+}</code></pre>
+<h4>Parallelize with <code>Promise.all</code></h4>
+<pre><code>const [a, b] = await Promise.all([fetchA(), fetchB()]);  // 1s, not 2s</code></pre>
+
+    
+  </div>
+</article>
+<article class="qa" id="q18">
+  <div class="qa__number">Question 18</div>
+  <h3 class="qa__question">What is the difference between synchronous and asynchronous code?</h3>
+  <div class="qa__answer">
+    
+<p>The distinction is whether the current operation blocks the next one from starting.</p>
+<ul>
+  <li><strong>Synchronous:</strong> each line waits for the previous to finish. Top-to-bottom execution.</li>
+  <li><strong>Asynchronous:</strong> a long operation is scheduled and control returns immediately. A callback, promise, or <code>await</code> notifies when it's done.</li>
+</ul>
+<pre><code>// Sync
+console.log(1);
+[1, 2, 3].map(n =&gt; n * 2);
+console.log(2);
+
+// Async
+console.log("A");
+setTimeout(() =&gt; console.log("B"), 0);
+console.log("C");
+// Output: A, C, B</code></pre>
+<h4>Why async exists</h4>
+<p>JavaScript is single-threaded. If I/O were synchronous, the UI would freeze for every network request. Async I/O lets the thread do other work while waiting for data.</p>
+<table>
+  <thead><tr><th>Model</th><th>Examples</th></tr></thead>
+  <tbody>
+    <tr><td>Sync</td><td>Array methods, math</td></tr>
+    <tr><td>Callback</td><td>Events, <code>setTimeout</code></td></tr>
+    <tr><td>Promise</td><td><code>fetch</code>, modern APIs</td></tr>
+    <tr><td>async/await</td><td>Readable async flow</td></tr>
+  </tbody>
+</table>
+
+    
+  </div>
+</article>
+<article class="qa" id="q19">
+  <div class="qa__number">Question 19</div>
+  <h3 class="qa__question">How do you create an object in JavaScript?</h3>
+  <div class="qa__answer">
+    
+<p>JavaScript provides several ways to create objects; pick by use case.</p>
+<pre><code>// 1. Object literal — ad-hoc data
+const user = { name: "Ada", greet() { return `Hi, ${this.name}`; } };
+
+// 2. new Object() — rare
+const u = new Object();
+u.name = "Ada";
+
+// 3. Constructor function
+function User(name) { this.name = name; }
+const u2 = new User("Ada");
+
+// 4. ES6 class (modern, sugar over #3)
+class Person {
+  constructor(name) { this.name = name; }
+  greet() { return `Hi, ${this.name}`; }
+}
+const p = new Person("Ada");
+
+// 5. Object.create() — explicit prototype
+const proto = { greet() { return `Hi, ${this.name}`; } };
+const u3 = Object.create(proto);
+u3.name = "Ada";
+
+// 6. Factory function — closures for private state
+function makeUser(name) {
+  return { name, greet() { return `Hi, ${name}`; } };
+}</code></pre>
+<p>In practice: literals for data bags, classes for typed models, factories when you want closure-based privacy or to avoid <code>this</code>.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q20">
+  <div class="qa__number">Question 20</div>
+  <h3 class="qa__question">What is a prototype in JavaScript?</h3>
+  <div class="qa__answer">
+    
+<p>A <strong>prototype</strong> is an object that another object inherits from via a hidden link. Property lookup walks this chain.</p>
+<pre><code>const animal = { eats: true, walk() { console.log("walking"); } };
+const rabbit = Object.create(animal);
+rabbit.jumps = true;
+
+rabbit.eats;   // true  — inherited
+rabbit.walk(); // "walking"  — found on animal</code></pre>
+<h4><code>prototype</code> vs <code>__proto__</code></h4>
+<ul>
+  <li><code>Ctor.prototype</code> — the object that will <em>become</em> the prototype of instances created with <code>new Ctor()</code>.</li>
+  <li><code>obj.__proto__</code> / <code>Object.getPrototypeOf(obj)</code> — the actual prototype of <code>obj</code>.</li>
+</ul>
+<pre><code>function User(name) { this.name = name; }
+User.prototype.greet = function() { return `Hi, ${this.name}`; };
+
+const u = new User("Ada");
+u.greet();                                      // "Hi, Ada"
+Object.getPrototypeOf(u) === User.prototype;    // true</code></pre>
+<p>ES6 <code>class</code> is syntactic sugar — under the hood it sets up a constructor function plus its prototype.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q21">
+  <div class="qa__number">Question 21</div>
+  <h3 class="qa__question">What is the difference between forEach and map?</h3>
+  <div class="qa__answer">
+    
+<p>Both iterate arrays; their returns and use cases differ.</p>
+<table>
+  <thead><tr><th></th><th><code>forEach</code></th><th><code>map</code></th></tr></thead>
+  <tbody>
+    <tr><td>Returns</td><td><code>undefined</code></td><td>New array of results</td></tr>
+    <tr><td>Chainable?</td><td>No</td><td>Yes</td></tr>
+    <tr><td>Best for</td><td>Side effects</td><td>Transformation</td></tr>
+  </tbody>
+</table>
+<pre><code>[1, 2, 3].forEach(n =&gt; console.log(n));   // side effect, returns undefined
+
+const doubled = [1, 2, 3].map(n =&gt; n * 2);  // [2, 4, 6]
+
+// Chain
+[1, 2, 3].map(n =&gt; n * 2).filter(n =&gt; n &gt; 2);  // [4, 6]</code></pre>
+<p>If you're pushing into an array inside a <code>forEach</code>, you probably want <code>map</code>. To exit early, use a <code>for...of</code> loop with <code>break</code>.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q22">
+  <div class="qa__number">Question 22</div>
+  <h3 class="qa__question">Explain the concept of inheritance in JavaScript.</h3>
+  <div class="qa__answer">
+    
+<p>JavaScript uses <strong>prototypal inheritance</strong>: objects inherit directly from other objects. The <code>class</code> syntax is sugar over this.</p>
+<h4>Modern way: <code>class</code></h4>
+<pre><code>class Animal {
+  constructor(name) { this.name = name; }
+  eat() { return `${this.name} eats`; }
+}
+
+class Rabbit extends Animal {
+  jump() { return `${this.name} jumps`; }
+}
+
+const r = new Rabbit("Bugs");
+r.eat();   // "Bugs eats"
+r.jump();  // "Bugs jumps"
+r instanceof Animal;  // true</code></pre>
+<h4>Older: constructor + prototype chain</h4>
+<pre><code>function Animal(name) { this.name = name; }
+Animal.prototype.eat = function() { return `${this.name} eats`; };
+
+function Rabbit(name) { Animal.call(this, name); }
+Rabbit.prototype = Object.create(Animal.prototype);
+Rabbit.prototype.constructor = Rabbit;</code></pre>
+<h4>Simplest: <code>Object.create</code></h4>
+<pre><code>const rabbit = Object.create(animalProto);</code></pre>
+<p>Use <code>super</code> inside a class to call parent constructor (<code>super(...)</code>) or parent method (<code>super.method(...)</code>).</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q23">
+  <div class="qa__number">Question 23</div>
+  <h3 class="qa__question">What are modules in JavaScript?</h3>
+  <div class="qa__answer">
+    
+<p>A <strong>module</strong> is a file of JavaScript whose top-level variables are private by default. You explicitly <code>export</code> what others can <code>import</code>.</p>
+<h4>ES Modules (modern, native)</h4>
+<pre><code>// math.js
+export function add(a, b) { return a + b; }
+export const PI = 3.14159;
+export default function multiply(a, b) { return a * b; }
+
+// app.js
+import multiply, { add, PI } from "./math.js";</code></pre>
+<h4>CommonJS (Node legacy)</h4>
+<pre><code>// math.js
+module.exports = { add };
+
+// app.js
+const { add } = require("./math");</code></pre>
+<h4>Key differences</h4>
+<table>
+  <thead><tr><th></th><th>ESM</th><th>CommonJS</th></tr></thead>
+  <tbody>
+    <tr><td>Loading</td><td>Static</td><td>Dynamic, synchronous</td></tr>
+    <tr><td>Browser native</td><td>Yes</td><td>No (needs bundler)</td></tr>
+    <tr><td>Tree-shaking</td><td>Yes</td><td>Limited</td></tr>
+    <tr><td>Exports</td><td>Live bindings</td><td>Value copies</td></tr>
+  </tbody>
+</table>
+<p>New projects default to ES Modules in both browser and Node.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q24">
+  <div class="qa__number">Question 24</div>
+  <h3 class="qa__question">What is the difference between slice and splice?</h3>
+  <div class="qa__answer">
+    
+<p>Both operate on arrays; one is safe, the other mutates.</p>
+<h4><code>slice(start, end?)</code> — non-mutating copy</h4>
+<pre><code>const a = [1, 2, 3, 4, 5];
+const b = a.slice(1, 4);  // [2, 3, 4]
+// a is unchanged</code></pre>
+<h4><code>splice(start, count, ...items)</code> — mutates</h4>
+<pre><code>const a = [1, 2, 3, 4, 5];
+a.splice(1, 2);           // removes 2 elements starting at index 1
+// a is now [1, 4, 5]
+
+a.splice(1, 0, 98, 99);   // insert without removing
+// a is now [1, 98, 99, 4, 5]
+
+a.splice(1, 1, "X");      // replace
+// a is now [1, "X", 99, 4, 5]</code></pre>
+<table>
+  <thead><tr><th></th><th><code>slice</code></th><th><code>splice</code></th></tr></thead>
+  <tbody>
+    <tr><td>Purpose</td><td>Extract copy</td><td>Insert/remove</td></tr>
+    <tr><td>Mutates?</td><td>No</td><td>Yes</td></tr>
+    <tr><td>Returns</td><td>New subarray</td><td>Removed elements</td></tr>
+  </tbody>
+</table>
+
+    
+  </div>
+</article>
+<article class="qa" id="q25">
+  <div class="qa__number">Question 25</div>
+  <h3 class="qa__question">How do you handle errors in JavaScript?</h3>
+  <div class="qa__answer">
+    
+<p>JavaScript has three main tools: <code>try/catch/finally</code>, promise <code>.catch</code>, and event-level handlers.</p>
+<h4>Synchronous</h4>
+<pre><code>try {
+  const data = JSON.parse(input);
+} catch (err) {
+  console.error(err.message);
+} finally {
+  cleanup();
+}</code></pre>
+<h4>Throwing</h4>
+<pre><code>function divide(a, b) {
+  if (b === 0) throw new Error("Divide by zero");
+  return a / b;
+}</code></pre>
+<h4>Promises</h4>
+<pre><code>fetch("/api").then(r =&gt; r.json()).catch(err =&gt; console.error(err));
+
+// async/await — use try/catch
+async function load() {
+  try {
+    const res = await fetch("/api");
+    return await res.json();
+  } catch (err) { console.error(err); }
+}</code></pre>
+<h4>Custom error classes</h4>
+<pre><code>class ValidationError extends Error {
+  constructor(field, msg) {
+    super(`${field}: ${msg}`);
+    this.name = "ValidationError";
+    this.field = field;
+  }
+}</code></pre>
+<h4>Global safety nets</h4>
+<pre><code>window.addEventListener("unhandledrejection", e =&gt; logToServer(e.reason));
+process.on("uncaughtException", err =&gt; { /* last-ditch log */ });</code></pre>
+
+    
+  </div>
+</article>
+<article class="qa" id="q26">
+  <div class="qa__number">Question 26</div>
+  <h3 class="qa__question">What is the purpose of use strict?</h3>
+  <div class="qa__answer">
+    
+<p><code>"use strict"</code> opts a file or function into a stricter variant of JavaScript (introduced ES5). ES Modules and classes enable it automatically.</p>
+<pre><code>"use strict";   // must be the first statement
+x = 10;         // ReferenceError — no implicit globals</code></pre>
+<h4>What changes in strict mode</h4>
+<ul>
+  <li>No implicit globals — undeclared assignments throw.</li>
+  <li><code>this</code> in standalone function calls is <code>undefined</code> (not the global).</li>
+  <li>Silent write-ignores become errors.</li>
+  <li>Duplicate parameter names, <code>with</code>, and octal literals are forbidden.</li>
+  <li><code>eval</code> can't leak variables to surrounding scope.</li>
+  <li>Reserved words like <code>implements</code> can't be used as identifiers.</li>
+</ul>
+<p>In modern code you rarely type <code>"use strict"</code> yourself — <code>import</code>/<code>export</code> and <code>class</code> turn it on automatically.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q27">
+  <div class="qa__number">Question 27</div>
+  <h3 class="qa__question">Explain the concept of scope in JavaScript.</h3>
+  <div class="qa__answer">
+    
+<p><strong>Scope</strong> is the region of code where a variable is accessible. Four levels, nested outward.</p>
+<ol>
+  <li><strong>Global</strong> — declared outside any function. In browsers, <code>var</code> globals become <code>window</code> properties.</li>
+  <li><strong>Module</strong> — top-level declarations in an ES module are scoped to that file.</li>
+  <li><strong>Function</strong> — <code>var</code> declarations live here.</li>
+  <li><strong>Block</strong> — <code>let</code>/<code>const</code> declarations live here (<code>{ ... }</code>).</li>
+</ol>
+<pre><code>function outer() {
+  const a = "A";
+  if (true) {
+    const b = "B";      // block-scoped
+    console.log(a, b);  // both visible
+  }
+  console.log(b);       // ReferenceError
+}</code></pre>
+<h4>Lexical scope</h4>
+<p>Inner scopes can access outer variables. When you reference a name, JavaScript searches outward — this is the foundation of closures.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q28">
+  <div class="qa__number">Question 28</div>
+  <h3 class="qa__question">What is a higher-order function?</h3>
+  <div class="qa__answer">
+    
+<p>A <strong>higher-order function</strong> either takes a function as an argument, returns a function, or both. This is possible because functions in JavaScript are first-class values.</p>
+<h4>Takes a function</h4>
+<pre><code>[1, 2, 3].map(n =&gt; n * 2);
+setTimeout(() =&gt; log("done"), 1000);
+button.addEventListener("click", handler);</code></pre>
+<h4>Returns a function</h4>
+<pre><code>function multiplier(factor) {
+  return n =&gt; n * factor;
+}
+const double = multiplier(2);
+double(5);  // 10</code></pre>
+<h4>Both</h4>
+<pre><code>function compose(f, g) {
+  return x =&gt; f(g(x));
+}
+const addOneThenDouble = compose(n =&gt; n * 2, n =&gt; n + 1);
+addOneThenDouble(3);  // 8</code></pre>
+<p>HOFs enable abstraction, composition (<code>map</code>/<code>filter</code>/<code>reduce</code>), and configuration via factories.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q29">
+  <div class="qa__number">Question 29</div>
+  <h3 class="qa__question">How do you convert a string to a number in JavaScript?</h3>
+  <div class="qa__answer">
+    
+<p>Several ways, each with different behavior.</p>
+<pre><code>Number("42");         // 42
+Number("42.5");       // 42.5
+Number("42px");       // NaN — strict
+Number("");           // 0 (surprising)
+Number(null);         // 0
+Number(undefined);    // NaN
+
+parseInt("42");       // 42
+parseInt("42px");     // 42 — tolerant, stops at first non-digit
+parseInt("3.14");     // 3 — truncates
+parseInt("1A", 16);   // 26 — always pass radix
+
+parseFloat("3.14px"); // 3.14
+
++"42";                // 42 — cryptic unary plus
++"abc";               // NaN</code></pre>
+<h4>Checking for NaN</h4>
+<pre><code>const n = Number(input);
+if (Number.isNaN(n)) { /* invalid */ }</code></pre>
+<p><strong>Rule:</strong> <code>Number()</code> for strict conversion; <code>parseInt</code>/<code>parseFloat</code> when input may have trailing units ("20px").</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q30">
+  <div class="qa__number">Question 30</div>
+  <h3 class="qa__question">What is the difference between apply and call?</h3>
+  <div class="qa__answer">
+    
+<p>Both invoke a function with an explicit <code>this</code>; they differ in how arguments are passed.</p>
+<ul>
+  <li><code>fn.call(thisArg, arg1, arg2, ...)</code> — arguments listed.</li>
+  <li><code>fn.apply(thisArg, [arg1, arg2, ...])</code> — arguments as array.</li>
+</ul>
+<pre><code>function introduce(g, p) { return `${g}, I'm ${this.name}${p}`; }
+const u = { name: "Ada" };
+
+introduce.call(u, "Hi", "!");        // "Hi, I'm Ada!"
+introduce.apply(u, ["Hi", "!"]);     // "Hi, I'm Ada!"
+
+// Modern: spread + call
+introduce.call(u, ..."Hi!".split(""));</code></pre>
+<h4>Historical use</h4>
+<pre><code>Math.max.apply(null, [1, 5, 2]);   // 5
+Math.max(...[1, 5, 2]);            // modern equivalent</code></pre>
+<p>Use <code>call</code> when you know the args at write time, <code>apply</code> when you have an array already. <code>bind</code> is the third cousin — it returns a new function with <code>this</code> permanently bound.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q31">
+  <div class="qa__number">Question 31</div>
+  <h3 class="qa__question">What are pure functions?</h3>
+  <div class="qa__answer">
+    
+<p>A <strong>pure function</strong> has two properties:</p>
+<ol>
+  <li><strong>Deterministic:</strong> same input → same output.</li>
+  <li><strong>No side effects:</strong> doesn't mutate inputs, globals, or do I/O.</li>
+</ol>
+<pre><code>// ✅ Pure
+function add(a, b) { return a + b; }
+
+// ❌ Impure — reads external state
+let counter = 0;
+function next() { return ++counter; }
+
+// ❌ Impure — mutates input
+function pushItem(arr, x) { arr.push(x); return arr; }
+
+// ✅ Pure version
+function withItem(arr, x) { return [...arr, x]; }</code></pre>
+<h4>Why pure functions matter</h4>
+<ul>
+  <li><strong>Testable:</strong> no setup/teardown.</li>
+  <li><strong>Cacheable (memoization):</strong> safe to remember results.</li>
+  <li><strong>Parallelizable:</strong> no shared state.</li>
+  <li><strong>Easy to reason about:</strong> read it, trust it.</li>
+</ul>
+<p>Real apps need impure functions for I/O. The pattern is to push side effects to the edges and keep core logic pure.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q32">
+  <div class="qa__number">Question 32</div>
+  <h3 class="qa__question">Explain the concept of immutability in JavaScript.</h3>
+  <div class="qa__answer">
+    
+<p><strong>Immutability</strong> means: once created, a value isn't changed. Instead of mutating, you create a new version with the desired changes.</p>
+<p>Primitives (strings, numbers) are immutable already. Objects and arrays require discipline.</p>
+<pre><code>// ❌ Mutation
+user.age = 31;
+
+// ✅ Immutable update
+const updated = { ...user, age: 31 };
+
+// ❌
+arr.push(4);
+
+// ✅
+const longer = [...arr, 4];</code></pre>
+<h4>Tools</h4>
+<ul>
+  <li>Spread: <code>{ ...obj }</code>, <code>[...arr]</code></li>
+  <li>Non-mutating methods: <code>map</code>, <code>filter</code>, <code>concat</code>, <code>slice</code></li>
+  <li><code>Object.freeze(obj)</code> — shallow freeze</li>
+  <li>Libraries: Immer (for ergonomic updates), Immutable.js (persistent data structures)</li>
+</ul>
+<h4>Why it matters</h4>
+<ul>
+  <li><strong>Predictability:</strong> no action at a distance.</li>
+  <li><strong>Change detection:</strong> React/Redux compare references — <code>prev !== next</code> is O(1).</li>
+  <li><strong>Undo/time-travel:</strong> old snapshots stay valid.</li>
+</ul>
+
+    
+  </div>
+</article>
+<article class="qa" id="q33">
+  <div class="qa__number">Question 33</div>
+  <h3 class="qa__question">What is the difference between setTimeout and setInterval?</h3>
+  <div class="qa__answer">
+    
+<p>Both schedule callbacks. Differ in frequency.</p>
+<ul>
+  <li><code>setTimeout(fn, ms)</code> — runs <em>once</em> after <code>ms</code>.</li>
+  <li><code>setInterval(fn, ms)</code> — runs <em>every</em> <code>ms</code>, repeatedly.</li>
+</ul>
+<pre><code>const t = setTimeout(() =&gt; log("hi"), 2000);
+clearTimeout(t);
+
+const i = setInterval(() =&gt; log("tick"), 2000);
+clearInterval(i);</code></pre>
+<h4>Gotchas</h4>
+<ul>
+  <li>Delays are a <em>minimum</em> — actual time may be longer when the thread is busy.</li>
+  <li><code>setInterval</code> can overlap itself if the callback is slow. Safer pattern:</li>
+</ul>
+<pre><code>function poll() {
+  doWork();
+  setTimeout(poll, 1000);
+}
+setTimeout(poll, 1000);</code></pre>
+<ul>
+  <li>For animation, use <code>requestAnimationFrame</code> — it syncs with the browser's frame rate.</li>
+</ul>
+
+    
+  </div>
+</article>
+<article class="qa" id="q34">
+  <div class="qa__number">Question 34</div>
+  <h3 class="qa__question">How do you create a class in JavaScript?</h3>
+  <div class="qa__answer">
+    
+<p>ES6 <code>class</code> is cleaner syntax for constructor functions + prototypes. Under the hood it's still prototypal inheritance.</p>
+<pre><code>class User {
+  active = true;              // instance field
+  static role = "user";       // class-level
+
+  constructor(name) { this.name = name; }
+
+  greet() { return `Hi, ${this.name}`; }   // on prototype
+
+  static fromObj(o) { return new User(o.name); }
+
+  get upper() { return this.name.toUpperCase(); }
+  set upper(v) { this.name = v.toLowerCase(); }
+
+  #secret = 42;               // private field (ES2022)
+  reveal() { return this.#secret; }
+}
+
+class Admin extends User {
+  constructor(name, perms) {
+    super(name);
+    this.perms = perms;
+  }
+  greet() { return super.greet() + " (admin)"; }
+}</code></pre>
+<h4>Notes</h4>
+<ul>
+  <li>Class bodies run in strict mode automatically.</li>
+  <li>Methods are non-enumerable by default.</li>
+  <li>Calling without <code>new</code> throws — much safer than constructor functions.</li>
+</ul>
+
+    
+  </div>
+</article>
+<article class="qa" id="q35">
+  <div class="qa__number">Question 35</div>
+  <h3 class="qa__question">What are destructuring assignments?</h3>
+  <div class="qa__answer">
+    
+<p><strong>Destructuring</strong> unpacks values from arrays or properties from objects into variables in a single expression.</p>
+<h4>Array</h4>
+<pre><code>const [a, b, c] = [1, 2, 3];
+const [first, , third] = arr;       // skip
+const [head, ...tail] = arr;        // rest
+const [x = 5, y = 10] = [1];        // defaults</code></pre>
+<h4>Object</h4>
+<pre><code>const { name, age } = user;
+const { name: n } = user;            // rename
+const { role = "guest" } = user;     // default
+const { a: { b: { c } } } = data;    // nested
+const { name, ...rest } = user;      // rest</code></pre>
+<h4>In parameters</h4>
+<pre><code>function greet({ name, age = 0 }) { return `${name} is ${age}`; }</code></pre>
+<h4>Swapping</h4>
+<pre><code>let a = 1, b = 2;
+[a, b] = [b, a];   // no temp variable needed</code></pre>
+
+    
+  </div>
+</article>
+<article class="qa" id="q36">
+  <div class="qa__number">Question 36</div>
+  <h3 class="qa__question">What is a generator function?</h3>
+  <div class="qa__answer">
+    
+<p>A <strong>generator function</strong> (<code>function*</code>) can pause and resume. It returns an iterator that produces values via <code>yield</code>.</p>
+<pre><code>function* range(start, end) {
+  for (let i = start; i &lt; end; i++) yield i;
+}
+
+const r = range(0, 3);
+r.next();   // { value: 0, done: false }
+r.next();   // { value: 1, done: false }
+r.next();   // { value: 2, done: false }
+r.next();   // { value: undefined, done: true }
+
+// Generators are iterable
+for (const n of range(0, 3)) console.log(n);
+[...range(0, 3)];                       // [0, 1, 2]</code></pre>
+<h4>Infinite sequence</h4>
+<pre><code>function* naturals() {
+  let n = 1;
+  while (true) yield n++;
+}</code></pre>
+<p>Uses: lazy sequences, custom iterables, state machines, and the <code>redux-saga</code>-style async flow libraries.</p>
+<p>There are also <strong>async generators</strong> (<code>async function*</code>) consumed with <code>for await...of</code>.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q37">
+  <div class="qa__number">Question 37</div>
+  <h3 class="qa__question">Explain the concept of event delegation.</h3>
+  <div class="qa__answer">
+    
+<p><strong>Event delegation</strong> attaches one listener to a parent to handle events from many children, leveraging that DOM events bubble.</p>
+<pre><code>&lt;ul id="list"&gt;
+  &lt;li data-id="1"&gt;Apple&lt;/li&gt;
+  &lt;li data-id="2"&gt;Banana&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+<pre><code>// One listener instead of one per li
+document.getElementById("list").addEventListener("click", (e) =&gt; {
+  const li = e.target.closest("li");
+  if (!li) return;
+  console.log(li.dataset.id);
+});</code></pre>
+<h4>Why</h4>
+<ul>
+  <li>Scales to many elements — one listener.</li>
+  <li>Handles dynamic children — new items just work.</li>
+  <li>Less memory — one handler reference.</li>
+</ul>
+<h4>Gotchas</h4>
+<ul>
+  <li>Use <code>target.closest(selector)</code> for the actual target (clicks may land on nested children).</li>
+  <li>Non-bubbling events need <code>focusin</code>/<code>focusout</code> instead of <code>focus</code>/<code>blur</code>.</li>
+  <li>A child calling <code>stopPropagation</code> breaks delegation.</li>
+</ul>
+
+    
+  </div>
+</article>
+<article class="qa" id="q38">
+  <div class="qa__number">Question 38</div>
+  <h3 class="qa__question">What are regular expressions in JavaScript?</h3>
+  <div class="qa__answer">
+    
+<p>A <strong>regular expression</strong> is a pattern for matching text. JavaScript has literal syntax between slashes.</p>
+<pre><code>const re = /hello/i;                  // literal, case-insensitive
+const re2 = new RegExp("hello", "i"); // equivalent
+
+re.test("Hello world");       // true
+"Hello world".match(re);      // ["Hello"]
+"Hello world".replace(re, "Hi");</code></pre>
+<h4>Common flags</h4>
+<table>
+  <thead><tr><th>Flag</th><th>Meaning</th></tr></thead>
+  <tbody>
+    <tr><td><code>i</code></td><td>case-insensitive</td></tr>
+    <tr><td><code>g</code></td><td>global — find all matches</td></tr>
+    <tr><td><code>m</code></td><td>multiline — <code>^</code>/<code>$</code> per line</td></tr>
+    <tr><td><code>s</code></td><td>dotall — <code>.</code> matches newlines</td></tr>
+    <tr><td><code>u</code></td><td>unicode</td></tr>
+  </tbody>
+</table>
+<h4>Common metacharacters</h4>
+<ul>
+  <li><code>\d</code> digit, <code>\w</code> word char, <code>\s</code> whitespace, <code>.</code> any char</li>
+  <li><code>^</code>/<code>$</code> start/end, <code>*</code> 0+, <code>+</code> 1+, <code>?</code> 0-or-1</li>
+  <li><code>{n,m}</code> repetitions, <code>(abc)</code> capture, <code>[abc]</code> class</li>
+</ul>
+<pre><code>const EMAIL = /([\w.+-]+)@([\w-]+\.[\w.-]+)/g;
+for (const m of text.matchAll(EMAIL)) console.log(m[0]);</code></pre>
+
+    
+  </div>
+</article>
+<article class="qa" id="q39">
+  <div class="qa__number">Question 39</div>
+  <h3 class="qa__question">How do you check if a variable is an array in JavaScript?</h3>
+  <div class="qa__answer">
+    
+<p>Use <code>Array.isArray(value)</code> — it's the correct, cross-context-safe way.</p>
+<pre><code>Array.isArray([1, 2]);     // true
+Array.isArray("hi");       // false
+Array.isArray({ length: 3 }); // false
+Array.isArray(new Array());  // true</code></pre>
+<h4>Why not <code>typeof</code>?</h4>
+<p><code>typeof []</code> is <code>"object"</code> — doesn't distinguish arrays.</p>
+<h4>Why not <code>instanceof Array</code>?</h4>
+<p>Fails across iframes / realms — each frame has its own <code>Array</code> constructor.</p>
+<pre><code>arr instanceof Array;    // false (cross-frame)
+Array.isArray(arr);      // true  — always correct</code></pre>
+<h4>Array-like objects</h4>
+<p>Things like <code>arguments</code>, <code>NodeList</code>, <code>HTMLCollection</code> have a <code>length</code> but aren't arrays. Convert:</p>
+<pre><code>Array.from(arguments);
+[...document.querySelectorAll(".x")];</code></pre>
+
+    
+  </div>
+</article>
+<article class="qa" id="q40">
+  <div class="qa__number">Question 40</div>
+  <h3 class="qa__question">What is the spread operator?</h3>
+  <div class="qa__answer">
+    
+<p>The <strong>spread operator</strong> (<code>...</code>) expands an iterable into individual elements or properties.</p>
+<h4>Arrays</h4>
+<pre><code>const copy = [...arr];
+const merged = [...a, ...b];
+const withNew = [...a, 4, 5];</code></pre>
+<h4>Function calls</h4>
+<pre><code>Math.max(...[5, 2, 8]);    // 8</code></pre>
+<h4>Objects (ES2018+)</h4>
+<pre><code>const updated = { ...user, age: 31 };     // override
+const merged = { ...defaults, ...overrides };</code></pre>
+<h4>Iterables → array</h4>
+<pre><code>[..."hello"];                      // ["h","e","l","l","o"]
+[...new Set([1, 1, 2, 3])];        // [1, 2, 3] — dedupe
+[...document.querySelectorAll(".x")];</code></pre>
+<div class="callout callout-warning">
+  <div class="callout-icon">⚠</div>
+  <div>Spread is <strong>shallow</strong>. Nested objects still share references. For deep copy use <code>structuredClone(obj)</code>.</div>
+</div>
+
+    
+  </div>
+</article>
+<article class="qa" id="q41">
+  <div class="qa__number">Question 41</div>
+  <h3 class="qa__question">How do you clone an object in JavaScript?</h3>
+  <div class="qa__answer">
+    
+<p>Several ways, from shallow to deep:</p>
+<h4>Shallow (fast, everyday)</h4>
+<pre><code>const copy = { ...original };                // spread
+const copy = Object.assign({}, original);    // older equivalent</code></pre>
+<h4>Deep</h4>
+<pre><code>// 1. structuredClone — modern, built-in
+const deep = structuredClone(original);
+// Handles nested objects, Dates, Maps, Sets, typed arrays, cycles.
+// Doesn't clone functions or DOM nodes.
+
+// 2. JSON round-trip — universal but lossy
+const deep = JSON.parse(JSON.stringify(original));
+// Loses Dates (become strings), functions, undefined, Map/Set.
+// Throws on cycles.
+
+// 3. Library — lodash.cloneDeep
+import cloneDeep from "lodash/cloneDeep";
+const copy = cloneDeep(original);</code></pre>
+<table>
+  <thead><tr><th>Need</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td>Shallow</td><td><code>{ ...obj }</code></td></tr>
+    <tr><td>Deep, normal data</td><td><code>structuredClone</code></td></tr>
+    <tr><td>Deep, old environments</td><td>Library</td></tr>
+  </tbody>
+</table>
+
+    
+  </div>
+</article>
+<article class="qa" id="q42">
+  <div class="qa__number">Question 42</div>
+  <h3 class="qa__question">What is the difference between Object.freeze and Object.seal?</h3>
+  <div class="qa__answer">
+    
+<p>Both prevent changes, at different levels.</p>
+<table>
+  <thead><tr><th></th><th><code>Object.freeze</code></th><th><code>Object.seal</code></th></tr></thead>
+  <tbody>
+    <tr><td>Add properties</td><td>❌</td><td>❌</td></tr>
+    <tr><td>Remove properties</td><td>❌</td><td>❌</td></tr>
+    <tr><td>Modify values</td><td>❌</td><td>✅</td></tr>
+  </tbody>
+</table>
+<pre><code>const u = { name: "Ada" };
+Object.seal(u);
+u.name = "Bob";     // ✅ works
+u.role = "admin";   // ❌ fails / ignored
+
+Object.freeze(u);
+u.name = "Eve";     // ❌ fails</code></pre>
+<h4>Checking</h4>
+<pre><code>Object.isFrozen(u);
+Object.isSealed(u);</code></pre>
+<p><strong>Both are shallow</strong> — nested objects aren't affected. For deep immutability, recursively freeze or use Immer.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q43">
+  <div class="qa__number">Question 43</div>
+  <h3 class="qa__question">What is a promise chain?</h3>
+  <div class="qa__answer">
+    
+<p>A <strong>promise chain</strong> is a sequence of <code>.then()</code> calls where each returns a value or promise that feeds the next.</p>
+<pre><code>fetch("/users/1")
+  .then(res =&gt; res.json())
+  .then(user =&gt; fetch(`/orders?u=${user.id}`))
+  .then(res =&gt; res.json())
+  .then(orders =&gt; render(orders))
+  .catch(err =&gt; showError(err))
+  .finally(() =&gt; hideSpinner());</code></pre>
+<h4>Rules</h4>
+<ul>
+  <li>Every <code>.then()</code> returns a new promise.</li>
+  <li>If the handler returns a promise, the chain waits.</li>
+  <li>If the handler throws or returns a rejected promise, it skips to the next <code>.catch</code>.</li>
+</ul>
+<h4>Common mistake — not returning</h4>
+<pre><code>// ❌ next .then doesn't wait
+promise.then(x =&gt; { somePromise(); }).then(...);
+
+// ✅
+promise.then(x =&gt; { return somePromise(); }).then(...);</code></pre>
+<p>In modern code, async/await replaces most chains. Chains remain useful for simple pipelines.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q44">
+  <div class="qa__number">Question 44</div>
+  <h3 class="qa__question">How do you merge two arrays in JavaScript?</h3>
+  <div class="qa__answer">
+    
+<p>Several clean ways:</p>
+<pre><code>const a = [1, 2], b = [3, 4];
+
+// Spread — immutable (preferred)
+const merged = [...a, ...b];           // [1, 2, 3, 4]
+
+// concat — older style, also immutable
+const merged2 = a.concat(b);
+const many = a.concat(b, [5, 6], 7);
+
+// push + spread — mutates first
+a.push(...b);                          // a becomes [1, 2, 3, 4]
+
+// Remove duplicates while merging
+const unique = [...new Set([...a, ...b])];</code></pre>
+<h4>Merge by key (arrays of objects)</h4>
+<pre><code>const map = new Map();
+[...users1, ...users2].forEach(u =&gt; map.set(u.id, { ...map.get(u.id), ...u }));
+const merged = [...map.values()];</code></pre>
+<p><strong>Default choice:</strong> spread — readable, immutable, fast enough.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q45">
+  <div class="qa__number">Question 45</div>
+  <h3 class="qa__question">What is a singleton pattern in JavaScript?</h3>
+  <div class="qa__answer">
+    
+<p>The <strong>singleton pattern</strong> ensures a single instance of an object. Useful for shared resources (config, cache, connection).</p>
+<h4>1. Module export (idiomatic)</h4>
+<pre><code>// logger.js
+class Logger { log(m) { /* ... */ } }
+export default new Logger();
+// Every importer gets the same instance — modules are cached.</code></pre>
+<h4>2. IIFE</h4>
+<pre><code>const counter = (function () {
+  let count = 0;
+  return { inc: () =&gt; ++count, get: () =&gt; count };
+})();</code></pre>
+<h4>3. Class with static getInstance</h4>
+<pre><code>class DB {
+  static #instance = null;
+  static getInstance() {
+    if (!DB.#instance) DB.#instance = new DB();
+    return DB.#instance;
+  }
+}</code></pre>
+<p><strong>Warning:</strong> singletons are global state in disguise. They make tests harder because state leaks between tests. Prefer dependency injection where possible.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q46">
+  <div class="qa__number">Question 46</div>
+  <h3 class="qa__question">Explain the difference between push and pop.</h3>
+  <div class="qa__answer">
+    
+<p>Both modify an array <em>in place</em> at the back (end).</p>
+<ul>
+  <li><code>push(item)</code> — adds to end, returns new length. O(1).</li>
+  <li><code>pop()</code> — removes last, returns removed item. O(1).</li>
+</ul>
+<pre><code>const stack = [];
+stack.push(1);      // [1]
+stack.push(2, 3);   // [1, 2, 3]
+stack.pop();        // returns 3, stack is [1, 2]
+stack.pop();        // returns 2
+stack.pop();        // returns 1
+stack.pop();        // returns undefined</code></pre>
+<p>Together they form a <strong>stack</strong> (LIFO). Pair with <code>shift</code>/<code>unshift</code> for queue-like (front-side) operations, but be aware those are O(n).</p>
+<p>For immutability: <code>[...arr, x]</code> (push) and <code>arr.slice(0, -1)</code> (pop).</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q47">
+  <div class="qa__number">Question 47</div>
+  <h3 class="qa__question">What is the difference between shift and unshift?</h3>
+  <div class="qa__answer">
+    
+<p>Both modify an array <em>in place</em> at the front.</p>
+<ul>
+  <li><code>shift()</code> — removes first element, returns it. <strong>O(n)</strong> — re-indexes.</li>
+  <li><code>unshift(item)</code> — adds to front, returns new length. <strong>O(n)</strong>.</li>
+</ul>
+<pre><code>const q = [1, 2, 3];
+q.shift();            // returns 1, q = [2, 3]
+q.unshift(0);         // q = [0, 2, 3], returns 3
+q.unshift(-2, -1);    // q = [-2, -1, 0, 2, 3]</code></pre>
+<p>Together with <code>push</code>, forms a <strong>queue</strong> (FIFO).</p>
+<table>
+  <thead><tr><th>Method</th><th>Where</th><th>Op</th><th>Cost</th></tr></thead>
+  <tbody>
+    <tr><td><code>push</code></td><td>End</td><td>Add</td><td>O(1)</td></tr>
+    <tr><td><code>pop</code></td><td>End</td><td>Remove</td><td>O(1)</td></tr>
+    <tr><td><code>unshift</code></td><td>Front</td><td>Add</td><td>O(n)</td></tr>
+    <tr><td><code>shift</code></td><td>Front</td><td>Remove</td><td>O(n)</td></tr>
+  </tbody>
+</table>
+<p>For high-throughput queues, use a library like <code>denque</code>.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q48">
+  <div class="qa__number">Question 48</div>
+  <h3 class="qa__question">What is the purpose of Object.keys?</h3>
+  <div class="qa__answer">
+    
+<p><code>Object.keys(obj)</code> returns an array of the object's own enumerable string keys, in insertion order.</p>
+<pre><code>const user = { name: "Ada", age: 30 };
+
+Object.keys(user);    // ["name", "age"]
+Object.values(user);  // ["Ada", 30]
+Object.entries(user); // [["name","Ada"], ["age",30]]</code></pre>
+<h4>Common patterns</h4>
+<pre><code>// Iterate
+for (const [k, v] of Object.entries(user)) console.log(k, v);
+
+// Count properties
+Object.keys(obj).length;
+
+// Empty?
+Object.keys(obj).length === 0;
+
+// Transform
+const upper = Object.fromEntries(
+  Object.entries(user).map(([k, v]) =&gt; [k, String(v).toUpperCase()])
+);</code></pre>
+<h4>What it skips</h4>
+<ul>
+  <li>Inherited properties (use <code>for...in</code> for those).</li>
+  <li>Non-enumerable ones (<code>Object.getOwnPropertyNames</code>).</li>
+  <li>Symbol keys (<code>Object.getOwnPropertySymbols</code>).</li>
+</ul>
+
+    
+  </div>
+</article>
+<article class="qa" id="q49">
+  <div class="qa__number">Question 49</div>
+  <h3 class="qa__question">How do you create a shallow copy of an object in JavaScript?</h3>
+  <div class="qa__answer">
+    
+<p>A <strong>shallow copy</strong> duplicates the top level only. Nested objects still reference the originals.</p>
+<pre><code>const original = { name: "Ada", settings: { theme: "dark" } };
+const copy = { ...original };
+
+copy.name = "Bob";               // ✅ doesn't affect original
+copy.settings.theme = "light";   // ⚠️ mutates original.settings too!</code></pre>
+<h4>Two modern ways</h4>
+<pre><code>const copy = { ...obj };                 // spread
+const copy = Object.assign({}, obj);     // older</code></pre>
+<h4>When shallow is enough</h4>
+<ul>
+  <li>Flat data bags with primitive values.</li>
+  <li>Immutable-update patterns where you explicitly spread nested pieces you change:
+  <pre><code>const updated = {
+  ...user,
+  settings: { ...user.settings, theme: "light" }
+};</code></pre>
+  </li>
+</ul>
+<p>For deep copy, use <code>structuredClone(obj)</code>.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q50">
+  <div class="qa__number">Question 50</div>
+  <h3 class="qa__question">What are immediately invoked function expressions (IIFE)?</h3>
+  <div class="qa__answer">
+    
+<p>An <strong>IIFE</strong> (Immediately Invoked Function Expression) is a function defined and called in the same expression.</p>
+<pre><code>(function () {
+  const secret = "hidden";
+  console.log("runs once");
+})();
+
+// Arrow version
+(() =&gt; { /* ... */ })();
+
+// With parameters
+((name) =&gt; console.log(`Hi, ${name}`))("Ada");</code></pre>
+<p>The wrapping parens turn a function <em>declaration</em> into an <em>expression</em> so it can be invoked immediately.</p>
+<h4>Historical uses</h4>
+<ul>
+  <li><strong>Private scope (pre-ES6):</strong> before <code>let</code>/<code>const</code>/modules, IIFEs were the way to avoid global pollution.</li>
+  <li><strong>Module pattern:</strong>
+<pre><code>const cart = (function () {
+  const items = [];
+  return { add: x =&gt; items.push(x), count: () =&gt; items.length };
+})();</code></pre>
+  </li>
+  <li><strong>Async at script top-level</strong> (before top-level await): <code>(async () =&gt; { await init(); })();</code></li>
+</ul>
+<p>With ES modules + block scoping, IIFEs are less common but still useful in quick scripts or for creating an async scope.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q51">
+  <div class="qa__number">Question 51</div>
+  <h3 class="qa__question">What is the difference between querySelector and getElementById?</h3>
+  <div class="qa__answer">
+    
+<p>Both find an element in the DOM, but they accept different kinds of input and have different flexibility.</p>
+<table>
+  <thead><tr><th></th><th><code>querySelector</code></th><th><code>getElementById</code></th></tr></thead>
+  <tbody>
+    <tr><td>Accepts</td><td>Any CSS selector</td><td>An ID string (no <code>#</code>)</td></tr>
+    <tr><td>Returns</td><td>First match (or <code>null</code>)</td><td>Element (or <code>null</code>)</td></tr>
+    <tr><td>Speed</td><td>Fast, but slightly slower</td><td>Fastest</td></tr>
+    <tr><td>Available on</td><td>Document + any element</td><td>Only <code>document</code></td></tr>
+  </tbody>
+</table>
+<pre><code>document.getElementById("main");     // &lt;div id="main"&gt;
+document.querySelector("#main");     // same — note the #
+document.querySelector(".card");     // first .card
+document.querySelectorAll(".card");  // NodeList of all .card
+document.querySelector("ul &gt; li:first-child");  // complex selector</code></pre>
+<p>Use <code>getElementById</code> for direct ID lookups (clearest intent, marginally faster). Use <code>querySelector</code> for anything more complex or when searching within a subtree (<code>container.querySelector(".x")</code>).</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q52">
+  <div class="qa__number">Question 52</div>
+  <h3 class="qa__question">How do you debounce a function in JavaScript?</h3>
+  <div class="qa__answer">
+    
+<p>
+  <strong>Debouncing</strong> delays a function so it fires only <em>after</em> a quiet period —
+  useful for search boxes, resize handlers, and form validation where rapid events should collapse
+  into a single call.
+</p>
+<pre><code>function debounce(fn, wait) {
+  let timer;
+  return function (...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() =&gt; fn.apply(this, args), wait);
+  };
+}
+
+// Usage
+const onSearch = debounce((q) =&gt; fetch(`/search?q=${q}`), 300);
+input.addEventListener("input", e =&gt; onSearch(e.target.value));
+// Types "hello" quickly — only one fetch fires, 300ms after the last keystroke.</code></pre>
+<h4>Compare to throttling</h4>
+<p><strong>Throttle</strong> lets the function fire at a fixed maximum rate (e.g., once per 100ms during a scroll). <strong>Debounce</strong> waits for the user to stop entirely.</p>
+<pre><code>function throttle(fn, wait) {
+  let last = 0;
+  return function (...args) {
+    const now = Date.now();
+    if (now - last &gt;= wait) {
+      last = now;
+      fn.apply(this, args);
+    }
+  };
+}</code></pre>
+<p>In 2024+ many teams use Lodash's <code>debounce</code> / <code>throttle</code> — they handle edge cases like leading/trailing invocation and cancellation.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q53">
+  <div class="qa__number">Question 53</div>
+  <h3 class="qa__question">What is the instanceof operator?</h3>
+  <div class="qa__answer">
+    
+<p>
+  <code>instanceof</code> checks whether an object's prototype chain contains a given constructor's
+  <code>prototype</code>. It answers "is this object a type of X?".
+</p>
+<pre><code>class Animal {}
+class Dog extends Animal {}
+
+const d = new Dog();
+d instanceof Dog;     // true
+d instanceof Animal;  // true (inheritance)
+d instanceof Object;  // true (everything)
+d instanceof Array;   // false
+
+[] instanceof Array;          // true
+new Date() instanceof Date;   // true
+"hi" instanceof String;       // false (primitive, not boxed)</code></pre>
+<h4>How it actually works</h4>
+<p>The expression <code>obj instanceof Ctor</code> walks <code>obj</code>'s prototype chain and returns <code>true</code> if it ever reaches <code>Ctor.prototype</code>.</p>
+<h4>Gotchas</h4>
+<ul>
+  <li><strong>Iframes / realms:</strong> each frame has its own global constructors. An array from another frame isn't <code>instanceof</code> <em>this</em> frame's <code>Array</code>. Use <code>Array.isArray</code> instead.</li>
+  <li><strong>Primitives:</strong> <code>"hi" instanceof String</code> is <code>false</code> — primitives don't have prototypes.</li>
+  <li><strong>Customizable:</strong> a class can define <code>[Symbol.hasInstance]</code> to override the check.</li>
+</ul>
+<p>For a simpler type check use <code>typeof</code> (primitives) or <code>Array.isArray</code> (arrays). Use <code>instanceof</code> for class hierarchies.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q54">
+  <div class="qa__number">Question 54</div>
+  <h3 class="qa__question">How do you add an event listener to an element?</h3>
+  <div class="qa__answer">
+    
+<p>Use <code>element.addEventListener(event, handler, options?)</code>. It's the modern, flexible way — multiple handlers can coexist on the same element.</p>
+<pre><code>const btn = document.querySelector("#save");
+
+function onSave(e) {
+  console.log("clicked", e.target);
+}
+
+btn.addEventListener("click", onSave);
+
+// Remove (must be the same function reference)
+btn.removeEventListener("click", onSave);</code></pre>
+<h4>Options</h4>
+<pre><code>btn.addEventListener("click", onSave, {
+  once: true,        // auto-remove after first fire
+  capture: false,    // use capture phase (usually false)
+  passive: true,     // for scroll / touch — promises not to preventDefault
+  signal: controller.signal,  // AbortController for cancellation
+});</code></pre>
+<h4>AbortController pattern (modern)</h4>
+<pre><code>const controller = new AbortController();
+
+btn.addEventListener("click", onSave, { signal: controller.signal });
+input.addEventListener("input", onType, { signal: controller.signal });
+
+// Remove both in one shot
+controller.abort();</code></pre>
+<h4>What to avoid</h4>
+<p><code>element.onclick = handler</code> works but replaces any existing handler. <code>addEventListener</code> accumulates them, which is usually what you want.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q55">
+  <div class="qa__number">Question 55</div>
+  <h3 class="qa__question">What is the purpose of the classList property?</h3>
+  <div class="qa__answer">
+    
+<p>
+  <code>classList</code> is an object on every DOM element that provides a clean API for
+  manipulating CSS classes. It replaces the awkward string manipulation on <code>className</code>.
+</p>
+<pre><code>const box = document.querySelector("#box");
+
+box.classList.add("active");               // add
+box.classList.add("big", "bordered");      // add multiple
+box.classList.remove("active");            // remove
+box.classList.remove("big", "bordered");   // remove multiple
+box.classList.toggle("visible");           // flip
+box.classList.toggle("visible", condition); // force on/off based on bool
+box.classList.contains("active");          // true/false
+box.classList.replace("old", "new");       // swap</code></pre>
+<h4>Compare to the old way</h4>
+<pre><code>// ❌ Old — fragile string manipulation
+element.className += " active";  // can create duplicates, spacing issues
+element.className = element.className.replace(/\bactive\b/, "");
+
+// ✅ Modern
+element.classList.add("active");
+element.classList.remove("active");</code></pre>
+<p><code>classList</code> is also iterable — <code>[...element.classList]</code> gives you an array of class names.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q56">
+  <div class="qa__number">Question 56</div>
+  <h3 class="qa__question">Explain the difference between innerHTML and textContent.</h3>
+  <div class="qa__answer">
+    
+<p>Both get or set content, but they treat HTML differently.</p>
+<ul>
+  <li><code>innerHTML</code> — gets/sets <strong>HTML markup</strong>. Tags are parsed.</li>
+  <li><code>textContent</code> — gets/sets <strong>text only</strong>. Tags are treated as literal text.</li>
+</ul>
+<pre><code>div.innerHTML = "&lt;b&gt;Hello&lt;/b&gt;";
+// Shows: Hello (bold)
+
+div.textContent = "&lt;b&gt;Hello&lt;/b&gt;";
+// Shows literally: &lt;b&gt;Hello&lt;/b&gt;</code></pre>
+<h4>Reading</h4>
+<pre><code>// &lt;div&gt;Hi &lt;b&gt;there&lt;/b&gt; &lt;!-- comment --&gt;&lt;/div&gt;
+
+div.innerHTML;    // "Hi &lt;b&gt;there&lt;/b&gt; &lt;!-- comment --&gt;"
+div.textContent;  // "Hi there"  (includes invisible text too)
+div.innerText;    // "Hi there"  (considers CSS — hidden elements excluded)</code></pre>
+<h4>When to use which</h4>
+<table>
+  <thead><tr><th>Need</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td>Plain text from user input</td><td><code>textContent</code> (safe)</td></tr>
+    <tr><td>Insert HTML you control</td><td><code>innerHTML</code></td></tr>
+    <tr><td>Visible text only (skip hidden)</td><td><code>innerText</code></td></tr>
+    <tr><td>Max performance</td><td><code>textContent</code> (doesn't reflow)</td></tr>
+  </tbody>
+</table>
+<div class="callout callout-warning">
+  <div class="callout-icon">⚠</div>
+  <div><strong>Never</strong> set <code>innerHTML</code> to user input — it's a classic XSS vulnerability. Use <code>textContent</code> for untrusted strings.</div>
+</div>
+
+    
+  </div>
+</article>
+<article class="qa" id="q57">
+  <div class="qa__number">Question 57</div>
+  <h3 class="qa__question">What is the difference between localStorage and sessionStorage?</h3>
+  <div class="qa__answer">
+    
+<p>Both store key/value strings in the browser, keyed to the origin. They differ in lifetime and scope.</p>
+<table>
+  <thead><tr><th></th><th><code>localStorage</code></th><th><code>sessionStorage</code></th></tr></thead>
+  <tbody>
+    <tr><td>Lifetime</td><td>Until explicitly cleared</td><td>Until tab/window closes</td></tr>
+    <tr><td>Shared between tabs?</td><td>Yes (same origin)</td><td>No — per tab</td></tr>
+    <tr><td>Size</td><td>~5–10 MB per origin</td><td>Same</td></tr>
+    <tr><td>Storage format</td><td>Strings only</td><td>Strings only</td></tr>
+    <tr><td>Sync or async?</td><td>Synchronous</td><td>Synchronous</td></tr>
+  </tbody>
+</table>
+<pre><code>// Same API for both
+localStorage.setItem("token", "abc123");
+localStorage.getItem("token");        // "abc123"
+localStorage.removeItem("token");
+localStorage.clear();                 // wipe everything
+
+// Store objects (JSON)
+localStorage.setItem("user", JSON.stringify({ id: 1, name: "Ada" }));
+const u = JSON.parse(localStorage.getItem("user") || "null");
+
+// Listen to changes in OTHER tabs (localStorage only)
+window.addEventListener("storage", e =&gt; console.log(e.key, e.newValue));</code></pre>
+<h4>When to pick which</h4>
+<ul>
+  <li><code>localStorage</code>: user preferences, cached data, auth tokens that should survive a refresh.</li>
+  <li><code>sessionStorage</code>: temporary state that shouldn't leak between tabs (a wizard in progress, one-time form data).</li>
+</ul>
+<h4>Gotchas</h4>
+<ul>
+  <li>Synchronous I/O — large reads block the main thread.</li>
+  <li>Values are strings — forget <code>JSON.stringify</code> and you'll get <code>"[object Object]"</code>.</li>
+  <li>Private-browsing modes may throw on write; wrap in try/catch.</li>
+  <li>Never store passwords or secrets in plain text.</li>
+</ul>
+
+    
+  </div>
+</article>
+<article class="qa" id="q58">
+  <div class="qa__number">Question 58</div>
+  <h3 class="qa__question">How do you make an AJAX call in JavaScript?</h3>
+  <div class="qa__answer">
+    
+<p>
+  An <strong>AJAX</strong> call is a background HTTP request from the browser. In 2024 the modern
+  API is <code>fetch</code>; the older <code>XMLHttpRequest</code> is still around but rarely
+  written by hand.
+</p>
+<h4>Modern: <code>fetch</code></h4>
+<pre><code>// GET
+const res = await fetch("/api/users/1");
+if (!res.ok) throw new Error(`HTTP ${res.status}`);
+const user = await res.json();
+
+// POST JSON
+const created = await fetch("/api/users", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ name: "Ada" }),
+}).then(r =&gt; r.json());</code></pre>
+<h4>Cancellable with AbortController</h4>
+<pre><code>const ctrl = new AbortController();
+setTimeout(() =&gt; ctrl.abort(), 5000);  // 5s timeout
+
+try {
+  const res = await fetch("/slow", { signal: ctrl.signal });
+} catch (err) {
+  if (err.name === "AbortError") console.log("timed out");
+}</code></pre>
+<h4>Old way: <code>XMLHttpRequest</code></h4>
+<pre><code>const xhr = new XMLHttpRequest();
+xhr.open("GET", "/api/users/1");
+xhr.onload = () =&gt; {
+  if (xhr.status === 200) console.log(JSON.parse(xhr.responseText));
+};
+xhr.onerror = () =&gt; console.error("error");
+xhr.send();</code></pre>
+<h4>Libraries</h4>
+<ul>
+  <li><strong>axios:</strong> popular wrapper with interceptors and automatic JSON handling.</li>
+  <li><strong>TanStack Query:</strong> not a fetcher, but a data-fetching state manager on top of fetch/axios.</li>
+</ul>
+
+    
+  </div>
+</article>
+<article class="qa" id="q59">
+  <div class="qa__number">Question 59</div>
+  <h3 class="qa__question">What is the purpose of the fetch API?</h3>
+  <div class="qa__answer">
+    
+<p>
+  <code>fetch</code> is the browser's built-in promise-based HTTP API. It replaces
+  <code>XMLHttpRequest</code> with a cleaner, stream-aware interface.
+</p>
+<h4>Basic use</h4>
+<pre><code>const res = await fetch("/api/users");
+const data = await res.json();</code></pre>
+<h4>Response object</h4>
+<pre><code>res.ok;         // true if status 200–299
+res.status;     // 200, 404, 500, etc.
+res.statusText; // "OK"
+res.headers.get("content-type");
+res.json();     // parses JSON body (async)
+res.text();     // raw text body (async)
+res.blob();     // for images/files
+res.arrayBuffer();</code></pre>
+<h4>Request options</h4>
+<pre><code>fetch(url, {
+  method: "POST",
+  headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+  body: JSON.stringify(payload),
+  credentials: "include",   // send cookies
+  signal: controller.signal, // for cancellation
+  cache: "no-cache",
+  mode: "cors",
+});</code></pre>
+<h4>Key gotchas</h4>
+<ul>
+  <li><code>fetch</code> does <strong>not</strong> reject on HTTP error statuses (404, 500). You must check <code>res.ok</code> yourself.</li>
+  <li>It only rejects on network failure (DNS, offline, aborted).</li>
+  <li>No automatic JSON conversion — call <code>await res.json()</code>.</li>
+  <li>No built-in timeout — use <code>AbortController</code>.</li>
+  <li>In Node.js, <code>fetch</code> has been built-in since v18.</li>
+</ul>
+
+    
+  </div>
+</article>
+<article class="qa" id="q60">
+  <div class="qa__number">Question 60</div>
+  <h3 class="qa__question">How do you handle JSON data in JavaScript?</h3>
+  <div class="qa__answer">
+    
+<p>
+  <strong>JSON</strong> (JavaScript Object Notation) is a text format for structured data.
+  JavaScript has two built-in tools: <code>JSON.stringify</code> (object → string) and
+  <code>JSON.parse</code> (string → object).
+</p>
+<pre><code>// Encode
+const user = { name: "Ada", age: 30, tags: ["admin", "active"] };
+const str = JSON.stringify(user);
+// '{"name":"Ada","age":30,"tags":["admin","active"]}'
+
+// Decode
+const back = JSON.parse(str);
+back.name;  // "Ada"</code></pre>
+<h4>Pretty-print with indentation</h4>
+<pre><code>JSON.stringify(user, null, 2);
+// Second arg is a replacer (filter/transform), third is indent spaces.</code></pre>
+<h4>Replacer and reviver — hooks to customize</h4>
+<pre><code>// Omit passwords
+const safe = JSON.stringify(user, (key, val) =&gt; key === "password" ? undefined : val);
+
+// Revive Date strings
+const data = JSON.parse(str, (key, val) =&gt;
+  typeof val === "string" &amp;&amp; /^\d{4}-/.test(val) ? new Date(val) : val
+);</code></pre>
+<h4>What JSON can't hold</h4>
+<ul>
+  <li><code>undefined</code> (dropped from objects; turned into <code>null</code> in arrays)</li>
+  <li>Functions (dropped)</li>
+  <li><code>Date</code> objects (become ISO strings; you have to revive them)</li>
+  <li><code>Map</code>, <code>Set</code>, <code>BigInt</code> (throw or lose type info)</li>
+  <li>Circular references (<code>JSON.stringify</code> throws)</li>
+</ul>
+<h4>Guard against bad input</h4>
+<pre><code>function safeParse(s) {
+  try { return JSON.parse(s); }
+  catch { return null; }
+}</code></pre>
+
+    
+  </div>
+</article>
+<article class="qa" id="q61">
+  <div class="qa__number">Question 61</div>
+  <h3 class="qa__question">What is the difference between bind and apply?</h3>
+  <div class="qa__answer">
+    
+<p>Both set <code>this</code>, but they behave very differently.</p>
+<ul>
+  <li><code>bind(thisArg, ...args)</code> — returns a <strong>new function</strong> with <code>this</code> permanently bound. It doesn't call it right away.</li>
+  <li><code>apply(thisArg, [args])</code> — <strong>calls</strong> the function immediately with arguments given as an array.</li>
+</ul>
+<pre><code>function greet(greeting, punct) {
+  return `${greeting}, ${this.name}${punct}`;
+}
+const user = { name: "Ada" };
+
+// bind: returns a new function
+const greetAda = greet.bind(user, "Hi");
+greetAda("!");  // "Hi, Ada!"   (call later)
+
+// apply: invoke now with array
+greet.apply(user, ["Hi", "!"]);  // "Hi, Ada!"</code></pre>
+<h4>Quick comparison</h4>
+<table>
+  <thead><tr><th></th><th><code>call</code></th><th><code>apply</code></th><th><code>bind</code></th></tr></thead>
+  <tbody>
+    <tr><td>Invokes?</td><td>Now</td><td>Now</td><td>Returns new fn</td></tr>
+    <tr><td>Args</td><td>Listed</td><td>Array</td><td>Listed (pre-applied)</td></tr>
+  </tbody>
+</table>
+<h4>Partial application with bind</h4>
+<pre><code>function multiply(a, b) { return a * b; }
+const double = multiply.bind(null, 2);
+double(5);   // 10</code></pre>
+<p>In modern JavaScript, arrow functions and closures often replace <code>bind</code>: <code>() =&gt; fn.call(ctx, x)</code>.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q62">
+  <div class="qa__number">Question 62</div>
+  <h3 class="qa__question">What is event bubbling and capturing?</h3>
+  <div class="qa__answer">
+    
+<p>
+  When an event fires on a DOM element, it propagates through the tree in two phases: <strong>capturing</strong>
+  (root → target) and <strong>bubbling</strong> (target → root). Most handlers run in the bubble phase by default.
+</p>
+<p>Consider: <code>&lt;div&gt;&lt;button&gt;Click&lt;/button&gt;&lt;/div&gt;</code>. Click the button:</p>
+<ol>
+  <li><strong>Capture phase:</strong> document → html → body → div (handlers registered with <code>{ capture: true }</code> fire here)</li>
+  <li><strong>Target phase:</strong> handlers on the button itself fire</li>
+  <li><strong>Bubble phase:</strong> div → body → html → document (default handlers fire here)</li>
+</ol>
+<pre><code>div.addEventListener("click", () =&gt; console.log("div bubble"));
+div.addEventListener("click", () =&gt; console.log("div capture"), { capture: true });
+btn.addEventListener("click", () =&gt; console.log("button"));
+
+// Click button — prints:
+// "div capture"
+// "button"
+// "div bubble"</code></pre>
+<h4>Stopping propagation</h4>
+<pre><code>e.stopPropagation();     // prevents further bubbling/capturing
+e.stopImmediatePropagation();  // also blocks other listeners on the same element
+e.preventDefault();      // cancels the default browser action (not propagation)</code></pre>
+<h4>Why bubbling matters</h4>
+<p>It enables <strong>event delegation</strong>: attach one listener to a parent and handle clicks on any descendant. See the delegation question.</p>
+<h4>Which events bubble?</h4>
+<p>Most do (<code>click</code>, <code>keydown</code>, <code>input</code>). Exceptions: <code>focus</code>, <code>blur</code>, <code>mouseenter</code>, <code>mouseleave</code>. The bubbling siblings are <code>focusin</code>, <code>focusout</code>, <code>mouseover</code>, <code>mouseout</code>.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q63">
+  <div class="qa__number">Question 63</div>
+  <h3 class="qa__question">How do you create a custom event in JavaScript?</h3>
+  <div class="qa__answer">
+    
+<p>
+  Custom events let components communicate with decoupled listeners. Create one with
+  <code>new CustomEvent</code> and dispatch it with <code>element.dispatchEvent</code>.
+</p>
+<pre><code>// Create and fire
+const evt = new CustomEvent("userLoggedIn", {
+  detail: { userId: 42, username: "ada" },   // your payload
+  bubbles: true,                              // propagate up the DOM
+  cancelable: true,                           // allow preventDefault
+});
+
+document.dispatchEvent(evt);
+
+// Listen
+document.addEventListener("userLoggedIn", (e) =&gt; {
+  console.log("User:", e.detail.username);
+});</code></pre>
+<h4>Bubbling up from a child</h4>
+<pre><code>// Inside a component, dispatch an event that parents can listen for
+myCheckoutBtn.dispatchEvent(new CustomEvent("checkout-requested", {
+  detail: { items },
+  bubbles: true,
+}));
+
+// Somewhere higher:
+cartContainer.addEventListener("checkout-requested", (e) =&gt; {
+  processCheckout(e.detail.items);
+});</code></pre>
+<h4>Uses</h4>
+<ul>
+  <li><strong>Web Components:</strong> the canonical way a custom element tells its parent something happened.</li>
+  <li><strong>Decoupled modules:</strong> one module fires, others listen — no direct imports needed.</li>
+  <li><strong>Global app events:</strong> route changes, auth changes, cart updates.</li>
+</ul>
+<p>For React / Vue / Angular, prefer framework-native event systems (props callbacks, emit). Use <code>CustomEvent</code> for plain DOM code or when crossing a framework boundary.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q64">
+  <div class="qa__number">Question 64</div>
+  <h3 class="qa__question">What are the different ways to iterate over an array in JavaScript?</h3>
+  <div class="qa__answer">
+    
+<p>JavaScript gives you several ways to loop an array. Pick based on what you need.</p>
+<pre><code>const arr = [10, 20, 30];
+
+// 1. for loop — maximum control, can break/continue
+for (let i = 0; i &lt; arr.length; i++) console.log(arr[i]);
+
+// 2. for...of — modern and clean (values)
+for (const v of arr) console.log(v);
+
+// 3. for...of with entries (index + value)
+for (const [i, v] of arr.entries()) console.log(i, v);
+
+// 4. forEach — concise, but no break; returns undefined
+arr.forEach((v, i) =&gt; console.log(i, v));
+
+// 5. map — transform into a new array
+const doubled = arr.map(v =&gt; v * 2);
+
+// 6. filter — keep only what matches
+const big = arr.filter(v =&gt; v &gt; 15);
+
+// 7. reduce — collapse to a single value
+const sum = arr.reduce((acc, v) =&gt; acc + v, 0);
+
+// 8. for...in — DON'T use on arrays (iterates all enumerable keys, including prototype)</code></pre>
+<h4>Picking guide</h4>
+<table>
+  <thead><tr><th>Goal</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td>Just iterate</td><td><code>for...of</code> or <code>forEach</code></td></tr>
+    <tr><td>Transform</td><td><code>map</code></td></tr>
+    <tr><td>Keep subset</td><td><code>filter</code></td></tr>
+    <tr><td>Aggregate</td><td><code>reduce</code></td></tr>
+    <tr><td>Break early</td><td><code>for</code> / <code>for...of</code> / <code>some</code></td></tr>
+    <tr><td>Find one item</td><td><code>find</code> / <code>findIndex</code></td></tr>
+  </tbody>
+</table>
+
+    
+  </div>
+</article>
+<article class="qa" id="q65">
+  <div class="qa__number">Question 65</div>
+  <h3 class="qa__question">How do you remove duplicates from an array in JavaScript?</h3>
+  <div class="qa__answer">
+    
+<p>Several ways, ordered from cleanest to most powerful.</p>
+<h4>1. <code>Set</code> — simplest for primitives</h4>
+<pre><code>const unique = [...new Set([1, 2, 2, 3, 3, 3])];  // [1, 2, 3]</code></pre>
+<p>O(n), uses strict equality. Works perfectly for strings, numbers, booleans.</p>
+<h4>2. <code>filter + indexOf</code> — classic</h4>
+<pre><code>const unique = arr.filter((v, i, a) =&gt; a.indexOf(v) === i);</code></pre>
+<p>O(n²) — slow for big arrays but concise.</p>
+<h4>3. Deduping objects by a property</h4>
+<p><code>Set</code> compares by reference — <code>{id:1}</code> and <code>{id:1}</code> are different objects. Use a <code>Map</code> keyed by the field:</p>
+<pre><code>const unique = [...new Map(arr.map(o =&gt; [o.id, o])).values()];
+
+// Keep the FIRST occurrence instead:
+const seen = new Set();
+const unique = arr.filter(o =&gt; !seen.has(o.id) &amp;&amp; seen.add(o.id));</code></pre>
+<h4>4. Deduping with a custom equality function</h4>
+<pre><code>function dedupe(arr, same) {
+  const out = [];
+  for (const x of arr) {
+    if (!out.some(y =&gt; same(x, y))) out.push(x);
+  }
+  return out;
+}</code></pre>
+<p><strong>Use Set</strong> for primitives. Use <strong>Map keyed by field</strong> for object arrays.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q66">
+  <div class="qa__number">Question 66</div>
+  <h3 class="qa__question">What is the purpose of the finally block in a try-catch statement?</h3>
+  <div class="qa__answer">
+    
+<p>
+  <code>finally</code> runs <strong>no matter what</strong> — whether the <code>try</code> succeeded,
+  threw an error, or returned early. It's the place for cleanup that must always happen.
+</p>
+<pre><code>function readConfig() {
+  const file = openFile("config.json");
+  try {
+    const data = file.read();
+    return JSON.parse(data);
+  } catch (err) {
+    console.error("read failed:", err);
+    throw err;
+  } finally {
+    file.close();   // always runs — even on success, error, or early return
+  }
+}</code></pre>
+<h4>Common uses</h4>
+<ul>
+  <li>Closing files, DB connections, sockets.</li>
+  <li>Hiding a loading spinner after an async call.</li>
+  <li>Releasing locks.</li>
+  <li>Telemetry: always log that an operation completed.</li>
+</ul>
+<h4>Promises have one too</h4>
+<pre><code>fetchData()
+  .then(use)
+  .catch(report)
+  .finally(() =&gt; hideSpinner());
+
+// With async/await
+try {
+  await fetchData();
+} finally {
+  hideSpinner();
+}</code></pre>
+<h4>Gotcha</h4>
+<p>A <code>return</code> in <code>finally</code> <em>overrides</em> a return or throw from the <code>try</code> block. Avoid returning from <code>finally</code>.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q67">
+  <div class="qa__number">Question 67</div>
+  <h3 class="qa__question">How do you check if a property exists in an object?</h3>
+  <div class="qa__answer">
+    
+<p>Four good ways — each answers a slightly different question.</p>
+<pre><code>const obj = { name: "Ada", role: undefined };
+
+// 1. `in` — includes inherited properties
+"name" in obj;       // true
+"toString" in obj;   // true (inherited)
+
+// 2. hasOwnProperty — own (non-inherited) only
+obj.hasOwnProperty("name");         // true
+obj.hasOwnProperty("toString");     // false
+Object.hasOwn(obj, "name");         // modern equivalent (ES2022)
+
+// 3. Direct access + undefined check — WATCH the false positive
+obj.name !== undefined;     // true
+obj.role !== undefined;     // false! Property exists but is undefined
+
+// 4. Object.keys().includes — iterates own enumerable
+Object.keys(obj).includes("name");</code></pre>
+<h4>Picking guide</h4>
+<table>
+  <thead><tr><th>Need</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td>Own property (recommended)</td><td><code>Object.hasOwn(obj, key)</code></td></tr>
+    <tr><td>Including inherited</td><td><code>key in obj</code></td></tr>
+    <tr><td>Old-code compatibility</td><td><code>obj.hasOwnProperty(key)</code></td></tr>
+  </tbody>
+</table>
+<h4>Why <code>Object.hasOwn</code> is preferred over <code>obj.hasOwnProperty</code></h4>
+<p>If an object was created with <code>Object.create(null)</code>, it has no prototype — and thus no <code>.hasOwnProperty</code> method. Also, a property named <code>hasOwnProperty</code> can shadow the real one. <code>Object.hasOwn(obj, key)</code> sidesteps both issues.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q68">
+  <div class="qa__number">Question 68</div>
+  <h3 class="qa__question">What are promises and how do you use them?</h3>
+  <div class="qa__answer">
+    
+<p>
+  A <strong>Promise</strong> represents a value that may not be available yet. It ends in either
+  <em>fulfilled</em> (success) or <em>rejected</em> (failure). See the earlier question on Promises
+  for the state machine; here we'll focus on using them.
+</p>
+<h4>Consuming an existing promise</h4>
+<pre><code>fetch("/api")
+  .then(res =&gt; res.json())
+  .then(data =&gt; console.log(data))
+  .catch(err =&gt; console.error(err));</code></pre>
+<h4>Creating your own</h4>
+<pre><code>function wait(ms) {
+  return new Promise(resolve =&gt; setTimeout(resolve, ms));
+}
+
+await wait(1000);</code></pre>
+<h4>Combining promises</h4>
+<pre><code>// All must succeed
+const [a, b, c] = await Promise.all([fetchA(), fetchB(), fetchC()]);
+
+// First to settle wins (success or failure)
+const fastest = await Promise.race([fetchA(), fetchB()]);
+
+// Wait for everything, don't short-circuit on error
+const results = await Promise.allSettled([fetchA(), fetchB()]);
+results.forEach(r =&gt; {
+  if (r.status === "fulfilled") console.log(r.value);
+  else console.error(r.reason);
+});
+
+// First one to FULFILL (ignores rejections) — ES2021
+const first = await Promise.any([fetchA(), fetchB()]);</code></pre>
+<h4>Utilities</h4>
+<pre><code>Promise.resolve(42);      // already-resolved promise
+Promise.reject(new Error("nope"));</code></pre>
+<h4>Use async/await for readability</h4>
+<pre><code>async function load() {
+  try {
+    const res = await fetch("/api");
+    return await res.json();
+  } catch (err) {
+    console.error(err);
+  }
+}</code></pre>
+
+    
+  </div>
+</article>
+<article class="qa" id="q69">
+  <div class="qa__number">Question 69</div>
+  <h3 class="qa__question">Explain the reduce method in JavaScript.</h3>
+  <div class="qa__answer">
+    
+<p>
+  <code>reduce</code> collapses an array to a single value by applying a reducer function to each
+  element and an accumulator.
+</p>
+<pre><code>arr.reduce((accumulator, currentValue, index, array) =&gt; {
+  // return the new accumulator
+}, initialValue);</code></pre>
+<h4>Sum, product, max</h4>
+<pre><code>[1, 2, 3, 4].reduce((sum, n) =&gt; sum + n, 0);        // 10
+[1, 2, 3, 4].reduce((p, n) =&gt; p * n, 1);             // 24
+[1, 5, 3].reduce((max, n) =&gt; (n &gt; max ? n : max));    // 5</code></pre>
+<h4>Group by a property</h4>
+<pre><code>const users = [
+  { name: "Ada", role: "admin" },
+  { name: "Bob", role: "user" },
+  { name: "Eve", role: "admin" },
+];
+
+const byRole = users.reduce((acc, u) =&gt; {
+  (acc[u.role] ||= []).push(u);
+  return acc;
+}, {});
+// { admin: [Ada, Eve], user: [Bob] }</code></pre>
+<h4>Count occurrences</h4>
+<pre><code>const counts = ["a","b","a","c","b","a"].reduce((acc, x) =&gt; {
+  acc[x] = (acc[x] || 0) + 1;
+  return acc;
+}, {});
+// { a: 3, b: 2, c: 1 }</code></pre>
+<h4>Flatten one level</h4>
+<pre><code>[[1,2], [3,4], [5]].reduce((acc, x) =&gt; acc.concat(x), []);  // [1,2,3,4,5]
+// Modern equivalent: arr.flat()</code></pre>
+<h4>Always pass an initial value</h4>
+<p>Without one, reduce uses the first element as the initial accumulator, which can be surprising (and throws on empty arrays). Be explicit.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q70">
+  <div class="qa__number">Question 70</div>
+  <h3 class="qa__question">What is the difference between some and every methods?</h3>
+  <div class="qa__answer">
+    
+<p>Both test array elements against a predicate and return a boolean.</p>
+<ul>
+  <li><code>some(fn)</code> — <strong>at least one</strong> passes. Like a logical OR.</li>
+  <li><code>every(fn)</code> — <strong>all of them</strong> pass. Like a logical AND.</li>
+</ul>
+<pre><code>const nums = [1, 2, 3, 4];
+
+nums.some(n =&gt; n &gt; 3);     // true  (4 passes)
+nums.every(n =&gt; n &gt; 3);    // false (1, 2, 3 don't)
+
+nums.some(n =&gt; n &gt; 100);   // false
+nums.every(n =&gt; n &gt; 0);    // true</code></pre>
+<h4>Short-circuiting</h4>
+<p>Both stop as soon as the result is determined, so they're efficient:</p>
+<ul>
+  <li><code>some</code> stops on the first <code>true</code>.</li>
+  <li><code>every</code> stops on the first <code>false</code>.</li>
+</ul>
+<h4>Empty array edge cases</h4>
+<pre><code>[].some(fn);   // always false
+[].every(fn);  // always true  (vacuously)</code></pre>
+<h4>Good use cases</h4>
+<pre><code>// Validation
+const valid = users.every(u =&gt; u.age &gt;= 18);
+
+// Permission check
+const canEdit = roles.some(r =&gt; r === "admin" || r === "editor");
+
+// Detect a condition without counting
+const hasErrors = results.some(r =&gt; r.error);</code></pre>
+
+    
+  </div>
+</article>
+<article class="qa" id="q71">
+  <div class="qa__number">Question 71</div>
+  <h3 class="qa__question">How do you flatten a multi-dimensional array in JavaScript?</h3>
+  <div class="qa__answer">
+    
+<p>Use <code>Array.prototype.flat(depth)</code>. Default depth is 1; pass <code>Infinity</code> for fully flat.</p>
+<pre><code>[1, [2, [3, [4, [5]]]]].flat();          // [1, 2, [3, [4, [5]]]]
+[1, [2, [3]]].flat(2);                    // [1, 2, 3]
+[1, [2, [3, [4, [5]]]]].flat(Infinity);   // [1, 2, 3, 4, 5]</code></pre>
+<h4>Related: <code>flatMap</code></h4>
+<p>Maps each element and flattens one level — useful when the mapper returns arrays.</p>
+<pre><code>["hi there", "how are you"].flatMap(s =&gt; s.split(" "));
+// ["hi","there","how","are","you"]</code></pre>
+<h4>Older manual approach (pre-ES2019)</h4>
+<pre><code>function flatten(arr) {
+  return arr.reduce(
+    (flat, x) =&gt; flat.concat(Array.isArray(x) ? flatten(x) : x),
+    []
+  );
+}</code></pre>
+<h4>Alternative via spread (only flattens one level)</h4>
+<pre><code>[].concat(...[[1, 2], [3, 4]]);   // [1, 2, 3, 4]</code></pre>
+<p>For 99% of cases, <code>flat(Infinity)</code> is the right answer.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q72">
+  <div class="qa__number">Question 72</div>
+  <h3 class="qa__question">What is the purpose of the then method in promises?</h3>
+  <div class="qa__answer">
+    
+<p>
+  <code>.then(onFulfilled, onRejected?)</code> attaches a handler that runs when the promise
+  settles. It returns a <strong>new promise</strong>, which is what makes chaining possible.
+</p>
+<pre><code>promise.then(
+  value =&gt; { /* runs on success */ return transformed; },
+  error =&gt; { /* runs on failure — optional */ }
+);</code></pre>
+<h4>Key behaviors</h4>
+<ul>
+  <li>The handler's return value becomes the next promise's resolved value.</li>
+  <li>If the handler returns a promise, the chain waits for it.</li>
+  <li>If the handler throws or returns a rejected promise, the next <code>.catch</code> handles it.</li>
+</ul>
+<pre><code>Promise.resolve(5)
+  .then(n =&gt; n * 2)                           // 10
+  .then(n =&gt; Promise.resolve(n + 1))         // 11 (waits for inner promise)
+  .then(n =&gt; { throw new Error("oops"); })
+  .then(n =&gt; console.log("skipped"))
+  .catch(err =&gt; console.error(err.message)); // "oops"</code></pre>
+<h4>Prefer <code>.catch</code> over the second argument</h4>
+<pre><code>// ❌ Misses errors thrown in the success handler itself
+promise.then(onOk, onErr);
+
+// ✅ Catches errors from both the original promise and the handler
+promise.then(onOk).catch(onErr);</code></pre>
+<h4>In async/await world</h4>
+<p><code>await</code> is equivalent to <code>.then</code> under the hood — it unwraps the value and lets execution continue.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q73">
+  <div class="qa__number">Question 73</div>
+  <h3 class="qa__question">What is the purpose of the catch method in promises?</h3>
+  <div class="qa__answer">
+    
+<p>
+  <code>.catch(onRejected)</code> attaches a handler for rejected promises. It's shorthand for
+  <code>.then(undefined, onRejected)</code> and catches any rejection earlier in the chain,
+  including thrown errors inside <code>.then</code> handlers.
+</p>
+<pre><code>fetch("/api")
+  .then(res =&gt; res.json())
+  .then(data =&gt; JSON.parse(data.something))  // may throw
+  .catch(err =&gt; {
+    // catches network failures, non-JSON responses,
+    // and any error thrown in earlier .then handlers
+    console.error(err);
+  });</code></pre>
+<h4>What it catches</h4>
+<ul>
+  <li>Original promise rejection (<code>reject(err)</code>).</li>
+  <li>Errors thrown inside any <code>.then</code> earlier in the chain.</li>
+  <li>Promises returned from <code>.then</code> that later reject.</li>
+</ul>
+<h4>Chaining after catch</h4>
+<p><code>.catch</code> returns a new promise that's <em>fulfilled</em> (with your handler's return value) unless you rethrow. So subsequent <code>.then</code>s will run:</p>
+<pre><code>getValue()
+  .catch(err =&gt; {
+    console.error(err);
+    return defaultValue;  // swallow and continue
+  })
+  .then(v =&gt; use(v));</code></pre>
+<h4>With async/await</h4>
+<p>Use <code>try/catch</code> instead — it's the synchronous-looking equivalent.</p>
+<h4>Unhandled rejections</h4>
+<p>If no <code>.catch</code> ever runs, the browser logs an <code>unhandledrejection</code> warning and Node.js may crash (depending on version / flag). Always terminate chains with <code>.catch</code> or <code>try/catch</code>.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q74">
+  <div class="qa__number">Question 74</div>
+  <h3 class="qa__question">Explain the concept of currying in JavaScript.</h3>
+  <div class="qa__answer">
+    
+<p>
+  <strong>Currying</strong> transforms a function of many arguments into a sequence of single-argument
+  functions. Each call returns a new function until all arguments are collected, then the result
+  is produced.
+</p>
+<pre><code>// Normal
+const add = (a, b, c) =&gt; a + b + c;
+add(1, 2, 3);  // 6
+
+// Curried
+const addC = a =&gt; b =&gt; c =&gt; a + b + c;
+addC(1)(2)(3); // 6</code></pre>
+<h4>A generic curry helper</h4>
+<pre><code>function curry(fn) {
+  return function curried(...args) {
+    if (args.length &gt;= fn.length) {
+      return fn.apply(this, args);
+    }
+    return (...more) =&gt; curried.apply(this, [...args, ...more]);
+  };
+}
+
+const add = curry((a, b, c) =&gt; a + b + c);
+add(1)(2)(3);     // 6
+add(1, 2)(3);     // 6
+add(1, 2, 3);     // 6</code></pre>
+<h4>Why bother</h4>
+<ul>
+  <li><strong>Partial application:</strong> lock in some args, leave others for later.</li>
+  <li><strong>Function composition:</strong> pipelines like <code>pipe(filter(pred), map(fn))</code> flow naturally with curried functions.</li>
+  <li><strong>Reusability:</strong> configure once, use many times.</li>
+</ul>
+<pre><code>const greet = curry((greeting, name) =&gt; `${greeting}, ${name}`);
+const hi = greet("Hi");
+hi("Ada");   // "Hi, Ada"
+hi("Bob");   // "Hi, Bob"</code></pre>
+<p>In practice, plain JavaScript often uses <code>.bind</code> or arrow-function closures for the same effect without the cognitive overhead of full currying.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q75">
+  <div class="qa__number">Question 75</div>
+  <h3 class="qa__question">How do you create a promise in JavaScript?</h3>
+  <div class="qa__answer">
+    
+<p>Several ways, depending on whether the value already exists.</p>
+<h4>1. <code>new Promise((resolve, reject) =&gt; ...)</code> — for wrapping</h4>
+<p>Use when you're adapting a non-promise API (callbacks, events, timers).</p>
+<pre><code>const wait = (ms) =&gt; new Promise(resolve =&gt; setTimeout(resolve, ms));
+
+function readFile(path) {
+  return new Promise((resolve, reject) =&gt; {
+    fs.readFile(path, "utf8", (err, data) =&gt; {
+      if (err) reject(err); else resolve(data);
+    });
+  });
+}</code></pre>
+<h4>2. <code>Promise.resolve(value)</code> — already have the value</h4>
+<pre><code>function getUser(id) {
+  const cached = cache.get(id);
+  if (cached) return Promise.resolve(cached);
+  return fetch(`/users/${id}`).then(r =&gt; r.json());
+}</code></pre>
+<h4>3. <code>Promise.reject(err)</code> — already know it failed</h4>
+<pre><code>function divide(a, b) {
+  if (b === 0) return Promise.reject(new Error("divide by zero"));
+  return Promise.resolve(a / b);
+}</code></pre>
+<h4>4. async functions — automatically return a promise</h4>
+<pre><code>async function load() {
+  return 42;   // same as Promise.resolve(42)
+}
+
+async function fail() {
+  throw new Error("nope");  // same as Promise.reject(...)
+}</code></pre>
+<h4>Tips</h4>
+<ul>
+  <li>Always handle rejections (<code>.catch</code> or <code>try/catch</code>). Unhandled rejections crash Node.</li>
+  <li>Don't mix <code>resolve</code>/<code>reject</code> with <code>return</code> — the constructor callback's return value is ignored.</li>
+  <li>Prefer async functions over <code>new Promise</code> for new code — they compose better.</li>
+</ul>
+
+    
+  </div>
+</article>
+<article class="qa" id="q76">
+  <div class="qa__number">Question 76</div>
+  <h3 class="qa__question">What is the purpose of the await keyword?</h3>
+  <div class="qa__answer">
+    
+<p>
+  <code>await</code> pauses an <code>async</code> function until a promise settles, then unwraps
+  its value. It transforms asynchronous code into a readable, synchronous-looking flow.
+</p>
+<pre><code>async function getUser(id) {
+  const res = await fetch(`/users/${id}`);  // pauses here
+  if (!res.ok) throw new Error("not found");
+  const user = await res.json();            // pauses here
+  return user;                              // resolves the outer promise
+}</code></pre>
+<h4>How it relates to promises</h4>
+<p><code>await p</code> is semantically the same as <code>p.then(...)</code>. The key improvements:</p>
+<ul>
+  <li>Sequential flow reads top-to-bottom.</li>
+  <li><code>try/catch</code> replaces <code>.catch</code>.</li>
+  <li>Variables stay in scope naturally (no nested callback scope problems).</li>
+</ul>
+<h4>Rules</h4>
+<ul>
+  <li>Only valid inside an <code>async</code> function — <em>or</em> at the top level of an ES module.</li>
+  <li>If the operand isn't a promise, <code>await</code> wraps it (<code>await 42</code> → <code>42</code>).</li>
+  <li>Rejections throw inside the async function — handle with <code>try/catch</code>.</li>
+</ul>
+<h4>Common pitfall: unintended sequential awaits</h4>
+<pre><code>// ❌ Takes 3s — runs one at a time
+const a = await fetchA();  // 1s
+const b = await fetchB();  // 1s
+const c = await fetchC();  // 1s
+
+// ✅ Takes ~1s — runs in parallel
+const [a, b, c] = await Promise.all([fetchA(), fetchB(), fetchC()]);</code></pre>
+<p>Only sequence requests that genuinely depend on each other. Parallelize everything else.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q77">
+  <div class="qa__number">Question 77</div>
+  <h3 class="qa__question">Explain the concept of tail call optimization.</h3>
+  <div class="qa__answer">
+    
+<p>
+  <strong>Tail call optimization</strong> (TCO) is a compiler technique where a function call in the
+  <em>last</em> position of another function doesn't add a new stack frame — it reuses the current
+  one. This lets recursive functions run in constant stack space, avoiding stack overflow.
+</p>
+<pre><code>// Tail call — the return value IS the recursive call
+function factorial(n, acc = 1) {
+  if (n &lt;= 1) return acc;
+  return factorial(n - 1, n * acc);  // tail position
+}
+
+// NOT a tail call — still work to do after the call
+function factorialNaive(n) {
+  if (n &lt;= 1) return 1;
+  return n * factorialNaive(n - 1);   // multiplication happens after return
+}</code></pre>
+<h4>Status in JavaScript</h4>
+<p>TCO is <strong>specified in ES6</strong> but only Safari implements it. V8 (Chrome/Node) and Firefox don't, so recursive functions in those engines still hit the default ~10,000-frame stack limit.</p>
+<h4>Practical workarounds</h4>
+<ul>
+  <li><strong>Iteration:</strong> replace deep recursion with a loop.</li>
+  <li><strong>Trampolining:</strong> return thunks (functions) instead of calling recursively; a driver loop calls them.</li>
+</ul>
+<pre><code>function trampoline(fn) {
+  return (...args) =&gt; {
+    let result = fn(...args);
+    while (typeof result === "function") result = result();
+    return result;
+  };
+}
+
+const factorial = trampoline(function go(n, acc = 1) {
+  if (n &lt;= 1) return acc;
+  return () =&gt; go(n - 1, n * acc);  // return a thunk
+});</code></pre>
+<p>TCO is a great interview topic about the language spec, but in 2024 production JavaScript you still avoid deep recursion in hot paths.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q78">
+  <div class="qa__number">Question 78</div>
+  <h3 class="qa__question">How do you find the largest number in an array in JavaScript?</h3>
+  <div class="qa__answer">
+    
+<p>Several clean ways to find the largest number.</p>
+<h4>1. <code>Math.max</code> with spread — most common</h4>
+<pre><code>const max = Math.max(...[3, 1, 5, 2, 9, 4]);  // 9</code></pre>
+<p>Watch out: passing an empty array gives <code>-Infinity</code>, and spreading very large arrays (&gt;100k elements) can hit the argument limit.</p>
+<h4>2. <code>reduce</code> — safe for any size</h4>
+<pre><code>const max = arr.reduce((m, n) =&gt; (n &gt; m ? n : m), -Infinity);</code></pre>
+<h4>3. Plain loop — fastest and most explicit</h4>
+<pre><code>let max = arr[0];
+for (let i = 1; i &lt; arr.length; i++) {
+  if (arr[i] &gt; max) max = arr[i];
+}</code></pre>
+<h4>4. Sort (NOT recommended — O(n log n))</h4>
+<pre><code>const max = [...arr].sort((a, b) =&gt; b - a)[0];</code></pre>
+<p>Works but wasteful and mutates if you forget to copy.</p>
+<h4>Finding the largest object by a field</h4>
+<pre><code>const oldest = users.reduce((a, b) =&gt; (a.age &gt; b.age ? a : b));</code></pre>
+<h4>Edge cases to handle</h4>
+<ul>
+  <li>Empty array — decide whether to return <code>undefined</code>, throw, or use a sentinel.</li>
+  <li><code>NaN</code> — any comparison with <code>NaN</code> is false, so it can leak through reduce.</li>
+</ul>
+
+    
+  </div>
+</article>
+<article class="qa" id="q79">
+  <div class="qa__number">Question 79</div>
+  <h3 class="qa__question">What is the difference between a function expression and a function declaration?</h3>
+  <div class="qa__answer">
+    
+<p>Both define a function, but their position and <em>hoisting</em> behavior differ.</p>
+<h4>Function declaration</h4>
+<pre><code>function greet(name) { return `Hi, ${name}`; }</code></pre>
+<ul>
+  <li>A statement. Starts with <code>function</code>.</li>
+  <li><strong>Fully hoisted</strong> — can be called before it's written in the source.</li>
+  <li>Always has a name.</li>
+</ul>
+<h4>Function expression</h4>
+<pre><code>const greet = function (name) { return `Hi, ${name}`; };
+const greet = function greet(name) { ... };   // named function expression
+const greet = (name) =&gt; `Hi, ${name}`;         // arrow function expression</code></pre>
+<ul>
+  <li>An expression — the function is a value assigned somewhere.</li>
+  <li>Only the variable is hoisted, not its value. Calling it before the assignment line is a <code>TypeError</code>.</li>
+  <li>Can be anonymous.</li>
+</ul>
+<h4>Hoisting demo</h4>
+<pre><code>sayHi();           // ✅ works — declaration is hoisted
+sayHello();        // ❌ TypeError: sayHello is not a function
+sayBye();          // ❌ ReferenceError: Cannot access before initialization
+
+function sayHi() {}
+var sayHello = function () {};
+const sayBye = function () {};</code></pre>
+<h4>Style convention</h4>
+<p>Modern code usually uses <code>const fn = () =&gt; { ... }</code> for consistency with other <code>const</code> declarations and to avoid the surprise of hoisting. Function declarations remain useful for top-level helpers where you don't care about order.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q80">
+  <div class="qa__number">Question 80</div>
+  <h3 class="qa__question">What is the purpose of the hasOwnProperty method?</h3>
+  <div class="qa__answer">
+    
+<p>
+  <code>obj.hasOwnProperty(key)</code> returns <code>true</code> if <code>obj</code> has
+  <code>key</code> as its <strong>own</strong> property — not inherited from a prototype.
+</p>
+<pre><code>const user = { name: "Ada" };
+
+user.hasOwnProperty("name");       // true
+user.hasOwnProperty("toString");   // false (inherited from Object.prototype)
+"toString" in user;                // true  (`in` includes inherited)</code></pre>
+<h4>Why it exists</h4>
+<p>When you iterate with <code>for...in</code>, you see inherited properties too. You often want only own properties — especially when iterating user data vs accidentally touching prototype methods added elsewhere.</p>
+<pre><code>for (const key in user) {
+  if (user.hasOwnProperty(key)) {
+    console.log(key, user[key]);
+  }
+}</code></pre>
+<h4>Modern preferred: <code>Object.hasOwn</code> (ES2022)</h4>
+<pre><code>Object.hasOwn(user, "name");  // true</code></pre>
+<p>It's safer because:</p>
+<ul>
+  <li>Works on objects created with <code>Object.create(null)</code> (which have no prototype, hence no <code>.hasOwnProperty</code>).</li>
+  <li>Isn't vulnerable to <code>{ hasOwnProperty: "lol" }</code> shadowing the method.</li>
+</ul>
+<h4>Alternatives</h4>
+<pre><code>Object.keys(obj).includes("x");                     // own enumerable only
+Object.getOwnPropertyNames(obj).includes("x");      // own, incl. non-enumerable</code></pre>
+
+    
+  </div>
+</article>
+<article class="qa" id="q81">
+  <div class="qa__number">Question 81</div>
+  <h3 class="qa__question">How do you get the current timestamp in JavaScript?</h3>
+  <div class="qa__answer">
+    
+<p>Several built-in ways — pick based on what you need.</p>
+<h4>Milliseconds since epoch</h4>
+<pre><code>Date.now();                         // 1713340800000
+new Date().getTime();               // same
++new Date();                        // same (unary + coerces)</code></pre>
+<h4>Seconds since epoch (Unix timestamp)</h4>
+<pre><code>Math.floor(Date.now() / 1000);      // 1713340800</code></pre>
+<h4>ISO 8601 string</h4>
+<pre><code>new Date().toISOString();           // "2026-04-17T09:00:00.000Z"</code></pre>
+<h4>High-resolution (sub-millisecond) for performance timing</h4>
+<pre><code>performance.now();   // milliseconds since page load, with fractional precision</code></pre>
+<h4>Human-formatted strings</h4>
+<pre><code>new Date().toLocaleString();        // "4/17/2026, 9:00:00 AM"
+new Date().toLocaleDateString("en-GB");  // "17/04/2026"
+new Date().toLocaleTimeString();    // "9:00:00 AM"
+
+new Intl.DateTimeFormat("en-US", {
+  dateStyle: "full", timeStyle: "short"
+}).format(new Date());
+// "Friday, April 17, 2026 at 9:00 AM"</code></pre>
+<h4>Tips</h4>
+<ul>
+  <li><code>Date.now()</code> is fastest for a simple timestamp.</li>
+  <li>For benchmarking use <code>performance.now()</code> — it's monotonic and has better precision.</li>
+  <li>For storage / APIs, use ISO strings (<code>toISOString()</code>) or the epoch number — avoid localized strings.</li>
+  <li>For production date math, many teams use a library like <code>date-fns</code> or <code>day.js</code> (native <code>Temporal</code> API is coming but not universal yet).</li>
+</ul>
+
+    
+  </div>
+</article>
+<article class="qa" id="q82">
+  <div class="qa__number">Question 82</div>
+  <h3 class="qa__question">How do you randomize the order of elements in an array?</h3>
+  <div class="qa__answer">
+    
+<p>
+  Shuffle uniformly using the <strong>Fisher–Yates algorithm</strong>. It's O(n), in-place, and
+  every permutation is equally likely.
+</p>
+<pre><code>function shuffle(arr) {
+  for (let i = arr.length - 1; i &gt; 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];  // swap
+  }
+  return arr;
+}
+
+const deck = [1,2,3,4,5,6,7,8,9,10];
+shuffle(deck);  // mutates in place
+
+// Non-mutating version
+const shuffled = shuffle([...deck]);</code></pre>
+<h4>Don't use <code>sort(() =&gt; Math.random() - 0.5)</code></h4>
+<p>It's a common "clever" trick but it's biased and breaks the comparator contract. Some engines produce visibly skewed distributions, and the complexity is O(n log n) instead of O(n).</p>
+<h4>Cryptographically secure shuffle</h4>
+<p>For things like password mnemonic order or lottery picks, use <code>crypto.getRandomValues</code> instead of <code>Math.random</code>:</p>
+<pre><code>function secureShuffle(arr) {
+  const bytes = new Uint32Array(arr.length);
+  crypto.getRandomValues(bytes);
+  for (let i = arr.length - 1; i &gt; 0; i--) {
+    const j = bytes[i] % (i + 1);
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}</code></pre>
+
+    
+  </div>
+</article>
+<article class="qa" id="q83">
+  <div class="qa__number">Question 83</div>
+  <h3 class="qa__question">What is the purpose of the new keyword?</h3>
+  <div class="qa__answer">
+    
+<p>
+  <code>new</code> invokes a function as a <strong>constructor</strong>, creating a new object whose
+  prototype is linked to the constructor's prototype.
+</p>
+<h4>What <code>new</code> actually does (four steps)</h4>
+<ol>
+  <li>Creates a new empty object.</li>
+  <li>Links its internal prototype to <code>Ctor.prototype</code>.</li>
+  <li>Calls the constructor with <code>this</code> bound to the new object.</li>
+  <li>Returns the new object (unless the constructor explicitly returns a non-primitive object, in which case that overrides).</li>
+</ol>
+<pre><code>function User(name, age) {
+  this.name = name;
+  this.age = age;
+}
+User.prototype.greet = function () { return `Hi, ${this.name}`; };
+
+const u = new User("Ada", 30);
+u.greet();                           // "Hi, Ada"
+u instanceof User;                   // true
+Object.getPrototypeOf(u) === User.prototype;  // true</code></pre>
+<h4>With ES6 classes (same mechanism, nicer syntax)</h4>
+<pre><code>class User {
+  constructor(name) { this.name = name; }
+  greet() { return `Hi, ${this.name}`; }
+}
+const u = new User("Ada");</code></pre>
+<h4>Forgetting <code>new</code></h4>
+<pre><code>const u = User("Ada", 30);   // in strict mode: TypeError (this is undefined)
+                             // in sloppy mode: attaches to window and returns undefined!</code></pre>
+<p>Classes throw a clear error if you forget <code>new</code>. That's one reason to prefer them over constructor functions.</p>
+<h4>Can't <code>new</code></h4>
+<ul>
+  <li>Arrow functions.</li>
+  <li>Async functions.</li>
+  <li>Generator functions.</li>
+  <li>Any function with a <code>[[Construct]]</code> internal method absent.</li>
+</ul>
+
+    
+  </div>
+</article>
+<article class="qa" id="q84">
+  <div class="qa__number">Question 84</div>
+  <h3 class="qa__question">How do you create an infinite loop in JavaScript?</h3>
+  <div class="qa__answer">
+    
+<p>
+  An <strong>infinite loop</strong> never terminates on its own — something inside the loop must
+  <code>break</code>, <code>return</code>, or throw to exit. Use intentionally for servers, event
+  pumps, and generators; accidentally they freeze your program.
+</p>
+<h4>Common syntaxes</h4>
+<pre><code>while (true) {
+  // forever
+}
+
+for (;;) {
+  // forever (no init, condition, or step)
+}
+
+do {
+  // forever
+} while (true);</code></pre>
+<h4>When you legitimately want one</h4>
+<pre><code>// Polling with a way out
+while (true) {
+  const next = await fetchNext();
+  if (!next) break;
+  process(next);
+}
+
+// Infinite async generator
+async function* source() {
+  while (true) {
+    yield await next();
+  }
+}</code></pre>
+<h4>Be careful</h4>
+<ul>
+  <li>A truly tight infinite loop blocks the event loop — no UI, no timers, no network callbacks run until it exits. Browsers eventually show "page unresponsive."</li>
+  <li>Inside an async function, an infinite loop is fine as long as each iteration awaits a promise (the event loop gets time between yields).</li>
+  <li>In Web Workers, an infinite loop is contained — it won't freeze the UI thread.</li>
+</ul>
+<h4>Debugging</h4>
+<p>If your code accidentally loops forever, browsers let you pause execution via the DevTools — look for the pause/debug icon in the Sources panel.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q85">
+  <div class="qa__number">Question 85</div>
+  <h3 class="qa__question">What is the difference between == and === in JavaScript?</h3>
+  <div class="qa__answer">
+    
+<p>A core question — covered earlier. Quick recap:</p>
+<ul>
+  <li><code>==</code> compares after <strong>type coercion</strong> — many surprising rules.</li>
+  <li><code>===</code> compares <strong>type and value strictly</strong> — no coercion.</li>
+</ul>
+<pre><code>0 == "";       // true
+0 == false;    // true
+0 == null;     // false
+0 == undefined;// false
+null == undefined;  // true
+NaN == NaN;    // false
+
+0 === "";      // false
+0 === false;   // false
+null === undefined; // false</code></pre>
+<p>
+  <strong>Always prefer <code>===</code>.</strong> The one historically defended use of <code>==</code>
+  is <code>x == null</code> as shorthand for "is null or undefined," but modern codebases usually
+  prefer being explicit: <code>x === null || x === undefined</code>.
+</p>
+<h4>Why <code>==</code> is error-prone</h4>
+<p>The coercion rules include: converting objects to primitives via <code>valueOf</code>/<code>toString</code>, converting strings to numbers, treating <code>null</code>/<code>undefined</code> as only loosely equal to each other. It's a lot to carry in your head; strict equality avoids the category of bugs entirely.</p>
+<p>ESLint rule <code>eqeqeq</code> enforces strict equality and is on by default in nearly every modern config.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q86">
+  <div class="qa__number">Question 86</div>
+  <h3 class="qa__question">How do you remove an element from an array?</h3>
+  <div class="qa__answer">
+    
+<p>It depends on <em>where</em> the element is and whether you want to mutate the original.</p>
+<h4>1. Remove by index (mutating)</h4>
+<pre><code>arr.splice(index, 1);            // removes 1 item at index, in place
+arr.pop();                       // last
+arr.shift();                     // first</code></pre>
+<h4>2. Remove by value (mutating, first match only)</h4>
+<pre><code>const i = arr.indexOf(value);
+if (i !== -1) arr.splice(i, 1);</code></pre>
+<h4>3. Remove all occurrences (mutating)</h4>
+<pre><code>// Simple for primitives
+for (let i = arr.length - 1; i &gt;= 0; i--) {
+  if (arr[i] === value) arr.splice(i, 1);
+}</code></pre>
+<h4>4. Immutable: return a new array without the element</h4>
+<pre><code>// By index
+const without = [...arr.slice(0, index), ...arr.slice(index + 1)];
+// or:
+const without = arr.toSpliced(index, 1);   // ES2023
+
+// By value — remove all matches
+const without = arr.filter(x =&gt; x !== value);
+
+// By predicate — keep everything except what matches
+const without = arr.filter(x =&gt; !isJunk(x));</code></pre>
+<h4>5. For arrays of objects, usually by id</h4>
+<pre><code>const next = arr.filter(u =&gt; u.id !== targetId);</code></pre>
+<p><strong>Tip:</strong> in React / Redux / any immutable state pattern, reach for <code>filter</code> or <code>toSpliced</code> (ES2023) rather than <code>splice</code>.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q87">
+  <div class="qa__number">Question 87</div>
+  <h3 class="qa__question">What are destructuring assignments in JavaScript?</h3>
+  <div class="qa__answer">
+    
+<p>Already covered in Q35 — the short version is: destructuring unpacks values from arrays or objects in a single concise expression.</p>
+<pre><code>const [a, b] = [1, 2];
+const { name, age } = user;
+const { nested: { id } } = data;
+const [, , third] = arr;
+const [head, ...tail] = arr;
+const { x, y = 0 } = obj;</code></pre>
+<p>Key uses:</p>
+<ul>
+  <li>Pulling values out of API responses.</li>
+  <li>Cleaner function parameters: <code>function greet({ name, age }) { ... }</code>.</li>
+  <li>Swapping variables without a temp.</li>
+  <li>Handling return values from hooks / libraries: <code>const [count, setCount] = useState(0)</code>.</li>
+</ul>
+<p>See Q35 for more examples and edge cases.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q88">
+  <div class="qa__number">Question 88</div>
+  <h3 class="qa__question">Explain the concept of object-oriented programming in JavaScript.</h3>
+  <div class="qa__answer">
+    
+<p>
+  JavaScript supports <strong>object-oriented programming</strong> through <em>prototypes</em>, not
+  classes-as-blueprints like Java. The <code>class</code> keyword (ES6) is syntactic sugar over
+  prototypal inheritance.
+</p>
+<h4>Four pillars in JavaScript</h4>
+<h4>1. Encapsulation — bundle data and behavior</h4>
+<pre><code>class BankAccount {
+  #balance = 0;                  // private field (ES2022)
+  deposit(amt) { this.#balance += amt; }
+  get balance() { return this.#balance; }
+}</code></pre>
+<h4>2. Inheritance — extend an existing class</h4>
+<pre><code>class SavingsAccount extends BankAccount {
+  addInterest(rate) { this.deposit(this.balance * rate); }
+}</code></pre>
+<h4>3. Polymorphism — override methods in subclasses</h4>
+<pre><code>class Animal { speak() { return "..."; } }
+class Dog extends Animal { speak() { return "woof"; } }
+class Cat extends Animal { speak() { return "meow"; } }
+
+[new Dog(), new Cat()].forEach(a =&gt; console.log(a.speak()));</code></pre>
+<h4>4. Abstraction — expose a simple interface, hide details</h4>
+<p>Use <code>#</code> fields and methods for internals. Expose only what callers need.</p>
+<h4>Prototypal quirks worth knowing</h4>
+<ul>
+  <li>Methods live on the prototype (shared across instances) — saves memory.</li>
+  <li>There are no real private fields without <code>#</code>, although closures and factory functions can simulate them.</li>
+  <li>Multiple inheritance isn't built-in, but you can compose via <strong>mixins</strong> (functions that merge behaviors into a class).</li>
+  <li>In 2024+ many teams prefer composition over inheritance — favor small objects/functions combined with React hooks, DI, or plain objects over deep class hierarchies.</li>
+</ul>
+
+    
+  </div>
+</article>
+<article class="qa" id="q89">
+  <div class="qa__number">Question 89</div>
+  <h3 class="qa__question">How do you check if a string contains a substring?</h3>
+  <div class="qa__answer">
+    
+<p>Several ways — all clean and modern.</p>
+<pre><code>const s = "Hello, world!";
+
+// 1. Best: includes — returns boolean
+s.includes("world");         // true
+s.includes("World");         // false (case sensitive)
+
+// 2. indexOf — returns position or -1
+s.indexOf("world") !== -1;   // true
+
+// 3. Start/end specific
+s.startsWith("Hello");       // true
+s.endsWith("!");             // true
+
+// 4. Regex — when you need patterns or case-insensitive
+/world/i.test(s);            // true (case insensitive)
+s.search(/world/i) !== -1;   // true</code></pre>
+<h4>Case-insensitive check without regex</h4>
+<pre><code>s.toLowerCase().includes(target.toLowerCase());</code></pre>
+<h4>Check against multiple substrings</h4>
+<pre><code>const terms = ["alpha", "beta", "gamma"];
+const hasAny = terms.some(t =&gt; s.includes(t));
+const hasAll = terms.every(t =&gt; s.includes(t));</code></pre>
+<p><strong>Default choice:</strong> <code>includes()</code> — readable, fast, handles empty strings correctly, and works with Unicode.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q90">
+  <div class="qa__number">Question 90</div>
+  <h3 class="qa__question">What is the purpose of the filter method in arrays?</h3>
+  <div class="qa__answer">
+    
+<p>
+  <code>filter(fn)</code> returns a new array containing only the elements for which
+  the callback returns a truthy value. It never mutates the original.
+</p>
+<pre><code>arr.filter((element, index, array) =&gt; boolean);</code></pre>
+<h4>Examples</h4>
+<pre><code>[1, 2, 3, 4, 5].filter(n =&gt; n &gt; 2);       // [3, 4, 5]
+[1, 2, 3, 4].filter(n =&gt; n % 2 === 0);    // [2, 4]
+
+const users = [
+  { name: "Ada", age: 30, active: true },
+  { name: "Bob", age: 17, active: true },
+  { name: "Eve", age: 25, active: false },
+];
+users.filter(u =&gt; u.active &amp;&amp; u.age &gt;= 18);  // [Ada]
+
+// Remove falsy values
+["a", "", "b", null, "c", 0].filter(Boolean); // ["a", "b", "c"]</code></pre>
+<h4>Combine with other methods</h4>
+<pre><code>// "count active adults"
+users.filter(u =&gt; u.active &amp;&amp; u.age &gt;= 18).length;
+
+// "get their names"
+users.filter(u =&gt; u.active).map(u =&gt; u.name);</code></pre>
+<h4>Return early with <code>find</code> if you only want one</h4>
+<pre><code>users.find(u =&gt; u.name === "Ada");      // first match (object)
+users.findIndex(u =&gt; u.name === "Ada"); // first match (index)</code></pre>
+<p>Performance: <code>filter</code> always walks the whole array. For very large arrays where you need early exit, use a <code>for</code> loop or <code>find</code>.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q91">
+  <div class="qa__number">Question 91</div>
+  <h3 class="qa__question">How do you convert an object to a JSON string?</h3>
+  <div class="qa__answer">
+    
+<p>Use <code>JSON.stringify</code>.</p>
+<pre><code>const user = { name: "Ada", age: 30, tags: ["admin"] };
+JSON.stringify(user);
+// '{"name":"Ada","age":30,"tags":["admin"]}'</code></pre>
+<h4>Pretty-print with indentation</h4>
+<pre><code>JSON.stringify(user, null, 2);
+/*
+{
+  "name": "Ada",
+  "age": 30,
+  "tags": [
+    "admin"
+  ]
+}
+*/</code></pre>
+<h4>Filter properties with a replacer</h4>
+<pre><code>// Array form: whitelist
+JSON.stringify(user, ["name"]);                 // '{"name":"Ada"}'
+
+// Function form: transform / omit
+JSON.stringify(user, (key, val) =&gt;
+  key === "password" ? undefined : val
+);</code></pre>
+<h4>Custom <code>toJSON</code> hook</h4>
+<p>If an object has a <code>toJSON</code> method, <code>JSON.stringify</code> uses its return value:</p>
+<pre><code>class Point {
+  constructor(x, y) { this.x = x; this.y = y; }
+  toJSON() { return `(${this.x},${this.y})`; }
+}
+JSON.stringify({ p: new Point(1, 2) });  // '{"p":"(1,2)"}'</code></pre>
+<h4>Things it can't represent</h4>
+<ul>
+  <li><code>undefined</code>, functions, symbols — dropped from objects; <code>null</code> in arrays.</li>
+  <li><code>Date</code> — encoded as ISO string (lossless round-trip needs a reviver on parse).</li>
+  <li><code>Map</code>, <code>Set</code>, <code>BigInt</code>, <code>TypedArray</code> — need manual handling.</li>
+  <li>Circular references — throws <code>TypeError</code>. Track visited objects or use a library.</li>
+</ul>
+
+    
+  </div>
+</article>
+<article class="qa" id="q92">
+  <div class="qa__number">Question 92</div>
+  <h3 class="qa__question">What is the purpose of the JSON.parse method?</h3>
+  <div class="qa__answer">
+    
+<p>
+  <code>JSON.parse(str, reviver?)</code> converts a JSON string into the corresponding JavaScript
+  value. It's the inverse of <code>JSON.stringify</code>.
+</p>
+<pre><code>JSON.parse('{"name":"Ada","age":30}');
+// { name: "Ada", age: 30 }
+
+JSON.parse('[1, 2, 3]');       // [1, 2, 3]
+JSON.parse('"hello"');          // "hello"
+JSON.parse('42');               // 42
+JSON.parse('null');             // null
+JSON.parse('true');             // true</code></pre>
+<h4>The reviver hook</h4>
+<p>Runs on every key/value as the JSON is built — useful for reviving Dates or transforming values:</p>
+<pre><code>const str = '{"name":"Ada","createdAt":"2026-04-17T09:00:00Z"}';
+
+const obj = JSON.parse(str, (key, val) =&gt; {
+  if (key === "createdAt") return new Date(val);
+  return val;
+});
+obj.createdAt instanceof Date;  // true</code></pre>
+<h4>Error handling</h4>
+<p>Invalid JSON throws <code>SyntaxError</code>. Always wrap in try/catch for untrusted input:</p>
+<pre><code>function safeParse(s, fallback = null) {
+  try { return JSON.parse(s); }
+  catch { return fallback; }
+}</code></pre>
+<h4>Caveats</h4>
+<ul>
+  <li>JSON requires strict double-quoted keys and strings — <code>'{name: "Ada"}'</code> fails.</li>
+  <li>Don't <code>eval()</code> JSON (classic security mistake). Always use <code>JSON.parse</code>.</li>
+  <li>Very large numbers lose precision — JSON uses JavaScript's 64-bit float. For arbitrary-precision, libraries like <code>json-bigint</code> help.</li>
+</ul>
+
+    
+  </div>
+</article>
+<article class="qa" id="q93">
+  <div class="qa__number">Question 93</div>
+  <h3 class="qa__question">How do you create a deep copy of an object?</h3>
+  <div class="qa__answer">
+    
+<p>Covered partially in Q41. Here's the focused answer.</p>
+<h4>Best modern way: <code>structuredClone</code></h4>
+<pre><code>const deep = structuredClone(original);</code></pre>
+<p>Handles: nested objects &amp; arrays, Dates, Maps, Sets, RegExps, typed arrays, Blobs, circular references.</p>
+<p>Doesn't clone: functions, DOM nodes, prototypes (cloned-to-plain-object), getters/setters, class instances (you get a plain object with the same data).</p>
+<h4>Fallback: JSON round-trip</h4>
+<pre><code>const deep = JSON.parse(JSON.stringify(original));</code></pre>
+<p>Easy and universal, but loses Dates (become strings), functions, <code>undefined</code>, <code>Map</code>, <code>Set</code>, and throws on circular refs.</p>
+<h4>Library: <code>lodash.cloneDeep</code></h4>
+<p>Handles the widest range of types, including preserving class prototypes.</p>
+<h4>DIY recursive (for learning / small cases)</h4>
+<pre><code>function deepClone(obj, seen = new WeakMap()) {
+  if (obj === null || typeof obj !== "object") return obj;
+  if (seen.has(obj)) return seen.get(obj);           // handle cycles
+
+  const copy = Array.isArray(obj) ? [] : {};
+  seen.set(obj, copy);
+  for (const key of Reflect.ownKeys(obj)) {
+    copy[key] = deepClone(obj[key], seen);
+  }
+  return copy;
+}</code></pre>
+<h4>Rule of thumb</h4>
+<table>
+  <thead><tr><th>Need</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td>Shallow</td><td><code>{ ...obj }</code></td></tr>
+    <tr><td>Deep, simple data</td><td><code>structuredClone</code></td></tr>
+    <tr><td>Deep, class instances preserved</td><td>Library or custom</td></tr>
+    <tr><td>Quick + everywhere</td><td>JSON round-trip (know the limits)</td></tr>
+  </tbody>
+</table>
+
+    
+  </div>
+</article>
+<article class="qa" id="q94">
+  <div class="qa__number">Question 94</div>
+  <h3 class="qa__question">What is the difference between alert, prompt, and confirm?</h3>
+  <div class="qa__answer">
+    
+<p>Three built-in browser dialogs. All three <strong>block</strong> the page until dismissed.</p>
+<table>
+  <thead><tr><th></th><th>Purpose</th><th>Returns</th></tr></thead>
+  <tbody>
+    <tr><td><code>alert(msg)</code></td><td>Show a message with OK</td><td><code>undefined</code></td></tr>
+    <tr><td><code>confirm(msg)</code></td><td>OK / Cancel — yes/no question</td><td><code>true</code> or <code>false</code></td></tr>
+    <tr><td><code>prompt(msg, default?)</code></td><td>Ask for text input</td><td>string (OK) or <code>null</code> (Cancel)</td></tr>
+  </tbody>
+</table>
+<pre><code>alert("Saved!");
+
+if (confirm("Delete this record?")) {
+  doDelete();
+}
+
+const name = prompt("Your name?", "Guest");
+if (name !== null) console.log("Hello, " + name);</code></pre>
+<h4>Why you rarely use them in production</h4>
+<ul>
+  <li>They block the entire page — JavaScript halts, animations stop.</li>
+  <li>Can't be styled to match your brand.</li>
+  <li>Users can check "don't show more dialogs" — silently disabling future calls.</li>
+  <li>Many browsers suppress them inside iframes or when triggered without user action.</li>
+  <li>Accessibility and translation are limited.</li>
+</ul>
+<h4>Modern alternatives</h4>
+<ul>
+  <li>Custom modal components (React/Vue/etc.).</li>
+  <li>The native <code>&lt;dialog&gt;</code> element with <code>showModal()</code> — keyboard-friendly, styleable, modern browsers only.</li>
+  <li>Toast / snackbar libraries for non-blocking notifications.</li>
+</ul>
+
+    
+  </div>
+</article>
+<article class="qa" id="q95">
+  <div class="qa__number">Question 95</div>
+  <h3 class="qa__question">How do you handle asynchronous code in JavaScript?</h3>
+  <div class="qa__answer">
+    
+<p>Covered across several earlier questions. A consolidated view:</p>
+<h4>The four eras</h4>
+<ol>
+  <li><strong>Callbacks</strong> — original pattern. Prone to nesting and inconsistent error handling.</li>
+  <li><strong>Promises</strong> — objects that represent future values; chainable with <code>.then</code>/<code>.catch</code>.</li>
+  <li><strong>async/await</strong> — syntactic sugar on promises; reads top-to-bottom.</li>
+  <li><strong>Streaming / async iterators</strong> — <code>for await...of</code> over async generators or ReadableStreams.</li>
+</ol>
+<h4>Pattern: parallel vs sequential</h4>
+<pre><code>// Sequential: each waits for the previous
+const a = await fetchA();
+const b = await fetchB();
+
+// Parallel: start all, then wait
+const [a, b] = await Promise.all([fetchA(), fetchB()]);
+
+// Non-blocking, continue even if some fail
+const results = await Promise.allSettled([fetchA(), fetchB()]);</code></pre>
+<h4>Error handling</h4>
+<pre><code>try {
+  const data = await riskyCall();
+  return data;
+} catch (err) {
+  logAndReturnDefault(err);
+} finally {
+  hideSpinner();
+}</code></pre>
+<h4>Cancellation</h4>
+<pre><code>const controller = new AbortController();
+fetch(url, { signal: controller.signal });
+// Somewhere else:
+controller.abort();  // cancels the fetch</code></pre>
+<h4>Consuming streams</h4>
+<pre><code>for await (const chunk of someAsyncIterable) {
+  process(chunk);
+}</code></pre>
+<h4>Tips</h4>
+<ul>
+  <li>Don't forget to <code>return</code> the promise from an <code>async</code> function — callers need it to wait.</li>
+  <li>Every <code>async</code> function returns a promise, so returning a value from inside is equivalent to <code>Promise.resolve(value)</code>.</li>
+  <li>Avoid mixing callbacks with promises unless you <code>promisify</code> first (Node's <code>util.promisify</code>).</li>
+</ul>
+
+    
+  </div>
+</article>
+<article class="qa" id="q96">
+  <div class="qa__number">Question 96</div>
+  <h3 class="qa__question">What is the purpose of the import statement?</h3>
+  <div class="qa__answer">
+    
+<p>
+  <code>import</code> brings values (or entire modules) from another file or package into the current
+  module. Covered alongside <code>export</code> in Q23 — here's the reference.
+</p>
+<h4>Named imports</h4>
+<pre><code>import { add, subtract, PI } from "./math.js";</code></pre>
+<h4>Default imports</h4>
+<pre><code>import multiply from "./math.js";           // default export
+import multiply, { add } from "./math.js";  // default + named</code></pre>
+<h4>Namespace imports</h4>
+<pre><code>import * as math from "./math.js";
+math.add(1, 2);
+math.PI;</code></pre>
+<h4>Rename</h4>
+<pre><code>import { add as plus } from "./math.js";</code></pre>
+<h4>Side-effect-only</h4>
+<pre><code>import "./polyfills.js";   // runs the file; imports nothing</code></pre>
+<h4>Dynamic (runtime) import</h4>
+<pre><code>const { heavy } = await import("./heavy.js");   // returns a promise</code></pre>
+<p>Dynamic imports are essential for code-splitting — you load big modules only when needed.</p>
+<h4>Key rules</h4>
+<ul>
+  <li>Imports are <strong>hoisted</strong> and statically analyzable — they live at the top of the module even if written lower.</li>
+  <li>Imports are <strong>read-only live bindings</strong> — the exporter updates the value, importers see it.</li>
+  <li>You can only use <code>import</code> at the top level of an ES module (or dynamically via <code>import()</code>).</li>
+  <li>File paths should include the extension in the browser (<code>./math.js</code>).</li>
+</ul>
+
+    
+  </div>
+</article>
+<article class="qa" id="q97">
+  <div class="qa__number">Question 97</div>
+  <h3 class="qa__question">How do you export a module in JavaScript?</h3>
+  <div class="qa__answer">
+    
+<p>Four export forms. Pick named for most cases; default for the primary export.</p>
+<h4>Named exports</h4>
+<pre><code>// math.js
+export const PI = 3.14;
+export function add(a, b) { return a + b; }
+export class Point { ... }
+
+// Or in one place
+const subtract = (a, b) =&gt; a - b;
+const multiply = (a, b) =&gt; a * b;
+export { subtract, multiply };
+
+// Rename
+export { subtract as minus };</code></pre>
+<h4>Default export</h4>
+<pre><code>// logger.js
+export default class Logger { ... }
+
+// Or
+function createServer() { ... }
+export default createServer;</code></pre>
+<p>A file can have many named exports but only one default.</p>
+<h4>Re-export (barrel files)</h4>
+<pre><code>// index.js — collect exports from several files
+export { add, subtract } from "./math.js";
+export * from "./constants.js";
+export { default as Logger } from "./logger.js";</code></pre>
+<h4>CommonJS (Node legacy)</h4>
+<pre><code>// export.js
+module.exports = { add, subtract };
+// or
+exports.add = add;
+
+// import.js
+const { add } = require("./export");</code></pre>
+<h4>Style notes</h4>
+<ul>
+  <li>Prefer <strong>named exports</strong> — better for tooling (rename safely, jump-to-definition, tree-shaking) and avoids the "default is called whatever the importer chose" inconsistency.</li>
+  <li>Use <strong>default exports</strong> when a file has one clear primary thing (a React component, a class).</li>
+</ul>
+
+    
+  </div>
+</article>
+<article class="qa" id="q98">
+  <div class="qa__number">Question 98</div>
+  <h3 class="qa__question">What is the purpose of the yield keyword?</h3>
+  <div class="qa__answer">
+    
+<p>
+  <code>yield</code> is used inside <strong>generator functions</strong> (<code>function*</code>) to
+  pause execution and produce a value. See Q36 for the full generator picture.
+</p>
+<pre><code>function* counter() {
+  yield 1;          // pause, emit 1
+  yield 2;          // pause, emit 2
+  yield 3;
+}
+
+const g = counter();
+g.next();  // { value: 1, done: false }
+g.next();  // { value: 2, done: false }
+g.next();  // { value: 3, done: false }
+g.next();  // { value: undefined, done: true }</code></pre>
+<h4>Two-way communication</h4>
+<p>You can pass a value <em>into</em> the generator through <code>next(arg)</code>. That value becomes the result of the paused <code>yield</code>:</p>
+<pre><code>function* conversation() {
+  const name = yield "What's your name?";
+  yield `Hello, ${name}!`;
+}
+
+const c = conversation();
+c.next();          // { value: "What's your name?", done: false }
+c.next("Ada");     // { value: "Hello, Ada!", done: false }</code></pre>
+<h4>Delegating: <code>yield*</code></h4>
+<p><code>yield*</code> delegates to another iterable — useful for composing generators:</p>
+<pre><code>function* range(n) { for (let i = 0; i &lt; n; i++) yield i; }
+function* combined() {
+  yield* range(3);    // yield 0, 1, 2
+  yield "middle";
+  yield* range(2);    // yield 0, 1
+}
+[...combined()];  // [0, 1, 2, "middle", 0, 1]</code></pre>
+<h4>Async generators</h4>
+<p>In an <code>async function*</code>, you can <code>yield</code> async values and consume with <code>for await...of</code>.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q99">
+  <div class="qa__number">Question 99</div>
+  <h3 class="qa__question">How do you create a named function in JavaScript?</h3>
+  <div class="qa__answer">
+    
+<p>
+  A <strong>named function</strong> is just a function with a given name. Both declarations and
+  expressions can be named.
+</p>
+<h4>Named function declaration</h4>
+<pre><code>function greet(name) {
+  return `Hi, ${name}`;
+}
+greet.name;  // "greet"</code></pre>
+<h4>Named function expression</h4>
+<pre><code>const g = function greet(name) {
+  // The name `greet` is visible ONLY inside the function —
+  // useful for recursion or debugging stack traces.
+  return `Hi, ${name}`;
+};
+g.name;       // "greet"
+greet;        // ReferenceError outside</code></pre>
+<h4>Anonymous expression (still given a name by assignment)</h4>
+<pre><code>const f = function (x) { return x * 2; };
+f.name;   // "f"  — inferred from the variable
+
+const obj = {
+  method() { ... }   // shorthand
+};
+obj.method.name;  // "method"</code></pre>
+<h4>Why names matter</h4>
+<ul>
+  <li><strong>Stack traces</strong> — anonymous functions show as <code>&lt;anonymous&gt;</code>, making debugging harder.</li>
+  <li><strong>Recursion</strong> — a named function expression can call itself by name even if the outer variable is reassigned.</li>
+  <li><strong>Profiler output</strong> and performance tools rely on names.</li>
+</ul>
+<h4>Rule of thumb</h4>
+<p>Even when assigning a function to a <code>const</code>, JavaScript infers a name from the binding. But in deeply nested callbacks or object literals, add an explicit name if you want better stack traces.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q100">
+  <div class="qa__number">Question 100</div>
+  <h3 class="qa__question">Explain the concept of callback hell and how to avoid it.</h3>
+  <div class="qa__answer">
+    
+<p>
+  <strong>Callback hell</strong> (a.k.a. "pyramid of doom") is the problem where asynchronous code
+  becomes deeply nested, hard to read, and nearly impossible to handle errors in consistently.
+</p>
+<h4>The pyramid</h4>
+<pre><code>getUser(id, (err, user) =&gt; {
+  if (err) return handle(err);
+  getOrders(user.id, (err, orders) =&gt; {
+    if (err) return handle(err);
+    getItems(orders[0].id, (err, items) =&gt; {
+      if (err) return handle(err);
+      processItems(items, (err, result) =&gt; {
+        if (err) return handle(err);
+        done(result);
+      });
+    });
+  });
+});</code></pre>
+<p>Problems: cognitive load, duplicated error handling, hard to add branches, broken stack traces.</p>
+<h4>Fixes (in order of preference)</h4>
+<h4>1. Async/await — best</h4>
+<pre><code>async function run(id) {
+  try {
+    const user = await getUser(id);
+    const orders = await getOrders(user.id);
+    const items = await getItems(orders[0].id);
+    return await processItems(items);
+  } catch (err) {
+    handle(err);
+  }
+}</code></pre>
+<h4>2. Promise chain</h4>
+<pre><code>getUser(id)
+  .then(user =&gt; getOrders(user.id))
+  .then(orders =&gt; getItems(orders[0].id))
+  .then(processItems)
+  .then(done)
+  .catch(handle);</code></pre>
+<h4>3. Name and extract functions</h4>
+<p>Even with callbacks, extracting named helpers flattens the visual structure:</p>
+<pre><code>function start(id) { getUser(id, onUser); }
+function onUser(err, user) { if (err) return handle(err); getOrders(user.id, onOrders); }
+function onOrders(err, orders) { ... }</code></pre>
+<h4>4. <code>util.promisify</code> (Node) / wrap callback APIs</h4>
+<pre><code>const { promisify } = require("util");
+const getUserP = promisify(getUser);
+
+async function run(id) {
+  const user = await getUserP(id);
+  // ...
+}</code></pre>
+<p>
+  <strong>Bottom line:</strong> for new code use async/await. For existing callback-heavy code,
+  promisify incrementally and migrate to await. Error handling becomes one try/catch instead of N.
+</p>
+
+    
+  </div>
+</article>
+
+    <nav class="chapter-nav" aria-label="Chapter navigation">
+      <div></div>
+      <a class="chapter-nav__next" href="javascript-tricky.html">
+      <span class="chapter-nav__dir">Next →</span>
+      <span class="chapter-nav__title">JavaScript — Tricky</span>
+    </a>
+    </nav>
+
+  </section>
+
+</main>
+</div>
+
+<script src="../assets/script.js"></script>
+</body>
+</html>

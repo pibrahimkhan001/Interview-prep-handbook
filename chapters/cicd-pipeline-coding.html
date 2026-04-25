@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CI/CD Pipeline — Coding · Interview Prep Mastery</title>
+<meta name="description" content="100 coding interview questions on CI/CD Pipeline, with detailed explanations and examples.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/styles.css">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%239a6b1d'/%3E%3Ctext x='50' y='68' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold' font-size='48'%3EIP%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="site-header">
+  <div class="site-header__inner">
+    <button class="menu-toggle" aria-label="Open menu" type="button">☰ Menu</button>
+    <a class="brand" href="../index.html">
+      <span class="brand__mark">IP</span>
+      <span class="brand__text">
+        <span class="brand__title">Interview Prep Mastery</span>
+        <span class="brand__subtitle">Interactive learning guide</span>
+      </span>
+    </a>
+    <nav class="header-nav">
+      <a href="../index.html#roadmap">Roadmap</a>
+      <a href="../index.html#chapters">All chapters</a>
+      <button class="theme-toggle" type="button" aria-label="Toggle color scheme">☾ Dark</button>
+    </nav>
+  </div>
+</header>
+<div class="layout">
+<aside class="sidebar" aria-label="Site navigation">
+  <div class="sidebar__header">Chapter Navigator</div>
+  
+        <div class="nav-part">
+          <div class="nav-part__label">Part 1</div>
+          <div class="nav-part__title">Core Programming Languages</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">JavaScript</li><li><a class="" href="../chapters/javascript-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/javascript-tricky.html"><span class="nav-item__title">Tricky</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-coding.html"><span class="nav-item__title">Advanced Coding</span><span class="nav-item__meta">100 questions · 100 min read</span></a></li><li><a class="" href="../chapters/javascript-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-scenario.html"><span class="nav-item__title">Advanced Scenario Based</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Python</li><li><a class="" href="../chapters/python-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/python-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-part">
+          <div class="nav-part__label">Part 2</div>
+          <div class="nav-part__title">Web Fundamentals</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">HTML</li><li><a class="" href="../chapters/html-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/html-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/html-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CSS</li><li><a class="" href="../chapters/css-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">102 questions · 60 min read</span></a></li><li><a class="" href="../chapters/css-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/css-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">101 questions · 90 min read</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-part">
+          <div class="nav-part__label">Part 3</div>
+          <div class="nav-part__title">Backend Technologies</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Node.Js</li><li><a class="" href="../chapters/nodejs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/nodejs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ExpressJS</li><li><a class="" href="../chapters/expressjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/expressjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/expressjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">API</li><li><a class="" href="../chapters/api-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/api-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-part">
+          <div class="nav-part__label">Part 4</div>
+          <div class="nav-part__title">Frontend Frameworks</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ReactJS</li><li><a class="" href="../chapters/reactjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">101 questions · 60 min read</span></a></li><li><a class="" href="../chapters/reactjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-part">
+          <div class="nav-part__label">Part 5</div>
+          <div class="nav-part__title">Databases</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MYSQL</li><li><a class="" href="../chapters/mysql-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mysql-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MongoDB</li><li><a class="" href="../chapters/mongodb-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mongodb-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-part">
+          <div class="nav-part__label">Part 6</div>
+          <div class="nav-part__title">System Design &amp; DevOps</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">System Design MERN Stack</li><li><a class="" href="../chapters/system-design-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Infrastructure MERN Stack</li><li><a class="" href="../chapters/infrastructure-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/infrastructure-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CI/CD Pipeline</li><li><a class="" href="../chapters/cicd-pipeline-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="active" href="../chapters/cicd-pipeline-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
+          </ul>
+        </div>
+</aside>
+<main class="main" id="main">
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="../index.html">Home</a>
+    <span class="breadcrumb__sep">›</span>
+    <a href="../index.html#part-6">System Design &amp; DevOps</a>
+    <span class="breadcrumb__sep">›</span>
+    <span>CI/CD Pipeline — Coding</span>
+  </nav>
+
+  <header class="chapter-header">
+    <div class="chapter-label">CI/CD Pipeline · Coding</div>
+    <h1 class="chapter-title">Coding CI/CD Pipeline Interview Questions</h1>
+    <p class="chapter-lede">Practical coding problems with full solutions and line-by-line explanations.</p>
+    <div class="chapter-meta">
+      <div class="chapter-meta__item"><span class="chapter-meta__label">Questions</span><span class="chapter-meta__value">100</span></div>
+      <div class="chapter-meta__item"><span class="chapter-meta__label">Level</span><span class="chapter-meta__value">Coding</span></div>
+      <div class="chapter-meta__item"><span class="chapter-meta__label">Estimated reading</span><span class="chapter-meta__value">90 min read</span></div>
+    </div>
+    
+        <div class="callout callout--info" style="margin-top: 1.2rem;">
+          <div class="callout__title">Listing mode</div>
+          <p style="margin: 0;">This chapter shows the full question list. Detailed beginner-friendly explanations with code examples and diagrams will be added progressively. Use the questions below as a study checklist — research each one, write your own answer, then verify.</p>
+        </div>
+  </header>
+
+  <section class="prose">
+
+    <div class="toc" id="toc">
+      <div class="toc__title">All questions in this chapter</div>
+      <ul class="toc__list">
+        <li><a href="#q1"><span class="toc__num">1.</span>Write a GitHub Action workflow to build and test a Node.js application.</a></li><li><a href="#q2"><span class="toc__num">2.</span>Create a Jenkins pipeline script to build and deploy a Docker image.</a></li><li><a href="#q3"><span class="toc__num">3.</span>Write a Dockerfile to containerize a simple Flask application.</a></li><li><a href="#q4"><span class="toc__num">4.</span>Write a Kubernetes deployment YAML file for a Node.js application.</a></li><li><a href="#q5"><span class="toc__num">5.</span>Create a GitHub Action workflow to deploy a React application to GitHub Pages.</a></li><li><a href="#q6"><span class="toc__num">6.</span>Write a Jenkinsfile to build a Maven project and deploy it to an AWS EC2 instance.</a></li><li><a href="#q7"><span class="toc__num">7.</span>Create a Docker Compose file for a multi-container application with a web server and a ...</a></li><li><a href="#q8"><span class="toc__num">8.</span>Write a Kubernetes service YAML file to expose a deployment externally.</a></li><li><a href="#q9"><span class="toc__num">9.</span>Create a GitHub Action workflow to run unit tests and generate a coverage report.</a></li><li><a href="#q10"><span class="toc__num">10.</span>Write a script to automate the setup of a Jenkins server using Docker.</a></li><li><a href="#q11"><span class="toc__num">11.</span>Create a Kubernetes ConfigMap to manage configuration for a Node.js application.</a></li><li><a href="#q12"><span class="toc__num">12.</span>Write a GitHub Action to build and push a Docker image to Docker Hub.</a></li><li><a href="#q13"><span class="toc__num">13.</span>Create a Jenkins pipeline to deploy a Python application to AWS Lambda.</a></li><li><a href="#q14"><span class="toc__num">14.</span>Write a Kubernetes ingress resource to route traffic to different services.</a></li><li><a href="#q15"><span class="toc__num">15.</span>Create a GitHub Action workflow to deploy a Docker container to AWS ECS.</a></li><li><a href="#q16"><span class="toc__num">16.</span>Write a Dockerfile for a Java application using a multi-stage build.</a></li><li><a href="#q17"><span class="toc__num">17.</span>Create a Jenkinsfile to run security scans on a Docker image.</a></li><li><a href="#q18"><span class="toc__num">18.</span>Write a Kubernetes StatefulSet YAML file for a MySQL database.</a></li><li><a href="#q19"><span class="toc__num">19.</span>Create a GitHub Action to run integration tests on a Docker container.</a></li><li><a href="#q20"><span class="toc__num">20.</span>Write a script to backup and restore Jenkins configurations.</a></li><li><a href="#q21"><span class="toc__num">21.</span>Create a Dockerfile to containerize a Django application.</a></li><li><a href="#q22"><span class="toc__num">22.</span>Write a Kubernetes job YAML file to run a one-time task.</a></li><li><a href="#q23"><span class="toc__num">23.</span>Create a GitHub Action workflow to deploy a Node.js application to Heroku.</a></li><li><a href="#q24"><span class="toc__num">24.</span>Write a Jenkins pipeline to build and deploy a .NET Core application.</a></li><li><a href="#q25"><span class="toc__num">25.</span>Create a Kubernetes secret to store sensitive information for a deployment.</a></li><li><a href="#q26"><span class="toc__num">26.</span>Write a GitHub Action to trigger a build on code push to a specific branch.</a></li><li><a href="#q27"><span class="toc__num">27.</span>Create a Docker Compose file to set up a local development environment with multiple se...</a></li><li><a href="#q28"><span class="toc__num">28.</span>Write a Kubernetes Horizontal Pod Autoscaler (HPA) YAML file.</a></li><li><a href="#q29"><span class="toc__num">29.</span>Create a GitHub Action workflow to deploy a Flask application to AWS Lambda.</a></li><li><a href="#q30"><span class="toc__num">30.</span>Write a Jenkinsfile to build, test, and deploy a Ruby on Rails application.</a></li><li><a href="#q31"><span class="toc__num">31.</span>Create a Kubernetes PersistentVolume and PersistentVolumeClaim YAML file.</a></li><li><a href="#q32"><span class="toc__num">32.</span>Write a Dockerfile to containerize a Golang application.</a></li><li><a href="#q33"><span class="toc__num">33.</span>Create a GitHub Action to run code linting and formatting checks.</a></li><li><a href="#q34"><span class="toc__num">34.</span>Write a script to set up a Jenkins slave node using Docker.</a></li><li><a href="#q35"><span class="toc__num">35.</span>Create a Kubernetes DaemonSet YAML file for deploying a logging agent.</a></li><li><a href="#q36"><span class="toc__num">36.</span>Write a GitHub Action workflow to deploy a static site to Netlify.</a></li><li><a href="#q37"><span class="toc__num">37.</span>Create a Jenkins pipeline to deploy a Spring Boot application to Google Cloud Run.</a></li><li><a href="#q38"><span class="toc__num">38.</span>Write a Kubernetes NetworkPolicy YAML file to restrict traffic between pods.</a></li><li><a href="#q39"><span class="toc__num">39.</span>Create a Docker Compose file to run a local instance of Jenkins.</a></li><li><a href="#q40"><span class="toc__num">40.</span>Write a script to automate the installation and setup of Kubernetes using kubeadm.</a></li><li><a href="#q41"><span class="toc__num">41.</span>Create a GitHub Action to build and deploy a Vue.js application.</a></li><li><a href="#q42"><span class="toc__num">42.</span>Write a Jenkinsfile to build and deploy a PHP application to an Azure Web App.</a></li><li><a href="#q43"><span class="toc__num">43.</span>Create a Kubernetes custom resource definition (CRD) YAML file.</a></li><li><a href="#q44"><span class="toc__num">44.</span>Write a Dockerfile to containerize a React application.</a></li><li><a href="#q45"><span class="toc__num">45.</span>Create a GitHub Action to run automated browser tests using Selenium.</a></li><li><a href="#q46"><span class="toc__num">46.</span>Write a script to automate the backup of Docker volumes.</a></li><li><a href="#q47"><span class="toc__num">47.</span>Create a Kubernetes PodDisruptionBudget YAML file to ensure high availability.</a></li><li><a href="#q48"><span class="toc__num">48.</span>Write a GitHub Action workflow to deploy a Node.js application to DigitalOcean.</a></li><li><a href="#q49"><span class="toc__num">49.</span>Create a Jenkins pipeline to deploy a Laravel application to a Kubernetes cluster.</a></li><li><a href="#q50"><span class="toc__num">50.</span>Write a Kubernetes Secret to store database credentials for a deployment.</a></li><li><a href="#q51"><span class="toc__num">51.</span>Create a Docker Compose file to run a local instance of a PostgreSQL database.</a></li><li><a href="#q52"><span class="toc__num">52.</span>Write a GitHub Action to deploy a Python application to Google Cloud Functions.</a></li><li><a href="#q53"><span class="toc__num">53.</span>Create a Jenkinsfile to run load tests on a web application.</a></li><li><a href="#q54"><span class="toc__num">54.</span>Write a Kubernetes ConfigMap to manage environment variables for a deployment.</a></li><li><a href="#q55"><span class="toc__num">55.</span>Create a Dockerfile to containerize an Angular application.</a></li><li><a href="#q56"><span class="toc__num">56.</span>Write a GitHub Action workflow to build and deploy a Rust application.</a></li><li><a href="#q57"><span class="toc__num">57.</span>Create a script to automate the scaling of a Kubernetes deployment.</a></li><li><a href="#q58"><span class="toc__num">58.</span>Write a Jenkins pipeline to deploy a C# application to AWS Elastic Beanstalk.</a></li><li><a href="#q59"><span class="toc__num">59.</span>Create a Kubernetes ServiceAccount and RoleBinding YAML file.</a></li><li><a href="#q60"><span class="toc__num">60.</span>Write a Docker Compose file to run a local instance of MongoDB.</a></li><li><a href="#q61"><span class="toc__num">61.</span>Create a GitHub Action to deploy a Ruby application to Heroku.</a></li><li><a href="#q62"><span class="toc__num">62.</span>Write a Kubernetes PodPreset YAML file to inject environment variables into pods.</a></li><li><a href="#q63"><span class="toc__num">63.</span>Create a Jenkinsfile to build and deploy a Scala application to Google App Engine.</a></li><li><a href="#q64"><span class="toc__num">64.</span>Write a Dockerfile to containerize a Next.js application.</a></li><li><a href="#q65"><span class="toc__num">65.</span>Create a GitHub Action workflow to run static code analysis.</a></li><li><a href="#q66"><span class="toc__num">66.</span>Write a script to automate the cleanup of old Docker images and containers.</a></li><li><a href="#q67"><span class="toc__num">67.</span>Create a Kubernetes CustomResource YAML file to define a custom resource.</a></li><li><a href="#q68"><span class="toc__num">68.</span>Write a GitHub Action to deploy a Go application to Azure Functions.</a></li><li><a href="#q69"><span class="toc__num">69.</span>Create a Jenkins pipeline to deploy a React Native application to App Store and Google ...</a></li><li><a href="#q70"><span class="toc__num">70.</span>Write a Kubernetes LimitRange YAML file to set default resource limits.</a></li><li><a href="#q71"><span class="toc__num">71.</span>Create a Docker Compose file to run a local instance of Redis.</a></li><li><a href="#q72"><span class="toc__num">72.</span>Write a GitHub Action workflow to deploy a TypeScript application to AWS Amplify.</a></li><li><a href="#q73"><span class="toc__num">73.</span>Create a Jenkinsfile to build and deploy a Haskell application.</a></li><li><a href="#q74"><span class="toc__num">74.</span>Write a Kubernetes PriorityClass YAML file to assign priority to pods.</a></li><li><a href="#q75"><span class="toc__num">75.</span>Create a Dockerfile to containerize a Svelte application.</a></li><li><a href="#q76"><span class="toc__num">76.</span>Write a GitHub Action to deploy a Kotlin application to Google Cloud Run.</a></li><li><a href="#q77"><span class="toc__num">77.</span>Create a script to monitor and restart failed Kubernetes pods.</a></li><li><a href="#q78"><span class="toc__num">78.</span>Write a Jenkins pipeline to deploy an Elixir application to Heroku.</a></li><li><a href="#q79"><span class="toc__num">79.</span>Create a Kubernetes ResourceQuota YAML file to limit resource usage.</a></li><li><a href="#q80"><span class="toc__num">80.</span>Write a Docker Compose file to run a local instance of RabbitMQ.</a></li><li><a href="#q81"><span class="toc__num">81.</span>Create a GitHub Action workflow to deploy a C++ application to AWS EC2.</a></li><li><a href="#q82"><span class="toc__num">82.</span>Write a Kubernetes MutatingWebhookConfiguration YAML file to modify incoming requests.</a></li><li><a href="#q83"><span class="toc__num">83.</span>Create a Jenkinsfile to build and deploy a Rust application to AWS Lambda.</a></li><li><a href="#q84"><span class="toc__num">84.</span>Write a Dockerfile to containerize a Phoenix application.</a></li><li><a href="#q85"><span class="toc__num">85.</span>Create a GitHub Action to run performance tests on a web application.</a></li><li><a href="#q86"><span class="toc__num">86.</span>Write a script to automate the setup of a Kubernetes cluster using kops.</a></li><li><a href="#q87"><span class="toc__num">87.</span>Create a Kubernetes VerticalPodAutoscaler YAML file to automatically adjust resource li...</a></li><li><a href="#q88"><span class="toc__num">88.</span>Write a GitHub Action workflow to deploy a Java application to Azure App Service.</a></li><li><a href="#q89"><span class="toc__num">89.</span>Create a Jenkins pipeline to deploy a Node.js application to IBM Cloud.</a></li><li><a href="#q90"><span class="toc__num">90.</span>Write a Kubernetes PodSecurityPolicy YAML file to enforce security policies.</a></li><li><a href="#q91"><span class="toc__num">91.</span>Create a Docker Compose file to run a local instance of Elasticsearch.</a></li><li><a href="#q92"><span class="toc__num">92.</span>Write a GitHub Action to deploy a Dart application to Google Cloud Run.</a></li><li><a href="#q93"><span class="toc__num">93.</span>Create a Jenkinsfile to build and deploy a Swift application to AWS Lambda.</a></li><li><a href="#q94"><span class="toc__num">94.</span>Write a Kubernetes HorizontalPodAutoscaler YAML file to scale pods based on CPU usage.</a></li><li><a href="#q95"><span class="toc__num">95.</span>Create a Dockerfile to containerize an ASP.NET Core application.</a></li><li><a href="#q96"><span class="toc__num">96.</span>Write a GitHub Action workflow to deploy a C# application to Heroku.</a></li><li><a href="#q97"><span class="toc__num">97.</span>Create a script to automate the scaling of a Kubernetes cluster using Cluster Autoscaler.</a></li><li><a href="#q98"><span class="toc__num">98.</span>Write a Jenkins pipeline to deploy a Perl application to Google Cloud Functions.</a></li><li><a href="#q99"><span class="toc__num">99.</span>Create a Kubernetes PodDisruptionBudget YAML file to ensure application availability.</a></li><li><a href="#q100"><span class="toc__num">100.</span>Write a Docker Compose file to run a local instance of MySQL.</a></li>
+      </ul>
+    </div>
+
+    
+<article class="qa" id="q1">
+  <div class="qa__number">Question 1</div>
+  <h3 class="qa__question">Write a GitHub Action workflow to build and test a Node.js application.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q2">
+  <div class="qa__number">Question 2</div>
+  <h3 class="qa__question">Create a Jenkins pipeline script to build and deploy a Docker image.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q3">
+  <div class="qa__number">Question 3</div>
+  <h3 class="qa__question">Write a Dockerfile to containerize a simple Flask application.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q4">
+  <div class="qa__number">Question 4</div>
+  <h3 class="qa__question">Write a Kubernetes deployment YAML file for a Node.js application.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q5">
+  <div class="qa__number">Question 5</div>
+  <h3 class="qa__question">Create a GitHub Action workflow to deploy a React application to GitHub Pages.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q6">
+  <div class="qa__number">Question 6</div>
+  <h3 class="qa__question">Write a Jenkinsfile to build a Maven project and deploy it to an AWS EC2 instance.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q7">
+  <div class="qa__number">Question 7</div>
+  <h3 class="qa__question">Create a Docker Compose file for a multi-container application with a web server and a database.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q8">
+  <div class="qa__number">Question 8</div>
+  <h3 class="qa__question">Write a Kubernetes service YAML file to expose a deployment externally.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q9">
+  <div class="qa__number">Question 9</div>
+  <h3 class="qa__question">Create a GitHub Action workflow to run unit tests and generate a coverage report.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q10">
+  <div class="qa__number">Question 10</div>
+  <h3 class="qa__question">Write a script to automate the setup of a Jenkins server using Docker.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q11">
+  <div class="qa__number">Question 11</div>
+  <h3 class="qa__question">Create a Kubernetes ConfigMap to manage configuration for a Node.js application.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q12">
+  <div class="qa__number">Question 12</div>
+  <h3 class="qa__question">Write a GitHub Action to build and push a Docker image to Docker Hub.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q13">
+  <div class="qa__number">Question 13</div>
+  <h3 class="qa__question">Create a Jenkins pipeline to deploy a Python application to AWS Lambda.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q14">
+  <div class="qa__number">Question 14</div>
+  <h3 class="qa__question">Write a Kubernetes ingress resource to route traffic to different services.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q15">
+  <div class="qa__number">Question 15</div>
+  <h3 class="qa__question">Create a GitHub Action workflow to deploy a Docker container to AWS ECS.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q16">
+  <div class="qa__number">Question 16</div>
+  <h3 class="qa__question">Write a Dockerfile for a Java application using a multi-stage build.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q17">
+  <div class="qa__number">Question 17</div>
+  <h3 class="qa__question">Create a Jenkinsfile to run security scans on a Docker image.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q18">
+  <div class="qa__number">Question 18</div>
+  <h3 class="qa__question">Write a Kubernetes StatefulSet YAML file for a MySQL database.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q19">
+  <div class="qa__number">Question 19</div>
+  <h3 class="qa__question">Create a GitHub Action to run integration tests on a Docker container.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q20">
+  <div class="qa__number">Question 20</div>
+  <h3 class="qa__question">Write a script to backup and restore Jenkins configurations.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q21">
+  <div class="qa__number">Question 21</div>
+  <h3 class="qa__question">Create a Dockerfile to containerize a Django application.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q22">
+  <div class="qa__number">Question 22</div>
+  <h3 class="qa__question">Write a Kubernetes job YAML file to run a one-time task.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q23">
+  <div class="qa__number">Question 23</div>
+  <h3 class="qa__question">Create a GitHub Action workflow to deploy a Node.js application to Heroku.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q24">
+  <div class="qa__number">Question 24</div>
+  <h3 class="qa__question">Write a Jenkins pipeline to build and deploy a .NET Core application.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q25">
+  <div class="qa__number">Question 25</div>
+  <h3 class="qa__question">Create a Kubernetes secret to store sensitive information for a deployment.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q26">
+  <div class="qa__number">Question 26</div>
+  <h3 class="qa__question">Write a GitHub Action to trigger a build on code push to a specific branch.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q27">
+  <div class="qa__number">Question 27</div>
+  <h3 class="qa__question">Create a Docker Compose file to set up a local development environment with multiple services.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q28">
+  <div class="qa__number">Question 28</div>
+  <h3 class="qa__question">Write a Kubernetes Horizontal Pod Autoscaler (HPA) YAML file.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q29">
+  <div class="qa__number">Question 29</div>
+  <h3 class="qa__question">Create a GitHub Action workflow to deploy a Flask application to AWS Lambda.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q30">
+  <div class="qa__number">Question 30</div>
+  <h3 class="qa__question">Write a Jenkinsfile to build, test, and deploy a Ruby on Rails application.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q31">
+  <div class="qa__number">Question 31</div>
+  <h3 class="qa__question">Create a Kubernetes PersistentVolume and PersistentVolumeClaim YAML file.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q32">
+  <div class="qa__number">Question 32</div>
+  <h3 class="qa__question">Write a Dockerfile to containerize a Golang application.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q33">
+  <div class="qa__number">Question 33</div>
+  <h3 class="qa__question">Create a GitHub Action to run code linting and formatting checks.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q34">
+  <div class="qa__number">Question 34</div>
+  <h3 class="qa__question">Write a script to set up a Jenkins slave node using Docker.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q35">
+  <div class="qa__number">Question 35</div>
+  <h3 class="qa__question">Create a Kubernetes DaemonSet YAML file for deploying a logging agent.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q36">
+  <div class="qa__number">Question 36</div>
+  <h3 class="qa__question">Write a GitHub Action workflow to deploy a static site to Netlify.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q37">
+  <div class="qa__number">Question 37</div>
+  <h3 class="qa__question">Create a Jenkins pipeline to deploy a Spring Boot application to Google Cloud Run.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q38">
+  <div class="qa__number">Question 38</div>
+  <h3 class="qa__question">Write a Kubernetes NetworkPolicy YAML file to restrict traffic between pods.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q39">
+  <div class="qa__number">Question 39</div>
+  <h3 class="qa__question">Create a Docker Compose file to run a local instance of Jenkins.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q40">
+  <div class="qa__number">Question 40</div>
+  <h3 class="qa__question">Write a script to automate the installation and setup of Kubernetes using kubeadm.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q41">
+  <div class="qa__number">Question 41</div>
+  <h3 class="qa__question">Create a GitHub Action to build and deploy a Vue.js application.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q42">
+  <div class="qa__number">Question 42</div>
+  <h3 class="qa__question">Write a Jenkinsfile to build and deploy a PHP application to an Azure Web App.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q43">
+  <div class="qa__number">Question 43</div>
+  <h3 class="qa__question">Create a Kubernetes custom resource definition (CRD) YAML file.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q44">
+  <div class="qa__number">Question 44</div>
+  <h3 class="qa__question">Write a Dockerfile to containerize a React application.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q45">
+  <div class="qa__number">Question 45</div>
+  <h3 class="qa__question">Create a GitHub Action to run automated browser tests using Selenium.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q46">
+  <div class="qa__number">Question 46</div>
+  <h3 class="qa__question">Write a script to automate the backup of Docker volumes.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q47">
+  <div class="qa__number">Question 47</div>
+  <h3 class="qa__question">Create a Kubernetes PodDisruptionBudget YAML file to ensure high availability.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q48">
+  <div class="qa__number">Question 48</div>
+  <h3 class="qa__question">Write a GitHub Action workflow to deploy a Node.js application to DigitalOcean.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q49">
+  <div class="qa__number">Question 49</div>
+  <h3 class="qa__question">Create a Jenkins pipeline to deploy a Laravel application to a Kubernetes cluster.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q50">
+  <div class="qa__number">Question 50</div>
+  <h3 class="qa__question">Write a Kubernetes Secret to store database credentials for a deployment.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q51">
+  <div class="qa__number">Question 51</div>
+  <h3 class="qa__question">Create a Docker Compose file to run a local instance of a PostgreSQL database.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q52">
+  <div class="qa__number">Question 52</div>
+  <h3 class="qa__question">Write a GitHub Action to deploy a Python application to Google Cloud Functions.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q53">
+  <div class="qa__number">Question 53</div>
+  <h3 class="qa__question">Create a Jenkinsfile to run load tests on a web application.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q54">
+  <div class="qa__number">Question 54</div>
+  <h3 class="qa__question">Write a Kubernetes ConfigMap to manage environment variables for a deployment.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q55">
+  <div class="qa__number">Question 55</div>
+  <h3 class="qa__question">Create a Dockerfile to containerize an Angular application.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q56">
+  <div class="qa__number">Question 56</div>
+  <h3 class="qa__question">Write a GitHub Action workflow to build and deploy a Rust application.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q57">
+  <div class="qa__number">Question 57</div>
+  <h3 class="qa__question">Create a script to automate the scaling of a Kubernetes deployment.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q58">
+  <div class="qa__number">Question 58</div>
+  <h3 class="qa__question">Write a Jenkins pipeline to deploy a C# application to AWS Elastic Beanstalk.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q59">
+  <div class="qa__number">Question 59</div>
+  <h3 class="qa__question">Create a Kubernetes ServiceAccount and RoleBinding YAML file.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q60">
+  <div class="qa__number">Question 60</div>
+  <h3 class="qa__question">Write a Docker Compose file to run a local instance of MongoDB.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q61">
+  <div class="qa__number">Question 61</div>
+  <h3 class="qa__question">Create a GitHub Action to deploy a Ruby application to Heroku.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q62">
+  <div class="qa__number">Question 62</div>
+  <h3 class="qa__question">Write a Kubernetes PodPreset YAML file to inject environment variables into pods.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q63">
+  <div class="qa__number">Question 63</div>
+  <h3 class="qa__question">Create a Jenkinsfile to build and deploy a Scala application to Google App Engine.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q64">
+  <div class="qa__number">Question 64</div>
+  <h3 class="qa__question">Write a Dockerfile to containerize a Next.js application.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q65">
+  <div class="qa__number">Question 65</div>
+  <h3 class="qa__question">Create a GitHub Action workflow to run static code analysis.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q66">
+  <div class="qa__number">Question 66</div>
+  <h3 class="qa__question">Write a script to automate the cleanup of old Docker images and containers.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q67">
+  <div class="qa__number">Question 67</div>
+  <h3 class="qa__question">Create a Kubernetes CustomResource YAML file to define a custom resource.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q68">
+  <div class="qa__number">Question 68</div>
+  <h3 class="qa__question">Write a GitHub Action to deploy a Go application to Azure Functions.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q69">
+  <div class="qa__number">Question 69</div>
+  <h3 class="qa__question">Create a Jenkins pipeline to deploy a React Native application to App Store and Google Play.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q70">
+  <div class="qa__number">Question 70</div>
+  <h3 class="qa__question">Write a Kubernetes LimitRange YAML file to set default resource limits.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q71">
+  <div class="qa__number">Question 71</div>
+  <h3 class="qa__question">Create a Docker Compose file to run a local instance of Redis.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q72">
+  <div class="qa__number">Question 72</div>
+  <h3 class="qa__question">Write a GitHub Action workflow to deploy a TypeScript application to AWS Amplify.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q73">
+  <div class="qa__number">Question 73</div>
+  <h3 class="qa__question">Create a Jenkinsfile to build and deploy a Haskell application.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q74">
+  <div class="qa__number">Question 74</div>
+  <h3 class="qa__question">Write a Kubernetes PriorityClass YAML file to assign priority to pods.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q75">
+  <div class="qa__number">Question 75</div>
+  <h3 class="qa__question">Create a Dockerfile to containerize a Svelte application.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q76">
+  <div class="qa__number">Question 76</div>
+  <h3 class="qa__question">Write a GitHub Action to deploy a Kotlin application to Google Cloud Run.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q77">
+  <div class="qa__number">Question 77</div>
+  <h3 class="qa__question">Create a script to monitor and restart failed Kubernetes pods.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q78">
+  <div class="qa__number">Question 78</div>
+  <h3 class="qa__question">Write a Jenkins pipeline to deploy an Elixir application to Heroku.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q79">
+  <div class="qa__number">Question 79</div>
+  <h3 class="qa__question">Create a Kubernetes ResourceQuota YAML file to limit resource usage.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q80">
+  <div class="qa__number">Question 80</div>
+  <h3 class="qa__question">Write a Docker Compose file to run a local instance of RabbitMQ.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q81">
+  <div class="qa__number">Question 81</div>
+  <h3 class="qa__question">Create a GitHub Action workflow to deploy a C++ application to AWS EC2.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q82">
+  <div class="qa__number">Question 82</div>
+  <h3 class="qa__question">Write a Kubernetes MutatingWebhookConfiguration YAML file to modify incoming requests.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q83">
+  <div class="qa__number">Question 83</div>
+  <h3 class="qa__question">Create a Jenkinsfile to build and deploy a Rust application to AWS Lambda.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q84">
+  <div class="qa__number">Question 84</div>
+  <h3 class="qa__question">Write a Dockerfile to containerize a Phoenix application.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q85">
+  <div class="qa__number">Question 85</div>
+  <h3 class="qa__question">Create a GitHub Action to run performance tests on a web application.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q86">
+  <div class="qa__number">Question 86</div>
+  <h3 class="qa__question">Write a script to automate the setup of a Kubernetes cluster using kops.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q87">
+  <div class="qa__number">Question 87</div>
+  <h3 class="qa__question">Create a Kubernetes VerticalPodAutoscaler YAML file to automatically adjust resource limits.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q88">
+  <div class="qa__number">Question 88</div>
+  <h3 class="qa__question">Write a GitHub Action workflow to deploy a Java application to Azure App Service.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q89">
+  <div class="qa__number">Question 89</div>
+  <h3 class="qa__question">Create a Jenkins pipeline to deploy a Node.js application to IBM Cloud.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q90">
+  <div class="qa__number">Question 90</div>
+  <h3 class="qa__question">Write a Kubernetes PodSecurityPolicy YAML file to enforce security policies.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q91">
+  <div class="qa__number">Question 91</div>
+  <h3 class="qa__question">Create a Docker Compose file to run a local instance of Elasticsearch.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q92">
+  <div class="qa__number">Question 92</div>
+  <h3 class="qa__question">Write a GitHub Action to deploy a Dart application to Google Cloud Run.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q93">
+  <div class="qa__number">Question 93</div>
+  <h3 class="qa__question">Create a Jenkinsfile to build and deploy a Swift application to AWS Lambda.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q94">
+  <div class="qa__number">Question 94</div>
+  <h3 class="qa__question">Write a Kubernetes HorizontalPodAutoscaler YAML file to scale pods based on CPU usage.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q95">
+  <div class="qa__number">Question 95</div>
+  <h3 class="qa__question">Create a Dockerfile to containerize an ASP.NET Core application.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q96">
+  <div class="qa__number">Question 96</div>
+  <h3 class="qa__question">Write a GitHub Action workflow to deploy a C# application to Heroku.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q97">
+  <div class="qa__number">Question 97</div>
+  <h3 class="qa__question">Create a script to automate the scaling of a Kubernetes cluster using Cluster Autoscaler.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q98">
+  <div class="qa__number">Question 98</div>
+  <h3 class="qa__question">Write a Jenkins pipeline to deploy a Perl application to Google Cloud Functions.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q99">
+  <div class="qa__number">Question 99</div>
+  <h3 class="qa__question">Create a Kubernetes PodDisruptionBudget YAML file to ensure application availability.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q100">
+  <div class="qa__number">Question 100</div>
+  <h3 class="qa__question">Write a Docker Compose file to run a local instance of MySQL.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+
+    <nav class="chapter-nav" aria-label="Chapter navigation">
+      <a class="chapter-nav__prev" href="cicd-pipeline-basic.html">
+      <span class="chapter-nav__dir">← Previous</span>
+      <span class="chapter-nav__title">CI/CD Pipeline — Basic</span>
+    </a>
+      <a class="chapter-nav__next" href="cicd-pipeline-advanced.html">
+      <span class="chapter-nav__dir">Next →</span>
+      <span class="chapter-nav__title">CI/CD Pipeline — Advanced</span>
+    </a>
+    </nav>
+
+  </section>
+
+</main>
+</div>
+
+<script src="../assets/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,4526 @@
+"""ExpressJS Advanced — senior-level conceptual depth.
+
+Each answer goes beyond surface usage to cover internals, performance trade-offs,
+production patterns, and industry best practices. Code is present but not the focus;
+prose explains why, when, and what can go wrong.
+"""
+
+ANSWERS: dict[int, str] = {}
+
+ANSWERS[1] = r'''
+<p>A production-grade request logger does four things: generate or propagate a <strong>correlation id</strong>, measure <strong>time with a monotonic clock</strong>, log as <strong>structured JSON</strong> so aggregators can parse it, and <strong>redact secrets</strong>.</p>
+<pre><code>import express from "express";
+import crypto from "node:crypto";
+import { AsyncLocalStorage } from "node:async_hooks";
+
+const als = new AsyncLocalStorage();
+export const currentReqId = () =&gt; als.getStore()?.reqId;
+
+function logger() {
+  return (req, res, next) =&gt; {
+    const reqId = req.headers["x-request-id"] || crypto.randomUUID();
+    res.setHeader("X-Request-Id", reqId);
+    req.id = reqId;
+
+    const start = process.hrtime.bigint();
+
+    res.on("finish", () =&gt; {
+      const durMs = Number(process.hrtime.bigint() - start) / 1e6;
+      const level = res.statusCode &gt;= 500 ? "error" : res.statusCode &gt;= 400 ? "warn" : "info";
+
+      process.stdout.write(JSON.stringify({
+        time:   new Date().toISOString(),
+        level, reqId,
+        method: req.method,
+        path:   req.originalUrl,
+        status: res.statusCode,
+        durMs:  Number(durMs.toFixed(1)),
+        bytes:  Number(res.getHeader("content-length")) || 0,
+        ip:     req.ip,
+        ua:     req.headers["user-agent"],
+        userId: req.user?.id,
+      }) + "\n");
+    });
+
+    als.run({ reqId }, next);                    // propagate id through async calls
+  };
+}
+</code></pre>
+<p><strong>Key design choices:</strong> use <code>process.hrtime.bigint()</code> (monotonic, nanosecond-precise) instead of <code>Date.now()</code> which can jump backward on NTP sync. Log on <code>res.on("finish")</code> so the final status code is captured after error middleware runs. <code>AsyncLocalStorage</code> threads the id through nested async calls without polluting function signatures &mdash; essential for correlating DB queries, outbound HTTP calls, and background work back to the originating request.</p>
+<p><strong>Production refinements:</strong> use <strong>pino-http</strong> (5-10x faster than <code>console.log</code>, async stdout with worker threads, declarative redaction). Sample verbose logs in high-traffic endpoints. Emit metrics (request count, p50/p95/p99 latency by route) to your observability platform alongside logs &mdash; logs for investigation, metrics for alerting.</p>
+'''
+
+ANSWERS[2] = r'''
+<p>Express performance tuning operates at four layers: <strong>framework</strong> (what Express does), <strong>process</strong> (how Node uses CPU/memory), <strong>I/O</strong> (DB, cache, HTTP), and <strong>edge</strong> (what never reaches Node).</p>
+<table>
+  <tr><th>Layer</th><th>Techniques</th></tr>
+  <tr><td>Framework</td><td>Disable <code>x-powered-by</code>; enable <code>view cache</code> in production; use a trie-based router like Express 5 or Fastify; <em>avoid</em> synchronous middleware in hot paths</td></tr>
+  <tr><td>Process</td><td>Run one Node process per CPU core with <strong>PM2 cluster mode</strong> or Kubernetes replicas; offload CPU-bound work to <strong>worker threads</strong>; set <code>--max-old-space-size</code> above default 1.5 GB for heap-heavy workloads</td></tr>
+  <tr><td>I/O</td><td>Pooled DB connections (pg/mysql2); Redis cache with cache-aside and stampede prevention; keep-alive HTTP agents; batched DB queries with DataLoader pattern</td></tr>
+  <tr><td>Edge</td><td>CDN for static assets, HTML caching on short TTLs, rate limiting and bot mitigation at the load balancer; gzip/brotli at the edge, not in Node</td></tr>
+</table>
+<p><strong>Profiling workflow:</strong> measure before optimizing. Use <code>clinic.js</code> (doctor for event-loop lag, flamegraphs for CPU, bubbleprof for async). Set up <strong>continuous profiling</strong> in production (Datadog, Pyroscope) &mdash; the hot path in dev rarely matches prod. Track p95/p99 latency, not averages; tail latency reveals garbage-collection pauses and slow downstream calls.</p>
+<p><strong>Common wins:</strong> replace <code>JSON.stringify</code> with <code>fast-json-stringify</code> (schema-compiled, 2-3x faster), swap bcrypt cost for argon2id, cache rendered templates, batch notification sends. Switching from Express to Fastify typically yields 15-40% throughput with minimal API change.</p>
+'''
+
+ANSWERS[3] = r'''
+<p>Middleware with multiple async steps needs disciplined error propagation and careful parallelism. The default pattern is sequential <code>await</code>; parallelize only when operations are independent.</p>
+<pre><code>// sequential — each step depends on the previous
+app.get("/dashboard", async (req, res, next) =&gt; {
+  try {
+    const user = await db.user.findUnique({ where: { id: req.user.sub } });
+    if (!user) return res.sendStatus(404);
+    const orders = await db.order.findMany({ where: { userId: user.id } });
+    res.json({ user, orders });
+  } catch (err) { next(err); }
+});
+
+// parallel — Promise.all when operations are independent
+app.get("/profile", async (req, res, next) =&gt; {
+  try {
+    const [user, stats, notifications] = await Promise.all([
+      db.user.findUnique({ where: { id: req.user.sub } }),
+      db.stats.forUser(req.user.sub),
+      db.notification.findMany({ where: { userId: req.user.sub, unread: true } }),
+    ]);
+    res.json({ user, stats, notifications });
+  } catch (err) { next(err); }
+});
+
+// partial-failure tolerance — Promise.allSettled when some operations can fail
+const [userR, adsR] = await Promise.allSettled([loadUser(), loadAds()]);
+const user = userR.status === "fulfilled" ? userR.value : null;
+const ads  = adsR.status  === "fulfilled" ? adsR.value  : [];
+</code></pre>
+<p><strong>Rules that matter:</strong> always wrap async handlers in <code>try/catch</code> in Express 4 (rejections don't auto-forward). Express 5 auto-forwards thrown errors but explicit handling still improves readability. Use <code>Promise.all</code> for independent operations &mdash; serial awaits waste latency when nothing shares state. Use <code>Promise.allSettled</code> when partial success is acceptable (e.g., a dashboard where a failing widget shouldn't break the whole page).</p>
+<p><strong>Cancellation:</strong> pass an <code>AbortSignal</code> through to every downstream call and abort it on <code>req.on("close")</code>. Without this, a client who drops the connection still incurs full DB/HTTP cost &mdash; a subtle amplifier during outages. For Prisma 5+ and undici, abort signals are first-class; for older ORMs you may need a wrapper.</p>
+'''
+
+ANSWERS[4] = r'''
+<p>Robust error handling in Express rests on four principles: <strong>centralize</strong> the response logic, <strong>normalize</strong> errors from different sources, <strong>distinguish</strong> operational from programmer errors, and <strong>observe</strong> failures with enough context to debug.</p>
+<pre><code>// 1. typed error class — carries status + public code
+class HttpError extends Error {
+  constructor(message, status = 500, code) {
+    super(message);
+    this.status = status; this.code = code;
+  }
+}
+
+// 2. one async wrapper, no try/catch clutter in handlers
+const ah = (fn) =&gt; (req, res, next) =&gt;
+  Promise.resolve(fn(req, res, next)).catch(next);
+
+// 3. single error middleware normalizes then formats
+app.use((err, req, res, _next) =&gt; {
+  if (err.name === "ZodError")        err = new HttpError("Invalid input", 400, "VALIDATION");
+  if (err.code === "P2002")           err = new HttpError("Already exists", 409, "CONFLICT");
+  if (err.code === "P2025")           err = new HttpError("Not found", 404, "NOT_FOUND");
+  if (err.name === "TokenExpiredError") err = new HttpError("Session expired", 401, "AUTH");
+
+  const status = err.status || 500;
+  const isServerError = status &gt;= 500;
+
+  // log full error server-side with context
+  if (isServerError) req.log?.error({ err, reqId: req.id });
+  else               req.log?.warn({ status, code: err.code, reqId: req.id }, err.message);
+
+  // never leak stack traces or internal details to the client
+  res.status(status).json({
+    error: isServerError ? "Internal Server Error" : err.message,
+    code:  err.code,
+    reqId: req.id,
+  });
+});
+
+// 4. last-resort crash handler for unhandled rejections
+process.on("unhandledRejection", (err) =&gt; {
+  console.error("unhandledRejection:", err);
+  // log, then exit — let your supervisor restart
+});
+</code></pre>
+<p><strong>Operational vs programmer errors:</strong> an operational error is expected (DB unavailable, invalid input) &mdash; handle and respond. A programmer error is a bug (undefined is not a function) &mdash; log, alert, and let the process die so a supervisor restarts a clean one. Don't try to "recover" from programmer errors; state is probably corrupt.</p>
+<p><strong>Production refinements:</strong> include a request id in every error response body so users can reference it in support tickets. Use <strong>Sentry</strong> for error tracking with release tags and source maps. Never log passwords, tokens, or full request bodies at error time &mdash; use a declarative redaction list (pino's <code>redact</code> option). Rate-limit error alerts so a single bad deploy doesn't page everyone 10,000 times.</p>
+'''
+
+ANSWERS[5] = r'''
+<p>Security is layered defense &mdash; no single middleware stops everything. Address the <strong>OWASP Top 10</strong> systematically, and treat every client input as hostile.</p>
+<table>
+  <tr><th>Threat</th><th>Mitigation</th></tr>
+  <tr><td>XSS</td><td>Auto-escaping template engines; strict <strong>CSP</strong> via helmet; avoid <code>dangerouslySetInnerHTML</code>; sanitize rich-text with <strong>DOMPurify</strong>; use <code>HttpOnly</code> cookies so JS can't read them</td></tr>
+  <tr><td>CSRF</td><td>Token-based auth (<code>Authorization: Bearer</code>) is immune; cookie-based sessions need CSRF tokens via <strong>csrf-csrf</strong> plus <code>SameSite=lax</code></td></tr>
+  <tr><td>SQL injection</td><td>Parameterized queries <em>always</em> (<code>$1</code>, <code>$2</code>) &mdash; ORMs (Prisma, Drizzle) do this by default; never string-concat SQL</td></tr>
+  <tr><td>NoSQL injection</td><td>Coerce types before passing to MongoDB (reject <code>{"$ne": null}</code> passed as a filter); validate with Zod/Joi first</td></tr>
+  <tr><td>Broken auth</td><td>bcrypt/argon2id for passwords (cost 12+); short JWT lifetimes + refresh rotation; aggressive rate limits on login</td></tr>
+  <tr><td>SSRF</td><td>Block private-IP ranges and localhost in outbound fetches; allowlist destinations when possible</td></tr>
+  <tr><td>Open redirect</td><td>Validate <code>returnTo</code> / <code>continueUrl</code> against an allowlist; reject external URLs</td></tr>
+  <tr><td>Dependency risk</td><td><code>npm audit</code>, <strong>Snyk</strong> or <strong>Dependabot</strong>, SBOM generation, lockfiles committed, signed package verification</td></tr>
+</table>
+<p><strong>Always-on middleware baseline:</strong> <code>helmet()</code> for security headers (CSP, HSTS, X-Content-Type-Options), <code>cors()</code> with an origin allowlist, <code>express-rate-limit</code> (Redis-backed), <code>express.json({ limit: "100kb" })</code> to cap body size, and input validation at every route with Zod. Disable <code>x-powered-by</code> (<code>app.disable("x-powered-by")</code>) so attackers can't fingerprint Express.</p>
+<p><strong>Operational:</strong> rotate secrets regularly (JWT keys, DB passwords, API keys); store them in a secret manager (AWS SSM, HashiCorp Vault) not env files on disk. Log security-relevant events (failed logins, authorization denials, rate-limit triggers) with enough detail to detect probing. Penetration-test before launch, and again every time scope changes materially.</p>
+'''
+
+ANSWERS[6] = r'''
+<p><strong>helmet</strong> is a collection of 15+ small middlewares that each set one security-related HTTP header with sensible defaults. Installing it eliminates a family of easy mistakes &mdash; forgetting <code>X-Content-Type-Options</code>, shipping a missing CSP, or letting browsers frame your pages.</p>
+<pre><code>// npm install helmet
+import helmet from "helmet";
+
+app.use(helmet({
+  contentSecurityPolicy: {
+    useDefaults: true,
+    directives: {
+      "default-src": ["'self'"],
+      "script-src":  ["'self'", "'unsafe-inline'", "cdn.example.com"],
+      "img-src":     ["'self'", "data:", "user-uploads.example.com"],
+      "connect-src": ["'self'", "api.example.com"],
+      "frame-ancestors": ["'none'"],
+    },
+  },
+  crossOriginResourcePolicy: { policy: "same-origin" },
+  referrerPolicy: { policy: "strict-origin-when-cross-origin" },
+  hsts: { maxAge: 31536000, includeSubDomains: true, preload: true },
+  // disable the ones you don't need — defaults are conservative
+}));
+</code></pre>
+<p><strong>What each default buys you:</strong></p>
+<ul>
+  <li><strong>CSP</strong> &mdash; arguably the single most important header; blocks injected scripts. Start in <code>Content-Security-Policy-Report-Only</code> mode, iterate until clean, then enforce.</li>
+  <li><strong>HSTS</strong> &mdash; forces HTTPS for a year; include <code>preload</code> only after submitting to the HSTS preload list.</li>
+  <li><strong>X-Content-Type-Options: nosniff</strong> &mdash; stops browsers from second-guessing MIME types.</li>
+  <li><strong>X-Frame-Options: DENY</strong> (now subsumed by CSP <code>frame-ancestors</code>) &mdash; prevents clickjacking.</li>
+  <li><strong>Referrer-Policy</strong> &mdash; stops leaking full URLs to third parties.</li>
+</ul>
+<p><strong>Production realities:</strong> CSP is where apps struggle &mdash; inline scripts, third-party SDKs, and analytics require explicit allowances. Use <strong>nonces</strong> (generated per request) over <code>'unsafe-inline'</code> for inline scripts you control. Set up CSP reporting (<code>report-uri</code>) to catch violations. Disable helmet modules that conflict with your CDN or analytics setup (e.g., <code>crossOriginEmbedderPolicy</code> breaks many third-party resources). Helmet is a floor, not a ceiling &mdash; you still need app-level security.</p>
+'''
+
+ANSWERS[7] = r'''
+<p><strong>express-validator</strong> is a middleware built on <strong>validator.js</strong> that chains per-field validators and sanitizers. It's a solid choice for JavaScript projects; TypeScript projects typically prefer Zod for type inference.</p>
+<pre><code>import { body, query, param, validationResult } from "express-validator";
+
+function handleValidation(req, res, next) {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      error: "Validation failed",
+      issues: errors.array().map((e) =&gt; ({ field: e.path, message: e.msg })),
+    });
+  }
+  next();
+}
+
+app.post("/signup",
+  body("email").isEmail().normalizeEmail(),
+  body("password").isLength({ min: 8, max: 128 })
+    .matches(/[A-Z]/).withMessage("needs an uppercase letter")
+    .matches(/[0-9]/).withMessage("needs a digit"),
+  body("name").trim().isLength({ min: 1, max: 100 }).escape(),
+  body("age").optional().isInt({ min: 13, max: 120 }).toInt(),
+  handleValidation,
+  async (req, res) =&gt; { /* req.body is cleaned + coerced */ }
+);
+</code></pre>
+<p><strong>Validation vs sanitization:</strong> validators check (<code>isEmail</code>, <code>isLength</code>); sanitizers transform (<code>trim</code>, <code>normalizeEmail</code>, <code>toInt</code>, <code>escape</code>). By the time your handler runs, <code>req.body</code> contains cleaned values &mdash; use them, don't re-fetch the raw input.</p>
+<table>
+  <tr><th>Library</th><th>Best for</th></tr>
+  <tr><td>express-validator</td><td>JavaScript projects, chainable DSL, built-in sanitizers</td></tr>
+  <tr><td>Zod</td><td>TypeScript projects &mdash; free type inference, composable schemas</td></tr>
+  <tr><td>Joi</td><td>Large declarative schemas, nested objects, long-running projects</td></tr>
+  <tr><td>AJV</td><td>Peak performance, JSON Schema contracts (OpenAPI-first)</td></tr>
+  <tr><td>Yup</td><td>Async validators (uniqueness checks), React Hook Form integration</td></tr>
+</table>
+<p><strong>Production gotchas:</strong> always call <code>validationResult(req)</code> &mdash; forgetting it silently skips validation. Collect all errors (don't <code>abortEarly</code>) so users see every problem at once. For complex rules that cross fields (password confirmation, conditional required fields), use a declarative schema validator (Zod/Joi) over express-validator chains, which get unwieldy. Validate <em>every</em> input surface: body, query, params, headers &mdash; not just the obvious one.</p>
+'''
+
+ANSWERS[8] = r'''
+<p><strong>Role-based access control</strong> separates authentication (who are you?) from authorization (what can you do?). A mature implementation has three layers: <strong>role</strong> (coarse), <strong>permission</strong> (fine-grained action), and <strong>resource ownership</strong> (per-record check).</p>
+<pre><code>// role hierarchy with permissions
+const ROLE_PERMS = {
+  user:   ["post:read", "post:create"],
+  editor: ["post:read", "post:create", "post:update", "comment:moderate"],
+  admin:  ["*"],
+};
+
+function requireRole(minRole) {
+  const order = { user: 0, editor: 1, admin: 2 };
+  return (req, res, next) =&gt; {
+    if (!req.user) return res.sendStatus(401);
+    if (order[req.user.role] &lt; order[minRole]) return res.sendStatus(403);
+    next();
+  };
+}
+
+function requirePerm(...needed) {
+  return (req, res, next) =&gt; {
+    if (!req.user) return res.sendStatus(401);
+    const have = new Set(ROLE_PERMS[req.user.role] ?? []);
+    const ok = have.has("*") || needed.every(p =&gt; have.has(p));
+    if (!ok) return res.sendStatus(403);
+    next();
+  };
+}
+
+// resource-scoped — "edit your own post, unless you're an editor"
+async function canEditPost(req, res, next) {
+  const post = await db.post.findUnique({ where: { id: req.params.id } });
+  if (!post) return res.sendStatus(404);
+  const isOwner  = post.authorId === req.user.sub;
+  const isEditor = ROLE_PERMS[req.user.role]?.includes("post:update");
+  if (!isOwner &amp;&amp; !isEditor) return res.sendStatus(403);
+  req.post = post;
+  next();
+}
+</code></pre>
+<p><strong>RBAC vs ABAC vs ReBAC:</strong></p>
+<table>
+  <tr><th>Model</th><th>Decides on</th><th>When to use</th></tr>
+  <tr><td>RBAC</td><td>User's role</td><td>Most apps; simple, auditable</td></tr>
+  <tr><td>ABAC</td><td>Attributes (role, department, time, IP)</td><td>Enterprise, compliance-heavy</td></tr>
+  <tr><td>ReBAC</td><td>Relationships (owner, editor, viewer)</td><td>Document sharing (Google Drive, Notion)</td></tr>
+</table>
+<p><strong>Scaling beyond roles:</strong> for "users can edit only their own posts, except moderators can edit any", pure RBAC breaks down. Use <strong>CASL</strong> (<code>ability.can("update", post)</code>) or <strong>Casbin</strong> for policy-based auth. For Google-Drive-style sharing, <strong>OpenFGA</strong> or <strong>SpiceDB</strong> model relationships explicitly. Always authorize server-side; never trust client-sent role fields. Log authorization denials with enough context to distinguish probing from configuration drift.</p>
+'''
+
+ANSWERS[9] = r'''
+<p><strong>JWT authentication</strong> trades server-side session state for self-contained, cryptographically-signed tokens. The payload holds claims (user id, role, expiry); the signature ensures integrity. Stateless verification means any server can validate without a shared session store &mdash; key to horizontal scaling.</p>
+<pre><code>import jwt from "jsonwebtoken";
+
+// issue on login
+const token = jwt.sign(
+  { sub: user.id, role: user.role },
+  process.env.JWT_SECRET,
+  { expiresIn: "15m", issuer: "api.example.com", audience: "web" }
+);
+
+// verify middleware
+function requireAuth(req, res, next) {
+  const [scheme, token] = (req.headers.authorization || "").split(" ");
+  if (scheme !== "Bearer" || !token) return res.sendStatus(401);
+  try {
+    req.user = jwt.verify(token, process.env.JWT_SECRET, {
+      issuer:   "api.example.com",
+      audience: "web",
+      algorithms: ["HS256"],                   // pin algorithm — prevents "none" attack
+    });
+    next();
+  } catch (err) {
+    res.status(401).json({ error: err.name === "TokenExpiredError" ? "expired" : "invalid" });
+  }
+}
+</code></pre>
+<p><strong>JWT vs opaque tokens:</strong></p>
+<table>
+  <tr><th></th><th>JWT</th><th>Opaque</th></tr>
+  <tr><td>Verification</td><td>Signature check (stateless)</td><td>DB/cache lookup</td></tr>
+  <tr><td>Revocation</td><td>Hard (short TTL + blocklist)</td><td>Easy (delete the row)</td></tr>
+  <tr><td>Payload</td><td>Visible to anyone who has the token</td><td>Opaque; claims fetched server-side</td></tr>
+  <tr><td>Best for</td><td>Microservices, mobile APIs</td><td>Web apps with sessions, high-security</td></tr>
+</table>
+<p><strong>Critical practices:</strong> always <em>pin the algorithm</em> (<code>algorithms: ["HS256"]</code>) &mdash; past CVEs exploited accepting <code>alg: "none"</code>. Keep access tokens short (5-15 min) and pair with refresh tokens; a leaked JWT is valid until it expires. Never put sensitive data (passwords, tokens) in the payload &mdash; it's only base64, not encrypted. For browser apps, prefer <strong>HttpOnly cookies</strong> over <code>localStorage</code> &mdash; XSS cannot read HttpOnly cookies. Rotate signing keys periodically; use <strong>RS256/ES256</strong> (public/private keypair) when multiple services need to verify but only one issues.</p>
+'''
+
+ANSWERS[10] = r'''
+<p>Secure JWT rotation combines <strong>short-lived access tokens</strong> with <strong>long-lived refresh tokens</strong>, plus server-side tracking to enable revocation. The access token is stateless and validated by signature alone; the refresh token is tracked in a database so it can be revoked individually.</p>
+<pre><code>// login issues both
+const jti = crypto.randomUUID();
+const access  = jwt.sign({ sub: user.id }, ACCESS_SECRET,  { expiresIn: "15m" });
+const refresh = jwt.sign({ sub: user.id, jti }, REFRESH_SECRET, { expiresIn: "30d" });
+
+await db.refreshToken.create({
+  data: { jti, userId: user.id, expiresAt: new Date(Date.now() + 30 * 86400_000) },
+});
+
+// HttpOnly cookie holds the refresh token (JS-inaccessible)
+res.cookie("refreshToken", refresh, {
+  httpOnly: true, secure: true, sameSite: "strict", path: "/auth",
+});
+
+// refresh endpoint — rotate both tokens on every use
+app.post("/auth/refresh", async (req, res) =&gt; {
+  const payload = jwt.verify(req.cookies.refreshToken, REFRESH_SECRET);
+  const record = await db.refreshToken.findUnique({ where: { jti: payload.jti } });
+
+  // replay detection — if revoked, assume theft, revoke ALL tokens for this user
+  if (!record || record.revokedAt) {
+    await db.refreshToken.updateMany({ where: { userId: payload.sub }, data: { revokedAt: new Date() } });
+    return res.sendStatus(401);
+  }
+
+  // rotation — old refresh becomes invalid, issue new pair
+  await db.refreshToken.update({ where: { jti: payload.jti }, data: { revokedAt: new Date() } });
+  const newJti = crypto.randomUUID();
+  /* ... issue new access + refresh tokens, set cookie ... */
+});
+</code></pre>
+<p><strong>The four rotation strategies:</strong></p>
+<ul>
+  <li><strong>Simple expiry:</strong> short access tokens, no refresh &mdash; users re-login often. Annoying but simplest.</li>
+  <li><strong>Sliding refresh:</strong> refresh extends the session. Simple but a stolen refresh token grants indefinite access.</li>
+  <li><strong>Rotation (shown above):</strong> every refresh invalidates the old one. A leaked refresh token is detectable on replay.</li>
+  <li><strong>Rotation + family tracking:</strong> each refresh links to a family; detecting reuse revokes the whole family &mdash; strongest pattern.</li>
+</ul>
+<p><strong>Key revocation:</strong> for emergency revocation (compromised signing key, vulnerability), issue a new key and add the old key to a <em>verification-only</em> list for a grace period. Use <strong>JWKS</strong> (JSON Web Key Sets) if multiple services verify; the issuer publishes current keys at a known URL, clients cache them. Never invent your own signing scheme; use well-maintained libraries (<code>jose</code>, <code>jsonwebtoken</code>) and <strong>Auth.js</strong> / <strong>better-auth</strong> for full flows.</p>
+'''
+
+ANSWERS[11] = r'''
+<p><strong>OAuth 2.0 / OpenID Connect</strong> delegates authentication to an external provider. In 2026, <strong>PKCE</strong> is mandatory for all clients (per OAuth 2.1), and <strong>OIDC</strong> (ID tokens) is the standard flow for user authentication vs pure API authorization.</p>
+<pre><code>// npm install openid-client
+import { Issuer, generators } from "openid-client";
+
+const issuer = await Issuer.discover("https://accounts.google.com");
+const client = new issuer.Client({
+  client_id:     process.env.CLIENT_ID,
+  client_secret: process.env.CLIENT_SECRET,
+  redirect_uris: ["https://app.example.com/auth/callback"],
+  response_types: ["code"],
+});
+
+// start flow with PKCE + state + nonce
+app.get("/auth/login", (req, res) =&gt; {
+  const codeVerifier  = generators.codeVerifier();
+  const codeChallenge = generators.codeChallenge(codeVerifier);
+  const state = generators.state();
+  const nonce = generators.nonce();
+
+  req.session.oauth = { codeVerifier, state, nonce };
+
+  res.redirect(client.authorizationUrl({
+    scope: "openid email profile",
+    code_challenge: codeChallenge, code_challenge_method: "S256",
+    state, nonce,
+  }));
+});
+
+// callback — verify state, exchange code, validate ID token
+app.get("/auth/callback", async (req, res) =&gt; {
+  const params = client.callbackParams(req);
+  const tokenSet = await client.callback(
+    "https://app.example.com/auth/callback", params,
+    { code_verifier: req.session.oauth.codeVerifier,
+      state: req.session.oauth.state,
+      nonce: req.session.oauth.nonce }
+  );
+  const claims = tokenSet.claims();            // verified ID token payload
+  // upsert user by claims.sub (stable), not email
+});
+</code></pre>
+<p><strong>Flow choices:</strong></p>
+<table>
+  <tr><th>Flow</th><th>Use for</th></tr>
+  <tr><td>Authorization Code + PKCE</td><td>Everything &mdash; web apps, SPAs, mobile, native (the 2026 default)</td></tr>
+  <tr><td>Client Credentials</td><td>Server-to-server &mdash; no user involved</td></tr>
+  <tr><td>Device Code</td><td>TVs, CLIs, IoT devices with limited input</td></tr>
+  <tr><td>Implicit / Password</td><td><strong>Deprecated</strong> &mdash; do not use</td></tr>
+</table>
+<p><strong>Critical practices:</strong> verify ID token signature (library does this), check <code>iss</code>, <code>aud</code>, <code>exp</code>, and <code>nonce</code>. Identify users by <code>sub</code> (stable) &mdash; emails change and get recycled. Check <code>email_verified</code> before trusting the email claim. For multi-provider auth, <strong>Auth.js</strong> or <strong>better-auth</strong> wrap the protocol and handle provider quirks (Facebook is OAuth 2.0 only, not OIDC; Apple requires specific client assertion). Rotate client secrets; never commit them to git.</p>
+'''
+
+ANSWERS[12] = r'''
+<p><strong>CORS</strong> (Cross-Origin Resource Sharing) exists because browsers enforce the <strong>same-origin policy</strong>. CORS relaxes it selectively &mdash; the server tells the browser "this cross-origin request is allowed" via response headers. Strategy varies by API type.</p>
+<pre><code>import cors from "cors";
+
+// 1. Allowlist for user-facing APIs with credentials
+app.use("/api", cors({
+  origin: (origin, cb) =&gt; {
+    const allowed = ["https://app.example.com", "https://admin.example.com"];
+    if (!origin || allowed.includes(origin)) cb(null, true);
+    else cb(new Error("CORS: origin not allowed"));
+  },
+  credentials: true,                           // allow cookies / Authorization
+  maxAge: 86400,                               // cache preflight 24h
+}));
+
+// 2. Wide-open for genuinely public APIs (no auth, read-only)
+app.use("/public-api", cors({ origin: "*" }));
+
+// 3. Per-route — different rules for webhook endpoints
+app.post("/webhook", cors({ origin: false }), handler);   // same-origin only
+</code></pre>
+<table>
+  <tr><th>Strategy</th><th>When to use</th></tr>
+  <tr><td>Strict allowlist</td><td>User-facing APIs with cookie/bearer auth</td></tr>
+  <tr><td>Wildcard (<code>*</code>)</td><td>Truly public, unauthenticated APIs (<code>credentials: false</code> required)</td></tr>
+  <tr><td>Dynamic function</td><td>Regex or dynamic allowlists (e.g., preview deploys <code>*.vercel.app</code>)</td></tr>
+  <tr><td>Edge-handled</td><td>Terminate CORS at the reverse proxy/CDN for centralized control</td></tr>
+</table>
+<p><strong>Common pitfalls:</strong></p>
+<ul>
+  <li><strong><code>origin: "*"</code> + <code>credentials: true</code></strong> is illegal per spec &mdash; browsers reject the combo. Always echo a specific origin when credentials flow.</li>
+  <li><strong>Auth middleware before CORS</strong> causes preflights (no auth header) to fail with 401 &mdash; browsers silently abort. Register <code>cors()</code> first, or skip auth for <code>OPTIONS</code>.</li>
+  <li><strong>Missing <code>Vary: Origin</code></strong> when origin is dynamic &mdash; CDNs cache the first response and serve it to everyone. The <code>cors</code> package adds this automatically.</li>
+  <li><strong>Preflights ignored</strong> &mdash; browsers preflight any request with custom headers, <code>Content-Type: application/json</code>, or non-GET/HEAD/POST methods.</li>
+</ul>
+<p><strong>Security insight:</strong> CORS protects users from malicious sites, not servers from malicious clients &mdash; never rely on CORS as authorization. An attacker running a curl script ignores CORS entirely. Authenticate and authorize regardless of origin.</p>
+'''
+
+ANSWERS[13] = r'''
+<p>Terminating traffic at <strong>Nginx</strong> in front of Node is the classic production topology: Nginx handles TLS, static files, compression, and connection management; Node focuses on business logic. Done right, it yields order-of-magnitude better concurrency and operational flexibility.</p>
+<pre><code># /etc/nginx/sites-available/app.conf
+upstream node_app {
+    server 127.0.0.1:3000;
+    server 127.0.0.1:3001;                # multiple Node instances
+    keepalive 64;                          # reuse connections
+}
+
+server {
+    listen 443 ssl http2;
+    server_name app.example.com;
+
+    ssl_certificate     /etc/letsencrypt/live/app.example.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/app.example.com/privkey.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
+
+    # static assets served directly by Nginx — never hit Node
+    location /static/ {
+        root /var/www/app;
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
+
+    # API routes — proxied to Node
+    location / {
+        proxy_pass http://node_app;
+        proxy_http_version 1.1;
+        proxy_set_header Connection "";               # enable keepalive
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_read_timeout 60s;
+
+        # WebSocket upgrade
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+    }
+
+    gzip on;
+    gzip_types application/json text/css application/javascript;
+}
+
+# redirect plain HTTP to HTTPS
+server { listen 80; server_name app.example.com; return 301 https://$host$request_uri; }
+</code></pre>
+<p><strong>On the Node side</strong>, trust the proxy headers:</p>
+<pre><code>app.set("trust proxy", 1);               // trust one hop — so req.ip reflects real client</code></pre>
+<p><strong>Why this topology wins:</strong> Nginx's event model handles tens of thousands of idle keep-alive connections at near-zero cost; Node is worse at this. TLS termination off Node frees event loop for app work. Static file serving from Nginx uses <code>sendfile(2)</code> &mdash; kernel-level zero-copy. Nginx can rate-limit, block bad IPs (fail2ban), and serve maintenance pages without restarting Node.</p>
+<p><strong>Alternatives:</strong> <strong>Caddy</strong> (auto-TLS, simpler config), <strong>Traefik</strong> (dynamic service discovery for Docker/Kubernetes), <strong>HAProxy</strong> (purpose-built load balancer). Cloud-managed options (AWS ALB, Cloudflare, GCP Load Balancer) obviate self-hosting entirely &mdash; usually the right choice unless you have strong reasons to run Nginx yourself.</p>
+'''
+
+ANSWERS[14] = r'''
+<p>Rate limiting protects against <strong>brute force</strong> (login attempts), <strong>scraping</strong>, <strong>accidental clients</strong> (runaway scripts), and <strong>malicious clients</strong> (DoS). Layer it: at the edge for cheap bulk rejection, in Node for fine-grained per-user policies.</p>
+<pre><code>// npm install express-rate-limit rate-limit-redis
+import rateLimit from "express-rate-limit";
+import RedisStore from "rate-limit-redis";
+
+app.set("trust proxy", 1);                   // required behind a proxy
+
+// general API — 100/15min per IP
+app.use("/api", rateLimit({
+  windowMs: 15 * 60 * 1000, max: 100,
+  standardHeaders: true,
+  store: new RedisStore({ sendCommand: (...a) =&gt; redis.call(...a) }),
+}));
+
+// auth endpoints — 5 failures/15min per IP
+app.post("/api/login", rateLimit({
+  windowMs: 15 * 60 * 1000, max: 5,
+  skipSuccessfulRequests: true,
+  store: new RedisStore({ sendCommand: (...a) =&gt; redis.call(...a) }),
+}), loginHandler);
+
+// per-user quota — after auth, key by userId not IP
+app.use("/api/v1", requireAuth, rateLimit({
+  windowMs: 60_000, max: 30,
+  keyGenerator: (req) =&gt; req.user.id,
+  store: new RedisStore({ sendCommand: (...a) =&gt; redis.call(...a) }),
+}));
+</code></pre>
+<p><strong>Algorithms and their trade-offs:</strong></p>
+<table>
+  <tr><th>Algorithm</th><th>Behavior</th><th>Good for</th></tr>
+  <tr><td>Fixed window</td><td>Reset counter every N seconds</td><td>Simple; edge burst at window boundary</td></tr>
+  <tr><td>Sliding window</td><td>Smoothly decaying count</td><td>Even traffic; more accurate</td></tr>
+  <tr><td>Token bucket</td><td>Burst allowance + steady refill</td><td>APIs where bursts are OK</td></tr>
+  <tr><td>Leaky bucket</td><td>Constant output rate</td><td>Rate-smoothing downstream requests</td></tr>
+</table>
+<p><strong>Production requirements:</strong></p>
+<ul>
+  <li><strong>Distributed store</strong> &mdash; the default in-memory store is per-process; with 5 instances, actual limit is 5× what you set. Use Redis (<code>rate-limit-redis</code>) or <code>rate-limiter-flexible</code>.</li>
+  <li><strong>Trust-proxy setting</strong> &mdash; without it, every client looks like the proxy IP and you lock out everyone simultaneously.</li>
+  <li><strong>Per-endpoint strategy</strong> &mdash; auth routes need tight limits (5-10/window); read-heavy APIs can afford 100s; expensive endpoints (AI, search) need their own tight limits.</li>
+  <li><strong>Response headers</strong> &mdash; <code>RateLimit-Limit</code>, <code>RateLimit-Remaining</code>, <code>Retry-After</code> (RFC 9331) let well-behaved clients self-throttle.</li>
+  <li><strong>Edge layer</strong> &mdash; for true hostile traffic, <strong>Cloudflare</strong>, <strong>AWS WAF</strong>, or <strong>Fastly</strong> reject at the edge with ~zero cost; Node limits are the inner defense, not the outer.</li>
+</ul>
+'''
+
+ANSWERS[15] = r'''
+<p>Throttling and rate limiting are cousins but solve different problems: <strong>rate limiting</strong> enforces a quota over a window (100 req / 15 min); <strong>throttling</strong> caps instantaneous rate (30 req / sec, bursts of 50). Most serious APIs need both.</p>
+<pre><code>// custom throttle — token-bucket style per key (user or IP)
+class TokenBucket {
+  constructor(ratePerSec, burst) {
+    this.rate = ratePerSec; this.capacity = burst;
+    this.tokens = burst; this.lastRefill = Date.now();
+  }
+  take() {
+    const now = Date.now();
+    this.tokens = Math.min(this.capacity, this.tokens + (now - this.lastRefill) / 1000 * this.rate);
+    this.lastRefill = now;
+    if (this.tokens &lt; 1) return false;
+    this.tokens -= 1;
+    return true;
+  }
+}
+
+const buckets = new Map();
+
+function throttle({ rate, burst, keyFn }) {
+  return (req, res, next) =&gt; {
+    const key = keyFn(req);
+    let bucket = buckets.get(key);
+    if (!bucket) { bucket = new TokenBucket(rate, burst); buckets.set(key, bucket); }
+
+    if (!bucket.take()) {
+      res.set("Retry-After", "1");
+      return res.status(429).json({ error: "Throttled" });
+    }
+    next();
+  };
+}
+
+app.use(throttle({
+  rate:  30,                                 // tokens per second
+  burst: 50,                                 // initial + max capacity
+  keyFn: (req) =&gt; req.user?.id ?? req.ip,
+}));
+</code></pre>
+<p><strong>When to prefer one approach:</strong></p>
+<table>
+  <tr><th></th><th>Throttling</th><th>Rate limiting</th></tr>
+  <tr><td>Window</td><td>Seconds to sub-second</td><td>Minutes to hours</td></tr>
+  <tr><td>Goal</td><td>Protect instantaneous capacity</td><td>Fair-use quota</td></tr>
+  <tr><td>Algorithm</td><td>Token bucket, leaky bucket</td><td>Fixed/sliding window</td></tr>
+  <tr><td>Response</td><td>429 + <code>Retry-After: 1</code></td><td>429 + <code>X-RateLimit-Reset</code></td></tr>
+</table>
+<p><strong>Production refinements:</strong> back buckets with Redis for cross-instance consistency (<strong>rate-limiter-flexible</strong> does this with multiple algorithms). In-process Maps leak memory over time &mdash; either use WeakMap with object keys or prune entries by LRU/TTL. For hostile traffic, fronting with a CDN (Cloudflare's rate-limiting rules) is 1000x cheaper than Node throttling &mdash; the goal is to avoid spending any Node CPU on requests you'll reject. Log throttle events with user/IP context; sudden spikes are either a bug or an attack.</p>
+'''
+
+ANSWERS[16] = r'''
+<p>Efficient large-file upload handling hinges on three principles: <strong>stream don't buffer</strong>, <strong>offload from Node</strong>, and <strong>validate aggressively</strong>. A naive <code>express.json({ limit: "500mb" })</code> will OOM your process under concurrent uploads.</p>
+<pre><code>// Strategy 1: stream through multer to disk
+import multer from "multer";
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: "/var/uploads/tmp",
+    filename: (req, file, cb) =&gt; cb(null, `${crypto.randomUUID()}.tmp`),
+  }),
+  limits: { fileSize: 200 * 1024 * 1024 },   // 200 MB cap
+});
+
+app.post("/upload", upload.single("file"), async (req, res) =&gt; {
+  await processUpload(req.file.path);        // scan, move to S3, etc.
+  res.json({ id: req.file.filename });
+});
+
+// Strategy 2: direct-to-S3 with pre-signed POST — BEST for production
+import { S3Client } from "@aws-sdk/client-s3";
+import { createPresignedPost } from "@aws-sdk/s3-presigned-post";
+
+app.post("/upload-url", async (req, res) =&gt; {
+  const key = `uploads/${crypto.randomUUID()}`;
+  const presigned = await createPresignedPost(new S3Client(), {
+    Bucket: "my-bucket", Key: key,
+    Conditions: [
+      ["content-length-range", 0, 200 * 1024 * 1024],
+      ["starts-with", "$Content-Type", "image/"],
+    ],
+    Expires: 300,                            // URL valid 5 minutes
+  });
+  res.json(presigned);                       // client uploads directly to S3
+});
+</code></pre>
+<p><strong>Approaches ranked:</strong></p>
+<table>
+  <tr><th>Approach</th><th>Memory</th><th>Node load</th><th>Complexity</th></tr>
+  <tr><td>express.json in memory</td><td>O(n)</td><td>High</td><td>Trivial — don't</td></tr>
+  <tr><td>multer disk storage</td><td>Small</td><td>Medium (bytes flow through)</td><td>Easy</td></tr>
+  <tr><td>multer-s3 (Node proxies)</td><td>Small</td><td>Medium (bytes flow through)</td><td>Easy</td></tr>
+  <tr><td><strong>Pre-signed direct-to-S3</strong></td><td><strong>~0</strong></td><td><strong>Minimal</strong></td><td><strong>Moderate</strong></td></tr>
+  <tr><td>TUS / resumable uploads</td><td>~0</td><td>Minimal</td><td>High</td></tr>
+</table>
+<p><strong>Production refinements:</strong> for videos and files &gt; 1 GB, use <strong>S3 multipart uploads</strong> with <code>@aws-sdk/lib-storage</code> &mdash; survives dropped connections via per-part retries. For user-resumable uploads (slow networks, mobile), the <strong>TUS protocol</strong> standardizes resumption. Set reasonable <code>Content-Length</code> limits at the reverse proxy (Nginx <code>client_max_body_size</code>) so oversized uploads die before reaching Node. Always validate file type by <em>magic bytes</em> after upload (<code>file-type</code> package) &mdash; never trust the client-reported MIME type; attackers send PHP shells named <code>.jpg</code>. Run uploads through virus scanning (ClamAV) before making them accessible.</p>
+'''
+
+ANSWERS[17] = r'''
+<p>Node.js <strong>streams</strong> are the correct abstraction whenever data volume exceeds memory or time-to-first-byte matters. They process data in chunks with automatic <strong>backpressure</strong>: when the consumer can't keep up, the producer pauses. Express supports streams at both request and response sides.</p>
+<pre><code>// Response streaming — CSV export of millions of rows
+import { pipeline } from "node:stream/promises";
+import { format } from "@fast-csv/format";
+
+app.get("/export.csv", async (req, res, next) =&gt; {
+  try {
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", `attachment; filename="export.csv"`);
+
+    const csv = format({ headers: true });
+    csv.pipe(res);                           // backpressure flows end-to-end
+
+    // cursor-paginate DB and write rows as they arrive
+    let lastId = null;
+    while (true) {
+      const batch = await db.order.findMany({
+        where: lastId ? { id: { gt: lastId } } : undefined,
+        orderBy: { id: "asc" }, take: 500,
+      });
+      if (batch.length === 0) break;
+      for (const row of batch) csv.write(row);   // writes respect drain events
+      lastId = batch[batch.length - 1].id;
+    }
+    csv.end();
+  } catch (err) { next(err); }
+});
+
+// Request streaming — parse large uploads without buffering
+import busboy from "busboy";
+app.post("/upload-stream", (req, res) =&gt; {
+  const bb = busboy({ headers: req.headers, limits: { fileSize: 500 * 1024 * 1024 } });
+  bb.on("file", (name, file, info) =&gt; {
+    pipeline(file, s3UploadStream(info.filename))
+      .catch((err) =&gt; req.log?.error({ err }));
+  });
+  bb.on("close", () =&gt; res.json({ ok: true }));
+  req.pipe(bb);
+});
+
+// Transform stream — on-the-fly processing
+import { Transform } from "node:stream";
+const jsonLines = new Transform({
+  writableObjectMode: true,
+  transform(obj, enc, cb) { cb(null, JSON.stringify(obj) + "\n"); },
+});
+</code></pre>
+<p><strong>Why streams matter:</strong></p>
+<ul>
+  <li><strong>Constant memory.</strong> A 10 GB export uses &lt; 100 KB of RAM; <code>fs.readFile</code> + <code>res.send</code> OOMs.</li>
+  <li><strong>Progressive delivery.</strong> Clients start receiving bytes before the whole response is generated &mdash; faster TTFB, better UX.</li>
+  <li><strong>Backpressure.</strong> When the socket buffer fills, the DB read pauses; when the client drains, it resumes. Without this, a slow client crashes a fast server.</li>
+</ul>
+<p><strong>Common mistakes:</strong> forgetting error handlers on intermediate streams (unhandled errors crash the process); mixing sync <code>write()</code> returns with manual flow control (use <code>pipeline()</code> from <code>node:stream/promises</code> &mdash; it handles errors and cleanup); compressing streams with <code>compression</code> middleware breaks SSE/chunked endpoints (disable per-route). For HTTP/2 server push or HTTP/3, use <strong>Node 22+</strong> plus a runtime like <strong>Bun</strong> or <strong>Deno</strong> for native support; Express on Node uses HTTP/1.1 by default.</p>
+'''
+
+ANSWERS[18] = r'''
+<p>Server-side rendering (SSR) generates HTML on each request, ships it to the browser as a complete document, and optionally hydrates client-side JavaScript afterward. For React in 2026, you usually use a framework (<strong>Next.js</strong>, <strong>Remix</strong>) rather than hand-rolling SSR &mdash; the fine details (streaming, suspense boundaries, data fetching) are a minefield.</p>
+<pre><code>// minimal React SSR in Express
+import express from "express";
+import React from "react";
+import { renderToPipeableStream } from "react-dom/server";
+import App from "./App.js";
+
+const app = express();
+
+app.get("/*", (req, res, next) =&gt; {
+  const { pipe } = renderToPipeableStream(&lt;App url={req.url} /&gt;, {
+    bootstrapScripts: ["/static/client.js"],
+    onShellReady() {
+      res.setHeader("Content-Type", "text/html");
+      pipe(res);                              // stream as shell is ready
+    },
+    onShellError(err) { next(err); },
+    onError(err) { console.error("SSR error:", err); },
+  });
+
+  // Safety timeout — don't wait forever on slow data
+  setTimeout(() =&gt; pipe(res), 5000);
+});
+</code></pre>
+<table>
+  <tr><th>Technique</th><th>What it is</th><th>Best for</th></tr>
+  <tr><td><strong>SSR</strong></td><td>Render on each request</td><td>Personalized pages, fresh data</td></tr>
+  <tr><td><strong>SSG</strong></td><td>Pre-render at build time</td><td>Marketing, blogs, docs</td></tr>
+  <tr><td><strong>ISR</strong></td><td>Pre-render with revalidation</td><td>E-commerce catalog, dashboards</td></tr>
+  <tr><td><strong>RSC</strong> (React Server Components)</td><td>Components run server-only, stream to client</td><td>Next.js 13+ default in 2026</td></tr>
+  <tr><td><strong>Edge SSR</strong></td><td>Run SSR at CDN edge (V8 isolates)</td><td>Low-latency personalization</td></tr>
+</table>
+<p><strong>Why SSR helps:</strong> faster time-to-first-byte (LCP), better SEO (crawlers see content without waiting for JS), works without JS enabled, predictable performance on low-end devices.</p>
+<p><strong>Why it's hard:</strong> data fetching must complete before render (or use streaming with Suspense); cookies/auth require request context in components; third-party libraries that touch <code>window</code> break; bundle size matters twice (server bundle + client bundle). Caching is non-trivial &mdash; cache keys must include auth state to avoid cross-user leaks.</p>
+<p><strong>Production recommendation in 2026:</strong> use <strong>Next.js App Router</strong>, <strong>Remix</strong>, or <strong>TanStack Start</strong> unless you have specific reasons to hand-roll. They solve streaming, data colocation, server actions, and edge deployment with ecosystems around them. Hand-rolled SSR in Express makes sense for small, tightly controlled rendering (email templates, PDF generation, one-off marketing pages).</p>
+'''
+
+ANSWERS[19] = r'''
+<p>Template engines turn data + template into HTML on the server. Each Express-supported engine (<strong>EJS</strong>, <strong>Pug</strong>, <strong>Handlebars</strong>) makes different trade-offs between syntax ergonomics, logic-friendliness, and performance.</p>
+<table>
+  <tr><th>Engine</th><th>Syntax style</th><th>Strengths</th><th>Weaknesses</th></tr>
+  <tr><td><strong>EJS</strong></td><td>HTML + <code>&lt;%= %&gt;</code> tags</td><td>Familiar HTML; easy to learn; logic-friendly</td><td>Tags get noisy in complex templates</td></tr>
+  <tr><td><strong>Pug</strong></td><td>Indentation-based; no HTML</td><td>Concise; forces structure; includes/mixins</td><td>Steep learning curve; indent-sensitive</td></tr>
+  <tr><td><strong>Handlebars</strong></td><td><code>{{value}}</code> in HTML</td><td>Logic-less by design; Mustache-compatible; used in emails widely</td><td>Limited control flow; custom helpers needed</td></tr>
+  <tr><td><strong>Eta</strong></td><td>Like EJS, but faster</td><td>2-3x faster than EJS; smaller; async-first</td><td>Smaller ecosystem</td></tr>
+  <tr><td><strong>Liquid</strong></td><td><code>{% %}</code> / <code>{{ }}</code></td><td>Safe for user-authored templates (Shopify)</td><td>Intentionally limited</td></tr>
+</table>
+<pre><code>// register any engine the same way
+app.set("view engine", "ejs");                        // or "pug", "hbs"
+app.set("views", path.join(__dirname, "views"));
+
+// render
+app.get("/users/:id", async (req, res) =&gt; {
+  const user = await db.user.findUnique({ where: { id: req.params.id } });
+  res.render("profile", { user, title: "Profile" });
+});
+
+// view-local data available to every template (e.g., logged-in user, CSRF token)
+app.use((req, res, next) =&gt; {
+  res.locals.currentUser = req.user;
+  res.locals.csrfToken   = req.csrfToken?.();
+  next();
+});
+</code></pre>
+<p><strong>Picking an engine:</strong></p>
+<ul>
+  <li><strong>EJS</strong> for "looks like HTML; team already knows JS" &mdash; the path of least surprise.</li>
+  <li><strong>Handlebars</strong> when you're sending data to other environments (email templates, Shopify) or want enforced logic-less templates.</li>
+  <li><strong>Pug</strong> when you value brevity and your team has adopted it.</li>
+  <li><strong>React SSR / Next.js</strong> for anything beyond simple pages &mdash; you'll outgrow string templates fast as complexity grows.</li>
+</ul>
+<p><strong>Performance notes:</strong> enable view caching in production (<code>app.set("view cache", true)</code> &mdash; on automatically when <code>NODE_ENV=production</code>). Otherwise templates re-parse every request. For very high RPS, <strong>fast-json-stringify</strong>-style compiled templates (<strong>Eta</strong>, <strong>ejs-locals</strong>) beat interpreter-style engines. Always rely on the engine's auto-escaping &mdash; <code>&lt;%= %&gt;</code> (EJS), <code>=</code> (Pug), <code>{{ }}</code> (Handlebars) &mdash; and never concatenate HTML yourself; XSS vulnerabilities are almost always in manually-assembled markup.</p>
+'''
+
+ANSWERS[20] = r'''
+<p>Session management in Express typically uses <strong>express-session</strong>, which signs a session ID into a cookie and stores session data server-side. The default in-memory store is development-only &mdash; production needs persistent, shared storage.</p>
+<pre><code>// npm install express-session connect-redis
+import session from "express-session";
+import { RedisStore } from "connect-redis";
+
+app.use(session({
+  store: new RedisStore({ client: redis, prefix: "sess:" }),
+  secret: process.env.SESSION_SECRET,           // rotate periodically
+  resave: false, saveUninitialized: false,
+  rolling: true,                                // renew expiry on each request
+  cookie: {
+    httpOnly: true, secure: true, sameSite: "lax",
+    maxAge: 30 * 60 * 1000,                     // 30 min idle timeout
+  },
+  name: "sid",                                  // don't advertise connect.sid
+  proxy: true,                                  // honor X-Forwarded-Proto
+}));
+</code></pre>
+<table>
+  <tr><th>Store</th><th>When to use</th></tr>
+  <tr><td><strong>MemoryStore</strong></td><td>Dev only &mdash; lost on restart, doesn't share across instances</td></tr>
+  <tr><td><strong>Redis</strong> (<code>connect-redis</code>)</td><td>Default production choice &mdash; fast, supports TTL, easy to run in HA</td></tr>
+  <tr><td><strong>Database</strong> (<code>connect-pg-simple</code>, <code>connect-mongo</code>)</td><td>Avoid Redis; need audit trail; sessions tied to user rows</td></tr>
+  <tr><td><strong>Cookie-only</strong> (<code>cookie-session</code>)</td><td>Small payload; no server state; re-issue on privilege change</td></tr>
+  <tr><td><strong>JWT / stateless tokens</strong></td><td>API-only; horizontal scaling without shared store</td></tr>
+</table>
+<p><strong>Security essentials:</strong></p>
+<ul>
+  <li><strong>Regenerate session ID on login</strong> (<code>req.session.regenerate</code>) &mdash; prevents session fixation attacks.</li>
+  <li><strong>HttpOnly + Secure + SameSite</strong> cookies; mark <code>sameSite: "strict"</code> for high-value actions.</li>
+  <li><strong>Idle + absolute timeouts</strong> &mdash; rolling expiry extends while active, but set an absolute cap (e.g., 12 hours) to force periodic re-authentication.</li>
+  <li><strong>Rotate <code>secret</code></strong> with a support window &mdash; use an array of secrets and accept the old one for 24h.</li>
+  <li><strong>CSRF protection</strong> &mdash; cookie-based sessions are CSRF-vulnerable; pair with <strong>csrf-csrf</strong> double-submit tokens.</li>
+</ul>
+<p><strong>Scaling notes:</strong> with stateless JWTs you skip the shared-store requirement but lose easy revocation. With sessions + Redis, failover requires Redis HA (Sentinel or Cluster). For API-first apps, a hybrid is common: short-lived JWTs for API calls, opaque sessions only for web-interface state. For modern projects, consider <strong>Auth.js</strong>, <strong>Lucia</strong>, or <strong>better-auth</strong> &mdash; they handle rotation, CSRF, OAuth, and adapter patterns idiomatically.</p>
+'''
+
+ANSWERS[21] = r'''
+<p>Redis is the default session store for Node in 2026: sub-millisecond reads, built-in TTL, and <code>connect-redis</code> adapter that's battle-tested at scale. The integration is a two-line swap; the interesting bits are operational.</p>
+<pre><code>// npm install express-session connect-redis ioredis
+import express from "express";
+import session from "express-session";
+import { RedisStore } from "connect-redis";
+import Redis from "ioredis";
+
+// dedicated connection for sessions (don't share with cache — different failure domains)
+const redis = new Redis({
+  host: process.env.REDIS_HOST,
+  port: Number(process.env.REDIS_PORT),
+  password: process.env.REDIS_PASSWORD,
+  enableReadyCheck: true,
+  maxRetriesPerRequest: 3,
+  reconnectOnError: (err) =&gt; err.message.includes("READONLY"),
+});
+
+const app = express();
+app.use(session({
+  store: new RedisStore({ client: redis, prefix: "sess:", ttl: 86400 * 7 }),
+  secret: process.env.SESSION_SECRET,
+  resave: false, saveUninitialized: false,
+  rolling: true,
+  cookie: { httpOnly: true, secure: true, sameSite: "lax", maxAge: 30 * 60_000 },
+}));
+</code></pre>
+<p><strong>Key architectural decisions:</strong></p>
+<table>
+  <tr><th>Concern</th><th>Approach</th></tr>
+  <tr><td>TTL management</td><td>Set <code>ttl</code> in store + <code>maxAge</code> in cookie; Redis expires abandoned sessions automatically</td></tr>
+  <tr><td>Key prefix</td><td><code>sess:</code> &mdash; lets you <code>SCAN</code> sessions separately from cache keys and segregate eviction policies</td></tr>
+  <tr><td>Connection pool</td><td>Single shared connection; Redis protocol pipelines requests efficiently. Don't create one per request.</td></tr>
+  <tr><td>High availability</td><td><strong>Redis Sentinel</strong> for automatic failover, <strong>Redis Cluster</strong> for sharding once you exceed single-node capacity</td></tr>
+  <tr><td>Eviction</td><td>Use a dedicated Redis instance for sessions with <code>maxmemory-policy noeviction</code> &mdash; losing sessions silently is worse than refusing new ones</td></tr>
+</table>
+<p><strong>Production watch-outs:</strong></p>
+<ul>
+  <li><strong>Session size bloat</strong> &mdash; storing entire user objects pushes session data to 50+ KB, wrecking Redis performance. Store only the user id; fetch the object per request.</li>
+  <li><strong>Reconnect storms</strong> &mdash; after a Redis outage, every Node instance reconnects at once. Use jittered backoff, monitor reconnect counts.</li>
+  <li><strong>Stale sessions after <code>noeviction</code></strong> &mdash; if Redis hits memory limit with <code>noeviction</code>, new session writes fail but reads succeed. Alerts on Redis memory &gt; 80% let you scale ahead.</li>
+  <li><strong>Encryption at rest</strong> &mdash; sessions may hold sensitive data; use Redis TLS and/or server-side encryption on the host volume.</li>
+  <li><strong>Split brains</strong> &mdash; during Sentinel failover, two nodes briefly accept writes. Short TTLs and idempotent session writes minimize fallout.</li>
+</ul>
+'''
+
+ANSWERS[22] = r'''
+<p>A mature logging setup uses <strong>structured output</strong> (JSON), <strong>leveled messages</strong> (trace/debug/info/warn/error/fatal), <strong>correlation IDs</strong> across async boundaries, and <strong>declarative redaction</strong>. <strong>Pino</strong> has largely replaced <strong>Winston</strong> for new projects; <strong>Morgan</strong> is access-log only.</p>
+<pre><code>// npm install pino pino-http
+import pino from "pino";
+import pinoHttp from "pino-http";
+import { AsyncLocalStorage } from "node:async_hooks";
+
+const als = new AsyncLocalStorage();
+
+const logger = pino({
+  level: process.env.LOG_LEVEL || "info",
+  redact: [
+    "req.headers.authorization",
+    "req.headers.cookie",
+    "req.body.password",
+    "*.creditCard",
+  ],
+  timestamp: pino.stdTimeFunctions.isoTime,
+  mixin: () =&gt; ({ reqId: als.getStore()?.reqId }),   // auto-attach id to every log
+});
+
+app.use(pinoHttp({
+  logger,
+  genReqId: (req) =&gt; req.headers["x-request-id"] || crypto.randomUUID(),
+  customLogLevel: (req, res, err) =&gt; {
+    if (err || res.statusCode &gt;= 500) return "error";
+    if (res.statusCode &gt;= 400) return "warn";
+    return "info";
+  },
+  serializers: {
+    req: (req) =&gt; ({ method: req.method, url: req.url, userId: req.user?.id }),
+  },
+}));
+
+// use req.log inside handlers — inherits reqId
+app.get("/users/:id", (req, res) =&gt; {
+  req.log.info({ target: req.params.id }, "fetching user");
+  res.json({});
+});
+</code></pre>
+<table>
+  <tr><th></th><th>Pino</th><th>Winston</th><th>Morgan</th></tr>
+  <tr><td>Purpose</td><td>General-purpose</td><td>General-purpose</td><td>HTTP access logs only</td></tr>
+  <tr><td>Speed</td><td>5-10x faster than Winston</td><td>Feature-rich but slow</td><td>Fast</td></tr>
+  <tr><td>Structured</td><td>JSON by default</td><td>Configurable</td><td>Configurable</td></tr>
+  <tr><td>Redaction</td><td>Declarative, path-based</td><td>Transform plugins</td><td>None</td></tr>
+  <tr><td>Ecosystem</td><td>pino-http, pino-pretty, transports</td><td>Transports + formatters</td><td>Standalone</td></tr>
+</table>
+<p><strong>Production patterns:</strong></p>
+<ul>
+  <li><strong>Log to stdout</strong>, not files &mdash; container runtimes (Docker, Kubernetes) collect stdout and ship it to your aggregator. File logging breaks when the pod dies.</li>
+  <li><strong>Aggregator of choice:</strong> Datadog, Loki (free, OSS), CloudWatch, Splunk. All expect structured JSON.</li>
+  <li><strong>Sampling</strong> in high-RPS services &mdash; log every request at <code>info</code> is expensive; sample down to 1% for hot endpoints.</li>
+  <li><strong>Don't log PII</strong> without a retention/compliance story &mdash; emails, IPs in full, session IDs.</li>
+  <li><strong>Separate access and application logs</strong> conceptually; same destination is fine, but distinct event types let aggregators treat them differently.</li>
+  <li><strong>Connect to tracing</strong> &mdash; OpenTelemetry's <code>trace_id</code> and <code>span_id</code> fields bridge logs to distributed traces.</li>
+</ul>
+'''
+
+ANSWERS[23] = r'''
+<p>A production-grade error middleware does five things: <strong>accept</strong> any thrown error, <strong>normalize</strong> it into a shape your clients understand, <strong>log</strong> with enough context to debug, <strong>map</strong> status codes sensibly, and <strong>respond</strong> with a format matching the client's <code>Accept</code> header.</p>
+<pre><code>class HttpError extends Error {
+  constructor(message, status = 500, code, details) {
+    super(message);
+    this.name = "HttpError";
+    this.status = status;
+    this.code = code;
+    this.details = details;
+  }
+}
+
+// async wrapper — lifts rejections into next()
+const ah = (fn) =&gt; (req, res, next) =&gt;
+  Promise.resolve(fn(req, res, next)).catch(next);
+
+// normalize library-specific errors into HttpError
+function normalize(err) {
+  if (err.name === "ZodError")
+    return new HttpError("Invalid input", 400, "VALIDATION", err.issues);
+  if (err.name === "TokenExpiredError")
+    return new HttpError("Session expired", 401, "AUTH_EXPIRED");
+  if (err.code === "P2002")
+    return new HttpError("Already exists", 409, "CONFLICT", err.meta);
+  if (err.code === "P2025")
+    return new HttpError("Not found", 404, "NOT_FOUND");
+  if (err.code === "ECONNREFUSED")
+    return new HttpError("Upstream unavailable", 503, "UPSTREAM_DOWN");
+  return err;
+}
+
+// the one error middleware — must come last, must have 4 args
+app.use((err, req, res, _next) =&gt; {
+  const norm = err.status ? err : normalize(err);
+  const status = norm.status || 500;
+  const isServerError = status &gt;= 500;
+
+  // log with severity and full error for server errors; less for client errors
+  const logFn = isServerError ? req.log?.error : req.log?.warn;
+  logFn?.({ err: norm, reqId: req.id, userId: req.user?.id }, norm.message);
+
+  // if response already started streaming, we can't change status — just close
+  if (res.headersSent) return res.destroy();
+
+  // content-negotiate the response
+  const body = {
+    error: isServerError ? "Internal Server Error" : norm.message,
+    code:  norm.code,
+    reqId: req.id,
+    ...(norm.details &amp;&amp; !isServerError &amp;&amp; { details: norm.details }),
+    ...(process.env.NODE_ENV !== "production" &amp;&amp; { stack: norm.stack }),
+  };
+
+  res.status(status).format({
+    "application/json": () =&gt; res.json(body),
+    "text/html":        () =&gt; res.render("error", { body, status }),
+    default:            () =&gt; res.type("text/plain").send(body.error),
+  });
+});
+</code></pre>
+<p><strong>Design principles:</strong></p>
+<ul>
+  <li><strong>One error middleware.</strong> Central normalization beats scattered try/catch with bespoke responses.</li>
+  <li><strong>Include a request id</strong> so users can paste it into support tickets and you can instantly correlate logs.</li>
+  <li><strong>Never leak internals to clients:</strong> on 5xx, return a generic message. Stack traces in production responses are an information-disclosure bug.</li>
+  <li><strong>Handle <code>headersSent</code>:</strong> if the response already started streaming (SSE, long JSON), you can't change the status &mdash; destroy the socket and log.</li>
+  <li><strong>Error classes carry HTTP semantics:</strong> <code>HttpError(message, status, code)</code> lets handlers <code>throw</code> freely without knowing about Express internals.</li>
+  <li><strong>Alerting</strong> &mdash; stream error-level logs to Sentry / Datadog / Rollbar. Set alert thresholds by error code so a spike in <code>VALIDATION</code> doesn't page when the DB goes down.</li>
+</ul>
+'''
+
+ANSWERS[24] = r'''
+<p>Node runs JavaScript on a single thread &mdash; a single process saturates one CPU core. To use all cores on a machine, you run <strong>N processes</strong> (one per core) and a load balancer in front. Options, ranked by 2026 production preference:</p>
+<table>
+  <tr><th>Approach</th><th>How</th><th>Best for</th></tr>
+  <tr><td><strong>Kubernetes replicas</strong></td><td>Deploy N pods, each one process; k8s Service load-balances</td><td>Cloud-native; most production</td></tr>
+  <tr><td><strong>PM2 cluster mode</strong></td><td><code>pm2 start app.js -i max</code> &mdash; PM2 spawns N workers, load-balances between them</td><td>VM/bare-metal deployments</td></tr>
+  <tr><td><strong>Node cluster module</strong></td><td>App code forks workers; master distributes connections</td><td>Legacy or educational use &mdash; mostly obsolete</td></tr>
+  <tr><td><strong>Fly.io/Render/Heroku scale</strong></td><td>Scale instances via platform CLI</td><td>PaaS deployments</td></tr>
+</table>
+<pre><code>// the classic cluster module pattern — illustrative, not recommended for new projects
+import cluster from "node:cluster";
+import os from "node:os";
+import process from "node:process";
+
+if (cluster.isPrimary) {
+  const cpus = os.cpus().length;
+  for (let i = 0; i &lt; cpus; i++) cluster.fork();
+
+  cluster.on("exit", (worker, code) =&gt; {
+    console.log(`worker ${worker.process.pid} died (${code}), restarting`);
+    cluster.fork();                             // self-healing
+  });
+} else {
+  // worker code — import your Express app
+  import("./app.js").then(({ app }) =&gt; app.listen(3000));
+}
+</code></pre>
+<p><strong>Why Kubernetes/PM2 beats cluster module:</strong></p>
+<ul>
+  <li><strong>Process isolation.</strong> A memory leak or crash in one worker doesn't affect siblings.</li>
+  <li><strong>Zero-downtime reloads.</strong> PM2 <code>reload</code> and k8s rolling deploys restart workers one at a time while the others serve traffic.</li>
+  <li><strong>Observability.</strong> PM2 and k8s expose metrics (CPU, memory, restart count) per worker without custom instrumentation.</li>
+  <li><strong>Resource limits.</strong> Kubernetes enforces memory limits per pod; a runaway leak kills that pod, not the whole host.</li>
+</ul>
+<p><strong>Session affinity concerns:</strong> WebSocket connections and file uploads tie clients to a specific worker; use <strong>sticky sessions</strong> at the load balancer (<code>session-affinity: ClientIP</code> in k8s) or externalize state to Redis. With pure stateless REST, no affinity needed.</p>
+<p><strong>Shared state:</strong> never put application state in process memory (in-memory caches, user sessions) &mdash; externalize to Redis/DB. Each worker is an island; workers can't <code>setInterval</code> for scheduled tasks (you'd run N times) &mdash; use a dedicated scheduler or a queue with a single consumer.</p>
+'''
+
+ANSWERS[25] = r'''
+<p>Request/response transformation middleware lets you intercept and modify data in both directions. Common uses: <strong>request</strong> &mdash; normalize headers, unwrap payloads, strip PII; <strong>response</strong> &mdash; reshape JSON envelopes, add pagination metadata, wrap errors.</p>
+<pre><code>// Request-side — normalize incoming payload
+function unwrapPayload(req, res, next) {
+  // accept both {data: {...}} and {...} at the top level
+  if (req.body &amp;&amp; typeof req.body === "object" &amp;&amp; "data" in req.body) {
+    req.body = req.body.data;
+  }
+  next();
+}
+
+// Response-side — wrap all JSON responses in an envelope
+function envelopeResponses(req, res, next) {
+  const origJson = res.json.bind(res);
+  res.json = (body) =&gt; {
+    const status = res.statusCode;
+    const wrapped = status &gt;= 400
+      ? { ok: false, error: body, meta: { reqId: req.id } }
+      : { ok: true,  data: body,  meta: { reqId: req.id, timestamp: Date.now() } };
+    return origJson(wrapped);
+  };
+  next();
+}
+
+app.use(express.json(), unwrapPayload, envelopeResponses);
+
+// Streaming transformation — gzip is the obvious one; on-the-fly filtering is another
+import { Transform } from "node:stream";
+function filterFields(...fieldsToRemove) {
+  return new Transform({
+    writableObjectMode: true,
+    transform(row, enc, cb) {
+      const clean = { ...row };
+      for (const f of fieldsToRemove) delete clean[f];
+      cb(null, JSON.stringify(clean) + "\n");
+    },
+  });
+}
+</code></pre>
+<p><strong>The monkey-patch tradeoff:</strong> overriding <code>res.json</code> (shown above) works but couples transformation to Express internals. Safer alternatives:</p>
+<ul>
+  <li><strong>Helper function</strong> &mdash; write <code>respond(res, status, body)</code> and use it everywhere; no monkey-patching.</li>
+  <li><strong>Response interceptor libraries</strong> (<strong>express-response-helper</strong>, or build your own) &mdash; provide a cleaner API.</li>
+  <li><strong>Buffer-then-transform</strong> for non-streaming responses &mdash; capture <code>res.write</code>/<code>res.end</code> chunks and modify before sending.</li>
+</ul>
+<p><strong>When not to transform:</strong> response transformation breaks the direct relationship between handler code and wire output &mdash; a future teammate wonders why <code>res.json({users: [...]})</code> returns <code>{ok: true, data: {users: [...]}}</code>. Document the envelope at the API boundary. For REST APIs, <strong>don't</strong> reshape every response &mdash; pagination metadata belongs in headers (<code>Link</code>, <code>X-Total-Count</code>) or response body by convention, not in a wrapping envelope that forces clients to unwrap everything.</p>
+<p><strong>Observability angle:</strong> request/response middleware is the natural place to instrument metrics and traces &mdash; measure duration, count by status code, sample bodies for debugging. OpenTelemetry's Express instrumentation already does this; if you have it installed, don't duplicate.</p>
+'''
+
+ANSWERS[26] = r'''
+<p>The <code>compression</code> middleware inspects the client's <code>Accept-Encoding</code> header and negotiates gzip, deflate, or (with extra packages) brotli on the response body. For typical JSON APIs, payloads shrink 70-90%.</p>
+<pre><code>import compression from "compression";
+
+app.use(compression({
+  level: 6,                                     // 1 (fastest) — 9 (smallest); 6 is balanced
+  threshold: 1024,                              // skip bodies &lt; 1 KB
+  filter: (req, res) =&gt; {
+    if (req.headers["x-no-compression"]) return false;
+    return compression.filter(req, res);        // default: compress by content-type
+  },
+}));</code></pre>
+<p><strong>Trade-offs:</strong></p>
+<ul>
+  <li><strong>CPU vs bandwidth.</strong> Compression is CPU-bound. On a CPU-constrained Node instance serving thousands of req/sec, the cost may exceed the savings. Profile with and without.</li>
+  <li><strong>Already-compressed formats</strong> (JPEG, MP4, PNG, <code>.zip</code>) get slightly larger with gzip &mdash; the default filter correctly skips them by MIME type.</li>
+  <li><strong>Streaming + compression</strong> buffer output; SSE and long-poll endpoints should disable compression or call <code>res.flush()</code> explicitly so partial frames ship.</li>
+  <li><strong>BREACH attack</strong> &mdash; gzip + user-controlled content + secrets in the same response leaks data via size analysis. Don't reflect secrets into responses, and use CSRF tokens per-request (not per-session).</li>
+</ul>
+<p><strong>Production guidance:</strong> offload compression to your reverse proxy (Nginx, Caddy, Cloudflare) &mdash; they do it in C, faster than Node's JS, and free Node's event loop for real work. <strong>Brotli</strong> (Cloudflare/Nginx support it natively) beats gzip 15-25% on text; combine with long <code>Cache-Control</code> on static assets for compounding wins. Measure first &mdash; if most traffic is mobile on slow links, compression is a clear win; if it's datacenter-to-datacenter, skip it.</p>
+'''
+
+ANSWERS[27] = r'''
+<p>Multer parses <code>multipart/form-data</code>, the only encoding that carries files over HTTP. Production uploads demand configuration beyond the defaults: strict limits, MIME filtering, magic-byte verification, and direct-to-storage streaming.</p>
+<pre><code>import multer from "multer";
+import { fileTypeFromBuffer } from "file-type";
+
+const upload = multer({
+  storage: multer.memoryStorage(),            // or diskStorage / multer-s3
+  limits: {
+    fileSize: 10 * 1024 * 1024,               // per file
+    files: 5,                                 // max files in one request
+    fields: 20,                               // max non-file fields
+  },
+  fileFilter: (req, file, cb) =&gt; {
+    const allowed = new Set(["image/jpeg","image/png","image/webp","application/pdf"]);
+    cb(null, allowed.has(file.mimetype));
+  },
+});
+
+app.post("/upload", upload.single("file"), async (req, res, next) =&gt; {
+  if (!req.file) return res.status(400).json({ error: "No file" });
+  // magic-byte verification — the client-reported MIME is unreliable
+  const detected = await fileTypeFromBuffer(req.file.buffer);
+  if (!detected || detected.mime !== req.file.mimetype) {
+    return res.status(400).json({ error: "Type mismatch" });
+  }
+  // then: re-encode via sharp, virus scan, move to storage...
+  res.status(201).json({ ok: true });
+});</code></pre>
+<p><strong>Three storage strategies:</strong></p>
+<ul>
+  <li><strong>Memory</strong> &mdash; fast access for processing (image resize, validation). RAM-bounded; unsuitable for large files.</li>
+  <li><strong>Disk</strong> &mdash; files stream to local disk; convenient for development. Doesn't survive container restarts; needs separate garbage collection.</li>
+  <li><strong>Direct-to-S3</strong> (multer-s3) or <strong>pre-signed URL</strong> &mdash; production default; zero Node bandwidth for the upload itself.</li>
+</ul>
+<p><strong>Security essentials:</strong> never trust the client MIME type; always verify with <code>file-type</code> or re-encode with a real parser (<code>sharp</code> for images). Generate server-side filenames (UUID) &mdash; never use user-supplied names as paths. Serve user content from a different origin (<code>user-content.example.com</code>) so any XSS is isolated. Run uploads through ClamAV or a cloud scanning service for documents.</p>
+'''
+
+ANSWERS[28] = r'''
+<p><code>multipart/form-data</code> is the only HTTP body format that interleaves text fields and files in one request. Neither <code>express.json()</code> nor <code>express.urlencoded()</code> can parse it &mdash; they consume the raw body and leave you with nothing usable. <strong>Multer</strong> (or <strong>busboy</strong> directly for streaming cases) is required.</p>
+<pre><code>import multer from "multer";
+
+const upload = multer({ storage: multer.memoryStorage() });
+
+// mixed: one avatar + multiple screenshots + text fields
+app.post("/report",
+  upload.fields([
+    { name: "avatar",      maxCount: 1 },
+    { name: "screenshots", maxCount: 5 },
+  ]),
+  (req, res) =&gt; {
+    // text fields (title, body) on req.body
+    // files on req.files.avatar[], req.files.screenshots[]
+    res.json({
+      title: req.body.title,
+      avatar: req.files.avatar?.[0]?.originalname,
+      screenshots: req.files.screenshots?.map((f) =&gt; f.originalname) ?? [],
+    });
+  }
+);</code></pre>
+<p><strong>Common pitfalls:</strong></p>
+<ul>
+  <li><strong>Body parsers conflict.</strong> Don't register <code>express.json()</code> <em>before</em> multer on the same route &mdash; it consumes the stream and multer sees an empty body.</li>
+  <li><strong>Field order matters on the wire.</strong> Multipart parses sequentially. Put text fields <em>before</em> file fields in the form, so your <code>fileFilter</code> can access <code>req.body</code> values (e.g. <code>req.body.userId</code>) for per-user limits.</li>
+  <li><strong>Streaming is better for huge files.</strong> For files &gt; 100 MB, use busboy directly with a readable stream &rarr; S3 multipart upload, rather than buffering or writing to disk.</li>
+</ul>
+<p><strong>When to skip Express entirely:</strong> for very large or many concurrent uploads, pre-signed URLs bypass Node's event loop &mdash; the browser POSTs directly to S3/GCS/R2 using a time-limited signed URL your server issues. Your Node process handles the tiny "sign" request; the multi-GB bytes never touch it. For resumable uploads on flaky networks, <strong>tus</strong> (tus-js-client + tusd server or <code>@tus/server</code> middleware) is the standard.</p>
+'''
+
+ANSWERS[29] = r'''
+<p>Express doesn't speak WebSocket &mdash; the protocol starts with an HTTP <em>Upgrade</em> handshake that Express routes don't intercept. The standard pattern is to attach a WebSocket server to the same underlying <code>http.Server</code> Express runs on, so both share a port.</p>
+<pre><code>import express from "express";
+import http from "node:http";
+import { WebSocketServer } from "ws";
+
+const app = express();
+app.get("/health", (req, res) =&gt; res.send("ok"));
+
+const server = http.createServer(app);
+const wss = new WebSocketServer({ noServer: true });   // attach via manual upgrade
+
+// authenticate on the upgrade handshake
+server.on("upgrade", async (req, socket, head) =&gt; {
+  try {
+    const token = new URL(req.url, "http://x").searchParams.get("token");
+    req.user = await verifyJwt(token);
+  } catch {
+    socket.write("HTTP/1.1 401 Unauthorized\r\n\r\n");
+    socket.destroy();
+    return;
+  }
+  wss.handleUpgrade(req, socket, head, (ws) =&gt; wss.emit("connection", ws, req));
+});
+
+wss.on("connection", (ws, req) =&gt; {
+  ws.send(JSON.stringify({ type: "welcome", userId: req.user.id }));
+  ws.on("message", (buf) =&gt; { /* handle */ });
+});
+
+server.listen(3000);                                   // HTTP and WS on :3000</code></pre>
+<p><strong>Production essentials:</strong></p>
+<ul>
+  <li><strong>Authenticate on upgrade</strong>, before emitting the connection event. Anyone who reaches the handler has full access; reject at the handshake.</li>
+  <li><strong>Heartbeats</strong> &mdash; ping/pong every 30s; terminate sockets that don't respond. NAT/proxies silently drop idle connections otherwise.</li>
+  <li><strong>Backpressure</strong> &mdash; check <code>ws.bufferedAmount</code> before sending; if a slow consumer is buffering, drop the socket or throttle the producer.</li>
+  <li><strong>Reverse proxy config</strong> &mdash; Nginx and ALBs need WebSocket support explicitly enabled (<code>proxy_set_header Upgrade</code>).</li>
+</ul>
+<p><strong>Scale-out:</strong> with multiple Node instances, a client on instance A can't send to a client on instance B. Use Redis pub/sub as a fan-out layer, or delegate to <strong>Socket.IO + @socket.io/redis-adapter</strong> which handles this out of the box. For high-scale real-time (100k+ connections per process), <strong>uWebSockets.js</strong> is an order of magnitude more efficient than <code>ws</code>. For hosted pub/sub, <strong>Ably</strong>, <strong>Pusher</strong>, and <strong>Supabase Realtime</strong> remove the ops burden.</p>
+'''
+
+ANSWERS[30] = r'''
+<p>Socket.IO is a higher-level protocol on top of WebSockets that adds <strong>rooms</strong>, <strong>automatic reconnection</strong>, <strong>namespaces</strong>, <strong>message acknowledgments</strong>, and <strong>HTTP long-polling fallback</strong>. It integrates with Express by attaching to the same HTTP server.</p>
+<pre><code>import express from "express";
+import http from "node:http";
+import { Server } from "socket.io";
+import { createAdapter } from "@socket.io/redis-adapter";
+import Redis from "ioredis";
+
+const app = express();
+const server = http.createServer(app);
+const io = new Server(server, { cors: { origin: process.env.APP_URL } });
+
+// Redis adapter — broadcasts cross instances
+const pub = new Redis(process.env.REDIS_URL);
+const sub = pub.duplicate();
+io.adapter(createAdapter(pub, sub));
+
+// authenticate on the handshake; rejected connections never reach handlers
+io.use(async (socket, next) =&gt; {
+  try {
+    socket.data.user = await verifyJwt(socket.handshake.auth?.token);
+    next();
+  } catch { next(new Error("Unauthorized")); }
+});
+
+io.on("connection", (socket) =&gt; {
+  const { user } = socket.data;
+  socket.join(`user:${user.id}`);                     // personal channel
+
+  socket.on("chat:send", async ({ room, text }, ack) =&gt; {
+    if (!text || text.length &gt; 2000) return ack?.({ ok: false });
+    await db.message.create({ data: { room, from: user.id, text } });
+    io.to(`room:${room}`).emit("chat:new", { from: user.id, text });
+    ack?.({ ok: true });                              // client-side promise resolves
+  });
+});
+
+server.listen(3000);</code></pre>
+<p><strong>What Socket.IO adds vs raw ws:</strong></p>
+<ul>
+  <li><strong>Rooms</strong> &mdash; named groups of sockets; broadcast with <code>io.to("room:42").emit(...)</code>.</li>
+  <li><strong>Reconnection</strong> &mdash; built-in exponential backoff and message buffering.</li>
+  <li><strong>Acknowledgments</strong> &mdash; the callback form (<code>emit(event, data, ack)</code>) lets clients await a round-trip.</li>
+  <li><strong>Fallback</strong> &mdash; when WebSocket is blocked, falls back to HTTP long-polling. Rarely needed in 2026; disable with <code>transports: ["websocket"]</code> if you don't want it.</li>
+</ul>
+<p><strong>Trade-offs:</strong> Socket.IO is heavier than raw ws (larger client bundle, custom protocol on the wire &mdash; not compatible with generic WebSocket clients). If you need interop with external WebSocket consumers or max throughput, go with ws or uWebSockets.js. For typical chat/collaboration apps, Socket.IO saves weeks of wiring.</p>
+'''
+
+ANSWERS[31] = r'''
+<p>Real-time data sync has three architectural levels: (1) <strong>broadcast</strong> changes to connected clients via WebSockets; (2) <strong>reconcile</strong> state on reconnect; (3) <strong>resolve conflicts</strong> when clients edit concurrently. Picking the right level depends on whether you're building a chat (broadcast suffices), a Trello (reconcile + optimistic updates), or a Figma (CRDT).</p>
+<pre><code>// Level 1: server-authoritative broadcast
+app.post("/orders/:id/status", async (req, res) =&gt; {
+  const order = await db.order.update({ where: { id: req.params.id }, data: { status: req.body.status } });
+  io.to(`order:${order.id}`).emit("order:updated", order);
+  io.to(`user:${order.userId}`).emit("notification", { orderId: order.id, status: order.status });
+  res.json(order);
+});
+
+// Level 2: reconciliation on reconnect — send "since lastSeenAt"
+io.on("connection", async (socket) =&gt; {
+  const { userId } = socket.data;
+  socket.on("sync:request", async ({ sinceId }) =&gt; {
+    const updates = await db.event.findMany({
+      where: { userId, id: { gt: sinceId } },
+      orderBy: { id: "asc" },
+      take: 500,
+    });
+    socket.emit("sync:updates", updates);
+  });
+});</code></pre>
+<p><strong>Patterns by complexity:</strong></p>
+<table>
+  <tr><th>Pattern</th><th>When</th><th>Libraries</th></tr>
+  <tr><td>Broadcast on write</td><td>Chat, notifications, presence</td><td>Socket.IO, Pusher, Ably</td></tr>
+  <tr><td>Event stream + replay</td><td>Activity feeds, collaborative lists</td><td>Kafka, Redpanda, NATS JetStream</td></tr>
+  <tr><td>CRDTs (conflict-free)</td><td>Concurrent doc editing (Figma, Linear)</td><td>Yjs, Automerge, Liveblocks</td></tr>
+  <tr><td>Operational Transform</td><td>Legacy co-editing (Google Docs)</td><td>ShareDB, ot.js</td></tr>
+  <tr><td>Sync engines</td><td>Offline-first, mobile</td><td>Replicache, ElectricSQL, PowerSync</td></tr>
+</table>
+<p><strong>Essentials across patterns:</strong> version every write (sequence number or vector clock) so clients can detect missed updates; send <em>events</em> not full-state dumps when possible (smaller messages, trivial reconciliation); acknowledge writes so clients know they succeeded; expire idle connections aggressively. For scale: fan-out via Redis pub/sub or NATS so multiple Node instances broadcast to the full connected pool.</p>
+'''
+
+ANSWERS[32] = r'''
+<p>Node's event loop runs JavaScript on a single thread. CPU-heavy work (encryption, image processing, compression of large buffers, complex regex) blocks the loop, freezing every request. <strong>Worker threads</strong> (<code>node:worker_threads</code>, since Node 10.5) run JS on real OS threads &mdash; the correct escape hatch.</p>
+<pre><code>// worker.js — lives in its own file
+import { parentPort, workerData } from "node:worker_threads";
+import bcrypt from "bcrypt";
+
+parentPort.on("message", async ({ id, password }) =&gt; {
+  const hash = await bcrypt.hash(password, 12);
+  parentPort.postMessage({ id, hash });
+});
+
+// main.js — maintain a small pool of workers
+import { Worker } from "node:worker_threads";
+import { availableParallelism } from "node:os";
+
+class WorkerPool {
+  constructor(size = availableParallelism() - 1) {
+    this.workers = Array.from({ length: size }, () =&gt; new Worker("./worker.js"));
+    this.idx = 0;
+    this.pending = new Map();
+    for (const w of this.workers) {
+      w.on("message", ({ id, ...r }) =&gt; {
+        this.pending.get(id)?.(r);
+        this.pending.delete(id);
+      });
+    }
+  }
+  run(data) {
+    return new Promise((resolve) =&gt; {
+      const id = crypto.randomUUID();
+      this.pending.set(id, resolve);
+      this.workers[this.idx].postMessage({ id, ...data });
+      this.idx = (this.idx + 1) % this.workers.length;
+    });
+  }
+}
+
+const pool = new WorkerPool();
+
+app.post("/signup", async (req, res) =&gt; {
+  const { hash } = await pool.run({ password: req.body.password });
+  // ... save user with hash ...
+  res.json({ ok: true });
+});</code></pre>
+<p><strong>Worker threads vs alternatives:</strong></p>
+<table>
+  <tr><th>Option</th><th>When</th><th>Trade-off</th></tr>
+  <tr><td>Worker threads</td><td>CPU-bound JS with shared memory via <code>SharedArrayBuffer</code></td><td>Overhead per message; not free</td></tr>
+  <tr><td>Child processes</td><td>Spawning external tools, or full OS isolation</td><td>Heavier than threads, more ops overhead</td></tr>
+  <tr><td>Cluster</td><td>Scaling whole requests across cores, not single operations</td><td>Different problem altogether</td></tr>
+  <tr><td>Background queue (BullMQ, Sidekiq)</td><td>Minutes-long tasks where request doesn't need to wait</td><td>Best for most real-world "expensive" work</td></tr>
+</table>
+<p><strong>Libraries:</strong> <strong>Piscina</strong> is the de-facto worker-pool library &mdash; it handles lifecycle, load balancing, cancellation, and crash recovery. Don't roll your own pool for production. Message passing uses structured clone (copy, not share) &mdash; for big data, pass a <code>SharedArrayBuffer</code>.</p>
+'''
+
+ANSWERS[33] = r'''
+<p>A CLI for an Express project usually serves three audiences: <strong>developers</strong> (generate scaffolding, run migrations), <strong>operators</strong> (seed data, run one-off jobs), and <strong>CI/CD</strong> (health probes, cache warmers). Node has a solid toolchain for all three.</p>
+<pre><code>#!/usr/bin/env node
+// bin/cli.js — make executable with chmod +x, register in package.json "bin"
+import { Command } from "commander";
+import { migrate }  from "../src/migrate.js";
+import { seed }     from "../src/seed.js";
+
+const program = new Command();
+program.name("myapp").version("1.0.0");
+
+program.command("migrate")
+  .description("run pending database migrations")
+  .option("-d, --dry", "show what would run without executing")
+  .action(async (opts) =&gt; {
+    const n = await migrate({ dry: opts.dry });
+    console.log(`applied ${n} migration(s)`);
+  });
+
+program.command("seed [env]")
+  .description("seed the database for a given environment")
+  .action(async (env = "dev") =&gt; {
+    await seed(env);
+    console.log("seeded");
+  });
+
+program.command("user:create &lt;email&gt;")
+  .description("create an admin user")
+  .option("-r, --role &lt;role&gt;", "user role", "admin")
+  .action(async (email, { role }) =&gt; {
+    const user = await db.user.create({ data: { email, role } });
+    console.log(`created ${user.id}`);
+  });
+
+program.parseAsync(process.argv);</code></pre>
+<pre><code>// package.json
+{
+  "bin": { "myapp": "./bin/cli.js" },
+  "scripts": { "dev": "node --watch src/server.js" }
+}
+// after `npm link`: run "myapp migrate" globally</code></pre>
+<p><strong>Essential patterns:</strong></p>
+<ul>
+  <li><strong>Separate entrypoints.</strong> <code>bin/cli.js</code> for commands; <code>src/server.js</code> for the HTTP server. Both import from the same <code>src/</code> modules &mdash; shared business logic, different lifecycles.</li>
+  <li><strong>Exit codes matter.</strong> <code>process.exit(1)</code> on failure so CI pipelines detect errors; print stack traces to stderr, not stdout.</li>
+  <li><strong>Environment isolation.</strong> Require <code>--env production</code> (or similar) for destructive operations &mdash; never rely on <code>NODE_ENV</code> alone.</li>
+</ul>
+<p><strong>Library choices:</strong> <strong>Commander</strong> (used above) and <strong>Yargs</strong> are mature; <strong>cac</strong> and <strong>clipanion</strong> are lighter alternatives. For interactive prompts use <strong>prompts</strong> or <strong>@inquirer/prompts</strong>. For spinners, <strong>ora</strong>; for tables, <strong>cli-table3</strong>. Framework-level: NestJS ships <code>@nestjs/cli</code> with code generation; Fastify has similar patterns via <strong>fastify-cli</strong>.</p>
+'''
+
+ANSWERS[34] = r'''
+<p>Configuration in production has three tiers: <strong>defaults</strong> (checked into code), <strong>environment overrides</strong> (per-deploy env vars or files), and <strong>runtime overrides</strong> (feature flags, kill switches). The hard rule: never commit secrets, never hardcode environment assumptions, always validate on startup.</p>
+<pre><code>// config/schema.js — validate and type config at process start
+import { z } from "zod";
+
+const Env = z.object({
+  NODE_ENV:    z.enum(["development","test","staging","production"]),
+  PORT:        z.coerce.number().int().positive().default(3000),
+  DATABASE_URL: z.string().url(),
+  REDIS_URL:   z.string().url(),
+  JWT_SECRET:  z.string().min(32),
+  LOG_LEVEL:   z.enum(["trace","debug","info","warn","error"]).default("info"),
+  FEATURE_NEW_CHECKOUT: z.coerce.boolean().default(false),
+});
+
+export const config = Env.parse(process.env);     // throws on missing/invalid → fail fast
+</code></pre>
+<pre><code>// runtime dynamic config — backed by Redis or a feature-flag service
+async function getFlag(name, userId) {
+  const cached = await redis.get(`flag:${name}:${userId}`);
+  if (cached !== null) return cached === "1";
+  const enabled = await flagService.evaluate(name, userId);
+  await redis.setex(`flag:${name}:${userId}`, 60, enabled ? "1" : "0");
+  return enabled;
+}
+
+app.get("/checkout", async (req, res) =&gt; {
+  if (await getFlag("newCheckout", req.user.id)) {
+    return res.render("checkout-v2");
+  }
+  res.render("checkout-v1");
+});</code></pre>
+<p><strong>Principles of dynamic config:</strong></p>
+<ul>
+  <li><strong>Validate at startup.</strong> A missing <code>JWT_SECRET</code> should crash the container, not fail the first auth request.</li>
+  <li><strong>Typed access.</strong> <code>config.PORT</code> is a number after Zod coercion; stringly-typed env vars cause subtle bugs.</li>
+  <li><strong>Kill switches</strong> for experimental code &mdash; flip off via config, no deploy required.</li>
+  <li><strong>Feature flags</strong> for rollouts &mdash; 1% &rarr; 10% &rarr; 100% of users, targeted by id/team/region.</li>
+  <li><strong>Separate secret storage</strong> &mdash; AWS Secrets Manager, HashiCorp Vault, Doppler, Infisical. Not <code>.env</code> in production.</li>
+</ul>
+<p><strong>Libraries:</strong> <strong>@nestjs/config</strong> + Zod is the cleanest Express-ecosystem pattern. For feature flags: <strong>LaunchDarkly</strong>, <strong>Flagsmith</strong>, <strong>PostHog</strong>, <strong>Unleash</strong>, <strong>GrowthBook</strong>. Most support SDK caching so flags evaluate locally in single-digit milliseconds.</p>
+'''
+
+ANSWERS[35] = r'''
+<p>Multi-tenancy means serving many customers from one codebase with isolated data. The three common architectures are: <strong>shared database with tenant id column</strong> (cheapest), <strong>database-per-tenant</strong> (strongest isolation), and <strong>schema-per-tenant</strong> (middle ground, Postgres-native). Pick by regulatory and scale requirements.</p>
+<pre><code>// tenant identification middleware — from subdomain, header, or JWT
+async function resolveTenant(req, res, next) {
+  const slug =
+    req.hostname.split(".")[0] ||
+    req.headers["x-tenant"] ||
+    req.user?.tenantSlug;
+  if (!slug) return res.sendStatus(400);
+
+  const tenant = await cacheLoad(`tenant:${slug}`, 60,
+    () =&gt; db.tenant.findUnique({ where: { slug } }));
+  if (!tenant || tenant.suspended) return res.sendStatus(404);
+  req.tenant = tenant;
+  next();
+}
+
+// every query automatically scoped — Prisma middleware
+db.$use(async (params, next) =&gt; {
+  const tenantId = als.getStore()?.tenantId;
+  if (tenantId &amp;&amp; TENANT_MODELS.has(params.model)) {
+    if (params.action.startsWith("find") || params.action === "count") {
+      params.args.where = { ...params.args.where, tenantId };
+    }
+    if (params.action === "create") {
+      params.args.data  = { ...params.args.data,  tenantId };
+    }
+  }
+  return next(params);
+});
+
+app.use(resolveTenant);
+app.use((req, res, next) =&gt; als.run({ tenantId: req.tenant.id }, next));</code></pre>
+<p><strong>Comparison:</strong></p>
+<table>
+  <tr><th>Model</th><th>Isolation</th><th>Cost/tenant</th><th>Ops complexity</th></tr>
+  <tr><td>Shared DB + tenant_id</td><td>App-level only</td><td>Pennies</td><td>Low, but any bug leaks across tenants</td></tr>
+  <tr><td>Schema per tenant (Postgres)</td><td>DB-level (<code>search_path</code>)</td><td>Moderate</td><td>Migrations become N-per-tenant</td></tr>
+  <tr><td>DB per tenant</td><td>Maximum</td><td>High (per-DB overhead)</td><td>Backup/migration pipelines multiply</td></tr>
+  <tr><td>Cluster per tenant</td><td>Full</td><td>Very high</td><td>Only for regulated industries</td></tr>
+</table>
+<p><strong>Cross-cutting concerns:</strong> every log line and metric needs a <code>tenantId</code> label; rate limits are per-tenant (one bad tenant can't starve others); backups respect the chosen boundary; tenant-level feature flags let you run experiments safely. For row-level security, <strong>Postgres RLS</strong> policies are gold-standard &mdash; even application bugs can't leak data across tenants. For SaaS audit: <strong>SOC 2</strong> Type II and <strong>ISO 27001</strong> require documented tenant isolation.</p>
+'''
+
+ANSWERS[36] = r'''
+<p>Graceful shutdown is: stop accepting new connections, finish in-flight requests, close resources (DB, Redis, queues), then exit. In container environments (Kubernetes, ECS), the runtime sends <strong>SIGTERM</strong> and gives you a grace window (default 30s in Kubernetes) before <strong>SIGKILL</strong>. Your job: use that window correctly.</p>
+<pre><code>import http from "node:http";
+
+const server = http.createServer(app);
+server.listen(PORT);
+
+let shuttingDown = false;
+app.get("/ready", (req, res) =&gt; {
+  res.status(shuttingDown ? 503 : 200).send(shuttingDown ? "draining" : "ready");
+});
+
+async function shutdown(signal) {
+  if (shuttingDown) return;
+  shuttingDown = true;
+  logger.info({ signal }, "shutdown initiated");
+
+  // 1. fail readiness immediately → load balancer drains traffic
+  //    (no code needed — handler above reads the flag)
+
+  // 2. wait a beat so LB has time to remove us from rotation
+  await new Promise((r) =&gt; setTimeout(r, 5_000));
+
+  // 3. close the HTTP server (stops accepting new connections)
+  await new Promise((resolve) =&gt; {
+    server.close((err) =&gt; { if (err) logger.error(err); resolve(); });
+    // Node 18.2+: force-close sockets that won't drain
+    setTimeout(() =&gt; server.closeAllConnections?.(), 15_000).unref();
+  });
+
+  // 4. close dependencies
+  await db.$disconnect();
+  await redis.quit();
+  await queue.close();
+
+  logger.info("shutdown complete");
+  process.exit(0);
+}
+
+process.on("SIGTERM", () =&gt; shutdown("SIGTERM"));
+process.on("SIGINT",  () =&gt; shutdown("SIGINT"));
+
+// never masquerade an unknown-state process as healthy
+process.on("uncaughtException",  (err) =&gt; { logger.fatal(err); process.exit(1); });
+process.on("unhandledRejection", (err) =&gt; { logger.fatal(err); process.exit(1); });</code></pre>
+<p><strong>Non-obvious details:</strong></p>
+<ul>
+  <li><strong>Readiness fails first, server closes second.</strong> If you close the listener before fail-ready, the LB still sends requests that get refused (connection reset) during the removal window.</li>
+  <li><strong>Keep-alive connections linger.</strong> <code>server.close()</code> waits for them to drain; <code>closeAllConnections()</code> (Node 18.2+) force-terminates after a timeout.</li>
+  <li><strong>WebSocket/SSE</strong> connections block shutdown; send a <code>reconnect</code> signal and close them explicitly.</li>
+  <li><strong>Background jobs</strong> &mdash; let BullMQ/inngest finish the active job; don't grab new ones while draining.</li>
+</ul>
+<p><strong>Libraries that handle edge cases:</strong> <strong>http-terminator</strong> and <strong>stoppable</strong> correctly handle keep-alive drain; <strong>terminus</strong> wraps the whole graceful-shutdown pattern with health-check integration. Always test shutdown locally with <code>kill -TERM &lt;pid&gt;</code> &mdash; the bug-finding rate is high.</p>
+'''
+
+ANSWERS[37] = r'''
+<p>A health endpoint is the contract between your app and the infrastructure &mdash; load balancers, orchestrators, and monitoring tools poll it to decide whether to send traffic, restart the pod, or page an engineer. The classic design separates <strong>liveness</strong> (am I alive?) from <strong>readiness</strong> (should I take traffic?).</p>
+<pre><code>let shuttingDown = false;
+let ready = false;
+
+// liveness — cheap, no dependencies
+app.get("/health", (req, res) =&gt; res.json({ status: "ok" }));
+
+// readiness — check dependencies, report degraded components
+app.get("/ready", async (req, res) =&gt; {
+  if (shuttingDown) return res.status(503).json({ status: "draining" });
+  if (!ready)       return res.status(503).json({ status: "starting" });
+
+  const checks = {};
+  let healthy = true;
+  await Promise.all([
+    timed("db",    () =&gt; db.$queryRaw`SELECT 1`),
+    timed("redis", () =&gt; redis.ping()),
+    timed("queue", () =&gt; queue.ping()),
+  ].map((p) =&gt; p.then(
+    (r) =&gt; checks[r.name] = { ok: true, ms: r.ms },
+    (r) =&gt; { checks[r.name] = { ok: false, err: r.err }; healthy = false; }
+  )));
+
+  res.status(healthy ? 200 : 503).json({ status: healthy ? "ok" : "degraded", checks });
+});
+
+function timed(name, fn) {
+  const start = Date.now();
+  return fn()
+    .then(()  =&gt; ({ name, ms: Date.now() - start }))
+    .catch((e) =&gt; Promise.reject({ name, err: e.message }));
+}
+
+// signal ready once startup is complete (migrations, cache warm, etc.)
+(async () =&gt; {
+  await runMigrations();
+  await warmCache();
+  ready = true;
+})();</code></pre>
+<p><strong>Liveness vs Readiness &mdash; why the split matters:</strong></p>
+<table>
+  <tr><th></th><th>Liveness</th><th>Readiness</th></tr>
+  <tr><td>Question</td><td>Is the process alive?</td><td>Can it serve traffic?</td></tr>
+  <tr><td>Failing action</td><td>Kubernetes restarts pod</td><td>LB routes traffic elsewhere</td></tr>
+  <tr><td>Dependencies</td><td>None</td><td>DB, cache, queue, warm caches</td></tr>
+  <tr><td>Startup</td><td>200 as soon as process exists</td><td>503 until ready</td></tr>
+  <tr><td>Shutdown</td><td>Keep returning 200 during drain</td><td>503 immediately on SIGTERM</td></tr>
+</table>
+<p><strong>Common anti-patterns:</strong> (1) <em>Liveness that checks the DB</em> &mdash; a DB blip cascades into every pod restarting simultaneously. (2) <em>Readiness probes public</em> &mdash; they leak version info, queue depth, and internal URLs; gate them to the internal network or require auth for detail. (3) <em>Expensive checks</em> &mdash; a probe called every 5 seconds that runs 10 DB queries <em>is</em> the problem. Add a <code>/version</code> endpoint returning git SHA and build time &mdash; critical for "what's in prod?" during incidents.</p>
+'''
+
+ANSWERS[38] = r'''
+<p>Internationalization (i18n) has four layers: <strong>locale detection</strong> (from header, cookie, query, or user profile), <strong>string translation</strong> (keys &rarr; localized text), <strong>formatting</strong> (dates, numbers, currency), and <strong>pluralization</strong> (which is trickier than it looks &mdash; Russian has three plural forms, Arabic six).</p>
+<pre><code>// npm install i18next i18next-fs-backend i18next-http-middleware
+import i18next from "i18next";
+import Backend from "i18next-fs-backend";
+import middleware from "i18next-http-middleware";
+
+await i18next
+  .use(Backend)
+  .use(middleware.LanguageDetector)
+  .init({
+    fallbackLng: "en",
+    supportedLngs: ["en","de","es","fr","ja","ar"],
+    preload: ["en","de","es","fr","ja","ar"],
+    backend: { loadPath: "./locales/{{lng}}/{{ns}}.json" },
+    detection: {
+      order: ["querystring","cookie","header"],
+      lookupQuerystring: "lang",
+      lookupCookie: "i18next",
+      caches: ["cookie"],
+    },
+  });
+
+app.use(middleware.handle(i18next));
+
+app.get("/", (req, res) =&gt; {
+  res.json({
+    greeting:  req.t("hello", { name: req.user?.name ?? "guest" }),
+    unread:    req.t("unreadMessages", { count: 3 }),     // auto-pluralization
+    price:     new Intl.NumberFormat(req.language, { style: "currency", currency: "USD" }).format(49.99),
+    date:      new Intl.DateTimeFormat(req.language, { dateStyle: "long" }).format(new Date()),
+  });
+});</code></pre>
+<p>Translation files:</p>
+<pre><code>// locales/en/translation.json
+{
+  "hello": "Hello, {{name}}",
+  "unreadMessages_one":   "{{count}} unread message",
+  "unreadMessages_other": "{{count}} unread messages"
+}
+// locales/de/translation.json
+{ "hello": "Hallo, {{name}}", "unreadMessages_one": "{{count}} ungelesene Nachricht", ... }</code></pre>
+<p><strong>Production practices:</strong></p>
+<ul>
+  <li><strong>Keys, not text, in code.</strong> Never <code>t("Hello world")</code>; use <code>t("home.greeting")</code>. Text changes break no code.</li>
+  <li><strong>Use ICU message format</strong> for complex rules (nested plurals, gendered text) &mdash; supported by <strong>FormatJS</strong> ecosystem.</li>
+  <li><strong>Don't reinvent formatting.</strong> Use the built-in <code>Intl.NumberFormat</code>, <code>Intl.DateTimeFormat</code>, <code>Intl.PluralRules</code>, <code>Intl.ListFormat</code> &mdash; they know every locale's rules.</li>
+  <li><strong>Translation workflow.</strong> <strong>Crowdin</strong>, <strong>Lokalise</strong>, <strong>Phrase</strong>, or self-hosted <strong>Weblate</strong> let translators work without touching code; CI pulls the latest JSON on deploy.</li>
+  <li><strong>RTL support</strong> &mdash; Arabic/Hebrew need <code>dir="rtl"</code> on the root and layout-direction-aware CSS.</li>
+  <li><strong>Timezones</strong> &mdash; store UTC in DB, format in user's timezone; <code>Intl.DateTimeFormat</code> with <code>timeZone</code> option.</li>
+</ul>
+'''
+
+ANSWERS[39] = r'''
+<p>Conditional middleware runs only when a request meets certain criteria &mdash; feature flags, route patterns, content type, user role, environment. Done right, it keeps common logic declarative; done wrong, it creates a maze where reasoning about order and coverage breaks down.</p>
+<pre><code>// 1. helper: conditional wrapper — runs middleware only when predicate passes
+function when(predicate, mw) {
+  return (req, res, next) =&gt; (predicate(req) ? mw(req, res, next) : next());
+}
+
+// 2. apply only in production
+app.use(when(() =&gt; process.env.NODE_ENV === "production", helmet()));
+
+// 3. apply only for authenticated users
+app.use(when((req) =&gt; !!req.user, trackUsage));
+
+// 4. apply only behind a feature flag
+app.use(when(async (req) =&gt; await flags.on("newValidator", req.user?.id),
+  newValidator));
+
+// 5. apply only to API routes, not static ones
+app.use(when((req) =&gt; req.path.startsWith("/api"), cors()));
+
+// 6. apply only to methods with bodies
+app.use(when((req) =&gt; ["POST","PUT","PATCH"].includes(req.method),
+  express.json()));
+
+// 7. per-route mounting is cleaner when the condition is a path
+app.use("/admin", requireRole("admin"), adminRouter);</code></pre>
+<p><strong>Guidance on conditions:</strong></p>
+<ul>
+  <li><strong>Prefer path-based mounting</strong> (<code>app.use("/admin", mw)</code>) over <code>when</code> predicates on path &mdash; Express's native routing is clearer.</li>
+  <li><strong>Keep predicates pure and synchronous</strong> when possible. Async predicates work but add latency to every request.</li>
+  <li><strong>Feature-flag middleware</strong> is an anti-pattern if the flag changes middleware ordering &mdash; two requests running under different flags behave differently at the framework level. Put flags <em>inside</em> the middleware.</li>
+  <li><strong>Environment gates</strong> are fine but risky &mdash; "it works in dev, fails in prod" often traces here. Prefer the same middleware in both environments with different config.</li>
+</ul>
+<p><strong>Common use cases:</strong> dev-only request logging verbose mode, production-only security headers, conditional body parsers by content type, skipping auth on health checks and OPTIONS preflight, A/B testing new middleware with a flag before rolling it out. For complex predicates, <strong>CASL</strong> or <strong>Casbin</strong> policies express "who can do what when" more readably than stacked <code>when()</code> calls.</p>
+'''
+
+ANSWERS[40] = r'''
+<p>API versioning is the contract between you and consumers who can't be forced to upgrade. The three mainstream strategies &mdash; URL path, header, and content-type &mdash; trade off discoverability, cacheability, and operational overhead differently.</p>
+<table>
+  <tr><th>Strategy</th><th>Example</th><th>Pros</th><th>Cons</th></tr>
+  <tr><td>URL path</td><td><code>/api/v1/users</code></td><td>Trivial to debug; CDN cacheable; browser-friendly</td><td>Two "resources" for one logical thing</td></tr>
+  <tr><td>Accept header</td><td><code>Accept: application/vnd.api+json; version=2</code></td><td>Resource URL stays stable; HATEOAS-friendly</td><td>Hard to test in a browser; cache keys more complex</td></tr>
+  <tr><td>Custom header</td><td><code>X-API-Version: 2</code></td><td>Clean URLs; simple to implement</td><td>Not standardized; cache config fiddly</td></tr>
+  <tr><td>Date-based</td><td><code>Stripe-Version: 2024-10-15</code></td><td>Gradual evolution; one version per account</td><td>Complex on the server; requires per-version code paths</td></tr>
+</table>
+<pre><code>// URL-path versioning with separate routers
+import v1Router from "./api/v1/index.js";
+import v2Router from "./api/v2/index.js";
+
+app.use("/api/v1", v1Router);
+app.use("/api/v2", v2Router);
+app.use("/api", (req, res) =&gt; res.redirect(301, req.originalUrl.replace("/api/", "/api/v1/")));
+
+// or header-based — one router, version-aware handlers
+app.use("/api", (req, res, next) =&gt; {
+  req.apiVersion = Number(req.headers["x-api-version"]) || 1;
+  next();
+});</code></pre>
+<p><strong>Operational principles:</strong></p>
+<ul>
+  <li><strong>Deprecation windows.</strong> Announce removal (6-12 months) before turning off an old version. Emit a <code>Deprecation</code> header and <code>Sunset</code> date in responses.</li>
+  <li><strong>Breaking change policy.</strong> Adding fields is backward-compatible; removing or renaming is not. Code defensively &mdash; never assume clients sent a field just because your current client does.</li>
+  <li><strong>Minimize versions.</strong> Each version is a separate test surface. Stripe's date-based scheme is elegant but only scales at their ops maturity.</li>
+  <li><strong>Document with OpenAPI</strong> &mdash; generate client SDKs from the spec. <strong>Swagger UI</strong> or <strong>Redoc</strong> for human-readable docs; <strong>openapi-typescript</strong> for typed clients.</li>
+</ul>
+<p><strong>Practical default for most teams:</strong> URL-path versioning (<code>/api/v1</code>) &mdash; it's boring, which is exactly what you want for versioning. Header-based is defensible but adds ceremony with no payoff for small consumers.</p>
+'''
+
+ANSWERS[41] = r'''
+<p>Logging requests and responses together closes the observability loop: you see what came in and what went out, down to sizes and timing, with enough correlation data to trace through a distributed system. The pattern is one middleware that records on <code>res.on("finish")</code>.</p>
+<pre><code>import pino from "pino";
+import { AsyncLocalStorage } from "node:async_hooks";
+
+const logger = pino({ redact: ["req.headers.authorization","req.headers.cookie"] });
+const als = new AsyncLocalStorage();
+
+function requestLogger(req, res, next) {
+  const reqId = req.headers["x-request-id"] || crypto.randomUUID();
+  req.id = reqId;
+  res.setHeader("X-Request-Id", reqId);
+
+  const start = process.hrtime.bigint();
+  const reqBodySize = Number(req.headers["content-length"]) || 0;
+
+  // capture response body size by wrapping res.write/res.end
+  let resSize = 0;
+  const origWrite = res.write.bind(res);
+  const origEnd   = res.end.bind(res);
+  res.write = (chunk, ...rest) =&gt; { if (chunk) resSize += Buffer.byteLength(chunk); return origWrite(chunk, ...rest); };
+  res.end   = (chunk, ...rest) =&gt; { if (chunk) resSize += Buffer.byteLength(chunk); return origEnd(chunk, ...rest); };
+
+  res.on("finish", () =&gt; {
+    const durMs = Number(process.hrtime.bigint() - start) / 1e6;
+    const level = res.statusCode &gt;= 500 ? "error" : res.statusCode &gt;= 400 ? "warn" : "info";
+    logger[level]({
+      reqId,
+      req:  { method: req.method, url: req.originalUrl, bytes: reqBodySize,
+              ua: req.get("user-agent"), ip: req.ip },
+      res:  { status: res.statusCode, bytes: resSize },
+      user: req.user?.id,
+      durMs: +durMs.toFixed(2),
+    });
+  });
+
+  als.run({ reqId, userId: req.user?.id }, next);
+}
+
+app.use(requestLogger);</code></pre>
+<p><strong>What you should NOT log:</strong></p>
+<ul>
+  <li><strong>Request bodies wholesale.</strong> They contain passwords, tokens, PII, payment data. Log sizes and keys, not values.</li>
+  <li><strong>Response bodies.</strong> Same reason, plus log-storage cost balloons fast.</li>
+  <li><strong>Authorization, Cookie, Set-Cookie headers.</strong> Redact declaratively (pino's <code>redact</code> option) &mdash; one missed log line is a credential leak.</li>
+  <li><strong>Query strings unredacted.</strong> <code>?token=xxx</code> and <code>?email=xxx</code> end up in logs.</li>
+</ul>
+<p><strong>Advanced:</strong> sample high-traffic endpoints (1 in 10-100 for <code>/health</code>, 1:1 for errors); emit logs as JSON on stdout in containers &mdash; the orchestrator ships them; use <strong>OpenTelemetry</strong> to propagate trace ids via <code>traceparent</code> headers so one request across many services threads together.</p>
+'''
+
+ANSWERS[42] = r'''
+<p>Building a RESTful API with Express and MongoDB is three layers stacked: <strong>routing</strong> (Express Router per resource), <strong>validation</strong> (Zod or similar at the edge), and <strong>data access</strong> (Mongoose schemas or the native driver). The architecture decisions that matter: how thick is each layer, where does error mapping happen, and how do you enforce ownership across endpoints.</p>
+<pre><code>// models/product.js
+import mongoose from "mongoose";
+const ProductSchema = new mongoose.Schema({
+  name:     { type: String, required: true, trim: true, index: "text" },
+  price:    { type: Number, required: true, min: 0 },
+  tags:     [{ type: String }],
+  userId:   { type: String, required: true, index: true },
+  createdAt: { type: Date, default: Date.now, index: -1 },
+}, { versionKey: false });
+export const Product = mongoose.model("Product", ProductSchema);
+
+// routes/products.js — thin HTTP layer, delegates to a service
+import { Router } from "express";
+import { z } from "zod";
+import { Product } from "../models/product.js";
+
+const router = Router();
+const Create = z.object({ name: z.string().min(1).max(200), price: z.number().nonnegative(), tags: z.array(z.string()).optional() });
+
+router.post("/", requireAuth, async (req, res, next) =&gt; {
+  try {
+    const data = Create.parse(req.body);
+    const doc = await Product.create({ ...data, userId: req.user.id });
+    res.status(201).location(`/api/products/${doc.id}`).json(doc);
+  } catch (err) { next(err); }
+});
+
+router.get("/", async (req, res, next) =&gt; {
+  try {
+    const { cursor, limit = 20 } = req.query;
+    const filter = cursor ? { _id: { $lt: cursor } } : {};
+    const docs = await Product.find(filter)
+      .sort({ _id: -1 })
+      .limit(Math.min(100, Number(limit)))
+      .lean();                                   // plain JS objects — faster
+    res.json({ data: docs, next: docs[docs.length-1]?._id });
+  } catch (err) { next(err); }
+});
+
+router.get("/:id", async (req, res, next) =&gt; {
+  try {
+    if (!mongoose.isValidObjectId(req.params.id)) return res.sendStatus(404);
+    const doc = await Product.findById(req.params.id).lean();
+    if (!doc) return res.sendStatus(404);
+    res.json(doc);
+  } catch (err) { next(err); }
+});
+
+export default router;</code></pre>
+<p><strong>Production essentials:</strong></p>
+<ul>
+  <li><strong>Indexes on query fields.</strong> Without an index on <code>userId</code>, every per-user query scans the whole collection.</li>
+  <li><strong>Cursor pagination</strong>, not offset &mdash; keyset is O(log n); offset scans skipped rows.</li>
+  <li><strong><code>.lean()</code></strong> on reads &mdash; skips Mongoose hydration, returns plain objects, 2-5x faster.</li>
+  <li><strong>Validate <code>ObjectId</code></strong> before querying &mdash; malformed ids throw otherwise.</li>
+  <li><strong>Never pass raw <code>req.query</code> as a filter</strong> &mdash; NoSQL injection (<code>{$ne:null}</code>) matches everything. Coerce to specific scalar types.</li>
+</ul>
+<p><strong>Architectural choice &mdash; Mongoose vs native driver vs Prisma:</strong> Mongoose gives schemas, validation, middleware, populate. Native driver is lighter and faster but you hand-roll everything. <strong>Prisma</strong> (with MongoDB adapter, since 2023) brings TypeScript inference and migrations but lags Mongoose in advanced features. Pick Mongoose for rich Mongo apps, Prisma for type-safety-first teams, native driver for performance-critical services.</p>
+'''
+
+ANSWERS[43] = r'''
+<p>Mongoose schemas are the type system and validation layer for MongoDB documents in Node. Beyond the basics, mature schemas lean on <strong>middleware (hooks)</strong>, <strong>custom validators</strong>, <strong>virtuals</strong>, and <strong>indexes declared on the schema</strong> so they're automatic across environments.</p>
+<pre><code>import mongoose from "mongoose";
+const { Schema } = mongoose;
+
+const UserSchema = new Schema({
+  email: {
+    type: String,
+    required: [true, "email is required"],
+    unique: true,                                  // creates a unique index
+    lowercase: true,
+    trim: true,
+    validate: {
+      validator: (v) =&gt; /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v),
+      message: "invalid email format",
+    },
+  },
+  passwordHash: { type: String, required: true, select: false },  // never returned by default
+  age:   { type: Number, min: 13, max: 120 },
+  roles: { type: [String], enum: ["user","editor","admin"], default: ["user"] },
+  profile: {
+    name:      { type: String, maxlength: 100 },
+    websites:  { type: [String], validate: [(arr) =&gt; arr.length &lt;= 5, "max 5 websites"] },
+  },
+}, {
+  timestamps: true,              // adds createdAt / updatedAt automatically
+  toJSON: { virtuals: true, transform: (doc, ret) =&gt; { delete ret.__v; return ret; } },
+});
+
+// compound index for query patterns — e.g. list "editors created recently"
+UserSchema.index({ roles: 1, createdAt: -1 });
+
+// virtual — computed field, not stored
+UserSchema.virtual("displayName").get(function () { return this.profile.name || this.email; });
+
+// pre-save hook — hash the password before persist
+UserSchema.pre("save", async function (next) {
+  if (!this.isModified("passwordHash")) return next();
+  this.passwordHash = await bcrypt.hash(this.passwordHash, 12);
+  next();
+});
+
+// instance method — encapsulate domain logic
+UserSchema.methods.verifyPassword = function (plain) {
+  return bcrypt.compare(plain, this.passwordHash);
+};
+
+export const User = mongoose.model("User", UserSchema);</code></pre>
+<p><strong>Where schema validation shines:</strong> schema rules run on every <code>save()</code>, <code>create()</code>, and (with <code>runValidators: true</code>) <code>update()</code>. You get a single source of truth &mdash; route handlers don't duplicate validation logic. Combine with <strong>Zod at the HTTP edge</strong> (client-friendly error messages, type inference) for defense in depth.</p>
+<p><strong>Pitfalls:</strong> <code>unique: true</code> doesn't validate per-request &mdash; it creates a DB index and relies on the duplicate-key error (handle <code>code: 11000</code>). <code>findOneAndUpdate</code> skips middleware unless you opt in. Subdocuments have their own validation scope. For TypeScript, use Mongoose's generic types (<code>Model&lt;IUser&gt;</code>) or switch to <strong>Typegoose</strong>/<strong>@typegoose/typegoose</strong> for class-based schemas with decorators.</p>
+'''
+
+ANSWERS[44] = r'''
+<p>Database transactions group operations so they all commit or none do &mdash; the classic need is "debit one account, credit another, never halfway." How Express code looks depends on the DB: Postgres/MySQL support real ACID transactions; MongoDB supports them only on replica sets (standalone Mongo can't).</p>
+<pre><code>// Postgres / MySQL via Prisma — managed transaction
+await prisma.$transaction(async (tx) =&gt; {
+  const from = await tx.account.findUniqueOrThrow({ where: { id: fromId } });
+  if (from.balance &lt; amount) throw new Error("INSUFFICIENT_FUNDS");
+  await tx.account.update({ where: { id: fromId }, data: { balance: { decrement: amount } } });
+  await tx.account.update({ where: { id: toId   }, data: { balance: { increment: amount } } });
+  await tx.transfer.create({ data: { fromId, toId, amount } });
+}, { isolationLevel: "Serializable" });               // highest level — retry on conflict</code></pre>
+<pre><code>// Postgres with node-postgres — explicit transaction + row locks
+const client = await pool.connect();
+try {
+  await client.query("BEGIN");
+  // SELECT ... FOR UPDATE locks rows; concurrent transfers serialize on the lock
+  const { rows } = await client.query(
+    "SELECT balance FROM accounts WHERE id = $1 FOR UPDATE", [fromId]
+  );
+  if (rows[0].balance &lt; amount) throw new Error("INSUFFICIENT_FUNDS");
+  await client.query("UPDATE accounts SET balance = balance - $1 WHERE id = $2", [amount, fromId]);
+  await client.query("UPDATE accounts SET balance = balance + $1 WHERE id = $2", [amount, toId]);
+  await client.query("COMMIT");
+} catch (err) {
+  await client.query("ROLLBACK");
+  throw err;
+} finally {
+  client.release();
+}</code></pre>
+<pre><code>// MongoDB — requires replica set
+const session = await mongoose.startSession();
+session.startTransaction();
+try {
+  await Account.updateOne({ _id: fromId }, { $inc: { balance: -amount } }).session(session);
+  await Account.updateOne({ _id: toId },   { $inc: { balance:  amount } }).session(session);
+  await session.commitTransaction();
+} catch (err) {
+  await session.abortTransaction();
+  throw err;
+} finally {
+  session.endSession();
+}</code></pre>
+<p><strong>Essential concepts:</strong></p>
+<ul>
+  <li><strong>Isolation levels.</strong> Default is usually <em>Read Committed</em>. For money/inventory use <em>Serializable</em> and handle retries on serialization failures.</li>
+  <li><strong>Lock vs optimistic concurrency.</strong> <code>SELECT ... FOR UPDATE</code> serializes access but can deadlock. Optimistic (version column, retry on conflict) scales better if conflicts are rare.</li>
+  <li><strong>Keep transactions short.</strong> Each lock blocks other writers. Never run HTTP calls or long computations inside a transaction.</li>
+  <li><strong>Retries.</strong> Serializable transactions can fail with serialization errors &mdash; wrap in a retry loop with jitter.</li>
+</ul>
+<p><strong>Distributed transactions</strong> (across services) are usually a bad idea &mdash; two-phase commit has painful failure modes. Use <strong>sagas</strong> (compensating actions) with a durable workflow engine (<strong>Temporal</strong>, <strong>Inngest</strong>) or <strong>transactional outbox</strong> patterns instead.</p>
+'''
+
+ANSWERS[45] = r'''
+<p>Knex.js is a SQL query builder and migration toolkit. Migrations are versioned, reversible schema changes &mdash; the foundation of deployable, team-shared databases. Every new environment runs the same sequence; no one hand-edits production.</p>
+<pre><code>// knexfile.js
+export default {
+  client: "pg",
+  connection: process.env.DATABASE_URL,
+  migrations: { directory: "./migrations", tableName: "knex_migrations" },
+};
+
+// migrations/20260418103000_create_users.js
+export function up(knex) {
+  return knex.schema.createTable("users", (t) =&gt; {
+    t.uuid("id").primary().defaultTo(knex.raw("gen_random_uuid()"));
+    t.string("email", 254).notNullable().unique();
+    t.string("password_hash", 60).notNullable();
+    t.string("role").notNullable().defaultTo("user");
+    t.timestamps(true, true);                       // created_at, updated_at with defaults
+  });
+}
+
+export function down(knex) {
+  return knex.schema.dropTable("users");
+}
+
+// migrations/20260418104500_add_user_status.js — incremental change
+export async function up(knex) {
+  await knex.schema.alterTable("users", (t) =&gt; {
+    t.string("status").notNullable().defaultTo("active");
+    t.index(["status","created_at"]);
+  });
+}
+export function down(knex) {
+  return knex.schema.alterTable("users", (t) =&gt; t.dropColumn("status"));
+}</code></pre>
+<pre><code># workflow
+npx knex migrate:make create_users              # create a new migration
+npx knex migrate:latest                         # apply pending migrations
+npx knex migrate:rollback                       # undo the most recent batch
+npx knex migrate:status</code></pre>
+<p><strong>Production migration principles:</strong></p>
+<ul>
+  <li><strong>Run in CI before deploy</strong> &mdash; a deploy whose migration hasn't run is half-broken code. Better: a separate migration job that completes first, then the rolling deploy of the app.</li>
+  <li><strong>Additive changes only</strong> during rolling deploys &mdash; old and new code run simultaneously during the window. Adding a nullable column is safe; dropping a column old code still reads is not.</li>
+  <li><strong>Long migrations need care.</strong> A migration that locks a 10-GB table for 30 minutes blocks every write. Use <code>CONCURRENTLY</code> (Postgres) for index creation, batched updates, and online-schema-change tools (<strong>pg_repack</strong>, <strong>pt-online-schema-change</strong>, <strong>gh-ost</strong>) for giant tables.</li>
+  <li><strong>Never edit a committed migration.</strong> Create a new one that fixes it. Applied migrations are immutable history.</li>
+</ul>
+<p><strong>Alternatives in 2026:</strong> <strong>Prisma Migrate</strong> is the default for Prisma users; <strong>Drizzle</strong> has a lighter-weight migration CLI with better TypeScript ergonomics; <strong>Atlas</strong> is a declarative schema-as-code tool that generates migrations by diffing. Pick the one that matches your ORM; Knex's appeal is being ORM-agnostic.</p>
+'''
+
+ANSWERS[46] = r'''
+<p>Joi is a schema description language with a rich vocabulary of validators and sanitizers. In Express, the idiomatic pattern is a <strong>factory middleware</strong> that accepts any Joi schema and a request location (<code>body</code>, <code>query</code>, <code>params</code>), runs validation, and replaces the original with the cleaned value.</p>
+<pre><code>import Joi from "joi";
+
+const SignupSchema = Joi.object({
+  email:    Joi.string().email({ tlds: { allow: false } }).lowercase().trim().required(),
+  password: Joi.string().min(8).max(128)
+                .pattern(/[A-Z]/, "uppercase").pattern(/[0-9]/, "digit").required(),
+  name:     Joi.string().trim().min(1).max(100).required(),
+  age:      Joi.number().integer().min(13).max(120).optional(),
+  website:  Joi.string().uri().optional().allow(""),
+  settings: Joi.object({
+    theme:         Joi.string().valid("light","dark","system").default("system"),
+    notifications: Joi.boolean().default(true),
+  }).default(),
+}).prefs({ abortEarly: false, stripUnknown: true });
+
+// reusable factory — use for body / query / params
+function validate(schema, where = "body") {
+  return (req, res, next) =&gt; {
+    const { error, value } = schema.validate(req[where]);
+    if (error) {
+      return res.status(400).json({
+        error: "Validation failed",
+        issues: error.details.map((d) =&gt; ({ path: d.path.join("."), message: d.message })),
+      });
+    }
+    req[where] = value;                             // cleaned + coerced
+    next();
+  };
+}
+
+app.post("/signup", validate(SignupSchema), signupHandler);</code></pre>
+<p><strong>Joi's strengths:</strong></p>
+<ul>
+  <li><strong>Rich vocabulary</strong> &mdash; patterns, conditionals (<code>.when()</code>), cross-field rules (<code>ref()</code>), custom validators.</li>
+  <li><strong>Sanitization</strong> (<code>trim</code>, <code>lowercase</code>, <code>default</code>) happens alongside validation.</li>
+  <li><strong>Readable error shapes</strong> &mdash; <code>error.details</code> is easy to map to field-level UI messages.</li>
+  <li><strong>Mature.</strong> Used in hapi, huge ecosystem, battle-tested at scale.</li>
+</ul>
+<p><strong>Joi vs Zod &mdash; pick by project shape:</strong></p>
+<table>
+  <tr><th></th><th>Joi</th><th>Zod</th></tr>
+  <tr><td>TypeScript inference</td><td>External; clunky</td><td>First-class via <code>z.infer</code></td></tr>
+  <tr><td>Bundle size</td><td>Larger</td><td>Smaller, tree-shakeable</td></tr>
+  <tr><td>Mature features</td><td>Richer (conditionals, refs)</td><td>Catching up</td></tr>
+  <tr><td>Ecosystem</td><td>hapi, celebrate (Express adapter)</td><td>tRPC, React Hook Form, NestJS pipes</td></tr>
+</table>
+<p>For TypeScript projects, <strong>Zod</strong> is the default in 2026; Joi remains excellent for plain-JS codebases and rich cross-field rules. For OpenAPI-driven projects, <strong>AJV</strong> is faster and lets your schemas be JSON Schema documents.</p>
+'''
+
+ANSWERS[47] = r'''
+<p>Passport is an authentication framework with a plug-in model called "strategies" &mdash; over 500 of them cover providers from local credentials to SAML, OAuth1/2, LDAP, Kerberos, and every social network. Its role in Express: verify credentials, serialize an identity into the session, and attach <code>req.user</code> on subsequent requests.</p>
+<pre><code>import passport from "passport";
+import { Strategy as LocalStrategy } from "passport-local";
+import { Strategy as GoogleStrategy } from "passport-google-oauth20";
+import session from "express-session";
+
+// 1. session + passport wiring
+app.use(session({ store: redisStore, secret: process.env.SESSION_SECRET,
+  resave: false, saveUninitialized: false, cookie: { httpOnly: true, secure: true } }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+// 2. register strategies
+passport.use(new LocalStrategy({ usernameField: "email" },
+  async (email, password, done) =&gt; {
+    try {
+      const user = await db.user.findUnique({ where: { email } });
+      if (!user) return done(null, false, { message: "Invalid credentials" });
+      const ok = await bcrypt.compare(password, user.passwordHash);
+      return done(null, ok ? { id: user.id, email } : false);
+    } catch (err) { done(err); }
+  }));
+
+passport.use(new GoogleStrategy({
+  clientID:     process.env.GOOGLE_CLIENT_ID,
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  callbackURL:  "/auth/google/callback",
+}, async (accessToken, refreshToken, profile, done) =&gt; {
+  const user = await db.user.upsert({
+    where:  { googleId: profile.id },
+    create: { googleId: profile.id, email: profile.emails[0].value, name: profile.displayName },
+    update: { email: profile.emails[0].value, name: profile.displayName },
+  });
+  done(null, user);
+}));
+
+// 3. session serialization — only id in the cookie
+passport.serializeUser((user, cb)   =&gt; cb(null, user.id));
+passport.deserializeUser(async (id, cb) =&gt; cb(null, await db.user.findUnique({ where: { id } })));
+
+// 4. routes
+app.post("/login", passport.authenticate("local", { successRedirect: "/", failureRedirect: "/login?err=1" }));
+app.get("/auth/google", passport.authenticate("google", { scope: ["email","profile"] }));
+app.get("/auth/google/callback",
+  passport.authenticate("google", { successRedirect: "/", failureRedirect: "/login" }));
+
+function requireAuth(req, res, next) {
+  return req.isAuthenticated() ? next() : res.redirect("/login");
+}
+app.get("/dashboard", requireAuth, (req, res) =&gt; res.render("dashboard", { user: req.user }));</code></pre>
+<p><strong>Trade-offs vs newer alternatives:</strong></p>
+<ul>
+  <li><strong>Passport pros</strong> &mdash; mature, huge strategy ecosystem, callback API works with any ORM.</li>
+  <li><strong>Passport cons</strong> &mdash; callback-based (pre-async/await), minimal TypeScript inference, brittle OIDC strategies that lag spec updates, no built-in refresh-token handling.</li>
+  <li><strong>Modern replacements in 2026</strong>: <strong>better-auth</strong>, <strong>Auth.js</strong> (formerly NextAuth), <strong>Lucia</strong> &mdash; all TypeScript-first, async/await native, up-to-date OIDC/OAuth 2.1, handle rotation and MFA cleanly.</li>
+  <li><strong>Hosted identity</strong> &mdash; Auth0, Clerk, WorkOS, Cognito. Zero crypto to get wrong; paid, but often cheaper than engineer-hours on correctness.</li>
+</ul>
+<p>For a new Express project in 2026, Passport is no longer the default &mdash; pick <strong>better-auth</strong> or a hosted provider unless you have a specific strategy (SAML, LDAP) only Passport covers.</p>
+'''
+
+ANSWERS[48] = r'''
+<p>A production signup + login flow with email verification needs five coordinated pieces: <strong>secure password storage</strong>, <strong>email verification tokens</strong>, <strong>constant-time login</strong> (to prevent user enumeration), <strong>rate limiting</strong>, and <strong>session issuance</strong>. Skipping any one creates a classic vulnerability.</p>
+<pre><code>import bcrypt from "bcrypt";
+import crypto from "node:crypto";
+
+// registration
+app.post("/auth/register", registerLimiter, async (req, res, next) =&gt; {
+  try {
+    const data = SignupSchema.parse(req.body);     // Zod validation
+    const existing = await db.user.findUnique({ where: { email: data.email } });
+    if (existing) {
+      // DON'T say "email taken" — enumerates existing accounts.
+      // Send a fake email saying "account exists; reset password".
+      await sendAccountExistsEmail(data.email);
+      return res.status(201).json({ ok: true });    // same response shape
+    }
+
+    const passwordHash = await bcrypt.hash(data.password, 12);
+    const rawToken    = crypto.randomBytes(32).toString("base64url");
+    const tokenHash   = crypto.createHash("sha256").update(rawToken).digest("hex");
+
+    await db.$transaction([
+      db.user.create({ data: { email: data.email, passwordHash, emailVerified: false } }),
+      db.verification.create({
+        data: { email: data.email, tokenHash,
+                expiresAt: new Date(Date.now() + 24 * 3600_000) },
+      }),
+    ]);
+
+    await sendVerificationEmail(data.email,
+      `${APP_URL}/auth/verify?token=${rawToken}&amp;email=${encodeURIComponent(data.email)}`);
+    res.status(201).json({ ok: true, message: "Check your email to verify." });
+  } catch (err) { next(err); }
+});
+
+// verification
+app.get("/auth/verify", async (req, res) =&gt; {
+  const hash = crypto.createHash("sha256").update(String(req.query.token)).digest("hex");
+  const rec  = await db.verification.findFirst({
+    where: { email: req.query.email, tokenHash: hash, usedAt: null, expiresAt: { gt: new Date() } },
+  });
+  if (!rec) return res.status(400).send("Invalid or expired link.");
+  await db.$transaction([
+    db.user.update({ where: { email: rec.email }, data: { emailVerified: true } }),
+    db.verification.update({ where: { id: rec.id }, data: { usedAt: new Date() } }),
+  ]);
+  res.redirect("/login?verified=1");
+});
+
+// login — constant-time even for unknown users
+app.post("/auth/login", loginLimiter, async (req, res) =&gt; {
+  const { email, password } = req.body;
+  const user = await db.user.findUnique({ where: { email } });
+  const hash = user?.passwordHash ?? "$2b$12$zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz";
+  const ok   = await bcrypt.compare(password, hash);
+  if (!user || !ok) return res.status(401).json({ error: "Invalid credentials" });
+  if (!user.emailVerified) return res.status(403).json({ error: "Verify your email first" });
+
+  req.session.regenerate(() =&gt; {                     // prevent session fixation
+    req.session.userId = user.id;
+    res.json({ ok: true });
+  });
+});</code></pre>
+<p><strong>Security rules that matter:</strong></p>
+<ul>
+  <li><strong>Never reveal whether an email exists.</strong> Same response shape for "account created" and "already exists" &mdash; send an email either way.</li>
+  <li><strong>Hash tokens</strong> stored in DB. A DB leak shouldn't yield usable verification links.</li>
+  <li><strong>Short token lifetime</strong> (24h), single-use, bound to email.</li>
+  <li><strong>Rate limit both endpoints</strong> &mdash; registration (prevent spam), login (prevent brute force).</li>
+  <li><strong>Regenerate session on login</strong> &mdash; stops fixation attacks.</li>
+</ul>
+<p><strong>In 2026</strong>, consider skipping passwords entirely: <strong>WebAuthn/passkeys</strong> for modern clients, magic links for everyone else. <strong>better-auth</strong>, <strong>Auth.js</strong>, and hosted providers (Clerk, Auth0) implement all of this correctly out of the box &mdash; the snippets above are educational, not "ship it."</p>
+'''
+
+ANSWERS[49] = r'''
+<p>Nodemailer sends email from Node over SMTP or via cloud providers' APIs. In production, the key decisions are: <strong>which provider</strong>, <strong>how to pool connections</strong>, and <strong>how to handle failures</strong> without dropping user-facing operations.</p>
+<pre><code>import nodemailer from "nodemailer";
+
+// SMTP transport — pooled and long-lived
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST,
+  port: Number(process.env.SMTP_PORT) || 587,
+  secure: false,
+  auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
+  pool: true, maxConnections: 5, maxMessages: 100,
+  tls: { minVersion: "TLSv1.2" },
+});
+
+await transporter.verify();                          // fail fast if SMTP creds are wrong
+
+// reusable helper with safe defaults
+export async function sendEmail({ to, subject, html, text, replyTo, attachments }) {
+  return transporter.sendMail({
+    from:    `"${process.env.FROM_NAME}" &lt;${process.env.FROM_EMAIL}&gt;`,
+    to, subject,
+    html, text: text ?? stripHtml(html),             // always include a plain-text fallback
+    replyTo,
+    attachments,
+    headers: { "X-Entity-Ref-Id": crypto.randomUUID() },
+  });
+}
+
+// usage — send from a background job, not a request handler
+app.post("/signup", async (req, res) =&gt; {
+  const user = await createUser(req.body);
+  await queue.add("send-welcome", { userId: user.id });   // decouple delivery from response
+  res.status(201).json({ ok: true });
+});</code></pre>
+<p><strong>Production essentials:</strong></p>
+<ul>
+  <li><strong>Use a transactional email provider</strong> &mdash; SendGrid, Postmark, Resend, AWS SES, Mailgun. Deliverability is a full-time problem (SPF, DKIM, DMARC, warmup, blocklist monitoring); it's cheaper to pay for the service than to solve it yourself.</li>
+  <li><strong>Send via their API, not SMTP</strong>, when available &mdash; Resend and Postmark expose SDKs that are faster and easier to observe than SMTP.</li>
+  <li><strong>Authenticate your domain</strong> &mdash; SPF + DKIM + DMARC or your mail goes to spam. Monitor DMARC reports.</li>
+  <li><strong>Never send synchronously from request handlers</strong> for user-facing operations &mdash; SMTP can take seconds; users blame your app. Queue the job (BullMQ, Inngest, AWS SQS), return the HTTP response immediately, send the email from a worker.</li>
+  <li><strong>Include plain-text</strong> alongside HTML &mdash; improves deliverability, works in text-only clients.</li>
+  <li><strong>Rate limits</strong> &mdash; providers cap per-second throughput; your worker should respect them with a token bucket.</li>
+  <li><strong>Idempotency</strong> &mdash; if the worker retries, you don't want to send the email twice. Key deliveries by an idempotency token.</li>
+</ul>
+<p><strong>Templates:</strong> <strong>MJML</strong> produces cross-client-compatible HTML (email clients are stuck in 2005); <strong>react-email</strong> lets you write templates as React components. Preview with <strong>Mailtrap</strong> in dev so you don't spam real inboxes.</p>
+'''
+
+ANSWERS[50] = r'''
+<p>Password reset is a mini authentication system: it needs to identify the user without letting attackers enumerate accounts, give them a limited-power credential (the reset token), let them complete the flow without amplifying damage if the token leaks, and invalidate everything on completion.</p>
+<pre><code>// step 1: request reset — always respond the same way
+app.post("/auth/forgot", resetLimiter, async (req, res) =&gt; {
+  const { email } = req.body;
+  const user = await db.user.findUnique({ where: { email } });
+
+  // invariant response shape — user-enumeration defense
+  const response = { message: "If that email exists, a reset link was sent." };
+
+  if (user) {
+    const rawToken  = crypto.randomBytes(32).toString("base64url");
+    const tokenHash = crypto.createHash("sha256").update(rawToken).digest("hex");
+
+    // single-use, 1-hour lifetime, 1-per-user (invalidate prior)
+    await db.$transaction([
+      db.passwordResetToken.updateMany({
+        where: { userId: user.id, usedAt: null }, data: { usedAt: new Date() },
+      }),
+      db.passwordResetToken.create({
+        data: { userId: user.id, tokenHash, expiresAt: new Date(Date.now() + 3600_000) },
+      }),
+    ]);
+
+    await sendResetEmail(user.email,
+      `${APP_URL}/auth/reset?token=${rawToken}&amp;uid=${user.id}`);
+  }
+  res.json(response);
+});
+
+// step 2: complete reset
+app.post("/auth/reset", async (req, res) =&gt; {
+  const { userId, token, newPassword } = req.body;
+
+  const hash = crypto.createHash("sha256").update(token).digest("hex");
+  const rec = await db.passwordResetToken.findFirst({
+    where: { userId, tokenHash: hash, usedAt: null, expiresAt: { gt: new Date() } },
+  });
+  if (!rec) return res.status(400).json({ error: "Invalid or expired token" });
+
+  const passwordHash = await bcrypt.hash(newPassword, 12);
+
+  await db.$transaction([
+    db.user.update({ where: { id: userId }, data: { passwordHash } }),
+    db.passwordResetToken.update({ where: { id: rec.id }, data: { usedAt: new Date() } }),
+    // invalidate all existing sessions — key step
+    db.session.deleteMany({ where: { userId } }),
+    db.refreshToken.updateMany({ where: { userId }, data: { revokedAt: new Date() } }),
+  ]);
+
+  await sendPasswordChangedNotification(userId);     // alert the user from a known-good email
+  res.json({ success: true });
+});</code></pre>
+<p><strong>Security principles:</strong></p>
+<ul>
+  <li><strong>Hash tokens in storage.</strong> Email carries the raw token; DB stores only the hash &mdash; a DB leak doesn't give away valid reset links.</li>
+  <li><strong>Invariant response</strong> for "email not found" &mdash; never signal which emails exist.</li>
+  <li><strong>Short lifetime</strong> (15-60 min), <strong>single-use</strong>, <strong>one active token</strong> per user (invalidate older ones on new request).</li>
+  <li><strong>Rate limit</strong> aggressively &mdash; <code>resetLimiter</code> caps requests per IP <em>and</em> per email.</li>
+  <li><strong>Revoke all sessions</strong> on successful reset &mdash; otherwise an attacker with an existing session survives the reset.</li>
+  <li><strong>Send a confirmation email</strong> to the user after the change &mdash; "your password was changed on X; if this wasn't you..." &mdash; gives a path to recover from compromised accounts.</li>
+  <li><strong>Never auto-login</strong> after reset &mdash; force a fresh login so the user proves ownership.</li>
+</ul>
+<p><strong>Beyond passwords:</strong> passkeys (WebAuthn) sidestep reset entirely &mdash; users authenticate with device-bound cryptographic keys. For existing password systems, <strong>better-auth</strong> and <strong>Auth.js</strong> implement all the above correctly, saving you from reinventing a fiddly security-critical flow.</p>
+'''
+
+ANSWERS[51] = r'''
+<p>Pagination has three patterns, each with different trade-offs. Your choice affects DB performance, cache friendliness, and client capability.</p>
+<table>
+  <tr><th>Pattern</th><th>Offset</th><th>Cursor (keyset)</th><th>Hybrid</th></tr>
+  <tr><td>URL</td><td><code>?page=2&amp;limit=20</code></td><td><code>?cursor=eyJpZCI6...</code></td><td>Both supported</td></tr>
+  <tr><td>DB cost on page N</td><td>O(offset+limit) &mdash; scans skipped rows</td><td>O(limit) &mdash; uses index</td><td>O(offset+limit) if offset used</td></tr>
+  <tr><td>Can "jump to page 50"</td><td>Yes</td><td>No &mdash; only next/prev</td><td>Yes for offset pages</td></tr>
+  <tr><td>Stable if rows inserted/deleted</td><td>No (skew)</td><td>Yes</td><td>No if offset used</td></tr>
+  <tr><td>Total count</td><td>Needs extra <code>COUNT(*)</code></td><td>Hard &mdash; omit or estimate</td><td>Extra query</td></tr>
+</table>
+<pre><code>// cursor pagination — base64-encoded (createdAt, id) tuple, tie-breaker prevents duplicates
+app.get("/posts", async (req, res) =&gt; {
+  const limit  = Math.min(100, Number(req.query.limit) || 20);
+  const cursor = req.query.cursor
+    ? JSON.parse(Buffer.from(String(req.query.cursor), "base64url").toString())
+    : null;
+
+  const rows = await db.post.findMany({
+    where: cursor &amp;&amp; {
+      OR: [
+        { createdAt: { lt: new Date(cursor.createdAt) } },
+        { createdAt: new Date(cursor.createdAt), id: { lt: cursor.id } },
+      ],
+    },
+    orderBy: [{ createdAt: "desc" }, { id: "desc" }],
+    take: limit + 1,
+  });
+
+  const hasNext = rows.length &gt; limit;
+  const data = rows.slice(0, limit);
+  const last = data[data.length - 1];
+
+  res.json({
+    data,
+    nextCursor: hasNext &amp;&amp; last
+      ? Buffer.from(JSON.stringify({ createdAt: last.createdAt, id: last.id })).toString("base64url")
+      : null,
+  });
+});</code></pre>
+<p><strong>Production rules:</strong> cap <code>limit</code> (100 typical); index the sort columns together (<code>(createdAt desc, id desc)</code>); use <code>take: limit + 1</code> to detect "more" without <code>COUNT(*)</code>. For "jump to page 50" UIs, accept offset &mdash; but warn consumers that page consistency is not guaranteed. For infinite scroll, cursor is always correct.</p>
+'''
+
+ANSWERS[52] = r'''
+<p>File downloads in Express come in three flavors depending on where the bytes live: <strong>local disk</strong>, <strong>streamed from code</strong>, or <strong>object storage</strong>. The choice affects throughput ceiling and operational complexity.</p>
+<pre><code>// 1. local disk — res.download handles MIME, range, ETag, Content-Disposition
+app.get("/reports/:id", (req, res, next) =&gt; {
+  const safeDir = path.resolve("./reports");
+  const abs     = path.resolve(safeDir, `${req.params.id}.pdf`);
+  if (!abs.startsWith(safeDir + path.sep)) return res.sendStatus(400);
+  res.download(abs, `report-${req.params.id}.pdf`, (err) =&gt;
+    err &amp;&amp; !res.headersSent &amp;&amp; next(err));
+});
+
+// 2. streamed — for data assembled at request time (CSV export, PDF rendering)
+app.get("/exports/users.csv", (req, res, next) =&gt; {
+  res.attachment("users.csv").type("text/csv");
+  res.write("\uFEFF");                                // BOM so Excel detects UTF-8
+  const stream = buildUserCsvStream();                // returns a Readable
+  pipeline(stream, res).catch(next);
+});
+
+// 3. object storage (S3) via pre-signed URLs — offloads bandwidth entirely
+app.get("/files/:id", async (req, res) =&gt; {
+  const file = await db.file.findFirst({ where: { id: req.params.id, userId: req.user.sub } });
+  if (!file) return res.sendStatus(404);
+  const url = await getSignedUrl(s3, new GetObjectCommand({
+    Bucket: BUCKET, Key: file.key, ResponseContentDisposition: `attachment; filename="${file.originalName}"`,
+  }), { expiresIn: 300 });
+  res.redirect(302, url);
+});</code></pre>
+<p><strong>When to use which:</strong> local for small internal files; streaming for data generated on-demand (reports, exports); pre-signed URLs for user-uploaded content &mdash; S3 handles range requests, CDN caching, and DDoS volume without any Node CPU. <strong>Always</strong> validate path traversal (<code>abs.startsWith(safeDir + path.sep)</code>), sanitize filenames (escape quotes, strip <code>\r\n</code> &mdash; response-header injection), and use RFC 5987 (<code>filename*=UTF-8''...</code>) for Unicode filenames with an ASCII fallback.</p>
+'''
+
+ANSWERS[53] = r'''
+<p>Node's built-in <code>crypto</code> module covers hashing, symmetric encryption, asymmetric encryption, key derivation, and digital signatures &mdash; you rarely need third-party libraries. The hard part is picking the right primitive.</p>
+<pre><code>import crypto from "node:crypto";
+
+// AES-256-GCM — authenticated symmetric encryption (AEAD)
+function encrypt(plaintext, key) {
+  const iv = crypto.randomBytes(12);
+  const cipher = crypto.createCipheriv("aes-256-gcm", key, iv);
+  const ct = Buffer.concat([cipher.update(plaintext, "utf8"), cipher.final()]);
+  const tag = cipher.getAuthTag();
+  return Buffer.concat([iv, tag, ct]).toString("base64url");
+}
+function decrypt(token, key) {
+  const buf = Buffer.from(token, "base64url");
+  const iv  = buf.subarray(0, 12);
+  const tag = buf.subarray(12, 28);
+  const ct  = buf.subarray(28);
+  const dec = crypto.createDecipheriv("aes-256-gcm", key, iv);
+  dec.setAuthTag(tag);
+  return Buffer.concat([dec.update(ct), dec.final()]).toString("utf8");
+}
+
+// key derivation — never use passwords as keys directly
+const key = crypto.scryptSync(password, salt, 32);    // slow — on boot only
+
+// hashing for tokens (NOT passwords)
+const hash = crypto.createHash("sha256").update(raw).digest("hex");
+
+// timing-safe comparison
+if (crypto.timingSafeEqual(Buffer.from(a), Buffer.from(b))) { /* ... */ }</code></pre>
+<table>
+  <tr><th>Use case</th><th>Primitive</th></tr>
+  <tr><td>Encrypt DB fields</td><td>AES-256-GCM + key in AWS KMS/Vault</td></tr>
+  <tr><td>Hash passwords</td><td>argon2id (via <code>argon2</code>) or bcrypt &mdash; NOT sha256</td></tr>
+  <tr><td>Sign JWTs</td><td>RS256 or ES256 (via <code>jsonwebtoken</code>)</td></tr>
+  <tr><td>One-way token for DB storage</td><td>SHA-256 is fine (tokens have high entropy)</td></tr>
+  <tr><td>Compare secrets</td><td><code>crypto.timingSafeEqual</code></td></tr>
+</table>
+<p><strong>Rules:</strong> never roll your own crypto, always use authenticated modes (GCM not CBC), store keys in a KMS not env vars, rotate keys with versioned key ids, and audit with <strong>npm audit</strong> + <strong>socket.dev</strong> for known-vulnerable crypto deps.</p>
+'''
+
+ANSWERS[54] = r'''
+<p>Environment variables are the standard config transport (12-Factor App), but they're commonly misused. Secure handling has four pillars: <strong>validation</strong>, <strong>redaction</strong>, <strong>secret separation</strong>, and <strong>rotation</strong>.</p>
+<pre><code>// 1. validate at startup — fail fast if misconfigured
+import { z } from "zod";
+const EnvSchema = z.object({
+  NODE_ENV:     z.enum(["development","staging","production","test"]),
+  PORT:         z.coerce.number().int().positive().default(3000),
+  DATABASE_URL: z.string().url(),
+  JWT_SECRET:   z.string().min(32),              // enforce length
+  SENTRY_DSN:   z.string().url().optional(),
+  LOG_LEVEL:    z.enum(["debug","info","warn","error"]).default("info"),
+});
+export const env = EnvSchema.parse(process.env);  // throws &amp; crashes if invalid
+
+// 2. never log the env blindly
+const SENSITIVE = /SECRET|KEY|TOKEN|PASSWORD/;
+console.log(Object.fromEntries(
+  Object.entries(process.env).map(([k, v]) =&gt; [k, SENSITIVE.test(k) ? "***" : v])
+));</code></pre>
+<table>
+  <tr><th>Environment</th><th>Strategy</th></tr>
+  <tr><td>Local dev</td><td><code>.env</code> file + <code>dotenv</code> (or Node 20.6+ <code>--env-file=.env</code>); <code>.env</code> in <code>.gitignore</code>.</td></tr>
+  <tr><td>CI</td><td>GitHub Actions / GitLab CI secrets; scoped per environment.</td></tr>
+  <tr><td>Production</td><td>Cloud-native secrets (AWS Secrets Manager, GCP Secret Manager, HashiCorp Vault, Doppler). Inject at deploy time; never bake into images.</td></tr>
+</table>
+<p><strong>Never:</strong> commit <code>.env</code> to git; print full env in logs; pass secrets as CLI args (visible in <code>ps</code>); store long-lived keys in env vars (prefer workload identity: IAM roles, GKE Workload Identity, Vault agents). Rotate secrets on a schedule with zero-downtime using versioned keys and gradual rollout. For browser-exposed config, prefix separately (<code>PUBLIC_*</code>) and never leak server-only vars to bundled JS.</p>
+'''
+
+ANSWERS[55] = r'''
+<p>Custom rate limiting is worth writing only when the <code>express-rate-limit</code> defaults don't fit &mdash; e.g. you need per-endpoint policies, differential limits per plan tier, or sliding-window + token-bucket semantics. The mechanism is always: pick a key, increment atomically, check threshold, set response headers.</p>
+<pre><code>// token-bucket limiter backed by Redis — allows bursts, enforces sustained rate
+function tokenBucketLimiter({ capacity, refillPerSec, key }) {
+  const lua = `
+    local bucket = KEYS[1]
+    local now        = tonumber(ARGV[1])
+    local capacity   = tonumber(ARGV[2])
+    local refillRate = tonumber(ARGV[3])
+    local data = redis.call("HMGET", bucket, "tokens", "ts")
+    local tokens = tonumber(data[1]) or capacity
+    local ts     = tonumber(data[2]) or now
+    tokens = math.min(capacity, tokens + (now - ts) * refillRate)
+    if tokens &lt; 1 then
+      redis.call("HMSET", bucket, "tokens", tokens, "ts", now)
+      redis.call("EXPIRE", bucket, 3600)
+      return {0, tokens}
+    end
+    tokens = tokens - 1
+    redis.call("HMSET", bucket, "tokens", tokens, "ts", now)
+    redis.call("EXPIRE", bucket, 3600)
+    return {1, tokens}
+  `;
+  return async (req, res, next) =&gt; {
+    const k = `rl:${key(req)}`;
+    const [ok, remaining] = await redis.eval(lua, 1, k, Date.now() / 1000, capacity, refillPerSec);
+    res.setHeader("X-RateLimit-Remaining", remaining);
+    if (!ok) {
+      res.setHeader("Retry-After", Math.ceil(1 / refillPerSec));
+      return res.status(429).json({ error: "Rate limit exceeded" });
+    }
+    next();
+  };
+}
+
+app.use(tokenBucketLimiter({
+  capacity: 60, refillPerSec: 10,
+  key: (req) =&gt; req.user?.id ?? req.ip,
+}));</code></pre>
+<p><strong>Why Lua:</strong> the check-and-update must be atomic &mdash; a naive <code>GET</code> → update → <code>SET</code> races under load. Redis runs each Lua script atomically. <strong>Alternatives:</strong> <code>rate-limiter-flexible</code> ships token-bucket/leaky-bucket/fixed/sliding-window out of the box with a cleaner API. For managed infra, use <strong>Cloudflare Rate Limiting</strong> at the edge &mdash; protects Node from traffic surges entirely.</p>
+'''
+
+ANSWERS[56] = r'''
+<p>Using Express as a proxy server (forwarding requests to an upstream) is legitimate for gateway patterns, API aggregation, and microservice frontends. The right tool is <strong>http-proxy-middleware</strong>, not a hand-rolled <code>fetch</code> that loses streaming semantics.</p>
+<pre><code>// npm install http-proxy-middleware
+import { createProxyMiddleware } from "http-proxy-middleware";
+
+// simple path-based proxy
+app.use("/api/users",
+  createProxyMiddleware({
+    target: "http://users-service:8080",
+    changeOrigin: true,                           // rewrites Host header
+    pathRewrite: { "^/api/users": "/v1/users" },
+  })
+);
+
+// with auth, logging, and response mutation
+app.use("/api/billing",
+  requireAuth,                                    // authenticate before proxying
+  createProxyMiddleware({
+    target: "http://billing-service:8080",
+    changeOrigin: true,
+    onProxyReq: (proxyReq, req) =&gt; {
+      proxyReq.setHeader("X-User-Id", req.user.sub);    // forward identity
+      proxyReq.setHeader("X-Request-Id", req.id);
+    },
+    onError: (err, req, res) =&gt; {
+      req.log?.error({ err }, "proxy error");
+      res.status(502).json({ error: "Upstream unavailable" });
+    },
+  })
+);</code></pre>
+<table>
+  <tr><th>Scenario</th><th>Recommendation</th></tr>
+  <tr><td>Path-based routing to microservices</td><td>Nginx/Traefik/Envoy at the edge &mdash; faster and simpler than Node.</td></tr>
+  <tr><td>API gateway with auth, rate-limit, identity injection</td><td>Express proxy works, but prefer <strong>Kong</strong>/<strong>Krakend</strong> for scale.</td></tr>
+  <tr><td>Dev-only proxy for CORS bypass</td><td>Express proxy is fine; ship Nginx in prod.</td></tr>
+  <tr><td>Response transformation / aggregation</td><td>Express or a dedicated GraphQL gateway (Apollo).</td></tr>
+</table>
+<p><strong>Watch out for:</strong> streaming (don't buffer; use <code>proxyReq.on("data")</code> carefully); cookies and <code>Set-Cookie</code> domain rewriting; timeouts (<code>proxyTimeout</code> + <code>timeout</code>); and WebSocket upgrade support (<code>ws: true</code>). For anything serious, a dedicated proxy at the infrastructure layer is better than a Node process.</p>
+'''
+
+ANSWERS[57] = r'''
+<p>The <code>body-parser</code> package predates Express 4.16 &mdash; since then, its functionality is <strong>built into Express</strong> as <code>express.json()</code>, <code>express.urlencoded()</code>, <code>express.text()</code>, and <code>express.raw()</code>. You should no longer install <code>body-parser</code> separately; Express re-exports the same underlying code.</p>
+<pre><code>// modern — use built-ins
+app.use(express.json({
+  limit: "100kb",                       // reject bigger bodies with 413
+  strict: true,                          // only accept arrays/objects at top level
+  verify: (req, res, buf) =&gt; { req.rawBody = buf; },  // for webhook signatures
+}));
+
+app.use(express.urlencoded({
+  extended: false,                       // use Node's querystring, not qs
+  limit: "100kb",
+  parameterLimit: 1000,
+}));
+
+// per-route raw body — Stripe webhook requires exact bytes for signature verification
+app.post("/webhook/stripe",
+  express.raw({ type: "application/json" }),
+  stripeWebhookHandler
+);</code></pre>
+<p><strong>Key options explained:</strong></p>
+<ul>
+  <li><strong><code>limit</code></strong> &mdash; defaults are 100kb (Express 4) / 1mb (Express 5). Raise only for endpoints that truly need it; global 100mb is a DoS vector.</li>
+  <li><strong><code>extended</code> (urlencoded)</strong> &mdash; <code>false</code> uses Node's built-in parser (flat keys); <code>true</code> uses <code>qs</code> for nested syntax. Prefer <code>false</code> &mdash; <code>qs</code> has had prototype-pollution CVEs.</li>
+  <li><strong><code>strict</code></strong> &mdash; <code>true</code> rejects top-level strings/numbers/<code>null</code>. Useful for APIs that only accept objects or arrays.</li>
+  <li><strong><code>verify</code></strong> &mdash; captures raw bytes before parsing. Essential for webhook signature verification (Stripe, GitHub, Slack) where canonical bytes matter.</li>
+</ul>
+<p>For <code>multipart/form-data</code> (file uploads), use <strong>multer</strong> or <strong>busboy</strong> &mdash; neither <code>json</code> nor <code>urlencoded</code> handles multipart.</p>
+'''
+
+ANSWERS[58] = r'''
+<p>Real-time notifications via WebSockets over Express requires three architectural decisions: <strong>library</strong> (ws vs Socket.IO), <strong>fan-out mechanism</strong> (in-process vs pub/sub), and <strong>reliability model</strong> (at-most-once vs at-least-once with persistence).</p>
+<pre><code>import { Server } from "socket.io";
+import { createAdapter } from "@socket.io/redis-adapter";
+import Redis from "ioredis";
+
+const io = new Server(server);
+const pub = new Redis(REDIS_URL); const sub = pub.duplicate();
+io.adapter(createAdapter(pub, sub));                  // cross-instance broadcasts
+
+io.use(async (socket, next) =&gt; {
+  try { socket.data.user = await verifyJwt(socket.handshake.auth.token); next(); }
+  catch { next(new Error("Unauthorized")); }
+});
+
+io.on("connection", (socket) =&gt; {
+  socket.join(`user:${socket.data.user.id}`);
+});
+
+// trigger from HTTP route — another instance, different process, doesn't matter
+app.post("/actions/:userId/notify", requireInternalAuth, (req, res) =&gt; {
+  io.to(`user:${req.params.userId}`).emit("notification", req.body);
+  res.sendStatus(204);
+});</code></pre>
+<table>
+  <tr><th>Concern</th><th>Approach</th></tr>
+  <tr><td>Horizontal scale</td><td>Redis pub/sub adapter &mdash; without it, users on different Node instances never hear each other.</td></tr>
+  <tr><td>Missed messages while offline</td><td>Queue per-user in Redis/Postgres; deliver on reconnect; mark read.</td></tr>
+  <tr><td>Fallback for strict corp networks</td><td>Socket.IO's HTTP long-polling fallback; SSE if uni-directional.</td></tr>
+  <tr><td>Load balancer config</td><td>Sticky sessions during handshake (Socket.IO's polling transport); ALB/Nginx with <code>ip_hash</code>; WebSocket upgrade headers.</td></tr>
+</table>
+<p><strong>Ops reality:</strong> each connection holds an FD and memory (~20 KB). Plan for ~10k concurrent sockets per Node instance. Hosted alternatives (<strong>Ably</strong>, <strong>Pusher</strong>, <strong>Supabase Realtime</strong>) remove connection-state ops from your plate; worth the cost when real-time isn't your product differentiator.</p>
+'''
+
+ANSWERS[59] = r'''
+<p>A custom authentication middleware centralizes three concerns: <strong>credential extraction</strong>, <strong>verification</strong>, and <strong>user hydration</strong>. Composable factories let you vary the policy per route (public, authenticated, or role-gated).</p>
+<pre><code>// base — verifies JWT, hydrates req.user
+export function authenticate({ optional = false } = {}) {
+  return async (req, res, next) =&gt; {
+    const [scheme, token] = (req.headers.authorization || "").split(" ");
+    if (scheme !== "Bearer" || !token) {
+      return optional ? next() : res.sendStatus(401);
+    }
+    try {
+      const payload = jwt.verify(token, ACCESS_SECRET, {
+        issuer: "api.example.com", audience: "api",
+      });
+      // check revocation
+      if (await redis.get(`jwt:blocklist:${payload.jti}`)) {
+        return res.status(401).json({ error: "Token revoked" });
+      }
+      // hydrate full user for downstream handlers
+      req.user = await db.user.findUnique({
+        where: { id: payload.sub },
+        select: { id: true, role: true, email: true, status: true },
+      });
+      if (!req.user || req.user.status === "suspended") {
+        return res.status(403).json({ error: "Account unavailable" });
+      }
+      next();
+    } catch (err) {
+      const msg = err.name === "TokenExpiredError" ? "Token expired" : "Invalid token";
+      res.status(401).json({ error: msg });
+    }
+  };
+}
+
+// composition
+app.get("/public",         authenticate({ optional: true }), publicHandler);
+app.get("/me",             authenticate(),                    meHandler);
+app.post("/admin/users",   authenticate(), requireRole("admin"), createUserHandler);</code></pre>
+<p><strong>Design principles:</strong> one middleware per concern (auth vs authz vs auditing); fail-closed (deny by default); use 401 for "not authenticated" and 403 for "authenticated but not authorized" &mdash; clients rely on the distinction. Hydrate <code>req.user</code> with current DB state, not just token claims, so role/status changes apply immediately. For mature systems, consider <strong>better-auth</strong> or <strong>Lucia</strong> rather than reinventing; auth is a dense security domain where bespoke code is where vulnerabilities hide.</p>
+'''
+
+ANSWERS[60] = r'''
+<p>Input sanitization and input validation are different operations. <strong>Validation</strong> rejects bad input (this isn't a valid email). <strong>Sanitization</strong> transforms input to be safe (remove dangerous HTML, trim whitespace, normalize unicode). Production code typically needs both, applied in the right order.</p>
+<table>
+  <tr><th>Threat</th><th>Where to defend</th></tr>
+  <tr><td>XSS in stored content</td><td><strong>Output encoding</strong> at render time (EJS <code>&lt;%= %&gt;</code>, React <code>{x}</code>). <em>Not</em> input sanitization &mdash; you lose the original.</td></tr>
+  <tr><td>User-submitted rich HTML</td><td>Sanitize with <strong>DOMPurify</strong> on input (only allow a whitelist of tags/attrs).</td></tr>
+  <tr><td>SQL injection</td><td>Parameterized queries &mdash; never sanitize-and-interpolate.</td></tr>
+  <tr><td>NoSQL injection</td><td>Coerce types (string fields must be strings); reject operator keys (<code>$ne</code>, <code>$where</code>).</td></tr>
+  <tr><td>Command injection</td><td>Never pass user input to <code>exec</code>; use <code>execFile</code> with an args array.</td></tr>
+  <tr><td>LDAP / XPath / header injection</td><td>Use library-provided escaping APIs or allowlists.</td></tr>
+</table>
+<pre><code>import DOMPurify from "isomorphic-dompurify";
+import { z } from "zod";
+
+const BioSchema = z.object({
+  html: z.string().max(50_000).transform((h) =&gt;
+    DOMPurify.sanitize(h, {
+      ALLOWED_TAGS: ["p","strong","em","a","ul","ol","li","br"],
+      ALLOWED_ATTR: ["href"],
+    })
+  ),
+});
+
+app.patch("/profile/bio", async (req, res) =&gt; {
+  const { html } = BioSchema.parse(req.body);
+  // html is now whitelisted — safe to render as-is with &lt;%- %&gt; or dangerouslySetInnerHTML
+});</code></pre>
+<p><strong>Default rule:</strong> prefer output encoding over input sanitization when you have the choice &mdash; storing the raw value and escaping at render time lets you change display policies later without re-sanitizing history. Sanitize on input only when you must <em>render</em> user HTML (rich-text comments, bio). A strict <strong>Content Security Policy</strong> makes even a successful XSS mostly harmless.</p>
+'''
+
+ANSWERS[61] = r'''
+<p><strong>morgan</strong> is a predefined HTTP request logger. It wires into <code>res.on("finish")</code> to log method, URL, status, response time, and size using configurable formats. It's fine for prototypes and good-enough for simple apps, but has limitations that make <strong>pino-http</strong> a better production choice.</p>
+<pre><code>import morgan from "morgan";
+
+// built-in formats
+app.use(morgan("dev"));        // colored — dev-only
+app.use(morgan("combined"));   // Apache-style — standard for production archival
+
+// custom format — structured JSON
+morgan.token("userId", (req) =&gt; req.user?.id ?? "-");
+morgan.token("reqId",  (req) =&gt; req.id);
+app.use(morgan(JSON.stringify({
+  time:   ":date[iso]", reqId: ":reqId",
+  method: ":method",    url:   ":url",
+  status: ":status",    durMs: ":response-time",
+  userId: ":userId",    ua:    ":user-agent",
+})));
+
+// rotate to disk with pino-roll or rotating-file-stream
+import rfs from "rotating-file-stream";
+const access = rfs.createStream("access.log", {
+  interval: "1d", path: "./logs", compress: "gzip", maxFiles: 14,
+});
+app.use(morgan("combined", { stream: access }));</code></pre>
+<table>
+  <tr><th>morgan</th><th>pino-http</th></tr>
+  <tr><td>Pre-built text formats; simple setup</td><td>Structured JSON by default, 5-10x faster</td></tr>
+  <tr><td>No redaction &mdash; logs headers as-is</td><td>Declarative <code>redact</code> for secrets</td></tr>
+  <tr><td>Ties into <code>console.log</code> or a stream</td><td>Async binary serialization with <code>pino.destination</code></td></tr>
+  <tr><td>No per-request child loggers</td><td><code>req.log</code> with inherited context</td></tr>
+</table>
+<p><strong>Production pattern:</strong> in containerized envs (Docker, Kubernetes), log JSON to stdout and let the runtime collect it &mdash; never log to files inside the container. Add a correlation-id middleware before morgan so every log line carries <code>reqId</code>.</p>
+'''
+
+ANSWERS[62] = r'''
+<p>Conditional GET is HTTP's native cache validation: the client asks "do you still have the same resource I saw last time?" via <code>If-None-Match</code> (ETag) or <code>If-Modified-Since</code> (Last-Modified). If nothing changed, the server returns <strong>304 Not Modified</strong> with no body &mdash; saving bandwidth and CPU.</p>
+<pre><code>// manual ETag — compute a strong hash of the content
+import crypto from "node:crypto";
+
+app.get("/posts/:id", async (req, res) =&gt; {
+  const post = await db.post.findUnique({ where: { id: req.params.id } });
+  if (!post) return res.sendStatus(404);
+
+  const body = JSON.stringify(post);
+  const etag = `"${crypto.createHash("sha1").update(body).digest("base64")}"`;
+
+  res.setHeader("ETag", etag);
+  res.setHeader("Last-Modified", post.updatedAt.toUTCString());
+  res.setHeader("Cache-Control", "public, max-age=0, must-revalidate");
+
+  // compare against client's copy
+  if (req.headers["if-none-match"] === etag) return res.sendStatus(304);
+  if (req.headers["if-modified-since"] &amp;&amp;
+      new Date(req.headers["if-modified-since"]) &gt;= post.updatedAt) {
+    return res.sendStatus(304);
+  }
+  res.type("application/json").send(body);
+});</code></pre>
+<p><strong>Express built-in behavior:</strong> <code>app.set("etag", "strong")</code> enables automatic ETag on <code>res.send()</code>/<code>res.json()</code>. The default is "weak" which is fine for most content. Express checks <code>If-None-Match</code> automatically when using <code>res.send</code>.</p>
+<table>
+  <tr><th>ETag</th><th>Last-Modified</th></tr>
+  <tr><td>Hash of content &mdash; precise</td><td>Timestamp &mdash; 1-second granularity</td></tr>
+  <tr><td>Works for generated content</td><td>Best for static files</td></tr>
+  <tr><td>Costs a hash per response</td><td>Cheap if you already have <code>updatedAt</code></td></tr>
+</table>
+<p><strong>Combined with <code>Cache-Control</code>:</strong> <code>max-age=60, stale-while-revalidate=300</code> lets the browser serve cached content for 60s with no round-trip, revalidate in the background, and fall back to stale during errors. This is the modern stack &mdash; ETag for correctness, Cache-Control for performance.</p>
+'''
+
+ANSWERS[63] = r'''
+<p>A content negotiation middleware centralizes response format selection so handlers don't repeat <code>res.format()</code> calls everywhere. The pattern: inspect <code>Accept</code> once, stash the chosen format on <code>req</code>, then handlers use a helper that serializes accordingly.</p>
+<pre><code>const SUPPORTED = ["application/json","application/xml","text/csv","text/html"];
+
+app.use((req, res, next) =&gt; {
+  req.preferredType = req.accepts(SUPPORTED) || "application/json";
+  res.vary("Accept");                          // tell caches responses differ by Accept
+  next();
+});
+
+// helper — handlers pass data, middleware decides format
+app.use((req, res, next) =&gt; {
+  res.respond = (data, status = 200) =&gt; {
+    res.status(status);
+    switch (req.preferredType) {
+      case "application/json": return res.json(data);
+      case "application/xml":  res.type("application/xml"); return res.send(toXml(data));
+      case "text/csv":         res.type("text/csv");        return res.send(toCsv(data));
+      case "text/html":        return res.render("resource", { data });
+      default:                 return res.sendStatus(406);
+    }
+  };
+  next();
+});
+
+app.get("/users/:id", async (req, res) =&gt; {
+  const user = await db.user.findUnique({ where: { id: req.params.id } });
+  if (!user) return res.sendStatus(404);
+  res.respond(user);                            // serializes based on Accept
+});</code></pre>
+<p><strong>Why a middleware over per-handler <code>res.format()</code>:</strong></p>
+<ul>
+  <li><strong>Consistency.</strong> One place decides what formats you support; routes can't drift.</li>
+  <li><strong>Single source for <code>Vary</code>.</strong> Caches (CDN, reverse proxy) need this header to store variants &mdash; missing it causes wrong-format responses served from cache.</li>
+  <li><strong>Testability.</strong> The helper is easy to mock in unit tests.</li>
+</ul>
+<p><strong>Alternatives to header-based negotiation:</strong> URL-based (<code>/users/42.json</code> vs <code>/users/42.csv</code>) is more explicit, cache-friendly, and easier to debug with curl. Reserve <code>Accept</code>-based negotiation for APIs that genuinely serve both browsers and machine clients from the same URL.</p>
+'''
+
+ANSWERS[64] = r'''
+<p>"Large JSON" comes in two flavors that need different strategies: <strong>large single payloads</strong> (one 10MB request body) and <strong>large response streams</strong> (paginated dataset returned as JSON). The wrong approach OOMs your Node process; the right one uses constant memory.</p>
+<table>
+  <tr><th>Scenario</th><th>Approach</th></tr>
+  <tr><td>10 MB request body (bulk import)</td><td>Raise <code>express.json({ limit: "20mb" })</code> only on the specific route; require auth; size-limit aggressively elsewhere.</td></tr>
+  <tr><td>100 MB request body</td><td>Reject JSON; use streaming NDJSON or CSV; or upload to S3 and process async.</td></tr>
+  <tr><td>1 MB response</td><td>Fine &mdash; <code>res.json()</code> is fast.</td></tr>
+  <tr><td>100 MB response</td><td>Stream NDJSON (one JSON object per line) with backpressure.</td></tr>
+</table>
+<pre><code>// streaming NDJSON response — O(1) memory, arbitrary dataset size
+app.get("/export/events.ndjson", async (req, res) =&gt; {
+  res.setHeader("Content-Type", "application/x-ndjson");
+  res.setHeader("Cache-Control", "no-store");
+
+  let cursor = null;
+  while (true) {
+    const batch = await db.event.findMany({
+      ...(cursor &amp;&amp; { cursor: { id: cursor }, skip: 1 }),
+      take: 500, orderBy: { id: "asc" },
+    });
+    if (batch.length === 0) break;
+    for (const row of batch) {
+      if (!res.write(JSON.stringify(row) + "\n")) {
+        await new Promise((r) =&gt; res.once("drain", r));  // backpressure
+      }
+    }
+    cursor = batch[batch.length - 1].id;
+  }
+  res.end();
+});</code></pre>
+<p><strong>Key techniques:</strong> watch <code>res.write</code> return value &mdash; when it's <code>false</code>, pause reading until <code>drain</code> fires (backpressure). For huge parsed input, use <strong>stream-json</strong> to parse incrementally rather than building one massive object. Consider <strong>MessagePack</strong> or <strong>Protocol Buffers</strong> for internal service-to-service traffic &mdash; 2-5x smaller, faster to parse. JSON is a terrible serialization format for bulk data; use it only when humans need to read it.</p>
+'''
+
+ANSWERS[65] = r'''
+<p>The <strong>cors</strong> middleware handles the two-phase CORS dance: <strong>preflight</strong> (OPTIONS with <code>Access-Control-Request-Method</code> headers) and the <strong>actual request</strong> (response includes <code>Access-Control-Allow-Origin</code>). One <code>app.use(cors(options))</code> covers both.</p>
+<pre><code>import cors from "cors";
+
+// function origin — full control over the allowlist
+const corsOptions = {
+  origin: (origin, cb) =&gt; {
+    // non-browser clients (curl, server-to-server) have no Origin → allow
+    if (!origin) return cb(null, true);
+    const allowlist = ["https://app.example.com", "https://admin.example.com"];
+    const matches = allowlist.includes(origin) || /\.internal\.example\.com$/.test(origin);
+    cb(matches ? null : new Error(`CORS: ${origin} not allowed`), matches);
+  },
+  credentials:    true,
+  methods:        ["GET","POST","PUT","PATCH","DELETE"],
+  allowedHeaders: ["Content-Type","Authorization","X-Request-Id","Idempotency-Key"],
+  exposedHeaders: ["X-Request-Id","X-RateLimit-Remaining"],   // expose custom resp headers to JS
+  maxAge:         86400,                                       // cache preflight 24h
+};
+
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));                           // explicit preflight handler</code></pre>
+<p><strong>Critical rules:</strong></p>
+<ul>
+  <li><strong>Register CORS before auth.</strong> Preflights don't carry auth headers &mdash; if auth comes first, they 401 and the browser aborts.</li>
+  <li><strong>Never <code>origin: "*"</code> with <code>credentials: true</code></strong> &mdash; browsers reject. Echo the origin from an allowlist instead.</li>
+  <li><strong>Custom headers need <code>allowedHeaders</code>.</strong> <code>X-Request-Id</code> silently drops from preflights otherwise.</li>
+  <li><strong>Custom response headers need <code>exposedHeaders</code>.</strong> Without it, <code>fetch</code> can't read them even though they're sent.</li>
+  <li><strong>Cache preflights aggressively</strong> (<code>maxAge: 86400</code>) &mdash; otherwise every unique preflight doubles request counts.</li>
+</ul>
+<p>For per-route policies (public docs at <code>*</code>, credentialed <code>/api</code>), mount <code>cors(options)</code> per path. Centralizing at the edge (Cloudflare Transform Rules) works but couples policy to infra &mdash; in-app CORS is easier to test and version-control.</p>
+'''
+
+ANSWERS[66] = r'''
+<p>Yup is a chainable validation library similar to Joi, with good async integration. A factory middleware turns any schema into a reusable validation step across routes.</p>
+<pre><code>import * as yup from "yup";
+
+function validate(schema, property = "body") {
+  return async (req, res, next) =&gt; {
+    try {
+      const clean = await schema.validate(req[property], {
+        abortEarly:   false,               // collect all errors
+        stripUnknown: true,                // remove unknown fields — mass-assignment defense
+      });
+      if (property === "body") req.body = clean;
+      else req.validated = { ...(req.validated ?? {}), [property]: clean };
+      next();
+    } catch (err) {
+      if (err.name === "ValidationError") {
+        return res.status(400).json({
+          error:  "Validation failed",
+          issues: err.inner.map((e) =&gt; ({ field: e.path, message: e.message, type: e.type })),
+        });
+      }
+      next(err);
+    }
+  };
+}
+
+const SignupSchema = yup.object({
+  email:    yup.string().email().lowercase().trim().required(),
+  password: yup.string().min(8).max(128)
+                .matches(/[A-Z]/, "needs uppercase")
+                .matches(/[0-9]/, "needs digit").required(),
+  profile:  yup.object({
+    name: yup.string().trim().min(1).max(100).required(),
+    bio:  yup.string().max(500).optional(),
+  }).noUnknown().required(),
+}).noUnknown();
+
+app.post("/signup", validate(SignupSchema), signupHandler);</code></pre>
+<table>
+  <tr><th>Yup</th><th>Zod</th><th>Joi</th><th>AJV</th></tr>
+  <tr><td>Chainable, async, TS types (manual)</td><td>TS-first, inferred types</td><td>Mature, very expressive</td><td>Fastest, JSON Schema-based</td></tr>
+  <tr><td>Popular with Formik</td><td>Default for new TS projects</td><td>Pick if already in stack</td><td>Best for OpenAPI APIs</td></tr>
+</table>
+<p><strong>Key practices:</strong> always <code>stripUnknown: true</code> + <code>.noUnknown()</code> for mass-assignment defense; always <code>abortEarly: false</code> for UX; replace <code>req.body</code> with the cleaned result so downstream handlers see coerced data. For query/params validation, parameterize <code>property</code> since Zod/Yup work identically on any source.</p>
+'''
+
+ANSWERS[67] = r'''
+<p>GraphQL-on-Express in 2026 means picking between <strong>graphql-yoga</strong> (modern, fast, spec-compliant), <strong>Apollo Server</strong> (mature, federation-ready), or <strong>GraphQL Helix</strong> (most flexible). Direct <code>express-graphql</code> is deprecated.</p>
+<pre><code>// npm install graphql-yoga graphql
+import { createYoga, createSchema } from "graphql-yoga";
+
+const schema = createSchema({
+  typeDefs: `
+    type User { id: ID!, email: String!, posts: [Post!]! }
+    type Post { id: ID!, title: String!, author: User! }
+    type Query  { me: User!, post(id: ID!): Post }
+    type Mutation { createPost(title: String!): Post! }
+  `,
+  resolvers: {
+    Query: {
+      me:   (_, __, ctx) =&gt; ctx.user,
+      post: (_, { id }, ctx) =&gt; ctx.loaders.post.load(id),
+    },
+    User: {
+      posts: (user, _, ctx) =&gt; ctx.loaders.postsByUser.load(user.id),
+    },
+    Mutation: {
+      createPost: (_, args, ctx) =&gt; {
+        if (!ctx.user) throw new GraphQLError("Unauthorized");
+        return db.post.create({ data: { ...args, authorId: ctx.user.id } });
+      },
+    },
+  },
+});
+
+const yoga = createYoga({
+  schema,
+  context: async ({ request }) =&gt; ({
+    user: await authenticate(request.headers.get("authorization")),
+    loaders: createLoaders(),             // DataLoader per-request to batch DB calls
+  }),
+});
+
+app.use("/graphql", yoga);</code></pre>
+<table>
+  <tr><th>Concern</th><th>Approach</th></tr>
+  <tr><td>N+1 queries</td><td><strong>DataLoader</strong> per request &mdash; batches &amp; caches field lookups</td></tr>
+  <tr><td>Query depth/complexity DoS</td><td><code>graphql-depth-limit</code> + <code>graphql-query-complexity</code>; enforce caps</td></tr>
+  <tr><td>Auth &amp; authz</td><td>Auth in context; authz in resolvers with a policy layer (CASL)</td></tr>
+  <tr><td>Caching</td><td>Persisted queries + CDN caching; Apollo client cache client-side</td></tr>
+  <tr><td>Subscriptions (realtime)</td><td>GraphQL-WS over WebSockets; server-side pub/sub via Redis</td></tr>
+</table>
+<p><strong>When GraphQL wins:</strong> frontends needing flexible queries over rich domain graphs, many UI variations over the same data, strong typing from schema to client (codegen). <strong>When REST wins:</strong> simple CRUD, file uploads, HTTP caching that "just works", public APIs with varied consumers. Tools like <strong>tRPC</strong> (for full-stack TS) sit between them.</p>
+'''
+
+ANSWERS[68] = r'''
+<p>Nested routers model hierarchical resources (<code>/users/:userId/posts/:postId/comments/:commentId</code>) without exploding a single <code>app.js</code>. Express's <code>Router</code> is composable &mdash; routers can mount other routers.</p>
+<pre><code>// routes/comments.js
+import { Router } from "express";
+const router = Router({ mergeParams: true });    // inherit :userId, :postId from parent
+
+router.get("/", async (req, res) =&gt; {
+  const { userId, postId } = req.params;         // both available
+  const comments = await db.comment.findMany({ where: { postId } });
+  res.json(comments);
+});
+
+router.get("/:commentId", loadComment, (req, res) =&gt; res.json(req.comment));
+export default router;
+
+// routes/posts.js
+import { Router } from "express";
+import commentsRouter from "./comments.js";
+
+const router = Router({ mergeParams: true });
+router.get("/:postId", (req, res) =&gt; res.json({ postId: req.params.postId }));
+router.use("/:postId/comments", commentsRouter);  // deeper nesting
+export default router;
+
+// routes/users.js
+import { Router } from "express";
+import postsRouter from "./posts.js";
+
+const router = Router();
+router.use("/:userId/posts", postsRouter);        // mount posts under users
+export default router;
+
+// app.js
+app.use("/api/users", usersRouter);</code></pre>
+<p><strong>Rules for healthy nesting:</strong></p>
+<ul>
+  <li><strong>Always use <code>mergeParams: true</code></strong> on child routers &mdash; without it, child handlers can't see parent params.</li>
+  <li><strong>Cap depth at 2-3 levels.</strong> <code>/a/:x/b/:y/c/:z</code> is a URL; deeper is a smell. Offer flat alternatives (<code>/comments/:id</code>) for direct access.</li>
+  <li><strong>Authorize at each level.</strong> Loading a comment should verify the <code>postId</code> and <code>userId</code> in the path match the comment's parents &mdash; otherwise attackers enumerate via crafted URLs.</li>
+  <li><strong>Param middleware</strong> (<code>app.param("postId", loadPost)</code>) runs once per request and attaches loaded resources to <code>req</code>, eliminating repeated DB lookups.</li>
+</ul>
+<p>For large apps, consider a <strong>controller/service</strong> split where the router is pure routing and handlers delegate to services. Frameworks like <strong>NestJS</strong> enforce this structure; for vanilla Express, convention replaces code.</p>
+'''
+
+ANSWERS[69] = r'''
+<p><strong>express-rate-limit</strong> is the de facto rate-limit middleware. This answer focuses on the production concerns: <strong>distribution</strong>, <strong>key strategy</strong>, and <strong>integration with infra</strong>.</p>
+<pre><code>import rateLimit from "express-rate-limit";
+import RedisStore from "rate-limit-redis";
+
+app.set("trust proxy", 1);                          // essential behind ALB/Nginx
+
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: async (req) =&gt; {                             // dynamic limit — per-plan tier
+    if (!req.user)             return 100;
+    if (req.user.plan === "pro") return 10_000;
+    if (req.user.plan === "enterprise") return 100_000;
+    return 1000;                                    // free tier
+  },
+  standardHeaders: true,                            // RateLimit-* per RFC 9331
+  store: new RedisStore({ sendCommand: (...a) =&gt; redis.call(...a) }),
+  keyGenerator: (req) =&gt; req.user?.id ?? req.ip,
+  skip: (req) =&gt; req.path === "/health",            // exempt health checks
+  handler: (req, res) =&gt; {
+    res.set("Retry-After", Math.ceil((req.rateLimit.resetTime - Date.now()) / 1000));
+    res.status(429).json({ error: "Rate limit exceeded", reset: req.rateLimit.resetTime });
+  },
+});
+app.use("/api", apiLimiter);</code></pre>
+<table>
+  <tr><th>Issue</th><th>Solution</th></tr>
+  <tr><td>Multi-instance deployments</td><td>Redis store &mdash; in-memory counters are per-process.</td></tr>
+  <tr><td>Behind a proxy</td><td><code>app.set("trust proxy", n)</code> so <code>req.ip</code> resolves to the real client IP.</td></tr>
+  <tr><td>Shared NATs (mobile carriers, offices)</td><td>Key on user id when authenticated; IP only as fallback.</td></tr>
+  <tr><td>Burst vs sustained abuse</td><td>Stack two limiters: short-window throttle + long-window quota.</td></tr>
+  <tr><td>Login brute-force</td><td>Separate stricter limiter with <code>skipSuccessfulRequests: true</code>.</td></tr>
+</table>
+<p><strong>Defense-in-depth:</strong> edge rate-limiting (Cloudflare, AWS WAF) absorbs DDoS before hitting Node; Express rate-limit handles app-level fairness and per-user quotas. Never rely on one layer &mdash; losing Redis for 30 seconds shouldn't destroy your API.</p>
+'''
+
+ANSWERS[70] = r'''
+<p>A custom session store implements <code>express-session</code>'s store interface &mdash; three methods: <code>get(sid, cb)</code>, <code>set(sid, session, cb)</code>, <code>destroy(sid, cb)</code>. Optional but valuable: <code>touch</code>, <code>length</code>, <code>all</code>, <code>clear</code>. Building one manually is rare &mdash; the ecosystem has production-grade stores for every backend.</p>
+<pre><code>import session from "express-session";
+
+class CustomStore extends session.Store {
+  constructor(client) { super(); this.client = client; }
+
+  async get(sid, cb) {
+    try {
+      const data = await this.client.get(`sess:${sid}`);
+      cb(null, data ? JSON.parse(data) : null);
+    } catch (err) { cb(err); }
+  }
+
+  async set(sid, sess, cb) {
+    try {
+      const ttl = sess.cookie?.maxAge ? Math.floor(sess.cookie.maxAge / 1000) : 86400;
+      await this.client.setex(`sess:${sid}`, ttl, JSON.stringify(sess));
+      cb(null);
+    } catch (err) { cb(err); }
+  }
+
+  async destroy(sid, cb) {
+    try { await this.client.del(`sess:${sid}`); cb(null); }
+    catch (err) { cb(err); }
+  }
+
+  async touch(sid, sess, cb) {                              // reset TTL on each request
+    try {
+      const ttl = sess.cookie?.maxAge ? Math.floor(sess.cookie.maxAge / 1000) : 86400;
+      await this.client.expire(`sess:${sid}`, ttl);
+      cb(null);
+    } catch (err) { cb(err); }
+  }
+}
+
+app.use(session({ store: new CustomStore(redis), /* ... */ }));</code></pre>
+<table>
+  <tr><th>Backend</th><th>Use store</th></tr>
+  <tr><td>Redis</td><td><strong>connect-redis</strong></td></tr>
+  <tr><td>PostgreSQL</td><td><strong>connect-pg-simple</strong></td></tr>
+  <tr><td>MongoDB</td><td><strong>connect-mongo</strong></td></tr>
+  <tr><td>Memcached</td><td><strong>connect-memcached</strong></td></tr>
+  <tr><td>DynamoDB</td><td><strong>connect-dynamodb</strong></td></tr>
+</table>
+<p><strong>When to build your own:</strong> encrypted-at-rest sessions with a custom KMS integration, multi-region with conflict resolution, or specialized backends (FoundationDB, Tarantool). For standard deployments, the ecosystem stores handle expiration, connection pooling, and error paths better than a rolled-your-own version. Add <code>rolling: true</code> and <code>touch</code> support for idle-timeout UX.</p>
+'''
+
+ANSWERS[71] = r'''
+<p>Sequelize is a mature promise-based ORM for Postgres, MySQL, MariaDB, SQLite, and MSSQL. It offers models, associations, migrations, transactions, and a query builder. In 2026, it's still widely used but losing ground to <strong>Prisma</strong> (better TS types, cleaner API) and <strong>Drizzle</strong> (lightweight, SQL-like).</p>
+<pre><code>import { Sequelize, DataTypes, Model } from "sequelize";
+
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+  pool: { max: 20, min: 2, idle: 10_000 },
+  logging: (msg) =&gt; req.log?.debug(msg) ?? null,
+});
+
+class User extends Model {}
+User.init({
+  id:    { type: DataTypes.UUID, defaultValue: DataTypes.UUIDV4, primaryKey: true },
+  email: { type: DataTypes.STRING, unique: true, allowNull: false, validate: { isEmail: true } },
+  role:  { type: DataTypes.ENUM("user","editor","admin"), defaultValue: "user" },
+}, { sequelize, modelName: "User", paranoid: true });       // soft delete via deletedAt
+
+class Post extends Model {}
+Post.init({ title: DataTypes.STRING, body: DataTypes.TEXT }, { sequelize, modelName: "Post" });
+
+User.hasMany(Post, { foreignKey: "authorId" });
+Post.belongsTo(User, { foreignKey: "authorId" });
+
+// CRUD with eager-loading (JOIN)
+app.get("/users/:id", async (req, res) =&gt; {
+  const user = await User.findByPk(req.params.id, {
+    include: [{ model: Post, limit: 5, order: [["createdAt","DESC"]] }],
+  });
+  res.json(user);
+});</code></pre>
+<table>
+  <tr><th>Feature</th><th>Sequelize</th><th>Prisma</th><th>Drizzle</th></tr>
+  <tr><td>TypeScript types</td><td>Partial</td><td>Excellent</td><td>Excellent (SQL-inferred)</td></tr>
+  <tr><td>Migrations</td><td>sequelize-cli</td><td><code>prisma migrate</code> (nicer)</td><td>drizzle-kit</td></tr>
+  <tr><td>N+1 protection</td><td>Manual <code>include</code></td><td>Manual <code>include</code> / DataLoader</td><td>Manual joins</td></tr>
+  <tr><td>Raw SQL feel</td><td>Abstracted</td><td>Abstracted</td><td>Close to SQL</td></tr>
+</table>
+<p><strong>Recommendation:</strong> for new TypeScript projects, <strong>Prisma</strong> or <strong>Drizzle</strong>. For legacy JS or JS-first teams, Sequelize still works. Whichever ORM you pick, always <strong>log slow queries</strong>, <strong>index foreign keys</strong>, and <strong>watch for N+1</strong> in production &mdash; ORMs hide performance problems until they're in prod.</p>
+'''
+
+ANSWERS[72] = r'''
+<p>File uploads + image processing is a common Express feature with three real concerns: <strong>validation</strong> (MIME lies, path traversal, zip bombs), <strong>processing</strong> (re-encode, strip metadata, resize), and <strong>storage</strong> (local vs object storage vs CDN).</p>
+<pre><code>import multer from "multer";
+import sharp from "sharp";
+import crypto from "node:crypto";
+
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits:  { fileSize: 10 * 1024 * 1024 },
+  fileFilter: (req, file, cb) =&gt; {
+    cb(null, ["image/jpeg","image/png","image/webp"].includes(file.mimetype));
+  },
+});
+
+app.post("/photos", requireAuth, upload.single("photo"), async (req, res, next) =&gt; {
+  if (!req.file) return res.status(400).json({ error: "No file" });
+  try {
+    // validate dimensions BEFORE resize — prevents "decompression bomb" OOMs
+    const meta = await sharp(req.file.buffer).metadata();
+    if (!meta.width || meta.width &gt; 8000 || meta.height &gt; 8000) {
+      return res.status(400).json({ error: "Image exceeds max dimensions" });
+    }
+
+    const base = sharp(req.file.buffer).rotate();           // apply EXIF, then strip
+    const id   = crypto.randomUUID();
+    const variants = await Promise.all([
+      base.clone().resize(200,  200, { fit: "cover"  }).webp({ quality: 80 }).toBuffer(),
+      base.clone().resize(800,  null, { fit: "inside" }).webp({ quality: 82 }).toBuffer(),
+      base.clone().resize(1920, null, { fit: "inside", withoutEnlargement: true }).webp({ quality: 82 }).toBuffer(),
+    ]);
+
+    // upload to S3/GCS
+    await Promise.all(variants.map((buf, i) =&gt;
+      s3.putObject({ Bucket, Key: `photos/${id}/${["thumb","medium","large"][i]}.webp`, Body: buf })
+    ));
+
+    await db.photo.create({ data: { id, userId: req.user.sub, /* ... */ } });
+    res.status(201).json({ id });
+  } catch (err) { next(err); }
+});</code></pre>
+<p><strong>Security essentials:</strong></p>
+<ul>
+  <li><strong>Bound dimensions.</strong> A 100kx100k PNG compresses tiny but expands to gigabytes on decode &mdash; OOMs the process.</li>
+  <li><strong>Re-encode, don't trust.</strong> Client's MIME type is user-supplied. Sharp validates the actual image format and strips metadata (EXIF often contains GPS).</li>
+  <li><strong>Async for heavy work.</strong> Resize three variants blocks the handler for hundreds of ms. Push to a queue (BullMQ) and return immediately with a "processing" status.</li>
+  <li><strong>Never serve from your domain.</strong> Serve user-uploaded content from a separate subdomain (<code>user-content.example.com</code>) so any XSS in uploaded SVG can't access auth cookies.</li>
+</ul>
+<p>For 2026 pipelines, consider <strong>sharp</strong> in a Lambda/worker, <strong>imgproxy</strong> as a Go-based on-demand service, or <strong>Cloudinary/imgix</strong> as managed solutions &mdash; they handle CDN, variants on-demand, and AVIF/WebP negotiation automatically.</p>
+'''
+
+ANSWERS[73] = r'''
+<p><strong>multer-s3</strong> streams uploads directly from the request to S3 without writing to local disk &mdash; critical for serverless/containerized deployments where local disk is ephemeral or nonexistent. The key selling point is zero-copy: bytes flow client → Node → S3 without ever touching a filesystem.</p>
+<pre><code>import multer from "multer";
+import multerS3 from "multer-s3";
+import { S3Client } from "@aws-sdk/client-s3";
+import crypto from "node:crypto";
+
+const s3 = new S3Client({ region: process.env.AWS_REGION });
+
+const upload = multer({
+  storage: multerS3({
+    s3,
+    bucket: process.env.S3_BUCKET,
+    acl: "private",                                  // never "public-read" for user content
+    contentType: multerS3.AUTO_CONTENT_TYPE,
+    metadata: (req, file, cb) =&gt; cb(null, { uploadedBy: req.user?.id || "anon" }),
+    key: (req, file, cb) =&gt; {
+      const ext = file.originalname.split(".").pop()?.toLowerCase() || "bin";
+      cb(null, `uploads/${new Date().toISOString().slice(0, 10)}/${crypto.randomUUID()}.${ext}`);
+    },
+  }),
+  limits: { fileSize: 100 * 1024 * 1024 },           // 100 MB
+});
+
+app.post("/upload", requireAuth, upload.single("file"), (req, res) =&gt; {
+  res.status(201).json({ key: req.file.key, location: req.file.location, size: req.file.size });
+});</code></pre>
+<p><strong>Better pattern for large files: pre-signed URLs.</strong> The Express server generates a short-lived signed URL, the browser PUTs directly to S3. Node never sees the bytes &mdash; bandwidth, CPU, and Node scaling all decouple from upload volume.</p>
+<pre><code>import { PutObjectCommand } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+
+app.post("/uploads/request", requireAuth, async (req, res) =&gt; {
+  const key = `uploads/${req.user.sub}/${crypto.randomUUID()}`;
+  const url = await getSignedUrl(s3,
+    new PutObjectCommand({ Bucket, Key: key, ContentType: req.body.contentType }),
+    { expiresIn: 300 }
+  );
+  res.json({ url, key });   // browser PUTs file to `url`
+});</code></pre>
+<p><strong>Operational checklist:</strong> private buckets always; use IAM roles / Workload Identity, not access keys; set S3 object lock + versioning for user-uploaded content; serve downloads via signed GET URLs (time-bound) or CloudFront with signed cookies. For very large uploads (&gt;100 MB), use multipart uploads (<code>@aws-sdk/lib-storage</code>) which support resume and parallelism.</p>
+'''
+
+ANSWERS[74] = r'''
+<p>Combining upload handling with validation requires pushing checks to the right layer: <strong>multer filter</strong> (client-reported MIME, size), <strong>post-upload analysis</strong> (real bytes), and <strong>DB-layer constraints</strong> (business rules). Each layer catches a different class of problem.</p>
+<pre><code>import multer from "multer";
+import { fileTypeFromBuffer } from "file-type";    // validates magic bytes
+
+const ALLOWED_MIMES = ["image/jpeg","image/png","image/webp","application/pdf"];
+const MAX_SIZE = 20 * 1024 * 1024;
+
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: MAX_SIZE, files: 1 },
+  fileFilter: (req, file, cb) =&gt; {
+    cb(null, ALLOWED_MIMES.includes(file.mimetype));  // fast rejection on claimed MIME
+  },
+});
+
+async function validateFile(req, res, next) {
+  if (!req.file) return res.status(400).json({ error: "No file" });
+
+  // 1. real-format detection — client-reported MIME can lie
+  const detected = await fileTypeFromBuffer(req.file.buffer);
+  if (!detected || !ALLOWED_MIMES.includes(detected.mime)) {
+    return res.status(400).json({ error: `File content is ${detected?.mime ?? "unknown"}` });
+  }
+
+  // 2. business rules
+  const userQuota = await getUserStorageUsed(req.user.sub);
+  if (userQuota + req.file.size &gt; QUOTA_BYTES) {
+    return res.status(413).json({ error: "Storage quota exceeded" });
+  }
+
+  // 3. attach normalized info for handlers
+  req.validatedFile = {
+    ...req.file,
+    detectedMime: detected.mime,
+    detectedExt:  detected.ext,
+  };
+  next();
+}
+
+app.post("/upload", requireAuth, upload.single("file"), validateFile,
+  async (req, res) =&gt; {
+    // persist req.validatedFile; the bytes are in req.file.buffer
+    res.status(201).json({ ok: true });
+  }
+);</code></pre>
+<p><strong>Validation depth by file type:</strong></p>
+<ul>
+  <li><strong>Images:</strong> re-encode with <code>sharp</code> &mdash; rejects malformed files, strips EXIF, bounds dimensions (decompression-bomb defense).</li>
+  <li><strong>PDFs:</strong> parse with <code>pdf-lib</code> to confirm it's valid; sandbox rendering.</li>
+  <li><strong>Office docs:</strong> scan with ClamAV; convert to PDF for safer preview.</li>
+  <li><strong>Archives:</strong> check compressed size before extracting &mdash; zip bombs are a thing (42KB → 4.5PB).</li>
+</ul>
+<p>Never trust <code>file.mimetype</code> &mdash; it comes from the browser's filename extension. For production, scan with <strong>ClamAV</strong> or cloud malware services, re-encode images through a hardened library, serve from a separate domain, and set <code>Content-Disposition: attachment</code> on ambiguous types so browsers don't render them.</p>
+'''
+
+ANSWERS[75] = r'''
+<p>Dynamic routes &mdash; where the path shape is data-driven rather than hardcoded &mdash; come up in two scenarios: <strong>parameterized routes</strong> with <code>:name</code> placeholders (easy), and <strong>fully data-driven routing</strong> where endpoints are generated from a config or DB (advanced).</p>
+<pre><code>// 1. parameterized — most "dynamic routes" are just this
+app.get("/users/:userId/posts/:postId", handler);        // matches many URLs
+
+// 2. route generation from config — common for CMS / plugin systems
+const routeConfig = [
+  { method: "get",  path: "/articles/:slug", handler: showArticle, cache: 60 },
+  { method: "post", path: "/contact",        handler: submitContact, auth: false },
+  { method: "get",  path: "/profile",        handler: showProfile, auth: true },
+];
+
+for (const r of routeConfig) {
+  const middlewares = [];
+  if (r.cache)       middlewares.push(cacheFor(r.cache));
+  if (r.auth)        middlewares.push(requireAuth);
+  middlewares.push(r.handler);
+  app[r.method](r.path, ...middlewares);
+}
+
+// 3. truly runtime routing — dispatch inside a catch-all
+// Trade-off: loses route definition clarity; harder to enumerate for tools like Swagger
+const dynamicRouter = express.Router();
+dynamicRouter.all("*", async (req, res, next) =&gt; {
+  const page = await db.page.findUnique({ where: { path: req.path } });
+  if (!page) return next();                              // fall through to 404
+  res.render("page", { content: page.content });
+});
+app.use(dynamicRouter);</code></pre>
+<table>
+  <tr><th>Approach</th><th>When</th></tr>
+  <tr><td>Parameterized routes</td><td>Resource APIs &mdash; the default for 95% of cases.</td></tr>
+  <tr><td>Generated from config array</td><td>Plugin systems, feature flags, permission-gated endpoints.</td></tr>
+  <tr><td>Runtime DB lookup</td><td>CMS, user-created pages, A/B experiments routing.</td></tr>
+</table>
+<p><strong>Gotchas:</strong> runtime routing hides endpoints from OpenAPI/Swagger generators, test suites, and IDE navigation. Keep as much as possible statically defined &mdash; reserve dynamic dispatch for the cases where static definition is genuinely impossible. Cache DB lookups in dispatch middleware aggressively, because <em>every</em> request pays the lookup cost otherwise.</p>
+'''
+
+ANSWERS[76] = r'''
+<p>Real-time chat over Socket.IO has three concerns beyond the basic "socket connects, emits messages": <strong>authentication &amp; authorization</strong>, <strong>message persistence &amp; ordering</strong>, and <strong>presence &amp; delivery guarantees</strong>.</p>
+<pre><code>import { Server } from "socket.io";
+import { createAdapter } from "@socket.io/redis-adapter";
+
+const io = new Server(server);
+const pub = new Redis(REDIS_URL); const sub = pub.duplicate();
+io.adapter(createAdapter(pub, sub));                  // cross-instance broadcasts
+
+// 1. auth on handshake — never at first message
+io.use(async (socket, next) =&gt; {
+  try { socket.data.user = await verifyJwt(socket.handshake.auth.token); next(); }
+  catch { next(new Error("Unauthorized")); }
+});
+
+io.on("connection", async (socket) =&gt; {
+  const user = socket.data.user;
+  socket.join(`user:${user.id}`);                     // personal channel
+
+  socket.on("room:join", async (roomId, ack) =&gt; {
+    // 2. authz per join — is this user allowed in this room?
+    if (!(await canUserJoinRoom(user.id, roomId))) return ack({ error: "Forbidden" });
+    socket.join(`room:${roomId}`);
+    // send recent history so user catches up
+    const history = await db.message.findMany({
+      where: { roomId }, orderBy: { createdAt: "desc" }, take: 50,
+    });
+    ack({ history: history.reverse() });
+  });
+
+  socket.on("message:send", async ({ roomId, text, clientMsgId }, ack) =&gt; {
+    if (!text || text.length &gt; 2000) return ack({ error: "Invalid" });
+    // 3. persist BEFORE broadcast — preserves ordering under load
+    const msg = await db.message.create({
+      data: { roomId, authorId: user.id, text, clientMsgId },
+    });
+    io.to(`room:${roomId}`).emit("message:new", msg);
+    ack({ ok: true, serverMsgId: msg.id });
+  });
+
+  socket.on("typing", ({ roomId }) =&gt; {
+    socket.to(`room:${roomId}`).emit("typing", { userId: user.id });
+  });
+});</code></pre>
+<p><strong>Production considerations:</strong></p>
+<ul>
+  <li><strong>Message ordering:</strong> persist with a monotonic <code>createdAt</code> (DB-generated) before broadcasting; clients reconcile on reconnect.</li>
+  <li><strong>Delivery guarantees:</strong> ack-based semantics (<code>emit(evt, data, ack)</code>) turn fire-and-forget into at-least-once; clients retry on timeout.</li>
+  <li><strong>Presence:</strong> store "online users in room X" in Redis sets with TTL; update on connect/disconnect; consider presence heartbeats.</li>
+  <li><strong>Rate limit</strong> per socket (not per IP) to prevent a single user spamming.</li>
+</ul>
+<p>For production scale, hosted options (<strong>Ably</strong>, <strong>Pusher</strong>, <strong>Stream Chat</strong>) provide message history, moderation tooling, and multi-region delivery. Build your own only if chat is the product.</p>
+'''
+
+ANSWERS[77] = r'''
+<p><strong>express-validator</strong> is a chainable validator/sanitizer built on <strong>validator.js</strong>. Its distinguishing feature is that validators and sanitizers compose in the same chain, running against any request location (<code>body</code>, <code>query</code>, <code>params</code>, <code>headers</code>, <code>cookies</code>).</p>
+<pre><code>import { body, query, param, validationResult, matchedData } from "express-validator";
+
+const signupRules = [
+  body("email").isEmail().normalizeEmail().isLength({ max: 254 }),
+  body("password")
+    .isLength({ min: 8, max: 128 }).withMessage("8-128 chars")
+    .matches(/[A-Z]/).withMessage("needs uppercase")
+    .matches(/[0-9]/).withMessage("needs digit"),
+  body("age").optional().isInt({ min: 13, max: 120 }).toInt(),
+  body("website").optional().isURL({ protocols: ["https"] }).trim(),
+  body("role").customSanitizer((v) =&gt; "user"),    // force — prevents mass assignment
+];
+
+function handleValidation(req, res, next) {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ error: "Validation failed", issues: errors.array() });
+  }
+  // get only the values that were in validation chains — mass-assignment defense
+  req.validated = matchedData(req, { includeOptionals: true });
+  next();
+}
+
+app.post("/signup", signupRules, handleValidation, signupHandler);</code></pre>
+<table>
+  <tr><th>express-validator</th><th>Zod</th></tr>
+  <tr><td>Per-field chains, middleware-native</td><td>Schema-first, framework-agnostic</td></tr>
+  <tr><td>Runtime only — no TS inference</td><td><code>z.infer</code> gives static types</td></tr>
+  <tr><td>Huge library of built-in validators</td><td>Smaller surface, more composable</td></tr>
+  <tr><td>Great for existing JS codebases</td><td>Default for new TS projects</td></tr>
+</table>
+<p><strong>Key gotchas:</strong> <code>validationResult(req)</code> must be called &mdash; without it, chains silently don't enforce. Use <code>matchedData()</code> over <code>req.body</code> to drop unvalidated fields (mass-assignment defense). For nested objects, use dot notation (<code>body("profile.name")</code>) or switch to schema-based validators &mdash; chains get unwieldy past 2 levels deep.</p>
+'''
+
+ANSWERS[78] = r'''
+<p>User profile management is a surprisingly deep feature &mdash; it touches auth, authorization, validation, file uploads, audit logging, privacy rights (GDPR/CCPA), and email verification. The API surface is small; the cross-cutting concerns are large.</p>
+<table>
+  <tr><th>Endpoint</th><th>Purpose</th><th>Concerns</th></tr>
+  <tr><td><code>GET /profile</code></td><td>Fetch own profile</td><td>Filter sensitive fields via <code>select</code></td></tr>
+  <tr><td><code>PATCH /profile</code></td><td>Partial update</td><td>Mass-assignment defense, field-level authz</td></tr>
+  <tr><td><code>POST /profile/avatar</code></td><td>Upload photo</td><td>Validation, image processing, CDN</td></tr>
+  <tr><td><code>POST /profile/email-change</code></td><td>Request email change</td><td>Verify new address via token</td></tr>
+  <tr><td><code>POST /profile/password</code></td><td>Change password</td><td>Require current password, revoke sessions</td></tr>
+  <tr><td><code>DELETE /profile</code></td><td>Delete account</td><td>Soft-delete + GDPR purge job</td></tr>
+  <tr><td><code>GET /profile/export</code></td><td>Data export (GDPR)</td><td>Async job, signed URL</td></tr>
+</table>
+<pre><code>const ProfilePatch = z.object({
+  displayName: z.string().trim().min(1).max(100).optional(),
+  bio:         z.string().trim().max(500).optional(),
+  website:     z.string().url().optional().or(z.literal("")),
+  locale:      z.enum(["en","de","fr","es","ja"]).optional(),
+  // email/role/plan deliberately EXCLUDED — separate endpoints
+}).strict();
+
+app.patch("/profile", requireAuth, async (req, res) =&gt; {
+  const patch = ProfilePatch.parse(req.body);
+  const updated = await db.user.update({
+    where: { id: req.user.sub }, data: patch,
+    select: { id: true, displayName: true, bio: true, website: true, locale: true, updatedAt: true },
+  });
+  // audit
+  await db.auditLog.create({ data: {
+    actorId: req.user.sub, action: "profile.update",
+    target: req.user.sub, diff: patch,
+  }});
+  res.json(updated);
+});</code></pre>
+<p><strong>Design rules:</strong> split <em>changing identity</em> (email, password, phone) from <em>changing metadata</em> (bio, display name). Identity changes need re-authentication (<code>current_password</code>) and trigger side-effects (revoke sessions, send confirmation email). Metadata changes don't. Use <code>.strict()</code> schemas &mdash; a user shouldn't be able to set <code>role: "admin"</code> by crafting a PATCH body. Audit every change with who, when, and diff &mdash; compliance teams will ask for this.</p>
+'''
+
+ANSWERS[79] = r'''
+<p>A RESTful API over MySQL in Express uses the <strong>mysql2</strong> driver (better than <code>mysql</code>: promise API, prepared statements, streaming) and an ORM on top for ergonomics. Production apps almost always use Prisma, Drizzle, or TypeORM; the raw driver is best for performance-critical paths.</p>
+<pre><code>import mysql from "mysql2/promise";
+
+const pool = mysql.createPool({
+  host: process.env.MYSQL_HOST,
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PASS,
+  database: process.env.MYSQL_DB,
+  connectionLimit: 20,
+  waitForConnections: true,
+  timezone: "+00:00",                         // ALWAYS UTC in the DB
+});
+
+// REST: GET /users — list with search &amp; pagination
+app.get("/users", async (req, res) =&gt; {
+  const q     = String(req.query.q ?? "").trim();
+  const limit = Math.min(100, Number(req.query.limit) || 20);
+  const page  = Math.max(1, Number(req.query.page) || 1);
+  const [rows] = await pool.query(
+    `SELECT id, email, name, created_at
+       FROM users
+      WHERE (? = '' OR name LIKE CONCAT('%', ?, '%'))
+      ORDER BY id DESC
+      LIMIT ? OFFSET ?`,
+    [q, q, limit, (page - 1) * limit]
+  );
+  res.json({ data: rows, meta: { page, limit } });
+});
+
+// REST: POST /users — create
+app.post("/users", async (req, res) =&gt; {
+  const { email, name, passwordHash } = req.body;
+  const [result] = await pool.execute(                    // execute = prepared statement
+    "INSERT INTO users (email, name, password_hash) VALUES (?, ?, ?)",
+    [email, name, passwordHash]
+  );
+  res.status(201).location(`/users/${result.insertId}`).json({ id: result.insertId });
+});
+
+// REST: transaction for multi-row updates
+app.post("/transfers", async (req, res) =&gt; {
+  const conn = await pool.getConnection();
+  try {
+    await conn.beginTransaction();
+    await conn.execute("UPDATE accounts SET balance = balance - ? WHERE id = ?", [req.body.amount, req.body.from]);
+    await conn.execute("UPDATE accounts SET balance = balance + ? WHERE id = ?", [req.body.amount, req.body.to]);
+    await conn.commit();
+    res.json({ ok: true });
+  } catch (err) {
+    await conn.rollback(); throw err;
+  } finally { conn.release(); }
+});</code></pre>
+<p><strong>MySQL-specific gotchas:</strong> always <code>execute()</code> not <code>query()</code> for user input (prepared statements are parameter-safe AND cached on the server); set <code>timezone: "+00:00"</code> globally; use <code>utf8mb4</code> for the DB/table charset (not <code>utf8</code>, which is 3-byte only); watch for implicit type coercion (<code>WHERE id = '123'</code> works but defeats indexes). For connection sharing on Lambda, use RDS Proxy or planetScale-style serverless drivers.</p>
+'''
+
+ANSWERS[80] = r'''
+<p>Redis caching in Express has three classic patterns, each with different consistency/complexity trade-offs.</p>
+<table>
+  <tr><th>Pattern</th><th>Read</th><th>Write</th><th>Use</th></tr>
+  <tr><td>Cache-aside (lazy)</td><td>Check cache → miss → DB → fill</td><td>Write DB, invalidate cache</td><td>Most common; good default</td></tr>
+  <tr><td>Read-through</td><td>Cache fetches from DB on miss</td><td>Write DB, invalidate cache</td><td>Needs a caching layer (DAX, Memorystore write-through)</td></tr>
+  <tr><td>Write-through</td><td>Always reads from cache</td><td>Writes go cache + DB</td><td>Reads cheap; complex failure modes</td></tr>
+</table>
+<pre><code>// cache-aside with singleflight — prevents stampede when a hot key expires
+const inFlight = new Map();
+
+async function cached(key, ttlSec, loader) {
+  const hit = await redis.get(key);
+  if (hit) return hit === "NULL" ? null : JSON.parse(hit);
+
+  // coalesce concurrent misses on the same key
+  if (inFlight.has(key)) return inFlight.get(key);
+
+  const p = (async () =&gt; {
+    try {
+      const fresh = await loader();
+      // cache even null — prevents cache penetration DoS
+      await redis.setex(key, ttlSec, fresh === null ? "NULL" : JSON.stringify(fresh));
+      return fresh;
+    } finally { inFlight.delete(key); }
+  })();
+  inFlight.set(key, p);
+  return p;
+}
+
+app.get("/products/:id", async (req, res) =&gt; {
+  const product = await cached(`product:${req.params.id}`, 60,
+    () =&gt; db.product.findUnique({ where: { id: req.params.id } }));
+  if (!product) return res.sendStatus(404);
+  res.set("Cache-Control", "public, max-age=30");
+  res.json(product);
+});
+
+// invalidate on write
+app.put("/products/:id", async (req, res) =&gt; {
+  const updated = await db.product.update({ where: { id: req.params.id }, data: req.body });
+  await redis.del(`product:${req.params.id}`);
+  res.json(updated);
+});</code></pre>
+<p><strong>Failure modes to design for:</strong> <strong>stampede</strong> (many requests miss the same key simultaneously → one DB hit thanks to singleflight); <strong>penetration</strong> (requests for non-existent keys hit DB every time → cache the <code>null</code>); <strong>avalanche</strong> (many keys expire together → add jitter to TTLs). For heavy-read workloads, combine Redis with HTTP <code>Cache-Control</code> and ETag so CDNs absorb most traffic before Node.</p>
+'''
+
+ANSWERS[81] = r'''
+<p>Custom async/await error handling comes down to <strong>bridging rejected promises to Express's error middleware</strong>. In Express 4, rejections inside an async handler escape to <code>unhandledRejection</code> instead of <code>next(err)</code>. Express 5 fixed this natively; Express 4 needs a wrapper.</p>
+<pre><code>// portable pattern: six-line asyncHandler — works in Express 4 and 5
+export const asyncHandler = (fn) =&gt; (req, res, next) =&gt;
+  Promise.resolve(fn(req, res, next)).catch(next);
+
+app.get("/users/:id", asyncHandler(async (req, res) =&gt; {
+  const user = await db.user.findUnique({ where: { id: req.params.id } });
+  if (!user) throw new HttpError("Not found", 404);
+  res.json(user);
+}));
+
+// alternative: monkey-patch — all async handlers forward thrown errors
+import "express-async-errors";                       // Express 4 only
+
+// error middleware — must have (err, req, res, next) signature
+app.use((err, req, res, _next) =&gt; {
+  // normalize library errors into HttpError
+  if (err.name === "ZodError") err = new HttpError("Invalid input", 400, err.issues);
+  if (err.code === "P2002")    err = new HttpError("Already exists", 409);
+  if (err.code === "ECONNREFUSED") err = new HttpError("Upstream unavailable", 503);
+
+  const status = err.status || 500;
+  if (status &gt;= 500) req.log?.error({ err, reqId: req.id }, "server error");
+
+  res.status(status).json({
+    error: err.message,
+    code:  err.code,
+    reqId: req.id,
+    ...(err.details &amp;&amp; { details: err.details }),
+    ...(process.env.NODE_ENV !== "production" &amp;&amp; { stack: err.stack }),
+  });
+});
+
+class HttpError extends Error {
+  constructor(message, status = 500, details) {
+    super(message); this.status = status; this.details = details;
+  }
+}</code></pre>
+<p><strong>Anti-patterns to avoid:</strong> try/catch around every <code>await</code> with bespoke <code>res.status(500).send()</code> &mdash; inconsistency creeps in instantly. Swallowing errors silently (<code>.catch(() =&gt; {})</code>). Returning 200 with <code>{ error: "..." }</code> &mdash; breaks HTTP semantics and confuses every monitoring tool. For <code>unhandledRejection</code> and <code>uncaughtException</code> at the process level, log and exit &mdash; let your supervisor (systemd, Kubernetes) restart. A broken process pretending to be healthy is worse than a clean crash.</p>
+'''
+
+ANSWERS[82] = r'''
+<p><strong>express-jsonschema</strong> wraps a JSON Schema validator as Express middleware. JSON Schema is an open standard (you can share schemas with clients, OpenAPI docs, and other languages), and validators like <strong>AJV</strong> compile schemas to generated code for near-zero runtime overhead.</p>
+<pre><code>// npm install express-jsonschema ajv ajv-formats
+import { validate } from "express-jsonschema";
+
+const signupSchema = {
+  type: "object",
+  additionalProperties: false,                // reject unknown fields
+  required: ["email", "password", "name"],
+  properties: {
+    email:    { type: "string", format: "email", maxLength: 254 },
+    password: { type: "string", minLength: 8, maxLength: 128 },
+    name:     { type: "string", minLength: 1, maxLength: 100 },
+    age:      { type: "integer", minimum: 13, maximum: 120 },
+  },
+};
+
+app.post("/signup",
+  validate({ body: signupSchema }),
+  (req, res) =&gt; res.status(201).json({ ok: true })
+);
+
+// error middleware catches JsonSchemaValidation errors
+app.use((err, req, res, next) =&gt; {
+  if (err.name === "JsonSchemaValidation") {
+    return res.status(400).json({
+      error: "Validation failed",
+      issues: err.validations.body?.map((v) =&gt; ({
+        field:   v.property.replace(/^instance\./, ""),
+        message: v.message,
+      })),
+    });
+  }
+  next(err);
+});</code></pre>
+<p><strong>When JSON Schema is the right choice:</strong></p>
+<ul>
+  <li><strong>OpenAPI-first projects.</strong> Schemas live in your OpenAPI spec; the same schema drives client SDK generation, docs, and runtime validation. No duplication.</li>
+  <li><strong>Cross-language consistency.</strong> Your Python workers, Go services, and iOS client can all validate against the same JSON Schema.</li>
+  <li><strong>Performance-critical validation.</strong> AJV compiles schemas to JS &mdash; typically 3-5x faster than Zod/Yup for the same rules.</li>
+</ul>
+<table>
+  <tr><th>Choose JSON Schema / AJV</th><th>Choose Zod</th></tr>
+  <tr><td>OpenAPI/contract-driven APIs</td><td>TypeScript-first projects</td></tr>
+  <tr><td>Raw speed matters</td><td>Type inference matters more</td></tr>
+  <tr><td>Shared schemas across languages</td><td>Single Node/TS codebase</td></tr>
+</table>
+<p>For the best of both, <strong>json-schema-to-ts</strong> generates TS types from JSON Schema, closing the typing gap. Consider <strong>fastify-type-provider-typebox</strong> on Fastify which combines TypeBox (TS-friendly JSON Schema) with AJV-level speed.</p>
+'''
+
+ANSWERS[83] = r'''
+<p>EJS is a simple templating engine that runs JavaScript inside <code>&lt;% %&gt;</code> tags &mdash; minimal learning curve, good performance, and no DSL to learn beyond JS itself. Express's <code>view engine</code> abstraction makes it a drop-in choice.</p>
+<pre><code>app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+app.set("view cache", process.env.NODE_ENV === "production");
+
+app.get("/users/:id", async (req, res) =&gt; {
+  const user = await db.user.findUnique({ where: { id: req.params.id } });
+  if (!user) return res.sendStatus(404);
+  res.render("users/show", {
+    user,
+    title: `${user.name}'s profile`,
+    nonce: res.locals.cspNonce,
+  });
+});</code></pre>
+<pre><code>&lt;!-- views/users/show.ejs --&gt;
+&lt;%- include("partials/header", { title }) %&gt;
+
+&lt;h1&gt;&lt;%= user.name %&gt;&lt;/h1&gt;
+&lt;p&gt;Joined: &lt;%= user.joinedAt.toLocaleDateString() %&gt;&lt;/p&gt;
+
+&lt;% if (user.admin) { %&gt;
+  &lt;p class="badge"&gt;Admin&lt;/p&gt;
+&lt;% } %&gt;
+
+&lt;ul&gt;
+  &lt;% for (const post of user.posts) { %&gt;
+    &lt;li&gt;&lt;a href="/posts/&lt;%= post.id %&gt;"&gt;&lt;%= post.title %&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;% } %&gt;
+&lt;/ul&gt;
+
+&lt;!-- inline script using CSP nonce --&gt;
+&lt;script nonce="&lt;%= nonce %&gt;"&gt;
+  console.log("hydrated");
+&lt;/script&gt;
+
+&lt;%- include("partials/footer") %&gt;
+</code></pre>
+<p><strong>EJS tags cheat sheet:</strong> <code>&lt;%= %&gt;</code> &mdash; escaped output (XSS-safe); <code>&lt;%- %&gt;</code> &mdash; raw output (only for trusted HTML); <code>&lt;% %&gt;</code> &mdash; control flow (if/for); <code>&lt;%# %&gt;</code> &mdash; comment.</p>
+<table>
+  <tr><th>EJS</th><th>Pug</th><th>Handlebars</th><th>React SSR (Next/Remix)</th></tr>
+  <tr><td>JS-native; easy migration</td><td>Indentation-based; fewer chars</td><td>Logic-less; safest default</td><td>Component model; hydration</td></tr>
+  <tr><td>Pure server-render</td><td>Pure server-render</td><td>Pure server-render</td><td>SSR + client interactivity</td></tr>
+</table>
+<p><strong>When EJS still makes sense in 2026:</strong> server-rendered admin panels, email HTML generation, simple marketing sites without client-side state. For interactive apps, React/Vue/Svelte SSR frameworks (Next.js, Remix, Nuxt) beat EJS &mdash; you get hydration, component reuse, and streaming out of the box.</p>
+'''
+
+ANSWERS[84] = r'''
+<p>JWT-based auth &amp; authz splits cleanly into <strong>authentication</strong> (who you are &mdash; verified by JWT signature) and <strong>authorization</strong> (what you can do &mdash; role/permission checks on the verified identity). Middleware composition keeps these orthogonal.</p>
+<pre><code>// AUTHENTICATION — verify the token, hydrate req.user from DB
+function authenticate() {
+  return async (req, res, next) =&gt; {
+    const [, token] = (req.headers.authorization || "").split(" ");
+    if (!token) return res.sendStatus(401);
+    try {
+      const payload = jwt.verify(token, ACCESS_SECRET, {
+        issuer: "api.example.com", audience: "api",
+      });
+      if (await redis.get(`jwt:blocklist:${payload.jti}`)) {
+        return res.status(401).json({ error: "Token revoked" });
+      }
+      req.user = await db.user.findUnique({
+        where: { id: payload.sub },
+        select: { id: true, role: true, email: true, permissions: true, status: true },
+      });
+      if (!req.user || req.user.status === "suspended") return res.sendStatus(403);
+      next();
+    } catch (err) {
+      const msg = err.name === "TokenExpiredError" ? "Token expired" : "Invalid token";
+      res.status(401).json({ error: msg });
+    }
+  };
+}
+
+// AUTHORIZATION — role or permission checks
+function requireRole(...roles) {
+  return (req, res, next) =&gt;
+    roles.includes(req.user?.role) ? next() : res.sendStatus(403);
+}
+function requirePermission(perm) {
+  return (req, res, next) =&gt;
+    req.user?.permissions?.includes(perm) || req.user?.role === "admin"
+      ? next() : res.sendStatus(403);
+}
+
+// resource-scoped authz — "you can edit only your own post"
+async function canEditPost(req, res, next) {
+  const post = await db.post.findUnique({ where: { id: req.params.id } });
+  if (!post) return res.sendStatus(404);
+  if (post.authorId !== req.user.sub &amp;&amp; req.user.role !== "admin") return res.sendStatus(403);
+  req.post = post; next();
+}
+
+// composition
+app.get("/me",               authenticate(),                                      meHandler);
+app.post("/admin/users",     authenticate(), requireRole("admin"),                createUserHandler);
+app.patch("/posts/:id",      authenticate(), canEditPost,                          updatePostHandler);
+app.delete("/billing/:id",   authenticate(), requirePermission("billing:delete"),  deleteHandler);</code></pre>
+<p><strong>Status-code discipline:</strong> 401 = "authenticate" (no valid token); 403 = "authenticated but not allowed". Clients rely on this distinction to decide whether to redirect to login or show a "denied" UI. <strong>Token invalidation:</strong> short access TTL (15 min) + refresh rotation + Redis blocklist for immediate revocation. For policy-heavy apps, graduate to <strong>CASL</strong> (<code>ability.can("update", post)</code>) or <strong>Casbin</strong> &mdash; they express rules declaratively and scale past simple roles.</p>
+'''
+
+ANSWERS[85] = r'''
+<p><strong>dotenv</strong> loads <code>.env</code> file contents into <code>process.env</code>. As of Node 20.6+, the runtime has built-in support via <code>node --env-file=.env</code>, reducing dotenv's necessity. Both work identically for the common case; the difference is package vs. no-package.</p>
+<pre><code>// before your imports that read process.env
+import "dotenv/config";              // side-effect: loads .env into process.env
+
+// or Node 20.6+ — no import needed:
+// $ node --env-file=.env server.js
+
+// best practice: validate immediately after loading
+import { z } from "zod";
+const Env = z.object({
+  NODE_ENV:     z.enum(["development","test","staging","production"]),
+  PORT:         z.coerce.number().int().positive().default(3000),
+  DATABASE_URL: z.string().url(),
+  JWT_SECRET:   z.string().min(32),
+  REDIS_URL:    z.string().url(),
+  SENTRY_DSN:   z.string().url().optional(),
+});
+export const env = Env.parse(process.env);       // throws on boot if invalid</code></pre>
+<table>
+  <tr><th>File</th><th>Purpose</th></tr>
+  <tr><td><code>.env</code></td><td>Local dev defaults. <strong>In <code>.gitignore</code>.</strong></td></tr>
+  <tr><td><code>.env.example</code></td><td>Template with dummy values. <strong>Committed.</strong></td></tr>
+  <tr><td><code>.env.test</code></td><td>Test overrides; loaded by test runner.</td></tr>
+  <tr><td><code>.env.production</code></td><td>Rarely exists. Prefer runtime secrets injection (K8s Secret, AWS SM).</td></tr>
+</table>
+<p><strong>Production rules:</strong></p>
+<ul>
+  <li><strong>Never commit <code>.env</code>.</strong> Add to <code>.gitignore</code>; provide <code>.env.example</code> with placeholder values so new devs know what to set.</li>
+  <li><strong>Don't bake secrets into Docker images.</strong> Inject at runtime (<code>docker run --env-file</code>, Kubernetes Secrets, AWS Secrets Manager + task definitions).</li>
+  <li><strong>Validate at startup.</strong> Missing or malformed config should crash the process, not surface as a mysterious runtime error under load.</li>
+  <li><strong>Separate secrets from config.</strong> <code>REDIS_URL</code> is config; <code>STRIPE_SECRET_KEY</code> is a secret. Secrets go in a dedicated secret store (Vault, AWS SM, Doppler); config can live in plain env.</li>
+  <li><strong>Workload identity beats secrets.</strong> If your platform supports IAM roles (AWS, GCP, Azure), use them &mdash; no secret to rotate or leak.</li>
+</ul>
+'''
+
+ANSWERS[86] = r'''
+<p>A response formatter middleware centralizes the JSON envelope so every endpoint emits the same shape &mdash; critical for client SDK generation, error handling, and API versioning.</p>
+<pre><code>// augment res with success/fail helpers
+app.use((req, res, next) =&gt; {
+  res.success = (data, meta = {}, status = 200) =&gt; res.status(status).json({
+    ok:    true,
+    data,
+    meta:  { ...meta, reqId: req.id, timestamp: new Date().toISOString() },
+  });
+  res.fail = (code, message, status = 400, details) =&gt; res.status(status).json({
+    ok:      false,
+    error:   { code, message, details },
+    meta:    { reqId: req.id, timestamp: new Date().toISOString() },
+  });
+  next();
+});
+
+// handlers become declarative
+app.get("/users/:id", asyncHandler(async (req, res) =&gt; {
+  const user = await db.user.findUnique({ where: { id: req.params.id } });
+  if (!user) return res.fail("USER_NOT_FOUND", "User not found", 404);
+  res.success(user);
+}));
+
+app.get("/users", asyncHandler(async (req, res) =&gt; {
+  const [data, total] = await Promise.all([
+    db.user.findMany({ take: 20 }),
+    db.user.count(),
+  ]);
+  res.success(data, { total, limit: 20 });
+}));</code></pre>
+<p><strong>When standardized envelopes help:</strong></p>
+<ul>
+  <li><strong>SDK generation</strong> &mdash; OpenAPI / tRPC / GraphQL expect consistent shapes. Envelopes make discriminated unions in TypeScript trivial.</li>
+  <li><strong>Client error handling</strong> &mdash; one check (<code>if (!res.ok)</code>) works for every endpoint.</li>
+  <li><strong>Observability</strong> &mdash; adding <code>reqId</code> to every response body lets users quote it in support tickets, tying to your server logs.</li>
+</ul>
+<table>
+  <tr><th>Envelope style</th><th>Pros</th><th>Cons</th></tr>
+  <tr><td>Wrapped (<code>{ ok, data, meta }</code>)</td><td>Consistent, client-friendly</td><td>Ugly, more bytes</td></tr>
+  <tr><td>Bare (just the data)</td><td>Terse, RESTful</td><td>No place for meta/pagination</td></tr>
+  <tr><td>JSON:API spec</td><td>Industry standard for complex APIs</td><td>Verbose, ceremony</td></tr>
+</table>
+<p><strong>Recommendation:</strong> for internal APIs with your own clients, a light wrapped envelope is easiest. For public APIs, follow JSON:API or OpenAPI conventions. Always include a request id in responses; it's the single most valuable field for debugging.</p>
+'''
+
+ANSWERS[87] = r'''
+<p>Multi-language (i18n) support has three axes: <strong>locale detection</strong>, <strong>translation management</strong>, and <strong>formatting</strong> (dates, numbers, currencies). The ecosystem standard is <strong>i18next</strong> with the <strong>i18next-http-middleware</strong> adapter for Express.</p>
+<pre><code>import i18next from "i18next";
+import Backend from "i18next-fs-backend";
+import middleware from "i18next-http-middleware";
+
+await i18next
+  .use(Backend)
+  .use(middleware.LanguageDetector)
+  .init({
+    fallbackLng: "en",
+    supportedLngs: ["en","de","fr","es","ja"],
+    preload: ["en","de","fr","es","ja"],        // load all at boot
+    ns: ["common","errors","emails"],
+    defaultNS: "common",
+    backend: { loadPath: "./locales/{{lng}}/{{ns}}.json" },
+    detection: {
+      order: ["querystring", "cookie", "header"],     // ?lng=de → cookie → Accept-Language
+      caches: ["cookie"],
+      lookupCookie: "i18n_lng",
+    },
+  });
+
+app.use(middleware.handle(i18next));
+
+// in handlers — req.t is bound to the detected language
+app.get("/", (req, res) =&gt; {
+  res.json({
+    greeting: req.t("welcome"),                 // "Welcome!" / "Willkommen!" / ...
+    items:    req.t("items.count", { count: 5 }),   // "5 items" / "5 Artikel"
+  });
+});
+
+// Intl for formatting — native in Node
+app.get("/price", (req, res) =&gt; {
+  const price = 1299.5;
+  res.json({
+    formatted: new Intl.NumberFormat(req.language, {
+      style: "currency", currency: "USD",
+    }).format(price),
+  });
+});</code></pre>
+<p><strong>Translation management workflow:</strong> JSON files per language/namespace committed to git, or dynamic via a TMS (Lokalise, Crowdin, Phrase). Extract strings with <code>i18next-parser</code>; translators edit; CI bundles. For frequently-changing copy (marketing pages, CMS), load translations from a DB or headless CMS instead of JSON files.</p>
+<table>
+  <tr><th>Concern</th><th>Best practice</th></tr>
+  <tr><td>Pluralization</td><td>Use i18next's <code>count</code> &mdash; it handles non-English plural rules</td></tr>
+  <tr><td>RTL languages</td><td>Send <code>Content-Language</code> header; frontend flips layout</td></tr>
+  <tr><td>Timezones</td><td>Store UTC in DB; format to user TZ in the response</td></tr>
+  <tr><td>SEO</td><td>Serve <code>/de/posts/&lt;slug&gt;</code>, <code>/fr/posts/&lt;slug&gt;</code>; <code>hreflang</code> tags</td></tr>
+  <tr><td>Cache</td><td>Add <code>Vary: Accept-Language</code> header</td></tr>
+</table>
+<p>Never interpolate user strings into translations (<code>t(userInput)</code>) &mdash; that's i18n injection. Keep translation keys stable; let translators edit values.</p>
+'''
+
+ANSWERS[88] = r'''
+<p>RBAC gives you three dials: <strong>roles</strong> (coarse buckets), <strong>permissions</strong> (fine-grained actions), and <strong>resource scope</strong> (who owns what). Simple apps need only roles; complex apps map roles to permissions and check permissions on each route; enterprise apps add ABAC (attribute-based) on top.</p>
+<pre><code>// role → permissions (loaded from DB or YAML at boot)
+const ROLE_PERMS = {
+  viewer: ["post:read"],
+  editor: ["post:read", "post:create", "post:update:own"],
+  moderator: ["post:read", "post:create", "post:update:*", "post:delete:*"],
+  admin: ["*"],
+};
+
+function hasPermission(user, perm) {
+  const perms = ROLE_PERMS[user.role] ?? [];
+  if (perms.includes("*")) return true;
+  return perms.some((p) =&gt; p === perm || p === perm.split(":").slice(0,-1).join(":") + ":*");
+}
+
+function requirePermission(perm) {
+  return (req, res, next) =&gt;
+    hasPermission(req.user, perm) ? next() : res.sendStatus(403);
+}
+
+// resource-scoped "own" check — editor can update only their own posts
+async function canUpdatePost(req, res, next) {
+  const post = await db.post.findUnique({ where: { id: req.params.id } });
+  if (!post) return res.sendStatus(404);
+  if (hasPermission(req.user, "post:update:*")) { req.post = post; return next(); }
+  if (hasPermission(req.user, "post:update:own") &amp;&amp; post.authorId === req.user.sub) {
+    req.post = post; return next();
+  }
+  return res.sendStatus(403);
+}
+
+app.patch("/posts/:id", authenticate(), canUpdatePost, updatePostHandler);</code></pre>
+<p><strong>When to graduate beyond this:</strong></p>
+<ul>
+  <li><strong>Per-field permissions:</strong> editors can change <code>title</code> but not <code>status</code>. Use <strong>CASL</strong>: <code>ability.can("update", post, "title")</code>.</li>
+  <li><strong>Attribute-based rules:</strong> "users in org X can access org X's data"; "after business hours, only admins". Use <strong>Casbin</strong> with RBAC-with-domains or ABAC policies.</li>
+  <li><strong>Centralized policy engine:</strong> microservices sharing authz rules → <strong>Open Policy Agent (OPA)</strong> with policies as Rego code.</li>
+</ul>
+<p><strong>Non-negotiables:</strong> always enforce server-side (client-side checks are UX, not security); audit-log every denial with user/action/resource (leading indicator of probing); start strict (deny by default) and add permissions as needed, not the reverse.</p>
+'''
+
+ANSWERS[89] = r'''
+<p><strong>express-session</strong> manages server-side sessions: clients hold a signed session id in a cookie; the server looks up session data from a store (Redis, Postgres, Mongo) on each request. It's the simpler, more secure alternative to JWT for traditional web apps.</p>
+<pre><code>import session from "express-session";
+import { RedisStore } from "connect-redis";
+import Redis from "ioredis";
+
+const redis = new Redis(process.env.REDIS_URL);
+
+app.set("trust proxy", 1);                             // required for secure cookies behind LB
+app.use(session({
+  store:  new RedisStore({ client: redis, prefix: "sess:" }),
+  secret: process.env.SESSION_SECRET,                  // SIGN — not encrypt
+  name:   "sid",                                        // avoid default "connect.sid" fingerprint
+  resave: false,                                        // don't re-save unchanged sessions
+  saveUninitialized: false,                            // don't create sessions until needed
+  rolling: true,                                        // reset expiry on each request
+  cookie: {
+    httpOnly: true,                                    // inaccessible to JS
+    secure:   true,                                    // HTTPS only
+    sameSite: "lax",                                   // CSRF defense
+    maxAge:   30 * 60 * 1000,                          // 30-min idle timeout
+  },
+}));
+
+// login
+app.post("/login", async (req, res) =&gt; {
+  const user = await authenticate(req.body);
+  if (!user) return res.status(401).json({ error: "Invalid credentials" });
+
+  // regenerate session ID on privilege change — prevents session fixation
+  req.session.regenerate((err) =&gt; {
+    if (err) return next(err);
+    req.session.userId = user.id;
+    req.session.createdAt = Date.now();
+    res.json({ ok: true });
+  });
+});
+
+// logout
+app.post("/logout", (req, res) =&gt; {
+  req.session.destroy(() =&gt; res.clearCookie("sid").sendStatus(204));
+});</code></pre>
+<table>
+  <tr><th>Option</th><th>Why it matters</th></tr>
+  <tr><td><code>resave: false</code></td><td>Avoids unnecessary store writes; prevents race conditions</td></tr>
+  <tr><td><code>saveUninitialized: false</code></td><td>Don't create empty sessions for anonymous visitors &mdash; reduces store size + GDPR scope</td></tr>
+  <tr><td><code>rolling: true</code></td><td>Active users don't get kicked out; quiet users eventually expire</td></tr>
+  <tr><td><code>regenerate()</code> on login</td><td>Prevents session fixation attacks</td></tr>
+  <tr><td><code>destroy()</code> on logout</td><td>Removes from store immediately; cookie alone isn't enough</td></tr>
+</table>
+<p><strong>Must-haves:</strong> always use a persistent store (default <code>MemoryStore</code> leaks memory and doesn't work across instances); <code>secure: true</code> in production (requires HTTPS); <code>SameSite=lax</code> as CSRF defense (or add <code>csrf-csrf</code> for stronger protection). For APIs consumed by mobile apps, JWTs are simpler; sessions shine for browser-based apps with cookies.</p>
+'''
+
+ANSWERS[90] = r'''
+<p>Social media authentication via OAuth 2.1 / OpenID Connect. In 2026, <strong>Auth.js</strong> (formerly NextAuth) or <strong>better-auth</strong> are the pragmatic choices &mdash; they handle provider quirks and account linking out of the box. Rolling your own per provider is archaeology you don't need.</p>
+<pre><code>// manual pattern for one provider — useful to understand what auth.js does
+import { Issuer, generators } from "openid-client";
+
+const google = await Issuer.discover("https://accounts.google.com");
+const client = new google.Client({
+  client_id: process.env.GOOGLE_CLIENT_ID,
+  client_secret: process.env.GOOGLE_CLIENT_SECRET,
+  redirect_uris: [`${APP_URL}/auth/google/callback`],
+  response_types: ["code"],
+});
+
+app.get("/auth/google", (req, res) =&gt; {
+  const codeVerifier = generators.codeVerifier();
+  const state        = generators.state();
+  const nonce        = generators.nonce();
+  req.session.oauth  = { codeVerifier, state, nonce };
+  res.redirect(client.authorizationUrl({
+    scope: "openid email profile",
+    code_challenge: generators.codeChallenge(codeVerifier),
+    code_challenge_method: "S256",
+    state, nonce,
+  }));
+});
+
+app.get("/auth/google/callback", async (req, res, next) =&gt; {
+  try {
+    const { codeVerifier, state, nonce } = req.session.oauth ?? {};
+    const tokenSet = await client.callback(
+      `${APP_URL}/auth/google/callback`,
+      client.callbackParams(req),
+      { code_verifier: codeVerifier, state, nonce }
+    );
+    const { sub, email, email_verified, name, picture } = tokenSet.claims();
+    if (!email_verified) return res.status(403).send("Email not verified");
+
+    // identify by sub (stable), not email (changeable)
+    const user = await db.user.upsert({
+      where:  { provider_providerId: { provider: "google", providerId: sub } },
+      create: { provider: "google", providerId: sub, email, name, avatar: picture },
+      update: { email, name, avatar: picture },
+    });
+
+    req.session.userId = user.id;
+    delete req.session.oauth;
+    res.redirect("/dashboard");
+  } catch (err) { next(err); }
+});</code></pre>
+<table>
+  <tr><th>Provider</th><th>Quirks</th></tr>
+  <tr><td>Google</td><td>Full OIDC; straightforward</td></tr>
+  <tr><td>GitHub</td><td>Plain OAuth2 (no OIDC); email requires extra API call</td></tr>
+  <tr><td>Facebook</td><td>OAuth2 only; email scope needs App Review; can return empty email</td></tr>
+  <tr><td>Apple</td><td>ES256 signed JWT client secret; private relay email addresses</td></tr>
+  <tr><td>Microsoft</td><td>OIDC; different flows for personal vs work accounts</td></tr>
+</table>
+<p><strong>Account linking:</strong> two users log in via different providers with the same email &mdash; one user or two? Safest policy: require email verification + explicit linking from a logged-in session. Storing <code>(provider, providerId)</code> + an email separately is the standard schema.</p>
+'''
+
+ANSWERS[91] = r'''
+<p>A custom API request validation middleware generalizes the per-route pattern into a reusable factory. The goal: one consistent shape for errors, one place to evolve validation rules, and no per-route boilerplate.</p>
+<pre><code>import { z } from "zod";
+
+// factory that validates any combination of body/query/params/headers
+export function validate(schemas) {
+  return async (req, res, next) =&gt; {
+    const results = {};
+    const issues = [];
+
+    for (const prop of ["body", "query", "params", "headers"]) {
+      if (!schemas[prop]) continue;
+      const result = schemas[prop].safeParse(req[prop]);
+      if (!result.success) {
+        for (const issue of result.error.issues) {
+          issues.push({
+            location: prop,
+            field:    issue.path.join("."),
+            message:  issue.message,
+            code:     issue.code,
+          });
+        }
+      } else {
+        results[prop] = result.data;
+      }
+    }
+    if (issues.length) {
+      return res.status(400).json({
+        error: "Validation failed", issues, reqId: req.id,
+      });
+    }
+    // stash cleaned versions — don't overwrite read-only req.query in Express 5
+    if (results.body)   req.body   = results.body;
+    if (results.params) req.params = results.params;
+    req.validated = results;
+    next();
+  };
+}
+
+// use it
+app.post("/posts/:id/comments",
+  validate({
+    params: z.object({ id: z.string().uuid() }),
+    body:   z.object({
+      text: z.string().trim().min(1).max(2000),
+      replyTo: z.string().uuid().optional(),
+    }).strict(),
+    query:  z.object({ notify: z.coerce.boolean().optional() }),
+  }),
+  createCommentHandler
+);</code></pre>
+<p><strong>Design decisions worth articulating:</strong></p>
+<ul>
+  <li><strong>One middleware, all locations.</strong> Cuts boilerplate &mdash; handlers declare schemas for body/query/params once.</li>
+  <li><strong>Aggregated errors.</strong> Return all issues at once with location + field + message &mdash; better UX than "fix, retry".</li>
+  <li><strong>Reassign cleaned values.</strong> Downstream handlers see coerced/stripped data, not raw input.</li>
+  <li><strong>Express 5 read-only query.</strong> <code>req.query</code> is a getter; write to <code>req.validated.query</code> instead.</li>
+  <li><strong>Stable error shape.</strong> <code>{ error, issues[{location,field,message,code}], reqId }</code> &mdash; clients parse this once.</li>
+</ul>
+<p>For multi-framework shops, schema libraries like <strong>TypeBox</strong> (JSON Schema + TS inference) give you validators that work in Express, Fastify, and client-side form code. Consistent schemas across layers eliminate a huge class of "server accepts what client rejects" bugs.</p>
+'''
+
+ANSWERS[92] = r'''
+<p>Nested JSON in request bodies is routine (orders with line items, forms with sub-objects) but has three hidden hazards: <strong>depth-based DoS</strong>, <strong>prototype pollution</strong>, and <strong>mass assignment</strong>. Validate early with a schema library that handles all three.</p>
+<pre><code>import { z } from "zod";
+import express from "express";
+
+// bound request size — nested JSON can balloon in size
+app.use(express.json({ limit: "200kb" }));
+
+// factor common shapes — compose deeply
+const AddressSchema = z.object({
+  line1:       z.string().min(1).max(100),
+  line2:       z.string().max(100).optional(),
+  city:        z.string().min(1).max(60),
+  region:      z.string().max(60).optional(),
+  postalCode:  z.string().min(3).max(20),
+  countryCode: z.string().length(2).regex(/^[A-Z]{2}$/),
+}).strict();
+
+const LineItemSchema = z.object({
+  productId: z.string().uuid(),
+  quantity:  z.number().int().min(1).max(999),
+  options:   z.record(z.string(), z.string().max(100)).optional(),
+}).strict();
+
+const OrderSchema = z.object({
+  customer: z.object({
+    email: z.string().email().toLowerCase(),
+    name:  z.string().min(1).max(100),
+    billingAddress: AddressSchema,
+  }).strict(),
+  shippingAddress: AddressSchema.optional(),
+  items: z.array(LineItemSchema).min(1).max(100),
+  metadata: z.record(z.string().max(50), z.string().max(500)).optional(),
+}).strict()
+  // cross-field rules
+  .refine((o) =&gt; o.items.reduce((s, i) =&gt; s + i.quantity, 0) &lt;= 500,
+    { message: "Order exceeds 500 total items" });
+
+app.post("/orders", validate({ body: OrderSchema }), createOrderHandler);</code></pre>
+<p><strong>Three hazards explained:</strong></p>
+<ol>
+  <li><strong>Depth DoS.</strong> <code>{a:{a:{a:{...(x 1000)}}}}</code> in 100KB is cheap to send, expensive to validate recursively. Mitigate: cap body size; most schemas bounded naturally by <code>.strict()</code>.</li>
+  <li><strong>Prototype pollution.</strong> Payloads like <code>{"__proto__":{"admin":true}}</code> used to mutate <code>Object.prototype</code>. Node 17+ fixed <code>JSON.parse</code>; still avoid <code>Object.assign</code>-style deep merges on raw input. Zod's <code>.strict()</code> rejects <code>__proto__</code> as an unknown key.</li>
+  <li><strong>Mass assignment.</strong> Without <code>.strict()</code>, a client sending <code>{email:"x", role:"admin"}</code> to PATCH /profile can escalate privileges if your ORM passes through unknown fields. Always use strict schemas.</li>
+</ol>
+<p><strong>For deeply nested arrays</strong>, use <strong>streaming JSON parsers</strong> (<code>stream-json</code>) instead of loading everything into memory. Process line items one at a time &mdash; constant memory regardless of order size.</p>
+'''
+
+ANSWERS[93] = r'''
+<p><strong>multer-gridfs-storage</strong> streams uploads into MongoDB's GridFS &mdash; MongoDB's built-in mechanism for files larger than the 16 MB BSON document limit. It's a specific choice with specific trade-offs.</p>
+<pre><code>// npm install multer multer-gridfs-storage gridfs-stream
+import multer from "multer";
+import { GridFsStorage } from "multer-gridfs-storage";
+import mongoose from "mongoose";
+import Grid from "gridfs-stream";
+
+const conn = await mongoose.connect(process.env.MONGODB_URI);
+const gfs = Grid(conn.connection.db, mongoose.mongo);
+gfs.collection("uploads");
+
+const storage = new GridFsStorage({
+  url: process.env.MONGODB_URI,
+  file: (req, file) =&gt; ({
+    bucketName: "uploads",
+    filename:   `${Date.now()}-${crypto.randomUUID()}`,
+    metadata:   { uploadedBy: req.user?.id, originalName: file.originalname },
+  }),
+});
+
+const upload = multer({
+  storage,
+  limits: { fileSize: 50 * 1024 * 1024 },
+  fileFilter: (req, file, cb) =&gt;
+    cb(null, ["image/jpeg","image/png","application/pdf"].includes(file.mimetype)),
+});
+
+// upload
+app.post("/files", requireAuth, upload.single("file"), (req, res) =&gt; {
+  res.status(201).json({ id: req.file.id, filename: req.file.filename });
+});
+
+// download — stream the GridFS file to the response
+app.get("/files/:id", async (req, res) =&gt; {
+  const _id = new mongoose.Types.ObjectId(req.params.id);
+  const file = await gfs.files.findOne({ _id });
+  if (!file) return res.sendStatus(404);
+  res.setHeader("Content-Type", file.contentType || "application/octet-stream");
+  gfs.createReadStream({ _id }).pipe(res);
+});</code></pre>
+<table>
+  <tr><th>GridFS</th><th>S3 / object storage</th></tr>
+  <tr><td>One less infrastructure component</td><td>Dedicated file storage, purpose-built</td></tr>
+  <tr><td>Transactional with document updates</td><td>Eventually consistent with your DB</td></tr>
+  <tr><td>Backed by your DB's replication/backup</td><td>Separate backup lifecycle, but cheap</td></tr>
+  <tr><td>DB instance carries file I/O load</td><td>Offloads bandwidth from app servers entirely</td></tr>
+  <tr><td>No CDN edge &mdash; served from DB</td><td>Direct CloudFront/Cloudflare integration</td></tr>
+</table>
+<p><strong>When GridFS makes sense:</strong> small teams already running MongoDB, moderate file volumes, tight coupling between file and document lifecycle (e.g., file deletion cascades with document deletion via a <code>$lookup</code>-aware cleanup). <strong>When S3 is better (most cases):</strong> public-facing downloads, high volume, CDN distribution, or clear separation of "app DB" from "file storage." In 2026, reach for S3/R2/GCS by default &mdash; GridFS is legacy for most workloads.</p>
+'''
+
+ANSWERS[94] = r'''
+<p><strong>AJV</strong> (Another JSON Schema Validator) is the fastest JSON Schema validator on Node &mdash; compiles schemas to generated JavaScript for near-native performance. Use it when JSON Schema is your contract format or raw speed matters.</p>
+<pre><code>// npm install ajv ajv-formats
+import Ajv from "ajv";
+import addFormats from "ajv-formats";
+
+const ajv = new Ajv({
+  allErrors:        true,              // collect all, not first
+  removeAdditional: "all",             // strip unknown fields — mass-assignment defense
+  coerceTypes:      true,              // "123" → 123 for query params
+  useDefaults:      true,
+});
+addFormats(ajv);                        // enables email, uri, date-time, etc.
+
+// define schema — plain JSON Schema object (no AJV-specific syntax)
+const signupSchema = {
+  type: "object",
+  additionalProperties: false,
+  required: ["email", "password", "name"],
+  properties: {
+    email:    { type: "string", format: "email", maxLength: 254 },
+    password: { type: "string", minLength: 8, maxLength: 128 },
+    name:     { type: "string", minLength: 1, maxLength: 100 },
+    age:      { type: "integer", minimum: 13, maximum: 120 },
+    tags:     { type: "array", items: { type: "string" }, maxItems: 10, uniqueItems: true },
+  },
+};
+
+// COMPILE ONCE — reuse across all requests
+const validateSignup = ajv.compile(signupSchema);
+
+function ajvMiddleware(validate) {
+  return (req, res, next) =&gt; {
+    if (!validate(req.body)) {
+      return res.status(400).json({
+        error: "Validation failed",
+        issues: validate.errors.map((e) =&gt; ({
+          field:   e.instancePath.replace(/^\//, "") || e.params?.missingProperty,
+          message: e.message,
+          schemaPath: e.schemaPath,
+        })),
+      });
+    }
+    next();
+  };
+}
+
+app.post("/signup", ajvMiddleware(validateSignup), signupHandler);</code></pre>
+<table>
+  <tr><th>AJV</th><th>Zod</th><th>Yup</th></tr>
+  <tr><td>JSON Schema; language-agnostic</td><td>TS-first; inferred types</td><td>Chainable; simpler API</td></tr>
+  <tr><td>Fastest (compiled)</td><td>Moderate speed</td><td>Slowest</td></tr>
+  <tr><td>Best for OpenAPI/contract-first</td><td>Best for TS projects</td><td>Best for Formik forms</td></tr>
+</table>
+<p><strong>Key gotchas:</strong> <code>ajv-formats</code> is a separate package &mdash; without it, format keywords (<code>email</code>, <code>uri</code>, <code>date-time</code>) silently pass. Compile schemas at startup, <em>never</em> inside request handlers (compilation is slow; validation is fast). For end-to-end type safety on JSON Schema, use <strong>json-schema-to-ts</strong> which infers TS types from the schema. On Fastify, <strong>TypeBox</strong> combines AJV speed with Zod-like type inference &mdash; arguably the sweet spot.</p>
+'''
+
+ANSWERS[95] = r'''
+<p>TypeScript with Express has two parts: <strong>compiling the code</strong> and <strong>typing the runtime correctly</strong>. The first is trivial; the second requires augmenting Express's types so <code>req.user</code>, <code>req.id</code>, etc. don't require <code>any</code>-casts.</p>
+<pre><code>// tsconfig.json — key settings
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,       // a[0] is T | undefined
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "outDir": "dist"
+  }
+}
+
+// types/express.d.ts — augment Request globally
+import "express";
+declare global {
+  namespace Express {
+    interface Request {
+      id: string;
+      user?: { id: string; role: "user"|"editor"|"admin"; email: string };
+      validated?: { body?: unknown; query?: unknown; params?: unknown };
+    }
+  }
+}
+
+// app.ts — typed handlers
+import express, { Request, Response, NextFunction, RequestHandler } from "express";
+
+const app = express();
+
+// typed asyncHandler
+export const ah = &lt;P = unknown, B = unknown, Q = unknown&gt;(
+  fn: (req: Request&lt;P, unknown, B, Q&gt;, res: Response, next: NextFunction) =&gt; Promise&lt;unknown&gt;
+): RequestHandler&lt;P, unknown, B, Q&gt; =&gt;
+  (req, res, next) =&gt; Promise.resolve(fn(req, res, next)).catch(next);
+
+// strongly-typed route
+interface GetUserParams { id: string }
+interface GetUserResponse { id: string; email: string }
+
+app.get&lt;GetUserParams&gt;("/users/:id", ah(async (req, res) =&gt; {
+  const user = await db.user.findUnique({ where: { id: req.params.id } });
+  if (!user) return res.sendStatus(404);
+  const response: GetUserResponse = { id: user.id, email: user.email };
+  res.json(response);
+}));</code></pre>
+<table>
+  <tr><th>Area</th><th>Recommendation</th></tr>
+  <tr><td>Runtime</td><td><strong>tsx</strong> for dev, <code>tsc</code> to build for production. Or <strong>SWC</strong> for faster builds.</td></tr>
+  <tr><td>ESM vs CJS</td><td>ESM (<code>"module": "NodeNext"</code>) is the 2026 default. Dependencies are mostly ESM now.</td></tr>
+  <tr><td>Schemas → types</td><td><strong>Zod</strong> (<code>z.infer&lt;typeof Schema&gt;</code>) or <strong>TypeBox</strong> &mdash; single source of truth for validation AND types.</td></tr>
+  <tr><td>ORM</td><td><strong>Prisma</strong> or <strong>Drizzle</strong> &mdash; both generate fully-typed client code from your schema.</td></tr>
+  <tr><td>End-to-end types</td><td><strong>tRPC</strong> gives frontend direct access to backend function signatures &mdash; no schema duplication.</td></tr>
+</table>
+<p><strong>The 2026 argument for TS in Express:</strong> refactoring safety, IDE support, and schema-to-type inference eliminating "did the request shape change?" bugs. The argument against: transpilation overhead in dev, learning curve. Most new backend Node projects are TS-first now; JS-only is increasingly rare.</p>
+'''
+
+ANSWERS[96] = r'''
+<p>Server-Sent Events (SSE) is the simpler cousin of WebSockets: <strong>server-to-client only</strong>, plain HTTP, auto-reconnect in browsers, no handshake protocol. For notifications, activity feeds, live dashboards &mdash; anywhere you don't need client → server messages &mdash; SSE beats WebSockets on operational simplicity.</p>
+<pre><code>app.get("/events", requireAuth, (req, res) =&gt; {
+  res.set({
+    "Content-Type":      "text/event-stream",
+    "Cache-Control":     "no-cache, no-transform",
+    "Connection":        "keep-alive",
+    "X-Accel-Buffering": "no",                       // disable Nginx response buffering
+  });
+  res.flushHeaders();
+
+  const send = (event, data, id) =&gt; {
+    if (id)    res.write(`id: ${id}\n`);
+    if (event) res.write(`event: ${event}\n`);
+    res.write(`data: ${JSON.stringify(data)}\n\n`);  // double-newline terminates event
+  };
+
+  // immediate "hello"
+  send("connected", { userId: req.user.sub });
+
+  // push updates from a pub/sub channel
+  const sub = redis.duplicate();
+  sub.subscribe(`user:${req.user.sub}:events`);
+  sub.on("message", (_, msg) =&gt; {
+    const event = JSON.parse(msg);
+    send(event.type, event.data, event.id);
+  });
+
+  // heartbeat every 20s — keeps proxies from killing idle conns
+  const heart = setInterval(() =&gt; res.write(":heartbeat\n\n"), 20_000);
+
+  // cleanup on disconnect
+  req.on("close", () =&gt; {
+    clearInterval(heart);
+    sub.unsubscribe().then(() =&gt; sub.quit());
+    res.end();
+  });
+});</code></pre>
+<table>
+  <tr><th>SSE</th><th>WebSockets</th></tr>
+  <tr><td>Server → client only</td><td>Bidirectional</td></tr>
+  <tr><td>Plain HTTP(S)</td><td>Protocol upgrade (wire-level)</td></tr>
+  <tr><td>Native browser auto-reconnect with <code>Last-Event-Id</code></td><td>Manual reconnect logic</td></tr>
+  <tr><td>Works through standard proxies, load balancers</td><td>Needs upgrade support</td></tr>
+  <tr><td>Text only, UTF-8</td><td>Binary + text</td></tr>
+  <tr><td>~6 concurrent conns / domain limit (HTTP/1.1)</td><td>No such limit</td></tr>
+</table>
+<p><strong>Operational notes:</strong> each SSE connection holds a file descriptor and memory (~5-20 KB); plan for ~10k concurrent per Node instance. Raise <code>ulimit -n</code>. Disable compression on SSE routes (it buffers). For the 6-connection limit, serve SSE on a separate subdomain or upgrade to HTTP/2, which multiplexes. For horizontal scale, use Redis pub/sub as shown &mdash; each Node instance subscribes and fans out to its connected clients.</p>
+'''
+
+ANSWERS[97] = r'''
+<p><strong>serve-favicon</strong> is a tiny middleware that serves a favicon (<code>favicon.ico</code>) efficiently &mdash; it loads the file into memory once, skips the Express routing pipeline, sets long-lived cache headers, and short-circuits the request before <code>morgan</code>/logging can spam your logs with favicon hits.</p>
+<pre><code>import favicon from "serve-favicon";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// ideally register BEFORE logging middleware
+app.use(favicon(path.join(__dirname, "public", "favicon.ico"), {
+  maxAge: 7 * 24 * 60 * 60 * 1000,                   // 7 days (in ms) — aggressive cache
+}));
+
+app.use(morgan("combined"));
+// ... routes ...</code></pre>
+<p><strong>What it really saves:</strong></p>
+<ul>
+  <li><strong>Log noise.</strong> Browsers request <code>/favicon.ico</code> on every page load; without serve-favicon, each hit generates an access-log entry and counts against rate limits.</li>
+  <li><strong>Disk I/O.</strong> The file is loaded into memory once at startup, not on every request.</li>
+  <li><strong>Pipeline cost.</strong> Short-circuits before routing, validation, auth middleware runs.</li>
+</ul>
+<p><strong>2026 reality check:</strong> most production apps serve static assets (including favicons) via a CDN (Cloudflare, CloudFront) or reverse proxy (Nginx, Caddy). In that world, <code>serve-favicon</code> is redundant &mdash; the CDN caches the favicon at the edge, and Node never sees the request. The middleware earns its place in:</p>
+<ul>
+  <li>Standalone Express apps without a CDN (dev, intranet tools).</li>
+  <li>Monoliths that serve HTML + API from the same process.</li>
+  <li>Apps where quickly reducing favicon log noise matters and you can't change deployment topology.</li>
+</ul>
+<p>Modern alternative: <code>express.static</code> with <code>maxAge: "7d"</code> on a <code>public</code> folder covers favicons alongside other assets. One middleware, one cache policy, one source of truth. For really production-grade setups, use <code>&lt;link rel="icon" href="https://cdn.example.com/favicon.ico"&gt;</code> in your HTML and let the CDN handle everything.</p>
+'''
+
+ANSWERS[98] = r'''
+<p>A request-timeout middleware bounds how long <em>any</em> request can take, protecting against slow upstreams, pathological queries, or infinite-loop bugs. Express has no built-in timeout; Node's default is infinite once a response has started.</p>
+<pre><code>// per-request timeout with proper cleanup
+function requestTimeout(ms) {
+  return (req, res, next) =&gt; {
+    // AbortController lets downstream work cancel itself when we time out
+    const ac = new AbortController();
+    req.signal = ac.signal;
+
+    const timer = setTimeout(() =&gt; {
+      ac.abort();
+      if (!res.headersSent) {
+        res.status(503).json({ error: "Request timed out", reqId: req.id });
+      } else {
+        // response started streaming — all we can do is destroy the socket
+        res.destroy(new Error("Request timeout"));
+      }
+    }, ms);
+
+    // clean up — whichever finishes first
+    const clear = () =&gt; { clearTimeout(timer); };
+    res.on("finish", clear);
+    res.on("close",  clear);
+
+    next();
+  };
+}
+
+// apply globally, or per-route with tighter budgets
+app.use(requestTimeout(30_000));                   // 30s default
+
+// expensive routes get their own, shorter budget
+app.get("/search", requestTimeout(5_000), searchHandler);
+
+// downstream handlers can use req.signal to cancel upstreams
+app.get("/upstream", async (req, res, next) =&gt; {
+  try {
+    const r = await fetch("https://slow.example.com", { signal: req.signal });
+    res.json(await r.json());
+  } catch (err) {
+    if (err.name === "AbortError") return; // response already sent by timeout handler
+    next(err);
+  }
+});</code></pre>
+<table>
+  <tr><th>Timeout scope</th><th>Recommendation</th></tr>
+  <tr><td>Request-level (app-wide)</td><td>30-60s default; tightens gradually as you fix slow endpoints</td></tr>
+  <tr><td>Expensive routes (search, reports)</td><td>5-10s; surface partial results or retry hints</td></tr>
+  <tr><td>Downstream calls (DB, HTTP)</td><td>Individual <code>AbortController</code> &amp; timeouts &mdash; don't rely on top-level alone</td></tr>
+  <tr><td>Load balancer</td><td>Set slightly higher than app (60s) &mdash; avoids LB killing valid streams</td></tr>
+</table>
+<p><strong>Critical ops lessons:</strong> without timeouts, a single slow upstream can exhaust your entire connection pool &mdash; your app looks dead. <strong>Set timeouts everywhere</strong>: HTTP client (<code>AbortSignal.timeout</code>), DB pool (<code>pool.query({ statement_timeout })</code>), Redis (<code>commandTimeout</code>), LB, app. Log timeouts separately from other 5xx errors &mdash; they're a leading indicator of capacity problems. Consider <strong>connect-timeout</strong> middleware for backwards-compat projects; for new code, the AbortController pattern above is cleaner.</p>
+'''
+
+ANSWERS[99] = r'''
+<p>A RESTful API over PostgreSQL is the mainstream Node backend. Use the <strong>pg</strong> (or <strong>postgres</strong>) driver with a pool; for ergonomics, add <strong>Prisma</strong> or <strong>Drizzle</strong>. Postgres-specific features &mdash; JSONB, arrays, full-text search, row-level security &mdash; often eliminate whole layers of code.</p>
+<pre><code>import pg from "pg";
+
+const pool = new pg.Pool({
+  connectionString: process.env.DATABASE_URL,
+  max: 20,
+  idleTimeoutMillis: 30_000,
+  connectionTimeoutMillis: 5_000,
+});
+pool.on("error", (err) =&gt; console.error("idle pg client error", err));
+
+// parameterized — $1, $2 — never string-concatenate
+app.get("/posts", async (req, res) =&gt; {
+  const limit = Math.min(100, Number(req.query.limit) || 20);
+  const tag   = req.query.tag ? String(req.query.tag) : null;
+  const { rows } = await pool.query(
+    `SELECT id, title, tags, created_at
+       FROM posts
+      WHERE ($1::text IS NULL OR $1 = ANY(tags))
+      ORDER BY id DESC
+      LIMIT $2`,
+    [tag, limit]
+  );
+  res.json({ data: rows });
+});
+
+// transaction for multi-row writes
+app.post("/orders", async (req, res, next) =&gt; {
+  const client = await pool.connect();
+  try {
+    await client.query("BEGIN");
+    const { rows: [order] } = await client.query(
+      "INSERT INTO orders(customer_id, total) VALUES($1,$2) RETURNING *",
+      [req.body.customerId, req.body.total]
+    );
+    for (const item of req.body.items) {
+      await client.query(
+        "INSERT INTO order_items(order_id, sku, qty) VALUES($1,$2,$3)",
+        [order.id, item.sku, item.qty]
+      );
+    }
+    await client.query("COMMIT");
+    res.status(201).json(order);
+  } catch (err) {
+    await client.query("ROLLBACK"); next(err);
+  } finally {
+    client.release();
+  }
+});
+
+// LISTEN/NOTIFY — no Redis needed for simple pub/sub
+app.post("/comments", async (req, res) =&gt; {
+  await pool.query("INSERT INTO comments(post_id, text) VALUES($1, $2)",
+    [req.body.postId, req.body.text]);
+  await pool.query(`NOTIFY comment_added, '${req.body.postId}'`);
+  res.sendStatus(201);
+});</code></pre>
+<table>
+  <tr><th>Postgres feature</th><th>Use</th></tr>
+  <tr><td>JSONB columns + GIN indexes</td><td>Semi-structured data without mongo</td></tr>
+  <tr><td>Generated columns</td><td>Auto-compute derived fields in DB</td></tr>
+  <tr><td>Row-Level Security (RLS)</td><td>Multi-tenancy enforced at DB layer</td></tr>
+  <tr><td>Full-text search (<code>tsvector</code>)</td><td>Basic search without Elasticsearch</td></tr>
+  <tr><td>LISTEN/NOTIFY</td><td>Lightweight pub/sub</td></tr>
+  <tr><td>Partitioning</td><td>Time-series at scale</td></tr>
+</table>
+<p><strong>Pool sizing:</strong> Postgres defaults to 100 total connections. With 5 Node instances &times; 20-connection pool, that's already the cap. Use <strong>PgBouncer</strong> in transaction-pooling mode to multiplex &mdash; you can get 1000 app connections against 20 real Postgres connections. For serverless, use <strong>Neon</strong> or <strong>RDS Proxy</strong> which handle this automatically.</p>
+'''
+
+ANSWERS[100] = r'''
+<p>API documentation via <strong>Swagger/OpenAPI</strong> has three implementation patterns: <strong>code-first</strong> (comments → spec), <strong>spec-first</strong> (YAML/JSON → stubs), and <strong>type-first</strong> (TS types → spec). The industry shift in 2026 is toward type-first with tools like <strong>tRPC</strong>, <strong>Zodios</strong>, or <strong>orpc</strong>.</p>
+<pre><code>// CODE-FIRST with swagger-jsdoc — comments become OpenAPI
+import swaggerJsDoc from "swagger-jsdoc";
+import swaggerUi   from "swagger-ui-express";
+
+const openapiSpec = swaggerJsDoc({
+  definition: {
+    openapi: "3.1.0",
+    info:    { title: "My API", version: "1.0.0" },
+    servers: [{ url: "https://api.example.com" }],
+    components: {
+      securitySchemes: {
+        bearerAuth: { type: "http", scheme: "bearer", bearerFormat: "JWT" },
+      },
+    },
+  },
+  apis: ["./routes/*.js"],                    // JSDoc @openapi blocks live in route files
+});
+
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(openapiSpec));
+app.get("/openapi.json", (req, res) =&gt; res.json(openapiSpec));
+
+/**
+ * @openapi
+ * /users/{id}:
+ *   get:
+ *     summary: Get a user by ID
+ *     security: [{ bearerAuth: [] }]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema: { type: string, format: uuid }
+ *     responses:
+ *       200:
+ *         description: User found
+ *         content:
+ *           application/json:
+ *             schema: { $ref: '#/components/schemas/User' }
+ *       404: { description: Not found }
+ */
+app.get("/users/:id", getUserHandler);</code></pre>
+<pre><code>// TYPE-FIRST with zod-openapi — schemas ARE the types ARE the docs
+import { createDocument } from "zod-openapi";
+import { z } from "zod";
+
+const UserSchema = z.object({
+  id:    z.string().uuid().openapi({ example: "..." }),
+  email: z.string().email(),
+}).openapi({ ref: "User" });
+
+const document = createDocument({
+  openapi: "3.1.0",
+  info: { title: "API", version: "1.0" },
+  paths: {
+    "/users/{id}": {
+      get: {
+        requestParams: { path: z.object({ id: z.string().uuid() }) },
+        responses: { 200: { content: { "application/json": { schema: UserSchema } } } },
+      },
+    },
+  },
+});</code></pre>
+<table>
+  <tr><th>Pattern</th><th>Pros</th><th>Cons</th></tr>
+  <tr><td>Code-first (swagger-jsdoc)</td><td>Docs live next to code</td><td>JSDoc comments drift from reality</td></tr>
+  <tr><td>Spec-first (OpenAPI YAML)</td><td>Single source of truth; codegen for clients</td><td>Duplicates types; extra review step</td></tr>
+  <tr><td>Type-first (Zod → OpenAPI)</td><td>Schemas validate AND document; one source</td><td>Newer tooling; more discipline needed</td></tr>
+</table>
+<p><strong>Don't forget:</strong> host Swagger UI behind auth in non-public APIs (it leaks all your endpoints). Lock the spec down in production &mdash; serve via <code>/docs</code> only for authenticated staff. Generate typed clients with <strong>openapi-typescript</strong> or <strong>Orval</strong> so frontends are automatically in sync. For tRPC-style APIs, consider <strong>trpc-openapi</strong> if you need an OpenAPI doc for third-party consumers.</p>
+'''

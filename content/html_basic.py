@@ -1,0 +1,2220 @@
+"""Detailed answers for HTML Basic questions."""
+
+ANSWERS: dict[int, str] = {}
+
+ANSWERS[1] = r'''
+<p><strong>HTML</strong> stands for <strong>HyperText Markup Language</strong>. It&rsquo;s the standard language used to create and structure the content of web pages.</p>
+<ul>
+  <li><strong>HyperText</strong> &mdash; text that links to other text (the hyperlinks that connect pages across the web).</li>
+  <li><strong>Markup</strong> &mdash; tags wrap content to describe what it is (a heading, a paragraph, a list, an image).</li>
+  <li><strong>Language</strong> &mdash; a defined set of rules browsers understand and render.</li>
+</ul>
+<pre><code>&lt;h1&gt;Hello, world!&lt;/h1&gt;
+&lt;p&gt;This is a paragraph.&lt;/p&gt;</code></pre>
+<p>HTML isn&rsquo;t a programming language &mdash; it has no variables, conditions, or loops. It&rsquo;s a <em>markup</em> language: it describes structure. CSS handles appearance and JavaScript handles behavior. The current standard is HTML Living Standard, maintained by the WHATWG.</p>
+'''
+
+ANSWERS[2] = r'''
+<p>The <code>&lt;!DOCTYPE html&gt;</code> declaration tells the browser: &ldquo;render this page in <strong>standards mode</strong> using the HTML5 specification.&rdquo; It must be the very first line of every HTML document, before any other tag.</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;My Page&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;...&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>Without it, browsers fall back to <strong>quirks mode</strong>, which emulates 1990s bugs for old-site compatibility &mdash; causing unpredictable layout and broken CSS. Omitting <code>&lt;!DOCTYPE&gt;</code> is almost always a mistake.</p>
+<div class="callout callout-tip">
+  <div class="callout-icon">💡</div>
+  <div>In HTML5 this declaration is short and case-insensitive. Older versions (XHTML, HTML4) had longer, stricter forms &mdash; but in 2026 you&rsquo;ll only ever need <code>&lt;!DOCTYPE html&gt;</code>.</div>
+</div>
+'''
+
+ANSWERS[3] = r'''
+<p>A hyperlink is created with the <strong>anchor tag</strong> <code>&lt;a&gt;</code> and its <code>href</code> attribute (short for <em>hypertext reference</em>). The text between the opening and closing tags becomes clickable.</p>
+<pre><code>&lt;a href="https://example.com"&gt;Visit Example&lt;/a&gt;
+&lt;a href="/about"&gt;About page (same site)&lt;/a&gt;
+&lt;a href="#section-2"&gt;Jump to section 2&lt;/a&gt;</code></pre>
+<p><code>href</code> accepts three common forms:</p>
+<ul>
+  <li><strong>Absolute URL</strong> &mdash; full address including protocol (<code>https://...</code>).</li>
+  <li><strong>Relative URL</strong> &mdash; path on the same site (<code>/about</code> or <code>../help.html</code>).</li>
+  <li><strong>Fragment</strong> &mdash; jump to an element with a matching <code>id</code> on the current page (<code>#top</code>).</li>
+</ul>
+<p>For links that open in a new tab, add <code>target="_blank"</code>. When doing so, also add <code>rel="noopener"</code> to prevent the new page from tampering with the original &mdash; a small security safeguard.</p>
+'''
+
+ANSWERS[4] = r'''
+<p>HTML has <strong>three types of lists</strong>, each serving a different purpose:</p>
+<ul>
+  <li><strong>Unordered list (<code>&lt;ul&gt;</code>)</strong> &mdash; items have no sequence; rendered with bullets. Use for groupings where order doesn&rsquo;t matter.</li>
+  <li><strong>Ordered list (<code>&lt;ol&gt;</code>)</strong> &mdash; items follow a sequence; rendered with numbers. Use for steps, rankings, or anything order-dependent.</li>
+  <li><strong>Description list (<code>&lt;dl&gt;</code>)</strong> &mdash; pairs of terms and their descriptions. Use for glossaries, metadata, or FAQs.</li>
+</ul>
+<pre><code>&lt;ul&gt;
+  &lt;li&gt;Apple&lt;/li&gt;
+  &lt;li&gt;Banana&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Preheat oven&lt;/li&gt;
+  &lt;li&gt;Mix ingredients&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;dl&gt;
+  &lt;dt&gt;HTML&lt;/dt&gt;
+  &lt;dd&gt;HyperText Markup Language&lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+<p>Picking the right list type matters for accessibility &mdash; screen readers announce &ldquo;numbered list of 5 items&rdquo; vs &ldquo;list of 5 items,&rdquo; which gives visually impaired users helpful context about the content.</p>
+'''
+
+ANSWERS[5] = r'''
+<p>An <strong>ordered list</strong> is created with the <code>&lt;ol&gt;</code> tag, and each item is wrapped in an <code>&lt;li&gt;</code> (list item) tag. The browser numbers them automatically.</p>
+<pre><code>&lt;ol&gt;
+  &lt;li&gt;Wake up&lt;/li&gt;
+  &lt;li&gt;Brush teeth&lt;/li&gt;
+  &lt;li&gt;Drink coffee&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+<p>By default items number as 1, 2, 3. You can customize with attributes:</p>
+<ul>
+  <li><code>type="A"</code> &mdash; uppercase letters (A, B, C).</li>
+  <li><code>type="a"</code> &mdash; lowercase letters (a, b, c).</li>
+  <li><code>type="I"</code> &mdash; uppercase Roman (I, II, III).</li>
+  <li><code>start="5"</code> &mdash; begin counting from 5.</li>
+  <li><code>reversed</code> &mdash; count down instead of up.</li>
+</ul>
+<pre><code>&lt;ol type="A" start="3"&gt;
+  &lt;li&gt;First item shown (labeled C)&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+<p>Use an ordered list whenever sequence matters &mdash; recipes, rankings, instructions. If you only want styled bullets or numbers without semantic order, CSS is the right tool.</p>
+'''
+
+ANSWERS[6] = r'''
+<p>An <strong>unordered list</strong> uses the <code>&lt;ul&gt;</code> tag with <code>&lt;li&gt;</code> (list item) children. Browsers render each item with a bullet point; the order of items carries no meaning.</p>
+<pre><code>&lt;ul&gt;
+  &lt;li&gt;Red&lt;/li&gt;
+  &lt;li&gt;Green&lt;/li&gt;
+  &lt;li&gt;Blue&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+<p>The default bullet marker can be changed with CSS using the <code>list-style-type</code> property:</p>
+<pre><code>ul { list-style-type: square; }  /* or circle, disc, none */</code></pre>
+<p>Unordered lists are one of the most commonly used HTML elements &mdash; they&rsquo;re the right choice for navigation menus, feature lists, tags, product bullet points, and anywhere items belong together but have no inherent order. Screen readers announce the list size, which helps users navigate quickly.</p>
+'''
+
+ANSWERS[7] = r'''
+<p>Images are added with the <strong>self-closing <code>&lt;img&gt;</code> tag</strong>. It requires two attributes: <code>src</code> (the image path) and <code>alt</code> (a text description for accessibility and fallback).</p>
+<pre><code>&lt;img src="photo.jpg" alt="A sunset over the ocean"&gt;
+&lt;img src="https://cdn.example.com/logo.png" alt="Company logo"&gt;</code></pre>
+<p>Common attributes:</p>
+<ul>
+  <li><strong><code>src</code></strong> &mdash; the file path, URL, or data URI.</li>
+  <li><strong><code>alt</code></strong> &mdash; text shown if the image fails to load; read aloud by screen readers.</li>
+  <li><strong><code>width</code> / <code>height</code></strong> &mdash; reserve layout space so the page doesn&rsquo;t jump when images load.</li>
+  <li><strong><code>loading="lazy"</code></strong> &mdash; defer loading until the image is near the viewport; improves page speed.</li>
+</ul>
+<pre><code>&lt;img src="hero.jpg" alt="" width="800" height="450" loading="lazy"&gt;</code></pre>
+<p>Always set <code>width</code> and <code>height</code> when you know them &mdash; it prevents <strong>layout shift</strong> (content jumping as images arrive), which hurts both user experience and Core Web Vitals scores.</p>
+'''
+
+ANSWERS[8] = r'''
+<p>The <code>alt</code> attribute gives a <strong>text description of the image</strong>. It serves several important purposes:</p>
+<ul>
+  <li><strong>Accessibility</strong> &mdash; screen readers read <code>alt</code> text aloud so blind and low-vision users know what the image shows.</li>
+  <li><strong>Fallback</strong> &mdash; if the image fails to load (broken link, slow connection), the browser displays the <code>alt</code> text in its place.</li>
+  <li><strong>SEO</strong> &mdash; search engines use <code>alt</code> text to understand image content and index it appropriately.</li>
+</ul>
+<pre><code>&lt;img src="puppy.jpg" alt="Golden retriever puppy playing in grass"&gt;
+
+&lt;!-- Decorative image — use empty alt so screen readers skip it --&gt;
+&lt;img src="divider.png" alt=""&gt;</code></pre>
+<p>Good alt text is <strong>concise and descriptive</strong>. Describe the content and function, not the appearance (&ldquo;Sign up&rdquo; button, not &ldquo;Green button&rdquo;). Skip phrases like &ldquo;Image of&rdquo; &mdash; screen readers already announce it&rsquo;s an image. For purely decorative images with no informational value, use <code>alt=""</code> so assistive tech ignores them.</p>
+'''
+
+ANSWERS[9] = r'''
+<p>A table is created with the <code>&lt;table&gt;</code> tag, containing <strong>rows</strong> (<code>&lt;tr&gt;</code>) which hold either <strong>header cells</strong> (<code>&lt;th&gt;</code>) or <strong>data cells</strong> (<code>&lt;td&gt;</code>).</p>
+<pre><code>&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Name&lt;/th&gt;
+      &lt;th&gt;Age&lt;/th&gt;
+      &lt;th&gt;City&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Alice&lt;/td&gt;
+      &lt;td&gt;30&lt;/td&gt;
+      &lt;td&gt;Paris&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bob&lt;/td&gt;
+      &lt;td&gt;25&lt;/td&gt;
+      &lt;td&gt;Tokyo&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+<p>Structural elements (<code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;tfoot&gt;</code>) group rows semantically and help screen readers announce &ldquo;row 2 of 50&rdquo; correctly. Always use <code>&lt;th&gt;</code> for headers &mdash; not a styled <code>&lt;td&gt;</code> &mdash; since it carries meaning for assistive technologies.</p>
+<p><strong>Tables are for tabular data only</strong> &mdash; not for page layout. Use CSS Grid or Flexbox for layout; they&rsquo;re more flexible and semantic.</p>
+'''
+
+ANSWERS[10] = r'''
+<p>A form is created with the <code>&lt;form&gt;</code> tag, which wraps input controls. Two attributes control submission behavior: <code>action</code> (where to send data) and <code>method</code> (how to send it).</p>
+<pre><code>&lt;form action="/signup" method="post"&gt;
+  &lt;label for="email"&gt;Email&lt;/label&gt;
+  &lt;input type="email" id="email" name="email" required&gt;
+
+  &lt;label for="pwd"&gt;Password&lt;/label&gt;
+  &lt;input type="password" id="pwd" name="pwd" required&gt;
+
+  &lt;button type="submit"&gt;Sign up&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+<p>Key points:</p>
+<ul>
+  <li><strong><code>action</code></strong> &mdash; URL that receives the submission. Omitting it posts to the current page.</li>
+  <li><strong><code>method="get"</code></strong> &mdash; values appear in the URL as query parameters. Good for searches, idempotent.</li>
+  <li><strong><code>method="post"</code></strong> &mdash; values sent in the request body. Use for sign-ups, logins, anything that changes server state.</li>
+  <li><strong><code>name</code></strong> on each input is required &mdash; that&rsquo;s the key under which its value arrives at the server.</li>
+</ul>
+<p>Without the <code>name</code> attribute, an input&rsquo;s value is <em>not</em> included in the submission &mdash; a common beginner gotcha.</p>
+'''
+
+ANSWERS[11] = r'''
+<p>The <code>&lt;label&gt;</code> tag associates descriptive text with a form control. It makes forms <strong>accessible</strong> and <strong>easier to use</strong>.</p>
+<pre><code>&lt;!-- Method 1: for/id pairing --&gt;
+&lt;label for="user"&gt;Username&lt;/label&gt;
+&lt;input type="text" id="user" name="user"&gt;
+
+&lt;!-- Method 2: wrapping the input --&gt;
+&lt;label&gt;
+  Email
+  &lt;input type="email" name="email"&gt;
+&lt;/label&gt;</code></pre>
+<p>Benefits of using <code>&lt;label&gt;</code>:</p>
+<ul>
+  <li><strong>Clicking the label focuses the input</strong> &mdash; a larger, more forgiving click target (especially helpful on mobile).</li>
+  <li><strong>Screen readers announce the label</strong> when users focus the input &mdash; essential for blind users.</li>
+  <li><strong>Checkboxes and radios become clickable via their label</strong> &mdash; a big usability win.</li>
+</ul>
+<p>Never use placeholder text as a substitute for a label &mdash; it disappears when the user types, leaving them without context. Always pair every input with a proper <code>&lt;label&gt;</code>.</p>
+'''
+
+ANSWERS[12] = r'''
+<p>A single-line text input is created with <code>&lt;input type="text"&gt;</code>. The <code>name</code> attribute is the key the value is submitted under.</p>
+<pre><code>&lt;label for="fullname"&gt;Full name&lt;/label&gt;
+&lt;input type="text" id="fullname" name="fullname" placeholder="Jane Doe"&gt;</code></pre>
+<p>Useful attributes:</p>
+<ul>
+  <li><strong><code>placeholder</code></strong> &mdash; hint text shown when empty (not a substitute for a label).</li>
+  <li><strong><code>value</code></strong> &mdash; initial/pre-filled text.</li>
+  <li><strong><code>required</code></strong> &mdash; browser blocks submission if left empty.</li>
+  <li><strong><code>maxlength</code></strong> / <strong><code>minlength</code></strong> &mdash; character limits.</li>
+  <li><strong><code>pattern</code></strong> &mdash; regex for validation.</li>
+  <li><strong><code>autocomplete</code></strong> &mdash; help browsers suggest values (<code>name</code>, <code>email</code>, <code>off</code>...).</li>
+</ul>
+<pre><code>&lt;input type="text" name="zip" pattern="[0-9]{5}" maxlength="5" required&gt;</code></pre>
+<p>For specific content, prefer typed inputs: <code>type="email"</code>, <code>type="tel"</code>, <code>type="url"</code>, <code>type="number"</code>. Mobile browsers show a matching keyboard layout, and some validation is automatic.</p>
+'''
+
+ANSWERS[13] = r'''
+<p>A submit button triggers form submission. Two equivalent ways:</p>
+<pre><code>&lt;!-- Preferred: &lt;button&gt; element --&gt;
+&lt;button type="submit"&gt;Sign up&lt;/button&gt;
+
+&lt;!-- Alternative: &lt;input&gt; --&gt;
+&lt;input type="submit" value="Sign up"&gt;</code></pre>
+<p>Inside a <code>&lt;form&gt;</code>, a <code>&lt;button&gt;</code> with no explicit <code>type</code> defaults to <code>type="submit"</code> &mdash; so always be explicit to avoid surprises.</p>
+<ul>
+  <li><strong><code>type="submit"</code></strong> &mdash; submits the form (default inside a form).</li>
+  <li><strong><code>type="reset"</code></strong> &mdash; clears all fields to their initial values.</li>
+  <li><strong><code>type="button"</code></strong> &mdash; does nothing by default; used with JavaScript event handlers.</li>
+</ul>
+<p><code>&lt;button&gt;</code> is preferred over <code>&lt;input type="submit"&gt;</code> because it can contain HTML (icons, spans for styling), while <code>&lt;input&gt;</code> only supports plain text via <code>value</code>:</p>
+<pre><code>&lt;button type="submit"&gt;
+  &lt;img src="check.svg" alt=""&gt; &lt;span&gt;Save changes&lt;/span&gt;
+&lt;/button&gt;</code></pre>
+'''
+
+ANSWERS[14] = r'''
+<p>A checkbox is created with <code>&lt;input type="checkbox"&gt;</code>. Users can toggle it independently of other checkboxes &mdash; any combination can be selected.</p>
+<pre><code>&lt;label&gt;
+  &lt;input type="checkbox" name="subscribe" value="yes"&gt;
+  Subscribe to newsletter
+&lt;/label&gt;
+
+&lt;fieldset&gt;
+  &lt;legend&gt;Select interests&lt;/legend&gt;
+  &lt;label&gt;&lt;input type="checkbox" name="interests" value="tech"&gt; Tech&lt;/label&gt;
+  &lt;label&gt;&lt;input type="checkbox" name="interests" value="sports"&gt; Sports&lt;/label&gt;
+  &lt;label&gt;&lt;input type="checkbox" name="interests" value="music" checked&gt; Music&lt;/label&gt;
+&lt;/fieldset&gt;</code></pre>
+<p>Key points:</p>
+<ul>
+  <li><strong><code>checked</code></strong> &mdash; pre-selects the checkbox.</li>
+  <li><strong><code>value</code></strong> &mdash; what&rsquo;s submitted when checked. Defaults to <code>&quot;on&quot;</code> if omitted.</li>
+  <li><strong>Only checked boxes submit data</strong> &mdash; unchecked boxes send nothing. If you need to know whether the user saw and unchecked a box, use a hidden input or handle it server-side.</li>
+  <li>Use the same <code>name</code> for related checkboxes to submit multiple values for the same field.</li>
+</ul>
+'''
+
+ANSWERS[15] = r'''
+<p>A radio button is created with <code>&lt;input type="radio"&gt;</code>. Unlike checkboxes, <strong>only one radio in a group can be selected at a time</strong>. Grouping is done by giving multiple radios the same <code>name</code>.</p>
+<pre><code>&lt;fieldset&gt;
+  &lt;legend&gt;Preferred contact&lt;/legend&gt;
+
+  &lt;label&gt;
+    &lt;input type="radio" name="contact" value="email" checked&gt;
+    Email
+  &lt;/label&gt;
+  &lt;label&gt;
+    &lt;input type="radio" name="contact" value="phone"&gt;
+    Phone
+  &lt;/label&gt;
+  &lt;label&gt;
+    &lt;input type="radio" name="contact" value="sms"&gt;
+    SMS
+  &lt;/label&gt;
+&lt;/fieldset&gt;</code></pre>
+<p>Notes:</p>
+<ul>
+  <li><strong>Same <code>name</code></strong> = same group. Different <code>name</code> = independent choices.</li>
+  <li><strong>Different <code>value</code></strong> for each option &mdash; that&rsquo;s what&rsquo;s submitted.</li>
+  <li>Use <code>checked</code> on the default option; radios without a default can confuse users (nothing pre-selected).</li>
+  <li>Group related radios inside a <code>&lt;fieldset&gt;</code> with a <code>&lt;legend&gt;</code> &mdash; screen readers announce the legend as the question being answered.</li>
+</ul>
+<p>Rule of thumb: checkboxes for many-of-many; radios for one-of-many.</p>
+'''
+
+ANSWERS[16] = r'''
+<p>The <code>&lt;textarea&gt;</code> tag creates a <strong>multi-line text input</strong> &mdash; essential for comments, messages, descriptions, code snippets, or anything longer than a single line.</p>
+<pre><code>&lt;label for="msg"&gt;Your message&lt;/label&gt;
+&lt;textarea id="msg" name="message" rows="5" cols="40" placeholder="Type here..."&gt;&lt;/textarea&gt;</code></pre>
+<p>Unlike <code>&lt;input&gt;</code>, <code>&lt;textarea&gt;</code> has an opening and closing tag; initial content goes between them:</p>
+<pre><code>&lt;textarea name="bio"&gt;
+Initial text
+appears here.
+&lt;/textarea&gt;</code></pre>
+<p>Common attributes:</p>
+<ul>
+  <li><strong><code>rows</code> / <code>cols</code></strong> &mdash; visible lines and character width (CSS is usually preferred for sizing).</li>
+  <li><strong><code>maxlength</code></strong> &mdash; character limit.</li>
+  <li><strong><code>wrap</code></strong> &mdash; controls line-wrapping in the submitted value (<code>soft</code> or <code>hard</code>).</li>
+  <li><strong><code>placeholder</code></strong> and <strong><code>required</code></strong> work the same as on <code>&lt;input&gt;</code>.</li>
+</ul>
+<p>Whitespace inside the tag counts as initial text &mdash; avoid line breaks between <code>&lt;textarea&gt;</code> and your content if you want it truly empty.</p>
+'''
+
+ANSWERS[17] = r'''
+<p>A dropdown list is built from two tags working together: <code>&lt;select&gt;</code> wraps the menu, and <code>&lt;option&gt;</code> tags define each choice.</p>
+<pre><code>&lt;label for="country"&gt;Country&lt;/label&gt;
+&lt;select id="country" name="country"&gt;
+  &lt;option value=""&gt;-- Choose --&lt;/option&gt;
+  &lt;option value="us"&gt;United States&lt;/option&gt;
+  &lt;option value="uk"&gt;United Kingdom&lt;/option&gt;
+  &lt;option value="fr" selected&gt;France&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+<p>Useful features:</p>
+<ul>
+  <li><strong><code>selected</code></strong> &mdash; pre-selects an option.</li>
+  <li><strong><code>disabled</code></strong> on an option &mdash; visible but not choosable.</li>
+  <li><strong><code>multiple</code></strong> attribute on <code>&lt;select&gt;</code> &mdash; allows picking several options (Ctrl/Cmd-click).</li>
+  <li><strong><code>&lt;optgroup label="..."&gt;</code></strong> &mdash; groups related options with a non-selectable label.</li>
+</ul>
+<pre><code>&lt;select name="pet" multiple size="4"&gt;
+  &lt;optgroup label="Mammals"&gt;
+    &lt;option value="dog"&gt;Dog&lt;/option&gt;
+    &lt;option value="cat"&gt;Cat&lt;/option&gt;
+  &lt;/optgroup&gt;
+  &lt;optgroup label="Birds"&gt;
+    &lt;option value="parrot"&gt;Parrot&lt;/option&gt;
+  &lt;/optgroup&gt;
+&lt;/select&gt;</code></pre>
+<p>If no <code>value</code> is set on an option, the text content is submitted instead.</p>
+'''
+
+ANSWERS[18] = r'''
+<p>The <code>&lt;select&gt;</code> tag creates a <strong>dropdown menu</strong> (or a listbox with <code>multiple</code>); <code>&lt;option&gt;</code> defines each choice inside it. They&rsquo;re always used together.</p>
+<pre><code>&lt;select name="size"&gt;
+  &lt;option value="s"&gt;Small&lt;/option&gt;
+  &lt;option value="m" selected&gt;Medium&lt;/option&gt;
+  &lt;option value="l"&gt;Large&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+<p>Key roles:</p>
+<ul>
+  <li><code>&lt;select&gt;</code> &mdash; the control itself. Attributes: <code>name</code>, <code>multiple</code>, <code>size</code>, <code>required</code>, <code>disabled</code>.</li>
+  <li><code>&lt;option&gt;</code> &mdash; one selectable choice. The <code>value</code> is submitted; the text content is displayed.</li>
+</ul>
+<p><strong>When to use</strong>: short, predefined lists (country, size, category). <strong>Avoid for</strong>:</p>
+<ul>
+  <li>Very long lists (100+ items) &mdash; use a searchable combobox (<code>&lt;input&gt;</code> with <code>&lt;datalist&gt;</code>, or a JS autocomplete) instead.</li>
+  <li>Two-option choices &mdash; use radios or a toggle; dropdowns force an extra click.</li>
+</ul>
+<p>On mobile, <code>&lt;select&gt;</code> triggers the OS-native picker &mdash; usually a better experience than custom dropdown widgets.</p>
+'''
+
+ANSWERS[19] = r'''
+<p>A password input is created with <code>&lt;input type="password"&gt;</code>. It behaves like a text input but <strong>masks characters</strong> as they&rsquo;re typed (usually showing dots or asterisks).</p>
+<pre><code>&lt;label for="pwd"&gt;Password&lt;/label&gt;
+&lt;input type="password" id="pwd" name="password" required minlength="8"
+       autocomplete="current-password"&gt;</code></pre>
+<p>Important attributes:</p>
+<ul>
+  <li><strong><code>autocomplete</code></strong> &mdash; tell the browser/password manager what role the field plays:
+    <ul>
+      <li><code>current-password</code> &mdash; login page.</li>
+      <li><code>new-password</code> &mdash; sign-up or change-password page.</li>
+      <li><code>off</code> &mdash; discouraged except for security-sensitive flows.</li>
+    </ul>
+  </li>
+  <li><strong><code>minlength</code></strong> &mdash; basic strength check (real validation belongs server-side).</li>
+</ul>
+<p><strong>Important safeguards</strong>:</p>
+<ul>
+  <li>Masking is visual only &mdash; it does <em>not</em> encrypt the value. Always use HTTPS so the password is encrypted in transit.</li>
+  <li>Never log password values or store them in plain text &mdash; hash with bcrypt, scrypt, or Argon2 on the server.</li>
+  <li>Consider a &ldquo;show password&rdquo; toggle (swap the <code>type</code> attribute to <code>text</code>) &mdash; it reduces typos and is an accessibility win.</li>
+</ul>
+'''
+
+ANSWERS[20] = r'''
+<p>Both <code>&lt;div&gt;</code> and <code>&lt;span&gt;</code> are <strong>generic containers with no inherent meaning</strong>. They&rsquo;re used for grouping content to apply styling or scripting. The difference is how they flow on the page:</p>
+<table>
+  <tr><th></th><th><code>&lt;div&gt;</code></th><th><code>&lt;span&gt;</code></th></tr>
+  <tr><td>Display</td><td>Block-level</td><td>Inline</td></tr>
+  <tr><td>Line break before/after</td><td>Yes</td><td>No</td></tr>
+  <tr><td>Common use</td><td>Sections, cards, layout containers</td><td>Bits of text inside a paragraph</td></tr>
+</table>
+<pre><code>&lt;div class="card"&gt;
+  &lt;p&gt;
+    Price: &lt;span class="highlight"&gt;$42&lt;/span&gt; today only!
+  &lt;/p&gt;
+&lt;/div&gt;</code></pre>
+<p><strong>Rule of thumb</strong>: reach for semantic tags first &mdash; <code>&lt;article&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, etc. Only use <code>&lt;div&gt;</code> when no semantic element fits. <code>&lt;span&gt;</code> is the default choice for styling or scripting a small piece of inline text that doesn&rsquo;t have a more specific tag (like <code>&lt;em&gt;</code>, <code>&lt;strong&gt;</code>, <code>&lt;code&gt;</code>).</p>
+'''
+
+ANSWERS[21] = r'''
+<p>HTML comments are wrapped in <code>&lt;!--</code> and <code>--&gt;</code>. Anything inside is ignored by the browser and not rendered on the page &mdash; though it&rsquo;s visible to anyone who views the page source.</p>
+<pre><code>&lt;!-- This is a single-line comment --&gt;
+
+&lt;!--
+  Multi-line comments
+  work too. Good for
+  documentation and TODOs.
+--&gt;
+
+&lt;nav&gt;
+  &lt;!-- TODO: add mobile menu --&gt;
+  &lt;a href="/"&gt;Home&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+<p>Uses:</p>
+<ul>
+  <li>Notes to yourself or teammates about why code is structured a certain way.</li>
+  <li>Temporarily disabling code without deleting it.</li>
+  <li>Marking sections in long files.</li>
+</ul>
+<p><strong>Important</strong>: comments are sent to the client &mdash; <em>never</em> put secrets, API keys, internal URLs, or sensitive business logic in HTML comments. You can&rsquo;t nest comments (<code>--</code> inside breaks them), and browsers are strict about the syntax. Build tools can strip comments at deploy time to reduce file size.</p>
+'''
+
+ANSWERS[22] = r'''
+<p>The <code>&lt;meta&gt;</code> tag provides <strong>metadata about the document</strong> &mdash; information about the page itself, rather than content displayed on it. It&rsquo;s a self-closing tag placed inside <code>&lt;head&gt;</code>.</p>
+<pre><code>&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+  &lt;meta name="description" content="Cheap flights to Paris."&gt;
+  &lt;meta name="theme-color" content="#1a73e8"&gt;
+
+  &lt;!-- Open Graph (social sharing) --&gt;
+  &lt;meta property="og:title" content="Paris Deals"&gt;
+  &lt;meta property="og:image" content="/hero.jpg"&gt;
+&lt;/head&gt;</code></pre>
+<p>Common meta tags you should know:</p>
+<ul>
+  <li><strong><code>charset="UTF-8"</code></strong> &mdash; declares character encoding. Put it first in <code>&lt;head&gt;</code>.</li>
+  <li><strong><code>viewport</code></strong> &mdash; essential for responsive/mobile pages. Without it, phones render at desktop width and zoom out.</li>
+  <li><strong><code>description</code></strong> &mdash; the short snippet search engines show under your page title.</li>
+  <li><strong>Open Graph (<code>og:*</code>)</strong> and <strong>Twitter Card</strong> tags &mdash; control how links preview on social media.</li>
+</ul>
+<p>Meta tags don&rsquo;t render on the page, but they heavily influence SEO, social previews, and mobile behavior.</p>
+'''
+
+ANSWERS[23] = r'''
+<p>Link an external CSS file with the <code>&lt;link&gt;</code> tag, placed inside <code>&lt;head&gt;</code>. Three attributes matter: <code>rel</code> (the relationship), <code>href</code> (the file path), and optionally <code>media</code> (when the styles apply).</p>
+<pre><code>&lt;head&gt;
+  &lt;link rel="stylesheet" href="styles.css"&gt;
+
+  &lt;!-- Separate print-only stylesheet --&gt;
+  &lt;link rel="stylesheet" href="print.css" media="print"&gt;
+
+  &lt;!-- Remote stylesheet from a CDN --&gt;
+  &lt;link rel="stylesheet" href="https://cdn.example.com/reset.css"&gt;
+&lt;/head&gt;</code></pre>
+<p>Key notes:</p>
+<ul>
+  <li><strong><code>rel="stylesheet"</code></strong> is required &mdash; it tells the browser this is a CSS file.</li>
+  <li><strong>Placement</strong>: inside <code>&lt;head&gt;</code> so styles load before the page renders (avoids the &ldquo;flash of unstyled content&rdquo;).</li>
+  <li><strong>Path</strong>: can be relative (<code>styles.css</code>, <code>/css/main.css</code>) or absolute (<code>https://...</code>).</li>
+  <li><strong>Multiple files</strong>: add multiple <code>&lt;link&gt;</code> tags &mdash; they load in order; later rules can override earlier ones.</li>
+</ul>
+<p>For small, page-specific styles you can use the <code>&lt;style&gt;</code> tag inline, but for anything reusable, external CSS is cleaner and cacheable.</p>
+'''
+
+ANSWERS[24] = r'''
+<p>Link external JavaScript with the <code>&lt;script&gt;</code> tag and a <code>src</code> attribute. Placement and loading behavior matter for performance.</p>
+<pre><code>&lt;!-- Classic placement: end of &lt;body&gt; so HTML parses first --&gt;
+&lt;script src="app.js"&gt;&lt;/script&gt;
+
+&lt;!-- Modern: in &lt;head&gt; with defer or async --&gt;
+&lt;script src="app.js" defer&gt;&lt;/script&gt;
+&lt;script src="analytics.js" async&gt;&lt;/script&gt;
+
+&lt;!-- ES modules --&gt;
+&lt;script type="module" src="main.js"&gt;&lt;/script&gt;</code></pre>
+<p>Loading strategies:</p>
+<table>
+  <tr><th>Attribute</th><th>When it runs</th><th>When to use</th></tr>
+  <tr><td>None</td><td>Blocks parsing; runs immediately</td><td>Rarely needed; avoid.</td></tr>
+  <tr><td><code>defer</code></td><td>Downloads in parallel; runs after HTML parses, in order</td><td>App code that needs the DOM ready.</td></tr>
+  <tr><td><code>async</code></td><td>Downloads in parallel; runs ASAP, no order guarantee</td><td>Independent scripts like analytics.</td></tr>
+  <tr><td><code>type="module"</code></td><td>Deferred by default; supports <code>import</code>/<code>export</code></td><td>Modern ES modules.</td></tr>
+</table>
+<p>A <code>&lt;script&gt;</code> tag with <code>src</code> must still have a closing <code>&lt;/script&gt;</code>. The tag is never self-closing &mdash; common source of silent bugs.</p>
+'''
+
+ANSWERS[25] = r'''
+<p>The <code>&lt;head&gt;</code> tag contains <strong>metadata and resources</strong> &mdash; information about the page rather than content shown to the user. It sits before <code>&lt;body&gt;</code>.</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+    &lt;title&gt;My Page&lt;/title&gt;
+    &lt;meta name="description" content="A brief page description"&gt;
+    &lt;link rel="icon" href="/favicon.ico"&gt;
+    &lt;link rel="stylesheet" href="styles.css"&gt;
+    &lt;script src="app.js" defer&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;...&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>Typical contents:</p>
+<ul>
+  <li><strong><code>&lt;title&gt;</code></strong> &mdash; shown in the browser tab and search results.</li>
+  <li><strong><code>&lt;meta&gt;</code> tags</strong> &mdash; charset, viewport, description, social sharing.</li>
+  <li><strong><code>&lt;link&gt;</code></strong> &mdash; stylesheets, favicons, preloads.</li>
+  <li><strong><code>&lt;script&gt;</code></strong> &mdash; JavaScript (preferably with <code>defer</code>).</li>
+  <li><strong><code>&lt;style&gt;</code></strong> &mdash; inline CSS for the page.</li>
+</ul>
+<p>Almost nothing in <code>&lt;head&gt;</code> is rendered visually &mdash; its job is to configure the page before the browser starts drawing.</p>
+'''
+
+ANSWERS[26] = r'''
+<p>The <code>&lt;body&gt;</code> tag contains <strong>everything the user actually sees</strong> on the page &mdash; text, images, links, forms, videos, buttons, and so on. It comes after <code>&lt;head&gt;</code> and is the second (and last) direct child of <code>&lt;html&gt;</code>.</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;title&gt;My Page&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Welcome!&lt;/h1&gt;
+    &lt;p&gt;This text shows up on the page.&lt;/p&gt;
+    &lt;img src="hero.jpg" alt="Hero image"&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>Think of it this way:</p>
+<ul>
+  <li><code>&lt;head&gt;</code> = backstage (configuration, resources, metadata).</li>
+  <li><code>&lt;body&gt;</code> = the stage (visible content).</li>
+</ul>
+<p>Global event handlers like <code>onload</code> can be set on <code>&lt;body&gt;</code>, but modern code attaches handlers via JavaScript instead. Every HTML document has exactly one <code>&lt;body&gt;</code>, and you should never nest another inside it.</p>
+'''
+
+ANSWERS[27] = r'''
+<p>Headings are created with the <code>&lt;h1&gt;</code> through <code>&lt;h6&gt;</code> tags, where <code>&lt;h1&gt;</code> is the most important and <code>&lt;h6&gt;</code> the least. They visually render larger/bolder by default, but their primary purpose is <strong>document structure</strong>.</p>
+<pre><code>&lt;h1&gt;Site or page title&lt;/h1&gt;
+&lt;h2&gt;Major section&lt;/h2&gt;
+&lt;h3&gt;Subsection&lt;/h3&gt;
+&lt;h4&gt;Nested subsection&lt;/h4&gt;</code></pre>
+<p>Best practices:</p>
+<ul>
+  <li><strong>One <code>&lt;h1&gt;</code> per page</strong> &mdash; it should describe the overall topic.</li>
+  <li><strong>Don&rsquo;t skip levels</strong> &mdash; go h2 &rarr; h3, not h2 &rarr; h4. Screen readers and search engines use the hierarchy to understand structure.</li>
+  <li><strong>Never choose headings for size alone</strong>. Need big text? Use CSS. Choose the heading level that reflects meaning.</li>
+</ul>
+<p>Good heading structure is one of the easiest wins for accessibility and SEO &mdash; it lets users with screen readers jump section-by-section, and it helps Google understand what your page is about.</p>
+'''
+
+ANSWERS[28] = r'''
+<p>HTML has <strong>six heading levels</strong>: <code>&lt;h1&gt;</code>, <code>&lt;h2&gt;</code>, <code>&lt;h3&gt;</code>, <code>&lt;h4&gt;</code>, <code>&lt;h5&gt;</code>, and <code>&lt;h6&gt;</code>. They indicate importance in descending order.</p>
+<pre><code>&lt;h1&gt;Chapter title&lt;/h1&gt;      &lt;!-- most important --&gt;
+&lt;h2&gt;Section&lt;/h2&gt;
+&lt;h3&gt;Subsection&lt;/h3&gt;
+&lt;h4&gt;Sub-subsection&lt;/h4&gt;
+&lt;h5&gt;Rarely used&lt;/h5&gt;
+&lt;h6&gt;Least important&lt;/h6&gt;    &lt;!-- rarely used --&gt;</code></pre>
+<p>In practice, most pages only use h1&ndash;h3. Levels h5 and h6 are rarely needed &mdash; if your document has that many levels, it may be too deeply nested and hard to follow.</p>
+<div class="callout callout-tip">
+  <div class="callout-icon">💡</div>
+  <div>The six levels have been part of HTML since 1991 &mdash; they predate CSS. That&rsquo;s why their default sizes decrease visually, but that&rsquo;s a side effect, not the purpose. Use them for <em>hierarchy</em>, not for styling.</div>
+</div>
+'''
+
+ANSWERS[29] = r'''
+<p>A paragraph is created with the <code>&lt;p&gt;</code> tag. It&rsquo;s a <strong>block-level element</strong>, so browsers automatically add vertical spacing before and after.</p>
+<pre><code>&lt;p&gt;This is the first paragraph. Text wraps
+to fit the container automatically.&lt;/p&gt;
+
+&lt;p&gt;This is the second. Separated by visible spacing.&lt;/p&gt;</code></pre>
+<p>Things to know:</p>
+<ul>
+  <li><strong>Line breaks and extra spaces in your source don&rsquo;t show up</strong>. HTML collapses whitespace. Use <code>&lt;br&gt;</code> for a forced line break within a paragraph, or a new <code>&lt;p&gt;</code> for a new thought.</li>
+  <li><strong>Paragraphs can&rsquo;t contain block-level elements</strong> &mdash; don&rsquo;t put a <code>&lt;div&gt;</code> or <code>&lt;ul&gt;</code> inside a <code>&lt;p&gt;</code>. The browser will silently close the paragraph early, which breaks layout.</li>
+  <li>For inline emphasis use <code>&lt;em&gt;</code>, <code>&lt;strong&gt;</code>, <code>&lt;code&gt;</code>, or <code>&lt;span&gt;</code> within a paragraph.</li>
+</ul>
+<p>Styling (margins, font size, line height) is handled with CSS &mdash; <code>&lt;p&gt;</code> just declares the structural intent that this is a paragraph of text.</p>
+'''
+
+ANSWERS[30] = r'''
+<p>A line break is inserted with the <strong>self-closing <code>&lt;br&gt;</code> tag</strong>. It forces the next content onto a new line without starting a new paragraph.</p>
+<pre><code>&lt;p&gt;
+  123 Main Street&lt;br&gt;
+  Springfield, IL 62701&lt;br&gt;
+  United States
+&lt;/p&gt;
+
+&lt;p&gt;
+  Roses are red,&lt;br&gt;
+  Violets are blue.
+&lt;/p&gt;</code></pre>
+<p><strong>When to use <code>&lt;br&gt;</code></strong>: where the line break itself is meaningful &mdash; inside addresses, poems, song lyrics, signatures. These are cases where the text structure actually <em>is</em> broken across lines.</p>
+<p><strong>When NOT to use <code>&lt;br&gt;</code></strong>:</p>
+<ul>
+  <li>To add space between paragraphs &mdash; that&rsquo;s CSS&rsquo;s job (<code>margin</code>).</li>
+  <li>To separate items &mdash; use a list (<code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code>) instead.</li>
+  <li>To fake layout &mdash; use CSS (flexbox, grid, padding).</li>
+</ul>
+<p>Overusing <code>&lt;br&gt;</code> is a classic sign of a beginner HTML file. A handful per page is fine; dozens usually indicates the structure needs rethinking.</p>
+'''
+
+ANSWERS[31] = r'''
+<p>The <code>&lt;hr&gt;</code> tag inserts a <strong>horizontal rule</strong> &mdash; a thin dividing line across the page. Semantically, it represents a <strong>thematic break</strong>: a shift in subject or a scene change within a section.</p>
+<pre><code>&lt;p&gt;End of the first topic.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Beginning of a new topic.&lt;/p&gt;</code></pre>
+<p>It&rsquo;s a self-closing tag with no content. Originally <code>&lt;hr&gt;</code> was purely presentational; HTML5 re-defined it as semantic (the &ldquo;break&rdquo; meaning) and delegated its appearance to CSS.</p>
+<pre><code>hr {
+  border: none;
+  height: 1px;
+  background: #ccc;
+  margin: 2rem 0;
+}</code></pre>
+<p><strong>When to use</strong>: a genuine topic shift &mdash; separating the end of a blog post from author info, or dividing chapters in a long article. <strong>When NOT to use</strong>: purely decorative lines (use CSS borders on surrounding elements) or to separate list items (a list&rsquo;s structure already implies separation).</p>
+'''
+
+ANSWERS[32] = r'''
+<p>There are two tags for making text bold. They <em>look</em> identical by default but have different meanings:</p>
+<ul>
+  <li><strong><code>&lt;strong&gt;</code></strong> &mdash; indicates <strong>strong importance</strong>. Screen readers may change their tone. Use this when the bold text is genuinely significant.</li>
+  <li><strong><code>&lt;b&gt;</code></strong> &mdash; marks text for visual stylistic offset <strong>without</strong> implying importance (product names, keywords in a summary). Purely presentational.</li>
+</ul>
+<pre><code>&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; this action cannot be undone.&lt;/p&gt;
+
+&lt;p&gt;The ship &lt;b&gt;HMS Beagle&lt;/b&gt; sailed in 1831.&lt;/p&gt;</code></pre>
+<p>Rule of thumb: prefer <code>&lt;strong&gt;</code>. It conveys meaning to assistive tech and search engines; <code>&lt;b&gt;</code> doesn&rsquo;t.</p>
+<div class="callout callout-tip">
+  <div class="callout-icon">💡</div>
+  <div>For <em>purely visual</em> bolding with no semantic weight, the cleanest modern approach is CSS: <code>font-weight: bold</code> on a <code>&lt;span&gt;</code> or a styled class.</div>
+</div>
+'''
+
+ANSWERS[33] = r'''
+<p>Like bold, italic text has two tags with similar appearance but different meanings:</p>
+<ul>
+  <li><strong><code>&lt;em&gt;</code></strong> &mdash; marks <strong>emphasis</strong>. Screen readers often change inflection. Use when the meaning changes if you remove the stress.</li>
+  <li><strong><code>&lt;i&gt;</code></strong> &mdash; italicizes text that is set off from normal prose &mdash; titles of works, foreign words, technical terms, thoughts &mdash; without implying emphasis.</li>
+</ul>
+<pre><code>&lt;p&gt;I &lt;em&gt;really&lt;/em&gt; don&rsquo;t like mushrooms.&lt;/p&gt;
+
+&lt;p&gt;She was reading &lt;i&gt;Pride and Prejudice&lt;/i&gt; again.&lt;/p&gt;
+&lt;p&gt;The French term for it is &lt;i lang="fr"&gt;bonjour&lt;/i&gt;.&lt;/p&gt;</code></pre>
+<p>In doubt, use <code>&lt;em&gt;</code> &mdash; it&rsquo;s the semantic default for italicized meaning. Reserve <code>&lt;i&gt;</code> for conventions like book titles and foreign terms.</p>
+<p>For purely decorative italics, CSS (<code>font-style: italic</code>) is the right approach.</p>
+'''
+
+ANSWERS[34] = r'''
+<p>The <code>&lt;u&gt;</code> tag creates <strong>underlined text</strong>. But in modern web design it&rsquo;s used cautiously &mdash; most users associate underlines with clickable links, so arbitrary underlining can confuse them.</p>
+<pre><code>&lt;p&gt;The word &lt;u&gt;teh&lt;/u&gt; is a misspelling of &ldquo;the&rdquo;.&lt;/p&gt;</code></pre>
+<p>Semantically, <code>&lt;u&gt;</code> marks text with a non-textual annotation &mdash; originally for proper nouns in Chinese text, misspellings, or similar conventions that are rendered with underlines.</p>
+<p><strong>Usually better alternatives</strong>:</p>
+<ul>
+  <li>For emphasis &mdash; use <code>&lt;em&gt;</code> (italic) or <code>&lt;strong&gt;</code> (bold).</li>
+  <li>For spelling corrections &mdash; use <code>&lt;u&gt;</code> combined with a CSS class like <code>text-decoration-style: wavy</code>.</li>
+  <li>For purely visual underlines &mdash; use CSS: <code>text-decoration: underline</code>.</li>
+</ul>
+<pre><code>&lt;style&gt;
+  .misspelled { text-decoration: underline wavy red; }
+&lt;/style&gt;
+&lt;p&gt;I went &lt;u class="misspelled"&gt;thier&lt;/u&gt; yesterday.&lt;/p&gt;</code></pre>
+<p>Whenever you underline text, ensure it&rsquo;s visually distinct from your link styles.</p>
+'''
+
+ANSWERS[35] = r'''
+<p>Strikethrough text has <strong>two semantic options</strong>, used for different situations:</p>
+<ul>
+  <li><strong><code>&lt;s&gt;</code></strong> &mdash; content that is <strong>no longer accurate or relevant</strong>. Think old prices, outdated facts, discontinued items.</li>
+  <li><strong><code>&lt;del&gt;</code></strong> &mdash; content that has been <strong>deleted</strong> in a document edit. Often paired with <code>&lt;ins&gt;</code> (inserted text) in change-tracking.</li>
+</ul>
+<pre><code>&lt;p&gt;Was &lt;s&gt;$99&lt;/s&gt; now $49!&lt;/p&gt;
+
+&lt;p&gt;
+  The meeting is at &lt;del&gt;3pm&lt;/del&gt; &lt;ins&gt;4pm&lt;/ins&gt; tomorrow.
+&lt;/p&gt;</code></pre>
+<p>Both render with a line through them by default. The difference is in meaning: <code>&lt;s&gt;</code> is about accuracy, <code>&lt;del&gt;</code> is about editorial history.</p>
+<p>For a purely visual line-through with no semantic meaning, CSS is the cleaner choice:</p>
+<pre><code>.strikethrough { text-decoration: line-through; }</code></pre>
+<p>The older <code>&lt;strike&gt;</code> tag is deprecated and should not be used in new code.</p>
+'''
+
+ANSWERS[36] = r'''
+<p>The <code>&lt;em&gt;</code> tag marks text as <strong>emphasized</strong> &mdash; text whose meaning is stressed or whose removal changes the meaning of the sentence. Browsers render it italic by default; screen readers may alter their pitch or emphasis.</p>
+<pre><code>&lt;p&gt;I &lt;em&gt;told&lt;/em&gt; you it would rain.&lt;/p&gt;
+&lt;p&gt;I told &lt;em&gt;you&lt;/em&gt; it would rain.&lt;/p&gt;
+&lt;p&gt;I told you it would &lt;em&gt;rain&lt;/em&gt;.&lt;/p&gt;</code></pre>
+<p>Notice how each sentence has a different meaning depending on what is emphasized &mdash; that&rsquo;s exactly what <code>&lt;em&gt;</code> captures.</p>
+<p><strong><code>&lt;em&gt;</code> vs <code>&lt;i&gt;</code></strong>:</p>
+<ul>
+  <li><code>&lt;em&gt;</code> = emphasis (stressed speech). Meaning-bearing.</li>
+  <li><code>&lt;i&gt;</code> = italic text for conventional reasons (titles, foreign words) without implying emphasis.</li>
+</ul>
+<p>You can nest <code>&lt;em&gt;</code> tags to indicate greater emphasis, though this is rare in practice:</p>
+<pre><code>&lt;p&gt;This is &lt;em&gt;really &lt;em&gt;really&lt;/em&gt; important&lt;/em&gt;.&lt;/p&gt;</code></pre>
+'''
+
+ANSWERS[37] = r'''
+<p>The <code>&lt;strong&gt;</code> tag marks text as having <strong>strong importance, seriousness, or urgency</strong>. Browsers render it bold by default, but the meaning is what matters &mdash; not the visual style.</p>
+<pre><code>&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; this file will be deleted permanently.&lt;/p&gt;
+
+&lt;p&gt;Read the &lt;strong&gt;terms and conditions&lt;/strong&gt; before signing.&lt;/p&gt;</code></pre>
+<p><strong><code>&lt;strong&gt;</code> vs <code>&lt;b&gt;</code></strong>:</p>
+<ul>
+  <li><code>&lt;strong&gt;</code> = importance/severity. Conveys meaning to screen readers and search engines.</li>
+  <li><code>&lt;b&gt;</code> = visual boldness without implied importance (product names, keywords).</li>
+</ul>
+<p>Use <code>&lt;strong&gt;</code> for:</p>
+<ul>
+  <li>Safety warnings, error messages, critical instructions.</li>
+  <li>Important labels in forms (&ldquo;<strong>Required</strong>&rdquo;).</li>
+  <li>Keywords users must remember in step-by-step guides.</li>
+</ul>
+<p>Nested <code>&lt;strong&gt;</code> increases importance level (valid but rarely used in practice). For pure visual boldness that carries no special meaning, prefer CSS <code>font-weight: bold</code>.</p>
+'''
+
+ANSWERS[38] = r'''
+<p>The <code>&lt;blockquote&gt;</code> tag marks up <strong>a quoted block of text</strong>, usually multiple lines. Browsers indent it by default. For inline (single-sentence) quotations, use <code>&lt;q&gt;</code> instead.</p>
+<pre><code>&lt;blockquote cite="https://example.com/speech"&gt;
+  &lt;p&gt;The only thing we have to fear is fear itself.&lt;/p&gt;
+  &lt;footer&gt;&mdash; Franklin D. Roosevelt&lt;/footer&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;
+  She said &lt;q&gt;come back later&lt;/q&gt; and closed the door.
+&lt;/p&gt;</code></pre>
+<p>Useful attributes and patterns:</p>
+<ul>
+  <li><strong><code>cite</code></strong> &mdash; URL of the source. It&rsquo;s machine-readable but not visually shown; pair it with a visible link or <code>&lt;cite&gt;</code> tag for the source name.</li>
+  <li><strong><code>&lt;cite&gt;</code></strong> &mdash; wrap the title of the cited work (book, article, speech).</li>
+  <li><strong><code>&lt;footer&gt;</code></strong> inside the blockquote is a common place for attribution.</li>
+</ul>
+<p><code>&lt;blockquote&gt;</code> is for <em>quotations</em>, not for generic indentation or stylistic emphasis. If you just want an indented container, use CSS (<code>margin-left</code> or <code>padding-left</code>).</p>
+'''
+
+ANSWERS[39] = r'''
+<p>To open a link in a new tab, add <code>target="_blank"</code> to the <code>&lt;a&gt;</code> tag. <strong>Always pair it with <code>rel="noopener"</code></strong> for security.</p>
+<pre><code>&lt;a href="https://example.com" target="_blank" rel="noopener"&gt;
+  Open Example in a new tab
+&lt;/a&gt;</code></pre>
+<p>Values for <code>target</code>:</p>
+<ul>
+  <li><strong><code>_blank</code></strong> &mdash; new tab/window.</li>
+  <li><strong><code>_self</code></strong> &mdash; same tab (the default).</li>
+  <li><strong><code>_parent</code> / <code>_top</code></strong> &mdash; relevant only inside iframes.</li>
+</ul>
+<p><strong>Why <code>rel="noopener"</code> matters</strong>: without it, the newly-opened page has a reference back to yours (<code>window.opener</code>) and can manipulate your original page. <code>noopener</code> severs that link. Add <code>noreferrer</code> as well if you want to hide which site the user came from:</p>
+<pre><code>&lt;a href="https://external.com" target="_blank" rel="noopener noreferrer"&gt;
+  External link
+&lt;/a&gt;</code></pre>
+<p>Modern browsers apply <code>noopener</code> automatically for <code>target="_blank"</code>, but writing it explicitly works in older browsers too and signals your intent.</p>
+'''
+
+ANSWERS[40] = r'''
+<p>The <code>&lt;title&gt;</code> tag sets the <strong>document title</strong>, placed inside <code>&lt;head&gt;</code>. Its content appears in several important places, even though it never shows on the page itself.</p>
+<pre><code>&lt;head&gt;
+  &lt;title&gt;Contact Us &ndash; Acme Corp&lt;/title&gt;
+&lt;/head&gt;</code></pre>
+<p>Where the title appears:</p>
+<ul>
+  <li><strong>Browser tab / window bar</strong> &mdash; the visible label of your page.</li>
+  <li><strong>Bookmarks</strong> &mdash; the default name when a user saves the page.</li>
+  <li><strong>Search engine results</strong> &mdash; Google, Bing, etc. use it as the clickable headline.</li>
+  <li><strong>Social media cards</strong> &mdash; fallback when no Open Graph title is set.</li>
+</ul>
+<p>Guidelines:</p>
+<ul>
+  <li>Keep it under ~60 characters &mdash; longer titles get truncated in search results.</li>
+  <li>Put the most important info first (page topic before site name).</li>
+  <li>Make every page&rsquo;s title unique &mdash; &ldquo;Home&rdquo; on every page is bad for usability and SEO.</li>
+</ul>
+<p>Every HTML document must have exactly one <code>&lt;title&gt;</code>. It&rsquo;s required by the HTML specification.</p>
+'''
+
+ANSWERS[41] = r'''
+<p>A numbered list is the same as an <strong>ordered list</strong> &mdash; use the <code>&lt;ol&gt;</code> tag with <code>&lt;li&gt;</code> items. The browser numbers them automatically, so you don&rsquo;t type the numbers yourself.</p>
+<pre><code>&lt;ol&gt;
+  &lt;li&gt;First step&lt;/li&gt;
+  &lt;li&gt;Second step&lt;/li&gt;
+  &lt;li&gt;Third step&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+<p>Renders as:</p>
+<ol>
+  <li>First step</li>
+  <li>Second step</li>
+  <li>Third step</li>
+</ol>
+<p>If you reorder, add, or remove items, numbering updates automatically &mdash; no manual fixing. You can customize the numbering with attributes:</p>
+<pre><code>&lt;ol start="5" type="i" reversed&gt;
+  &lt;li&gt;Labeled v (counting down)&lt;/li&gt;
+  &lt;li&gt;iv&lt;/li&gt;
+  &lt;li&gt;iii&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+<p>If you want bullet points instead of numbers, use <code>&lt;ul&gt;</code> (unordered list). If the order is meaningful &mdash; like instructions, rankings, or event timelines &mdash; <code>&lt;ol&gt;</code> is the right choice because the sequence carries meaning.</p>
+'''
+
+ANSWERS[42] = r'''
+<p>Both tags create lists with <code>&lt;li&gt;</code> items inside. The difference is about <strong>whether the order matters</strong>:</p>
+<table>
+  <tr><th></th><th><code>&lt;ol&gt;</code> (ordered)</th><th><code>&lt;ul&gt;</code> (unordered)</th></tr>
+  <tr><td>Meaning</td><td>Sequence matters</td><td>Sequence doesn&rsquo;t matter</td></tr>
+  <tr><td>Default marker</td><td>Numbers: 1, 2, 3</td><td>Bullets: &bull;</td></tr>
+  <tr><td>Use for</td><td>Steps, rankings, recipes, instructions</td><td>Features, tags, navigation, groupings</td></tr>
+</table>
+<pre><code>&lt;!-- Ordered: rearranging changes meaning --&gt;
+&lt;ol&gt;
+  &lt;li&gt;Whisk eggs&lt;/li&gt;
+  &lt;li&gt;Add milk&lt;/li&gt;
+  &lt;li&gt;Cook on low heat&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;!-- Unordered: reordering is fine --&gt;
+&lt;ul&gt;
+  &lt;li&gt;Eggs&lt;/li&gt;
+  &lt;li&gt;Milk&lt;/li&gt;
+  &lt;li&gt;Butter&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+<p>The quick test: if you shuffled the items, would the list still make sense? If yes, use <code>&lt;ul&gt;</code>. If the order matters, use <code>&lt;ol&gt;</code>. Screen readers announce &ldquo;numbered list of 5 items&rdquo; vs &ldquo;list of 5 items,&rdquo; which helps users understand structure.</p>
+'''
+
+ANSWERS[43] = r'''
+<p>Every item inside a list &mdash; whether ordered or unordered &mdash; is wrapped in a <code>&lt;li&gt;</code> (list item) tag. It&rsquo;s always a child of <code>&lt;ol&gt;</code>, <code>&lt;ul&gt;</code>, or <code>&lt;menu&gt;</code>.</p>
+<pre><code>&lt;ul&gt;
+  &lt;li&gt;Apple&lt;/li&gt;
+  &lt;li&gt;Banana&lt;/li&gt;
+  &lt;li&gt;Cherry&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+<p>List items can hold almost any content &mdash; paragraphs, links, images, even other lists:</p>
+<pre><code>&lt;ul&gt;
+  &lt;li&gt;
+    &lt;strong&gt;Groceries&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Milk&lt;/li&gt;
+      &lt;li&gt;Eggs&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href="/todo"&gt;Check todo list&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+<p>Inside an <code>&lt;ol&gt;</code>, you can override numbering per item with the <code>value</code> attribute:</p>
+<pre><code>&lt;ol&gt;
+  &lt;li&gt;First&lt;/li&gt;
+  &lt;li value="10"&gt;Jumps to 10&lt;/li&gt;
+  &lt;li&gt;Continues at 11&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+<p><code>&lt;li&gt;</code> outside a list container isn&rsquo;t valid HTML &mdash; always wrap it.</p>
+'''
+
+ANSWERS[44] = r'''
+<p>A nested list is just a list placed <strong>inside another list&rsquo;s <code>&lt;li&gt;</code></strong>. It must be inside the <code>&lt;li&gt;</code>, not directly inside the outer <code>&lt;ul&gt;</code> or <code>&lt;ol&gt;</code>.</p>
+<pre><code>&lt;ul&gt;
+  &lt;li&gt;Fruits
+    &lt;ul&gt;
+      &lt;li&gt;Apple&lt;/li&gt;
+      &lt;li&gt;Banana&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Vegetables
+    &lt;ul&gt;
+      &lt;li&gt;Carrot&lt;/li&gt;
+      &lt;li&gt;Spinach&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+<p>You can mix list types:</p>
+<pre><code>&lt;ol&gt;
+  &lt;li&gt;Prepare ingredients
+    &lt;ul&gt;
+      &lt;li&gt;Flour&lt;/li&gt;
+      &lt;li&gt;Sugar&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Mix and bake&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+<p>Common mistakes to avoid:</p>
+<ul>
+  <li>Placing a nested list directly inside <code>&lt;ul&gt;</code>/<code>&lt;ol&gt;</code> (not inside an <code>&lt;li&gt;</code>) is invalid HTML. The browser will still render something, but it may look wrong in screen readers.</li>
+  <li>Deeply nested lists become hard to read &mdash; try to keep nesting at 2&ndash;3 levels max.</li>
+</ul>
+'''
+
+ANSWERS[45] = r'''
+<p>Background images aren&rsquo;t added with HTML &mdash; they&rsquo;re applied with <strong>CSS</strong>. The <code>background-image</code> property works on any element.</p>
+<pre><code>&lt;div class="hero"&gt;Welcome!&lt;/div&gt;
+
+&lt;style&gt;
+  .hero {
+    background-image: url('hero.jpg');
+    background-size: cover;            /* fill the element */
+    background-position: center;       /* center the image */
+    background-repeat: no-repeat;      /* don&rsquo;t tile it */
+    height: 400px;
+  }
+&lt;/style&gt;</code></pre>
+<p>You can also stack a gradient overlay on top of an image:</p>
+<pre><code>.hero {
+  background-image:
+    linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.4)),
+    url('hero.jpg');
+  background-size: cover;
+}</code></pre>
+<p><strong>When <em>not</em> to use a background image</strong>:</p>
+<ul>
+  <li>If the image conveys content (like a product photo or a chart), use <code>&lt;img&gt;</code> &mdash; background images are invisible to screen readers and skipped by search engines.</li>
+  <li>Background images are purely decorative. Save them for aesthetics (hero banners, textures, gradients).</li>
+</ul>
+<p>The old HTML <code>background</code> attribute on <code>&lt;body&gt;</code> is long deprecated &mdash; CSS is the modern way.</p>
+'''
+
+ANSWERS[46] = r'''
+<p>A tooltip (small popup shown on hover) is added with the <code>title</code> attribute. It&rsquo;s a <strong>global attribute</strong>, so it works on almost any HTML element.</p>
+<pre><code>&lt;button title="Save your changes"&gt;Save&lt;/button&gt;
+
+&lt;a href="/help" title="Opens the help center"&gt;Help&lt;/a&gt;
+
+&lt;img src="chart.png" alt="Sales chart" title="Q4 2025 revenue breakdown"&gt;</code></pre>
+<p>The browser displays the <code>title</code> text as a small tooltip after the user hovers for ~1 second.</p>
+<p><strong>Caveats</strong>:</p>
+<ul>
+  <li><strong>Not accessible to touch-screen users</strong> &mdash; no hover on phones/tablets. Don&rsquo;t hide essential info in a <code>title</code>.</li>
+  <li><strong>Keyboard users</strong> may not see the tooltip &mdash; behavior varies by browser.</li>
+  <li><strong>Screen readers</strong> often ignore <code>title</code> or announce it inconsistently.</li>
+  <li>You can&rsquo;t style the default tooltip appearance.</li>
+</ul>
+<p>For important hints or richer tooltips (custom styling, always-visible on focus), build one with CSS and a bit of JavaScript, or use an accessible library. The native <code>title</code> attribute is fine for minor hints but a poor primary UX pattern.</p>
+'''
+
+ANSWERS[47] = r'''
+<p>A navigation menu is typically built with the semantic <code>&lt;nav&gt;</code> element wrapping a list (<code>&lt;ul&gt;</code>) of links. The list makes the menu structured and screen-reader-friendly.</p>
+<pre><code>&lt;nav aria-label="Main"&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="/"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/products"&gt;Products&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/pricing"&gt;Pricing&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/contact"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+<p>CSS removes the default bullets and arranges items horizontally:</p>
+<pre><code>nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  padding: 0;
+}
+nav a { text-decoration: none; color: #333; }</code></pre>
+<p>Best practices:</p>
+<ul>
+  <li>Use <strong>one <code>&lt;nav&gt;</code> for each major nav area</strong> (main site nav, footer links, in-page table of contents) and label each with <code>aria-label</code>.</li>
+  <li>Use an unordered list &mdash; assistive tech announces &ldquo;list of 4 items&rdquo; so users know how many options exist.</li>
+  <li>Mark the current page visually and with <code>aria-current="page"</code> on its link.</li>
+</ul>
+'''
+
+ANSWERS[48] = r'''
+<p>The <code>&lt;nav&gt;</code> tag marks a section of the page as a <strong>block of navigation links</strong> &mdash; a primary menu, a table of contents, or major link groups in a footer. It&rsquo;s one of several HTML5 semantic landmarks.</p>
+<pre><code>&lt;nav aria-label="Main"&gt;
+  &lt;a href="/"&gt;Home&lt;/a&gt;
+  &lt;a href="/about"&gt;About&lt;/a&gt;
+  &lt;a href="/contact"&gt;Contact&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+<p>Why it matters:</p>
+<ul>
+  <li><strong>Screen readers</strong> let users jump directly to <code>&lt;nav&gt;</code> landmarks, skipping repetitive site chrome.</li>
+  <li><strong>Search engines</strong> understand which links represent site structure vs content links.</li>
+  <li><strong>Readability</strong> &mdash; clear semantic meaning for anyone reading the markup.</li>
+</ul>
+<p>Guidelines:</p>
+<ul>
+  <li>A page can have <strong>multiple <code>&lt;nav&gt;</code> elements</strong> (main nav, sidebar, footer, etc.). Label each with <code>aria-label</code> or <code>aria-labelledby</code> to distinguish them.</li>
+  <li>Not every group of links needs <code>&lt;nav&gt;</code> &mdash; reserve it for the major navigation. Inline links in an article should stay plain.</li>
+  <li>The footer&rsquo;s site-wide links may be wrapped in a <code>&lt;nav&gt;</code>; legal notices and copy generally don&rsquo;t need it.</li>
+</ul>
+'''
+
+ANSWERS[49] = r'''
+<p>A footer is created with the HTML5 semantic <code>&lt;footer&gt;</code> tag. It typically sits at the bottom of the page and holds metadata about its parent section &mdash; copyright, contact info, social links, sitemap.</p>
+<pre><code>&lt;footer&gt;
+  &lt;p&gt;&copy; 2026 Acme Corp. All rights reserved.&lt;/p&gt;
+
+  &lt;nav aria-label="Footer"&gt;
+    &lt;a href="/privacy"&gt;Privacy&lt;/a&gt;
+    &lt;a href="/terms"&gt;Terms&lt;/a&gt;
+    &lt;a href="/contact"&gt;Contact&lt;/a&gt;
+  &lt;/nav&gt;
+&lt;/footer&gt;</code></pre>
+<p>A page can have <strong>more than one footer</strong> &mdash; each <code>&lt;article&gt;</code> or <code>&lt;section&gt;</code> can have its own footer (author info, article timestamp, etc.):</p>
+<pre><code>&lt;article&gt;
+  &lt;h2&gt;Blog post title&lt;/h2&gt;
+  &lt;p&gt;...&lt;/p&gt;
+  &lt;footer&gt;
+    &lt;p&gt;By &lt;a href="/author"&gt;Jane Doe&lt;/a&gt; on &lt;time datetime="2026-04-20"&gt;April 20, 2026&lt;/time&gt;&lt;/p&gt;
+  &lt;/footer&gt;
+&lt;/article&gt;</code></pre>
+<p>Visual placement (sticky-to-bottom, styled background) is entirely up to CSS. The tag is about meaning, not position.</p>
+'''
+
+ANSWERS[50] = r'''
+<p>The <code>&lt;footer&gt;</code> tag marks a <strong>footer section</strong> for its nearest ancestor &mdash; the whole page, or an article, section, or aside. It usually contains metadata: author, copyright, related links, contact info.</p>
+<pre><code>&lt;footer&gt;
+  &lt;p&gt;&copy; 2026 Acme. &lt;a href="/privacy"&gt;Privacy Policy&lt;/a&gt;&lt;/p&gt;
+&lt;/footer&gt;</code></pre>
+<p>Why it&rsquo;s useful:</p>
+<ul>
+  <li><strong>Accessibility</strong>: screen readers treat <code>&lt;footer&gt;</code> as a <em>contentinfo</em> landmark when it&rsquo;s the page&rsquo;s main footer &mdash; users can jump to it directly.</li>
+  <li><strong>SEO</strong>: search engines understand structure better, distinguishing navigation from incidental info.</li>
+  <li><strong>Clarity</strong>: the markup describes intent, not just layout.</li>
+</ul>
+<p>What goes in a typical page footer:</p>
+<ul>
+  <li>Copyright notice.</li>
+  <li>Secondary navigation (privacy, terms, careers).</li>
+  <li>Social media icons.</li>
+  <li>Newsletter signup.</li>
+  <li>Contact info.</li>
+</ul>
+<p>Sectional footers (inside articles) typically hold author credits, publication dates, or related tags. Footers don&rsquo;t have to be at the visual bottom &mdash; CSS handles layout &mdash; but semantically they conclude their parent.</p>
+'''
+
+ANSWERS[51] = r'''
+<p>A header is created with the HTML5 semantic <code>&lt;header&gt;</code> tag. It typically wraps introductory content &mdash; a site logo, page title, main navigation, or article metadata.</p>
+<pre><code>&lt;header&gt;
+  &lt;h1&gt;Acme Corp&lt;/h1&gt;
+  &lt;nav aria-label="Main"&gt;
+    &lt;a href="/"&gt;Home&lt;/a&gt;
+    &lt;a href="/products"&gt;Products&lt;/a&gt;
+    &lt;a href="/contact"&gt;Contact&lt;/a&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;</code></pre>
+<p>A page can have <strong>multiple headers</strong> &mdash; each <code>&lt;article&gt;</code> or <code>&lt;section&gt;</code> can have its own header with that section&rsquo;s title:</p>
+<pre><code>&lt;article&gt;
+  &lt;header&gt;
+    &lt;h2&gt;How to center a div&lt;/h2&gt;
+    &lt;p&gt;Published &lt;time datetime="2026-04-20"&gt;April 20&lt;/time&gt;&lt;/p&gt;
+  &lt;/header&gt;
+  &lt;p&gt;Article content...&lt;/p&gt;
+&lt;/article&gt;</code></pre>
+<p>The name <code>&lt;header&gt;</code> describes <em>meaning</em>, not position &mdash; visually, a header normally sits at the top, but the tag&rsquo;s purpose is to group introductory content. CSS handles the visual placement.</p>
+'''
+
+ANSWERS[52] = r'''
+<p>The <code>&lt;header&gt;</code> tag represents <strong>introductory content</strong> for its nearest ancestor &mdash; the page, an article, a section, or an aside. Typical contents: site title, navigation, search form, logo, author byline.</p>
+<pre><code>&lt;header&gt;
+  &lt;h1&gt;My Blog&lt;/h1&gt;
+  &lt;nav&gt;&lt;a href="/"&gt;Home&lt;/a&gt;&lt;/nav&gt;
+&lt;/header&gt;</code></pre>
+<p>Why it matters:</p>
+<ul>
+  <li><strong>Accessibility</strong>: when <code>&lt;header&gt;</code> is a direct child of <code>&lt;body&gt;</code>, screen readers expose it as a <em>banner</em> landmark &mdash; users can jump straight to it.</li>
+  <li><strong>Clarity of structure</strong>: it tells readers of the code (and AI tools, and search engines) which part of the page is introductory.</li>
+  <li><strong>Reusable within the document</strong>: each article or section can have its own internal <code>&lt;header&gt;</code>.</li>
+</ul>
+<p>Guidelines:</p>
+<ul>
+  <li>Don&rsquo;t nest a <code>&lt;header&gt;</code> inside another <code>&lt;header&gt;</code> or inside a <code>&lt;footer&gt;</code>.</li>
+  <li>If the top bar is purely a logo image, a plain <code>&lt;div&gt;</code> or <code>&lt;img&gt;</code> might be enough &mdash; reserve <code>&lt;header&gt;</code> for content with a heading or introductory role.</li>
+</ul>
+'''
+
+ANSWERS[53] = r'''
+<p>A section of related content is created with the <code>&lt;section&gt;</code> tag. It groups content that belongs together thematically &mdash; typically under a shared heading.</p>
+<pre><code>&lt;section&gt;
+  &lt;h2&gt;Features&lt;/h2&gt;
+  &lt;p&gt;Our product offers three main features...&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h2&gt;Pricing&lt;/h2&gt;
+  &lt;p&gt;Plans start at $9/month.&lt;/p&gt;
+&lt;/section&gt;</code></pre>
+<p>Each <code>&lt;section&gt;</code> should normally contain a heading (<code>&lt;h2&gt;</code>, <code>&lt;h3&gt;</code>, etc.) identifying its topic.</p>
+<p>When to use <code>&lt;section&gt;</code>:</p>
+<ul>
+  <li>The content is a <strong>distinct thematic grouping</strong> that would typically appear in a table of contents.</li>
+  <li>You need to divide a long article or page into labeled parts.</li>
+</ul>
+<p>When <em>not</em> to use it:</p>
+<ul>
+  <li>Just for styling or layout &mdash; use <code>&lt;div&gt;</code> for that.</li>
+  <li>For standalone, reusable content &mdash; use <code>&lt;article&gt;</code> instead.</li>
+</ul>
+'''
+
+ANSWERS[54] = r'''
+<p>The <code>&lt;section&gt;</code> tag identifies a <strong>thematic grouping of content</strong>, usually with its own heading. It&rsquo;s part of HTML5&rsquo;s semantic elements, improving structure for accessibility and search engines.</p>
+<pre><code>&lt;section aria-labelledby="team-heading"&gt;
+  &lt;h2 id="team-heading"&gt;Our Team&lt;/h2&gt;
+  &lt;p&gt;Meet the people behind the product.&lt;/p&gt;
+&lt;/section&gt;</code></pre>
+<p>Quick test: if it would reasonably appear in a <strong>table of contents</strong>, it&rsquo;s probably a section.</p>
+<p><strong><code>&lt;section&gt;</code> vs <code>&lt;div&gt;</code></strong>:</p>
+<ul>
+  <li><code>&lt;section&gt;</code> &mdash; semantic meaning (&ldquo;thematic group with a heading&rdquo;).</li>
+  <li><code>&lt;div&gt;</code> &mdash; no meaning; pure styling/layout container.</li>
+</ul>
+<p><strong><code>&lt;section&gt;</code> vs <code>&lt;article&gt;</code></strong>:</p>
+<ul>
+  <li><code>&lt;article&gt;</code> &mdash; standalone, independently distributable content (blog post, news item).</li>
+  <li><code>&lt;section&gt;</code> &mdash; a part of a larger whole (the features section of a page).</li>
+</ul>
+<p>A single page often contains several sections, which may in turn contain their own subsections.</p>
+'''
+
+ANSWERS[55] = r'''
+<p>An article is created with the <code>&lt;article&gt;</code> tag. It wraps <strong>self-contained, independently meaningful content</strong> &mdash; content that would make sense if syndicated to another site or read in isolation.</p>
+<pre><code>&lt;article&gt;
+  &lt;header&gt;
+    &lt;h2&gt;How Rust manages memory&lt;/h2&gt;
+    &lt;p&gt;Published &lt;time datetime="2026-04-20"&gt;April 20, 2026&lt;/time&gt; by Alex&lt;/p&gt;
+  &lt;/header&gt;
+  &lt;p&gt;Rust&rsquo;s ownership model eliminates a whole category of bugs...&lt;/p&gt;
+  &lt;footer&gt;
+    &lt;p&gt;Tags: Rust, systems programming&lt;/p&gt;
+  &lt;/footer&gt;
+&lt;/article&gt;</code></pre>
+<p>Typical uses:</p>
+<ul>
+  <li>Blog posts and news stories.</li>
+  <li>Forum posts and comments.</li>
+  <li>Product cards in a catalog.</li>
+  <li>Reviews.</li>
+</ul>
+<p>A page can contain many articles (like a blog index), and articles can contain their own header, footer, sections, and subheadings. Nested articles are valid too &mdash; e.g., a comment thread under a blog post, where each comment is its own <code>&lt;article&gt;</code> inside the parent.</p>
+'''
+
+ANSWERS[56] = r'''
+<p>The <code>&lt;article&gt;</code> tag marks content that is <strong>self-contained and independently distributable</strong>. The test: would this content still make sense if pulled out and published on its own &mdash; in an RSS feed, a syndication platform, or shared as a stand-alone snippet?</p>
+<pre><code>&lt;article&gt;
+  &lt;h2&gt;Product Review: SomeGadget&lt;/h2&gt;
+  &lt;p&gt;This device performs admirably...&lt;/p&gt;
+&lt;/article&gt;</code></pre>
+<p>Good candidates for <code>&lt;article&gt;</code>:</p>
+<ul>
+  <li>Blog posts, news articles, magazine stories.</li>
+  <li>Individual forum posts and user comments.</li>
+  <li>Product listings.</li>
+  <li>Reviews and testimonials.</li>
+</ul>
+<p>Accessibility benefits: screen readers identify articles as landmarks and announce boundaries, helping users navigate pages with many items (like a blog archive).</p>
+<p><strong><code>&lt;article&gt;</code> vs <code>&lt;section&gt;</code></strong>:</p>
+<ul>
+  <li><code>&lt;article&gt;</code> &mdash; standalone (remove it from the page; it still makes sense).</li>
+  <li><code>&lt;section&gt;</code> &mdash; a part of a larger whole (only makes sense in context).</li>
+</ul>
+<p>When in doubt, ask: could this stand alone? If yes, <code>&lt;article&gt;</code>.</p>
+'''
+
+ANSWERS[57] = r'''
+<p>An aside &mdash; content that&rsquo;s <strong>tangentially related</strong> to the surrounding content &mdash; is created with the <code>&lt;aside&gt;</code> tag. Think sidebars, pull quotes, related-links boxes, author bios, advertisements.</p>
+<pre><code>&lt;article&gt;
+  &lt;h2&gt;Introduction to HTML&lt;/h2&gt;
+  &lt;p&gt;HTML is the foundation of the web...&lt;/p&gt;
+
+  &lt;aside&gt;
+    &lt;h3&gt;Did you know?&lt;/h3&gt;
+    &lt;p&gt;HTML was created by Tim Berners-Lee in 1991.&lt;/p&gt;
+  &lt;/aside&gt;
+
+  &lt;p&gt;The current standard is HTML Living Standard...&lt;/p&gt;
+&lt;/article&gt;</code></pre>
+<p>Typical uses:</p>
+<ul>
+  <li>A sidebar with related links next to the main content.</li>
+  <li>A &ldquo;related articles&rdquo; box inside a blog post.</li>
+  <li>Pull quotes highlighting key points.</li>
+  <li>An author bio beside an article.</li>
+  <li>Advertisements that relate (even loosely) to the content.</li>
+</ul>
+<p>The content should have a real relationship to its surroundings; <code>&lt;aside&gt;</code> is <em>not</em> a generic container for off-topic boxes. If the content is completely unrelated, use another element or just a <code>&lt;div&gt;</code>.</p>
+'''
+
+ANSWERS[58] = r'''
+<p>The <code>&lt;aside&gt;</code> tag represents content that is <strong>related but not essential</strong> to its surrounding context. It typically appears alongside an article or section as supplementary material.</p>
+<pre><code>&lt;main&gt;
+  &lt;article&gt;
+    &lt;h2&gt;Main story&lt;/h2&gt;
+    &lt;p&gt;Article text...&lt;/p&gt;
+  &lt;/article&gt;
+  &lt;aside aria-label="Related"&gt;
+    &lt;h3&gt;Related reading&lt;/h3&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href="/post-1"&gt;Similar topic 1&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="/post-2"&gt;Similar topic 2&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/aside&gt;
+&lt;/main&gt;</code></pre>
+<p>Accessibility: screen readers recognize <code>&lt;aside&gt;</code> as a <em>complementary</em> landmark &mdash; users can skip to it or skip past it.</p>
+<p>What to use it for:</p>
+<ul>
+  <li>Sidebars on blog and news sites.</li>
+  <li>Pull quotes in long articles.</li>
+  <li>Glossary terms or footnotes beside related text.</li>
+  <li>Widgets relevant to the main content (author bio, tag list, upcoming events).</li>
+</ul>
+<p>CSS governs placement &mdash; &ldquo;aside&rdquo; describes meaning, not position. You can render it below the content, in a side column, inline, or anywhere else.</p>
+'''
+
+ANSWERS[59] = r'''
+<p>A figure is created with the <code>&lt;figure&gt;</code> tag, which wraps self-contained content (usually with a caption via <code>&lt;figcaption&gt;</code>). Typical uses: images, illustrations, diagrams, code snippets, charts.</p>
+<pre><code>&lt;figure&gt;
+  &lt;img src="chart.png" alt="Bar chart of Q4 revenue"&gt;
+  &lt;figcaption&gt;Figure 1: Q4 revenue by region.&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+<p>A figure can hold more than just images:</p>
+<pre><code>&lt;figure&gt;
+  &lt;pre&gt;&lt;code&gt;const greet = name =&gt; `Hi, ${name}!`;&lt;/code&gt;&lt;/pre&gt;
+  &lt;figcaption&gt;Listing 2: A simple arrow function.&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;figure&gt;
+  &lt;blockquote&gt;To be or not to be.&lt;/blockquote&gt;
+  &lt;figcaption&gt;&mdash; Shakespeare, &lt;cite&gt;Hamlet&lt;/cite&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+<p>Key idea: the content inside a figure can be <strong>referenced from the main text</strong> (&ldquo;as shown in Figure 1&rdquo;) and can be moved to an appendix or sidebar without breaking the flow of the surrounding prose.</p>
+<p><code>&lt;figcaption&gt;</code> is optional but recommended &mdash; it&rsquo;s announced by screen readers and gives visual context. It must be the first or last child of <code>&lt;figure&gt;</code>.</p>
+'''
+
+ANSWERS[60] = r'''
+<p>The pair <code>&lt;figure&gt;</code> + <code>&lt;figcaption&gt;</code> is HTML&rsquo;s way of bundling <strong>self-contained content with its caption</strong> &mdash; like an image and its description, or a code listing and its label.</p>
+<table>
+  <tr><th>Tag</th><th>Role</th></tr>
+  <tr><td><code>&lt;figure&gt;</code></td><td>Container for content that can be referenced elsewhere</td></tr>
+  <tr><td><code>&lt;figcaption&gt;</code></td><td>Caption for the figure (first or last child)</td></tr>
+</table>
+<pre><code>&lt;figure&gt;
+  &lt;img src="eclipse.jpg" alt="Total solar eclipse with corona visible"&gt;
+  &lt;figcaption&gt;A total solar eclipse photographed in 2024.&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+<p>Benefits:</p>
+<ul>
+  <li><strong>Screen readers</strong> associate the caption with the content &mdash; users get context automatically.</li>
+  <li><strong>Semantics</strong> &mdash; you can refer to &ldquo;Figure 3&rdquo; from elsewhere in the text, and the caption gives it a concrete label.</li>
+  <li><strong>Moveability</strong> &mdash; a figure is self-contained; moving it (say, from inline to an appendix) doesn&rsquo;t break the article flow.</li>
+</ul>
+<p>Always include meaningful <code>alt</code> text on images inside figures &mdash; <code>&lt;figcaption&gt;</code> and <code>alt</code> serve different audiences (alt is for when the image fails; figcaption supplements the image).</p>
+'''
+
+ANSWERS[61] = r'''
+<p>Link to an email address using the <code>mailto:</code> scheme in <code>href</code>. Clicking opens the user&rsquo;s default mail app with the address pre-filled.</p>
+<pre><code>&lt;a href="mailto:hello@example.com"&gt;Email us&lt;/a&gt;</code></pre>
+<p>You can pre-fill the subject, body, CC, and BCC using URL parameters:</p>
+<pre><code>&lt;a href="mailto:support@example.com?subject=Bug%20report&amp;body=Hi%20team,"&gt;
+  Report a bug
+&lt;/a&gt;
+
+&lt;a href="mailto:a@example.com?cc=b@example.com&amp;bcc=c@example.com"&gt;
+  Contact the team
+&lt;/a&gt;</code></pre>
+<p>Important: <strong>spaces and special characters must be URL-encoded</strong> (<code>%20</code> for space, <code>%0A</code> for newline). Otherwise, some mail clients treat the link as broken.</p>
+<p>Caveats:</p>
+<ul>
+  <li>Requires a mail client configured on the user&rsquo;s device. If they only use webmail without OS integration, clicking may open nothing.</li>
+  <li>Publishing raw email addresses in HTML exposes them to spam harvesters. Consider obfuscation (JavaScript-rendered) or a contact form for public pages.</li>
+</ul>
+'''
+
+ANSWERS[62] = r'''
+<p>Link to a phone number using the <code>tel:</code> scheme in <code>href</code>. On mobile devices, clicking opens the phone dialer with the number pre-filled; on desktop, it may open Skype, FaceTime, or another calling app.</p>
+<pre><code>&lt;a href="tel:+14155551234"&gt;Call us: (415) 555-1234&lt;/a&gt;</code></pre>
+<p>Best practices:</p>
+<ul>
+  <li><strong>Use full international format</strong>: <code>+</code>, country code, area code, number &mdash; no spaces, hyphens, or parentheses in the <code>href</code>. <code>+14155551234</code> works everywhere.</li>
+  <li><strong>Display the number in a human-readable format</strong> as the link text.</li>
+  <li>Never include extensions in the <code>tel:</code> URL. If you must, separate with a comma: <code>tel:+14155551234,,101</code> &mdash; commas add a short pause after dialing (support varies).</li>
+</ul>
+<pre><code>&lt;!-- SMS also works with sms: --&gt;
+&lt;a href="sms:+14155551234"&gt;Text us&lt;/a&gt;
+
+&lt;!-- Pre-filled SMS body --&gt;
+&lt;a href="sms:+14155551234?body=Hi,%20I%20have%20a%20question"&gt;
+  Text with message
+&lt;/a&gt;</code></pre>
+<p>Phone links are especially valuable for service-oriented sites &mdash; one tap and the customer is calling.</p>
+'''
+
+ANSWERS[63] = r'''
+<p>The <code>&lt;main&gt;</code> tag identifies the <strong>primary content</strong> of a page &mdash; the unique, central material, excluding site-wide things like headers, sidebars, navigation, and footers.</p>
+<pre><code>&lt;body&gt;
+  &lt;header&gt;...site logo, nav...&lt;/header&gt;
+
+  &lt;main&gt;
+    &lt;h1&gt;About us&lt;/h1&gt;
+    &lt;p&gt;We build software.&lt;/p&gt;
+    &lt;section&gt;...&lt;/section&gt;
+  &lt;/main&gt;
+
+  &lt;aside&gt;...sidebar...&lt;/aside&gt;
+  &lt;footer&gt;...copyright...&lt;/footer&gt;
+&lt;/body&gt;</code></pre>
+<p>Why it matters:</p>
+<ul>
+  <li><strong>Accessibility</strong>: screen readers treat <code>&lt;main&gt;</code> as a landmark; users can jump to it, skipping over repeated nav and headers. This is one of the most impactful semantic improvements you can make.</li>
+  <li><strong>SEO</strong>: search engines identify which part is the &ldquo;real&rdquo; content of the page.</li>
+</ul>
+<p>Rules:</p>
+<ul>
+  <li><strong>Only one <code>&lt;main&gt;</code> per page</strong> should be visible at a time (extras must have <code>hidden</code>).</li>
+  <li>Don&rsquo;t nest <code>&lt;main&gt;</code> inside <code>&lt;article&gt;</code>, <code>&lt;aside&gt;</code>, <code>&lt;header&gt;</code>, <code>&lt;footer&gt;</code>, or <code>&lt;nav&gt;</code>.</li>
+  <li>Repeated site-wide content (logo, search bar) belongs outside <code>&lt;main&gt;</code>.</li>
+</ul>
+'''
+
+ANSWERS[64] = r'''
+<p>A time element is created with the <code>&lt;time&gt;</code> tag. Its visible text is for humans; the optional <code>datetime</code> attribute provides a machine-readable ISO 8601 value.</p>
+<pre><code>&lt;p&gt;Published on &lt;time datetime="2026-04-20"&gt;April 20, 2026&lt;/time&gt;.&lt;/p&gt;
+
+&lt;p&gt;The meeting starts at
+  &lt;time datetime="2026-04-20T15:30:00-07:00"&gt;3:30 PM PT&lt;/time&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;Duration:
+  &lt;time datetime="PT2H30M"&gt;2 hours 30 minutes&lt;/time&gt;
+&lt;/p&gt;</code></pre>
+<p>Accepted <code>datetime</code> values include dates, times, date-times, timezone offsets, and durations (<code>PT2H</code> = 2 hours). If the visible text is already a valid ISO 8601 date, you can omit <code>datetime</code>:</p>
+<pre><code>&lt;time&gt;2026-04-20&lt;/time&gt;</code></pre>
+<p>Semantic value: search engines and calendar tools can parse <code>&lt;time&gt;</code> to display publish dates, add events to calendars, or sort by recency &mdash; more reliable than parsing free-form text.</p>
+'''
+
+ANSWERS[65] = r'''
+<p>The <code>&lt;time&gt;</code> tag represents a <strong>specific date, time, or duration</strong> in a machine-readable way. It doesn&rsquo;t affect visual rendering &mdash; its value is semantic.</p>
+<pre><code>&lt;time datetime="2026-04-20"&gt;April 20, 2026&lt;/time&gt;</code></pre>
+<p>Why it matters:</p>
+<ul>
+  <li><strong>Search engines</strong> use it to show &ldquo;published X days ago&rdquo; or highlight recent content.</li>
+  <li><strong>Screen readers</strong> can announce dates in the user&rsquo;s preferred format.</li>
+  <li><strong>Calendar apps &amp; automation</strong> can extract structured event data.</li>
+  <li><strong>JavaScript</strong> can read the <code>datetime</code> attribute for consistent formatting without parsing display strings.</li>
+</ul>
+<p>Accepted formats for <code>datetime</code> (all ISO 8601 / RFC 3339):</p>
+<ul>
+  <li><code>2026-04-20</code> &mdash; date</li>
+  <li><code>15:30</code> &mdash; time</li>
+  <li><code>2026-04-20T15:30:00Z</code> &mdash; date-time in UTC</li>
+  <li><code>2026-04-20T15:30-05:00</code> &mdash; date-time with timezone offset</li>
+  <li><code>PT2H30M</code> &mdash; a duration of 2 hours 30 minutes</li>
+</ul>
+<p>Use <code>&lt;time&gt;</code> wherever a date or time has meaning &mdash; publication dates, event times, historical dates.</p>
+'''
+
+ANSWERS[66] = r'''
+<p>A progress bar is created with the <code>&lt;progress&gt;</code> tag. It represents <strong>completion progress of a task</strong> &mdash; like a file upload or a loading indicator.</p>
+<pre><code>&lt;label for="upload"&gt;Uploading file:&lt;/label&gt;
+&lt;progress id="upload" value="42" max="100"&gt;42%&lt;/progress&gt;</code></pre>
+<p>Attributes:</p>
+<ul>
+  <li><strong><code>value</code></strong> &mdash; current progress (0 to <code>max</code>).</li>
+  <li><strong><code>max</code></strong> &mdash; total amount (default 1 if omitted).</li>
+</ul>
+<p>If you omit <code>value</code>, the progress bar displays as <strong>indeterminate</strong> &mdash; a pulsing/animated bar indicating activity without specific progress:</p>
+<pre><code>&lt;progress&gt;Loading...&lt;/progress&gt;</code></pre>
+<p>Update progress with JavaScript:</p>
+<pre><code>const bar = document.getElementById("upload");
+bar.value = 75;  // now 75% complete</code></pre>
+<p>Text content inside the tag is a fallback for browsers that don&rsquo;t support <code>&lt;progress&gt;</code> &mdash; essentially nothing modern, but good practice for accessibility. Browsers style <code>&lt;progress&gt;</code> differently; CSS can fully override the appearance with pseudo-elements like <code>::-webkit-progress-bar</code>.</p>
+'''
+
+ANSWERS[67] = r'''
+<p>The <code>&lt;progress&gt;</code> tag represents the <strong>completion progress of a task</strong>. It conveys meaning (&ldquo;we&rsquo;re N% done&rdquo;) that a custom div-based bar can&rsquo;t match for accessibility tools.</p>
+<pre><code>&lt;progress value="30" max="100"&gt;30%&lt;/progress&gt;</code></pre>
+<p>Use cases:</p>
+<ul>
+  <li>File uploads or downloads.</li>
+  <li>Multi-step form progress.</li>
+  <li>Installation or processing steps.</li>
+  <li>Quiz or tutorial completion.</li>
+</ul>
+<p><strong><code>&lt;progress&gt;</code> vs <code>&lt;meter&gt;</code></strong>:</p>
+<ul>
+  <li><code>&lt;progress&gt;</code> &mdash; a task being completed (progress <em>toward</em> something).</li>
+  <li><code>&lt;meter&gt;</code> &mdash; a scalar measurement within a known range (disk usage, battery level, a score).</li>
+</ul>
+<p>A gauge showing &ldquo;current disk usage: 60%&rdquo; is a <code>&lt;meter&gt;</code>; a bar tracking &ldquo;upload 60% done&rdquo; is a <code>&lt;progress&gt;</code>. The semantic distinction is about <em>intent</em>: is something in-flight (progress), or is it a measurement (meter)?</p>
+<p>Screen readers announce progress bars with their current percentage, so users always know where a task stands.</p>
+'''
+
+ANSWERS[68] = r'''
+<p>A meter (gauge) is created with the <code>&lt;meter&gt;</code> tag. It represents a <strong>scalar value within a known range</strong> &mdash; like disk usage, battery level, or a score.</p>
+<pre><code>&lt;label&gt;Disk usage:
+  &lt;meter value="0.7" min="0" max="1"&gt;70%&lt;/meter&gt;
+&lt;/label&gt;
+
+&lt;label&gt;Battery:
+  &lt;meter value="20" min="0" max="100" low="20" high="80" optimum="100"&gt;20%&lt;/meter&gt;
+&lt;/label&gt;</code></pre>
+<p>Key attributes:</p>
+<ul>
+  <li><strong><code>value</code></strong> &mdash; current measurement.</li>
+  <li><strong><code>min</code> / <code>max</code></strong> &mdash; range (default 0 and 1).</li>
+  <li><strong><code>low</code> / <code>high</code></strong> &mdash; thresholds that split the range into &ldquo;low&rdquo;, &ldquo;medium&rdquo;, and &ldquo;high&rdquo; bands.</li>
+  <li><strong><code>optimum</code></strong> &mdash; which band is considered optimal. Browsers color the bar differently based on whether <code>value</code> is in the optimal band.</li>
+</ul>
+<p>For battery at 20 with <code>low=20, high=80, optimum=100</code>, the meter often renders red/yellow &mdash; signaling the value is outside the optimal band. This semantic coloring is a nice touch for status displays.</p>
+'''
+
+ANSWERS[69] = r'''
+<p>The <code>&lt;meter&gt;</code> tag represents a <strong>scalar measurement</strong> within a known, defined range. Think of it as a gauge or a dial: a fixed scale with a current value along it.</p>
+<pre><code>&lt;meter value="6" min="0" max="10"&gt;6 out of 10&lt;/meter&gt;</code></pre>
+<p>Good uses:</p>
+<ul>
+  <li>Disk or storage usage.</li>
+  <li>Battery charge level.</li>
+  <li>Quiz or rating score (6/10 stars).</li>
+  <li>Server load, temperature, concentration in a sample.</li>
+</ul>
+<p><strong><code>&lt;meter&gt;</code> vs <code>&lt;progress&gt;</code></strong>:</p>
+<table>
+  <tr><th></th><th><code>&lt;meter&gt;</code></th><th><code>&lt;progress&gt;</code></th></tr>
+  <tr><td>Represents</td><td>Static measurement</td><td>Task completion over time</td></tr>
+  <tr><td>Range</td><td>Fixed (<code>min</code>&hellip;<code>max</code>)</td><td>0&hellip;<code>max</code></td></tr>
+  <tr><td>Example</td><td>&ldquo;Disk is 60% full&rdquo;</td><td>&ldquo;Upload is 60% done&rdquo;</td></tr>
+</table>
+<p>A good quick test: if the value changes as a task progresses toward completion, use <code>&lt;progress&gt;</code>; if it&rsquo;s a reading or measurement at a point in time, use <code>&lt;meter&gt;</code>.</p>
+'''
+
+ANSWERS[70] = r'''
+<p>Embed a video with the <code>&lt;video&gt;</code> tag. You can specify the source with a <code>src</code> attribute or nest multiple <code>&lt;source&gt;</code> tags for format fallback.</p>
+<pre><code>&lt;video src="movie.mp4" width="640" controls&gt;&lt;/video&gt;
+
+&lt;!-- Multiple sources — browser picks the first supported format --&gt;
+&lt;video width="640" controls poster="cover.jpg"&gt;
+  &lt;source src="movie.webm" type="video/webm"&gt;
+  &lt;source src="movie.mp4"  type="video/mp4"&gt;
+  &lt;p&gt;Your browser doesn&rsquo;t support video. &lt;a href="movie.mp4"&gt;Download it.&lt;/a&gt;&lt;/p&gt;
+&lt;/video&gt;</code></pre>
+<p>Common attributes:</p>
+<ul>
+  <li><strong><code>controls</code></strong> &mdash; shows play/pause/volume controls.</li>
+  <li><strong><code>autoplay</code></strong> &mdash; starts playing automatically (most browsers require <code>muted</code> as well).</li>
+  <li><strong><code>loop</code></strong> &mdash; restarts after ending.</li>
+  <li><strong><code>muted</code></strong> &mdash; starts silent.</li>
+  <li><strong><code>poster</code></strong> &mdash; image shown before playback starts.</li>
+  <li><strong><code>preload</code></strong> &mdash; <code>none</code>, <code>metadata</code>, or <code>auto</code>.</li>
+</ul>
+<p>Add captions with a <code>&lt;track&gt;</code> element for accessibility:</p>
+<pre><code>&lt;video src="movie.mp4" controls&gt;
+  &lt;track src="captions.vtt" kind="captions" srclang="en" label="English"&gt;
+&lt;/video&gt;</code></pre>
+'''
+
+ANSWERS[71] = r'''
+<p>Embed audio with the <code>&lt;audio&gt;</code> tag. Like <code>&lt;video&gt;</code>, it accepts either a <code>src</code> attribute or nested <code>&lt;source&gt;</code> tags for fallback.</p>
+<pre><code>&lt;audio src="song.mp3" controls&gt;&lt;/audio&gt;
+
+&lt;!-- With format fallback --&gt;
+&lt;audio controls&gt;
+  &lt;source src="song.ogg" type="audio/ogg"&gt;
+  &lt;source src="song.mp3" type="audio/mpeg"&gt;
+  &lt;p&gt;Your browser doesn&rsquo;t support audio. &lt;a href="song.mp3"&gt;Download&lt;/a&gt;.&lt;/p&gt;
+&lt;/audio&gt;</code></pre>
+<p>Common attributes:</p>
+<ul>
+  <li><strong><code>controls</code></strong> &mdash; shows play/pause/volume UI.</li>
+  <li><strong><code>autoplay</code></strong> &mdash; plays on load (requires <code>muted</code> in most browsers).</li>
+  <li><strong><code>loop</code></strong> &mdash; restarts after finishing.</li>
+  <li><strong><code>preload</code></strong> &mdash; <code>none</code>, <code>metadata</code>, or <code>auto</code>.</li>
+</ul>
+<p>Supported formats vary &mdash; MP3 is the most universally supported. Offering an additional OGG or AAC source improves compatibility without much cost.</p>
+<p>Without <code>controls</code>, the <code>&lt;audio&gt;</code> element is invisible. You can build a custom UI using JavaScript to control playback via the Media API (<code>.play()</code>, <code>.pause()</code>, <code>.currentTime</code>).</p>
+'''
+
+ANSWERS[72] = r'''
+<p>The <code>&lt;audio&gt;</code> and <code>&lt;video&gt;</code> tags embed <strong>media content</strong> directly in HTML &mdash; no plugins, no Flash, no external players required.</p>
+<table>
+  <tr><th>Tag</th><th>Purpose</th></tr>
+  <tr><td><code>&lt;audio&gt;</code></td><td>Music, podcasts, sound effects, audio messages</td></tr>
+  <tr><td><code>&lt;video&gt;</code></td><td>Movies, clips, tutorials, product demos</td></tr>
+</table>
+<p>Both accept similar attributes (<code>controls</code>, <code>autoplay</code>, <code>loop</code>, <code>muted</code>, <code>preload</code>) and support nested <code>&lt;source&gt;</code> tags for format fallback and <code>&lt;track&gt;</code> for captions/subtitles.</p>
+<pre><code>&lt;video controls&gt;
+  &lt;source src="demo.webm" type="video/webm"&gt;
+  &lt;source src="demo.mp4"  type="video/mp4"&gt;
+  &lt;track src="en.vtt" kind="captions" srclang="en" label="English"&gt;
+&lt;/video&gt;</code></pre>
+<p>Benefits of these native tags:</p>
+<ul>
+  <li>Built-in player UI &mdash; users see familiar controls.</li>
+  <li>JavaScript API for building custom players (<code>.play()</code>, <code>.pause()</code>, events like <code>timeupdate</code>).</li>
+  <li>Accessible by default via keyboard and screen readers (especially when you add <code>&lt;track&gt;</code> for captions).</li>
+  <li>Works offline, on mobile, on desktop &mdash; standards-based, no plugins required.</li>
+</ul>
+'''
+
+ANSWERS[73] = r'''
+<p>A canvas is created with the <code>&lt;canvas&gt;</code> tag. It provides a rectangular drawing surface that you fill with JavaScript &mdash; shapes, text, images, even real-time animations and games.</p>
+<pre><code>&lt;canvas id="drawing" width="400" height="300"&gt;
+  Your browser doesn&rsquo;t support canvas.
+&lt;/canvas&gt;
+
+&lt;script&gt;
+  const canvas = document.getElementById("drawing");
+  const ctx = canvas.getContext("2d");
+
+  ctx.fillStyle = "blue";
+  ctx.fillRect(50, 50, 100, 80);
+
+  ctx.strokeStyle = "red";
+  ctx.beginPath();
+  ctx.arc(250, 150, 40, 0, Math.PI * 2);
+  ctx.stroke();
+&lt;/script&gt;</code></pre>
+<p>Key points:</p>
+<ul>
+  <li>Set dimensions with the <code>width</code> and <code>height</code> <em>attributes</em> (not CSS) &mdash; these control the actual drawing resolution.</li>
+  <li>You draw via a <strong>rendering context</strong> &mdash; <code>2d</code> for most purposes, or <code>webgl</code>/<code>webgpu</code> for 3D/GPU-accelerated graphics.</li>
+  <li>Content inside the tag is shown as fallback in browsers that don&rsquo;t support canvas.</li>
+  <li>Once drawn, pixels on a canvas are just pixels &mdash; not separately selectable or styled. For interactivity, you track click coordinates yourself.</li>
+</ul>
+<p>Common uses: charts, games, image editors, data visualization, signature pads.</p>
+'''
+
+ANSWERS[74] = r'''
+<p>The <code>&lt;canvas&gt;</code> tag provides a <strong>pixel-based drawing surface</strong> for JavaScript. It&rsquo;s a blank rectangle the browser gives you, and JavaScript draws on it using a rendering context.</p>
+<pre><code>&lt;canvas width="300" height="150"&gt;&lt;/canvas&gt;</code></pre>
+<p>Contexts available:</p>
+<ul>
+  <li><strong><code>2d</code></strong> &mdash; shapes, text, images, gradients, transforms. Used for most 2D graphics.</li>
+  <li><strong><code>webgl</code> / <code>webgl2</code></strong> &mdash; GPU-accelerated 3D graphics (based on OpenGL ES).</li>
+  <li><strong><code>webgpu</code></strong> &mdash; newer, modern GPU API for both graphics and compute (gaining adoption in 2026).</li>
+  <li><strong><code>bitmaprenderer</code></strong> &mdash; displays pre-rendered ImageBitmap objects efficiently.</li>
+</ul>
+<p>Typical applications:</p>
+<ul>
+  <li>Charts and data visualization (Chart.js, D3 with canvas mode).</li>
+  <li>2D games and animation.</li>
+  <li>Image editing and filters.</li>
+  <li>Signature and drawing pads.</li>
+  <li>Generative art and shaders.</li>
+</ul>
+<p><strong>Canvas vs SVG</strong>: canvas is pixel-based (good for complex scenes, not scalable, not selectable); SVG is vector-based (scales cleanly, styleable with CSS, individual elements interactable). Pick canvas when you have many changing pixels; pick SVG when you have structured, styleable graphics.</p>
+'''
+
+ANSWERS[75] = r'''
+<p>A datalist is created with the <code>&lt;datalist&gt;</code> tag, which provides a list of <strong>autocomplete suggestions</strong> for a text input. Unlike a <code>&lt;select&gt;</code>, users can type anything &mdash; suggestions are hints, not restrictions.</p>
+<pre><code>&lt;label for="browser"&gt;Favorite browser:&lt;/label&gt;
+&lt;input list="browsers" id="browser" name="browser"&gt;
+
+&lt;datalist id="browsers"&gt;
+  &lt;option value="Chrome"&gt;
+  &lt;option value="Firefox"&gt;
+  &lt;option value="Safari"&gt;
+  &lt;option value="Edge"&gt;
+&lt;/datalist&gt;</code></pre>
+<p>Two things link them:</p>
+<ul>
+  <li>The <code>&lt;datalist&gt;</code> has an <code>id</code>.</li>
+  <li>The <code>&lt;input&gt;</code> uses the matching <code>list</code> attribute.</li>
+</ul>
+<p><strong>Datalist vs Select</strong>:</p>
+<table>
+  <tr><th></th><th><code>&lt;datalist&gt;</code></th><th><code>&lt;select&gt;</code></th></tr>
+  <tr><td>User can enter custom values?</td><td>Yes</td><td>No</td></tr>
+  <tr><td>Displays as</td><td>Autocomplete suggestions</td><td>Dropdown menu</td></tr>
+  <tr><td>Best for</td><td>Long lists with free-form input</td><td>Fixed small choice sets</td></tr>
+</table>
+<p>Native autocomplete beats most JavaScript combobox libraries for simple cases &mdash; no setup, mobile-friendly, accessible by default.</p>
+'''
+
+ANSWERS[76] = r'''
+<p>The <code>&lt;datalist&gt;</code> tag gives a text input a built-in list of <strong>autocomplete suggestions</strong>. As the user types, matching options appear; they can pick one or type something entirely different.</p>
+<pre><code>&lt;input list="colors" name="color"&gt;
+&lt;datalist id="colors"&gt;
+  &lt;option value="Red"&gt;
+  &lt;option value="Green"&gt;
+  &lt;option value="Blue"&gt;
+&lt;/datalist&gt;</code></pre>
+<p><strong>Key purposes:</strong></p>
+<ul>
+  <li><strong>Speed up input</strong> &mdash; users don&rsquo;t retype common values.</li>
+  <li><strong>Reduce typos</strong> &mdash; suggested values match canonical spellings.</li>
+  <li><strong>Allow free-form entry</strong> &mdash; unlike <code>&lt;select&gt;</code>, users can enter values not in the list.</li>
+  <li><strong>Native UX</strong> &mdash; browser handles the dropdown UI, keyboard navigation, and mobile styling automatically.</li>
+</ul>
+<p>Use a datalist when the list is long (countries, cities, tags) and users may need to enter custom values. Use <code>&lt;select&gt;</code> when choices are short and fixed (yes/no, gender, status). Datalist works with most input types including <code>text</code>, <code>email</code>, <code>url</code>, and even <code>date</code> or <code>number</code> in supporting browsers.</p>
+'''
+
+ANSWERS[77] = r'''
+<p>A <strong>definition list</strong> pairs terms with their descriptions &mdash; like a glossary entry. It&rsquo;s built with three tags: <code>&lt;dl&gt;</code> wraps the whole list, <code>&lt;dt&gt;</code> marks each term, and <code>&lt;dd&gt;</code> provides its description.</p>
+<pre><code>&lt;dl&gt;
+  &lt;dt&gt;HTML&lt;/dt&gt;
+  &lt;dd&gt;The standard markup language for web pages.&lt;/dd&gt;
+
+  &lt;dt&gt;CSS&lt;/dt&gt;
+  &lt;dd&gt;A language used to style HTML documents.&lt;/dd&gt;
+
+  &lt;dt&gt;JavaScript&lt;/dt&gt;
+  &lt;dd&gt;A programming language for adding interactivity to web pages.&lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+<p>A term can have <strong>multiple descriptions</strong>, and a description can cover <strong>multiple terms</strong>:</p>
+<pre><code>&lt;dl&gt;
+  &lt;dt&gt;Cat&lt;/dt&gt;
+  &lt;dt&gt;Feline&lt;/dt&gt;
+  &lt;dd&gt;A small domesticated carnivorous mammal.&lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+<p>Definition lists are perfect for glossaries, FAQ pages, metadata (author, date, category), or any name-value pairs. Browsers indent <code>&lt;dd&gt;</code> under its <code>&lt;dt&gt;</code> by default, but use CSS for real styling control.</p>
+'''
+
+ANSWERS[78] = r'''
+<p>These three tags work together to mark up <strong>term-description pairs</strong> &mdash; the semantic structure behind definition lists.</p>
+<table>
+  <tr><th>Tag</th><th>Meaning</th><th>Role</th></tr>
+  <tr><td><code>&lt;dl&gt;</code></td><td>Description list</td><td>Container that groups related terms and descriptions</td></tr>
+  <tr><td><code>&lt;dt&gt;</code></td><td>Description term</td><td>The term being defined</td></tr>
+  <tr><td><code>&lt;dd&gt;</code></td><td>Description detail</td><td>The explanation or value of the term</td></tr>
+</table>
+<pre><code>&lt;dl&gt;
+  &lt;dt&gt;Price&lt;/dt&gt;
+  &lt;dd&gt;$49.99&lt;/dd&gt;
+
+  &lt;dt&gt;In stock&lt;/dt&gt;
+  &lt;dd&gt;Yes, ships in 2 days&lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+<p><strong>Why they matter:</strong> screen readers announce &ldquo;term&rdquo; and &ldquo;definition&rdquo; to help users understand the relationship. Search engines can identify glossary content. The structure is more meaningful than faking it with <code>&lt;div&gt;</code> tags.</p>
+<p>Although originally named &ldquo;definition list,&rdquo; modern HTML describes them as &ldquo;description lists&rdquo; because they work well for any name-value pairs &mdash; not just dictionary-style definitions. Product specifications, event details, or metadata blocks all fit naturally.</p>
+'''
+
+ANSWERS[79] = r'''
+<p>A <strong>description term</strong> in a definition list is created with the <code>&lt;dt&gt;</code> tag. Each <code>&lt;dt&gt;</code> marks a single term that will be described by one or more following <code>&lt;dd&gt;</code> elements.</p>
+<pre><code>&lt;dl&gt;
+  &lt;dt&gt;Tiger&lt;/dt&gt;
+  &lt;dd&gt;A large cat native to Asia.&lt;/dd&gt;
+
+  &lt;dt&gt;Elephant&lt;/dt&gt;
+  &lt;dd&gt;The largest living land animal.&lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+<p><strong>Rules to remember:</strong></p>
+<ul>
+  <li><code>&lt;dt&gt;</code> must be inside a <code>&lt;dl&gt;</code>.</li>
+  <li>Every <code>&lt;dt&gt;</code> should be followed by at least one <code>&lt;dd&gt;</code>.</li>
+  <li>You can have multiple <code>&lt;dt&gt;</code> tags in a row when several terms share one description (e.g. synonyms).</li>
+  <li><code>&lt;dt&gt;</code> should only contain inline content &mdash; plain text, <code>&lt;code&gt;</code>, <code>&lt;em&gt;</code>, links &mdash; not block-level elements like paragraphs.</li>
+</ul>
+<p>Browsers typically style <code>&lt;dt&gt;</code> as bold or at the left margin with <code>&lt;dd&gt;</code> indented beneath it, but you can override this freely with CSS to match any design.</p>
+'''
+
+ANSWERS[80] = r'''
+<p>A <strong>description detail</strong> in a definition list is created with the <code>&lt;dd&gt;</code> tag. It provides the explanation, value, or content that goes with the term above it.</p>
+<pre><code>&lt;dl&gt;
+  &lt;dt&gt;Author&lt;/dt&gt;
+  &lt;dd&gt;Jane Austen&lt;/dd&gt;
+
+  &lt;dt&gt;Published&lt;/dt&gt;
+  &lt;dd&gt;1813&lt;/dd&gt;
+
+  &lt;dt&gt;Genre&lt;/dt&gt;
+  &lt;dd&gt;Novel of manners&lt;/dd&gt;
+  &lt;dd&gt;Romantic fiction&lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+<p><strong>Key points:</strong></p>
+<ul>
+  <li>A single term can have <strong>multiple <code>&lt;dd&gt;</code> elements</strong> &mdash; useful when one term has several descriptions.</li>
+  <li><code>&lt;dd&gt;</code> can contain rich content &mdash; paragraphs, lists, images, even nested definition lists.</li>
+  <li>Browsers indent <code>&lt;dd&gt;</code> to the right of the preceding <code>&lt;dt&gt;</code> by default.</li>
+</ul>
+<pre><code>&lt;dl&gt;
+  &lt;dt&gt;Features&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Waterproof&lt;/li&gt;
+      &lt;li&gt;Rechargeable battery&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+<p>This flexibility makes <code>&lt;dd&gt;</code> useful beyond simple one-line definitions &mdash; for metadata panels, specification sheets, and glossaries with elaborate entries.</p>
+'''
+
+ANSWERS[81] = r'''
+<p>A <strong>favicon</strong> is the small icon shown in browser tabs, bookmarks, and history. Add it by placing an icon file in your site and linking to it from the <code>&lt;head&gt;</code>.</p>
+<pre><code>&lt;head&gt;
+  &lt;link rel="icon" href="/favicon.ico"&gt;
+
+  &lt;!-- Modern PNG favicon, with sizes --&gt;
+  &lt;link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"&gt;
+  &lt;link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png"&gt;
+
+  &lt;!-- Apple touch icon for iOS home screen --&gt;
+  &lt;link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"&gt;
+
+  &lt;!-- SVG (scales perfectly) --&gt;
+  &lt;link rel="icon" type="image/svg+xml" href="/favicon.svg"&gt;
+&lt;/head&gt;</code></pre>
+<p><strong>Format tips:</strong></p>
+<ul>
+  <li><strong>.ico</strong> &mdash; the traditional choice; supports multiple sizes in one file; browser looks for <code>/favicon.ico</code> at the root automatically.</li>
+  <li><strong>.png</strong> &mdash; common modern format; specify sizes so browsers pick the best one.</li>
+  <li><strong>.svg</strong> &mdash; scales to any size crisply; smallest file; supported in modern browsers.</li>
+</ul>
+<p>For a complete set covering every browser and device &mdash; desktop tabs, mobile home screens, PWA splash screens &mdash; use a generator like <code>realfavicongenerator.net</code>. Browsers aggressively cache favicons, so changes may take a hard refresh or cache bust (<code>?v=2</code>) to appear.</p>
+'''
+
+ANSWERS[82] = r'''
+<p>A <strong>responsive image</strong> adapts to different screen sizes and resolutions &mdash; showing a smaller file on phones and a larger, higher-quality one on big displays. The simplest approach uses the <code>srcset</code> attribute.</p>
+<pre><code>&lt;img
+  src="photo-800.jpg"
+  srcset="photo-400.jpg  400w,
+          photo-800.jpg  800w,
+          photo-1600.jpg 1600w"
+  sizes="(max-width: 600px) 100vw, 50vw"
+  alt="Mountain landscape"&gt;</code></pre>
+<p><strong>How it works:</strong></p>
+<ul>
+  <li><code>srcset</code> lists image files with their widths (<code>400w</code> = 400 pixels wide).</li>
+  <li><code>sizes</code> tells the browser how wide the image will display at different viewport sizes.</li>
+  <li>The browser picks the smallest file that looks good at the current display width and device pixel ratio.</li>
+  <li><code>src</code> remains as a fallback for browsers that don&rsquo;t support <code>srcset</code>.</li>
+</ul>
+<p>For simpler responsive sizing without art direction, CSS is enough:</p>
+<pre><code>img { max-width: 100%; height: auto; }</code></pre>
+<p>This makes any image shrink to fit its container while keeping proportions. Combine CSS sizing with <code>srcset</code> for the best balance of quality, bandwidth, and performance &mdash; mobile users on cellular data thank you.</p>
+'''
+
+ANSWERS[83] = r'''
+<p>The <code>&lt;picture&gt;</code> tag gives you <strong>fine-grained control</strong> over which image is shown &mdash; based on screen size, format support, or device pixel density. It contains one or more <code>&lt;source&gt;</code> elements and a final <code>&lt;img&gt;</code> as fallback.</p>
+<pre><code>&lt;picture&gt;
+  &lt;source media="(max-width: 600px)" srcset="small.jpg"&gt;
+  &lt;source media="(max-width: 1200px)" srcset="medium.jpg"&gt;
+  &lt;img src="large.jpg" alt="Product"&gt;
+&lt;/picture&gt;</code></pre>
+<p><strong>Main uses:</strong></p>
+<ul>
+  <li><strong>Art direction</strong> &mdash; show a differently-cropped image on mobile vs desktop (portrait vs landscape).</li>
+  <li><strong>Format selection</strong> &mdash; serve modern formats (AVIF, WebP) to browsers that support them, JPEG to older ones.</li>
+  <li><strong>Resolution selection</strong> &mdash; like <code>srcset</code> on <code>&lt;img&gt;</code>, but with more control.</li>
+</ul>
+<pre><code>&lt;picture&gt;
+  &lt;source srcset="photo.avif" type="image/avif"&gt;
+  &lt;source srcset="photo.webp" type="image/webp"&gt;
+  &lt;img src="photo.jpg" alt="Landscape"&gt;
+&lt;/picture&gt;</code></pre>
+<p>The browser picks the <strong>first <code>&lt;source&gt;</code> that matches</strong> &mdash; it supports the format and its <code>media</code> condition is true. If none match, it falls back to the <code>&lt;img&gt;</code>. This is how you serve modern next-gen image formats safely today.</p>
+'''
+
+ANSWERS[84] = r'''
+<p>The <code>&lt;source&gt;</code> tag provides <strong>alternate media files</strong> inside <code>&lt;picture&gt;</code>, <code>&lt;audio&gt;</code>, or <code>&lt;video&gt;</code> elements. The browser picks the first <code>&lt;source&gt;</code> it can play or display.</p>
+<p><strong>In <code>&lt;picture&gt;</code>:</strong></p>
+<pre><code>&lt;picture&gt;
+  &lt;source srcset="hero.avif" type="image/avif"&gt;
+  &lt;source srcset="hero.webp" type="image/webp"&gt;
+  &lt;img src="hero.jpg" alt="Banner"&gt;
+&lt;/picture&gt;</code></pre>
+<p><strong>In <code>&lt;video&gt;</code>:</strong></p>
+<pre><code>&lt;video controls&gt;
+  &lt;source src="movie.webm" type="video/webm"&gt;
+  &lt;source src="movie.mp4" type="video/mp4"&gt;
+  Your browser doesn&rsquo;t support video.
+&lt;/video&gt;</code></pre>
+<p><strong>In <code>&lt;audio&gt;</code>:</strong></p>
+<pre><code>&lt;audio controls&gt;
+  &lt;source src="song.opus" type="audio/ogg"&gt;
+  &lt;source src="song.mp3" type="audio/mpeg"&gt;
+&lt;/audio&gt;</code></pre>
+<p><strong>Common attributes:</strong></p>
+<ul>
+  <li><code>src</code> &mdash; file URL (for audio/video).</li>
+  <li><code>srcset</code> &mdash; one or more image URLs with widths (for picture).</li>
+  <li><code>type</code> &mdash; MIME type so the browser can skip unsupported formats.</li>
+  <li><code>media</code> &mdash; CSS media query (picture only) for art direction.</li>
+</ul>
+<p>The order matters &mdash; list the most preferred format first. The browser stops at the first compatible source, so put modern formats before fallbacks.</p>
+'''
+
+ANSWERS[85] = r'''
+<p>A <strong>table header</strong> is a cell that labels a row or column. Use the <code>&lt;th&gt;</code> tag instead of <code>&lt;td&gt;</code> for header cells &mdash; browsers style them bold and centered by default, and screen readers announce them as headers.</p>
+<pre><code>&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Name&lt;/th&gt;
+    &lt;th&gt;Age&lt;/th&gt;
+    &lt;th&gt;City&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Alice&lt;/td&gt;
+    &lt;td&gt;30&lt;/td&gt;
+    &lt;td&gt;Seattle&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+<p><strong>The <code>scope</code> attribute</strong> makes headers explicit for accessibility:</p>
+<pre><code>&lt;tr&gt;
+  &lt;th scope="col"&gt;Product&lt;/th&gt;
+  &lt;th scope="col"&gt;Price&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th scope="row"&gt;Widget&lt;/th&gt;
+  &lt;td&gt;$9.99&lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+<ul>
+  <li><code>scope="col"</code> &mdash; header applies to the column below.</li>
+  <li><code>scope="row"</code> &mdash; header applies to the row to its right.</li>
+</ul>
+<p>Wrap header rows in <code>&lt;thead&gt;</code> for semantic clarity and easier styling. Screen readers use the header-data association to announce column names when reading cells, so users know what each value means.</p>
+'''
+
+ANSWERS[86] = r'''
+<p>A <strong>table row</strong> is created with the <code>&lt;tr&gt;</code> tag. Every cell in a table must be inside a <code>&lt;tr&gt;</code>, and rows stack vertically to form the grid.</p>
+<pre><code>&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Item&lt;/th&gt;
+    &lt;th&gt;Quantity&lt;/th&gt;
+    &lt;th&gt;Price&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Apple&lt;/td&gt;
+    &lt;td&gt;3&lt;/td&gt;
+    &lt;td&gt;$1.50&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Bread&lt;/td&gt;
+    &lt;td&gt;1&lt;/td&gt;
+    &lt;td&gt;$3.00&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+<p><strong>Rules:</strong></p>
+<ul>
+  <li><code>&lt;tr&gt;</code> can only contain <code>&lt;th&gt;</code> or <code>&lt;td&gt;</code> cells.</li>
+  <li>Every row should have the same number of cells (use <code>colspan</code> when merging).</li>
+  <li>Rows can go inside <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, or <code>&lt;tfoot&gt;</code> for sectioning.</li>
+</ul>
+<p>For styling, the <code>:nth-child()</code> CSS selector is perfect for rows:</p>
+<pre><code>tr:nth-child(even) { background-color: #f9f9f9; }
+tr:hover           { background-color: #e8f4fd; }</code></pre>
+<p>Striped rows and hover effects greatly improve readability for wide tables. Keep row structure consistent &mdash; varying cell counts per row breaks layout and confuses assistive technology.</p>
+'''
+
+ANSWERS[87] = r'''
+<p>A <strong>table cell</strong> holds the data inside a row. Use <code>&lt;td&gt;</code> for regular data cells and <code>&lt;th&gt;</code> for header cells.</p>
+<pre><code>&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Month&lt;/th&gt;
+    &lt;th&gt;Sales&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;January&lt;/td&gt;
+    &lt;td&gt;$12,400&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;February&lt;/td&gt;
+    &lt;td&gt;$15,200&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+<p><strong>Cell tags:</strong></p>
+<table>
+  <tr><th>Tag</th><th>Purpose</th><th>Default styling</th></tr>
+  <tr><td><code>&lt;td&gt;</code></td><td>Regular data cell</td><td>Left-aligned, normal weight</td></tr>
+  <tr><td><code>&lt;th&gt;</code></td><td>Header cell</td><td>Centered, bold</td></tr>
+</table>
+<p><strong>Useful cell attributes:</strong></p>
+<ul>
+  <li><code>colspan="2"</code> &mdash; cell spans 2 columns.</li>
+  <li><code>rowspan="3"</code> &mdash; cell spans 3 rows.</li>
+  <li><code>headers="idOfTh"</code> &mdash; explicit association to a header (for complex tables).</li>
+</ul>
+<p>Cells can contain anything &mdash; plain text, images, links, inputs, even nested tables (rarely a good idea). Keep cells focused on single pieces of data; use CSS classes on cells for alignment, padding, or emphasis rather than inline styles.</p>
+'''
+
+ANSWERS[88] = r'''
+<p>A <strong>table footer</strong> is a section at the bottom of a table for totals, summaries, or notes. Wrap its rows in the <code>&lt;tfoot&gt;</code> element.</p>
+<pre><code>&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Product&lt;/th&gt;
+      &lt;th&gt;Price&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;Book&lt;/td&gt;&lt;td&gt;$15&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Pen&lt;/td&gt;&lt;td&gt;$2&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;tfoot&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Total&lt;/th&gt;
+      &lt;td&gt;$17&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tfoot&gt;
+&lt;/table&gt;</code></pre>
+<p><strong>Benefits of <code>&lt;tfoot&gt;</code>:</strong></p>
+<ul>
+  <li><strong>Semantic meaning</strong> &mdash; screen readers announce it as a footer, helping users understand that it contains summary data.</li>
+  <li><strong>Print repetition</strong> &mdash; some browsers repeat <code>&lt;tfoot&gt;</code> on every printed page of a long table.</li>
+  <li><strong>Easier styling</strong> &mdash; target with <code>tfoot td { font-weight: bold; }</code>.</li>
+</ul>
+<p>The <code>&lt;tfoot&gt;</code> can appear anywhere inside the <code>&lt;table&gt;</code> &mdash; before or after <code>&lt;tbody&gt;</code> &mdash; and the browser still renders it at the bottom. Use it for totals, grand averages, counts, or footnotes that relate to the whole table.</p>
+'''
+
+ANSWERS[89] = r'''
+<p>These three tags divide a table into <strong>logical sections</strong> &mdash; header, body, and footer &mdash; giving structure to otherwise flat rows.</p>
+<table>
+  <tr><th>Tag</th><th>Purpose</th></tr>
+  <tr><td><code>&lt;thead&gt;</code></td><td>Wraps header rows (column titles)</td></tr>
+  <tr><td><code>&lt;tbody&gt;</code></td><td>Wraps the main data rows</td></tr>
+  <tr><td><code>&lt;tfoot&gt;</code></td><td>Wraps footer rows (totals, summaries)</td></tr>
+</table>
+<pre><code>&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;&lt;th&gt;Item&lt;/th&gt;&lt;th&gt;Cost&lt;/th&gt;&lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;Coffee&lt;/td&gt;&lt;td&gt;$4&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Muffin&lt;/td&gt;&lt;td&gt;$3&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;tfoot&gt;
+    &lt;tr&gt;&lt;td&gt;Total&lt;/td&gt;&lt;td&gt;$7&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tfoot&gt;
+&lt;/table&gt;</code></pre>
+<p><strong>Why use them:</strong></p>
+<ul>
+  <li><strong>Semantic clarity</strong> &mdash; screen readers announce sections, helping users navigate tables.</li>
+  <li><strong>Scroll + fixed headers</strong> &mdash; when <code>&lt;tbody&gt;</code> scrolls, <code>&lt;thead&gt;</code> can stick.</li>
+  <li><strong>Print repetition</strong> &mdash; <code>&lt;thead&gt;</code> and <code>&lt;tfoot&gt;</code> repeat on each printed page.</li>
+  <li><strong>Easier CSS targeting</strong> &mdash; style headers, body rows, and footers differently without extra classes.</li>
+</ul>
+<p>Including these sections is a small extra effort that pays off in accessibility, print layout, and maintainable styling.</p>
+'''
+
+ANSWERS[90] = r'''
+<p>Merge cells using <code>colspan</code> (horizontal merge) or <code>rowspan</code> (vertical merge) on a <code>&lt;td&gt;</code> or <code>&lt;th&gt;</code> &mdash; the value is the number of cells it should span.</p>
+<pre><code>&lt;table border="1"&gt;
+  &lt;tr&gt;
+    &lt;th colspan="2"&gt;Name&lt;/th&gt;
+    &lt;th&gt;Age&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Jane&lt;/td&gt;
+    &lt;td&gt;Smith&lt;/td&gt;
+    &lt;td&gt;28&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+<p>Here the &ldquo;Name&rdquo; header spans two columns above First and Last name cells.</p>
+<p><strong>Row span example:</strong></p>
+<pre><code>&lt;table border="1"&gt;
+  &lt;tr&gt;
+    &lt;td rowspan="2"&gt;Q1&lt;/td&gt;
+    &lt;td&gt;January&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;February&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+<p><strong>Important:</strong> when a cell spans multiple rows or columns, <strong>skip the cells it covers</strong> in subsequent rows. Forgetting to remove them creates extra cells and breaks the layout.</p>
+<p><strong>Accessibility tip:</strong> spanned headers can confuse screen readers. For complex tables, add <code>scope="colgroup"</code> or <code>scope="rowgroup"</code> to clarify which cells a merged header governs. Keep merges simple &mdash; deeply nested merges are hard to maintain and often hint that a single table is doing two separate jobs.</p>
+'''
+
+ANSWERS[91] = r'''
+<p>A <strong>table caption</strong> is a title or description for the whole table. Add it with the <code>&lt;caption&gt;</code> tag, which must be the <strong>first child</strong> of <code>&lt;table&gt;</code>.</p>
+<pre><code>&lt;table&gt;
+  &lt;caption&gt;Monthly Sales Report &mdash; Q3 2026&lt;/caption&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Month&lt;/th&gt;
+      &lt;th&gt;Revenue&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;July&lt;/td&gt;&lt;td&gt;$28,000&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;August&lt;/td&gt;&lt;td&gt;$32,500&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+<p><strong>Benefits:</strong></p>
+<ul>
+  <li><strong>Screen readers</strong> announce the caption before reading the table, giving context upfront.</li>
+  <li><strong>Semantic meaning</strong> &mdash; better than a <code>&lt;h3&gt;</code> above the table because it&rsquo;s tied to the table itself.</li>
+  <li><strong>Printed documents</strong> keep the caption with the table.</li>
+</ul>
+<p>By default, the caption appears above the table. You can move it with CSS:</p>
+<pre><code>caption {
+  caption-side: bottom;
+  font-style: italic;
+  padding: 0.5em;
+}</code></pre>
+<p>Keep captions brief but informative &mdash; &ldquo;Sales by Region, 2026&rdquo; beats &ldquo;Table 1&rdquo; because it tells users what they&rsquo;re looking at without having to scan the content.</p>
+'''
+
+ANSWERS[92] = r'''
+<p>The HTML <code>border</code> attribute is deprecated &mdash; modern tables use <strong>CSS</strong> for borders. CSS gives far more control over thickness, color, and style.</p>
+<pre><code>&lt;table class="bordered"&gt;
+  &lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Role&lt;/th&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;Ada&lt;/td&gt;&lt;td&gt;Engineer&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;Grace&lt;/td&gt;&lt;td&gt;Admiral&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;style&gt;
+  .bordered {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .bordered th, .bordered td {
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+  }
+&lt;/style&gt;</code></pre>
+<p><strong>Key properties:</strong></p>
+<ul>
+  <li><code>border: 1px solid #ccc</code> &mdash; sets the line around each cell.</li>
+  <li><code>border-collapse: collapse</code> &mdash; merges adjacent cell borders into single lines (the default has two borders between cells, looking doubled).</li>
+  <li><code>border-spacing: 4px</code> &mdash; only applies when <code>border-collapse: separate</code>; controls gap between cells.</li>
+</ul>
+<p>For different styles:</p>
+<pre><code>table { border: 2px solid #333; }            /* outer border */
+td, th { border-bottom: 1px solid #eee; }    /* horizontal lines only */</code></pre>
+<p>Keeping borders in CSS means your design can evolve without touching HTML &mdash; swap light and dark themes, change thickness globally, or remove borders entirely by editing one rule.</p>
+'''
+
+ANSWERS[93] = r'''
+<p><strong>Alternating row colors</strong> (&ldquo;zebra striping&rdquo;) make wide tables much easier to read &mdash; your eye follows a single row across without jumping lines. Use the CSS <code>:nth-child()</code> selector.</p>
+<pre><code>&lt;table class="striped"&gt;
+  &lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Email&lt;/th&gt;&lt;th&gt;Role&lt;/th&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;Alice&lt;/td&gt;&lt;td&gt;alice@x.com&lt;/td&gt;&lt;td&gt;Admin&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;Bob&lt;/td&gt;&lt;td&gt;bob@x.com&lt;/td&gt;&lt;td&gt;User&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;Carol&lt;/td&gt;&lt;td&gt;carol@x.com&lt;/td&gt;&lt;td&gt;Admin&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;Dave&lt;/td&gt;&lt;td&gt;dave@x.com&lt;/td&gt;&lt;td&gt;User&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;style&gt;
+  .striped tr:nth-child(even) {
+    background-color: #f5f5f5;
+  }
+  .striped tr:hover {
+    background-color: #e8f4fd;
+  }
+&lt;/style&gt;</code></pre>
+<p><strong>Useful selectors:</strong></p>
+<ul>
+  <li><code>tr:nth-child(even)</code> &mdash; every even-numbered row.</li>
+  <li><code>tr:nth-child(odd)</code> &mdash; every odd-numbered row.</li>
+  <li><code>tbody tr:nth-child(even)</code> &mdash; stripes only data rows, ignoring the header.</li>
+</ul>
+<p>Combine with a hover highlight to make the current row pop out. Pick background colors with enough contrast to be visible but not distracting &mdash; a light gray (<code>#f5f5f5</code> or <code>#fafafa</code>) on white works well for most designs. Avoid loud colors; they fight with the data rather than helping you read it.</p>
+'''
+
+ANSWERS[94] = r'''
+<p>An <strong>image map</strong> makes different parts of a single image clickable, each leading to a different link or action. Create it with an <code>&lt;img&gt;</code> linked to a <code>&lt;map&gt;</code> that contains clickable <code>&lt;area&gt;</code> elements.</p>
+<pre><code>&lt;img src="worldmap.png" alt="World map" usemap="#regions"&gt;
+
+&lt;map name="regions"&gt;
+  &lt;area shape="rect" coords="0,0,200,150"
+        href="/europe" alt="Europe"&gt;
+  &lt;area shape="circle" coords="300,200,80"
+        href="/africa" alt="Africa"&gt;
+  &lt;area shape="poly" coords="400,100,500,100,450,200"
+        href="/asia" alt="Asia"&gt;
+&lt;/map&gt;</code></pre>
+<p><strong>How the pieces link:</strong></p>
+<ul>
+  <li>The image&rsquo;s <code>usemap="#regions"</code> attribute points to the map&rsquo;s <code>name="regions"</code>.</li>
+  <li>Each <code>&lt;area&gt;</code> defines a hotspot with a <code>shape</code> and <code>coords</code>.</li>
+  <li>Every <code>&lt;area&gt;</code> needs an <code>alt</code> attribute for accessibility.</li>
+</ul>
+<p><strong>Shape types:</strong></p>
+<table>
+  <tr><th>Shape</th><th>Coords format</th></tr>
+  <tr><td><code>rect</code></td><td>x1, y1, x2, y2 &mdash; top-left and bottom-right</td></tr>
+  <tr><td><code>circle</code></td><td>cx, cy, radius</td></tr>
+  <tr><td><code>poly</code></td><td>x1, y1, x2, y2, ... &mdash; series of points</td></tr>
+</table>
+<p>Image maps are rare today &mdash; SVG with clickable paths is more flexible, accessible, and scalable. Use maps only for bitmap images where SVG isn&rsquo;t practical.</p>
+'''
+
+ANSWERS[95] = r'''
+<p>The <code>&lt;map&gt;</code> and <code>&lt;area&gt;</code> tags together turn <strong>regions of an image into clickable hotspots</strong> &mdash; useful for diagrams, floor plans, or anatomical illustrations where clicking different parts leads to different pages.</p>
+<table>
+  <tr><th>Tag</th><th>Purpose</th></tr>
+  <tr><td><code>&lt;map&gt;</code></td><td>Container that holds one or more clickable areas; referenced by an image&rsquo;s <code>usemap</code> attribute</td></tr>
+  <tr><td><code>&lt;area&gt;</code></td><td>Defines a single clickable region with a shape, coordinates, and a target URL</td></tr>
+</table>
+<pre><code>&lt;img src="car.jpg" alt="Car" usemap="#car-parts"&gt;
+
+&lt;map name="car-parts"&gt;
+  &lt;area shape="rect" coords="50,20,150,80"
+        href="/parts/hood" alt="Hood"&gt;
+  &lt;area shape="circle" coords="100,200,30"
+        href="/parts/wheel" alt="Wheel"&gt;
+&lt;/map&gt;</code></pre>
+<p><strong>Key points:</strong></p>
+<ul>
+  <li>The <code>name</code> on <code>&lt;map&gt;</code> must match the <code>usemap</code> on the image (with <code>#</code> prefix in usemap).</li>
+  <li>Every <code>&lt;area&gt;</code> needs an <code>alt</code> attribute so screen readers announce what each hotspot leads to.</li>
+  <li>Hotspots can overlap &mdash; the first matching area wins.</li>
+</ul>
+<p>Modern alternatives like SVG with <code>&lt;a&gt;</code> wrapped around shapes, or CSS-positioned transparent buttons over an image, offer more flexibility for responsive design. Use image maps when you need quick clickable zones on a static raster image.</p>
+'''
+
+ANSWERS[96] = r'''
+<p>A <strong>collapsible section</strong> is built natively with <code>&lt;details&gt;</code> and <code>&lt;summary&gt;</code> &mdash; no JavaScript needed. The summary is always visible; the rest shows or hides when clicked.</p>
+<pre><code>&lt;details&gt;
+  &lt;summary&gt;Shipping information&lt;/summary&gt;
+  &lt;p&gt;Orders ship within 2 business days.
+  Free shipping on orders over $50.&lt;/p&gt;
+&lt;/details&gt;
+
+&lt;details open&gt;
+  &lt;summary&gt;Return policy&lt;/summary&gt;
+  &lt;p&gt;Free returns within 30 days of purchase.&lt;/p&gt;
+&lt;/details&gt;</code></pre>
+<p><strong>How it works:</strong></p>
+<ul>
+  <li><code>&lt;summary&gt;</code> is the clickable label &mdash; always visible, with a disclosure triangle in most browsers.</li>
+  <li>Everything else inside <code>&lt;details&gt;</code> is the expandable content.</li>
+  <li>Add the <code>open</code> attribute to have a section expanded by default.</li>
+</ul>
+<p><strong>Why use it:</strong></p>
+<ul>
+  <li>Zero JavaScript &mdash; built-in expand/collapse behavior.</li>
+  <li>Keyboard-accessible out of the box (Enter and Space toggle it).</li>
+  <li>Announced correctly by screen readers as an expandable widget.</li>
+  <li>Remembers state when printing (open sections print; closed don&rsquo;t).</li>
+</ul>
+<p>Perfect for FAQs, &ldquo;show more&rdquo; sections, advanced options, or any content the user shouldn&rsquo;t see until they ask for it. Style with CSS; the default arrow can be replaced using the <code>::marker</code> or <code>summary::-webkit-details-marker</code> pseudo-elements.</p>
+'''
+
+ANSWERS[97] = r'''
+<p>An <strong>accordion</strong> is a stack of collapsible sections where only one (or sometimes several) is open at a time. You can build a simple accordion natively with multiple <code>&lt;details&gt;</code> elements.</p>
+<pre><code>&lt;div class="accordion"&gt;
+  &lt;details name="faq"&gt;
+    &lt;summary&gt;How do I reset my password?&lt;/summary&gt;
+    &lt;p&gt;Click &ldquo;Forgot password&rdquo; on the login page.&lt;/p&gt;
+  &lt;/details&gt;
+
+  &lt;details name="faq"&gt;
+    &lt;summary&gt;How do I cancel my subscription?&lt;/summary&gt;
+    &lt;p&gt;Go to Account Settings and click Cancel.&lt;/p&gt;
+  &lt;/details&gt;
+
+  &lt;details name="faq"&gt;
+    &lt;summary&gt;What payment methods are accepted?&lt;/summary&gt;
+    &lt;p&gt;Credit card, PayPal, and Apple Pay.&lt;/p&gt;
+  &lt;/details&gt;
+&lt;/div&gt;</code></pre>
+<p>The <strong><code>name</code> attribute</strong> is the key feature &mdash; when multiple <code>&lt;details&gt;</code> share the same <code>name</code>, opening one automatically closes the others. This gives you exclusive, radio-button-style behavior without any JavaScript.</p>
+<p><strong>Simple styling:</strong></p>
+<pre><code>.accordion details {
+  border-bottom: 1px solid #ddd;
+  padding: 1em 0;
+}
+.accordion summary {
+  cursor: pointer;
+  font-weight: bold;
+}</code></pre>
+<p>For richer accordions with smooth animations or multi-level nesting, frameworks like Radix UI or Headless UI provide fully accessible components. Native <code>&lt;details&gt;</code> with <code>name</code> is ideal for FAQs and simple toggle groups.</p>
+'''
+
+ANSWERS[98] = r'''
+<p>A <strong>tabbed navigation</strong> lets users switch between panels of content by clicking labels. HTML alone doesn&rsquo;t offer a native tabs widget, so you build one with a <code>&lt;ul&gt;</code> of tab buttons and content sections that show or hide.</p>
+<pre><code>&lt;div class="tabs"&gt;
+  &lt;ul role="tablist"&gt;
+    &lt;li&gt;&lt;button role="tab" aria-selected="true"  aria-controls="p1"&gt;Overview&lt;/button&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;button role="tab" aria-selected="false" aria-controls="p2"&gt;Details&lt;/button&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;button role="tab" aria-selected="false" aria-controls="p3"&gt;Reviews&lt;/button&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;section id="p1" role="tabpanel"&gt;Overview content here.&lt;/section&gt;
+  &lt;section id="p2" role="tabpanel" hidden&gt;Product details here.&lt;/section&gt;
+  &lt;section id="p3" role="tabpanel" hidden&gt;Reviews here.&lt;/section&gt;
+&lt;/div&gt;</code></pre>
+<p><strong>ARIA roles for accessibility:</strong></p>
+<ul>
+  <li><code>role="tablist"</code> on the container of buttons.</li>
+  <li><code>role="tab"</code> on each tab button.</li>
+  <li><code>role="tabpanel"</code> on each content section.</li>
+  <li><code>aria-controls</code> links a tab to its panel.</li>
+  <li><code>aria-selected</code> marks the active tab.</li>
+</ul>
+<p>JavaScript toggles the <code>hidden</code> attribute and <code>aria-selected</code> when a tab is clicked. For production, use a component library (Radix, Headless UI, Material UI) &mdash; correct tab behavior (arrow-key navigation, focus management) is surprisingly tricky to get right by hand.</p>
+'''
+
+ANSWERS[99] = r'''
+<p>The <code>&lt;dialog&gt;</code> element creates a native <strong>modal dialog</strong> in modern HTML &mdash; with proper focus trapping, backdrop, and <code>Esc</code>-to-close built in.</p>
+<pre><code>&lt;dialog id="confirmModal"&gt;
+  &lt;h2&gt;Delete this item?&lt;/h2&gt;
+  &lt;p&gt;This action cannot be undone.&lt;/p&gt;
+  &lt;form method="dialog"&gt;
+    &lt;button value="cancel"&gt;Cancel&lt;/button&gt;
+    &lt;button value="confirm"&gt;Delete&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/dialog&gt;
+
+&lt;button onclick="confirmModal.showModal()"&gt;Delete&lt;/button&gt;</code></pre>
+<p><strong>Key methods:</strong></p>
+<ul>
+  <li><code>.showModal()</code> &mdash; opens as a true modal; background is dimmed and blocked.</li>
+  <li><code>.show()</code> &mdash; opens as a non-modal (user can still interact with the page).</li>
+  <li><code>.close(returnValue)</code> &mdash; closes the dialog, optionally returning a value.</li>
+</ul>
+<p><strong>Why <code>&lt;dialog&gt;</code> is great:</strong></p>
+<ul>
+  <li>Automatic focus management &mdash; keyboard users can&rsquo;t Tab out of the dialog while modal.</li>
+  <li><code>Esc</code> key closes it by default.</li>
+  <li>The <code>::backdrop</code> pseudo-element lets you style the dim overlay.</li>
+  <li>Screen readers announce it correctly as a dialog.</li>
+</ul>
+<pre><code>dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}</code></pre>
+<p>Before <code>&lt;dialog&gt;</code>, developers built modals with positioned <code>&lt;div&gt;</code> elements and JavaScript &mdash; correct focus trapping alone was hard. Use the native element whenever possible.</p>
+'''
+
+ANSWERS[100] = r'''
+<p><strong>Breadcrumb navigation</strong> shows where the user is within a site hierarchy &mdash; like &ldquo;Home &gt; Products &gt; Laptops &gt; Dell XPS 15.&rdquo; Build it with an ordered list inside a <code>&lt;nav&gt;</code>, marked with <code>aria-label</code> for screen readers.</p>
+<pre><code>&lt;nav aria-label="Breadcrumb"&gt;
+  &lt;ol class="breadcrumb"&gt;
+    &lt;li&gt;&lt;a href="/"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/products"&gt;Products&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/products/laptops"&gt;Laptops&lt;/a&gt;&lt;/li&gt;
+    &lt;li aria-current="page"&gt;Dell XPS 15&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/nav&gt;
+
+&lt;style&gt;
+  .breadcrumb {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    gap: 0.5em;
+  }
+  .breadcrumb li + li::before {
+    content: "\203A";    /* › separator */
+    margin-right: 0.5em;
+    color: #888;
+  }
+  .breadcrumb [aria-current="page"] {
+    color: #666;
+    font-weight: bold;
+  }
+&lt;/style&gt;</code></pre>
+<p><strong>Best practices:</strong></p>
+<ul>
+  <li>Use an ordered list (<code>&lt;ol&gt;</code>) &mdash; order matters.</li>
+  <li>Wrap in <code>&lt;nav&gt;</code> with <code>aria-label="Breadcrumb"</code> so screen readers announce it.</li>
+  <li>Mark the current page with <code>aria-current="page"</code> and omit the link (you&rsquo;re already there).</li>
+  <li>Use a CSS <code>::before</code> pseudo-element for separators instead of typing <code>/</code> or <code>&gt;</code> into the markup &mdash; screen readers skip decorative characters this way.</li>
+</ul>
+<p>Breadcrumbs help users understand site structure and quickly jump up levels &mdash; especially valuable for e-commerce and documentation sites with deep hierarchies.</p>
+'''

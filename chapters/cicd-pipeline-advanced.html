@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CI/CD Pipeline — Advanced · Interview Prep Mastery</title>
+<meta name="description" content="100 advanced interview questions on CI/CD Pipeline, with detailed explanations and examples.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/styles.css">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%239a6b1d'/%3E%3Ctext x='50' y='68' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold' font-size='48'%3EIP%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="site-header">
+  <div class="site-header__inner">
+    <button class="menu-toggle" aria-label="Open menu" type="button">☰ Menu</button>
+    <a class="brand" href="../index.html">
+      <span class="brand__mark">IP</span>
+      <span class="brand__text">
+        <span class="brand__title">Interview Prep Mastery</span>
+        <span class="brand__subtitle">Interactive learning guide</span>
+      </span>
+    </a>
+    <nav class="header-nav">
+      <a href="../index.html#roadmap">Roadmap</a>
+      <a href="../index.html#chapters">All chapters</a>
+      <button class="theme-toggle" type="button" aria-label="Toggle color scheme">☾ Dark</button>
+    </nav>
+  </div>
+</header>
+<div class="layout">
+<aside class="sidebar" aria-label="Site navigation">
+  <div class="sidebar__header">Chapter Navigator</div>
+  
+        <div class="nav-part">
+          <div class="nav-part__label">Part 1</div>
+          <div class="nav-part__title">Core Programming Languages</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">JavaScript</li><li><a class="" href="../chapters/javascript-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/javascript-tricky.html"><span class="nav-item__title">Tricky</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-coding.html"><span class="nav-item__title">Advanced Coding</span><span class="nav-item__meta">100 questions · 100 min read</span></a></li><li><a class="" href="../chapters/javascript-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-scenario.html"><span class="nav-item__title">Advanced Scenario Based</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Python</li><li><a class="" href="../chapters/python-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/python-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-part">
+          <div class="nav-part__label">Part 2</div>
+          <div class="nav-part__title">Web Fundamentals</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">HTML</li><li><a class="" href="../chapters/html-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/html-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/html-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CSS</li><li><a class="" href="../chapters/css-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">102 questions · 60 min read</span></a></li><li><a class="" href="../chapters/css-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/css-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">101 questions · 90 min read</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-part">
+          <div class="nav-part__label">Part 3</div>
+          <div class="nav-part__title">Backend Technologies</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Node.Js</li><li><a class="" href="../chapters/nodejs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/nodejs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ExpressJS</li><li><a class="" href="../chapters/expressjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/expressjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/expressjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">API</li><li><a class="" href="../chapters/api-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/api-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-part">
+          <div class="nav-part__label">Part 4</div>
+          <div class="nav-part__title">Frontend Frameworks</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ReactJS</li><li><a class="" href="../chapters/reactjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">101 questions · 60 min read</span></a></li><li><a class="" href="../chapters/reactjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-part">
+          <div class="nav-part__label">Part 5</div>
+          <div class="nav-part__title">Databases</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MYSQL</li><li><a class="" href="../chapters/mysql-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mysql-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MongoDB</li><li><a class="" href="../chapters/mongodb-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mongodb-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-part">
+          <div class="nav-part__label">Part 6</div>
+          <div class="nav-part__title">System Design &amp; DevOps</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">System Design MERN Stack</li><li><a class="" href="../chapters/system-design-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Infrastructure MERN Stack</li><li><a class="" href="../chapters/infrastructure-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/infrastructure-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CI/CD Pipeline</li><li><a class="" href="../chapters/cicd-pipeline-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="active" href="../chapters/cicd-pipeline-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
+          </ul>
+        </div>
+</aside>
+<main class="main" id="main">
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="../index.html">Home</a>
+    <span class="breadcrumb__sep">›</span>
+    <a href="../index.html#part-6">System Design &amp; DevOps</a>
+    <span class="breadcrumb__sep">›</span>
+    <span>CI/CD Pipeline — Advanced</span>
+  </nav>
+
+  <header class="chapter-header">
+    <div class="chapter-label">CI/CD Pipeline · Advanced</div>
+    <h1 class="chapter-title">Advanced CI/CD Pipeline Interview Questions</h1>
+    <p class="chapter-lede">Deep internals, architecture decisions, and questions typical of senior-level interviews.</p>
+    <div class="chapter-meta">
+      <div class="chapter-meta__item"><span class="chapter-meta__label">Questions</span><span class="chapter-meta__value">100</span></div>
+      <div class="chapter-meta__item"><span class="chapter-meta__label">Level</span><span class="chapter-meta__value">Advanced</span></div>
+      <div class="chapter-meta__item"><span class="chapter-meta__label">Estimated reading</span><span class="chapter-meta__value">90 min read</span></div>
+    </div>
+    
+        <div class="callout callout--info" style="margin-top: 1.2rem;">
+          <div class="callout__title">Listing mode</div>
+          <p style="margin: 0;">This chapter shows the full question list. Detailed beginner-friendly explanations with code examples and diagrams will be added progressively. Use the questions below as a study checklist — research each one, write your own answer, then verify.</p>
+        </div>
+  </header>
+
+  <section class="prose">
+
+    <div class="toc" id="toc">
+      <div class="toc__title">All questions in this chapter</div>
+      <ul class="toc__list">
+        <li><a href="#q1"><span class="toc__num">1.</span>How do you implement blue-green deployment using Kubernetes?</a></li><li><a href="#q2"><span class="toc__num">2.</span>What is a canary deployment and how do you implement it in Jenkins?</a></li><li><a href="#q3"><span class="toc__num">3.</span>How do you use GitHub Actions to manage infrastructure as code (IaC)?</a></li><li><a href="#q4"><span class="toc__num">4.</span>How do you secure Docker images and containers in a CI/CD pipeline?</a></li><li><a href="#q5"><span class="toc__num">5.</span>Explain the concept of infrastructure as code (IaC) and its benefits in CI/CD.</a></li><li><a href="#q6"><span class="toc__num">6.</span>How do you configure and use Jenkins Shared Libraries?</a></li><li><a href="#q7"><span class="toc__num">7.</span>How do you implement CI/CD for microservices using Kubernetes and Docker?</a></li><li><a href="#q8"><span class="toc__num">8.</span>How do you use GitOps to manage Kubernetes deployments?</a></li><li><a href="#q9"><span class="toc__num">9.</span>What is Docker multi-stage build and how does it benefit the CI/CD pipeline?</a></li><li><a href="#q10"><span class="toc__num">10.</span>How do you handle secrets management in GitHub Actions?</a></li><li><a href="#q11"><span class="toc__num">11.</span>How do you implement a disaster recovery plan for a Kubernetes cluster?</a></li><li><a href="#q12"><span class="toc__num">12.</span>How do you use Jenkinsfile to define a multi-branch pipeline?</a></li><li><a href="#q13"><span class="toc__num">13.</span>How do you set up and use HashiCorp Vault for managing secrets in CI/CD?</a></li><li><a href="#q14"><span class="toc__num">14.</span>How do you optimize Docker image build times in a CI/CD pipeline?</a></li><li><a href="#q15"><span class="toc__num">15.</span>What are Kubernetes Custom Resource Definitions (CRDs) and how do you use them?</a></li><li><a href="#q16"><span class="toc__num">16.</span>How do you implement CI/CD for a monorepo using GitHub Actions?</a></li><li><a href="#q17"><span class="toc__num">17.</span>How do you integrate Jenkins with third-party tools like Slack and Jira?</a></li><li><a href="#q18"><span class="toc__num">18.</span>How do you implement rolling updates in Kubernetes?</a></li><li><a href="#q19"><span class="toc__num">19.</span>How do you set up dynamic Jenkins agents using Kubernetes?</a></li><li><a href="#q20"><span class="toc__num">20.</span>How do you use GitHub Actions for continuous security and compliance checks?</a></li><li><a href="#q21"><span class="toc__num">21.</span>How do you handle dependency management in Docker for multi-service applications?</a></li><li><a href="#q22"><span class="toc__num">22.</span>How do you use Helm for managing Kubernetes application deployments?</a></li><li><a href="#q23"><span class="toc__num">23.</span>How do you set up and use Tekton Pipelines in Kubernetes?</a></li><li><a href="#q24"><span class="toc__num">24.</span>How do you implement continuous deployment to AWS EKS using Jenkins?</a></li><li><a href="#q25"><span class="toc__num">25.</span>How do you manage and monitor Kubernetes clusters using Prometheus and Grafana?</a></li><li><a href="#q26"><span class="toc__num">26.</span>How do you configure GitHub Actions to run tests in parallel?</a></li><li><a href="#q27"><span class="toc__num">27.</span>How do you handle Docker image versioning in CI/CD pipelines?</a></li><li><a href="#q28"><span class="toc__num">28.</span>How do you implement CI/CD for a serverless application using GitHub Actions?</a></li><li><a href="#q29"><span class="toc__num">29.</span>How do you use Kubernetes Operators for managing complex applications?</a></li><li><a href="#q30"><span class="toc__num">30.</span>How do you set up and use Jenkins X for Kubernetes-native CI/CD?</a></li><li><a href="#q31"><span class="toc__num">31.</span>How do you use GitHub Actions to deploy applications to Google Kubernetes Engine (GKE)?</a></li><li><a href="#q32"><span class="toc__num">32.</span>How do you implement security best practices for Docker in a CI/CD pipeline?</a></li><li><a href="#q33"><span class="toc__num">33.</span>How do you use Jenkins Pipeline DSL for complex workflows?</a></li><li><a href="#q34"><span class="toc__num">34.</span>How do you implement automated rollback strategies in Kubernetes?</a></li><li><a href="#q35"><span class="toc__num">35.</span>How do you use GitHub Actions to build and deploy containerized applications?</a></li><li><a href="#q36"><span class="toc__num">36.</span>How do you manage Kubernetes configurations using Kustomize?</a></li><li><a href="#q37"><span class="toc__num">37.</span>How do you optimize Docker container startup times in a CI/CD pipeline?</a></li><li><a href="#q38"><span class="toc__num">38.</span>How do you set up and use Argo CD for continuous delivery in Kubernetes?</a></li><li><a href="#q39"><span class="toc__num">39.</span>How do you implement end-to-end testing in a CI/CD pipeline using Jenkins?</a></li><li><a href="#q40"><span class="toc__num">40.</span>How do you use GitHub Actions for multi-cloud deployments?</a></li><li><a href="#q41"><span class="toc__num">41.</span>How do you handle database migrations in a CI/CD pipeline?</a></li><li><a href="#q42"><span class="toc__num">42.</span>How do you use Kubernetes Horizontal Pod Autoscaler (HPA) for scaling applications?</a></li><li><a href="#q43"><span class="toc__num">43.</span>How do you implement zero-downtime deployments in a CI/CD pipeline?</a></li><li><a href="#q44"><span class="toc__num">44.</span>How do you set up and use Fluentd for log aggregation in Kubernetes?</a></li><li><a href="#q45"><span class="toc__num">45.</span>How do you use GitHub Actions to trigger workflows based on external events?</a></li><li><a href="#q46"><span class="toc__num">46.</span>How do you implement CI/CD for a multi-tenant application using Kubernetes?</a></li><li><a href="#q47"><span class="toc__num">47.</span>How do you set up and use Jenkins Configuration as Code (JCasC)?</a></li><li><a href="#q48"><span class="toc__num">48.</span>How do you implement security scanning for Docker images in a CI/CD pipeline?</a></li><li><a href="#q49"><span class="toc__num">49.</span>How do you use Kubernetes Network Policies for securing applications?</a></li><li><a href="#q50"><span class="toc__num">50.</span>How do you set up and use GitHub Actions for deploying to Azure Kubernetes Service (AKS)?</a></li><li><a href="#q51"><span class="toc__num">51.</span>How do you handle multi-stage deployments in Jenkins pipelines?</a></li><li><a href="#q52"><span class="toc__num">52.</span>How do you use Kubernetes DaemonSets for deploying system-level applications?</a></li><li><a href="#q53"><span class="toc__num">53.</span>How do you implement CI/CD for hybrid cloud environments using GitHub Actions?</a></li><li><a href="#q54"><span class="toc__num">54.</span>How do you optimize Docker container resource usage in a CI/CD pipeline?</a></li><li><a href="#q55"><span class="toc__num">55.</span>How do you set up and use Spinnaker for continuous delivery in Kubernetes?</a></li><li><a href="#q56"><span class="toc__num">56.</span>How do you manage secrets and environment variables in Jenkins pipelines?</a></li><li><a href="#q57"><span class="toc__num">57.</span>How do you use Kubernetes RBAC for securing cluster access?</a></li><li><a href="#q58"><span class="toc__num">58.</span>How do you implement GitOps workflows using Argo CD and GitHub Actions?</a></li><li><a href="#q59"><span class="toc__num">59.</span>How do you use Jenkins pipelines to deploy applications to Kubernetes?</a></li><li><a href="#q60"><span class="toc__num">60.</span>How do you implement CI/CD for a multi-cloud architecture using GitHub Actions?</a></li><li><a href="#q61"><span class="toc__num">61.</span>How do you set up and use Linkerd for service mesh in Kubernetes?</a></li><li><a href="#q62"><span class="toc__num">62.</span>How do you implement automated canary releases in Kubernetes?</a></li><li><a href="#q63"><span class="toc__num">63.</span>How do you use GitHub Actions to deploy serverless applications to AWS Lambda?</a></li><li><a href="#q64"><span class="toc__num">64.</span>How do you handle complex dependency graphs in Jenkins pipelines?</a></li><li><a href="#q65"><span class="toc__num">65.</span>How do you set up and use Istio for service mesh in Kubernetes?</a></li><li><a href="#q66"><span class="toc__num">66.</span>How do you implement CI/CD for legacy applications using Docker and Kubernetes?</a></li><li><a href="#q67"><span class="toc__num">67.</span>How do you optimize CI/CD pipelines for speed and efficiency?</a></li><li><a href="#q68"><span class="toc__num">68.</span>How do you set up and use Jenkins Blue Ocean for visual pipeline creation?</a></li><li><a href="#q69"><span class="toc__num">69.</span>How do you implement continuous testing in a CI/CD pipeline using GitHub Actions?</a></li><li><a href="#q70"><span class="toc__num">70.</span>How do you manage Kubernetes cluster upgrades in a CI/CD pipeline?</a></li><li><a href="#q71"><span class="toc__num">71.</span>How do you handle distributed tracing in a microservices architecture using Kubernetes?</a></li><li><a href="#q72"><span class="toc__num">72.</span>How do you set up and use Jenkins Shared Libraries for code reuse?</a></li><li><a href="#q73"><span class="toc__num">73.</span>How do you implement CI/CD for real-time applications using WebSockets and Kubernetes?</a></li><li><a href="#q74"><span class="toc__num">74.</span>How do you use GitHub Actions to deploy machine learning models to Kubernetes?</a></li><li><a href="#q75"><span class="toc__num">75.</span>How do you manage and monitor Kubernetes clusters using Rancher?</a></li><li><a href="#q76"><span class="toc__num">76.</span>How do you implement security hardening for Jenkins servers?</a></li><li><a href="#q77"><span class="toc__num">77.</span>How do you set up and use Kubernetes Admission Controllers for policy enforcement?</a></li><li><a href="#q78"><span class="toc__num">78.</span>How do you handle multi-environment deployments in a CI/CD pipeline?</a></li><li><a href="#q79"><span class="toc__num">79.</span>How do you use GitHub Actions for building and deploying mobile applications?</a></li><li><a href="#q80"><span class="toc__num">80.</span>How do you implement CI/CD for IoT applications using Docker and Kubernetes?</a></li><li><a href="#q81"><span class="toc__num">81.</span>How do you optimize Kubernetes pod scheduling for performance?</a></li><li><a href="#q82"><span class="toc__num">82.</span>How do you set up and use Jenkins Multibranch Pipelines?</a></li><li><a href="#q83"><span class="toc__num">83.</span>How do you implement CI/CD for data-intensive applications using Kubernetes?</a></li><li><a href="#q84"><span class="toc__num">84.</span>How do you use GitHub Actions for continuous delivery to on-premise environments?</a></li><li><a href="#q85"><span class="toc__num">85.</span>How do you manage and monitor serverless applications using AWS Lambda and Jenkins?</a></li><li><a href="#q86"><span class="toc__num">86.</span>How do you implement CI/CD for blockchain applications using Docker and Kubernetes?</a></li><li><a href="#q87"><span class="toc__num">87.</span>How do you handle large-scale Kubernetes deployments in a CI/CD pipeline?</a></li><li><a href="#q88"><span class="toc__num">88.</span>How do you set up and use Jenkins Pipeline as Code (JCasC) for managing Jenkins configu...</a></li><li><a href="#q89"><span class="toc__num">89.</span>How do you implement CI/CD for edge computing applications using Docker and Kubernetes?</a></li><li><a href="#q90"><span class="toc__num">90.</span>How do you use GitHub Actions to deploy to AWS Fargate?</a></li><li><a href="#q91"><span class="toc__num">91.</span>How do you manage Kubernetes cluster state using etcd?</a></li><li><a href="#q92"><span class="toc__num">92.</span>How do you set up and use Jenkins X for Kubernetes-native CI/CD pipelines?</a></li><li><a href="#q93"><span class="toc__num">93.</span>How do you implement CI/CD for AI/ML applications using Docker and Kubernetes?</a></li><li><a href="#q94"><span class="toc__num">94.</span>How do you optimize Kubernetes ingress controllers for performance?</a></li><li><a href="#q95"><span class="toc__num">95.</span>How do you use GitHub Actions for automated code reviews and quality checks?</a></li><li><a href="#q96"><span class="toc__num">96.</span>How do you manage and monitor Kubernetes clusters using OpenShift?</a></li><li><a href="#q97"><span class="toc__num">97.</span>How do you implement CI/CD for event-driven applications using Docker and Kubernetes?</a></li><li><a href="#q98"><span class="toc__num">98.</span>How do you set up and use Jenkins Pipeline DSL for complex workflows?</a></li><li><a href="#q99"><span class="toc__num">99.</span>How do you handle Kubernetes cluster autoscaling in a CI/CD pipeline?</a></li><li><a href="#q100"><span class="toc__num">100.</span>How do you use GitHub Actions to deploy multi-container applications using Docker Compo...</a></li>
+      </ul>
+    </div>
+
+    
+<article class="qa" id="q1">
+  <div class="qa__number">Question 1</div>
+  <h3 class="qa__question">How do you implement blue-green deployment using Kubernetes?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q2">
+  <div class="qa__number">Question 2</div>
+  <h3 class="qa__question">What is a canary deployment and how do you implement it in Jenkins?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q3">
+  <div class="qa__number">Question 3</div>
+  <h3 class="qa__question">How do you use GitHub Actions to manage infrastructure as code (IaC)?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q4">
+  <div class="qa__number">Question 4</div>
+  <h3 class="qa__question">How do you secure Docker images and containers in a CI/CD pipeline?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q5">
+  <div class="qa__number">Question 5</div>
+  <h3 class="qa__question">Explain the concept of infrastructure as code (IaC) and its benefits in CI/CD.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q6">
+  <div class="qa__number">Question 6</div>
+  <h3 class="qa__question">How do you configure and use Jenkins Shared Libraries?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q7">
+  <div class="qa__number">Question 7</div>
+  <h3 class="qa__question">How do you implement CI/CD for microservices using Kubernetes and Docker?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q8">
+  <div class="qa__number">Question 8</div>
+  <h3 class="qa__question">How do you use GitOps to manage Kubernetes deployments?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q9">
+  <div class="qa__number">Question 9</div>
+  <h3 class="qa__question">What is Docker multi-stage build and how does it benefit the CI/CD pipeline?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q10">
+  <div class="qa__number">Question 10</div>
+  <h3 class="qa__question">How do you handle secrets management in GitHub Actions?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q11">
+  <div class="qa__number">Question 11</div>
+  <h3 class="qa__question">How do you implement a disaster recovery plan for a Kubernetes cluster?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q12">
+  <div class="qa__number">Question 12</div>
+  <h3 class="qa__question">How do you use Jenkinsfile to define a multi-branch pipeline?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q13">
+  <div class="qa__number">Question 13</div>
+  <h3 class="qa__question">How do you set up and use HashiCorp Vault for managing secrets in CI/CD?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q14">
+  <div class="qa__number">Question 14</div>
+  <h3 class="qa__question">How do you optimize Docker image build times in a CI/CD pipeline?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q15">
+  <div class="qa__number">Question 15</div>
+  <h3 class="qa__question">What are Kubernetes Custom Resource Definitions (CRDs) and how do you use them?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q16">
+  <div class="qa__number">Question 16</div>
+  <h3 class="qa__question">How do you implement CI/CD for a monorepo using GitHub Actions?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q17">
+  <div class="qa__number">Question 17</div>
+  <h3 class="qa__question">How do you integrate Jenkins with third-party tools like Slack and Jira?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q18">
+  <div class="qa__number">Question 18</div>
+  <h3 class="qa__question">How do you implement rolling updates in Kubernetes?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q19">
+  <div class="qa__number">Question 19</div>
+  <h3 class="qa__question">How do you set up dynamic Jenkins agents using Kubernetes?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q20">
+  <div class="qa__number">Question 20</div>
+  <h3 class="qa__question">How do you use GitHub Actions for continuous security and compliance checks?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q21">
+  <div class="qa__number">Question 21</div>
+  <h3 class="qa__question">How do you handle dependency management in Docker for multi-service applications?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q22">
+  <div class="qa__number">Question 22</div>
+  <h3 class="qa__question">How do you use Helm for managing Kubernetes application deployments?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q23">
+  <div class="qa__number">Question 23</div>
+  <h3 class="qa__question">How do you set up and use Tekton Pipelines in Kubernetes?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q24">
+  <div class="qa__number">Question 24</div>
+  <h3 class="qa__question">How do you implement continuous deployment to AWS EKS using Jenkins?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q25">
+  <div class="qa__number">Question 25</div>
+  <h3 class="qa__question">How do you manage and monitor Kubernetes clusters using Prometheus and Grafana?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q26">
+  <div class="qa__number">Question 26</div>
+  <h3 class="qa__question">How do you configure GitHub Actions to run tests in parallel?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q27">
+  <div class="qa__number">Question 27</div>
+  <h3 class="qa__question">How do you handle Docker image versioning in CI/CD pipelines?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q28">
+  <div class="qa__number">Question 28</div>
+  <h3 class="qa__question">How do you implement CI/CD for a serverless application using GitHub Actions?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q29">
+  <div class="qa__number">Question 29</div>
+  <h3 class="qa__question">How do you use Kubernetes Operators for managing complex applications?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q30">
+  <div class="qa__number">Question 30</div>
+  <h3 class="qa__question">How do you set up and use Jenkins X for Kubernetes-native CI/CD?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q31">
+  <div class="qa__number">Question 31</div>
+  <h3 class="qa__question">How do you use GitHub Actions to deploy applications to Google Kubernetes Engine (GKE)?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q32">
+  <div class="qa__number">Question 32</div>
+  <h3 class="qa__question">How do you implement security best practices for Docker in a CI/CD pipeline?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q33">
+  <div class="qa__number">Question 33</div>
+  <h3 class="qa__question">How do you use Jenkins Pipeline DSL for complex workflows?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q34">
+  <div class="qa__number">Question 34</div>
+  <h3 class="qa__question">How do you implement automated rollback strategies in Kubernetes?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q35">
+  <div class="qa__number">Question 35</div>
+  <h3 class="qa__question">How do you use GitHub Actions to build and deploy containerized applications?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q36">
+  <div class="qa__number">Question 36</div>
+  <h3 class="qa__question">How do you manage Kubernetes configurations using Kustomize?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q37">
+  <div class="qa__number">Question 37</div>
+  <h3 class="qa__question">How do you optimize Docker container startup times in a CI/CD pipeline?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q38">
+  <div class="qa__number">Question 38</div>
+  <h3 class="qa__question">How do you set up and use Argo CD for continuous delivery in Kubernetes?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q39">
+  <div class="qa__number">Question 39</div>
+  <h3 class="qa__question">How do you implement end-to-end testing in a CI/CD pipeline using Jenkins?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q40">
+  <div class="qa__number">Question 40</div>
+  <h3 class="qa__question">How do you use GitHub Actions for multi-cloud deployments?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q41">
+  <div class="qa__number">Question 41</div>
+  <h3 class="qa__question">How do you handle database migrations in a CI/CD pipeline?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q42">
+  <div class="qa__number">Question 42</div>
+  <h3 class="qa__question">How do you use Kubernetes Horizontal Pod Autoscaler (HPA) for scaling applications?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q43">
+  <div class="qa__number">Question 43</div>
+  <h3 class="qa__question">How do you implement zero-downtime deployments in a CI/CD pipeline?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q44">
+  <div class="qa__number">Question 44</div>
+  <h3 class="qa__question">How do you set up and use Fluentd for log aggregation in Kubernetes?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q45">
+  <div class="qa__number">Question 45</div>
+  <h3 class="qa__question">How do you use GitHub Actions to trigger workflows based on external events?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q46">
+  <div class="qa__number">Question 46</div>
+  <h3 class="qa__question">How do you implement CI/CD for a multi-tenant application using Kubernetes?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q47">
+  <div class="qa__number">Question 47</div>
+  <h3 class="qa__question">How do you set up and use Jenkins Configuration as Code (JCasC)?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q48">
+  <div class="qa__number">Question 48</div>
+  <h3 class="qa__question">How do you implement security scanning for Docker images in a CI/CD pipeline?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q49">
+  <div class="qa__number">Question 49</div>
+  <h3 class="qa__question">How do you use Kubernetes Network Policies for securing applications?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q50">
+  <div class="qa__number">Question 50</div>
+  <h3 class="qa__question">How do you set up and use GitHub Actions for deploying to Azure Kubernetes Service (AKS)?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q51">
+  <div class="qa__number">Question 51</div>
+  <h3 class="qa__question">How do you handle multi-stage deployments in Jenkins pipelines?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q52">
+  <div class="qa__number">Question 52</div>
+  <h3 class="qa__question">How do you use Kubernetes DaemonSets for deploying system-level applications?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q53">
+  <div class="qa__number">Question 53</div>
+  <h3 class="qa__question">How do you implement CI/CD for hybrid cloud environments using GitHub Actions?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q54">
+  <div class="qa__number">Question 54</div>
+  <h3 class="qa__question">How do you optimize Docker container resource usage in a CI/CD pipeline?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q55">
+  <div class="qa__number">Question 55</div>
+  <h3 class="qa__question">How do you set up and use Spinnaker for continuous delivery in Kubernetes?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q56">
+  <div class="qa__number">Question 56</div>
+  <h3 class="qa__question">How do you manage secrets and environment variables in Jenkins pipelines?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q57">
+  <div class="qa__number">Question 57</div>
+  <h3 class="qa__question">How do you use Kubernetes RBAC for securing cluster access?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q58">
+  <div class="qa__number">Question 58</div>
+  <h3 class="qa__question">How do you implement GitOps workflows using Argo CD and GitHub Actions?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q59">
+  <div class="qa__number">Question 59</div>
+  <h3 class="qa__question">How do you use Jenkins pipelines to deploy applications to Kubernetes?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q60">
+  <div class="qa__number">Question 60</div>
+  <h3 class="qa__question">How do you implement CI/CD for a multi-cloud architecture using GitHub Actions?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q61">
+  <div class="qa__number">Question 61</div>
+  <h3 class="qa__question">How do you set up and use Linkerd for service mesh in Kubernetes?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q62">
+  <div class="qa__number">Question 62</div>
+  <h3 class="qa__question">How do you implement automated canary releases in Kubernetes?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q63">
+  <div class="qa__number">Question 63</div>
+  <h3 class="qa__question">How do you use GitHub Actions to deploy serverless applications to AWS Lambda?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q64">
+  <div class="qa__number">Question 64</div>
+  <h3 class="qa__question">How do you handle complex dependency graphs in Jenkins pipelines?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q65">
+  <div class="qa__number">Question 65</div>
+  <h3 class="qa__question">How do you set up and use Istio for service mesh in Kubernetes?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q66">
+  <div class="qa__number">Question 66</div>
+  <h3 class="qa__question">How do you implement CI/CD for legacy applications using Docker and Kubernetes?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q67">
+  <div class="qa__number">Question 67</div>
+  <h3 class="qa__question">How do you optimize CI/CD pipelines for speed and efficiency?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q68">
+  <div class="qa__number">Question 68</div>
+  <h3 class="qa__question">How do you set up and use Jenkins Blue Ocean for visual pipeline creation?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q69">
+  <div class="qa__number">Question 69</div>
+  <h3 class="qa__question">How do you implement continuous testing in a CI/CD pipeline using GitHub Actions?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q70">
+  <div class="qa__number">Question 70</div>
+  <h3 class="qa__question">How do you manage Kubernetes cluster upgrades in a CI/CD pipeline?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q71">
+  <div class="qa__number">Question 71</div>
+  <h3 class="qa__question">How do you handle distributed tracing in a microservices architecture using Kubernetes?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q72">
+  <div class="qa__number">Question 72</div>
+  <h3 class="qa__question">How do you set up and use Jenkins Shared Libraries for code reuse?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q73">
+  <div class="qa__number">Question 73</div>
+  <h3 class="qa__question">How do you implement CI/CD for real-time applications using WebSockets and Kubernetes?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q74">
+  <div class="qa__number">Question 74</div>
+  <h3 class="qa__question">How do you use GitHub Actions to deploy machine learning models to Kubernetes?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q75">
+  <div class="qa__number">Question 75</div>
+  <h3 class="qa__question">How do you manage and monitor Kubernetes clusters using Rancher?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q76">
+  <div class="qa__number">Question 76</div>
+  <h3 class="qa__question">How do you implement security hardening for Jenkins servers?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q77">
+  <div class="qa__number">Question 77</div>
+  <h3 class="qa__question">How do you set up and use Kubernetes Admission Controllers for policy enforcement?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q78">
+  <div class="qa__number">Question 78</div>
+  <h3 class="qa__question">How do you handle multi-environment deployments in a CI/CD pipeline?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q79">
+  <div class="qa__number">Question 79</div>
+  <h3 class="qa__question">How do you use GitHub Actions for building and deploying mobile applications?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q80">
+  <div class="qa__number">Question 80</div>
+  <h3 class="qa__question">How do you implement CI/CD for IoT applications using Docker and Kubernetes?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q81">
+  <div class="qa__number">Question 81</div>
+  <h3 class="qa__question">How do you optimize Kubernetes pod scheduling for performance?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q82">
+  <div class="qa__number">Question 82</div>
+  <h3 class="qa__question">How do you set up and use Jenkins Multibranch Pipelines?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q83">
+  <div class="qa__number">Question 83</div>
+  <h3 class="qa__question">How do you implement CI/CD for data-intensive applications using Kubernetes?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q84">
+  <div class="qa__number">Question 84</div>
+  <h3 class="qa__question">How do you use GitHub Actions for continuous delivery to on-premise environments?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q85">
+  <div class="qa__number">Question 85</div>
+  <h3 class="qa__question">How do you manage and monitor serverless applications using AWS Lambda and Jenkins?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q86">
+  <div class="qa__number">Question 86</div>
+  <h3 class="qa__question">How do you implement CI/CD for blockchain applications using Docker and Kubernetes?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q87">
+  <div class="qa__number">Question 87</div>
+  <h3 class="qa__question">How do you handle large-scale Kubernetes deployments in a CI/CD pipeline?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q88">
+  <div class="qa__number">Question 88</div>
+  <h3 class="qa__question">How do you set up and use Jenkins Pipeline as Code (JCasC) for managing Jenkins configurations?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q89">
+  <div class="qa__number">Question 89</div>
+  <h3 class="qa__question">How do you implement CI/CD for edge computing applications using Docker and Kubernetes?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q90">
+  <div class="qa__number">Question 90</div>
+  <h3 class="qa__question">How do you use GitHub Actions to deploy to AWS Fargate?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q91">
+  <div class="qa__number">Question 91</div>
+  <h3 class="qa__question">How do you manage Kubernetes cluster state using etcd?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q92">
+  <div class="qa__number">Question 92</div>
+  <h3 class="qa__question">How do you set up and use Jenkins X for Kubernetes-native CI/CD pipelines?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q93">
+  <div class="qa__number">Question 93</div>
+  <h3 class="qa__question">How do you implement CI/CD for AI/ML applications using Docker and Kubernetes?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q94">
+  <div class="qa__number">Question 94</div>
+  <h3 class="qa__question">How do you optimize Kubernetes ingress controllers for performance?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q95">
+  <div class="qa__number">Question 95</div>
+  <h3 class="qa__question">How do you use GitHub Actions for automated code reviews and quality checks?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q96">
+  <div class="qa__number">Question 96</div>
+  <h3 class="qa__question">How do you manage and monitor Kubernetes clusters using OpenShift?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q97">
+  <div class="qa__number">Question 97</div>
+  <h3 class="qa__question">How do you implement CI/CD for event-driven applications using Docker and Kubernetes?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q98">
+  <div class="qa__number">Question 98</div>
+  <h3 class="qa__question">How do you set up and use Jenkins Pipeline DSL for complex workflows?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q99">
+  <div class="qa__number">Question 99</div>
+  <h3 class="qa__question">How do you handle Kubernetes cluster autoscaling in a CI/CD pipeline?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q100">
+  <div class="qa__number">Question 100</div>
+  <h3 class="qa__question">How do you use GitHub Actions to deploy multi-container applications using Docker Compose?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+
+    <nav class="chapter-nav" aria-label="Chapter navigation">
+      <a class="chapter-nav__prev" href="cicd-pipeline-coding.html">
+      <span class="chapter-nav__dir">← Previous</span>
+      <span class="chapter-nav__title">CI/CD Pipeline — Coding</span>
+    </a>
+      <a class="chapter-nav__next" href="cicd-pipeline-scenario.html">
+      <span class="chapter-nav__dir">Next →</span>
+      <span class="chapter-nav__title">CI/CD Pipeline — Scenario Based</span>
+    </a>
+    </nav>
+
+  </section>
+
+</main>
+</div>
+
+<script src="../assets/script.js"></script>
+</body>
+</html>

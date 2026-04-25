@@ -1,0 +1,7183 @@
+"""API Coding — practical REST/HTTP implementations.
+
+Each answer is code-first (working solution as the first visible content) with
+~100 words of prose explaining the approach, complexity notes where relevant,
+and edge cases. Target 2,000-3,500 chars per answer.
+Code is 2026-idiomatic: ESM, async/await, Express 5, Zod, modern libraries.
+"""
+
+ANSWERS: dict[int, str] = {}
+
+ANSWERS[1] = r'''
+<pre><code>// books-api.js — RESTful CRUD for a books collection
+import express from "express";
+import crypto from "node:crypto";
+import { z } from "zod";
+
+const app = express();
+app.use(express.json({ limit: "100kb" }));
+
+// in-memory store (swap for a DB in production)
+const books = new Map();
+
+const BookSchema = z.object({
+  title:  z.string().min(1).max(200),
+  author: z.string().min(1).max(100),
+  year:   z.number().int().min(-3000).max(2100).optional(),
+  isbn:   z.string().regex(/^\d{10}(\d{3})?$/).optional(),
+});
+
+// LIST — GET /books?page=1&amp;limit=20
+app.get("/books", (req, res) =&gt; {
+  const page  = Math.max(1, Number(req.query.page) || 1);
+  const limit = Math.min(100, Number(req.query.limit) || 20);
+  const all = [...books.values()];
+  res.json({
+    data: all.slice((page - 1) * limit, page * limit),
+    meta: { page, limit, total: all.length },
+  });
+});
+
+// READ — GET /books/:id
+app.get("/books/:id", (req, res) =&gt; {
+  const book = books.get(req.params.id);
+  if (!book) return res.sendStatus(404);
+  res.json(book);
+});
+
+// CREATE — POST /books
+app.post("/books", (req, res) =&gt; {
+  const parsed = BookSchema.safeParse(req.body);
+  if (!parsed.success) return res.status(400).json({ error: parsed.error.issues });
+  const id = crypto.randomUUID();
+  const book = { id, ...parsed.data, createdAt: new Date().toISOString() };
+  books.set(id, book);
+  res.status(201).location(`/books/${id}`).json(book);
+});
+
+// UPDATE — PATCH /books/:id (partial)
+app.patch("/books/:id", (req, res) =&gt; {
+  const existing = books.get(req.params.id);
+  if (!existing) return res.sendStatus(404);
+  const parsed = BookSchema.partial().safeParse(req.body);
+  if (!parsed.success) return res.status(400).json({ error: parsed.error.issues });
+  const updated = { ...existing, ...parsed.data, updatedAt: new Date().toISOString() };
+  books.set(req.params.id, updated);
+  res.json(updated);
+});
+
+// DELETE — DELETE /books/:id
+app.delete("/books/:id", (req, res) =&gt; {
+  if (!books.has(req.params.id)) return res.sendStatus(404);
+  books.delete(req.params.id);
+  res.sendStatus(204);
+});
+
+app.listen(3000);</code></pre>
+<p>A proper RESTful CRUD has five endpoints mapped to the standard verbs. Zod validates input with a partial schema for PATCH (only-the-changes semantics). Status codes matter: <strong>201</strong> with a <code>Location</code> header on create, <strong>204</strong> on delete, <strong>404</strong> for missing items, <strong>400</strong> for validation failures. Always cap <code>limit</code> (DoS defense) and include pagination meta. For production: persist to a database (Prisma, Drizzle), add auth middleware, and return <code>ETag</code>/<code>Last-Modified</code> headers for caching.</p>
+'''
+
+ANSWERS[2] = r'''
+<pre><code>// api-client.js — robust fetch with timeouts, retries, typed errors
+export class ApiError extends Error {
+  constructor(message, { status, code, cause, body }) {
+    super(message);
+    this.status = status; this.code = code; this.cause = cause; this.body = body;
+  }
+}
+
+export async function fetchApi(url, {
+  method = "GET", body, headers = {},
+  timeoutMs = 10_000, retries = 3,
+} = {}) {
+  const opts = {
+    method,
+    headers: { "Accept": "application/json", ...headers },
+    ...(body &amp;&amp; { body: JSON.stringify(body), headers: { ...headers, "Content-Type": "application/json" } }),
+  };
+
+  for (let attempt = 0; attempt &lt;= retries; attempt++) {
+    const ac = new AbortController();
+    const timer = setTimeout(() =&gt; ac.abort(), timeoutMs);
+
+    try {
+      const res = await fetch(url, { ...opts, signal: ac.signal });
+      clearTimeout(timer);
+
+      if (res.status === 429 || res.status &gt;= 500) {
+        if (attempt === retries) break;
+        const retryAfter = Number(res.headers.get("Retry-After")) || 2 ** attempt;
+        await sleep(retryAfter * 1000 + Math.random() * 500);       // jitter
+        continue;
+      }
+
+      const text = await res.text();
+      const data = text ? JSON.parse(text) : null;
+
+      if (!res.ok) {
+        throw new ApiError(data?.error?.message ?? res.statusText, {
+          status: res.status, code: data?.error?.code, body: data,
+        });
+      }
+      return data;
+    } catch (err) {
+      clearTimeout(timer);
+      if (err.name === "AbortError") throw new ApiError("Request timed out", { status: 0, cause: err });
+      if (err instanceof ApiError || attempt === retries) throw err;
+      await sleep(2 ** attempt * 1000);
+    }
+  }
+  throw new ApiError("Retries exhausted", { status: 0 });
+}
+
+const sleep = (ms) =&gt; new Promise((r) =&gt; setTimeout(r, ms));
+
+// usage
+try {
+  const user = await fetchApi("https://api.example.com/users/42");
+} catch (err) {
+  if (err.status === 404) { /* user not found */ }
+  else if (err.status === 429) { /* rate limited even after retries */ }
+  else { /* other */ }
+}</code></pre>
+<p>Production HTTP needs four things: <strong>timeout</strong> (AbortController &mdash; no hangs), <strong>retries on 5xx and 429</strong> (with <code>Retry-After</code> honored + jitter to avoid thundering herd), <strong>typed errors</strong> (not raw responses &mdash; callers switch on <code>err.status</code>), and <strong>idempotency awareness</strong> (only retry safe methods or add <code>Idempotency-Key</code>). Skip retries on 4xx &mdash; those need a fix, not a retry. For heavy usage, prefer <strong>got</strong> or <strong>ky</strong>, which package all of this.</p>
+'''
+
+ANSWERS[3] = r'''
+<pre><code>// request-logger.js — structured logging middleware
+import { randomUUID } from "node:crypto";
+import { AsyncLocalStorage } from "node:async_hooks";
+
+const als = new AsyncLocalStorage();
+export const currentReqId = () =&gt; als.getStore()?.reqId;
+
+export function requestLogger(req, res, next) {
+  const reqId = req.headers["x-request-id"] || randomUUID();
+  res.setHeader("X-Request-Id", reqId);
+
+  const start = process.hrtime.bigint();
+
+  // log once the response is fully sent
+  res.on("finish", () =&gt; {
+    const durMs = Number(process.hrtime.bigint() - start) / 1e6;
+    const entry = {
+      ts:     new Date().toISOString(),
+      level:  res.statusCode &gt;= 500 ? "error" : res.statusCode &gt;= 400 ? "warn" : "info",
+      reqId,
+      method: req.method,
+      url:    req.originalUrl,
+      status: res.statusCode,
+      durMs:  Number(durMs.toFixed(1)),
+      ua:     req.headers["user-agent"],
+      ip:     req.ip,
+      userId: req.user?.id,
+    };
+    process.stdout.write(JSON.stringify(entry) + "\n");
+  });
+
+  // bind reqId to async context — downstream code can access it without threading
+  als.run({ reqId }, next);
+}
+
+// install at the top of the pipeline
+app.set("trust proxy", 1);           // correct req.ip behind a proxy
+app.use(requestLogger);</code></pre>
+<p>Four design choices that matter: <strong>monotonic timing</strong> with <code>process.hrtime.bigint()</code> (immune to NTP jumps), <strong>log on <code>res.on("finish")</code></strong> (captures the final status, not an intermediate one), <strong>AsyncLocalStorage</strong> to thread the request id into deep async call stacks without passing it around, and <strong>structured JSON output</strong> to stdout (what log aggregators expect). Production upgrade: use <strong>pino-http</strong> &mdash; 5-10x faster, built-in redaction for secrets, per-request child loggers.</p>
+'''
+
+ANSWERS[4] = r'''
+<pre><code>// upload.js — single-file upload with validation and safe storage
+import express from "express";
+import multer from "multer";
+import sharp from "sharp";
+import crypto from "node:crypto";
+import path from "node:path";
+import { fileTypeFromBuffer } from "file-type";
+
+const app = express();
+
+const upload = multer({
+  storage: multer.memoryStorage(),                   // buffer in RAM, don't touch disk yet
+  limits:  { fileSize: 10 * 1024 * 1024, files: 1 }, // 10MB cap — DoS defense
+  fileFilter: (req, file, cb) =&gt; cb(null,
+    ["image/jpeg","image/png","image/webp"].includes(file.mimetype)
+  ),
+});
+
+const UPLOADS_DIR = path.resolve("./uploads");
+
+app.post("/upload", upload.single("file"), async (req, res, next) =&gt; {
+  if (!req.file) return res.status(400).json({ error: "No file provided" });
+  try {
+    // verify actual bytes — browser mimetype can lie
+    const detected = await fileTypeFromBuffer(req.file.buffer);
+    if (!detected || !detected.mime.startsWith("image/")) {
+      return res.status(400).json({ error: "Not a valid image" });
+    }
+    // re-encode through sharp — strips EXIF, validates structure, bounds dimensions
+    const id = crypto.randomUUID();
+    const filename = `${id}.webp`;
+    const safePath = path.resolve(UPLOADS_DIR, filename);
+    if (!safePath.startsWith(UPLOADS_DIR + path.sep)) throw new Error("path traversal");
+
+    await sharp(req.file.buffer)
+      .rotate()                                       // apply EXIF orientation
+      .resize({ width: 2000, height: 2000, fit: "inside", withoutEnlargement: true })
+      .webp({ quality: 85 })
+      .toFile(safePath);
+
+    res.status(201).json({ id, url: `/files/${filename}` });
+  } catch (err) { next(err); }
+});</code></pre>
+<p>Four safety layers: <strong>size cap</strong> in multer (reject large files early), <strong>MIME filter</strong> (quick rejection based on claimed type), <strong>magic-byte detection</strong> (<code>file-type</code> reads actual bytes &mdash; clients lie about Content-Type), and <strong>re-encoding through sharp</strong> (validates the image structure, strips metadata with GPS, bounds decompressed size against decompression bombs). Always validate paths with <code>startsWith</code> to block <code>../</code> traversal. For large-scale uploads, use pre-signed S3 URLs so bytes never pass through your server.</p>
+'''
+
+ANSWERS[5] = r'''
+<pre><code>// rate-limit.js — IP-based rate limiting with Redis
+import rateLimit from "express-rate-limit";
+import RedisStore from "rate-limit-redis";
+import Redis from "ioredis";
+
+const redis = new Redis(process.env.REDIS_URL);
+
+// global: 100 requests per IP per 15 min
+const apiLimiter = rateLimit({
+  windowMs:         15 * 60 * 1000,
+  max:              100,
+  standardHeaders:  true,                          // RateLimit-* headers (RFC 9331)
+  legacyHeaders:    false,                         // drop X-RateLimit-* (old)
+  store:            new RedisStore({ sendCommand: (...args) =&gt; redis.call(...args) }),
+  keyGenerator:     (req) =&gt; req.ip,
+  handler: (req, res) =&gt; {
+    res.set("Retry-After", Math.ceil((req.rateLimit.resetTime - Date.now()) / 1000));
+    res.status(429).json({
+      error: "Too many requests",
+      retryAfterSeconds: Math.ceil((req.rateLimit.resetTime - Date.now()) / 1000),
+    });
+  },
+});
+
+// stricter: 5 login attempts per 15 min, only count failures
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max:      5,
+  skipSuccessfulRequests: true,                    // successful logins don't count
+  keyGenerator: (req) =&gt; `${req.ip}:${req.body?.email ?? "anon"}`,
+  store: new RedisStore({ sendCommand: (...args) =&gt; redis.call(...args) }),
+});
+
+app.set("trust proxy", 1);                         // essential behind load balancer
+app.use("/api", apiLimiter);
+app.post("/api/login", loginLimiter, loginHandler);</code></pre>
+<p>Three operational musts: <strong>Redis-backed store</strong> (in-memory counters diverge across Node instances &mdash; your "100/15min" becomes 300 at 3 replicas), <strong><code>trust proxy</code></strong> (without it, <code>req.ip</code> is your load balancer's IP and everyone shares one limiter), and <strong>per-endpoint tuning</strong> (login gets 5/15min; general API gets 100). <code>skipSuccessfulRequests</code> prevents legitimate users from getting locked out while still blocking brute-force. Layer edge limits (Cloudflare, AWS WAF) on top for DDoS protection.</p>
+'''
+
+ANSWERS[6] = r'''
+<pre><code>// jwt-auth.js — issue, verify, and revoke tokens
+import jwt from "jsonwebtoken";
+import crypto from "node:crypto";
+
+const ACCESS_SECRET  = process.env.JWT_ACCESS_SECRET;   // 32+ random bytes
+const ACCESS_TTL     = "15m";
+
+export function issueAccessToken(user) {
+  return jwt.sign(
+    { sub: user.id, role: user.role, email: user.email },
+    ACCESS_SECRET,
+    {
+      expiresIn: ACCESS_TTL,
+      issuer:    "api.example.com",
+      audience:  "api",
+      jwtid:     crypto.randomUUID(),                 // unique id — enables revocation
+    }
+  );
+}
+
+export async function authenticate(req, res, next) {
+  const [scheme, token] = (req.headers.authorization || "").split(" ");
+  if (scheme !== "Bearer" || !token) return res.sendStatus(401);
+
+  try {
+    const payload = jwt.verify(token, ACCESS_SECRET, {
+      issuer:   "api.example.com",
+      audience: "api",
+      algorithms: ["HS256"],                          // pin algorithm — "none" attack defense
+    });
+
+    // check revocation list (blocked tokens)
+    if (await redis.get(`jwt:blocklist:${payload.jti}`)) {
+      return res.status(401).json({ error: "Token revoked" });
+    }
+
+    req.user = { id: payload.sub, role: payload.role, email: payload.email };
+    next();
+  } catch (err) {
+    const msg = err.name === "TokenExpiredError" ? "Token expired" : "Invalid token";
+    res.status(401).json({ error: msg });
+  }
+}
+
+// revoke by jti — write to Redis with TTL matching remaining token life
+export async function revokeToken(jti, expiresInSec) {
+  await redis.setex(`jwt:blocklist:${jti}`, expiresInSec, "1");
+}
+
+app.get("/me", authenticate, (req, res) =&gt; res.json(req.user));</code></pre>
+<p>Five things to get right: <strong>pin the algorithm</strong> (<code>algorithms: ["HS256"]</code>) &mdash; prevents the infamous <code>alg: none</code> attack where an attacker removes the signature; <strong>include <code>jti</code></strong> &mdash; lets you revoke tokens via a Redis blocklist; <strong>short TTL</strong> (15 min access + long refresh) &mdash; limits damage from leaks; <strong>verify <code>iss</code>/<code>aud</code></strong> &mdash; prevents tokens from one service being replayed at another; <strong>never put secrets in the payload</strong> &mdash; JWTs are signed, not encrypted. For asymmetric setups, use RS256/ES256 with a JWKS endpoint.</p>
+'''
+
+ANSWERS[7] = r'''
+<pre><code>// pagination.js — both offset and cursor-based endpoints
+import express from "express";
+import { z } from "zod";
+
+// OFFSET pagination — simple, supports "jump to page 5"
+const OffsetQuery = z.object({
+  page:  z.coerce.number().int().min(1).default(1),
+  limit: z.coerce.number().int().min(1).max(100).default(20),
+  sort:  z.enum(["newest","oldest"]).default("newest"),
+});
+
+app.get("/posts", async (req, res) =&gt; {
+  const { page, limit, sort } = OffsetQuery.parse(req.query);
+  const [data, total] = await Promise.all([
+    db.post.findMany({
+      orderBy: { createdAt: sort === "newest" ? "desc" : "asc" },
+      skip:    (page - 1) * limit,
+      take:    limit,
+    }),
+    db.post.count(),
+  ]);
+  res.json({
+    data,
+    meta: { page, limit, total, totalPages: Math.ceil(total / limit) },
+  });
+});
+
+// CURSOR pagination — O(1) on deep pages, stable under inserts
+app.get("/feed", async (req, res) =&gt; {
+  const limit = Math.min(100, Number(req.query.limit) || 20);
+  const cursor = req.query.cursor
+    ? JSON.parse(Buffer.from(String(req.query.cursor), "base64url").toString())
+    : null;
+
+  const rows = await db.post.findMany({
+    where: cursor &amp;&amp; {
+      OR: [
+        { createdAt: { lt: new Date(cursor.createdAt) } },
+        { createdAt: new Date(cursor.createdAt), id: { lt: cursor.id } },   // tie-breaker
+      ],
+    },
+    orderBy: [{ createdAt: "desc" }, { id: "desc" }],
+    take: limit + 1,                                      // peek for "hasMore"
+  });
+
+  const hasMore = rows.length &gt; limit;
+  const data    = rows.slice(0, limit);
+  const last    = data[data.length - 1];
+
+  res.json({
+    data,
+    nextCursor: hasMore &amp;&amp; last
+      ? Buffer.from(JSON.stringify({ createdAt: last.createdAt, id: last.id }))
+               .toString("base64url")
+      : null,
+  });
+});</code></pre>
+<p>Two styles for different needs. <strong>Offset</strong> works fine for small datasets (&lt;10k rows) and lets users jump to any page; cost is O(offset+limit) per page. <strong>Cursor</strong> scales to any size and doesn't skip/duplicate rows during concurrent inserts; cost is O(limit) always. Always include a tie-breaker (<code>id</code>) in the ORDER BY &mdash; timestamp alone causes duplicates when two rows share a millisecond. Fetch <code>limit + 1</code> to detect "more" without an extra COUNT query.</p>
+'''
+
+ANSWERS[8] = r'''
+<pre><code>// downloads.js — stream files from disk, S3, or generated content
+import path from "node:path";
+import { createReadStream, promises as fs } from "node:fs";
+import { pipeline } from "node:stream/promises";
+
+const SAFE_DIR = path.resolve("./files");
+
+// 1. stream a local file — res.download handles range, ETag, Content-Disposition
+app.get("/files/:name", async (req, res, next) =&gt; {
+  try {
+    const abs = path.resolve(SAFE_DIR, req.params.name);
+    if (!abs.startsWith(SAFE_DIR + path.sep)) return res.sendStatus(400);   // traversal block
+
+    const stat = await fs.stat(abs);
+    if (!stat.isFile()) return res.sendStatus(404);
+
+    res.download(abs, req.params.name, (err) =&gt; {
+      if (err &amp;&amp; !res.headersSent) next(err);
+    });
+  } catch (err) {
+    if (err.code === "ENOENT") return res.sendStatus(404);
+    next(err);
+  }
+});
+
+// 2. stream generated content — CSV export, O(1) memory
+app.get("/exports/users.csv", async (req, res, next) =&gt; {
+  res.attachment("users.csv").type("text/csv");
+  res.write("\uFEFF");                                // BOM for Excel UTF-8
+  res.write("id,email,name\n");
+  try {
+    for await (const user of db.user.stream()) {      // cursor-based stream
+      const line = [user.id, user.email, user.name].map(csvEscape).join(",");
+      if (!res.write(line + "\n")) {                  // backpressure
+        await new Promise((r) =&gt; res.once("drain", r));
+      }
+    }
+    res.end();
+  } catch (err) { if (!res.headersSent) next(err); }
+});
+
+// 3. redirect to pre-signed S3 URL — zero bandwidth through Node
+app.get("/private-files/:id", requireAuth, async (req, res) =&gt; {
+  const file = await db.file.findFirst({
+    where: { id: req.params.id, ownerId: req.user.id },
+  });
+  if (!file) return res.sendStatus(404);
+  const url = await getSignedUrl(s3,
+    new GetObjectCommand({ Bucket, Key: file.key }), { expiresIn: 300 });
+  res.redirect(302, url);
+});
+
+const csvEscape = (v) =&gt; {
+  const s = String(v ?? "");
+  return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+};</code></pre>
+<p>Three patterns by scenario. <strong>Local disk</strong> &mdash; <code>res.download</code> handles MIME, range requests, and safe filename escaping. Always validate the path against a safe root to prevent <code>../../etc/passwd</code> traversal. <strong>Generated content</strong> &mdash; stream row-by-row with backpressure (<code>drain</code>) for constant memory regardless of dataset size. <strong>Object storage</strong> &mdash; redirect to a short-lived pre-signed S3 URL; bytes bypass Node entirely, and CloudFront/CDN can cache them. For public files, use <code>Cache-Control</code>; for private, pair auth with the pre-signed URL approach.</p>
+'''
+
+ANSWERS[9] = r'''
+<pre><code>// weather-proxy.js — proxy third-party API with caching &amp; key hiding
+import express from "express";
+import { z } from "zod";
+
+const CACHE = new Map();
+const TTL_MS = 5 * 60 * 1000;                          // 5 minutes
+
+const QuerySchema = z.object({
+  city: z.string().trim().min(1).max(100),
+  units: z.enum(["metric","imperial"]).default("metric"),
+});
+
+app.get("/weather", async (req, res, next) =&gt; {
+  try {
+    const { city, units } = QuerySchema.parse(req.query);
+    const cacheKey = `${city}:${units}`;
+
+    // serve from cache if fresh
+    const hit = CACHE.get(cacheKey);
+    if (hit &amp;&amp; hit.expiresAt &gt; Date.now()) {
+      res.set("X-Cache", "HIT");
+      return res.json(hit.data);
+    }
+
+    // call upstream — API key stays on server
+    const url = new URL("https://api.openweathermap.org/data/2.5/weather");
+    url.searchParams.set("q", city);
+    url.searchParams.set("units", units);
+    url.searchParams.set("appid", process.env.OPENWEATHER_KEY);
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() =&gt; controller.abort(), 5_000);
+    const r = await fetch(url, { signal: controller.signal });
+    clearTimeout(timeout);
+
+    if (r.status === 404) return res.status(404).json({ error: "City not found" });
+    if (!r.ok) return res.status(502).json({ error: "Weather service unavailable" });
+
+    const raw = await r.json();
+    // reshape — don't expose upstream structure to clients
+    const data = {
+      city:        raw.name,
+      temperature: raw.main.temp,
+      conditions:  raw.weather[0]?.description,
+      humidity:    raw.main.humidity,
+      windSpeed:   raw.wind?.speed,
+    };
+
+    CACHE.set(cacheKey, { data, expiresAt: Date.now() + TTL_MS });
+    res.set("X-Cache", "MISS");
+    res.set("Cache-Control", "public, max-age=300");    // let CDN cache too
+    res.json(data);
+  } catch (err) { next(err); }
+});</code></pre>
+<p>Why proxy instead of calling directly from the browser: <strong>hide the API key</strong> (browser code is public), <strong>cache aggressively</strong> (one upstream call serves hundreds of clients), <strong>reshape the response</strong> (change upstream without breaking your clients), and <strong>add auth/rate limits</strong> in front. Always set a <strong>timeout</strong> with AbortController &mdash; upstreams can hang for minutes. Translate upstream errors into your own (502 for upstream failures, 404 for not-found). For production, use Redis instead of an in-memory Map so caching works across instances.</p>
+'''
+
+ANSWERS[10] = r'''
+<pre><code>// validate.js — generic schema validation middleware
+import { z } from "zod";
+
+/** Returns middleware that validates any combination of body/query/params. */
+export function validate(schemas) {
+  return (req, res, next) =&gt; {
+    const issues = [];
+    const clean = {};
+
+    for (const key of ["body", "query", "params"]) {
+      if (!schemas[key]) continue;
+      const result = schemas[key].safeParse(req[key]);
+      if (!result.success) {
+        for (const issue of result.error.issues) {
+          issues.push({
+            location: key,
+            field:    issue.path.join("."),
+            message:  issue.message,
+            code:     issue.code,
+          });
+        }
+      } else {
+        clean[key] = result.data;
+      }
+    }
+
+    if (issues.length) {
+      return res.status(400).json({ error: "Validation failed", issues });
+    }
+    // replace raw with cleaned — type-coerced, stripped of unknown fields
+    if (clean.body)   req.body   = clean.body;
+    if (clean.params) req.params = clean.params;
+    req.validated = clean;              // query is read-only in Express 5
+    next();
+  };
+}
+
+// usage
+const CreateBook = z.object({
+  title:  z.string().min(1).max(200),
+  author: z.string().min(1).max(100),
+  year:   z.number().int().optional(),
+}).strict();                            // reject unknown fields — mass-assignment defense
+
+const BookParams = z.object({ id: z.string().uuid() });
+
+app.post("/books",
+  validate({ body: CreateBook }),
+  createBookHandler
+);
+
+app.get("/books/:id",
+  validate({ params: BookParams }),
+  getBookHandler
+);</code></pre>
+<p>A factory middleware beats hand-writing validation per route. Three design wins: <strong><code>.strict()</code></strong> rejects unknown fields (defends against mass-assignment attacks where a client sends <code>{role: "admin"}</code>), <strong>aggregated errors</strong> let the UI show all issues at once (better UX than fix-and-retry cycles), and <strong>replacing <code>req.body</code> with cleaned data</strong> means handlers see coerced types. Zod gives TypeScript inference for free via <code>z.infer</code>. For JSON-Schema-first APIs (OpenAPI-driven), use AJV &mdash; 3-5x faster at runtime.</p>
+'''
+
+ANSWERS[11] = r'''
+<pre><code>// auth.js — register, login, issue tokens
+import express from "express";
+import argon2 from "argon2";
+import jwt from "jsonwebtoken";
+import { z } from "zod";
+import { validate } from "./validate.js";
+
+const Register = z.object({
+  email:    z.string().email().toLowerCase().trim(),
+  password: z.string().min(8).max(128),
+  name:     z.string().min(1).max(100),
+}).strict();
+
+const Login = z.object({
+  email:    z.string().email().toLowerCase().trim(),
+  password: z.string().min(1).max(128),
+}).strict();
+
+app.post("/auth/register", validate({ body: Register }), async (req, res, next) =&gt; {
+  const { email, password, name } = req.body;
+  try {
+    const existing = await db.user.findUnique({ where: { email } });
+    if (existing) {
+      // constant response time regardless — user-enumeration defense
+      await argon2.hash("dummy");
+      return res.status(409).json({ error: "Email already registered" });
+    }
+    const passwordHash = await argon2.hash(password, { type: argon2.argon2id });
+    const user = await db.user.create({ data: { email, name, passwordHash } });
+    const token = jwt.sign({ sub: user.id }, process.env.JWT_SECRET, {
+      expiresIn: "15m", issuer: "api", audience: "api", jwtid: crypto.randomUUID(),
+    });
+    res.status(201).json({ user: { id: user.id, email, name }, accessToken: token });
+  } catch (err) { next(err); }
+});
+
+app.post("/auth/login", loginLimiter, validate({ body: Login }), async (req, res) =&gt; {
+  const { email, password } = req.body;
+  const user = await db.user.findUnique({ where: { email } });
+
+  // always run verify (even on no-user) — timing-attack defense
+  const ok = user
+    ? await argon2.verify(user.passwordHash, password)
+    : await argon2.verify("$argon2id$v=19$m=65536,t=3,p=4$xxx$dummy", password).catch(() =&gt; false);
+
+  if (!user || !ok) {
+    return res.status(401).json({ error: "Invalid credentials" });
+  }
+  const token = jwt.sign({ sub: user.id }, process.env.JWT_SECRET, {
+    expiresIn: "15m", issuer: "api", audience: "api", jwtid: crypto.randomUUID(),
+  });
+  res.json({ user: { id: user.id, email: user.email, name: user.name }, accessToken: token });
+});</code></pre>
+<p>Auth has more security footguns than it looks. <strong>argon2id</strong> for password hashing (OWASP-recommended in 2026; bcrypt is acceptable but older). <strong>Constant-time response</strong> &mdash; always run hash/verify even when the user doesn't exist, or attackers learn which emails are registered (user-enumeration). <strong>Rate limit</strong> login aggressively with <code>loginLimiter</code>. <strong>Never echo back the password or reveal "wrong password" vs "no such user"</strong> &mdash; same 401 either way. For production: add refresh tokens, email verification, and consider <strong>Auth.js</strong> or <strong>better-auth</strong> rather than rolling your own.</p>
+'''
+
+ANSWERS[12] = r'''
+<pre><code>// aggregate.js — fan out to multiple APIs, combine results
+/** Fetch from all sources in parallel; partial failures don't kill the whole response. */
+export async function aggregateUserProfile(userId) {
+  const TIMEOUT_MS = 3000;
+
+  const withTimeout = (promise, label) =&gt; Promise.race([
+    promise,
+    new Promise((_, rej) =&gt; setTimeout(() =&gt; rej(new Error(`${label} timed out`)), TIMEOUT_MS)),
+  ]);
+
+  // Promise.allSettled — one failure doesn't reject the rest
+  const [profileR, ordersR, prefsR, activityR] = await Promise.allSettled([
+    withTimeout(fetch(`${USERS_API}/users/${userId}`).then((r) =&gt; r.json()), "profile"),
+    withTimeout(fetch(`${ORDERS_API}/orders?userId=${userId}&amp;limit=5`).then((r) =&gt; r.json()), "orders"),
+    withTimeout(fetch(`${PREFS_API}/preferences/${userId}`).then((r) =&gt; r.json()), "prefs"),
+    withTimeout(fetch(`${ACTIVITY_API}/activity/${userId}?limit=10`).then((r) =&gt; r.json()), "activity"),
+  ]);
+
+  // build response, degrading gracefully on partial failures
+  return {
+    profile:    profileR.status  === "fulfilled" ? profileR.value  : null,
+    orders:     ordersR.status   === "fulfilled" ? ordersR.value.data : [],
+    prefs:      prefsR.status    === "fulfilled" ? prefsR.value     : {},
+    activity:   activityR.status === "fulfilled" ? activityR.value.data : [],
+    warnings:   [profileR, ordersR, prefsR, activityR]
+                  .filter((r) =&gt; r.status === "rejected")
+                  .map((r) =&gt; r.reason?.message ?? String(r.reason)),
+  };
+}
+
+// Express route using it
+app.get("/me/dashboard", requireAuth, async (req, res, next) =&gt; {
+  try {
+    const data = await aggregateUserProfile(req.user.sub);
+    if (data.warnings.length) res.set("X-Degraded", "partial");
+    res.json(data);
+  } catch (err) { next(err); }
+});</code></pre>
+<p>Three rules for API aggregation. <strong>Parallelize with <code>Promise.all</code> or <code>allSettled</code></strong> &mdash; sequential awaits multiply latency. <strong>Use <code>allSettled</code> not <code>all</code></strong> so one flaky microservice doesn't kill the whole dashboard &mdash; return what succeeded and flag what failed. <strong>Timeout each call</strong> &mdash; without it, one slow upstream pins your response for minutes. This pattern is the foundation of the <strong>BFF (Backend for Frontend)</strong> and <strong>GraphQL resolver</strong> approaches. For heavy fan-out, DataLoader or dedicated tools like <strong>Hasura</strong> handle batching and caching automatically.</p>
+'''
+
+ANSWERS[13] = r'''
+<pre><code>// todos-api.js — RESTful to-do list
+import express from "express";
+import crypto from "node:crypto";
+import { z } from "zod";
+import { validate } from "./validate.js";
+
+const todos = new Map();
+
+const TodoCreate = z.object({
+  title:    z.string().trim().min(1).max(200),
+  dueDate:  z.coerce.date().optional(),
+  priority: z.enum(["low","medium","high"]).default("medium"),
+}).strict();
+
+const TodoUpdate = TodoCreate.extend({
+  completed: z.boolean().optional(),
+}).partial();
+
+const TodoParams  = z.object({ id: z.string().uuid() });
+const TodoQuery   = z.object({
+  completed: z.enum(["true","false"]).optional().transform((v) =&gt; v === undefined ? undefined : v === "true"),
+  priority:  z.enum(["low","medium","high"]).optional(),
+});
+
+// LIST with filters
+app.get("/todos", validate({ query: TodoQuery }), (req, res) =&gt; {
+  const { completed, priority } = req.validated.query;
+  let items = [...todos.values()];
+  if (completed !== undefined) items = items.filter((t) =&gt; t.completed === completed);
+  if (priority)                items = items.filter((t) =&gt; t.priority === priority);
+  items.sort((a, b) =&gt; +new Date(b.createdAt) - +new Date(a.createdAt));
+  res.json({ data: items });
+});
+
+// CREATE
+app.post("/todos", validate({ body: TodoCreate }), (req, res) =&gt; {
+  const id = crypto.randomUUID();
+  const todo = {
+    id, ...req.body, completed: false,
+    createdAt: new Date().toISOString(),
+  };
+  todos.set(id, todo);
+  res.status(201).location(`/todos/${id}`).json(todo);
+});
+
+// UPDATE (partial)
+app.patch("/todos/:id",
+  validate({ params: TodoParams, body: TodoUpdate }),
+  (req, res) =&gt; {
+    const existing = todos.get(req.params.id);
+    if (!existing) return res.sendStatus(404);
+    const updated = { ...existing, ...req.body, updatedAt: new Date().toISOString() };
+    todos.set(req.params.id, updated);
+    res.json(updated);
+  }
+);
+
+// MARK COMPLETE — sub-resource pattern for state transitions
+app.post("/todos/:id/complete", validate({ params: TodoParams }), (req, res) =&gt; {
+  const todo = todos.get(req.params.id);
+  if (!todo) return res.sendStatus(404);
+  todo.completed = true;
+  todo.completedAt = new Date().toISOString();
+  res.json(todo);
+});
+
+// DELETE
+app.delete("/todos/:id", validate({ params: TodoParams }), (req, res) =&gt; {
+  if (!todos.has(req.params.id)) return res.sendStatus(404);
+  todos.delete(req.params.id);
+  res.sendStatus(204);
+});</code></pre>
+<p>A CRUD resource gets 5 endpoints; this one adds a 6th (<code>POST /todos/:id/complete</code>) as a named state transition &mdash; more explicit and audit-friendly than <code>PATCH</code> for meaningful actions. Three details that make this production-ready: <strong>filter with query-param validation</strong> (coerce <code>"true"</code> strings to booleans), <strong>partial update schema</strong> with <code>.partial()</code> for PATCH, and <strong>strict schemas</strong> to reject unknown fields. Sort newest-first for list endpoints; clients will expect it.</p>
+'''
+
+ANSWERS[14] = r'''
+<pre><code>// cors.js — per-route CORS with an allowlist
+import cors from "cors";
+
+const ALLOWED = new Set([
+  "https://app.example.com",
+  "https://admin.example.com",
+  ...(process.env.NODE_ENV === "development" ? ["http://localhost:5173"] : []),
+]);
+
+const corsOptions = {
+  origin: (origin, cb) =&gt; {
+    // non-browser clients (curl, mobile) have no Origin — allow
+    if (!origin) return cb(null, true);
+    if (ALLOWED.has(origin)) return cb(null, true);
+    // staging subdomains via regex
+    if (/^https:\/\/[a-z0-9-]+\.staging\.example\.com$/.test(origin)) return cb(null, true);
+    cb(new Error(`CORS: ${origin} not allowed`));
+  },
+  credentials:    true,                                  // allow cookies
+  methods:        ["GET","POST","PUT","PATCH","DELETE"],
+  allowedHeaders: ["Content-Type","Authorization","X-Request-Id","Idempotency-Key"],
+  exposedHeaders: ["X-Request-Id","RateLimit-Remaining"],
+  maxAge:         86400,                                 // cache preflight 24h
+};
+
+// install before any auth — preflight doesn't carry Authorization
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));                     // explicit preflight handler
+
+// public endpoints can override with permissive CORS
+app.get("/docs/openapi.json", cors({ origin: "*" }), (req, res) =&gt; {
+  res.json(openapiSpec);
+});</code></pre>
+<p>CORS has five traps. <strong>Register before auth</strong> &mdash; preflight OPTIONS requests don't carry tokens; if auth runs first, they 401 and the browser aborts. <strong>Never combine <code>origin: "*"</code> with <code>credentials: true</code></strong> &mdash; browsers reject; use a function origin with an allowlist. <strong>Set <code>maxAge: 86400</code></strong> &mdash; otherwise every unique preflight doubles request count. <strong>Custom headers must be in <code>allowedHeaders</code></strong> or they silently drop. <strong>Custom response headers need <code>exposedHeaders</code></strong> or <code>fetch</code> can't read them. For per-route public endpoints (docs, widgets), override with <code>cors({ origin: "*" })</code>.</p>
+'''
+
+ANSWERS[15] = r'''
+<pre><code>// api-key-auth.js — API key middleware with DB lookup &amp; usage tracking
+import crypto from "node:crypto";
+
+/** Hash the key before storage — a DB leak shouldn't expose live keys. */
+export function hashApiKey(raw) {
+  return crypto.createHash("sha256").update(raw).digest("hex");
+}
+
+/** Generate a new key — returns plaintext ONCE; store the hash. */
+export async function createApiKey(userId, scopes = []) {
+  const raw = `sk_${crypto.randomBytes(32).toString("base64url")}`;
+  const hash = hashApiKey(raw);
+  await db.apiKey.create({
+    data: {
+      userId, keyHash: hash, scopes,
+      lastUsedAt: null, createdAt: new Date(),
+    },
+  });
+  return raw;                                          // show to user, never again
+}
+
+export function requireApiKey(requiredScope) {
+  return async (req, res, next) =&gt; {
+    const key = req.headers["x-api-key"] || extractBearer(req);
+    if (!key) return res.status(401).json({ error: "Missing API key" });
+
+    const record = await db.apiKey.findUnique({
+      where:  { keyHash: hashApiKey(String(key)) },
+      include: { user: true },
+    });
+
+    if (!record || record.revokedAt) {
+      return res.status(401).json({ error: "Invalid API key" });
+    }
+
+    if (requiredScope &amp;&amp; !record.scopes.includes(requiredScope) &amp;&amp; !record.scopes.includes("*")) {
+      return res.status(403).json({ error: `Missing scope: ${requiredScope}` });
+    }
+
+    // async update — don't block the request
+    db.apiKey.update({
+      where: { id: record.id },
+      data:  { lastUsedAt: new Date(), usageCount: { increment: 1 } },
+    }).catch((err) =&gt; req.log?.warn({ err }, "key usage update failed"));
+
+    req.apiKey = record;
+    req.user   = record.user;
+    next();
+  };
+}
+
+const extractBearer = (req) =&gt; {
+  const [scheme, token] = (req.headers.authorization || "").split(" ");
+  return scheme === "Bearer" ? token : null;
+};
+
+// usage
+app.get("/v1/data",    requireApiKey("read"),  dataHandler);
+app.post("/v1/admin",  requireApiKey("admin"), adminHandler);</code></pre>
+<p>Three non-obvious practices. <strong>Hash keys before DB storage</strong> &mdash; you only need equality checks, so store SHA-256 hashes. If your DB leaks, keys are useless (unlike plaintext). <strong>Give the raw key to the user exactly once</strong> &mdash; a ephemeral display with a "copy to clipboard" button, then only show the prefix. <strong>Track usage async</strong> &mdash; incrementing a counter per request blocks the response; fire-and-forget with <code>.catch()</code> for observability without latency cost. Pair with per-key rate limits and scope-based authorization.</p>
+'''
+
+ANSWERS[16] = r'''
+<pre><code>// token-endpoint.js — issue access + refresh tokens
+import jwt from "jsonwebtoken";
+import crypto from "node:crypto";
+import argon2 from "argon2";
+
+async function issueTokenPair(user) {
+  const familyId = crypto.randomUUID();
+  const accessJti = crypto.randomUUID();
+  const refreshJti = crypto.randomUUID();
+
+  const accessToken = jwt.sign(
+    { sub: user.id, role: user.role },
+    process.env.JWT_ACCESS_SECRET,
+    {
+      expiresIn: "15m",
+      issuer: "api.example.com", audience: "api",
+      jwtid: accessJti,
+    }
+  );
+
+  const refreshToken = jwt.sign(
+    { sub: user.id, familyId },
+    process.env.JWT_REFRESH_SECRET,
+    {
+      expiresIn: "30d",
+      issuer: "api.example.com", audience: "api",
+      jwtid: refreshJti,
+    }
+  );
+
+  // persist refresh token metadata for rotation &amp; revocation tracking
+  await db.refreshToken.create({
+    data: {
+      jti: refreshJti, userId: user.id, familyId,
+      expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+    },
+  });
+
+  return { accessToken, refreshToken, expiresIn: 900 };
+}
+
+app.post("/auth/token", loginLimiter, async (req, res) =&gt; {
+  const { email, password } = req.body;
+
+  const user = await db.user.findUnique({ where: { email: email?.toLowerCase() } });
+  const ok = user &amp;&amp; await argon2.verify(user.passwordHash, password ?? "");
+  if (!user || !ok) return res.status(401).json({ error: "Invalid credentials" });
+
+  const tokens = await issueTokenPair(user);
+
+  // refresh token in HttpOnly cookie, access token in body
+  res.cookie("rt", tokens.refreshToken, {
+    httpOnly: true, secure: true, sameSite: "lax",
+    path: "/auth", maxAge: 30 * 24 * 60 * 60 * 1000,
+  });
+  res.json({ accessToken: tokens.accessToken, expiresIn: tokens.expiresIn });
+});
+
+app.post("/auth/refresh", async (req, res) =&gt; {
+  const rt = req.cookies?.rt;
+  if (!rt) return res.sendStatus(401);
+  try {
+    const payload = jwt.verify(rt, process.env.JWT_REFRESH_SECRET);
+    const record = await db.refreshToken.findUnique({ where: { jti: payload.jti } });
+    if (!record || record.revokedAt) {
+      // reuse detected → revoke entire family
+      await db.refreshToken.updateMany({
+        where: { familyId: payload.familyId }, data: { revokedAt: new Date() },
+      });
+      return res.status(401).json({ error: "Token family revoked" });
+    }
+    // rotate — old token becomes invalid
+    await db.refreshToken.update({ where: { id: record.id }, data: { revokedAt: new Date() } });
+    const user = await db.user.findUnique({ where: { id: payload.sub } });
+    const tokens = await issueTokenPair(user);
+    res.cookie("rt", tokens.refreshToken, { httpOnly: true, secure: true, sameSite: "lax", path: "/auth" });
+    res.json({ accessToken: tokens.accessToken, expiresIn: tokens.expiresIn });
+  } catch { res.sendStatus(401); }
+});</code></pre>
+<p>Two tokens with different lifetimes and storage: <strong>access token</strong> (15 min, in memory, sent in <code>Authorization</code>) and <strong>refresh token</strong> (30 days, HttpOnly cookie, only sent to <code>/auth/refresh</code>). The key insight is <strong>refresh token rotation with family tracking</strong> &mdash; each refresh invalidates the old token. If an old token is reused, the whole family is revoked (the attacker has the old, the legitimate user has the new &mdash; you can't tell which is which, so revoke both). HttpOnly cookies protect the long-lived refresh token from XSS.</p>
+'''
+
+ANSWERS[17] = r'''
+<pre><code>// cached-fetch.js — stale-while-revalidate cache on top of fetch
+import Redis from "ioredis";
+const redis = new Redis(process.env.REDIS_URL);
+
+/**
+ * Fetch with SWR caching: returns cached data instantly; refreshes in background if stale.
+ * If the cache is missing, blocks until fresh data arrives.
+ */
+export async function cachedFetch(url, {
+  freshMs = 60_000,                  // fresh window
+  staleMs = 5 * 60_000,              // serve stale up to this; then revalidate
+  fetchFn = fetch,
+} = {}) {
+  const key = `cache:${url}`;
+  const now = Date.now();
+
+  const cached = await redis.get(key);
+  if (cached) {
+    const entry = JSON.parse(cached);
+    if (now - entry.fetchedAt &lt; freshMs) return entry.data;      // fresh — return
+    if (now - entry.fetchedAt &lt; freshMs + staleMs) {
+      revalidate(key, url, fetchFn).catch(() =&gt; {});              // background refresh
+      return entry.data;                                          // stale — still serve
+    }
+  }
+
+  // miss or too stale — block for fresh data
+  return revalidate(key, url, fetchFn);
+}
+
+// in-flight dedup — prevents cache stampede on a hot key
+const inFlight = new Map();
+
+async function revalidate(key, url, fetchFn) {
+  if (inFlight.has(key)) return inFlight.get(key);
+  const promise = (async () =&gt; {
+    try {
+      const res = await fetchFn(url);
+      if (!res.ok) throw new Error(`upstream ${res.status}`);
+      const data = await res.json();
+      await redis.setex(key, 600, JSON.stringify({ data, fetchedAt: Date.now() }));
+      return data;
+    } finally { inFlight.delete(key); }
+  })();
+  inFlight.set(key, promise);
+  return promise;
+}
+
+// usage in an Express route
+app.get("/products/:id", async (req, res, next) =&gt; {
+  try {
+    const product = await cachedFetch(`${UPSTREAM}/products/${req.params.id}`);
+    res.set("Cache-Control", "public, max-age=30");
+    res.json(product);
+  } catch (err) { next(err); }
+});</code></pre>
+<p>Three problems solved at once. <strong>Stale-while-revalidate</strong> &mdash; users see cached data instantly; the cache refreshes in the background so no one waits. <strong>Singleflight/in-flight dedup</strong> &mdash; when a hot key expires and 1000 requests come in, only one hits the upstream; the rest share the promise. <strong>Cache the null/404</strong> &mdash; otherwise every request for a missing item DoSes your upstream. Pair with HTTP <code>Cache-Control</code> so CDNs cache at the edge too &mdash; Redis is layer 2, CDN is layer 1.</p>
+'''
+
+ANSWERS[18] = r'''
+<pre><code>// search.js — paginated search over a dataset
+import { z } from "zod";
+import { validate } from "./validate.js";
+
+const SearchQuery = z.object({
+  q:      z.string().trim().min(1).max(100),
+  limit:  z.coerce.number().int().min(1).max(50).default(20),
+  offset: z.coerce.number().int().min(0).max(10_000).default(0),
+  sort:   z.enum(["relevance","newest","oldest"]).default("relevance"),
+}).strict();
+
+app.get("/search", validate({ query: SearchQuery }), async (req, res, next) =&gt; {
+  const { q, limit, offset, sort } = req.validated.query;
+  try {
+    // Postgres full-text search with ranking
+    const [rows, { count }] = await Promise.all([
+      db.$queryRaw`
+        SELECT id, title, slug, excerpt,
+               ts_rank(search_vector, query) AS rank,
+               created_at
+          FROM posts, websearch_to_tsquery('english', ${q}) query
+         WHERE search_vector @@ query
+           AND published = true
+         ORDER BY
+           ${sort === "relevance" ? db.$queryRaw`rank DESC`
+                                  : sort === "newest"
+                                    ? db.$queryRaw`created_at DESC`
+                                    : db.$queryRaw`created_at ASC`}
+         LIMIT ${limit} OFFSET ${offset}
+      `,
+      db.$queryRaw`
+        SELECT COUNT(*)::int AS count
+          FROM posts, websearch_to_tsquery('english', ${q}) query
+         WHERE search_vector @@ query AND published = true
+      `.then((r) =&gt; r[0]),
+    ]);
+
+    res.json({
+      data: rows,
+      meta: { q, total: count, limit, offset, hasMore: offset + rows.length &lt; count },
+    });
+  } catch (err) { next(err); }
+});</code></pre>
+<p>Three considerations for search. <strong>Cap inputs</strong> &mdash; <code>q</code> length, <code>limit</code>, <code>offset</code> &mdash; so attackers can't <code>?q=&lt;huge&gt;</code> or paginate a million rows. <strong>Full-text search with ranking</strong> &mdash; Postgres's <code>websearch_to_tsquery</code> handles quoting, operators, and scoring. Add a <code>tsvector</code> column with a GIN index for O(log n) queries. <strong>Parallel <code>COUNT</code></strong> &mdash; users want to know total results; run in parallel, not sequentially. For serious search (fuzzy matching, typo tolerance, facets), reach for <strong>Meilisearch</strong>, <strong>Typesense</strong>, or <strong>Elasticsearch</strong>.</p>
+'''
+
+ANSWERS[19] = r'''
+<pre><code>// multipart.js — multipart/form-data with multiple files + text fields
+import multer from "multer";
+import crypto from "node:crypto";
+import { z } from "zod";
+
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: {
+    fileSize:  10 * 1024 * 1024,    // 10MB per file
+    files:     5,                    // max 5 files
+    fields:    20,                   // max 20 text fields
+    fieldSize: 1024 * 1024,          // 1MB per text field
+  },
+  fileFilter: (req, file, cb) =&gt; {
+    const allowed = ["image/jpeg","image/png","application/pdf"];
+    cb(null, allowed.includes(file.mimetype));
+  },
+});
+
+// text fields come through as strings — validate separately
+const FormSchema = z.object({
+  title:       z.string().trim().min(1).max(200),
+  description: z.string().trim().max(2000).optional(),
+  tags:        z.string().transform((s) =&gt; s.split(",").map((t) =&gt; t.trim()).filter(Boolean))
+                 .pipe(z.array(z.string()).max(10)),
+});
+
+// .any() for flexible file-fields; .array("files", 5) for fixed
+app.post("/posts",
+  upload.fields([
+    { name: "cover",       maxCount: 1 },
+    { name: "attachments", maxCount: 4 },
+  ]),
+  async (req, res, next) =&gt; {
+    try {
+      const parsed = FormSchema.safeParse(req.body);
+      if (!parsed.success) return res.status(400).json({ error: parsed.error.issues });
+
+      const cover       = req.files?.cover?.[0];
+      const attachments = req.files?.attachments ?? [];
+
+      if (!cover) return res.status(400).json({ error: "cover is required" });
+
+      // process &amp; persist; here just echo
+      res.status(201).json({
+        ...parsed.data,
+        coverSize: cover.size,
+        coverMime: cover.mimetype,
+        attachmentCount: attachments.length,
+        attachmentNames: attachments.map((f) =&gt; f.originalname),
+      });
+    } catch (err) { next(err); }
+  }
+);
+
+// handle multer's own errors cleanly
+app.use((err, req, res, next) =&gt; {
+  if (err instanceof multer.MulterError) {
+    if (err.code === "LIMIT_FILE_SIZE")   return res.status(413).json({ error: "File too large" });
+    if (err.code === "LIMIT_FILE_COUNT")  return res.status(400).json({ error: "Too many files" });
+    return res.status(400).json({ error: err.message });
+  }
+  next(err);
+});</code></pre>
+<p>Three size dimensions to cap: <strong>fileSize</strong>, <strong>files</strong> (count), and <strong>fieldSize</strong> for text. Text fields in multipart arrive as strings on <code>req.body</code>, so validate separately with Zod and coerce types manually (comma-split tags, number fields). Use <code>upload.fields(...)</code> for named file slots, <code>upload.array(name, max)</code> for a single repeated field. Handle <code>MulterError</code> explicitly &mdash; default error handler returns cryptic messages. For very large uploads, stream directly to S3 with multer-s3 or pre-signed URLs.</p>
+'''
+
+ANSWERS[20] = r'''
+<pre><code>// user-profiles.js — fetch by ID, including bulk
+import { z } from "zod";
+import { validate } from "./validate.js";
+
+const UserParams = z.object({ id: z.string().uuid() });
+const BulkQuery  = z.object({
+  ids: z.string().transform((s) =&gt; s.split(","))
+       .pipe(z.array(z.string().uuid()).min(1).max(100)),
+});
+
+// single user — select only fields safe to expose
+app.get("/users/:id",
+  validate({ params: UserParams }),
+  async (req, res, next) =&gt; {
+    try {
+      const user = await db.user.findUnique({
+        where:  { id: req.params.id },
+        select: {
+          id: true, displayName: true, avatarUrl: true,
+          bio: true, createdAt: true,
+          // NOT selecting: email, passwordHash, role, internal flags
+        },
+      });
+      if (!user) return res.sendStatus(404);
+
+      res.set("Cache-Control", "public, max-age=60");
+      res.json(user);
+    } catch (err) { next(err); }
+  }
+);
+
+// BULK endpoint — clients avoid N+1 calls
+app.get("/users",
+  validate({ query: BulkQuery }),
+  async (req, res, next) =&gt; {
+    try {
+      const users = await db.user.findMany({
+        where:  { id: { in: req.validated.query.ids } },
+        select: { id: true, displayName: true, avatarUrl: true },
+      });
+      // return as a map so clients can look up by id without searching
+      const byId = Object.fromEntries(users.map((u) =&gt; [u.id, u]));
+      res.json({ data: byId });
+    } catch (err) { next(err); }
+  }
+);
+
+// "me" — more fields since the user is the owner
+app.get("/me", requireAuth, async (req, res, next) =&gt; {
+  try {
+    const user = await db.user.findUnique({
+      where:  { id: req.user.sub },
+      select: {
+        id: true, email: true, displayName: true, avatarUrl: true,
+        bio: true, locale: true, timezone: true, preferences: true,
+      },
+    });
+    res.json(user);
+  } catch (err) { next(err); }
+});</code></pre>
+<p>Three patterns worth internalizing. <strong>Field projection</strong> with <code>select</code> &mdash; never <code>SELECT *</code>. Public endpoints expose fewer fields than <code>/me</code>. Accidental email leaks are a common OWASP "excessive data exposure" bug. <strong>Bulk endpoints</strong> with capped <code>ids</code> arrays &mdash; prevent clients making 100 separate requests (N+1 on the network). <strong>Cache public profiles</strong> with short <code>max-age</code> &mdash; big speedup for feeds where the same users appear repeatedly. For mutable fields, pair with <code>ETag</code> for conditional GETs.</p>
+'''
+
+ANSWERS[21] = r'''
+<pre><code>// mongo-crud.js — RESTful CRUD over MongoDB
+import express from "express";
+import { MongoClient, ObjectId } from "mongodb";
+import { z } from "zod";
+import { validate } from "./validate.js";
+
+const client = new MongoClient(process.env.MONGODB_URI, {
+  maxPoolSize: 20, serverSelectionTimeoutMS: 5000,
+});
+await client.connect();
+const db = client.db("myapp");
+const products = db.collection("products");
+
+// index setup (run once at startup)
+await products.createIndex({ slug: 1 }, { unique: true });
+await products.createIndex({ createdAt: -1 });
+
+const ObjectIdParam = z.object({
+  id: z.string().refine((s) =&gt; ObjectId.isValid(s), "invalid id"),
+});
+
+const ProductCreate = z.object({
+  slug:  z.string().regex(/^[a-z0-9-]+$/).max(100),
+  name:  z.string().min(1).max(200),
+  price: z.number().nonnegative().finite(),
+  tags:  z.array(z.string().max(50)).max(10).default([]),
+}).strict();
+
+// CREATE
+app.post("/products", validate({ body: ProductCreate }), async (req, res) =&gt; {
+  try {
+    const doc = { ...req.body, createdAt: new Date(), updatedAt: new Date() };
+    const { insertedId } = await products.insertOne(doc);
+    res.status(201).location(`/products/${insertedId}`).json({ _id: insertedId, ...doc });
+  } catch (err) {
+    if (err.code === 11000) return res.status(409).json({ error: "slug already exists" });
+    throw err;
+  }
+});
+
+// READ
+app.get("/products/:id", validate({ params: ObjectIdParam }), async (req, res) =&gt; {
+  const doc = await products.findOne({ _id: new ObjectId(req.params.id) });
+  if (!doc) return res.sendStatus(404);
+  res.json(doc);
+});
+
+// LIST with filtering + pagination
+app.get("/products", async (req, res) =&gt; {
+  const limit = Math.min(100, Number(req.query.limit) || 20);
+  const page  = Math.max(1, Number(req.query.page) || 1);
+  const filter = {};
+  if (req.query.tag) filter.tags = { $in: [String(req.query.tag)] };
+  // explicit query — never pass raw req.body as filter (NoSQL injection!)
+  const cursor = products.find(filter).sort({ createdAt: -1 })
+                          .skip((page - 1) * limit).limit(limit);
+  const [data, total] = await Promise.all([cursor.toArray(), products.countDocuments(filter)]);
+  res.json({ data, meta: { page, limit, total } });
+});
+
+// UPDATE (partial)
+app.patch("/products/:id",
+  validate({ params: ObjectIdParam, body: ProductCreate.partial() }),
+  async (req, res) =&gt; {
+    const result = await products.findOneAndUpdate(
+      { _id: new ObjectId(req.params.id) },
+      { $set: { ...req.body, updatedAt: new Date() } },
+      { returnDocument: "after" }
+    );
+    if (!result) return res.sendStatus(404);
+    res.json(result);
+  }
+);
+
+// DELETE
+app.delete("/products/:id", validate({ params: ObjectIdParam }), async (req, res) =&gt; {
+  const { deletedCount } = await products.deleteOne({ _id: new ObjectId(req.params.id) });
+  if (!deletedCount) return res.sendStatus(404);
+  res.sendStatus(204);
+});</code></pre>
+<p>Three MongoDB-specific points beyond normal CRUD. <strong>Validate <code>ObjectId</code> strings</strong> with <code>ObjectId.isValid</code> before constructing one &mdash; raw <code>new ObjectId(badInput)</code> throws a cryptic error. <strong>Never pass <code>req.body</code> or <code>req.query</code> directly as a filter</strong> &mdash; attackers send <code>{"$ne": null}</code> or <code>{"$where": "..."}</code> for NoSQL injection. Whitelist the keys you support. <strong>Create indexes at startup</strong> (unique on <code>slug</code>, descending on <code>createdAt</code>) &mdash; without them, list/filter queries scan the whole collection.</p>
+'''
+
+ANSWERS[22] = r'''
+<pre><code>// password-reset.js — token-based reset with safe email flow
+import crypto from "node:crypto";
+import argon2 from "argon2";
+
+// step 1: request a reset — always respond the same way
+app.post("/auth/forgot", resetLimiter, async (req, res) =&gt; {
+  const { email } = req.body;
+  const user = await db.user.findUnique({ where: { email: String(email).toLowerCase() } });
+
+  // invariant response shape — user-enumeration defense
+  const response = { message: "If that email exists, a reset link was sent." };
+
+  if (user) {
+    const rawToken  = crypto.randomBytes(32).toString("base64url");
+    const tokenHash = crypto.createHash("sha256").update(rawToken).digest("hex");
+
+    // single-use, 1-hour lifetime, invalidate any prior tokens
+    await db.$transaction([
+      db.passwordReset.updateMany({
+        where: { userId: user.id, usedAt: null },
+        data:  { usedAt: new Date() },
+      }),
+      db.passwordReset.create({
+        data: {
+          userId: user.id, tokenHash,
+          expiresAt: new Date(Date.now() + 3600_000),
+        },
+      }),
+    ]);
+
+    await sendEmail({
+      to: user.email, template: "password-reset",
+      data: { resetUrl: `${APP_URL}/auth/reset?token=${rawToken}&amp;uid=${user.id}` },
+    });
+  }
+  res.json(response);
+});
+
+// step 2: complete the reset
+app.post("/auth/reset", async (req, res) =&gt; {
+  const { userId, token, newPassword } = req.body;
+  if (!userId || !token || !newPassword) return res.status(400).json({ error: "missing fields" });
+  if (newPassword.length &lt; 8) return res.status(400).json({ error: "password too short" });
+
+  const hash = crypto.createHash("sha256").update(token).digest("hex");
+  const rec = await db.passwordReset.findFirst({
+    where: {
+      userId, tokenHash: hash, usedAt: null,
+      expiresAt: { gt: new Date() },
+    },
+  });
+  if (!rec) return res.status(400).json({ error: "Invalid or expired token" });
+
+  const passwordHash = await argon2.hash(newPassword, { type: argon2.argon2id });
+
+  await db.$transaction([
+    db.user.update({ where: { id: userId }, data: { passwordHash } }),
+    db.passwordReset.update({ where: { id: rec.id }, data: { usedAt: new Date() } }),
+    // CRITICAL: invalidate all existing sessions after password change
+    db.session.deleteMany({ where: { userId } }),
+    db.refreshToken.updateMany({ where: { userId }, data: { revokedAt: new Date() } }),
+  ]);
+
+  await sendEmail({
+    to: (await db.user.findUnique({ where: { id: userId } })).email,
+    template: "password-changed",
+  });
+
+  res.json({ success: true });
+});</code></pre>
+<p>Password reset is a dense security topic. Six non-negotiables: <strong>hash tokens in storage</strong> (DB leak doesn't give attackers live links), <strong>invariant response for "email not found"</strong> (no user enumeration), <strong>rate-limit aggressively</strong> (slow SMS/email spam), <strong>single-use + short TTL</strong> (1 hour; invalidate older tokens on new request), <strong>revoke all sessions</strong> on success (otherwise a compromised session survives reset), <strong>send a confirmation email</strong> (lets users respond to unauthorized resets). For passwordless setups, use magic links or passkeys (WebAuthn).</p>
+'''
+
+ANSWERS[23] = r'''
+<pre><code>// graphql-client.js — call a GraphQL API from server or browser
+const GRAPHQL_ENDPOINT = "https://api.example.com/graphql";
+
+/** Low-level: send a query and return data, throwing on errors. */
+export async function gql(query, variables = {}, { token } = {}) {
+  const res = await fetch(GRAPHQL_ENDPOINT, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      ...(token &amp;&amp; { Authorization: `Bearer ${token}` }),
+    },
+    body: JSON.stringify({ query, variables }),
+  });
+
+  const json = await res.json();
+
+  if (json.errors?.length) {
+    // GraphQL always returns 200; errors live in the body
+    const msg = json.errors.map((e) =&gt; e.message).join("; ");
+    const err = new Error(`GraphQL: ${msg}`);
+    err.errors = json.errors;
+    throw err;
+  }
+  return json.data;
+}
+
+// usage — fetch a user and their recent posts in one round-trip
+const UserWithPostsQuery = /* GraphQL */ `
+  query UserWithPosts($id: ID!, $limit: Int = 5) {
+    user(id: $id) {
+      id
+      name
+      avatarUrl
+      posts(limit: $limit) {
+        id
+        title
+        publishedAt
+        commentCount
+      }
+    }
+  }
+`;
+
+app.get("/dashboard/:userId", async (req, res, next) =&gt; {
+  try {
+    const data = await gql(UserWithPostsQuery,
+      { id: req.params.userId, limit: 10 },
+      { token: req.user?.token });
+    if (!data.user) return res.sendStatus(404);
+    res.json(data.user);
+  } catch (err) { next(err); }
+});
+
+// production: use a client with caching, auth, error handling
+// import { GraphQLClient } from "graphql-request";
+// const client = new GraphQLClient(GRAPHQL_ENDPOINT, { headers: { Authorization: `Bearer ${token}` } });
+// const { user } = await client.request(UserWithPostsQuery, { id: "..." });</code></pre>
+<p>GraphQL clients differ from REST in two key ways. <strong>POST for everything</strong> &mdash; no GET, no browser cache. Variables go in the JSON body separately from the query string so they can be reused and type-checked. <strong>Errors live in the response body</strong> &mdash; HTTP 200 with <code>{ errors: [...] }</code>. Partial success is possible: <code>data</code> may contain some fields while others failed. For production apps, use <strong>graphql-request</strong> (simple), <strong>urql</strong> or <strong>Apollo Client</strong> (with caching, subscriptions, optimistic updates). Pair with <strong>graphql-codegen</strong> for TypeScript types generated from your schema &mdash; zero manual type maintenance.</p>
+'''
+
+ANSWERS[24] = r'''
+<pre><code>// push-notifications.js — send via Web Push (browsers) + FCM (mobile)
+import webpush from "web-push";
+import { z } from "zod";
+
+webpush.setVapidDetails(
+  "mailto:admin@example.com",
+  process.env.VAPID_PUBLIC_KEY,
+  process.env.VAPID_PRIVATE_KEY,
+);
+
+// user opts in — browser generates a subscription; we persist it
+app.post("/push/subscribe", requireAuth, async (req, res) =&gt; {
+  const { endpoint, keys } = req.body;     // from PushSubscription.toJSON()
+  await db.pushSubscription.upsert({
+    where:  { endpoint },
+    create: { userId: req.user.sub, endpoint, p256dh: keys.p256dh, auth: keys.auth },
+    update: { userId: req.user.sub, p256dh: keys.p256dh, auth: keys.auth },
+  });
+  res.sendStatus(204);
+});
+
+// server-side trigger — batch to all subs for a user
+export async function sendPush(userId, payload) {
+  const subs = await db.pushSubscription.findMany({ where: { userId } });
+
+  const results = await Promise.allSettled(
+    subs.map((sub) =&gt; webpush.sendNotification(
+      { endpoint: sub.endpoint, keys: { p256dh: sub.p256dh, auth: sub.auth } },
+      JSON.stringify(payload),
+      { TTL: 3600 }
+    ))
+  );
+
+  // clean up dead subscriptions (410 Gone means the user uninstalled)
+  const dead = results
+    .map((r, i) =&gt; ({ r, sub: subs[i] }))
+    .filter(({ r }) =&gt; r.status === "rejected" &amp;&amp; r.reason.statusCode === 410);
+
+  if (dead.length) {
+    await db.pushSubscription.deleteMany({
+      where: { id: { in: dead.map((d) =&gt; d.sub.id) } },
+    });
+  }
+}
+
+// trigger from app logic
+app.post("/posts/:id/comments", requireAuth, async (req, res) =&gt; {
+  const comment = await db.comment.create({ data: {
+    postId: req.params.id, userId: req.user.sub, text: req.body.text,
+  } });
+  const post = await db.post.findUnique({ where: { id: req.params.id } });
+
+  // fire-and-forget — don't block the HTTP response on push delivery
+  sendPush(post.authorId, {
+    title: "New comment on your post",
+    body:  `${req.user.name}: ${req.body.text.slice(0, 80)}`,
+    url:   `/posts/${post.id}#comment-${comment.id}`,
+  }).catch((err) =&gt; req.log?.warn({ err }, "push send failed"));
+
+  res.status(201).json(comment);
+});</code></pre>
+<p>Web Push has two parts: the browser subscribes (generating keys), the server uses VAPID keys to push encrypted payloads. <strong>Always <code>allSettled</code></strong> &mdash; one failed subscription shouldn't block others. <strong>Handle 410 Gone</strong> &mdash; means the user uninstalled or revoked; delete the subscription so you're not paying to push to dead endpoints. <strong>Fire-and-forget</strong> from the triggering request &mdash; don't make an API response wait on push delivery (FCM/APNs can take seconds). For mobile, use <strong>Firebase Cloud Messaging</strong> on the backend and platform SDKs on iOS/Android.</p>
+'''
+
+ANSWERS[25] = r'''
+<pre><code>// api-keys.js — generate, validate, rotate
+import crypto from "node:crypto";
+
+/** Generate a prefixed, base64url random key. */
+export function generateApiKey(env = "live") {
+  return `sk_${env}_${crypto.randomBytes(32).toString("base64url")}`;
+}
+
+/** Hash a key for storage. */
+export function hashApiKey(raw) {
+  return crypto.createHash("sha256").update(raw).digest("hex");
+}
+
+/** Create a new key, return plaintext ONCE. */
+export async function createApiKey({ userId, name, scopes = [] }) {
+  const raw     = generateApiKey(process.env.NODE_ENV === "production" ? "live" : "test");
+  const prefix  = raw.slice(0, 12);                          // safe to show in UI
+  const keyHash = hashApiKey(raw);
+
+  await db.apiKey.create({
+    data: {
+      userId, name, keyHash, prefix, scopes,
+      createdAt: new Date(), lastUsedAt: null,
+    },
+  });
+
+  return { key: raw, prefix };                               // plaintext shown once
+}
+
+/** Middleware: validate key, inject record + user. */
+export function requireApiKey(requiredScope) {
+  return async (req, res, next) =&gt; {
+    const raw = req.headers["x-api-key"] ||
+                (req.headers.authorization?.startsWith("Bearer ")
+                  ? req.headers.authorization.slice(7) : null);
+    if (!raw) return res.status(401).json({ error: "API key required" });
+
+    const record = await db.apiKey.findUnique({
+      where: { keyHash: hashApiKey(raw) },
+      include: { user: { select: { id: true, role: true, email: true } } },
+    });
+    if (!record || record.revokedAt) return res.status(401).json({ error: "Invalid API key" });
+
+    if (requiredScope &amp;&amp; !record.scopes.includes(requiredScope) &amp;&amp; !record.scopes.includes("*")) {
+      return res.status(403).json({ error: `Missing scope: ${requiredScope}` });
+    }
+
+    // async usage tracking — don't block
+    db.apiKey.update({
+      where: { id: record.id },
+      data:  { lastUsedAt: new Date() },
+    }).catch(() =&gt; {});
+
+    req.apiKey = record; req.user = record.user;
+    next();
+  };
+}
+
+/** Rotate — issue new key, keep old active for a grace window. */
+export async function rotateApiKey(keyId, graceMs = 24 * 3600_000) {
+  const { key: newKey } = await createApiKey({
+    userId: (await db.apiKey.findUnique({ where: { id: keyId } })).userId,
+    name:   "rotated",
+  });
+  // revoke old after grace period — user has time to update their app
+  setTimeout(() =&gt; db.apiKey.update({ where: { id: keyId }, data: { revokedAt: new Date() } }),
+             graceMs);
+  return newKey;
+}</code></pre>
+<p>Three practices for secure API keys. <strong>Prefix + environment tag</strong> (<code>sk_live_...</code>, <code>sk_test_...</code>) &mdash; instantly tells which env a leaked key is for, and tools like GitHub's secret scanning can detect known prefixes. <strong>Hash before storage</strong> &mdash; only equality checks needed. <strong>Store the prefix separately</strong> so the UI can show "sk_live_xxx****" without exposing the whole key &mdash; lets users identify keys in their dashboard. Rotation with a grace period prevents users from being locked out during the transition.</p>
+'''
+
+ANSWERS[26] = r'''
+<pre><code>// rbac.js — role + permission management with resource scoping
+import { z } from "zod";
+
+// role → permissions (static or DB-backed)
+const ROLE_PERMS = {
+  viewer:    ["post:read"],
+  author:    ["post:read", "post:create", "post:update:own", "post:delete:own"],
+  moderator: ["post:read", "post:create", "post:update:*", "post:delete:*", "comment:*"],
+  admin:     ["*"],
+};
+
+function hasPermission(user, perm) {
+  const perms = ROLE_PERMS[user.role] ?? [];
+  if (perms.includes("*")) return true;
+  if (perms.includes(perm)) return true;
+  // wildcard match: post:update:* matches post:update:own
+  const [resource, action] = perm.split(":");
+  if (perms.includes(`${resource}:*`)) return true;
+  if (perms.includes(`${resource}:${action}:*`)) return true;
+  return false;
+}
+
+export function requirePermission(...perms) {
+  return (req, res, next) =&gt; {
+    if (!req.user) return res.sendStatus(401);
+    const ok = perms.every((p) =&gt; hasPermission(req.user, p));
+    return ok ? next() : res.status(403).json({ error: "Forbidden", required: perms });
+  };
+}
+
+// resource-scoped authz — combine with hasPermission
+export async function canUpdatePost(req, res, next) {
+  const post = await db.post.findUnique({ where: { id: req.params.id } });
+  if (!post) return res.sendStatus(404);
+  if (hasPermission(req.user, "post:update:*")) { req.post = post; return next(); }
+  if (hasPermission(req.user, "post:update:own") &amp;&amp; post.authorId === req.user.sub) {
+    req.post = post;
+    return next();
+  }
+  res.sendStatus(403);
+}
+
+// admin — change a user's role
+const RoleChange = z.object({
+  role: z.enum(["viewer","author","moderator","admin"]),
+}).strict();
+
+app.patch("/admin/users/:id/role",
+  requireAuth, requirePermission("user:update"),
+  validate({ body: RoleChange, params: z.object({ id: z.string().uuid() }) }),
+  async (req, res) =&gt; {
+    // audit the change — who did it, to whom, when, from/to
+    const target = await db.user.findUnique({ where: { id: req.params.id } });
+    if (!target) return res.sendStatus(404);
+
+    await db.$transaction([
+      db.user.update({ where: { id: target.id }, data: { role: req.body.role } }),
+      db.auditLog.create({ data: {
+        actorId: req.user.sub, action: "user.role.change",
+        targetId: target.id,
+        metadata: { from: target.role, to: req.body.role },
+      }}),
+    ]);
+    res.json({ id: target.id, role: req.body.role });
+  }
+);
+
+app.patch("/posts/:id", requireAuth, canUpdatePost, updatePostHandler);</code></pre>
+<p>Three layers compose: <strong>authentication</strong> (<code>req.user</code> populated), <strong>permission check</strong> (<code>requirePermission("x")</code> &mdash; coarse role-based), and <strong>resource ownership</strong> (<code>canUpdatePost</code> &mdash; fine-grained on specific records). The wildcard pattern (<code>post:update:*</code>) keeps the permission list short while still expressing precise rules. <strong>Always audit privilege changes</strong> &mdash; role updates, admin actions, permission grants. For richer policies (attribute-based rules, per-field permissions), graduate to <strong>CASL</strong> (<code>ability.can("update", post)</code>) or <strong>Casbin</strong>.</p>
+'''
+
+ANSWERS[27] = r'''
+<pre><code>// image-upload.js — upload, generate thumbnails, upload to S3
+import multer from "multer";
+import sharp from "sharp";
+import crypto from "node:crypto";
+import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+
+const s3 = new S3Client({ region: process.env.AWS_REGION });
+const BUCKET = process.env.S3_BUCKET;
+
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits:  { fileSize: 10 * 1024 * 1024 },             // 10MB
+  fileFilter: (req, file, cb) =&gt; cb(null,
+    ["image/jpeg","image/png","image/webp"].includes(file.mimetype)
+  ),
+});
+
+const VARIANTS = [
+  { name: "thumb",   width: 200,  height: 200, fit: "cover"  },
+  { name: "preview", width: 800,  height: null, fit: "inside" },
+  { name: "large",   width: 1920, height: null, fit: "inside" },
+];
+
+app.post("/images", requireAuth, upload.single("image"), async (req, res, next) =&gt; {
+  if (!req.file) return res.status(400).json({ error: "No file" });
+
+  try {
+    const meta = await sharp(req.file.buffer).metadata();
+    // decompression-bomb defense — reject absurd dimensions BEFORE rendering
+    if (!meta.width || meta.width &gt; 8000 || meta.height &gt; 8000) {
+      return res.status(400).json({ error: "Image dimensions too large" });
+    }
+
+    const id = crypto.randomUUID();
+    const pipeline = sharp(req.file.buffer).rotate();    // apply EXIF, strip metadata
+
+    // generate + upload all variants in parallel
+    const uploads = await Promise.all(VARIANTS.map(async (v) =&gt; {
+      const buffer = await pipeline.clone()
+        .resize(v.width, v.height, { fit: v.fit, withoutEnlargement: true })
+        .webp({ quality: 82 })
+        .toBuffer();
+
+      const key = `images/${id}/${v.name}.webp`;
+      await s3.send(new PutObjectCommand({
+        Bucket: BUCKET, Key: key, Body: buffer,
+        ContentType: "image/webp", CacheControl: "public, max-age=31536000, immutable",
+      }));
+      return { name: v.name, key, url: `${process.env.CDN_URL}/${key}` };
+    }));
+
+    const record = await db.image.create({
+      data: {
+        id, userId: req.user.sub, originalName: req.file.originalname,
+        variants: Object.fromEntries(uploads.map((u) =&gt; [u.name, u.url])),
+      },
+    });
+    res.status(201).json(record);
+  } catch (err) { next(err); }
+});</code></pre>
+<p>Three concerns. <strong>Decompression-bomb defense</strong> &mdash; check dimensions from metadata before resizing; a small file can decode to gigabytes. <strong>Re-encode through sharp</strong> &mdash; validates the image, applies EXIF orientation (photos look right), strips metadata (EXIF often contains GPS). <strong>Parallel variant generation</strong> &mdash; thumbnail + preview + large at once, not sequentially. For heavy loads, push to a background queue (BullMQ) and return 202 with a status URL &mdash; requests don't wait on 500ms of image processing.</p>
+'''
+
+ANSWERS[28] = r'''
+<pre><code>// stock-prices.js — real-time via SSE, fetched from upstream
+import EventEmitter from "node:events";
+
+const prices = new Map();                              // symbol → { price, ts }
+const bus = new EventEmitter();
+bus.setMaxListeners(1000);
+
+// background poller — fetches from upstream, publishes on change
+async function pollPrices() {
+  const symbols = [...subscribedSymbols];
+  if (!symbols.length) return;
+  try {
+    const r = await fetch(`${UPSTREAM}/quotes?symbols=${symbols.join(",")}`, {
+      headers: { "X-API-Key": process.env.QUOTES_API_KEY },
+      signal: AbortSignal.timeout(3000),
+    });
+    const data = await r.json();
+    for (const q of data.quotes) {
+      const prev = prices.get(q.symbol);
+      if (!prev || prev.price !== q.price) {
+        prices.set(q.symbol, { price: q.price, ts: Date.now() });
+        bus.emit("price", q);                          // fan out to SSE listeners
+      }
+    }
+  } catch (err) { console.error("poller error", err); }
+}
+setInterval(pollPrices, 1000);                          // 1-second polling
+
+const subscribedSymbols = new Set();
+
+// REST endpoint — snapshot
+app.get("/stocks/:symbol", (req, res) =&gt; {
+  const entry = prices.get(req.params.symbol);
+  if (!entry) return res.sendStatus(404);
+  res.json({ symbol: req.params.symbol, ...entry });
+});
+
+// SSE — stream updates as they happen
+app.get("/stocks/:symbol/stream", (req, res) =&gt; {
+  const symbol = req.params.symbol;
+  subscribedSymbols.add(symbol);
+
+  res.set({
+    "Content-Type":      "text/event-stream",
+    "Cache-Control":     "no-cache, no-transform",
+    "Connection":        "keep-alive",
+    "X-Accel-Buffering": "no",                          // disable Nginx buffering
+  });
+  res.flushHeaders();
+
+  // send current snapshot immediately
+  const entry = prices.get(symbol);
+  if (entry) res.write(`data: ${JSON.stringify({ symbol, ...entry })}\n\n`);
+
+  const listener = (q) =&gt; {
+    if (q.symbol === symbol) res.write(`data: ${JSON.stringify(q)}\n\n`);
+  };
+  bus.on("price", listener);
+
+  // heartbeat every 20s keeps proxies from killing the connection
+  const heartbeat = setInterval(() =&gt; res.write(":heartbeat\n\n"), 20_000);
+
+  req.on("close", () =&gt; {
+    clearInterval(heartbeat);
+    bus.off("price", listener);
+    // optional: if no one else cares about this symbol, stop polling it
+    if (bus.listenerCount("price") === 0) subscribedSymbols.delete(symbol);
+  });
+});</code></pre>
+<p>Two-layer architecture: <strong>server-side poller</strong> runs once (regardless of client count) and publishes to a pub/sub bus; <strong>SSE handlers</strong> subscribe per-client and stream deltas. This way 1000 clients watching AAPL cause 1 upstream call, not 1000. For multi-instance deployments, replace EventEmitter with Redis pub/sub. SSE (vs WebSockets) is simpler here &mdash; uni-directional, plain HTTP, browser auto-reconnect. <strong>Heartbeat every 20s</strong> prevents idle-connection timeouts from proxies.</p>
+'''
+
+ANSWERS[29] = r'''
+<pre><code>// query-validation.js — strict query-param validation with coercion
+import { z } from "zod";
+import { validate } from "./validate.js";
+
+// coerce strings to proper types, clamp to safe ranges, reject unknown keys
+const ListQuery = z.object({
+  // pagination
+  page:  z.coerce.number().int().min(1).max(10_000).default(1),
+  limit: z.coerce.number().int().min(1).max(100).default(20),
+
+  // filtering
+  status: z.enum(["draft","published","archived"]).optional(),
+  tag:    z.string().trim().min(1).max(50).optional(),
+  q:      z.string().trim().min(1).max(200).optional(),
+
+  // date range — ISO 8601 only
+  after:  z.string().datetime({ offset: true }).optional().transform((s) =&gt; s ? new Date(s) : undefined),
+  before: z.string().datetime({ offset: true }).optional().transform((s) =&gt; s ? new Date(s) : undefined),
+
+  // sort — whitelist to prevent arbitrary column ordering (perf/leak risk)
+  sort: z.enum(["created_at", "updated_at", "title"]).default("created_at"),
+  dir:  z.enum(["asc","desc"]).default("desc"),
+
+  // multi-value: ?ids=a&amp;ids=b OR ?ids=a,b
+  ids: z.union([
+         z.string().transform((s) =&gt; s.split(",")),
+         z.array(z.string()),
+       ]).optional().pipe(z.array(z.string().uuid()).max(100).optional()),
+}).strict()
+  // cross-field: after must be before "before"
+  .refine((q) =&gt; !q.after || !q.before || q.after &lt; q.before, {
+    message: "`after` must be earlier than `before`",
+    path: ["after"],
+  });
+
+app.get("/posts", validate({ query: ListQuery }), async (req, res) =&gt; {
+  const q = req.validated.query;
+  const where = {
+    ...(q.status &amp;&amp; { status: q.status }),
+    ...(q.tag &amp;&amp; { tags: { has: q.tag } }),
+    ...(q.q &amp;&amp; { title: { contains: q.q, mode: "insensitive" } }),
+    ...(q.after || q.before
+        ? { createdAt: { ...(q.after &amp;&amp; { gte: q.after }), ...(q.before &amp;&amp; { lt: q.before }) } }
+        : {}),
+    ...(q.ids &amp;&amp; { id: { in: q.ids } }),
+  };
+  const [data, total] = await Promise.all([
+    db.post.findMany({
+      where, orderBy: { [q.sort]: q.dir },
+      skip: (q.page - 1) * q.limit, take: q.limit,
+    }),
+    db.post.count({ where }),
+  ]);
+  res.json({ data, meta: { page: q.page, limit: q.limit, total } });
+});</code></pre>
+<p>Query-param validation is trickier than body validation because <strong>everything arrives as strings</strong>. Use <code>z.coerce</code> to turn <code>"25"</code> into <code>25</code>. Four protective practices: <strong>clamp numeric ranges</strong> (prevents <code>?page=999999</code> timeouts), <strong>whitelist sort fields</strong> (attackers can't sort by an unindexed column to cause slow queries, or by a sensitive column to leak data), <strong>enum optional fields</strong> (reject unknown status values), and <strong><code>.strict()</code></strong> to reject unknown query keys entirely. Cross-field refinements (<code>after &lt; before</code>) catch logical errors before they reach the DB.</p>
+'''
+
+ANSWERS[30] = r'''
+<pre><code>// social-auth.js — OAuth login with Google (same pattern for GitHub, Facebook)
+import { Issuer, generators } from "openid-client";
+import crypto from "node:crypto";
+
+// discover the provider once at boot
+const google = await Issuer.discover("https://accounts.google.com");
+const client = new google.Client({
+  client_id:     process.env.GOOGLE_CLIENT_ID,
+  client_secret: process.env.GOOGLE_CLIENT_SECRET,
+  redirect_uris: [`${APP_URL}/auth/google/callback`],
+  response_types: ["code"],
+});
+
+// STEP 1 — initiate login
+app.get("/auth/google", (req, res) =&gt; {
+  const codeVerifier = generators.codeVerifier();
+  const state        = generators.state();
+  const nonce        = generators.nonce();
+
+  req.session.oauth = { codeVerifier, state, nonce };
+
+  const authUrl = client.authorizationUrl({
+    scope: "openid email profile",
+    code_challenge:        generators.codeChallenge(codeVerifier),
+    code_challenge_method: "S256",                            // PKCE
+    state, nonce,
+  });
+  res.redirect(authUrl);
+});
+
+// STEP 2 — handle the callback
+app.get("/auth/google/callback", async (req, res, next) =&gt; {
+  try {
+    const { codeVerifier, state, nonce } = req.session.oauth ?? {};
+    if (!codeVerifier) return res.status(400).send("Missing OAuth state");
+
+    const params = client.callbackParams(req);
+    const tokenSet = await client.callback(
+      `${APP_URL}/auth/google/callback`,
+      params,
+      { code_verifier: codeVerifier, state, nonce }
+    );
+
+    const claims = tokenSet.claims();
+    const { sub, email, email_verified, name, picture } = claims;
+
+    if (!email_verified) return res.status(403).send("Email not verified at provider");
+
+    // identify by (provider, providerId) — never by email alone
+    const user = await db.user.upsert({
+      where:  { provider_providerId: { provider: "google", providerId: sub } },
+      create: {
+        provider: "google", providerId: sub,
+        email, name, avatarUrl: picture,
+      },
+      update: { email, name, avatarUrl: picture },
+    });
+
+    // establish our own session — don't keep the OAuth token
+    req.session.userId = user.id;
+    delete req.session.oauth;
+    res.redirect("/dashboard");
+  } catch (err) { next(err); }
+});</code></pre>
+<p>OAuth has many footguns. Six things to get right: <strong>PKCE (<code>code_verifier</code> + S256)</strong> &mdash; now mandatory in OAuth 2.1 for all clients; prevents authorization-code interception. <strong>state</strong> &mdash; CSRF protection. <strong>nonce</strong> (OIDC) &mdash; prevents ID-token replay. <strong>Exact <code>redirect_uri</code></strong> registered with the provider &mdash; prevents open-redirect attacks. <strong>Identify users by <code>sub</code></strong>, not email &mdash; emails change or get re-issued; <code>sub</code> is stable. <strong>Drop the provider token after issuing your own session</strong> &mdash; you don't need it for subsequent logins. For multi-provider support, use <strong>Auth.js</strong> or <strong>better-auth</strong> &mdash; they handle the per-provider quirks (Facebook OAuth2-only, Apple's private relay emails, GitHub's separate email API).</p>
+'''
+
+ANSWERS[31] = r'''
+<pre><code>// paginate-sort.js — reusable helper for paginated + sorted list endpoints
+import { z } from "zod";
+
+/**
+ * Build a validator for a paginated endpoint with a whitelist of sortable fields.
+ */
+export function createListQuery(sortFields) {
+  return z.object({
+    page:  z.coerce.number().int().min(1).max(10_000).default(1),
+    limit: z.coerce.number().int().min(1).max(100).default(20),
+    sort:  z.enum(sortFields).default(sortFields[0]),
+    dir:   z.enum(["asc","desc"]).default("desc"),
+  }).strict();
+}
+
+/** Execute a list query given a Prisma model + `where` clause. */
+export async function paginateList(model, where, query) {
+  const { page, limit, sort, dir } = query;
+  const [data, total] = await Promise.all([
+    model.findMany({
+      where,
+      orderBy: [{ [sort]: dir }, { id: "asc" }],       // stable tiebreaker
+      skip:    (page - 1) * limit,
+      take:    limit,
+    }),
+    model.count({ where }),
+  ]);
+  return {
+    data,
+    meta: {
+      page, limit, total,
+      totalPages: Math.ceil(total / limit),
+      hasMore:    page * limit &lt; total,
+    },
+  };
+}
+
+// wire up — zero boilerplate per endpoint
+const PostListQuery = createListQuery(["createdAt", "updatedAt", "title", "views"]);
+
+app.get("/posts",
+  validate({ query: PostListQuery }),
+  async (req, res, next) =&gt; {
+    try {
+      const where = req.query.status ? { status: String(req.query.status) } : {};
+      const result = await paginateList(db.post, where, req.validated.query);
+      res.json(result);
+    } catch (err) { next(err); }
+  }
+);
+
+// also export a cursor-based variant for large datasets
+export async function paginateCursor(model, where, { limit = 20, cursor, sort = "createdAt" }) {
+  const rows = await model.findMany({
+    where: cursor
+      ? { ...where, OR: [
+          { [sort]: { lt: new Date(cursor.ts) } },
+          { [sort]: new Date(cursor.ts), id: { lt: cursor.id } },
+        ]}
+      : where,
+    orderBy: [{ [sort]: "desc" }, { id: "desc" }],
+    take: limit + 1,
+  });
+  const hasMore = rows.length &gt; limit;
+  const data = rows.slice(0, limit);
+  const last = data[data.length - 1];
+  return {
+    data,
+    nextCursor: hasMore &amp;&amp; last
+      ? Buffer.from(JSON.stringify({ ts: last[sort], id: last.id })).toString("base64url")
+      : null,
+  };
+}</code></pre>
+<p>Three patterns make pagination clean. <strong>Factory for query schemas</strong> &mdash; every list endpoint is 3 lines, not 30. <strong>Whitelist sort fields</strong> via the enum &mdash; prevents <code>?sort=passwordHash</code> or <code>?sort=&lt;unindexed_column&gt;</code> (slow query attack). <strong>Stable tiebreaker</strong> in <code>orderBy</code> (<code>id asc</code>) &mdash; without it, rows with identical sort values can duplicate or skip across page boundaries. Export both offset and cursor variants &mdash; offset for user-facing UIs ("go to page 5"), cursor for feeds and infinite scroll.</p>
+'''
+
+ANSWERS[32] = r'''
+<pre><code>// csv-upload.js — parse, validate, import CSV rows
+import multer from "multer";
+import { parse } from "csv-parse";
+import { z } from "zod";
+
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits:  { fileSize: 20 * 1024 * 1024 },           // 20MB cap
+  fileFilter: (req, file, cb) =&gt; cb(null,
+    /^text\/csv|application\/(vnd\.ms-excel|octet-stream)$/.test(file.mimetype)
+  ),
+});
+
+// schema per row — coerce strings to real types
+const RowSchema = z.object({
+  email:  z.string().email().toLowerCase().trim(),
+  name:   z.string().trim().min(1).max(100),
+  age:    z.coerce.number().int().min(0).max(150).optional(),
+  joined: z.coerce.date().optional(),
+});
+
+app.post("/import/users", requireAuth, upload.single("file"), async (req, res, next) =&gt; {
+  if (!req.file) return res.status(400).json({ error: "No file" });
+
+  const results = { imported: 0, errors: [], duplicates: 0 };
+  let rowNum = 1;                                     // header is row 1
+
+  try {
+    const parser = parse(req.file.buffer, {
+      columns: true, trim: true, bom: true, skip_empty_lines: true,
+    });
+
+    // stream-process rows — constant memory regardless of file size
+    const batch = [];
+    for await (const row of parser) {
+      rowNum++;
+      const parsed = RowSchema.safeParse(row);
+      if (!parsed.success) {
+        results.errors.push({ row: rowNum, issues: parsed.error.issues });
+        if (results.errors.length &gt; 100) break;       // cap error reporting
+        continue;
+      }
+      batch.push(parsed.data);
+
+      // flush in chunks to avoid huge single inserts
+      if (batch.length &gt;= 500) {
+        const r = await db.user.createMany({ data: batch, skipDuplicates: true });
+        results.imported += r.count;
+        results.duplicates += batch.length - r.count;
+        batch.length = 0;
+      }
+    }
+
+    if (batch.length) {
+      const r = await db.user.createMany({ data: batch, skipDuplicates: true });
+      results.imported += r.count;
+      results.duplicates += batch.length - r.count;
+    }
+
+    res.json(results);
+  } catch (err) { next(err); }
+});</code></pre>
+<p>Four decisions that matter for CSV imports. <strong>Stream-parse, don't <code>readFileSync</code></strong> &mdash; a 20MB CSV in memory is fine, but a 2GB one is not; async iteration via <code>csv-parse</code> keeps memory bounded. <strong>Validate per row + continue on error</strong> &mdash; bulk imports often have a few bad rows; collect them with line numbers for the user to fix. <strong>Batch DB inserts in chunks of 500</strong> &mdash; single giant inserts lock tables; one-at-a-time is 100x slower. <strong>Handle BOMs</strong> &mdash; Excel loves to prefix UTF-8 files with a byte-order mark that breaks dumb parsers. For huge imports, push to a queue and return a job id.</p>
+'''
+
+ANSWERS[33] = r'''
+<pre><code>// websocket-server.js — real-time updates with ws + Redis pub/sub
+import { WebSocketServer } from "ws";
+import { createServer } from "node:http";
+import Redis from "ioredis";
+
+const pub = new Redis(process.env.REDIS_URL);
+const sub = pub.duplicate();
+
+const server = createServer(app);
+const wss = new WebSocketServer({ noServer: true });
+
+// authenticate on upgrade — reject unauth'd connections at the HTTP layer
+server.on("upgrade", async (req, socket, head) =&gt; {
+  try {
+    const url = new URL(req.url, "http://x");
+    const token = url.searchParams.get("token");       // or from cookie/header
+    const user = await verifyJwt(token);
+
+    wss.handleUpgrade(req, socket, head, (ws) =&gt; {
+      ws.user = user;
+      wss.emit("connection", ws, req);
+    });
+  } catch {
+    socket.write("HTTP/1.1 401 Unauthorized\r\n\r\n");
+    socket.destroy();
+  }
+});
+
+// per-client subscription state
+wss.on("connection", (ws) =&gt; {
+  ws.rooms = new Set();
+
+  // heartbeat — detect dead clients
+  ws.isAlive = true;
+  ws.on("pong", () =&gt; { ws.isAlive = true; });
+
+  ws.on("message", (raw) =&gt; {
+    let msg; try { msg = JSON.parse(raw); } catch { return; }
+
+    if (msg.type === "subscribe" &amp;&amp; typeof msg.room === "string") {
+      ws.rooms.add(msg.room);
+      sub.subscribe(`room:${msg.room}`).catch(() =&gt; {});
+    } else if (msg.type === "publish" &amp;&amp; ws.rooms.has(msg.room)) {
+      pub.publish(`room:${msg.room}`, JSON.stringify({
+        from: ws.user.id, data: msg.data, ts: Date.now(),
+      }));
+    }
+  });
+
+  ws.on("close", () =&gt; ws.rooms.clear());
+});
+
+// fan out Redis messages to matching WebSocket clients
+sub.on("message", (channel, msg) =&gt; {
+  const room = channel.replace(/^room:/, "");
+  for (const client of wss.clients) {
+    if (client.readyState === 1 &amp;&amp; client.rooms.has(room)) {
+      client.send(msg);
+    }
+  }
+});
+
+// periodic heartbeat — ping each client, terminate unresponsive ones
+setInterval(() =&gt; {
+  for (const ws of wss.clients) {
+    if (!ws.isAlive) { ws.terminate(); continue; }
+    ws.isAlive = false;
+    ws.ping();
+  }
+}, 30_000);
+
+server.listen(3000);</code></pre>
+<p>Four essentials for real-time WebSocket services. <strong>Authenticate on upgrade</strong> &mdash; not on first message &mdash; so unauthenticated connections never consume server resources. <strong>Redis pub/sub for fan-out</strong> &mdash; without it, a user connected to Node instance A never sees messages from a user on instance B; with it, the architecture scales horizontally. <strong>Heartbeats (ping/pong)</strong> &mdash; dead connections leak memory; ping every 30s and terminate non-responders. <strong>Server-side room membership</strong> &mdash; clients can request joining, but the server validates permission before subscribing. For production, <strong>Socket.IO</strong> gives you fallbacks, reconnection, and rooms out of the box.</p>
+'''
+
+ANSWERS[34] = r'''
+<pre><code>// activity-log.js — paginated activity feed with filtering
+import { z } from "zod";
+
+const ActivityQuery = z.object({
+  limit:  z.coerce.number().int().min(1).max(100).default(50),
+  cursor: z.string().optional(),
+  type:   z.enum(["login","post","comment","follow","like"]).optional(),
+  after:  z.string().datetime().optional(),
+}).strict();
+
+app.get("/users/:id/activity",
+  requireAuth, validate({ params: z.object({ id: z.string().uuid() }), query: ActivityQuery }),
+  async (req, res, next) =&gt; {
+    // authz: user can see their own; admins can see anyone's
+    if (req.params.id !== req.user.sub &amp;&amp; req.user.role !== "admin") {
+      return res.sendStatus(403);
+    }
+
+    try {
+      const q = req.validated.query;
+      const cursor = q.cursor
+        ? JSON.parse(Buffer.from(q.cursor, "base64url").toString())
+        : null;
+
+      const where = {
+        userId: req.params.id,
+        ...(q.type  &amp;&amp; { type: q.type }),
+        ...(q.after &amp;&amp; { createdAt: { gte: new Date(q.after) } }),
+        ...(cursor  &amp;&amp; {
+          OR: [
+            { createdAt: { lt: new Date(cursor.ts) } },
+            { createdAt: new Date(cursor.ts), id: { lt: cursor.id } },
+          ],
+        }),
+      };
+
+      const rows = await db.activity.findMany({
+        where,
+        orderBy: [{ createdAt: "desc" }, { id: "desc" }],
+        take:    q.limit + 1,
+        include: {
+          user: { select: { id: true, displayName: true, avatarUrl: true } },
+          // polymorphic target — adjust based on your schema
+        },
+      });
+
+      const hasMore = rows.length &gt; q.limit;
+      const data = rows.slice(0, q.limit);
+      const last = data[data.length - 1];
+
+      // enrich each activity into a human-readable entry
+      const enriched = data.map((a) =&gt; ({
+        id:         a.id,
+        type:       a.type,
+        actor:      a.user,
+        summary:    buildSummary(a),              // "You liked Ada's post 'X'"
+        createdAt:  a.createdAt,
+        metadata:   a.metadata,
+      }));
+
+      res.json({
+        data: enriched,
+        nextCursor: hasMore &amp;&amp; last
+          ? Buffer.from(JSON.stringify({ ts: last.createdAt, id: last.id })).toString("base64url")
+          : null,
+      });
+    } catch (err) { next(err); }
+  }
+);
+
+function buildSummary(a) {
+  switch (a.type) {
+    case "login":   return `Signed in from ${a.metadata.ip}`;
+    case "post":    return `Published "${a.metadata.title}"`;
+    case "comment": return `Commented on "${a.metadata.parentTitle}"`;
+    case "follow":  return `Started following ${a.metadata.targetName}`;
+    case "like":    return `Liked "${a.metadata.parentTitle}"`;
+    default:        return a.type;
+  }
+}</code></pre>
+<p>Activity feeds are append-only time-series that benefit from three specific patterns. <strong>Cursor pagination with tiebreaker</strong> &mdash; timestamps collide at high throughput; the <code>(createdAt, id)</code> pair keeps pages stable under concurrent writes. <strong>Authorization per-owner</strong> &mdash; you can see your own activity; admins see everyone's; anyone else is 403. <strong>Enrichment at read time</strong> &mdash; store raw events with minimal data; compute human-readable summaries in the response. For very large feeds, use a time-series database (TimescaleDB) or push to OpenSearch for complex analytics queries.</p>
+'''
+
+ANSWERS[35] = r'''
+<pre><code>// form-validation.js — thorough server-side validation with Zod
+import { z } from "zod";
+
+const ContactForm = z.object({
+  name:  z.string().trim().min(1, "Name is required").max(100),
+  email: z.string().email("Invalid email").toLowerCase().trim().max(254),
+  phone: z.string().trim()
+          .regex(/^[\d\s\-+()]{7,20}$/, "Invalid phone").optional().or(z.literal("")),
+
+  topic: z.enum(["sales","support","billing","other"]),
+
+  message: z.string().trim()
+            .min(10, "Message is too short")
+            .max(5000, "Message is too long"),
+
+  // checkbox — comes as "on" / "true" / undefined from HTML forms
+  agreeToTerms: z.preprocess(
+    (v) =&gt; v === "on" || v === "true" || v === true,
+    z.literal(true, { errorMap: () =&gt; ({ message: "You must accept the terms" }) })
+  ),
+
+  // honeypot — real users don't fill this; bots do
+  website: z.string().max(0, "spam detected").optional().default(""),
+}).strict()
+  .superRefine((data, ctx) =&gt; {
+    // cross-field: billing topic requires a phone number
+    if (data.topic === "billing" &amp;&amp; !data.phone) {
+      ctx.addIssue({ code: "custom", path: ["phone"], message: "Phone required for billing inquiries" });
+    }
+  });
+
+app.post("/contact", contactLimiter, async (req, res, next) =&gt; {
+  try {
+    const parsed = ContactForm.safeParse(req.body);
+    if (!parsed.success) {
+      // return a shape frontend forms can display per-field
+      const fieldErrors = {};
+      for (const issue of parsed.error.issues) {
+        const field = issue.path.join(".") || "_root";
+        (fieldErrors[field] ||= []).push(issue.message);
+      }
+      return res.status(400).json({ error: "Validation failed", fieldErrors });
+    }
+
+    // sanitize for display — message is rendered somewhere; strip HTML
+    const cleanMessage = parsed.data.message.replace(/&lt;/g, "&amp;lt;");
+
+    await db.contactMessage.create({
+      data: { ...parsed.data, message: cleanMessage, ip: req.ip, userAgent: req.headers["user-agent"] },
+    });
+
+    await sendEmail({ to: "support@example.com", subject: `[${parsed.data.topic}] ${parsed.data.name}`,
+                      body: cleanMessage });
+
+    res.status(201).json({ success: true });
+  } catch (err) { next(err); }
+});</code></pre>
+<p>Server-side validation has to do several things at once. <strong>Aggregate all errors</strong> (<code>abortEarly: false</code>) and return them as a field-keyed map &mdash; single-pass form UX instead of fix-one-retry loops. <strong>Normalize inputs</strong> (<code>trim</code>, <code>toLowerCase</code>) before validating so "<code>Ada@Example.COM  </code>" matches "<code>ada@example.com</code>". <strong>Cross-field rules</strong> via <code>superRefine</code> for "billing requires phone" kinds of constraints. <strong>Honeypot field</strong> &mdash; a hidden form field that real users never fill; bots auto-fill everything. <strong>Output escaping before display</strong> &mdash; even with validation, treat user text as untrusted at render time to prevent stored XSS.</p>
+'''
+
+ANSWERS[36] = r'''
+<pre><code>// email.js — transactional email via SendGrid / Resend / SES
+import { Resend } from "resend";
+import { z } from "zod";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+const SendEmailSchema = z.object({
+  to:       z.string().email().max(254),
+  subject:  z.string().trim().min(1).max(200),
+  template: z.enum(["welcome", "order_confirmation", "password_reset"]),
+  data:     z.record(z.string(), z.any()).optional(),
+}).strict();
+
+// template → (subject, html) mapping
+const TEMPLATES = {
+  welcome: (d) =&gt; ({
+    subject: `Welcome, ${d.name}!`,
+    html: `&lt;p&gt;Hi ${escapeHtml(d.name)}, thanks for signing up!&lt;/p&gt;
+           &lt;p&gt;Get started at &lt;a href="${d.url}"&gt;your dashboard&lt;/a&gt;.&lt;/p&gt;`,
+  }),
+  password_reset: (d) =&gt; ({
+    subject: "Password reset request",
+    html: `&lt;p&gt;Reset your password: &lt;a href="${d.resetUrl}"&gt;Click here&lt;/a&gt; (expires in 1 hour)&lt;/p&gt;`,
+  }),
+  order_confirmation: (d) =&gt; ({
+    subject: `Order #${d.orderId} confirmed`,
+    html: `&lt;p&gt;Thanks for your order of $${d.total}. We'll email shipping info soon.&lt;/p&gt;`,
+  }),
+};
+
+function escapeHtml(s) {
+  return String(s).replace(/[&amp;&lt;&gt;"']/g,
+    (c) =&gt; ({ "&amp;":"&amp;amp;", "&lt;":"&amp;lt;", "&gt;":"&amp;gt;", '"':"&amp;quot;", "'":"&amp;#39;" }[c]));
+}
+
+app.post("/notify/email", requireInternalAuth, async (req, res, next) =&gt; {
+  try {
+    const { to, template, data = {} } = SendEmailSchema.parse(req.body);
+    const built = TEMPLATES[template](data);
+
+    // enqueue to background queue — NEVER send inline
+    await emailQueue.add("send-email", {
+      to, from: "notifications@example.com",
+      subject: built.subject, html: built.html,
+      idempotencyKey: `${template}:${to}:${crypto.createHash("sha256").update(JSON.stringify(data)).digest("hex").slice(0,16)}`,
+    }, {
+      attempts: 3,
+      backoff: { type: "exponential", delay: 5000 },
+    });
+
+    res.status(202).json({ status: "queued" });
+  } catch (err) { next(err); }
+});
+
+// worker — runs separately
+emailQueue.process("send-email", async (job) =&gt; {
+  const { to, from, subject, html, idempotencyKey } = job.data;
+
+  // dedupe — don't send same email twice on retry
+  if (await redis.get(`email:sent:${idempotencyKey}`)) return;
+
+  await resend.emails.send({ from, to, subject, html });
+  await redis.setex(`email:sent:${idempotencyKey}`, 86400, "1");
+});</code></pre>
+<p><strong>Key insight:</strong> never send email inline from a request handler &mdash; SMTP / API calls can take 500ms-5s, tie up a worker, and fail in ways that surface to users. Always <strong>enqueue to a background queue</strong> (BullMQ, SQS, Cloudflare Queues) and return 202 Accepted. Generate an <strong>idempotency key</strong> from the template + recipient + data so a retry doesn't send the welcome email twice. Use a server-side template system &mdash; never let API callers send raw HTML, or you've built a phishing-as-a-service. Escape all interpolated user data before rendering.</p>
+'''
+
+ANSWERS[37] = r'''
+<pre><code>// nested-routes.js — posts/:postId/comments with proper auth + scoping
+import { Router } from "express";
+
+// COMMENTS router — child of posts
+const commentsRouter = Router({ mergeParams: true });   // inherit :postId
+
+// middleware: verify post exists + load it once
+commentsRouter.use(async (req, res, next) =&gt; {
+  const post = await db.post.findUnique({ where: { id: req.params.postId } });
+  if (!post) return res.sendStatus(404);
+  req.post = post;
+  next();
+});
+
+// GET /posts/:postId/comments — paginated
+commentsRouter.get("/", async (req, res) =&gt; {
+  const limit = Math.min(100, Number(req.query.limit) || 20);
+  const comments = await db.comment.findMany({
+    where: { postId: req.post.id },
+    orderBy: { createdAt: "desc" },
+    take: limit,
+  });
+  res.json({ data: comments });
+});
+
+// POST /posts/:postId/comments
+commentsRouter.post("/", authenticate, async (req, res) =&gt; {
+  const { text } = CommentSchema.parse(req.body);
+  const comment = await db.comment.create({
+    data: { postId: req.post.id, authorId: req.user.sub, text },
+  });
+  res.status(201).location(`/posts/${req.post.id}/comments/${comment.id}`).json(comment);
+});
+
+// GET / PATCH / DELETE for individual comments
+commentsRouter.param("commentId", async (req, res, next, id) =&gt; {
+  const c = await db.comment.findFirst({ where: { id, postId: req.post.id } });
+  if (!c) return res.sendStatus(404);
+  req.comment = c;
+  next();
+});
+
+commentsRouter.get("/:commentId", (req, res) =&gt; res.json(req.comment));
+
+commentsRouter.patch("/:commentId", authenticate, async (req, res) =&gt; {
+  // ownership check — scoped to the PATH, not just the DB
+  if (req.comment.authorId !== req.user.sub &amp;&amp; req.user.role !== "admin") {
+    return res.sendStatus(403);
+  }
+  const updated = await db.comment.update({
+    where: { id: req.comment.id },
+    data: CommentSchema.partial().parse(req.body),
+  });
+  res.json(updated);
+});
+
+commentsRouter.delete("/:commentId", authenticate, async (req, res) =&gt; {
+  if (req.comment.authorId !== req.user.sub &amp;&amp; req.user.role !== "admin") {
+    return res.sendStatus(403);
+  }
+  await db.comment.delete({ where: { id: req.comment.id } });
+  res.sendStatus(204);
+});
+
+// MOUNT under the parent
+app.use("/posts/:postId/comments", commentsRouter);</code></pre>
+<p><strong>Key insight:</strong> three things must line up for nested routes to be both clean and secure. (1) <code>mergeParams: true</code> so child routes see <code>:postId</code> from the parent. (2) <code>router.use</code> middleware at the child level that verifies the parent exists and attaches it to <code>req</code> &mdash; so every sub-route starts with a valid <code>req.post</code>. (3) <code>router.param</code> to load and scope individual items: <code>findFirst({ id, postId })</code> &mdash; not just <code>findUnique({ id })</code> &mdash; prevents the attack where someone requests <code>/posts/1/comments/999</code> to get comment 999 even though it belongs to post 42.</p>
+'''
+
+ANSWERS[38] = r'''
+<pre><code>// posts-from-db.js — Prisma with pg driver, relations, and filtered queries
+import { PrismaClient } from "@prisma/client";
+import { z } from "zod";
+
+const prisma = new PrismaClient({
+  log: ["warn", "error"],
+});
+
+const ListQuery = z.object({
+  authorId: z.string().uuid().optional(),
+  tag:      z.string().max(50).optional(),
+  search:   z.string().max(200).optional(),
+  limit:    z.coerce.number().int().min(1).max(100).default(20),
+  page:     z.coerce.number().int().min(1).default(1),
+}).strict();
+
+// GET /posts — filtered, paginated, with author data joined in
+app.get("/posts", async (req, res, next) =&gt; {
+  try {
+    const q = ListQuery.parse(req.query);
+
+    const where = {
+      ...(q.authorId &amp;&amp; { authorId: q.authorId }),
+      ...(q.tag      &amp;&amp; { tags: { has: q.tag } }),
+      ...(q.search   &amp;&amp; { title: { contains: q.search, mode: "insensitive" } }),
+      publishedAt: { not: null },
+    };
+
+    // single SQL JOIN — not N+1
+    const [data, total] = await prisma.$transaction([
+      prisma.post.findMany({
+        where,
+        orderBy: { publishedAt: "desc" },
+        skip:    (q.page - 1) * q.limit,
+        take:    q.limit,
+        include: {
+          author: { select: { id: true, name: true, avatarUrl: true } },
+          _count: { select: { comments: true, likes: true } },
+        },
+      }),
+      prisma.post.count({ where }),
+    ]);
+
+    res.json({
+      data: data.map((p) =&gt; ({
+        ...p,
+        commentCount: p._count.comments,
+        likeCount:    p._count.likes,
+        _count: undefined,
+      })),
+      meta: { page: q.page, limit: q.limit, total },
+    });
+  } catch (err) {
+    if (err instanceof z.ZodError) return res.status(400).json({ issues: err.issues });
+    next(err);
+  }
+});
+
+// GET /posts/:id — single post with deeper relation
+app.get("/posts/:id", async (req, res, next) =&gt; {
+  try {
+    const post = await prisma.post.findUnique({
+      where: { id: req.params.id },
+      include: {
+        author: { select: { id: true, name: true, avatarUrl: true } },
+        comments: {
+          take: 10,
+          orderBy: { createdAt: "desc" },
+          include: { author: { select: { id: true, name: true } } },
+        },
+      },
+    });
+    if (!post) return res.sendStatus(404);
+    res.json(post);
+  } catch (err) { next(err); }
+});
+
+// graceful shutdown — close pool on exit
+process.on("beforeExit", async () =&gt; await prisma.$disconnect());</code></pre>
+<p><strong>Key insight:</strong> Prisma's <code>include</code> generates a single SQL query with JOINs &mdash; not N+1. Fetching comments inside a loop (<code>for (const p of posts) await prisma.comment.findMany(...)</code>) is the classic ORM performance killer &mdash; 1 query becomes N+1 queries. Always prefer <code>include</code> or <code>select</code> with nested relations, or use DataLoader in GraphQL. <code>_count</code> is Prisma's optimized aggregate &mdash; way cheaper than loading all comments just to count them. Use <code>$transaction</code> for the data + total-count pair so they're consistent.</p>
+'''
+
+ANSWERS[39] = r'''
+<pre><code>// oauth-flow.js — OAuth 2.1 Authorization Code with PKCE (Google example)
+import { Issuer, generators } from "openid-client";
+
+const google  = await Issuer.discover("https://accounts.google.com");
+const oauth   = new google.Client({
+  client_id:     process.env.GOOGLE_CLIENT_ID,
+  client_secret: process.env.GOOGLE_CLIENT_SECRET,
+  redirect_uris: [`${process.env.APP_URL}/auth/google/callback`],
+  response_types: ["code"],
+});
+
+// 1. initiate login — redirect user to Google
+app.get("/auth/google", (req, res) =&gt; {
+  const codeVerifier = generators.codeVerifier();
+  const state        = generators.state();
+  const nonce        = generators.nonce();
+
+  // store transient values in server-side session (NOT in a cookie to the client)
+  req.session.oauth = { codeVerifier, state, nonce };
+
+  const url = oauth.authorizationUrl({
+    scope: "openid email profile",
+    code_challenge:        generators.codeChallenge(codeVerifier),
+    code_challenge_method: "S256",
+    state,
+    nonce,
+  });
+
+  res.redirect(url);
+});
+
+// 2. Google redirects user back here with ?code=...&amp;state=...
+app.get("/auth/google/callback", async (req, res, next) =&gt; {
+  try {
+    const stored = req.session.oauth;
+    if (!stored) return res.status(400).send("No oauth session");
+
+    // verify state, exchange code for tokens (PKCE verifier must match)
+    const tokenSet = await oauth.callback(
+      `${process.env.APP_URL}/auth/google/callback`,
+      oauth.callbackParams(req),
+      {
+        code_verifier: stored.codeVerifier,
+        state:         stored.state,
+        nonce:         stored.nonce,
+      }
+    );
+
+    const claims = tokenSet.claims();
+    if (!claims.email_verified) {
+      return res.status(403).send("Email not verified with Google");
+    }
+
+    // find or create user — identify by sub (stable), not email (can change)
+    const user = await db.user.upsert({
+      where:  { provider_providerId: { provider: "google", providerId: claims.sub } },
+      create: {
+        provider: "google", providerId: claims.sub,
+        email: claims.email, name: claims.name, avatarUrl: claims.picture,
+      },
+      update: { email: claims.email, name: claims.name, avatarUrl: claims.picture },
+    });
+
+    // clear oauth session, set user session
+    delete req.session.oauth;
+    req.session.userId = user.id;
+
+    res.redirect("/dashboard");
+  } catch (err) {
+    next(err);
+  }
+});</code></pre>
+<p><strong>Key insight:</strong> OAuth 2.1 (the current consolidated spec) <em>requires PKCE</em> for all clients &mdash; not just SPAs. PKCE prevents authorization-code interception: an attacker who steals the <code>code</code> still can't exchange it for tokens without the <code>code_verifier</code>. Three values must be server-side and per-login: <strong>codeVerifier</strong> (PKCE), <strong>state</strong> (CSRF-proofs the redirect), <strong>nonce</strong> (prevents ID token replay). Always identify users by <code>sub</code> (stable provider ID), not email &mdash; a user can change their Google email, and reused emails reassign accounts. For production, use <strong>Auth.js</strong> or <strong>better-auth</strong> &mdash; they handle per-provider quirks and account linking.</p>
+'''
+
+ANSWERS[40] = r'''
+<pre><code>// user-analytics.js — aggregate user statistics endpoint
+app.get("/users/:id/analytics", authenticate, async (req, res, next) =&gt; {
+  try {
+    // authz — only self or admin can see analytics
+    if (req.params.id !== req.user.sub &amp;&amp; req.user.role !== "admin") {
+      return res.sendStatus(403);
+    }
+
+    const userId = req.params.id;
+    const period = req.query.period || "30d";
+    const since  = new Date(Date.now() - parsePeriod(period));
+
+    // parallelize independent aggregates — run all at once
+    const [
+      postCount,
+      commentCount,
+      likesReceived,
+      followerCount,
+      recentActivity,
+      postsOverTime,
+    ] = await Promise.all([
+      prisma.post.count({ where: { authorId: userId, createdAt: { gte: since } } }),
+      prisma.comment.count({ where: { authorId: userId, createdAt: { gte: since } } }),
+      prisma.like.count({ where: { post: { authorId: userId }, createdAt: { gte: since } } }),
+      prisma.follow.count({ where: { followingId: userId } }),
+
+      // recent activity
+      prisma.activityLog.findMany({
+        where: { userId, createdAt: { gte: since } },
+        orderBy: { createdAt: "desc" },
+        take: 10,
+      }),
+
+      // time series — group by day
+      prisma.$queryRaw`
+        SELECT DATE(created_at) AS date, COUNT(*)::int AS count
+        FROM posts
+        WHERE author_id = ${userId}::uuid AND created_at &gt;= ${since}
+        GROUP BY DATE(created_at)
+        ORDER BY date ASC
+      `,
+    ]);
+
+    // cache for 5 min — analytics rarely need to be live
+    res.setHeader("Cache-Control", "private, max-age=300");
+
+    res.json({
+      period,
+      stats: {
+        postCount,
+        commentCount,
+        likesReceived,
+        followerCount,
+        engagementRate: postCount &gt; 0 ? (likesReceived / postCount).toFixed(2) : "0.00",
+      },
+      recentActivity,
+      postsOverTime,
+    });
+  } catch (err) { next(err); }
+});
+
+function parsePeriod(period) {
+  const m = { "7d":  7, "30d": 30, "90d": 90, "365d": 365 };
+  const days = m[period] ?? 30;
+  return days * 86400 * 1000;
+}</code></pre>
+<p><strong>Key insight:</strong> analytics endpoints often assemble 5-10 independent aggregations. <strong>Always run them in parallel</strong> with <code>Promise.all</code> &mdash; sequential awaits would total the latencies (10 &times; 50ms = 500ms become 50ms). For time-series data, use raw SQL with <code>GROUP BY DATE(...)</code> &mdash; Prisma's aggregation doesn't support calendar-based grouping. Cache aggressively with <code>Cache-Control: private, max-age=300</code>; users don't notice their view count being 5 minutes old, but your DB will notice the load drop. For heavy workloads, compute aggregates on a schedule into a summary table rather than on every request.</p>
+'''
+
+ANSWERS[41] = r'''
+<pre><code>// upload-progress.js — file upload with real-time progress tracking
+// Strategy: pre-signed S3 multipart upload — browser uploads chunks directly,
+// server only signs URLs. Progress comes naturally from fetch upload progress.
+
+import { CreateMultipartUploadCommand, UploadPartCommand, CompleteMultipartUploadCommand } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+
+// 1. start upload — server creates the multipart upload and signs URLs for each part
+app.post("/uploads/multipart/start", authenticate, async (req, res, next) =&gt; {
+  try {
+    const { filename, contentType, fileSize } = z.object({
+      filename:    z.string().min(1).max(255),
+      contentType: z.string().max(100),
+      fileSize:    z.number().int().positive().max(5 * 1024 ** 3),  // 5 GB cap
+    }).parse(req.body);
+
+    const key = `uploads/${req.user.sub}/${crypto.randomUUID()}-${filename.replace(/[^\w.-]/g, "_")}`;
+
+    // 5 MB chunks — S3 minimum
+    const partSize = 5 * 1024 * 1024;
+    const numParts = Math.ceil(fileSize / partSize);
+
+    const { UploadId } = await s3.send(new CreateMultipartUploadCommand({
+      Bucket: BUCKET, Key: key, ContentType: contentType,
+    }));
+
+    // sign URL for each part — 1 hour expiry
+    const parts = await Promise.all(
+      Array.from({ length: numParts }, async (_, i) =&gt; {
+        const url = await getSignedUrl(s3, new UploadPartCommand({
+          Bucket: BUCKET, Key: key, UploadId, PartNumber: i + 1,
+        }), { expiresIn: 3600 });
+        return { partNumber: i + 1, url };
+      })
+    );
+
+    res.json({ uploadId: UploadId, key, partSize, parts });
+  } catch (err) { next(err); }
+});
+
+// 2. client uploads each part directly to S3 (no Node bytes!)
+//    browser code:
+//    for (const part of parts) {
+//      const res = await fetch(part.url, { method: "PUT", body: chunk });
+//      const etag = res.headers.get("ETag");
+//      onProgress(uploadedBytes / fileSize);
+//    }
+
+// 3. finalize — client sends back ETags for each part
+app.post("/uploads/multipart/complete", authenticate, async (req, res, next) =&gt; {
+  try {
+    const { uploadId, key, parts } = req.body;   // parts: [{ PartNumber, ETag }]
+    await s3.send(new CompleteMultipartUploadCommand({
+      Bucket: BUCKET, Key: key, UploadId: uploadId,
+      MultipartUpload: { Parts: parts },
+    }));
+
+    // now record the finalized upload in DB
+    const file = await db.file.create({
+      data: { id: crypto.randomUUID(), userId: req.user.sub, storageKey: key },
+    });
+    res.status(201).json({ fileId: file.id, url: `/files/${file.id}` });
+  } catch (err) { next(err); }
+});</code></pre>
+<p><strong>Key insight:</strong> uploading via your Node server and reporting progress (e.g., with Socket.IO or SSE) works but wastes bandwidth &mdash; every byte flows client → Node → S3. The modern pattern is <strong>S3 multipart + pre-signed URLs</strong>: Node only signs URLs, the browser uploads parts directly to S3 using <code>fetch</code>'s native upload progress events. Benefits: zero Node bandwidth, resumable (retry failed parts), parallel uploads (upload 4 parts simultaneously), scales to 5TB files. The same pattern works for GCS and R2 with their respective SDKs.</p>
+'''
+
+ANSWERS[42] = r'''
+<pre><code>// batch-update.js — bulk update dataset with partial success reporting
+import { z } from "zod";
+
+const BatchUpdateSchema = z.object({
+  updates: z.array(z.object({
+    id:    z.string().uuid(),
+    patch: z.object({
+      status:   z.enum(["active", "paused", "archived"]).optional(),
+      priority: z.number().int().min(1).max(5).optional(),
+      tags:     z.array(z.string().max(50)).max(20).optional(),
+    }).strict(),
+  })).min(1).max(1000),                     // CAP batch size — prevents DoS
+});
+
+app.patch("/items/batch", authenticate, async (req, res, next) =&gt; {
+  try {
+    const { updates } = BatchUpdateSchema.parse(req.body);
+
+    const results = [];
+    const BATCH = 50;                        // DB transaction size
+
+    for (let i = 0; i &lt; updates.length; i += BATCH) {
+      const chunk = updates.slice(i, i + BATCH);
+
+      // use transaction so each chunk is atomic
+      const chunkResults = await prisma.$transaction(
+        chunk.map(async (u) =&gt; {
+          try {
+            // verify ownership in the same query — NO race
+            const updated = await prisma.item.update({
+              where: {
+                id: u.id,
+                // multi-tenant scope — won't update someone else's item
+                ownerId: req.user.sub,
+              },
+              data: u.patch,
+            });
+            return { id: u.id, status: "ok", item: updated };
+          } catch (err) {
+            // Prisma P2025 = record not found (or not owned)
+            if (err.code === "P2025") return { id: u.id, status: "not_found" };
+            return { id: u.id, status: "error", error: err.message };
+          }
+        })
+      ).catch((txErr) =&gt; {
+        // transaction failed — mark all chunk items as errored
+        return chunk.map((u) =&gt; ({ id: u.id, status: "error", error: txErr.message }));
+      });
+
+      results.push(...chunkResults);
+    }
+
+    const summary = results.reduce((acc, r) =&gt; {
+      acc[r.status] = (acc[r.status] || 0) + 1;
+      return acc;
+    }, {});
+
+    // 207 Multi-Status — partial success is normal here
+    res.status(207).json({ summary, results });
+  } catch (err) {
+    if (err instanceof z.ZodError) return res.status(400).json({ issues: err.issues });
+    next(err);
+  }
+});</code></pre>
+<p><strong>Key insight:</strong> bulk endpoints need four things often skipped. (1) <strong>Cap the batch size</strong> (100-1000) in the schema &mdash; otherwise a single malicious request can update millions of rows. (2) <strong>Chunk into transactions</strong> of ~50 &mdash; too small and you pay transaction overhead per item, too large and locks linger. (3) <strong>Return per-item results</strong> &mdash; 207 Multi-Status with a summary + per-id outcome lets clients reconcile partial failures. (4) <strong>Include ownership in the WHERE clause</strong> (not just after fetching) &mdash; prevents the attack where user A sends IDs belonging to user B.</p>
+'''
+
+ANSWERS[43] = r'''
+<pre><code>// retry-client.js — API client with exponential backoff + jitter + circuit breaker
+import { setTimeout as sleep } from "node:timers/promises";
+
+export async function fetchWithRetry(url, options = {}) {
+  const {
+    maxRetries    = 5,
+    initialDelay  = 1000,     // 1s
+    maxDelay      = 30_000,   // cap at 30s
+    factor        = 2,
+    jitterMs      = 300,
+    timeout       = 10_000,
+    ...fetchOpts
+  } = options;
+
+  let lastErr;
+
+  for (let attempt = 0; attempt &lt;= maxRetries; attempt++) {
+    try {
+      const res = await fetch(url, {
+        ...fetchOpts,
+        signal: AbortSignal.timeout(timeout),
+      });
+
+      // success
+      if (res.ok) return res;
+
+      // honor Retry-After for 429 and 503
+      if (res.status === 429 || res.status === 503) {
+        const retryAfter = res.headers.get("Retry-After");
+        const waitMs = retryAfter
+          ? Number(retryAfter) * 1000
+          : Math.min(maxDelay, initialDelay * factor ** attempt);
+
+        // stop if we've exhausted retries
+        if (attempt === maxRetries) {
+          throw new Error(`Rate limited after ${maxRetries + 1} attempts`);
+        }
+        await sleep(waitMs + Math.random() * jitterMs);
+        continue;
+      }
+
+      // 4xx (not 429) — permanent, don't retry
+      if (res.status &gt;= 400 &amp;&amp; res.status &lt; 500) {
+        throw new Error(`HTTP ${res.status} ${await res.text()}`);
+      }
+
+      // 5xx — retry with backoff
+      if (attempt === maxRetries) {
+        throw new Error(`HTTP ${res.status} after ${maxRetries + 1} attempts`);
+      }
+    } catch (err) {
+      lastErr = err;
+
+      // don't retry AbortError at max attempts
+      const retriable = err.name === "TimeoutError" ||
+                        err.name === "AbortError"   ||
+                        err.code === "ECONNREFUSED" ||
+                        err.code === "ECONNRESET"   ||
+                        /^HTTP 5/.test(err.message);
+
+      if (!retriable || attempt === maxRetries) throw err;
+    }
+
+    // exponential backoff with FULL JITTER
+    // without jitter, all clients retry in lockstep → thundering herd
+    const base = Math.min(maxDelay, initialDelay * factor ** attempt);
+    const jittered = Math.random() * base;                // full jitter (AWS best practice)
+    await sleep(jittered);
+  }
+
+  throw lastErr;
+}
+
+// usage
+try {
+  const res = await fetchWithRetry("https://api.example.com/data", {
+    headers: { Authorization: `Bearer ${token}` },
+    maxRetries: 5,
+    timeout: 5_000,
+  });
+  const data = await res.json();
+} catch (err) {
+  console.error("Final failure:", err.message);
+}</code></pre>
+<p><strong>Key insight:</strong> three details separate a pro retry library from a naive loop. (1) <strong>Classify errors</strong> &mdash; retry 5xx and network errors, but never 4xx (except 429) because they're permanent client bugs. (2) <strong>Honor <code>Retry-After</code></strong> on 429/503 &mdash; the server is telling you exactly when to retry; ignoring it wastes both parties' resources. (3) <strong>Full jitter</strong> (random 0-to-base) beats <em>fixed</em> exponential backoff (<code>2^n</code> seconds) by scattering retries evenly. Without jitter, thousands of clients all retry at exactly second 2, 4, 8 &mdash; the "thundering herd" that can re-kill a recovering server.</p>
+'''
+
+ANSWERS[44] = r'''
+<pre><code>// recent-activity.js — user activity feed with cursor pagination + filtering
+import { z } from "zod";
+
+const ActivityQuery = z.object({
+  cursor: z.string().optional(),
+  limit:  z.coerce.number().int().min(1).max(50).default(20),
+  types:  z.string().optional().transform(
+    (s) =&gt; s ? s.split(",").map((t) =&gt; t.trim()) : undefined
+  ),
+}).strict();
+
+app.get("/users/:id/activities", authenticate, async (req, res, next) =&gt; {
+  try {
+    if (req.params.id !== req.user.sub &amp;&amp; req.user.role !== "admin") {
+      return res.sendStatus(403);
+    }
+
+    const q = ActivityQuery.parse(req.query);
+
+    const cursor = q.cursor
+      ? JSON.parse(Buffer.from(q.cursor, "base64url").toString())
+      : null;
+
+    const where = {
+      userId: req.params.id,
+      ...(q.types?.length &amp;&amp; { type: { in: q.types } }),
+      ...(cursor &amp;&amp; {
+        OR: [
+          { createdAt: { lt: new Date(cursor.createdAt) } },
+          { createdAt: new Date(cursor.createdAt), id: { lt: cursor.id } },
+        ],
+      }),
+    };
+
+    const rows = await prisma.activityLog.findMany({
+      where,
+      orderBy: [{ createdAt: "desc" }, { id: "desc" }],
+      take: q.limit + 1,           // fetch +1 to detect "more"
+      select: {
+        id: true, type: true, createdAt: true, metadata: true,
+        // join related entity for display
+        post:    { select: { id: true, title: true } },
+        comment: { select: { id: true, text: true } },
+      },
+    });
+
+    const hasMore = rows.length &gt; q.limit;
+    const data = rows.slice(0, q.limit);
+    const last = data[data.length - 1];
+
+    // denormalize — frontend can render any activity type uniformly
+    const feed = data.map((a) =&gt; ({
+      id:        a.id,
+      type:      a.type,
+      createdAt: a.createdAt,
+      // pull out the relevant entity
+      target:    a.post || a.comment || null,
+      metadata:  a.metadata,
+    }));
+
+    res.setHeader("Cache-Control", "private, no-cache");
+    res.json({
+      data: feed,
+      nextCursor: hasMore &amp;&amp; last
+        ? Buffer.from(JSON.stringify({ createdAt: last.createdAt, id: last.id })).toString("base64url")
+        : null,
+    });
+  } catch (err) {
+    if (err instanceof z.ZodError) return res.status(400).json({ issues: err.issues });
+    next(err);
+  }
+});</code></pre>
+<p><strong>Key insight:</strong> activity feeds are a perfect fit for <strong>cursor pagination</strong>, not offset. New activity lands constantly, so offsets drift &mdash; page 2 at 10:00:00 and page 2 at 10:00:05 show different rows if 3 new activities arrived. Cursor (keyset) pagination is stable: "show me things older than this timestamp+id." Always return a <strong>denormalized shape</strong> the frontend can render uniformly &mdash; don't force clients to handle both <code>activity.post</code> and <code>activity.comment</code> with different branches; collapse into a common <code>target</code> field. Set <code>Cache-Control: private, no-cache</code> &mdash; activity data is personal and constantly changing.</p>
+'''
+
+ANSWERS[45] = r'''
+<pre><code>// nested-query-params.js — parse nested/complex query strings safely
+// URL: /search?filter[status]=active&amp;filter[tags][]=js&amp;filter[tags][]=node&amp;sort=-createdAt
+import qs from "qs";
+import { z } from "zod";
+
+// Express 5 default is 'simple' which doesn't do nested — use qs explicitly
+app.set("query parser", (str) =&gt;
+  qs.parse(str, {
+    depth: 5,                                // CAP nesting depth (DoS defense)
+    arrayLimit: 100,                         // CAP array length
+    parameterLimit: 100,                     // CAP total number of params
+    allowPrototypes: false,                  // prototype-pollution defense
+  })
+);
+
+const SearchQuery = z.object({
+  filter: z.object({
+    status: z.enum(["active", "paused", "archived"]).optional(),
+    tags:   z.array(z.string().max(50)).max(10).optional(),
+    minPrice: z.coerce.number().nonnegative().optional(),
+    maxPrice: z.coerce.number().nonnegative().optional(),
+    createdAfter: z.string().datetime().optional(),
+  }).strict().optional(),
+
+  sort: z.string().regex(/^-?[\w]+$/).optional(),       // "-createdAt" = desc
+  page:  z.coerce.number().int().min(1).default(1),
+  limit: z.coerce.number().int().min(1).max(100).default(20),
+}).strict();
+
+app.get("/search", async (req, res, next) =&gt; {
+  try {
+    const parsed = SearchQuery.parse(req.query);
+
+    // build Prisma WHERE from nested filter
+    const where = {};
+    if (parsed.filter?.status)       where.status = parsed.filter.status;
+    if (parsed.filter?.tags?.length) where.tags = { hasSome: parsed.filter.tags };
+    if (parsed.filter?.minPrice != null || parsed.filter?.maxPrice != null) {
+      where.price = {
+        ...(parsed.filter.minPrice != null &amp;&amp; { gte: parsed.filter.minPrice }),
+        ...(parsed.filter.maxPrice != null &amp;&amp; { lte: parsed.filter.maxPrice }),
+      };
+    }
+    if (parsed.filter?.createdAfter) {
+      where.createdAt = { gte: new Date(parsed.filter.createdAfter) };
+    }
+
+    // safe sort — whitelist column
+    const SAFE_SORT = new Set(["createdAt", "price", "title"]);
+    let orderBy = { createdAt: "desc" };
+    if (parsed.sort) {
+      const desc = parsed.sort.startsWith("-");
+      const col  = desc ? parsed.sort.slice(1) : parsed.sort;
+      if (SAFE_SORT.has(col)) orderBy = { [col]: desc ? "desc" : "asc" };
+    }
+
+    const [data, total] = await Promise.all([
+      prisma.item.findMany({
+        where, orderBy,
+        skip: (parsed.page - 1) * parsed.limit,
+        take: parsed.limit,
+      }),
+      prisma.item.count({ where }),
+    ]);
+
+    res.json({ data, meta: { page: parsed.page, limit: parsed.limit, total } });
+  } catch (err) {
+    if (err instanceof z.ZodError) return res.status(400).json({ issues: err.issues });
+    next(err);
+  }
+});</code></pre>
+<p><strong>Key insight:</strong> Node's default query parser only handles flat <code>?a=1&amp;b=2</code>; for <code>?filter[status]=active</code> you need <code>qs</code>. Three guardrails on <code>qs</code> matter: <strong>depth cap</strong> (prevents <code>?a[a][a][a]...</code> DoS), <strong>arrayLimit / parameterLimit</strong> (prevents huge allocations), and <strong>allowPrototypes: false</strong> (blocks <code>?__proto__[admin]=true</code> prototype pollution attacks). For sort fields, always <strong>whitelist</strong> allowed column names &mdash; never pass user input directly to <code>orderBy</code>, or attackers can sort on indexed vs non-indexed columns to map your schema.</p>
+'''
+
+ANSWERS[46] = r'''
+<pre><code>// preferences.js — user settings with merge semantics + defaults
+import { z } from "zod";
+import _merge from "lodash.merge";
+
+// schema includes defaults — partial updates merge against these
+const PreferencesSchema = z.object({
+  theme:    z.enum(["light", "dark", "auto"]).default("auto"),
+  language: z.enum(["en", "de", "fr", "es", "ja"]).default("en"),
+  timezone: z.string().default("UTC"),
+
+  notifications: z.object({
+    email:     z.boolean().default(true),
+    push:      z.boolean().default(false),
+    sms:       z.boolean().default(false),
+    frequency: z.enum(["immediate", "daily", "weekly", "never"]).default("immediate"),
+  }).default({}),
+
+  privacy: z.object({
+    profileVisibility: z.enum(["public", "followers", "private"]).default("public"),
+    showEmail:         z.boolean().default(false),
+    allowMessages:     z.enum(["everyone", "followers", "nobody"]).default("everyone"),
+  }).default({}),
+}).strict();
+
+// GET — return current prefs (with defaults filled in)
+app.get("/me/preferences", authenticate, async (req, res) =&gt; {
+  const row  = await db.userPreferences.findUnique({ where: { userId: req.user.sub } });
+  const prefs = PreferencesSchema.parse(row?.data || {});
+  res.json(prefs);
+});
+
+// PATCH — merge partial update with existing values
+app.patch("/me/preferences", authenticate, async (req, res, next) =&gt; {
+  try {
+    // accept nested partial — any field optional
+    const PatchSchema = PreferencesSchema.deepPartial();
+    const patch = PatchSchema.parse(req.body);
+
+    const existing = await db.userPreferences.findUnique({ where: { userId: req.user.sub } });
+    const merged   = _merge({}, existing?.data || {}, patch);
+
+    // re-validate the merged result (catches invalid combinations)
+    const final = PreferencesSchema.parse(merged);
+
+    const saved = await db.userPreferences.upsert({
+      where:  { userId: req.user.sub },
+      create: { userId: req.user.sub, data: final },
+      update: { data: final },
+    });
+
+    res.json(PreferencesSchema.parse(saved.data));
+  } catch (err) {
+    if (err instanceof z.ZodError) return res.status(400).json({ issues: err.issues });
+    next(err);
+  }
+});
+
+// PUT — full replace (only use when sending ALL prefs at once)
+app.put("/me/preferences", authenticate, async (req, res, next) =&gt; {
+  try {
+    const final = PreferencesSchema.parse(req.body);
+    await db.userPreferences.upsert({
+      where:  { userId: req.user.sub },
+      create: { userId: req.user.sub, data: final },
+      update: { data: final },
+    });
+    res.json(final);
+  } catch (err) {
+    if (err instanceof z.ZodError) return res.status(400).json({ issues: err.issues });
+    next(err);
+  }
+});</code></pre>
+<p><strong>Key insight:</strong> preference APIs demonstrate the PATCH vs PUT distinction clearly. With PATCH, the client sends <code>{ "notifications": { "email": false } }</code> and expects the other notification sub-fields to stay as they were. With PUT, missing fields get defaults. Two implementation details matter: (1) use <code>deepPartial()</code> to make nested fields optional, and <strong>deep-merge</strong> with lodash (not spread &mdash; <code>{ ...existing, ...patch }</code> would replace the whole <code>notifications</code> object). (2) <strong>Re-validate after merge</strong> &mdash; individual pieces may be valid but combinations might not be.</p>
+'''
+
+ANSWERS[47] = r'''
+<pre><code>// filter-sort.js — generic server-side filtering + sorting + field selection
+import { z } from "zod";
+
+// whitelist what can be filtered/sorted — NEVER accept arbitrary column names
+const ALLOWED_FILTERS = {
+  status:    (v) =&gt; ({ status: String(v) }),
+  authorId:  (v) =&gt; ({ authorId: String(v) }),
+  minPrice:  (v) =&gt; ({ price: { gte: Number(v) } }),
+  maxPrice:  (v) =&gt; ({ price: { lte: Number(v) } }),
+  tag:       (v) =&gt; ({ tags: { has: String(v) } }),
+  createdAfter: (v) =&gt; ({ createdAt: { gte: new Date(String(v)) } }),
+};
+
+const ALLOWED_SORTS = new Set(["createdAt", "updatedAt", "price", "title"]);
+
+// parse comma-separated list of fields — e.g. ?fields=id,title,price
+function parseFieldList(query, allowed) {
+  if (!query) return null;
+  const fields = String(query).split(",").map((f) =&gt; f.trim()).filter(Boolean);
+  const select = {};
+  for (const f of fields) if (allowed.has(f)) select[f] = true;
+  return Object.keys(select).length ? select : null;
+}
+
+const SELECTABLE = new Set(["id", "title", "price", "status", "authorId", "createdAt", "tags"]);
+
+app.get("/items", async (req, res, next) =&gt; {
+  try {
+    // build WHERE from allowed filters only
+    const where = {};
+    for (const [key, value] of Object.entries(req.query)) {
+      if (ALLOWED_FILTERS[key] &amp;&amp; value !== undefined) {
+        Object.assign(where, ALLOWED_FILTERS[key](value));
+      }
+    }
+
+    // sort: "-field" for desc, "field" for asc
+    let orderBy = { createdAt: "desc" };
+    if (req.query.sort) {
+      const raw   = String(req.query.sort);
+      const desc  = raw.startsWith("-");
+      const col   = desc ? raw.slice(1) : raw;
+      if (ALLOWED_SORTS.has(col)) {
+        orderBy = { [col]: desc ? "desc" : "asc" };
+      }
+    }
+
+    // sparse field selection (?fields=id,title,price)
+    const select = parseFieldList(req.query.fields, SELECTABLE);
+
+    const limit = Math.min(100, Number(req.query.limit) || 20);
+    const page  = Math.max(1, Number(req.query.page) || 1);
+
+    const [data, total] = await Promise.all([
+      prisma.item.findMany({
+        where, orderBy,
+        skip: (page - 1) * limit,
+        take: limit,
+        ...(select &amp;&amp; { select }),
+      }),
+      prisma.item.count({ where }),
+    ]);
+
+    res.json({ data, meta: { page, limit, total } });
+  } catch (err) { next(err); }
+});</code></pre>
+<p><strong>Key insight:</strong> exposing "filter by any column" via <code>?where[col]=value</code> is a classic ORM injection vector &mdash; users filter on indexed vs unindexed columns to enumerate your schema, or filter on private fields (<code>?where[passwordHash]=...</code>) to leak data. Always <strong>whitelist</strong> filterable columns with a handler per column (so each filter can have its own coercion logic), whitelist sortable columns as a <code>Set</code>, and whitelist which fields <code>select</code> can request. Sparse fieldsets (<code>?fields=id,title</code>) meaningfully reduce bandwidth for large tables with JSONB or text columns.</p>
+'''
+
+ANSWERS[48] = r'''
+<pre><code>// mongo-crud.js — CRUD against MongoDB with the native driver + Zod
+import { MongoClient, ObjectId } from "mongodb";
+import { z } from "zod";
+
+const client = new MongoClient(process.env.MONGO_URI);
+await client.connect();
+const db   = client.db("app");
+const col  = db.collection("products");
+
+// ensure indexes once at startup
+await col.createIndex({ sku: 1 }, { unique: true });
+await col.createIndex({ tags: 1 });
+await col.createIndex({ createdAt: -1 });
+
+const ProductSchema = z.object({
+  sku:         z.string().trim().min(1).max(50).regex(/^[A-Z0-9-]+$/),
+  name:        z.string().trim().min(1).max(200),
+  price:       z.number().nonnegative(),
+  stock:       z.number().int().nonnegative().default(0),
+  tags:        z.array(z.string().max(50)).max(20).default([]),
+  description: z.string().max(5000).optional(),
+}).strict();
+
+// CREATE
+app.post("/products", async (req, res, next) =&gt; {
+  try {
+    const data = ProductSchema.parse(req.body);
+    const now = new Date();
+    const { insertedId } = await col.insertOne({ ...data, createdAt: now, updatedAt: now });
+    res.status(201).json({ _id: insertedId, ...data, createdAt: now });
+  } catch (err) {
+    if (err.code === 11000) return res.status(409).json({ error: "SKU exists" });
+    if (err instanceof z.ZodError) return res.status(400).json({ issues: err.issues });
+    next(err);
+  }
+});
+
+// READ one — validate ObjectId format (prevents NoSQL injection)
+app.get("/products/:id", async (req, res, next) =&gt; {
+  try {
+    if (!ObjectId.isValid(req.params.id)) return res.status(400).json({ error: "Invalid id" });
+    const doc = await col.findOne({ _id: new ObjectId(req.params.id) });
+    if (!doc) return res.sendStatus(404);
+    res.json(doc);
+  } catch (err) { next(err); }
+});
+
+// LIST with filtering — only allow whitelisted query keys
+app.get("/products", async (req, res, next) =&gt; {
+  try {
+    const filter = {};
+    if (req.query.tag)   filter.tags = { $in: [String(req.query.tag)] };
+    if (req.query.minPrice != null) filter.price = { ...filter.price, $gte: Number(req.query.minPrice) };
+    if (req.query.maxPrice != null) filter.price = { ...filter.price, $lte: Number(req.query.maxPrice) };
+
+    const limit = Math.min(100, Number(req.query.limit) || 20);
+    const page  = Math.max(1, Number(req.query.page) || 1);
+
+    const [data, total] = await Promise.all([
+      col.find(filter).sort({ createdAt: -1 }).skip((page - 1) * limit).limit(limit).toArray(),
+      col.countDocuments(filter),
+    ]);
+    res.json({ data, meta: { page, limit, total } });
+  } catch (err) { next(err); }
+});
+
+// UPDATE (PATCH) — partial
+app.patch("/products/:id", async (req, res, next) =&gt; {
+  try {
+    if (!ObjectId.isValid(req.params.id)) return res.status(400).json({ error: "Invalid id" });
+    const patch = ProductSchema.partial().parse(req.body);
+    const result = await col.findOneAndUpdate(
+      { _id: new ObjectId(req.params.id) },
+      { $set: { ...patch, updatedAt: new Date() } },
+      { returnDocument: "after" }
+    );
+    if (!result) return res.sendStatus(404);
+    res.json(result);
+  } catch (err) {
+    if (err instanceof z.ZodError) return res.status(400).json({ issues: err.issues });
+    next(err);
+  }
+});
+
+// DELETE
+app.delete("/products/:id", async (req, res, next) =&gt; {
+  try {
+    if (!ObjectId.isValid(req.params.id)) return res.status(400).json({ error: "Invalid id" });
+    const r = await col.deleteOne({ _id: new ObjectId(req.params.id) });
+    if (r.deletedCount === 0) return res.sendStatus(404);
+    res.sendStatus(204);
+  } catch (err) { next(err); }
+});</code></pre>
+<p><strong>Key insight:</strong> two MongoDB-specific footguns. (1) <strong>NoSQL injection</strong> &mdash; if you pass <code>req.body</code> directly as a filter, an attacker sends <code>{"email": {"$ne": null}}</code> and matches every record. Zod's <code>.strict()</code> fixes this by rejecting object-valued fields. (2) <strong>ObjectId validation</strong> &mdash; <code>new ObjectId(str)</code> throws on bad input, but validating with <code>ObjectId.isValid()</code> first returns a clean 400 instead of a 500. Catching <code>err.code === 11000</code> (duplicate key) and returning 409 Conflict is the canonical pattern for unique-constraint violations.</p>
+'''
+
+ANSWERS[49] = r'''
+<pre><code>// dynamic-query.js — safe dynamic query construction for an analytics endpoint
+import { z } from "zod";
+import { sql, Kysely, PostgresDialect } from "kysely";   // Kysely = typed SQL builder
+
+const DynamicReportSchema = z.object({
+  metric: z.enum(["revenue", "orders", "customers"]),
+  groupBy: z.enum(["day", "week", "month", "country", "product_id"]),
+  filters: z.object({
+    startDate:   z.string().datetime().optional(),
+    endDate:     z.string().datetime().optional(),
+    country:     z.string().length(2).optional(),
+    minAmount:   z.number().nonnegative().optional(),
+  }).strict().optional(),
+  limit: z.coerce.number().int().min(1).max(1000).default(100),
+}).strict();
+
+const METRIC_EXPRS = {
+  revenue:   sql`SUM(amount)::numeric(12,2)`,
+  orders:    sql`COUNT(*)::int`,
+  customers: sql`COUNT(DISTINCT customer_id)::int`,
+};
+
+const GROUP_EXPRS = {
+  day:        sql`DATE_TRUNC('day', created_at)`,
+  week:       sql`DATE_TRUNC('week', created_at)`,
+  month:      sql`DATE_TRUNC('month', created_at)`,
+  country:    sql`country`,
+  product_id: sql`product_id`,
+};
+
+app.post("/reports/run", authenticate, async (req, res, next) =&gt; {
+  try {
+    const { metric, groupBy, filters = {}, limit } = DynamicReportSchema.parse(req.body);
+
+    let query = kysely
+      .selectFrom("orders")
+      .select([
+        sql.as(METRIC_EXPRS[metric], "value"),
+        sql.as(GROUP_EXPRS[groupBy], "group"),
+      ])
+      .groupBy(sql.ref(GROUP_EXPRS[groupBy]))
+      .orderBy("group", "asc")
+      .limit(limit);
+
+    // parameterized filters — values bind safely
+    if (filters.startDate) query = query.where("created_at", "&gt;=", new Date(filters.startDate));
+    if (filters.endDate)   query = query.where("created_at", "&lt;=", new Date(filters.endDate));
+    if (filters.country)   query = query.where("country", "=", filters.country);
+    if (filters.minAmount != null) query = query.where("amount", "&gt;=", filters.minAmount);
+
+    const rows = await query.execute();
+    res.json({ metric, groupBy, filters, data: rows });
+  } catch (err) {
+    if (err instanceof z.ZodError) return res.status(400).json({ issues: err.issues });
+    next(err);
+  }
+});</code></pre>
+<p><strong>Key insight:</strong> "dynamic query" is where SQL injection lives in modern apps. Two rules keep it safe. (1) <strong>Identifiers (column/table/SQL expressions) must come from a whitelist</strong> &mdash; never user input. Map user-facing names ("revenue", "monthly") to server-side SQL fragments <em>you wrote</em>. (2) <strong>Values bind as parameters</strong> &mdash; always. Kysely, Drizzle, Prisma's <code>$queryRaw</code>, or raw <code>pool.query(text, values)</code> all support this. Never build the full SQL string with template literals and user input &mdash; even one <code>"${input}"</code> is enough to get pwned. The <code>sql</code> helper's tagged-template form handles this correctly.</p>
+'''
+
+ANSWERS[50] = r'''
+<pre><code>// external-api-proxy.js — proxy rate-limited 3rd-party API with batching + retries
+import pLimit from "p-limit";
+import { setTimeout as sleep } from "node:timers/promises";
+
+const UPSTREAM = "https://api.example.com";
+const API_KEY  = process.env.UPSTREAM_KEY;
+
+// upstream allows 10 concurrent requests + 100/minute
+const concurrency = pLimit(10);                  // max 10 in-flight calls
+let   minuteBudget = 100;                         // refills every 60s
+setInterval(() =&gt; { minuteBudget = 100; }, 60_000);
+
+const inflight = new Map();                       // request deduping
+
+async function callUpstream(path, cacheKey) {
+  // 1. in-flight deduplication — concurrent calls for same key share one upstream request
+  if (inflight.has(cacheKey)) return inflight.get(cacheKey);
+
+  // 2. cache check
+  const cached = await redis.get(`up:${cacheKey}`);
+  if (cached) return JSON.parse(cached);
+
+  const promise = (async () =&gt; {
+    // 3. wait for budget
+    while (minuteBudget &lt;= 0) await sleep(100);
+    minuteBudget--;
+
+    // 4. concurrency gate + retries
+    return concurrency(async () =&gt; {
+      for (let attempt = 0; attempt &lt; 3; attempt++) {
+        const res = await fetch(`${UPSTREAM}${path}`, {
+          headers: { "X-API-Key": API_KEY },
+          signal: AbortSignal.timeout(10_000),
+        });
+        if (res.ok) {
+          const data = await res.json();
+          await redis.setex(`up:${cacheKey}`, 300, JSON.stringify(data));
+          return data;
+        }
+        if (res.status === 429) {
+          const retryAfter = Number(res.headers.get("Retry-After")) || 2 ** attempt;
+          await sleep(retryAfter * 1000 + Math.random() * 500);
+          continue;
+        }
+        throw new Error(`Upstream ${res.status}`);
+      }
+      throw new Error("Retries exhausted");
+    });
+  })();
+
+  inflight.set(cacheKey, promise);
+  promise.finally(() =&gt; inflight.delete(cacheKey));
+  return promise;
+}
+
+app.get("/proxy/product/:id", async (req, res, next) =&gt; {
+  try {
+    const data = await callUpstream(`/products/${req.params.id}`, `product:${req.params.id}`);
+    res.setHeader("Cache-Control", "public, max-age=300");
+    res.json(data);
+  } catch (err) { next(err); }
+});</code></pre>
+<p><strong>Key insight:</strong> when many of your users call one rate-limited upstream, four layers protect both sides. (1) <strong>Cache</strong> aggressively &mdash; the same product doesn't change per request; serve from Redis. (2) <strong>In-flight deduplication</strong> (singleflight) &mdash; 1000 simultaneous misses for the same key share <em>one</em> upstream call, not 1000. (3) <strong>Concurrency cap</strong> (<code>p-limit</code>) &mdash; bounds in-flight calls regardless of traffic spike. (4) <strong>Budget tracking</strong> + <code>Retry-After</code> respect &mdash; gracefully slow down instead of hammering and getting blocked. Together these turn a fragile integration into a predictable one.</p>
+'''
+
+ANSWERS[51] = r'''
+<pre><code>// secure-download.js — authenticated downloads with ownership + path-traversal defense
+import path from "node:path";
+import fs   from "node:fs";
+import crypto from "node:crypto";
+
+const FILES_ROOT = path.resolve("./user-files");
+
+// Option 1 — stream from local disk with ownership check
+app.get("/files/:id/download", requireAuth, async (req, res, next) =&gt; {
+  // 1. Ownership check — never skip this
+  const file = await db.file.findFirst({
+    where: { id: req.params.id, userId: req.user.id, deletedAt: null },
+  });
+  if (!file) return res.sendStatus(404);       // 404, not 403 — don't reveal existence
+
+  // 2. Path traversal defense — resolve against root
+  const abs = path.resolve(FILES_ROOT, file.storagePath);
+  if (!abs.startsWith(FILES_ROOT + path.sep)) {
+    return res.status(400).json({ error: "Invalid path" });
+  }
+
+  // 3. Verify file still exists on disk
+  try {
+    const stat = await fs.promises.stat(abs);
+    if (!stat.isFile()) return res.sendStatus(404);
+
+    // 4. Set headers before streaming
+    res.setHeader("Content-Type", file.mimeType);
+    res.setHeader("Content-Length", stat.size);
+    res.setHeader("Cache-Control", "private, no-store");
+    res.setHeader("Content-Disposition",
+      `attachment; filename*=UTF-8''${encodeURIComponent(file.originalName)}`
+    );
+
+    // 5. Audit log — who downloaded what, when
+    await db.downloadLog.create({ data: {
+      userId: req.user.id, fileId: file.id, ip: req.ip, at: new Date(),
+    }});
+
+    // 6. Stream — constant memory regardless of file size
+    fs.createReadStream(abs).pipe(res);
+  } catch (err) {
+    if (err.code === "ENOENT") return res.sendStatus(404);
+    next(err);
+  }
+});
+
+// Option 2 — pre-signed S3 URL (recommended for large files)
+import { GetObjectCommand } from "@aws-sdk/client-s3";
+import { getSignedUrl }     from "@aws-sdk/s3-request-presigner";
+
+app.get("/files/:id/download-url", requireAuth, async (req, res) =&gt; {
+  const file = await db.file.findFirst({
+    where: { id: req.params.id, userId: req.user.id, deletedAt: null },
+  });
+  if (!file) return res.sendStatus(404);
+
+  const url = await getSignedUrl(s3, new GetObjectCommand({
+    Bucket: BUCKET,
+    Key:    file.s3Key,
+    ResponseContentDisposition:
+      `attachment; filename*=UTF-8''${encodeURIComponent(file.originalName)}`,
+  }), { expiresIn: 300 });                     // 5-min expiry
+
+  await db.downloadLog.create({ data: { userId: req.user.id, fileId: file.id, ip: req.ip, at: new Date() }});
+  res.json({ url, expiresIn: 300 });
+});</code></pre>
+<p><strong>Six security layers matter:</strong> (1) authenticate; (2) check ownership, not just existence &mdash; users only download their own files; (3) return 404 rather than 403 on mismatch (don't leak existence); (4) path traversal check with <code>abs.startsWith(root + path.sep)</code>; (5) RFC 5987 <code>filename*</code> encoding handles Unicode filenames correctly; (6) audit-log every download for compliance and forensics. For files larger than a few MB, pre-signed S3 URLs offload bandwidth entirely &mdash; your Node process never sees the bytes.</p>
+'''
+
+ANSWERS[52] = r'''
+<pre><code>// realtime-chat.js — Socket.IO + Redis adapter for horizontally-scalable chat
+import { Server } from "socket.io";
+import { createAdapter } from "@socket.io/redis-adapter";
+import Redis from "ioredis";
+import jwt from "jsonwebtoken";
+
+const io = new Server(httpServer, {
+  cors: { origin: ALLOWED_ORIGINS, credentials: true },
+});
+
+// Horizontal scaling — all Socket.IO instances share events via Redis pub/sub
+const pub = new Redis(process.env.REDIS_URL);
+const sub = pub.duplicate();
+io.adapter(createAdapter(pub, sub));
+
+// Auth on handshake — reject before joining any rooms
+io.use((socket, next) =&gt; {
+  const token = socket.handshake.auth.token;
+  if (!token) return next(new Error("Unauthorized"));
+  try {
+    const payload = jwt.verify(token, process.env.JWT_ACCESS_SECRET);
+    socket.data.user = { id: payload.sub, name: payload.name };
+    next();
+  } catch {
+    next(new Error("Invalid token"));
+  }
+});
+
+io.on("connection", (socket) =&gt; {
+  const user = socket.data.user;
+
+  socket.on("room:join", async ({ roomId }, ack) =&gt; {
+    // Authz — is user allowed in this room?
+    const member = await db.roomMember.findFirst({ where: { roomId, userId: user.id } });
+    if (!member) return ack({ error: "Forbidden" });
+
+    socket.join(`room:${roomId}`);
+
+    // Send recent history — missing-messages fix on reconnect
+    const recent = await db.message.findMany({
+      where: { roomId }, orderBy: { createdAt: "desc" }, take: 50,
+    });
+    ack({ history: recent.reverse() });
+  });
+
+  socket.on("message:send", async ({ roomId, text, clientMsgId }, ack) =&gt; {
+    if (!text || text.length &gt; 2000) return ack({ error: "Invalid message" });
+
+    // Dedup — same clientMsgId from a retry returns the existing message
+    const existing = await db.message.findUnique({ where: { clientMsgId } });
+    const msg = existing ?? await db.message.create({ data: {
+      id: crypto.randomUUID(), clientMsgId, roomId,
+      authorId: user.id, text, createdAt: new Date(),
+    }});
+
+    // Broadcast to everyone in the room — across all Node instances thanks to Redis
+    io.to(`room:${roomId}`).emit("message:new", msg);
+    ack({ ok: true, serverMsgId: msg.id });
+  });
+
+  socket.on("typing", ({ roomId }) =&gt; {
+    socket.to(`room:${roomId}`).emit("typing", { userId: user.id });
+  });
+
+  socket.on("disconnect", () =&gt; {
+    // presence updates fan out via rooms user was in
+  });
+});</code></pre>
+<p><strong>Four real-time essentials:</strong> (1) authenticate on the handshake, not after &mdash; unauthenticated sockets never consume a slot; (2) Redis adapter fans out events across all Node instances, essential for horizontal scaling; (3) per-room authz on join; (4) <code>clientMsgId</code>-based dedup makes the message send operation idempotent under retries. Always rate-limit per <em>socket</em>, not per IP &mdash; otherwise one user can flood a room. For large deployments, managed services like <strong>Ably</strong>, <strong>Pusher</strong>, or <strong>Stream Chat</strong> eliminate the connection-state ops burden.</p>
+'''
+
+ANSWERS[53] = r'''
+<pre><code>// input-sanitization.js — layered defense for user-supplied text &amp; HTML
+import { z } from "zod";
+import DOMPurify from "isomorphic-dompurify";
+
+// Layer 1 — validate shape &amp; size with Zod (reject malformed early)
+const CommentSchema = z.object({
+  title:  z.string().trim().min(1).max(200),
+  body:   z.string().trim().min(1).max(10_000),
+  tags:   z.array(z.string().trim().max(32)).max(10).optional(),
+}).strict();
+
+// Layer 2 — sanitize rich HTML with DOMPurify (allowlist tags/attrs)
+function sanitizeHtml(raw) {
+  return DOMPurify.sanitize(raw, {
+    ALLOWED_TAGS: ["p","br","strong","em","u","a","ul","ol","li","code","pre","blockquote","h2","h3"],
+    ALLOWED_ATTR: ["href", "title"],
+    ALLOWED_URI_REGEXP: /^(https?:\/\/|mailto:|\/|#)/i,        // no javascript: URIs
+    FORBID_ATTR: ["style", "onerror", "onload", "onclick"],     // block event handlers
+  });
+}
+
+// Layer 3 — defeat NoSQL operator injection
+function stripOperators(obj) {
+  if (obj == null || typeof obj !== "object") return obj;
+  for (const key of Object.keys(obj)) {
+    if (key.startsWith("$") || key.includes(".")) {
+      delete obj[key];                                          // strip Mongo operators
+    } else {
+      stripOperators(obj[key]);
+    }
+  }
+  return obj;
+}
+
+app.post("/comments", requireAuth, (req, res, next) =&gt; {
+  // Validate shape
+  const parsed = CommentSchema.safeParse(req.body);
+  if (!parsed.success) return res.status(400).json({ issues: parsed.error.issues });
+
+  const { title, body, tags } = parsed.data;
+
+  // Sanitize every user-controlled string
+  const clean = {
+    title:       title,                                         // plain text — no HTML allowed
+    bodyHtml:    sanitizeHtml(body),
+    tags:        (tags ?? []).map((t) =&gt; t.replace(/[^\w-]/g, "")),  // whitelist chars
+    authorId:    req.user.id,
+  };
+
+  db.comment.create({ data: clean })
+    .then((c) =&gt; res.status(201).json(c))
+    .catch(next);
+});
+
+// For query filters — strip operators to prevent NoSQL injection
+app.get("/search", (req, res, next) =&gt; {
+  const filter = stripOperators({ ...req.query });              // no $ne, $gt, etc.
+  db.post.findMany({ where: filter }).then((rows) =&gt; res.json(rows)).catch(next);
+});</code></pre>
+<p><strong>Validation vs sanitization &mdash; they're different jobs.</strong> Validation (Zod) rejects bad-shape input; sanitization transforms valid-shape input to make it safe. For plain text, validate only &mdash; escape at render time in your templates. For rich HTML (comments, bios), DOMPurify with a strict allowlist is the 2026 standard &mdash; never hand-roll a regex-based HTML sanitizer (every attempt has holes). For Mongo queries, strip keys starting with <code>$</code> &mdash; otherwise <code>{ password: { $ne: null } }</code> matches any user. Layer with parameterized queries and a strict Content-Security-Policy.</p>
+'''
+
+ANSWERS[54] = r'''
+<pre><code>// password-change.js — requires current password, revokes all sessions on change
+import argon2 from "argon2";
+import { z } from "zod";
+
+const ChangePasswordSchema = z.object({
+  currentPassword: z.string().min(1).max(128),
+  newPassword:     z.string().min(12).max(128)
+    .refine((p) =&gt; /[a-z]/.test(p) &amp;&amp; /[A-Z]/.test(p) &amp;&amp; /[0-9]/.test(p),
+      "Password must contain lowercase, uppercase, and a digit"),
+}).strict().refine((d) =&gt; d.currentPassword !== d.newPassword,
+  { message: "New password must differ from current", path: ["newPassword"] });
+
+app.post("/me/password",
+  requireAuth,
+  authLimiter,                                      // see Q5 — slows brute-force
+  validate({ body: ChangePasswordSchema }),
+  async (req, res, next) =&gt; {
+    const { currentPassword, newPassword } = req.body;
+    const user = await db.user.findUnique({ where: { id: req.user.id } });
+    if (!user) return res.sendStatus(404);
+
+    // Verify current password (timing-safe via argon2.verify)
+    const valid = await argon2.verify(user.passwordHash, currentPassword).catch(() =&gt; false);
+    if (!valid) {
+      // Log failed attempt for monitoring
+      await db.audit.create({ data: {
+        userId: user.id, action: "password.change.failed",
+        ip: req.ip, at: new Date(),
+      }});
+      return res.status(401).json({ error: "Current password incorrect" });
+    }
+
+    // Optional — check against breached-password database (Have I Been Pwned k-anonymity API)
+    if (await isPwnedPassword(newPassword)) {
+      return res.status(400).json({ error: "This password has been found in a breach; choose another" });
+    }
+
+    const newHash = await argon2.hash(newPassword, {
+      type: argon2.argon2id, memoryCost: 19456, timeCost: 2, parallelism: 1,
+    });
+
+    // Atomic: update password AND invalidate all existing sessions &amp; refresh tokens
+    await db.$transaction([
+      db.user.update({
+        where: { id: user.id },
+        data:  { passwordHash: newHash, passwordChangedAt: new Date() },
+      }),
+      // Force all other sessions to re-login
+      db.session.updateMany({
+        where: { userId: user.id, id: { not: req.session?.id } },
+        data:  { revokedAt: new Date() },
+      }),
+      db.refreshToken.updateMany({
+        where: { userId: user.id },
+        data:  { revokedAt: new Date() },
+      }),
+      db.audit.create({ data: { userId: user.id, action: "password.changed", ip: req.ip, at: new Date() }}),
+    ]);
+
+    // Email notification — alerts user if someone else made this change
+    await sendEmail(user.email, "Your password was changed", `
+      Your password was just changed. If this wasn't you, reset immediately:
+      ${APP_URL}/auth/forgot-password
+    `);
+
+    res.json({ success: true, message: "Password changed. Other sessions have been logged out." });
+  }
+);</code></pre>
+<p><strong>Seven must-haves:</strong> (1) require current password &mdash; protects against session hijacking; (2) strict rate limiting; (3) Zod ensures new ≠ current and enforces complexity; (4) argon2 (not bcrypt or SHA); (5) check against HIBP's pwned-passwords API for known-breached values; (6) <em>transactionally</em> revoke other sessions &amp; refresh tokens so stolen credentials become useless; (7) email a security alert &mdash; catches silent account takeover. The Transaction is crucial: if sessions aren't revoked, an attacker already logged in stays logged in.</p>
+'''
+
+ANSWERS[55] = r'''
+<pre><code>// server-pagination.js — cursor-based pagination with count, stable under writes
+import { z } from "zod";
+
+const QuerySchema = z.object({
+  limit:  z.coerce.number().int().min(1).max(100).default(20),
+  cursor: z.string().optional(),
+  // filter params
+  status: z.enum(["open", "closed", "archived"]).optional(),
+  search: z.string().trim().max(200).optional(),
+  // sort
+  sort:   z.enum(["newest", "oldest", "title"]).default("newest"),
+});
+
+app.get("/tickets", requireAuth, async (req, res) =&gt; {
+  const q = QuerySchema.safeParse(req.query);
+  if (!q.success) return res.status(400).json({ issues: q.error.issues });
+  const { limit, cursor, status, search, sort } = q.data;
+
+  // Decode cursor — tuple of (createdAt, id) for keyset pagination
+  const cur = cursor
+    ? JSON.parse(Buffer.from(cursor, "base64url").toString())
+    : null;
+
+  // Build WHERE clause
+  const where = {
+    userId: req.user.id,
+    ...(status &amp;&amp; { status }),
+    ...(search &amp;&amp; { title: { contains: search, mode: "insensitive" } }),
+  };
+
+  // Keyset predicate — "rows after the cursor in sort order"
+  if (cur) {
+    if (sort === "newest") {
+      where.OR = [
+        { createdAt: { lt: new Date(cur.createdAt) } },
+        { createdAt: new Date(cur.createdAt), id: { lt: cur.id } },
+      ];
+    } else if (sort === "oldest") {
+      where.OR = [
+        { createdAt: { gt: new Date(cur.createdAt) } },
+        { createdAt: new Date(cur.createdAt), id: { gt: cur.id } },
+      ];
+    }
+  }
+
+  const orderBy = sort === "newest" ? [{ createdAt: "desc" }, { id: "desc" }]
+                : sort === "oldest" ? [{ createdAt: "asc"  }, { id: "asc"  }]
+                :                     [{ title: "asc" }, { id: "asc" }];
+
+  // Fetch limit+1 to detect "hasMore" without a COUNT(*) query
+  const rows = await db.ticket.findMany({ where, orderBy, take: limit + 1 });
+
+  const hasMore = rows.length &gt; limit;
+  const data    = rows.slice(0, limit);
+  const last    = data[data.length - 1];
+
+  const nextCursor = hasMore &amp;&amp; last
+    ? Buffer.from(JSON.stringify({ createdAt: last.createdAt, id: last.id })).toString("base64url")
+    : null;
+
+  // Optional — return total only when explicitly requested (it's expensive)
+  let total;
+  if (req.query.includeTotal === "true") {
+    total = await db.ticket.count({ where: { userId: req.user.id,
+      ...(status &amp;&amp; { status }), ...(search &amp;&amp; { title: { contains: search, mode: "insensitive" } }),
+    }});
+  }
+
+  res.json({ data, pagination: { limit, hasMore, nextCursor, ...(total !== undefined &amp;&amp; { total }) } });
+});</code></pre>
+<p><strong>Three wins over offset pagination:</strong> (1) O(limit) DB cost — keyset scans only the rows you want; offset pagination scans everything before the page; (2) stable under writes — new rows inserted while the user is on page 5 don't shift results; (3) no <code>COUNT(*)</code> needed — the <code>limit+1</code> trick detects "more" for free. Composite <code>(createdAt, id)</code> tie-breaker prevents duplicates when multiple rows share a timestamp. Offer <code>includeTotal=true</code> as opt-in since counts are expensive on large tables.</p>
+'''
+
+ANSWERS[56] = r'''
+<pre><code>// restful-proxy.js — fetch from an upstream REST API and display on our API
+import { z } from "zod";
+
+const SHOP = "https://api.fakestoreapi.com";        // sample upstream
+
+// Cache wrapper — Redis-backed cache-aside with singleflight to prevent stampedes
+const inFlight = new Map();
+async function cached(key, ttlSec, loader) {
+  const hit = await redis.get(key);
+  if (hit) return JSON.parse(hit);
+
+  // Coalesce concurrent misses on same key into one upstream call
+  if (inFlight.has(key)) return inFlight.get(key);
+
+  const promise = (async () =&gt; {
+    try {
+      const fresh = await loader();
+      if (fresh !== undefined) {
+        await redis.setex(key, ttlSec, JSON.stringify(fresh));
+      }
+      return fresh;
+    } finally {
+      inFlight.delete(key);
+    }
+  })();
+  inFlight.set(key, promise);
+  return promise;
+}
+
+// Validate upstream responses — never trust third-party data
+const ProductSchema = z.object({
+  id:       z.number(),
+  title:    z.string(),
+  price:    z.number(),
+  description: z.string(),
+  category: z.string(),
+  image:    z.string().url(),
+  rating:   z.object({ rate: z.number(), count: z.number() }).optional(),
+});
+
+// GET /products?page=1 — paginated listing from upstream
+app.get("/products", async (req, res, next) =&gt; {
+  const page  = Math.max(1, Number(req.query.page) || 1);
+  const limit = Math.min(50, Number(req.query.limit) || 20);
+
+  try {
+    const all = await cached("products:all", 300, async () =&gt; {
+      const r = await fetch(`${SHOP}/products`, {
+        signal: AbortSignal.timeout(5_000),
+      });
+      if (!r.ok) throw new Error(`Upstream ${r.status}`);
+      const raw = await r.json();
+      return z.array(ProductSchema).parse(raw);     // reject malformed upstream data
+    });
+
+    const start = (page - 1) * limit;
+    const data  = all.slice(start, start + limit);
+    // Project — don't leak upstream fields you don't expose
+    res.set("Cache-Control", "public, max-age=60");
+    res.json({
+      data: data.map(({ id, title, price, image, category }) =&gt; ({ id, title, price, image, category })),
+      pagination: { page, limit, total: all.length },
+    });
+  } catch (err) { next(err); }
+});
+
+// GET /products/:id — single item with its own cache key
+app.get("/products/:id", async (req, res, next) =&gt; {
+  const id = Number(req.params.id);
+  if (!Number.isInteger(id)) return res.status(400).json({ error: "Invalid id" });
+
+  try {
+    const product = await cached(`product:${id}`, 600, async () =&gt; {
+      const r = await fetch(`${SHOP}/products/${id}`, { signal: AbortSignal.timeout(5_000) });
+      if (r.status === 404) return null;
+      if (!r.ok) throw new Error(`Upstream ${r.status}`);
+      return ProductSchema.parse(await r.json());
+    });
+    if (!product) return res.sendStatus(404);
+    res.set("Cache-Control", "public, max-age=300");
+    res.json(product);
+  } catch (err) { next(err); }
+});</code></pre>
+<p><strong>Four patterns for consuming third-party APIs well:</strong> (1) Zod-validate the upstream response &mdash; they can change schemas any time; (2) cache with singleflight so a traffic spike doesn't multiply into an upstream spike; (3) project (reshape) the data &mdash; your API contract shouldn't expose upstream fields; (4) short timeouts with <code>AbortSignal.timeout</code> so a slow upstream doesn't cascade into your own outage. For multiple upstreams, add a circuit breaker like <strong>cockatiel</strong> or <strong>opossum</strong>.</p>
+'''
+
+ANSWERS[57] = r'''
+<pre><code>// jwt-auth-authz.js — complete authentication + authorization with refresh rotation
+import jwt from "jsonwebtoken";
+import crypto from "node:crypto";
+import argon2 from "argon2";
+
+const ACCESS_SECRET  = process.env.JWT_ACCESS_SECRET;
+const REFRESH_SECRET = process.env.JWT_REFRESH_SECRET;
+const ACCESS_TTL  = "15m";
+const REFRESH_TTL = "30d";
+
+async function issueTokenPair(user, familyId = crypto.randomUUID()) {
+  const jti = crypto.randomUUID();
+  const access = jwt.sign(
+    { sub: user.id, role: user.role, email: user.email },
+    ACCESS_SECRET,
+    { algorithm: "HS256", expiresIn: ACCESS_TTL, jwtid: jti, issuer: "api", audience: "api" }
+  );
+  const refresh = jwt.sign(
+    { sub: user.id, jti, familyId },
+    REFRESH_SECRET,
+    { algorithm: "HS256", expiresIn: REFRESH_TTL, issuer: "api", audience: "api" }
+  );
+  await db.refreshToken.create({ data: { jti, userId: user.id, familyId, createdAt: new Date() }});
+  return { access, refresh };
+}
+
+// LOGIN — verify password, issue tokens
+app.post("/auth/login", authLimiter, async (req, res) =&gt; {
+  const user = await db.user.findUnique({ where: { email: req.body.email } });
+  const ok = user &amp;&amp; await argon2.verify(user.passwordHash, req.body.password).catch(() =&gt; false);
+  if (!ok) return res.status(401).json({ error: "Invalid credentials" });
+  const { access, refresh } = await issueTokenPair(user);
+  res.json({ accessToken: access, refreshToken: refresh, expiresIn: 900 });
+});
+
+// REFRESH — rotation with family tracking, reuse detection
+app.post("/auth/refresh", async (req, res) =&gt; {
+  try {
+    const payload = jwt.verify(req.body.refreshToken, REFRESH_SECRET,
+      { algorithms: ["HS256"], issuer: "api", audience: "api" });
+
+    const record = await db.refreshToken.findUnique({ where: { jti: payload.jti } });
+
+    // Reuse detection — if token was already rotated, something's compromised
+    if (!record || record.revokedAt) {
+      // Nuke the entire family — old refresh tokens might be in use by an attacker
+      await db.refreshToken.updateMany({
+        where: { familyId: payload.familyId, revokedAt: null },
+        data:  { revokedAt: new Date() },
+      });
+      return res.status(401).json({ error: "Token family revoked — please log in again" });
+    }
+
+    // Rotate — revoke old token, issue new pair in same family
+    await db.refreshToken.update({ where: { jti: payload.jti }, data: { revokedAt: new Date() }});
+    const user = await db.user.findUnique({ where: { id: payload.sub }});
+    const { access, refresh } = await issueTokenPair(user, payload.familyId);
+
+    res.json({ accessToken: access, refreshToken: refresh, expiresIn: 900 });
+  } catch {
+    res.status(401).json({ error: "Invalid refresh token" });
+  }
+});
+
+// AUTHN middleware — verify access token
+export function requireAuth(req, res, next) {
+  const [, token] = (req.headers.authorization || "").split(" ");
+  try {
+    req.user = jwt.verify(token, ACCESS_SECRET, { algorithms: ["HS256"], issuer: "api", audience: "api" });
+    next();
+  } catch { res.status(401).json({ error: "Unauthorized" }); }
+}
+
+// AUTHZ middleware — role check
+export const requireRole = (...roles) =&gt; (req, res, next) =&gt;
+  roles.includes(req.user?.role) ? next() : res.sendStatus(403);
+
+app.get("/admin/users", requireAuth, requireRole("admin"), adminListUsers);</code></pre>
+<p><strong>Refresh rotation with family tracking is the key security detail.</strong> Each login creates a "family" of refresh tokens; every refresh replaces the old token with a new one in the same family. If a revoked token is ever presented again, the entire family is torched &mdash; because presenting an old token means either the attacker has it or the legitimate client is broken. Either way, force re-authentication. This is the same pattern OAuth 2.1 mandates.</p>
+'''
+
+ANSWERS[58] = r'''
+<pre><code>// notifications.js — unified read/unread notifications API
+import { z } from "zod";
+
+// GET /notifications — list with filters, cursor pagination
+app.get("/notifications", requireAuth, async (req, res) =&gt; {
+  const qs = z.object({
+    limit:  z.coerce.number().int().min(1).max(100).default(20),
+    cursor: z.string().optional(),
+    unread: z.enum(["true", "false"]).optional(),
+    type:   z.enum(["message", "mention", "system", "billing"]).optional(),
+  }).parse(req.query);
+
+  const cursor = qs.cursor
+    ? JSON.parse(Buffer.from(qs.cursor, "base64url").toString())
+    : null;
+
+  const rows = await db.notification.findMany({
+    where: {
+      userId: req.user.id,
+      deletedAt: null,
+      ...(qs.unread === "true"  &amp;&amp; { readAt: null }),
+      ...(qs.unread === "false" &amp;&amp; { readAt: { not: null } }),
+      ...(qs.type &amp;&amp; { type: qs.type }),
+      ...(cursor &amp;&amp; { OR: [
+        { createdAt: { lt: new Date(cursor.createdAt) } },
+        { createdAt: new Date(cursor.createdAt), id: { lt: cursor.id } },
+      ]}),
+    },
+    orderBy: [{ createdAt: "desc" }, { id: "desc" }],
+    take: qs.limit + 1,
+  });
+
+  const hasMore = rows.length &gt; qs.limit;
+  const data    = rows.slice(0, qs.limit);
+  const last    = data[data.length - 1];
+
+  // Unread counter &mdash; useful for UI badges
+  const unreadCount = await db.notification.count({
+    where: { userId: req.user.id, readAt: null, deletedAt: null },
+  });
+
+  res.json({
+    data,
+    meta: {
+      unreadCount,
+      hasMore,
+      nextCursor: hasMore &amp;&amp; last
+        ? Buffer.from(JSON.stringify({ createdAt: last.createdAt, id: last.id })).toString("base64url")
+        : null,
+    },
+  });
+});
+
+// POST /notifications/:id/read — mark single as read
+app.post("/notifications/:id/read", requireAuth, async (req, res) =&gt; {
+  const result = await db.notification.updateMany({
+    where: { id: req.params.id, userId: req.user.id, readAt: null },
+    data:  { readAt: new Date() },
+  });
+  if (result.count === 0) return res.sendStatus(404);
+  res.sendStatus(204);
+});
+
+// POST /notifications/read-all — bulk mark-read (idempotent)
+app.post("/notifications/read-all", requireAuth, async (req, res) =&gt; {
+  await db.notification.updateMany({
+    where: { userId: req.user.id, readAt: null },
+    data:  { readAt: new Date() },
+  });
+  res.sendStatus(204);
+});
+
+// DELETE /notifications/:id — soft-delete, doesn't actually remove rows
+app.delete("/notifications/:id", requireAuth, async (req, res) =&gt; {
+  const result = await db.notification.updateMany({
+    where: { id: req.params.id, userId: req.user.id },
+    data:  { deletedAt: new Date() },
+  });
+  if (result.count === 0) return res.sendStatus(404);
+  res.sendStatus(204);
+});
+
+// Server push — sent by notification emitters elsewhere
+export async function createNotification({ userId, type, title, body, link }) {
+  const n = await db.notification.create({ data: {
+    id: crypto.randomUUID(), userId, type, title, body, link,
+    createdAt: new Date(), readAt: null,
+  }});
+  // Fan out over WebSocket (see Q52)
+  io.to(`user:${userId}`).emit("notification:new", n);
+  return n;
+}</code></pre>
+<p><strong>Three things this gets right:</strong> (1) authorization via <code>updateMany</code> with userId filter &mdash; ensures users can only mutate their own rows, even if they guess another user's id; (2) separate <code>readAt</code> timestamp rather than a boolean &mdash; lets you sort by reading time and debug "when did this become read?"; (3) soft-delete via <code>deletedAt</code> &mdash; preserves history for audit. The WebSocket push from <code>createNotification</code> gives instant delivery; the API provides the historical list.</p>
+'''
+
+ANSWERS[59] = r'''
+<pre><code>// cors-preflight.js — manual CORS so you understand what the 'cors' package does
+const ALLOWED_ORIGINS = new Set([
+  "https://app.example.com",
+  "https://admin.example.com",
+]);
+
+function corsHeaders(req, res) {
+  const origin = req.headers.origin;
+  if (!origin || !ALLOWED_ORIGINS.has(origin)) return false;
+
+  res.setHeader("Access-Control-Allow-Origin",      origin);
+  res.setHeader("Vary",                              "Origin");        // cache per-origin
+  res.setHeader("Access-Control-Allow-Credentials", "true");            // cookies/auth cross-origin
+  return true;
+}
+
+// Register BEFORE auth middleware — preflights have no Authorization header
+app.use((req, res, next) =&gt; {
+  // Preflight — OPTIONS with Access-Control-Request-Method header
+  if (req.method === "OPTIONS" &amp;&amp; req.headers["access-control-request-method"]) {
+    const allowed = corsHeaders(req, res);
+    if (!allowed) return res.sendStatus(403);
+
+    res.setHeader("Access-Control-Allow-Methods",
+      "GET, POST, PUT, PATCH, DELETE, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers",
+      // Echo requested headers from Access-Control-Request-Headers
+      req.headers["access-control-request-headers"] ||
+      "Content-Type, Authorization, X-Request-Id, Idempotency-Key");
+    res.setHeader("Access-Control-Max-Age", "86400");                   // cache 24h
+    return res.sendStatus(204);                                          // no body on preflight
+  }
+
+  // Actual request — add CORS headers to the response
+  if (req.headers.origin) corsHeaders(req, res);
+
+  // Expose custom response headers so browser JS can read them
+  res.setHeader("Access-Control-Expose-Headers",
+    "X-Request-Id, RateLimit-Remaining, RateLimit-Reset");
+
+  next();
+});
+
+// Normal routes — CORS is transparent to them
+app.use(express.json());
+app.use(authenticate);
+app.get("/me", (req, res) =&gt; res.json(req.user));</code></pre>
+<p><strong>Preflight mechanics explained:</strong> the browser sends <code>OPTIONS</code> with <code>Access-Control-Request-Method</code> and <code>Access-Control-Request-Headers</code> before any "non-simple" request (custom headers, non-form body, PUT/DELETE). The server responds with what's allowed; browser caches that for <code>Access-Control-Max-Age</code> seconds. Four footguns: (1) <code>Allow-Origin: *</code> can't coexist with <code>Allow-Credentials: true</code>; (2) <code>Vary: Origin</code> prevents CDN cache pollution; (3) register CORS before auth; (4) custom headers like <code>X-Request-Id</code> must be in <code>Allow-Headers</code> (preflight) and <code>Expose-Headers</code> (for JS to read). In practice, the <code>cors</code> npm package (Q14) handles all this &mdash; this is to understand what it's doing.</p>
+'''
+
+ANSWERS[60] = r'''
+<pre><code>// microservices-gateway.js — API gateway aggregating multiple services with BFF pattern
+import { z } from "zod";
+
+// Service registry — in production this comes from service discovery (K8s DNS, Consul)
+const services = {
+  users:     "http://user-service:8080",
+  orders:    "http://orders-service:8080",
+  payments:  "http://payments-service:8080",
+  inventory: "http://inventory-service:8080",
+};
+
+// Resilient fetch with timeout + retry for service-to-service
+async function callService(service, path, { method = "GET", body, headers } = {}) {
+  const url = `${services[service]}${path}`;
+  for (let attempt = 0; attempt &lt; 2; attempt++) {
+    try {
+      const res = await fetch(url, {
+        method,
+        headers: { "Content-Type": "application/json", ...headers },
+        body: body ? JSON.stringify(body) : undefined,
+        signal: AbortSignal.timeout(3_000),
+      });
+      if (res.status &gt;= 500 &amp;&amp; attempt === 0) continue;      // retry 5xx once
+      if (!res.ok) {
+        const text = await res.text().catch(() =&gt; "");
+        throw Object.assign(new Error(text), { status: res.status });
+      }
+      return await res.json();
+    } catch (err) {
+      if (err.name === "AbortError" &amp;&amp; attempt === 0) continue;
+      if (attempt === 1) throw err;
+    }
+  }
+}
+
+// BFF endpoint — aggregates 4 services into one response for the dashboard
+app.get("/dashboard", requireAuth, async (req, res, next) =&gt; {
+  const userId = req.user.id;
+
+  // Forward user identity to backend services
+  const headers = { "X-User-Id": userId, "X-Request-Id": req.id };
+
+  // Fetch in parallel — allSettled so one failure doesn't kill the whole response
+  const [profile, orders, payments, inv] = await Promise.allSettled([
+    callService("users",     `/users/${userId}`,               { headers }),
+    callService("orders",    `/orders?userId=${userId}&amp;limit=5`, { headers }),
+    callService("payments",  `/payments?userId=${userId}&amp;limit=5`, { headers }),
+    callService("inventory", `/alerts?userId=${userId}`,       { headers }),
+  ]);
+
+  const pick = (r, fallback = null) =&gt; r.status === "fulfilled" ? r.value : fallback;
+  const errors = [];
+  ["users","orders","payments","inventory"].forEach((name, i) =&gt; {
+    const result = [profile, orders, payments, inv][i];
+    if (result.status === "rejected") errors.push({ service: name, message: result.reason.message });
+  });
+
+  // Shape the response for the frontend — reduces client-side composition
+  res.json({
+    data: {
+      user:            pick(profile, { unavailable: true }),
+      recentOrders:    pick(orders, []),
+      recentPayments:  pick(payments, []),
+      inventoryAlerts: pick(inv, []),
+    },
+    partial: errors.length &gt; 0,
+    errors,
+  });
+});
+
+// Simple proxy for CRUD — forwards directly to a service
+app.all(/^\/api\/(users|orders|payments|inventory)(\/.*)?$/, async (req, res, next) =&gt; {
+  const [, service, path = ""] = req.originalUrl.replace(/^\/api\//, "").match(/^(\w+)(\/.*)?$/) ?? [];
+  try {
+    const data = await callService(service, path, {
+      method:  req.method,
+      body:    req.body,
+      headers: { "X-User-Id": req.user?.id, "X-Request-Id": req.id },
+    });
+    res.json(data);
+  } catch (err) { next(err); }
+});</code></pre>
+<p><strong>BFF (Backend For Frontend) pattern is the key insight:</strong> instead of making the browser call 4 services and composing data client-side, the gateway does it server-side. This cuts 4 round-trips to 1 (huge on mobile networks), centralizes auth/logging/error-mapping, and lets the frontend get exactly the shape it needs. <code>Promise.allSettled</code> makes the response gracefully degrade &mdash; if payments-service is down, the rest still loads. For heavy aggregation, consider GraphQL federation (Apollo Router) or a dedicated BFF service per client type (web BFF, mobile BFF).</p>
+'''
+
+ANSWERS[61] = r'''
+<pre><code>// dynamic-forms.js — schema-driven form definition + runtime validation
+import { z } from "zod";
+
+// Form definitions stored in DB — loaded dynamically
+const formDefinitions = {
+  "contact-us": {
+    fields: [
+      { name: "name",    label: "Your name",    type: "text",  required: true, max: 100 },
+      { name: "email",   label: "Email",        type: "email", required: true },
+      { name: "subject", label: "Subject",      type: "select", options: ["Support","Sales","Billing"], required: true },
+      { name: "message", label: "Message",      type: "textarea", required: true, max: 2000 },
+      { name: "newsletter", label: "Subscribe", type: "checkbox" },
+    ],
+  },
+  "bug-report": {
+    fields: [
+      { name: "title",    type: "text",     required: true, max: 200 },
+      { name: "severity", type: "select",   options: ["low","med","high","critical"], required: true },
+      { name: "steps",    type: "textarea", required: true, max: 5000 },
+      { name: "screenshots", type: "file",  multiple: true, maxFiles: 5 },
+    ],
+  },
+};
+
+// GET /forms/:id — return form definition for the client to render
+app.get("/forms/:id", (req, res) =&gt; {
+  const def = formDefinitions[req.params.id];
+  if (!def) return res.sendStatus(404);
+  res.json(def);
+});
+
+// Build a Zod schema from the form definition at runtime
+function schemaFromForm(def) {
+  const shape = {};
+  for (const field of def.fields) {
+    let validator;
+    switch (field.type) {
+      case "text":
+      case "textarea":
+        validator = z.string().trim();
+        if (field.max) validator = validator.max(field.max);
+        break;
+      case "email":
+        validator = z.string().trim().email().toLowerCase();
+        break;
+      case "select":
+        validator = z.enum(field.options);
+        break;
+      case "checkbox":
+        validator = z.boolean();
+        break;
+      case "file":
+        validator = z.array(z.string().url()).max(field.maxFiles ?? 10);
+        break;
+      default:
+        validator = z.string();
+    }
+    if (!field.required) validator = validator.optional();
+    shape[field.name] = validator;
+  }
+  return z.object(shape).strict();
+}
+
+// POST /forms/:id/submit — validate against the dynamic schema &amp; save
+app.post("/forms/:id/submit", async (req, res) =&gt; {
+  const def = formDefinitions[req.params.id];
+  if (!def) return res.sendStatus(404);
+
+  const schema = schemaFromForm(def);
+  const parsed = schema.safeParse(req.body);
+  if (!parsed.success) {
+    return res.status(400).json({
+      error: "Validation failed",
+      issues: parsed.error.issues.map((i) =&gt; ({ field: i.path.join("."), message: i.message })),
+    });
+  }
+
+  const submission = await db.formSubmission.create({ data: {
+    formId: req.params.id,
+    userId: req.user?.id ?? null,
+    values: parsed.data,
+    submittedAt: new Date(),
+  }});
+
+  res.status(201).json({ id: submission.id });
+});</code></pre>
+<p><strong>The key insight: schema on both ends.</strong> The <em>same</em> form definition drives UI rendering on the client AND generates a Zod schema for server-side validation at runtime. No duplication, no drift. Without this, UI and server validators go out of sync as forms evolve. For heavy admin-editable forms, consider <strong>JSON Schema</strong> (AJV) &mdash; it's a published standard, language-neutral, and can validate in both Python and TypeScript from one source. <code>.strict()</code> prevents attackers from injecting extra fields like <code>role: "admin"</code>.</p>
+'''
+
+ANSWERS[62] = r'''
+<pre><code>// activity-feed.js — unified activity feed aggregating multiple event sources
+import { z } from "zod";
+
+// Each event type lives in its own table; the feed queries all of them.
+// For high scale, denormalize into an activity_events table with a worker fan-in.
+
+app.get("/feed", requireAuth, async (req, res) =&gt; {
+  const q = z.object({
+    limit:  z.coerce.number().int().min(1).max(50).default(20),
+    cursor: z.string().optional(),
+    types:  z.string().optional(),                              // comma-separated filter
+  }).parse(req.query);
+
+  const cursor = q.cursor
+    ? JSON.parse(Buffer.from(q.cursor, "base64url").toString())
+    : null;
+
+  const typeFilter = q.types?.split(",").filter(Boolean);
+  const cursorDate = cursor ? new Date(cursor.ts) : new Date();
+
+  // Query denormalized activity table — one row per event
+  const rows = await db.activity.findMany({
+    where: {
+      // You see activity from users you follow + your own
+      OR: [
+        { actorId: req.user.id },
+        { actorId: { in: await getFollowedUserIds(req.user.id) } },
+      ],
+      ...(typeFilter &amp;&amp; { type: { in: typeFilter } }),
+      ...(cursor &amp;&amp; { OR: [
+        { occurredAt: { lt: cursorDate } },
+        { occurredAt: cursorDate, id: { lt: cursor.id } },
+      ]}),
+    },
+    orderBy: [{ occurredAt: "desc" }, { id: "desc" }],
+    take: q.limit + 1,
+    include: {
+      actor: { select: { id: true, name: true, avatar: true } },
+    },
+  });
+
+  // Hydrate polymorphic targets in parallel — one query per unique type
+  const byType = new Map();
+  for (const r of rows) {
+    if (!byType.has(r.targetType)) byType.set(r.targetType, new Set());
+    byType.get(r.targetType).add(r.targetId);
+  }
+
+  const targets = {};
+  await Promise.all([...byType.entries()].map(async ([type, ids]) =&gt; {
+    const list = await db[type].findMany({
+      where: { id: { in: [...ids] } },
+      select: { id: true, title: true, slug: true },         // minimal projection
+    });
+    targets[type] = new Map(list.map((t) =&gt; [t.id, t]));
+  }));
+
+  const hasMore = rows.length &gt; q.limit;
+  const slice   = rows.slice(0, q.limit);
+  const last    = slice[slice.length - 1];
+
+  const data = slice.map((r) =&gt; ({
+    id:     r.id,
+    type:   r.type,                                           // "post.created" | "comment.added" | ...
+    actor:  r.actor,
+    target: targets[r.targetType]?.get(r.targetId) ?? { id: r.targetId, deleted: true },
+    at:     r.occurredAt.toISOString(),
+  }));
+
+  const nextCursor = hasMore &amp;&amp; last
+    ? Buffer.from(JSON.stringify({ ts: last.occurredAt.toISOString(), id: last.id })).toString("base64url")
+    : null;
+
+  res.set("Cache-Control", "private, max-age=5");              // 5s edge cache for feeds
+  res.json({ data, hasMore, nextCursor });
+});</code></pre>
+<p><strong>Two architecture decisions drive this:</strong> (1) a denormalized <code>activity</code> table with a <code>type</code>+<code>targetType</code>+<code>targetId</code> triple makes the feed a single index scan instead of UNIONing 10 source tables; (2) hydrate polymorphic targets in <em>batches</em> grouped by type, not per-row &mdash; prevents the N+1 query trap. At Twitter/Instagram scale, this becomes a fan-out-on-write system (each follower has their own materialized timeline); for most apps, fan-out-on-read (this pattern) is simpler and plenty fast.</p>
+'''
+
+ANSWERS[63] = r'''
+<pre><code>// mtls-service.js — mutual TLS between microservices (both sides verify certificates)
+import https from "node:https";
+import fs from "node:fs";
+import express from "express";
+
+const ca = fs.readFileSync("/etc/tls/internal-ca.crt");          // trusted internal CA
+
+// SERVER — require clients to present a valid cert signed by our CA
+const app = express();
+app.use((req, res, next) =&gt; {
+  const cert = req.socket.getPeerCertificate();
+  if (!cert || !cert.subject) {
+    return res.status(401).json({ error: "Client certificate required" });
+  }
+  // Derive caller identity from cert CN — safe because CA vouches for it
+  req.caller = {
+    name:  cert.subject.CN,                                     // e.g., "billing-service"
+    org:   cert.subject.O,
+    validUntil: cert.valid_to,
+  };
+  next();
+});
+
+app.get("/internal/users/:id", (req, res) =&gt; {
+  // AuthZ: only allow specific services to call this endpoint
+  if (!["billing-service", "admin-api"].includes(req.caller.name)) {
+    return res.sendStatus(403);
+  }
+  res.json({ id: req.params.id /* ... */ });
+});
+
+https.createServer({
+  cert: fs.readFileSync("/etc/tls/user-service.crt"),
+  key:  fs.readFileSync("/etc/tls/user-service.key"),
+  ca,                                                            // trust anchor
+  requestCert:        true,                                      // ask clients for their cert
+  rejectUnauthorized: true,                                      // reject if invalid or missing
+}, app).listen(8443);
+
+// CLIENT — present our cert when calling other services
+import { Agent } from "undici";
+
+const mtlsAgent = new Agent({
+  connect: {
+    cert: fs.readFileSync("/etc/tls/billing-service.crt"),
+    key:  fs.readFileSync("/etc/tls/billing-service.key"),
+    ca,                                                          // trust the internal CA
+  },
+});
+
+export async function callUserService(userId) {
+  const res = await fetch(`https://user-service.internal:8443/internal/users/${userId}`, {
+    dispatcher: mtlsAgent,
+    signal: AbortSignal.timeout(3_000),
+  });
+  if (!res.ok) throw new Error(`user-service returned ${res.status}`);
+  return res.json();
+}</code></pre>
+<p><strong>How mTLS protects service-to-service traffic:</strong> both sides present X.509 certificates signed by a trusted internal CA. Each side verifies the other &mdash; no valid cert, no conversation. The server can extract the caller's service name from the certificate's <code>CN</code>, giving you <em>cryptographically enforced</em> service identity (can't be spoofed without stealing the private key). In 2026, service meshes (<strong>Istio</strong>, <strong>Linkerd</strong>, <strong>Consul Connect</strong>) automate mTLS: they handle cert issuance, rotation, and termination, so app code doesn't touch certs at all. For new projects, pick a service mesh rather than hand-rolling.</p>
+'''
+
+ANSWERS[64] = r'''
+<pre><code>// realtime-weather.js — Server-Sent Events push updates every 60s to connected clients
+import { z } from "zod";
+
+// Subscription registry: cityCode → Set of response streams
+const subscribers = new Map();
+
+// SSE endpoint — long-lived response, pushes updates to clients
+app.get("/weather/:city/stream", requireAuth, async (req, res) =&gt; {
+  const city = String(req.params.city).toLowerCase().trim();
+
+  res.set({
+    "Content-Type":      "text/event-stream",
+    "Cache-Control":     "no-cache, no-transform",
+    "Connection":        "keep-alive",
+    "X-Accel-Buffering": "no",                     // disable nginx buffering
+  });
+  res.flushHeaders();
+
+  // Send initial snapshot immediately
+  const initial = await getCachedWeather(city);
+  res.write(`event: snapshot\ndata: ${JSON.stringify(initial)}\n\n`);
+
+  // Register this client
+  if (!subscribers.has(city)) subscribers.set(city, new Set());
+  subscribers.get(city).add(res);
+
+  // Heartbeat every 20s — keeps proxies from timing out the connection
+  const heartbeat = setInterval(() =&gt; res.write(":heartbeat\n\n"), 20_000);
+
+  // Cleanup on disconnect
+  req.on("close", () =&gt; {
+    clearInterval(heartbeat);
+    subscribers.get(city)?.delete(res);
+    if (subscribers.get(city)?.size === 0) subscribers.delete(city);
+  });
+});
+
+// Upstream polling loop — runs once, updates cache, fans out to subscribers
+async function pollWeather() {
+  for (const city of subscribers.keys()) {
+    try {
+      const r = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&amp;units=metric&amp;appid=${process.env.OWM_KEY}`, {
+        signal: AbortSignal.timeout(5_000),
+      });
+      if (!r.ok) continue;
+      const raw  = await r.json();
+      const data = { city: raw.name, temp: raw.main.temp, conditions: raw.weather[0].description, at: new Date().toISOString() };
+
+      await redis.setex(`weather:${city}`, 120, JSON.stringify(data));
+
+      // Fan out — send the update to every subscribed client for this city
+      const clients = subscribers.get(city) || [];
+      const payload = `event: update\ndata: ${JSON.stringify(data)}\n\n`;
+      for (const client of clients) {
+        try { client.write(payload); }
+        catch { /* client disconnected; will be cleaned up */ }
+      }
+    } catch (err) {
+      console.error(`weather poll ${city} failed`, err);
+    }
+  }
+}
+
+setInterval(pollWeather, 60_000);                  // poll every minute
+</code></pre>
+<p><strong>Why SSE over WebSocket here:</strong> SSE is one-way (server→client), built on plain HTTP, automatically reconnects in browsers with <code>Last-Event-Id</code>, and doesn't need a special protocol upgrade. Perfect for "push me updates" use cases like weather, stock tickers, or activity feeds. The <strong>heartbeat</strong> is essential &mdash; many proxies/load balancers kill idle connections at 30-60s. A comment line (<code>:heartbeat\n\n</code>) is the SSE convention. For horizontal scaling, pair with Redis pub/sub so all Node instances broadcast the same updates.</p>
+'''
+
+ANSWERS[65] = r'''
+<pre><code>// nested-json-validation.js — deep validation with composable schemas
+import { z } from "zod";
+
+// Compose schemas bottom-up — each piece is reusable
+const MoneySchema = z.object({
+  amount:   z.number().positive().multipleOf(0.01),
+  currency: z.string().length(3).regex(/^[A-Z]{3}$/),       // ISO 4217
+}).strict();
+
+const AddressSchema = z.object({
+  line1:       z.string().trim().min(1).max(100),
+  line2:       z.string().max(100).optional(),
+  city:        z.string().trim().min(1).max(60),
+  postalCode:  z.string().min(3).max(20),
+  countryCode: z.string().length(2).regex(/^[A-Z]{2}$/),
+}).strict();
+
+const ItemSchema = z.object({
+  productId: z.string().uuid(),
+  quantity:  z.number().int().min(1).max(999),
+  price:     MoneySchema,                                     // nested reusable schema
+  options:   z.record(z.string(), z.string().max(100)).optional(),   // { color: "blue", size: "L" }
+}).strict();
+
+const OrderSchema = z.object({
+  customer: z.object({
+    email: z.string().email().toLowerCase(),
+    name:  z.string().trim().min(1).max(100),
+    billingAddress:  AddressSchema,
+    shippingAddress: AddressSchema.optional(),                // optional sub-object
+  }).strict(),
+  items: z.array(ItemSchema).min(1).max(100),
+  total: MoneySchema,
+  promoCode: z.string().max(32).optional(),
+  metadata: z.record(z.string().max(50), z.string().max(500)).optional(),
+}).strict()
+  // Cross-field validation — total must match sum of items
+  .refine((o) =&gt; {
+    const sum = o.items.reduce((s, i) =&gt; s + i.price.amount * i.quantity, 0);
+    return Math.abs(sum - o.total.amount) &lt; 0.01;
+  }, { message: "Order total does not match sum of line items", path: ["total", "amount"] })
+  // All currencies match
+  .refine((o) =&gt; o.items.every((i) =&gt; i.price.currency === o.total.currency),
+    { message: "All line items must use the same currency", path: ["items"] });
+
+app.post("/orders", requireAuth, (req, res, next) =&gt; {
+  const parsed = OrderSchema.safeParse(req.body);
+  if (!parsed.success) {
+    return res.status(400).json({
+      error: "Validation failed",
+      issues: parsed.error.issues.map((i) =&gt; ({
+        path:    i.path.join("."),                            // "items.0.price.amount"
+        message: i.message,
+        code:    i.code,
+      })),
+    });
+  }
+
+  db.order.create({ data: parsed.data })
+    .then((o) =&gt; res.status(201).json(o))
+    .catch(next);
+});</code></pre>
+<p><strong>Three techniques for real-world nested payloads:</strong> (1) compose schemas bottom-up &mdash; <code>AddressSchema</code>, <code>MoneySchema</code>, <code>ItemSchema</code> are small and reusable; (2) <code>.strict()</code> on every object rejects unknown fields, defending against mass assignment attacks; (3) <code>.refine()</code> handles cross-field invariants like "total equals sum of items" and "all currencies match" &mdash; the kind of rules a flat schema can't express. Zod paths (<code>items.0.price.amount</code>) pinpoint exactly which nested field failed, giving clients actionable errors.</p>
+'''
+
+ANSWERS[66] = r'''
+<pre><code>// graphql-cached-client.js — GraphQL fetching with server-side cache + persisted queries
+import { z } from "zod";
+
+const UPSTREAM_GQL = "https://api.github.com/graphql";
+
+// Cache key = hash of (operation name + variables)
+import crypto from "node:crypto";
+function cacheKey(operationName, variables) {
+  const sig = crypto.createHash("sha256")
+    .update(operationName + ":" + JSON.stringify(variables))
+    .digest("hex").slice(0, 16);
+  return `gql:${operationName}:${sig}`;
+}
+
+// Registry of allowed queries (persisted queries) — prevents attackers from
+// crafting arbitrary queries; only pre-approved ones are allowed.
+const QUERIES = {
+  getRepo: `
+    query getRepo($owner: String!, $name: String!) {
+      repository(owner: $owner, name: $name) {
+        name description stargazerCount updatedAt
+        owner { login }
+      }
+    }`,
+  getUser: `
+    query getUser($login: String!) {
+      user(login: $login) { login name bio followers { totalCount } }
+    }`,
+};
+
+// Validate variables per operation
+const varSchemas = {
+  getRepo: z.object({ owner: z.string(), name: z.string() }),
+  getUser: z.object({ login: z.string() }),
+};
+
+app.post("/graphql-proxy/:op", async (req, res, next) =&gt; {
+  const op = req.params.op;
+  const query = QUERIES[op];
+  if (!query) return res.status(404).json({ error: "Unknown operation" });
+
+  const parsed = varSchemas[op].safeParse(req.body);
+  if (!parsed.success) return res.status(400).json({ issues: parsed.error.issues });
+  const variables = parsed.data;
+
+  const key = cacheKey(op, variables);
+
+  // Cache check
+  const hit = await redis.get(key);
+  if (hit) {
+    res.set("X-Cache", "HIT");
+    res.set("Cache-Control", "public, max-age=60");
+    return res.json(JSON.parse(hit));
+  }
+
+  try {
+    const r = await fetch(UPSTREAM_GQL, {
+      method: "POST",
+      headers: {
+        "Content-Type":  "application/json",
+        "Authorization": `Bearer ${process.env.GITHUB_TOKEN}`,
+      },
+      body: JSON.stringify({ query, variables, operationName: op }),
+      signal: AbortSignal.timeout(10_000),
+    });
+
+    if (!r.ok) return res.status(502).json({ error: "Upstream unavailable" });
+
+    const payload = await r.json();
+
+    // Don't cache responses with errors
+    if (!payload.errors) {
+      await redis.setex(key, 300, JSON.stringify(payload));
+    }
+
+    res.set("X-Cache", "MISS");
+    res.set("Cache-Control", "public, max-age=60");
+    res.json(payload);
+  } catch (err) {
+    if (err.name === "AbortError") return res.status(504).json({ error: "Upstream timeout" });
+    next(err);
+  }
+});</code></pre>
+<p><strong>Three GraphQL-proxy wins:</strong> (1) <strong>persisted queries</strong> — only pre-approved operations are allowed, preventing attackers from crafting expensive queries; (2) deterministic cache key from <code>(operation, variables)</code> makes different queries share separate cache entries correctly; (3) never cache responses with <code>errors</code> &mdash; you'd serve broken data for the whole TTL. GraphQL's flexibility is a double-edged sword: clients can ask for anything, but it defeats HTTP caching. Pinned operations restore cacheability and protect the upstream budget.</p>
+'''
+
+ANSWERS[67] = r'''
+<pre><code>// dynamic-query.js — safe, whitelist-driven filtering &amp; sorting for an API endpoint
+import { z } from "zod";
+
+// ALLOWLIST — what columns can be filtered/sorted on &amp; how.
+// Never let user input decide column names directly — SQL injection vector.
+const FILTERABLE = {
+  status:   { type: "enum", options: ["open", "closed", "archived"] },
+  priority: { type: "enum", options: ["low", "med", "high"] },
+  assignee: { type: "uuid" },
+  title:    { type: "string-contains", maxLength: 200 },
+  createdAfter:  { type: "date", field: "createdAt", op: "gte" },
+  createdBefore: { type: "date", field: "createdAt", op: "lte" },
+};
+
+const SORTABLE = {
+  newest:   [{ createdAt: "desc" }, { id: "desc" }],
+  oldest:   [{ createdAt: "asc"  }, { id: "asc"  }],
+  priority: [{ priority: "desc" }, { createdAt: "desc" }],
+  title:    [{ title: "asc" }],
+};
+
+function buildWhere(query) {
+  const where = { userId: query.userId };                     // always scope to user
+  for (const [key, spec] of Object.entries(FILTERABLE)) {
+    const raw = query[key];
+    if (raw === undefined) continue;
+    try {
+      switch (spec.type) {
+        case "enum":
+          if (!spec.options.includes(raw)) throw new Error("invalid");
+          where[key] = raw;
+          break;
+        case "uuid":
+          z.string().uuid().parse(raw);
+          where[key] = raw;
+          break;
+        case "string-contains":
+          z.string().max(spec.maxLength).parse(raw);
+          where[key] = { contains: raw, mode: "insensitive" };
+          break;
+        case "date": {
+          const d = new Date(raw);
+          if (Number.isNaN(d.getTime())) throw new Error("invalid date");
+          const field = spec.field;
+          where[field] = { ...where[field], [spec.op]: d };
+          break;
+        }
+      }
+    } catch { throw new Error(`Invalid value for ${key}`); }
+  }
+  return where;
+}
+
+app.get("/tickets", requireAuth, async (req, res) =&gt; {
+  const limit = Math.min(100, Number(req.query.limit) || 20);
+  const sort  = SORTABLE[req.query.sort] ?? SORTABLE.newest;
+
+  try {
+    const where = buildWhere({ ...req.query, userId: req.user.id });
+    const rows = await db.ticket.findMany({ where, orderBy: sort, take: limit });
+    res.json({ data: rows });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});</code></pre>
+<p><strong>The critical insight: never trust client-supplied column names.</strong> A naive implementation like <code>where: { [req.query.field]: req.query.value }</code> lets an attacker query sensitive fields (passwordHash, isAdmin) or craft operator injection (<code>?field=$ne</code>). The allowlist pattern maps user-facing filter names to <em>specific</em> DB behavior, validated by type. It also converts intuitive params (<code>createdAfter=2026-01-01</code>) into correct Prisma/ORM queries. This is what mature APIs like GitHub's do &mdash; every filter is a curated, documented option.</p>
+'''
+
+ANSWERS[68] = r'''
+<pre><code>// session-mgmt.js — session-backed auth with server-side revocation
+import session from "express-session";
+import { RedisStore } from "connect-redis";
+import Redis from "ioredis";
+
+const redis = new Redis(process.env.REDIS_URL);
+
+app.set("trust proxy", 1);                          // required for secure cookies behind LB
+app.use(session({
+  store:  new RedisStore({ client: redis, prefix: "sess:" }),
+  secret: process.env.SESSION_SECRET,               // signs the session id
+  name:   "sid",                                    // avoid default "connect.sid" fingerprint
+  resave: false,                                    // don't save unchanged sessions
+  saveUninitialized: false,                         // don't track anonymous visitors
+  rolling: true,                                    // reset expiry on each request
+  cookie: {
+    httpOnly: true,                                 // inaccessible to JS (XSS defense)
+    secure:   true,                                 // HTTPS only
+    sameSite: "lax",                                // CSRF defense
+    maxAge:   30 * 60 * 1000,                       // 30-min idle timeout
+  },
+}));
+
+// LOGIN — create session
+app.post("/auth/login", authLimiter, async (req, res, next) =&gt; {
+  const user = await authenticate(req.body.email, req.body.password);
+  if (!user) return res.status(401).json({ error: "Invalid credentials" });
+
+  // Regenerate session ID — prevents session fixation
+  req.session.regenerate((err) =&gt; {
+    if (err) return next(err);
+
+    req.session.userId     = user.id;
+    req.session.createdAt  = Date.now();
+    req.session.ip         = req.ip;
+    req.session.userAgent  = req.headers["user-agent"];
+
+    // Track active sessions per user — for "sign out other devices" UI
+    redis.sadd(`user:${user.id}:sessions`, req.sessionID);
+
+    res.json({ ok: true, user: { id: user.id, email: user.email } });
+  });
+});
+
+// LOGOUT — destroy session on server + clear cookie
+app.post("/auth/logout", (req, res) =&gt; {
+  const userId    = req.session.userId;
+  const sessionId = req.sessionID;
+  req.session.destroy((err) =&gt; {
+    if (err) return res.status(500).json({ error: "Logout failed" });
+    if (userId) redis.srem(`user:${userId}:sessions`, sessionId);
+    res.clearCookie("sid").sendStatus(204);
+  });
+});
+
+// LOGOUT ALL — revoke all sessions for this user
+app.post("/auth/logout-all", requireAuth, async (req, res) =&gt; {
+  const userId = req.session.userId;
+  const sessionIds = await redis.smembers(`user:${userId}:sessions`);
+
+  await Promise.all(sessionIds.map((id) =&gt; redis.del(`sess:${id}`)));
+  await redis.del(`user:${userId}:sessions`);
+
+  req.session.destroy(() =&gt; res.clearCookie("sid").sendStatus(204));
+});
+
+// AUTH MIDDLEWARE — populate req.user from session
+export function requireAuth(req, res, next) {
+  if (!req.session.userId) return res.status(401).json({ error: "Not authenticated" });
+  req.user = { id: req.session.userId };
+  next();
+}</code></pre>
+<p><strong>Why sessions beat JWT for many apps:</strong> revocation is instant &mdash; just delete the Redis key. (JWTs are stateless and you have to wait for expiry or maintain a blocklist.) Two mandatory hardening steps: <code>regenerate()</code> on login to prevent session fixation; track active sessions in a per-user set so "sign out everywhere" is one Redis operation. For browser apps, sessions + HttpOnly cookies are simpler and safer than JWTs. For mobile/native apps where cookies are awkward, JWTs still win.</p>
+'''
+
+ANSWERS[69] = r'''
+<pre><code>// api-ssr.js — dual-mode endpoints: JSON for clients, HTML for browsers/crawlers
+import express from "express";
+import { renderToString } from "react-dom/server";
+import { UserProfile } from "./views/UserProfile.js";
+
+const app = express();
+app.set("view engine", "ejs");                    // for simple pages
+
+// Content negotiation middleware — pick format based on Accept header
+app.use((req, res, next) =&gt; {
+  req.preferredType = req.accepts(["html", "json"]) || "json";
+  res.vary("Accept");
+  next();
+});
+
+// Single endpoint serving both JSON and HTML from the same data
+app.get("/users/:id", async (req, res, next) =&gt; {
+  try {
+    const user = await db.user.findUnique({
+      where: { id: req.params.id },
+      select: { id: true, name: true, bio: true, avatar: true, joinedAt: true },
+    });
+    if (!user) {
+      if (req.preferredType === "html") return res.status(404).render("404");
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    if (req.preferredType === "html") {
+      // Server-render React to HTML — search engines &amp; link previews get real content
+      const bodyHtml = renderToString(UserProfile({ user }));
+      res.set("Content-Type", "text/html; charset=utf-8");
+      res.send(`&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;${escapeHtml(user.name)} | MyApp&lt;/title&gt;
+  &lt;meta name="description" content="${escapeHtml(user.bio?.slice(0,160) ?? "")}"&gt;
+  &lt;meta property="og:title" content="${escapeHtml(user.name)}"&gt;
+  &lt;meta property="og:image" content="${user.avatar}"&gt;
+  &lt;link rel="canonical" href="https://example.com/users/${user.id}"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id="root"&gt;${bodyHtml}&lt;/div&gt;
+  &lt;script&gt;window.__INITIAL_DATA__ = ${JSON.stringify({ user }).replace(/</g, "\\u003c")}&lt;/script&gt;
+  &lt;script type="module" src="/app.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;`);
+    } else {
+      // JSON for programmatic clients
+      res.json(user);
+    }
+  } catch (err) { next(err); }
+});
+
+function escapeHtml(s) {
+  return String(s).replace(/[&amp;&lt;&gt;"']/g, (c) =&gt; ({
+    "&amp;": "&amp;amp;", "&lt;": "&amp;lt;", "&gt;": "&amp;gt;",
+    '"': "&amp;quot;", "'": "&amp;#39;",
+  })[c]);
+}</code></pre>
+<p><strong>When to SSR an API response:</strong> search engines and social-media link previewers still don't reliably execute JavaScript &mdash; if you want proper <code>og:image</code> previews when users share links, you need server-rendered HTML with metadata tags. Content negotiation lets one URL serve both machines (JSON) and browsers (HTML) from the same handler. Two safety rules: escape <em>every</em> string you interpolate into HTML (XSS defense); use <code>.replace(/&lt;/g, "\\u003c")</code> when embedding JSON as a <code>&lt;script&gt;</code> tag to prevent script-injection via closing-tag tricks. For full React apps, use <strong>Next.js</strong> or <strong>Remix</strong> rather than hand-rolling SSR.</p>
+'''
+
+ANSWERS[70] = r'''
+<pre><code>// public-api-proxy.js — your API proxying a public upstream with rate-limit awareness
+import { setTimeout as sleep } from "node:timers/promises";
+import pLimit from "p-limit";
+
+const UPSTREAM = "https://api.publicdata.example.com";
+
+// Upstream limit is 60 req/min. We enforce it globally across all our users.
+class TokenBucket {
+  constructor(capacity, refillPerSec) {
+    this.capacity = capacity; this.tokens = capacity; this.refillPerSec = refillPerSec;
+    this.lastRefill = Date.now();
+  }
+  async take(n = 1) {
+    while (true) {
+      this.refill();
+      if (this.tokens &gt;= n) { this.tokens -= n; return; }
+      await sleep(100);
+    }
+  }
+  refill() {
+    const now = Date.now();
+    const add = ((now - this.lastRefill) / 1000) * this.refillPerSec;
+    this.tokens = Math.min(this.capacity, this.tokens + add);
+    this.lastRefill = now;
+  }
+}
+
+const bucket = new TokenBucket(60, 1);                     // 60 capacity, 1/sec refill
+const concurrency = pLimit(10);
+
+async function callUpstream(path) {
+  await bucket.take();
+  return concurrency(async () =&gt; {
+    for (let attempt = 0; attempt &lt; 3; attempt++) {
+      const r = await fetch(`${UPSTREAM}${path}`, {
+        signal: AbortSignal.timeout(10_000),
+      });
+
+      if (r.status === 429) {
+        // Respect their Retry-After — back off globally
+        const retrySec = Number(r.headers.get("Retry-After")) || 2 ** attempt;
+        await sleep(retrySec * 1000 + Math.random() * 500);
+        continue;
+      }
+      if (r.status &gt;= 500 &amp;&amp; attempt &lt; 2) {
+        await sleep(2 ** attempt * 500);
+        continue;
+      }
+      if (!r.ok) throw Object.assign(new Error(`Upstream ${r.status}`), { status: r.status });
+      return r.json();
+    }
+    throw new Error("Retries exhausted");
+  });
+}
+
+app.get("/data/:id", requireAuth, async (req, res, next) =&gt; {
+  // Cache layer — spares upstream budget entirely
+  const cacheKey = `pub:${req.params.id}`;
+  const hit = await redis.get(cacheKey);
+  if (hit) {
+    res.set("X-Cache", "HIT");
+    return res.json(JSON.parse(hit));
+  }
+
+  try {
+    const data = await callUpstream(`/items/${encodeURIComponent(req.params.id)}`);
+    await redis.setex(cacheKey, 300, JSON.stringify(data));   // 5-min TTL
+    res.set("X-Cache", "MISS");
+    res.set("Cache-Control", "public, max-age=60");
+    res.json(data);
+  } catch (err) {
+    if (err.status === 429) return res.status(503).json({ error: "Upstream rate-limited, try again shortly" });
+    if (err.name === "AbortError") return res.status(504).json({ error: "Upstream timeout" });
+    next(err);
+  }
+});</code></pre>
+<p><strong>Four layers of rate-limit respect:</strong> (1) <strong>cache</strong> &mdash; the upstream only sees cache misses; (2) <strong>token bucket</strong> &mdash; self-imposed limit matching upstream's so you never exceed; (3) <strong>concurrency cap</strong> &mdash; bounds in-flight requests regardless of burst; (4) <strong>respect Retry-After</strong> on 429 &mdash; back off for the time the upstream asks for. Together, these turn a fragile integration into a polite, resilient one. When you exceed upstream limits, your users get 503 (not 429) since the limit isn't on their end.</p>
+'''
+
+ANSWERS[71] = r'''
+<pre><code>// complex-query-validation.js — validate deep/nested query params with Zod
+import { z } from "zod";
+
+// Query params arrive as strings; Zod's .coerce methods convert them safely.
+const SearchQuerySchema = z.object({
+  // Scalars
+  q:       z.string().trim().min(1).max(200).optional(),
+  limit:   z.coerce.number().int().min(1).max(100).default(20),
+  page:    z.coerce.number().int().min(1).default(1),
+
+  // Boolean from string
+  archived: z.enum(["true", "false"]).optional().transform((v) =&gt; v === "true"),
+
+  // Array: ?tags=js&amp;tags=node  →  ["js", "node"]
+  tags: z.union([z.string(), z.array(z.string())])
+    .optional()
+    .transform((v) =&gt; (typeof v === "string" ? [v] : v ?? []))
+    .pipe(z.array(z.string().trim().min(1).max(32)).max(10)),
+
+  // Enum
+  sort: z.enum(["newest", "oldest", "popular", "trending"]).default("newest"),
+
+  // Date range
+  createdAfter:  z.string().datetime().optional(),
+  createdBefore: z.string().datetime().optional(),
+
+  // Bracket notation: ?filter[status]=active&amp;filter[priority]=high  (Express parses this)
+  filter: z.object({
+    status:   z.enum(["active", "archived"]).optional(),
+    priority: z.enum(["low", "med", "high"]).optional(),
+    assignee: z.string().uuid().optional(),
+  }).strict().optional(),
+
+  // Numeric range from JSON-encoded string
+  price: z.string()
+    .optional()
+    .transform((v) =&gt; (v ? JSON.parse(v) : undefined))
+    .pipe(z.object({ min: z.number().min(0), max: z.number().min(0) }).optional()),
+})
+  .strict()
+  // Cross-field: createdAfter must be before createdBefore
+  .refine((q) =&gt; !q.createdAfter || !q.createdBefore || q.createdAfter &lt; q.createdBefore,
+    { message: "createdAfter must be before createdBefore", path: ["createdAfter"] })
+  .refine((q) =&gt; !q.price || q.price.min &lt;= q.price.max,
+    { message: "price.min must be ≤ price.max", path: ["price", "min"] });
+
+app.get("/posts", (req, res) =&gt; {
+  // Enable bracket notation: app.set("query parser", "extended") in Express
+  const parsed = SearchQuerySchema.safeParse(req.query);
+  if (!parsed.success) {
+    return res.status(400).json({
+      error:  "Invalid query parameters",
+      issues: parsed.error.issues.map((i) =&gt; ({ path: i.path.join("."), message: i.message })),
+    });
+  }
+
+  // parsed.data is fully typed and coerced
+  res.json({ query: parsed.data });
+});</code></pre>
+<p><strong>Four query-param coercion tricks:</strong> (1) <code>z.coerce.number()</code> and friends automatically convert strings to their target types; (2) <code>.transform()</code> normalizes single/multi values (<code>?tags=x</code> vs <code>?tags=x&amp;tags=y</code>) into a consistent array; (3) Express's extended query parser handles <code>?filter[status]=active</code> bracket notation (enable with <code>app.set("query parser", "extended")</code>); (4) for deeply nested filters, JSON-encode the value (<code>?price={"min":0,"max":100}</code>) then <code>JSON.parse</code> inside a transform. Always <code>.strict()</code> to reject unknown params &mdash; prevents typos silently being ignored.</p>
+'''
+
+ANSWERS[72] = r'''
+<pre><code>// user-generated-content.js — user-submitted content with moderation + rate limits
+import { z } from "zod";
+import DOMPurify from "isomorphic-dompurify";
+
+// Tight per-user rate limit to slow spam
+const ugcLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 5,                                           // 5 posts per minute
+  keyGenerator: (req) =&gt; req.user?.id ?? req.ip,
+});
+
+const PostSchema = z.object({
+  title: z.string().trim().min(1).max(200),
+  body:  z.string().trim().min(10).max(50_000),
+  tags:  z.array(z.string().trim().max(32)).max(5).optional(),
+}).strict();
+
+// CREATE — with sanitization + spam checks + moderation queue
+app.post("/posts", requireAuth, ugcLimiter, async (req, res, next) =&gt; {
+  const parsed = PostSchema.safeParse(req.body);
+  if (!parsed.success) return res.status(400).json({ issues: parsed.error.issues });
+
+  const { title, body, tags } = parsed.data;
+
+  // Sanitize rich HTML — allowlist only safe tags
+  const safeBody = DOMPurify.sanitize(body, {
+    ALLOWED_TAGS: ["p","br","strong","em","ul","ol","li","a","code","pre","blockquote","h2","h3"],
+    ALLOWED_ATTR: ["href"],
+    ALLOWED_URI_REGEXP: /^(https?:\/\/|\/|#)/i,
+  });
+
+  // Heuristic spam checks
+  const needsReview =
+    /(https?:\/\/\S+){3,}/i.test(safeBody) ||           // 3+ URLs
+    /\b(viagra|casino|crypto giveaway)\b/i.test(safeBody) ||
+    req.user.reputation &lt; 10;                           // new/low-rep users
+
+  try {
+    const post = await db.post.create({ data: {
+      id:       crypto.randomUUID(),
+      authorId: req.user.id,
+      title,
+      body:     safeBody,
+      tags:     tags ?? [],
+      status:   needsReview ? "pending_review" : "published",
+      createdAt: new Date(),
+    }});
+
+    // Notify moderators asynchronously
+    if (needsReview) await queueModerationCheck(post.id);
+
+    res.status(201).json(post);
+  } catch (err) { next(err); }
+});
+
+// LIST — only published content (hides pending/rejected from other users)
+app.get("/posts", async (req, res, next) =&gt; {
+  const page  = Math.max(1, Number(req.query.page) || 1);
+  const limit = Math.min(50, Number(req.query.limit) || 20);
+
+  const posts = await db.post.findMany({
+    where: { status: "published" },
+    orderBy: [{ createdAt: "desc" }],
+    skip:  (page - 1) * limit,
+    take:  limit,
+    include: { author: { select: { id: true, name: true, avatar: true } } },
+  });
+  res.json({ data: posts });
+});
+
+// FLAG — let users report abusive content
+app.post("/posts/:id/flag", requireAuth, async (req, res) =&gt; {
+  const schema = z.object({
+    reason: z.enum(["spam", "harassment", "illegal", "copyright", "other"]),
+    detail: z.string().max(1000).optional(),
+  });
+  const p = schema.safeParse(req.body);
+  if (!p.success) return res.status(400).json({ issues: p.error.issues });
+
+  await db.flag.create({ data: { postId: req.params.id, reporterId: req.user.id, ...p.data }});
+
+  // Auto-hide posts that hit a flag threshold
+  const count = await db.flag.count({ where: { postId: req.params.id }});
+  if (count &gt;= 5) {
+    await db.post.update({ where: { id: req.params.id }, data: { status: "pending_review" } });
+  }
+  res.sendStatus(204);
+});</code></pre>
+<p><strong>Five layers for user-generated content:</strong> (1) rate limit per user to slow spam creation; (2) Zod-validate shape; (3) DOMPurify to sanitize rich text; (4) heuristic spam detection (link count, keywords, user reputation) routing to a moderation queue; (5) community flagging with an auto-hide threshold. New-user content should generally start in <code>pending_review</code> until reputation is built &mdash; most UGC spam comes from brand-new accounts. For scale, integrate Perspective API or Azure Content Moderator for automated toxicity scoring.</p>
+'''
+
+ANSWERS[73] = r'''
+<pre><code>// dynamic-resources.js — generic CRUD factory that creates endpoints from schema definitions
+import { z } from "zod";
+import crypto from "node:crypto";
+
+// Resource definitions — loaded from config or DB at boot
+const resources = {
+  tasks: {
+    schema: z.object({
+      title:    z.string().trim().min(1).max(200),
+      done:     z.boolean().default(false),
+      dueAt:    z.string().datetime().optional(),
+    }).strict(),
+    table: "task",
+    ownerField: "userId",                           // scope rows to owning user
+  },
+  notes: {
+    schema: z.object({
+      title:   z.string().trim().min(1).max(200),
+      content: z.string().max(50_000).default(""),
+    }).strict(),
+    table: "note",
+    ownerField: "userId",
+  },
+};
+
+// Factory that mounts GET/POST/PATCH/DELETE for a resource definition
+function mountResource(app, path, def) {
+  const { schema, table, ownerField } = def;
+
+  // List own resources
+  app.get(path, requireAuth, async (req, res, next) =&gt; {
+    try {
+      const rows = await db[table].findMany({
+        where: { [ownerField]: req.user.id },
+        orderBy: { createdAt: "desc" }, take: 50,
+      });
+      res.json({ data: rows });
+    } catch (err) { next(err); }
+  });
+
+  // Read one — check ownership
+  app.get(`${path}/:id`, requireAuth, async (req, res, next) =&gt; {
+    try {
+      const row = await db[table].findFirst({
+        where: { id: req.params.id, [ownerField]: req.user.id },
+      });
+      if (!row) return res.sendStatus(404);
+      res.json(row);
+    } catch (err) { next(err); }
+  });
+
+  // Create
+  app.post(path, requireAuth, async (req, res, next) =&gt; {
+    const parsed = schema.safeParse(req.body);
+    if (!parsed.success) return res.status(400).json({ issues: parsed.error.issues });
+    try {
+      const row = await db[table].create({ data: {
+        id: crypto.randomUUID(),
+        [ownerField]: req.user.id,
+        ...parsed.data,
+        createdAt: new Date(),
+      }});
+      res.status(201).location(`${path}/${row.id}`).json(row);
+    } catch (err) { next(err); }
+  });
+
+  // Update — partial
+  app.patch(`${path}/:id`, requireAuth, async (req, res, next) =&gt; {
+    const parsed = schema.partial().safeParse(req.body);
+    if (!parsed.success) return res.status(400).json({ issues: parsed.error.issues });
+    try {
+      const result = await db[table].updateMany({
+        where: { id: req.params.id, [ownerField]: req.user.id },
+        data:  { ...parsed.data, updatedAt: new Date() },
+      });
+      if (result.count === 0) return res.sendStatus(404);
+      const updated = await db[table].findUnique({ where: { id: req.params.id }});
+      res.json(updated);
+    } catch (err) { next(err); }
+  });
+
+  // Delete
+  app.delete(`${path}/:id`, requireAuth, async (req, res, next) =&gt; {
+    try {
+      const result = await db[table].deleteMany({
+        where: { id: req.params.id, [ownerField]: req.user.id },
+      });
+      if (result.count === 0) return res.sendStatus(404);
+      res.sendStatus(204);
+    } catch (err) { next(err); }
+  });
+}
+
+// Mount all resources in a loop
+for (const [name, def] of Object.entries(resources)) {
+  mountResource(app, `/${name}`, def);
+}</code></pre>
+<p><strong>Why a factory beats repeating CRUD in every route:</strong> consistency. Every resource gets the same ownership check (<code>updateMany</code> + <code>ownerField</code> filter prevents users from touching other users' rows), same error handling, same validation structure. Adding a new resource is a one-liner in the <code>resources</code> map. Safety note: <code>updateMany</code>/<code>deleteMany</code> with the ownership filter is safer than <code>findUnique</code>-then-update &mdash; atomic, no TOCTOU window. For truly dynamic (admin-configurable) resources, store schemas in a DB table and rebuild the handler on config changes.</p>
+'''
+
+ANSWERS[74] = r'''
+<pre><code>// cloud-storage.js — list + download files from S3 with per-user prefixing
+import { S3Client, ListObjectsV2Command, GetObjectCommand, HeadObjectCommand } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+
+const s3 = new S3Client({ region: process.env.AWS_REGION });
+const BUCKET = process.env.S3_BUCKET;
+
+// Each user gets their own prefix — isolation enforced by IAM policy too
+function userPrefix(userId) { return `users/${userId}/`; }
+
+// LIST — paginated
+app.get("/files", requireAuth, async (req, res, next) =&gt; {
+  const continuationToken = req.query.cursor || undefined;
+
+  try {
+    const response = await s3.send(new ListObjectsV2Command({
+      Bucket: BUCKET,
+      Prefix: userPrefix(req.user.id),                // user can only see own files
+      MaxKeys: 100,
+      ContinuationToken: continuationToken,
+    }));
+
+    const data = (response.Contents || []).map((obj) =&gt; ({
+      key:          obj.Key,
+      name:         obj.Key.replace(userPrefix(req.user.id), ""),
+      size:         obj.Size,
+      lastModified: obj.LastModified?.toISOString(),
+      etag:         obj.ETag?.replace(/"/g, ""),
+    }));
+
+    res.json({
+      data,
+      nextCursor: response.NextContinuationToken ?? null,
+      hasMore:    !!response.IsTruncated,
+    });
+  } catch (err) { next(err); }
+});
+
+// DOWNLOAD — short-lived pre-signed URL (bandwidth never goes through Node)
+app.get("/files/:key(*)/download-url", requireAuth, async (req, res, next) =&gt; {
+  // The :key(*) pattern allows slashes in the key — users can have folders
+  const key = `${userPrefix(req.user.id)}${req.params.key}`;
+
+  try {
+    // HEAD to confirm file exists and belongs to this user's prefix
+    await s3.send(new HeadObjectCommand({ Bucket: BUCKET, Key: key }));
+
+    const url = await getSignedUrl(s3,
+      new GetObjectCommand({
+        Bucket: BUCKET,
+        Key:    key,
+        ResponseContentDisposition:
+          `attachment; filename*=UTF-8''${encodeURIComponent(req.params.key.split("/").pop())}`,
+      }),
+      { expiresIn: 300 }                              // 5 min
+    );
+
+    res.json({ url, expiresIn: 300 });
+  } catch (err) {
+    if (err.name === "NotFound" || err.$metadata?.httpStatusCode === 404) {
+      return res.sendStatus(404);
+    }
+    next(err);
+  }
+});
+
+// DELETE
+import { DeleteObjectCommand } from "@aws-sdk/client-s3";
+app.delete("/files/:key(*)", requireAuth, async (req, res, next) =&gt; {
+  const key = `${userPrefix(req.user.id)}${req.params.key}`;
+  try {
+    await s3.send(new DeleteObjectCommand({ Bucket: BUCKET, Key: key }));
+    res.sendStatus(204);
+  } catch (err) { next(err); }
+});</code></pre>
+<p><strong>Two architectural wins:</strong> (1) <strong>pre-signed URLs for downloads</strong> &mdash; your Node process never touches file bytes; AWS serves directly to the user with S3's bandwidth and edge. (2) <strong>Prefix-based isolation</strong> &mdash; each user's files live under <code>users/&lt;id&gt;/</code>, enforced in code and (ideally) in the IAM policy of the Node role. For defense-in-depth, use S3 bucket policies that require the object key to start with <code>users/${aws:PrincipalTag/userId}/</code>. Never return a signed URL without first HEADing to verify the file exists within the user's namespace &mdash; otherwise you can leak file existence via signed-URL generation.</p>
+'''
+
+ANSWERS[75] = r'''
+<pre><code>// secure-uploads.js — layered validation for file uploads
+import multer from "multer";
+import crypto from "node:crypto";
+import { fileTypeFromBuffer } from "file-type";
+import sharp from "sharp";
+import { PutObjectCommand } from "@aws-sdk/client-s3";
+
+const ALLOWED = {
+  "image/jpeg":      ".jpg",
+  "image/png":       ".png",
+  "image/webp":      ".webp",
+  "application/pdf": ".pdf",
+};
+
+const upload = multer({
+  storage: multer.memoryStorage(),                              // bytes in RAM, not disk
+  limits:  { fileSize: 10 * 1024 * 1024, files: 1 },            // 10 MB hard cap
+  fileFilter: (req, file, cb) =&gt; {
+    // Layer 1 — quick MIME filter
+    cb(null, file.mimetype in ALLOWED);
+  },
+});
+
+app.post("/uploads", requireAuth, upload.single("file"), async (req, res, next) =&gt; {
+  if (!req.file) return res.status(400).json({ error: "No file provided" });
+
+  try {
+    // Layer 2 — verify actual file type from magic bytes (MIME type can be spoofed)
+    const detected = await fileTypeFromBuffer(req.file.buffer);
+    if (!detected || !(detected.mime in ALLOWED)) {
+      return res.status(400).json({ error: "File content doesn't match declared type" });
+    }
+
+    let outBuffer = req.file.buffer;
+    let outMime   = detected.mime;
+
+    // Layer 3 — for images, re-encode to strip EXIF metadata &amp; defuse exploits
+    if (detected.mime.startsWith("image/")) {
+      const meta = await sharp(req.file.buffer).metadata();
+      if ((meta.width ?? 0) &gt; 8000 || (meta.height ?? 0) &gt; 8000) {
+        return res.status(400).json({ error: "Image dimensions too large" });
+      }
+      // Re-encode → strips EXIF (GPS, camera serial), defuses malformed-image exploits
+      outBuffer = await sharp(req.file.buffer)
+        .rotate()                                       // apply EXIF orientation then drop
+        .webp({ quality: 85 })
+        .toBuffer();
+      outMime = "image/webp";
+    }
+
+    // Layer 4 — optional antivirus scan for non-images
+    if (detected.mime === "application/pdf") {
+      const clean = await scanWithClamAV(req.file.buffer);
+      if (!clean) return res.status(400).json({ error: "File failed virus scan" });
+    }
+
+    // Upload to S3 with a generated key (never trust originalname as a filename)
+    const id  = crypto.randomUUID();
+    const key = `uploads/${req.user.id}/${id}${ALLOWED[outMime] ?? ""}`;
+
+    await s3.send(new PutObjectCommand({
+      Bucket:      process.env.S3_BUCKET,
+      Key:         key,
+      Body:        outBuffer,
+      ContentType: outMime,
+      Metadata:    { userId: req.user.id, originalName: req.file.originalname },
+    }));
+
+    await db.file.create({ data: {
+      id, userId: req.user.id,
+      s3Key: key,
+      originalName: req.file.originalname.slice(0, 255),
+      mimeType: outMime,
+      size: outBuffer.byteLength,
+      createdAt: new Date(),
+    }});
+
+    res.status(201).json({ id, size: outBuffer.byteLength });
+  } catch (err) { next(err); }
+});</code></pre>
+<p><strong>Four layers catch different classes of attack:</strong> (1) <code>multer.fileFilter</code> on claimed MIME — cheap early reject; (2) <code>file-type</code> magic-byte detection catches clients lying about MIME type; (3) <strong>re-encoding images with sharp</strong> is critical — strips EXIF (location privacy), defuses PNG decompression bombs, and neutralizes malformed-image CVEs; (4) ClamAV for PDFs catches known malware. Generate server-side filenames (UUIDs) so users can't path-traverse via <code>../../etc/passwd</code>. For very large files (&gt;10 MB), use pre-signed URLs for direct browser→S3 upload (see Q74).</p>
+'''
+
+ANSWERS[76] = r'''
+<pre><code>// iot-stream.js — real-time IoT telemetry via WebSocket + Redis fan-out
+import { WebSocketServer } from "ws";
+import Redis from "ioredis";
+
+const redis = new Redis(process.env.REDIS_URL);
+const sub   = redis.duplicate();
+const wss   = new WebSocketServer({ server, path: "/iot/stream" });
+
+// auth on handshake — reject without a valid device token
+wss.on("connection", async (ws, req) =&gt; {
+  const token = new URL(req.url, "http://x").searchParams.get("token");
+  const device = await verifyDeviceToken(token);
+  if (!device) return ws.close(1008, "Unauthorized");
+
+  ws.deviceId = device.id;
+  ws.tenantId = device.tenantId;
+
+  // subscribe this socket to its tenant's channel
+  const channel = `iot:${device.tenantId}`;
+  await sub.subscribe(channel);
+
+  ws.on("close", () =&gt; sub.unsubscribe(channel));
+
+  // heartbeat — detect dead connections
+  ws.isAlive = true;
+  ws.on("pong", () =&gt; (ws.isAlive = true));
+});
+
+// ONE Redis subscriber fans out to all matching sockets
+sub.on("message", (channel, payload) =&gt; {
+  const tenantId = channel.split(":")[1];
+  for (const client of wss.clients) {
+    if (client.readyState === 1 &amp;&amp; client.tenantId === tenantId) {
+      client.send(payload);       // already stringified in the publisher
+    }
+  }
+});
+
+// heartbeat sweep every 30s — close sockets that don't pong back
+setInterval(() =&gt; {
+  for (const client of wss.clients) {
+    if (!client.isAlive) { client.terminate(); continue; }
+    client.isAlive = false;
+    client.ping();
+  }
+}, 30_000);
+
+// INGESTION endpoint — device POSTs telemetry, server fans out
+app.post("/iot/ingest", requireDeviceAuth, async (req, res) =&gt; {
+  const { temp, humidity, ts } = req.body;
+  const event = {
+    deviceId: req.device.id,
+    tenantId: req.device.tenantId,
+    temp, humidity, ts: ts || Date.now(),
+  };
+  // persist for history + publish for live subscribers
+  await Promise.all([
+    db.telemetry.create({ data: event }),
+    redis.publish(`iot:${req.device.tenantId}`, JSON.stringify(event)),
+  ]);
+  res.sendStatus(204);
+});</code></pre>
+<p><strong>Key insight:</strong> IoT streams at scale need three patterns together. <strong>Auth on handshake</strong>, not on first message &mdash; reject unauthorized connections before they hold a socket. <strong>Redis pub/sub</strong> for horizontal fan-out &mdash; without it, a device publishing to instance A can't reach subscribers on instance B. <strong>Heartbeat + terminate</strong> &mdash; WebSockets don't reliably notify you when a client disconnects (mobile, NAT timeouts); ping/pong every 30s detects dead connections before they pile up. Tag sockets with tenant id so the fan-out only wakes the right subscribers.</p>
+'''
+
+ANSWERS[77] = r'''
+<pre><code>// nested-sanitizer.js — recursively clean complex JSON payloads
+import DOMPurify from "isomorphic-dompurify";
+import { z } from "zod";
+
+// 1. type-aware sanitizer — walks the tree, cleans strings, preserves shape
+const DEPTH_LIMIT = 10;
+const ARRAY_LIMIT = 1000;
+
+export function sanitizePayload(value, depth = 0) {
+  if (depth &gt; DEPTH_LIMIT) throw new Error("Payload too deeply nested");
+
+  if (value === null || typeof value !== "object") {
+    if (typeof value === "string") {
+      // strip control chars except tab/newline; cap length
+      const cleaned = value.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, "").slice(0, 10_000);
+      // HTML-bearing fields use DOMPurify; plain strings just get trimmed
+      return cleaned;
+    }
+    return value;
+  }
+
+  if (Array.isArray(value)) {
+    if (value.length &gt; ARRAY_LIMIT) throw new Error("Array too large");
+    return value.map((v) =&gt; sanitizePayload(v, depth + 1));
+  }
+
+  // reject prototype-pollution vectors
+  const out = Object.create(null);
+  for (const [k, v] of Object.entries(value)) {
+    if (k === "__proto__" || k === "constructor" || k === "prototype") continue;
+    out[k] = sanitizePayload(v, depth + 1);
+  }
+  return out;
+}
+
+// 2. field-specific sanitization via Zod transforms — for known shapes
+const RichBioSchema = z.object({
+  name: z.string().trim().min(1).max(100),
+  bio:  z.string().max(50_000).transform((html) =&gt;
+    DOMPurify.sanitize(html, {
+      ALLOWED_TAGS: ["p","strong","em","a","ul","ol","li","br","code"],
+      ALLOWED_ATTR: ["href"],
+    })
+  ),
+  links: z.array(z.object({
+    label: z.string().trim().max(50),
+    url:   z.string().url(),
+  })).max(10),
+}).strict();
+
+// combine: strip dangerous keys FIRST, then schema-validate + sanitize HTML
+app.patch("/profile", requireAuth, (req, res, next) =&gt; {
+  try {
+    const stripped = sanitizePayload(req.body);
+    const clean = RichBioSchema.parse(stripped);
+    req.body = clean;
+    next();
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+}, updateProfileHandler);</code></pre>
+<p><strong>Key insight:</strong> sanitizing complex JSON has three layers. <strong>Structural defense</strong> &mdash; bound depth, array size, and string length to prevent DoS from pathological payloads. <strong>Prototype-pollution defense</strong> &mdash; skip <code>__proto__</code>, <code>constructor</code>, <code>prototype</code> keys when walking the tree; use <code>Object.create(null)</code> for the output. <strong>Field-aware cleanup</strong> &mdash; use Zod's <code>.transform()</code> to run DOMPurify only on fields that carry HTML (bio); plain strings don't need HTML sanitization and applying it would mangle them. Always run structural cleanup before schema validation.</p>
+'''
+
+ANSWERS[78] = r'''
+<pre><code>// register + verify-email flow — two endpoints, one token table
+import crypto from "node:crypto";
+import bcrypt from "bcrypt";
+import { z } from "zod";
+
+const RegisterSchema = z.object({
+  email:    z.string().trim().toLowerCase().email().max(254),
+  password: z.string().min(8).max(128),
+  name:     z.string().trim().min(1).max(100),
+}).strict();
+
+app.post("/auth/register", authLimiter, validate({ body: RegisterSchema }),
+  async (req, res) =&gt; {
+    const { email, password, name } = req.body;
+    const existing = await db.user.findUnique({ where: { email } });
+
+    // invariant response — prevents enumeration
+    const response = { message: "If the email is available, a verification link has been sent." };
+
+    if (!existing) {
+      const passwordHash = await bcrypt.hash(password, 12);
+      const user = await db.user.create({
+        data: { email, name, passwordHash, emailVerified: false },
+      });
+
+      const rawToken  = crypto.randomBytes(32).toString("base64url");
+      const tokenHash = crypto.createHash("sha256").update(rawToken).digest("hex");
+
+      await db.emailToken.create({
+        data: {
+          userId: user.id, tokenHash,
+          purpose: "verify_email",
+          expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000),     // 24h
+        },
+      });
+      await sendEmail(email,
+        `Click to verify: ${APP_URL}/auth/verify?token=${rawToken}&amp;u=${user.id}`);
+    }
+    res.status(202).json(response);
+  }
+);
+
+// verification — single-use, time-bound
+app.post("/auth/verify", async (req, res) =&gt; {
+  const { token, userId } = req.body;
+  if (!token || !userId) return res.sendStatus(400);
+
+  const tokenHash = crypto.createHash("sha256").update(token).digest("hex");
+  const rec = await db.emailToken.findFirst({
+    where: {
+      userId, tokenHash,
+      purpose: "verify_email",
+      usedAt: null,
+      expiresAt: { gt: new Date() },
+    },
+  });
+  if (!rec) return res.status(400).json({ error: "Invalid or expired verification link" });
+
+  await db.$transaction([
+    db.user.update({ where: { id: userId }, data: { emailVerified: true } }),
+    db.emailToken.update({ where: { id: rec.id }, data: { usedAt: new Date() } }),
+  ]);
+
+  res.json({ verified: true });
+});
+
+// login — REJECT if not verified
+app.post("/auth/login", authLimiter, async (req, res) =&gt; {
+  const user = await db.user.findUnique({
+    where: { email: String(req.body.email || "").toLowerCase() },
+  });
+  const valid = await bcrypt.compare(req.body.password || "",
+    user?.passwordHash || "$2b$12$dummydummydummydummydummydummydummydummydummydummy.");
+
+  if (!user || !valid) return res.status(401).json({ error: "Invalid credentials" });
+  if (!user.emailVerified) return res.status(403).json({ error: "Please verify your email first" });
+
+  res.json({ accessToken: issueAccessToken(user) });
+});</code></pre>
+<p><strong>Key insight:</strong> email verification is a tiny state machine with big security implications. <strong>Hash tokens in storage</strong> &mdash; email carries the raw token, DB stores only the hash; a DB leak doesn't expose working links. <strong>Single-use, time-bound</strong> &mdash; mark <code>usedAt</code> and check <code>expiresAt</code> atomically in a transaction. <strong>Invariant response</strong> on register &mdash; don't reveal whether the email is already registered; the actual signal goes via the side channel (the email itself). <strong>Reject login until verified</strong> &mdash; otherwise users can self-authenticate before proving ownership.</p>
+'''
+
+ANSWERS[79] = r'''
+<pre><code>// dynamic-router.js — data-driven routing + response generation
+import express from "express";
+
+// ROUTE CONFIG — could come from a DB or config file
+const routeConfig = [
+  {
+    method: "get", path: "/articles/:slug",
+    handler: async (req) =&gt; {
+      const a = await db.article.findUnique({ where: { slug: req.params.slug } });
+      return a ? { status: 200, body: a } : { status: 404, body: { error: "Not found" } };
+    },
+    cacheSec: 60,
+  },
+  {
+    method: "post", path: "/contact",
+    auth: false,
+    handler: async (req) =&gt; {
+      await db.contactMessage.create({ data: req.body });
+      return { status: 201, body: { ok: true } };
+    },
+  },
+  {
+    method: "get", path: "/admin/stats",
+    auth: true, roles: ["admin"],
+    handler: async () =&gt; ({ status: 200, body: await computeStats() }),
+  },
+];
+
+// register routes dynamically at boot
+const router = express.Router();
+for (const r of routeConfig) {
+  const middlewares = [];
+  if (r.auth !== false) middlewares.push(requireAuth);
+  if (r.roles)          middlewares.push(requireRole(...r.roles));
+  if (r.cacheSec)       middlewares.push(cacheFor(r.cacheSec));
+
+  router[r.method](r.path, ...middlewares, async (req, res, next) =&gt; {
+    try {
+      const result = await r.handler(req, res);
+      res.status(result.status || 200);
+      if (result.headers) for (const [k, v] of Object.entries(result.headers)) res.set(k, v);
+      res.json(result.body);
+    } catch (err) { next(err); }
+  });
+}
+
+app.use("/api", router);
+
+// RUNTIME DB-driven routing — e.g., CMS pages
+const cmsRouter = express.Router();
+cmsRouter.all("*", async (req, res, next) =&gt; {
+  if (req.method !== "GET") return next();
+  const page = await db.page.findUnique({
+    where: { path: req.path, published: true },
+  });
+  if (!page) return next();
+  res.set("Cache-Control", "public, max-age=60").render("page", { page });
+});
+app.use("/pages", cmsRouter);</code></pre>
+<p><strong>Key insight:</strong> two patterns serve different needs. <strong>Config-driven registration at boot</strong> keeps routes visible to OpenAPI/codegen/tests &mdash; each route still has a known signature. <strong>Runtime DB dispatch</strong> (CMS pages) trades visibility for flexibility &mdash; the URL set is infinite but tools can't enumerate it. Normalize the handler return shape (<code>{ status, body, headers? }</code>) so the dispatcher logic lives in one place. For runtime routing, cache the DB lookup aggressively or every request pays the DB round-trip.</p>
+'''
+
+ANSWERS[80] = r'''
+<pre><code>// activity-reports.js — aggregated activity with time windows + aggregation
+app.get("/users/:userId/activity-report", requireAuth, async (req, res) =&gt; {
+  const { userId } = req.params;
+  if (userId !== req.user.sub &amp;&amp; req.user.role !== "admin") return res.sendStatus(403);
+
+  const from = req.query.from ? new Date(req.query.from) : new Date(Date.now() - 30*86400_000);
+  const to   = req.query.to   ? new Date(req.query.to)   : new Date();
+  if (isNaN(from) || isNaN(to)) return res.status(400).json({ error: "Invalid date" });
+  if (to - from &gt; 365 * 86400_000) {
+    return res.status(400).json({ error: "Range cannot exceed 365 days" });
+  }
+
+  // parallel aggregations — each returns a small summary
+  const [byAction, byDay, totals, recent] = await Promise.all([
+    db.$queryRaw`
+      SELECT action, COUNT(*)::int AS count
+        FROM activities
+       WHERE user_id = ${userId} AND created_at BETWEEN ${from} AND ${to}
+       GROUP BY action ORDER BY count DESC LIMIT 20`,
+    db.$queryRaw`
+      SELECT date_trunc('day', created_at) AS day, COUNT(*)::int AS count
+        FROM activities
+       WHERE user_id = ${userId} AND created_at BETWEEN ${from} AND ${to}
+       GROUP BY day ORDER BY day`,
+    db.activity.aggregate({
+      where: { userId, createdAt: { gte: from, lte: to } },
+      _count: { id: true },
+      _min: { createdAt: true }, _max: { createdAt: true },
+    }),
+    db.activity.findMany({
+      where: { userId, createdAt: { gte: from, lte: to } },
+      take: 20, orderBy: { createdAt: "desc" },
+    }),
+  ]);
+
+  res.set("Cache-Control", "private, max-age=60");
+  res.json({
+    period:   { from, to, days: Math.ceil((to - from) / 86400_000) },
+    summary:  {
+      totalEvents: totals._count.id,
+      firstEvent:  totals._min.createdAt,
+      lastEvent:   totals._max.createdAt,
+    },
+    byAction,
+    byDay,
+    recent,
+  });
+});</code></pre>
+<p><strong>Key insight:</strong> reports fail in three ways if not designed carefully. <strong>Unbounded time ranges</strong> &mdash; a user asking for "all time" over 10 years of data will lock your DB; cap at 365 days with a clear error. <strong>Serialized aggregations</strong> &mdash; running 4 queries in a row is 4x the latency; <code>Promise.all</code> runs them in parallel. <strong>Raw SQL for grouped aggregations</strong> &mdash; ORMs force you to fetch rows and group in JS, which is slow for millions of events; push the aggregation into Postgres/MySQL with <code>GROUP BY</code>. Cache for 60s per user since reports rarely need to be real-time.</p>
+'''
+
+ANSWERS[81] = r'''
+<pre><code>// service-to-service auth via OAuth 2.0 Client Credentials — machine identity
+import jwt from "jsonwebtoken";
+
+// 1. CLIENT — obtains an access token for THIS service's identity
+class ServiceClient {
+  constructor({ tokenUrl, clientId, clientSecret, scopes = [] }) {
+    Object.assign(this, { tokenUrl, clientId, clientSecret, scopes });
+    this.cached = null;
+  }
+
+  async getToken() {
+    if (this.cached &amp;&amp; this.cached.expiresAt &gt; Date.now() + 30_000) {
+      return this.cached.token;                    // still fresh (&gt;30s left)
+    }
+
+    const body = new URLSearchParams({
+      grant_type:    "client_credentials",
+      client_id:     this.clientId,
+      client_secret: this.clientSecret,
+      scope:         this.scopes.join(" "),
+    });
+
+    const r = await fetch(this.tokenUrl, {
+      method:  "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body,
+    });
+    if (!r.ok) throw new Error(`Token endpoint returned ${r.status}`);
+    const { access_token, expires_in } = await r.json();
+
+    this.cached = {
+      token:     access_token,
+      expiresAt: Date.now() + expires_in * 1000,
+    };
+    return access_token;
+  }
+
+  async call(method, url, body) {
+    const token = await this.getToken();
+    const r = await fetch(url, {
+      method,
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type":  body ? "application/json" : undefined,
+      },
+      body: body ? JSON.stringify(body) : undefined,
+    });
+    // on 401, force token refresh once
+    if (r.status === 401) {
+      this.cached = null;
+      return this.call(method, url, body);
+    }
+    return r;
+  }
+}
+
+// 2. RESOURCE SERVER — verifies the token, checks scope
+function requireServiceScope(...required) {
+  return async (req, res, next) =&gt; {
+    const [, token] = (req.headers.authorization || "").split(" ");
+    try {
+      const payload = jwt.verify(token, AUTH_PUBLIC_KEY, {
+        algorithms: ["RS256"],
+        issuer:   "https://auth.example.com",
+        audience: "api.example.com",
+      });
+
+      const scopes = (payload.scope || "").split(" ");
+      if (!required.every((s) =&gt; scopes.includes(s))) {
+        return res.status(403).json({ error: "Insufficient scope" });
+      }
+
+      req.clientId = payload.client_id;             // machine identity
+      next();
+    } catch {
+      res.sendStatus(401);
+    }
+  };
+}
+
+// usage — orders-service calling payments-service
+const paymentsClient = new ServiceClient({
+  tokenUrl:     "https://auth.example.com/oauth/token",
+  clientId:     process.env.ORDERS_CLIENT_ID,
+  clientSecret: process.env.ORDERS_CLIENT_SECRET,
+  scopes:       ["payments:charge"],
+});
+
+await paymentsClient.call("POST", "https://payments.example.com/charges", { amount: 100 });</code></pre>
+<p><strong>Key insight:</strong> client-credentials is OAuth's answer for machine-to-machine auth, and it has three features that beat hand-rolled API keys. <strong>Token caching</strong> &mdash; don't re-authenticate on every call; reuse until ~30s before expiry. <strong>Automatic refresh on 401</strong> &mdash; tokens can be revoked before natural expiry; retry once with a fresh token. <strong>Scopes</strong> &mdash; each service gets only the permissions it needs (<code>payments:charge</code>, not "everything"); damage from a leaked credential is bounded. Centralized auth server means one place to rotate, revoke, or audit.</p>
+'''
+
+ANSWERS[82] = r'''
+<pre><code>// sports-scores.js — upstream API + polling + SSE push to clients
+import { LRUCache } from "lru-cache";
+
+// ---- SERVER-SIDE POLLING of the upstream ----
+const scoresCache = new LRUCache({ max: 100, ttl: 15_000 });    // 15s TTL
+const subscribers = new Map();     // gameId → Set&lt;res&gt;
+
+async function fetchLive(gameId) {
+  const cached = scoresCache.get(gameId);
+  if (cached) return cached;
+
+  const r = await fetch(`https://api.sports.com/v1/games/${gameId}`, {
+    headers: { "x-api-key": process.env.SPORTS_API_KEY },
+    signal:  AbortSignal.timeout(5000),
+  });
+  if (!r.ok) throw new Error(`Upstream ${r.status}`);
+  const data = await r.json();
+  scoresCache.set(gameId, data);
+  return data;
+}
+
+// poll upstream every 5s when we have subscribers for a game
+setInterval(async () =&gt; {
+  for (const [gameId, clients] of subscribers) {
+    if (!clients.size) continue;
+    try {
+      const data = await fetchLive(gameId);
+      const payload = `id: ${Date.now()}\nevent: score\ndata: ${JSON.stringify(data)}\n\n`;
+      for (const res of clients) res.write(payload);
+    } catch (err) {
+      /* skip this tick; next will retry */
+    }
+  }
+}, 5000);
+
+// ---- SSE ENDPOINT — client subscribes to live updates ----
+app.get("/games/:id/live", async (req, res) =&gt; {
+  res.set({
+    "Content-Type":      "text/event-stream",
+    "Cache-Control":     "no-store",
+    "Connection":        "keep-alive",
+    "X-Accel-Buffering": "no",
+  });
+  res.flushHeaders();
+
+  // send current score immediately
+  try {
+    const current = await fetchLive(req.params.id);
+    res.write(`event: score\ndata: ${JSON.stringify(current)}\n\n`);
+  } catch { /* ignore */ }
+
+  // register subscriber
+  if (!subscribers.has(req.params.id)) subscribers.set(req.params.id, new Set());
+  subscribers.get(req.params.id).add(res);
+
+  // heartbeat every 20s — keep connection alive through proxies
+  const heart = setInterval(() =&gt; res.write(":heartbeat\n\n"), 20_000);
+
+  req.on("close", () =&gt; {
+    clearInterval(heart);
+    subscribers.get(req.params.id)?.delete(res);
+    res.end();
+  });
+});
+
+// plain REST fallback for clients that can't do SSE
+app.get("/games/:id/score", async (req, res) =&gt; {
+  try {
+    res.set("Cache-Control", "public, max-age=10").json(await fetchLive(req.params.id));
+  } catch { res.sendStatus(502); }
+});</code></pre>
+<p><strong>Key insight:</strong> live sports scores amplify a single upstream call into many client updates. <strong>Poll once</strong> from your server (every 5-10s), then fan out to all subscribers via SSE or WebSocket &mdash; this protects the upstream's rate limit and saves API credits. <strong>Only poll when you have subscribers</strong> &mdash; a per-game interval that runs with zero clients burns money. <strong>SSE over WebSocket for one-way feeds</strong> &mdash; simpler (plain HTTP), native browser auto-reconnect via <code>Last-Event-Id</code>, works through more corporate proxies. Always provide a plain REST fallback for compatibility.</p>
+'''
+
+ANSWERS[83] = r'''
+<pre><code>// multipart-validator.js — validate form fields alongside file uploads
+import multer from "multer";
+import { z } from "zod";
+import { fileTypeFromBuffer } from "file-type";
+
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 10 * 1024 * 1024, files: 5, fields: 20 },
+});
+
+// schema describing text fields sent alongside files
+const ProductFormSchema = z.object({
+  name:        z.string().trim().min(1).max(200),
+  description: z.string().trim().max(5000),
+  price:       z.coerce.number().min(0).max(1_000_000),   // multer sends strings
+  category:    z.enum(["books", "electronics", "clothing"]),
+  tags:        z.preprocess(
+    (v) =&gt; Array.isArray(v) ? v : typeof v === "string" ? [v] : [],
+    z.array(z.string().trim().min(1).max(30)).max(10),
+  ),
+}).strict();
+
+app.post("/products",
+  requireAuth,
+  upload.fields([
+    { name: "main",    maxCount: 1 },
+    { name: "gallery", maxCount: 5 },
+  ]),
+  async (req, res, next) =&gt; {
+    // 1. validate text fields
+    const parsed = ProductFormSchema.safeParse(req.body);
+    if (!parsed.success) {
+      return res.status(400).json({ error: "Invalid form data", issues: parsed.error.issues });
+    }
+
+    // 2. validate required file presence
+    const main = req.files?.main?.[0];
+    if (!main) return res.status(400).json({ error: "main image is required" });
+
+    // 3. validate ALL uploaded files by magic bytes
+    const files = [main, ...(req.files?.gallery || [])];
+    for (const f of files) {
+      const detected = await fileTypeFromBuffer(f.buffer);
+      if (!detected || !["jpg", "png", "webp"].includes(detected.ext)) {
+        return res.status(400).json({
+          error: `File ${f.fieldname} must be JPEG, PNG, or WebP`,
+        });
+      }
+    }
+
+    // 4. process — upload to S3, create DB record, etc.
+    try {
+      const product = await createProduct({
+        ...parsed.data,
+        userId: req.user.sub,
+        images: files,
+      });
+      res.status(201).json(product);
+    } catch (err) { next(err); }
+  }
+);
+
+// multer errors → proper HTTP codes
+app.use((err, req, res, next) =&gt; {
+  if (err?.code === "LIMIT_FILE_SIZE")       return res.status(413).json({ error: "File too large" });
+  if (err?.code === "LIMIT_UNEXPECTED_FILE") return res.status(400).json({ error: "Unknown field" });
+  if (err?.code === "LIMIT_FILE_COUNT")      return res.status(400).json({ error: "Too many files" });
+  next(err);
+});</code></pre>
+<p><strong>Key insight:</strong> multipart has three validation layers that must all pass. <strong>Text fields arrive as strings</strong> even for numbers and booleans &mdash; use <code>z.coerce.number()</code> or Zod <code>.preprocess()</code> for arrays. <strong>Field-name normalization</strong> &mdash; clients sometimes send <code>tags</code> once and sometimes as <code>tags[]</code>; <code>preprocess</code> handles both. <strong>Verify file content</strong> with magic bytes &mdash; client's <code>file.mimetype</code> is just whatever the browser guessed from the filename extension. Multer's <code>LIMIT_*</code> errors need translating to 413/400; otherwise they surface as 500s.</p>
+'''
+
+ANSWERS[84] = r'''
+<pre><code>// api-with-cache.js — ETag + Cache-Control + Redis layer
+import crypto from "node:crypto";
+import { LRUCache } from "lru-cache";
+
+const memCache = new LRUCache({ max: 1000, ttl: 60_000 });
+
+async function cachedFetch(key, ttlSec, loader) {
+  // 1. in-process LRU (fastest)
+  const local = memCache.get(key);
+  if (local) return { data: local, source: "memory" };
+
+  // 2. Redis (shared across instances)
+  const hit = await redis.get(key);
+  if (hit) {
+    const parsed = JSON.parse(hit);
+    memCache.set(key, parsed);
+    return { data: parsed, source: "redis" };
+  }
+
+  // 3. origin — and cache at both layers
+  const data = await loader();
+  await redis.setex(key, ttlSec, JSON.stringify(data));
+  memCache.set(key, data);
+  return { data, source: "origin" };
+}
+
+// FETCH handler with HTTP caching on top of Redis
+app.get("/articles/:slug", async (req, res) =&gt; {
+  const key = `article:${req.params.slug}`;
+
+  const { data, source } = await cachedFetch(key, 300,
+    () =&gt; db.article.findUnique({ where: { slug: req.params.slug } }));
+
+  if (!data) return res.sendStatus(404);
+
+  // strong ETag from content hash
+  const body = JSON.stringify(data);
+  const etag = `"${crypto.createHash("sha1").update(body).digest("base64").slice(0, 27)}"`;
+
+  res.set({
+    "ETag":          etag,
+    "Last-Modified": new Date(data.updatedAt).toUTCString(),
+    "Cache-Control": "public, max-age=60, stale-while-revalidate=300",
+    "Vary":          "Accept",
+    "X-Cache":       source,
+  });
+
+  // conditional GET — save bandwidth for unchanged resources
+  if (req.headers["if-none-match"] === etag) return res.status(304).end();
+
+  res.type("application/json").send(body);
+});
+
+// INVALIDATION on writes — match the key pattern
+app.patch("/articles/:slug", requireAuth, async (req, res) =&gt; {
+  const updated = await db.article.update({
+    where: { slug: req.params.slug }, data: req.body,
+  });
+  await Promise.all([
+    redis.del(`article:${req.params.slug}`),
+    memCache.delete(`article:${req.params.slug}`),
+  ]);
+  res.json(updated);
+});</code></pre>
+<p><strong>Key insight:</strong> layer caches by access speed. <strong>In-process LRU</strong> is ~100 ns and survives process lifetime; <strong>Redis</strong> is ~1 ms and shared across instances; <strong>origin</strong> is ~10-100 ms. Each layer absorbs reads that miss the faster layer above. <strong>HTTP ETag on top</strong> lets well-behaved clients (browsers, CDNs) short-circuit with 304 even before the cache chain runs. <code>stale-while-revalidate</code> tells CDNs to serve stale content while revalidating in the background &mdash; near-zero latency with eventual freshness. Remember to invalidate both layers on writes or you'll serve stale reads.</p>
+'''
+
+ANSWERS[85] = r'''
+<pre><code>// dynamic-query-builder.js — validated filtering/sorting/projection for lists
+import { z } from "zod";
+import { Prisma } from "@prisma/client";
+
+const USER_FILTER_FIELDS = ["role", "active", "plan", "country"];
+const USER_SORT_FIELDS   = ["createdAt", "name", "lastLoginAt"];
+
+// schema for the query — tightly enumerated to prevent injection
+const UserQuerySchema = z.object({
+  // filters — simple key/value
+  role:    z.enum(["user", "editor", "admin"]).optional(),
+  active:  z.enum(["true", "false"]).optional(),
+  plan:    z.enum(["free", "pro", "enterprise"]).optional(),
+  country: z.string().length(2).regex(/^[A-Z]{2}$/).optional(),
+  // text search
+  q: z.string().trim().min(1).max(100).optional(),
+  // sort — only allowlisted columns + direction
+  sortBy: z.enum(USER_SORT_FIELDS).default("createdAt"),
+  order:  z.enum(["asc", "desc"]).default("desc"),
+  // pagination
+  limit:  z.coerce.number().int().min(1).max(100).default(20),
+  cursor: z.string().optional(),
+}).strict();
+
+app.get("/users", requireAuth, async (req, res) =&gt; {
+  const parsed = UserQuerySchema.safeParse(req.query);
+  if (!parsed.success) return res.status(400).json({ error: parsed.error.issues });
+  const q = parsed.data;
+
+  // BUILD the Prisma WHERE from validated fields ONLY
+  const where = {};
+  for (const field of USER_FILTER_FIELDS) {
+    if (q[field] !== undefined) {
+      where[field] = field === "active" ? q.active === "true" : q[field];
+    }
+  }
+  if (q.q) {
+    where.OR = [
+      { name:  { contains: q.q, mode: "insensitive" } },
+      { email: { contains: q.q, mode: "insensitive" } },
+    ];
+  }
+
+  // cursor decode — same allowlist discipline
+  const cursor = q.cursor
+    ? JSON.parse(Buffer.from(q.cursor, "base64url").toString())
+    : null;
+
+  const results = await db.user.findMany({
+    where: cursor
+      ? {
+          AND: [where, {
+            OR: [
+              { [q.sortBy]: { lt: cursor.val } },
+              { [q.sortBy]: cursor.val, id: { lt: cursor.id } },
+            ],
+          }],
+        }
+      : where,
+    orderBy: [{ [q.sortBy]: q.order }, { id: q.order }],
+    take: q.limit + 1,
+  });
+
+  const hasMore = results.length &gt; q.limit;
+  const data = results.slice(0, q.limit);
+  const last = data[data.length - 1];
+
+  res.json({
+    data,
+    nextCursor: hasMore &amp;&amp; last
+      ? Buffer.from(JSON.stringify({ val: last[q.sortBy], id: last.id })).toString("base64url")
+      : null,
+  });
+});</code></pre>
+<p><strong>Key insight:</strong> dynamic queries from user input are the #1 source of accidental SQL injection, IDOR, and performance disasters. <strong>Allowlist everything</strong> &mdash; filter fields, sort columns, and directions are enumerated explicitly; anything else is silently dropped or rejected. <strong>Never interpolate field names from <code>req.query</code></strong> &mdash; an attacker could sort by <code>passwordHash</code> to leak order-based timing. <strong>Index the sort columns</strong> &mdash; a dynamic ORDER BY on an unindexed column is a 10-second query. The tightly-typed Zod schema doubles as input validation and as safety net against injection.</p>
+'''
+
+ANSWERS[86] = r'''
+<pre><code>// oauth-auth.js — full OAuth 2.1 authorization-code + PKCE flow
+import { Issuer, generators } from "openid-client";
+
+let client;
+async function initOauth() {
+  const issuer = await Issuer.discover(process.env.OIDC_ISSUER);
+  client = new issuer.Client({
+    client_id:     process.env.OIDC_CLIENT_ID,
+    client_secret: process.env.OIDC_CLIENT_SECRET,
+    redirect_uris: [`${APP_URL}/auth/callback`],
+    response_types: ["code"],
+  });
+}
+await initOauth();
+
+// 1. start — user clicks "Sign in"
+app.get("/auth/login", (req, res) =&gt; {
+  const codeVerifier  = generators.codeVerifier();
+  const codeChallenge = generators.codeChallenge(codeVerifier);
+  const state         = generators.state();
+  const nonce         = generators.nonce();
+
+  req.session.oauth = { codeVerifier, state, nonce };
+
+  res.redirect(client.authorizationUrl({
+    scope:                 "openid email profile",
+    code_challenge:         codeChallenge,
+    code_challenge_method:  "S256",                  // PKCE mandatory in 2.1
+    state, nonce,
+  }));
+});
+
+// 2. callback — exchange code for tokens, create session
+app.get("/auth/callback", async (req, res, next) =&gt; {
+  try {
+    const { codeVerifier, state, nonce } = req.session.oauth ?? {};
+    const params = client.callbackParams(req);
+
+    const tokenSet = await client.callback(
+      `${APP_URL}/auth/callback`, params,
+      { code_verifier: codeVerifier, state, nonce }
+    );
+
+    const claims = tokenSet.claims();
+    if (!claims.email_verified) {
+      return res.status(403).send("Email not verified with provider");
+    }
+
+    // identify by (provider, sub) — stable even if email changes
+    const user = await db.user.upsert({
+      where:  { provider_providerId: { provider: "oidc", providerId: claims.sub } },
+      create: {
+        provider:   "oidc",
+        providerId: claims.sub,
+        email:      claims.email,
+        name:       claims.name,
+        avatar:     claims.picture,
+      },
+      update: {
+        email:  claims.email,
+        name:   claims.name,
+        avatar: claims.picture,
+      },
+    });
+
+    // mint our own session / API token — don't expose the IdP token to clients
+    const accessToken  = issueAccessToken(user);
+    const refreshToken = await issueRefreshToken(user.id);
+
+    delete req.session.oauth;
+    res
+      .cookie("refresh", refreshToken, {
+        httpOnly: true, secure: true, sameSite: "lax",
+        path: "/auth", maxAge: 30 * 24 * 60 * 60 * 1000,
+      })
+      .redirect(`/app?token=${encodeURIComponent(accessToken)}`);
+  } catch (err) { next(err); }
+});</code></pre>
+<p><strong>Key insight:</strong> OAuth 2.1 (2024 consolidated spec) mandates <strong>PKCE for every client</strong> &mdash; even server-side apps &mdash; to prevent authorization-code interception. Six things must be right: PKCE with S256, <code>state</code> parameter for CSRF protection, <code>nonce</code> for ID-token replay protection, exact redirect URI match registered with the IdP, session-scoped storage of <code>(codeVerifier, state, nonce)</code>, and identifying users by <code>sub</code> (stable) rather than email (changeable). Never hand the IdP's access token to your client &mdash; mint your own session token so you control revocation and scopes.</p>
+'''
+
+ANSWERS[87] = r'''
+<pre><code>// ssr-dynamic.js — server-side render API data into HTML
+import express from "express";
+import { renderToPipeableStream } from "react-dom/server";
+import App from "./App.jsx";
+
+const app = express();
+
+// PATTERN 1 — full HTML page per route
+app.get("/articles/:slug", async (req, res) =&gt; {
+  // fetch data first; bail on 404 so SSR doesn't render an empty state
+  const article = await db.article.findUnique({
+    where: { slug: req.params.slug, published: true },
+  });
+  if (!article) return res.status(404).send(render404());
+
+  // compute caching headers BEFORE starting stream
+  res.set({
+    "Content-Type":  "text/html; charset=utf-8",
+    "Cache-Control": "public, max-age=60, stale-while-revalidate=300",
+  });
+
+  // streaming SSR — first byte arrives ASAP; above-the-fold renders first
+  const { pipe } = renderToPipeableStream(
+    &lt;App article={article} /&gt;,
+    {
+      bootstrapScripts: ["/static/client.js"],
+      onShellReady() {
+        res.status(200);
+        pipe(res);
+      },
+      onShellError(err) {
+        res.status(500).send(render500());
+      },
+    }
+  );
+});
+
+// PATTERN 2 — partial SSR for HTMX / Turbo / data fragments
+app.get("/partials/comments/:postId", async (req, res) =&gt; {
+  const comments = await db.comment.findMany({
+    where: { postId: req.params.postId },
+    take: 50, orderBy: { createdAt: "desc" },
+  });
+
+  res.set("Content-Type", "text/html");
+  res.send(renderCommentList(comments));             // partial HTML, not full page
+});
+
+function renderCommentList(items) {
+  return `
+    &lt;ul class="comments"&gt;
+      ${items.map((c) =&gt; `
+        &lt;li&gt;
+          &lt;strong&gt;${escapeHtml(c.author)}&lt;/strong&gt;
+          &lt;p&gt;${escapeHtml(c.body)}&lt;/p&gt;
+        &lt;/li&gt;
+      `).join("")}
+    &lt;/ul&gt;
+  `;
+}
+
+function escapeHtml(s) {
+  return String(s)
+    .replace(/&amp;/g, "&amp;amp;")
+    .replace(/&lt;/g, "&amp;lt;")
+    .replace(/&gt;/g, "&amp;gt;")
+    .replace(/"/g, "&amp;quot;");
+}</code></pre>
+<p><strong>Key insight:</strong> SSR over dynamic API responses is about <strong>time-to-first-byte</strong> and <strong>escaping</strong>. Use <strong>streaming</strong> (<code>renderToPipeableStream</code>) so the browser starts rendering the shell while the server is still fetching data &mdash; the whole-page blocking on <code>renderToString</code> is a footgun for real APIs. For partial SSR (HTMX, Turbo), always escape user content manually &mdash; missing one <code>escapeHtml</code> call is XSS. Set caching headers <em>before</em> starting the stream; once bytes flow, headers are locked. Frameworks like Next.js, Remix, and Nuxt wrap all this with the caveat that you lose fine-grained control over the response.</p>
+'''
+
+ANSWERS[88] = r'''
+<pre><code>// dynamic-query-proxy.js — forward selected query params to a public API
+import { z } from "zod";
+
+// whitelist: which query params we pass upstream
+const SEARCH_PARAMS = {
+  q:       z.string().trim().min(1).max(200),
+  lang:    z.enum(["en", "de", "fr", "es"]).optional(),
+  page:    z.coerce.number().int().min(1).max(100).optional(),
+  sort:    z.enum(["relevance", "date", "popularity"]).optional(),
+  per_page: z.coerce.number().int().min(1).max(50).optional(),
+};
+
+app.get("/search", async (req, res) =&gt; {
+  // validate + whitelist params in one step
+  const cleaned = {};
+  const issues = [];
+  for (const [key, schema] of Object.entries(SEARCH_PARAMS)) {
+    if (!(key in req.query)) continue;
+    const parsed = schema.safeParse(req.query[key]);
+    if (!parsed.success) {
+      issues.push({ field: key, issues: parsed.error.issues });
+    } else if (parsed.data !== undefined) {
+      cleaned[key] = parsed.data;
+    }
+  }
+  if (issues.length) return res.status(400).json({ error: "Invalid params", issues });
+  if (!cleaned.q)    return res.status(400).json({ error: "q is required" });
+
+  // build upstream URL — URLSearchParams handles escaping
+  const upstream = new URL("https://api.search-provider.com/search");
+  for (const [k, v] of Object.entries(cleaned)) upstream.searchParams.set(k, String(v));
+
+  // rate-limited upstream call — cache the result
+  const cacheKey = `search:${upstream.searchParams.toString()}`;
+  const cached   = await redis.get(cacheKey);
+  if (cached) {
+    return res.set("X-Cache", "HIT")
+              .set("Cache-Control", "public, max-age=60")
+              .json(JSON.parse(cached));
+  }
+
+  try {
+    const r = await fetch(upstream, {
+      headers: { "x-api-key": process.env.SEARCH_API_KEY },
+      signal:  AbortSignal.timeout(5000),
+    });
+    if (r.status === 429) return res.status(429).json({ error: "Search rate-limited" });
+    if (!r.ok)            return res.status(502).json({ error: "Search unavailable" });
+
+    const data = await r.json();
+
+    // shape OUR response — don't leak upstream fields to clients
+    const shaped = {
+      query:     cleaned.q,
+      total:     data.total,
+      page:      cleaned.page || 1,
+      results:   data.items.map((it) =&gt; ({
+        id:    it.id,
+        title: it.title,
+        url:   it.url,
+        snippet: it.description?.slice(0, 200),
+      })),
+    };
+
+    await redis.setex(cacheKey, 60, JSON.stringify(shaped));
+    res.set("X-Cache", "MISS")
+       .set("Cache-Control", "public, max-age=60")
+       .json(shaped);
+  } catch (err) {
+    if (err.name === "TimeoutError") return res.status(504).json({ error: "Search timed out" });
+    throw err;
+  }
+});</code></pre>
+<p><strong>Key insight:</strong> proxying with dynamic query params has two big risks. <strong>Parameter pollution</strong> &mdash; if you forward <em>any</em> query param the client sends, attackers can inject upstream-only parameters (<code>&amp;api_key=leaked</code>, <code>&amp;admin=true</code>). Whitelist explicitly. <strong>Upstream rate limit leaks</strong> &mdash; one misbehaving client can exhaust the upstream quota for everyone. Cache at the <em>shaped</em> response level keyed by the cleaned params, and apply per-user rate limiting before hitting the upstream. Shape the response so upstream schema changes don't propagate to your clients.</p>
+'''
+
+ANSWERS[89] = r'''
+<pre><code>// complex-query-validator.js — nested filters, arrays, mixed types
+import { z } from "zod";
+
+// domain: a products search with nested filters on price, tags, attributes
+const PriceRange = z.object({
+  min: z.coerce.number().min(0).optional(),
+  max: z.coerce.number().max(1_000_000).optional(),
+}).refine((v) =&gt; v.min === undefined || v.max === undefined || v.min &lt;= v.max,
+  { message: "min must be &lt;= max" });
+
+const AttributeFilter = z.object({
+  key:   z.string().regex(/^[a-z][a-z0-9_]{0,30}$/),    // allowlisted key shape
+  value: z.union([
+    z.string().max(100),
+    z.number(),
+    z.boolean(),
+    z.array(z.string().max(100)).max(10),
+  ]),
+});
+
+const ProductSearchSchema = z.object({
+  // string with length bounds
+  q: z.string().trim().min(1).max(200).optional(),
+
+  // array of scalars — coerce single value into array
+  tags: z.preprocess(
+    (v) =&gt; v === undefined ? undefined : Array.isArray(v) ? v : [v],
+    z.array(z.string().trim().min(1).max(30)).max(20).optional(),
+  ),
+
+  // nested object
+  price: PriceRange.optional(),
+
+  // array of objects — complex shape
+  attributes: z.array(AttributeFilter).max(10).optional(),
+
+  // enum
+  category: z.enum(["books", "electronics", "clothing", "home"]).optional(),
+
+  // date range with cross-field rule
+  createdAfter:  z.coerce.date().optional(),
+  createdBefore: z.coerce.date().optional(),
+
+  // pagination + sorting
+  page:  z.coerce.number().int().min(1).max(1000).default(1),
+  limit: z.coerce.number().int().min(1).max(100).default(20),
+  sort:  z.enum(["price_asc", "price_desc", "newest", "popular"]).default("newest"),
+}).strict().refine(
+  (v) =&gt; !v.createdAfter || !v.createdBefore || v.createdAfter &lt;= v.createdBefore,
+  { message: "createdAfter must be &lt;= createdBefore" },
+);
+
+// USAGE — accepts JSON body OR flattened query params
+app.post("/products/search", async (req, res) =&gt; {
+  const parsed = ProductSearchSchema.safeParse(req.body);
+  if (!parsed.success) {
+    return res.status(400).json({
+      error: "Invalid search parameters",
+      issues: parsed.error.issues.map((i) =&gt; ({
+        path:    i.path.join("."),
+        message: i.message,
+        code:    i.code,
+      })),
+    });
+  }
+
+  // build DB query from cleaned params
+  const where = {};
+  if (parsed.data.q)          where.name = { contains: parsed.data.q, mode: "insensitive" };
+  if (parsed.data.tags)       where.tags = { hasSome: parsed.data.tags };
+  if (parsed.data.category)   where.category = parsed.data.category;
+  if (parsed.data.price) {
+    where.price = {};
+    if (parsed.data.price.min !== undefined) where.price.gte = parsed.data.price.min;
+    if (parsed.data.price.max !== undefined) where.price.lte = parsed.data.price.max;
+  }
+
+  const results = await db.product.findMany({ where, /* ... */ });
+  res.json({ data: results });
+});</code></pre>
+<p><strong>Key insight:</strong> complex query validation has four patterns worth internalizing. <strong>Scalar-or-array coercion</strong> via <code>preprocess</code> &mdash; clients send <code>tags=foo</code> (string) or <code>tags=foo&amp;tags=bar</code> (array); always normalize to array. <strong>Cross-field rules</strong> via <code>.refine()</code> &mdash; <code>min &lt;= max</code> and <code>createdAfter &lt;= createdBefore</code> can't be expressed per-field. <strong>Allowlisted keys</strong> with a regex pattern prevent attackers from injecting arbitrary DB field names. <strong>Bounded sizes</strong> on every array and string block DoS via enormous payloads &mdash; the <code>.max()</code> calls are non-negotiable at the API edge.</p>
+'''
+
+ANSWERS[90] = r'''
+<pre><code>// ugc-paginated.js — user-generated content with visibility rules
+app.get("/posts", async (req, res) =&gt; {
+  const limit = Math.min(50, Math.max(1, Number(req.query.limit) || 20));
+  const cursor = req.query.cursor
+    ? JSON.parse(Buffer.from(String(req.query.cursor), "base64url").toString())
+    : null;
+
+  // VISIBILITY — anonymous users see only public, logged-in see public + friends' posts
+  const visibility = req.user
+    ? { OR: [
+        { visibility: "public" },
+        { authorId: req.user.sub },
+        { visibility: "followers", author: { followers: { some: { id: req.user.sub } } } },
+      ] }
+    : { visibility: "public" };
+
+  const posts = await db.post.findMany({
+    where: {
+      AND: [
+        visibility,
+        { status: "published" },
+        { moderationState: { not: "hidden" } },
+        cursor &amp;&amp; {
+          OR: [
+            { createdAt: { lt: new Date(cursor.createdAt) } },
+            { createdAt: new Date(cursor.createdAt), id: { lt: cursor.id } },
+          ],
+        },
+      ].filter(Boolean),
+    },
+    include: {
+      author: { select: { id: true, name: true, avatar: true } },
+      _count: { select: { likes: true, comments: true } },
+    },
+    orderBy: [{ createdAt: "desc" }, { id: "desc" }],
+    take: limit + 1,
+  });
+
+  const hasMore = posts.length &gt; limit;
+  const data = posts.slice(0, limit);
+
+  // SAFETY — strip fields the current viewer shouldn't see
+  const sanitized = data.map((p) =&gt; ({
+    id:        p.id,
+    title:     p.title,
+    body:      p.body,
+    createdAt: p.createdAt,
+    author:    p.author,
+    stats:     { likes: p._count.likes, comments: p._count.comments },
+    // admins or the author can see moderation info; others can't
+    ...(req.user?.role === "admin" || p.authorId === req.user?.sub
+       ? { moderationState: p.moderationState }
+       : {}),
+  }));
+
+  res.set("Cache-Control", req.user ? "private, max-age=0" : "public, max-age=60");
+  res.json({
+    data: sanitized,
+    nextCursor: hasMore
+      ? Buffer.from(JSON.stringify({
+          createdAt: data[data.length - 1].createdAt,
+          id:        data[data.length - 1].id,
+        })).toString("base64url")
+      : null,
+  });
+});</code></pre>
+<p><strong>Key insight:</strong> paginated UGC is where <strong>visibility rules</strong> and <strong>field-level authorization</strong> become critical. Public pages, follower-only posts, and own drafts are three overlapping sets that the WHERE clause must encode. Strip fields (<code>moderationState</code>, hidden likes) at the response layer &mdash; even fetching them and filtering in JS leaks via response size. Cache differently per viewer: anonymous feeds can be public-cached for 60s; logged-in feeds are personal and should be <code>private</code>. Cursor-based pagination is stable across inserts &mdash; offset breaks the moment someone posts.</p>
+'''
+
+ANSWERS[91] = r'''
+<pre><code>// dynamic-resource.js — generic create/update with per-type validation
+import { z } from "zod";
+
+// REGISTRY — map resource name → schema + hooks
+const RESOURCES = {
+  post: {
+    create: z.object({
+      title: z.string().trim().min(1).max(200),
+      body:  z.string().trim().min(1).max(50_000),
+      tags:  z.array(z.string().trim().min(1).max(30)).max(10).default([]),
+    }).strict(),
+    update: (existing) =&gt; z.object({
+      title: z.string().trim().min(1).max(200).optional(),
+      body:  z.string().trim().min(1).max(50_000).optional(),
+      tags:  z.array(z.string()).max(10).optional(),
+    }).strict(),
+    ownerField: "authorId",
+    model: "post",
+  },
+  comment: {
+    create: z.object({
+      postId: z.string().uuid(),
+      body:   z.string().trim().min(1).max(2000),
+    }).strict(),
+    update: () =&gt; z.object({
+      body: z.string().trim().min(1).max(2000),
+    }).strict(),
+    ownerField: "authorId",
+    model: "comment",
+  },
+  // register more types here
+};
+
+// GENERIC CREATE — one handler for any registered resource
+app.post("/resources/:type", requireAuth, async (req, res) =&gt; {
+  const config = RESOURCES[req.params.type];
+  if (!config) return res.sendStatus(404);
+
+  const parsed = config.create.safeParse(req.body);
+  if (!parsed.success) {
+    return res.status(400).json({ error: "Validation failed", issues: parsed.error.issues });
+  }
+
+  const record = await db[config.model].create({
+    data: { ...parsed.data, [config.ownerField]: req.user.sub },
+  });
+  res.status(201).location(`/resources/${req.params.type}/${record.id}`).json(record);
+});
+
+// GENERIC UPDATE — with ownership check
+app.patch("/resources/:type/:id", requireAuth, async (req, res) =&gt; {
+  const config = RESOURCES[req.params.type];
+  if (!config) return res.sendStatus(404);
+
+  const existing = await db[config.model].findUnique({ where: { id: req.params.id } });
+  if (!existing) return res.sendStatus(404);
+  if (existing[config.ownerField] !== req.user.sub &amp;&amp; req.user.role !== "admin") {
+    return res.sendStatus(403);
+  }
+
+  const parsed = config.update(existing).safeParse(req.body);
+  if (!parsed.success) {
+    return res.status(400).json({ error: "Validation failed", issues: parsed.error.issues });
+  }
+
+  const updated = await db[config.model].update({
+    where: { id: req.params.id }, data: parsed.data,
+  });
+  res.json(updated);
+});</code></pre>
+<p><strong>Key insight:</strong> generic resource handlers trade off between <strong>DRY and safety</strong>. The registry approach works if every resource has the same shape of lifecycle (create → validate → save, update → load → authz → validate → save). <strong>Per-type schemas</strong> keep validation tight &mdash; no resource escapes checks. <strong>Owner field is configurable</strong> so posts have <code>authorId</code> and invoices have <code>customerId</code>. Avoid over-genericization: custom fields like <code>publishAt</code> or lifecycle hooks (send notification on create) belong in typed handlers. For truly dynamic CMS, pair this with per-type field schemas stored in the DB.</p>
+'''
+
+ANSWERS[92] = r'''
+<pre><code>// cloud-storage.js — authenticated file fetch via S3 with ownership checks
+import { GetObjectCommand, HeadObjectCommand } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+
+// STRATEGY 1 — redirect to pre-signed URL (preferred for big files)
+app.get("/files/:id", requireAuth, async (req, res) =&gt; {
+  const file = await db.file.findUnique({ where: { id: req.params.id } });
+  if (!file) return res.sendStatus(404);
+
+  // authorization — owner or explicitly shared
+  const allowed = file.ownerId === req.user.sub
+    || await db.fileShare.findFirst({
+         where: { fileId: file.id, userId: req.user.sub, expiresAt: { gt: new Date() } },
+       });
+  if (!allowed) return res.sendStatus(403);
+
+  const url = await getSignedUrl(s3,
+    new GetObjectCommand({
+      Bucket: BUCKET, Key: file.s3Key,
+      ResponseContentDisposition: `attachment; filename="${encodeURIComponent(file.name)}"`,
+      ResponseCacheControl:       "private, no-store",
+    }),
+    { expiresIn: 300 });                             // 5-minute link
+
+  // audit access
+  await db.fileAccess.create({ data: { fileId: file.id, userId: req.user.sub } });
+
+  res.redirect(302, url);
+});
+
+// STRATEGY 2 — proxy-stream (when you need to inspect/rewrite headers)
+app.get("/files/:id/stream", requireAuth, async (req, res, next) =&gt; {
+  const file = await db.file.findUnique({ where: { id: req.params.id } });
+  if (!file || file.ownerId !== req.user.sub) return res.sendStatus(404);
+
+  try {
+    const head = await s3.send(new HeadObjectCommand({ Bucket: BUCKET, Key: file.s3Key }));
+    res.set({
+      "Content-Type":        head.ContentType || "application/octet-stream",
+      "Content-Length":      head.ContentLength,
+      "Content-Disposition": `attachment; filename="${encodeURIComponent(file.name)}"`,
+      "Cache-Control":       "private, no-store",
+      "ETag":                head.ETag,
+    });
+
+    const obj = await s3.send(new GetObjectCommand({ Bucket: BUCKET, Key: file.s3Key }));
+    obj.Body.pipe(res);                              // stream — no buffering
+    obj.Body.on("error", next);
+  } catch (err) {
+    if (err.name === "NoSuchKey") return res.sendStatus(404);
+    next(err);
+  }
+});
+
+// LIST with pagination
+app.get("/files", requireAuth, async (req, res) =&gt; {
+  const files = await db.file.findMany({
+    where: { ownerId: req.user.sub },
+    select: { id: true, name: true, size: true, contentType: true, createdAt: true },
+    orderBy: { createdAt: "desc" },
+    take: 50,
+  });
+  res.json({ data: files });
+});</code></pre>
+<p><strong>Key insight:</strong> authenticated cloud-storage fetches have two implementations with different trade-offs. <strong>Pre-signed URL redirect</strong> &mdash; cheap, fast (S3 serves directly, no bytes through Node), scales to any file size, but can't filter or modify content; the URL is valid for its lifetime even after logout. <strong>Proxy-stream</strong> &mdash; every byte passes through your server, so you can transform, re-check auth mid-stream, or apply DRM headers; costly in bandwidth and CPU. For most cases, pre-signed is right. Always audit access and set short expiry times (5 minutes covers typical click-to-download flows).</p>
+'''
+
+ANSWERS[93] = r'''
+<pre><code>// upload-with-progress.js — client-side progress via chunked PUT to S3
+import { S3Client, UploadPartCommand,
+         CreateMultipartUploadCommand, CompleteMultipartUploadCommand,
+         AbortMultipartUploadCommand } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+
+const CHUNK = 5 * 1024 * 1024;        // 5 MB minimum for S3 multipart
+
+// 1. INIT — create multipart upload, return uploadId + signed URLs for each part
+app.post("/uploads/init", requireAuth, async (req, res) =&gt; {
+  const { filename, contentType, size } = req.body;
+  if (!filename || size &gt; 5 * 1024 * 1024 * 1024) {     // 5 GB cap
+    return res.status(400).json({ error: "Invalid upload spec" });
+  }
+
+  const key = `uploads/${req.user.sub}/${crypto.randomUUID()}/${sanitize(filename)}`;
+  const { UploadId } = await s3.send(new CreateMultipartUploadCommand({
+    Bucket: BUCKET, Key: key, ContentType: contentType,
+    Metadata: { "uploaded-by": req.user.sub },
+  }));
+
+  const partCount = Math.ceil(size / CHUNK);
+  const partUrls = await Promise.all(
+    Array.from({ length: partCount }, (_, i) =&gt;
+      getSignedUrl(s3, new UploadPartCommand({
+        Bucket: BUCKET, Key: key, UploadId, PartNumber: i + 1,
+      }), { expiresIn: 3600 })
+    )
+  );
+
+  // record pending upload — clean up orphans after 24h
+  await db.pendingUpload.create({
+    data: { key, uploadId: UploadId, userId: req.user.sub, size,
+            expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000) },
+  });
+
+  res.json({ uploadId: UploadId, key, partUrls, chunkSize: CHUNK });
+});
+
+// 2. COMPLETE — client reports completed parts; we finalize
+app.post("/uploads/complete", requireAuth, async (req, res) =&gt; {
+  const { key, uploadId, parts } = req.body;    // parts: [{ PartNumber, ETag }]
+
+  const pending = await db.pendingUpload.findFirst({ where: { key, uploadId, userId: req.user.sub } });
+  if (!pending) return res.sendStatus(404);
+
+  await s3.send(new CompleteMultipartUploadCommand({
+    Bucket: BUCKET, Key: key, UploadId: uploadId,
+    MultipartUpload: { Parts: parts.sort((a, b) =&gt; a.PartNumber - b.PartNumber) },
+  }));
+
+  await db.$transaction([
+    db.file.create({ data: { key, ownerId: req.user.sub, size: pending.size } }),
+    db.pendingUpload.delete({ where: { id: pending.id } }),
+  ]);
+
+  res.status(201).json({ ok: true, key });
+});
+
+// 3. ABORT — on cancel, clean up
+app.post("/uploads/abort", requireAuth, async (req, res) =&gt; {
+  const { key, uploadId } = req.body;
+  await s3.send(new AbortMultipartUploadCommand({ Bucket: BUCKET, Key: key, UploadId: uploadId }));
+  await db.pendingUpload.deleteMany({ where: { key, uploadId, userId: req.user.sub } });
+  res.sendStatus(204);
+});
+
+// CLIENT (browser) — reports progress via XHR upload event
+// const xhr = new XMLHttpRequest();
+// xhr.upload.onprogress = (e) =&gt; setProgress(e.loaded / e.total);
+// xhr.open("PUT", partUrl); xhr.send(chunkBlob);</code></pre>
+<p><strong>Key insight:</strong> progress tracking for large files requires <strong>chunked PUTs direct to S3</strong>, not through your Node server. Three reasons: bandwidth stays on S3 (cheap + fast), Node memory stays O(1) regardless of file size, and the browser's <code>xhr.upload.onprogress</code> (or <code>fetch</code> + <code>ReadableStream.pipeTo</code>) gives per-chunk progress for free. Your API orchestrates &mdash; init, list signed URLs, complete, abort &mdash; but never handles bytes. Always validate: cap size at init, authenticate each step, clean up <code>AbortMultipartUpload</code> on cancel (incomplete uploads cost storage).</p>
+'''
+
+ANSWERS[94] = r'''
+<pre><code>// iot-cached.js — IoT devices push data; read API serves cached snapshots
+import { LRUCache } from "lru-cache";
+
+// in-memory cache for hot readings; Redis for cross-instance consistency
+const hotReadings = new LRUCache({ max: 10_000, ttl: 5_000 });   // 5s in-memory
+
+// INGEST — high-frequency writes from devices (store + invalidate cache)
+app.post("/iot/devices/:id/reading", requireDeviceAuth, async (req, res) =&gt; {
+  const { temp, humidity, pressure, ts } = req.body;
+  if (req.device.id !== req.params.id) return res.sendStatus(403);
+
+  const reading = {
+    deviceId: req.params.id,
+    temp:     Number(temp), humidity: Number(humidity), pressure: Number(pressure),
+    ts:       ts ? new Date(ts) : new Date(),
+  };
+
+  // dual write — hot in Redis (for reads), cold in timeseries DB (for history)
+  await Promise.all([
+    redis.hset(`iot:latest:${req.params.id}`, {
+      temp: reading.temp, humidity: reading.humidity, pressure: reading.pressure,
+      ts: reading.ts.toISOString(),
+    }),
+    redis.expire(`iot:latest:${req.params.id}`, 600),              // auto-expire stale data
+    influx.write(reading),                                          // time-series DB
+  ]);
+
+  // invalidate the in-process cache so next read sees fresh value
+  hotReadings.delete(req.params.id);
+
+  res.sendStatus(204);
+});
+
+// READ — cached latest reading
+app.get("/iot/devices/:id/latest", requireAuth, async (req, res) =&gt; {
+  const id = req.params.id;
+
+  // L1 — in-process cache
+  const local = hotReadings.get(id);
+  if (local) return res.set("X-Cache", "L1").json(local);
+
+  // L2 — Redis
+  const hot = await redis.hgetall(`iot:latest:${id}`);
+  if (hot &amp;&amp; hot.ts) {
+    const data = {
+      temp: Number(hot.temp), humidity: Number(hot.humidity),
+      pressure: Number(hot.pressure), ts: hot.ts,
+    };
+    hotReadings.set(id, data);
+    return res.set("X-Cache", "L2").json(data);
+  }
+
+  // L3 — cold storage (time-series DB)
+  const row = await influx.lastReading(id);
+  if (!row) return res.sendStatus(404);
+  hotReadings.set(id, row);
+  res.set("X-Cache", "MISS").json(row);
+});
+
+// HISTORY — bucketed aggregates from time-series DB (not cached)
+app.get("/iot/devices/:id/history", requireAuth, async (req, res) =&gt; {
+  const from = new Date(req.query.from);
+  const to   = new Date(req.query.to);
+  const bucket = req.query.bucket || "1h";            // 1m / 1h / 1d
+
+  const data = await influx.query(`
+    SELECT mean(temp) AS temp, mean(humidity) AS humidity
+      FROM readings
+     WHERE device_id = '${id}' AND time &gt;= $from AND time &lt;= $to
+     GROUP BY time(${bucket})
+  `, { from, to });
+
+  res.set("Cache-Control", "public, max-age=60").json({ data });
+});</code></pre>
+<p><strong>Key insight:</strong> IoT at volume separates <strong>hot</strong> from <strong>cold</strong> storage. <strong>Hot</strong> (current reading) lives in Redis with a short TTL so reads are sub-millisecond; <strong>cold</strong> (history) goes to a time-series DB (InfluxDB, Timescale, Prometheus) optimized for time-based aggregates. The three-layer read path (in-process → Redis → cold storage) handles traffic spikes without DB load. Invalidate L1 on write so devices posting fast see their own data immediately. Never query the time-series DB for "latest" &mdash; it's optimized for range scans, not point reads.</p>
+'''
+
+ANSWERS[95] = r'''
+<pre><code>// deep-sanitize-validate.js — two-phase defense for nested payloads
+import { z } from "zod";
+import DOMPurify from "isomorphic-dompurify";
+
+// PHASE 1 — structural defense: bounded depth, strip dangerous keys, cap sizes
+const MAX_DEPTH = 8;
+const MAX_ARRAY = 500;
+
+function structuralSanitize(value, depth = 0) {
+  if (depth &gt; MAX_DEPTH) throw new Error("Payload too deeply nested");
+
+  if (typeof value === "string") {
+    // strip control chars (except tab/newline), cap length
+    return value.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, "").slice(0, 10_000);
+  }
+  if (typeof value !== "object" || value === null) return value;
+
+  if (Array.isArray(value)) {
+    if (value.length &gt; MAX_ARRAY) throw new Error("Array too large");
+    return value.map((v) =&gt; structuralSanitize(v, depth + 1));
+  }
+
+  // skip prototype-pollution keys
+  const clean = Object.create(null);
+  for (const [k, v] of Object.entries(value)) {
+    if (k === "__proto__" || k === "constructor" || k === "prototype") continue;
+    clean[k] = structuralSanitize(v, depth + 1);
+  }
+  return clean;
+}
+
+// PHASE 2 — schema validation with targeted HTML sanitization
+const RichTextString = z.string().max(50_000).transform((html) =&gt;
+  DOMPurify.sanitize(html, {
+    ALLOWED_TAGS: ["p","strong","em","a","ul","ol","li","br","code","blockquote"],
+    ALLOWED_ATTR: ["href", "title"],
+  })
+);
+
+const CommentSchema = z.object({
+  postId: z.string().uuid(),
+  body:   RichTextString,
+  mentions: z.array(z.object({
+    userId: z.string().uuid(),
+    label:  z.string().trim().max(50),
+  })).max(20).optional(),
+  attachments: z.array(z.object({
+    type: z.enum(["image", "link"]),
+    url:  z.string().url(),
+    meta: z.object({
+      altText: z.string().trim().max(200).optional(),
+      caption: RichTextString.optional(),
+    }).strict().optional(),
+  })).max(5).optional(),
+}).strict();
+
+// COMBINED middleware — sanitize first, then validate
+export function sanitizeAndValidate(schema) {
+  return (req, res, next) =&gt; {
+    try {
+      const stripped = structuralSanitize(req.body);
+      const parsed = schema.safeParse(stripped);
+      if (!parsed.success) {
+        return res.status(400).json({
+          error: "Validation failed",
+          issues: parsed.error.issues.map((i) =&gt; ({
+            path:    i.path.join("."),
+            message: i.message,
+          })),
+        });
+      }
+      req.body = parsed.data;
+      next();
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  };
+}
+
+app.post("/comments", requireAuth, sanitizeAndValidate(CommentSchema),
+  async (req, res) =&gt; {
+    const comment = await db.comment.create({
+      data: { ...req.body, authorId: req.user.sub },
+    });
+    res.status(201).json(comment);
+  }
+);</code></pre>
+<p><strong>Key insight:</strong> nested payload defense needs <strong>two phases that run in order</strong>. Phase 1 (structural) blocks payload-shape attacks &mdash; depth bombs, prototype pollution, control-char injection &mdash; <em>before</em> the schema validator sees the data. Phase 2 (schema) enforces business rules and sanitizes HTML only on fields that carry it. Running them in the other order means <code>__proto__</code> keys could pollute objects during validation. Zod's <code>.transform()</code> on specific fields localizes expensive work (DOMPurify runs once per RichTextString, not on every string). <code>Object.create(null)</code> produces objects without a prototype chain for extra paranoia.</p>
+'''
+
+ANSWERS[96] = r'''
+<pre><code>// mfa-login.js — email+password + TOTP second factor
+import bcrypt from "bcrypt";
+import speakeasy from "speakeasy";
+import { z } from "zod";
+import crypto from "node:crypto";
+
+const LoginSchema = z.object({
+  email:    z.string().trim().toLowerCase().email(),
+  password: z.string().min(1).max(128),
+}).strict();
+
+// STEP 1 — verify password; if MFA enabled, issue a short-lived CHALLENGE token
+app.post("/auth/login", authLimiter, validate({ body: LoginSchema }), async (req, res) =&gt; {
+  const { email, password } = req.body;
+  const user = await db.user.findUnique({ where: { email } });
+
+  const dummy = "$2b$12$dummydummydummydummydummydummydummydummydummydummy.";
+  const valid = await bcrypt.compare(password, user?.passwordHash || dummy);
+  if (!user || !valid || !user.emailVerified) {
+    return res.status(401).json({ error: "Invalid credentials" });
+  }
+
+  // password OK; branch on MFA
+  if (!user.mfaEnabled) {
+    return res.json({ accessToken: issueAccessToken(user), mfaRequired: false });
+  }
+
+  // mint a challenge token — lets the client redeem a code within 5 min
+  const challengeId = crypto.randomUUID();
+  await redis.setex(`mfa:challenge:${challengeId}`, 300,
+    JSON.stringify({ userId: user.id, attempts: 0 }));
+
+  return res.json({ mfaRequired: true, challengeId });
+});
+
+// STEP 2 — submit TOTP code against the challenge
+const MfaVerifySchema = z.object({
+  challengeId: z.string().uuid(),
+  code:        z.string().regex(/^\d{6}$/),
+}).strict();
+
+app.post("/auth/mfa/verify", authLimiter, validate({ body: MfaVerifySchema }),
+  async (req, res) =&gt; {
+    const { challengeId, code } = req.body;
+
+    const raw = await redis.get(`mfa:challenge:${challengeId}`);
+    if (!raw) return res.status(401).json({ error: "Challenge expired" });
+    const challenge = JSON.parse(raw);
+
+    // bound attempts — 5 tries
+    if (challenge.attempts &gt;= 5) {
+      await redis.del(`mfa:challenge:${challengeId}`);
+      return res.status(401).json({ error: "Too many attempts" });
+    }
+
+    const user = await db.user.findUnique({ where: { id: challenge.userId } });
+    if (!user?.mfaSecret) return res.sendStatus(401);
+
+    const ok = speakeasy.totp.verify({
+      secret:   user.mfaSecret, encoding: "base32",
+      token:    code,
+      window:   1,             // allow ±30s drift (standard)
+    });
+
+    if (!ok) {
+      // check if it's a backup code
+      const backupHash = crypto.createHash("sha256").update(code).digest("hex");
+      const backup = await db.mfaBackupCode.findFirst({
+        where: { userId: user.id, codeHash: backupHash, usedAt: null },
+      });
+
+      if (!backup) {
+        await redis.hincrby(`mfa:challenge:${challengeId}`, "attempts", 1);
+        return res.status(401).json({ error: "Invalid code" });
+      }
+      await db.mfaBackupCode.update({
+        where: { id: backup.id }, data: { usedAt: new Date() },
+      });
+    }
+
+    await redis.del(`mfa:challenge:${challengeId}`);      // single-use
+    res.json({ accessToken: issueAccessToken(user) });
+  }
+);</code></pre>
+<p><strong>Key insight:</strong> MFA is a <strong>two-request protocol</strong> and must preserve two properties: the challenge is <em>single-use</em> and <em>time-bound</em>. Store the challenge in Redis with a short TTL; track attempt counters to prevent brute-force (6-digit TOTP is only 1-in-1M so 5 tries is plenty). Accept <strong>backup codes</strong> stored as hashes &mdash; if a user loses their phone, they can still log in. The <code>window: 1</code> allowance for TOTP handles the tiny clock drift between user and server without weakening security. Passkeys (WebAuthn) are the 2026 gold standard that replaces all of this when available.</p>
+'''
+
+ANSWERS[97] = r'''
+<pre><code>// dynamic-routes-validated.js — declarative config → routes with validation
+import { z } from "zod";
+
+// each "route config" carries everything needed to build the handler
+const routeConfigs = [
+  {
+    method: "post", path: "/api/orders",
+    auth:   true,
+    schemas: {
+      body: z.object({
+        items: z.array(z.object({
+          productId: z.string().uuid(),
+          qty:       z.number().int().min(1).max(100),
+        })).min(1).max(50),
+        shippingAddressId: z.string().uuid(),
+      }).strict(),
+    },
+    handler: async ({ body, user }) =&gt; {
+      const order = await db.order.create({
+        data: { ...body, customerId: user.sub, status: "pending" },
+      });
+      return { status: 201, body: order };
+    },
+  },
+  {
+    method: "get", path: "/api/orders/:id",
+    auth: true,
+    schemas: { params: z.object({ id: z.string().uuid() }) },
+    handler: async ({ params, user }) =&gt; {
+      const order = await db.order.findUnique({ where: { id: params.id } });
+      if (!order || order.customerId !== user.sub) return { status: 404 };
+      return { status: 200, body: order };
+    },
+  },
+];
+
+// REGISTER — one loop installs all routes, with consistent validation + shape
+function registerRoutes(app) {
+  for (const rc of routeConfigs) {
+    const middlewares = [];
+    if (rc.auth)   middlewares.push(requireAuth);
+    if (rc.roles)  middlewares.push(requireRole(...rc.roles));
+
+    app[rc.method](rc.path, ...middlewares, async (req, res, next) =&gt; {
+      try {
+        // validate each location
+        const validated = {};
+        for (const loc of ["body", "query", "params"]) {
+          if (!rc.schemas?.[loc]) { validated[loc] = req[loc]; continue; }
+          const parsed = rc.schemas[loc].safeParse(req[loc]);
+          if (!parsed.success) {
+            return res.status(400).json({ error: "Validation failed", issues: parsed.error.issues });
+          }
+          validated[loc] = parsed.data;
+        }
+
+        // invoke handler with clean input
+        const result = await rc.handler({
+          ...validated,
+          user:    req.user,
+          headers: req.headers,
+        });
+
+        res.status(result.status || 200);
+        if (result.headers) for (const [k, v] of Object.entries(result.headers)) res.set(k, v);
+        if (result.body)    return res.json(result.body);
+        return res.end();
+      } catch (err) { next(err); }
+    });
+  }
+}
+
+registerRoutes(app);</code></pre>
+<p><strong>Key insight:</strong> driving routes from a config array is powerful if you preserve <strong>three properties</strong>. <strong>Uniform validation</strong> &mdash; every route validates body/query/params via per-route schemas; handlers only see cleaned input. <strong>Uniform response shape</strong> &mdash; handlers return <code>{ status, body, headers? }</code>, not an Express response; the dispatcher sends it. <strong>Uniform errors</strong> &mdash; all exceptions flow through <code>next(err)</code> to a central error middleware. This makes routes easy to test (handlers are plain async functions), easy to enumerate (config array), and easy to generate OpenAPI from (schemas are already declarative).</p>
+'''
+
+ANSWERS[98] = r'''
+<pre><code>// activity-report.js — paginated activity with cursor + time filter
+import { z } from "zod";
+
+const ActivityQuerySchema = z.object({
+  type:    z.enum(["login", "purchase", "post", "comment"]).optional(),
+  from:    z.coerce.date().optional(),
+  to:      z.coerce.date().optional(),
+  limit:   z.coerce.number().int().min(1).max(100).default(20),
+  cursor:  z.string().optional(),
+}).strict().refine(
+  (v) =&gt; !v.from || !v.to || v.from &lt;= v.to,
+  { message: "from must be &lt;= to" }
+);
+
+app.get("/users/:userId/activities", requireAuth, async (req, res) =&gt; {
+  if (req.params.userId !== req.user.sub &amp;&amp; req.user.role !== "admin") {
+    return res.sendStatus(403);
+  }
+
+  const parsed = ActivityQuerySchema.safeParse(req.query);
+  if (!parsed.success) return res.status(400).json({ error: parsed.error.issues });
+  const { type, from, to, limit, cursor } = parsed.data;
+
+  const cursorData = cursor
+    ? JSON.parse(Buffer.from(cursor, "base64url").toString())
+    : null;
+
+  const where = {
+    userId: req.params.userId,
+    ...(type &amp;&amp; { type }),
+    ...(from &amp;&amp; { createdAt: { gte: from } }),
+    ...(to   &amp;&amp; { createdAt: { ...(from ? { gte: from } : {}), lte: to } }),
+    ...(cursorData &amp;&amp; {
+      OR: [
+        { createdAt: { lt: new Date(cursorData.createdAt) } },
+        { createdAt: new Date(cursorData.createdAt), id: { lt: cursorData.id } },
+      ],
+    }),
+  };
+
+  // fetch data + total count in parallel (capped for performance)
+  const [activities, totalCount] = await Promise.all([
+    db.activity.findMany({
+      where,
+      orderBy: [{ createdAt: "desc" }, { id: "desc" }],
+      take: limit + 1,
+      include: { meta: true },
+    }),
+    // totals are expensive on huge datasets — only compute when no cursor
+    cursor ? Promise.resolve(null) : db.activity.count({
+      where: {
+        userId: req.params.userId,
+        ...(type &amp;&amp; { type }),
+        ...(from &amp;&amp; { createdAt: { gte: from } }),
+        ...(to   &amp;&amp; { createdAt: { ...(from ? { gte: from } : {}), lte: to } }),
+      },
+    }),
+  ]);
+
+  const hasMore = activities.length &gt; limit;
+  const data    = activities.slice(0, limit);
+  const last    = data[data.length - 1];
+
+  res.json({
+    data,
+    pagination: {
+      nextCursor: hasMore &amp;&amp; last
+        ? Buffer.from(JSON.stringify({ createdAt: last.createdAt, id: last.id })).toString("base64url")
+        : null,
+      hasMore,
+      ...(totalCount !== null &amp;&amp; { total: totalCount }),
+    },
+    filters: { type, from, to },
+  });
+});</code></pre>
+<p><strong>Key insight:</strong> paginated reports with filters have two performance traps. <strong>Don't compute <code>COUNT(*)</code> on every page</strong> &mdash; it's O(N) each time and kills DB CPU; compute it only on page 1 (no cursor), or skip it entirely if the client doesn't need it. <strong>The cursor must include the tie-breaker id</strong> &mdash; two activities can share a timestamp, and without <code>id</code> as the secondary key you get duplicate or missing rows across pages. Run the count and page fetch in parallel; index on <code>(userId, createdAt DESC, id DESC)</code> so the sort uses the index.</p>
+'''
+
+ANSWERS[99] = r'''
+<pre><code>// service-jwt.js — service-to-service with short-lived asymmetric JWTs
+import jwt from "jsonwebtoken";
+import fs from "node:fs";
+
+// EACH SERVICE owns its private key; other services have the public key
+const privateKey = fs.readFileSync(process.env.SERVICE_PRIVATE_KEY_PATH);
+const publicKeys = {                                  // JWKS or loaded from disk
+  "user-service":    fs.readFileSync("/keys/user-service.pub"),
+  "orders-service":  fs.readFileSync("/keys/orders-service.pub"),
+  "payments-service": fs.readFileSync("/keys/payments-service.pub"),
+};
+
+// CLIENT — mint + cache a token to call another service
+class ServiceJwtClient {
+  constructor(issuerName) {
+    this.issuer = issuerName;
+    this.cache = new Map();          // audience → { token, expiresAt }
+  }
+
+  getToken(audience) {
+    const cached = this.cache.get(audience);
+    if (cached &amp;&amp; cached.expiresAt &gt; Date.now() + 30_000) return cached.token;
+
+    const token = jwt.sign(
+      { scope: ["service"] },        // per-audience scopes if needed
+      privateKey,
+      {
+        algorithm: "RS256",
+        issuer:    this.issuer,
+        audience,
+        subject:   this.issuer,
+        expiresIn: "5m",             // SHORT lifetime — tokens never stale long
+        jwtid:     crypto.randomUUID(),
+      }
+    );
+    this.cache.set(audience, { token, expiresAt: Date.now() + 4 * 60 * 1000 });
+    return token;
+  }
+
+  async call(audience, url, init = {}) {
+    const token = this.getToken(audience);
+    const res = await fetch(url, {
+      ...init,
+      headers: { ...init.headers, "Authorization": `Bearer ${token}` },
+    });
+    if (res.status === 401) {
+      // token was revoked? refresh and retry once
+      this.cache.delete(audience);
+      return this.call(audience, url, init);
+    }
+    return res;
+  }
+}
+
+// SERVER — verify incoming service JWTs
+export function requireServiceAuth({ allowedIssuers } = {}) {
+  return (req, res, next) =&gt; {
+    const [, token] = (req.headers.authorization || "").split(" ");
+    if (!token) return res.sendStatus(401);
+
+    // unpack without verifying to find issuer → pick the right public key
+    const decoded = jwt.decode(token, { complete: true });
+    const issuer  = decoded?.payload?.iss;
+
+    if (!issuer || !publicKeys[issuer]) {
+      return res.status(401).json({ error: "Unknown issuer" });
+    }
+    if (allowedIssuers &amp;&amp; !allowedIssuers.includes(issuer)) {
+      return res.status(403).json({ error: "Caller not allowed" });
+    }
+
+    try {
+      const payload = jwt.verify(token, publicKeys[issuer], {
+        algorithms: ["RS256"],
+        issuer,
+        audience: process.env.SERVICE_NAME,
+      });
+      req.callerService = payload.iss;
+      req.callerScopes  = payload.scope || [];
+      next();
+    } catch (err) {
+      res.status(401).json({ error: "Invalid token" });
+    }
+  };
+}
+
+// USAGE in orders-service
+const paymentsClient = new ServiceJwtClient("orders-service");
+const r = await paymentsClient.call("payments-service",
+  "http://payments-service:8080/charges",
+  { method: "POST", body: JSON.stringify({ amount: 100 }) });</code></pre>
+<p><strong>Key insight:</strong> service-to-service JWT works best with <strong>asymmetric keys</strong> (RS256/ES256) so receivers can verify without sharing the signing secret &mdash; leaked secret on user-service doesn't compromise orders-service. <strong>Short lifetimes</strong> (5 minutes) with caching mean revocation happens naturally without a blocklist. <strong>Per-call audience</strong> in the token binds it to a specific target service; stealing the token to call a different service fails. Consider <strong>mTLS</strong> for environments where networking supports it &mdash; it's stronger and simpler operationally. Service mesh (Istio, Linkerd) automates both.</p>
+'''
+
+ANSWERS[100] = r'''
+<pre><code>// stock-prices.js — real-time quotes with cache + rate-limit + SSE fan-out
+import { LRUCache } from "lru-cache";
+import rateLimit from "express-rate-limit";
+import RedisStore from "rate-limit-redis";
+
+const priceCache = new LRUCache({ max: 1000, ttl: 2_000 });   // 2s TTL — finance-grade freshness
+
+// PER-USER rate limit to protect upstream quota
+const quotesLimiter = rateLimit({
+  windowMs: 60_000, max: 60,
+  keyGenerator: (req) =&gt; req.user?.id ?? req.ip,
+  standardHeaders: true,
+  store: new RedisStore({ sendCommand: (...args) =&gt; redis.call(...args) }),
+});
+
+// SINGLEFLIGHT — only one upstream request per symbol in flight at a time
+const inflight = new Map();
+
+async function fetchQuote(symbol) {
+  const cached = priceCache.get(symbol);
+  if (cached) return { data: cached, source: "cache" };
+
+  if (inflight.has(symbol)) return { data: await inflight.get(symbol), source: "dedup" };
+
+  const p = (async () =&gt; {
+    try {
+      const r = await fetch(
+        `https://api.quotes.example.com/v1/quote/${encodeURIComponent(symbol)}`,
+        {
+          headers: { "x-api-key": process.env.QUOTES_API_KEY },
+          signal:  AbortSignal.timeout(2000),
+        }
+      );
+      if (!r.ok) throw new Error(`Upstream ${r.status}`);
+      const data = await r.json();
+      priceCache.set(symbol, data);
+      return data;
+    } finally {
+      inflight.delete(symbol);
+    }
+  })();
+  inflight.set(symbol, p);
+  return { data: await p, source: "origin" };
+}
+
+// REST — one-off quote
+app.get("/quotes/:symbol", quotesLimiter, requireAuth, async (req, res) =&gt; {
+  const symbol = String(req.params.symbol).toUpperCase();
+  if (!/^[A-Z]{1,5}$/.test(symbol)) return res.status(400).json({ error: "Invalid symbol" });
+
+  try {
+    const { data, source } = await fetchQuote(symbol);
+    res.set({
+      "Cache-Control": "private, max-age=2",
+      "X-Cache":       source,
+    }).json(data);
+  } catch (err) {
+    if (err.name === "TimeoutError") return res.status(504).json({ error: "Quote timed out" });
+    res.status(502).json({ error: "Quote service unavailable" });
+  }
+});
+
+// SSE — live subscription; server polls upstream once per symbol and fans out
+const subscribers = new Map();   // symbol → Set&lt;res&gt;
+
+app.get("/quotes/:symbol/live", requireAuth, async (req, res) =&gt; {
+  const symbol = String(req.params.symbol).toUpperCase();
+  if (!/^[A-Z]{1,5}$/.test(symbol)) return res.status(400).end();
+
+  res.set({
+    "Content-Type":      "text/event-stream",
+    "Cache-Control":     "no-store",
+    "Connection":        "keep-alive",
+    "X-Accel-Buffering": "no",
+  }).flushHeaders();
+
+  // register
+  if (!subscribers.has(symbol)) subscribers.set(symbol, new Set());
+  subscribers.get(symbol).add(res);
+
+  // initial push
+  try {
+    const { data } = await fetchQuote(symbol);
+    res.write(`event: quote\ndata: ${JSON.stringify(data)}\n\n`);
+  } catch {}
+
+  const heart = setInterval(() =&gt; res.write(":heartbeat\n\n"), 20_000);
+  req.on("close", () =&gt; {
+    clearInterval(heart);
+    subscribers.get(symbol)?.delete(res);
+    if (!subscribers.get(symbol)?.size) subscribers.delete(symbol);
+    res.end();
+  });
+});
+
+// POLLER — one pull per symbol every 2s when there are subscribers
+setInterval(async () =&gt; {
+  for (const [symbol, clients] of subscribers) {
+    if (!clients.size) continue;
+    try {
+      const { data } = await fetchQuote(symbol);
+      const payload = `event: quote\ndata: ${JSON.stringify(data)}\n\n`;
+      for (const res of clients) res.write(payload);
+    } catch { /* skip this tick */ }
+  }
+}, 2000);</code></pre>
+<p><strong>Key insight:</strong> real-time quotes combine every technique so far. <strong>Short cache TTL (2s)</strong> balances freshness with upstream cost &mdash; stock prices change fast but clients don't need sub-second precision for dashboards. <strong>Singleflight deduplication</strong> &mdash; 100 clients requesting AAPL at once produce ONE upstream call, not 100; the critical line is <code>if (inflight.has(symbol)) return ...</code>. <strong>SSE + shared poller</strong> &mdash; polling upstream once per symbol and fanning out to N subscribers is orders of magnitude cheaper than each client polling independently. <strong>Per-user rate limit</strong> prevents a single client from exhausting your upstream quota.</p>
+'''

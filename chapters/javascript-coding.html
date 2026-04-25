@@ -1,0 +1,3169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JavaScript — Coding · Interview Prep Mastery</title>
+<meta name="description" content="100 coding interview questions on JavaScript, with detailed explanations and examples.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/styles.css">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%239a6b1d'/%3E%3Ctext x='50' y='68' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold' font-size='48'%3EIP%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="site-header">
+  <div class="site-header__inner">
+    <button class="menu-toggle" aria-label="Open menu" type="button">☰ Menu</button>
+    <a class="brand" href="../index.html">
+      <span class="brand__mark">IP</span>
+      <span class="brand__text">
+        <span class="brand__title">Interview Prep Mastery</span>
+        <span class="brand__subtitle">Interactive learning guide</span>
+      </span>
+    </a>
+    <nav class="header-nav">
+      <a href="../index.html#roadmap">Roadmap</a>
+      <a href="../index.html#chapters">All chapters</a>
+      <button class="theme-toggle" type="button" aria-label="Toggle color scheme">☾ Dark</button>
+    </nav>
+  </div>
+</header>
+<div class="layout">
+<aside class="sidebar" aria-label="Site navigation">
+  <div class="sidebar__header">Chapter Navigator</div>
+  
+        <div class="nav-part">
+          <div class="nav-part__label">Part 1</div>
+          <div class="nav-part__title">Core Programming Languages</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">JavaScript</li><li><a class="" href="../chapters/javascript-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/javascript-tricky.html"><span class="nav-item__title">Tricky</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="active" href="../chapters/javascript-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-coding.html"><span class="nav-item__title">Advanced Coding</span><span class="nav-item__meta">100 questions · 100 min read</span></a></li><li><a class="" href="../chapters/javascript-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-scenario.html"><span class="nav-item__title">Advanced Scenario Based</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Python</li><li><a class="" href="../chapters/python-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/python-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-part">
+          <div class="nav-part__label">Part 2</div>
+          <div class="nav-part__title">Web Fundamentals</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">HTML</li><li><a class="" href="../chapters/html-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/html-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/html-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CSS</li><li><a class="" href="../chapters/css-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">102 questions · 60 min read</span></a></li><li><a class="" href="../chapters/css-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/css-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">101 questions · 90 min read</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-part">
+          <div class="nav-part__label">Part 3</div>
+          <div class="nav-part__title">Backend Technologies</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Node.Js</li><li><a class="" href="../chapters/nodejs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/nodejs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ExpressJS</li><li><a class="" href="../chapters/expressjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/expressjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/expressjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">API</li><li><a class="" href="../chapters/api-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/api-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-part">
+          <div class="nav-part__label">Part 4</div>
+          <div class="nav-part__title">Frontend Frameworks</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ReactJS</li><li><a class="" href="../chapters/reactjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">101 questions · 60 min read</span></a></li><li><a class="" href="../chapters/reactjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-part">
+          <div class="nav-part__label">Part 5</div>
+          <div class="nav-part__title">Databases</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MYSQL</li><li><a class="" href="../chapters/mysql-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mysql-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MongoDB</li><li><a class="" href="../chapters/mongodb-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mongodb-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-part">
+          <div class="nav-part__label">Part 6</div>
+          <div class="nav-part__title">System Design &amp; DevOps</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">System Design MERN Stack</li><li><a class="" href="../chapters/system-design-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Infrastructure MERN Stack</li><li><a class="" href="../chapters/infrastructure-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/infrastructure-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CI/CD Pipeline</li><li><a class="" href="../chapters/cicd-pipeline-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
+          </ul>
+        </div>
+</aside>
+<main class="main" id="main">
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="../index.html">Home</a>
+    <span class="breadcrumb__sep">›</span>
+    <a href="../index.html#part-1">Core Programming Languages</a>
+    <span class="breadcrumb__sep">›</span>
+    <span>JavaScript — Coding</span>
+  </nav>
+
+  <header class="chapter-header">
+    <div class="chapter-label">JavaScript · Coding</div>
+    <h1 class="chapter-title">Coding JavaScript Interview Questions</h1>
+    <p class="chapter-lede">Practical coding problems with full solutions and line-by-line explanations.</p>
+    <div class="chapter-meta">
+      <div class="chapter-meta__item"><span class="chapter-meta__label">Questions</span><span class="chapter-meta__value">100</span></div>
+      <div class="chapter-meta__item"><span class="chapter-meta__label">Level</span><span class="chapter-meta__value">Coding</span></div>
+      <div class="chapter-meta__item"><span class="chapter-meta__label">Estimated reading</span><span class="chapter-meta__value">90 min read</span></div>
+    </div>
+    
+  </header>
+
+  <section class="prose">
+
+    <div class="toc" id="toc">
+      <div class="toc__title">All questions in this chapter</div>
+      <ul class="toc__list">
+        <li><a href="#q1"><span class="toc__num">1.</span>Write a function to reverse a string.</a></li><li><a href="#q2"><span class="toc__num">2.</span>How would you implement a deep clone of an object?</a></li><li><a href="#q3"><span class="toc__num">3.</span>Write a function to flatten a nested array.</a></li><li><a href="#q4"><span class="toc__num">4.</span>Create a function that removes duplicates from an array.</a></li><li><a href="#q5"><span class="toc__num">5.</span>Implement a function to check if a string is a palindrome.</a></li><li><a href="#q6"><span class="toc__num">6.</span>Write a function to find the longest word in a string.</a></li><li><a href="#q7"><span class="toc__num">7.</span>How would you merge two sorted arrays into one sorted array?</a></li><li><a href="#q8"><span class="toc__num">8.</span>Write a function to check if two strings are anagrams.</a></li><li><a href="#q9"><span class="toc__num">9.</span>Implement a simple debounce function.</a></li><li><a href="#q10"><span class="toc__num">10.</span>Write a function to find the factorial of a number.</a></li><li><a href="#q11"><span class="toc__num">11.</span>Create a function to generate all permutations of a string.</a></li><li><a href="#q12"><span class="toc__num">12.</span>Implement a function to find the intersection of two arrays.</a></li><li><a href="#q13"><span class="toc__num">13.</span>Write a function to check if an object is empty.</a></li><li><a href="#q14"><span class="toc__num">14.</span>How would you create a memoized version of a function?</a></li><li><a href="#q15"><span class="toc__num">15.</span>Implement a function to perform binary search on a sorted array.</a></li><li><a href="#q16"><span class="toc__num">16.</span>Write a function to count the number of vowels in a string.</a></li><li><a href="#q17"><span class="toc__num">17.</span>Create a function to convert a number to its binary representation.</a></li><li><a href="#q18"><span class="toc__num">18.</span>Write a function to find the nth Fibonacci number using recursion.</a></li><li><a href="#q19"><span class="toc__num">19.</span>Implement a function to check if a number is prime.</a></li><li><a href="#q20"><span class="toc__num">20.</span>Write a function to sum all the numbers in a nested array.</a></li><li><a href="#q21"><span class="toc__num">21.</span>Create a function to convert a string to title case.</a></li><li><a href="#q22"><span class="toc__num">22.</span>Write a function to check if a number is a power of two.</a></li><li><a href="#q23"><span class="toc__num">23.</span>Implement a function to perform a deep comparison between two objects.</a></li><li><a href="#q24"><span class="toc__num">24.</span>Write a function to generate a random string of given length.</a></li><li><a href="#q25"><span class="toc__num">25.</span>Create a function to find the GCD (Greatest Common Divisor) of two numbers.</a></li><li><a href="#q26"><span class="toc__num">26.</span>Write a function to find the LCM (Least Common Multiple) of two numbers.</a></li><li><a href="#q27"><span class="toc__num">27.</span>Implement a function to remove falsy values from an array.</a></li><li><a href="#q28"><span class="toc__num">28.</span>Write a function to group an array of objects by a property.</a></li><li><a href="#q29"><span class="toc__num">29.</span>Create a function to throttle another function.</a></li><li><a href="#q30"><span class="toc__num">30.</span>Write a function to convert a string to camelCase.</a></li><li><a href="#q31"><span class="toc__num">31.</span>Implement a function to check if a string contains balanced parentheses.</a></li><li><a href="#q32"><span class="toc__num">32.</span>Write a function to find the maximum depth of a nested array.</a></li><li><a href="#q33"><span class="toc__num">33.</span>Create a function to shuffle an array.</a></li><li><a href="#q34"><span class="toc__num">34.</span>Write a function to find the first non-repeating character in a string.</a></li><li><a href="#q35"><span class="toc__num">35.</span>Implement a function to rotate an array to the right by k steps.</a></li><li><a href="#q36"><span class="toc__num">36.</span>Write a function to calculate the square root of a number without using Math.sqrt.</a></li><li><a href="#q37"><span class="toc__num">37.</span>Create a function to find the longest common prefix in an array of strings.</a></li><li><a href="#q38"><span class="toc__num">38.</span>Write a function to find the missing number in an array of 1 to n.</a></li><li><a href="#q39"><span class="toc__num">39.</span>Implement a function to convert a Roman numeral to an integer.</a></li><li><a href="#q40"><span class="toc__num">40.</span>Write a function to generate all subsets of an array.</a></li><li><a href="#q41"><span class="toc__num">41.</span>Create a function to check if two rectangles overlap.</a></li><li><a href="#q42"><span class="toc__num">42.</span>Write a function to find the maximum sum subarray.</a></li><li><a href="#q43"><span class="toc__num">43.</span>Implement a function to perform merge sort on an array.</a></li><li><a href="#q44"><span class="toc__num">44.</span>Write a function to find the longest increasing subsequence in an array.</a></li><li><a href="#q45"><span class="toc__num">45.</span>Create a function to validate a credit card number using the Luhn algorithm.</a></li><li><a href="#q46"><span class="toc__num">46.</span>Write a function to find the intersection point of two linked lists.</a></li><li><a href="#q47"><span class="toc__num">47.</span>Implement a function to serialize and deserialize a binary tree.</a></li><li><a href="#q48"><span class="toc__num">48.</span>Write a function to find the k-th largest element in an array.</a></li><li><a href="#q49"><span class="toc__num">49.</span>Create a function to find the majority element in an array.</a></li><li><a href="#q50"><span class="toc__num">50.</span>Write a function to determine if a number is a happy number.</a></li><li><a href="#q51"><span class="toc__num">51.</span>Implement a function to find the longest palindromic substring.</a></li><li><a href="#q52"><span class="toc__num">52.</span>Write a function to convert an integer to a Roman numeral.</a></li><li><a href="#q53"><span class="toc__num">53.</span>Create a function to find the maximum product of three numbers in an array.</a></li><li><a href="#q54"><span class="toc__num">54.</span>Write a function to find the diameter of a binary tree.</a></li><li><a href="#q55"><span class="toc__num">55.</span>Implement a function to calculate the power of a number using recursion.</a></li><li><a href="#q56"><span class="toc__num">56.</span>Write a function to perform level-order traversal of a binary tree.</a></li><li><a href="#q57"><span class="toc__num">57.</span>Create a function to find the kth smallest element in a sorted matrix.</a></li><li><a href="#q58"><span class="toc__num">58.</span>Write a function to determine if a linked list is a palindrome.</a></li><li><a href="#q59"><span class="toc__num">59.</span>Implement a function to find the longest consecutive sequence in an array.</a></li><li><a href="#q60"><span class="toc__num">60.</span>Write a function to calculate the edit distance between two strings.</a></li><li><a href="#q61"><span class="toc__num">61.</span>Create a function to check if a string can be segmented into dictionary words.</a></li><li><a href="#q62"><span class="toc__num">62.</span>Write a function to find the maximum profit from buying and selling stocks.</a></li><li><a href="#q63"><span class="toc__num">63.</span>Implement a function to perform in-order traversal of a binary tree without recursion.</a></li><li><a href="#q64"><span class="toc__num">64.</span>Write a function to find all the permutations of an array.</a></li><li><a href="#q65"><span class="toc__num">65.</span>Create a function to convert a BST to a doubly linked list.</a></li><li><a href="#q66"><span class="toc__num">66.</span>Write a function to find the maximum path sum in a binary tree.</a></li><li><a href="#q67"><span class="toc__num">67.</span>Implement a function to find the number of islands in a 2D grid.</a></li><li><a href="#q68"><span class="toc__num">68.</span>Write a function to determine if a binary tree is height-balanced.</a></li><li><a href="#q69"><span class="toc__num">69.</span>Create a function to calculate the median of two sorted arrays.</a></li><li><a href="#q70"><span class="toc__num">70.</span>Write a function to implement a simple web worker in JavaScript.</a></li><li><a href="#q71"><span class="toc__num">71.</span>Implement a function to solve the N-Queens problem.</a></li><li><a href="#q72"><span class="toc__num">72.</span>Write a function to find the minimum window substring.</a></li><li><a href="#q73"><span class="toc__num">73.</span>Create a function to validate a Sudoku board.</a></li><li><a href="#q74"><span class="toc__num">74.</span>Write a function to find all the anagrams of a string.</a></li><li><a href="#q75"><span class="toc__num">75.</span>Implement a function to detect a cycle in a linked list.</a></li><li><a href="#q76"><span class="toc__num">76.</span>Write a function to find the shortest path in a binary matrix.</a></li><li><a href="#q77"><span class="toc__num">77.</span>Create a function to find the maximum rectangle in a binary matrix.</a></li><li><a href="#q78"><span class="toc__num">78.</span>Write a function to solve the coin change problem.</a></li><li><a href="#q79"><span class="toc__num">79.</span>Implement a function to find the first missing positive integer.</a></li><li><a href="#q80"><span class="toc__num">80.</span>Write a function to find the largest rectangle in a histogram.</a></li><li><a href="#q81"><span class="toc__num">81.</span>Create a function to calculate the maximum area of an island.</a></li><li><a href="#q82"><span class="toc__num">82.</span>Write a function to find the maximum XOR of two numbers in an array.</a></li><li><a href="#q83"><span class="toc__num">83.</span>Implement a function to find the longest valid parentheses substring.</a></li><li><a href="#q84"><span class="toc__num">84.</span>Write a function to generate all possible unique BSTs.</a></li><li><a href="#q85"><span class="toc__num">85.</span>Create a function to count the number of digit one appearing in all non-negative intege...</a></li><li><a href="#q86"><span class="toc__num">86.</span>Write a function to find the minimum number of refueling stops.</a></li><li><a href="#q87"><span class="toc__num">87.</span>Implement a function to find the longest uncommon subsequence.</a></li><li><a href="#q88"><span class="toc__num">88.</span>Write a function to find the number of distinct islands.</a></li><li><a href="#q89"><span class="toc__num">89.</span>Create a function to find the minimum cost to merge stones.</a></li><li><a href="#q90"><span class="toc__num">90.</span>Write a function to find the shortest palindrome.</a></li><li><a href="#q91"><span class="toc__num">91.</span>Implement a function to find the maximum profit with at most k transactions.</a></li><li><a href="#q92"><span class="toc__num">92.</span>Write a function to find the minimum number of steps to make two strings anagrams.</a></li><li><a href="#q93"><span class="toc__num">93.</span>Create a function to count the number of ways to decode a string.</a></li><li><a href="#q94"><span class="toc__num">94.</span>Write a function to find the largest divisible subset.</a></li><li><a href="#q95"><span class="toc__num">95.</span>Implement a function to find the minimum path sum in a triangle.</a></li><li><a href="#q96"><span class="toc__num">96.</span>Write a function to find the maximum number of points on a line.</a></li><li><a href="#q97"><span class="toc__num">97.</span>Create a function to find the number of connected components in an undirected graph.</a></li><li><a href="#q98"><span class="toc__num">98.</span>Write a function to find the number of subarrays with a given XOR.</a></li><li><a href="#q99"><span class="toc__num">99.</span>Implement a function to find the length of the longest substring with at most k distinc...</a></li><li><a href="#q100"><span class="toc__num">100.</span>Write a function to solve the wildcard matching problem.</a></li>
+      </ul>
+    </div>
+
+    
+<article class="qa" id="q1">
+  <div class="qa__number">Question 1</div>
+  <h3 class="qa__question">Write a function to reverse a string.</h3>
+  <div class="qa__answer">
+    
+<p>Three common approaches — all O(n):</p>
+<pre><code>// 1. Built-ins (cleanest)
+const reverse = (s) =&gt; [...s].reverse().join("");
+
+// 2. Loop (most explicit)
+function reverseLoop(s) {
+  let out = "";
+  for (let i = s.length - 1; i &gt;= 0; i--) out += s[i];
+  return out;
+}
+
+// 3. Recursive (cute, but blows stack for long inputs)
+const reverseRec = (s) =&gt; s === "" ? "" : reverseRec(s.slice(1)) + s[0];
+
+reverse("hello"); // "olleh"</code></pre>
+<p>Spread handles surrogate pairs (emoji) correctly, which <code>s.split("")</code> does not. For production, use the built-in form.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q2">
+  <div class="qa__number">Question 2</div>
+  <h3 class="qa__question">How would you implement a deep clone of an object?</h3>
+  <div class="qa__answer">
+    
+<p>Preferred: the built-in <code>structuredClone</code>. For environments without it, write a recursive helper that handles arrays, objects, dates, and cycles.</p>
+<pre><code>// Modern one-liner
+const copy = structuredClone(obj);
+
+// Polyfill
+function deepClone(v, seen = new WeakMap()) {
+  if (v === null || typeof v !== "object") return v;
+  if (v instanceof Date)   return new Date(v);
+  if (v instanceof RegExp) return new RegExp(v);
+  if (seen.has(v))         return seen.get(v);   // cycle
+  const out = Array.isArray(v) ? [] : {};
+  seen.set(v, out);
+  for (const k of Reflect.ownKeys(v)) out[k] = deepClone(v[k], seen);
+  return out;
+}</code></pre>
+<p><code>JSON.parse(JSON.stringify(o))</code> is short but drops functions, <code>undefined</code>, Maps, Sets, and corrupts Dates — avoid for real data.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q3">
+  <div class="qa__number">Question 3</div>
+  <h3 class="qa__question">Write a function to flatten a nested array.</h3>
+  <div class="qa__answer">
+    
+<p>Two clean approaches:</p>
+<pre><code>// 1. Built-in — flatten to any depth
+const flat = (arr) =&gt; arr.flat(Infinity);
+
+// 2. Recursive — works in old environments
+function flatten(arr) {
+  const out = [];
+  for (const item of arr) {
+    if (Array.isArray(item)) out.push(...flatten(item));
+    else out.push(item);
+  }
+  return out;
+}
+
+// 3. Iterative with stack — safe for very deep arrays
+function flattenIter(arr) {
+  const stack = [...arr], out = [];
+  while (stack.length) {
+    const next = stack.pop();
+    if (Array.isArray(next)) stack.push(...next);
+    else out.unshift(next);
+  }
+  return out;
+}
+
+flatten([1, [2, [3, [4]]]]); // [1,2,3,4]</code></pre>
+<p>Use <code>flat(n)</code> if you know the depth; <code>flat(Infinity)</code> for arbitrary nesting.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q4">
+  <div class="qa__number">Question 4</div>
+  <h3 class="qa__question">Create a function that removes duplicates from an array.</h3>
+  <div class="qa__answer">
+    
+<p>A <code>Set</code> handles primitives in one line. For object duplicates, compare by a key.</p>
+<pre><code>// Primitives — O(n)
+const unique = [...new Set(arr)];
+
+// By a key (e.g., id)
+function uniqueBy(arr, key) {
+  const seen = new Set();
+  return arr.filter(item =&gt; {
+    const k = typeof key === "function" ? key(item) : item[key];
+    if (seen.has(k)) return false;
+    seen.add(k);
+    return true;
+  });
+}
+
+// Deep equality (slow — O(n²) JSON compare)
+const uniqueDeep = (arr) =&gt;
+  arr.filter((v, i, a) =&gt; a.findIndex(x =&gt; JSON.stringify(x) === JSON.stringify(v)) === i);
+
+unique([1,2,2,3]);              // [1,2,3]
+uniqueBy(users, "id");          // dedupe by id
+uniqueBy(users, u =&gt; u.email);  // dedupe by derived key</code></pre>
+
+    
+  </div>
+</article>
+<article class="qa" id="q5">
+  <div class="qa__number">Question 5</div>
+  <h3 class="qa__question">Implement a function to check if a string is a palindrome.</h3>
+  <div class="qa__answer">
+    
+<p>Normalize first, then use a two-pointer scan or reverse-compare.</p>
+<pre><code>function isPalindrome(s) {
+  const clean = s.toLowerCase().replace(/[^a-z0-9]/g, "");
+  let i = 0, j = clean.length - 1;
+  while (i &lt; j) {
+    if (clean[i] !== clean[j]) return false;
+    i++; j--;
+  }
+  return true;
+}
+
+// Shorter (less memory-efficient)
+const isPalindrome2 = (s) =&gt; {
+  const c = s.toLowerCase().replace(/[^a-z0-9]/g, "");
+  return c === [...c].reverse().join("");
+};
+
+isPalindrome("A man, a plan, a canal: Panama"); // true
+isPalindrome("race a car");                     // false</code></pre>
+<p>Two-pointer is O(n) time, O(1) extra space. The reverse-compare version is O(n) time but O(n) space.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q6">
+  <div class="qa__number">Question 6</div>
+  <h3 class="qa__question">Write a function to find the longest word in a string.</h3>
+  <div class="qa__answer">
+    
+<p>Split on whitespace and track the current max.</p>
+<pre><code>function longestWord(s) {
+  return s.split(/\s+/)
+          .reduce((best, w) =&gt; w.length &gt; best.length ? w : best, "");
+}
+
+// Manual loop — slightly faster, no intermediate array
+function longestWordLoop(s) {
+  let best = "", cur = "";
+  for (const ch of s + " ") {
+    if (/\s/.test(ch)) {
+      if (cur.length &gt; best.length) best = cur;
+      cur = "";
+    } else cur += ch;
+  }
+  return best;
+}
+
+longestWord("The quick brown fox"); // "quick"</code></pre>
+<p>If tied, <code>reduce</code> keeps the first match. Strip punctuation beforehand (<code>s.replace(/[^\w\s]/g, "")</code>) if "quick," shouldn't count the comma.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q7">
+  <div class="qa__number">Question 7</div>
+  <h3 class="qa__question">How would you merge two sorted arrays into one sorted array?</h3>
+  <div class="qa__answer">
+    
+<p>Count letter frequencies, or sort both strings — whichever is cleaner for the size of input.</p>
+<pre><code>// O(n) — frequency map
+function isAnagram(a, b) {
+  if (a.length !== b.length) return false;
+  const count = {};
+  for (const ch of a) count[ch] = (count[ch] || 0) + 1;
+  for (const ch of b) {
+    if (!count[ch]) return false;
+    count[ch]--;
+  }
+  return true;
+}
+
+// O(n log n) — sort
+const isAnagram2 = (a, b) =&gt;
+  a.length === b.length &&
+  [...a].sort().join("") === [...b].sort().join("");
+
+isAnagram("listen", "silent"); // true</code></pre>
+<p>Normalize case and whitespace first (<code>a.toLowerCase().replace(/\s/g, "")</code>) if inputs are phrases.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q8">
+  <div class="qa__number">Question 8</div>
+  <h3 class="qa__question">Write a function to check if two strings are anagrams.</h3>
+  <div class="qa__answer">
+    
+<p>Classic closure + <code>setTimeout</code>.</p>
+<pre><code>function debounce(fn, wait) {
+  let timer;
+  return function (...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() =&gt; fn.apply(this, args), wait);
+  };
+}
+
+// With immediate option (fire on leading edge)
+function debounce(fn, wait, immediate = false) {
+  let timer;
+  return function (...args) {
+    const callNow = immediate && !timer;
+    clearTimeout(timer);
+    timer = setTimeout(() =&gt; {
+      timer = null;
+      if (!immediate) fn.apply(this, args);
+    }, wait);
+    if (callNow) fn.apply(this, args);
+  };
+}
+
+const onSearch = debounce(q =&gt; fetch("/s?q=" + q), 300);
+input.addEventListener("input", e =&gt; onSearch(e.target.value));</code></pre>
+<p>Lodash's <code>_.debounce</code> adds cancel/flush and leading+trailing edges.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q9">
+  <div class="qa__number">Question 9</div>
+  <h3 class="qa__question">Implement a simple debounce function.</h3>
+  <div class="qa__answer">
+    
+<p>Three ways — recursion is clearest but limited by stack depth.</p>
+<pre><code>// Iterative — safest for large n
+function factorial(n) {
+  if (n &lt; 0) throw new Error("negative");
+  let r = 1n;                                  // BigInt for big n
+  for (let i = 2n; i &lt;= BigInt(n); i++) r *= i;
+  return r;
+}
+
+// Recursive
+const fact = (n) =&gt; n &lt;= 1 ? 1 : n * fact(n - 1);
+
+// Reduce
+const factR = (n) =&gt; Array.from({length: n}, (_, i) =&gt; i + 1)
+                         .reduce((a, b) =&gt; a * b, 1);
+
+factorial(20);   // 2432902008176640000n
+factorial(100);  // 9332621544394...</code></pre>
+<p><code>20!</code> already exceeds <code>Number.MAX_SAFE_INTEGER</code>. Use <code>BigInt</code> for <code>n &gt; 20</code>.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q10">
+  <div class="qa__number">Question 10</div>
+  <h3 class="qa__question">Write a function to find the factorial of a number.</h3>
+  <div class="qa__answer">
+    
+<p>Classic backtracking: swap in place, recurse, swap back.</p>
+<pre><code>function permutations(s) {
+  const chars = [...s];
+  const out = [];
+  function backtrack(start) {
+    if (start === chars.length) {
+      out.push(chars.join(""));
+      return;
+    }
+    for (let i = start; i &lt; chars.length; i++) {
+      [chars[start], chars[i]] = [chars[i], chars[start]];
+      backtrack(start + 1);
+      [chars[start], chars[i]] = [chars[i], chars[start]];
+    }
+  }
+  backtrack(0);
+  return out;
+}
+
+// Dedupe if input has repeats
+const uniquePerms = (s) =&gt; [...new Set(permutations(s))];
+
+permutations("abc");
+// ["abc","acb","bac","bca","cba","cab"]</code></pre>
+<p>n! permutations means n=10 gives 3.6M results — watch for memory blowups.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q11">
+  <div class="qa__number">Question 11</div>
+  <h3 class="qa__question">Create a function to generate all permutations of a string.</h3>
+  <div class="qa__answer">
+    
+<p><code>Set</code> makes this O(n+m).</p>
+<pre><code>function intersect(a, b) {
+  const setA = new Set(a);
+  return [...new Set(b.filter(x =&gt; setA.has(x)))];  // unique
+}
+
+// Preserve order from `a`, allow duplicates
+function intersectWithDups(a, b) {
+  const countB = new Map();
+  for (const x of b) countB.set(x, (countB.get(x) || 0) + 1);
+  const out = [];
+  for (const x of a) {
+    if (countB.get(x) &gt; 0) {
+      out.push(x);
+      countB.set(x, countB.get(x) - 1);
+    }
+  }
+  return out;
+}
+
+intersect([1,2,2,3], [2,3,4]); // [2,3]</code></pre>
+<p>Naive nested-loop approach is O(n·m) — avoid on large arrays.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q12">
+  <div class="qa__number">Question 12</div>
+  <h3 class="qa__question">Implement a function to find the intersection of two arrays.</h3>
+  <div class="qa__answer">
+    
+<p>Check for own enumerable keys.</p>
+<pre><code>function isEmpty(obj) {
+  if (obj == null) return true;
+  return Object.keys(obj).length === 0 &&
+         obj.constructor === Object;
+}
+
+// More robust — also handles Map, Set, arrays
+function isEmptyAny(v) {
+  if (v == null) return true;
+  if (Array.isArray(v) || typeof v === "string") return v.length === 0;
+  if (v instanceof Map || v instanceof Set) return v.size === 0;
+  if (typeof v === "object") return Object.keys(v).length === 0;
+  return false;
+}
+
+isEmpty({});         // true
+isEmpty({a: 1});     // false
+isEmpty(new Date()); // false — constructor check</code></pre>
+<p><code>Object.keys</code> ignores inherited and non-enumerable properties — usually what you want.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q13">
+  <div class="qa__number">Question 13</div>
+  <h3 class="qa__question">Write a function to check if an object is empty.</h3>
+  <div class="qa__answer">
+    
+<p>Wrap the function; cache results by serialized arguments.</p>
+<pre><code>function memoize(fn) {
+  const cache = new Map();
+  return function (...args) {
+    const key = JSON.stringify(args);
+    if (cache.has(key)) return cache.get(key);
+    const result = fn.apply(this, args);
+    cache.set(key, result);
+    return result;
+  };
+}
+
+// Classic example: exponential → linear
+const fib = memoize(function (n) {
+  return n &lt; 2 ? n : fib(n - 1) + fib(n - 2);
+});
+fib(40); // fast</code></pre>
+<p>Caveats: <code>JSON.stringify</code> can't key by non-serializable args (functions, Symbols). For single-arg, use <code>args[0]</code> directly. Consider a <code>WeakMap</code> keyed by object args to avoid leaks.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q14">
+  <div class="qa__number">Question 14</div>
+  <h3 class="qa__question">How would you create a memoized version of a function?</h3>
+  <div class="qa__answer">
+    
+<p>Divide-and-conquer on a sorted array — O(log n).</p>
+<pre><code>function binarySearch(arr, target) {
+  let lo = 0, hi = arr.length - 1;
+  while (lo &lt;= hi) {
+    const mid = (lo + hi) &gt;&gt; 1;          // fast ÷2 floor
+    if (arr[mid] === target) return mid;
+    if (arr[mid] &lt; target) lo = mid + 1;
+    else hi = mid - 1;
+  }
+  return -1;
+}
+
+// Recursive variant
+function bsRec(arr, t, lo = 0, hi = arr.length - 1) {
+  if (lo &gt; hi) return -1;
+  const mid = (lo + hi) &gt;&gt; 1;
+  if (arr[mid] === t) return mid;
+  return arr[mid] &lt; t ? bsRec(arr, t, mid+1, hi) : bsRec(arr, t, lo, mid-1);
+}
+
+binarySearch([1,3,5,7,9,11], 7); // 3</code></pre>
+<p>Array must be sorted. Beware overflow for huge arrays: use <code>lo + Math.floor((hi-lo)/2)</code>.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q15">
+  <div class="qa__number">Question 15</div>
+  <h3 class="qa__question">Implement a function to perform binary search on a sorted array.</h3>
+  <div class="qa__answer">
+    
+<p>Match against the vowel set.</p>
+<pre><code>const countVowels = (s) =&gt;
+  (s.match(/[aeiou]/gi) || []).length;
+
+// Manual loop — no regex
+function countVowelsLoop(s) {
+  const vowels = new Set("aeiouAEIOU");
+  let n = 0;
+  for (const ch of s) if (vowels.has(ch)) n++;
+  return n;
+}
+
+countVowels("Hello World"); // 3</code></pre>
+<p>Add <code>y</code> if needed. Include accented vowels with Unicode: <code>/[aeiouáéíóú]/giu</code>.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q16">
+  <div class="qa__number">Question 16</div>
+  <h3 class="qa__question">Write a function to count the number of vowels in a string.</h3>
+  <div class="qa__answer">
+    
+<p>Use <code>Number.prototype.toString(2)</code>, or build it manually.</p>
+<pre><code>// Built-in
+const toBin = (n) =&gt; n.toString(2);
+
+// Manual (positive integers)
+function toBinary(n) {
+  if (n === 0) return "0";
+  let out = "";
+  while (n &gt; 0) {
+    out = (n &amp; 1) + out;
+    n = n &gt;&gt;&gt; 1;
+  }
+  return out;
+}
+
+// Negative — two's complement, 32-bit
+const toBin32 = (n) =&gt; (n &gt;&gt;&gt; 0).toString(2).padStart(32, "0");
+
+toBin(10);      // "1010"
+toBin(-5);      // "-101"  — sign + magnitude
+toBin32(-5);    // "11111111111111111111111111111011"</code></pre>
+<p>For fractional numbers you'd need a different algorithm — rarely needed.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q17">
+  <div class="qa__number">Question 17</div>
+  <h3 class="qa__question">Create a function to convert a number to its binary representation.</h3>
+  <div class="qa__answer">
+    
+<p>Classic but inefficient without memoization — O(2ⁿ). Memoize for O(n).</p>
+<pre><code>// Pure recursive — exponential
+function fib(n) {
+  if (n &lt; 2) return n;
+  return fib(n - 1) + fib(n - 2);
+}
+
+// Memoized
+const fibMemo = (function () {
+  const cache = [0, 1];
+  return function f(n) {
+    if (cache[n] !== undefined) return cache[n];
+    return cache[n] = f(n - 1) + f(n - 2);
+  };
+})();
+
+// Iterative — O(n) time, O(1) space
+function fibIter(n) {
+  let a = 0, b = 1;
+  for (let i = 0; i &lt; n; i++) [a, b] = [b, a + b];
+  return a;
+}
+
+fibIter(50); // 12586269025</code></pre>
+<p>Use <code>BigInt</code> for <code>n &gt; 78</code> to avoid precision loss.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q18">
+  <div class="qa__number">Question 18</div>
+  <h3 class="qa__question">Write a function to find the nth Fibonacci number using recursion.</h3>
+  <div class="qa__answer">
+    
+<p>Check divisibility up to √n.</p>
+<pre><code>function isPrime(n) {
+  if (n &lt; 2)        return false;
+  if (n &lt; 4)        return true;            // 2, 3
+  if (n % 2 === 0)  return false;
+  for (let i = 3; i * i &lt;= n; i += 2) {
+    if (n % i === 0) return false;
+  }
+  return true;
+}
+
+// 6k ± 1 optimization — skip obvious composites
+function isPrime6k(n) {
+  if (n &lt; 2) return false;
+  if (n &lt; 4) return true;
+  if (n % 2 === 0 || n % 3 === 0) return false;
+  for (let i = 5; i * i &lt;= n; i += 6) {
+    if (n % i === 0 || n % (i + 2) === 0) return false;
+  }
+  return true;
+}
+
+isPrime(97);   // true
+isPrime(100);  // false</code></pre>
+<p>For generating many primes, the Sieve of Eratosthenes is faster.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q19">
+  <div class="qa__number">Question 19</div>
+  <h3 class="qa__question">Implement a function to check if a number is prime.</h3>
+  <div class="qa__answer">
+    
+<p>Recursion handles arbitrary nesting.</p>
+<pre><code>function deepSum(arr) {
+  let total = 0;
+  for (const item of arr) {
+    total += Array.isArray(item) ? deepSum(item) : item;
+  }
+  return total;
+}
+
+// Alternative — flatten + reduce
+const deepSum2 = (arr) =&gt;
+  arr.flat(Infinity).reduce((a, b) =&gt; a + b, 0);
+
+deepSum([1, [2, [3, [4, 5]]]]); // 15</code></pre>
+<p>Recursive version is slightly faster (no intermediate array), but the <code>flat + reduce</code> version is more readable. Add <code>typeof item === "number"</code> guard if array may contain mixed types.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q20">
+  <div class="qa__number">Question 20</div>
+  <h3 class="qa__question">Write a function to sum all the numbers in a nested array.</h3>
+  <div class="qa__answer">
+    
+<p>Uppercase the first letter of each word.</p>
+<pre><code>// Simple
+const titleCase = (s) =&gt;
+  s.toLowerCase().replace(/\b\w/g, c =&gt; c.toUpperCase());
+
+// Split/map — more control
+const titleCase2 = (s) =&gt;
+  s.toLowerCase()
+   .split(/\s+/)
+   .map(w =&gt; w[0]?.toUpperCase() + w.slice(1))
+   .join(" ");
+
+// Skip small words (English)
+const SMALL = new Set(["a","an","the","and","or","of","in","on"]);
+function properTitle(s) {
+  return s.toLowerCase().split(/\s+/).map((w, i) =&gt;
+    i === 0 || !SMALL.has(w) ? w[0].toUpperCase() + w.slice(1) : w
+  ).join(" ");
+}
+
+titleCase("hello world"); // "Hello World"</code></pre>
+<p>Handle apostrophes carefully — <code>\b</code> matches before apostrophes so "it's" becomes "It'S". Use <code>/(?:^|\s)\S/g</code> to only touch the leading letter.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q21">
+  <div class="qa__number">Question 21</div>
+  <h3 class="qa__question">Create a function to convert a string to title case.</h3>
+  <div class="qa__answer">
+    
+<p>Powers of two have exactly one bit set.</p>
+<pre><code>// Bitwise — O(1)
+const isPow2 = (n) =&gt; n &gt; 0 && (n &amp; (n - 1)) === 0;
+
+// Log-based (watch float precision)
+const isPow2Log = (n) =&gt; {
+  if (n &lt;= 0) return false;
+  const k = Math.log2(n);
+  return Number.isInteger(k);
+};
+
+// Division loop
+function isPow2Loop(n) {
+  if (n &lt;= 0) return false;
+  while (n % 2 === 0) n /= 2;
+  return n === 1;
+}
+
+isPow2(16);  // true
+isPow2(18);  // false
+isPow2(1);   // true — 2⁰</code></pre>
+<p><code>n &amp; (n-1)</code> clears the lowest set bit. If that yields zero, there was only one set bit — a pure power of two.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q22">
+  <div class="qa__number">Question 22</div>
+  <h3 class="qa__question">Write a function to check if a number is a power of two.</h3>
+  <div class="qa__answer">
+    
+<p>Recursive structural comparison with cycle protection.</p>
+<pre><code>function deepEqual(a, b, seen = new WeakMap()) {
+  if (Object.is(a, b)) return true;
+  if (typeof a !== "object" || typeof b !== "object" ||
+      a === null || b === null) return false;
+
+  if (a.constructor !== b.constructor) return false;
+  if (a instanceof Date)   return a.getTime() === b.getTime();
+  if (a instanceof RegExp) return a.toString() === b.toString();
+
+  if (seen.get(a) === b) return true;
+  seen.set(a, b);
+
+  const keysA = Reflect.ownKeys(a);
+  const keysB = Reflect.ownKeys(b);
+  if (keysA.length !== keysB.length) return false;
+  for (const k of keysA) {
+    if (!Object.prototype.hasOwnProperty.call(b, k)) return false;
+    if (!deepEqual(a[k], b[k], seen)) return false;
+  }
+  return true;
+}
+
+deepEqual({a:[1,2]}, {a:[1,2]}); // true</code></pre>
+<p>For serializable data only, <code>JSON.stringify(a) === JSON.stringify(b)</code> is quick but order-sensitive and fails on Dates.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q23">
+  <div class="qa__number">Question 23</div>
+  <h3 class="qa__question">Implement a function to perform a deep comparison between two objects.</h3>
+  <div class="qa__answer">
+    
+<p>Sample characters from an alphabet.</p>
+<pre><code>function randomString(len, alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789") {
+  let out = "";
+  for (let i = 0; i &lt; len; i++) {
+    out += alphabet[Math.floor(Math.random() * alphabet.length)];
+  }
+  return out;
+}
+
+// Cryptographically secure (browser/Node ≥ 17)
+function secureRandomString(len) {
+  const bytes = new Uint8Array(len);
+  crypto.getRandomValues(bytes);
+  return [...bytes].map(b =&gt; b.toString(36)).join("").slice(0, len);
+}
+
+// Short ID via crypto
+const id = () =&gt; crypto.randomUUID();
+
+randomString(8); // "a3Gh7kLm"</code></pre>
+<p><code>Math.random()</code> is not cryptographically secure. For session tokens or passwords, use <code>crypto.getRandomValues</code> or <code>crypto.randomUUID</code>.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q24">
+  <div class="qa__number">Question 24</div>
+  <h3 class="qa__question">Write a function to generate a random string of given length.</h3>
+  <div class="qa__answer">
+    
+<p>Euclidean algorithm — iterative form is fast and avoids stack issues.</p>
+<pre><code>function gcd(a, b) {
+  a = Math.abs(a);
+  b = Math.abs(b);
+  while (b) {
+    [a, b] = [b, a % b];
+  }
+  return a;
+}
+
+// Recursive
+const gcdRec = (a, b) =&gt; b === 0 ? Math.abs(a) : gcdRec(b, a % b);
+
+// Multi-arg
+const gcdAll = (...nums) =&gt; nums.reduce(gcd);
+
+gcd(12, 18);       // 6
+gcdAll(12, 18, 24); // 6</code></pre>
+<p>Works because gcd(a, b) = gcd(b, a mod b). Terminates quickly — Fibonacci pairs are the worst case and still O(log n) steps.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q25">
+  <div class="qa__number">Question 25</div>
+  <h3 class="qa__question">Create a function to find the GCD (Greatest Common Divisor) of two numbers.</h3>
+  <div class="qa__answer">
+    
+<p>LCM derives from GCD: <code>lcm(a,b) = |a·b| / gcd(a,b)</code>.</p>
+<pre><code>function gcd(a, b) {
+  a = Math.abs(a); b = Math.abs(b);
+  while (b) [a, b] = [b, a % b];
+  return a;
+}
+
+function lcm(a, b) {
+  if (a === 0 || b === 0) return 0;
+  return Math.abs(a * b) / gcd(a, b);
+}
+
+// Multi-arg
+const lcmAll = (...nums) =&gt; nums.reduce(lcm);
+
+lcm(4, 6);         // 12
+lcmAll(2, 3, 4);   // 12</code></pre>
+<p>Divide before multiplying (<code>(a / gcd(a,b)) * b</code>) to reduce overflow risk with large integers. Use <code>BigInt</code> if products exceed safe integers.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q26">
+  <div class="qa__number">Question 26</div>
+  <h3 class="qa__question">Write a function to find the LCM (Least Common Multiple) of two numbers.</h3>
+  <div class="qa__answer">
+    
+<p><code>filter(Boolean)</code> is the elegant trick — <code>Boolean</code> returns <code>false</code> for <code>false</code>, <code>0</code>, <code>""</code>, <code>null</code>, <code>undefined</code>, <code>NaN</code>.</p>
+<pre><code>const compact = (arr) =&gt; arr.filter(Boolean);
+
+compact([0, 1, false, 2, "", 3, null]); // [1, 2, 3]
+
+// Same thing, explicit
+const compact2 = (arr) =&gt; arr.filter(v =&gt; !!v);
+
+// Keep 0 / false (only drop null/undefined)
+const dropNullish = (arr) =&gt; arr.filter(v =&gt; v != null);</code></pre>
+<p>Handy after chained optional operations (<code>map</code> may return <code>null</code> for skipped items; <code>filter(Boolean)</code> cleans up).</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q27">
+  <div class="qa__number">Question 27</div>
+  <h3 class="qa__question">Implement a function to remove falsy values from an array.</h3>
+  <div class="qa__answer">
+    
+<p><code>reduce</code> into an object keyed by the group value.</p>
+<pre><code>function groupBy(arr, key) {
+  return arr.reduce((acc, item) =&gt; {
+    const k = typeof key === "function" ? key(item) : item[key];
+    (acc[k] ??= []).push(item);
+    return acc;
+  }, {});
+}
+
+// Modern: Object.groupBy (ES2024)
+Object.groupBy(users, u =&gt; u.role);
+
+const users = [
+  { name: "A", role: "admin" },
+  { name: "B", role: "user"  },
+  { name: "C", role: "admin" },
+];
+groupBy(users, "role");
+// { admin: [A, C], user: [B] }
+
+groupBy([1,2,3,4], n =&gt; n % 2 ? "odd" : "even");
+// { odd:[1,3], even:[2,4] }</code></pre>
+<p><code>Object.groupBy</code> is native in Node 21+ and current browsers.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q28">
+  <div class="qa__number">Question 28</div>
+  <h3 class="qa__question">Write a function to group an array of objects by a property.</h3>
+  <div class="qa__answer">
+    
+<p>Throttle via timestamp check — calls fire at most once per <code>wait</code>.</p>
+<pre><code>function throttle(fn, wait) {
+  let last = 0, timer = null;
+  return function (...args) {
+    const now = Date.now();
+    const remaining = wait - (now - last);
+    if (remaining &lt;= 0) {
+      clearTimeout(timer);
+      timer = null;
+      last = now;
+      fn.apply(this, args);
+    } else if (!timer) {
+      // Trailing call — fire at end of window with latest args
+      timer = setTimeout(() =&gt; {
+        last = Date.now();
+        timer = null;
+        fn.apply(this, args);
+      }, remaining);
+    }
+  };
+}
+
+const onScroll = throttle(() =&gt; console.log(scrollY), 100);
+window.addEventListener("scroll", onScroll);</code></pre>
+<p>This version fires on leading edge and also ensures a trailing call, so you never miss the final event.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q29">
+  <div class="qa__number">Question 29</div>
+  <h3 class="qa__question">Create a function to throttle another function.</h3>
+  <div class="qa__answer">
+    
+<p>Split on non-word characters, then capitalize all but the first word.</p>
+<pre><code>function toCamelCase(s) {
+  return s
+    .toLowerCase()
+    .split(/[\s_\-]+/)
+    .filter(Boolean)
+    .map((w, i) =&gt; i === 0 ? w : w[0].toUpperCase() + w.slice(1))
+    .join("");
+}
+
+// Regex one-liner
+const camel = (s) =&gt;
+  s.toLowerCase().replace(/[\s_-]+(.)/g, (_, c) =&gt; c.toUpperCase());
+
+toCamelCase("hello world");       // "helloWorld"
+toCamelCase("foo_bar-baz");       // "fooBarBaz"
+toCamelCase("--first class--");   // "firstClass"</code></pre>
+<p>For PascalCase, capitalize the first letter too. For snake_case, reverse the transform: insert <code>_</code> before uppercase letters and lowercase everything.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q30">
+  <div class="qa__number">Question 30</div>
+  <h3 class="qa__question">Write a function to convert a string to camelCase.</h3>
+  <div class="qa__answer">
+    
+<p>Stack-based matching — push openers, pop and verify on closers.</p>
+<pre><code>function isBalanced(s) {
+  const pairs = { ")": "(", "]": "[", "}": "{" };
+  const stack = [];
+  for (const ch of s) {
+    if ("([{".includes(ch)) stack.push(ch);
+    else if (")]}".includes(ch)) {
+      if (stack.pop() !== pairs[ch]) return false;
+    }
+  }
+  return stack.length === 0;
+}
+
+isBalanced("({[]})");     // true
+isBalanced("([)]");       // false — correctly catches interleaved
+isBalanced("(((");        // false — unclosed
+isBalanced("a(b){c}");    // true — non-brackets ignored</code></pre>
+<p>O(n) time, O(n) space. Works for any set of paired delimiters — just extend the <code>pairs</code> map.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q31">
+  <div class="qa__number">Question 31</div>
+  <h3 class="qa__question">Implement a function to check if a string contains balanced parentheses.</h3>
+  <div class="qa__answer">
+    
+<p>Recurse, tracking max depth.</p>
+<pre><code>function maxDepth(arr) {
+  if (!Array.isArray(arr)) return 0;
+  let depth = 1;
+  for (const item of arr) {
+    if (Array.isArray(item)) {
+      depth = Math.max(depth, 1 + maxDepth(item));
+    }
+  }
+  return depth;
+}
+
+// One-liner with reduce
+const depth = (a) =&gt;
+  Array.isArray(a) ? 1 + a.reduce((d, x) =&gt; Math.max(d, depth(x)), 0) : 0;
+
+maxDepth([1, [2, [3, [4]]]]);  // 4
+maxDepth([]);                   // 1
+maxDepth(42);                   // 0</code></pre>
+<p>Iterative version with a stack (<code>[value, depth]</code> pairs) avoids stack overflow for very deep inputs.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q32">
+  <div class="qa__number">Question 32</div>
+  <h3 class="qa__question">Write a function to find the maximum depth of a nested array.</h3>
+  <div class="qa__answer">
+    
+<p>Fisher-Yates is the only unbiased, O(n) in-place shuffle.</p>
+<pre><code>function shuffle(arr) {
+  const a = [...arr];                   // don't mutate input
+  for (let i = a.length - 1; i &gt; 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+shuffle([1,2,3,4,5]);</code></pre>
+<div class="callout callout-warning"><div class="callout-icon">!</div><div>
+<strong>Don't use <code>arr.sort(() =&gt; Math.random() - 0.5)</code>.</strong> It's biased — the resulting distribution isn't uniform, and the behavior depends on the engine's sort implementation.
+</div></div>
+<p>For cryptographic applications use <code>crypto.getRandomValues</code> instead of <code>Math.random</code>.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q33">
+  <div class="qa__number">Question 33</div>
+  <h3 class="qa__question">Create a function to shuffle an array.</h3>
+  <div class="qa__answer">
+    
+<p>Count characters, then scan in order and return the first with count === 1.</p>
+<pre><code>function firstUnique(s) {
+  const count = new Map();
+  for (const ch of s) count.set(ch, (count.get(ch) || 0) + 1);
+  for (const ch of s) if (count.get(ch) === 1) return ch;
+  return null;
+}
+
+firstUnique("aabbcddee");  // "c"
+firstUnique("aabb");       // null
+firstUnique("leetcode");   // "l"</code></pre>
+<p>Two-pass O(n) time, O(k) space where k = unique chars. Using <code>Map</code> preserves insertion order so a single pass over the map would also work (check which has count 1 first).</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q34">
+  <div class="qa__number">Question 34</div>
+  <h3 class="qa__question">Write a function to find the first non-repeating character in a string.</h3>
+  <div class="qa__answer">
+    
+<p>Right rotation: last <code>k</code> elements move to the front. Three clean approaches.</p>
+<pre><code>// 1. Slice (simple, O(n) space)
+function rotate(arr, k) {
+  k = k % arr.length;
+  return [...arr.slice(-k), ...arr.slice(0, -k)];
+}
+
+// 2. In-place triple reverse — O(1) extra space
+function rotateInPlace(arr, k) {
+  k = k % arr.length;
+  reverse(arr, 0, arr.length - 1);
+  reverse(arr, 0, k - 1);
+  reverse(arr, k, arr.length - 1);
+  return arr;
+}
+function reverse(a, i, j) {
+  while (i &lt; j) { [a[i], a[j]] = [a[j], a[i]]; i++; j--; }
+}
+
+rotate([1,2,3,4,5], 2);  // [4,5,1,2,3]</code></pre>
+<p>Always normalize <code>k</code> with <code>% length</code> to handle k ≥ length.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q35">
+  <div class="qa__number">Question 35</div>
+  <h3 class="qa__question">Implement a function to rotate an array to the right by k steps.</h3>
+  <div class="qa__answer">
+    
+<p>Newton's method converges fast for square roots.</p>
+<pre><code>function sqrt(n, eps = 1e-10) {
+  if (n &lt; 0) return NaN;
+  if (n === 0) return 0;
+  let x = n;
+  while (Math.abs(x * x - n) &gt; eps) {
+    x = (x + n / x) / 2;                // Newton step
+  }
+  return x;
+}
+
+// Binary search variant (integer sqrt)
+function isqrt(n) {
+  if (n &lt; 2) return n;
+  let lo = 1, hi = n;
+  while (lo &lt;= hi) {
+    const mid = (lo + hi) &gt;&gt; 1;
+    if (mid * mid === n)      return mid;
+    else if (mid * mid &lt; n)   lo = mid + 1;
+    else                       hi = mid - 1;
+  }
+  return hi;                             // floor(sqrt(n))
+}
+
+sqrt(25);    // 5
+sqrt(2);     // 1.414213...
+isqrt(17);   // 4</code></pre>
+<p>Newton roughly doubles the correct digits per step — typically 4-5 iterations for 1e-10 precision.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q36">
+  <div class="qa__number">Question 36</div>
+  <h3 class="qa__question">Write a function to calculate the square root of a number without using Math.sqrt.</h3>
+  <div class="qa__answer">
+    
+<p>Pick any string; reduce it while checking others start with the prefix.</p>
+<pre><code>function longestCommonPrefix(strs) {
+  if (!strs.length) return "";
+  let prefix = strs[0];
+  for (let i = 1; i &lt; strs.length; i++) {
+    while (!strs[i].startsWith(prefix)) {
+      prefix = prefix.slice(0, -1);
+      if (!prefix) return "";
+    }
+  }
+  return prefix;
+}
+
+// Vertical scan — O(S) where S = total chars
+function lcpVertical(strs) {
+  if (!strs.length) return "";
+  for (let i = 0; i &lt; strs[0].length; i++) {
+    const c = strs[0][i];
+    for (let j = 1; j &lt; strs.length; j++) {
+      if (i === strs[j].length || strs[j][i] !== c) {
+        return strs[0].slice(0, i);
+      }
+    }
+  }
+  return strs[0];
+}
+
+longestCommonPrefix(["flower","flow","flight"]);  // "fl"</code></pre>
+
+    
+  </div>
+</article>
+<article class="qa" id="q37">
+  <div class="qa__number">Question 37</div>
+  <h3 class="qa__question">Create a function to find the longest common prefix in an array of strings.</h3>
+  <div class="qa__answer">
+    
+<p>Several O(n) approaches — the sum formula is cleanest.</p>
+<pre><code>// Gauss sum — O(n) time, O(1) space
+function findMissing(arr) {
+  const n = arr.length + 1;                 // array has 1..n with one missing
+  const expected = n * (n + 1) / 2;
+  const actual = arr.reduce((a, b) =&gt; a + b, 0);
+  return expected - actual;
+}
+
+// XOR — works even if numbers overflow
+function findMissingXor(arr) {
+  let x = 0;
+  for (let i = 0; i &lt;= arr.length; i++) x ^= i;
+  for (const n of arr) x ^= n;
+  return x + 1;       // shift 0-indexed XOR back to 1..n
+  // (or XOR with 1..n directly; see below)
+}
+
+// Clearer XOR (1..n directly)
+function findMissingXor2(arr, n) {
+  let x = 0;
+  for (let i = 1; i &lt;= n; i++) x ^= i;
+  for (const v of arr) x ^= v;
+  return x;
+}
+
+findMissing([1,2,4,5]);  // 3</code></pre>
+
+    
+  </div>
+</article>
+<article class="qa" id="q38">
+  <div class="qa__number">Question 38</div>
+  <h3 class="qa__question">Write a function to find the missing number in an array of 1 to n.</h3>
+  <div class="qa__answer">
+    
+<p>Walk left-to-right, summing values; subtract when a smaller numeral precedes a larger.</p>
+<pre><code>function romanToInt(s) {
+  const map = { I:1, V:5, X:10, L:50, C:100, D:500, M:1000 };
+  let total = 0;
+  for (let i = 0; i &lt; s.length; i++) {
+    const cur = map[s[i]];
+    const nxt = map[s[i + 1]] || 0;
+    total += cur &lt; nxt ? -cur : cur;
+  }
+  return total;
+}
+
+romanToInt("III");     // 3
+romanToInt("IV");      // 4
+romanToInt("MCMXCIV"); // 1994</code></pre>
+<p>Example: <code>IX</code> = -1 + 10 = 9. Valid because each smaller-before-larger pair (IV, IX, XL, XC, CD, CM) is a subtraction. Invalid Roman numerals produce nonsense — add validation if input isn't trusted.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q39">
+  <div class="qa__number">Question 39</div>
+  <h3 class="qa__question">Implement a function to convert a Roman numeral to an integer.</h3>
+  <div class="qa__answer">
+    
+<p>2ⁿ subsets — generate iteratively using the previous result, or via bitmask.</p>
+<pre><code>// Iterative — clone and extend
+function subsets(arr) {
+  let result = [[]];
+  for (const x of arr) {
+    const n = result.length;
+    for (let i = 0; i &lt; n; i++) {
+      result.push([...result[i], x]);
+    }
+  }
+  return result;
+}
+
+// Bitmask — elegant for small n
+function subsetsBits(arr) {
+  const total = 1 &lt;&lt; arr.length;
+  const out = [];
+  for (let mask = 0; mask &lt; total; mask++) {
+    const sub = [];
+    for (let i = 0; i &lt; arr.length; i++) {
+      if (mask &amp; (1 &lt;&lt; i)) sub.push(arr[i]);
+    }
+    out.push(sub);
+  }
+  return out;
+}
+
+subsets([1,2,3]);
+// [[], [1], [2], [1,2], [3], [1,3], [2,3], [1,2,3]]</code></pre>
+<p>2ⁿ grows fast — arrays larger than ~20 elements are impractical.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q40">
+  <div class="qa__number">Question 40</div>
+  <h3 class="qa__question">Write a function to generate all subsets of an array.</h3>
+  <div class="qa__answer">
+    
+<p>Two rectangles <em>don't</em> overlap if one is entirely left/right/above/below the other.</p>
+<pre><code>// Rectangles defined by {x1, y1, x2, y2} (top-left, bottom-right)
+function overlap(a, b) {
+  return !(a.x2 &lt;= b.x1 ||  // a is entirely left of b
+           b.x2 &lt;= a.x1 ||  // b is entirely left of a
+           a.y2 &lt;= b.y1 ||  // a is above b
+           b.y2 &lt;= a.y1);   // b is above a
+}
+
+overlap({x1:0,y1:0,x2:2,y2:2}, {x1:1,y1:1,x2:3,y2:3}); // true
+overlap({x1:0,y1:0,x2:1,y2:1}, {x1:2,y1:0,x2:3,y2:1}); // false</code></pre>
+<p>Use <code>&lt;=</code> if touching edges don't count as overlap; <code>&lt;</code> if they do. The inverse-condition formulation is more robust than trying to enumerate overlap cases directly.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q41">
+  <div class="qa__number">Question 41</div>
+  <h3 class="qa__question">Create a function to check if two rectangles overlap.</h3>
+  <div class="qa__answer">
+    
+<p>Kadane's algorithm — O(n), O(1) space.</p>
+<pre><code>function maxSubarray(nums) {
+  let best = nums[0], cur = nums[0];
+  for (let i = 1; i &lt; nums.length; i++) {
+    cur = Math.max(nums[i], cur + nums[i]);
+    best = Math.max(best, cur);
+  }
+  return best;
+}
+
+// If you also want the range
+function maxSubarrayRange(nums) {
+  let best = nums[0], cur = nums[0];
+  let start = 0, end = 0, tempStart = 0;
+  for (let i = 1; i &lt; nums.length; i++) {
+    if (nums[i] &gt; cur + nums[i]) {
+      cur = nums[i];
+      tempStart = i;
+    } else {
+      cur += nums[i];
+    }
+    if (cur &gt; best) { best = cur; start = tempStart; end = i; }
+  }
+  return { sum: best, start, end };
+}
+
+maxSubarray([-2,1,-3,4,-1,2,1,-5,4]); // 6  (from [4,-1,2,1])</code></pre>
+<p>Intuition: at each index, either extend the running sum or restart from this element — whichever is larger.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q42">
+  <div class="qa__number">Question 42</div>
+  <h3 class="qa__question">Write a function to find the maximum sum subarray.</h3>
+  <div class="qa__answer">
+    
+<p>Divide, sort halves, merge — O(n log n) time, O(n) space.</p>
+<pre><code>function mergeSort(arr) {
+  if (arr.length &lt;= 1) return arr;
+  const mid = arr.length &gt;&gt; 1;
+  const left  = mergeSort(arr.slice(0, mid));
+  const right = mergeSort(arr.slice(mid));
+  return merge(left, right);
+}
+
+function merge(a, b) {
+  const out = [];
+  let i = 0, j = 0;
+  while (i &lt; a.length && j &lt; b.length) {
+    out.push(a[i] &lt;= b[j] ? a[i++] : b[j++]);
+  }
+  while (i &lt; a.length) out.push(a[i++]);
+  while (j &lt; b.length) out.push(b[j++]);
+  return out;
+}
+
+mergeSort([5,2,8,1,9,3]); // [1,2,3,5,8,9]</code></pre>
+<p>Stable (equal elements keep order). Guaranteed O(n log n) — unlike quicksort's worst case. Use when stability matters or data is nearly sorted.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q43">
+  <div class="qa__number">Question 43</div>
+  <h3 class="qa__question">Implement a function to perform merge sort on an array.</h3>
+  <div class="qa__answer">
+    
+<p>Patience sorting with binary search — O(n log n).</p>
+<pre><code>function lengthOfLIS(nums) {
+  const tails = [];                 // tails[i] = smallest tail of an LIS of length i+1
+  for (const x of nums) {
+    let lo = 0, hi = tails.length;
+    while (lo &lt; hi) {
+      const mid = (lo + hi) &gt;&gt; 1;
+      if (tails[mid] &lt; x) lo = mid + 1;
+      else                 hi = mid;
+    }
+    tails[lo] = x;
+  }
+  return tails.length;
+}
+
+lengthOfLIS([10,9,2,5,3,7,101,18]); // 4  ([2,3,7,101])</code></pre>
+<p>Notes: <code>tails</code> itself isn't the LIS — just its length is guaranteed correct. O(n²) DP is easier to reason about (<code>dp[i] = 1 + max(dp[j] for j&lt;i where nums[j]&lt;nums[i])</code>) if clarity matters more than speed.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q44">
+  <div class="qa__number">Question 44</div>
+  <h3 class="qa__question">Write a function to find the longest increasing subsequence in an array.</h3>
+  <div class="qa__answer">
+    
+<p>Luhn: double every second digit from the right; sum digits; total mod 10 == 0.</p>
+<pre><code>function luhn(num) {
+  const digits = String(num).replace(/\D/g, "");
+  let sum = 0;
+  let alt = false;
+  for (let i = digits.length - 1; i &gt;= 0; i--) {
+    let n = +digits[i];
+    if (alt) {
+      n *= 2;
+      if (n &gt; 9) n -= 9;   // same as summing the digits
+    }
+    sum += n;
+    alt = !alt;
+  }
+  return sum % 10 === 0;
+}
+
+luhn("4539 1488 0343 6467"); // true  (valid)
+luhn("1234 5678 9012 3456"); // false</code></pre>
+<p>Luhn catches single-digit errors and most transpositions — it's a checksum, not authentication. Real payment systems also verify via the issuer's network.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q45">
+  <div class="qa__number">Question 45</div>
+  <h3 class="qa__question">Create a function to validate a credit card number using the Luhn algorithm.</h3>
+  <div class="qa__answer">
+    
+<p>Length-align both lists, then advance in lockstep until they meet.</p>
+<pre><code>function getIntersection(headA, headB) {
+  let a = headA, b = headB;
+  while (a !== b) {
+    a = a ? a.next : headB;   // after reaching end, restart at the other head
+    b = b ? b.next : headA;
+  }
+  return a;   // either the node or null
+}</code></pre>
+<p>Elegant trick: by swapping heads at the end of each list, both pointers traverse <code>lenA + lenB</code> total steps — guaranteeing they align at the intersection (or both hit <code>null</code>).</p>
+<p>Alternative: use a <code>Set</code> of node references from one list, then scan the other — O(n+m) time, O(n) space vs O(1) for the pointer trick.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q46">
+  <div class="qa__number">Question 46</div>
+  <h3 class="qa__question">Write a function to find the intersection point of two linked lists.</h3>
+  <div class="qa__answer">
+    
+<p>Serialize pre-order with null markers; deserialize via recursion.</p>
+<pre><code>function serialize(root) {
+  const out = [];
+  const dfs = (n) =&gt; {
+    if (!n) { out.push("#"); return; }
+    out.push(n.val);
+    dfs(n.left);
+    dfs(n.right);
+  };
+  dfs(root);
+  return out.join(",");
+}
+
+function deserialize(data) {
+  const tokens = data.split(",");
+  let i = 0;
+  const build = () =&gt; {
+    if (i &gt;= tokens.length) return null;
+    const t = tokens[i++];
+    if (t === "#") return null;
+    const node = { val: +t, left: null, right: null };
+    node.left  = build();
+    node.right = build();
+    return node;
+  };
+  return build();
+}</code></pre>
+<p>Pre-order + null markers uniquely identifies the tree shape, so no second traversal is needed.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q47">
+  <div class="qa__number">Question 47</div>
+  <h3 class="qa__question">Implement a function to serialize and deserialize a binary tree.</h3>
+  <div class="qa__answer">
+    
+<p>Min-heap of size <code>k</code> — O(n log k).</p>
+<pre><code>// Quick-select (Hoare) — average O(n), worst O(n²)
+function kthLargest(nums, k) {
+  const target = nums.length - k;          // index if sorted ascending
+  const arr = [...nums];
+
+  function select(lo, hi) {
+    if (lo === hi) return arr[lo];
+    const pivot = arr[hi];
+    let i = lo;
+    for (let j = lo; j &lt; hi; j++) {
+      if (arr[j] &lt; pivot) {
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+        i++;
+      }
+    }
+    [arr[i], arr[hi]] = [arr[hi], arr[i]];
+    if (i === target)  return arr[i];
+    if (i &lt; target)    return select(i + 1, hi);
+    else                return select(lo, i - 1);
+  }
+  return select(0, arr.length - 1);
+}
+
+// Simple: sort — O(n log n)
+const kthLargestSort = (nums, k) =&gt;
+  [...nums].sort((a, b) =&gt; b - a)[k - 1];
+
+kthLargest([3,2,1,5,6,4], 2); // 5</code></pre>
+
+    
+  </div>
+</article>
+<article class="qa" id="q48">
+  <div class="qa__number">Question 48</div>
+  <h3 class="qa__question">Write a function to find the k-th largest element in an array.</h3>
+  <div class="qa__answer">
+    
+<p>Boyer-Moore voting — O(n) time, O(1) space.</p>
+<pre><code>function majorityElement(nums) {
+  let candidate = null, count = 0;
+  for (const x of nums) {
+    if (count === 0) candidate = x;
+    count += (x === candidate) ? 1 : -1;
+  }
+  return candidate;
+}
+
+majorityElement([3,2,3]);           // 3
+majorityElement([2,2,1,1,1,2,2]);   // 2</code></pre>
+<p>Intuition: pair every occurrence of the majority element with a non-majority one — since majority appears more than n/2 times, it outlasts the cancellation. Returns a garbage value if no majority exists; verify with a second pass if the problem doesn't guarantee one.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q49">
+  <div class="qa__number">Question 49</div>
+  <h3 class="qa__question">Create a function to find the majority element in an array.</h3>
+  <div class="qa__answer">
+    
+<p>Replace <code>n</code> with the sum of squares of its digits. Detect the cycle.</p>
+<pre><code>function isHappy(n) {
+  const sq = (x) =&gt; {
+    let s = 0;
+    while (x) { s += (x % 10) ** 2; x = (x / 10) | 0; }
+    return s;
+  };
+
+  let slow = n, fast = n;
+  do {
+    slow = sq(slow);
+    fast = sq(sq(fast));
+  } while (fast !== 1 && slow !== fast);
+  return fast === 1;
+}
+
+isHappy(19); // true  (19 → 82 → 68 → 100 → 1)
+isHappy(2);  // false (cycles)</code></pre>
+<p>Floyd's cycle detection means O(1) extra space vs the <code>Set</code>-based version. Any unhappy number eventually enters the cycle containing 4 → 16 → 37 → 58 → 89 → 145 → 42 → 20 → 4.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q50">
+  <div class="qa__number">Question 50</div>
+  <h3 class="qa__question">Write a function to determine if a number is a happy number.</h3>
+  <div class="qa__answer">
+    
+<p>Expand around centers — O(n²) time, O(1) space. Each center yields two candidates (odd and even length).</p>
+<pre><code>function longestPalindrome(s) {
+  if (!s) return "";
+  let start = 0, maxLen = 0;
+
+  const expand = (l, r) =&gt; {
+    while (l &gt;= 0 && r &lt; s.length && s[l] === s[r]) { l--; r++; }
+    return [l + 1, r - l - 1];
+  };
+
+  for (let i = 0; i &lt; s.length; i++) {
+    const [s1, l1] = expand(i, i);       // odd
+    const [s2, l2] = expand(i, i + 1);   // even
+    if (l1 &gt; maxLen) { start = s1; maxLen = l1; }
+    if (l2 &gt; maxLen) { start = s2; maxLen = l2; }
+  }
+  return s.slice(start, start + maxLen);
+}
+
+longestPalindrome("babad"); // "bab" or "aba"</code></pre>
+<p>Manacher's algorithm achieves O(n) but is more complex — rarely needed in practice.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q51">
+  <div class="qa__number">Question 51</div>
+  <h3 class="qa__question">Implement a function to find the longest palindromic substring.</h3>
+  <div class="qa__answer">
+    
+<p>Greedy — subtract the largest numeral that fits.</p>
+<pre><code>function intToRoman(n) {
+  const map = [
+    [1000,"M"], [900,"CM"], [500,"D"], [400,"CD"],
+    [100,"C"],  [90,"XC"],  [50,"L"],  [40,"XL"],
+    [10,"X"],   [9,"IX"],   [5,"V"],   [4,"IV"], [1,"I"]
+  ];
+  let out = "";
+  for (const [v, s] of map) {
+    while (n &gt;= v) { out += s; n -= v; }
+  }
+  return out;
+}
+
+intToRoman(1994);  // "MCMXCIV"
+intToRoman(58);    // "LVIII"</code></pre>
+<p>The subtractive pairs (CM, CD, XC, XL, IX, IV) must be listed alongside their base numerals so the greedy scan picks them first when applicable.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q52">
+  <div class="qa__number">Question 52</div>
+  <h3 class="qa__question">Write a function to convert an integer to a Roman numeral.</h3>
+  <div class="qa__answer">
+    
+<p>Sort, then consider products of the three largest or the two smallest (negatives) times the largest.</p>
+<pre><code>function maxProductOfThree(nums) {
+  nums.sort((a, b) =&gt; a - b);
+  const n = nums.length;
+  return Math.max(
+    nums[n-1] * nums[n-2] * nums[n-3],       // three largest
+    nums[0]   * nums[1]   * nums[n-1]        // two smallest (negatives) × largest
+  );
+}
+
+// O(n) single pass — track 3 largest + 2 smallest
+function maxProduct3Linear(nums) {
+  let max1=-Infinity, max2=-Infinity, max3=-Infinity;
+  let min1= Infinity, min2= Infinity;
+  for (const n of nums) {
+    if (n &gt; max1)      { max3=max2; max2=max1; max1=n; }
+    else if (n &gt; max2) { max3=max2; max2=n; }
+    else if (n &gt; max3) { max3=n; }
+    if (n &lt; min1)      { min2=min1; min1=n; }
+    else if (n &lt; min2) { min2=n; }
+  }
+  return Math.max(max1*max2*max3, max1*min1*min2);
+}
+
+maxProductOfThree([-10,-10,5,2]); // 500</code></pre>
+
+    
+  </div>
+</article>
+<article class="qa" id="q53">
+  <div class="qa__number">Question 53</div>
+  <h3 class="qa__question">Create a function to find the maximum product of three numbers in an array.</h3>
+  <div class="qa__answer">
+    
+<p>The diameter is the longest path between any two nodes. For each node, it's <code>leftHeight + rightHeight</code>. Compute with post-order DFS.</p>
+<pre><code>function diameter(root) {
+  let best = 0;
+  const height = (node) =&gt; {
+    if (!node) return 0;
+    const l = height(node.left);
+    const r = height(node.right);
+    best = Math.max(best, l + r);           // path through this node
+    return 1 + Math.max(l, r);
+  };
+  height(root);
+  return best;
+}</code></pre>
+<p>O(n). Single traversal — each subtree height is computed once. The diameter may not pass through the root.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q54">
+  <div class="qa__number">Question 54</div>
+  <h3 class="qa__question">Write a function to find the diameter of a binary tree.</h3>
+  <div class="qa__answer">
+    
+<p>Fast exponentiation — O(log n).</p>
+<pre><code>function power(base, exp) {
+  if (exp === 0) return 1;
+  if (exp &lt; 0)   return 1 / power(base, -exp);
+  const half = power(base, Math.floor(exp / 2));
+  return exp % 2 === 0 ? half * half : half * half * base;
+}
+
+// Iterative (same complexity, safer for large exp)
+function powerIter(base, exp) {
+  if (exp &lt; 0) { base = 1 / base; exp = -exp; }
+  let result = 1;
+  while (exp &gt; 0) {
+    if (exp &amp; 1) result *= base;
+    base *= base;
+    exp &gt;&gt;&gt;= 1;
+  }
+  return result;
+}
+
+power(2, 10);    // 1024
+power(2, -2);    // 0.25</code></pre>
+<p>Handles negative exponents and zero base. For integer-only inputs, replace <code>/</code> with integer division to avoid float drift.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q55">
+  <div class="qa__number">Question 55</div>
+  <h3 class="qa__question">Implement a function to calculate the power of a number using recursion.</h3>
+  <div class="qa__answer">
+    
+<p>BFS with a queue — process nodes level by level.</p>
+<pre><code>function levelOrder(root) {
+  if (!root) return [];
+  const out = [];
+  const q = [root];
+  while (q.length) {
+    const level = [];
+    const size = q.length;
+    for (let i = 0; i &lt; size; i++) {
+      const node = q.shift();
+      level.push(node.val);
+      if (node.left)  q.push(node.left);
+      if (node.right) q.push(node.right);
+    }
+    out.push(level);
+  }
+  return out;
+}</code></pre>
+<p><code>Array.prototype.shift</code> is O(n) — for huge trees use a deque or an index pointer. For each &ldquo;level&rdquo; you snapshot the queue's current length and only process that many nodes.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q56">
+  <div class="qa__number">Question 56</div>
+  <h3 class="qa__question">Write a function to perform level-order traversal of a binary tree.</h3>
+  <div class="qa__answer">
+    
+<p>Min-heap walks row-by-row — O(k log k).</p>
+<pre><code>// Using a min-heap (simplified with sorted-insert for clarity)
+function kthSmallestMatrix(matrix, k) {
+  const n = matrix.length;
+  const heap = [];                        // [value, row, col]
+  const push = (item) =&gt; {
+    let i = 0;
+    while (i &lt; heap.length && heap[i][0] &lt; item[0]) i++;
+    heap.splice(i, 0, item);
+  };
+
+  for (let r = 0; r &lt; Math.min(n, k); r++) push([matrix[r][0], r, 0]);
+
+  for (let i = 0; i &lt; k - 1; i++) {
+    const [v, r, c] = heap.shift();
+    if (c + 1 &lt; n) push([matrix[r][c+1], r, c+1]);
+  }
+  return heap[0][0];
+}
+
+// Binary search on values — O(n log(max-min)), slicker
+function kthSmallest(matrix, k) {
+  const n = matrix.length;
+  let lo = matrix[0][0], hi = matrix[n-1][n-1];
+  const countLE = (x) =&gt; {
+    let count = 0, c = n - 1;
+    for (let r = 0; r &lt; n; r++) {
+      while (c &gt;= 0 && matrix[r][c] &gt; x) c--;
+      count += c + 1;
+    }
+    return count;
+  };
+  while (lo &lt; hi) {
+    const mid = (lo + hi) &gt;&gt; 1;
+    if (countLE(mid) &lt; k) lo = mid + 1;
+    else                   hi = mid;
+  }
+  return lo;
+}</code></pre>
+
+    
+  </div>
+</article>
+<article class="qa" id="q57">
+  <div class="qa__number">Question 57</div>
+  <h3 class="qa__question">Create a function to find the kth smallest element in a sorted matrix.</h3>
+  <div class="qa__answer">
+    
+<p>Reverse the second half and compare — O(n) time, O(1) space.</p>
+<pre><code>function isLinkedListPalindrome(head) {
+  if (!head || !head.next) return true;
+
+  // Find middle (slow/fast pointers)
+  let slow = head, fast = head;
+  while (fast.next && fast.next.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+  }
+
+  // Reverse second half
+  let prev = null, cur = slow.next;
+  while (cur) {
+    const next = cur.next;
+    cur.next = prev;
+    prev = cur;
+    cur = next;
+  }
+
+  // Compare halves
+  let p1 = head, p2 = prev;
+  while (p2) {
+    if (p1.val !== p2.val) return false;
+    p1 = p1.next;
+    p2 = p2.next;
+  }
+  return true;
+}</code></pre>
+<p>Simpler (O(n) space): copy values to an array, then standard palindrome check.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q58">
+  <div class="qa__number">Question 58</div>
+  <h3 class="qa__question">Write a function to determine if a linked list is a palindrome.</h3>
+  <div class="qa__answer">
+    
+<p>Sort + scan, or use a <code>Set</code> and only start sequences from the smallest element — O(n).</p>
+<pre><code>function longestConsecutive(nums) {
+  const set = new Set(nums);
+  let best = 0;
+  for (const n of set) {
+    if (set.has(n - 1)) continue;          // only start from the smallest of a run
+    let cur = n, len = 1;
+    while (set.has(cur + 1)) { cur++; len++; }
+    best = Math.max(best, len);
+  }
+  return best;
+}
+
+longestConsecutive([100,4,200,1,3,2]); // 4  ([1,2,3,4])</code></pre>
+<p>The &ldquo;only start from smallest&rdquo; check makes each number visited at most twice, giving amortized O(n) despite the nested loop.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q59">
+  <div class="qa__number">Question 59</div>
+  <h3 class="qa__question">Implement a function to find the longest consecutive sequence in an array.</h3>
+  <div class="qa__answer">
+    
+<p>Levenshtein distance — DP on a 2D table.</p>
+<pre><code>function editDistance(a, b) {
+  const m = a.length, n = b.length;
+  const dp = Array.from({length: m+1}, () =&gt; new Array(n+1).fill(0));
+
+  for (let i = 0; i &lt;= m; i++) dp[i][0] = i;
+  for (let j = 0; j &lt;= n; j++) dp[0][j] = j;
+
+  for (let i = 1; i &lt;= m; i++) {
+    for (let j = 1; j &lt;= n; j++) {
+      if (a[i-1] === b[j-1]) {
+        dp[i][j] = dp[i-1][j-1];
+      } else {
+        dp[i][j] = 1 + Math.min(
+          dp[i-1][j],       // delete
+          dp[i][j-1],       // insert
+          dp[i-1][j-1]      // replace
+        );
+      }
+    }
+  }
+  return dp[m][n];
+}
+
+editDistance("kitten", "sitting"); // 3</code></pre>
+<p>Space can be reduced to O(min(m, n)) by keeping only two rows.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q60">
+  <div class="qa__number">Question 60</div>
+  <h3 class="qa__question">Write a function to calculate the edit distance between two strings.</h3>
+  <div class="qa__answer">
+    
+<p>DP with a dictionary set.</p>
+<pre><code>function wordBreak(s, wordDict) {
+  const words = new Set(wordDict);
+  const dp = new Array(s.length + 1).fill(false);
+  dp[0] = true;
+
+  for (let i = 1; i &lt;= s.length; i++) {
+    for (let j = 0; j &lt; i; j++) {
+      if (dp[j] && words.has(s.slice(j, i))) {
+        dp[i] = true;
+        break;
+      }
+    }
+  }
+  return dp[s.length];
+}
+
+wordBreak("leetcode", ["leet","code"]);   // true
+wordBreak("applepenapple", ["apple","pen"]); // true
+wordBreak("catsandog", ["cats","dog","sand","and","cat"]); // false</code></pre>
+<p>O(n²) average. Cap the inner slice length by the longest dictionary word for a small speedup.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q61">
+  <div class="qa__number">Question 61</div>
+  <h3 class="qa__question">Create a function to check if a string can be segmented into dictionary words.</h3>
+  <div class="qa__answer">
+    
+<p>Single-pass tracking the running minimum.</p>
+<pre><code>function maxProfit(prices) {
+  let minSoFar = Infinity;
+  let best = 0;
+  for (const p of prices) {
+    if (p &lt; minSoFar)      minSoFar = p;
+    else if (p - minSoFar &gt; best) best = p - minSoFar;
+  }
+  return best;
+}
+
+// Multiple transactions (buy/sell as often as you like)
+function maxProfitMulti(prices) {
+  let profit = 0;
+  for (let i = 1; i &lt; prices.length; i++) {
+    if (prices[i] &gt; prices[i-1]) profit += prices[i] - prices[i-1];
+  }
+  return profit;
+}
+
+maxProfit([7,1,5,3,6,4]);      // 5  (buy at 1, sell at 6)
+maxProfitMulti([7,1,5,3,6,4]); // 7  (1→5, 3→6)</code></pre>
+<p>Intuition: best profit so far = max(current price − min price seen so far).</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q62">
+  <div class="qa__number">Question 62</div>
+  <h3 class="qa__question">Write a function to find the maximum profit from buying and selling stocks.</h3>
+  <div class="qa__answer">
+    
+<p>Iterative in-order with an explicit stack.</p>
+<pre><code>function inorder(root) {
+  const out = [];
+  const stack = [];
+  let cur = root;
+  while (cur || stack.length) {
+    while (cur) {
+      stack.push(cur);
+      cur = cur.left;
+    }
+    cur = stack.pop();
+    out.push(cur.val);
+    cur = cur.right;
+  }
+  return out;
+}</code></pre>
+<p>Push all lefts, pop and visit, move to right — repeat. For BSTs this yields values in sorted order. Morris traversal achieves O(1) space by temporarily modifying the tree (threading <code>right</code> pointers), but iterative with a stack is usually clearer.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q63">
+  <div class="qa__number">Question 63</div>
+  <h3 class="qa__question">Implement a function to perform in-order traversal of a binary tree without recursion.</h3>
+  <div class="qa__answer">
+    
+<p>Same backtracking template as string permutations — swap, recurse, swap back.</p>
+<pre><code>function permutations(arr) {
+  const result = [];
+  const permute = (start) =&gt; {
+    if (start === arr.length) {
+      result.push([...arr]);
+      return;
+    }
+    for (let i = start; i &lt; arr.length; i++) {
+      [arr[start], arr[i]] = [arr[i], arr[start]];
+      permute(start + 1);
+      [arr[start], arr[i]] = [arr[i], arr[start]];
+    }
+  };
+  permute(0);
+  return result;
+}
+
+// With duplicates — dedupe via sort + skip
+function permuteUnique(arr) {
+  arr.sort((a, b) =&gt; a - b);
+  const result = [];
+  const used = new Array(arr.length).fill(false);
+  const dfs = (path) =&gt; {
+    if (path.length === arr.length) { result.push([...path]); return; }
+    for (let i = 0; i &lt; arr.length; i++) {
+      if (used[i]) continue;
+      if (i &gt; 0 && arr[i] === arr[i-1] && !used[i-1]) continue;
+      used[i] = true; path.push(arr[i]);
+      dfs(path);
+      used[i] = false; path.pop();
+    }
+  };
+  dfs([]);
+  return result;
+}</code></pre>
+
+    
+  </div>
+</article>
+<article class="qa" id="q64">
+  <div class="qa__number">Question 64</div>
+  <h3 class="qa__question">Write a function to find all the permutations of an array.</h3>
+  <div class="qa__answer">
+    
+<p>In-order traversal with a running tail pointer.</p>
+<pre><code>function bstToDoublyList(root) {
+  if (!root) return null;
+  let head = null, prev = null;
+
+  const inorder = (node) =&gt; {
+    if (!node) return;
+    inorder(node.left);
+
+    if (!head) head = node;
+    node.left = prev;
+    if (prev) prev.right = node;
+    prev = node;
+
+    inorder(node.right);
+  };
+  inorder(root);
+
+  // Circular doubly-linked — wire head and tail
+  if (head && prev) {
+    head.left  = prev;
+    prev.right = head;
+  }
+  return head;
+}</code></pre>
+<p>In-order visits BST nodes in sorted order. Repurpose <code>left</code>/<code>right</code> as prev/next. O(n) time, O(h) recursion stack.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q65">
+  <div class="qa__number">Question 65</div>
+  <h3 class="qa__question">Create a function to convert a BST to a doubly linked list.</h3>
+  <div class="qa__answer">
+    
+<p>DFS returning <code>{maxToHere, maxOverall}</code>.</p>
+<pre><code>function maxPathSum(root) {
+  let best = -Infinity;
+
+  const gain = (node) =&gt; {
+    if (!node) return 0;
+    const left  = Math.max(0, gain(node.left));   // drop negatives
+    const right = Math.max(0, gain(node.right));
+
+    best = Math.max(best, node.val + left + right);  // path through this node
+    return node.val + Math.max(left, right);         // contributed upward
+  };
+
+  gain(root);
+  return best;
+}</code></pre>
+<p>Key insight: a path either ends at a subtree's root (returned upward) or &ldquo;bends&rdquo; at it (counted but not returned). Clamping negatives to zero via <code>Math.max(0, ...)</code> means we skip subtrees that would reduce the sum.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q66">
+  <div class="qa__number">Question 66</div>
+  <h3 class="qa__question">Write a function to find the maximum path sum in a binary tree.</h3>
+  <div class="qa__answer">
+    
+<p>Flood-fill each unvisited land cell — DFS or BFS.</p>
+<pre><code>function numIslands(grid) {
+  if (!grid.length) return 0;
+  const rows = grid.length, cols = grid[0].length;
+  let count = 0;
+
+  const dfs = (r, c) =&gt; {
+    if (r &lt; 0 || r &gt;= rows || c &lt; 0 || c &gt;= cols || grid[r][c] !== "1") return;
+    grid[r][c] = "0";        // mark visited
+    dfs(r-1, c); dfs(r+1, c);
+    dfs(r, c-1); dfs(r, c+1);
+  };
+
+  for (let r = 0; r &lt; rows; r++) {
+    for (let c = 0; c &lt; cols; c++) {
+      if (grid[r][c] === "1") { count++; dfs(r, c); }
+    }
+  }
+  return count;
+}</code></pre>
+<p>O(rows·cols). Mutates input — clone first if that's a problem, or maintain a separate <code>visited</code> grid. Use BFS (iterative queue) instead of DFS if the grid is huge, to avoid stack overflow.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q67">
+  <div class="qa__number">Question 67</div>
+  <h3 class="qa__question">Implement a function to find the number of islands in a 2D grid.</h3>
+  <div class="qa__answer">
+    
+<p>Post-order DFS returning heights; short-circuit on imbalance.</p>
+<pre><code>function isBalanced(root) {
+  const check = (node) =&gt; {
+    if (!node) return 0;
+    const l = check(node.left);
+    if (l === -1) return -1;
+    const r = check(node.right);
+    if (r === -1) return -1;
+    if (Math.abs(l - r) &gt; 1) return -1;      // imbalance sentinel
+    return 1 + Math.max(l, r);
+  };
+  return check(root) !== -1;
+}</code></pre>
+<p>O(n). The naive approach of calling <code>height(node)</code> at every node is O(n²). Returning −1 as &ldquo;unbalanced&rdquo; lets us propagate early without throwing.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q68">
+  <div class="qa__number">Question 68</div>
+  <h3 class="qa__question">Write a function to determine if a binary tree is height-balanced.</h3>
+  <div class="qa__answer">
+    
+<p>Merge halves into one sorted stream, stopping at the median index — O(m+n). For O(log(min(m,n))), binary search on the partition.</p>
+<pre><code>// O(m+n) — clearer
+function findMedianSortedArrays(a, b) {
+  const merged = [];
+  let i = 0, j = 0;
+  while (i &lt; a.length && j &lt; b.length) {
+    merged.push(a[i] &lt;= b[j] ? a[i++] : b[j++]);
+  }
+  while (i &lt; a.length) merged.push(a[i++]);
+  while (j &lt; b.length) merged.push(b[j++]);
+
+  const n = merged.length;
+  return n % 2
+    ? merged[(n - 1) &gt;&gt; 1]
+    : (merged[n/2 - 1] + merged[n/2]) / 2;
+}</code></pre>
+<p>For the O(log) solution, binary-search a partition of the shorter array so that the left halves of both combined equal n/2, and check that max(leftHalves) ≤ min(rightHalves).</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q69">
+  <div class="qa__number">Question 69</div>
+  <h3 class="qa__question">Create a function to calculate the median of two sorted arrays.</h3>
+  <div class="qa__answer">
+    
+<p>A simple worker that offloads heavy compute from the main thread.</p>
+<pre><code>// main.js
+const worker = new Worker("worker.js");
+worker.postMessage({ numbers: [1, 2, 3, 4, 5] });
+worker.onmessage = (e) =&gt; console.log("sum:", e.data);
+worker.onerror   = (e) =&gt; console.error(e.message);
+
+// worker.js
+self.onmessage = (e) =&gt; {
+  const { numbers } = e.data;
+  const sum = numbers.reduce((a, b) =&gt; a + b, 0);
+  self.postMessage(sum);
+};</code></pre>
+<p>Inline worker via Blob (useful for bundlers):</p>
+<pre><code>const code = `self.onmessage = e =&gt; self.postMessage(e.data * 2);`;
+const blob = new Blob([code], { type: "application/javascript" });
+const worker = new Worker(URL.createObjectURL(blob));</code></pre>
+<p>Workers run in a separate thread with no DOM access. Communicate via <code>postMessage</code> (data is structured-cloned — or zero-copied via <code>Transferable</code>).</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q70">
+  <div class="qa__number">Question 70</div>
+  <h3 class="qa__question">Write a function to implement a simple web worker in JavaScript.</h3>
+  <div class="qa__answer">
+    
+<p>Backtracking with column / diagonal pruning.</p>
+<pre><code>function solveNQueens(n) {
+  const result = [];
+  const queens = new Array(n).fill(-1);     // col of queen on row i
+  const cols = new Set(), d1 = new Set(), d2 = new Set();
+
+  const place = (row) =&gt; {
+    if (row === n) {
+      result.push(queens.map(c =&gt; ".".repeat(c) + "Q" + ".".repeat(n - c - 1)));
+      return;
+    }
+    for (let c = 0; c &lt; n; c++) {
+      if (cols.has(c) || d1.has(row - c) || d2.has(row + c)) continue;
+      queens[row] = c;
+      cols.add(c); d1.add(row - c); d2.add(row + c);
+      place(row + 1);
+      cols.delete(c); d1.delete(row - c); d2.delete(row + c);
+    }
+  };
+  place(0);
+  return result;
+}
+
+solveNQueens(4).length; // 2</code></pre>
+<p><code>row - c</code> identifies ↘ diagonals; <code>row + c</code> identifies ↙ diagonals. Both sets give O(1) conflict checks.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q71">
+  <div class="qa__number">Question 71</div>
+  <h3 class="qa__question">Implement a function to solve the N-Queens problem.</h3>
+  <div class="qa__answer">
+    
+<p>Sliding window with character-frequency matching.</p>
+<pre><code>function minWindow(s, t) {
+  if (!t.length) return "";
+  const need = {};
+  for (const ch of t) need[ch] = (need[ch] || 0) + 1;
+
+  let have = 0, required = Object.keys(need).length;
+  let best = [-1, -1, Infinity];
+  const have_count = {};
+
+  let l = 0;
+  for (let r = 0; r &lt; s.length; r++) {
+    const ch = s[r];
+    have_count[ch] = (have_count[ch] || 0) + 1;
+    if (have_count[ch] === need[ch]) have++;
+
+    while (have === required) {
+      if (r - l + 1 &lt; best[2]) best = [l, r, r - l + 1];
+      const left = s[l];
+      have_count[left]--;
+      if (need[left] !== undefined && have_count[left] &lt; need[left]) have--;
+      l++;
+    }
+  }
+  return best[2] === Infinity ? "" : s.slice(best[0], best[1] + 1);
+}
+
+minWindow("ADOBECODEBANC", "ABC"); // "BANC"</code></pre>
+
+    
+  </div>
+</article>
+<article class="qa" id="q72">
+  <div class="qa__number">Question 72</div>
+  <h3 class="qa__question">Write a function to find the minimum window substring.</h3>
+  <div class="qa__answer">
+    
+<p>Check every row, column, and 3×3 box for duplicates — O(1) since the board is fixed size.</p>
+<pre><code>function isValidSudoku(board) {
+  const rows = Array.from({length:9}, () =&gt; new Set());
+  const cols = Array.from({length:9}, () =&gt; new Set());
+  const boxes = Array.from({length:9}, () =&gt; new Set());
+
+  for (let r = 0; r &lt; 9; r++) {
+    for (let c = 0; c &lt; 9; c++) {
+      const v = board[r][c];
+      if (v === ".") continue;
+      const b = 3 * Math.floor(r / 3) + Math.floor(c / 3);
+      if (rows[r].has(v) || cols[c].has(v) || boxes[b].has(v)) return false;
+      rows[r].add(v); cols[c].add(v); boxes[b].add(v);
+    }
+  }
+  return true;
+}</code></pre>
+<p>Single pass. Encoding trick: use strings like <code>`r${r}v${v}`</code> in one big set to avoid three parallel arrays — often cleaner in interview solutions.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q73">
+  <div class="qa__number">Question 73</div>
+  <h3 class="qa__question">Create a function to validate a Sudoku board.</h3>
+  <div class="qa__answer">
+    
+<p>Sort each string and group.</p>
+<pre><code>function groupAnagrams(strs) {
+  const groups = new Map();
+  for (const s of strs) {
+    const key = [...s].sort().join("");
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(s);
+  }
+  return [...groups.values()];
+}
+
+// O(n·k) — count letters instead of sorting (k = string length)
+function groupAnagrams2(strs) {
+  const groups = new Map();
+  for (const s of strs) {
+    const count = new Array(26).fill(0);
+    for (const ch of s) count[ch.charCodeAt(0) - 97]++;
+    const key = count.join(",");
+    (groups.get(key) || groups.set(key, []).get(key)).push(s);
+  }
+  return [...groups.values()];
+}
+
+groupAnagrams(["eat","tea","tan","ate","nat","bat"]);
+// [["eat","tea","ate"],["tan","nat"],["bat"]]</code></pre>
+
+    
+  </div>
+</article>
+<article class="qa" id="q74">
+  <div class="qa__number">Question 74</div>
+  <h3 class="qa__question">Write a function to find all the anagrams of a string.</h3>
+  <div class="qa__answer">
+    
+<p>Floyd's tortoise-and-hare — O(n) time, O(1) space.</p>
+<pre><code>function hasCycle(head) {
+  let slow = head, fast = head;
+  while (fast && fast.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+    if (slow === fast) return true;
+  }
+  return false;
+}
+
+// Find the entry point of the cycle
+function cycleStart(head) {
+  let slow = head, fast = head;
+  while (fast && fast.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+    if (slow === fast) {
+      let p = head;
+      while (p !== slow) { p = p.next; slow = slow.next; }
+      return p;
+    }
+  }
+  return null;
+}</code></pre>
+<p>If fast ever catches slow, there's a cycle (two pointers in a loop must eventually meet). Mathematical trick: after meeting, advancing one pointer from <code>head</code> and another from the meeting point at equal speed makes them meet at the cycle's start.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q75">
+  <div class="qa__number">Question 75</div>
+  <h3 class="qa__question">Implement a function to detect a cycle in a linked list.</h3>
+  <div class="qa__answer">
+    
+<p>BFS — shortest path in an unweighted graph.</p>
+<pre><code>function shortestPathBinaryMatrix(grid) {
+  const n = grid.length;
+  if (grid[0][0] || grid[n-1][n-1]) return -1;
+
+  const dirs = [[-1,-1],[-1,0],[-1,1],[0,-1],[0,1],[1,-1],[1,0],[1,1]];
+  const q = [[0, 0, 1]];          // [r, c, distance]
+  grid[0][0] = 1;                  // mark visited
+
+  while (q.length) {
+    const [r, c, d] = q.shift();
+    if (r === n - 1 && c === n - 1) return d;
+    for (const [dr, dc] of dirs) {
+      const nr = r + dr, nc = c + dc;
+      if (nr &gt;= 0 && nr &lt; n && nc &gt;= 0 && nc &lt; n && grid[nr][nc] === 0) {
+        grid[nr][nc] = 1;
+        q.push([nr, nc, d + 1]);
+      }
+    }
+  }
+  return -1;
+}</code></pre>
+<p>8-directional movement. <code>q.shift()</code> is O(n) — use a proper queue or index-based dequeue for large grids.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q76">
+  <div class="qa__number">Question 76</div>
+  <h3 class="qa__question">Write a function to find the shortest path in a binary matrix.</h3>
+  <div class="qa__answer">
+    
+<p>Histogram-per-row approach — reduces to &ldquo;largest rectangle in histogram&rdquo; problem per row.</p>
+<pre><code>function maximalRectangle(matrix) {
+  if (!matrix.length) return 0;
+  const cols = matrix[0].length;
+  const heights = new Array(cols).fill(0);
+  let best = 0;
+
+  for (const row of matrix) {
+    for (let c = 0; c &lt; cols; c++) {
+      heights[c] = row[c] === "1" ? heights[c] + 1 : 0;
+    }
+    best = Math.max(best, largestRectInHistogram(heights));
+  }
+  return best;
+}
+
+function largestRectInHistogram(heights) {
+  const stack = [];
+  let best = 0;
+  for (let i = 0; i &lt;= heights.length; i++) {
+    const cur = i === heights.length ? 0 : heights[i];
+    while (stack.length && heights[stack.at(-1)] &gt; cur) {
+      const h = heights[stack.pop()];
+      const w = stack.length ? i - stack.at(-1) - 1 : i;
+      best = Math.max(best, h * w);
+    }
+    stack.push(i);
+  }
+  return best;
+}</code></pre>
+<p>O(rows·cols). The stack-based histogram pass is O(cols) per row because each index is pushed/popped at most once.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q77">
+  <div class="qa__number">Question 77</div>
+  <h3 class="qa__question">Create a function to find the maximum rectangle in a binary matrix.</h3>
+  <div class="qa__answer">
+    
+<p>DP — unbounded knapsack.</p>
+<pre><code>function coinChange(coins, amount) {
+  const dp = new Array(amount + 1).fill(Infinity);
+  dp[0] = 0;
+  for (let a = 1; a &lt;= amount; a++) {
+    for (const coin of coins) {
+      if (coin &lt;= a) dp[a] = Math.min(dp[a], dp[a - coin] + 1);
+    }
+  }
+  return dp[amount] === Infinity ? -1 : dp[amount];
+}
+
+coinChange([1,2,5], 11);     // 3  (5+5+1)
+coinChange([2], 3);           // -1</code></pre>
+<p>O(amount·coins). Greedy (always take the largest coin) fails for non-canonical coin sets — DP is safe. For &ldquo;number of ways&rdquo; variation, iterate coins outside and sum contributions.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q78">
+  <div class="qa__number">Question 78</div>
+  <h3 class="qa__question">Write a function to solve the coin change problem.</h3>
+  <div class="qa__answer">
+    
+<p>The answer is always in <code>[1, n+1]</code>. Use the array itself as a hash map.</p>
+<pre><code>function firstMissingPositive(nums) {
+  const n = nums.length;
+
+  // Place each value v (where 1 ≤ v ≤ n) at index v-1
+  for (let i = 0; i &lt; n; i++) {
+    while (nums[i] &gt; 0 && nums[i] &lt;= n && nums[nums[i] - 1] !== nums[i]) {
+      const j = nums[i] - 1;
+      [nums[i], nums[j]] = [nums[j], nums[i]];
+    }
+  }
+
+  for (let i = 0; i &lt; n; i++) {
+    if (nums[i] !== i + 1) return i + 1;
+  }
+  return n + 1;
+}
+
+firstMissingPositive([3,4,-1,1]);   // 2
+firstMissingPositive([1,2,0]);       // 3</code></pre>
+<p>O(n) time, O(1) extra space. The inner <code>while</code> doesn't blow complexity — each swap puts one value in its correct slot, capping total swaps at n.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q79">
+  <div class="qa__number">Question 79</div>
+  <h3 class="qa__question">Implement a function to find the first missing positive integer.</h3>
+  <div class="qa__answer">
+    
+<p>Monotonic stack — O(n).</p>
+<pre><code>function largestRectangleArea(heights) {
+  const stack = [];
+  let best = 0;
+  for (let i = 0; i &lt;= heights.length; i++) {
+    const h = i === heights.length ? 0 : heights[i];
+    while (stack.length && heights[stack.at(-1)] &gt; h) {
+      const top = heights[stack.pop()];
+      const width = stack.length ? i - stack.at(-1) - 1 : i;
+      best = Math.max(best, top * width);
+    }
+    stack.push(i);
+  }
+  return best;
+}
+
+largestRectangleArea([2,1,5,6,2,3]); // 10</code></pre>
+<p>Each index enters and leaves the stack once → O(n). The sentinel zero at the end flushes remaining bars. The popped bar's &ldquo;width&rdquo; extends from the element now on top (exclusive) to the current index (exclusive).</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q80">
+  <div class="qa__number">Question 80</div>
+  <h3 class="qa__question">Write a function to find the largest rectangle in a histogram.</h3>
+  <div class="qa__answer">
+    
+<p>Flood-fill variant of the islands problem, tracking area per connected component.</p>
+<pre><code>function maxAreaOfIsland(grid) {
+  if (!grid.length) return 0;
+  const rows = grid.length, cols = grid[0].length;
+
+  const dfs = (r, c) =&gt; {
+    if (r &lt; 0 || r &gt;= rows || c &lt; 0 || c &gt;= cols || grid[r][c] !== 1) return 0;
+    grid[r][c] = 0;
+    return 1 + dfs(r-1,c) + dfs(r+1,c) + dfs(r,c-1) + dfs(r,c+1);
+  };
+
+  let best = 0;
+  for (let r = 0; r &lt; rows; r++) {
+    for (let c = 0; c &lt; cols; c++) {
+      if (grid[r][c] === 1) best = Math.max(best, dfs(r, c));
+    }
+  }
+  return best;
+}</code></pre>
+<p>O(rows·cols). Mutates the grid to mark visited cells. For immutable input, maintain a <code>visited</code> boolean grid.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q81">
+  <div class="qa__number">Question 81</div>
+  <h3 class="qa__question">Create a function to calculate the maximum area of an island.</h3>
+  <div class="qa__answer">
+    
+<p>Trie-based approach — O(n) per query with bit-level tree.</p>
+<pre><code>function findMaximumXOR(nums) {
+  let best = 0;
+  let mask = 0;
+  for (let bit = 30; bit &gt;= 0; bit--) {
+    mask |= (1 &lt;&lt; bit);
+    const prefixes = new Set(nums.map(n =&gt; n &amp; mask));
+    const candidate = best | (1 &lt;&lt; bit);
+    for (const p of prefixes) {
+      if (prefixes.has(p ^ candidate)) { best = candidate; break; }
+    }
+  }
+  return best;
+}
+
+findMaximumXOR([3, 10, 5, 25, 2, 8]); // 28 (5 ^ 25)</code></pre>
+<p>Idea: greedily try to set each bit of the answer from high to low. If any two prefixes XOR to our target candidate, that bit is achievable. O(n · 30) which is effectively O(n).</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q82">
+  <div class="qa__number">Question 82</div>
+  <h3 class="qa__question">Write a function to find the maximum XOR of two numbers in an array.</h3>
+  <div class="qa__answer">
+    
+<p>Stack of indices; pair closers with openers as they match.</p>
+<pre><code>function longestValidParentheses(s) {
+  const stack = [-1];           // base index
+  let best = 0;
+  for (let i = 0; i &lt; s.length; i++) {
+    if (s[i] === "(") {
+      stack.push(i);
+    } else {
+      stack.pop();
+      if (!stack.length) stack.push(i);         // reset base
+      else best = Math.max(best, i - stack.at(-1));
+    }
+  }
+  return best;
+}
+
+longestValidParentheses("(()");     // 2
+longestValidParentheses(")()())");  // 4</code></pre>
+<p>O(n) time and space. Two-pass (left-to-right, then right-to-left counting opens/closes) achieves O(1) space.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q83">
+  <div class="qa__number">Question 83</div>
+  <h3 class="qa__question">Implement a function to find the longest valid parentheses substring.</h3>
+  <div class="qa__answer">
+    
+<p>Catalan numbers — DP where <code>f(n) = Σ f(i) * f(n-1-i)</code>.</p>
+<pre><code>function generateTrees(n) {
+  if (n === 0) return [];
+  const build = (lo, hi) =&gt; {
+    if (lo &gt; hi) return [null];
+    const out = [];
+    for (let root = lo; root &lt;= hi; root++) {
+      for (const L of build(lo, root - 1)) {
+        for (const R of build(root + 1, hi)) {
+          out.push({ val: root, left: L, right: R });
+        }
+      }
+    }
+    return out;
+  };
+  return build(1, n);
+}
+
+generateTrees(3).length; // 5  (C₃)</code></pre>
+<p>Returns <em>distinct</em> BST structures holding values 1..n. Count grows as the nth Catalan number (5, 14, 42, 132…) — impractical beyond n ≈ 15.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q84">
+  <div class="qa__number">Question 84</div>
+  <h3 class="qa__question">Write a function to generate all possible unique BSTs.</h3>
+  <div class="qa__answer">
+    
+<p>Digit-by-digit contribution counting — O(log n).</p>
+<pre><code>function countDigitOne(n) {
+  let count = 0;
+  for (let i = 1; i &lt;= n; i *= 10) {
+    const divider = i * 10;
+    count += Math.floor(n / divider) * i
+           + Math.min(Math.max(n % divider - i + 1, 0), i);
+  }
+  return count;
+}
+
+countDigitOne(13);  // 6  (1, 10, 11, 12, 13 → digit 1 appears 6 times)</code></pre>
+<p>For each digit position, count how many times '1' appears. Three cases based on the digit at that position: 0 / 1 / 2+. This formula compresses all three cases into one expression.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q85">
+  <div class="qa__number">Question 85</div>
+  <h3 class="qa__question">Create a function to count the number of digit one appearing in all non-negative integers less than or equal to n.</h3>
+  <div class="qa__answer">
+    
+<p>Classic 1D DP on sorted stations.</p>
+<pre><code>function minRefuelStops(target, startFuel, stations) {
+  // dp[i] = max distance reachable with i stops
+  const dp = new Array(stations.length + 1).fill(0);
+  dp[0] = startFuel;
+
+  for (let i = 0; i &lt; stations.length; i++) {
+    const [pos, fuel] = stations[i];
+    for (let j = i; j &gt;= 0; j--) {
+      if (dp[j] &gt;= pos) dp[j + 1] = Math.max(dp[j + 1], dp[j] + fuel);
+    }
+  }
+  for (let i = 0; i &lt;= stations.length; i++) {
+    if (dp[i] &gt;= target) return i;
+  }
+  return -1;
+}
+
+// Greedy with a max-heap — O(n log n) but cleaner conceptually:
+// Drive to each unreachable station, then refuel at whichever past station had the most gas.</code></pre>
+
+    
+  </div>
+</article>
+<article class="qa" id="q86">
+  <div class="qa__number">Question 86</div>
+  <h3 class="qa__question">Write a function to find the minimum number of refueling stops.</h3>
+  <div class="qa__answer">
+    
+<p>Longer string automatically beats any subsequence of the shorter one, unless they're equal.</p>
+<pre><code>function findLUSlength(a, b) {
+  if (a === b) return -1;
+  return Math.max(a.length, b.length);
+}
+
+// For an array of strings
+function findLUSlengthArr(strs) {
+  strs.sort((x, y) =&gt; y.length - x.length);
+  const isSubseq = (a, b) =&gt; {
+    let i = 0;
+    for (const ch of b) {
+      if (ch === a[i]) i++;
+      if (i === a.length) return true;
+    }
+    return i === a.length;
+  };
+
+  for (let i = 0; i &lt; strs.length; i++) {
+    let unique = true;
+    for (let j = 0; j &lt; strs.length; j++) {
+      if (i !== j && isSubseq(strs[i], strs[j])) { unique = false; break; }
+    }
+    if (unique) return strs[i].length;
+  }
+  return -1;
+}
+
+findLUSlength("aba", "cdc"); // 3</code></pre>
+
+    
+  </div>
+</article>
+<article class="qa" id="q87">
+  <div class="qa__number">Question 87</div>
+  <h3 class="qa__question">Implement a function to find the longest uncommon subsequence.</h3>
+  <div class="qa__answer">
+    
+<p>Flood-fill and record the <em>shape</em> of each island relative to its starting cell.</p>
+<pre><code>function numDistinctIslands(grid) {
+  const rows = grid.length, cols = grid[0].length;
+  const shapes = new Set();
+
+  const dfs = (r, c, r0, c0, path) =&gt; {
+    if (r &lt; 0 || r &gt;= rows || c &lt; 0 || c &gt;= cols || grid[r][c] !== 1) return;
+    grid[r][c] = 0;
+    path.push((r - r0) + "," + (c - c0));
+    dfs(r+1, c, r0, c0, path);
+    dfs(r-1, c, r0, c0, path);
+    dfs(r, c+1, r0, c0, path);
+    dfs(r, c-1, r0, c0, path);
+  };
+
+  for (let r = 0; r &lt; rows; r++) {
+    for (let c = 0; c &lt; cols; c++) {
+      if (grid[r][c] === 1) {
+        const path = [];
+        dfs(r, c, r, c, path);
+        shapes.add(path.join("|"));
+      }
+    }
+  }
+  return shapes.size;
+}</code></pre>
+<p>The DFS visits cells in a deterministic order, so two islands with the same shape produce the same signature. Translation-invariant because all coords are relative to the first cell.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q88">
+  <div class="qa__number">Question 88</div>
+  <h3 class="qa__question">Write a function to find the number of distinct islands.</h3>
+  <div class="qa__answer">
+    
+<p>DP on intervals — O(n³).</p>
+<pre><code>function mergeStones(stones, k) {
+  const n = stones.length;
+  if ((n - 1) % (k - 1) !== 0) return -1;        // must leave exactly 1
+
+  const prefix = [0];
+  for (let i = 0; i &lt; n; i++) prefix.push(prefix[i] + stones[i]);
+
+  const dp = Array.from({length: n}, () =&gt; new Array(n).fill(0));
+
+  for (let len = k; len &lt;= n; len++) {
+    for (let i = 0; i + len &lt;= n; i++) {
+      const j = i + len - 1;
+      dp[i][j] = Infinity;
+      for (let mid = i; mid &lt; j; mid += k - 1) {
+        dp[i][j] = Math.min(dp[i][j], dp[i][mid] + dp[mid+1][j]);
+      }
+      if ((len - 1) % (k - 1) === 0) dp[i][j] += prefix[j+1] - prefix[i];
+    }
+  }
+  return dp[0][n-1];
+}</code></pre>
+<p>Tricky DP. The mid stride of <code>k-1</code> ensures we only split at merge-able boundaries.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q89">
+  <div class="qa__number">Question 89</div>
+  <h3 class="qa__question">Create a function to find the minimum cost to merge stones.</h3>
+  <div class="qa__answer">
+    
+<p>KMP failure function applied to <code>s + "#" + reverse(s)</code>.</p>
+<pre><code>function shortestPalindrome(s) {
+  const rev = [...s].reverse().join("");
+  const combined = s + "#" + rev;
+
+  // KMP prefix-function
+  const n = combined.length;
+  const pi = new Array(n).fill(0);
+  for (let i = 1; i &lt; n; i++) {
+    let j = pi[i - 1];
+    while (j &gt; 0 && combined[i] !== combined[j]) j = pi[j - 1];
+    if (combined[i] === combined[j]) j++;
+    pi[i] = j;
+  }
+
+  const longestPalinPrefix = pi[n - 1];
+  return rev.slice(0, s.length - longestPalinPrefix) + s;
+}
+
+shortestPalindrome("aacecaaa"); // "aaacecaaa"
+shortestPalindrome("abcd");     // "dcbabcd"</code></pre>
+<p><code>pi[n-1]</code> is the length of the longest prefix of <code>s</code> that's also a suffix of <code>reverse(s)</code> — i.e., the longest palindromic prefix.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q90">
+  <div class="qa__number">Question 90</div>
+  <h3 class="qa__question">Write a function to find the shortest palindrome.</h3>
+  <div class="qa__answer">
+    
+<p>DP with a state per (day, transactions-used, holding?).</p>
+<pre><code>function maxProfitK(k, prices) {
+  const n = prices.length;
+  if (n === 0 || k === 0) return 0;
+  if (k &gt;= n / 2) {
+    // unlimited transactions
+    let profit = 0;
+    for (let i = 1; i &lt; n; i++) {
+      if (prices[i] &gt; prices[i-1]) profit += prices[i] - prices[i-1];
+    }
+    return profit;
+  }
+
+  const buy  = new Array(k + 1).fill(-Infinity);
+  const sell = new Array(k + 1).fill(0);
+
+  for (const p of prices) {
+    for (let j = 1; j &lt;= k; j++) {
+      buy[j]  = Math.max(buy[j], sell[j-1] - p);
+      sell[j] = Math.max(sell[j], buy[j] + p);
+    }
+  }
+  return sell[k];
+}
+
+maxProfitK(2, [2,4,1]);             // 2
+maxProfitK(2, [3,2,6,5,0,3]);       // 7</code></pre>
+<p>O(n·k) time, O(k) space. The unlimited-transactions shortcut prevents wasted work when k is larger than possible trades.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q91">
+  <div class="qa__number">Question 91</div>
+  <h3 class="qa__question">Implement a function to find the maximum profit with at most k transactions.</h3>
+  <div class="qa__answer">
+    
+<p>Anagrams require equal character counts — the &ldquo;steps&rdquo; is the count mismatch.</p>
+<pre><code>function minSteps(s, t) {
+  const count = new Array(26).fill(0);
+  for (const ch of s) count[ch.charCodeAt(0) - 97]++;
+  for (const ch of t) count[ch.charCodeAt(0) - 97]--;
+
+  let steps = 0;
+  for (const c of count) if (c &gt; 0) steps += c;
+  return steps;
+}
+
+minSteps("bab", "aba");        // 1
+minSteps("leetcode", "practice"); // 5</code></pre>
+<p>Sum of positive residuals only (negatives are mirrored). Works because s and t have the same length in this problem variant. If allowing insert+delete on either side, use edit distance with only insert/delete costs.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q92">
+  <div class="qa__number">Question 92</div>
+  <h3 class="qa__question">Write a function to find the minimum number of steps to make two strings anagrams.</h3>
+  <div class="qa__answer">
+    
+<p>DP — at each position, try one digit and two digits if valid.</p>
+<pre><code>function numDecodings(s) {
+  if (!s || s[0] === "0") return 0;
+  const n = s.length;
+  const dp = new Array(n + 1).fill(0);
+  dp[0] = 1;
+  dp[1] = 1;
+
+  for (let i = 2; i &lt;= n; i++) {
+    const one = +s.slice(i-1, i);
+    const two = +s.slice(i-2, i);
+    if (one &gt;= 1) dp[i] += dp[i-1];
+    if (two &gt;= 10 && two &lt;= 26) dp[i] += dp[i-2];
+  }
+  return dp[n];
+}
+
+numDecodings("12");   // 2  ("AB" or "L")
+numDecodings("226");  // 3
+numDecodings("0");    // 0</code></pre>
+<p>Similar to Fibonacci, but each step is guarded by a validity check. Space can be reduced to O(1) with two rolling variables.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q93">
+  <div class="qa__number">Question 93</div>
+  <h3 class="qa__question">Create a function to count the number of ways to decode a string.</h3>
+  <div class="qa__answer">
+    
+<p>Sort, then DP: at each position, find the longest chain ending there.</p>
+<pre><code>function largestDivisibleSubset(nums) {
+  if (!nums.length) return [];
+  nums.sort((a, b) =&gt; a - b);
+  const n = nums.length;
+  const dp = new Array(n).fill(1);
+  const prev = new Array(n).fill(-1);
+  let best = 0;
+
+  for (let i = 0; i &lt; n; i++) {
+    for (let j = 0; j &lt; i; j++) {
+      if (nums[i] % nums[j] === 0 && dp[j] + 1 &gt; dp[i]) {
+        dp[i] = dp[j] + 1;
+        prev[i] = j;
+      }
+    }
+    if (dp[i] &gt; dp[best]) best = i;
+  }
+
+  const result = [];
+  for (let i = best; i !== -1; i = prev[i]) result.push(nums[i]);
+  return result.reverse();
+}
+
+largestDivisibleSubset([1,2,3]);    // [1,2] or [1,3]
+largestDivisibleSubset([1,2,4,8]);  // [1,2,4,8]</code></pre>
+<p>Sorting guarantees we only need divisibility with earlier elements. O(n²).</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q94">
+  <div class="qa__number">Question 94</div>
+  <h3 class="qa__question">Write a function to find the largest divisible subset.</h3>
+  <div class="qa__answer">
+    
+<p>Top-down DP — each cell holds the best total from root.</p>
+<pre><code>function minimumTotal(triangle) {
+  // Work bottom-up, modifying triangle in place
+  for (let r = triangle.length - 2; r &gt;= 0; r--) {
+    for (let c = 0; c &lt; triangle[r].length; c++) {
+      triangle[r][c] += Math.min(triangle[r+1][c], triangle[r+1][c+1]);
+    }
+  }
+  return triangle[0][0];
+}
+
+minimumTotal([[2],[3,4],[6,5,7],[4,1,8,3]]);  // 11</code></pre>
+<p>Bottom-up is cleaner than top-down because each cell at the bottom is its own minimum and the answer accumulates upward. O(n²) time, O(1) extra if we mutate the input (otherwise O(n) using a single rolling row).</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q95">
+  <div class="qa__number">Question 95</div>
+  <h3 class="qa__question">Implement a function to find the minimum path sum in a triangle.</h3>
+  <div class="qa__answer">
+    
+<p>For each pair, compute the slope using GCD-reduced form as the hash key.</p>
+<pre><code>function maxPoints(points) {
+  const n = points.length;
+  if (n &lt; 2) return n;
+
+  const gcd = (a, b) =&gt; b === 0 ? a : gcd(b, a % b);
+
+  let best = 0;
+  for (let i = 0; i &lt; n; i++) {
+    const slopes = new Map();
+    let duplicates = 1;
+    for (let j = 0; j &lt; n; j++) {
+      if (i === j) continue;
+      let dx = points[j][0] - points[i][0];
+      let dy = points[j][1] - points[i][1];
+      if (dx === 0 && dy === 0) { duplicates++; continue; }
+      const g = gcd(Math.abs(dx), Math.abs(dy)) || 1;
+      dx /= g; dy /= g;
+      if (dx &lt; 0) { dx = -dx; dy = -dy; }       // normalize direction
+      const key = dx + "," + dy;
+      slopes.set(key, (slopes.get(key) || 0) + 1);
+    }
+    let localBest = 0;
+    for (const c of slopes.values()) localBest = Math.max(localBest, c);
+    best = Math.max(best, localBest + duplicates);
+  }
+  return best;
+}</code></pre>
+<p>Avoid floating-point slopes — they introduce rounding errors. O(n²).</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q96">
+  <div class="qa__number">Question 96</div>
+  <h3 class="qa__question">Write a function to find the maximum number of points on a line.</h3>
+  <div class="qa__answer">
+    
+<p>Union-find (disjoint-set) — clean and fast.</p>
+<pre><code>function countComponents(n, edges) {
+  const parent = Array.from({length: n}, (_, i) =&gt; i);
+
+  const find = (x) =&gt; {
+    while (parent[x] !== x) {
+      parent[x] = parent[parent[x]];      // path compression
+      x = parent[x];
+    }
+    return x;
+  };
+  const union = (a, b) =&gt; {
+    const ra = find(a), rb = find(b);
+    if (ra !== rb) { parent[ra] = rb; return true; }
+    return false;
+  };
+
+  let components = n;
+  for (const [a, b] of edges) if (union(a, b)) components--;
+  return components;
+}
+
+countComponents(5, [[0,1],[1,2],[3,4]]); // 2</code></pre>
+<p>O((n + e)·α(n)) ≈ O(n + e). Alternative: DFS/BFS from each unvisited node, counting the number of components.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q97">
+  <div class="qa__number">Question 97</div>
+  <h3 class="qa__question">Create a function to find the number of connected components in an undirected graph.</h3>
+  <div class="qa__answer">
+    
+<p>Prefix-XOR + hash map — turns the problem into a two-sum variant.</p>
+<pre><code>function subarraysWithXor(arr, target) {
+  const count = new Map();
+  count.set(0, 1);         // empty prefix
+  let xor = 0, result = 0;
+  for (const n of arr) {
+    xor ^= n;
+    const needed = xor ^ target;
+    result += count.get(needed) || 0;
+    count.set(xor, (count.get(xor) || 0) + 1);
+  }
+  return result;
+}
+
+subarraysWithXor([4,2,2,6,4], 6);   // 4</code></pre>
+<p>Trick: XOR of subarray (i..j) = prefix[j] XOR prefix[i-1]. So subarrays equal to <code>target</code> correspond to prefix pairs that XOR to <code>target</code>. O(n) time, O(n) space.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q98">
+  <div class="qa__number">Question 98</div>
+  <h3 class="qa__question">Write a function to find the number of subarrays with a given XOR.</h3>
+  <div class="qa__answer">
+    
+<p>Sliding window with a frequency map — O(n).</p>
+<pre><code>function lengthOfLongestSubstringKDistinct(s, k) {
+  if (k === 0) return 0;
+  const count = new Map();
+  let best = 0, left = 0;
+
+  for (let right = 0; right &lt; s.length; right++) {
+    count.set(s[right], (count.get(s[right]) || 0) + 1);
+    while (count.size &gt; k) {
+      const c = s[left];
+      count.set(c, count.get(c) - 1);
+      if (count.get(c) === 0) count.delete(c);
+      left++;
+    }
+    best = Math.max(best, right - left + 1);
+  }
+  return best;
+}
+
+lengthOfLongestSubstringKDistinct("eceba", 2);   // 3  ("ece")
+lengthOfLongestSubstringKDistinct("aa", 1);      // 2</code></pre>
+<p>Window shrinks only when the unique-character count exceeds <code>k</code>. Each index is visited at most twice → O(n).</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q99">
+  <div class="qa__number">Question 99</div>
+  <h3 class="qa__question">Implement a function to find the length of the longest substring with at most k distinct characters.</h3>
+  <div class="qa__answer">
+    
+<p>Two-pointer DP with <code>*</code> tracking.</p>
+<pre><code>function isMatch(s, p) {
+  let i = 0, j = 0;
+  let starJ = -1, starI = -1;
+  while (i &lt; s.length) {
+    if (j &lt; p.length && (p[j] === s[i] || p[j] === "?")) {
+      i++; j++;
+    } else if (j &lt; p.length && p[j] === "*") {
+      starJ = j;                 // record position of *
+      starI = i;
+      j++;                       // tentatively match zero chars
+    } else if (starJ !== -1) {
+      j = starJ + 1;             // backtrack: consume one more char with *
+      i = ++starI;
+    } else {
+      return false;
+    }
+  }
+  while (j &lt; p.length && p[j] === "*") j++;
+  return j === p.length;
+}
+
+isMatch("adceb", "*a*b*");     // true
+isMatch("aa", "a");             // false
+isMatch("cb", "?a");            // false</code></pre>
+<p>O(m + n) average, O(m·n) worst case. DP table version is easier to reason about but uses O(m·n) space.</p>
+
+    
+  </div>
+</article>
+<article class="qa" id="q100">
+  <div class="qa__number">Question 100</div>
+  <h3 class="qa__question">Write a function to solve the wildcard matching problem.</h3>
+  <div class="qa__answer">
+    
+<p>Classic DP on two strings. <code>*</code> either matches zero of the preceding char or extends it.</p>
+<pre><code>function isMatch(s, p) {
+  const m = s.length, n = p.length;
+  const dp = Array.from({length: m+1}, () =&gt; new Array(n+1).fill(false));
+  dp[0][0] = true;
+
+  for (let j = 1; j &lt;= n; j++) {
+    if (p[j-1] === "*") dp[0][j] = dp[0][j-2];
+  }
+
+  for (let i = 1; i &lt;= m; i++) {
+    for (let j = 1; j &lt;= n; j++) {
+      if (p[j-1] === s[i-1] || p[j-1] === ".") {
+        dp[i][j] = dp[i-1][j-1];
+      } else if (p[j-1] === "*") {
+        dp[i][j] = dp[i][j-2];              // zero of previous
+        if (p[j-2] === s[i-1] || p[j-2] === ".") {
+          dp[i][j] = dp[i][j] || dp[i-1][j]; // one more of previous
+        }
+      }
+    }
+  }
+  return dp[m][n];
+}
+
+isMatch("aa", "a*");     // true
+isMatch("aab", "c*a*b"); // true</code></pre>
+<p>O(m·n). The <code>*</code> tricky bit: it consumes the previous character zero-or-more times, so <code>a*</code> matches <code>""</code>, <code>"a"</code>, <code>"aa"</code>, etc.</p>
+
+    
+  </div>
+</article>
+
+    <nav class="chapter-nav" aria-label="Chapter navigation">
+      <a class="chapter-nav__prev" href="javascript-tricky.html">
+      <span class="chapter-nav__dir">← Previous</span>
+      <span class="chapter-nav__title">JavaScript — Tricky</span>
+    </a>
+      <a class="chapter-nav__next" href="javascript-advanced.html">
+      <span class="chapter-nav__dir">Next →</span>
+      <span class="chapter-nav__title">JavaScript — Advanced</span>
+    </a>
+    </nav>
+
+  </section>
+
+</main>
+</div>
+
+<script src="../assets/script.js"></script>
+</body>
+</html>

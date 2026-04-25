@@ -1,0 +1,2857 @@
+"""API Basic — introductory REST/HTTP concepts for new developers.
+
+Each answer is friendly, beginner-oriented, with simple concrete examples.
+Covers HTTP methods, status codes, URL design, auth basics, REST principles,
+and common API patterns. Target length 80-150 words with short code snippets.
+"""
+
+ANSWERS: dict[int, str] = {}
+
+ANSWERS[1] = r'''
+<p>An <strong>API</strong> (Application Programming Interface) is a contract that lets two pieces of software talk to each other. You send a request describing what you want; the API sends back a response with data or confirmation. The rules of how to ask &mdash; URLs, parameters, data formats &mdash; are the API's "interface."</p>
+<pre><code># ask GitHub for info about a user
+GET https://api.github.com/users/torvalds
+
+# response (JSON)
+{
+  "login": "torvalds",
+  "name":  "Linus Torvalds",
+  "company": "Linux Foundation",
+  "public_repos": 9
+}</code></pre>
+<p><strong>Why APIs matter:</strong> they let your mobile app pull data from a server without owning the database; let one company's software integrate with another's (Stripe for payments, Twilio for SMS); and let teams split a large system into independent services that talk via well-defined contracts. In 2026, the vast majority of web traffic is machine-to-machine API calls, not humans visiting web pages.</p>
+<p>When developers say "an API," they usually mean a <strong>web API</strong> &mdash; an HTTP-based service you call over the internet.</p>
+'''
+
+ANSWERS[2] = r'''
+<p>APIs come in several flavors, distinguished by their <strong>architecture style</strong> (how requests are structured) and their <strong>audience</strong> (who can use them).</p>
+<table>
+  <tr><th>By architecture</th><th>How it works</th></tr>
+  <tr><td><strong>REST</strong></td><td>Plain HTTP + JSON. Resources have URLs (<code>/users/42</code>). Most common today.</td></tr>
+  <tr><td><strong>GraphQL</strong></td><td>One endpoint, client describes exactly the fields it wants.</td></tr>
+  <tr><td><strong>SOAP</strong></td><td>XML messages with strict schemas. Legacy enterprise.</td></tr>
+  <tr><td><strong>gRPC</strong></td><td>Binary (Protocol Buffers) over HTTP/2. Fast service-to-service.</td></tr>
+  <tr><td><strong>WebSocket</strong></td><td>Long-lived two-way connection. For chat, live updates.</td></tr>
+</table>
+<table>
+  <tr><th>By audience</th><th>Example</th></tr>
+  <tr><td><strong>Public</strong></td><td>GitHub, Stripe &mdash; docs + keys for any developer.</td></tr>
+  <tr><td><strong>Partner</strong></td><td>Shared with specific companies under contract.</td></tr>
+  <tr><td><strong>Private / Internal</strong></td><td>Used only by a company's own apps.</td></tr>
+</table>
+<p><strong>Rule of thumb in 2026:</strong> start with REST for simple data CRUD, reach for GraphQL when clients need flexible queries, use gRPC between your own microservices, and WebSockets when data is truly real-time.</p>
+'''
+
+ANSWERS[3] = r'''
+<p><strong>REST</strong> and <strong>SOAP</strong> are two different ways to design APIs. REST is the modern default; SOAP is older and still common in large enterprises (banking, healthcare, government).</p>
+<table>
+  <tr><th>Aspect</th><th>REST</th><th>SOAP</th></tr>
+  <tr><td>Data format</td><td>JSON (usually), also XML</td><td>Always XML</td></tr>
+  <tr><td>Transport</td><td>HTTP only</td><td>HTTP, SMTP, TCP, others</td></tr>
+  <tr><td>Structure</td><td>Loose conventions (URLs + methods)</td><td>Strict message envelope + WSDL schema</td></tr>
+  <tr><td>Security</td><td>HTTPS + tokens (OAuth, JWT)</td><td>Built-in WS-Security standards</td></tr>
+  <tr><td>Stateful?</td><td>No &mdash; each request is independent</td><td>Can maintain state</td></tr>
+  <tr><td>Size</td><td>Compact JSON</td><td>Verbose XML with lots of boilerplate</td></tr>
+  <tr><td>Complexity</td><td>Easy to learn in an hour</td><td>Steep learning curve</td></tr>
+</table>
+<pre><code>// REST — GET user 42
+GET /users/42 HTTP/1.1
+Accept: application/json
+
+// SOAP — the same request
+POST /UserService HTTP/1.1
+Content-Type: text/xml
+&lt;soap:Envelope&gt;
+  &lt;soap:Body&gt;
+    &lt;GetUser&gt;&lt;id&gt;42&lt;/id&gt;&lt;/GetUser&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</code></pre>
+<p><strong>When you'd still see SOAP:</strong> legacy integrations (SAP, Salesforce's older APIs), strict contract environments where formal WSDL schemas matter (insurance, payments). For new projects, REST or GraphQL wins for developer speed.</p>
+'''
+
+ANSWERS[4] = r'''
+<p>A <strong>RESTful API</strong> follows the principles of <strong>REST</strong> (Representational State Transfer), a design style for HTTP APIs introduced by Roy Fielding in 2000. The key idea: treat everything as a <em>resource</em> that has a URL, and use standard HTTP methods (GET/POST/PUT/DELETE) to act on it.</p>
+<pre><code>GET    /users          # list users
+GET    /users/42       # fetch user 42
+POST   /users          # create a new user
+PUT    /users/42       # replace user 42
+PATCH  /users/42       # update part of user 42
+DELETE /users/42       # delete user 42</code></pre>
+<p><strong>Core properties of a RESTful API:</strong></p>
+<ul>
+  <li><strong>Resource-based URLs</strong> &mdash; nouns, not verbs (<code>/users</code>, not <code>/getAllUsers</code>).</li>
+  <li><strong>Standard HTTP methods</strong> carry meaning (GET reads, POST creates, DELETE removes).</li>
+  <li><strong>Stateless</strong> &mdash; each request carries everything it needs (auth token, parameters); the server doesn't remember previous calls.</li>
+  <li><strong>Standard status codes</strong> (200 OK, 404 Not Found, 500 Server Error) tell the client what happened.</li>
+  <li><strong>Representation</strong> &mdash; usually JSON; the same resource could theoretically be sent as XML, CSV, HTML.</li>
+</ul>
+<p>Most "REST" APIs in the wild don't follow <em>every</em> REST rule (HATEOAS especially is rare), but they share enough conventions that developers can pick any one up quickly. That consistency is REST's real gift.</p>
+'''
+
+ANSWERS[5] = r'''
+<p><strong>JSON</strong> (JavaScript Object Notation) is a text format for representing structured data &mdash; numbers, strings, booleans, arrays, and objects. It was invented by Douglas Crockford around 2001 and took over from XML as the dominant API data format.</p>
+<pre><code>{
+  "id": 42,
+  "name": "Ada Lovelace",
+  "active": true,
+  "roles": ["admin", "editor"],
+  "address": {
+    "city": "London",
+    "country": "UK"
+  }
+}</code></pre>
+<p><strong>Why APIs love JSON:</strong></p>
+<ul>
+  <li><strong>Compact.</strong> Much smaller than equivalent XML &mdash; less bandwidth, faster parsing.</li>
+  <li><strong>Human-readable.</strong> Easy to eyeball and debug with <code>curl</code> or DevTools.</li>
+  <li><strong>Native to JavaScript.</strong> <code>JSON.parse()</code> / <code>JSON.stringify()</code> are built in; no library needed in browsers.</li>
+  <li><strong>Universal.</strong> Every language has a parser; no one has to learn a new format.</li>
+  <li><strong>Maps directly to data structures</strong> &mdash; objects become dictionaries/hashmaps, arrays become lists.</li>
+</ul>
+<p><strong>Limitations:</strong> no comments, no dates (just strings), no binary data (base64-encode it), and no schema (pair with JSON Schema or OpenAPI for that). For these reasons, some modern APIs use <strong>MessagePack</strong> or <strong>Protocol Buffers</strong> internally &mdash; but JSON remains the default for public APIs because of its universality.</p>
+'''
+
+ANSWERS[6] = r'''
+<p>Both JSON and XML are ways to represent structured data as text. They overlap in what they can express, but the syntax and ergonomics are very different.</p>
+<pre><code>// JSON — compact, minimal syntax
+{
+  "user": {
+    "id": 42,
+    "name": "Ada",
+    "roles": ["admin", "editor"]
+  }
+}
+
+&lt;!-- XML — tags wrap every value --&gt;
+&lt;user&gt;
+  &lt;id&gt;42&lt;/id&gt;
+  &lt;name&gt;Ada&lt;/name&gt;
+  &lt;roles&gt;
+    &lt;role&gt;admin&lt;/role&gt;
+    &lt;role&gt;editor&lt;/role&gt;
+  &lt;/roles&gt;
+&lt;/user&gt;</code></pre>
+<table>
+  <tr><th>Aspect</th><th>JSON</th><th>XML</th></tr>
+  <tr><td>Verbosity</td><td>Compact</td><td>Verbose (closing tags double the bytes)</td></tr>
+  <tr><td>Data types</td><td>number, string, bool, array, object, null</td><td>Everything is a string (or namespaced)</td></tr>
+  <tr><td>Comments</td><td>Not allowed</td><td>Supported: <code>&lt;!-- ... --&gt;</code></td></tr>
+  <tr><td>Attributes</td><td>No concept</td><td>Elements can have attributes</td></tr>
+  <tr><td>Schema validation</td><td>JSON Schema (optional)</td><td>XSD / DTD (mature)</td></tr>
+  <tr><td>Parsing speed</td><td>Very fast</td><td>Slower, more complex</td></tr>
+  <tr><td>Best for</td><td>Web APIs, JS apps</td><td>Document-centric data (DOCX, SVG, SOAP)</td></tr>
+</table>
+<p><strong>Modern default:</strong> JSON wins for APIs. Use XML if you're dealing with legacy SOAP, office documents, or complex schemas where XSD validation matters.</p>
+'''
+
+ANSWERS[7] = r'''
+<p>An <strong>endpoint</strong> is a specific URL where an API exposes a piece of functionality. Think of an endpoint as an "address" you send requests to; the API routes each URL + method combination to different code.</p>
+<pre><code>// a few endpoints from GitHub's REST API
+GET  https://api.github.com/users/{username}          # fetch a user
+GET  https://api.github.com/users/{username}/repos    # list their repos
+POST https://api.github.com/repos/{owner}/{repo}/issues   # create an issue
+PATCH https://api.github.com/user                     # update your profile</code></pre>
+<p><strong>Key pieces of an endpoint:</strong></p>
+<ul>
+  <li><strong>Base URL</strong> &mdash; <code>https://api.github.com</code> &mdash; where the API lives.</li>
+  <li><strong>Path</strong> &mdash; <code>/users/{username}</code> &mdash; identifies the resource. Placeholders like <code>{username}</code> become real values (<code>/users/torvalds</code>).</li>
+  <li><strong>Method</strong> &mdash; <code>GET</code>, <code>POST</code>, <code>PUT</code>, etc. &mdash; describes the intent (read, create, update, delete).</li>
+  <li><strong>Query parameters</strong> &mdash; optional filters after <code>?</code>: <code>/users?sort=newest&amp;limit=10</code>.</li>
+</ul>
+<p>The same path can mean different things under different methods: <code>GET /users/42</code> fetches user 42, <code>DELETE /users/42</code> removes them. The method is as much part of the endpoint as the URL. When API documentation lists endpoints, it usually shows method + path together: <code>DELETE /users/:id</code>.</p>
+'''
+
+ANSWERS[8] = r'''
+<p>An <strong>HTTP request</strong> is a message sent from a client (browser, mobile app, another server) to a server asking it to do something. Every API call is an HTTP request.</p>
+<pre><code>POST /users HTTP/1.1            # 1. request line — method + path + protocol version
+Host: api.example.com           # 2. headers — metadata about the request
+Authorization: Bearer abc123
+Content-Type: application/json
+Content-Length: 47
+
+{ "name": "Ada", "email": "ada@example.com" }    # 3. body — optional payload</code></pre>
+<p><strong>A request has three parts:</strong></p>
+<ul>
+  <li><strong>Request line</strong> &mdash; the HTTP method (<code>GET</code>, <code>POST</code>, etc.), the path, and the protocol version.</li>
+  <li><strong>Headers</strong> &mdash; key/value metadata: content type, authentication, client info (<code>User-Agent</code>), what formats you accept, cache hints.</li>
+  <li><strong>Body</strong> &mdash; optional data payload. GET/DELETE usually have no body; POST/PUT/PATCH typically carry one (JSON, form data, files).</li>
+</ul>
+<p>The server reads the request, figures out what's being asked, does the work (reads a database, calls another service, etc.), and sends back an <strong>HTTP response</strong> with a status code (200, 404, etc.), its own headers, and an optional body containing the result. This request/response cycle is the fundamental building block of all HTTP APIs.</p>
+'''
+
+ANSWERS[9] = r'''
+<p>HTTP defines a small set of <strong>methods</strong> (also called "verbs") that describe the intent of a request. Each one has a conventional meaning that REST APIs follow closely.</p>
+<table>
+  <tr><th>Method</th><th>Intent</th><th>Has body?</th><th>Safe?</th><th>Idempotent?</th></tr>
+  <tr><td><strong>GET</strong></td><td>Read a resource</td><td>No</td><td>Yes</td><td>Yes</td></tr>
+  <tr><td><strong>POST</strong></td><td>Create (or generic action)</td><td>Yes</td><td>No</td><td>No</td></tr>
+  <tr><td><strong>PUT</strong></td><td>Replace a resource entirely</td><td>Yes</td><td>No</td><td>Yes</td></tr>
+  <tr><td><strong>PATCH</strong></td><td>Update part of a resource</td><td>Yes</td><td>No</td><td>Usually</td></tr>
+  <tr><td><strong>DELETE</strong></td><td>Remove a resource</td><td>No</td><td>No</td><td>Yes</td></tr>
+  <tr><td><strong>HEAD</strong></td><td>Like GET but headers only, no body</td><td>No</td><td>Yes</td><td>Yes</td></tr>
+  <tr><td><strong>OPTIONS</strong></td><td>Ask what's allowed (used for CORS preflight)</td><td>No</td><td>Yes</td><td>Yes</td></tr>
+</table>
+<p><strong>Safe</strong> means the method shouldn't change server state (GET should never create or delete). <strong>Idempotent</strong> means calling it multiple times has the same effect as calling it once &mdash; critical for retries on flaky networks (safe to retry PUT / DELETE; risky to retry POST without an idempotency key).</p>
+<p>You'll see GET, POST, PUT, PATCH, and DELETE in ~95% of REST APIs. The others show up for specific purposes (CORS preflight, efficient probing). Picking the right verb makes your API predictable &mdash; and every HTTP tool in the world "just works" with it.</p>
+'''
+
+ANSWERS[10] = r'''
+<p><strong>GET</strong> reads data; <strong>POST</strong> submits data to create or trigger something. They're the two most common HTTP methods and the easiest to mix up.</p>
+<table>
+  <tr><th>Aspect</th><th>GET</th><th>POST</th></tr>
+  <tr><td>Purpose</td><td>Retrieve information</td><td>Create resources or submit data</td></tr>
+  <tr><td>Has a body?</td><td>No (data goes in URL)</td><td>Yes (data goes in body)</td></tr>
+  <tr><td>Idempotent?</td><td>Yes &mdash; same call = same result</td><td>No &mdash; each call may create a new thing</td></tr>
+  <tr><td>Cacheable?</td><td>Yes (default)</td><td>No</td></tr>
+  <tr><td>Data visible in URL?</td><td>Yes &mdash; so no passwords</td><td>No &mdash; in request body</td></tr>
+  <tr><td>Max URL length</td><td>~2000 chars (browser limits)</td><td>Large bodies are fine</td></tr>
+  <tr><td>Safe to retry?</td><td>Always</td><td>Risky &mdash; may create duplicates</td></tr>
+</table>
+<pre><code>// GET — search for users
+GET /users?name=ada&amp;active=true
+
+// POST — create a new user
+POST /users
+Content-Type: application/json
+{ "name": "Ada", "email": "ada@example.com" }</code></pre>
+<p><strong>Rules of thumb:</strong> if you're just fetching something, use GET. If the URL would need to carry sensitive data or the action changes server state (creating, purchasing, sending), use POST. Never use GET for destructive actions &mdash; browsers and crawlers prefetch GET URLs, which can accidentally trigger them.</p>
+'''
+
+ANSWERS[11] = r'''
+<p><strong>PUT</strong> is used to <em>replace an entire resource</em> at a known URL. The client sends the complete new state, and the server either updates the existing resource or creates it at that URL if it didn't exist (sometimes called "upsert").</p>
+<pre><code>// PUT — replace user 42 entirely
+PUT /users/42
+Content-Type: application/json
+
+{
+  "name":  "Ada Lovelace",
+  "email": "ada@example.com",
+  "role":  "admin"
+}
+// response: 200 OK (updated) or 201 Created (just created)</code></pre>
+<p><strong>Key properties:</strong></p>
+<ul>
+  <li><strong>Full replacement.</strong> You send the whole resource, not just the fields you're changing. Missing fields are set to their defaults or null.</li>
+  <li><strong>Idempotent.</strong> Sending the same PUT twice produces the same state. Safe to retry on network failure.</li>
+  <li><strong>Works on a specific URL.</strong> The client decides the resource's URL (<code>/users/42</code>), unlike POST where the server picks.</li>
+</ul>
+<p><strong>PUT vs PATCH:</strong> if you want to change just one field (e.g., a user's email), PATCH is usually better &mdash; it sends only the diff, avoiding the risk of accidentally wiping fields you forgot to include. Use PUT when you have the whole resource in hand (edit form with all fields, or config updates).</p>
+'''
+
+ANSWERS[12] = r'''
+<p><strong>DELETE</strong> removes a resource. Once the server processes a successful DELETE, future GETs to that URL typically return 404.</p>
+<pre><code>DELETE /users/42
+
+// common responses
+204 No Content       # deleted, nothing to return (the conventional response)
+200 OK               # deleted; body contains the deleted resource
+404 Not Found        # already deleted (or never existed)
+403 Forbidden        # you're not allowed to delete this</code></pre>
+<p><strong>Key properties:</strong></p>
+<ul>
+  <li><strong>Idempotent.</strong> Deleting an already-deleted resource should still be safe &mdash; most APIs return 204 on the second call (or 404 if "it must exist") &mdash; never an error that breaks retries.</li>
+  <li><strong>Usually no body.</strong> The URL alone identifies what to delete.</li>
+  <li><strong>Often a soft delete.</strong> Real-world APIs usually set a <code>deleted_at</code> flag rather than wiping the row &mdash; enables recovery, audit, and compliance (GDPR's "right to be forgotten" still requires a proper purge process).</li>
+</ul>
+<p><strong>Safety in practice:</strong> because DELETE is destructive and irreversible for the user, APIs typically require authentication, log every call, and may ask for extra confirmation (a password re-entry, an "Are you sure?" flow on the client). Some APIs implement DELETE as a two-step flow: first PATCH to mark for deletion, then a cleanup job removes after a recovery window.</p>
+'''
+
+ANSWERS[13] = r'''
+<p><strong>HTTP status codes</strong> are 3-digit numbers in every response that tell the client what happened. They're grouped into five classes based on the first digit.</p>
+<table>
+  <tr><th>Class</th><th>Meaning</th><th>Examples</th></tr>
+  <tr><td><strong>1xx</strong></td><td>Informational (rare)</td><td>100 Continue, 101 Switching Protocols</td></tr>
+  <tr><td><strong>2xx</strong></td><td>Success</td><td>200 OK, 201 Created, 204 No Content</td></tr>
+  <tr><td><strong>3xx</strong></td><td>Redirection</td><td>301 Moved Permanently, 302 Found, 304 Not Modified</td></tr>
+  <tr><td><strong>4xx</strong></td><td>Client error &mdash; the request was bad</td><td>400 Bad Request, 401 Unauthorized, 404 Not Found, 429 Too Many Requests</td></tr>
+  <tr><td><strong>5xx</strong></td><td>Server error &mdash; the server failed</td><td>500 Internal Server Error, 502 Bad Gateway, 503 Service Unavailable</td></tr>
+</table>
+<p><strong>Why status codes matter:</strong> they let generic tools (browsers, load balancers, monitoring, retry libraries) make decisions without parsing your response body. A 429 means "back off and retry"; a 500 might trigger an alert; a 404 can be cached; a 401 should redirect to login. Using the <em>wrong</em> code (like returning 200 with <code>{ "error": "..." }</code>) breaks this ecosystem.</p>
+<p>You'll memorize 200, 201, 204, 301, 400, 401, 403, 404, 429, 500, 502, 503 &mdash; those cover 95% of real traffic. MDN's HTTP status reference is the definitive source for the rest.</p>
+'''
+
+ANSWERS[14] = r'''
+<p><strong>200 OK</strong> is the most common success response. It means the request was processed successfully and a response body follows.</p>
+<pre><code>GET /users/42 HTTP/1.1
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{ "id": 42, "name": "Ada Lovelace", "role": "admin" }</code></pre>
+<p><strong>When to return 200:</strong></p>
+<ul>
+  <li><strong>GET</strong> that successfully retrieves a resource (with the resource in the body).</li>
+  <li><strong>PUT</strong> / <strong>PATCH</strong> that updates an existing resource (often with the updated version in the body).</li>
+  <li><strong>POST</strong> for actions that aren't "create" &mdash; like <code>/orders/42/refund</code> or <code>/sessions/logout</code>.</li>
+  <li><strong>DELETE</strong> when you want to return the deleted resource (use 204 if the body is empty).</li>
+</ul>
+<p><strong>Related 2xx codes:</strong></p>
+<ul>
+  <li><strong>201 Created</strong> &mdash; specifically for successful POST that created a new resource; include a <code>Location</code> header pointing to the new URL.</li>
+  <li><strong>202 Accepted</strong> &mdash; request valid, work queued asynchronously; follow-up needed to check result.</li>
+  <li><strong>204 No Content</strong> &mdash; success, no body to return (typical for DELETE).</li>
+</ul>
+<p>Returning 200 for <em>every</em> response (even failures) is a common anti-pattern &mdash; it defeats status-based tooling. Match the code to what actually happened.</p>
+'''
+
+ANSWERS[15] = r'''
+<p><strong>404 Not Found</strong> means the server understood the request fine but there's nothing at that URL. It's the single most famous error code &mdash; the web page you hit when a link is broken.</p>
+<pre><code>GET /users/9999 HTTP/1.1
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+
+{ "error": "User not found", "id": 9999 }</code></pre>
+<p><strong>When to return 404:</strong></p>
+<ul>
+  <li>The specific resource doesn't exist (<code>/users/9999</code> when user 9999 was never created or was deleted).</li>
+  <li>The URL doesn't match any route in your API.</li>
+  <li>(Sometimes) the resource exists but the caller shouldn't know about it &mdash; some APIs return 404 instead of 403 to avoid revealing that resources exist.</li>
+</ul>
+<p><strong>Don't confuse 404 with:</strong></p>
+<ul>
+  <li><strong>400 Bad Request</strong> &mdash; the URL is syntactically wrong or parameters are invalid.</li>
+  <li><strong>410 Gone</strong> &mdash; the resource <em>used to</em> exist and definitely won't come back. Rare; used when you want crawlers to stop indexing.</li>
+  <li><strong>204 No Content</strong> &mdash; the resource exists but has no body to return (e.g., after a successful DELETE).</li>
+</ul>
+<p>For a good user experience, include a helpful error message explaining what was missing &mdash; not just a blank 404 page.</p>
+'''
+
+ANSWERS[16] = r'''
+<p><strong>500 Internal Server Error</strong> is the generic "something went wrong on our side" response. The client's request was syntactically valid, but the server crashed, had a bug, or hit an unexpected error while processing it.</p>
+<pre><code>POST /orders HTTP/1.1
+Content-Type: application/json
+
+{ "productId": 42, "quantity": 2 }
+
+HTTP/1.1 500 Internal Server Error
+Content-Type: application/json
+
+{ "error": "Something went wrong", "reqId": "req_abc123" }</code></pre>
+<p><strong>When 500 happens:</strong></p>
+<ul>
+  <li>Unhandled exception in your code (null pointer, type error, unexpected input).</li>
+  <li>Database connection lost.</li>
+  <li>Out-of-memory, disk full, or process crash.</li>
+  <li>A dependency (payment gateway, email service) returned an unexpected response that your code didn't handle.</li>
+</ul>
+<p><strong>Related 5xx codes</strong> that are more specific:</p>
+<ul>
+  <li><strong>502 Bad Gateway</strong> &mdash; your server tried to call another server, which failed or returned invalid data.</li>
+  <li><strong>503 Service Unavailable</strong> &mdash; server is temporarily down (maintenance, overloaded).</li>
+  <li><strong>504 Gateway Timeout</strong> &mdash; your server waited too long for an upstream response.</li>
+</ul>
+<p><strong>Best practices:</strong> never leak stack traces or internal details in 500 responses &mdash; attackers use them to probe your system. Log everything server-side with a request id, return a generic message + that id to the user. Every 500 should trigger an alert; they're bugs, not normal.</p>
+'''
+
+ANSWERS[17] = r'''
+<p>An <strong>API key</strong> is a long, random string that identifies a specific client (app or developer account) calling an API. The client sends the key with each request, and the server uses it to authenticate and track usage.</p>
+<pre><code>// usually sent as a header
+GET /v1/weather?city=London
+X-API-Key: sk_live_4a8b3c2d9e7f1a6b5c4d3e2f
+
+// or as a query parameter (less secure)
+GET /v1/weather?city=London&amp;api_key=sk_live_4a8b3c2d9e7f1a6b5c4d3e2f</code></pre>
+<p><strong>What API keys are good for:</strong></p>
+<ul>
+  <li><strong>Identifying the client</strong> &mdash; "which app is calling?" so you can meter, log, or bill per customer.</li>
+  <li><strong>Rate limiting</strong> &mdash; each key has its own quota.</li>
+  <li><strong>Revocation</strong> &mdash; if a key leaks, you rotate it without affecting other clients.</li>
+</ul>
+<p><strong>Limitations &mdash; why API keys aren't "real" auth:</strong></p>
+<ul>
+  <li>A leaked key gives full access to anyone who grabs it. Unlike passwords, keys are usually stored in app code/env files, where they can leak via git commits, logs, or screenshots.</li>
+  <li>They identify the <em>app</em>, not the <em>user</em>. Use OAuth / JWT for user-specific authorization.</li>
+</ul>
+<p><strong>Best practices:</strong> always send keys in headers (not URLs &mdash; URLs end up in logs), always over HTTPS, rotate periodically, scope to specific permissions ("read-only key" vs "full-access key"), and monitor for anomalous usage. Most modern APIs (Stripe, OpenAI) use API keys for server-to-server auth, OAuth/JWT for user-facing flows.</p>
+'''
+
+ANSWERS[18] = r'''
+<p><strong>OAuth 2.0</strong> (and its 2026 update, OAuth 2.1) is a standard protocol for <strong>delegated authorization</strong> &mdash; letting one app act on your behalf with another service without sharing your password.</p>
+<p>Example: "Sign in with Google" or "Connect your GitHub." You click "Allow," and the app gets an <em>access token</em> scoped to specific permissions (read your email, post to your feed). The app never sees your password.</p>
+<pre><code>// 1. User clicks "Sign in with Google" — redirected to Google
+GET https://accounts.google.com/o/oauth2/v2/auth?
+  client_id=MY_APP&amp;
+  redirect_uri=https://myapp.com/callback&amp;
+  scope=email+profile&amp;
+  response_type=code
+
+// 2. User approves — Google redirects back with a code
+GET https://myapp.com/callback?code=ABC123
+
+// 3. Server exchanges code for a token
+POST https://oauth2.googleapis.com/token
+// returns: { "access_token": "ya29.a0...", "expires_in": 3600 }
+
+// 4. App calls Google APIs with the token
+GET https://www.googleapis.com/userinfo/v2/me
+Authorization: Bearer ya29.a0...</code></pre>
+<p><strong>Key concepts:</strong></p>
+<ul>
+  <li><strong>Access token</strong> &mdash; short-lived credential (usually 1 hour) sent with API calls.</li>
+  <li><strong>Refresh token</strong> &mdash; longer-lived credential used to get new access tokens.</li>
+  <li><strong>Scopes</strong> &mdash; what the app is allowed to do (<code>read_email</code>, <code>post_tweets</code>).</li>
+  <li><strong>PKCE</strong> &mdash; now mandatory in OAuth 2.1 for all clients; prevents code-interception attacks.</li>
+</ul>
+<p>OAuth powers almost every "Sign in with X" button online. Libraries like <strong>Auth.js</strong> or <strong>better-auth</strong> implement the full flow for you &mdash; don't roll your own; the spec has many footguns.</p>
+'''
+
+ANSWERS[19] = r'''
+<p>A <strong>token</strong> is a credential (usually a long opaque or signed string) that a client presents with each API request to prove who they are. It replaces sending a username/password on every call.</p>
+<pre><code>// 1. user logs in once with credentials
+POST /auth/login
+{ "email": "ada@example.com", "password": "hunter2" }
+
+// 2. server returns a token
+{ "accessToken": "eyJhbGc...", "expiresIn": 900 }
+
+// 3. client sends token on every subsequent API call
+GET /me
+Authorization: Bearer eyJhbGc...</code></pre>
+<p><strong>Why tokens over passwords on every request:</strong></p>
+<ul>
+  <li><strong>Security.</strong> Password is entered once (and ideally stored nowhere); tokens are scoped and time-limited.</li>
+  <li><strong>Revocable.</strong> If a token leaks, you invalidate just that token, not the user's password.</li>
+  <li><strong>Stateless servers.</strong> Tokens (especially JWTs) can carry identity claims, so servers don't need a database lookup for every request.</li>
+  <li><strong>Scoped.</strong> A token can grant narrow permissions (read-only, one specific API).</li>
+</ul>
+<p><strong>Common token types:</strong></p>
+<ul>
+  <li><strong>JWT</strong> (JSON Web Token) &mdash; a signed, self-describing token that the server verifies without a DB lookup.</li>
+  <li><strong>Opaque token</strong> &mdash; a random string; the server looks it up in Redis/DB to find out who it belongs to.</li>
+  <li><strong>API key</strong> &mdash; a long-lived token for server-to-server use (see Q17).</li>
+</ul>
+<p>Always send tokens over HTTPS, store them carefully (HttpOnly cookies or secure storage, never <code>localStorage</code> for session tokens), and keep expiry short (15 min) with refresh tokens for longer sessions.</p>
+'''
+
+ANSWERS[20] = r'''
+<p><strong>Rate limiting</strong> caps how many requests a client can make in a given time window. It protects the API from abuse, accidental infinite loops, and traffic spikes that would otherwise overwhelm the server.</p>
+<pre><code>// response when you've hit the limit
+HTTP/1.1 429 Too Many Requests
+RateLimit-Limit:     100
+RateLimit-Remaining: 0
+RateLimit-Reset:     60              # seconds until reset
+Retry-After:         60
+
+{ "error": "Rate limit exceeded. Retry in 60 seconds." }</code></pre>
+<p><strong>Typical rate-limit schemes:</strong></p>
+<ul>
+  <li><strong>Per IP</strong> &mdash; good for public, unauthenticated endpoints (login, signup).</li>
+  <li><strong>Per API key / user</strong> &mdash; fair sharing; free users might get 100 req/hour, paid plans 10,000.</li>
+  <li><strong>Per endpoint</strong> &mdash; tighter limits on expensive operations (search, AI calls).</li>
+</ul>
+<p><strong>What clients should do when they hit 429:</strong></p>
+<ul>
+  <li>Read the <code>Retry-After</code> header and wait that long before retrying.</li>
+  <li>Use <strong>exponential backoff</strong> with jitter &mdash; don't hammer the server the instant the window resets.</li>
+  <li>Cache responses locally where possible to reduce call volume.</li>
+</ul>
+<p><strong>Why rate limits matter:</strong> without them, a single buggy client (or a DDoS attacker) can take your API down for everyone. The standard headers (<code>RateLimit-Limit</code>, <code>RateLimit-Remaining</code>, <code>RateLimit-Reset</code>) are defined in RFC 9331 and let well-behaved clients pace themselves automatically.</p>
+'''
+
+ANSWERS[21] = r'''
+<p><strong>API versioning</strong> means releasing a new version of your API alongside the old one, so existing clients keep working when you change the interface. Without versioning, <em>any</em> change &mdash; adding a required field, renaming an endpoint &mdash; breaks every app that calls you.</p>
+<pre><code>// three common versioning strategies
+GET /v1/users/42                                # URL path — easiest, most visible
+GET /users/42       Accept: application/vnd.myapi.v1+json   # header — cleaner URL
+GET /users/42?version=1                         # query param — discouraged</code></pre>
+<p><strong>Why it's important:</strong></p>
+<ul>
+  <li><strong>Client stability.</strong> Mobile apps can take weeks or months to update. You can't force everyone to upgrade at once.</li>
+  <li><strong>Freedom to evolve.</strong> You can fix design mistakes or add new features without fear of breaking old clients.</li>
+  <li><strong>Clear deprecation.</strong> You announce "v1 will be removed on 2027-01-01"; clients migrate on their own schedule.</li>
+</ul>
+<p><strong>When to bump the version:</strong></p>
+<ul>
+  <li><strong>Breaking change</strong> &mdash; new required field, renamed response key, removed endpoint, changed data type. This goes in a new version.</li>
+  <li><strong>Non-breaking change</strong> &mdash; adding optional fields, new endpoints, new status codes. No version bump needed; clients keep working.</li>
+</ul>
+<p><strong>Practical tip:</strong> most mature APIs (GitHub, Stripe) use URL-based versioning for its simplicity. Run at most 2-3 versions in parallel; maintaining more is a support nightmare. Communicate deprecations clearly with headers (<code>Sunset</code>, <code>Deprecation</code>) and email warnings.</p>
+'''
+
+ANSWERS[22] = r'''
+<p>HTTP <strong>headers</strong> are key-value metadata attached to every request and response. They carry information that doesn't fit the body &mdash; content type, authentication, caching hints, client identification, and more.</p>
+<pre><code>POST /orders HTTP/1.1
+Host:            api.example.com         # which server to send this to
+Authorization:   Bearer eyJhbGc...        # who's calling
+Content-Type:    application/json         # what format the body is in
+Content-Length:  87                       # how many bytes the body is
+Accept:          application/json         # what format I want back
+User-Agent:      my-app/1.0               # identifies the client software
+X-Request-Id:    req_abc123               # correlation id for tracing
+
+{ "productId": 42, "quantity": 2 }</code></pre>
+<p><strong>Common request headers:</strong></p>
+<ul>
+  <li><strong>Authorization</strong> &mdash; credentials (token, API key, Basic auth).</li>
+  <li><strong>Content-Type</strong> &mdash; format of the body (JSON, form-data, XML).</li>
+  <li><strong>Accept</strong> &mdash; what the client wants back (<code>application/json</code>, <code>text/html</code>).</li>
+  <li><strong>User-Agent</strong> &mdash; identifies the client software; servers sometimes use it for analytics or routing.</li>
+  <li><strong>Cookie</strong> &mdash; session or tracking data from the browser.</li>
+</ul>
+<p><strong>Common response headers:</strong> <code>Content-Type</code>, <code>Cache-Control</code> (caching rules), <code>Set-Cookie</code>, <code>Location</code> (for redirects), and custom headers like <code>X-RateLimit-Remaining</code>.</p>
+<p>Headers are case-insensitive (<code>Content-Type</code> and <code>content-type</code> are the same) and can't contain newlines &mdash; they're a flat list of short strings, not a place for structured data.</p>
+'''
+
+ANSWERS[23] = r'''
+<p>The <strong>Accept</strong> header tells the server what response formats the client can understand. It's how one URL can serve different formats to different clients &mdash; JSON for your mobile app, HTML for your browser, CSV for a spreadsheet tool.</p>
+<pre><code>// same URL, three clients, three formats
+GET /reports/sales
+Accept: application/json        →   { "total": 12000, ... }
+
+GET /reports/sales
+Accept: text/csv                →   date,total\n2026-04-01,12000\n
+
+GET /reports/sales
+Accept: text/html               →   &lt;h1&gt;Sales report&lt;/h1&gt;&lt;p&gt;...&lt;/p&gt;</code></pre>
+<p><strong>How it works:</strong> the server picks the best match from the client's preferences and returns the resource in that format. If the server can't satisfy the request, it returns <strong>406 Not Acceptable</strong>.</p>
+<p><strong>Quality values:</strong> you can rank preferences with <code>q</code> weights:</p>
+<pre><code>Accept: application/json, text/html;q=0.9, */*;q=0.1
+// "I strongly prefer JSON, accept HTML, and anything else as last resort"</code></pre>
+<p><strong>Other Accept-* headers</strong> serve similar purposes:</p>
+<ul>
+  <li><strong>Accept-Language</strong> &mdash; what languages the client prefers (<code>en-US, de;q=0.8</code>).</li>
+  <li><strong>Accept-Encoding</strong> &mdash; what compression the client supports (<code>gzip, br</code>).</li>
+  <li><strong>Accept-Charset</strong> &mdash; what character encoding (mostly obsolete; UTF-8 is standard).</li>
+</ul>
+<p>Most REST APIs today default to JSON regardless of Accept, but supporting multiple formats is what content negotiation is for &mdash; remember to also set <code>Vary: Accept</code> in responses so caches store the right variant per format.</p>
+'''
+
+ANSWERS[24] = r'''
+<p>The <strong>Content-Type</strong> header tells the other side what format the <em>body</em> is in. It appears both in requests (describing what the client is sending) and responses (describing what the server is returning).</p>
+<pre><code>// client sends JSON
+POST /users
+Content-Type: application/json
+{ "name": "Ada" }
+
+// client sends HTML form data
+POST /login
+Content-Type: application/x-www-form-urlencoded
+email=ada@example.com&amp;password=hunter2
+
+// client uploads a file
+POST /photos
+Content-Type: multipart/form-data; boundary=----abc
+...
+
+// server returns JSON
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+{ "id": 42, "name": "Ada" }</code></pre>
+<p><strong>Common Content-Types:</strong></p>
+<ul>
+  <li><strong>application/json</strong> &mdash; JSON data; by far the most common for APIs.</li>
+  <li><strong>application/x-www-form-urlencoded</strong> &mdash; classic HTML form submissions.</li>
+  <li><strong>multipart/form-data</strong> &mdash; forms with file uploads.</li>
+  <li><strong>text/html</strong> &mdash; web pages.</li>
+  <li><strong>text/plain</strong> &mdash; plain text.</li>
+  <li><strong>application/xml</strong> &mdash; XML data.</li>
+  <li><strong>image/png</strong>, <strong>application/pdf</strong>, etc. &mdash; binary files.</li>
+</ul>
+<p><strong>Why it matters:</strong> without Content-Type, the receiver can't parse the body. If you forget it on a JSON POST request, Express's <code>express.json()</code> middleware skips the body and <code>req.body</code> is <code>undefined</code>. Setting a wrong Content-Type is a classic "my API doesn't work" debugging moment. Always include <code>charset=utf-8</code> for text-based formats to avoid encoding surprises.</p>
+'''
+
+ANSWERS[25] = r'''
+<p>Both query parameters and path parameters pass data to an API via the URL, but they have different purposes and conventions.</p>
+<pre><code>// path parameters — identify WHICH resource
+GET /users/42/posts/7
+           ↑          ↑
+      userId=42    postId=7
+
+// query parameters — filter, sort, paginate
+GET /users?role=admin&amp;sort=newest&amp;limit=20
+           ↑              ↑            ↑
+           filter         sort         pagination</code></pre>
+<table>
+  <tr><th>Aspect</th><th>Path parameter</th><th>Query parameter</th></tr>
+  <tr><td>Position in URL</td><td>Inside the path: <code>/users/{id}</code></td><td>After <code>?</code>: <code>?page=2</code></td></tr>
+  <tr><td>Purpose</td><td>Identify a specific resource</td><td>Modify, filter, or configure the request</td></tr>
+  <tr><td>Required?</td><td>Usually yes</td><td>Usually optional</td></tr>
+  <tr><td>Order matters?</td><td>Yes &mdash; <code>/a/b</code> ≠ <code>/b/a</code></td><td>No &mdash; <code>?a=1&amp;b=2</code> = <code>?b=2&amp;a=1</code></td></tr>
+  <tr><td>Cached by default?</td><td>Yes</td><td>Yes (full URL including query)</td></tr>
+  <tr><td>Can hold multiple values?</td><td>No</td><td>Yes: <code>?tag=js&amp;tag=web</code></td></tr>
+</table>
+<p><strong>Rule of thumb:</strong> path parameters for "which one" (<code>/users/42</code>, <code>/orders/abc</code>), query parameters for "how do you want it" (<code>?sort=date&amp;limit=10</code>). Using them the wrong way makes URLs hard to read and cache.</p>
+'''
+
+ANSWERS[26] = r'''
+<p><strong>CORS</strong> (Cross-Origin Resource Sharing) is a browser security feature that controls whether JavaScript on one domain can call an API on a different domain. Without CORS, your web app at <code>app.example.com</code> can't call your API at <code>api.example.com</code> &mdash; the browser blocks the response.</p>
+<pre><code>// browser on https://app.example.com runs:
+fetch("https://api.example.com/users")
+// → browser sends OPTIONS preflight first to check permission
+
+// API must respond with CORS headers
+Access-Control-Allow-Origin:      https://app.example.com
+Access-Control-Allow-Methods:     GET, POST
+Access-Control-Allow-Headers:     Authorization, Content-Type
+Access-Control-Allow-Credentials: true</code></pre>
+<p><strong>What CORS protects against:</strong> a malicious site (<code>evil.com</code>) trying to use your logged-in session to call <code>bank.com/transfer</code>. Browsers send the victim's cookies automatically, but CORS blocks the <em>response</em> from being read by the attacker's JavaScript.</p>
+<p><strong>Key concepts:</strong></p>
+<ul>
+  <li><strong>Origin</strong> = protocol + domain + port. <code>http://example.com</code> and <code>https://example.com</code> are different origins.</li>
+  <li><strong>Simple requests</strong> (GET/POST with plain content types) are sent directly.</li>
+  <li><strong>Preflight</strong> &mdash; for anything fancier (custom headers, JSON POST, PUT/DELETE), the browser sends an OPTIONS request first to check permission.</li>
+  <li><strong>CORS is a browser thing.</strong> Server-to-server calls and mobile apps ignore it entirely.</li>
+</ul>
+<p>To enable CORS on your API, respond with <code>Access-Control-Allow-Origin</code>. In Express, use the <code>cors</code> middleware with an allowlist &mdash; never <code>*</code> with credentials.</p>
+'''
+
+ANSWERS[27] = r'''
+<p><strong>OPTIONS</strong> asks the server "what can I do with this URL?" without actually doing it. In practice, its main use today is the <strong>CORS preflight</strong> &mdash; browsers automatically send OPTIONS before certain cross-origin requests to check if the real request is allowed.</p>
+<pre><code>// browser-generated preflight — happens before your actual fetch
+OPTIONS /users HTTP/1.1
+Origin: https://app.example.com
+Access-Control-Request-Method:  POST
+Access-Control-Request-Headers: Authorization, Content-Type
+
+// server's preflight response — lists what's permitted
+HTTP/1.1 204 No Content
+Access-Control-Allow-Origin:  https://app.example.com
+Access-Control-Allow-Methods: GET, POST, DELETE
+Access-Control-Allow-Headers: Authorization, Content-Type
+Access-Control-Max-Age:       86400             # cache this answer 24h</code></pre>
+<p><strong>When OPTIONS fires:</strong></p>
+<ul>
+  <li>Cross-origin request with a non-simple method (PUT, DELETE, PATCH).</li>
+  <li>Cross-origin request with a custom header (<code>Authorization</code>, <code>X-Request-Id</code>).</li>
+  <li>Cross-origin POST with a JSON body (<code>Content-Type: application/json</code>).</li>
+</ul>
+<p><strong>Other (rare) OPTIONS uses:</strong> discovering what methods a URL supports (<code>Allow: GET, POST, DELETE</code> in the response). Mostly legacy.</p>
+<p><strong>Performance tip:</strong> set <code>Access-Control-Max-Age</code> (up to 24h) so browsers cache the preflight answer. Without it, every cross-origin API call triggers two network round-trips &mdash; half your latency is preflights.</p>
+'''
+
+ANSWERS[28] = r'''
+<p>An <strong>API gateway</strong> sits in front of one or more backend services and acts as the single entry point for all API traffic. Clients talk to the gateway; the gateway routes, authenticates, rate-limits, and aggregates before passing the request to the right service.</p>
+<pre><code>                        ┌─────────────────┐
+                        │   API Gateway   │
+client  ───────▶        │                 │
+                        │ • auth          │  ──▶ user-service
+                        │ • rate limit    │  ──▶ orders-service
+                        │ • routing       │  ──▶ payments-service
+                        │ • logging       │  ──▶ notifications-service
+                        │ • caching       │
+                        └─────────────────┘</code></pre>
+<p><strong>What gateways typically do:</strong></p>
+<ul>
+  <li><strong>Route</strong> requests to the right backend service based on path (<code>/users/*</code> → user service).</li>
+  <li><strong>Authenticate</strong> once at the edge; pass a verified identity downstream.</li>
+  <li><strong>Rate limit</strong> across services to prevent one client from hogging everything.</li>
+  <li><strong>TLS termination</strong> &mdash; backend services can run plain HTTP internally.</li>
+  <li><strong>Aggregate</strong> &mdash; combine responses from multiple services into one (BFF pattern).</li>
+  <li><strong>Log &amp; monitor</strong> &mdash; one place to collect metrics and traces.</li>
+</ul>
+<p><strong>Common gateway software:</strong> <strong>Kong</strong>, <strong>KrakenD</strong>, <strong>Traefik</strong>, <strong>Envoy</strong>, cloud-native options like AWS API Gateway, Google Cloud Endpoints, and Azure API Management. For simpler needs, Nginx or a thin Node/Go service handles 80% of what a gateway does.</p>
+'''
+
+ANSWERS[29] = r'''
+<p><strong>Idempotency</strong> means making the same request multiple times has the same effect as making it once. Idempotent operations are safe to retry on network failures &mdash; a huge deal on flaky mobile connections.</p>
+<table>
+  <tr><th>Method</th><th>Idempotent?</th><th>Why</th></tr>
+  <tr><td>GET</td><td>Yes</td><td>Reading doesn't change state</td></tr>
+  <tr><td>PUT</td><td>Yes</td><td>Replacing with the same data = same state</td></tr>
+  <tr><td>DELETE</td><td>Yes</td><td>Deleting an already-deleted thing = still deleted</td></tr>
+  <tr><td>POST</td><td>No (default)</td><td>"Create a user" twice = two users</td></tr>
+  <tr><td>PATCH</td><td>Depends</td><td><code>{ "counter": { "$inc": 1 } }</code> is not idempotent</td></tr>
+</table>
+<p><strong>Making POST idempotent &mdash; the Idempotency-Key pattern:</strong></p>
+<pre><code>POST /payments HTTP/1.1
+Idempotency-Key: charge_2026_04_19_abc123       # client-generated unique id
+{ "amount": 100, "currency": "USD" }
+
+// server stores the result of each key for 24h
+// retrying with the same key returns the SAME response — no duplicate charge</code></pre>
+<p><strong>Why it matters in real life:</strong> users double-tap buttons; mobile networks drop mid-request; proxies retry automatically. Without idempotency, each retry might create a duplicate order, double-charge a card, or send the same email twice. Stripe, Shopify, and other payments APIs <em>require</em> idempotency keys for this reason. On your own API, opt-in via the <code>Idempotency-Key</code> header for any write that's expensive to duplicate.</p>
+'''
+
+ANSWERS[30] = r'''
+<p><strong>HATEOAS</strong> (Hypermedia As The Engine Of Application State) is the "full REST" principle: responses should include <em>links</em> that tell the client what it can do next, so the client doesn't hardcode URLs.</p>
+<pre><code>// plain REST response — client has to know /orders/42/cancel
+{
+  "id": 42,
+  "status": "pending",
+  "total": 99.99
+}
+
+// HATEOAS — response includes next-action links
+{
+  "id": 42,
+  "status": "pending",
+  "total": 99.99,
+  "_links": {
+    "self":   { "href": "/orders/42" },
+    "cancel": { "href": "/orders/42/cancel", "method": "POST" },
+    "pay":    { "href": "/orders/42/pay",    "method": "POST" },
+    "items":  { "href": "/orders/42/items" }
+  }
+}</code></pre>
+<p><strong>The theoretical benefit:</strong> the client doesn't need to know your URL structure. It fetches the root <code>/</code>, gets links, follows them. When URLs change, nothing breaks. It's how the <em>web</em> works &mdash; you don't hand-type URLs into your browser; you click links.</p>
+<p><strong>Reality in 2026:</strong> HATEOAS is rare. Most "RESTful" APIs skip it because:</p>
+<ul>
+  <li>It doubles response size with metadata most clients ignore.</li>
+  <li>Developers prefer typed API clients (OpenAPI-generated SDKs) that hardcode routes with compile-time safety.</li>
+  <li>The benefit (evolve URLs without breaking clients) is handled by versioning instead.</li>
+</ul>
+<p>You'll see HATEOAS in enterprise systems, hypermedia-focused frameworks (HTMX), and APIs that need deep discoverability (browser-rendered admin UIs). For most web APIs, it's optional.</p>
+'''
+
+ANSWERS[31] = r'''
+<p>The difference is whether the caller waits for the result (<strong>synchronous</strong>) or gets a ticket and checks back later (<strong>asynchronous</strong>).</p>
+<table>
+  <tr><th>Synchronous</th><th>Asynchronous</th></tr>
+  <tr><td>Client waits for the full response</td><td>Client gets an immediate "accepted" reply</td></tr>
+  <tr><td>Simple to code and understand</td><td>Requires polling, webhooks, or WebSocket updates</td></tr>
+  <tr><td>Times out on long-running work</td><td>Suits long-running tasks (PDF gen, AI inference)</td></tr>
+  <tr><td>Returns 200 with the result</td><td>Returns 202 Accepted with a status URL</td></tr>
+</table>
+<pre><code>// synchronous — client blocks until done
+POST /users
+{ "name": "Ada" }
+→ HTTP/1.1 201 Created
+  { "id": 42, "name": "Ada" }
+
+// asynchronous — server queues the job, returns a handle
+POST /reports/generate
+{ "type": "annual", "year": 2026 }
+→ HTTP/1.1 202 Accepted
+  Location: /jobs/xyz
+  { "jobId": "xyz", "status": "queued" }
+
+// client polls (or gets notified via webhook)
+GET /jobs/xyz
+→ { "status": "done", "result": "/reports/123.pdf" }</code></pre>
+<p><strong>When to use async:</strong> any operation that could take more than a few seconds &mdash; generating PDFs, transcoding video, running ML models, bulk imports. Sync calls fail over at load-balancer timeouts (30-60s), so async protects your API from cascading failures.</p>
+<p><strong>Delivery patterns:</strong> polling (client checks periodically), <strong>webhooks</strong> (server calls the client back), <strong>SSE/WebSocket</strong> (live push). Pick based on how often the status changes and who has the easier infrastructure.</p>
+'''
+
+ANSWERS[32] = r'''
+<p>A <strong>webhook</strong> is a reverse API call &mdash; instead of polling, you give a provider a URL and they POST to it when something happens. It flips the request direction: your server becomes the "client" and the third-party service becomes the "caller."</p>
+<pre><code>// 1. you register a webhook with Stripe
+POST https://api.stripe.com/v1/webhook_endpoints
+{ "url": "https://myapp.com/webhook/stripe",
+  "events": ["payment.succeeded", "payment.failed"] }
+
+// 2. later — a customer pays — Stripe POSTs to your URL
+POST /webhook/stripe HTTP/1.1
+Stripe-Signature: t=1234567,v1=abc123...
+{ "type": "payment.succeeded", "data": { ... } }
+
+// 3. your server processes the event (mark order paid, email receipt, etc.)</code></pre>
+<p><strong>Why webhooks beat polling:</strong> instead of asking "did anything happen?" every 30 seconds, you're notified instantly when something happens. Lower latency, lower load, real-time UX.</p>
+<p><strong>Handling webhooks correctly:</strong></p>
+<ul>
+  <li><strong>Verify signatures.</strong> Attackers can POST fake webhooks to your public endpoint. Providers sign payloads with a secret; you verify before trusting.</li>
+  <li><strong>Return 200 fast.</strong> Providers retry if you respond slowly or with an error. Queue work asynchronously; ack the webhook immediately.</li>
+  <li><strong>Dedupe by event ID.</strong> Providers retry on failure and can send the same event twice. Store processed IDs.</li>
+  <li><strong>Be idempotent.</strong> Processing the same event twice should produce the same result.</li>
+</ul>
+<p>Every modern SaaS (Stripe, GitHub, Slack, Shopify) offers webhooks. It's how integrations connect reliably &mdash; like an API-to-API push notification.</p>
+'''
+
+ANSWERS[33] = r'''
+<p><strong>Pagination</strong> is how APIs return manageable chunks of a large collection instead of dumping thousands of items in one response. Without pagination, fetching "all users" on a site with 10 million users would crash both the server and the client.</p>
+<table>
+  <tr><th>Style</th><th>URL looks like</th><th>Best for</th></tr>
+  <tr><td><strong>Offset / page</strong></td><td><code>?page=2&amp;limit=20</code></td><td>Small datasets, "jump to page" UIs</td></tr>
+  <tr><td><strong>Cursor / keyset</strong></td><td><code>?cursor=eyJpZCI6MTAwfQ</code></td><td>Large datasets, infinite scroll</td></tr>
+  <tr><td><strong>Time-based</strong></td><td><code>?before=2026-01-01&amp;limit=50</code></td><td>Feeds, activity streams</td></tr>
+</table>
+<pre><code>// offset pagination response
+{
+  "data": [ { "id": 21, ... }, { "id": 22, ... }, ... ],
+  "meta": {
+    "page":       2,
+    "limit":      20,
+    "total":      10_000,
+    "totalPages": 500
+  }
+}
+
+// cursor pagination response
+{
+  "data":       [ ... ],
+  "nextCursor": "eyJpZCI6MTAwfQ",        // opaque — clients pass it back as-is
+  "hasMore":    true
+}</code></pre>
+<p><strong>Offset vs cursor trade-off:</strong> offset is intuitive (<code>?page=5</code>) but slows down on huge datasets (the DB scans skipped rows). Cursor is fast and stable (insertions don't shift pages) but you can't "jump to page 50" &mdash; only next/previous.</p>
+<p><strong>Best practices:</strong> always cap <code>limit</code> (typically 100); include <code>hasMore</code> or <code>nextCursor</code> so clients don't guess when to stop; document defaults clearly. GitHub and Stripe use cursor pagination &mdash; a strong signal for APIs at scale.</p>
+'''
+
+ANSWERS[34] = r'''
+<p>In REST, a <strong>resource</strong> is the <em>thing</em> &mdash; a user, an order, a photo &mdash; that your API exposes. An <strong>endpoint</strong> is a specific URL+method combination that acts on a resource.</p>
+<pre><code>// resource: "user"
+// endpoints:
+GET    /users        # list users
+POST   /users        # create a user
+GET    /users/42     # fetch user 42
+PUT    /users/42     # replace user 42
+DELETE /users/42     # delete user 42</code></pre>
+<table>
+  <tr><th>Resource</th><th>Endpoint</th></tr>
+  <tr><td>Abstract concept ("a user")</td><td>Concrete URL + method (<code>GET /users/42</code>)</td></tr>
+  <tr><td>One per type of thing</td><td>Many per resource (read, create, update, delete, search, etc.)</td></tr>
+  <tr><td>Modeled as a noun</td><td>Method + URL combined</td></tr>
+</table>
+<p><strong>Think of it like files on a filesystem:</strong> the resource is the <em>file</em>; the endpoints are the <em>operations</em> you can perform on it (read, write, delete). The same file has multiple operations; two different files have their own operations.</p>
+<p>In API documentation, resources are usually top-level sections ("Users," "Orders," "Payments"); endpoints are listed underneath as the specific requests you can make against that resource. A good API design starts by identifying resources first, then deciding what endpoints each resource needs.</p>
+'''
+
+ANSWERS[35] = r'''
+<p>RESTful APIs are stateless, so every request must carry its own authentication &mdash; there's no "session" the server remembers. The client proves identity on each call, usually via an HTTP header.</p>
+<table>
+  <tr><th>Method</th><th>Header</th><th>Use when</th></tr>
+  <tr><td><strong>Bearer token (JWT)</strong></td><td><code>Authorization: Bearer eyJhbGc...</code></td><td>Most modern APIs</td></tr>
+  <tr><td><strong>API key</strong></td><td><code>X-API-Key: sk_abc123</code></td><td>Server-to-server, SDKs</td></tr>
+  <tr><td><strong>Basic auth</strong></td><td><code>Authorization: Basic base64(user:pass)</code></td><td>Simple tools, internal APIs</td></tr>
+  <tr><td><strong>OAuth 2.0</strong></td><td><code>Authorization: Bearer ya29...</code></td><td>User-facing "Sign in with..."</td></tr>
+  <tr><td><strong>Session cookie</strong></td><td><code>Cookie: session=...</code></td><td>Browser-only apps</td></tr>
+</table>
+<pre><code>// typical login → token flow
+POST /auth/login
+{ "email": "ada@example.com", "password": "hunter2" }
+→ { "accessToken": "eyJhbGc...", "expiresIn": 900, "refreshToken": "..." }
+
+// subsequent API calls carry the token
+GET /me
+Authorization: Bearer eyJhbGc...</code></pre>
+<p><strong>Best practices:</strong></p>
+<ul>
+  <li><strong>Always over HTTPS.</strong> Tokens and credentials in headers are plaintext &mdash; TLS is the only thing protecting them.</li>
+  <li><strong>Short token lifetimes</strong> (15 min) + refresh tokens to limit damage from leaks.</li>
+  <li><strong>Validate on every request.</strong> Stateless means no shortcuts.</li>
+  <li><strong>401 vs 403.</strong> 401 = "you're not authenticated"; 403 = "you are, but not allowed."</li>
+  <li><strong>Rate-limit login and refresh</strong> to slow brute-force attempts.</li>
+</ul>
+<p>For web apps needing sessions, use HttpOnly cookies &mdash; but APIs consumed by mobile apps, SPAs, or other services almost always go with Bearer tokens.</p>
+'''
+
+ANSWERS[36] = r'''
+<p>An <strong>API rate limit</strong> is a cap on how many requests a single client can make within a time window. It protects the API from abuse (bots, scrapers), accidental overuse (buggy retry loops), and fair sharing (one client can't hog the server).</p>
+<pre><code>// common server response when the limit is hit
+HTTP/1.1 429 Too Many Requests
+RateLimit-Limit:     1000                # allowed per window
+RateLimit-Remaining: 0                   # left in current window
+RateLimit-Reset:     60                  # seconds until reset
+Retry-After:         60
+
+{ "error": "Rate limit exceeded. Retry in 60 seconds." }</code></pre>
+<p><strong>How you can implement one in Express:</strong></p>
+<pre><code>import rateLimit from "express-rate-limit";
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,              // 15 minutes
+  max:      100,                          // 100 requests per IP per window
+  standardHeaders: true,
+  keyGenerator: (req) =&gt; req.user?.id ?? req.ip,
+});
+app.use("/api", limiter);</code></pre>
+<p><strong>Implementation options:</strong></p>
+<ul>
+  <li><strong>In-memory counter</strong> &mdash; fine for single-server apps.</li>
+  <li><strong>Redis counter</strong> &mdash; needed for multi-server deployments so counts are shared.</li>
+  <li><strong>Edge rate limiting</strong> (Cloudflare, AWS WAF) &mdash; stops abusive traffic before it reaches your servers.</li>
+</ul>
+<p><strong>Common algorithms:</strong> fixed window (simple but bursty at boundaries), sliding window (smoother), token bucket (allows bursts up to a cap), leaky bucket (smooths traffic). For most APIs, <strong>express-rate-limit</strong> + Redis is enough; reach for more complex algorithms only when you hit their limits.</p>
+'''
+
+ANSWERS[37] = r'''
+<p>APIs expose a large attack surface &mdash; they're programmatic, authenticated, and often public. Most security problems fall into a few well-known categories.</p>
+<table>
+  <tr><th>Concern</th><th>What attackers do</th><th>Defense</th></tr>
+  <tr><td><strong>Broken auth</strong></td><td>Steal tokens, bypass login, forge sessions</td><td>Short-lived tokens, HTTPS only, rate-limit login</td></tr>
+  <tr><td><strong>Broken access control</strong></td><td>User A reads/edits user B's data</td><td>Check ownership on every request</td></tr>
+  <tr><td><strong>Injection</strong></td><td>Malicious input in SQL, commands, NoSQL</td><td>Parameterized queries, input validation</td></tr>
+  <tr><td><strong>Mass assignment</strong></td><td>Send <code>{"role":"admin"}</code> to escalate</td><td>Whitelist allowed fields (Zod <code>.strict()</code>)</td></tr>
+  <tr><td><strong>Rate limit abuse</strong></td><td>Brute-force, DDoS, credential stuffing</td><td>Rate limits + CAPTCHA + edge firewalls</td></tr>
+  <tr><td><strong>Data exposure</strong></td><td>API leaks SSNs, passwords, PII in responses</td><td>Explicit field selection; never <code>SELECT *</code></td></tr>
+  <tr><td><strong>Insecure deserialization</strong></td><td>Malformed JSON triggers bugs</td><td>Validate schema with Zod/AJV</td></tr>
+  <tr><td><strong>CSRF</strong></td><td>Victim's browser submits requests attacker crafts</td><td>SameSite cookies, CSRF tokens</td></tr>
+</table>
+<p><strong>The OWASP API Security Top 10</strong> is the industry reference &mdash; read it. It names specific attack patterns and defenses for API work specifically.</p>
+<p><strong>Core habits:</strong> HTTPS everywhere, authenticate every request, validate every input, authorize every action (not just read access &mdash; specific records too), log enough to trace abuse, and <em>patch dependencies</em> (<code>npm audit</code>, Dependabot, Renovate). Most breaches aren't novel &mdash; they're outdated libraries or missing ownership checks.</p>
+'''
+
+ANSWERS[38] = r'''
+<p><strong>Public APIs</strong> are open to any developer who signs up for a key. <strong>Private (internal) APIs</strong> are only used inside one company.</p>
+<table>
+  <tr><th>Aspect</th><th>Public API</th><th>Private API</th></tr>
+  <tr><td>Who uses it</td><td>Anyone (with a key)</td><td>Your own apps / internal services</td></tr>
+  <tr><td>Docs</td><td>Polished, publicly hosted</td><td>Often sparse; internal wiki</td></tr>
+  <tr><td>Versioning</td><td>Critical &mdash; breaking changes = angry developers</td><td>Easier &mdash; coordinate via internal channels</td></tr>
+  <tr><td>Auth</td><td>API keys, OAuth, managed from a dashboard</td><td>Internal IAM, JWTs, service meshes (mTLS)</td></tr>
+  <tr><td>Rate limits</td><td>Enforced strictly, tiered by plan</td><td>Optional, mostly for sanity</td></tr>
+  <tr><td>Security</td><td>High stakes &mdash; bug bounty + strict review</td><td>High stakes <em>inside</em> the network</td></tr>
+  <tr><td>Examples</td><td>GitHub, Stripe, Twilio, OpenAI</td><td>Your users-service, billing-service</td></tr>
+</table>
+<p><strong>A third category &mdash; Partner APIs:</strong> semi-public, shared with specific business partners under a contract. Examples: a shipping carrier giving Amazon direct API access, a bank giving fintechs access to account data (Open Banking).</p>
+<p><strong>What changes in your code:</strong> public APIs need more-careful security (public = untrusted), more-careful versioning (you can't update millions of clients), and more-polished errors (developer experience sells). Private APIs can move faster but still deserve the same hygiene &mdash; insider threats, misconfigured services, and attackers-already-inside are real.</p>
+'''
+
+ANSWERS[39] = r'''
+<p>Good documentation is what makes an API actually usable. It should let a developer go from "I've never heard of this API" to "I just made my first successful call" in under 10 minutes.</p>
+<p><strong>What every API doc page should cover:</strong></p>
+<ul>
+  <li><strong>Authentication</strong> &mdash; how to get a key/token, where to put it.</li>
+  <li><strong>Base URL</strong> and environments (<code>api.example.com</code> vs <code>sandbox.example.com</code>).</li>
+  <li><strong>Endpoints</strong> &mdash; method, path, parameters, request body schema, response schema.</li>
+  <li><strong>Examples</strong> for every endpoint: a <code>curl</code> call and responses for both success and common errors.</li>
+  <li><strong>Error codes</strong> &mdash; what the 400/403/404/429 responses mean specifically for your API.</li>
+  <li><strong>Rate limits</strong> &mdash; caps and how to respond to 429.</li>
+  <li><strong>Versioning</strong> policy &mdash; how breaking changes are communicated.</li>
+  <li><strong>Quickstart</strong> &mdash; 5-line "hello world" example at the top.</li>
+</ul>
+<p><strong>Tools in 2026:</strong></p>
+<table>
+  <tr><th>Tool</th><th>Best for</th></tr>
+  <tr><td><strong>OpenAPI (Swagger)</strong></td><td>Machine-readable specs; auto-generated SDKs + docs</td></tr>
+  <tr><td><strong>Redoc / Swagger UI / Scalar</strong></td><td>Rendering OpenAPI into browsable docs</td></tr>
+  <tr><td><strong>Mintlify / Stoplight / ReadMe</strong></td><td>Polished hosted documentation sites</td></tr>
+  <tr><td><strong>Postman Collections</strong></td><td>Interactive "try it" alongside docs</td></tr>
+</table>
+<p>The best docs (Stripe, GitHub, Twilio) co-host examples in multiple languages (curl, JS, Python) and let you make live calls from the browser. The worst docs are out-of-date or missing entirely &mdash; if you can't keep docs in sync with the code, use OpenAPI so they're generated from the same source.</p>
+'''
+
+ANSWERS[40] = r'''
+<p><strong>Swagger</strong> is both a set of tools and the original name for what's now called <strong>OpenAPI</strong> &mdash; a standard format for describing REST APIs in a machine-readable YAML or JSON file. "Swagger spec" and "OpenAPI spec" mean the same thing today.</p>
+<pre><code># openapi.yaml — describes one endpoint
+openapi: 3.1.0
+info: { title: My API, version: 1.0.0 }
+
+paths:
+  /users/{id}:
+    get:
+      summary: Fetch a user by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          description: Found
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/User" }
+        "404":
+          description: Not found
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:    { type: string }
+        email: { type: string, format: email }
+        name:  { type: string }</code></pre>
+<p><strong>What OpenAPI unlocks:</strong></p>
+<ul>
+  <li><strong>Interactive docs.</strong> Swagger UI, Redoc, and Scalar render your spec into browseable, try-it-now docs.</li>
+  <li><strong>Client SDK generation.</strong> <code>openapi-generator</code> or <strong>Orval</strong> produce typed clients for 40+ languages from one file.</li>
+  <li><strong>Server stubs.</strong> Generate route definitions and typed handlers from the spec.</li>
+  <li><strong>Mock servers.</strong> Tools like <strong>Prism</strong> serve realistic fake responses before the real API exists.</li>
+  <li><strong>Contract testing.</strong> Validate that your real API matches the spec.</li>
+</ul>
+<p><strong>Two workflows:</strong> <em>spec-first</em> (write OpenAPI, then the code) or <em>code-first</em> (annotate code, extract spec). Spec-first suits teams that need backend + frontend + SDK alignment; code-first is simpler for solo-developed APIs. Either way, OpenAPI is now the universal format for REST &mdash; learn it once, use it everywhere.</p>
+'''
+
+ANSWERS[41] = r'''
+<p><strong>API mocking</strong> means simulating an API's responses without the real backend. You hit a fake server that returns canned data, so you can build and test against it before the real API exists, or when it's slow, expensive, or unreliable.</p>
+<pre><code>// you define — "if someone GETs /users/42, return this"
+GET /users/42
+→ {
+    "id":    42,
+    "name":  "Ada Lovelace",
+    "email": "ada@example.com"
+  }
+
+// point your app at http://localhost:4010 instead of the real API
+// your app doesn't know the difference</code></pre>
+<p><strong>When mocking helps:</strong></p>
+<ul>
+  <li><strong>Frontend/backend in parallel.</strong> Frontend doesn't wait for backend &mdash; it builds against the mock agreed in the spec.</li>
+  <li><strong>Third-party APIs.</strong> Paid APIs (payments, SMS) charge per call; mock them in tests.</li>
+  <li><strong>Unreliable dependencies.</strong> External APIs go down; mocks don't.</li>
+  <li><strong>Edge-case testing.</strong> Force a 500, timeout, or weird response that's hard to reproduce live.</li>
+  <li><strong>Offline development.</strong> Work on a plane, a bad Wi-Fi, a secure network.</li>
+</ul>
+<p><strong>Popular mocking tools:</strong></p>
+<ul>
+  <li><strong>Prism</strong> &mdash; generates a mock server from an OpenAPI spec; realistic, schema-validated responses.</li>
+  <li><strong>Mirage JS</strong>, <strong>MSW</strong> &mdash; frontend-side, intercept network calls in dev/test.</li>
+  <li><strong>Postman Mock Server</strong> &mdash; hosted mock from a Postman collection.</li>
+  <li><strong>WireMock</strong> &mdash; standalone Java-based mock with rich matching.</li>
+</ul>
+<p>Great mocks are driven by your real OpenAPI schema &mdash; so frontend, tests, and the real server all stay in sync.</p>
+'''
+
+ANSWERS[42] = r'''
+<p><strong>GraphQL</strong> is a query language for APIs (created by Facebook, open-sourced in 2015). Clients send a query describing <em>exactly</em> the fields they want, and the server returns just those fields &mdash; no more, no less.</p>
+<pre><code># client asks for a user's name and last 3 post titles
+query {
+  user(id: "42") {
+    name
+    posts(limit: 3) {
+      title
+    }
+  }
+}
+
+# response — exactly the shape requested
+{
+  "data": {
+    "user": {
+      "name": "Ada",
+      "posts": [
+        { "title": "On difference engines" },
+        { "title": "Notes on computing" },
+        { "title": "Algorithms for Bernoulli numbers" }
+      ]
+    }
+  }
+}</code></pre>
+<table>
+  <tr><th>GraphQL</th><th>REST</th></tr>
+  <tr><td>One endpoint (<code>/graphql</code>)</td><td>Many endpoints (<code>/users</code>, <code>/users/42/posts</code>, ...)</td></tr>
+  <tr><td>Client picks fields per request</td><td>Server decides what each endpoint returns</td></tr>
+  <tr><td>Strongly typed schema</td><td>Optional (OpenAPI)</td></tr>
+  <tr><td>One query = multiple resources</td><td>Multiple requests needed</td></tr>
+  <tr><td>Doesn't use HTTP status codes for errors</td><td>Uses 4xx/5xx</td></tr>
+  <tr><td>Hard to cache (POST-only)</td><td>Easy to cache (GET)</td></tr>
+</table>
+<p><strong>When GraphQL shines:</strong> frontend apps with varied screens that need different slices of the same data; avoiding "over-fetching" (getting more than you need) and "under-fetching" (needing multiple round-trips to assemble a view).</p>
+<p><strong>When REST still wins:</strong> simple CRUD, file uploads, HTTP caching, public APIs with varied consumers (REST is everyone's common denominator).</p>
+'''
+
+ANSWERS[43] = r'''
+<p>GraphQL's main wins come from solving two specific problems of REST APIs: <strong>over-fetching</strong> (you get more data than you need) and <strong>under-fetching</strong> (you need multiple requests to piece together one view).</p>
+<p><strong>Concrete benefits:</strong></p>
+<ul>
+  <li><strong>Ask for exactly what you need.</strong> A mobile screen showing just user name + avatar gets just those fields &mdash; no wasted bandwidth on the 30 other fields on the user record.</li>
+  <li><strong>One request, many resources.</strong> Fetching a user plus their latest posts plus the post authors' avatars is one query, not three round-trips.</li>
+  <li><strong>Strongly typed schema.</strong> The GraphQL schema is mandatory (unlike OpenAPI which is optional). Every field has a type; clients can auto-generate type-safe code (graphql-codegen).</li>
+  <li><strong>Evolves without versioning.</strong> Deprecate fields with <code>@deprecated</code> instead of releasing v2. Old queries keep working.</li>
+  <li><strong>Introspection.</strong> Clients can ask the server "what types and fields exist?" Tools like GraphiQL and Apollo Studio make exploration easy.</li>
+  <li><strong>Subscriptions</strong> built-in for real-time updates over WebSockets.</li>
+</ul>
+<p><strong>Where REST still wins:</strong></p>
+<ul>
+  <li><strong>HTTP caching</strong> &mdash; REST with GET + Cache-Control works with CDNs; GraphQL POSTs don't.</li>
+  <li><strong>File uploads</strong> &mdash; not part of spec; needs extensions.</li>
+  <li><strong>Simpler</strong> &mdash; for CRUD APIs, GraphQL is extra machinery.</li>
+  <li><strong>Public APIs</strong> &mdash; REST is the universal skill; GraphQL requires client adoption.</li>
+  <li><strong>N+1 queries</strong> &mdash; you must use DataLoader; easy to create performance nightmares otherwise.</li>
+</ul>
+<p>In 2026, many teams run <em>both</em>: REST for third-party integration, GraphQL for their own frontend. <strong>tRPC</strong> (for all-TypeScript stacks) gives GraphQL's type-safety without the schema overhead.</p>
+'''
+
+ANSWERS[44] = r'''
+<p>An <strong>API gateway</strong> is a server that sits between clients and your backend services, acting as the single entry point for all API traffic. Every request flows through it before reaching the real service.</p>
+<pre><code>client  ──▶  API Gateway  ──▶  user-service
+                           ──▶  orders-service
+                           ──▶  payments-service</code></pre>
+<p><strong>What the gateway handles (so your services don't have to):</strong></p>
+<ul>
+  <li><strong>Routing.</strong> <code>/api/users/*</code> → user service, <code>/api/orders/*</code> → orders service.</li>
+  <li><strong>Authentication.</strong> Validate tokens once at the edge; pass a verified identity to downstream services.</li>
+  <li><strong>Rate limiting.</strong> One place to enforce limits across all services.</li>
+  <li><strong>TLS termination.</strong> Services behind the gateway run plain HTTP internally.</li>
+  <li><strong>Logging &amp; monitoring.</strong> One consistent place to emit structured logs, traces, and metrics.</li>
+  <li><strong>Request/response transformation.</strong> Aggregate multiple backend calls into one client response (BFF pattern), or translate formats (gRPC ↔ REST).</li>
+  <li><strong>Caching.</strong> Cache GET responses at the gateway to reduce load on backends.</li>
+</ul>
+<p><strong>Benefits:</strong></p>
+<ul>
+  <li><strong>Decoupling.</strong> Clients don't know your internal service topology; change services without client rewrites.</li>
+  <li><strong>Cross-cutting concerns in one place.</strong> Update rate limiting once, not across 12 services.</li>
+  <li><strong>Security surface shrinkage.</strong> Backend services aren't directly exposed to the internet.</li>
+</ul>
+<p><strong>Popular options:</strong> <strong>Kong</strong>, <strong>KrakenD</strong>, <strong>Traefik</strong>, <strong>Envoy</strong>, and cloud-native services like AWS API Gateway, Google Cloud Endpoints, and Azure API Management. For simpler needs, Nginx handles 80% of what a gateway does.</p>
+'''
+
+ANSWERS[45] = r'''
+<p>Good API error handling has three parts: <strong>return the right status code</strong>, <strong>return a structured error body</strong>, and <strong>never leak internals</strong>.</p>
+<pre><code>// consistent error shape across ALL endpoints
+{
+  "error": {
+    "code":    "USER_NOT_FOUND",
+    "message": "No user with id 9999",
+    "details": [
+      { "field": "id", "issue": "invalid" }
+    ]
+  },
+  "reqId": "req_abc123"        // correlation id for support tickets
+}</code></pre>
+<p><strong>Match the status to what happened:</strong></p>
+<ul>
+  <li><strong>400 Bad Request</strong> &mdash; invalid input (malformed JSON, missing fields, bad types).</li>
+  <li><strong>401 Unauthorized</strong> &mdash; no or invalid credentials.</li>
+  <li><strong>403 Forbidden</strong> &mdash; authenticated but not allowed.</li>
+  <li><strong>404 Not Found</strong> &mdash; resource doesn't exist.</li>
+  <li><strong>409 Conflict</strong> &mdash; duplicate, stale update, already-exists.</li>
+  <li><strong>422 Unprocessable Entity</strong> &mdash; valid syntax but semantic validation failed.</li>
+  <li><strong>429 Too Many Requests</strong> &mdash; rate-limited.</li>
+  <li><strong>500 Internal Server Error</strong> &mdash; bug or crash in your code.</li>
+  <li><strong>502/503/504</strong> &mdash; upstream dependency failed or is down.</li>
+</ul>
+<p><strong>Critical rules:</strong></p>
+<ul>
+  <li><strong>Never return 200 with <code>{ "error": ... }</code>.</strong> Breaks every HTTP tool (monitoring, retries, caches).</li>
+  <li><strong>Include a machine-readable <code>code</code></strong> &mdash; clients can switch on <code>USER_NOT_FOUND</code>; they can't reliably parse human prose.</li>
+  <li><strong>Never leak stack traces or SQL errors</strong> in production responses &mdash; attackers use them to map your system.</li>
+  <li><strong>Always include a request id</strong> &mdash; users quote it in support tickets; you use it to find logs.</li>
+  <li><strong>Validation errors</strong> should list all issues at once, not one at a time (better UX).</li>
+</ul>
+<p><strong>Standard format reference:</strong> RFC 7807 <code>application/problem+json</code> defines a consistent error shape. Many APIs adopt a light version of it.</p>
+'''
+
+ANSWERS[46] = r'''
+<p>An <strong>API client</strong> is any piece of software that calls an API. That's a broad definition &mdash; a browser, a mobile app, a Python script, another server, even a CLI tool like <code>curl</code>.</p>
+<pre><code>// a raw HTTP client — works everywhere
+curl -H "Authorization: Bearer abc123" https://api.example.com/users/42
+
+// a browser calling with fetch
+const res = await fetch("https://api.example.com/users/42", {
+  headers: { "Authorization": "Bearer abc123" }
+});
+
+// a dedicated SDK — typed, handles auth, retries, pagination
+import { OpenAI } from "openai";
+const client = new OpenAI({ apiKey });
+const response = await client.chat.completions.create({ ... });</code></pre>
+<p><strong>Kinds of API clients, from low-level to high-level:</strong></p>
+<ul>
+  <li><strong>Raw HTTP libraries</strong> (<code>fetch</code>, <code>axios</code>, <code>requests</code> in Python) &mdash; give you full control, need you to handle everything (auth, retries, pagination).</li>
+  <li><strong>Generated clients</strong> (from OpenAPI, GraphQL schema) &mdash; typed, automatically in sync with the API.</li>
+  <li><strong>Official SDKs</strong> (Stripe, OpenAI, AWS) &mdash; polished, handle rate limits, retries, pagination, and edge cases.</li>
+  <li><strong>GUI clients</strong> (<strong>Postman</strong>, <strong>Insomnia</strong>, <strong>Bruno</strong>) &mdash; for manual exploration and testing.</li>
+</ul>
+<p><strong>What a good client library does for you:</strong> authentication, automatic retries with backoff, request/response serialization, timeouts, rate-limit awareness, pagination helpers, typed responses. Writing these from scratch is fiddly &mdash; prefer the official SDK when one exists; for smaller APIs, generate a client from the OpenAPI spec with <strong>openapi-typescript</strong> or <strong>Orval</strong>.</p>
+'''
+
+ANSWERS[47] = r'''
+<p>The <strong>response body</strong> is the optional data payload in an HTTP response &mdash; what follows the status line and headers. For APIs, this is usually the JSON you care about; for websites, it's the HTML page.</p>
+<pre><code>HTTP/1.1 200 OK                    ← status line
+Content-Type: application/json     ← headers
+Content-Length: 42
+Date: Sun, 19 Apr 2026 12:00:00 GMT
+
+{ "id": 42, "name": "Ada Lovelace" }   ← body</code></pre>
+<p><strong>What bodies carry, by status class:</strong></p>
+<ul>
+  <li><strong>2xx (success)</strong> &mdash; the requested resource, the created resource, or nothing (204 No Content).</li>
+  <li><strong>3xx (redirect)</strong> &mdash; usually empty; the <code>Location</code> header carries the real info.</li>
+  <li><strong>4xx (client error)</strong> &mdash; an error object explaining what was wrong.</li>
+  <li><strong>5xx (server error)</strong> &mdash; a generic error (don't leak internals).</li>
+</ul>
+<p><strong>Not every response has a body:</strong></p>
+<ul>
+  <li><strong>204 No Content</strong> &mdash; success with no data (common after DELETE).</li>
+  <li><strong>304 Not Modified</strong> &mdash; cached copy still valid; body elided.</li>
+  <li><strong>HEAD</strong> responses &mdash; headers only, by design.</li>
+</ul>
+<p><strong>Body format</strong> is declared in the <code>Content-Type</code> header (<code>application/json</code>, <code>text/html</code>, <code>image/png</code>, etc.). Binary responses (images, PDFs) send raw bytes, not JSON. Very large bodies can be <strong>streamed</strong> &mdash; the client processes chunks as they arrive without buffering the whole thing.</p>
+'''
+
+ANSWERS[48] = r'''
+<p>The key difference is <strong>statelessness</strong>. REST is strictly stateless by design; SOAP can (and often does) maintain state across calls.</p>
+<table>
+  <tr><th>Aspect</th><th>REST</th><th>SOAP</th></tr>
+  <tr><td>Server-side session state</td><td>None &mdash; each request is independent</td><td>Can track sessions, transactions, conversations</td></tr>
+  <tr><td>Every request self-contained?</td><td>Yes &mdash; carries all auth &amp; context</td><td>Not necessarily &mdash; may rely on prior state</td></tr>
+  <tr><td>Scalability</td><td>Easy &mdash; any server can handle any request</td><td>Harder &mdash; needs sticky sessions or shared state</td></tr>
+  <tr><td>Caching</td><td>Easy &mdash; GET responses are cacheable</td><td>Hard &mdash; stateful responses can't be cached</td></tr>
+  <tr><td>Transactions</td><td>Do it yourself (idempotency keys)</td><td>WS-AtomicTransaction built-in</td></tr>
+</table>
+<pre><code>// REST — stateless: every request carries auth
+GET /orders/42
+Authorization: Bearer abc123
+
+GET /orders/42/items
+Authorization: Bearer abc123          ← sent again
+
+// SOAP (stateful example) — session initiated once
+POST /BankService — login → session id
+POST /BankService — transfer money (uses session)
+POST /BankService — commit transaction
+POST /BankService — logout</code></pre>
+<p><strong>Why REST chose stateless:</strong> it scales trivially. Put 10 app servers behind a load balancer, any can handle any request &mdash; no sticky sessions needed. SOAP's statefulness creates complexity (session replication, affinity, failover) that REST avoids entirely.</p>
+<p><strong>Trade-off:</strong> REST forces clients to send auth + context on every call (slightly more bandwidth); SOAP's stateful transactions are cleaner to express in code but much harder to scale. REST's simplicity won for modern web.</p>
+'''
+
+ANSWERS[49] = r'''
+<p>An <strong>SDK</strong> (Software Development Kit) is a language-specific library that wraps an API. Instead of crafting HTTP requests by hand, you call typed methods that feel native to your programming language.</p>
+<pre><code>// without an SDK — raw HTTP
+const res = await fetch("https://api.stripe.com/v1/charges", {
+  method: "POST",
+  headers: {
+    "Authorization": "Bearer sk_test_...",
+    "Content-Type":  "application/x-www-form-urlencoded",
+  },
+  body: new URLSearchParams({ amount: "1000", currency: "usd", source: "tok_..." }),
+});
+const charge = await res.json();
+if (!res.ok) throw new Error(charge.error.message);
+
+// with Stripe's SDK — simpler, typed, handles errors
+import Stripe from "stripe";
+const stripe = new Stripe(process.env.STRIPE_KEY);
+const charge = await stripe.charges.create({
+  amount: 1000, currency: "usd", source: "tok_...",
+});</code></pre>
+<p><strong>What SDKs do beyond HTTP:</strong></p>
+<ul>
+  <li><strong>Authentication handling</strong> &mdash; inject tokens automatically.</li>
+  <li><strong>Retries with exponential backoff</strong> &mdash; handle transient failures.</li>
+  <li><strong>Rate-limit awareness</strong> &mdash; respect <code>Retry-After</code>.</li>
+  <li><strong>Pagination helpers</strong> &mdash; auto-iterate through pages.</li>
+  <li><strong>Type safety</strong> &mdash; compile-time checks for request/response shapes.</li>
+  <li><strong>Error classes</strong> &mdash; typed exceptions (<code>RateLimitError</code>, <code>AuthError</code>) instead of raw HTTP codes.</li>
+  <li><strong>Idempotency</strong> &mdash; auto-generate keys for retries.</li>
+</ul>
+<p><strong>SDK vs API:</strong> the API is the HTTP contract (what requests the server accepts); the SDK is one language's convenient wrapper around it. Multiple SDKs (JS, Python, Go, etc.) all talk to the same API. Many companies <strong>generate</strong> their SDKs from OpenAPI specs with <code>openapi-generator</code> &mdash; one source, many languages.</p>
+'''
+
+ANSWERS[50] = r'''
+<p>Testing an API happens at several layers, each catching different bugs. Good coverage combines all of them.</p>
+<table>
+  <tr><th>Test type</th><th>Tests</th><th>Tools</th></tr>
+  <tr><td><strong>Unit</strong></td><td>Individual functions, validators, business logic</td><td>Jest, Vitest, Mocha</td></tr>
+  <tr><td><strong>Integration</strong></td><td>Routes + DB + middleware working together</td><td>supertest + Jest; testcontainers for DB</td></tr>
+  <tr><td><strong>Contract</strong></td><td>API matches the OpenAPI spec</td><td>Dredd, Schemathesis, Pact</td></tr>
+  <tr><td><strong>End-to-end</strong></td><td>Real staging env; real browser/mobile calls</td><td>Playwright, Cypress</td></tr>
+  <tr><td><strong>Load</strong></td><td>Behavior under concurrent traffic</td><td>k6, Artillery, autocannon</td></tr>
+  <tr><td><strong>Security</strong></td><td>OWASP API Top-10 vulnerabilities</td><td>ZAP, Burp Suite, Snyk</td></tr>
+</table>
+<pre><code>// example integration test with supertest + Jest
+import request from "supertest";
+import { app } from "../app.js";
+
+describe("POST /users", () =&gt; {
+  it("creates a user and returns 201", async () =&gt; {
+    const res = await request(app)
+      .post("/users")
+      .send({ email: "ada@example.com", name: "Ada" })
+      .expect(201);
+    expect(res.body.id).toBeDefined();
+    expect(res.body.email).toBe("ada@example.com");
+  });
+
+  it("rejects invalid email with 400", async () =&gt; {
+    await request(app)
+      .post("/users")
+      .send({ email: "not-an-email" })
+      .expect(400);
+  });
+});</code></pre>
+<p><strong>Additional testing tools worth knowing:</strong></p>
+<ul>
+  <li><strong>Postman / Insomnia / Bruno</strong> &mdash; manual and scripted collection runs.</li>
+  <li><strong>curl + shell scripts</strong> &mdash; quick smoke tests.</li>
+  <li><strong>OpenAPI Examples</strong> &mdash; if your spec has examples, run contract tests against them automatically.</li>
+</ul>
+<p>Run unit + integration tests on every commit (CI), contract tests before deploy, load/security tests before major releases.</p>
+'''
+
+ANSWERS[51] = r'''
+<p>API testing tools split into a few categories depending on what you're checking.</p>
+<table>
+  <tr><th>Category</th><th>Tools</th></tr>
+  <tr><td><strong>Manual exploration &amp; collections</strong></td><td><strong>Postman</strong>, <strong>Insomnia</strong>, <strong>Bruno</strong>, <strong>Hoppscotch</strong>, <strong>HTTPie</strong></td></tr>
+  <tr><td><strong>Command-line</strong></td><td><strong>curl</strong>, <strong>HTTPie</strong>, <strong>xh</strong></td></tr>
+  <tr><td><strong>Integration tests (code)</strong></td><td><strong>supertest</strong> (Node), <strong>pytest + requests</strong> (Python), <strong>RestAssured</strong> (Java)</td></tr>
+  <tr><td><strong>Contract testing</strong></td><td><strong>Pact</strong>, <strong>Dredd</strong>, <strong>Schemathesis</strong> (spec ↔ implementation alignment)</td></tr>
+  <tr><td><strong>Load &amp; performance</strong></td><td><strong>k6</strong>, <strong>Artillery</strong>, <strong>autocannon</strong>, <strong>Locust</strong>, <strong>Apache JMeter</strong></td></tr>
+  <tr><td><strong>Security</strong></td><td><strong>OWASP ZAP</strong>, <strong>Burp Suite</strong>, <strong>nuclei</strong>, <strong>Snyk</strong></td></tr>
+  <tr><td><strong>Monitoring / synthetic</strong></td><td><strong>Checkly</strong>, <strong>Grafana Synthetic</strong>, <strong>UptimeRobot</strong>, <strong>Datadog Synthetics</strong></td></tr>
+  <tr><td><strong>Mock servers</strong></td><td><strong>Prism</strong>, <strong>WireMock</strong>, <strong>Mirage JS</strong>, <strong>MSW</strong></td></tr>
+</table>
+<pre><code># curl — the lowest-common-denominator test tool
+curl -i -X POST https://api.example.com/users \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $TOKEN" \
+  -d '{"email":"ada@example.com","name":"Ada"}'</code></pre>
+<p><strong>Recommended starter stack:</strong></p>
+<ul>
+  <li><strong>Postman / Bruno</strong> for exploration and shared team collections.</li>
+  <li><strong>supertest + Jest</strong> for automated integration tests in CI.</li>
+  <li><strong>k6</strong> for load tests before big releases.</li>
+  <li><strong>Prism</strong> to serve a mock from your OpenAPI spec when the backend isn't ready.</li>
+  <li><strong>Checkly</strong> or similar for synthetic production monitoring (real requests every minute).</li>
+</ul>
+<p>The single most impactful investment is a <strong>shared Postman collection</strong> (or Bruno, which is file-based and git-friendly) &mdash; new team members can explore your API in minutes.</p>
+'''
+
+ANSWERS[52] = r'''
+<p><strong>Postman</strong> is the most popular GUI for testing and exploring APIs. You type in a URL, headers, and body; click Send; see the response. It's much friendlier than raw <code>curl</code> for manual testing and saves your work as reusable "collections."</p>
+<p><strong>Key features:</strong></p>
+<ul>
+  <li><strong>Requests.</strong> Build any HTTP request with a form UI &mdash; method, URL, headers, body, params.</li>
+  <li><strong>Collections.</strong> Group related requests (e.g., "User API," "Orders API") and share with your team.</li>
+  <li><strong>Environments.</strong> Variables for dev/staging/prod (<code>{{baseUrl}}</code>, <code>{{apiKey}}</code>) so you can switch without editing URLs.</li>
+  <li><strong>Tests.</strong> Write JS snippets that assert on responses (<code>pm.expect(pm.response.code).to.equal(200)</code>).</li>
+  <li><strong>Collection Runner.</strong> Run a whole collection against an environment &mdash; lightweight integration testing.</li>
+  <li><strong>Mock servers.</strong> Host fake responses from your collection.</li>
+  <li><strong>Documentation.</strong> Auto-generate browsable docs from a collection.</li>
+  <li><strong>Code generation.</strong> Copy a request as curl, fetch, Python, etc.</li>
+</ul>
+<p><strong>Common usage pattern:</strong></p>
+<ol>
+  <li>Add an <strong>auth request</strong> that saves the returned token: <code>pm.environment.set("token", pm.response.json().accessToken)</code>.</li>
+  <li>Other requests reference <code>{{token}}</code> in the <code>Authorization</code> header.</li>
+  <li>Chain: run auth → run protected endpoints → verify responses.</li>
+</ol>
+<p><strong>Alternatives in 2026:</strong> <strong>Bruno</strong> (file-based, git-friendly, offline-first), <strong>Insomnia</strong>, <strong>Hoppscotch</strong> (open-source, web-based). Postman's push toward cloud accounts has driven many teams to Bruno; pick based on whether your requests need to live in git alongside code.</p>
+'''
+
+ANSWERS[53] = r'''
+<p>Both <strong>301</strong> and <strong>302</strong> tell the client "go to a different URL," but they differ in <em>permanence</em> and <em>caching behavior</em>.</p>
+<table>
+  <tr><th></th><th>301 Moved Permanently</th><th>302 Found</th></tr>
+  <tr><td>Meaning</td><td>Permanent redirect &mdash; the resource lives at the new URL forever</td><td>Temporary redirect &mdash; just go here for now</td></tr>
+  <tr><td>Browser caches?</td><td>Yes, aggressively &mdash; may skip the old URL entirely next time</td><td>No (by default)</td></tr>
+  <tr><td>Search engines</td><td>Updates indexed URL; passes link equity to new URL</td><td>Keeps old URL indexed</td></tr>
+  <tr><td>Method on redirect</td><td>Spec says keep the same; many browsers change POST → GET</td><td>Same inconsistency</td></tr>
+</table>
+<pre><code>// 301 — this page moved permanently
+HTTP/1.1 301 Moved Permanently
+Location: https://example.com/new-url
+
+// 302 — temporary detour (default for res.redirect() in Express)
+HTTP/1.1 302 Found
+Location: https://example.com/temp-url</code></pre>
+<p><strong>When to use which:</strong></p>
+<ul>
+  <li><strong>301</strong> &mdash; the old URL is gone for good: site migration, slug rename, forced HTTPS upgrade.</li>
+  <li><strong>302</strong> &mdash; temporary: A/B testing, maintenance pages, "login required, redirect after."</li>
+</ul>
+<p><strong>Modern alternatives:</strong> <strong>308 Permanent Redirect</strong> and <strong>307 Temporary Redirect</strong> are newer, stricter versions that preserve the HTTP method (a POST redirected with 308 stays a POST). For POST-then-redirect flows, <strong>303 See Other</strong> explicitly says "do a GET on the new URL" &mdash; exactly what you want after a form submission to prevent refresh-resubmits.</p>
+'''
+
+ANSWERS[54] = r'''
+<p><strong>401 Unauthorized</strong> means "you haven't proven who you are." Despite the confusing name, it's really about <em>authentication</em>, not authorization.</p>
+<pre><code>// no token at all
+GET /api/me
+
+HTTP/1.1 401 Unauthorized
+WWW-Authenticate: Bearer realm="api"
+{ "error": "Authentication required" }
+
+// invalid or expired token
+GET /api/me
+Authorization: Bearer abc.def.xyz
+
+HTTP/1.1 401 Unauthorized
+{ "error": "Token expired" }</code></pre>
+<p><strong>When 401 is the right answer:</strong></p>
+<ul>
+  <li>No <code>Authorization</code> header on a protected endpoint.</li>
+  <li>Invalid signature on a JWT.</li>
+  <li>Expired token.</li>
+  <li>Revoked session.</li>
+  <li>Wrong API key.</li>
+</ul>
+<p><strong>Don't confuse 401 with:</strong></p>
+<ul>
+  <li><strong>403 Forbidden</strong> &mdash; you're authenticated, but not allowed to do this action. "I know who you are; you can't do that."</li>
+  <li><strong>400 Bad Request</strong> &mdash; the request was malformed, independent of auth.</li>
+  <li><strong>404 Not Found</strong> &mdash; deliberately used by some APIs instead of 403, to avoid hinting that protected resources exist.</li>
+</ul>
+<p><strong>How clients should handle 401:</strong></p>
+<ul>
+  <li>Try refreshing the access token (if you have a refresh token) and retry the request.</li>
+  <li>If the refresh also fails, clear credentials and redirect to login.</li>
+  <li>Never retry indefinitely &mdash; the creds are dead until the user intervenes.</li>
+</ul>
+<p>HTTP's spec naming is historically messy: "401 Unauthorized" should really be called "Unauthenticated," but we're stuck with the name.</p>
+'''
+
+ANSWERS[55] = r'''
+<p><strong>403 Forbidden</strong> means "you're authenticated, but you're not allowed to do this." The server recognized you; it's refusing because the specific action isn't permitted for your account.</p>
+<pre><code>// you're logged in, but you tried to delete someone else's account
+DELETE /users/9999
+Authorization: Bearer &lt;my valid token, user id 42&gt;
+
+HTTP/1.1 403 Forbidden
+{
+  "error": "You don't have permission to delete this user",
+  "code": "INSUFFICIENT_PRIVILEGES"
+}</code></pre>
+<p><strong>Common 403 scenarios:</strong></p>
+<ul>
+  <li><strong>Wrong role.</strong> A regular user trying to hit an admin-only endpoint.</li>
+  <li><strong>Wrong resource owner.</strong> Trying to edit another user's post.</li>
+  <li><strong>Missing permission/scope.</strong> OAuth token doesn't have the required scope.</li>
+  <li><strong>Geographic restrictions.</strong> "Sorry, not available in your region."</li>
+  <li><strong>IP allowlist.</strong> Internal admin API blocks traffic from outside the office.</li>
+</ul>
+<p><strong>401 vs 403 in one sentence:</strong></p>
+<ul>
+  <li><strong>401</strong> &mdash; "I don't know who you are; please authenticate." → Client should send credentials (or redirect to login).</li>
+  <li><strong>403</strong> &mdash; "I know who you are, but no." → Client should show a "not permitted" UI; re-authenticating won't help.</li>
+</ul>
+<p><strong>Security consideration:</strong> for very sensitive resources (e.g., accessing other tenants' data), some APIs return 404 instead of 403 to avoid confirming that the resource exists. This is called <em>obscurity through status codes</em> and tradeoffs against clarity, but it's common in strict environments.</p>
+'''
+
+ANSWERS[56] = r'''
+<p>In REST, a <strong>resource</strong> is the core concept &mdash; it's any "thing" in your system that has a URL and can be acted on: a user, an order, a photo, a comment. Resources are modeled as <strong>nouns</strong>, never verbs.</p>
+<pre><code>// good — nouns
+GET    /users
+POST   /orders
+DELETE /photos/42
+
+// bad — verbs in the URL
+GET    /getAllUsers        ← let the HTTP method describe the action
+POST   /createOrder
+POST   /deletePhotoById/42</code></pre>
+<p><strong>Properties of a RESTful resource:</strong></p>
+<ul>
+  <li><strong>Identified by a URL.</strong> Every resource has a unique URI: <code>/users/42</code>.</li>
+  <li><strong>Uniform interface.</strong> The same HTTP methods apply across all resources (GET reads, DELETE removes) &mdash; predictability across the API.</li>
+  <li><strong>Multiple representations.</strong> The same resource can be returned as JSON, XML, or HTML depending on <code>Accept</code>.</li>
+  <li><strong>Can have sub-resources.</strong> <code>/users/42/posts</code> is the user's posts resource.</li>
+</ul>
+<p><strong>Resource vs endpoint:</strong> the resource is abstract ("a user"); an endpoint is a specific URL+method combination for acting on it (<code>GET /users/42</code> fetches, <code>DELETE /users/42</code> removes). Multiple endpoints belong to one resource.</p>
+<p><strong>Resource modeling tips:</strong> use <strong>plural nouns</strong> for collections (<code>/users</code>, not <code>/user</code>); use <strong>nesting</strong> sparingly (2 levels max: <code>/users/:id/posts</code> is fine, deeper gets painful); for non-CRUD operations that don't map to a verb cleanly, create a resource representing the <em>action</em>: <code>/orders/42/refund</code>, <code>/emails/verify</code>.</p>
+'''
+
+ANSWERS[57] = r'''
+<p>An <strong>API contract</strong> is the formal agreement describing <em>exactly</em> what the API accepts and returns: endpoints, parameter types, status codes, response shapes, auth requirements. It's the shared "truth" between backend and frontend teams.</p>
+<pre><code># an OpenAPI contract — machine-readable, language-agnostic
+paths:
+  /users/{id}:
+    get:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:    { type: string }
+                  email: { type: string, format: email }
+                  name:  { type: string }
+                required: [id, email, name]
+        "404":
+          description: User not found</code></pre>
+<p><strong>Why contracts matter:</strong></p>
+<ul>
+  <li><strong>Parallel development.</strong> Frontend and backend teams build simultaneously &mdash; frontend against a mock, backend against the spec. They integrate painlessly if both honor the contract.</li>
+  <li><strong>Generated clients.</strong> Type-safe SDKs in JS, Python, Go, etc. &mdash; generated from the same source.</li>
+  <li><strong>Contract testing.</strong> Tools like <strong>Pact</strong> and <strong>Dredd</strong> verify that the real API matches the spec, catching drift.</li>
+  <li><strong>Shared documentation.</strong> The spec doubles as docs &mdash; Swagger UI renders it browsably.</li>
+</ul>
+<p><strong>Common contract formats:</strong> <strong>OpenAPI</strong> (the REST standard), <strong>GraphQL schema</strong>, <strong>Protocol Buffers</strong> (for gRPC). Most modern teams use OpenAPI for REST APIs and commit the YAML alongside the code. When the contract changes, review becomes a code review &mdash; everyone sees the diff.</p>
+<p>The key insight: the contract is the <em>product</em>. Code implements it; tests verify it; clients consume it. Without a contract, every API change is an integration surprise.</p>
+'''
+
+ANSWERS[58] = r'''
+<p>"API" and "web service" overlap heavily, but they're not the same thing. Every web service is a kind of API, but not every API is a web service.</p>
+<table>
+  <tr><th></th><th>API</th><th>Web Service</th></tr>
+  <tr><td>Scope</td><td>Any programmatic interface (library, OS, web)</td><td>Specifically APIs over the network</td></tr>
+  <tr><td>Transport</td><td>Any &mdash; function calls, IPC, HTTP</td><td>Always over HTTP(S) or similar network protocol</td></tr>
+  <tr><td>Examples</td><td>DOM API, OS file API, Stripe API, REST API</td><td>SOAP service, REST API, gRPC service</td></tr>
+  <tr><td>Data format</td><td>Anything</td><td>Structured (JSON, XML)</td></tr>
+</table>
+<p><strong>Think of it this way:</strong> "API" is the general concept &mdash; any interface one piece of software exposes to another. "Web service" is a specific kind of API: one that lives on a server and is called over a network.</p>
+<pre><code>// a library API — function calls, no network
+import _ from "lodash";
+_.debounce(fn, 300);
+
+// an OS API — system calls
+fs.readFileSync("/etc/hosts");
+
+// a web service API — HTTP request
+fetch("https://api.example.com/users/42");</code></pre>
+<p><strong>Historical context:</strong> "Web service" was a popular term in the 2000s when SOAP dominated; it specifically implied "a SOAP/XML/WSDL system." Modern developers mostly just say "API" or "REST API" now &mdash; "web service" has faded as a marketing term.</p>
+<p>In 2026, "web service" is still sometimes used to distinguish network-based APIs from library APIs, but interchangeably with "web API" or "HTTP API" for most purposes. If someone asks "does this have an API?", they usually mean "can I call it over HTTP?"</p>
+'''
+
+ANSWERS[59] = r'''
+<p>REST (Representational State Transfer) is an <strong>architectural style</strong> for designing networked applications. Roy Fielding described it in his 2000 PhD dissertation, and it became the dominant way to build web APIs.</p>
+<p><strong>The six architectural constraints:</strong></p>
+<ul>
+  <li><strong>Client-server.</strong> Clear separation of concerns: clients handle UI, servers handle data and logic. Either can evolve independently.</li>
+  <li><strong>Stateless.</strong> Each request carries all information needed to process it. The server doesn't remember previous calls.</li>
+  <li><strong>Cacheable.</strong> Responses declare their cacheability (<code>Cache-Control</code>, <code>ETag</code>). Clients and intermediaries cache where allowed.</li>
+  <li><strong>Layered system.</strong> Clients can't tell whether they're talking to the origin server or a proxy/cache/load balancer. Enables scaling.</li>
+  <li><strong>Uniform interface.</strong> Resources have URLs, actions use standard HTTP methods, responses use standard formats and status codes. Consistency across the whole API.</li>
+  <li><strong>Code on demand (optional).</strong> Server can send executable code (JavaScript) to clients. Rarely used in practice.</li>
+</ul>
+<pre><code>// RESTful example — each request is self-contained
+GET /orders/42 HTTP/1.1
+Host: api.example.com
+Authorization: Bearer abc123           # carries auth itself
+Accept: application/json               # tells server the representation wanted
+
+// server response includes caching directive
+HTTP/1.1 200 OK
+ETag: "abc123"
+Cache-Control: max-age=60
+Content-Type: application/json</code></pre>
+<p><strong>Why REST won:</strong> it uses the existing web infrastructure &mdash; HTTP, URLs, standard methods, caches, load balancers. No new protocols, no custom tools. Any developer who knows HTTP can pick up any REST API in minutes. That accessibility is REST's biggest strength, and why it's the default choice for public APIs in 2026.</p>
+'''
+
+ANSWERS[60] = r'''
+<p>An <strong>endpoint URI</strong> is the complete address identifying a specific API resource or action. URI stands for <em>Uniform Resource Identifier</em> &mdash; essentially, a URL.</p>
+<pre><code>https://api.example.com/v1/users/42?include=posts
+└────┘  └──────────────┘ └─┘ └───────┘ └─────────────┘
+protocol      host       ver   path      query
+
+// common endpoint URI patterns:
+GET    /users                           # list
+GET    /users/42                        # item
+GET    /users/42/posts                  # sub-collection
+POST   /users                           # create
+GET    /users/42/posts?limit=20         # with query params
+GET    /users/search?q=ada              # action via URL</code></pre>
+<p><strong>Parts of a URI:</strong></p>
+<ul>
+  <li><strong>Scheme</strong> &mdash; <code>https://</code> (always HTTPS in production).</li>
+  <li><strong>Host</strong> &mdash; <code>api.example.com</code> (the server).</li>
+  <li><strong>Version</strong> &mdash; <code>/v1</code> (optional, URL-based versioning).</li>
+  <li><strong>Path</strong> &mdash; <code>/users/42</code> (identifies the resource).</li>
+  <li><strong>Query string</strong> &mdash; <code>?include=posts&amp;sort=newest</code> (filters/options).</li>
+  <li><strong>Fragment</strong> &mdash; <code>#section</code> (client-side only; APIs don't use this).</li>
+</ul>
+<p><strong>Design principles:</strong></p>
+<ul>
+  <li><strong>Use nouns, not verbs.</strong> <code>/users</code>, not <code>/getUsers</code>.</li>
+  <li><strong>Plurals for collections.</strong> <code>/users</code>, not <code>/user</code>.</li>
+  <li><strong>Lowercase with hyphens.</strong> <code>/user-profiles</code>, not <code>/UserProfiles</code>.</li>
+  <li><strong>Short, hierarchical paths.</strong> <code>/posts/42/comments</code> is fine; <code>/a/b/c/d/e</code> is not.</li>
+  <li><strong>Stable identifiers.</strong> Once published, don't change URIs &mdash; external clients break.</li>
+</ul>
+<p>A good URI tells the reader what resource you're dealing with just by looking at it.</p>
+'''
+
+ANSWERS[61] = r'''
+<p><strong>PATCH</strong> is for <em>partial updates</em> &mdash; you send only the fields you want to change, and the server leaves the rest alone. Contrast with PUT, which replaces the whole resource.</p>
+<pre><code>// existing user record
+{ "id": 42, "name": "Ada", "email": "ada@old.com", "age": 36, "role": "user" }
+
+// PATCH — update just the email
+PATCH /users/42
+Content-Type: application/json
+{ "email": "ada@new.com" }
+
+// result — only email changed; everything else preserved
+{ "id": 42, "name": "Ada", "email": "ada@new.com", "age": 36, "role": "user" }
+
+// PUT — would replace EVERYTHING
+PUT /users/42
+{ "email": "ada@new.com" }
+// result: other fields wiped or set to defaults!</code></pre>
+<p><strong>When to use PATCH:</strong></p>
+<ul>
+  <li>Updating one field (change password, toggle a preference).</li>
+  <li>Bandwidth-constrained clients (mobile apps).</li>
+  <li>Avoiding accidental overwrites of fields you didn't mean to touch.</li>
+  <li>Concurrent editors &mdash; only the fields each user changed get sent.</li>
+</ul>
+<p><strong>PATCH body formats:</strong></p>
+<ul>
+  <li><strong>Simple JSON</strong> (most common) &mdash; just the fields to change: <code>{ "email": "new@example.com" }</code>.</li>
+  <li><strong>JSON Merge Patch (RFC 7396)</strong> &mdash; same as above, but <code>null</code> means "delete this field."</li>
+  <li><strong>JSON Patch (RFC 6902)</strong> &mdash; explicit operations: <code>[{"op":"replace","path":"/email","value":"new@..."}]</code>. More verbose but supports precise changes like array inserts.</li>
+</ul>
+<p><strong>Idempotency:</strong> PATCH <em>usually</em> is idempotent (sending the same patch twice = same state), but not always (<code>{ "counter": { "$inc": 1 } }</code> isn't). Document clearly which endpoints are safe to retry.</p>
+'''
+
+ANSWERS[62] = r'''
+<p><strong>Throttling</strong> is a form of rate limiting that focuses on <em>short-window burst control</em> &mdash; "no more than X requests per second" &mdash; rather than long-window quotas ("1000 requests per day"). Its goal is to smooth traffic and protect downstream systems from sudden spikes.</p>
+<pre><code>// throttled — 10 req/sec max
+// request 1-10 in second N: accepted
+// request 11 in second N:   HTTP 429 Too Many Requests
+//                           Retry-After: 1
+
+// vs rate limit — 1000 req/hour
+// any 1000 requests anywhere in the hour are accepted
+// the 1001st is rejected until the hour window resets</code></pre>
+<table>
+  <tr><th>Throttling</th><th>Rate limiting</th></tr>
+  <tr><td>Short windows (seconds)</td><td>Long windows (minutes/hours/days)</td></tr>
+  <tr><td>Caps burst rate</td><td>Caps total volume</td></tr>
+  <tr><td>Protects server from overload</td><td>Protects from abuse, enforces quotas</td></tr>
+  <tr><td>Typical: 10-100 req/sec</td><td>Typical: 1000 req/hour</td></tr>
+</table>
+<p><strong>Implementation algorithms:</strong></p>
+<ul>
+  <li><strong>Token bucket</strong> &mdash; allows bursts up to the bucket size; refills at a steady rate. Feels natural to users.</li>
+  <li><strong>Leaky bucket</strong> &mdash; queues requests and drains at a fixed rate. Smooths spikes at the cost of latency.</li>
+  <li><strong>Sliding window</strong> &mdash; counts requests in the trailing N seconds. Accurate but more expensive.</li>
+</ul>
+<p><strong>In practice, you want both.</strong> A per-second throttle catches runaway loops; a per-hour rate limit catches abuse. Stack them: <code>max 10 req/sec AND max 1000 req/hour</code>. For serious protection, combine edge throttling (Cloudflare, AWS WAF) with app-level limits (express-rate-limit + Redis).</p>
+'''
+
+ANSWERS[63] = r'''
+<p>API versioning lets you evolve your API without breaking existing clients. Once an API is published, any breaking change &mdash; renamed field, removed endpoint, type change &mdash; needs a new version so old clients keep working.</p>
+<p><strong>Common versioning strategies:</strong></p>
+<table>
+  <tr><th>Strategy</th><th>Example</th><th>Pros</th><th>Cons</th></tr>
+  <tr><td><strong>URL path</strong></td><td><code>/v1/users</code>, <code>/v2/users</code></td><td>Obvious; easy to route; browsable</td><td>URLs change between versions</td></tr>
+  <tr><td><strong>Header</strong></td><td><code>Accept: application/vnd.myapi.v2+json</code></td><td>URLs stay clean</td><td>Less visible; harder to debug</td></tr>
+  <tr><td><strong>Query parameter</strong></td><td><code>/users?version=2</code></td><td>Simple</td><td>Easy to forget; pollutes URLs</td></tr>
+  <tr><td><strong>Subdomain</strong></td><td><code>v2.api.example.com</code></td><td>Independent deployment per version</td><td>DNS / cert complexity</td></tr>
+  <tr><td><strong>No versioning + evolve</strong></td><td>Same endpoint, add optional fields only</td><td>One version to maintain</td><td>Only works for narrow changes</td></tr>
+</table>
+<pre><code>// GitHub: URL path
+GET /v3/users/octocat
+
+// Stripe: date-based header
+GET /v1/charges
+Stripe-Version: 2024-06-20
+
+// GitHub (REST): media type header
+GET /users/octocat
+Accept: application/vnd.github.v3+json</code></pre>
+<p><strong>Best practices:</strong></p>
+<ul>
+  <li><strong>Only bump on breaking changes.</strong> Adding optional fields, new endpoints, and new status codes is safe &mdash; no version bump.</li>
+  <li><strong>Support old versions for 6-12 months.</strong> Mobile apps need time to roll out updates.</li>
+  <li><strong>Announce deprecations early</strong> with <code>Deprecation</code> and <code>Sunset</code> headers plus email warnings.</li>
+  <li><strong>Don't run too many versions in parallel.</strong> 2-3 is manageable; 10 is a nightmare.</li>
+  <li><strong>Document migration paths</strong> &mdash; "here's what changed between v1 and v2."</li>
+</ul>
+<p>Stripe's date-based versioning is a notable variant: clients pin to a specific spec date and get the API as of that date. It's powerful but heavy &mdash; most teams use URL-path versioning for its simplicity.</p>
+'''
+
+ANSWERS[64] = r'''
+<p><strong>API documentation</strong> is the human-readable guide for developers using your API. <strong>API specification</strong> is the machine-readable contract describing exactly what the API does. They're complementary: one for reading, one for tooling.</p>
+<table>
+  <tr><th>Documentation</th><th>Specification</th></tr>
+  <tr><td>For humans to read</td><td>For machines to parse</td></tr>
+  <tr><td>Narrative, tutorials, examples</td><td>Formal, structured, complete</td></tr>
+  <tr><td>Markdown, HTML, guidebooks</td><td>OpenAPI, GraphQL SDL, protobuf, WSDL</td></tr>
+  <tr><td>"How to authenticate," "Quickstart"</td><td>"GET /users/{id} returns User schema"</td></tr>
+  <tr><td>Explains <em>why</em> and <em>when</em></td><td>Defines <em>what</em> exactly</td></tr>
+  <tr><td>Often prose + examples</td><td>YAML/JSON with strict schema</td></tr>
+</table>
+<pre><code>// SPECIFICATION (OpenAPI) — what the API does
+paths:
+  /users/{id}:
+    get:
+      parameters: [{ name: id, in: path, schema: { type: string } }]
+      responses:
+        "200": { content: { application/json: { schema: { $ref: '#/.../User' } } } }
+
+// DOCUMENTATION — how and why to use it
+# Fetching a user
+
+Call `GET /users/{id}` with the user's UUID.
+The response includes the user's profile and public settings.
+
+```
+curl https://api.example.com/users/abc123
+```
+
+If you don't have a valid token, you'll get 401. See [Authentication](#auth)
+for how to get one.</code></pre>
+<p><strong>Best of both worlds:</strong> tools like <strong>Swagger UI</strong>, <strong>Redoc</strong>, and <strong>Scalar</strong> take an OpenAPI specification and render browsable docs. Tools like <strong>Mintlify</strong> or <strong>Stoplight</strong> combine narrative documentation with embedded spec-driven sections.</p>
+<p>The spec is the <strong>source of truth</strong>; documentation is how you make it friendly. Great APIs (Stripe, Twilio) have both: a spec for codegen and contract tests, plus thorough prose docs with examples in multiple languages.</p>
+'''
+
+ANSWERS[65] = r'''
+<p>A <strong>JWT</strong> (JSON Web Token) is a compact, URL-safe string that carries signed claims about a user or session. Clients typically get one at login and include it on every subsequent request.</p>
+<pre><code>// a JWT has three parts, separated by dots
+eyJhbGciOiJIUzI1NiJ9 . eyJzdWIiOiI0MiIsIm5hbWUiOiJBZGEifQ . sflKxwRJSMeKKF2...
+  ──── header ────     ─────── payload ───────             ── signature ──
+
+// decoded — header and payload are just base64url-encoded JSON
+header:  { "alg": "HS256", "typ": "JWT" }
+payload: { "sub": "42", "name": "Ada", "iat": 1713500000, "exp": 1713500900 }
+signature: HMACSHA256(base64url(header) + "." + base64url(payload), SECRET)</code></pre>
+<p><strong>Key properties:</strong></p>
+<ul>
+  <li><strong>Self-contained.</strong> All the claims (user id, role, expiry) are in the token &mdash; server can validate without a database lookup.</li>
+  <li><strong>Signed, not encrypted.</strong> Anyone can read the payload; only the server can create or verify signatures (unless encrypted with JWE).</li>
+  <li><strong>Stateless.</strong> No server-side session store needed.</li>
+  <li><strong>Tamper-proof.</strong> Changing any character invalidates the signature.</li>
+</ul>
+<p><strong>Standard claims (RFC 7519):</strong> <code>sub</code> (subject / user id), <code>iat</code> (issued at), <code>exp</code> (expires at), <code>iss</code> (issuer), <code>aud</code> (audience), <code>jti</code> (token id for revocation).</p>
+<p><strong>Gotchas:</strong></p>
+<ul>
+  <li><strong>JWTs are not encrypted.</strong> Don't put passwords or secrets inside &mdash; attackers can base64-decode.</li>
+  <li><strong>No easy revocation.</strong> Short expiry (15 min) + refresh tokens + Redis blocklist for immediate revocation.</li>
+  <li><strong>Never use <code>alg: none</code>.</strong> Old vulnerability &mdash; always enforce a specific algorithm server-side.</li>
+  <li><strong>Never store in <code>localStorage</code></strong> &mdash; XSS-exposed. Use HttpOnly cookies.</li>
+</ul>
+<p>JWTs are the default for stateless auth in modern APIs. For simpler apps, consider server-side sessions with Redis &mdash; easier revocation, smaller tokens.</p>
+'''
+
+ANSWERS[66] = r'''
+<p>Securing an API is layered &mdash; no single measure is enough. Real-world attacks target the weakest link.</p>
+<p><strong>The stack, from outside in:</strong></p>
+<ul>
+  <li><strong>HTTPS everywhere.</strong> All traffic encrypted; redirect HTTP → HTTPS; HSTS header. No plain HTTP, ever.</li>
+  <li><strong>Edge layer</strong> (Cloudflare, AWS WAF) &mdash; blocks obvious attacks (SQLi probes, DDoS, known bot networks) before hitting your servers.</li>
+  <li><strong>Authentication</strong> &mdash; every non-public endpoint requires valid credentials (JWT, OAuth, API key).</li>
+  <li><strong>Authorization</strong> &mdash; check ownership/permissions on <em>every</em> request; never trust the client's stated identity.</li>
+  <li><strong>Input validation.</strong> Schema-validate every input with Zod, Joi, or AJV. Reject unknown fields (mass assignment defense).</li>
+  <li><strong>Parameterized queries.</strong> SQL injection only happens with string concatenation &mdash; always use <code>$1</code>, <code>?</code> parameters.</li>
+  <li><strong>Rate limiting.</strong> Throttle per-IP and per-user; especially tight on auth endpoints.</li>
+  <li><strong>CORS</strong> with an allowlist (never <code>*</code> + credentials).</li>
+  <li><strong>Security headers</strong> via Helmet &mdash; CSP, HSTS, X-Content-Type-Options, etc.</li>
+  <li><strong>Secrets management.</strong> Env vars, AWS Secrets Manager, Vault &mdash; never commit keys to git.</li>
+  <li><strong>Dependency hygiene.</strong> <code>npm audit</code>, Dependabot, Renovate &mdash; most breaches are outdated libraries.</li>
+  <li><strong>Logging &amp; monitoring.</strong> Log auth failures, 4xx spikes, new user agents; alert on anomalies.</li>
+  <li><strong>Principle of least privilege.</strong> Tokens with narrow scopes; DB users with minimal grants; no "admin everywhere" accounts.</li>
+</ul>
+<p><strong>Reference:</strong> The <strong>OWASP API Security Top 10</strong> lists the most common API-specific vulnerabilities &mdash; broken authentication, broken object-level authorization, excessive data exposure, mass assignment, etc. Every API developer should read it.</p>
+<p>Security is not a feature you add &mdash; it's a mindset you maintain in every commit.</p>
+'''
+
+ANSWERS[67] = r'''
+<p>An <strong>API call</strong> is any individual request made to an API. It's the unit of interaction between a client and an API &mdash; one request → one response.</p>
+<pre><code>// each of these is an API call
+GET  https://api.github.com/users/torvalds           → 1 call
+POST https://api.stripe.com/v1/charges               → 1 call
+GET  https://api.openai.com/v1/chat/completions      → 1 call</code></pre>
+<p><strong>What happens during an API call:</strong></p>
+<ol>
+  <li>Client builds an HTTP request (method, URL, headers, optional body).</li>
+  <li>DNS resolves the hostname (<code>api.example.com</code> → IP address). Usually cached.</li>
+  <li>TLS handshake establishes an encrypted connection (reused for subsequent calls).</li>
+  <li>Request is sent over the network.</li>
+  <li>Server receives, routes, authenticates, authorizes, processes, and responds.</li>
+  <li>Response flows back; client parses status, headers, body.</li>
+</ol>
+<p><strong>Why "API call" matters in practice:</strong></p>
+<ul>
+  <li><strong>Billing.</strong> Many APIs charge per call (OpenAI: per tokens per call; Stripe: per operation).</li>
+  <li><strong>Rate limits.</strong> Measured in "calls per minute/hour" &mdash; each request counts as one call.</li>
+  <li><strong>Performance.</strong> Fewer calls = faster apps. Batch operations (one call creating 100 records) beat 100 individual calls.</li>
+  <li><strong>Monitoring.</strong> Metrics track "calls per second," "p99 latency per call," "error rate per call."</li>
+</ul>
+<p><strong>Minimizing calls:</strong> use bulk endpoints where possible; use GraphQL to fetch everything in one request; cache responses; batch asynchronously (debounce, throttle). Each API call has fixed overhead (DNS, TLS, network latency) &mdash; even a trivial call takes 50-200ms on the public internet. Reducing the number of calls often beats optimizing individual ones.</p>
+'''
+
+ANSWERS[68] = r'''
+<p>The <strong>Authorization</strong> header carries the credentials that prove who's making the request. It's how most API authentication happens in practice.</p>
+<pre><code>// Bearer tokens — the standard for modern APIs (JWT, OAuth)
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIi...
+
+// API keys — server-to-server
+Authorization: Bearer sk_live_abc123xyz
+
+// Basic auth — username:password base64-encoded (still used for simple tools)
+Authorization: Basic YWxhZGRpbjpvcGVuc2VzYW1l          # → aladdin:opensesame
+
+// Digest auth — older challenge-response (rare in modern APIs)
+Authorization: Digest username="Mufasa", realm="...", ...
+
+// custom schemes — company-specific, e.g., AWS SigV4
+Authorization: AWS4-HMAC-SHA256 Credential=..., Signature=...</code></pre>
+<p><strong>Why a dedicated header:</strong></p>
+<ul>
+  <li><strong>Standard location.</strong> Every HTTP library, proxy, and logging tool knows where to find credentials &mdash; and where to redact them.</li>
+  <li><strong>Not in the URL.</strong> URLs end up in logs, browser history, referrer headers &mdash; leaking credentials. Headers are safer.</li>
+  <li><strong>Survives redirects carefully.</strong> Good HTTP clients strip <code>Authorization</code> on cross-origin redirects to prevent credential leaks.</li>
+</ul>
+<p><strong>The scheme token</strong> (<code>Bearer</code>, <code>Basic</code>, etc.) tells the server how to interpret the value. <code>Bearer</code> means "this token alone grants access" &mdash; no challenge, no username/password exchange. The name comes from "whoever bears this token has access."</p>
+<p><strong>Critical rules:</strong> always over HTTPS (header is plaintext otherwise); never log the raw value (redact to <code>***</code>); reject requests missing or malformed. 401 responses typically include a <code>WWW-Authenticate</code> header hinting at the expected scheme: <code>WWW-Authenticate: Bearer realm="api"</code>.</p>
+'''
+
+ANSWERS[69] = r'''
+<p>An <strong>API response</strong> is the server's answer to a request. Every API call gets exactly one response &mdash; even if the request is malformed or unauthorized, you still get a response (with an error status).</p>
+<pre><code>HTTP/1.1 200 OK                                     ← status line
+Content-Type: application/json; charset=utf-8       ← headers
+Content-Length: 54
+Date: Sun, 19 Apr 2026 12:00:00 GMT
+ETag: "abc123"
+Cache-Control: public, max-age=60
+
+{ "id": 42, "name": "Ada", "role": "admin" }        ← body</code></pre>
+<p><strong>Three parts, parallel to a request:</strong></p>
+<ul>
+  <li><strong>Status line</strong> &mdash; HTTP version + status code + reason phrase (<code>200 OK</code>, <code>404 Not Found</code>).</li>
+  <li><strong>Headers</strong> &mdash; metadata: content type, caching, CORS, server info, rate-limit counters.</li>
+  <li><strong>Body</strong> &mdash; optional payload (JSON, HTML, binary). Empty for 204 or 304.</li>
+</ul>
+<p><strong>What clients look at first:</strong></p>
+<ol>
+  <li><strong>Status code</strong> &mdash; tells whether the request succeeded, what went wrong, whether to retry.</li>
+  <li><strong>Content-Type</strong> &mdash; how to parse the body.</li>
+  <li><strong>Rate-limit headers</strong> (<code>RateLimit-Remaining</code>) &mdash; pace future calls.</li>
+  <li><strong>ETag / Last-Modified</strong> &mdash; for caching and conditional requests.</li>
+  <li><strong>Body</strong> &mdash; the actual data.</li>
+</ol>
+<p><strong>Good API responses are consistent:</strong></p>
+<ul>
+  <li>Same error shape across all endpoints (<code>{ error: { code, message } }</code>).</li>
+  <li>Always include a request id for support.</li>
+  <li>Match the HTTP status to the actual result.</li>
+  <li>Never leak stack traces or internal details.</li>
+  <li>Include all relevant rate-limit headers.</li>
+</ul>
+<p>Inconsistent responses (different error shapes per endpoint, wrong status codes, mixing HTML and JSON) are the single biggest complaint developers have about APIs.</p>
+'''
+
+ANSWERS[70] = r'''
+<p>Both <strong>4xx</strong> and <strong>5xx</strong> are errors, but they assign blame to different parties.</p>
+<table>
+  <tr><th>4xx &mdash; Client Error</th><th>5xx &mdash; Server Error</th></tr>
+  <tr><td>The client sent a bad request</td><td>The server failed to handle a valid request</td></tr>
+  <tr><td>Fixing requires client change</td><td>Fixing requires server-side work</td></tr>
+  <tr><td>Retrying the same request won't help</td><td>Retrying <em>might</em> help (with backoff)</td></tr>
+  <tr><td>Not a server bug; not alerted on</td><td>A server bug; triggers alerts</td></tr>
+  <tr><td>400 Bad Request, 401, 403, 404, 409, 422, 429</td><td>500 Internal Error, 502 Bad Gateway, 503 Unavailable, 504 Gateway Timeout</td></tr>
+</table>
+<pre><code>// 4xx — client did something wrong
+POST /users
+{ "email": "not-an-email" }
+→ 400 Bad Request
+  { "error": "email must be a valid email address" }
+
+// 5xx — server failed unexpectedly
+GET /users/42
+→ 500 Internal Server Error
+  { "error": "Something went wrong", "reqId": "req_abc" }</code></pre>
+<p><strong>Operational implications:</strong></p>
+<ul>
+  <li><strong>Monitoring:</strong> 5xx errors are usually alerts (your app is broken). 4xx errors are information (you're being probed, or a client has bugs). A spike in 401s often indicates a credential-stuffing attack.</li>
+  <li><strong>Retries:</strong> client libraries retry 5xx with exponential backoff; they don't retry most 4xx (except 429 "too many requests").</li>
+  <li><strong>Logging:</strong> log 5xx with full stack trace; log 4xx with just the request summary.</li>
+  <li><strong>SLA impact:</strong> 5xx counts against your uptime SLA; 4xx doesn't (the client caused the error).</li>
+</ul>
+<p><strong>Common confusion:</strong> is a validation failure a 400 or 422? Both are valid &mdash; 400 for malformed (can't even parse), 422 for well-formed but semantically wrong ("email already taken"). Pick one style and stay consistent.</p>
+'''
+
+ANSWERS[71] = r'''
+<p>A <strong>RESTful web service</strong> is a web API built following REST architectural principles. It exposes resources over HTTP, uses standard HTTP methods for actions, and returns representations (usually JSON).</p>
+<pre><code>// a small RESTful web service for a library
+GET    /books              # list
+GET    /books/42           # one book
+POST   /books              # add new book
+PUT    /books/42           # replace book 42
+PATCH  /books/42           # update fields
+DELETE /books/42           # remove
+
+GET    /books/42/reviews   # sub-resource</code></pre>
+<p><strong>What makes a web service "RESTful":</strong></p>
+<ul>
+  <li><strong>Resources have URLs.</strong> Every entity you can access has a stable URI.</li>
+  <li><strong>HTTP methods carry meaning.</strong> GET reads, POST creates, DELETE removes &mdash; you don't invent your own verbs.</li>
+  <li><strong>Stateless.</strong> Each request is self-contained; no server-side session needed.</li>
+  <li><strong>Standard status codes.</strong> 200, 201, 400, 404, 500 &mdash; not custom or reused incorrectly.</li>
+  <li><strong>Multiple representations.</strong> JSON by default; XML, HTML possible.</li>
+  <li><strong>Cacheable.</strong> Responses declare what can be cached.</li>
+</ul>
+<p><strong>Historical context:</strong> "Web service" was the 2000s term when SOAP-based services dominated. As REST won out in the 2010s, people started saying "REST API" or "RESTful API" more often &mdash; but "RESTful web service" still appears in textbooks and enterprise codebases.</p>
+<p>In practice, these terms are interchangeable:</p>
+<ul>
+  <li>RESTful web service</li>
+  <li>REST API</li>
+  <li>RESTful API</li>
+  <li>HTTP API (when being pedantic about true REST compliance)</li>
+</ul>
+<p>They all mean: a server that speaks HTTP, organizes data as resources, and uses standard verbs. That's the web-service API of 2026.</p>
+'''
+
+ANSWERS[72] = r'''
+<p>REST is defined by six <strong>architectural constraints</strong> from Roy Fielding's dissertation. A service that follows all six is "fully RESTful"; most real APIs follow 4-5 and still call themselves REST.</p>
+<ol>
+  <li><strong>Client-Server.</strong> Clear separation: client handles UI and state; server handles data and business logic. Each can evolve independently.</li>
+  <li><strong>Stateless.</strong> Each request carries all context (auth, parameters). The server does not remember previous requests. Scales trivially &mdash; any server can handle any request.</li>
+  <li><strong>Cacheable.</strong> Responses declare whether they can be cached (<code>Cache-Control</code>, <code>ETag</code>). Clients and intermediaries cache to reduce load and latency.</li>
+  <li><strong>Uniform Interface.</strong> Consistency across the API:
+    <ul>
+      <li>Resources identified by URIs (<code>/users/42</code>).</li>
+      <li>Manipulated through representations (JSON).</li>
+      <li>Self-descriptive messages (status codes, content types).</li>
+      <li>HATEOAS (responses include links to related resources).</li>
+    </ul>
+  </li>
+  <li><strong>Layered System.</strong> Clients can't tell if they're talking to the origin server or a cache/proxy/load balancer. Enables horizontal scaling, security boundaries, and gradual migration.</li>
+  <li><strong>Code on Demand (optional).</strong> Servers can deliver executable code (JavaScript) to clients. Rarely used; the only optional constraint.</li>
+</ol>
+<p><strong>Practical 2026 reality:</strong> most APIs follow 1-5 but skip HATEOAS (part of "uniform interface"). Strict Fielding purists call this <em>REST-ish</em>; the rest of the industry just says "REST."</p>
+<p><strong>Why these constraints won:</strong> they describe how the web itself already worked. Adopting them gets you scalability, caching, and interoperability for free &mdash; using infrastructure already deployed everywhere (browsers, CDNs, proxies). That fit with existing systems is REST's killer feature.</p>
+'''
+
+ANSWERS[73] = r'''
+<p>An <strong>API proxy</strong> is a lightweight layer that sits in front of an API, forwarding requests but adding or adjusting behavior. Simpler than a full API gateway, which does more (routing, aggregation, transformations).</p>
+<pre><code>client  ──▶  API Proxy  ──▶  real API
+              ├─ adds authentication
+              ├─ logs the request
+              ├─ caches the response
+              └─ transforms headers</code></pre>
+<p><strong>Common proxy uses:</strong></p>
+<ul>
+  <li><strong>Hide API keys from the browser.</strong> Your frontend calls your proxy; the proxy adds the real API key server-side before forwarding. Users never see the key.</li>
+  <li><strong>Add authentication.</strong> Proxy validates tokens for unauthenticated backends.</li>
+  <li><strong>Rate limiting.</strong> One place to throttle external API usage across multiple clients.</li>
+  <li><strong>Request/response transformation.</strong> Fix a third-party API's ugly response shape; add headers; rewrite paths.</li>
+  <li><strong>Caching.</strong> Cache expensive upstream calls.</li>
+  <li><strong>CORS bypass.</strong> Your server calls the third-party API from a same-origin proxy, avoiding browser CORS restrictions.</li>
+  <li><strong>Logging &amp; monitoring.</strong> Observe all traffic in one place.</li>
+</ul>
+<pre><code>// Node.js example — proxy weather API with caching
+app.get("/weather/:city", async (req, res) =&gt; {
+  const cached = cache.get(req.params.city);
+  if (cached) return res.json(cached);
+
+  const r = await fetch(`https://api.openweather.com/${req.params.city}`, {
+    headers: { "API-Key": process.env.OPENWEATHER_KEY },
+  });
+  const data = await r.json();
+  cache.set(req.params.city, data, 300);  // 5 min TTL
+  res.json(data);
+});</code></pre>
+<p><strong>Proxy vs gateway:</strong> a proxy typically fronts <em>one</em> API with simple logic; a gateway fronts <em>many</em> APIs with routing, auth, and orchestration. For small needs, a Node proxy is enough; for multi-service architectures, reach for Kong, KrakenD, or AWS API Gateway.</p>
+'''
+
+ANSWERS[74] = r'''
+<p>Caching in APIs comes in layers &mdash; from the browser to the edge to the server. Each layer saves bandwidth, reduces latency, and shields your server from load.</p>
+<pre><code>// server response with HTTP cache headers
+GET /posts/42
+
+HTTP/1.1 200 OK
+Cache-Control: public, max-age=60
+ETag: "v1-abc123"
+Last-Modified: Sun, 19 Apr 2026 12:00:00 GMT</code></pre>
+<table>
+  <tr><th>Layer</th><th>How</th><th>Benefit</th></tr>
+  <tr><td><strong>Browser cache</strong></td><td><code>Cache-Control</code> headers</td><td>Zero network calls for cached content</td></tr>
+  <tr><td><strong>CDN / edge</strong></td><td>Cloudflare, CloudFront at the edge</td><td>Near-instant for global users</td></tr>
+  <tr><td><strong>Reverse proxy</strong></td><td>Nginx, Varnish in front of Node</td><td>Protects app servers from spikes</td></tr>
+  <tr><td><strong>App-layer cache</strong></td><td>Redis for query results</td><td>Avoids repeated DB hits</td></tr>
+  <tr><td><strong>DB cache</strong></td><td>Postgres shared buffers, Redis</td><td>Query plans, indexes, hot rows</td></tr>
+</table>
+<p><strong>Key HTTP caching headers:</strong></p>
+<ul>
+  <li><strong>Cache-Control</strong> &mdash; <code>public, max-age=60</code> (cache 60s anywhere), <code>private</code> (browser only), <code>no-store</code> (don't cache at all).</li>
+  <li><strong>ETag</strong> &mdash; fingerprint of the response. Client sends it back as <code>If-None-Match</code>; server returns 304 if unchanged.</li>
+  <li><strong>Last-Modified</strong> &mdash; timestamp alternative to ETag; less precise but cheaper.</li>
+  <li><strong>Vary</strong> &mdash; tells caches which headers affect the response (<code>Vary: Accept, Accept-Language</code>).</li>
+</ul>
+<p><strong>Redis caching pattern:</strong></p>
+<pre><code>const cached = await redis.get(`user:${id}`);
+if (cached) return res.json(JSON.parse(cached));
+
+const user = await db.user.findUnique({ where: { id } });
+await redis.setex(`user:${id}`, 60, JSON.stringify(user));   // 60s TTL
+res.json(user);</code></pre>
+<p><strong>Cache invalidation &mdash; the hard part.</strong> When data changes, delete the cache entry (<code>redis.del(...)</code>); or use short TTLs and tolerate brief staleness. Mixing strategies (CDN + Redis + HTTP headers) is common but tricky to debug &mdash; add logs that show cache hits/misses.</p>
+'''
+
+ANSWERS[75] = r'''
+<p>A <strong>RESTful API endpoint</strong> is a specific HTTP method + URL combination exposed by a REST API. Each endpoint does one thing &mdash; fetch a resource, create one, update one, delete one.</p>
+<pre><code>// each of these is a distinct endpoint
+GET    /users              # list users            (method: GET    + path: /users)
+POST   /users              # create a user         (method: POST   + path: /users)
+GET    /users/42           # fetch user 42         (method: GET    + path: /users/:id)
+PATCH  /users/42           # update user 42        (method: PATCH  + path: /users/:id)
+DELETE /users/42           # delete user 42        (method: DELETE + path: /users/:id)</code></pre>
+<p><strong>Characteristics of a good RESTful endpoint:</strong></p>
+<ul>
+  <li><strong>Noun-based URL.</strong> <code>/users</code>, not <code>/getUsers</code>. Let the method carry the verb.</li>
+  <li><strong>Resource-oriented.</strong> Corresponds to one entity or collection.</li>
+  <li><strong>Predictable.</strong> Same shape across the API (<code>/users</code>, <code>/orders</code>, <code>/products</code> all work the same).</li>
+  <li><strong>Uses the right HTTP method.</strong> GET = read, POST = create, PUT = replace, PATCH = update, DELETE = remove.</li>
+  <li><strong>Returns proper status codes.</strong> 200/201/204 for success, 400/401/403/404 for client errors, 500 for server errors.</li>
+  <li><strong>Consistent error format.</strong> Clients can parse one error shape across all endpoints.</li>
+  <li><strong>Documented.</strong> OpenAPI spec describes inputs, outputs, and errors precisely.</li>
+</ul>
+<p><strong>Anti-pattern examples (not RESTful):</strong></p>
+<ul>
+  <li><code>POST /getUser?id=42</code> &mdash; should be <code>GET /users/42</code>.</li>
+  <li><code>GET /users/42/delete</code> &mdash; should be <code>DELETE /users/42</code>.</li>
+  <li><code>POST /users/delete-many</code> &mdash; acceptable for bulk ops, but prefer <code>DELETE</code> with a filter if possible.</li>
+  <li>Returning 200 with <code>{ error: "..." }</code> &mdash; should be 400/404/500 with a proper body.</li>
+</ul>
+<p>The endpoint is the <em>touchable surface</em> of your API. Every endpoint lives forever once shipped (versioning to change), so design thoughtfully.</p>
+'''
+
+ANSWERS[76] = r'''
+<p>RESTful APIs dominate the web because they hit a sweet spot of simplicity, scalability, and compatibility with existing infrastructure.</p>
+<p><strong>Key benefits:</strong></p>
+<ul>
+  <li><strong>Uses existing infrastructure.</strong> HTTP, URLs, status codes, caching, load balancers, CDNs, proxies &mdash; all already deployed worldwide. No new protocols, no new tools.</li>
+  <li><strong>Language-agnostic.</strong> Any language with an HTTP library (all of them) can call a REST API. Your Python script talks to a Node backend written by strangers. That interoperability is unmatched.</li>
+  <li><strong>Easy to learn.</strong> If you know HTTP, you know 80% of REST. No special toolchain to install.</li>
+  <li><strong>Stateless = scalable.</strong> Any server can handle any request &mdash; add more servers behind a load balancer, done. No session replication, no sticky sessions.</li>
+  <li><strong>Cacheable.</strong> <code>GET</code> responses work with browser caches, CDNs, reverse proxies out of the box &mdash; huge performance wins for free.</li>
+  <li><strong>Self-documenting (with OpenAPI).</strong> The same spec generates docs, typed clients, and contract tests.</li>
+  <li><strong>Mature ecosystem.</strong> Every framework (Express, Rails, Django, Spring, FastAPI) has first-class REST support.</li>
+  <li><strong>Good developer tooling.</strong> Postman, curl, Bruno, browsers' DevTools &mdash; you can inspect and debug easily.</li>
+</ul>
+<p><strong>Trade-offs to be aware of:</strong></p>
+<ul>
+  <li><strong>Over/under-fetching.</strong> REST endpoints return fixed shapes; you might get fields you don't need or need multiple round-trips for a view. GraphQL fixes this for complex frontends.</li>
+  <li><strong>Not ideal for real-time.</strong> REST is request-response; WebSockets or SSE suit live updates.</li>
+  <li><strong>No formal schema by default.</strong> You need OpenAPI or similar for strong typing &mdash; it's optional, not built-in.</li>
+</ul>
+<p>In 2026, REST is still the default for new APIs. Reach for alternatives (GraphQL, gRPC, tRPC) when you hit REST's specific limits &mdash; not before.</p>
+'''
+
+ANSWERS[77] = r'''
+<p>A <strong>microservice</strong> is a small, independent service that owns one piece of a larger system. Instead of one big monolithic application handling everything (users + orders + payments + notifications), you split it into separate services that communicate over the network, usually via HTTP APIs.</p>
+<pre><code>// monolith — one big app
+┌──────────────────────────────────┐
+│  MyApp                           │
+│  ├─ User logic                   │
+│  ├─ Order logic                  │
+│  ├─ Payment logic                │
+│  └─ Notification logic           │
+└──────────────────────────────────┘
+
+// microservices — each concern is its own service
+┌─────────────┐  ┌──────────────┐  ┌─────────────┐  ┌──────────────────┐
+│ user-service│  │orders-service│  │payment-svc  │  │notification-svc  │
+└─────────────┘  └──────────────┘  └─────────────┘  └──────────────────┘
+        ↑                 ↑                ↑                 ↑
+        └─────────── API Gateway / service mesh ─────────────┘</code></pre>
+<p><strong>Typical properties:</strong></p>
+<ul>
+  <li><strong>Single responsibility.</strong> Each service owns one domain (users, orders, billing).</li>
+  <li><strong>Own database.</strong> Services don't share DB tables &mdash; they talk via APIs.</li>
+  <li><strong>Independently deployed.</strong> Update user-service without redeploying the whole system.</li>
+  <li><strong>Technology choice per service.</strong> One might be Node, another Python, another Go &mdash; pick the best tool for each job.</li>
+  <li><strong>Horizontally scalable.</strong> Scale payment-service separately if it's the bottleneck.</li>
+</ul>
+<p><strong>The trade-off:</strong> microservices solve scaling and team-organization problems but introduce new ones &mdash; distributed tracing, network failures, data consistency across services, operational complexity. For small teams and simple apps, a <strong>well-structured monolith</strong> is usually better. Move to microservices when you hit real scaling or team-coordination pain, not because it's trendy.</p>
+'''
+
+ANSWERS[78] = r'''
+<p>API design in microservices differs from monolithic APIs in a few key ways because there are now two audiences: <strong>external clients</strong> (browsers, mobile apps) and <strong>other services</strong> (internal microservice-to-microservice calls).</p>
+<table>
+  <tr><th>Monolith API</th><th>Microservices API</th></tr>
+  <tr><td>One API surface</td><td>Many internal APIs + one external facade</td></tr>
+  <tr><td>Callers share memory/DB</td><td>Every call crosses the network</td></tr>
+  <tr><td>Simple auth (session)</td><td>Service-to-service auth (mTLS, JWT, API keys)</td></tr>
+  <tr><td>ACID transactions</td><td>Eventual consistency, sagas, compensation</td></tr>
+  <tr><td>One error handler</td><td>Per-service errors + aggregation</td></tr>
+</table>
+<p><strong>Key microservice API patterns:</strong></p>
+<ul>
+  <li><strong>API Gateway.</strong> One external-facing entry point routes to internal services; handles auth, rate limits, aggregation. Clients don't know the internal topology.</li>
+  <li><strong>Backend for Frontend (BFF).</strong> Per-client gateways (web BFF, mobile BFF) that stitch multiple internal services into one response tailored for that client.</li>
+  <li><strong>Service discovery.</strong> Services find each other by logical name (<code>http://payment-service</code>), not IP. Kubernetes DNS, Consul, or service meshes handle this.</li>
+  <li><strong>Resilience patterns.</strong> Circuit breakers (don't hammer a failing service), retries with exponential backoff, timeouts at every layer, bulkheads.</li>
+  <li><strong>Async messaging.</strong> For non-critical work, use message queues (RabbitMQ, Kafka, SQS) instead of sync HTTP &mdash; decouples services.</li>
+  <li><strong>Distributed tracing.</strong> Thread a trace-id across every hop (OpenTelemetry); debug issues that span 5+ services.</li>
+</ul>
+<p><strong>Critical rule:</strong> every network call can fail. Code defensively &mdash; timeouts, retries, fallbacks, circuit breakers. What works in a monolith (just call the function) becomes a reliability problem across services. Libraries like <strong>Axios</strong>, <strong>got</strong>, or service meshes (Istio, Linkerd) bake in these patterns.</p>
+'''
+
+ANSWERS[79] = r'''
+<p>An <strong>API schema</strong> is the formal description of an API's structure: what endpoints exist, what parameters they take, what responses they return, and what types the data uses. It's the "shape" of the API, written in a machine-readable format.</p>
+<pre><code># OpenAPI schema fragment describing a user endpoint
+paths:
+  /users/{id}:
+    get:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/User" }
+
+components:
+  schemas:
+    User:
+      type: object
+      required: [id, email]
+      properties:
+        id:    { type: string, format: uuid }
+        email: { type: string, format: email, maxLength: 254 }
+        name:  { type: string }
+        age:   { type: integer, minimum: 0, maximum: 150 }</code></pre>
+<p><strong>Common schema formats by API type:</strong></p>
+<ul>
+  <li><strong>REST</strong> &mdash; <strong>OpenAPI</strong> (formerly Swagger), using JSON Schema internally.</li>
+  <li><strong>GraphQL</strong> &mdash; <strong>GraphQL Schema Definition Language (SDL)</strong>: built-in, required.</li>
+  <li><strong>gRPC</strong> &mdash; <strong>Protocol Buffers (protobuf)</strong>.</li>
+  <li><strong>SOAP</strong> &mdash; <strong>WSDL</strong> (XML-based).</li>
+  <li><strong>JSON APIs generally</strong> &mdash; <strong>JSON Schema</strong> for payload validation.</li>
+</ul>
+<p><strong>Why schemas matter:</strong></p>
+<ul>
+  <li><strong>Documentation.</strong> Swagger UI renders your schema as browsable docs &mdash; no separate docs to maintain.</li>
+  <li><strong>Client SDK generation.</strong> One schema → typed clients for every language.</li>
+  <li><strong>Server stubs.</strong> Generate route definitions and typed handlers from the schema.</li>
+  <li><strong>Runtime validation.</strong> Reject requests that violate the schema (AJV, Zod, Ajv middleware).</li>
+  <li><strong>Contract testing.</strong> Verify that real requests/responses match the schema (Dredd, Schemathesis).</li>
+  <li><strong>Mocking.</strong> Generate fake servers from the schema (Prism).</li>
+</ul>
+<p>A schema <em>is</em> the contract between API and clients. Writing it first (spec-first development) or extracting it from code (code-first) are both viable &mdash; but skipping it means every change is a surprise.</p>
+'''
+
+ANSWERS[80] = r'''
+<p><strong>Middleware</strong> in APIs is code that runs between the incoming HTTP request and the final handler. Each piece of middleware inspects, modifies, or short-circuits the request &mdash; then passes control to the next. Think of it as a pipeline.</p>
+<pre><code>// typical Express middleware pipeline
+incoming request
+      ↓
+[CORS middleware]        → sets CORS headers
+      ↓
+[JSON parser]            → parses the body into req.body
+      ↓
+[Rate limit]             → rejects if too many requests
+      ↓
+[Auth middleware]        → validates token, sets req.user
+      ↓
+[Validation middleware]  → schema-checks req.body
+      ↓
+[Your route handler]     → actual business logic
+      ↓
+[Error handler]          → catches any throws
+      ↓
+response</code></pre>
+<p><strong>What middleware typically handles:</strong></p>
+<ul>
+  <li><strong>Logging</strong> &mdash; record method, URL, status, response time for every request.</li>
+  <li><strong>Authentication</strong> &mdash; validate tokens; populate <code>req.user</code>.</li>
+  <li><strong>Authorization</strong> &mdash; check roles/permissions before the handler.</li>
+  <li><strong>Body parsing</strong> &mdash; turn raw bytes into <code>req.body</code> (JSON, form data, files).</li>
+  <li><strong>Validation</strong> &mdash; reject malformed input with 400 before logic runs.</li>
+  <li><strong>CORS</strong> &mdash; set the right headers for browser cross-origin access.</li>
+  <li><strong>Rate limiting</strong> &mdash; count requests; reject over-limit ones.</li>
+  <li><strong>Compression</strong> &mdash; gzip/brotli responses.</li>
+  <li><strong>Error handling</strong> &mdash; catch and format exceptions into consistent error responses.</li>
+</ul>
+<pre><code>// simple Express middleware
+function logger(req, res, next) {
+  console.log(`${req.method} ${req.url}`);
+  next();                // → pass to the next middleware
+}
+app.use(logger);</code></pre>
+<p><strong>Why middleware is powerful:</strong> cross-cutting concerns (auth, logging, validation) stay out of your handlers. Each handler focuses on business logic; the pipeline handles everything else. Most popular frameworks (Express, Koa, Fastify, FastAPI, Django) are built around middleware.</p>
+'''
+
+ANSWERS[81] = r'''
+<p>REST is dramatically more flexible than SOAP &mdash; which is exactly why it replaced SOAP for most modern APIs.</p>
+<table>
+  <tr><th>Flexibility dimension</th><th>REST</th><th>SOAP</th></tr>
+  <tr><td>Data format</td><td>JSON, XML, CSV, binary &mdash; whatever <code>Content-Type</code> you declare</td><td>XML only</td></tr>
+  <tr><td>Schema</td><td>Optional (OpenAPI); can evolve without breaking clients</td><td>Mandatory WSDL; strict; breaking to change</td></tr>
+  <tr><td>Adding fields</td><td>Add optional fields freely &mdash; old clients ignore them</td><td>Schema change requires client regeneration</td></tr>
+  <tr><td>Client tooling</td><td>Any HTTP library &mdash; every language</td><td>SOAP libraries required; complex stubs</td></tr>
+  <tr><td>Evolution</td><td>Versioning or additive changes</td><td>Heavy schema versioning; regeneration</td></tr>
+  <tr><td>Browser-friendly</td><td>Yes &mdash; fetch, curl, Postman</td><td>Awkward &mdash; SOAP envelopes, XML parsing</td></tr>
+</table>
+<pre><code>// REST — add a field without breaking anyone
+GET /users/42
+{ "id": 42, "name": "Ada", "email": "ada@...", "twoFactorEnabled": true }
+//                                              ↑ new field — old clients simply ignore it
+
+// SOAP — changing the WSDL forces every client to regenerate stubs
+&lt;xs:element name="twoFactorEnabled" type="xs:boolean"/&gt;
+// → clients fail to parse responses until they update their generated code</code></pre>
+<p><strong>Why REST's flexibility is practical:</strong> real APIs evolve constantly &mdash; new fields, new endpoints, better error messages. REST allows continuous evolution; SOAP punishes it. On the flip side, SOAP's strictness was valued in banking/insurance because it made contracts unambiguous &mdash; and legal.</p>
+<p>In 2026, REST is default everywhere. SOAP survives only in legacy enterprise stacks (bank core systems, old SAP, some healthcare), where strict contracts and WS-Security still matter more than agility. For new public APIs, no one picks SOAP.</p>
+'''
+
+ANSWERS[82] = r'''
+<p>Large payloads &mdash; either in requests (bulk imports) or responses (big datasets) &mdash; can overwhelm servers if handled naively. The right strategy depends on size, structure, and how often it happens.</p>
+<table>
+  <tr><th>Size</th><th>Approach</th></tr>
+  <tr><td>&lt; 100 KB</td><td>Handle normally; cap body size at 1 MB default</td></tr>
+  <tr><td>100 KB - 10 MB</td><td>Paginate responses; raise request body limit on specific routes</td></tr>
+  <tr><td>10 MB - 1 GB</td><td>Stream NDJSON / CSV; compression (gzip, brotli)</td></tr>
+  <tr><td>&gt; 1 GB</td><td>Object storage (S3) with pre-signed URLs; async job + webhook</td></tr>
+</table>
+<pre><code>// pagination — chunked retrieval of large collections
+GET /events?limit=100&amp;cursor=abc
+→ { "data": [...100 items], "nextCursor": "def" }
+
+// streaming NDJSON response — constant memory regardless of size
+res.setHeader("Content-Type", "application/x-ndjson");
+for await (const row of db.query.stream()) {
+  res.write(JSON.stringify(row) + "\n");
+}
+res.end();
+
+// pre-signed S3 URL for large uploads — bytes never touch your server
+POST /uploads/request
+→ { "url": "https://s3...", "key": "uploads/abc123" }
+// browser PUTs the file directly to S3</code></pre>
+<p><strong>Key techniques:</strong></p>
+<ul>
+  <li><strong>Paginate collections.</strong> Never return 10,000 items in one response &mdash; use cursor-based pagination.</li>
+  <li><strong>Compress.</strong> <code>Accept-Encoding: gzip, br</code> &mdash; JSON compresses 70-90%. Cloudflare/Nginx can do this at the edge.</li>
+  <li><strong>Stream.</strong> For exports, write rows to the response as you read them from the DB &mdash; no memory blow-up.</li>
+  <li><strong>Offload to object storage.</strong> File uploads/downloads go to S3/R2 directly &mdash; your API just signs URLs.</li>
+  <li><strong>Async for expensive work.</strong> Return 202 Accepted + a job URL; client polls or gets a webhook when ready.</li>
+  <li><strong>Cap request body size.</strong> Even with all of the above, set a hard limit (<code>express.json({ limit: "1mb" })</code>) to prevent DoS.</li>
+</ul>
+<p>The goal: server memory and request time don't grow with payload size. Design for that from the start.</p>
+'''
+
+ANSWERS[83] = r'''
+<p>An <strong>API rate limit</strong> caps how many requests a client can make in a time window. It's one of the most important defenses an API has.</p>
+<pre><code>// response showing rate-limit state
+HTTP/1.1 200 OK
+RateLimit-Limit:     1000
+RateLimit-Remaining: 847
+RateLimit-Reset:     3600
+
+// over the limit
+HTTP/1.1 429 Too Many Requests
+Retry-After: 60
+{ "error": "Rate limit exceeded" }</code></pre>
+<p><strong>Why rate limits matter:</strong></p>
+<ul>
+  <li><strong>Prevent abuse.</strong> Scrapers, bots, and attackers can send thousands of requests per second. Without limits, they take your API down for everyone.</li>
+  <li><strong>Protect from buggy clients.</strong> A client stuck in a retry loop can DoS you accidentally. Rate limits stop the bleeding.</li>
+  <li><strong>Fair sharing.</strong> One customer shouldn't be able to hog resources that affect everyone else on your platform.</li>
+  <li><strong>Cost control.</strong> Every request costs CPU, memory, bandwidth, and (if you call paid APIs downstream) money. Limits bound that cost.</li>
+  <li><strong>Monetization.</strong> Tiered plans: free users get 100 req/hour, paid plans get 10,000, enterprise gets unlimited. Rate limits differentiate plans.</li>
+  <li><strong>Brute-force defense.</strong> Strict limits on <code>/login</code> slow password-guessing attacks.</li>
+</ul>
+<p><strong>Implementation quick guide:</strong></p>
+<ul>
+  <li>Use <strong>express-rate-limit</strong> + Redis for multi-server apps.</li>
+  <li>Key by <code>user id</code> when authenticated; <code>IP</code> for public endpoints.</li>
+  <li>Return standard RFC 9331 headers (<code>RateLimit-*</code>) so well-behaved clients self-pace.</li>
+  <li>Include <code>Retry-After</code> on 429s.</li>
+  <li>Layer edge rate-limiting (Cloudflare, AWS WAF) in front for DDoS protection.</li>
+</ul>
+<p>Skipping rate limits is one of the top mistakes in new APIs &mdash; they're easy to add upfront and painful to retrofit after an incident.</p>
+'''
+
+ANSWERS[84] = r'''
+<p>SOAP and REST use different approaches for how messages travel between client and server.</p>
+<table>
+  <tr><th>Aspect</th><th>REST</th><th>SOAP</th></tr>
+  <tr><td>Protocol</td><td>HTTP(S) only</td><td>Transport-agnostic &mdash; HTTP, SMTP, TCP, JMS, MQ</td></tr>
+  <tr><td>Default port</td><td>80 / 443</td><td>Same, but can be any</td></tr>
+  <tr><td>Message format</td><td>Plain HTTP body (JSON, XML, whatever)</td><td>SOAP envelope wrapping XML content</td></tr>
+  <tr><td>State of HTTP features</td><td>Uses URLs, methods, status codes as part of design</td><td>Uses HTTP only as dumb transport (usually POST)</td></tr>
+</table>
+<pre><code>// REST — uses HTTP as HTTP was meant to be used
+GET /users/42 HTTP/1.1
+Host: api.example.com
+Authorization: Bearer abc
+
+// SOAP — everything is POST; HTTP is just a tunnel
+POST /UserService HTTP/1.1
+Host: api.example.com
+Content-Type: text/xml; charset=utf-8
+SOAPAction: "http://example.com/GetUser"
+
+&lt;?xml version="1.0"?&gt;
+&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+  &lt;soap:Header&gt;
+    &lt;auth:Credentials&gt;...&lt;/auth:Credentials&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;GetUser&gt;&lt;Id&gt;42&lt;/Id&gt;&lt;/GetUser&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</code></pre>
+<p><strong>Why this matters:</strong></p>
+<ul>
+  <li><strong>REST leverages HTTP.</strong> Methods, status codes, URLs, caching, CORS, headers &mdash; all part of the design. Every HTTP tool understands REST traffic.</li>
+  <li><strong>SOAP tunnels through HTTP.</strong> HTTP is just transport; the real "protocol" is inside the SOAP envelope. HTTP caching doesn't help (every call is POST); browsers can't natively debug it.</li>
+  <li><strong>SOAP can work over non-HTTP transports.</strong> Email (SMTP), message queues (MQ), TCP &mdash; rare in practice but real. This was the enterprise selling point in the 2000s.</li>
+</ul>
+<p>REST's tight HTTP integration is a feature, not a limitation. The entire internet is optimized for HTTP traffic &mdash; REST rides that wave. SOAP's transport flexibility was a promise that rarely paid off; for new projects, pick REST (or gRPC if you need high-performance binary).</p>
+'''
+
+ANSWERS[85] = r'''
+<p>Versioning in RESTful APIs is how you evolve the API without breaking existing clients. Once an API is public, changing it is like changing a public contract &mdash; you need a strategy.</p>
+<pre><code>// URL path (most common)
+GET /v1/users/42
+GET /v2/users/42        # new version alongside
+
+// Header (cleaner URLs)
+GET /users/42
+Accept: application/vnd.myapi.v2+json
+
+// Custom header
+GET /users/42
+X-API-Version: 2
+
+// Query parameter (discouraged)
+GET /users/42?version=2
+
+// Subdomain (rare)
+GET https://v2.api.example.com/users/42</code></pre>
+<p><strong>What counts as a breaking change (needs a new version):</strong></p>
+<ul>
+  <li>Removing a field from a response.</li>
+  <li>Renaming a field.</li>
+  <li>Changing a field's type (string → integer).</li>
+  <li>Adding a required request field.</li>
+  <li>Removing an endpoint.</li>
+  <li>Changing a status code for a case.</li>
+</ul>
+<p><strong>What's safe (no version bump needed):</strong></p>
+<ul>
+  <li>Adding new optional response fields.</li>
+  <li>Adding new endpoints.</li>
+  <li>Adding optional request parameters with sensible defaults.</li>
+  <li>Loosening validation (accepting more input formats).</li>
+</ul>
+<p><strong>Deprecation workflow:</strong></p>
+<ol>
+  <li>Ship v2 alongside v1.</li>
+  <li>Announce v1 deprecation: set <code>Deprecation: true</code> and <code>Sunset: &lt;date&gt;</code> headers on v1 responses.</li>
+  <li>Email developers, update docs, publish migration guide.</li>
+  <li>Monitor v1 usage; nudge remaining users.</li>
+  <li>Remove v1 after the sunset date (usually 6-12 months later).</li>
+</ol>
+<p><strong>Best practices:</strong> pick one versioning strategy and stick with it; keep at most 2-3 versions live; use semantic versioning discipline (breaking = new major). GitHub's v3 REST API lived for over a decade before v4 (GraphQL) &mdash; stable APIs win trust.</p>
+'''
+
+ANSWERS[86] = r'''
+<p>In microservices, an <strong>API endpoint</strong> is the specific URL a service exposes for external or internal consumers. Each service owns a set of endpoints scoped to its domain.</p>
+<pre><code>// each service owns endpoints for its domain
+user-service:
+  GET    /users/{id}
+  POST   /users
+  PATCH  /users/{id}
+
+orders-service:
+  GET    /orders/{id}
+  POST   /orders
+  GET    /orders?customerId={id}
+
+payments-service:
+  POST   /payments/charge
+  POST   /payments/refund
+  GET    /payments/{id}
+
+// externally — one gateway URL routes to the right service
+https://api.example.com/users/42        → user-service
+https://api.example.com/orders/42       → orders-service
+https://api.example.com/payments/xyz    → payments-service</code></pre>
+<p><strong>Two kinds of endpoints in microservices:</strong></p>
+<ul>
+  <li><strong>External endpoints</strong> &mdash; exposed through the API gateway; public contract for clients (browsers, mobile apps, partners).</li>
+  <li><strong>Internal endpoints</strong> &mdash; service-to-service calls; private, behind the network perimeter; use mTLS or internal JWTs.</li>
+</ul>
+<p><strong>Design considerations specific to microservices:</strong></p>
+<ul>
+  <li><strong>Service boundaries.</strong> An endpoint on the user-service shouldn't look up order data &mdash; that crosses service boundaries. The gateway (or BFF) aggregates.</li>
+  <li><strong>Versioning.</strong> Each service versions independently. Coordinating cross-service changes needs care.</li>
+  <li><strong>Service discovery.</strong> Services find each other by logical name (<code>http://user-service</code>), not IP. Kubernetes DNS handles this.</li>
+  <li><strong>Health checks.</strong> Every service exposes <code>/health</code> and <code>/ready</code> for orchestrators.</li>
+  <li><strong>Observability.</strong> Every endpoint emits traces, metrics, structured logs with a trace-id.</li>
+  <li><strong>Resilience.</strong> Every call to another service has timeouts, retries, circuit breakers.</li>
+</ul>
+<p>A common pattern: the gateway rewrites external URLs (<code>/api/users/42</code>) to internal ones (<code>http://user-service/users/42</code>). Clients see a clean, versioned public API; internally, services evolve freely.</p>
+'''
+
+ANSWERS[87] = r'''
+<p>An <strong>API gateway</strong> in microservices is the single entry point for all external traffic. It sits in front of your services, handling the cross-cutting concerns so individual services don't each reinvent them.</p>
+<pre><code>                       ┌────────────────────┐
+                       │   API Gateway      │
+external clients  ────▶│ • auth             │──▶ user-service
+(browsers, apps)       │ • rate limiting    │──▶ orders-service
+                       │ • TLS termination  │──▶ payments-service
+                       │ • routing          │──▶ notifications-service
+                       │ • logging          │
+                       │ • caching          │
+                       │ • aggregation      │
+                       └────────────────────┘</code></pre>
+<p><strong>Core roles of the gateway:</strong></p>
+<ul>
+  <li><strong>Routing.</strong> URL path decides which service handles the request (<code>/users/*</code> → user-service).</li>
+  <li><strong>Authentication.</strong> Validate tokens once at the edge; pass a verified identity header downstream. Services don't duplicate auth logic.</li>
+  <li><strong>Authorization.</strong> Coarse-grained policy checks (role, plan tier) before touching services.</li>
+  <li><strong>Rate limiting.</strong> One consistent policy across all services.</li>
+  <li><strong>TLS termination.</strong> Internal services can run plain HTTP; gateway handles certs.</li>
+  <li><strong>Request/response transformation.</strong> Aggregate multiple service calls (BFF pattern); translate protocols (gRPC ↔ REST).</li>
+  <li><strong>Caching.</strong> Cache GET responses at the edge.</li>
+  <li><strong>Logging &amp; metrics.</strong> One place to instrument every request with trace-ids.</li>
+</ul>
+<p><strong>Benefits:</strong></p>
+<ul>
+  <li><strong>Decouples clients from service topology.</strong> Split or merge services without client rewrites.</li>
+  <li><strong>Consistent security.</strong> Every request passes through auth &mdash; no service can accidentally leak unauthenticated data.</li>
+  <li><strong>Smaller services.</strong> Each focuses on its domain; cross-cutting concerns live centrally.</li>
+  <li><strong>Easier for clients.</strong> Public API is one URL; clients don't discover services.</li>
+</ul>
+<p><strong>Popular gateways:</strong> <strong>Kong</strong>, <strong>KrakenD</strong>, <strong>Traefik</strong>, <strong>Envoy</strong>, <strong>AWS API Gateway</strong>, <strong>Google Cloud Endpoints</strong>, <strong>Azure API Management</strong>. For simpler needs, Nginx or a thin Node/Go service handles most of what a gateway does.</p>
+'''
+
+ANSWERS[88] = r'''
+<p>The <strong>Host</strong> header tells the server which domain the client is trying to reach. It's mandatory in HTTP/1.1 &mdash; every request sent must include it. Without it, a server hosting multiple websites on the same IP wouldn't know which one to respond with.</p>
+<pre><code>GET /users/42 HTTP/1.1
+Host: api.example.com           ← which virtual host?
+User-Agent: curl/8.4.0
+Accept: application/json</code></pre>
+<p><strong>Why the Host header exists:</strong></p>
+<ul>
+  <li><strong>Virtual hosting.</strong> One web server at one IP can serve hundreds of domains. Host tells it which one. Without Host, <code>api.example.com</code> and <code>app.example.com</code> at the same IP would be indistinguishable.</li>
+  <li><strong>Routing in load balancers and proxies.</strong> Nginx and cloud LBs inspect Host to decide which backend service to forward to.</li>
+  <li><strong>TLS SNI pair.</strong> Host (in HTTP) + SNI (in TLS handshake) together let HTTPS servers pick the right certificate for the requested domain.</li>
+</ul>
+<pre><code># Nginx — route based on Host header
+server {
+  listen 80;
+  server_name api.example.com;
+  location / { proxy_pass http://api-backend; }
+}
+server {
+  listen 80;
+  server_name app.example.com;
+  location / { proxy_pass http://app-backend; }
+}</code></pre>
+<p><strong>Security note:</strong> apps must not blindly trust the Host header for building absolute URLs in responses (like password reset emails) &mdash; an attacker can send <code>Host: evil.com</code> and redirect victims. Use an allowlist or a configured canonical hostname. HTTP/2 and HTTP/3 replace Host with <code>:authority</code> pseudo-header &mdash; same purpose, different spelling.</p>
+<p>Client libraries (fetch, axios, requests) set Host automatically from the URL; you only need to set it manually in rare cases like testing against a server with a different DNS name.</p>
+'''
+
+ANSWERS[89] = r'''
+<p>A <strong>RESTful API client</strong> is the piece of software making the HTTP requests to a REST API. That's anything from <code>curl</code> in a terminal to a typed SDK inside your app.</p>
+<table>
+  <tr><th>Client type</th><th>When used</th></tr>
+  <tr><td><strong>Browser (fetch/axios)</strong></td><td>Frontend JS calling your backend</td></tr>
+  <tr><td><strong>Mobile app</strong></td><td>Native HTTP libraries (URLSession, Retrofit)</td></tr>
+  <tr><td><strong>Backend HTTP library</strong></td><td>Server calling another server (<code>fetch</code>, <code>axios</code>, <code>got</code>, Python <code>requests</code>)</td></tr>
+  <tr><td><strong>Generated typed client</strong></td><td>Generated from OpenAPI spec; fully typed</td></tr>
+  <tr><td><strong>SDK</strong></td><td>Stripe, OpenAI, AWS &mdash; polished wrapper around their API</td></tr>
+  <tr><td><strong>GUI tools</strong></td><td>Postman, Insomnia, Bruno for manual testing</td></tr>
+  <tr><td><strong>Command-line</strong></td><td>curl, HTTPie, xh &mdash; quick shell scripts</td></tr>
+</table>
+<pre><code>// raw HTTP client — full control, full responsibility
+const res = await fetch("https://api.example.com/users/42", {
+  headers: { "Authorization": `Bearer ${token}` },
+});
+const user = await res.json();
+
+// generated typed client (from OpenAPI) — SDK-like ergonomics
+import createClient from "./openapi-client";
+const client = createClient({ baseUrl, token });
+const { data: user, error } = await client.GET("/users/{id}", {
+  params: { path: { id: "42" } },
+});
+
+// SDK — handles retries, rate limits, pagination
+import Stripe from "stripe";
+const stripe = new Stripe(key);
+const customer = await stripe.customers.retrieve("cus_abc");</code></pre>
+<p><strong>What a well-built client does:</strong></p>
+<ul>
+  <li>Automatic authentication (inject tokens, refresh on 401).</li>
+  <li>Retries with exponential backoff on 5xx / 429.</li>
+  <li>Timeout per request (no hangs on slow upstreams).</li>
+  <li>Pagination helpers (iterate all pages transparently).</li>
+  <li>Typed request/response shapes (TypeScript, Python type hints).</li>
+  <li>Idempotency keys for safe retries of POSTs.</li>
+</ul>
+<p><strong>When to use what:</strong> official SDK if available; generated client from OpenAPI if not; raw fetch for one-off calls. Writing a new client library from scratch is almost always a mistake &mdash; the existing ones handle corner cases you haven't thought of yet.</p>
+'''
+
+ANSWERS[90] = r'''
+<p>A <strong>SOAP envelope</strong> is the XML wrapper around every SOAP message. It's the outermost element that contains the header (metadata) and body (actual request/response data).</p>
+<pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+  &lt;soap:Header&gt;                              &lt;!-- optional: auth, routing, transaction info --&gt;
+    &lt;wsse:Security&gt;
+      &lt;wsse:UsernameToken&gt;
+        &lt;wsse:Username&gt;ada&lt;/wsse:Username&gt;
+        &lt;wsse:Password&gt;***&lt;/wsse:Password&gt;
+      &lt;/wsse:UsernameToken&gt;
+    &lt;/wsse:Security&gt;
+  &lt;/soap:Header&gt;
+
+  &lt;soap:Body&gt;                                 &lt;!-- required: the actual call payload --&gt;
+    &lt;GetUser xmlns="http://example.com/"&gt;
+      &lt;Id&gt;42&lt;/Id&gt;
+    &lt;/GetUser&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</code></pre>
+<p><strong>Parts of the envelope:</strong></p>
+<ul>
+  <li><strong>Envelope</strong> &mdash; the outermost wrapper. Always present; names the SOAP version (1.1 or 1.2) via the namespace.</li>
+  <li><strong>Header</strong> &mdash; optional; carries metadata like WS-Security credentials, transaction ids, routing hints.</li>
+  <li><strong>Body</strong> &mdash; required; contains the actual request or response payload: the method being called and its parameters.</li>
+  <li><strong>Fault</strong> &mdash; SOAP's error element (appears inside Body on errors). Has a fault code, reason, and detail.</li>
+</ul>
+<pre><code>&lt;!-- SOAP error response --&gt;
+&lt;soap:Envelope&gt;
+  &lt;soap:Body&gt;
+    &lt;soap:Fault&gt;
+      &lt;faultcode&gt;soap:Client&lt;/faultcode&gt;
+      &lt;faultstring&gt;User not found&lt;/faultstring&gt;
+      &lt;detail&gt;&lt;UserId&gt;42&lt;/UserId&gt;&lt;/detail&gt;
+    &lt;/soap:Fault&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</code></pre>
+<p><strong>Why the envelope exists:</strong> SOAP was designed as transport-agnostic, so the envelope packages everything needed to process the message &mdash; independent of whether it's sent over HTTP, SMTP, or MQ. It's also what makes SOAP verbose: every call carries this XML wrapping overhead, even for tiny payloads. REST avoided this entirely by using HTTP itself as the envelope.</p>
+'''
+
+ANSWERS[91] = r'''
+<p><strong>WSDL</strong> (Web Services Description Language) is the XML contract for a SOAP service. It describes every operation, its parameters, return types, and how to call it. Think of it as OpenAPI for SOAP &mdash; the machine-readable spec.</p>
+<pre><code>&lt;?xml version="1.0"?&gt;
+&lt;wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"&gt;
+
+  &lt;!-- types: define the data shapes --&gt;
+  &lt;wsdl:types&gt;
+    &lt;xs:schema targetNamespace="http://example.com/"&gt;
+      &lt;xs:element name="GetUser"&gt;
+        &lt;xs:complexType&gt;
+          &lt;xs:sequence&gt;
+            &lt;xs:element name="Id" type="xs:int"/&gt;
+          &lt;/xs:sequence&gt;
+        &lt;/xs:complexType&gt;
+      &lt;/xs:element&gt;
+    &lt;/xs:schema&gt;
+  &lt;/wsdl:types&gt;
+
+  &lt;!-- operations: what the service can do --&gt;
+  &lt;wsdl:portType name="UserService"&gt;
+    &lt;wsdl:operation name="GetUser"&gt;
+      &lt;wsdl:input  message="GetUserRequest"/&gt;
+      &lt;wsdl:output message="GetUserResponse"/&gt;
+    &lt;/wsdl:operation&gt;
+  &lt;/wsdl:portType&gt;
+
+  &lt;!-- binding: how operations travel over the wire --&gt;
+  &lt;wsdl:binding ...&gt; ... &lt;/wsdl:binding&gt;
+
+  &lt;!-- service: where the endpoint lives --&gt;
+  &lt;wsdl:service name="UserService"&gt;
+    &lt;wsdl:port binding="..."&gt;
+      &lt;soap:address location="http://example.com/UserService"/&gt;
+    &lt;/wsdl:port&gt;
+  &lt;/wsdl:service&gt;
+&lt;/wsdl:definitions&gt;</code></pre>
+<p><strong>What WSDL enables:</strong></p>
+<ul>
+  <li><strong>Code generation.</strong> Tools like <code>wsimport</code> (Java) or <code>svcutil</code> (.NET) read a WSDL and generate client stubs &mdash; typed classes and methods that call the service.</li>
+  <li><strong>Discovery.</strong> Clients fetch the WSDL from the service URL (<code>?wsdl</code>) and learn all available operations.</li>
+  <li><strong>Validation.</strong> Servers and clients validate requests/responses against the schema.</li>
+  <li><strong>Documentation.</strong> WSDL is the authoritative reference for the SOAP service &mdash; what's possible and what formats are expected.</li>
+</ul>
+<p><strong>WSDL's strengths and weaknesses:</strong> it's extremely strict &mdash; breaking changes require regenerating every client's stubs. Perfect for formal enterprise contracts (banking, insurance); painful for APIs that evolve quickly. REST/OpenAPI's looser approach (add optional fields freely) is why REST won for modern APIs.</p>
+'''
+
+ANSWERS[92] = r'''
+<p>The <strong>Accept-Language</strong> header tells the server what languages the client prefers. Servers use it to return localized responses &mdash; error messages, UI strings, dates, and numbers formatted for the user's locale.</p>
+<pre><code>// client tells server "I prefer English, then German"
+GET /api/errors
+Accept-Language: en-US, en;q=0.9, de;q=0.8
+
+// server returns localized error messages
+{ "error": { "code": "INVALID_EMAIL", "message": "Invalid email address" } }
+
+// or if de is picked
+{ "error": { "code": "INVALID_EMAIL", "message": "Ungültige E-Mail-Adresse" } }</code></pre>
+<p><strong>How the value works:</strong></p>
+<ul>
+  <li><strong>Language codes</strong> &mdash; <code>en</code> (English), <code>en-US</code> (American English), <code>de</code> (German), <code>ja-JP</code> (Japanese as used in Japan).</li>
+  <li><strong>Quality values</strong> (<code>q=0.8</code>) rank preferences from 1.0 (best) down to 0.0 (not acceptable). If omitted, q=1.0.</li>
+  <li><strong>Fallback.</strong> If the server can't match any preference, it serves its default (usually English).</li>
+</ul>
+<p><strong>What servers typically do:</strong></p>
+<ol>
+  <li>Parse the header, sort by q-value.</li>
+  <li>Match against supported languages in priority order.</li>
+  <li>Use the match to pick translation files (i18n).</li>
+  <li>Return a <code>Content-Language: de</code> response header confirming what was used.</li>
+  <li>Add <code>Vary: Accept-Language</code> so CDNs cache per-language variants correctly.</li>
+</ol>
+<pre><code>// Express example with i18next
+import middleware from "i18next-http-middleware";
+app.use(middleware.handle(i18next));       // populates req.t() based on Accept-Language
+
+app.get("/welcome", (req, res) =&gt; {
+  res.set("Content-Language", req.language);
+  res.json({ greeting: req.t("welcome") }); // "Welcome" or "Willkommen"
+});</code></pre>
+<p><strong>Important notes:</strong> browsers send Accept-Language automatically based on the user's system language. APIs should respect it by default but let clients override (query param <code>?lang=fr</code> or <code>X-Language</code> header). Without <code>Vary: Accept-Language</code>, caches serve the wrong language to different users &mdash; a classic i18n bug.</p>
+'''
+
+ANSWERS[93] = r'''
+<p>An <strong>API proxy</strong> is a server that forwards requests to an upstream API, typically adding cross-cutting behavior along the way. It's a thin intermediary &mdash; simpler than a full API gateway.</p>
+<pre><code>client  ──▶  your proxy  ──▶  real API
+              (adds auth, caching, logging)</code></pre>
+<p><strong>Common uses:</strong></p>
+<ul>
+  <li><strong>Hide API keys.</strong> Browser calls your proxy; proxy adds the real API key before forwarding. End users never see the secret.</li>
+  <li><strong>CORS bypass.</strong> Third-party API doesn't support CORS? Proxy it from your server to avoid browser restrictions.</li>
+  <li><strong>Rate limiting.</strong> One place to cap your upstream API usage across all your clients.</li>
+  <li><strong>Caching.</strong> Cache expensive upstream calls (weather, pricing data).</li>
+  <li><strong>Transform responses.</strong> Fix an ugly third-party response shape; add/remove fields.</li>
+  <li><strong>Authentication.</strong> Require your own auth on proxied endpoints even if the upstream doesn't.</li>
+  <li><strong>Analytics &amp; logging.</strong> See all traffic to the upstream in one place.</li>
+</ul>
+<pre><code>// Node example — proxy weather API with caching + hide the API key
+const cache = new Map();
+
+app.get("/weather/:city", async (req, res) =&gt; {
+  const key = req.params.city;
+  const cached = cache.get(key);
+  if (cached &amp;&amp; cached.expiresAt &gt; Date.now()) return res.json(cached.data);
+
+  const r = await fetch(`https://api.openweather.com/data?q=${key}`, {
+    headers: { "x-api-key": process.env.OPENWEATHER_KEY },      // server-side only
+  });
+  const data = await r.json();
+
+  cache.set(key, { data, expiresAt: Date.now() + 5 * 60_000 });
+  res.json(data);
+});</code></pre>
+<p><strong>Proxy vs gateway:</strong> a proxy fronts <em>one</em> upstream API with simple logic; a gateway fronts <em>many</em> services with routing, orchestration, and aggregation. For a single third-party API integration, a proxy is enough. For a multi-service architecture, use a full gateway (Kong, KrakenD, AWS API Gateway).</p>
+'''
+
+ANSWERS[94] = r'''
+<p>Handling rate limiting has two sides: <strong>enforcing</strong> it on your own API, and <strong>respecting</strong> it when calling someone else's.</p>
+<p><strong>Enforcing (your API):</strong></p>
+<pre><code>import rateLimit from "express-rate-limit";
+import RedisStore from "rate-limit-redis";
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,                      // 15 minutes
+  max: 100,                                       // 100 requests per IP/user
+  standardHeaders: true,                          // RateLimit-* headers per RFC 9331
+  store: new RedisStore({ sendCommand: (...a) =&gt; redis.call(...a) }),
+  keyGenerator: (req) =&gt; req.user?.id ?? req.ip,
+  handler: (req, res) =&gt; {
+    res.set("Retry-After", "60");
+    res.status(429).json({ error: "Rate limit exceeded" });
+  },
+});
+
+app.use("/api", limiter);</code></pre>
+<p><strong>Respecting (when you're a client):</strong></p>
+<pre><code>async function callWithRateLimit(url, options, maxRetries = 5) {
+  for (let attempt = 0; attempt &lt; maxRetries; attempt++) {
+    const res = await fetch(url, options);
+
+    if (res.status !== 429) return res;
+
+    // server tells us when to retry
+    const retryAfter = Number(res.headers.get("Retry-After") ?? 60);
+    const jitter = Math.random() * 500;                // avoid thundering herd
+    await new Promise((r) =&gt; setTimeout(r, retryAfter * 1000 + jitter));
+  }
+  throw new Error("Rate limit retries exhausted");
+}</code></pre>
+<p><strong>Best practices for enforcing:</strong></p>
+<ul>
+  <li><strong>Use Redis for multi-server apps</strong> &mdash; in-memory counters diverge across instances.</li>
+  <li><strong>Key by user id when authenticated</strong>; IP only for public endpoints.</li>
+  <li><strong>Tighter limits on auth endpoints</strong> (<code>/login</code>: 5/min) to slow brute force.</li>
+  <li><strong>Layer edge rate limits</strong> (Cloudflare, AWS WAF) for DDoS protection.</li>
+  <li><strong>Return standard headers</strong> &mdash; well-behaved clients self-pace.</li>
+</ul>
+<p><strong>Best practices for respecting:</strong></p>
+<ul>
+  <li>Honor <code>Retry-After</code> &mdash; don't guess.</li>
+  <li>Exponential backoff + jitter on retries.</li>
+  <li>Cache responses to reduce calls.</li>
+  <li>Batch requests when the API supports it.</li>
+  <li>Monitor your own remaining quota (<code>RateLimit-Remaining</code>).</li>
+</ul>
+<p>Rate-limit-aware client libraries (AWS SDK, Stripe's SDK) do all this automatically.</p>
+'''
+
+ANSWERS[95] = r'''
+<p>In REST, a <strong>resource</strong> is the fundamental unit of data the API exposes. Every URL points to a resource; every method acts on one. Designing your API starts by identifying resources.</p>
+<pre><code>// resources (nouns) with URLs
+/users                # collection of users
+/users/42             # one specific user
+/users/42/posts       # that user's posts (sub-resource)
+/posts/7/comments     # comments on a post
+/orders/abc/items     # items in an order</code></pre>
+<p><strong>Properties of a RESTful resource:</strong></p>
+<ul>
+  <li><strong>Noun-based.</strong> Never verbs: <code>/users</code> yes; <code>/getUsers</code> no.</li>
+  <li><strong>Identified by URL.</strong> Each resource has a unique, stable URI.</li>
+  <li><strong>Singular or collection.</strong> <code>/users</code> is the collection; <code>/users/42</code> is an individual item.</li>
+  <li><strong>Plural names for collections.</strong> <code>/users</code>, not <code>/user</code>.</li>
+  <li><strong>Hierarchy for relationships.</strong> <code>/users/42/posts</code> &mdash; posts belonging to user 42.</li>
+  <li><strong>Self-contained.</strong> The URL alone (with auth) should be enough to identify and operate on the resource.</li>
+</ul>
+<p><strong>Handling actions that don't fit CRUD nicely:</strong> sometimes you need to express things that aren't simple create/read/update/delete. Common patterns:</p>
+<ul>
+  <li><strong>Model the action as a resource.</strong> <code>POST /orders/42/refund</code> creates a refund resource. <code>POST /emails/verify</code> creates an email-verification.</li>
+  <li><strong>State transitions via PATCH.</strong> <code>PATCH /orders/42 { "status": "cancelled" }</code>.</li>
+  <li><strong>Sub-resource for relationships.</strong> <code>PUT /users/42/follows/99</code> to follow user 99.</li>
+</ul>
+<p><strong>Resource design rules of thumb:</strong> plural + lowercase + hyphens for URLs (<code>/user-profiles</code>); 2-3 levels of nesting max; avoid verbs in paths; keep identifiers stable forever (URIs are a public contract). Design resources first, endpoints second &mdash; the endpoints follow naturally from the resource model.</p>
+'''
+
+ANSWERS[96] = r'''
+<p>APIs use several common authentication methods, chosen based on who's calling (user or machine), how sensitive the data is, and what infrastructure you already have.</p>
+<table>
+  <tr><th>Method</th><th>How it works</th><th>Best for</th></tr>
+  <tr><td><strong>API Key</strong></td><td>Long random string in a header: <code>X-API-Key: sk_...</code></td><td>Server-to-server; simple SDKs</td></tr>
+  <tr><td><strong>Bearer Token / JWT</strong></td><td>Signed token from login: <code>Authorization: Bearer ...</code></td><td>Most modern web/mobile APIs</td></tr>
+  <tr><td><strong>OAuth 2.0 / OIDC</strong></td><td>Third-party flow: "Sign in with Google"</td><td>User-facing APIs; social login</td></tr>
+  <tr><td><strong>Basic Auth</strong></td><td>base64(user:pass) in Authorization header</td><td>Simple internal tools; curl scripts</td></tr>
+  <tr><td><strong>Session Cookies</strong></td><td>HttpOnly cookie; server-side lookup</td><td>Browser apps with same-origin API</td></tr>
+  <tr><td><strong>mTLS</strong></td><td>Client presents a TLS certificate</td><td>Service-to-service; high-trust internal</td></tr>
+  <tr><td><strong>AWS SigV4 / HMAC</strong></td><td>Request is signed with a shared secret</td><td>Cloud APIs; replay-protected</td></tr>
+  <tr><td><strong>Passkeys / WebAuthn</strong></td><td>Device-bound cryptographic keys; no passwords</td><td>Modern passwordless login (2026)</td></tr>
+</table>
+<pre><code>// JWT — the most common modern pattern
+POST /auth/login                                    → issues a token
+{ "email": "ada@...", "password": "..." }
+→ { "accessToken": "eyJ...", "refreshToken": "...", "expiresIn": 900 }
+
+// subsequent calls carry the token
+GET /me
+Authorization: Bearer eyJ...</code></pre>
+<p><strong>Picking one:</strong></p>
+<ul>
+  <li><strong>Public API consumed by developers</strong> → API Key (simple, familiar).</li>
+  <li><strong>Your own web/mobile app</strong> → JWT or session cookie + refresh tokens.</li>
+  <li><strong>"Sign in with Google/GitHub"</strong> → OAuth 2.0 / OIDC.</li>
+  <li><strong>Internal service-to-service</strong> → mTLS or short-lived JWT from an internal issuer.</li>
+  <li><strong>Maximum user security</strong> → Passkeys (WebAuthn) &mdash; no passwords, phishing-resistant.</li>
+</ul>
+<p><strong>Universal rules:</strong> HTTPS always; short token lifetimes (15 min); refresh tokens for longer sessions; revocation via blocklists or token rotation; rate-limit authentication endpoints to slow brute-force.</p>
+'''
+
+ANSWERS[97] = r'''
+<p>An <strong>API</strong> is the contract (endpoints + request/response shapes); an <strong>SDK</strong> is a language-specific library that wraps the API to make it easier to call from your code.</p>
+<table>
+  <tr><th>API</th><th>SDK</th></tr>
+  <tr><td>Language-agnostic HTTP contract</td><td>Language-specific library</td></tr>
+  <tr><td>Specifies endpoints, formats, auth</td><td>Provides typed methods, handles HTTP internally</td></tr>
+  <tr><td>Consumed from any language</td><td>One SDK per language</td></tr>
+  <tr><td>Stable over years</td><td>Evolves more freely (patch releases)</td></tr>
+  <tr><td>You handle retries, auth, pagination</td><td>Handled for you</td></tr>
+</table>
+<pre><code>// calling the API directly (raw HTTP)
+const res = await fetch("https://api.stripe.com/v1/charges", {
+  method: "POST",
+  headers: {
+    "Authorization": "Bearer sk_test_...",
+    "Content-Type":  "application/x-www-form-urlencoded",
+  },
+  body: new URLSearchParams({ amount: "1000", currency: "usd" }),
+});
+if (!res.ok) throw new Error((await res.json()).error.message);
+const charge = await res.json();
+
+// calling through Stripe's SDK
+import Stripe from "stripe";
+const stripe = new Stripe(process.env.STRIPE_KEY);
+const charge = await stripe.charges.create({ amount: 1000, currency: "usd" });</code></pre>
+<p><strong>What SDKs add beyond raw HTTP:</strong></p>
+<ul>
+  <li><strong>Automatic authentication</strong> &mdash; inject keys/tokens.</li>
+  <li><strong>Retries with backoff</strong> on transient failures.</li>
+  <li><strong>Rate-limit awareness</strong> &mdash; honor <code>Retry-After</code>.</li>
+  <li><strong>Pagination helpers</strong> &mdash; auto-iterate pages as an async iterator.</li>
+  <li><strong>Type safety</strong> &mdash; compile-time checks for request/response shapes.</li>
+  <li><strong>Typed errors</strong> &mdash; <code>RateLimitError</code>, <code>AuthError</code> instead of HTTP codes.</li>
+  <li><strong>Idempotency keys</strong> generated automatically for safe retries.</li>
+  <li><strong>Parsing &amp; serialization</strong> &mdash; convert between wire format and language types.</li>
+</ul>
+<p><strong>Relationship:</strong> the API comes first &mdash; it's the source of truth. The SDK is a convenience layer. Most modern companies <strong>generate</strong> their SDKs from an OpenAPI or GraphQL schema, so the API and SDK stay in sync. If an API has no official SDK, you can often generate one with <code>openapi-generator</code> or <strong>Orval</strong>.</p>
+'''
+
+ANSWERS[98] = r'''
+<p>A <strong>RESTful API server</strong> is the server-side software that receives HTTP requests from clients, processes them, and returns responses &mdash; following REST principles.</p>
+<pre><code>// minimal REST API server in Node + Express
+import express from "express";
+const app = express();
+app.use(express.json());
+
+const users = new Map();              // imagine this is a database
+
+app.get("/users/:id", (req, res) =&gt; {
+  const user = users.get(req.params.id);
+  if (!user) return res.sendStatus(404);
+  res.json(user);
+});
+
+app.post("/users", (req, res) =&gt; {
+  const id = crypto.randomUUID();
+  users.set(id, { id, ...req.body });
+  res.status(201).location(`/users/${id}`).json(users.get(id));
+});
+
+app.listen(3000);</code></pre>
+<p><strong>What a REST server typically does:</strong></p>
+<ul>
+  <li><strong>Listen for HTTP requests</strong> on a port (80/443 via nginx in front).</li>
+  <li><strong>Route</strong> based on method + URL to the right handler.</li>
+  <li><strong>Run middleware</strong> (parse body, check auth, validate input, rate-limit).</li>
+  <li><strong>Execute business logic</strong> &mdash; query DB, call other services, perform the action.</li>
+  <li><strong>Return an HTTP response</strong> with the right status code, headers, and body.</li>
+  <li><strong>Handle errors</strong> consistently &mdash; 4xx for client mistakes, 5xx for server bugs.</li>
+  <li><strong>Log</strong> every request with a correlation id for debugging.</li>
+  <li><strong>Emit metrics &amp; traces</strong> for observability.</li>
+</ul>
+<p><strong>Common building blocks in 2026:</strong></p>
+<ul>
+  <li><strong>Framework</strong> &mdash; Express, Fastify, Hono, NestJS (Node); FastAPI, Django (Python); Spring Boot (Java); Gin, Chi (Go); Rails (Ruby).</li>
+  <li><strong>Deployment</strong> &mdash; Docker + Kubernetes, serverless (AWS Lambda, Vercel, Cloudflare Workers), or classic VMs.</li>
+  <li><strong>Behind a reverse proxy</strong> &mdash; Nginx, Caddy, or cloud LB for TLS, compression, static files.</li>
+  <li><strong>Observability</strong> &mdash; structured logs (JSON), metrics (Prometheus), traces (OpenTelemetry).</li>
+</ul>
+<p>A good REST server is invisible when it works: clean URLs, consistent errors, proper status codes, predictable shapes. The craft is in making the whole thing boringly reliable.</p>
+'''
+
+ANSWERS[99] = r'''
+<p>RESTful APIs have become the default because of a combination of simplicity, scalability, and ecosystem maturity. The advantages compound.</p>
+<p><strong>Technical advantages:</strong></p>
+<ul>
+  <li><strong>Simple.</strong> Just HTTP + JSON &mdash; no custom protocols, no special toolchain. New developers are productive in hours.</li>
+  <li><strong>Language-agnostic.</strong> Any language with an HTTP client can call any REST API. Your Python script, Go service, and Swift mobile app all work.</li>
+  <li><strong>Stateless and scalable.</strong> Any server can handle any request. Add more instances behind a load balancer &mdash; instant horizontal scaling, no session replication.</li>
+  <li><strong>Cacheable.</strong> GET + Cache-Control + ETag leverages the entire HTTP caching stack: browser, CDN, reverse proxy. Dramatic performance wins for free.</li>
+  <li><strong>Human-readable.</strong> JSON is debuggable with <code>curl</code> and DevTools. Contrast with binary protocols (Protocol Buffers, MessagePack) that need tools.</li>
+  <li><strong>Works through corporate networks.</strong> Firewalls, proxies, and corporate IT allow HTTP(S). WebSocket and gRPC often get blocked.</li>
+</ul>
+<p><strong>Ecosystem advantages:</strong></p>
+<ul>
+  <li><strong>Mature tooling.</strong> Postman, Bruno, curl, Swagger UI, OpenAPI codegen, monitoring, testing frameworks &mdash; all built for REST.</li>
+  <li><strong>OpenAPI standard.</strong> One spec generates docs, typed clients, server stubs, mocks, contract tests.</li>
+  <li><strong>Standard infrastructure.</strong> Every LB, CDN, WAF, gateway (Cloudflare, AWS, Nginx) understands HTTP traffic out of the box.</li>
+  <li><strong>Universal knowledge.</strong> Every backend developer knows REST. Lower hiring/onboarding cost than niche protocols.</li>
+</ul>
+<p><strong>Developer experience advantages:</strong></p>
+<ul>
+  <li><strong>Predictable conventions.</strong> Same verbs, same status codes, same URL patterns across every API &mdash; quick mental model transfer.</li>
+  <li><strong>Easy to version and evolve.</strong> Add optional fields freely; bump major version for breaking changes.</li>
+  <li><strong>Good enough for 95% of use cases.</strong> CRUD apps, mobile backends, SaaS integrations &mdash; REST handles them all cleanly.</li>
+</ul>
+<p>Reach for alternatives (GraphQL, gRPC, WebSockets, tRPC) when you hit REST's specific limits &mdash; over-fetching, real-time, or typed cross-service calls. Otherwise, REST is the safe default.</p>
+'''
+
+ANSWERS[100] = r'''
+<p>API performance monitoring tracks how fast, reliable, and healthy your API is under real traffic. It's the feedback loop that catches regressions before users complain.</p>
+<table>
+  <tr><th>Metric</th><th>What it tells you</th></tr>
+  <tr><td><strong>Latency</strong></td><td>How long requests take &mdash; track p50, p95, p99 (not averages!)</td></tr>
+  <tr><td><strong>Throughput</strong></td><td>Requests per second &mdash; capacity utilization</td></tr>
+  <tr><td><strong>Error rate</strong></td><td>% of 4xx / 5xx responses &mdash; leading indicator of problems</td></tr>
+  <tr><td><strong>Availability</strong></td><td>% of successful requests over time &mdash; your SLA number</td></tr>
+  <tr><td><strong>Saturation</strong></td><td>CPU, memory, DB connections &mdash; running out of capacity?</td></tr>
+  <tr><td><strong>Apdex</strong></td><td>User-satisfaction score based on latency thresholds</td></tr>
+</table>
+<p><strong>The three pillars of observability:</strong></p>
+<ul>
+  <li><strong>Metrics</strong> (Prometheus, Datadog, New Relic) &mdash; numerical time-series. Dashboards, alerts.</li>
+  <li><strong>Logs</strong> (structured JSON to stdout, aggregated by Loki, Elasticsearch, CloudWatch) &mdash; per-request detail for debugging.</li>
+  <li><strong>Traces</strong> (OpenTelemetry, Jaeger, Tempo) &mdash; follow a request across multiple services.</li>
+</ul>
+<pre><code>// example structured log with correlation id
+{
+  "ts":      "2026-04-19T12:00:01Z",
+  "level":   "info",
+  "reqId":   "req_abc123",
+  "traceId": "trace_def456",
+  "method":  "GET",
+  "path":    "/users/42",
+  "status":  200,
+  "durMs":   47,
+  "userId":  "user_42"
+}</code></pre>
+<p><strong>Practical monitoring stack:</strong></p>
+<ul>
+  <li><strong>RED method</strong> &mdash; for each endpoint, track <strong>R</strong>ate, <strong>E</strong>rrors, <strong>D</strong>uration. Simple and powerful.</li>
+  <li><strong>Synthetic monitoring</strong> (Checkly, Grafana Synthetic) &mdash; real requests every minute from multiple regions. Catches outages before users do.</li>
+  <li><strong>Real user monitoring (RUM)</strong> &mdash; measure API performance from actual browsers/apps, not just your datacenter.</li>
+  <li><strong>Distributed tracing</strong> &mdash; essential in microservices; shows where latency accumulates across services.</li>
+  <li><strong>Alerts</strong> &mdash; page on SLO violations (p99 &gt; 500ms, error rate &gt; 1%, availability &lt; 99.9%). Avoid alerting on raw metrics; alert on user-visible impact.</li>
+</ul>
+<p><strong>Leading tools in 2026:</strong> Datadog, New Relic, Grafana Cloud, Honeycomb, Sentry, plus OpenTelemetry for a vendor-neutral instrumentation layer. The key: instrument <em>before</em> you need it, so when something breaks, you have data to diagnose.</p>
+'''

@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MongoDB — Advanced · Interview Prep Mastery</title>
+<meta name="description" content="100 advanced interview questions on MongoDB, with detailed explanations and examples.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/styles.css">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%239a6b1d'/%3E%3Ctext x='50' y='68' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold' font-size='48'%3EIP%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="site-header">
+  <div class="site-header__inner">
+    <button class="menu-toggle" aria-label="Open menu" type="button">☰ Menu</button>
+    <a class="brand" href="../index.html">
+      <span class="brand__mark">IP</span>
+      <span class="brand__text">
+        <span class="brand__title">Interview Prep Mastery</span>
+        <span class="brand__subtitle">Interactive learning guide</span>
+      </span>
+    </a>
+    <nav class="header-nav">
+      <a href="../index.html#roadmap">Roadmap</a>
+      <a href="../index.html#chapters">All chapters</a>
+      <button class="theme-toggle" type="button" aria-label="Toggle color scheme">☾ Dark</button>
+    </nav>
+  </div>
+</header>
+<div class="layout">
+<aside class="sidebar" aria-label="Site navigation">
+  <div class="sidebar__header">Chapter Navigator</div>
+  
+        <div class="nav-part">
+          <div class="nav-part__label">Part 1</div>
+          <div class="nav-part__title">Core Programming Languages</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">JavaScript</li><li><a class="" href="../chapters/javascript-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/javascript-tricky.html"><span class="nav-item__title">Tricky</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-coding.html"><span class="nav-item__title">Advanced Coding</span><span class="nav-item__meta">100 questions · 100 min read</span></a></li><li><a class="" href="../chapters/javascript-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-scenario.html"><span class="nav-item__title">Advanced Scenario Based</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Python</li><li><a class="" href="../chapters/python-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/python-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-part">
+          <div class="nav-part__label">Part 2</div>
+          <div class="nav-part__title">Web Fundamentals</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">HTML</li><li><a class="" href="../chapters/html-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/html-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/html-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CSS</li><li><a class="" href="../chapters/css-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">102 questions · 60 min read</span></a></li><li><a class="" href="../chapters/css-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/css-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">101 questions · 90 min read</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-part">
+          <div class="nav-part__label">Part 3</div>
+          <div class="nav-part__title">Backend Technologies</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Node.Js</li><li><a class="" href="../chapters/nodejs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/nodejs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ExpressJS</li><li><a class="" href="../chapters/expressjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/expressjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/expressjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">API</li><li><a class="" href="../chapters/api-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/api-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-part">
+          <div class="nav-part__label">Part 4</div>
+          <div class="nav-part__title">Frontend Frameworks</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ReactJS</li><li><a class="" href="../chapters/reactjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">101 questions · 60 min read</span></a></li><li><a class="" href="../chapters/reactjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-part">
+          <div class="nav-part__label">Part 5</div>
+          <div class="nav-part__title">Databases</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MYSQL</li><li><a class="" href="../chapters/mysql-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mysql-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MongoDB</li><li><a class="" href="../chapters/mongodb-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mongodb-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="active" href="../chapters/mongodb-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
+          </ul>
+        </div>
+        <div class="nav-part">
+          <div class="nav-part__label">Part 6</div>
+          <div class="nav-part__title">System Design &amp; DevOps</div>
+          <ul class="nav-part__list">
+            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">System Design MERN Stack</li><li><a class="" href="../chapters/system-design-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Infrastructure MERN Stack</li><li><a class="" href="../chapters/infrastructure-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/infrastructure-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CI/CD Pipeline</li><li><a class="" href="../chapters/cicd-pipeline-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
+          </ul>
+        </div>
+</aside>
+<main class="main" id="main">
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="../index.html">Home</a>
+    <span class="breadcrumb__sep">›</span>
+    <a href="../index.html#part-5">Databases</a>
+    <span class="breadcrumb__sep">›</span>
+    <span>MongoDB — Advanced</span>
+  </nav>
+
+  <header class="chapter-header">
+    <div class="chapter-label">MongoDB · Advanced</div>
+    <h1 class="chapter-title">Advanced MongoDB Interview Questions</h1>
+    <p class="chapter-lede">Deep internals, architecture decisions, and questions typical of senior-level interviews.</p>
+    <div class="chapter-meta">
+      <div class="chapter-meta__item"><span class="chapter-meta__label">Questions</span><span class="chapter-meta__value">100</span></div>
+      <div class="chapter-meta__item"><span class="chapter-meta__label">Level</span><span class="chapter-meta__value">Advanced</span></div>
+      <div class="chapter-meta__item"><span class="chapter-meta__label">Estimated reading</span><span class="chapter-meta__value">90 min read</span></div>
+    </div>
+    
+        <div class="callout callout--info" style="margin-top: 1.2rem;">
+          <div class="callout__title">Listing mode</div>
+          <p style="margin: 0;">This chapter shows the full question list. Detailed beginner-friendly explanations with code examples and diagrams will be added progressively. Use the questions below as a study checklist — research each one, write your own answer, then verify.</p>
+        </div>
+  </header>
+
+  <section class="prose">
+
+    <div class="toc" id="toc">
+      <div class="toc__title">All questions in this chapter</div>
+      <ul class="toc__list">
+        <li><a href="#q1"><span class="toc__num">1.</span>Explain the differences between MongoDB&#x27;s replica sets and sharding.</a></li><li><a href="#q2"><span class="toc__num">2.</span>How do you implement and manage sharded clusters in MongoDB?</a></li><li><a href="#q3"><span class="toc__num">3.</span>What is a shard key, and how do you choose an appropriate shard key for a collection?</a></li><li><a href="#q4"><span class="toc__num">4.</span>How do you handle shard key migrations in MongoDB?</a></li><li><a href="#q5"><span class="toc__num">5.</span>Explain the write concern levels in MongoDB and their implications.</a></li><li><a href="#q6"><span class="toc__num">6.</span>How do you configure and use read preferences in a MongoDB replica set?</a></li><li><a href="#q7"><span class="toc__num">7.</span>Describe the CAP theorem and its relevance to MongoDB.</a></li><li><a href="#q8"><span class="toc__num">8.</span>How do you perform zero-downtime schema changes in MongoDB?</a></li><li><a href="#q9"><span class="toc__num">9.</span>Explain the purpose and usage of the $graphLookup stage in an aggregation pipeline.</a></li><li><a href="#q10"><span class="toc__num">10.</span>How do you implement role-based access control (RBAC) in MongoDB?</a></li><li><a href="#q11"><span class="toc__num">11.</span>What are MongoDB change streams, and how do you use them for real-time applications?</a></li><li><a href="#q12"><span class="toc__num">12.</span>How do you handle large volumes of data in MongoDB using data partitioning?</a></li><li><a href="#q13"><span class="toc__num">13.</span>Explain how MongoDB&#x27;s WiredTiger storage engine works.</a></li><li><a href="#q14"><span class="toc__num">14.</span>How do you optimize MongoDB for high write throughput?</a></li><li><a href="#q15"><span class="toc__num">15.</span>What are the differences between the MMAPv1 and WiredTiger storage engines?</a></li><li><a href="#q16"><span class="toc__num">16.</span>How do you use MongoDB Atlas for database management and what are its key features?</a></li><li><a href="#q17"><span class="toc__num">17.</span>Explain how to implement data encryption at rest in MongoDB.</a></li><li><a href="#q18"><span class="toc__num">18.</span>How do you manage and monitor MongoDB using Ops Manager?</a></li><li><a href="#q19"><span class="toc__num">19.</span>Describe how to implement MongoDB&#x27;s built-in aggregation pipeline for complex data anal...</a></li><li><a href="#q20"><span class="toc__num">20.</span>What are MongoDB transactions, and how do you use them for multi-document ACID transact...</a></li><li><a href="#q21"><span class="toc__num">21.</span>How do you use the $lookup stage for performing left outer joins in an aggregation pipe...</a></li><li><a href="#q22"><span class="toc__num">22.</span>Explain how MongoDB handles concurrency and isolation levels.</a></li><li><a href="#q23"><span class="toc__num">23.</span>How do you manage MongoDB backups and restores using mongodump and mongorestore?</a></li><li><a href="#q24"><span class="toc__num">24.</span>What are the advantages and disadvantages of using embedded documents vs. references in...</a></li><li><a href="#q25"><span class="toc__num">25.</span>How do you implement and use MongoDB GridFS for storing large files?</a></li><li><a href="#q26"><span class="toc__num">26.</span>Explain the purpose of the oplog in MongoDB replication.</a></li><li><a href="#q27"><span class="toc__num">27.</span>How do you handle network partitions and split-brain scenarios in a MongoDB replica set?</a></li><li><a href="#q28"><span class="toc__num">28.</span>Describe how you would use MongoDB for time-series data storage and querying.</a></li><li><a href="#q29"><span class="toc__num">29.</span>How do you optimize index usage in MongoDB to improve query performance?</a></li><li><a href="#q30"><span class="toc__num">30.</span>Explain the differences between compound indexes and multikey indexes in MongoDB.</a></li><li><a href="#q31"><span class="toc__num">31.</span>How do you manage and monitor performance metrics in a MongoDB deployment?</a></li><li><a href="#q32"><span class="toc__num">32.</span>What are the best practices for designing schemas in MongoDB for optimal performance?</a></li><li><a href="#q33"><span class="toc__num">33.</span>How do you use the $geoNear stage for geospatial queries in MongoDB?</a></li><li><a href="#q34"><span class="toc__num">34.</span>Explain how MongoDB&#x27;s journaling works and its importance for data durability.</a></li><li><a href="#q35"><span class="toc__num">35.</span>How do you handle and resolve replication lag in MongoDB replica sets?</a></li><li><a href="#q36"><span class="toc__num">36.</span>What are the different stages of an aggregation pipeline, and how do they impact perfor...</a></li><li><a href="#q37"><span class="toc__num">37.</span>How do you configure and manage authentication mechanisms in MongoDB?</a></li><li><a href="#q38"><span class="toc__num">38.</span>Explain the use of the $sample stage in an aggregation pipeline.</a></li><li><a href="#q39"><span class="toc__num">39.</span>How do you implement a hybrid MongoDB and SQL database architecture?</a></li><li><a href="#q40"><span class="toc__num">40.</span>How do you handle schema validation in MongoDB using the $jsonSchema operator?</a></li><li><a href="#q41"><span class="toc__num">41.</span>Describe how to use MongoDB&#x27;s Atlas Data Lake for querying data stored in AWS S3.</a></li><li><a href="#q42"><span class="toc__num">42.</span>How do you implement MongoDB triggers using change streams and serverless functions?</a></li><li><a href="#q43"><span class="toc__num">43.</span>Explain the purpose and usage of the $facet stage in an aggregation pipeline.</a></li><li><a href="#q44"><span class="toc__num">44.</span>How do you perform data migration from a relational database to MongoDB?</a></li><li><a href="#q45"><span class="toc__num">45.</span>What are MongoDB zones, and how do you configure them for geo-distributed data?</a></li><li><a href="#q46"><span class="toc__num">46.</span>How do you handle index building operations without impacting production performance?</a></li><li><a href="#q47"><span class="toc__num">47.</span>Explain the use of the $merge stage in an aggregation pipeline.</a></li><li><a href="#q48"><span class="toc__num">48.</span>How do you implement and manage MongoDB&#x27;s automatic failover mechanism?</a></li><li><a href="#q49"><span class="toc__num">49.</span>Describe the differences between MongoDB community edition and enterprise edition.</a></li><li><a href="#q50"><span class="toc__num">50.</span>How do you perform a rolling upgrade of a MongoDB replica set or sharded cluster?</a></li><li><a href="#q51"><span class="toc__num">51.</span>Explain how to implement and use the $redact stage in an aggregation pipeline.</a></li><li><a href="#q52"><span class="toc__num">52.</span>How do you manage and resolve conflicts in MongoDB&#x27;s multi-document ACID transactions?</a></li><li><a href="#q53"><span class="toc__num">53.</span>Describe the process of setting up and configuring a MongoDB arbiter.</a></li><li><a href="#q54"><span class="toc__num">54.</span>How do you use MongoDB Atlas Search for full-text search capabilities?</a></li><li><a href="#q55"><span class="toc__num">55.</span>Explain the differences between MongoDB&#x27;s capped collections and regular collections.</a></li><li><a href="#q56"><span class="toc__num">56.</span>How do you implement multi-tenant architecture using MongoDB?</a></li><li><a href="#q57"><span class="toc__num">57.</span>Describe how to use the $reduce operator in an aggregation pipeline.</a></li><li><a href="#q58"><span class="toc__num">58.</span>How do you handle schema evolution and versioning in MongoDB?</a></li><li><a href="#q59"><span class="toc__num">59.</span>Explain the purpose and usage of the $function operator in an aggregation pipeline.</a></li><li><a href="#q60"><span class="toc__num">60.</span>How do you configure and use LDAP authentication with MongoDB?</a></li><li><a href="#q61"><span class="toc__num">61.</span>Describe how to implement a data archival strategy using MongoDB.</a></li><li><a href="#q62"><span class="toc__num">62.</span>How do you use the $bucket and $bucketAuto stages in an aggregation pipeline?</a></li><li><a href="#q63"><span class="toc__num">63.</span>Explain the process of performing an in-place upgrade of MongoDB.</a></li><li><a href="#q64"><span class="toc__num">64.</span>How do you implement real-time analytics using MongoDB change streams?</a></li><li><a href="#q65"><span class="toc__num">65.</span>Describe the use of MongoDB&#x27;s $mergeObjects operator in an aggregation pipeline.</a></li><li><a href="#q66"><span class="toc__num">66.</span>How do you manage and optimize memory usage in MongoDB?</a></li><li><a href="#q67"><span class="toc__num">67.</span>Explain how to use the $indexStats command for monitoring index usage.</a></li><li><a href="#q68"><span class="toc__num">68.</span>How do you implement and manage database audits and compliance in MongoDB?</a></li><li><a href="#q69"><span class="toc__num">69.</span>Describe how to use the $dateToParts and $dateFromParts operators in an aggregation pip...</a></li><li><a href="#q70"><span class="toc__num">70.</span>How do you handle data obfuscation and anonymization in MongoDB?</a></li><li><a href="#q71"><span class="toc__num">71.</span>Explain the differences between MongoDB&#x27;s $match and $facet stages in aggregation.</a></li><li><a href="#q72"><span class="toc__num">72.</span>How do you implement a robust backup and disaster recovery strategy for MongoDB?</a></li><li><a href="#q73"><span class="toc__num">73.</span>Describe the process of using MongoDB&#x27;s $replaceRoot and $replaceWith stages.</a></li><li><a href="#q74"><span class="toc__num">74.</span>How do you manage and monitor long-running queries in MongoDB?</a></li><li><a href="#q75"><span class="toc__num">75.</span>Explain the purpose of MongoDB&#x27;s read and write concern levels.</a></li><li><a href="#q76"><span class="toc__num">76.</span>How do you use the $setWindowFields stage in an aggregation pipeline?</a></li><li><a href="#q77"><span class="toc__num">77.</span>Describe the process of sharding a large collection in MongoDB.</a></li><li><a href="#q78"><span class="toc__num">78.</span>How do you handle and resolve the &quot;too many open files&quot; error in MongoDB?</a></li><li><a href="#q79"><span class="toc__num">79.</span>Explain the differences between MongoDB&#x27;s $out and $merge stages.</a></li><li><a href="#q80"><span class="toc__num">80.</span>How do you use the $function and $accumulator operators in aggregation?</a></li><li><a href="#q81"><span class="toc__num">81.</span>Describe the best practices for managing large-scale MongoDB deployments.</a></li><li><a href="#q82"><span class="toc__num">82.</span>How do you use MongoDB for hierarchical data modeling and querying?</a></li><li><a href="#q83"><span class="toc__num">83.</span>Explain how to implement a hot backup solution for MongoDB.</a></li><li><a href="#q84"><span class="toc__num">84.</span>How do you manage and optimize disk I/O performance in MongoDB?</a></li><li><a href="#q85"><span class="toc__num">85.</span>Describe the process of setting up and configuring MongoDB Ops Manager.</a></li><li><a href="#q86"><span class="toc__num">86.</span>How do you use MongoDB&#x27;s $isoDate and $isoWeekYear operators?</a></li><li><a href="#q87"><span class="toc__num">87.</span>Explain how to handle and optimize MongoDB&#x27;s background index builds.</a></li><li><a href="#q88"><span class="toc__num">88.</span>How do you implement and use the $toString and $toObjectId operators in aggregation?</a></li><li><a href="#q89"><span class="toc__num">89.</span>Describe the process of using MongoDB&#x27;s $literal and $mergeArrays operators.</a></li><li><a href="#q90"><span class="toc__num">90.</span>How do you monitor and manage MongoDB&#x27;s WiredTiger cache usage?</a></li><li><a href="#q91"><span class="toc__num">91.</span>Explain how to use MongoDB&#x27;s $switch and $let operators in aggregation.</a></li><li><a href="#q92"><span class="toc__num">92.</span>How do you implement and manage multi-region deployments with MongoDB?</a></li><li><a href="#q93"><span class="toc__num">93.</span>Describe the process of configuring MongoDB&#x27;s TTL indexes for data expiration.</a></li><li><a href="#q94"><span class="toc__num">94.</span>How do you handle and optimize MongoDB&#x27;s initial sync process in replication?</a></li><li><a href="#q95"><span class="toc__num">95.</span>Explain the purpose and usage of MongoDB&#x27;s $currentOp command.</a></li><li><a href="#q96"><span class="toc__num">96.</span>How do you use MongoDB&#x27;s $year, $month, and $dayOfMonth operators?</a></li><li><a href="#q97"><span class="toc__num">97.</span>Describe the process of managing MongoDB&#x27;s oplog size and performance.</a></li><li><a href="#q98"><span class="toc__num">98.</span>How do you implement and manage field-level encryption in MongoDB?</a></li><li><a href="#q99"><span class="toc__num">99.</span>Explain the differences between MongoDB&#x27;s $geoNear and $geoWithin operators.</a></li><li><a href="#q100"><span class="toc__num">100.</span>How do you use MongoDB&#x27;s $merge and $setUnion operators in aggregation?</a></li>
+      </ul>
+    </div>
+
+    
+<article class="qa" id="q1">
+  <div class="qa__number">Question 1</div>
+  <h3 class="qa__question">Explain the differences between MongoDB&#x27;s replica sets and sharding.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q2">
+  <div class="qa__number">Question 2</div>
+  <h3 class="qa__question">How do you implement and manage sharded clusters in MongoDB?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q3">
+  <div class="qa__number">Question 3</div>
+  <h3 class="qa__question">What is a shard key, and how do you choose an appropriate shard key for a collection?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q4">
+  <div class="qa__number">Question 4</div>
+  <h3 class="qa__question">How do you handle shard key migrations in MongoDB?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q5">
+  <div class="qa__number">Question 5</div>
+  <h3 class="qa__question">Explain the write concern levels in MongoDB and their implications.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q6">
+  <div class="qa__number">Question 6</div>
+  <h3 class="qa__question">How do you configure and use read preferences in a MongoDB replica set?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q7">
+  <div class="qa__number">Question 7</div>
+  <h3 class="qa__question">Describe the CAP theorem and its relevance to MongoDB.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q8">
+  <div class="qa__number">Question 8</div>
+  <h3 class="qa__question">How do you perform zero-downtime schema changes in MongoDB?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q9">
+  <div class="qa__number">Question 9</div>
+  <h3 class="qa__question">Explain the purpose and usage of the $graphLookup stage in an aggregation pipeline.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q10">
+  <div class="qa__number">Question 10</div>
+  <h3 class="qa__question">How do you implement role-based access control (RBAC) in MongoDB?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q11">
+  <div class="qa__number">Question 11</div>
+  <h3 class="qa__question">What are MongoDB change streams, and how do you use them for real-time applications?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q12">
+  <div class="qa__number">Question 12</div>
+  <h3 class="qa__question">How do you handle large volumes of data in MongoDB using data partitioning?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q13">
+  <div class="qa__number">Question 13</div>
+  <h3 class="qa__question">Explain how MongoDB&#x27;s WiredTiger storage engine works.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q14">
+  <div class="qa__number">Question 14</div>
+  <h3 class="qa__question">How do you optimize MongoDB for high write throughput?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q15">
+  <div class="qa__number">Question 15</div>
+  <h3 class="qa__question">What are the differences between the MMAPv1 and WiredTiger storage engines?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q16">
+  <div class="qa__number">Question 16</div>
+  <h3 class="qa__question">How do you use MongoDB Atlas for database management and what are its key features?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q17">
+  <div class="qa__number">Question 17</div>
+  <h3 class="qa__question">Explain how to implement data encryption at rest in MongoDB.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q18">
+  <div class="qa__number">Question 18</div>
+  <h3 class="qa__question">How do you manage and monitor MongoDB using Ops Manager?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q19">
+  <div class="qa__number">Question 19</div>
+  <h3 class="qa__question">Describe how to implement MongoDB&#x27;s built-in aggregation pipeline for complex data analysis.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q20">
+  <div class="qa__number">Question 20</div>
+  <h3 class="qa__question">What are MongoDB transactions, and how do you use them for multi-document ACID transactions?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q21">
+  <div class="qa__number">Question 21</div>
+  <h3 class="qa__question">How do you use the $lookup stage for performing left outer joins in an aggregation pipeline?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q22">
+  <div class="qa__number">Question 22</div>
+  <h3 class="qa__question">Explain how MongoDB handles concurrency and isolation levels.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q23">
+  <div class="qa__number">Question 23</div>
+  <h3 class="qa__question">How do you manage MongoDB backups and restores using mongodump and mongorestore?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q24">
+  <div class="qa__number">Question 24</div>
+  <h3 class="qa__question">What are the advantages and disadvantages of using embedded documents vs. references in MongoDB?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q25">
+  <div class="qa__number">Question 25</div>
+  <h3 class="qa__question">How do you implement and use MongoDB GridFS for storing large files?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q26">
+  <div class="qa__number">Question 26</div>
+  <h3 class="qa__question">Explain the purpose of the oplog in MongoDB replication.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q27">
+  <div class="qa__number">Question 27</div>
+  <h3 class="qa__question">How do you handle network partitions and split-brain scenarios in a MongoDB replica set?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q28">
+  <div class="qa__number">Question 28</div>
+  <h3 class="qa__question">Describe how you would use MongoDB for time-series data storage and querying.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q29">
+  <div class="qa__number">Question 29</div>
+  <h3 class="qa__question">How do you optimize index usage in MongoDB to improve query performance?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q30">
+  <div class="qa__number">Question 30</div>
+  <h3 class="qa__question">Explain the differences between compound indexes and multikey indexes in MongoDB.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q31">
+  <div class="qa__number">Question 31</div>
+  <h3 class="qa__question">How do you manage and monitor performance metrics in a MongoDB deployment?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q32">
+  <div class="qa__number">Question 32</div>
+  <h3 class="qa__question">What are the best practices for designing schemas in MongoDB for optimal performance?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q33">
+  <div class="qa__number">Question 33</div>
+  <h3 class="qa__question">How do you use the $geoNear stage for geospatial queries in MongoDB?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q34">
+  <div class="qa__number">Question 34</div>
+  <h3 class="qa__question">Explain how MongoDB&#x27;s journaling works and its importance for data durability.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q35">
+  <div class="qa__number">Question 35</div>
+  <h3 class="qa__question">How do you handle and resolve replication lag in MongoDB replica sets?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q36">
+  <div class="qa__number">Question 36</div>
+  <h3 class="qa__question">What are the different stages of an aggregation pipeline, and how do they impact performance?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q37">
+  <div class="qa__number">Question 37</div>
+  <h3 class="qa__question">How do you configure and manage authentication mechanisms in MongoDB?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q38">
+  <div class="qa__number">Question 38</div>
+  <h3 class="qa__question">Explain the use of the $sample stage in an aggregation pipeline.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q39">
+  <div class="qa__number">Question 39</div>
+  <h3 class="qa__question">How do you implement a hybrid MongoDB and SQL database architecture?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q40">
+  <div class="qa__number">Question 40</div>
+  <h3 class="qa__question">How do you handle schema validation in MongoDB using the $jsonSchema operator?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q41">
+  <div class="qa__number">Question 41</div>
+  <h3 class="qa__question">Describe how to use MongoDB&#x27;s Atlas Data Lake for querying data stored in AWS S3.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q42">
+  <div class="qa__number">Question 42</div>
+  <h3 class="qa__question">How do you implement MongoDB triggers using change streams and serverless functions?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q43">
+  <div class="qa__number">Question 43</div>
+  <h3 class="qa__question">Explain the purpose and usage of the $facet stage in an aggregation pipeline.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q44">
+  <div class="qa__number">Question 44</div>
+  <h3 class="qa__question">How do you perform data migration from a relational database to MongoDB?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q45">
+  <div class="qa__number">Question 45</div>
+  <h3 class="qa__question">What are MongoDB zones, and how do you configure them for geo-distributed data?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q46">
+  <div class="qa__number">Question 46</div>
+  <h3 class="qa__question">How do you handle index building operations without impacting production performance?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q47">
+  <div class="qa__number">Question 47</div>
+  <h3 class="qa__question">Explain the use of the $merge stage in an aggregation pipeline.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q48">
+  <div class="qa__number">Question 48</div>
+  <h3 class="qa__question">How do you implement and manage MongoDB&#x27;s automatic failover mechanism?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q49">
+  <div class="qa__number">Question 49</div>
+  <h3 class="qa__question">Describe the differences between MongoDB community edition and enterprise edition.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q50">
+  <div class="qa__number">Question 50</div>
+  <h3 class="qa__question">How do you perform a rolling upgrade of a MongoDB replica set or sharded cluster?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q51">
+  <div class="qa__number">Question 51</div>
+  <h3 class="qa__question">Explain how to implement and use the $redact stage in an aggregation pipeline.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q52">
+  <div class="qa__number">Question 52</div>
+  <h3 class="qa__question">How do you manage and resolve conflicts in MongoDB&#x27;s multi-document ACID transactions?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q53">
+  <div class="qa__number">Question 53</div>
+  <h3 class="qa__question">Describe the process of setting up and configuring a MongoDB arbiter.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q54">
+  <div class="qa__number">Question 54</div>
+  <h3 class="qa__question">How do you use MongoDB Atlas Search for full-text search capabilities?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q55">
+  <div class="qa__number">Question 55</div>
+  <h3 class="qa__question">Explain the differences between MongoDB&#x27;s capped collections and regular collections.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q56">
+  <div class="qa__number">Question 56</div>
+  <h3 class="qa__question">How do you implement multi-tenant architecture using MongoDB?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q57">
+  <div class="qa__number">Question 57</div>
+  <h3 class="qa__question">Describe how to use the $reduce operator in an aggregation pipeline.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q58">
+  <div class="qa__number">Question 58</div>
+  <h3 class="qa__question">How do you handle schema evolution and versioning in MongoDB?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q59">
+  <div class="qa__number">Question 59</div>
+  <h3 class="qa__question">Explain the purpose and usage of the $function operator in an aggregation pipeline.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q60">
+  <div class="qa__number">Question 60</div>
+  <h3 class="qa__question">How do you configure and use LDAP authentication with MongoDB?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q61">
+  <div class="qa__number">Question 61</div>
+  <h3 class="qa__question">Describe how to implement a data archival strategy using MongoDB.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q62">
+  <div class="qa__number">Question 62</div>
+  <h3 class="qa__question">How do you use the $bucket and $bucketAuto stages in an aggregation pipeline?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q63">
+  <div class="qa__number">Question 63</div>
+  <h3 class="qa__question">Explain the process of performing an in-place upgrade of MongoDB.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q64">
+  <div class="qa__number">Question 64</div>
+  <h3 class="qa__question">How do you implement real-time analytics using MongoDB change streams?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q65">
+  <div class="qa__number">Question 65</div>
+  <h3 class="qa__question">Describe the use of MongoDB&#x27;s $mergeObjects operator in an aggregation pipeline.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q66">
+  <div class="qa__number">Question 66</div>
+  <h3 class="qa__question">How do you manage and optimize memory usage in MongoDB?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q67">
+  <div class="qa__number">Question 67</div>
+  <h3 class="qa__question">Explain how to use the $indexStats command for monitoring index usage.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q68">
+  <div class="qa__number">Question 68</div>
+  <h3 class="qa__question">How do you implement and manage database audits and compliance in MongoDB?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q69">
+  <div class="qa__number">Question 69</div>
+  <h3 class="qa__question">Describe how to use the $dateToParts and $dateFromParts operators in an aggregation pipeline.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q70">
+  <div class="qa__number">Question 70</div>
+  <h3 class="qa__question">How do you handle data obfuscation and anonymization in MongoDB?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q71">
+  <div class="qa__number">Question 71</div>
+  <h3 class="qa__question">Explain the differences between MongoDB&#x27;s $match and $facet stages in aggregation.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q72">
+  <div class="qa__number">Question 72</div>
+  <h3 class="qa__question">How do you implement a robust backup and disaster recovery strategy for MongoDB?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q73">
+  <div class="qa__number">Question 73</div>
+  <h3 class="qa__question">Describe the process of using MongoDB&#x27;s $replaceRoot and $replaceWith stages.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q74">
+  <div class="qa__number">Question 74</div>
+  <h3 class="qa__question">How do you manage and monitor long-running queries in MongoDB?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q75">
+  <div class="qa__number">Question 75</div>
+  <h3 class="qa__question">Explain the purpose of MongoDB&#x27;s read and write concern levels.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q76">
+  <div class="qa__number">Question 76</div>
+  <h3 class="qa__question">How do you use the $setWindowFields stage in an aggregation pipeline?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q77">
+  <div class="qa__number">Question 77</div>
+  <h3 class="qa__question">Describe the process of sharding a large collection in MongoDB.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q78">
+  <div class="qa__number">Question 78</div>
+  <h3 class="qa__question">How do you handle and resolve the &quot;too many open files&quot; error in MongoDB?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q79">
+  <div class="qa__number">Question 79</div>
+  <h3 class="qa__question">Explain the differences between MongoDB&#x27;s $out and $merge stages.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q80">
+  <div class="qa__number">Question 80</div>
+  <h3 class="qa__question">How do you use the $function and $accumulator operators in aggregation?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q81">
+  <div class="qa__number">Question 81</div>
+  <h3 class="qa__question">Describe the best practices for managing large-scale MongoDB deployments.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q82">
+  <div class="qa__number">Question 82</div>
+  <h3 class="qa__question">How do you use MongoDB for hierarchical data modeling and querying?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q83">
+  <div class="qa__number">Question 83</div>
+  <h3 class="qa__question">Explain how to implement a hot backup solution for MongoDB.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q84">
+  <div class="qa__number">Question 84</div>
+  <h3 class="qa__question">How do you manage and optimize disk I/O performance in MongoDB?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q85">
+  <div class="qa__number">Question 85</div>
+  <h3 class="qa__question">Describe the process of setting up and configuring MongoDB Ops Manager.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q86">
+  <div class="qa__number">Question 86</div>
+  <h3 class="qa__question">How do you use MongoDB&#x27;s $isoDate and $isoWeekYear operators?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q87">
+  <div class="qa__number">Question 87</div>
+  <h3 class="qa__question">Explain how to handle and optimize MongoDB&#x27;s background index builds.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q88">
+  <div class="qa__number">Question 88</div>
+  <h3 class="qa__question">How do you implement and use the $toString and $toObjectId operators in aggregation?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q89">
+  <div class="qa__number">Question 89</div>
+  <h3 class="qa__question">Describe the process of using MongoDB&#x27;s $literal and $mergeArrays operators.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q90">
+  <div class="qa__number">Question 90</div>
+  <h3 class="qa__question">How do you monitor and manage MongoDB&#x27;s WiredTiger cache usage?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q91">
+  <div class="qa__number">Question 91</div>
+  <h3 class="qa__question">Explain how to use MongoDB&#x27;s $switch and $let operators in aggregation.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q92">
+  <div class="qa__number">Question 92</div>
+  <h3 class="qa__question">How do you implement and manage multi-region deployments with MongoDB?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q93">
+  <div class="qa__number">Question 93</div>
+  <h3 class="qa__question">Describe the process of configuring MongoDB&#x27;s TTL indexes for data expiration.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q94">
+  <div class="qa__number">Question 94</div>
+  <h3 class="qa__question">How do you handle and optimize MongoDB&#x27;s initial sync process in replication?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q95">
+  <div class="qa__number">Question 95</div>
+  <h3 class="qa__question">Explain the purpose and usage of MongoDB&#x27;s $currentOp command.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q96">
+  <div class="qa__number">Question 96</div>
+  <h3 class="qa__question">How do you use MongoDB&#x27;s $year, $month, and $dayOfMonth operators?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q97">
+  <div class="qa__number">Question 97</div>
+  <h3 class="qa__question">Describe the process of managing MongoDB&#x27;s oplog size and performance.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q98">
+  <div class="qa__number">Question 98</div>
+  <h3 class="qa__question">How do you implement and manage field-level encryption in MongoDB?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q99">
+  <div class="qa__number">Question 99</div>
+  <h3 class="qa__question">Explain the differences between MongoDB&#x27;s $geoNear and $geoWithin operators.</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+<article class="qa" id="q100">
+  <div class="qa__number">Question 100</div>
+  <h3 class="qa__question">How do you use MongoDB&#x27;s $merge and $setUnion operators in aggregation?</h3>
+  <div class="qa__answer">
+    <p style="color: var(--text-muted); font-style: italic;">Detailed explanation coming soon. In the meantime, try researching this question on your own — teaching yourself is the most effective study method.</p>
+    
+  </div>
+</article>
+
+    <nav class="chapter-nav" aria-label="Chapter navigation">
+      <a class="chapter-nav__prev" href="mongodb-coding.html">
+      <span class="chapter-nav__dir">← Previous</span>
+      <span class="chapter-nav__title">MongoDB — Coding</span>
+    </a>
+      <a class="chapter-nav__next" href="mongodb-scenario.html">
+      <span class="chapter-nav__dir">Next →</span>
+      <span class="chapter-nav__title">MongoDB — Scenario Based</span>
+    </a>
+    </nav>
+
+  </section>
+
+</main>
+</div>
+
+<script src="../assets/script.js"></script>
+</body>
+</html>

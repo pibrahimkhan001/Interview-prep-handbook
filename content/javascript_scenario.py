@@ -1,0 +1,2959 @@
+"""JavaScript · Scenario Based · Detailed answers. Each value is an HTML snippet."""
+
+ANSWERS = {}
+
+ANSWERS[1] = r'''
+<p><strong>The approach</strong>: slice the work, yield often, move heavy work off the main thread.</p>
+<pre><code>// 1. Chunk + yield
+async function processInChunks(items, chunk = 500) {
+  for (let i = 0; i &lt; items.length; i += chunk) {
+    processChunk(items.slice(i, i + chunk));
+    await new Promise(r =&gt; setTimeout(r, 0));    // yield to event loop
+  }
+}
+
+// 2. Web Worker — offload entirely
+const worker = new Worker("processor.js");
+worker.postMessage({ items }, [items.buffer]);   // transferable
+worker.onmessage = (e) =&gt; render(e.data);
+
+// 3. requestIdleCallback — fit into idle browser time
+function idle(fn) {
+  (window.requestIdleCallback || setTimeout)(fn);
+}</code></pre>
+<p>Pick based on workload:</p>
+<ul>
+  <li><strong>Chunking + <code>setTimeout(0)</code></strong> — simplest; keeps UI responsive but still single-threaded.</li>
+  <li><strong>Web Workers</strong> — best for sustained CPU-heavy work (parsing, crypto, image/audio).</li>
+  <li><strong>requestIdleCallback</strong> — non-critical background work (analytics, prefetch).</li>
+  <li><strong>Streaming APIs</strong> — process data as it arrives instead of buffering.</li>
+</ul>
+'''
+
+ANSWERS[2] = r'''
+<p>Classic search-as-you-type: <strong>debounce input + cancel stale requests</strong>.</p>
+<pre><code>function searchController() {
+  let controller = null;
+  return debounce(async (query, render) =&gt; {
+    controller?.abort();
+    controller = new AbortController();
+    try {
+      const res = await fetch(`/search?q=${encodeURIComponent(query)}`,
+                              { signal: controller.signal });
+      render(await res.json());
+    } catch (e) {
+      if (e.name !== "AbortError") showError(e);
+    }
+  }, 300);
+}
+const search = searchController();
+input.oninput = (e) =&gt; search(e.target.value, renderResults);</code></pre>
+<p>Extras:</p>
+<ul>
+  <li><strong>Min length</strong> — skip query if &lt; 2 chars.</li>
+  <li><strong>Client-side cache</strong> — <code>Map&lt;query, results&gt;</code> with short TTL.</li>
+  <li><strong>Indexing for client-side filter</strong> — for small datasets, Fuse.js / Lunr.js is instant.</li>
+  <li><strong>Server side</strong> — Elasticsearch / PostgreSQL <code>tsvector</code> / Meilisearch / Typesense.</li>
+  <li><strong>Race protection</strong> — <code>AbortController</code> or request-ID check before rendering.</li>
+</ul>
+'''
+
+ANSWERS[3] = r'''
+<p>Two layers of defense: <strong>client respect</strong> + <strong>server enforcement</strong>.</p>
+<pre><code>// Token bucket — client side
+class RateLimiter {
+  constructor(max, perMs) {
+    this.max = max; this.tokens = max; this.perMs = perMs;
+    setInterval(() =&gt; this.tokens = Math.min(this.max, this.tokens + 1), perMs / max);
+  }
+  async acquire() {
+    while (this.tokens &lt;= 0) await new Promise(r =&gt; setTimeout(r, 50));
+    this.tokens--;
+  }
+}
+const limiter = new RateLimiter(10, 1000);   // 10 req/sec
+
+async function request(url) {
+  await limiter.acquire();
+  const res = await fetch(url);
+  if (res.status === 429) {
+    const retry = res.headers.get("Retry-After") || 1;
+    await new Promise(r =&gt; setTimeout(r, retry * 1000));
+    return request(url);                      // retry
+  }
+  return res;
+}</code></pre>
+<p>Other techniques:</p>
+<ul>
+  <li><strong>Request queue</strong> — serialize and throttle.</li>
+  <li><strong>Debounce user-driven calls</strong> (search, autosave).</li>
+  <li><strong>Batch endpoints</strong> — combine N items into one request.</li>
+  <li><strong>Respect <code>Retry-After</code></strong> and honor response rate-limit headers (<code>X-RateLimit-Remaining</code>).</li>
+  <li><strong>Exponential backoff with jitter</strong> on retries.</li>
+</ul>
+'''
+
+ANSWERS[4] = r'''
+<p><strong>Offline-first architecture</strong>: Service Worker caches the shell; IndexedDB stores data; background sync replays writes when online.</p>
+<pre><code>// Register service worker
+navigator.serviceWorker.register("/sw.js");
+
+// sw.js — cache app shell
+self.addEventListener("install", (e) =&gt; {
+  e.waitUntil(caches.open("v1").then(c =&gt; c.addAll(["/", "/app.js", "/app.css"])));
+});
+
+// Respond from cache first, fall back to network
+self.addEventListener("fetch", (e) =&gt; {
+  e.respondWith(caches.match(e.request).then(hit =&gt; hit || fetch(e.request)));
+});
+
+// Queue writes when offline
+async function saveNote(note) {
+  try {
+    await fetch("/notes", { method: "POST", body: JSON.stringify(note) });
+  } catch {
+    await addToOutbox(note);                  // IndexedDB outbox
+    await navigator.serviceWorker.ready
+      .then(reg =&gt; reg.sync.register("flush-outbox"));
+  }
+}</code></pre>
+<p>Key pieces:</p>
+<ul>
+  <li><strong>Detection</strong> — <code>navigator.onLine</code> + <code>online/offline</code> events (not 100% reliable; do a real probe).</li>
+  <li><strong>Storage</strong> — IndexedDB for structured data, Cache API for responses.</li>
+  <li><strong>Sync</strong> — Background Sync API or retry on next focus.</li>
+  <li><strong>UX</strong> — optimistic updates, offline banner, queued-write indicator.</li>
+</ul>
+'''
+
+ANSWERS[5] = r'''
+<p>Break hard dependencies with events and DI; expose capabilities through a well-defined contract.</p>
+<pre><code>// Modular component boundary
+class DataGrid {
+  constructor({ fetchPage, renderRow, onRowClick }) {
+    this.fetchPage = fetchPage;
+    this.renderRow = renderRow;
+    this.onRowClick = onRowClick;
+  }
+  async load() { ... }
+}
+
+// Event bus for cross-module comms
+const bus = new EventTarget();
+bus.addEventListener("user-logged-in", handleLogin);
+bus.dispatchEvent(new CustomEvent("user-logged-in", { detail: user }));</code></pre>
+<p>Techniques:</p>
+<ul>
+  <li><strong>Dependency injection</strong> — modules accept their collaborators via constructor or props.</li>
+  <li><strong>Event bus / pub-sub</strong> — loose coupling for cross-cutting concerns (auth, telemetry).</li>
+  <li><strong>Public API surface</strong> — expose only what's needed; keep internals in closures / <code>#private</code>.</li>
+  <li><strong>Monorepo with workspaces</strong> — clear package boundaries with shared tooling.</li>
+  <li><strong>Layered architecture</strong> — UI → application → domain → infrastructure.</li>
+  <li><strong>Feature flags</strong> — ship without coupling release to deployment.</li>
+</ul>
+<p>Test it: can you replace a module's real implementation with a mock? If not, coupling is too tight.</p>
+'''
+
+ANSWERS[6] = r'''
+<p><strong>CSS-first with a JS toggle for breakpoints + keyboard/touch support.</strong></p>
+<pre><code>&lt;nav class="nav" data-open="false"&gt;
+  &lt;button class="nav__toggle" aria-expanded="false" aria-controls="nav-list"&gt;Menu&lt;/button&gt;
+  &lt;ul id="nav-list" class="nav__list"&gt;...&lt;/ul&gt;
+&lt;/nav&gt;
+
+&lt;style&gt;
+.nav__list { display: flex; gap: 1rem; }
+@media (max-width: 640px) {
+  .nav__list { display: none; flex-direction: column; }
+  .nav[data-open="true"] .nav__list { display: flex; }
+}
+&lt;/style&gt;
+
+&lt;script&gt;
+const nav = document.querySelector(".nav");
+nav.querySelector(".nav__toggle").addEventListener("click", (e) =&gt; {
+  const open = nav.dataset.open === "true";
+  nav.dataset.open = String(!open);
+  e.currentTarget.setAttribute("aria-expanded", String(!open));
+});
+document.addEventListener("click", (e) =&gt; {
+  if (!nav.contains(e.target)) nav.dataset.open = "false";
+});
+document.addEventListener("keydown", (e) =&gt; {
+  if (e.key === "Escape") nav.dataset.open = "false";
+});
+&lt;/script&gt;</code></pre>
+<p>Accessibility essentials: <code>aria-expanded</code>, <code>aria-controls</code>, focus trap when open (for a drawer), restore focus on close, Escape to close.</p>
+'''
+
+ANSWERS[7] = r'''
+<p><strong>Three layers</strong>: client-side error capture, structured logs, centralized monitoring.</p>
+<pre><code>// Global capture
+window.addEventListener("error", (e) =&gt; report({
+  type: "uncaught",
+  message: e.message,
+  stack: e.error?.stack,
+  url: e.filename,
+  line: e.lineno,
+}));
+window.addEventListener("unhandledrejection", (e) =&gt; report({
+  type: "unhandled-promise",
+  reason: String(e.reason),
+}));
+
+// Structured report with context
+function report(err) {
+  fetch("/errors", {
+    method: "POST",
+    body: JSON.stringify({
+      ...err,
+      release: APP_VERSION,
+      userId: session.id,
+      sessionId: session.sid,
+      userAgent: navigator.userAgent,
+      url: location.href,
+      ts: Date.now(),
+    }),
+    keepalive: true   // survive page unload
+  });
+}</code></pre>
+<p>Practical setup:</p>
+<ul>
+  <li><strong>SaaS</strong> — Sentry, Datadog RUM, Bugsnag — source maps, release tracking, user-impact grouping.</li>
+  <li><strong>Source maps</strong> — upload on deploy so stack traces resolve to original code.</li>
+  <li><strong>PII discipline</strong> — strip tokens, emails, form values before sending.</li>
+  <li><strong>Sampling</strong> at scale so you don't DDOS yourself.</li>
+  <li><strong>Alerts on spikes</strong>, not individual errors.</li>
+</ul>
+'''
+
+ANSWERS[8] = r'''
+<p>Resumable, chunked upload with progress — <code>XMLHttpRequest</code> still beats <code>fetch</code> for granular upload progress.</p>
+<pre><code>function uploadWithProgress(file, url) {
+  return new Promise((resolve, reject) =&gt; {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", url);
+    xhr.upload.onprogress = (e) =&gt; {
+      if (e.lengthComputable) onProgress(e.loaded / e.total);
+    };
+    xhr.onload = () =&gt; xhr.status &lt; 400 ? resolve(xhr.response) : reject(xhr);
+    xhr.onerror = reject;
+    xhr.ontimeout = reject;
+    xhr.timeout = 60000;
+    const fd = new FormData();
+    fd.append("file", file);
+    xhr.send(fd);
+  });
+}
+
+// Chunked + resumable (pseudo)
+for (let i = start; i &lt; chunks; i++) {
+  await retry(() =&gt; uploadChunk(file, i), 3);
+  persistProgress(i);            // localStorage so refresh can resume
+}</code></pre>
+<p>Production considerations: generate client-side hash for dedup, validate size/type, show per-file state (pending/uploading/done/error), allow retry of failed chunks only, use <code>tus</code> protocol or signed S3 multipart URLs for server-light design.</p>
+'''
+
+ANSWERS[9] = r'''
+<p>Strategy: <strong>declarative schema</strong> + <strong>field-level rules</strong> + <strong>async/cross-field</strong> support.</p>
+<pre><code>const schema = {
+  email:     { required: true, pattern: /^\S+@\S+\.\S+$/ },
+  password:  { required: true, minLength: 8, custom: hasUpperAndDigit },
+  confirm:   { required: true, equalsField: "password" },
+  username:  { required: true, asyncCheck: checkUsernameAvailable },
+};
+
+async function validate(data, schema) {
+  const errors = {};
+  for (const [field, rules] of Object.entries(schema)) {
+    const value = data[field];
+    if (rules.required && !value) { errors[field] = "Required"; continue; }
+    if (rules.pattern && !rules.pattern.test(value)) errors[field] = "Invalid";
+    if (rules.minLength && value.length &lt; rules.minLength) errors[field] = "Too short";
+    if (rules.equalsField && value !== data[rules.equalsField]) errors[field] = "Mismatch";
+    if (rules.asyncCheck) {
+      const res = await rules.asyncCheck(value);
+      if (!res.ok) errors[field] = res.message;
+    }
+  }
+  return errors;
+}</code></pre>
+<p>UX details: validate on blur (not per keystroke), summarize errors at top of form for screen readers (<code>role="alert"</code>), disable submit until required fields pass, preserve values on error, show server-side errors in the same UI. Libraries: Zod, Yup, Joi for schema; React Hook Form / Formik for wiring.</p>
+'''
+
+ANSWERS[10] = r'''
+<p><strong>CSS variables + <code>prefers-color-scheme</code> + persistence</strong>.</p>
+<pre><code>&lt;style&gt;
+:root {
+  --bg: #fff; --fg: #111; --border: #ddd;
+}
+:root[data-theme="dark"] {
+  --bg: #111; --fg: #eee; --border: #333;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --bg: #111; --fg: #eee; --border: #333;
+  }
+}
+body { background: var(--bg); color: var(--fg); }
+&lt;/style&gt;
+
+&lt;script&gt;
+// Apply before paint to avoid flash
+(function () {
+  const saved = localStorage.getItem("theme");
+  if (saved) document.documentElement.dataset.theme = saved;
+})();
+
+function toggleTheme() {
+  const cur = document.documentElement.dataset.theme;
+  const next = cur === "dark" ? "light" : "dark";
+  document.documentElement.dataset.theme = next;
+  localStorage.setItem("theme", next);
+}
+&lt;/script&gt;</code></pre>
+<p>Tricks: run the theme script <em>before</em> the first paint (inline in <code>&lt;head&gt;</code>) to prevent the flash of wrong theme. Use CSS variables so components don't need conditional logic. Listen to <code>matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ...)</code> to reflect OS changes when the user hasn't explicitly chosen.</p>
+'''
+
+ANSWERS[11] = r'''
+<p>Cookies for the session token, client-side hydration of user profile, refresh on load.</p>
+<pre><code>// Server sets HttpOnly cookie after login — JS can't touch it
+// Client-side: probe session on boot
+async function bootAuth() {
+  try {
+    const res = await fetch("/me", { credentials: "include" });
+    if (res.ok) setUser(await res.json());
+  } catch { setUser(null); }
+}
+
+// Token refresh (silent)
+async function withAuth(req) {
+  let res = await fetch(req);
+  if (res.status === 401) {
+    const r = await fetch("/auth/refresh", { method: "POST", credentials: "include" });
+    if (r.ok) res = await fetch(req);              // retry
+  }
+  return res;
+}</code></pre>
+<p>Best practices:</p>
+<ul>
+  <li><strong>Storage</strong> — HttpOnly/Secure/SameSite cookies for session tokens. Avoid <code>localStorage</code> for tokens (XSS exposure).</li>
+  <li><strong>Short-lived access tokens + refresh tokens</strong> — rotating refresh tokens limit blast radius.</li>
+  <li><strong>Logout</strong> — revoke server-side, clear cookies, wipe in-memory state, redirect.</li>
+  <li><strong>Cross-tab sync</strong> — <code>BroadcastChannel</code> or <code>storage</code> event to log out other tabs.</li>
+  <li><strong>Idle timeout</strong> — reset on activity, warn before expiry.</li>
+</ul>
+'''
+
+ANSWERS[12] = r'''
+<p>HTML5 Drag-and-Drop API, or pointer events for fine control.</p>
+<pre><code>let dragged = null;
+
+list.addEventListener("dragstart", (e) =&gt; {
+  dragged = e.target;
+  e.target.classList.add("dragging");
+  e.dataTransfer.effectAllowed = "move";
+});
+
+list.addEventListener("dragover", (e) =&gt; {
+  e.preventDefault();                                 // allow drop
+  const over = e.target.closest("li");
+  if (!over || over === dragged) return;
+  const rect = over.getBoundingClientRect();
+  const after = (e.clientY - rect.top) &gt; rect.height / 2;
+  over.parentNode.insertBefore(dragged, after ? over.nextSibling : over);
+});
+
+list.addEventListener("dragend", (e) =&gt; {
+  dragged.classList.remove("dragging");
+  persist(readOrder(list));
+});</code></pre>
+<p>Accessibility: HTML5 DnD is mouse-only. Add keyboard alternatives (arrow keys + <code>aria-grabbed</code>/<code>aria-dropeffect</code>, or move-up/move-down buttons). For production, use libraries like <strong>dnd-kit</strong> or <strong>Sortable.js</strong> — they handle keyboard, touch, autoscroll, and animations correctly.</p>
+'''
+
+ANSWERS[13] = r'''
+<p>WebSocket (or Server-Sent Events for one-way) + reconnection + backoff + message envelope.</p>
+<pre><code>class NotificationClient {
+  constructor(url) { this.url = url; this.connect(); }
+  connect() {
+    this.ws = new WebSocket(this.url);
+    this.ws.onopen    = () =&gt; { this.retries = 0; this.send({ type: "subscribe" }); };
+    this.ws.onmessage = (e) =&gt; this.handle(JSON.parse(e.data));
+    this.ws.onclose   = () =&gt; this.scheduleReconnect();
+    this.ws.onerror   = () =&gt; this.ws.close();
+  }
+  scheduleReconnect() {
+    const wait = Math.min(30000, 1000 * 2 ** (this.retries++ || 0))
+               + Math.random() * 500;
+    setTimeout(() =&gt; this.connect(), wait);
+  }
+  send(msg) { if (this.ws.readyState === 1) this.ws.send(JSON.stringify(msg)); }
+  handle(msg) { /* dispatch to UI via event bus */ }
+}</code></pre>
+<p>Considerations:</p>
+<ul>
+  <li><strong>Auth</strong> — include token in initial handshake message (not in URL).</li>
+  <li><strong>Heartbeat</strong> — ping/pong every 30s to detect dead connections through NAT.</li>
+  <li><strong>Fallback</strong> — SSE (polyfilled) if WebSockets are blocked.</li>
+  <li><strong>Message ordering</strong> — include sequence numbers; resync on gap.</li>
+  <li><strong>Delivery</strong> — pair with push notifications for offline users.</li>
+</ul>
+'''
+
+ANSWERS[14] = r'''
+<p><strong>Virtual scrolling</strong> — render only what's visible; swap DOM as you scroll.</p>
+<pre><code>function virtualList(container, items, { rowHeight, render }) {
+  const spacer = document.createElement("div");
+  spacer.style.height = (items.length * rowHeight) + "px";
+  const viewport = document.createElement("div");
+  viewport.style.position = "absolute";
+  viewport.style.top = "0";
+  container.append(spacer, viewport);
+
+  function paint() {
+    const scrollTop = container.scrollTop;
+    const start = Math.max(0, (scrollTop / rowHeight) - 5 | 0);
+    const end   = Math.min(items.length, start + (container.clientHeight / rowHeight) + 10 | 0);
+    viewport.style.transform = `translateY(${start * rowHeight}px)`;
+    viewport.replaceChildren(...items.slice(start, end).map(render));
+  }
+  container.addEventListener("scroll", paint, { passive: true });
+  paint();
+}</code></pre>
+<p>Alternative: <strong>IntersectionObserver + append-on-scroll</strong> for infinite append (no unmount).</p>
+<p>Production libraries: <strong>react-window</strong>, <strong>react-virtualized</strong>, <strong>TanStack Virtual</strong>. They handle variable row heights, horizontal scrolling, and sticky rows.</p>
+<p>Trade-offs: virtualization breaks <code>Ctrl+F</code> search, copy-all, and screen readers (mitigate with ARIA attributes and in-memory search).</p>
+'''
+
+ANSWERS[15] = r'''
+<p>The waterfall: quick wins first, then structural changes.</p>
+<ul>
+  <li><strong>Image formats</strong> — WebP/AVIF with JPEG/PNG fallback via <code>&lt;picture&gt;</code>. Responsive <code>srcset</code> by DPR and viewport.</li>
+  <li><strong>Lazy-load</strong> — <code>loading="lazy"</code> on <code>&lt;img&gt;</code>/<code>&lt;iframe&gt;</code>; IntersectionObserver for background images.</li>
+  <li><strong>Preload critical assets</strong> — <code>&lt;link rel="preload"&gt;</code> for hero image, primary font.</li>
+  <li><strong>Font strategy</strong> — <code>font-display: swap</code>, subset, WOFF2, preload top 1–2 faces.</li>
+  <li><strong>Code splitting</strong> — route-level and component-level dynamic <code>import()</code>.</li>
+  <li><strong>Bundle hygiene</strong> — analyze with <code>vite-bundle-visualizer</code> / <code>webpack-bundle-analyzer</code>; remove unused libs.</li>
+  <li><strong>HTTP/2 or HTTP/3</strong> — CDN with connection coalescing.</li>
+  <li><strong>Caching</strong> — long-lived immutable assets (content-hashed filenames) + <code>Cache-Control</code>.</li>
+  <li><strong>Service Worker</strong> for repeat visits.</li>
+  <li><strong>Server-side rendering / static generation</strong> for fast first paint.</li>
+</ul>
+<p>Measure with Lighthouse and the Performance panel — target LCP &lt; 2.5s, CLS &lt; 0.1, INP &lt; 200ms.</p>
+'''
+
+ANSWERS[16] = r'''
+<p>Debounced fetch + keyed cache + keyboard navigation.</p>
+<pre><code>class Autocomplete {
+  constructor(input, list, endpoint) {
+    this.input = input; this.list = list; this.endpoint = endpoint;
+    this.cache = new Map();
+    this.activeIndex = -1;
+    this.search = debounce(this.fetch.bind(this), 200);
+    input.oninput = () =&gt; this.search(input.value);
+    input.onkeydown = this.onKeyDown.bind(this);
+  }
+  async fetch(q) {
+    if (!q) return this.render([]);
+    if (this.cache.has(q)) return this.render(this.cache.get(q));
+    this.controller?.abort();
+    this.controller = new AbortController();
+    const res = await fetch(`${this.endpoint}?q=${encodeURIComponent(q)}`,
+                            { signal: this.controller.signal });
+    const items = await res.json();
+    this.cache.set(q, items);
+    this.render(items);
+  }
+  onKeyDown(e) {
+    const count = this.list.children.length;
+    if (e.key === "ArrowDown") this.activeIndex = (this.activeIndex + 1) % count;
+    else if (e.key === "ArrowUp") this.activeIndex = (this.activeIndex - 1 + count) % count;
+    else if (e.key === "Enter")   this.select(this.activeIndex);
+    else if (e.key === "Escape")  this.render([]);
+    this.updateHighlight();
+  }
+}</code></pre>
+<p>ARIA: <code>role="combobox"</code> on input, <code>role="listbox"</code> on dropdown, <code>aria-activedescendant</code> pointing to the highlighted option. Libraries: Downshift, Combobox from Headless UI.</p>
+'''
+
+ANSWERS[17] = r'''
+<p><strong>Depends on complexity</strong>. Match the tool to the pain level.</p>
+<table>
+  <thead><tr><th>Scope</th><th>Approach</th></tr></thead>
+  <tbody>
+    <tr><td>Single form, simple validation</td><td>React Hook Form — uncontrolled inputs, minimal re-renders</td></tr>
+    <tr><td>Complex cross-field logic, wizards</td><td>React Hook Form + Zod for schema validation</td></tr>
+    <tr><td>Highly dynamic, collaborative</td><td>Formik + Yup, or custom state machine (XState)</td></tr>
+    <tr><td>Simple forms, no library</td><td>Native uncontrolled components + <code>FormData</code></td></tr>
+  </tbody>
+</table>
+<pre><code>// React Hook Form + Zod sketch
+const schema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8),
+  confirm: z.string(),
+}).refine(d =&gt; d.password === d.confirm, { path: ["confirm"], message: "Mismatch" });
+
+function SignupForm() {
+  const { register, handleSubmit, formState: { errors } } =
+    useForm({ resolver: zodResolver(schema) });
+  return (
+    &lt;form onSubmit={handleSubmit(submit)}&gt;
+      &lt;input {...register("email")} /&gt; {errors.email?.message}
+      ...
+    &lt;/form&gt;
+  );
+}</code></pre>
+<p>Principles: avoid turning every keystroke into a global-state update. Validate on blur/submit, not on every change. Keep derived state (e.g., formatted display) local to the input.</p>
+'''
+
+ANSWERS[18] = r'''
+<p><strong>Choose based on the state's origin and scope</strong> — don't put everything in one store.</p>
+<table>
+  <thead><tr><th>Kind of state</th><th>Tool</th></tr></thead>
+  <tbody>
+    <tr><td>Component-local UI</td><td><code>useState</code>, <code>useReducer</code></td></tr>
+    <tr><td>Cross-component shared UI</td><td>Context + <code>useReducer</code>, or Zustand</td></tr>
+    <tr><td>Server data (cache, fetch, revalidate)</td><td>TanStack Query, SWR, RTK Query</td></tr>
+    <tr><td>Complex client domain logic</td><td>Redux Toolkit, Zustand, Jotai</td></tr>
+    <tr><td>URL-reflected state (filters, tabs)</td><td>Router params + URL state</td></tr>
+    <tr><td>Form state</td><td>React Hook Form / Formik</td></tr>
+  </tbody>
+</table>
+<p>Principles:</p>
+<ul>
+  <li><strong>Colocate by default</strong> — lift state only when two siblings need it.</li>
+  <li><strong>Separate server state from client state</strong> — different lifecycle, staleness, errors.</li>
+  <li><strong>Normalize entity data</strong> (like a relational DB) to avoid duplication.</li>
+  <li><strong>Derive, don't duplicate</strong> — computed values via selectors, not stored separately.</li>
+  <li><strong>Undo/redo</strong> if needed — built-in in some libs, or implement with a history stack.</li>
+</ul>
+'''
+
+ANSWERS[19] = r'''
+<p>Native <code>loading="lazy"</code> is the easy win; IntersectionObserver for fallback and background images.</p>
+<pre><code>&lt;!-- Native (Chrome, Firefox, Safari 15.4+) --&gt;
+&lt;img src="big.jpg" loading="lazy" alt="" width="600" height="400"&gt;
+
+&lt;!-- Blur-up with a tiny placeholder --&gt;
+&lt;img class="lazy"
+     src="tiny-blur.jpg"
+     data-src="full.jpg"
+     loading="lazy"
+     width="600" height="400"&gt;
+
+&lt;script&gt;
+const io = new IntersectionObserver((entries, obs) =&gt; {
+  entries.filter(e =&gt; e.isIntersecting).forEach(e =&gt; {
+    e.target.src = e.target.dataset.src;
+    obs.unobserve(e.target);
+  });
+}, { rootMargin: "200px" });
+
+document.querySelectorAll("img.lazy").forEach(img =&gt; io.observe(img));
+&lt;/script&gt;</code></pre>
+<p>Always set <code>width</code>/<code>height</code> or <code>aspect-ratio</code> to prevent layout shift. Combine with responsive <code>srcset</code> for optimal bytes per viewport. Don't lazy-load the hero / above-the-fold image — use <code>fetchpriority="high"</code> and <code>preload</code> for those.</p>
+'''
+
+ANSWERS[20] = r'''
+<p><strong>Client-side routing</strong> with the History API + declarative route config.</p>
+<pre><code>// React Router v6 sketch
+const router = createBrowserRouter([
+  { path: "/",             element: &lt;Home /&gt; },
+  { path: "/users/:id",    element: &lt;UserProfile /&gt;, loader: ({ params }) =&gt; fetchUser(params.id) },
+  { path: "/admin",        element: &lt;RequireAuth&gt;&lt;Admin /&gt;&lt;/RequireAuth&gt; },
+  { path: "*",             element: &lt;NotFound /&gt; },
+]);</code></pre>
+<p>Must-haves:</p>
+<ul>
+  <li><strong>Server fallback</strong> — catch-all rewrite (<code>try_files $uri /index.html</code>) so deep links work.</li>
+  <li><strong>Code splitting per route</strong> — <code>React.lazy(() =&gt; import("./Route"))</code> + <code>&lt;Suspense&gt;</code>.</li>
+  <li><strong>Route guards</strong> — redirect unauthenticated users.</li>
+  <li><strong>Scroll restoration</strong> — on pop vs push handle differently.</li>
+  <li><strong>Data loading</strong> — loaders + suspense, or TanStack Query per route.</li>
+  <li><strong>Not-found handling</strong> — match all pattern + server 404 for non-SPA crawlers.</li>
+  <li><strong>Link prefetching</strong> — hover/viewport prefetch for instant navigation.</li>
+</ul>
+<p>Libraries: React Router, TanStack Router, Vue Router, SvelteKit, Next.js App Router.</p>
+'''
+
+ANSWERS[21] = r'''
+<p>Wrap TanStack Query (or a similar lib) in a custom hook for consistent error/retry/cache behavior.</p>
+<pre><code>import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+
+export function useUser(id) {
+  return useQuery({
+    queryKey: ["user", id],
+    queryFn: ({ signal }) =&gt; fetch(`/api/users/${id}`, { signal }).then(r =&gt; r.json()),
+    staleTime: 60_000,
+    retry: 2,
+  });
+}
+
+export function useUpdateUser() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (user) =&gt; fetch(`/api/users/${user.id}`, {
+      method: "PUT", body: JSON.stringify(user),
+    }),
+    onSuccess: (_, user) =&gt; qc.invalidateQueries({ queryKey: ["user", user.id] }),
+  });
+}
+
+// Usage
+function Profile({ id }) {
+  const { data, isLoading, error } = useUser(id);
+  if (isLoading) return &lt;Spinner /&gt;;
+  if (error)     return &lt;Error retry={refetch} /&gt;;
+  return &lt;UserCard user={data} /&gt;;
+}</code></pre>
+<p>Benefits: deduplicated requests across components, automatic refetch on focus/reconnect, stale-while-revalidate behavior, built-in retries with exponential backoff. Roll your own only if library size is critical — it's a lot to get right.</p>
+'''
+
+ANSWERS[22] = r'''
+<p>Two sides: client sends <code>Origin</code>; server responds with <code>Access-Control-Allow-*</code> headers. Client code can't &ldquo;bypass&rdquo; CORS — the browser enforces it.</p>
+<pre><code>// Simple request (GET/POST with safe headers) — browser auto-adds Origin
+fetch("https://api.other.com/data", { credentials: "include" });
+
+// Preflighted request (PUT, custom headers) — browser sends OPTIONS first
+fetch("https://api.other.com/data", {
+  method: "PUT",
+  headers: { "Content-Type": "application/json", "X-Auth": token },
+  body: JSON.stringify(payload),
+});
+
+// Server must respond to OPTIONS with:
+// Access-Control-Allow-Origin: https://myapp.com
+// Access-Control-Allow-Methods: GET, POST, PUT
+// Access-Control-Allow-Headers: Content-Type, X-Auth
+// Access-Control-Allow-Credentials: true   ← only if cookies needed
+// Access-Control-Max-Age: 86400             ← cache the preflight</code></pre>
+<p>Common pitfalls: using <code>*</code> as origin with credentials (not allowed), missing <code>OPTIONS</code> handler (preflight fails), case-sensitive custom header matching. Same-origin or reverse-proxy the API under your own domain to avoid CORS entirely. JSONP is a legacy workaround — don't use in new code.</p>
+'''
+
+ANSWERS[23] = r'''
+<p>WebSocket-based chat with presence and typing indicators.</p>
+<pre><code>class ChatClient extends EventTarget {
+  constructor(url) {
+    super();
+    this.ws = new WebSocket(url);
+    this.ws.onmessage = (e) =&gt; this.dispatchEvent(new CustomEvent("msg",
+                                                   { detail: JSON.parse(e.data) }));
+    this.typingTimer = null;
+  }
+  send(msg) { this.ws.send(JSON.stringify({ type: "msg", text: msg })); }
+
+  onInput() {
+    clearTimeout(this.typingTimer);
+    if (!this.typing) this.ws.send(JSON.stringify({ type: "typing-start" }));
+    this.typing = true;
+    this.typingTimer = setTimeout(() =&gt; {
+      this.ws.send(JSON.stringify({ type: "typing-stop" }));
+      this.typing = false;
+    }, 2000);
+  }
+}</code></pre>
+<p>Features checklist:</p>
+<ul>
+  <li><strong>Message ordering</strong> — server timestamp; client displays in order received.</li>
+  <li><strong>Read receipts</strong> — client acks; server broadcasts.</li>
+  <li><strong>Presence</strong> — last-seen from server heartbeats.</li>
+  <li><strong>History pagination</strong> — REST endpoint for messages before a cursor.</li>
+  <li><strong>Offline queue</strong> — buffer sends; flush on reconnect.</li>
+  <li><strong>E2E encryption</strong> — Signal Protocol if needed.</li>
+</ul>
+<p>For production, use a service: Pusher, Ably, Socket.IO, or Supabase Realtime rather than rolling from scratch.</p>
+'''
+
+ANSWERS[24] = r'''
+<p>Two flavors: <strong>streaming download</strong> (browser handles), <strong>client-generated</strong> (you build the file).</p>
+<pre><code>// Server-streamed download
+function downloadFile(url, filename) {
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;                // server Content-Disposition also works
+  a.click();
+}
+
+// Client-built file from in-memory data
+async function downloadBlob(blob, filename) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// Very large — use File System Access API (streaming write)
+async function downloadLarge(url, suggestedName) {
+  const handle = await window.showSaveFilePicker({ suggestedName });
+  const writable = await handle.createWritable();
+  const res = await fetch(url);
+  await res.body.pipeTo(writable);       // streams — no memory spike
+}</code></pre>
+<p>Server-side: serve with <code>Content-Disposition: attachment; filename="..."</code>, set <code>Accept-Ranges: bytes</code> for resumable downloads, use signed URLs (S3/CloudFront) to offload bandwidth and add expiry.</p>
+'''
+
+ANSWERS[25] = r'''
+<p>Set up a monorepo with a clean package boundary and design tokens.</p>
+<pre><code>// packages/ui/
+//   src/
+//     Button.tsx
+//     Input.tsx
+//     tokens.css
+//   package.json  (name: "@co/ui", exports: "./dist/index.js")
+//   tsconfig.json
+
+// packages/ui/src/Button.tsx
+export interface ButtonProps {
+  variant?: "primary" | "secondary";
+  children: React.ReactNode;
+}
+export function Button({ variant = "primary", children, ...rest }: ButtonProps) {
+  return &lt;button className={`btn btn--${variant}`} {...rest}&gt;{children}&lt;/button&gt;;
+}
+
+// Consumer
+import { Button } from "@co/ui";</code></pre>
+<p>Essentials:</p>
+<ul>
+  <li><strong>Design tokens</strong> — colors/spacing/typography as CSS custom properties.</li>
+  <li><strong>Accessibility</strong> — keyboard + ARIA tested with axe.</li>
+  <li><strong>Stable API</strong> — props with good defaults and strong types.</li>
+  <li><strong>Storybook</strong> — isolated dev, visual regression tests.</li>
+  <li><strong>Tree-shakeable</strong> — individual exports, <code>sideEffects: false</code>.</li>
+  <li><strong>Versioning</strong> — Changesets, semver; deprecate before remove.</li>
+  <li><strong>Docs</strong> — usage, props, a11y notes, do's and don'ts.</li>
+</ul>
+<p>Start small (4-5 primitives) and let real consumer needs drive growth, not speculation.</p>
+'''
+
+ANSWERS[26] = r'''
+<p>Cursor-based pagination reads cleanly with infinite scroll; offset-based is simpler for page numbers.</p>
+<pre><code>// Cursor-based (preferred)
+async function loadPage(cursor) {
+  const url = cursor ? `/items?after=${cursor}` : "/items";
+  const { items, nextCursor } = await (await fetch(url)).json();
+  return { items, nextCursor };
+}
+
+// React — TanStack Query infinite
+function useItems() {
+  return useInfiniteQuery({
+    queryKey: ["items"],
+    queryFn: ({ pageParam }) =&gt; loadPage(pageParam),
+    getNextPageParam: (last) =&gt; last.nextCursor ?? undefined,
+  });
+}
+
+function ItemList() {
+  const { data, fetchNextPage, hasNextPage, isFetching } = useItems();
+  const items = data?.pages.flatMap(p =&gt; p.items) ?? [];
+
+  const ref = useIntersectionObserver(() =&gt; {
+    if (hasNextPage && !isFetching) fetchNextPage();
+  });
+
+  return (
+    &lt;&gt;
+      {items.map(i =&gt; &lt;Row key={i.id} item={i} /&gt;)}
+      &lt;div ref={ref}&gt;{isFetching ? "…" : ""}&lt;/div&gt;
+    &lt;/&gt;
+  );
+}</code></pre>
+<p>Cursor beats offset because: stable under insertions (offset shifts), better on large tables (no <code>OFFSET N</code> scan), and trivially works with infinite scroll. Use offset+limit only when you must show &ldquo;page 57 of 120&rdquo;.</p>
+'''
+
+ANSWERS[27] = r'''
+<p>Build rows client-side, wrap in a Blob, trigger download. For Excel, use a library.</p>
+<pre><code>// CSV — no dependency
+function toCsv(rows, columns) {
+  const esc = (v) =&gt; `"${String(v ?? "").replace(/"/g, '""')}"`;
+  const head = columns.map(c =&gt; esc(c.label)).join(",");
+  const body = rows.map(r =&gt; columns.map(c =&gt; esc(r[c.key])).join(",")).join("\n");
+  return "\uFEFF" + head + "\n" + body;          // BOM so Excel reads UTF-8
+}
+
+function download(content, filename, type) {
+  const blob = new Blob([content], { type });
+  const url = URL.createObjectURL(blob);
+  const a = Object.assign(document.createElement("a"), { href: url, download: filename });
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+download(toCsv(data, cols), "report.csv", "text/csv;charset=utf-8");
+
+// Excel (.xlsx) — SheetJS
+import * as XLSX from "xlsx";
+const ws = XLSX.utils.json_to_sheet(data);
+const wb = XLSX.utils.book_new();
+XLSX.utils.book_append_sheet(wb, ws, "Report");
+XLSX.writeFile(wb, "report.xlsx");</code></pre>
+<p>Gotchas: the BOM prefix ensures Excel opens UTF-8 CSVs without mojibake. For huge datasets, generate server-side and stream (client memory will explode). Preserve formatting (dates, percentages) with SheetJS cell styles.</p>
+'''
+
+ANSWERS[28] = r'''
+<p>Store dates as UTC; convert at the display boundary.</p>
+<pre><code>// Store and transmit UTC ISO strings
+const saved = new Date().toISOString();   // "2024-05-01T14:30:00.000Z"
+
+// Display in user's locale + timezone
+new Intl.DateTimeFormat(undefined, {
+  dateStyle: "medium", timeStyle: "short",
+  timeZone: "America/New_York",            // or undefined for local
+}).format(new Date(saved));                 // "May 1, 2024, 10:30 AM"
+
+// Relative time
+new Intl.RelativeTimeFormat(undefined, { numeric: "auto" })
+  .format(-2, "hour");                      // "2 hours ago"
+
+// For anything past locale formatting — use a proper lib
+// date-fns-tz or luxon:
+import { DateTime } from "luxon";
+DateTime.fromISO(saved, { zone: "utc" })
+        .setZone("Asia/Tokyo")
+        .toFormat("yyyy-MM-dd HH:mm");</code></pre>
+<p>Rules:</p>
+<ul>
+  <li><strong>Server stores UTC</strong>; <strong>client displays local</strong>.</li>
+  <li><strong>Never persist formatted strings</strong> — you lose timezone information.</li>
+  <li><strong>Include timezone in user events</strong> (&ldquo;meeting at 3pm&rdquo; is ambiguous without a zone).</li>
+  <li><strong>Prefer Temporal API</strong> (or polyfill) when available — fixes many <code>Date</code> footguns.</li>
+  <li><strong>Test around DST transitions</strong> — that's where bugs hide.</li>
+</ul>
+'''
+
+ANSWERS[29] = r'''
+<p>Model <strong>roles</strong>, derive <strong>permissions</strong>, enforce both client and server.</p>
+<pre><code>// Permission check hook
+function usePermissions() {
+  const { user } = useAuth();
+  const can = (action) =&gt; user?.permissions?.includes(action) ?? false;
+  return { can };
+}
+
+// Gate UI
+function DeleteButton({ item }) {
+  const { can } = usePermissions();
+  if (!can("item:delete")) return null;
+  return &lt;button onClick={() =&gt; delete(item.id)}&gt;Delete&lt;/button&gt;;
+}
+
+// Route guard
+function RequirePerm({ perm, children }) {
+  const { can } = usePermissions();
+  return can(perm) ? children : &lt;Navigate to="/403" /&gt;;
+}</code></pre>
+<p>Key points:</p>
+<ul>
+  <li><strong>Server is the source of truth</strong> — client checks are UX, not security.</li>
+  <li><strong>Role → permission mapping</strong> — roles (admin, editor, viewer) map to a set of fine-grained permissions.</li>
+  <li><strong>Permission names</strong> — prefer <code>resource:action</code> (<code>item:delete</code>) over just &ldquo;admin&rdquo;.</li>
+  <li><strong>Attribute-based</strong> if row-level — permissions can depend on the object (&ldquo;owner can edit&rdquo;).</li>
+  <li><strong>Cache permissions</strong> — fetch on login, refresh on critical actions.</li>
+  <li><strong>Audit logs</strong> — record who did what.</li>
+</ul>
+'''
+
+ANSWERS[30] = r'''
+<p>Covered extensively by Q17. Briefly:</p>
+<pre><code>// Minimal React Hook Form + Zod
+const schema = z.object({
+  name:    z.string().min(1, "Required"),
+  email:   z.string().email(),
+  age:     z.coerce.number().int().min(13),
+});
+
+function Form() {
+  const { register, handleSubmit, formState: { errors, isSubmitting } } =
+    useForm({ resolver: zodResolver(schema) });
+
+  async function onSubmit(values) {
+    try {
+      await api.createUser(values);
+      toast("Saved");
+    } catch (e) {
+      if (e.status === 422) setServerErrors(e.errors);
+      else                   toast("Network error");
+    }
+  }
+  return (
+    &lt;form onSubmit={handleSubmit(onSubmit)}&gt;
+      &lt;input {...register("name")} /&gt;
+      {errors.name && &lt;span&gt;{errors.name.message}&lt;/span&gt;}
+      ...
+      &lt;button disabled={isSubmitting}&gt;Save&lt;/button&gt;
+    &lt;/form&gt;
+  );
+}</code></pre>
+<p>Submit-side concerns: optimistic UI vs pessimistic, retry on transient network errors, debounce duplicate submits (<code>disabled={isSubmitting}</code>), preserve values on failure, surface server-side validation errors, reset or navigate on success.</p>
+'''
+
+ANSWERS[31] = r'''
+<p>Choose the right storage, wrap it, and version the schema.</p>
+<pre><code>// Safe wrapper
+const Prefs = {
+  key: "prefs:v1",
+  defaults: { theme: "auto", density: "normal" },
+  get() {
+    try { return { ...this.defaults, ...JSON.parse(localStorage.getItem(this.key) || "{}") }; }
+    catch { return { ...this.defaults }; }
+  },
+  set(prefs) {
+    try { localStorage.setItem(this.key, JSON.stringify(prefs)); }
+    catch (e) { /* quota exceeded, private mode */ }
+  },
+  clear() { localStorage.removeItem(this.key); },
+};
+
+// Cross-tab sync
+window.addEventListener("storage", (e) =&gt; {
+  if (e.key === Prefs.key) applyPrefs(Prefs.get());
+});</code></pre>
+<p>Storage choice:</p>
+<ul>
+  <li><strong><code>localStorage</code></strong> — simple preferences, small (~5 MB), survives sessions.</li>
+  <li><strong><code>IndexedDB</code></strong> — structured data, large payloads, async.</li>
+  <li><strong>Cookies</strong> — things the server also needs (e.g., <code>locale</code>).</li>
+  <li><strong>Server + local cache</strong> — if preferences must sync across devices.</li>
+</ul>
+<p>Versioning: include <code>:v1</code> in the key so you can migrate on schema changes. Always default gracefully when the blob is missing or corrupted.</p>
+'''
+
+ANSWERS[32] = r'''
+<p>Schema-driven: render fields from an array; let users add/remove entries.</p>
+<pre><code>function FormBuilder() {
+  const [fields, setFields] = useState([
+    { id: uid(), type: "text", label: "Name", required: true },
+  ]);
+
+  const add    = (t) =&gt; setFields(f =&gt; [...f, { id: uid(), type: t, label: "", required: false }]);
+  const remove = (id) =&gt; setFields(f =&gt; f.filter(x =&gt; x.id !== id));
+  const patch  = (id, change) =&gt; setFields(f =&gt; f.map(x =&gt; x.id === id ? { ...x, ...change } : x));
+
+  return (
+    &lt;div&gt;
+      {fields.map(f =&gt; (
+        &lt;FieldEditor key={f.id} field={f}
+                     onChange={(change) =&gt; patch(f.id, change)}
+                     onRemove={() =&gt; remove(f.id)} /&gt;
+      ))}
+      &lt;button onClick={() =&gt; add("text")}&gt;+ Text&lt;/button&gt;
+      &lt;button onClick={() =&gt; add("select")}&gt;+ Select&lt;/button&gt;
+      &lt;FormPreview fields={fields} /&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+<p>Architecture: treat the field list as data, save it to JSON, render runtime forms from it. Support validation rules per field, conditional visibility (&ldquo;show field X when Y = Z&rdquo;), and drag-to-reorder (dnd-kit). Preview pane builds real inputs using the same renderer used in production.</p>
+'''
+
+ANSWERS[33] = r'''
+<p>State includes a set of predicates; results are filtered by applying all active predicates.</p>
+<pre><code>const [filters, setFilters] = useState({
+  q: "", category: "all", minPrice: 0, maxPrice: Infinity, inStock: false,
+});
+
+const filtered = useMemo(() =&gt; {
+  return items.filter(item =&gt;
+    (!filters.q || item.name.toLowerCase().includes(filters.q.toLowerCase())) &&
+    (filters.category === "all" || item.category === filters.category) &&
+    item.price &gt;= filters.minPrice && item.price &lt;= filters.maxPrice &&
+    (!filters.inStock || item.stock &gt; 0)
+  );
+}, [items, filters]);
+
+// Sync to URL so filters are shareable / refresh-safe
+useEffect(() =&gt; setSearchParams(serializeFilters(filters)), [filters]);</code></pre>
+<p>For large datasets:</p>
+<ul>
+  <li><strong>Debounce text input</strong> — don't re-filter per keystroke.</li>
+  <li><strong>Server-side filtering</strong> — once datasets exceed a few thousand rows.</li>
+  <li><strong>Indexes</strong> on the server (DB or search engine).</li>
+  <li><strong>Client virtualization</strong> for results.</li>
+  <li><strong>Persist filters in URL</strong> — shareable and back-button friendly.</li>
+  <li><strong>Show result count + &ldquo;clear all&rdquo;</strong> for UX.</li>
+</ul>
+'''
+
+ANSWERS[34] = r'''
+<p>Progressive enhancement + polyfills + transpilation.</p>
+<ul>
+  <li><strong>Target matrix</strong> — browserslist config (<code>&gt; 0.5%, last 2 versions, not dead</code>).</li>
+  <li><strong>Transpile</strong> — Babel / SWC for syntax, core-js for built-ins.</li>
+  <li><strong>Feature-detect, don't sniff UA</strong> — <code>"IntersectionObserver" in window</code> beats parsing user agent.</li>
+  <li><strong>Polyfills</strong> — load conditionally (<code>polyfill.io</code>) or at bundle edge; don't ship them to modern browsers.</li>
+  <li><strong>CSS</strong> — Autoprefixer, <code>@supports</code> for progressive enhancement, fallbacks for <code>gap</code>, <code>:has</code>, etc.</li>
+  <li><strong>Graceful degradation</strong> — the site should at least load on older browsers even if animations are skipped.</li>
+  <li><strong>Test matrix</strong> — BrowserStack/Sauce for real-device testing; Playwright for headless cross-browser automation.</li>
+</ul>
+<pre><code>// Feature detection
+if (!("IntersectionObserver" in window)) {
+  await import("intersection-observer");       // polyfill on demand
+}</code></pre>
+<p>A caveat: polyfills can't add truly new features (e.g., Web Workers where unsupported). For those, pick a fallback behavior or exclude old browsers explicitly.</p>
+'''
+
+ANSWERS[35] = r'''
+<p>Centralize through a wrapper; map HTTP status to domain-level handling.</p>
+<pre><code>class ApiError extends Error {
+  constructor(status, code, message, details) {
+    super(message);
+    Object.assign(this, { status, code, details });
+  }
+}
+
+async function api(input, init = {}) {
+  const res = await fetch(input, { ...init, headers: {
+    "Content-Type": "application/json", ...init.headers, ...authHeaders(),
+  }});
+  if (res.ok) return res.status === 204 ? null : res.json();
+
+  let body = {};
+  try { body = await res.json(); } catch {}
+  if (res.status === 401) { session.logout(); throw new ApiError(401, "auth", "Sign in"); }
+  if (res.status === 429) { await backoff(res); return api(input, init); }
+  throw new ApiError(res.status, body.code, body.message ?? res.statusText, body.details);
+}
+
+// Callers handle uniformly
+try { const user = await api("/users/1"); }
+catch (e) {
+  if (e instanceof ApiError && e.status &lt; 500) toast(e.message);
+  else                                           telemetry.error(e);
+}</code></pre>
+<p>Design notes: distinguish user-facing (4xx) from transient (5xx, network), retry with exponential backoff on transient errors, don't retry non-idempotent requests blindly, show a single error surface (toast + inline) — not a modal per error.</p>
+'''
+
+ANSWERS[36] = r'''
+<p>Already covered in Q19. Extra considerations:</p>
+<ul>
+  <li><strong>Chunk size</strong> ~5-10 MB balances overhead vs retry cost.</li>
+  <li><strong>Concurrency</strong> — upload 3-5 chunks in parallel.</li>
+  <li><strong>Progress per chunk</strong> then aggregate for overall progress.</li>
+  <li><strong>Hash for dedup</strong> — send SHA-256 of each chunk so server can skip already-received bytes.</li>
+  <li><strong>Server coordinates</strong> — uses upload ID + chunk index to assemble.</li>
+  <li><strong>Protocols</strong> — tus (<code>tus-js-client</code>) or S3 multipart directly.</li>
+</ul>
+<pre><code>import { Upload } from "tus-js-client";
+
+const upload = new Upload(file, {
+  endpoint: "/uploads",
+  chunkSize: 5 * 1024 * 1024,
+  retryDelays: [0, 1000, 3000, 5000],
+  onProgress: (sent, total) =&gt; setPct(sent / total),
+  onSuccess: () =&gt; toast("Uploaded"),
+  onError: (e) =&gt; toast(e.message),
+});
+upload.start();</code></pre>
+<p>tus handles reconnection, resumption, and chunk acknowledgement out of the box — usually a better choice than writing it from scratch.</p>
+'''
+
+ANSWERS[37] = r'''
+<p>Portal the modal to <code>document.body</code>, trap focus, close on Escape / backdrop click.</p>
+<pre><code>function Modal({ open, onClose, title, children }) {
+  useEffect(() =&gt; {
+    if (!open) return;
+    const onKey = (e) =&gt; { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";    // prevent background scroll
+    return () =&gt; {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [open, onClose]);
+
+  if (!open) return null;
+  return createPortal(
+    &lt;div className="modal-backdrop" onClick={onClose}&gt;
+      &lt;div className="modal" role="dialog" aria-modal="true" aria-labelledby="m-title"
+           onClick={(e) =&gt; e.stopPropagation()}&gt;
+        &lt;h2 id="m-title"&gt;{title}&lt;/h2&gt;
+        {children}
+      &lt;/div&gt;
+    &lt;/div&gt;,
+    document.body
+  );
+}</code></pre>
+<p>Accessibility (often missed):</p>
+<ul>
+  <li><strong>Focus trap</strong> — tab cycles inside the modal.</li>
+  <li><strong>Initial focus</strong> — on the first actionable element.</li>
+  <li><strong>Focus restore</strong> — return focus to the trigger on close.</li>
+  <li><strong>ARIA</strong> — <code>role="dialog"</code>, <code>aria-modal</code>, <code>aria-labelledby</code>.</li>
+</ul>
+<p>Use <code>@radix-ui/react-dialog</code> or Headless UI's <code>Dialog</code> rather than reinventing — they get all the edge cases right.</p>
+'''
+
+ANSWERS[38] = r'''
+<p>Run your React/Vue tree on the server, serialize HTML + state, hydrate on the client.</p>
+<pre><code>// Next.js App Router — server component
+// app/products/[id]/page.tsx
+export default async function Product({ params }) {
+  const product = await db.products.findById(params.id);   // runs on server
+  return &lt;ProductDetail product={product} /&gt;;
+}
+
+// Express + React (manual SSR)
+import { renderToPipeableStream } from "react-dom/server";
+app.get("/", (req, res) =&gt; {
+  const { pipe } = renderToPipeableStream(&lt;App /&gt;, {
+    bootstrapScripts: ["/bundle.js"],
+    onShellReady() { res.setHeader("Content-Type","text/html"); pipe(res); },
+  });
+});</code></pre>
+<p>Benefits: better LCP, crawler-friendly, works before JS loads.</p>
+<p>Trade-offs: server CPU cost, harder debugging (two runtimes), <code>window</code>/<code>document</code> undefined server-side, hydration mismatches.</p>
+<p>Modern answer: use <strong>Next.js</strong>, <strong>Remix</strong>, <strong>SvelteKit</strong>, or <strong>Nuxt</strong>. They handle routing, data-fetching boundaries, streaming, and selective hydration. Consider <strong>partial pre-rendering</strong> and <strong>React Server Components</strong> to serve static shells with streamed dynamic content.</p>
+'''
+
+ANSWERS[39] = r'''
+<p><code>Intl</code> APIs for formatting; <strong>ICU messages</strong> for grammar; lazy-load locale bundles.</p>
+<pre><code>// Message extraction + formatting — use FormatJS / i18next
+import { IntlProvider, FormattedMessage } from "react-intl";
+
+&lt;IntlProvider locale={locale} messages={messages}&gt;
+  &lt;FormattedMessage id="cart.count" values={{ count }} /&gt;
+  {/* en.json: "cart.count": "{count, plural, one {# item} other {# items}}" */}
+&lt;/IntlProvider&gt;
+
+// Lazy load
+const messages = await import(`./locales/${locale}.json`);
+
+// Intl for numbers, dates, lists
+new Intl.NumberFormat(locale, { style: "currency", currency: "EUR" }).format(49.95);
+new Intl.ListFormat(locale, { type: "conjunction" }).format(["a","b","c"]);</code></pre>
+<p>Best practices:</p>
+<ul>
+  <li><strong>ICU MessageFormat</strong> for plurals, gender, select — don't concatenate.</li>
+  <li><strong>Locale negotiation</strong> — <code>Accept-Language</code>, user pref, fallback chain.</li>
+  <li><strong>RTL support</strong> — <code>dir="rtl"</code>, logical CSS properties (<code>padding-inline-start</code>).</li>
+  <li><strong>Pluralization</strong> — 6 plural forms in some languages (Arabic, Russian).</li>
+  <li><strong>Currency &amp; numbers</strong> — separators differ (<code>1,234.56</code> vs <code>1.234,56</code>).</li>
+  <li><strong>Translation workflow</strong> — Crowdin, Lokalise, Phrase. Never hardcode strings.</li>
+</ul>
+'''
+
+ANSWERS[40] = r'''
+<p>Two kinds of tracking: <strong>behavioral</strong> (page views, clicks) and <strong>performance</strong> (metrics).</p>
+<pre><code>// Centralized event tracker
+const analytics = {
+  queue: [],
+  track(event, props = {}) {
+    this.queue.push({ event, props, ts: Date.now(), sid: session.id, user: session.userId });
+    this.flush();
+  },
+  flush: throttle(() =&gt; {
+    if (!this.queue.length) return;
+    fetch("/events", { method: "POST", body: JSON.stringify(this.queue), keepalive: true });
+    this.queue = [];
+  }, 5000),
+};
+
+// Usage
+analytics.track("cta.click", { label: "signup" });
+analytics.track("form.submit", { form: "checkout", items: cart.length });
+
+// Page views via router
+router.subscribe(route =&gt; analytics.track("page.view", { path: route.path }));</code></pre>
+<p>Privacy &amp; compliance: get consent (GDPR/CCPA), provide opt-out, hash PII, avoid URL query strings containing personal data. Services like Segment (routes to multiple destinations), PostHog (self-hostable), Mixpanel, Amplitude, or plain server logs for privacy-conscious setups.</p>
+'''
+
+ANSWERS[41] = r'''
+<p>Client-side JS is crawlable by Google (imperfectly) and poorly by others. If SEO matters, pre-render.</p>
+<ul>
+  <li><strong>Server-side rendering or SSG</strong> (Next.js, Remix, Astro). Pre-rendered HTML is what search engines actually index.</li>
+  <li><strong>Meta tags</strong> — unique <code>&lt;title&gt;</code> and <code>&lt;meta description&gt;</code> per page.</li>
+  <li><strong>Structured data</strong> — JSON-LD for products, articles, breadcrumbs (<code>&lt;script type="application/ld+json"&gt;</code>).</li>
+  <li><strong>Canonical URLs</strong> — <code>&lt;link rel="canonical"&gt;</code> to avoid duplicate content penalties.</li>
+  <li><strong>Open Graph / Twitter</strong> — for social previews.</li>
+  <li><strong>Semantic HTML</strong> — <code>&lt;h1&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;nav&gt;</code>, alt text.</li>
+  <li><strong>Core Web Vitals</strong> — LCP, CLS, INP rank factors.</li>
+  <li><strong>sitemap.xml + robots.txt</strong> — submit via Google Search Console.</li>
+  <li><strong>Clean URLs</strong> — <code>/products/laptop-stand</code> over <code>/p?id=123</code>.</li>
+  <li><strong>Pre-rendering services</strong> (Prerender.io, Rendertron) as a fallback for pure SPAs.</li>
+</ul>
+<p>Test with Google's URL Inspection tool to see exactly how the crawler renders your page.</p>
+'''
+
+ANSWERS[42] = r'''
+<p>A diff algorithm + merge resolution + UI to show conflicts.</p>
+<pre><code>// Simple 3-way object merge (last-write-wins per field)
+function merge(base, local, remote) {
+  const out = { ...base };
+  const conflicts = [];
+  for (const key of new Set([...Object.keys(local), ...Object.keys(remote)])) {
+    const b = base[key], l = local[key], r = remote[key];
+    if (l === r)        out[key] = l;
+    else if (l === b)   out[key] = r;                     // only remote changed
+    else if (r === b)   out[key] = l;                     // only local changed
+    else {
+      out[key] = l;                                        // keep local
+      conflicts.push({ key, base: b, local: l, remote: r });
+    }
+  }
+  return { merged: out, conflicts };
+}</code></pre>
+<p>For text documents: use a diff-merge library (<code>diff3</code>, <code>diff-match-patch</code>). For structured data with real-time collaboration: CRDTs (Yjs, Automerge) give automatic conflict-free merging. UI should show a 3-pane diff when there are unresolved conflicts, letting the user pick per field.</p>
+'''
+
+ANSWERS[43] = r'''
+<p>Covered in depth in Q11. Short summary for SPA context:</p>
+<ul>
+  <li><strong>Auth</strong> — HttpOnly cookie with short-lived access token, refresh token rotation.</li>
+  <li><strong>Authorization</strong> — server returns user's permissions on login; client hides UI based on them, server enforces every endpoint.</li>
+  <li><strong>Routing</strong> — <code>&lt;RequireAuth&gt;</code> / <code>&lt;RequirePerm&gt;</code> wrappers on protected routes.</li>
+  <li><strong>API requests</strong> — all calls go through a wrapper that attaches auth and refreshes on 401.</li>
+  <li><strong>Logout</strong> — server revokes refresh token, client clears cookies and in-memory state.</li>
+  <li><strong>CSRF</strong> — SameSite=Strict cookies, or double-submit CSRF tokens for cross-site contexts.</li>
+  <li><strong>XSS defense</strong> — escape by default, CSP headers, no <code>dangerouslySetInnerHTML</code> with untrusted input.</li>
+</ul>
+<p>Don't store tokens in <code>localStorage</code> if you can avoid it — an XSS leaks them instantly. If you must (e.g., mobile), keep TTL short.</p>
+'''
+
+ANSWERS[44] = r'''
+<p>Grid system + drag to rearrange + persist layout per user.</p>
+<pre><code>// Data shape
+const layout = [
+  { id: "chart1", x: 0, y: 0, w: 6, h: 4, component: "RevenueChart" },
+  { id: "list1",  x: 6, y: 0, w: 6, h: 4, component: "TopCustomers" },
+];
+
+// Render with react-grid-layout
+import GridLayout from "react-grid-layout";
+
+function Dashboard({ layout, components, onChange }) {
+  return (
+    &lt;GridLayout cols={12} rowHeight={40} layout={layout} onLayoutChange={onChange}&gt;
+      {layout.map(w =&gt; (
+        &lt;div key={w.id}&gt;{React.createElement(components[w.component])}&lt;/div&gt;
+      ))}
+    &lt;/GridLayout&gt;
+  );
+}
+
+// Persist
+useEffect(() =&gt; api.saveLayout(userId, layout), [layout]);</code></pre>
+<p>Capabilities to offer: add/remove widgets, resize, reset to default, export/import JSON, named dashboard presets. Store layout per user+device (a phone layout isn't a desktop layout). Library options: <code>react-grid-layout</code>, <code>react-mosaic</code>, <code>gridstack.js</code>.</p>
+'''
+
+ANSWERS[45] = r'''
+<p>Service Worker for asset caching; IndexedDB for data; queued writes.</p>
+<pre><code>// Detect
+window.addEventListener("online",  () =&gt; store.dispatch(setOnline(true)));
+window.addEventListener("offline", () =&gt; store.dispatch(setOnline(false)));
+
+// Probe — onLine is unreliable (says true when on a restaurant wifi portal)
+async function probeOnline() {
+  try { await fetch("/ping", { cache: "no-store", signal: AbortSignal.timeout(3000) });
+        return true; }
+  catch { return false; }
+}
+
+// Save with offline queue
+async function save(entity) {
+  dispatch(optimisticUpdate(entity));           // update UI immediately
+  try {
+    await api.save(entity);
+  } catch (e) {
+    await outbox.add(entity);                    // IndexedDB
+    showToast("Saved offline — will sync later");
+  }
+}
+
+// Sync on reconnect
+window.addEventListener("online", async () =&gt; {
+  for (const item of await outbox.all()) {
+    try { await api.save(item); await outbox.remove(item.id); }
+    catch { break; }
+  }
+});</code></pre>
+<p>UX essentials: persistent offline indicator, optimistic updates, clear queued state, conflict resolution when reconnected. Full offline-first: Workbox (service worker patterns), RxDB, Dexie.js, or PouchDB.</p>
+'''
+
+ANSWERS[46] = r'''
+<p>CSS Grid is the right tool.</p>
+<pre><code>/* Auto-fit: columns shrink and reflow */
+.grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+/* Breakpoint-based */
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+@media (min-width: 640px)  { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1440px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+
+/* Container queries — style based on parent size, not viewport */
+.card-grid { container-type: inline-size; }
+@container (min-width: 600px) {
+  .card-grid .grid { grid-template-columns: repeat(3, 1fr); }
+}</code></pre>
+<p>Container queries (widely supported since 2023) let components adapt to their <em>context</em>, not just the viewport — the right abstraction for reusable components. Use <code>minmax()</code> with <code>auto-fit</code> for the simplest responsive grid without media queries.</p>
+'''
+
+ANSWERS[47] = r'''
+<p>Real-time sync requires conflict resolution strategy.</p>
+<ul>
+  <li><strong>Last-write-wins</strong> — simplest; fine for non-collaborative data.</li>
+  <li><strong>Operational Transformation (OT)</strong> — transforms conflicting operations to converge (Google Docs' original approach).</li>
+  <li><strong>CRDTs</strong> (Yjs, Automerge) — mathematically mergeable without a central authority; great for collaboration.</li>
+  <li><strong>Event sourcing</strong> — append-only log; everyone replays events to reach the same state.</li>
+</ul>
+<pre><code>// Yjs — provider-agnostic CRDT
+import * as Y from "yjs";
+import { WebsocketProvider } from "y-websocket";
+
+const ydoc = new Y.Doc();
+const provider = new WebsocketProvider("wss://sync.example.com", "my-room", ydoc);
+const ytext = ydoc.getText("editor");
+
+ytext.observe(() =&gt; render(ytext.toString()));
+// Any edit anywhere converges; no &ldquo;who wins&rdquo; logic needed
+ytext.insert(0, "Hello ");</code></pre>
+<p>Transport: WebSocket for push, SSE for one-way, or Firestore / Ably / Supabase Realtime for hosted sync. Track presence (who's online, cursor position) alongside the data for collaborative UX.</p>
+'''
+
+ANSWERS[48] = r'''
+<p>Render markdown/HTML safely, allow edits, save diffs or full versions.</p>
+<pre><code>// Preview with sanitized HTML
+import DOMPurify from "dompurify";
+import { marked } from "marked";
+
+function Preview({ markdown }) {
+  const html = DOMPurify.sanitize(marked.parse(markdown));
+  return &lt;div dangerouslySetInnerHTML={{ __html: html }} /&gt;;
+}
+
+// Edit with a proper editor — not a textarea for anything structured
+import { useEditor, EditorContent } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+
+function Editor({ content, onChange }) {
+  const editor = useEditor({
+    extensions: [StarterKit],
+    content,
+    onUpdate: ({ editor }) =&gt; onChange(editor.getHTML()),
+  });
+  return &lt;EditorContent editor={editor} /&gt;;
+}</code></pre>
+<p>Essentials:</p>
+<ul>
+  <li><strong>Sanitize</strong> any HTML you render — XSS is the #1 risk with user documents.</li>
+  <li><strong>Image handling</strong> — upload + replace <code>&lt;img&gt;</code> sources; compress large images.</li>
+  <li><strong>Autosave</strong> with debounce + local draft fallback.</li>
+  <li><strong>Version history</strong> — either diffs (efficient) or snapshots on major edits.</li>
+  <li><strong>Collaboration</strong> — Tiptap/ProseMirror + Yjs for Google-Docs-like UX.</li>
+</ul>
+'''
+
+ANSWERS[49] = r'''
+<p>Structured log levels, contextual metadata, remote sink.</p>
+<pre><code>const levels = ["debug","info","warn","error"];
+const levelIndex = (l) =&gt; levels.indexOf(l);
+const minLevel = import.meta.env.PROD ? "warn" : "debug";
+
+const logger = {
+  context: { release: APP_VERSION, sid: session.id },
+  log(level, message, data) {
+    if (levelIndex(level) &lt; levelIndex(minLevel)) return;
+    const entry = { level, message, data, ...this.context, ts: Date.now() };
+    console[level === "debug" ? "log" : level](entry);
+    if (level === "error" || level === "warn") this.ship(entry);
+  },
+  debug: function (m, d) { this.log("debug", m, d); },
+  info:  function (m, d) { this.log("info",  m, d); },
+  warn:  function (m, d) { this.log("warn",  m, d); },
+  error: function (m, d) { this.log("error", m, d); },
+  ship(entry) {
+    navigator.sendBeacon?.("/logs", JSON.stringify(entry)) ||
+    fetch("/logs", { method: "POST", body: JSON.stringify(entry), keepalive: true });
+  },
+};</code></pre>
+<p>Practices: set log level from environment, scrub sensitive data, use <code>sendBeacon</code> for unload events, sample high-volume levels, include a unique <code>traceId</code> so you can correlate with server logs. Commercial choices: Sentry (errors), Datadog (everything), LogRocket (session replay).</p>
+'''
+
+ANSWERS[50] = r'''
+<p>Real-time chart with WebSocket stream + capped data window + virtualized updates.</p>
+<pre><code>// Streaming source
+const ws = new WebSocket("wss://api.example.com/metrics");
+ws.onmessage = (e) =&gt; addPoint(JSON.parse(e.data));
+
+// Keep only recent points to bound memory + draw cost
+const MAX = 500;
+const points = [];
+function addPoint(p) {
+  points.push(p);
+  if (points.length &gt; MAX) points.shift();
+  throttledRender();
+}
+
+// Throttle to requestAnimationFrame — don't redraw per message
+let pending = false;
+const throttledRender = () =&gt; {
+  if (pending) return;
+  pending = true;
+  requestAnimationFrame(() =&gt; { pending = false; chart.update(points); });
+};</code></pre>
+<p>Library choice:</p>
+<ul>
+  <li><strong>ECharts / Highcharts</strong> — feature-rich, heavy.</li>
+  <li><strong>Chart.js</strong> — simple, lightweight.</li>
+  <li><strong>D3.js</strong> — custom, full control, steep learning curve.</li>
+  <li><strong>uPlot / Lightweight Charts</strong> — extremely fast for time-series.</li>
+  <li><strong>Recharts / Visx</strong> — React-first.</li>
+</ul>
+<p>For truly huge data, use Canvas (not SVG), downsample off the main thread, and aggregate at the server (1s / 1min buckets).</p>
+'''
+
+ANSWERS[51] = r'''
+<p>Cookie-based session with HttpOnly token; refresh silently; survive reloads.</p>
+<pre><code>// On login — server sets HttpOnly cookie
+await fetch("/auth/login", {
+  method: "POST",
+  credentials: "include",
+  body: JSON.stringify({ email, password }),
+});
+
+// On app boot — probe session to restore user
+async function bootSession() {
+  try {
+    const res = await fetch("/auth/me", { credentials: "include" });
+    if (res.ok) store.dispatch(setUser(await res.json()));
+  } catch { store.dispatch(setUser(null)); }
+}
+
+// Idle timeout — warn at 25min, logout at 30
+let idleTimer;
+const resetIdle = () =&gt; {
+  clearTimeout(idleTimer);
+  idleTimer = setTimeout(() =&gt; showIdleWarning(), 25 * 60 * 1000);
+};
+["mousemove","keydown","click","scroll"].forEach(e =&gt; window.addEventListener(e, resetIdle));</code></pre>
+<p>Persistence targets:</p>
+<ul>
+  <li><strong>Session token</strong> — HttpOnly cookie (can't be accessed by JS = safer from XSS).</li>
+  <li><strong>User profile cache</strong> — <code>localStorage</code> or <code>IndexedDB</code> for instant UI after reload.</li>
+  <li><strong>Unsaved form state</strong> — <code>sessionStorage</code> so accidental refresh doesn't lose work.</li>
+  <li><strong>Cross-tab sync</strong> — <code>BroadcastChannel</code> or <code>storage</code> event for logout-all.</li>
+</ul>
+'''
+
+ANSWERS[52] = r'''
+<p>A date picker is surprisingly hard. Build on an existing base unless you have strong reasons.</p>
+<pre><code>// Pattern: controlled component with format prop
+function DatePicker({ value, onChange, format = "yyyy-MM-dd", locale }) {
+  const [input, setInput] = useState(value ? formatDate(value, format) : "");
+
+  useEffect(() =&gt; setInput(value ? formatDate(value, format) : ""), [value, format]);
+
+  return (
+    &lt;div&gt;
+      &lt;input value={input} onChange={e =&gt; handleChange(e.target.value)} /&gt;
+      &lt;Calendar selected={value} onSelect={onChange} locale={locale} /&gt;
+    &lt;/div&gt;
+  );
+}
+
+function handleChange(text) {
+  setInput(text);
+  const parsed = parseDate(text, format, locale);
+  if (parsed && !isNaN(parsed)) onChange(parsed);
+}</code></pre>
+<p>What to get right:</p>
+<ul>
+  <li><strong>Keyboard navigation</strong> — arrows to move, Enter to select, PgUp/Down for month.</li>
+  <li><strong>Locale-aware</strong> — weekday names, week start (Sun/Mon), parsing.</li>
+  <li><strong>Accessibility</strong> — <code>role="grid"</code>, <code>aria-selected</code>, live regions.</li>
+  <li><strong>Min/max/disabled dates</strong>.</li>
+  <li><strong>Timezone handling</strong> — dates as strings, not Date objects, avoid off-by-one.</li>
+</ul>
+<p>Libraries: <code>react-day-picker</code>, <code>@internationalized/date</code> + React Aria, <code>flatpickr</code>. Use Luxon / date-fns-tz / Temporal for parsing/formatting.</p>
+'''
+
+ANSWERS[53] = r'''
+<p>Data model: items have a <code>tags: string[]</code>. UI: text input + suggestion dropdown + chip display.</p>
+<pre><code>function TagInput({ tags, onChange, suggestions }) {
+  const [input, setInput] = useState("");
+  const [open, setOpen] = useState(false);
+
+  const addTag = (t) =&gt; {
+    t = t.trim().toLowerCase();
+    if (!t || tags.includes(t)) return;
+    onChange([...tags, t]);
+    setInput("");
+  };
+  const removeTag = (t) =&gt; onChange(tags.filter(x =&gt; x !== t));
+
+  const onKey = (e) =&gt; {
+    if (e.key === "Enter" || e.key === ",") { e.preventDefault(); addTag(input); }
+    else if (e.key === "Backspace" && !input && tags.length) removeTag(tags.at(-1));
+  };
+
+  const filtered = suggestions.filter(s =&gt;
+    s.startsWith(input.toLowerCase()) && !tags.includes(s));
+
+  return (
+    &lt;div&gt;
+      {tags.map(t =&gt; &lt;Chip key={t} label={t} onRemove={() =&gt; removeTag(t)} /&gt;)}
+      &lt;input value={input} onChange={e =&gt; setInput(e.target.value)}
+             onKeyDown={onKey} onFocus={() =&gt; setOpen(true)} /&gt;
+      {open && filtered.length &gt; 0 && &lt;Dropdown items={filtered} onSelect={addTag} /&gt;}
+    &lt;/div&gt;
+  );
+}</code></pre>
+<p>Backend: normalize tag names (lowercase, trim), many-to-many join table, index for fast filtering. Tag cloud / faceted search on top of the same model.</p>
+'''
+
+ANSWERS[54] = r'''
+<p>Use native <code>import()</code>; bundlers split automatically; preload predictably-needed chunks.</p>
+<pre><code>// Route-level split
+const Admin = React.lazy(() =&gt; import(/* webpackChunkName: "admin" */ "./Admin"));
+
+// On-demand feature
+async function openEditor() {
+  const { MarkdownEditor } = await import("./MarkdownEditor");
+  // use it
+}
+
+// Preload when likely (hover, viewport)
+&lt;Link to="/admin"
+      onMouseEnter={() =&gt; import("./Admin")}
+      onTouchStart={() =&gt; import("./Admin")}/&gt;
+
+// Vite/Webpack prefetch hint
+import(/* webpackPrefetch: true */ "./rare-modal");</code></pre>
+<p>Strategy:</p>
+<ul>
+  <li><strong>Route boundaries</strong> get the biggest wins.</li>
+  <li><strong>Heavy infrequent features</strong> (WYSIWYG editor, charts library) — load on demand.</li>
+  <li><strong>Vendor chunks</strong> — keep React + framework stable across deploys for better caching.</li>
+  <li><strong>Prefetch on hover</strong> — anticipates navigation without blocking initial load.</li>
+  <li><strong>Analyze</strong> with <code>webpack-bundle-analyzer</code> / <code>rollup-plugin-visualizer</code>.</li>
+</ul>
+'''
+
+ANSWERS[55] = r'''
+<p>RBAC as described in Q29, plus a UI to manage assignments.</p>
+<pre><code>// Admin screen
+function RoleManager() {
+  const { data: roles } = useRoles();
+  const { data: perms } = usePermissions();
+
+  return (
+    &lt;table&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;&lt;th&gt;Role&lt;/th&gt;{perms.map(p =&gt; &lt;th key={p.id}&gt;{p.name}&lt;/th&gt;)}&lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        {roles.map(role =&gt; (
+          &lt;tr key={role.id}&gt;
+            &lt;td&gt;{role.name}&lt;/td&gt;
+            {perms.map(p =&gt; (
+              &lt;td key={p.id}&gt;
+                &lt;input type="checkbox"
+                       checked={role.permissions.includes(p.id)}
+                       onChange={e =&gt; togglePerm(role.id, p.id, e.target.checked)} /&gt;
+              &lt;/td&gt;
+            ))}
+          &lt;/tr&gt;
+        ))}
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  );
+}</code></pre>
+<p>Features: role hierarchies (admin &gt; editor &gt; viewer), row-level access rules (&ldquo;only owners can edit&rdquo;), audit log of role changes, &ldquo;assume user&rdquo; for debugging (with audit trail). User detail page shows effective permissions — which come from direct grants or inherited roles.</p>
+'''
+
+ANSWERS[56] = r'''
+<p>Grid of thumbnails → lightbox modal on click, with swipe/keyboard navigation.</p>
+<pre><code>function Gallery({ images }) {
+  const [selected, setSelected] = useState(null);
+
+  return (
+    &lt;&gt;
+      &lt;div className="grid"&gt;
+        {images.map((img, i) =&gt; (
+          &lt;img key={img.id} src={img.thumb} loading="lazy"
+               onClick={() =&gt; setSelected(i)} /&gt;
+        ))}
+      &lt;/div&gt;
+      {selected !== null && (
+        &lt;Lightbox images={images} index={selected}
+                  onClose={() =&gt; setSelected(null)}
+                  onNext={() =&gt; setSelected(i =&gt; (i + 1) % images.length)}
+                  onPrev={() =&gt; setSelected(i =&gt; (i - 1 + images.length) % images.length)} /&gt;
+      )}
+    &lt;/&gt;
+  );
+}</code></pre>
+<p>Features to include: keyboard nav (arrows, Escape), swipe (Pointer Events), pinch-zoom (CSS <code>touch-action</code> + transform), fullscreen API, preload next image, spinner for loading, EXIF-respecting rotation. Libraries: PhotoSwipe, Lightbox2, yet-another-react-lightbox.</p>
+'''
+
+ANSWERS[57] = r'''
+<p>Browser can't &ldquo;run cron&rdquo; — delegate to the server. For fire-and-forget UI tasks, use the right tool.</p>
+<ul>
+  <li><strong>On server</strong> — Bull/BullMQ (Node + Redis), pg-boss (Postgres), AWS SQS, or a scheduler like cron / GitHub Actions / Cloudflare Cron Triggers.</li>
+  <li><strong>Web Worker</strong> — run CPU-bound work off the main thread; still tied to page lifetime.</li>
+  <li><strong>Service Worker</strong> — Background Sync API retries failed writes; Periodic Background Sync for recurring tasks (limited browser support).</li>
+  <li><strong>Notification delivery</strong> — Web Push API for when the page is closed.</li>
+</ul>
+<pre><code>// BullMQ on server
+import { Queue, Worker } from "bullmq";
+const q = new Queue("emails", { connection: redis });
+
+// Enqueue
+await q.add("welcome", { userId }, { delay: 60_000 });
+
+// Process
+new Worker("emails", async (job) =&gt; {
+  if (job.name === "welcome") await sendWelcomeEmail(job.data.userId);
+}, { connection: redis });</code></pre>
+<p>For UI schedule pickers (&ldquo;remind me tomorrow at 9am&rdquo;), store the schedule server-side. The browser can't keep a promise about running code at a specific future time.</p>
+'''
+
+ANSWERS[58] = r'''
+<p>Typical use case for WebSockets or SSE — server pushes updates; client renders.</p>
+<pre><code>// Server-Sent Events (one-way, HTTP-friendly, auto-reconnect)
+const es = new EventSource("/stocks/stream");
+es.onmessage = (e) =&gt; updateTicker(JSON.parse(e.data));
+es.addEventListener("heartbeat", () =&gt; {});      // custom events
+
+// WebSocket when bidirectional is needed
+const ws = new WebSocket("wss://api.example.com/stocks");
+ws.onmessage = (e) =&gt; updateTicker(JSON.parse(e.data));
+
+function updateTicker({ symbol, price, change }) {
+  const el = document.querySelector(`[data-symbol="${symbol}"]`);
+  el.querySelector(".price").textContent = price.toFixed(2);
+  el.classList.toggle("up",   change &gt; 0);
+  el.classList.toggle("down", change &lt; 0);
+}</code></pre>
+<p>Performance: batch updates (don't re-render per tick), use <code>requestAnimationFrame</code> to coalesce, virtualize long watchlists, render only visible rows. For thousands of symbols updating every second, use Canvas or incremental DOM diffing. Use <code>Intl.NumberFormat</code> with a cached instance for formatting.</p>
+'''
+
+ANSWERS[59] = r'''
+<p>Same mechanism as dark mode (Q10) but with multiple themes and per-user config.</p>
+<pre><code>/* Define theme sets as data attributes */
+:root[data-theme="default"] {
+  --primary: #3b82f6; --bg: #fff; --fg: #111;
+}
+:root[data-theme="ocean"] {
+  --primary: #0284c7; --bg: #f0f9ff; --fg: #0c4a6e;
+}
+:root[data-theme="sunset"] {
+  --primary: #f97316; --bg: #fff7ed; --fg: #7c2d12;
+}</code></pre>
+<pre><code>// Application
+function applyTheme(name) {
+  document.documentElement.dataset.theme = name;
+  localStorage.setItem("theme", name);
+}
+
+// User-defined tokens (advanced)
+function applyCustomTheme(tokens) {
+  Object.entries(tokens).forEach(([k, v]) =&gt;
+    document.documentElement.style.setProperty(`--${k}`, v));
+}
+
+applyCustomTheme({ primary: "#8b5cf6", bg: "#fafafa" });</code></pre>
+<p>For brand-level customization (white-label SaaS), let tenants define tokens server-side; inject them via <code>&lt;style&gt;</code> tag on page load or CSS custom properties set via JS.</p>
+'''
+
+ANSWERS[60] = r'''
+<p>Server issues JWT; client stores (carefully); attaches on every request; refresh when expired.</p>
+<pre><code>// Auth wrapper that auto-refreshes
+let accessToken = null;
+
+async function apiWithToken(url, init = {}) {
+  if (!accessToken) accessToken = await getAccessToken();
+  let res = await fetch(url, {
+    ...init,
+    headers: { ...init.headers, Authorization: `Bearer ${accessToken}` },
+  });
+  if (res.status === 401) {
+    accessToken = await refreshAccessToken();
+    res = await fetch(url, {
+      ...init,
+      headers: { ...init.headers, Authorization: `Bearer ${accessToken}` },
+    });
+  }
+  return res;
+}
+
+async function refreshAccessToken() {
+  // Refresh token in HttpOnly cookie — browser sends it automatically
+  const res = await fetch("/auth/refresh", { method: "POST", credentials: "include" });
+  const { access_token } = await res.json();
+  return access_token;
+}</code></pre>
+<p>Best practices:</p>
+<ul>
+  <li><strong>Short-lived access tokens</strong> (5-15 min); long-lived refresh tokens with rotation.</li>
+  <li><strong>Store access token in memory only</strong>; refresh token as HttpOnly cookie.</li>
+  <li><strong>Never validate JWT on client</strong> for security — the server does.</li>
+  <li><strong>Don't put sensitive data in the JWT payload</strong> — it's just base64.</li>
+  <li><strong>Deduplicate refreshes</strong> — multiple concurrent 401s should share one refresh request.</li>
+</ul>
+'''
+
+ANSWERS[61] = r'''
+<p>Two options: <strong>client-side rendering with jsPDF/pdf-lib</strong> (simple) or <strong>server-side with headless browser</strong> (pixel-perfect).</p>
+<pre><code>// Client-side — jsPDF
+import jsPDF from "jspdf";
+import "jspdf-autotable";
+
+function downloadReport(data) {
+  const doc = new jsPDF();
+  doc.text("Report", 14, 20);
+  doc.autoTable({
+    startY: 30,
+    head: [["Name", "Email", "Signup"]],
+    body: data.map(d =&gt; [d.name, d.email, d.signup]),
+  });
+  doc.save("report.pdf");
+}
+
+// Render DOM to PDF
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
+async function printElementToPdf(el) {
+  const canvas = await html2canvas(el, { scale: 2 });
+  const pdf = new jsPDF("p", "mm", "a4");
+  pdf.addImage(canvas.toDataURL("image/png"), "PNG", 10, 10, 190, 0);
+  pdf.save("out.pdf");
+}
+
+// Server-side — Puppeteer (Node)
+const browser = await puppeteer.launch();
+const page = await browser.newPage();
+await page.setContent(html);
+const pdf = await page.pdf({ format: "A4" });
+res.send(pdf);</code></pre>
+<p>Server-side is better for: complex layouts, page breaks, headers/footers, charts, fonts, i18n. Client-side is fine for simple tabular data.</p>
+'''
+
+ANSWERS[62] = r'''
+<p>Extract to a component with a consistent API and smart rendering.</p>
+<pre><code>function Pagination({ currentPage, totalPages, onPageChange, siblings = 1 }) {
+  const pages = buildPageList(currentPage, totalPages, siblings);
+  return (
+    &lt;nav aria-label="Pagination"&gt;
+      &lt;button disabled={currentPage === 1}
+              onClick={() =&gt; onPageChange(currentPage - 1)}&gt;Prev&lt;/button&gt;
+      {pages.map((p, i) =&gt;
+        p === "..."
+          ? &lt;span key={i}&gt;…&lt;/span&gt;
+          : &lt;button key={p}
+                    aria-current={p === currentPage ? "page" : undefined}
+                    onClick={() =&gt; onPageChange(p)}&gt;{p}&lt;/button&gt;
+      )}
+      &lt;button disabled={currentPage === totalPages}
+              onClick={() =&gt; onPageChange(currentPage + 1)}&gt;Next&lt;/button&gt;
+    &lt;/nav&gt;
+  );
+}
+
+// Build [1, ..., 4, 5, 6, ..., 20] style lists
+function buildPageList(current, total, siblings) {
+  const pages = new Set([1, total, current]);
+  for (let i = 1; i &lt;= siblings; i++) {
+    pages.add(current - i);
+    pages.add(current + i);
+  }
+  const filtered = [...pages].filter(p =&gt; p &gt;= 1 && p &lt;= total).sort((a, b) =&gt; a - b);
+  const out = [];
+  for (let i = 0; i &lt; filtered.length; i++) {
+    if (i &gt; 0 && filtered[i] - filtered[i-1] &gt; 1) out.push("...");
+    out.push(filtered[i]);
+  }
+  return out;
+}</code></pre>
+<p>Support cursor-based pagination (just prev/next + &ldquo;load more&rdquo;) when total pages aren't known. Sync current page to URL so deep-links work.</p>
+'''
+
+ANSWERS[63] = r'''
+<p>Server-side is non-negotiable at scale; client-side just drives the UI.</p>
+<pre><code>// API:  GET /items?page=1&amp;sort=name:asc&amp;filter[status]=active&amp;q=jane
+function DataTable({ endpoint }) {
+  const [state, setState] = useState({ page: 1, sort: "id:desc", filter: {}, q: "" });
+  const { data, isLoading } = useQuery({
+    queryKey: ["items", state],
+    queryFn: () =&gt; api.list(endpoint, state),
+    keepPreviousData: true,                          // avoid flicker on page change
+  });
+
+  return (
+    &lt;&gt;
+      &lt;SearchBox onChange={q =&gt; setState(s =&gt; ({ ...s, q, page: 1 }))} /&gt;
+      &lt;Filters value={state.filter} onChange={f =&gt; setState(s =&gt; ({ ...s, filter: f, page: 1 }))} /&gt;
+      &lt;Table rows={data?.items} sort={state.sort}
+             onSort={sort =&gt; setState(s =&gt; ({ ...s, sort }))} /&gt;
+      &lt;Pagination page={state.page} total={data?.pages}
+                  onChange={page =&gt; setState(s =&gt; ({ ...s, page }))} /&gt;
+    &lt;/&gt;
+  );
+}</code></pre>
+<p>Essentials: debounce search input, paginate via cursor for stable results under inserts, reset page to 1 when filters change, persist state in URL, use <code>keepPreviousData</code> to avoid flicker, virtualize rows if page size is large. Libraries: TanStack Table + TanStack Query + TanStack Virtual for this whole stack.</p>
+'''
+
+ANSWERS[64] = r'''
+<p>Finite-state machine — each step validates before advancing.</p>
+<pre><code>const steps = ["personal", "address", "payment", "review"];
+
+function Wizard() {
+  const [step, setStep] = useState(0);
+  const [data, setData] = useState({});
+
+  const next = (stepData) =&gt; {
+    setData(d =&gt; ({ ...d, ...stepData }));
+    setStep(s =&gt; Math.min(s + 1, steps.length - 1));
+  };
+  const prev = () =&gt; setStep(s =&gt; Math.max(s - 1, 0));
+  const submit = () =&gt; api.save(data);
+
+  const StepComponent = {
+    personal: &lt;PersonalStep  defaults={data} onNext={next} /&gt;,
+    address:  &lt;AddressStep   defaults={data} onNext={next} onBack={prev} /&gt;,
+    payment:  &lt;PaymentStep   defaults={data} onNext={next} onBack={prev} /&gt;,
+    review:   &lt;ReviewStep    data={data}     onSubmit={submit} onBack={prev} /&gt;,
+  }[steps[step]];
+
+  return (
+    &lt;&gt;
+      &lt;ProgressIndicator current={step} steps={steps} /&gt;
+      {StepComponent}
+    &lt;/&gt;
+  );
+}</code></pre>
+<p>Each step validates locally before advancing. Persist partial data to <code>sessionStorage</code> so refresh doesn't lose progress. For complex dependencies between steps (&ldquo;if shipping == billing, skip step&rdquo;), XState makes the state graph auditable.</p>
+'''
+
+ANSWERS[65] = r'''
+<p>Client crops and resizes before upload — saves bandwidth and server work.</p>
+<pre><code>function AvatarUpload({ onUpload }) {
+  const [preview, setPreview] = useState(null);
+  const [cropped, setCropped] = useState(null);
+
+  const onFile = async (file) =&gt; {
+    if (!validateImage(file)) return;
+    setPreview(URL.createObjectURL(file));
+  };
+
+  const upload = async () =&gt; {
+    const blob = await cropToSquare(preview, 256);
+    const form = new FormData();
+    form.append("avatar", blob, "avatar.jpg");
+    await fetch("/me/avatar", { method: "POST", body: form });
+    onUpload();
+  };
+
+  return (
+    &lt;&gt;
+      &lt;input type="file" accept="image/*" onChange={e =&gt; onFile(e.target.files[0])} /&gt;
+      {preview && &lt;Cropper src={preview} onChange={setCropped} /&gt;}
+      &lt;button onClick={upload} disabled={!cropped}&gt;Save&lt;/button&gt;
+    &lt;/&gt;
+  );
+}
+
+function validateImage(file) {
+  if (!/^image\/(png|jpe?g|webp)$/.test(file.type)) return false;
+  if (file.size &gt; 5 * 1024 * 1024) return false;
+  return true;
+}</code></pre>
+<p>Server-side: validate again (never trust client), scan for malware, strip EXIF metadata (privacy), generate thumbnails (WebP/AVIF), store on object storage with signed URLs. Libraries: <code>react-easy-crop</code>, <code>Cropper.js</code>, server-side <code>sharp</code> for processing.</p>
+'''
+
+ANSWERS[66] = r'''
+<p>Permission checks at render time; gated server endpoints.</p>
+<pre><code>// Declarative gating
+function Can({ perm, children, fallback = null }) {
+  const { can } = usePermissions();
+  return can(perm) ? children : fallback;
+}
+
+// Usage
+&lt;Can perm="admin:users:view" fallback={&lt;AccessDenied /&gt;}&gt;
+  &lt;UserAdminPanel /&gt;
+&lt;/Can&gt;
+
+// Role-switched layouts
+function Navigation() {
+  const { user } = useAuth();
+  return (
+    &lt;nav&gt;
+      &lt;Link to="/"&gt;Home&lt;/Link&gt;
+      {user.role !== "viewer" && &lt;Link to="/compose"&gt;Compose&lt;/Link&gt;}
+      {user.role === "admin" && &lt;Link to="/admin"&gt;Admin&lt;/Link&gt;}
+    &lt;/nav&gt;
+  );
+}</code></pre>
+<p>Data-driven UI: render different components/widgets based on what the user is allowed to see. Backend <em>must</em> also check — never trust client for authorization. Hide disabled menu items cleanly instead of showing disabled-looking ones (less clutter, less &ldquo;why can't I click this?&rdquo;).</p>
+'''
+
+ANSWERS[67] = r'''
+<p>Serious collaborative editors require CRDT infrastructure — don't build from scratch.</p>
+<pre><code>// Tiptap (ProseMirror-based) + Yjs (CRDT) + y-websocket
+import { Editor } from "@tiptap/react";
+import Collaboration from "@tiptap/extension-collaboration";
+import CollaborationCursor from "@tiptap/extension-collaboration-cursor";
+import * as Y from "yjs";
+import { WebsocketProvider } from "y-websocket";
+
+const ydoc = new Y.Doc();
+const provider = new WebsocketProvider("wss://sync", "doc-id", ydoc);
+
+const editor = new Editor({
+  extensions: [
+    StarterKit.configure({ history: false }),     // Yjs handles history
+    Collaboration.configure({ document: ydoc }),
+    CollaborationCursor.configure({ provider, user: { name: "Ana", color: "#f783ac" } }),
+  ],
+});</code></pre>
+<p>Key concepts:</p>
+<ul>
+  <li><strong>CRDTs</strong> auto-merge concurrent edits without a central authority.</li>
+  <li><strong>Awareness protocol</strong> (Yjs term) broadcasts cursor positions, selections, presence.</li>
+  <li><strong>Persistence</strong> — snapshot document state to DB on version saves.</li>
+  <li><strong>Offline editing</strong> — CRDTs handle merging when user reconnects.</li>
+</ul>
+<p>Full stack options: Liveblocks, Tiptap Cloud, Socket.IO + Yjs, Firestore + custom OT. OT (Google Docs-style) is harder to implement correctly than CRDTs.</p>
+'''
+
+ANSWERS[68] = r'''
+<p>JSON is already structured; the work is in <strong>schema validation</strong> and <strong>user-friendly errors</strong>.</p>
+<pre><code>// Import
+function ImportJson({ onImport }) {
+  const onFile = async (file) =&gt; {
+    try {
+      const text = await file.text();
+      const data = JSON.parse(text);
+      const parsed = schema.parse(data);          // Zod
+      onImport(parsed);
+    } catch (e) {
+      if (e instanceof SyntaxError)   return toast("Invalid JSON");
+      if (e instanceof z.ZodError)    return toast("Schema mismatch: " + e.errors[0].message);
+      toast("Import failed");
+    }
+  };
+  return &lt;input type="file" accept=".json" onChange={e =&gt; onFile(e.target.files[0])} /&gt;;
+}
+
+// Export
+function exportData(data, filename = "data.json") {
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+  const a = Object.assign(document.createElement("a"), {
+    href: URL.createObjectURL(blob), download: filename,
+  });
+  a.click();
+  URL.revokeObjectURL(a.href);
+}</code></pre>
+<p>Essentials: validate with Zod/Yup/Joi, preview what's about to be imported (counts + first few rows), version the export format (<code>{ version: 1, data: ... }</code>), support incremental import for large files (streaming with <code>ReadableStream</code>), reject oversized uploads.</p>
+'''
+
+ANSWERS[69] = r'''
+<p>Map technical errors to friendly messages; offer a recovery path.</p>
+<pre><code>const errorMessages = {
+  NETWORK: "Check your connection and try again.",
+  UNAUTHORIZED: "Please sign in to continue.",
+  FORBIDDEN: "You don't have permission to do that.",
+  NOT_FOUND: "We couldn't find what you were looking for.",
+  VALIDATION: "Please fix the highlighted fields.",
+  RATE_LIMIT: "Slow down — please try again in a moment.",
+  SERVER: "Something went wrong on our end. We've been notified.",
+  DEFAULT: "Something unexpected happened. Please try again.",
+};
+
+function friendlyError(err) {
+  if (!navigator.onLine)           return errorMessages.NETWORK;
+  if (err.status === 401)          return errorMessages.UNAUTHORIZED;
+  if (err.status === 403)          return errorMessages.FORBIDDEN;
+  if (err.status === 404)          return errorMessages.NOT_FOUND;
+  if (err.status === 422)          return err.message ?? errorMessages.VALIDATION;
+  if (err.status === 429)          return errorMessages.RATE_LIMIT;
+  if (err.status &gt;= 500)           return errorMessages.SERVER;
+  return errorMessages.DEFAULT;
+}</code></pre>
+<p>UX principles: one error surface per action (inline or toast — not both), offer a retry button, preserve user-entered data, log the technical details for developers while showing the friendly message to the user, avoid &ldquo;500 Internal Server Error&rdquo; being shown directly.</p>
+'''
+
+ANSWERS[70] = r'''
+<p>Real-time analytics: push events from the server to the browser; update charts progressively.</p>
+<pre><code>// Server push via WebSocket
+const socket = new WebSocket("wss://api.example.com/analytics");
+socket.onmessage = (e) =&gt; {
+  const event = JSON.parse(e.data);
+  store.dispatch({ type: "METRIC", event });
+};
+
+// Or Server-Sent Events (simpler, one-way)
+const es = new EventSource("/analytics/stream");
+es.addEventListener("metric", (e) =&gt; update(JSON.parse(e.data)));
+
+// Throttle chart updates — don't re-render per event
+const updateChart = throttle((metrics) =&gt; chart.update(metrics), 100);</code></pre>
+<p>Architecture: events → message broker (Kafka, Redis Streams) → aggregation pipeline (ksqlDB, ClickHouse) → WebSocket/SSE fan-out to dashboard clients. For rolling windows, keep a ring buffer on the client. Use <code>requestAnimationFrame</code> for smooth chart animations; downsample when zoomed out; virtualize huge time ranges. Tools: Grafana, Apache Superset, or custom with uPlot / Lightweight Charts.</p>
+'''
+
+ANSWERS[71] = r'''
+<p>Follow <strong>semver</strong> (<code>MAJOR.MINOR.PATCH</code>) and ship each version as an immutable package.</p>
+<ul>
+  <li><strong>PATCH</strong> — bug fixes, no API changes.</li>
+  <li><strong>MINOR</strong> — backward-compatible additions.</li>
+  <li><strong>MAJOR</strong> — breaking changes.</li>
+</ul>
+<pre><code>// package.json
+{ "name": "@acme/sdk", "version": "2.4.1" }
+
+// Deprecate without breaking
+/**
+ * @deprecated Use `createClient` instead. Removed in v3.
+ */
+export function connect(opts) {
+  warnOnce("connect() is deprecated — use createClient()");
+  return createClient(opts);
+}
+
+// Codemod to help consumers migrate
+// npx @acme/sdk-codemod v2-to-v3 ./src</code></pre>
+<p>Best practices: maintain a CHANGELOG.md (keepachangelog.com format), ship migration guides for majors, keep the previous major supported for a stated window, provide codemods (jscodeshift) for mechanical rewrites, expose feature flags for opt-in to new behavior before it becomes default, and publish types (<code>.d.ts</code>) so TypeScript surfaces breaking changes at compile time.</p>
+'''
+
+ANSWERS[72] = r'''
+<p>HTML range input is usually enough — reach for custom only when design truly requires it.</p>
+<pre><code>// Custom slider with pointer events
+function Slider({ min = 0, max = 100, value, onChange }) {
+  const trackRef = useRef(null);
+
+  const update = (clientX) =&gt; {
+    const rect = trackRef.current.getBoundingClientRect();
+    const pct = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+    onChange(Math.round(min + pct * (max - min)));
+  };
+
+  const onPointerDown = (e) =&gt; {
+    e.target.setPointerCapture(e.pointerId);
+    update(e.clientX);
+    const move = (e) =&gt; update(e.clientX);
+    const up   = () =&gt; {
+      window.removeEventListener("pointermove", move);
+      window.removeEventListener("pointerup", up);
+    };
+    window.addEventListener("pointermove", move);
+    window.addEventListener("pointerup", up);
+  };
+
+  const pct = ((value - min) / (max - min)) * 100;
+  return (
+    &lt;div ref={trackRef} className="slider" onPointerDown={onPointerDown}&gt;
+      &lt;div className="slider__fill" style={{ width: `${pct}%` }} /&gt;
+      &lt;div className="slider__thumb" style={{ left: `${pct}%` }}
+           role="slider" aria-valuemin={min} aria-valuemax={max} aria-valuenow={value}
+           tabIndex={0} onKeyDown={handleArrowKeys} /&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+<p>Touch handling: Pointer Events unify mouse/touch/pen. Accessibility: <code>role="slider"</code> + ARIA values + arrow-key nudges. Libraries that do it well: Radix UI Slider, React Aria.</p>
+'''
+
+ANSWERS[73] = r'''
+<p>Two parts: input UI + scheduler backend.</p>
+<pre><code>// Schedule shape
+const task = {
+  id: uid(),
+  title: "Submit report",
+  startAt: "2024-11-01T09:00:00Z",
+  recurrence: { freq: "WEEKLY", byDay: ["MO","WE"] },     // RFC 5545 rrule
+  reminderMinutes: 30,
+  timezone: "America/New_York",
+};
+
+// Parse recurrence with rrule.js
+import { RRule } from "rrule";
+const rule = new RRule({
+  freq: RRule.WEEKLY,
+  byweekday: [RRule.MO, RRule.WE],
+  dtstart: new Date("2024-11-01T09:00:00Z"),
+  until:   new Date("2025-01-01"),
+});
+const occurrences = rule.all();</code></pre>
+<p>Server:</p>
+<ul>
+  <li><strong>Job queue</strong> (BullMQ, pg-boss) with delayed jobs for each reminder.</li>
+  <li><strong>Store the rule</strong> (iCalendar rrule), not the expanded occurrences — handles &ldquo;forever&rdquo; repetition.</li>
+  <li><strong>Deliver via</strong> Web Push, email, SMS, in-app notification.</li>
+  <li><strong>Timezone-aware</strong> — store UTC + user's timezone; calculate the next fire in the user's zone to handle DST correctly.</li>
+</ul>
+'''
+
+ANSWERS[74] = r'''
+<p>Version your endpoints; maintain both versions through a deprecation window.</p>
+<pre><code>// Accept version via URL path (most common)
+// /v1/users vs /v2/users
+
+// Or via header
+// X-API-Version: 2
+
+// Client-side — wrap the base path
+function makeClient(version = "v1") {
+  const base = `/api/${version}`;
+  return {
+    users: { list: () =&gt; fetch(`${base}/users`).then(r =&gt; r.json()) },
+    ...
+  };
+}
+
+// Expand/transform responses to stay backward compatible internally
+function adaptUserV1(v2) {
+  return { id: v2.id, name: v2.firstName + " " + v2.lastName, email: v2.email };
+}</code></pre>
+<p>Strategy:</p>
+<ul>
+  <li><strong>URL versioning</strong> for major breaking changes.</li>
+  <li><strong>Additive evolution within a version</strong> — add fields, never remove or rename.</li>
+  <li><strong>Deprecation headers</strong> (<code>Sunset: Wed, 01 Jan 2025 GMT</code>).</li>
+  <li><strong>Telemetry</strong> on which versions are still used so you can retire old ones.</li>
+  <li><strong>Deprecation window</strong> — typically 6-12 months public notice.</li>
+  <li><strong>GraphQL</strong> evolves via field deprecation without bumping the URL.</li>
+</ul>
+'''
+
+ANSWERS[75] = r'''
+<p>Use platform share APIs where available; fall back to URL schemes.</p>
+<pre><code>// Web Share API — native system sheet (mobile-heavy)
+async function share(data) {
+  if (navigator.share) {
+    try { await navigator.share(data); } catch {}
+    return;
+  }
+  // Fallback — custom buttons
+  shareTo("twitter",  data);
+  shareTo("facebook", data);
+  shareTo("linkedin", data);
+}
+
+function shareTo(network, { url, title }) {
+  const targets = {
+    twitter:  `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&amp;text=${encodeURIComponent(title)}`,
+    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
+    linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
+  };
+  window.open(targets[network], "_blank", "width=600,height=400");
+}</code></pre>
+<p>SEO essentials: Open Graph tags (<code>og:title</code>, <code>og:image</code>, <code>og:description</code>) and Twitter Card meta so shared links render as rich previews. Server-render these for SPAs or use a meta-tag service. Dynamic <code>og:image</code> (per page) drives much higher share CTR than a generic logo.</p>
+'''
+
+ANSWERS[76] = r'''
+<p>A preferences screen + persisted choices + respected at delivery time.</p>
+<pre><code>const NOTIFICATION_CHANNELS = ["email", "push", "inApp", "sms"];
+const NOTIFICATION_TYPES = [
+  { id: "newMessage",  label: "New messages" },
+  { id: "mentions",    label: "You're mentioned" },
+  { id: "weeklySummary", label: "Weekly summary" },
+];
+
+function NotificationSettings({ prefs, onChange }) {
+  return (
+    &lt;table&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;&lt;th /&gt;{NOTIFICATION_CHANNELS.map(c =&gt; &lt;th key={c}&gt;{c}&lt;/th&gt;)}&lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        {NOTIFICATION_TYPES.map(t =&gt; (
+          &lt;tr key={t.id}&gt;
+            &lt;td&gt;{t.label}&lt;/td&gt;
+            {NOTIFICATION_CHANNELS.map(c =&gt; (
+              &lt;td key={c}&gt;
+                &lt;input type="checkbox"
+                       checked={prefs[t.id]?.[c] ?? false}
+                       onChange={e =&gt; onChange(t.id, c, e.target.checked)} /&gt;
+              &lt;/td&gt;
+            ))}
+          &lt;/tr&gt;
+        ))}
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  );
+}</code></pre>
+<p>Server side: check prefs at send time; route to the right channel(s). Support do-not-disturb windows (time-range based), digest mode (batch and deliver once/day), and global kill switches (&ldquo;pause all for 1 hour&rdquo;). GDPR: transactional messages (password resets) are not opt-in-able, marketing is.</p>
+'''
+
+ANSWERS[77] = r'''
+<p>Editable cells, per-row validation, optimistic UI, save-on-blur.</p>
+<pre><code>function EditableCell({ row, column, value, onCommit, validate }) {
+  const [draft, setDraft]     = useState(value);
+  const [editing, setEditing] = useState(false);
+  const [error, setError]     = useState(null);
+
+  const commit = () =&gt; {
+    const err = validate?.(draft, row, column);
+    if (err) { setError(err); return; }
+    setError(null);
+    setEditing(false);
+    if (draft !== value) onCommit(row.id, column.key, draft);
+  };
+
+  return editing
+    ? &lt;input autoFocus value={draft}
+             onChange={e =&gt; setDraft(e.target.value)}
+             onBlur={commit}
+             onKeyDown={e =&gt; e.key === "Enter" && commit()} /&gt;
+    : &lt;span onDoubleClick={() =&gt; setEditing(true)}&gt;{value}&lt;/span&gt;;
+}</code></pre>
+<p>Considerations: keyboard nav (Tab/Enter between cells), async validation with debounce, row-level validation (cross-field), optimistic updates with rollback on server rejection, dirty-state indicators, undo/redo (command stack), large tables require virtualization. AG Grid, TanStack Table, and Glide Data Grid handle all of the above.</p>
+'''
+
+ANSWERS[78] = r'''
+<p>Use the <strong>Web Crypto API</strong> — native, audited, no dependencies.</p>
+<pre><code>// Generate a symmetric key
+const key = await crypto.subtle.generateKey(
+  { name: "AES-GCM", length: 256 }, true, ["encrypt", "decrypt"]
+);
+
+async function encrypt(plaintext, key) {
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const cipher = await crypto.subtle.encrypt(
+    { name: "AES-GCM", iv },
+    key,
+    new TextEncoder().encode(plaintext)
+  );
+  return { iv: [...iv], cipher: [...new Uint8Array(cipher)] };
+}
+
+async function decrypt({ iv, cipher }, key) {
+  const plain = await crypto.subtle.decrypt(
+    { name: "AES-GCM", iv: new Uint8Array(iv) },
+    key,
+    new Uint8Array(cipher)
+  );
+  return new TextDecoder().decode(plain);
+}</code></pre>
+<p>Rules:</p>
+<ul>
+  <li><strong>Never invent your own crypto</strong> — use standard algorithms (AES-GCM, ChaCha20-Poly1305).</li>
+  <li><strong>Unique IV per encryption</strong> — reusing an IV with AES-GCM breaks confidentiality.</li>
+  <li><strong>Keys belong on the server</strong> for most use cases — client-side encryption protects against MITM but not a compromised client.</li>
+  <li>For password-based keys, derive via <code>PBKDF2</code> with ≥ 100,000 iterations.</li>
+</ul>
+'''
+
+ANSWERS[79] = r'''
+<p>A single reusable component that positions itself relative to an anchor and handles show/hide.</p>
+<pre><code>function Tooltip({ content, children, placement = "top", delay = 300 }) {
+  const [visible, setVisible] = useState(false);
+  const ref = useRef();
+  const timer = useRef();
+
+  const show = () =&gt; { timer.current = setTimeout(() =&gt; setVisible(true), delay); };
+  const hide = () =&gt; { clearTimeout(timer.current); setVisible(false); };
+
+  return (
+    &lt;span ref={ref} onMouseEnter={show} onMouseLeave={hide}
+                     onFocus={show}      onBlur={hide}
+                     tabIndex={0} aria-describedby="tt"&gt;
+      {children}
+      {visible && createPortal(
+        &lt;div role="tooltip" id="tt" className={`tt tt-${placement}`}&gt;{content}&lt;/div&gt;,
+        document.body
+      )}
+    &lt;/span&gt;
+  );
+}</code></pre>
+<p>Key concerns:</p>
+<ul>
+  <li><strong>Positioning</strong> — use Floating UI (<code>@floating-ui/react</code>) to handle flip/shift within viewport.</li>
+  <li><strong>Accessibility</strong> — <code>role="tooltip"</code>, keyboard (Escape dismisses), focus events, <code>aria-describedby</code>.</li>
+  <li><strong>Touch devices</strong> — mouseover doesn't fire; use long-press or tap.</li>
+  <li><strong>Portal</strong> — avoids overflow/clipping issues from parent containers.</li>
+  <li><strong>Debounce</strong> — prevents flicker on rapid hover.</li>
+</ul>
+'''
+
+ANSWERS[80] = r'''
+<p>Strategy depends on dataset size: client-side for small (&lt;1000), server-side for anything larger.</p>
+<pre><code>// Client-side with useMemo — fine for small lists
+function useFilteredData(items, query, filters) {
+  return useMemo(() =&gt; {
+    const q = query.trim().toLowerCase();
+    return items.filter(item =&gt; {
+      if (q && !JSON.stringify(item).toLowerCase().includes(q)) return false;
+      for (const [key, value] of Object.entries(filters)) {
+        if (value != null && item[key] !== value) return false;
+      }
+      return true;
+    });
+  }, [items, query, filters]);
+}
+
+// Server-side — debounce, abort stale requests, paginate
+function useServerSearch(endpoint) {
+  const [results, setResults] = useState([]);
+  useEffect(() =&gt; {
+    const ctrl = new AbortController();
+    const t = setTimeout(async () =&gt; {
+      const res = await fetch(endpoint, { signal: ctrl.signal });
+      setResults(await res.json());
+    }, 300);
+    return () =&gt; { clearTimeout(t); ctrl.abort(); };
+  }, [endpoint]);
+  return results;
+}</code></pre>
+<p>For &gt;10k records: server-side with Elasticsearch, Typesense, or PostgreSQL full-text search. Features: fuzzy matching, faceted filters, highlighting, pagination/infinite scroll, and URL-state sync so searches are shareable.</p>
+'''
+
+ANSWERS[81] = r'''
+<p>Never email the password. Send a short-lived, single-use <strong>reset token</strong>.</p>
+<ol>
+  <li>User submits email.</li>
+  <li>Server always responds with the same &ldquo;check your email&rdquo; message (avoid user enumeration).</li>
+  <li>If the email exists, server generates a cryptographically-random token, stores a hash of it with expiry (15-60 min) and <code>user_id</code>.</li>
+  <li>Email a link: <code>https://app.example.com/reset?token=...</code>.</li>
+  <li>On form submit, server verifies the token hash, marks it consumed, and updates the password (bcrypt/argon2, cost ≥ 12).</li>
+  <li>Invalidate all existing sessions for that user and email a confirmation to the old address.</li>
+</ol>
+<pre><code>// Token generation
+const raw = crypto.randomBytes(32).toString("hex");
+const hash = crypto.createHash("sha256").update(raw).digest("hex");
+await db.resetTokens.insert({ user_id, hash, expires_at: Date.now() + 3600_000 });
+sendEmail(user.email, `https://app/reset?token=${raw}`);</code></pre>
+<p>Extras: rate-limit requests per IP/email, require strong passwords, support WebAuthn, and log all reset events for audit.</p>
+'''
+
+ANSWERS[82] = r'''
+<p>Validate on both client and server. Never trust the extension alone — check MIME and content.</p>
+<pre><code>async function validateFile(file, { maxSize, allowedTypes }) {
+  if (file.size &gt; maxSize) throw new Error(`Too large: ${file.size}`);
+  if (!allowedTypes.includes(file.type)) throw new Error(`Bad MIME: ${file.type}`);
+
+  // Sniff magic bytes — the real test
+  const header = new Uint8Array(await file.slice(0, 12).arrayBuffer());
+  const sig = [...header].map(b =&gt; b.toString(16).padStart(2, "0")).join("");
+  const sigMap = {
+    "jpeg": /^ffd8ff/,
+    "png":  /^89504e47/,
+    "pdf":  /^25504446/,
+  };
+  const detected = Object.entries(sigMap).find(([, re]) =&gt; re.test(sig))?.[0];
+  if (!detected) throw new Error("Unknown file type");
+  return detected;
+}
+
+// Upload with progress
+function upload(file, onProgress) {
+  return new Promise((resolve, reject) =&gt; {
+    const xhr = new XMLHttpRequest();
+    xhr.upload.onprogress = e =&gt; onProgress(e.loaded / e.total);
+    xhr.onload = () =&gt; resolve(xhr.response);
+    xhr.onerror = () =&gt; reject(xhr.statusText);
+    xhr.open("POST", "/upload");
+    const form = new FormData();
+    form.append("file", file);
+    xhr.send(form);
+  });
+}</code></pre>
+<p>Server: re-validate everything, scan with ClamAV, store in blob storage (S3) not filesystem, generate signed URLs rather than serving directly.</p>
+'''
+
+ANSWERS[83] = r'''
+<p>Model progress as a percentage or completed/total; update via events or periodic refetch.</p>
+<pre><code>function ProgressBar({ value, total, label }) {
+  const pct = Math.min(100, (value / total) * 100);
+  return (
+    &lt;div role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100}&gt;
+      &lt;div className="bar" style={{ width: `${pct}%` }} /&gt;
+      &lt;span&gt;{label} — {value}/{total} ({pct.toFixed(0)}%)&lt;/span&gt;
+    &lt;/div&gt;
+  );
+}
+
+// Course progress — track completion per lesson
+function useCourseProgress(courseId) {
+  const [completed, setCompleted] = useState(new Set());
+  const markDone = async (lessonId) =&gt; {
+    setCompleted(prev =&gt; new Set(prev).add(lessonId));   // optimistic
+    await fetch(`/courses/${courseId}/lessons/${lessonId}/complete`, { method: "POST" });
+  };
+  return { completed, markDone };
+}</code></pre>
+<p>For long-running server tasks, use WebSockets/SSE for push updates; polling with exponential backoff as a fallback. Store progress server-side so it survives reloads. Accessibility: <code>aria-valuenow</code>, live regions for screen readers.</p>
+'''
+
+ANSWERS[84] = r'''
+<p>Annotations = position + content + author. Store per-document in a collection keyed by selection range.</p>
+<pre><code>// Text annotation — range serialization
+function serializeRange(range) {
+  return {
+    startPath: getPathTo(range.startContainer),
+    startOffset: range.startOffset,
+    endPath: getPathTo(range.endContainer),
+    endOffset: range.endOffset,
+  };
+}
+
+function AnnotationLayer({ docId }) {
+  const [annotations, setAnnotations] = useState([]);
+  const onMouseUp = async () =&gt; {
+    const sel = window.getSelection();
+    if (!sel.rangeCount || sel.isCollapsed) return;
+    const content = prompt("Comment:");
+    if (!content) return;
+    const range = serializeRange(sel.getRangeAt(0));
+    const note = await api.create({ docId, range, content, authorId });
+    setAnnotations([...annotations, note]);
+  };
+  return &lt;div onMouseUp={onMouseUp}&gt;{/* render document + annotation markers */}&lt;/div&gt;;
+}</code></pre>
+<p>Considerations: resolve ranges after document edits (use stable anchors or CFI-style paths), threaded replies, resolve/unresolve workflow, real-time updates via WebSockets, access control on who can see/create. PDF annotations use the W3C Web Annotation model; for code, see GitHub's review UI.</p>
+'''
+
+ANSWERS[85] = r'''
+<p>Respect the API's <code>Retry-After</code> header; add jittered exponential backoff for 429s.</p>
+<pre><code>async function fetchWithRetry(url, options = {}, maxRetries = 5) {
+  for (let attempt = 0; attempt &lt;= maxRetries; attempt++) {
+    const res = await fetch(url, options);
+
+    if (res.status !== 429 && res.status &lt; 500) return res;
+    if (attempt === maxRetries) throw new Error("Max retries");
+
+    const retryAfter = res.headers.get("Retry-After");
+    const base = retryAfter
+      ? +retryAfter * 1000
+      : Math.min(30_000, 500 * 2 ** attempt);       // cap at 30s
+    const jitter = Math.random() * 500;
+    await new Promise(r =&gt; setTimeout(r, base + jitter));
+  }
+}
+
+// Client-side rate limiter — token bucket
+class Limiter {
+  constructor(capacity, refillPerSec) {
+    this.tokens = capacity; this.cap = capacity; this.rate = refillPerSec;
+    this.last = Date.now();
+  }
+  async acquire() {
+    while (true) {
+      const now = Date.now();
+      this.tokens = Math.min(this.cap, this.tokens + (now - this.last) / 1000 * this.rate);
+      this.last = now;
+      if (this.tokens &gt;= 1) { this.tokens--; return; }
+      await new Promise(r =&gt; setTimeout(r, 100));
+    }
+  }
+}</code></pre>
+'''
+
+ANSWERS[86] = r'''
+<p>A multi-select dropdown manages a list of selected values, handles keyboard nav, and supports search.</p>
+<pre><code>function MultiSelect({ options, value, onChange, placeholder = "Select..." }) {
+  const [open, setOpen] = useState(false);
+  const [query, setQuery] = useState("");
+  const filtered = options.filter(o =&gt;
+    o.label.toLowerCase().includes(query.toLowerCase())
+  );
+
+  const toggle = (id) =&gt; {
+    const set = new Set(value);
+    set.has(id) ? set.delete(id) : set.add(id);
+    onChange([...set]);
+  };
+
+  return (
+    &lt;div className="multi-select" onBlur={() =&gt; setOpen(false)}&gt;
+      &lt;button onClick={() =&gt; setOpen(o =&gt; !o)}&gt;
+        {value.length ? `${value.length} selected` : placeholder}
+      &lt;/button&gt;
+      {open && (
+        &lt;div className="dropdown" role="listbox" aria-multiselectable&gt;
+          &lt;input value={query} onChange={e =&gt; setQuery(e.target.value)} /&gt;
+          {filtered.map(o =&gt; (
+            &lt;div role="option" key={o.id}
+                 aria-selected={value.includes(o.id)}
+                 onClick={() =&gt; toggle(o.id)}&gt;
+              &lt;input type="checkbox" checked={value.includes(o.id)} readOnly /&gt;
+              {o.label}
+            &lt;/div&gt;
+          ))}
+        &lt;/div&gt;
+      )}
+    &lt;/div&gt;
+  );
+}</code></pre>
+<p>Must-haves: keyboard navigation (arrow keys, Enter to toggle, Escape to close), ARIA roles/states, virtualization for large option lists, click-outside to close. Downshift and Radix UI provide accessible primitives.</p>
+'''
+
+ANSWERS[87] = r'''
+<p>Notifications have severity, persistence, and interactivity. Manage centrally.</p>
+<pre><code>// Global store — context + reducer
+const NotificationContext = createContext();
+
+function NotificationProvider({ children }) {
+  const [items, setItems] = useState([]);
+  const add = (n) =&gt; {
+    const id = crypto.randomUUID();
+    setItems(prev =&gt; [...prev, { id, ...n }]);
+    if (n.timeout !== 0) setTimeout(() =&gt; remove(id), n.timeout ?? 5000);
+  };
+  const remove = (id) =&gt; setItems(prev =&gt; prev.filter(x =&gt; x.id !== id));
+  return (
+    &lt;NotificationContext.Provider value={{ add, remove }}&gt;
+      {children}
+      &lt;NotificationList items={items} onDismiss={remove} /&gt;
+    &lt;/NotificationContext.Provider&gt;
+  );
+}
+
+// Usage
+const { add } = useContext(NotificationContext);
+add({ type: "error", message: "Save failed", action: { label: "Retry", onClick: retry } });</code></pre>
+<p>Types: toasts (transient), banners (persistent, top of page), in-app notification center (history). Accessibility: <code>role="status"</code> for info, <code>role="alert"</code> for errors. Respect user preferences (mute, do-not-disturb). Persist unread count server-side for notification-center use cases.</p>
+'''
+
+ANSWERS[88] = r'''
+<p>Validation rules depend on other fields — model as a schema that reruns on change.</p>
+<pre><code>import { z } from "zod";
+
+const schema = z.object({
+  email: z.string().email(),
+  country: z.enum(["US", "IN", "UK"]),
+  zip: z.string(),
+}).refine(
+  v =&gt; {
+    if (v.country === "US") return /^\d{5}$/.test(v.zip);
+    if (v.country === "UK") return /^[A-Z0-9 ]{5,8}$/i.test(v.zip);
+    if (v.country === "IN") return /^\d{6}$/.test(v.zip);
+  },
+  { message: "Invalid ZIP for country", path: ["zip"] }
+);
+
+// React Hook Form + Zod
+const { register, handleSubmit, formState: { errors }, watch } = useForm({
+  resolver: zodResolver(schema),
+  mode: "onChange",        // validate as user types
+});
+const country = watch("country");   // reactive</code></pre>
+<p>Patterns for dynamic forms:</p>
+<ul>
+  <li><strong>Field visibility</strong> — conditionally render based on other fields.</li>
+  <li><strong>Async validation</strong> — debounced server checks (e.g., username availability).</li>
+  <li><strong>Cross-field</strong> — schema-level rules (<code>z.refine</code>, Yup <code>test</code>).</li>
+  <li><strong>Submit blocking</strong> — disable submit until valid; show a summary of errors.</li>
+  <li><strong>Error display</strong> — inline after blur, not on every keystroke.</li>
+</ul>
+'''
+
+ANSWERS[89] = r'''
+<p>Store bookmarks per-user on the server (syncs across devices); cache locally for speed.</p>
+<pre><code>function useBookmarks() {
+  const [set, setSet] = useState(new Set());
+
+  useEffect(() =&gt; {
+    api.getBookmarks().then(ids =&gt; setSet(new Set(ids)));
+  }, []);
+
+  const toggle = async (itemId) =&gt; {
+    const next = new Set(set);
+    if (next.has(itemId)) {
+      next.delete(itemId);
+      setSet(next);
+      api.removeBookmark(itemId).catch(() =&gt; setSet(set));   // rollback
+    } else {
+      next.add(itemId);
+      setSet(next);
+      api.addBookmark(itemId).catch(() =&gt; setSet(set));
+    }
+  };
+
+  return { set, toggle };
+}
+
+function BookmarkButton({ itemId }) {
+  const { set, toggle } = useBookmarks();
+  const active = set.has(itemId);
+  return (
+    &lt;button onClick={() =&gt; toggle(itemId)}
+            aria-label={active ? "Remove bookmark" : "Add bookmark"}
+            aria-pressed={active}&gt;
+      {active ? "★" : "☆"}
+    &lt;/button&gt;
+  );
+}</code></pre>
+<p>Anonymous users? Use <code>localStorage</code>; migrate on sign-up. Extras: folders/tags, bookmark search, import/export (JSON, HTML bookmarks format), keyboard shortcuts.</p>
+'''
+
+ANSWERS[90] = r'''
+<p>Integrate a weather API (Open-Meteo is free and keyless; OpenWeatherMap and WeatherAPI are common). Poll on a reasonable cadence.</p>
+<pre><code>async function fetchWeather(lat, lon) {
+  const url = new URL("https://api.open-meteo.com/v1/forecast");
+  url.searchParams.set("latitude",  lat);
+  url.searchParams.set("longitude", lon);
+  url.searchParams.set("current",   "temperature_2m,weather_code,wind_speed_10m");
+  url.searchParams.set("daily",     "temperature_2m_max,temperature_2m_min,weather_code");
+  url.searchParams.set("timezone",  "auto");
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`Weather API: ${res.status}`);
+  return res.json();
+}
+
+function useWeather(coords) {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() =&gt; {
+    if (!coords) return;
+    let cancelled = false;
+    const load = async () =&gt; {
+      try {
+        const d = await fetchWeather(coords.lat, coords.lon);
+        if (!cancelled) setData(d);
+      } catch (e) { if (!cancelled) setError(e); }
+    };
+    load();
+    const id = setInterval(load, 10 * 60 * 1000);   // refresh every 10 min
+    return () =&gt; { cancelled = true; clearInterval(id); };
+  }, [coords?.lat, coords?.lon]);
+
+  return { data, error };
+}</code></pre>
+<p>Extras: auto-detect user location via <code>navigator.geolocation</code>, cache in <code>localStorage</code> for offline fallback, unit conversion (C/F), icons per weather code.</p>
+'''
+
+ANSWERS[91] = r'''
+<p>In an SPA, &ldquo;page&rdquo; = URL segment → component tree. Load chunks on demand; show loading states.</p>
+<pre><code>// React Router + code-splitting
+import { lazy, Suspense } from "react";
+import { Routes, Route } from "react-router-dom";
+
+const Dashboard = lazy(() =&gt; import("./Dashboard"));
+const Settings  = lazy(() =&gt; import("./Settings"));
+
+function App() {
+  return (
+    &lt;Suspense fallback={&lt;Spinner /&gt;}&gt;
+      &lt;Routes&gt;
+        &lt;Route path="/dashboard" element={&lt;Dashboard /&gt;} /&gt;
+        &lt;Route path="/settings"  element={&lt;Settings /&gt;} /&gt;
+      &lt;/Routes&gt;
+    &lt;/Suspense&gt;
+  );
+}
+
+// Data loading with caching (React Query / SWR)
+const { data, isLoading, error } = useQuery({
+  queryKey: ["users", page],
+  queryFn:  () =&gt; fetchUsers(page),
+  keepPreviousData: true,     // avoid flicker during pagination
+});</code></pre>
+<p>Patterns: preload on route hover, prefetch next-page data during idle time, suspense boundaries per section, skeleton screens, error boundaries. For deeply dynamic pages (docs, marketing), consider SSR/SSG (Next.js, Remix) for faster time to first content.</p>
+'''
+
+ANSWERS[92] = r'''
+<p>API keys: generate, store hashed, show plaintext only once, support rotation and scoping.</p>
+<pre><code>// Server — generation
+app.post("/api-keys", requireAuth, async (req, res) =&gt; {
+  const raw = "sk_" + crypto.randomBytes(24).toString("base64url");
+  const hash = crypto.createHash("sha256").update(raw).digest("hex");
+  const record = await db.apiKeys.insert({
+    user_id: req.user.id,
+    name: req.body.name,
+    scopes: req.body.scopes,       // e.g. ["read:orders", "write:users"]
+    key_hash: hash,
+    created_at: Date.now(),
+    last_used_at: null,
+  });
+  res.json({ ...record, key: raw });    // raw only returned here
+});
+
+// Server — verification middleware
+async function verifyKey(req, res, next) {
+  const key = req.headers["x-api-key"];
+  const hash = crypto.createHash("sha256").update(key).digest("hex");
+  const record = await db.apiKeys.findOne({ key_hash: hash });
+  if (!record) return res.status(401).end();
+  await db.apiKeys.update(record.id, { last_used_at: Date.now() });
+  req.auth = record;
+  next();
+}</code></pre>
+<p>UI: list keys with name, scopes, created/last-used dates; allow revocation (soft-delete with <code>revoked_at</code>); show usage stats. Never store raw keys — users must save them when shown. Rate-limit per key.</p>
+'''
+
+ANSWERS[93] = r'''
+<p>Ship events; aggregate in a dashboard. Batch client events to minimize requests.</p>
+<pre><code>class Analytics {
+  constructor({ endpoint, flushInterval = 10_000, maxQueue = 50 }) {
+    this.queue = [];
+    this.endpoint = endpoint;
+    setInterval(() =&gt; this.flush(), flushInterval);
+    addEventListener("beforeunload", () =&gt; this.flush(true));
+  }
+  track(event, props) {
+    this.queue.push({ event, props, ts: Date.now() });
+    if (this.queue.length &gt;= 50) this.flush();
+  }
+  async flush(useBeacon = false) {
+    if (!this.queue.length) return;
+    const batch = this.queue.splice(0);
+    const payload = JSON.stringify({ events: batch });
+    if (useBeacon && navigator.sendBeacon) {
+      navigator.sendBeacon(this.endpoint, payload);    // survives page unload
+    } else {
+      await fetch(this.endpoint, { method: "POST", body: payload, keepalive: true });
+    }
+  }
+}
+
+const analytics = new Analytics({ endpoint: "/analytics" });
+analytics.track("page_view", { path: location.pathname });</code></pre>
+<p>Display: time-series charts (daily active users, event counts, funnels, retention cohorts). Tools: Mixpanel, Amplitude, PostHog, or build on ClickHouse/DuckDB. Respect privacy: anonymize PII, respect DNT, honor consent flags.</p>
+'''
+
+ANSWERS[94] = r'''
+<p>CSS variables + a theme provider that toggles values at the root. No component restyling needed.</p>
+<pre><code>/* styles.css */
+:root {
+  --color-bg: #ffffff;
+  --color-fg: #111111;
+  --color-accent: #3b82f6;
+}
+:root[data-theme="dark"] {
+  --color-bg: #0b1020;
+  --color-fg: #e8ebf1;
+  --color-accent: #60a5fa;
+}
+body { background: var(--color-bg); color: var(--color-fg); }</code></pre>
+<pre><code>// ThemeProvider
+function ThemeProvider({ children }) {
+  const [theme, setTheme] = useState(() =&gt; {
+    const saved = localStorage.getItem("theme");
+    if (saved) return saved;
+    return matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  });
+  useEffect(() =&gt; {
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+  return (
+    &lt;ThemeContext.Provider value={{ theme, setTheme }}&gt;{children}&lt;/ThemeContext.Provider&gt;
+  );
+}</code></pre>
+<p>Extras: user-specific themes (saved server-side), brand-level customization (white-labeling — pass a color palette via CSS vars), respect <code>prefers-reduced-motion</code> and <code>prefers-contrast</code>.</p>
+'''
+
+ANSWERS[95] = r'''
+<p>Read file as blob → preview → let user crop → upload cropped result.</p>
+<pre><code>// With react-image-crop (popular library)
+import ReactCrop from "react-image-crop";
+
+function ImageCropper({ onCropped }) {
+  const [src, setSrc]   = useState(null);
+  const [crop, setCrop] = useState({ unit: "%", width: 50, aspect: 1 });
+  const imgRef = useRef();
+
+  const onFile = (e) =&gt; {
+    const reader = new FileReader();
+    reader.onload = () =&gt; setSrc(reader.result);
+    reader.readAsDataURL(e.target.files[0]);
+  };
+
+  const getCroppedBlob = () =&gt; new Promise((resolve) =&gt; {
+    const img = imgRef.current;
+    const canvas = document.createElement("canvas");
+    const scaleX = img.naturalWidth / img.width;
+    const scaleY = img.naturalHeight / img.height;
+    canvas.width  = crop.width;
+    canvas.height = crop.height;
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(img,
+      crop.x * scaleX, crop.y * scaleY, crop.width * scaleX, crop.height * scaleY,
+      0, 0, crop.width, crop.height);
+    canvas.toBlob(resolve, "image/jpeg", 0.9);
+  });
+
+  return (
+    &lt;&gt;
+      &lt;input type="file" accept="image/*" onChange={onFile} /&gt;
+      {src && (
+        &lt;&gt;
+          &lt;ReactCrop crop={crop} onChange={setCrop}&gt;
+            &lt;img ref={imgRef} src={src} /&gt;
+          &lt;/ReactCrop&gt;
+          &lt;button onClick={async () =&gt; onCropped(await getCroppedBlob())}&gt;Save&lt;/button&gt;
+        &lt;/&gt;
+      )}
+    &lt;/&gt;
+  );
+}</code></pre>
+<p>Considerations: EXIF orientation (fix via <code>createImageBitmap</code> with <code>imageOrientation: "from-image"</code>), downscale huge images before cropping, preserve aspect ratios for avatars.</p>
+'''
+
+ANSWERS[96] = r'''
+<p>Intercept <code>contextmenu</code> event, prevent default, render a floating list at the cursor.</p>
+<pre><code>function ContextMenu({ items }) {
+  const [pos, setPos] = useState(null);
+
+  useEffect(() =&gt; {
+    const onMenu = (e) =&gt; {
+      e.preventDefault();
+      setPos({ x: e.clientX, y: e.clientY });
+    };
+    const onClick = () =&gt; setPos(null);
+    document.addEventListener("contextmenu", onMenu);
+    document.addEventListener("click", onClick);
+    document.addEventListener("keydown", e =&gt; e.key === "Escape" && setPos(null));
+    return () =&gt; {
+      document.removeEventListener("contextmenu", onMenu);
+      document.removeEventListener("click", onClick);
+    };
+  }, []);
+
+  if (!pos) return null;
+  return createPortal(
+    &lt;ul className="context-menu" role="menu"
+        style={{ top: pos.y, left: pos.x, position: "fixed" }}&gt;
+      {items.map(item =&gt; (
+        &lt;li role="menuitem" key={item.label} onClick={item.onClick}&gt;
+          {item.label}
+          {item.shortcut && &lt;kbd&gt;{item.shortcut}&lt;/kbd&gt;}
+        &lt;/li&gt;
+      ))}
+    &lt;/ul&gt;,
+    document.body
+  );
+}</code></pre>
+<p>Considerations: flip position if menu would overflow viewport, support submenus, keyboard navigation (arrow keys, Enter to activate), respect context (different items on different elements — use event delegation). Always provide keyboard-accessible alternatives — some users can't right-click.</p>
+'''
+
+ANSWERS[97] = r'''
+<p>Real-time collaboration needs <strong>CRDTs</strong> or <strong>Operational Transformation (OT)</strong> to merge concurrent edits. CRDTs are now the modern default.</p>
+<pre><code>// Yjs — a mature CRDT library
+import * as Y from "yjs";
+import { WebsocketProvider } from "y-websocket";
+
+const doc = new Y.Doc();
+new WebsocketProvider("wss://collab.example.com", "doc-123", doc);
+const ytext = doc.getText("content");
+
+// Bind to an editor (Quill, CodeMirror, ProseMirror, TipTap)
+ytext.observe(event =&gt; updateEditor(ytext.toString()));
+ytext.insert(0, "Hello");       // automatically syncs
+
+// Presence / cursors
+const awareness = provider.awareness;
+awareness.setLocalStateField("user", { name: "Ana", color: "#f00", cursor: 42 });
+awareness.on("change", () =&gt; renderCursors(awareness.getStates()));</code></pre>
+<p>Key ideas:</p>
+<ul>
+  <li><strong>CRDT</strong> — every edit is commutative; clients converge without central coordination.</li>
+  <li><strong>Presence</strong> — separate channel for ephemeral data (cursors, selection).</li>
+  <li><strong>Conflict UX</strong> — for structured data (e.g., form fields), last-write-wins or prompt user.</li>
+</ul>
+<p>Production: persist doc state (Yjs has server-side persistence via <code>y-leveldb</code>/<code>y-mongodb</code>), handle offline edits, permissions per document.</p>
+'''
+
+ANSWERS[98] = r'''
+<p>Generate formats client-side (for simple reports) or server-side (for anything heavy).</p>
+<pre><code>// CSV — trivial, client-side
+function toCSV(rows) {
+  const esc = (v) =&gt; `"${String(v).replace(/"/g, '""')}"`;
+  const headers = Object.keys(rows[0]);
+  return [
+    headers.join(","),
+    ...rows.map(r =&gt; headers.map(h =&gt; esc(r[h])).join(","))
+  ].join("\n");
+}
+
+function download(content, filename, mime = "text/csv") {
+  const blob = new Blob([content], { type: mime });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = filename; a.click();
+  URL.revokeObjectURL(url);
+}
+
+download(toCSV(rows), "report.csv");</code></pre>
+<p>Other formats:</p>
+<ul>
+  <li><strong>Excel (XLSX)</strong> — SheetJS (<code>xlsx</code>) or ExcelJS in browser; openpyxl/xlsxwriter on Python server.</li>
+  <li><strong>PDF</strong> — jsPDF or pdfmake in browser; Puppeteer or wkhtmltopdf on server for HTML-based layouts.</li>
+  <li><strong>JSON</strong> — <code>JSON.stringify(data, null, 2)</code>.</li>
+</ul>
+<p>For large exports, generate async on the server, email a download link, or stream the response (Transfer-Encoding: chunked).</p>
+'''
+
+ANSWERS[99] = r'''
+<p><strong>Validation</strong> (reject bad input) and <strong>sanitization</strong> (clean input before use/display) are separate concerns — both matter.</p>
+<pre><code>// Validation — schema library
+import { z } from "zod";
+const userSchema = z.object({
+  email: z.string().email(),
+  age: z.number().int().min(0).max(150),
+  role: z.enum(["admin", "user"]),
+});
+const result = userSchema.safeParse(input);
+if (!result.success) return res.status(400).json(result.error);
+
+// Sanitize HTML before rendering
+import DOMPurify from "dompurify";
+const clean = DOMPurify.sanitize(userInput);
+element.innerHTML = clean;       // safe from XSS
+
+// SQL — parameterized queries only
+db.query("SELECT * FROM users WHERE id = $1", [userId]);</code></pre>
+<p>Rules:</p>
+<ul>
+  <li>Validate <strong>on the server</strong> — client validation is UX only.</li>
+  <li>Allowlist, don't denylist — describe what's valid, not what's forbidden.</li>
+  <li>Escape at output time for the target context (HTML, attributes, URLs, SQL, shell).</li>
+  <li>Never trust <code>innerHTML</code> with user data — use <code>textContent</code> or sanitize.</li>
+  <li>Strip out dangerous protocols (<code>javascript:</code>, <code>data:</code>) from user-supplied URLs.</li>
+</ul>
+'''
+
+ANSWERS[100] = r'''
+<p>Preferences are key/value pairs; persist per user; apply at app start.</p>
+<pre><code>// Preferences store
+function usePreferences() {
+  const [prefs, setPrefs] = useState({});
+
+  useEffect(() =&gt; {
+    api.getPreferences().then(setPrefs);
+  }, []);
+
+  const update = async (key, value) =&gt; {
+    const prev = prefs;
+    const next = { ...prev, [key]: value };
+    setPrefs(next);                              // optimistic
+    try { await api.updatePreference(key, value); }
+    catch { setPrefs(prev); toast.error("Failed to save"); }
+  };
+  return { prefs, update };
+}
+
+// Preferences UI — grouped
+function PreferencesPage() {
+  const { prefs, update } = usePreferences();
+  return (
+    &lt;Tabs&gt;
+      &lt;Tab label="Account"&gt;
+        &lt;Field label="Display name"&gt;
+          &lt;input value={prefs.displayName ?? ""}
+                 onBlur={e =&gt; update("displayName", e.target.value)} /&gt;
+        &lt;/Field&gt;
+      &lt;/Tab&gt;
+      &lt;Tab label="Appearance"&gt;
+        &lt;Select label="Theme" value={prefs.theme}
+                onChange={v =&gt; update("theme", v)}
+                options={["system", "light", "dark"]} /&gt;
+      &lt;/Tab&gt;
+      &lt;Tab label="Notifications"&gt;...&lt;/Tab&gt;
+    &lt;/Tabs&gt;
+  );
+}</code></pre>
+<p>Considerations: sync across devices (server-side storage), anonymous user defaults (<code>localStorage</code>, migrate on sign-up), export/import, reset-to-defaults, role-based preference overrides (organization-wide defaults that users can override).</p>
+'''
