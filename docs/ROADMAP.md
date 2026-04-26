@@ -1,6 +1,6 @@
 # Roadmap
 
-Phase plan for filling in the remaining 25 stub chapters (~2,500 detailed answers to write).
+Phase plan for filling in the remaining 21 stub chapters (~2,100 detailed answers to write).
 
 ## Completed phases
 
@@ -13,20 +13,20 @@ Phase plan for filling in the remaining 25 stub chapters (~2,500 detailed answer
 
 ### Phase 4: Frontend (HTML / CSS / React)
 
-Frontend chapters round out the browser-facing half of full-stack interviews. HTML first as the foundation, then CSS for styling, then React as the dominant component framework. Each topic has 3-4 levels.
+Frontend chapters round out the browser-facing half of full-stack interviews. HTML and CSS complete; React next.
 
 - [x] HTML Basic (100 Q, completed 2026-04-20)
 - [x] HTML Coding (100 Q, completed 2026-04-25)
-- [ ] **HTML Advanced (100 Q)** ← next
-- [ ] CSS Basic (100 Q)
-- [ ] CSS Coding (104 Q)
-- [ ] CSS Advanced (100 Q)
-- [ ] React JS Basic (100 Q)
+- [x] HTML Advanced (100 Q, completed 2026-04-26)
+- [x] CSS Basic (102 Q, completed 2026-04-26)
+- [x] CSS Coding (100 Q, completed 2026-04-26)
+- [x] CSS Advanced (101 Q, completed 2026-04-26)
+- [ ] **React JS Basic (101 Q)** ← next
 - [ ] React JS Coding (100 Q)
 - [ ] React JS Advanced (100 Q)
 - [ ] React JS Scenario Based (100 Q)
 
-**Target:** 804 more answers to finish frontend.
+**Target:** 401 more answers to finish frontend.
 
 ## Future phases (in priority order)
 

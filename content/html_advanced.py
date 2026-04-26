@@ -1,118 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HTML — Advanced · Interview Prep Mastery</title>
-<meta name="description" content="100 advanced interview questions on HTML, with detailed explanations and examples.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="../assets/styles.css">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%239a6b1d'/%3E%3Ctext x='50' y='68' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold' font-size='48'%3EIP%3C/text%3E%3C/svg%3E">
-</head>
-<body>
-<header class="site-header">
-  <div class="site-header__inner">
-    <button class="menu-toggle" aria-label="Open menu" type="button">☰ Menu</button>
-    <a class="brand" href="../index.html">
-      <span class="brand__mark">IP</span>
-      <span class="brand__text">
-        <span class="brand__title">Interview Prep Mastery</span>
-        <span class="brand__subtitle">Interactive learning guide</span>
-      </span>
-    </a>
-    <nav class="header-nav">
-      <a href="../index.html#roadmap">Roadmap</a>
-      <a href="../index.html#chapters">All chapters</a>
-      <button class="theme-toggle" type="button" aria-label="Toggle color scheme">☾ Dark</button>
-    </nav>
-  </div>
-</header>
-<div class="layout">
-<aside class="sidebar" aria-label="Site navigation">
-  <div class="sidebar__header">Chapter Navigator</div>
-  
-        <div class="nav-part">
-          <div class="nav-part__label">Part 1</div>
-          <div class="nav-part__title">Core Programming Languages</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">JavaScript</li><li><a class="" href="../chapters/javascript-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/javascript-tricky.html"><span class="nav-item__title">Tricky</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-coding.html"><span class="nav-item__title">Advanced Coding</span><span class="nav-item__meta">100 questions · 100 min read</span></a></li><li><a class="" href="../chapters/javascript-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-scenario.html"><span class="nav-item__title">Advanced Scenario Based</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Python</li><li><a class="" href="../chapters/python-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/python-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 2</div>
-          <div class="nav-part__title">Web Fundamentals</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">HTML</li><li><a class="" href="../chapters/html-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/html-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="active" href="../chapters/html-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CSS</li><li><a class="" href="../chapters/css-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">102 questions · 60 min read</span></a></li><li><a class="" href="../chapters/css-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/css-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">101 questions · 90 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 3</div>
-          <div class="nav-part__title">Backend Technologies</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Node.Js</li><li><a class="" href="../chapters/nodejs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/nodejs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ExpressJS</li><li><a class="" href="../chapters/expressjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/expressjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/expressjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">API</li><li><a class="" href="../chapters/api-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/api-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 4</div>
-          <div class="nav-part__title">Frontend Frameworks</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ReactJS</li><li><a class="" href="../chapters/reactjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">101 questions · 60 min read</span></a></li><li><a class="" href="../chapters/reactjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 5</div>
-          <div class="nav-part__title">Databases</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MYSQL</li><li><a class="" href="../chapters/mysql-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mysql-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MongoDB</li><li><a class="" href="../chapters/mongodb-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mongodb-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 6</div>
-          <div class="nav-part__title">System Design &amp; DevOps</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">System Design MERN Stack</li><li><a class="" href="../chapters/system-design-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Infrastructure MERN Stack</li><li><a class="" href="../chapters/infrastructure-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/infrastructure-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CI/CD Pipeline</li><li><a class="" href="../chapters/cicd-pipeline-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-</aside>
-<main class="main" id="main">
+"""Detailed answers for HTML Advanced questions."""
 
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="../index.html">Home</a>
-    <span class="breadcrumb__sep">›</span>
-    <a href="../index.html#part-2">Web Fundamentals</a>
-    <span class="breadcrumb__sep">›</span>
-    <span>HTML — Advanced</span>
-  </nav>
+ANSWERS: dict[int, str] = {}
 
-  <header class="chapter-header">
-    <div class="chapter-label">HTML · Advanced</div>
-    <h1 class="chapter-title">Advanced HTML Interview Questions</h1>
-    <p class="chapter-lede">Deep internals, architecture decisions, and questions typical of senior-level interviews.</p>
-    <div class="chapter-meta">
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Questions</span><span class="chapter-meta__value">100</span></div>
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Level</span><span class="chapter-meta__value">Advanced</span></div>
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Estimated reading</span><span class="chapter-meta__value">90 min read</span></div>
-    </div>
-    
-  </header>
-
-  <section class="prose">
-
-    <div class="toc" id="toc">
-      <div class="toc__title">All questions in this chapter</div>
-      <ul class="toc__list">
-        <li><a href="#q1"><span class="toc__num">1.</span>What are the new features introduced in HTML5?</a></li><li><a href="#q2"><span class="toc__num">2.</span>Explain the concept of semantic HTML.</a></li><li><a href="#q3"><span class="toc__num">3.</span>How does the &lt;picture&gt; element work, and when should you use it?</a></li><li><a href="#q4"><span class="toc__num">4.</span>Describe the use of the &lt;template&gt; element in HTML.</a></li><li><a href="#q5"><span class="toc__num">5.</span>What is the &lt;slot&gt; element, and how is it used in web components?</a></li><li><a href="#q6"><span class="toc__num">6.</span>How do you create custom data attributes in HTML, and what are their use cases?</a></li><li><a href="#q7"><span class="toc__num">7.</span>Explain the difference between the &lt;b&gt; and &lt;strong&gt; tags.</a></li><li><a href="#q8"><span class="toc__num">8.</span>Explain the difference between the &lt;i&gt; and &lt;em&gt; tags.</a></li><li><a href="#q9"><span class="toc__num">9.</span>How does the &lt;dialog&gt; element work in HTML?</a></li><li><a href="#q10"><span class="toc__num">10.</span>What are ARIA (Accessible Rich Internet Applications) attributes, and how are they used...</a></li><li><a href="#q11"><span class="toc__num">11.</span>How do you implement lazy loading for images in HTML5?</a></li><li><a href="#q12"><span class="toc__num">12.</span>Explain the purpose and usage of the &lt;output&gt; element in HTML.</a></li><li><a href="#q13"><span class="toc__num">13.</span>What is the &lt;shadow&gt; DOM, and how is it used in web components?</a></li><li><a href="#q14"><span class="toc__num">14.</span>How do you use the &lt;data&gt; element in HTML?</a></li><li><a href="#q15"><span class="toc__num">15.</span>What are microdata and the itemprop attribute in HTML?</a></li><li><a href="#q16"><span class="toc__num">16.</span>Explain the use of the &lt;details&gt; and &lt;summary&gt; elements in HTML.</a></li><li><a href="#q17"><span class="toc__num">17.</span>How do you create a custom element in HTML5?</a></li><li><a href="#q18"><span class="toc__num">18.</span>What is the purpose of the &lt;isindex&gt; element, and why is it deprecated?</a></li><li><a href="#q19"><span class="toc__num">19.</span>How do you use the &lt;progress&gt; and &lt;meter&gt; elements in HTML5?</a></li><li><a href="#q20"><span class="toc__num">20.</span>Explain the purpose and usage of the &lt;keygen&gt; element in HTML.</a></li><li><a href="#q21"><span class="toc__num">21.</span>How do you handle form validation using HTML5 attributes?</a></li><li><a href="#q22"><span class="toc__num">22.</span>What is the purpose of the &lt;wbr&gt; (word break opportunity) element?</a></li><li><a href="#q23"><span class="toc__num">23.</span>How do you create a custom HTML element using the &lt;template&gt; and &lt;shadow&gt; DOM?</a></li><li><a href="#q24"><span class="toc__num">24.</span>Explain the use of the &lt;picture&gt; element for responsive images.</a></li><li><a href="#q25"><span class="toc__num">25.</span>What is the purpose of the &lt;fieldset&gt; and &lt;legend&gt; elements in HTML forms?</a></li><li><a href="#q26"><span class="toc__num">26.</span>How do you use the &lt;datalist&gt; element to create an autocomplete dropdown?</a></li><li><a href="#q27"><span class="toc__num">27.</span>Explain the difference between the &lt;nav&gt; and &lt;aside&gt; elements.</a></li><li><a href="#q28"><span class="toc__num">28.</span>How do you create an inline SVG (Scalable Vector Graphics) in HTML?</a></li><li><a href="#q29"><span class="toc__num">29.</span>What is the purpose of the &lt;mark&gt; element in HTML?</a></li><li><a href="#q30"><span class="toc__num">30.</span>How do you create a sticky footer using HTML and CSS?</a></li><li><a href="#q31"><span class="toc__num">31.</span>What is the purpose of the &lt;abbr&gt; element in HTML?</a></li><li><a href="#q32"><span class="toc__num">32.</span>Explain the difference between &lt;object&gt;, &lt;embed&gt;, and &lt;iframe&gt; elements.</a></li><li><a href="#q33"><span class="toc__num">33.</span>How do you implement a responsive navigation menu using HTML5 and CSS?</a></li><li><a href="#q34"><span class="toc__num">34.</span>What are the best practices for using the &lt;iframe&gt; element in HTML?</a></li><li><a href="#q35"><span class="toc__num">35.</span>How do you create a polyfill for a new HTML5 feature in older browsers?</a></li><li><a href="#q36"><span class="toc__num">36.</span>Explain the purpose and usage of the &lt;time&gt; element in HTML.</a></li><li><a href="#q37"><span class="toc__num">37.</span>How do you create an accessible form using HTML5 attributes?</a></li><li><a href="#q38"><span class="toc__num">38.</span>What is the purpose of the &lt;figcaption&gt; element in HTML?</a></li><li><a href="#q39"><span class="toc__num">39.</span>How do you use the &lt;bdi&gt; (bidirectional isolation) element in HTML?</a></li><li><a href="#q40"><span class="toc__num">40.</span>Explain the use of the &lt;track&gt; element in HTML5 for video subtitles.</a></li><li><a href="#q41"><span class="toc__num">41.</span>How do you create a fullscreen API in HTML5?</a></li><li><a href="#q42"><span class="toc__num">42.</span>What is the purpose of the &lt;ruby&gt;, &lt;rt&gt;, and &lt;rp&gt; elements in HTML?</a></li><li><a href="#q43"><span class="toc__num">43.</span>How do you create a responsive grid layout using HTML5 and CSS Grid?</a></li><li><a href="#q44"><span class="toc__num">44.</span>What are web components, and how do you use them in HTML5?</a></li><li><a href="#q45"><span class="toc__num">45.</span>Explain the purpose and usage of the &lt;main&gt; element in HTML5.</a></li><li><a href="#q46"><span class="toc__num">46.</span>How do you create a print-friendly HTML document?</a></li><li><a href="#q47"><span class="toc__num">47.</span>What is the purpose of the &lt;blockquote&gt; element in HTML?</a></li><li><a href="#q48"><span class="toc__num">48.</span>How do you implement ARIA roles and properties for better accessibility?</a></li><li><a href="#q49"><span class="toc__num">49.</span>Explain the concept of HTML5 Offline Web Applications.</a></li><li><a href="#q50"><span class="toc__num">50.</span>How do you use the &lt;code&gt;, &lt;pre&gt;, and &lt;samp&gt; elements for displaying code snippets?</a></li><li><a href="#q51"><span class="toc__num">51.</span>What is the purpose of the &lt;cite&gt; element in HTML?</a></li><li><a href="#q52"><span class="toc__num">52.</span>How do you use the &lt;form&gt; element with the &lt;input type=&quot;file&quot;&gt; for file uploads?</a></li><li><a href="#q53"><span class="toc__num">53.</span>Explain the difference between the &lt;address&gt; and &lt;footer&gt; elements.</a></li><li><a href="#q54"><span class="toc__num">54.</span>How do you use the &lt;canvas&gt; element for drawing graphics in HTML5?</a></li><li><a href="#q55"><span class="toc__num">55.</span>What is the purpose of the &lt;caption&gt; element in HTML tables?</a></li><li><a href="#q56"><span class="toc__num">56.</span>How do you create an HTML5 form with placeholder text?</a></li><li><a href="#q57"><span class="toc__num">57.</span>Explain the use of the &lt;optgroup&gt; element in a dropdown list.</a></li><li><a href="#q58"><span class="toc__num">58.</span>How do you create a custom tooltip using HTML and CSS?</a></li><li><a href="#q59"><span class="toc__num">59.</span>What is the purpose of the &lt;kbd&gt; element in HTML?</a></li><li><a href="#q60"><span class="toc__num">60.</span>How do you implement client-side storage using HTML5 Web Storage API?</a></li><li><a href="#q61"><span class="toc__num">61.</span>Explain the difference between sessionStorage and localStorage in HTML5.</a></li><li><a href="#q62"><span class="toc__num">62.</span>How do you create a collapsible sidebar using HTML5 and CSS?</a></li><li><a href="#q63"><span class="toc__num">63.</span>What is the purpose of the &lt;base&gt; element in HTML?</a></li><li><a href="#q64"><span class="toc__num">64.</span>How do you use the &lt;form action&gt; attribute to submit form data to a server?</a></li><li><a href="#q65"><span class="toc__num">65.</span>Explain the use of the &lt;noscript&gt; element in HTML.</a></li><li><a href="#q66"><span class="toc__num">66.</span>How do you create a responsive image gallery using HTML5 and CSS Flexbox?</a></li><li><a href="#q67"><span class="toc__num">67.</span>What is the purpose of the &lt;sub&gt; and &lt;sup&gt; elements in HTML?</a></li><li><a href="#q68"><span class="toc__num">68.</span>How do you create a sticky header using HTML5 and CSS?</a></li><li><a href="#q69"><span class="toc__num">69.</span>Explain the concept of progressive enhancement in HTML.</a></li><li><a href="#q70"><span class="toc__num">70.</span>How do you implement a responsive video player using HTML5 and CSS?</a></li><li><a href="#q71"><span class="toc__num">71.</span>What is the purpose of the &lt;acronym&gt; element, and why is it deprecated?</a></li><li><a href="#q72"><span class="toc__num">72.</span>How do you use the &lt;meta&gt; viewport tag for responsive web design?</a></li><li><a href="#q73"><span class="toc__num">73.</span>Explain the use of the &lt;address&gt; element in HTML.</a></li><li><a href="#q74"><span class="toc__num">74.</span>How do you create a form that supports multiple file uploads in HTML5?</a></li><li><a href="#q75"><span class="toc__num">75.</span>What is the purpose of the &lt;q&gt; element in HTML?</a></li><li><a href="#q76"><span class="toc__num">76.</span>How do you implement a responsive card layout using HTML5 and CSS?</a></li><li><a href="#q77"><span class="toc__num">77.</span>Explain the difference between &lt;script&gt; and &lt;noscript&gt; elements.</a></li><li><a href="#q78"><span class="toc__num">78.</span>How do you create an HTML5 form with required fields?</a></li><li><a href="#q79"><span class="toc__num">79.</span>What is the purpose of the &lt;small&gt; element in HTML?</a></li><li><a href="#q80"><span class="toc__num">80.</span>How do you use the &lt;optgroup&gt; element to group options in a dropdown list?</a></li><li><a href="#q81"><span class="toc__num">81.</span>Explain the use of the &lt;fieldset&gt; and &lt;legend&gt; elements for grouping form fields.</a></li><li><a href="#q82"><span class="toc__num">82.</span>How do you create a custom scroll bar using HTML and CSS?</a></li><li><a href="#q83"><span class="toc__num">83.</span>What is the purpose of the &lt;s&gt; element in HTML?</a></li><li><a href="#q84"><span class="toc__num">84.</span>How do you create a multi-column layout using HTML5 and CSS?</a></li><li><a href="#q85"><span class="toc__num">85.</span>Explain the concept of graceful degradation in HTML.</a></li><li><a href="#q86"><span class="toc__num">86.</span>How do you use the &lt;input type=&quot;color&quot;&gt; element in HTML5 forms?</a></li><li><a href="#q87"><span class="toc__num">87.</span>What is the purpose of the &lt;ins&gt; and &lt;del&gt; elements in HTML?</a></li><li><a href="#q88"><span class="toc__num">88.</span>How do you create a responsive accordion using HTML5 and CSS?</a></li><li><a href="#q89"><span class="toc__num">89.</span>Explain the use of the &lt;summary&gt; element in a collapsible content section.</a></li><li><a href="#q90"><span class="toc__num">90.</span>How do you implement a print-specific stylesheet in HTML?</a></li><li><a href="#q91"><span class="toc__num">91.</span>What is the purpose of the &lt;var&gt; element in HTML?</a></li><li><a href="#q92"><span class="toc__num">92.</span>How do you create a responsive layout using HTML5 and CSS Media Queries?</a></li><li><a href="#q93"><span class="toc__num">93.</span>Explain the use of the &lt;bdi&gt; element for handling bidirectional text.</a></li><li><a href="#q94"><span class="toc__num">94.</span>How do you create a form with inline validation using HTML5 attributes?</a></li><li><a href="#q95"><span class="toc__num">95.</span>What is the purpose of the &lt;u&gt; element in HTML?</a></li><li><a href="#q96"><span class="toc__num">96.</span>How do you implement a fixed navigation bar using HTML5 and CSS?</a></li><li><a href="#q97"><span class="toc__num">97.</span>Explain the use of the &lt;dl&gt;, &lt;dt&gt;, and &lt;dd&gt; elements for creating definition lists.</a></li><li><a href="#q98"><span class="toc__num">98.</span>How do you create an HTML5 form with autocomplete functionality?</a></li><li><a href="#q99"><span class="toc__num">99.</span>What is the purpose of the &lt;menu&gt; and &lt;menuitem&gt; elements in HTML5?</a></li><li><a href="#q100"><span class="toc__num">100.</span>How do you use the &lt;link&gt; element to preload resources in HTML5?</a></li>
-      </ul>
-    </div>
-
-    
-<article class="qa" id="q1">
-  <div class="qa__number">Question 1</div>
-  <h3 class="qa__question">What are the new features introduced in HTML5?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[1] = r'''
 <p>HTML5 (officially a living standard since 2014) introduced a substantial set of features that turned HTML from a markup language into a platform for rich applications. Most of the &ldquo;HTML5 features&rdquo; people cite are now baseline web platform features in 2026.</p>
 <p><strong>New semantic elements:</strong></p>
 <ul>
@@ -130,15 +20,9 @@
 <p><strong>JavaScript APIs introduced alongside HTML5:</strong> <code>localStorage</code>/<code>sessionStorage</code>, IndexedDB, Geolocation, Web Workers, WebSockets, Server-Sent Events, History API (<code>pushState</code>), Drag &amp; Drop, File API, application cache (now superseded by Service Workers), Web Audio, WebRTC, Notifications. Together these enabled true single-page applications.</p>
 <p><strong>Document structure improvements:</strong> simpler <code>&lt;!DOCTYPE html&gt;</code> declaration, the <code>&lt;meta charset="UTF-8"&gt;</code> shorthand, the viewport meta tag for responsive design (<code>&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;</code>), microdata via <code>itemprop</code>/<code>itemscope</code>, and ARIA attribute integration.</p>
 <p><strong>What HTML5 didn&rsquo;t do</strong> is finalize a single feature set &mdash; it&rsquo;s a living standard that evolves continuously. Recent additions (2024-2026) include <code>&lt;dialog&gt;</code>, the popover API, <code>:has()</code> CSS selector, container queries, view transitions, and speculation rules. The spec at <code>html.spec.whatwg.org</code> is the source of truth.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q2">
-  <div class="qa__number">Question 2</div>
-  <h3 class="qa__question">Explain the concept of semantic HTML.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[2] = r'''
 <p>Semantic HTML uses elements that <strong>describe the meaning of their content</strong>, not just its appearance. <code>&lt;article&gt;</code> says &ldquo;this is a self-contained piece of content&rdquo;; <code>&lt;div&gt;</code> says nothing. The browser renders both as plain blocks &mdash; but semantic tags carry information that browsers, assistive tech, search engines, and other developers can use.</p>
 <p><strong>Categories of semantic elements:</strong></p>
 <table>
@@ -159,15 +43,9 @@
 </ul>
 <p><strong>Common mistakes:</strong> using <code>&lt;section&gt;</code> as a generic wrapper (it should have a heading and represent a thematic group); using <code>&lt;article&gt;</code> for non-self-contained content; nesting <code>&lt;main&gt;</code> multiple times (only one per page); using <code>&lt;b&gt;</code>/<code>&lt;i&gt;</code> for emphasis when <code>&lt;strong&gt;</code>/<code>&lt;em&gt;</code> carry semantic weight.</p>
 <p>The accessibility tree (visible in browser devtools under &ldquo;Accessibility&rdquo;) shows how your markup is exposed to assistive tech &mdash; if it&rsquo;s a wall of generic divs and the structure is invisible there, semantic improvements will pay off immediately.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q3">
-  <div class="qa__number">Question 3</div>
-  <h3 class="qa__question">How does the &lt;picture&gt; element work, and when should you use it?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[3] = r'''
 <p>The <code>&lt;picture&gt;</code> element gives the browser a list of image candidates and lets it pick the best fit based on the viewport, format support, or pixel density. It&rsquo;s the fix for &ldquo;serve a different image to mobile vs desktop&rdquo; that <code>srcset</code> alone can&rsquo;t solve.</p>
 <pre><code>&lt;picture&gt;
   &lt;!-- Modern format with art-direction crop --&gt;
@@ -200,15 +78,9 @@
   <li><strong>Use <code>&lt;picture&gt;</code></strong> when the image itself differs &mdash; cropped differently, alternate format, dark-mode variant.</li>
 </ul>
 <p>Performance hint: always include <code>width</code> and <code>height</code> on the fallback <code>&lt;img&gt;</code> &mdash; they prevent layout shift even when picture chooses a different source. Modern formats (AVIF saves 30-50% over JPEG; WebP saves 25-30%) directly improve LCP scores. Use <code>&lt;link rel="preload" as="image" imagesrcset="..." imagesizes="..."&gt;</code> to preload the LCP image with the same negotiation rules.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q4">
-  <div class="qa__number">Question 4</div>
-  <h3 class="qa__question">Describe the use of the &lt;template&gt; element in HTML.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[4] = r'''
 <p>The <code>&lt;template&gt;</code> element holds inert HTML &mdash; markup that&rsquo;s parsed but not rendered, with no scripts running and no images loading until you clone its contents into the live DOM. It&rsquo;s the foundation for client-side templating and Web Components.</p>
 <pre><code>&lt;template id="card-template"&gt;
   &lt;article class="card"&gt;
@@ -249,15 +121,9 @@
 <p><strong>Template + custom elements:</strong> Web Components use templates inside <code>connectedCallback</code> to populate a Shadow DOM. The pattern is so common that the platform exposes <code>HTMLTemplateElement.content</code> as a <code>DocumentFragment</code> for convenient cloning.</p>
 <p><strong>Server-rendered apps</strong> use <code>&lt;template&gt;</code> for client-side hydration: the server inlines templates for components that may render later (modal dialogs, tooltips). HTMX, Astro, and Lit-based libraries lean heavily on this pattern.</p>
 <p><strong>Limitations:</strong> templates can&rsquo;t hold interpolated values directly (no <code>{{name}}</code> syntax) &mdash; you fill placeholders with JavaScript. For declarative two-way binding, libraries like Lit, Stimulus, or AlpineJS layer expressions on top.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q5">
-  <div class="qa__number">Question 5</div>
-  <h3 class="qa__question">What is the &lt;slot&gt; element, and how is it used in web components?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[5] = r'''
 <p>The <code>&lt;slot&gt;</code> element is a placeholder inside a Web Component&rsquo;s Shadow DOM where the component&rsquo;s <em>light DOM</em> children get projected. It&rsquo;s how custom elements compose: the user puts content between the custom tags; the component decides where that content appears in its internal structure.</p>
 <pre><code>// Define the component
 class UserCard extends HTMLElement {
@@ -293,15 +159,9 @@ customElements.define("user-card", UserCard);
 <p><strong>The <code>::slotted()</code> selector</strong> styles projected content <em>from inside</em> the shadow DOM &mdash; but only one level deep. It targets the slotted element itself, not its descendants. Cross-tree styling is intentionally limited to keep encapsulation tight.</p>
 <p><strong>Why slots matter:</strong> they make components <em>composable</em> the way HTML tags are. A consumer of <code>&lt;user-card&gt;</code> can put any markup into the bio slot &mdash; links, lists, formatted text &mdash; and the component just renders it. This is the killer feature of Shadow DOM: encapsulated styles inside, flexible composition outside.</p>
 <p>Frameworks like Lit, Stencil, and Vue 3 (in custom-element mode) use slots heavily; React&rsquo;s equivalent concept is <code>children</code> + named props, but it&rsquo;s a runtime concept rather than a platform primitive.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q6">
-  <div class="qa__number">Question 6</div>
-  <h3 class="qa__question">How do you create custom data attributes in HTML, and what are their use cases?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[6] = r'''
 <p>Custom data attributes &mdash; any attribute starting with <code>data-</code> &mdash; let you attach arbitrary metadata to elements without invalidating HTML or colliding with future spec attributes. They&rsquo;re the documented escape hatch for &ldquo;I need to associate some data with this element.&rdquo;</p>
 <pre><code>&lt;article data-post-id="42"
          data-author-id="7"
@@ -338,15 +198,9 @@ article.dataset.editCount = "4";
   <li>Don&rsquo;t use them where ARIA attributes apply &mdash; <code>aria-expanded</code>, not <code>data-expanded</code>, when the meaning is &ldquo;is this expanded.&rdquo;</li>
 </ul>
 <p>For very large data payloads, <code>&lt;script type="application/json"&gt;</code> blocks are cleaner than stuffing JSON into attributes.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q7">
-  <div class="qa__number">Question 7</div>
-  <h3 class="qa__question">Explain the difference between the &lt;b&gt; and &lt;strong&gt; tags.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[7] = r'''
 <p><code>&lt;b&gt;</code> and <code>&lt;strong&gt;</code> both render bold text by default, but they carry <strong>completely different semantic meaning</strong>. The visual collision masks an important distinction that screen readers and search engines respect.</p>
 <table>
   <tr><th></th><th><code>&lt;strong&gt;</code></th><th><code>&lt;b&gt;</code></th></tr>
@@ -369,15 +223,9 @@ article.dataset.editCount = "4";
 <p><strong>Modern best practice:</strong> for purely visual bolding (e.g., a numeric value styled bold in a card layout), use a <code>&lt;span&gt;</code> with a class. Save <code>&lt;b&gt;</code> for traditional typographic uses (lead-in words, ship names, taxonomy terms) where the bolding has reading-level meaning but not importance. Use <code>&lt;strong&gt;</code> when the content actually matters more than what surrounds it.</p>
 <p><strong>Nesting:</strong> <code>&lt;strong&gt;&lt;strong&gt;...&lt;/strong&gt;&lt;/strong&gt;</code> increases relative importance per the spec, but no browser or screen reader reflects this in 2026 &mdash; treat it as a stylistic curio rather than a feature.</p>
 <p>For italics, the same pattern applies: <code>&lt;em&gt;</code> for emphasis, <code>&lt;i&gt;</code> for stylistic italics (foreign words, taxonomic names, technical terms).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q8">
-  <div class="qa__number">Question 8</div>
-  <h3 class="qa__question">Explain the difference between the &lt;i&gt; and &lt;em&gt; tags.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[8] = r'''
 <p><code>&lt;i&gt;</code> and <code>&lt;em&gt;</code> both render italic by default but mean very different things. The HTML5 spec explicitly redefined them to differentiate <em>stylistic</em> italics from <em>emphatic</em> italics &mdash; a distinction screen readers honor.</p>
 <table>
   <tr><th></th><th><code>&lt;em&gt;</code></th><th><code>&lt;i&gt;</code></th></tr>
@@ -412,15 +260,9 @@ article.dataset.editCount = "4";
 <p>Each defaults to italic, but they tell the browser <em>why</em> the text is italic. Screen readers, search engines, and dictionaries can use this information.</p>
 <p><strong>For purely visual italics</strong> (an italicized caption, a stylistic flourish), use a CSS class &mdash; <code>font-style: italic</code> &mdash; rather than misusing semantic tags.</p>
 <p><strong>Common mistake:</strong> defaulting to <code>&lt;em&gt;</code> for every italicized word. If the italics carry no spoken-emphasis meaning &mdash; book titles, technical jargon, foreign phrases &mdash; <code>&lt;i&gt;</code> or a more specific tag (<code>&lt;cite&gt;</code>, <code>&lt;dfn&gt;</code>) is more accurate. Same pattern as <code>&lt;b&gt;</code> vs <code>&lt;strong&gt;</code>: visual identity, semantic difference.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q9">
-  <div class="qa__number">Question 9</div>
-  <h3 class="qa__question">How does the &lt;dialog&gt; element work in HTML?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[9] = r'''
 <p>The <code>&lt;dialog&gt;</code> element is the native modal/popover primitive. It handles focus management, the Escape key, the backdrop, and (since 2024) the top-layer rendering that previously required <code>position: fixed</code> + custom z-index management. It&rsquo;s a substantial replacement for the dozens of modal libraries that historically dominated.</p>
 <pre><code>&lt;dialog id="confirm-dialog"&gt;
   &lt;form method="dialog"&gt;
@@ -470,15 +312,9 @@ dialog[open] {
 }</code></pre>
 <p><strong>Top-layer rendering</strong> means the dialog escapes any <code>overflow: hidden</code> or stacking context constraints. This solved a decade of z-index whack-a-mole. The popover API (<code>popover</code> attribute) extends the same top-layer mechanism to non-modal popovers like menus and tooltips.</p>
 <p><strong>Accessibility:</strong> the role is implicitly <code>dialog</code> (or <code>alertdialog</code> if you set it). Always include a label (heading or <code>aria-labelledby</code>) so screen readers announce what the dialog is about. <code>&lt;dialog&gt;</code> beats almost any custom modal &mdash; less code, correct accessibility, no library.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q10">
-  <div class="qa__number">Question 10</div>
-  <h3 class="qa__question">What are ARIA (Accessible Rich Internet Applications) attributes, and how are they used in HTML?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[10] = r'''
 <p>ARIA (Accessible Rich Internet Applications) is a set of attributes that describe the role, state, and properties of elements to assistive technology &mdash; specifically when native HTML semantics fall short. ARIA is a bridge: HTML covers the common cases natively; ARIA covers everything else.</p>
 <p><strong>Three categories of ARIA attributes:</strong></p>
 <table>
@@ -528,15 +364,9 @@ dialog[open] {
   <li>Using <code>aria-live</code> with <code>assertive</code> for non-urgent updates &mdash; interrupts the user&rsquo;s screen reader flow.</li>
 </ul>
 <p><strong>Testing:</strong> use NVDA + Firefox or VoiceOver + Safari to verify your ARIA does what you intended. The Chrome DevTools Accessibility panel shows the computed accessibility tree &mdash; what assistive tech actually sees.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q11">
-  <div class="qa__number">Question 11</div>
-  <h3 class="qa__question">How do you implement lazy loading for images in HTML5?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[11] = r'''
 <p>Lazy loading defers fetching of off-screen images until the user scrolls near them &mdash; saving bandwidth and improving initial page load. HTML5 provides this natively via the <code>loading</code> attribute, no JavaScript or library needed.</p>
 <pre><code>&lt;!-- Native lazy loading — supported in all modern browsers --&gt;
 &lt;img src="photo.jpg"
@@ -575,15 +405,9 @@ document.querySelectorAll("img[data-src]")
         .forEach((img) =&gt; observer.observe(img));</code></pre>
 <p><strong>Lazy loading + responsive images</strong> compose perfectly &mdash; <code>srcset</code> still negotiates which size to fetch, <code>loading="lazy"</code> still defers when. Combined with modern formats (AVIF, WebP), you get smaller images, lazy-loaded, with no JavaScript &mdash; a major win for Core Web Vitals.</p>
 <p><strong>SEO note:</strong> Googlebot respects <code>loading="lazy"</code> when crawling, so lazy images are still indexed.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q12">
-  <div class="qa__number">Question 12</div>
-  <h3 class="qa__question">Explain the purpose and usage of the &lt;output&gt; element in HTML.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[12] = r'''
 <p>The question asks about <code>&lt;o&gt;</code>, but <strong>there is no <code>&lt;o&gt;</code> element in HTML</strong>. This is a common confusion &mdash; people sometimes mistype <code>&lt;p&gt;</code>, <code>&lt;ol&gt;</code>, or <code>&lt;output&gt;</code>. Here are the elements that may be intended:</p>
 <table>
   <tr><th>Element</th><th>Purpose</th></tr>
@@ -616,15 +440,9 @@ document.querySelectorAll("img[data-src]")
 &lt;/ol&gt;</code></pre>
 <p><strong>If the question really intends <code>&lt;o&gt;</code></strong>: HTML lets you use any unrecognized tag &mdash; browsers will treat <code>&lt;o&gt;</code> as a generic inline element with no semantics, no styling, and no accessibility benefit. Don&rsquo;t do this. Custom semantics belong in custom elements (<code>&lt;my-component&gt;</code> with a hyphen) registered via the Custom Elements API.</p>
 <p>The takeaway: stick to documented HTML elements. The MDN HTML element reference is the authoritative list of what exists; anything not on it is invalid.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q13">
-  <div class="qa__number">Question 13</div>
-  <h3 class="qa__question">What is the &lt;shadow&gt; DOM, and how is it used in web components?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[13] = r'''
 <p>Shadow DOM is a browser-native encapsulation mechanism: a hidden DOM tree attached to an element that&rsquo;s isolated from the rest of the document &mdash; CSS doesn&rsquo;t leak in or out, query selectors don&rsquo;t cross the boundary, and IDs are scoped. It&rsquo;s the foundation that makes Web Components actually composable.</p>
 <pre><code>class TweetEmbed extends HTMLElement {
   connectedCallback() {
@@ -665,15 +483,9 @@ customElements.define("tweet-embed", TweetEmbed);</code></pre>
 </ul>
 <p><strong>The <code>:host</code> selector</strong> styles the host element from inside the shadow. <code>:host(.featured)</code> targets the host when it has a class. <code>:host-context()</code> matches based on ancestors of the host.</p>
 <p><strong>Where Shadow DOM shines:</strong> embedded widgets that must not be affected by the host page&rsquo;s CSS (third-party embeds, design system components, browser extensions injecting UI). For the cost of a slightly more complex API, you get bulletproof style isolation that <code>div + class</code> conventions never deliver. The <code>&lt;details&gt;</code>, <code>&lt;video&gt;</code>, and <code>&lt;input type="range"&gt;</code> elements all use shadow DOM internally &mdash; their controls are real elements you can&rsquo;t style without explicit CSS hooks.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q14">
-  <div class="qa__number">Question 14</div>
-  <h3 class="qa__question">How do you use the &lt;data&gt; element in HTML?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[14] = r'''
 <p>The <code>&lt;data&gt;</code> element pairs human-readable text with a machine-readable value via the <code>value</code> attribute. The visible text is what users read; the <code>value</code> is what scripts and tools consume.</p>
 <pre><code>&lt;p&gt;
   Stock: &lt;data value="389"&gt;Three hundred and eighty-nine&lt;/data&gt; units
@@ -710,15 +522,9 @@ node.textContent;      // "Three hundred and eighty-nine" — display</code></pr
   <tr><td>Best for</td><td>Inline values where both display and machine forms matter</td><td>Metadata not visible to users</td></tr>
 </table>
 <p><strong>Honest assessment:</strong> <code>&lt;data&gt;</code> is rarely seen in production. Most teams use <code>data-*</code> attributes or microdata (<code>itemprop</code>) for the same job. <code>&lt;data&gt;</code> earns its place when display and machine value genuinely differ in inline content &mdash; otherwise <code>&lt;span data-id="..."&gt;</code> is more common. Knowing it exists matters for accessibility audits and for parsers that look for it (some search engine crawlers, browser extensions).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q15">
-  <div class="qa__number">Question 15</div>
-  <h3 class="qa__question">What are microdata and the itemprop attribute in HTML?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[15] = r'''
 <p>Microdata is HTML&rsquo;s built-in way to embed structured data in pages so search engines, browsers, and tools can extract meaning beyond the visible text. The HTML5 spec defines a small set of attributes &mdash; <code>itemscope</code>, <code>itemtype</code>, <code>itemprop</code>, <code>itemref</code>, <code>itemid</code> &mdash; that mark up entities and their properties.</p>
 <pre><code>&lt;article itemscope itemtype="https://schema.org/Article"&gt;
   &lt;h1 itemprop="headline"&gt;Modern HTML Patterns&lt;/h1&gt;
@@ -769,15 +575,9 @@ node.textContent;      // "Three hundred and eighty-nine" — display</code></pr
 &lt;/script&gt;</code></pre>
 <p>JSON-LD is easier to maintain &mdash; one block per page rather than scattered attributes &mdash; and supports things microdata can&rsquo;t (cross-references, deeper nesting). Most modern stacks use JSON-LD; microdata remains useful when the visible content already structures the data well, eliminating the duplication.</p>
 <p>Test your structured data with Google&rsquo;s Rich Results Test to see exactly what gets extracted.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q16">
-  <div class="qa__number">Question 16</div>
-  <h3 class="qa__question">Explain the use of the &lt;details&gt; and &lt;summary&gt; elements in HTML.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[16] = r'''
 <p><code>&lt;details&gt;</code> + <code>&lt;summary&gt;</code> create a native disclosure widget &mdash; the user clicks the summary to expand or collapse the details. Built-in keyboard support, screen-reader announcement, and zero JavaScript required.</p>
 <pre><code>&lt;details&gt;
   &lt;summary&gt;What&rsquo;s included in the Pro plan?&lt;/summary&gt;
@@ -830,15 +630,9 @@ details[open] summary::before {
 }</code></pre>
 <p><strong>Animation:</strong> details/summary doesn&rsquo;t animate height by default. Modern CSS uses <code>::details-content</code> (Chrome 131+) or <code>interpolate-size: allow-keywords</code> for smooth height transitions; older approaches use JavaScript with explicit height calculations.</p>
 <p><strong>When NOT to use details:</strong> menu items (use a real button + popover), modals (use <code>&lt;dialog&gt;</code>), or content that needs explicit ARIA roles. For straightforward expand/collapse, the native element is the right tool.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q17">
-  <div class="qa__number">Question 17</div>
-  <h3 class="qa__question">How do you create a custom element in HTML5?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[17] = r'''
 <p>Custom elements let you define new HTML tags with their own behavior, lifecycle, and shadow DOM. Once registered, you use <code>&lt;my-tag&gt;</code> like any built-in element &mdash; framework-free, browser-native components.</p>
 <pre><code>class CountdownTimer extends HTMLElement {
   // 1. Observed attributes — changes trigger attributeChangedCallback
@@ -907,15 +701,9 @@ customElements.define("countdown-timer", CountdownTimer);
 </ul>
 <p><strong>Naming rules:</strong> custom elements <em>must</em> have a hyphen in the name (<code>my-element</code>, not <code>myelement</code>) &mdash; this prevents collision with future standard elements.</p>
 <p><strong>Lit, Stencil, FAST</strong> are popular libraries that build on custom elements with reactive templates and TypeScript-friendly APIs &mdash; the platform primitives plus ergonomics. Web Components don&rsquo;t replace React/Vue/Angular for app-scale work, but they&rsquo;re excellent for design systems, third-party widgets, and components that must work across multiple frameworks (a Lit component drops into React, Vue, and plain HTML identically).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q18">
-  <div class="qa__number">Question 18</div>
-  <h3 class="qa__question">What is the purpose of the &lt;isindex&gt; element, and why is it deprecated?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[18] = r'''
 <p><code>&lt;isindex&gt;</code> was an obsolete element from HTML&rsquo;s earliest days &mdash; circa 1993 &mdash; designed for primitive single-field search forms when forms didn&rsquo;t exist yet. It rendered as a single text input, and submitting it generated a GET request with the typed value as the entire query string.</p>
 <pre><code>&lt;!-- Historical use (obsolete, do NOT use) --&gt;
 &lt;isindex prompt="Search this index:"&gt;</code></pre>
@@ -948,15 +736,9 @@ customElements.define("countdown-timer", CountdownTimer);
   <tr><td><code>&lt;marquee&gt;</code>, <code>&lt;blink&gt;</code></td><td>CSS animations (sparingly)</td></tr>
 </table>
 <p>Browsers retain partial support for some of these for legacy compatibility, but the spec doesn&rsquo;t require it &mdash; rendering can disappear at any point. The MDN compatibility table is the authoritative reference.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q19">
-  <div class="qa__number">Question 19</div>
-  <h3 class="qa__question">How do you use the &lt;progress&gt; and &lt;meter&gt; elements in HTML5?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[19] = r'''
 <p><code>&lt;progress&gt;</code> and <code>&lt;meter&gt;</code> both render gauge-like indicators, but they represent different things &mdash; <strong>progress toward completion</strong> vs <strong>a measurement within a range</strong>. Choosing the right one matters for accessibility and semantics.</p>
 <table>
   <tr><th></th><th><code>&lt;progress&gt;</code></th><th><code>&lt;meter&gt;</code></th></tr>
@@ -996,15 +778,9 @@ customElements.define("countdown-timer", CountdownTimer);
 <p>For deeper control, the underlying pseudo-elements differ by browser (<code>::-webkit-progress-bar</code>, <code>::-webkit-progress-value</code>, <code>::-moz-progress-bar</code>) &mdash; complex but doable.</p>
 <p><strong>Accessibility:</strong> both elements are exposed to screen readers as appropriate roles. Pair with a visible <code>&lt;label for&gt;</code> or use <code>aria-label</code>. For progress that&rsquo;s critical to user understanding (file upload completion, multi-step forms), also announce major milestones via an <code>aria-live</code> region &mdash; the visual gauge alone can be missed.</p>
 <p><strong>The decision rule:</strong> &ldquo;is this value <em>becoming</em> something?&rdquo; (uploading, building, loading) &rarr; <code>&lt;progress&gt;</code>. &ldquo;Is this a fixed measurement?&rdquo; &rarr; <code>&lt;meter&gt;</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q20">
-  <div class="qa__number">Question 20</div>
-  <h3 class="qa__question">Explain the purpose and usage of the &lt;keygen&gt; element in HTML.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[20] = r'''
 <p><code>&lt;keygen&gt;</code> was an obsolete HTML form element that generated a public/private key pair when a form was submitted &mdash; the public key went to the server, the private key stayed in the browser&rsquo;s key store. It was used for client certificate enrollment in early-2000s enterprise PKIs.</p>
 <pre><code>&lt;!-- Historical use (obsolete, do NOT use) --&gt;
 &lt;form action="/enroll" method="post"&gt;
@@ -1066,15 +842,9 @@ await fetch("/auth/register", {
   <li>Cross-device passkey sync via cloud (Apple iCloud Keychain, Google Password Manager, 1Password).</li>
 </ul>
 <p>By 2026, all major sites and OSes support passkeys. The <code>&lt;keygen&gt;</code> use case is obsolete &mdash; modern browsers don&rsquo;t even render the element.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q21">
-  <div class="qa__number">Question 21</div>
-  <h3 class="qa__question">How do you handle form validation using HTML5 attributes?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[21] = r'''
 <p>HTML5 added a comprehensive set of validation attributes that browsers enforce automatically &mdash; users see a tooltip and submission is blocked when invalid. No JavaScript required for most checks.</p>
 <pre><code>&lt;form action="/signup" method="post"&gt;
   &lt;label for="email"&gt;Email&lt;/label&gt;
@@ -1148,15 +918,9 @@ if (someCondition) {
 input.reportValidity();</code></pre>
 <p><strong>Customizing the validation UI:</strong> by default, browsers show their own tooltip on submit. To replace this with custom UI, listen for the <code>invalid</code> event, call <code>preventDefault</code> on each invalid field, and render your own messages. The <code>:invalid</code> styles still apply for visual feedback.</p>
 <p><strong>Always re-validate server-side.</strong> Client-side validation is UX, not security &mdash; users can disable JavaScript, modify the DOM in DevTools, or send raw HTTP requests. Server validation is the actual gate; client validation just makes the experience smoother. Modern stacks share schemas (Zod, Yup) between client and server so the rules don&rsquo;t drift.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q22">
-  <div class="qa__number">Question 22</div>
-  <h3 class="qa__question">What is the purpose of the &lt;wbr&gt; (word break opportunity) element?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[22] = r'''
 <p>The <code>&lt;wbr&gt;</code> element marks a <strong>word break opportunity</strong> &mdash; a place where the browser may break a long, unbreakable string onto a new line if needed. It doesn&rsquo;t force a break; it just permits one.</p>
 <pre><code>&lt;p&gt;
   Visit our site at https://example.com/very-long-path/&lt;wbr&gt;and-more-text/&lt;wbr&gt;continuing-here.html
@@ -1195,15 +959,9 @@ input.reportValidity();</code></pre>
 <p>This avoids manually finding break points in URLs and keeps content readable. <code>&lt;wbr&gt;</code> is most useful when you want <em>specific</em> break points (semantic boundaries in a long string) rather than &ldquo;break wherever needed.&rdquo; A long compound term like &ldquo;<code>microservices&lt;wbr&gt;orchestration&lt;wbr&gt;framework</code>&rdquo; reads better when broken at meaningful points.</p>
 <p><strong>Selection and copy behavior:</strong> <code>&lt;wbr&gt;</code> is a zero-width element &mdash; it doesn&rsquo;t affect text selection, search-in-page, or text copied to the clipboard (the copied string has no embedded character at the wbr position).</p>
 <p><strong>Accessibility:</strong> screen readers ignore <code>&lt;wbr&gt;</code>. It&rsquo;s purely a visual/typographic hint to the browser.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q23">
-  <div class="qa__number">Question 23</div>
-  <h3 class="qa__question">How do you create a custom HTML element using the &lt;template&gt; and &lt;shadow&gt; DOM?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[23] = r'''
 <p>Combining <code>&lt;template&gt;</code> with Shadow DOM is the canonical pattern for creating encapsulated Web Components &mdash; the template defines the component&rsquo;s internal markup once, and each instance clones it into its shadow root for isolation.</p>
 <pre><code>&lt;!-- Template defined once in the document --&gt;
 &lt;template id="profile-card-template"&gt;
@@ -1281,15 +1039,9 @@ customElements.define("profile-card", ProfileCard);
 &lt;/profile-card&gt;</code></pre>
 <p>The browser inflates the <code>&lt;template&gt;</code> with <code>shadowrootmode</code> directly into a shadow tree at parse time &mdash; the component has visible, styled output before any script runs.</p>
 <p><strong>Lit, FAST, Stencil</strong> wrap this pattern with reactive bindings, TypeScript decorators, and ergonomic APIs. For straightforward components, the platform primitives shown here are entirely sufficient and ship zero runtime overhead. The pattern underlies every native HTML element &mdash; <code>&lt;input&gt;</code>, <code>&lt;video&gt;</code>, <code>&lt;details&gt;</code> all use shadow DOM internally for their controls.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q24">
-  <div class="qa__number">Question 24</div>
-  <h3 class="qa__question">Explain the use of the &lt;picture&gt; element for responsive images.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[24] = r'''
 <p>The <code>&lt;picture&gt;</code> element is the most powerful tool for responsive images &mdash; it solves three problems that <code>&lt;img srcset&gt;</code> alone can&rsquo;t address:</p>
 <ol>
   <li><strong>Art direction</strong> &mdash; serve a different crop or composition based on viewport size.</li>
@@ -1352,15 +1104,9 @@ customElements.define("profile-card", ProfileCard);
   <li><strong>Don&rsquo;t over-engineer</strong> &mdash; for product thumbnails or content images that don&rsquo;t need art direction, plain <code>&lt;img srcset&gt;</code> is enough and simpler.</li>
 </ul>
 <p><strong>Image CDNs</strong> (Cloudflare Images, Imgix, Cloudinary, Vercel) generate responsive variants on-the-fly and emit the right <code>&lt;picture&gt;</code> markup automatically. For most teams, this is the right level of abstraction &mdash; you write one <code>&lt;img&gt;</code> tag, the CDN handles negotiation, format selection, and caching.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q25">
-  <div class="qa__number">Question 25</div>
-  <h3 class="qa__question">What is the purpose of the &lt;fieldset&gt; and &lt;legend&gt; elements in HTML forms?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[25] = r'''
 <p><code>&lt;fieldset&gt;</code> groups related form controls together; <code>&lt;legend&gt;</code> labels the group. Together they create a semantic boundary that benefits accessibility, organization, and form-state management.</p>
 <pre><code>&lt;form&gt;
   &lt;fieldset&gt;
@@ -1428,15 +1174,9 @@ legend {
   <li>Multiple legends per fieldset &mdash; only the first counts; rest are ignored.</li>
 </ul>
 <p>The fieldset/legend pattern is one of HTML&rsquo;s oldest accessibility wins &mdash; it&rsquo;s been required reading in WCAG since 2.0. Skipping it is one of the most common audit findings on form-heavy sites.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q26">
-  <div class="qa__number">Question 26</div>
-  <h3 class="qa__question">How do you use the &lt;datalist&gt; element to create an autocomplete dropdown?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[26] = r'''
 <p>The <code>&lt;datalist&gt;</code> element provides browser-native autocomplete suggestions for text inputs. Unlike <code>&lt;select&gt;</code>, it allows arbitrary user input alongside suggestions &mdash; ideal for "type-or-pick" interactions like city pickers, search history, or tag autocomplete.</p>
 <pre><code>&lt;label for="lang"&gt;Programming language:&lt;/label&gt;
 &lt;input list="languages" id="lang" name="language" autocomplete="off"&gt;
@@ -1471,15 +1211,9 @@ input.addEventListener('input', () =&gt; {
   }, 200);
 });</code></pre>
 <p><strong>When to choose datalist vs alternatives:</strong> use datalist for simple, finite suggestion sets where free-text input is allowed. For richer combobox behavior &mdash; remote search with debouncing, custom rendering, async loading states, accessibility callouts &mdash; reach for a library (Headless UI Combobox, Downshift, React Aria) or build with ARIA's <code>role="combobox"</code> pattern. Datalist is great for quick wins; full comboboxes require more scaffolding but offer significantly better UX for power-user inputs.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q27">
-  <div class="qa__number">Question 27</div>
-  <h3 class="qa__question">Explain the difference between the &lt;nav&gt; and &lt;aside&gt; elements.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[27] = r'''
 <p><code>&lt;nav&gt;</code> and <code>&lt;aside&gt;</code> are both HTML5 sectioning elements that create accessibility landmarks &mdash; but they signal fundamentally different intent. Confusing them is a common semantic mistake that affects screen reader navigation.</p>
 <p><strong><code>&lt;nav&gt;</code> &mdash; major navigation:</strong></p>
 <ul>
@@ -1522,15 +1256,9 @@ input.addEventListener('input', () =&gt; {
   &lt;/main&gt;
 &lt;/body&gt;</code></pre>
 <p><strong>Why this matters operationally:</strong> screen reader users navigate by landmark using shortcut keys (e.g., NVDA's <kbd>D</kbd> for landmarks, JAWS's <kbd>R</kbd>). When you mark every footer-link cluster as <code>&lt;nav&gt;</code>, the landmark list becomes noisy and useful navs get buried. When you misuse <code>&lt;aside&gt;</code> for primary content, that content gets demoted to "complementary" and may be skipped entirely. Test with a screen reader's landmark navigation &mdash; if your structure feels right there, it's probably correct semantically.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q28">
-  <div class="qa__number">Question 28</div>
-  <h3 class="qa__question">How do you create an inline SVG (Scalable Vector Graphics) in HTML?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[28] = r'''
 <p>Inline SVG embeds vector graphics directly in the HTML document, where they become first-class DOM elements &mdash; styleable with CSS, scriptable with JavaScript, accessible to screen readers, and indexable by search engines.</p>
 <pre><code>&lt;svg xmlns="http://www.w3.org/2000/svg"
      viewBox="0 0 100 100"
@@ -1562,15 +1290,9 @@ input.addEventListener('input', () =&gt; {
   <li><code>&lt;desc&gt;</code> provides extended descriptions for complex graphics like charts.</li>
 </ul>
 <p><strong>Optimization workflow:</strong> design tools (Figma, Illustrator) export verbose SVG with metadata, hidden layers, and unnecessary precision. Run output through <strong>SVGO</strong> (CLI or build plugin) &mdash; it routinely reduces file size 60-80% without visual change. For icon systems, build a single sprite (<code>&lt;symbol&gt;</code> + <code>&lt;use&gt;</code>) or use a build tool (vite-plugin-svg-icons, SVGR) to import each SVG as a component.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q29">
-  <div class="qa__number">Question 29</div>
-  <h3 class="qa__question">What is the purpose of the &lt;mark&gt; element in HTML?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[29] = r'''
 <p>The <code>&lt;mark&gt;</code> element marks text as <em>relevant in the current context</em> &mdash; not just visually highlighted, but semantically called out as significant for the user's reading purpose. Browsers default-style it with a yellow background, but the meaning runs deeper than the styling.</p>
 <pre><code>&lt;p&gt;Search results for &ldquo;&lt;mark&gt;quantum&lt;/mark&gt;&rdquo;:&lt;/p&gt;
 
@@ -1597,15 +1319,9 @@ input.addEventListener('input', () =&gt; {
 <p>"Search results for &lt;b&gt;quantum&lt;/b&gt;" is wrong &mdash; <code>&lt;b&gt;</code> implies stylistic offset, not contextual relevance. "Search results for &lt;strong&gt;quantum&lt;/strong&gt;" is also wrong &mdash; the term isn't intrinsically important; it's just relevant to <em>this user's search</em>.</p>
 <p><strong>Screen reader behavior</strong> varies. NVDA and JAWS by default don't announce <code>&lt;mark&gt;</code> distinctly &mdash; the semantic value is more for visual users and search engines. To force announcement of "highlighted" text, layer ARIA: <code>&lt;mark role="mark" aria-label="Highlighted: quantum"&gt;</code>. Most apps don't bother because over-announcing distracts more than it helps; use <code>&lt;mark&gt;</code> for the visual + semantic contract and trust users to perceive context from the surrounding text.</p>
 <p><strong>Custom styling:</strong> override the default yellow with CSS to match your design language &mdash; <code>mark { background: #fff3cd; padding: 0 0.2em; border-radius: 2px; }</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q30">
-  <div class="qa__number">Question 30</div>
-  <h3 class="qa__question">How do you create a sticky footer using HTML and CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[30] = r'''
 <p>A "sticky footer" pattern keeps the footer at the bottom of the viewport when content is short, and at the bottom of the document when content is tall. The cleanest 2026 solution uses Flexbox or Grid on the body.</p>
 <pre><code>&lt;body&gt;
   &lt;header&gt;...&lt;/header&gt;
@@ -1644,15 +1360,9 @@ input.addEventListener('input', () =&gt; {
 <p><strong>Modern viewport units &mdash; <code>100vh</code> caveat:</strong> on mobile, <code>100vh</code> includes browser chrome at first then jumps when the URL bar hides, causing layout shift. Use <code>100dvh</code> (dynamic viewport height) instead &mdash; supported in all major browsers since 2022. For broader fallback:</p>
 <pre><code>body { min-height: 100vh; min-height: 100dvh; }</code></pre>
 <p>The older &mdash; and now obsolete &mdash; approach used negative margins and fixed footer heights. Flexbox/Grid eliminate that fragility entirely.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q31">
-  <div class="qa__number">Question 31</div>
-  <h3 class="qa__question">What is the purpose of the &lt;abbr&gt; element in HTML?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[31] = r'''
 <p>The <code>&lt;abbr&gt;</code> element marks an abbreviation or acronym, and its <code>title</code> attribute provides the full expansion shown on hover and announced by some assistive tech.</p>
 <pre><code>&lt;p&gt;The standard markup language for the web is
 &lt;abbr title="HyperText Markup Language"&gt;HTML&lt;/abbr&gt;.
@@ -1678,15 +1388,9 @@ and JavaScript.&lt;/p&gt;
 </ol>
 <p><strong>Accessible expansion patterns</strong> when expansions are critical: render the full term with the abbreviation in parentheses, or use a glossary page linked from each abbreviation's first occurrence.</p>
 <p><strong>Acronym vs abbreviation:</strong> the deprecated <code>&lt;acronym&gt;</code> existed in HTML4 specifically for pronounced acronyms (NASA, FBI), distinct from spelled-out abbreviations (HTML, FBI). HTML5 dropped <code>&lt;acronym&gt;</code> because the distinction added no semantic value beyond <code>&lt;abbr&gt;</code> &mdash; the rendering and assistive tech behavior was identical.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q32">
-  <div class="qa__number">Question 32</div>
-  <h3 class="qa__question">Explain the difference between &lt;object&gt;, &lt;embed&gt;, and &lt;iframe&gt; elements.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[32] = r'''
 <p>All three elements embed external content into a page, but they target different content types and offer very different security, scriptability, and UX tradeoffs. In 2026, <code>&lt;iframe&gt;</code> is the workhorse; <code>&lt;object&gt;</code> sees rare use; <code>&lt;embed&gt;</code> is essentially legacy.</p>
 <pre><code>&lt;!-- iframe: embed an HTML document --&gt;
 &lt;iframe src="/widget.html"
@@ -1727,15 +1431,9 @@ and JavaScript.&lt;/p&gt;
 </ul>
 <p><strong>Cross-document communication</strong> is via <code>postMessage</code>; always validate <code>event.origin</code> on receive. Use <code>Content-Security-Policy: frame-ancestors</code> to control who can embed your pages, and <code>X-Frame-Options</code> as a legacy fallback.</p>
 <p><strong>When each fits:</strong> iframe for embedding live HTML widgets, payment forms (Stripe Elements), maps, video players. Object for inline PDF viewers with non-PDF fallback. Embed for legacy content where you have no other option.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q33">
-  <div class="qa__number">Question 33</div>
-  <h3 class="qa__question">How do you implement a responsive navigation menu using HTML5 and CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[33] = r'''
 <p>A responsive nav adapts to viewport width &mdash; horizontal links on desktop, a hamburger menu on mobile. The 2026 best-in-class approach uses CSS Container Queries or media queries with semantic markup and a CSS-only or progressively-enhanced JS toggle.</p>
 <pre><code>&lt;nav class="primary-nav" aria-label="Primary"&gt;
   &lt;a href="/" class="brand"&gt;Acme&lt;/a&gt;
@@ -1800,15 +1498,9 @@ and JavaScript.&lt;/p&gt;
 </ul>
 <p><strong>Container Queries (modern alternative):</strong> for navs whose width depends on the parent rather than viewport (component libraries, multi-column layouts), use <code>@container</code> instead of <code>@media</code> &mdash; the nav adapts to its container's width regardless of viewport.</p>
 <p><strong>Don't reach for a hamburger reflexively.</strong> If you have 3-5 links, fitting them in a horizontal bar is achievable down to ~360px. Hamburgers add a click and hide important destinations &mdash; valuable real estate goes to waste.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q34">
-  <div class="qa__number">Question 34</div>
-  <h3 class="qa__question">What are the best practices for using the &lt;iframe&gt; element in HTML?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[34] = r'''
 <p>Iframes are powerful but expose security, performance, and a11y pitfalls. Best practices in 2026 center on the <code>sandbox</code> attribute, lazy-loading, explicit titles, and origin policy.</p>
 <p><strong>The non-negotiables:</strong></p>
 <ul>
@@ -1851,15 +1543,9 @@ window.addEventListener('message', (e) =&gt; {
   if (e.data.type === 'config') applyConfig(e.data);
 });</code></pre>
 <p><strong>Performance:</strong> iframes block the parent's <code>load</code> event by default. For analytics/marketing widgets that don't need to be visible immediately, lazy-load is essentially free. Consider using <code>fetch</code> + <code>iframe.srcdoc</code> for synthesized content rather than network requests.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q35">
-  <div class="qa__number">Question 35</div>
-  <h3 class="qa__question">How do you create a polyfill for a new HTML5 feature in older browsers?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[35] = r'''
 <p>A polyfill is JavaScript that implements a missing platform feature on older browsers, allowing modern code to run unchanged. The 2026 reality: polyfills are largely unnecessary for HTML5 because evergreen browsers cover everything &mdash; but <em>cutting-edge</em> features (Container Queries, View Transitions API, Popover, custom <code>showPicker</code> methods) sometimes need them for the long tail.</p>
 <p><strong>The polyfill workflow:</strong></p>
 <ol>
@@ -1896,15 +1582,9 @@ window.addEventListener('message', (e) =&gt; {
 </ul>
 <p><strong>When NOT to polyfill:</strong> if a feature is purely an enhancement (e.g., View Transitions for a smoother route change), let it gracefully degrade rather than ship a heavy polyfill. The cost of every byte of polyfill is paid by every user, including those who'd never see the difference.</p>
 <p><strong>Progressive enhancement</strong> often beats polyfilling entirely: design for the lowest-common-denominator behavior, then layer modern features on top. The base experience works without JavaScript or modern CSS; advanced browsers get the upgrade.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q36">
-  <div class="qa__number">Question 36</div>
-  <h3 class="qa__question">Explain the purpose and usage of the &lt;time&gt; element in HTML.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[36] = r'''
 <p>The <code>&lt;time&gt;</code> element marks dates, times, and durations as machine-readable. The visible text is for humans; the <code>datetime</code> attribute carries an unambiguous, parseable value for assistive tech, search engines, and JavaScript.</p>
 <pre><code>&lt;p&gt;Published &lt;time datetime="2026-04-25"&gt;April 25, 2026&lt;/time&gt;&lt;/p&gt;
 
@@ -1949,15 +1629,9 @@ window.addEventListener('message', (e) =&gt; {
   <li>Ignoring time zones &mdash; "2:30 PM" without offset is meaningless across regions. Either specify the zone (<code>-07:00</code>) or use UTC (<code>Z</code>).</li>
 </ul>
 <p><strong>The <code>pubdate</code> boolean</strong> existed in early HTML5 drafts to mark "this is the publication date for the nearest article." It was removed from the spec but harmless to leave; tools that recognized it have largely moved to Schema.org metadata instead.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q37">
-  <div class="qa__number">Question 37</div>
-  <h3 class="qa__question">How do you create an accessible form using HTML5 attributes?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[37] = r'''
 <p>Accessible forms are built on a few non-negotiable patterns. HTML5 attributes do most of the heavy lifting; ARIA fills gaps where native semantics don't fit.</p>
 <p><strong>The four foundations:</strong></p>
 <ol>
@@ -2025,15 +1699,9 @@ window.addEventListener('message', (e) =&gt; {
   <li><strong>Don't trap users with auto-submit</strong> &mdash; submitting on every keystroke breaks form review. Submit on explicit user action.</li>
 </ul>
 <p><strong>Test with a screen reader.</strong> Once. The first time you navigate your own form with VoiceOver, NVDA, or Orca, gaps become obvious. WCAG 2.2 forms criteria are largely about labeling and error messaging &mdash; the patterns above cover most of them.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q38">
-  <div class="qa__number">Question 38</div>
-  <h3 class="qa__question">What is the purpose of the &lt;figcaption&gt; element in HTML?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[38] = r'''
 <p>The <code>&lt;figcaption&gt;</code> element provides a caption for content inside a <code>&lt;figure&gt;</code>. It creates a <em>programmatic</em> association between the caption and its content, beyond what a visually-positioned paragraph could provide.</p>
 <pre><code>&lt;figure&gt;
   &lt;img src="hubble-eagle.jpg" alt="Pillars of dust and gas in the Eagle Nebula"&gt;
@@ -2075,15 +1743,9 @@ window.addEventListener('message', (e) =&gt; {
   <li>Wrapping a layout figure (like a header logo) in <code>&lt;figure&gt;</code> &mdash; the semantic implies the image is content worth referencing, which a logo isn't.</li>
 </ul>
 <p><strong>Citation pattern:</strong> the <code>&lt;cite&gt;</code> element inside a figcaption marks the title of a referenced work (book, article, painting). Combine with structured data (Schema.org's CreativeWork) for SEO benefits.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q39">
-  <div class="qa__number">Question 39</div>
-  <h3 class="qa__question">How do you use the &lt;bdi&gt; (bidirectional isolation) element in HTML?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[39] = r'''
 <p>The <code>&lt;bdi&gt;</code> (bidirectional isolate) element prevents text directionality from "leaking" between adjacent runs of text. It's essential when displaying user-generated content that might mix LTR (Latin scripts) and RTL (Arabic, Hebrew) characters &mdash; situations where the browser's automatic bidi algorithm produces wrong reading order.</p>
 <p><strong>The problem it solves:</strong> when a username "&#1571;&#1581;&#1605;&#1583;" (Ahmed in Arabic, RTL) appears in a user list with a count, the browser tries to merge directional context with surrounding text. The number "5" can attach to the wrong side, the comma can flip, and the visual order becomes wrong.</p>
 <pre><code>&lt;!-- Without bdi: number can attach to wrong side --&gt;
@@ -2114,15 +1776,9 @@ window.addEventListener('message', (e) =&gt; {
 </table>
 <p><strong>The <code>dir="auto"</code> alternative</strong> works on any element and produces the same isolation behavior. Use <code>&lt;bdi&gt;</code> when you want the semantic intent of "this is a separate directional run" to be obvious in the markup; use <code>dir="auto"</code> on existing elements (<code>&lt;span dir="auto"&gt;</code>) when you don't want to introduce a new wrapping element.</p>
 <p><strong>Why this matters:</strong> bidirectional rendering bugs are hard to spot if your team is monolingual. Even apps that "support" multiple languages often look wrong to RTL users because of leakage in chrome elements like timestamps, vote counts, and user mentions. <code>&lt;bdi&gt;</code> is a five-character fix that prevents weeks of post-launch bug reports from international users.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q40">
-  <div class="qa__number">Question 40</div>
-  <h3 class="qa__question">Explain the use of the &lt;track&gt; element in HTML5 for video subtitles.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[40] = r'''
 <p>The <code>&lt;track&gt;</code> element associates timed text with <code>&lt;video&gt;</code> or <code>&lt;audio&gt;</code> &mdash; subtitles, captions, descriptions, or chapter markers in WebVTT format. It's the accessibility cornerstone for media content; without tracks, deaf or hard-of-hearing users have no access to spoken audio.</p>
 <pre><code>&lt;video controls width="640" height="360"&gt;
   &lt;source src="movie.mp4" type="video/mp4"&gt;
@@ -2186,15 +1842,9 @@ on the same cue.</code></pre>
 </ul>
 <p><strong>Auto-generated captions vs human captions:</strong> auto-captioning (Whisper, Otter, YouTube auto-CC) reaches ~95% accuracy on clean audio &mdash; great as a starting point but not deployment-ready alone. Always have a human review pass for: speaker identification, technical terms, names, and non-speech audio cues like (laughter), (door slams). WCAG 2.2 SC 1.2.2 requires accurate captions; auto-captions alone don't meet the bar.</p>
 <p><strong>Live streams</strong> use a different mechanism &mdash; live captions via WebSocket or Live VTT &mdash; outside the static <code>&lt;track&gt;</code> model. Services like Mux, Cloudflare Stream, and AWS Elemental MediaLive handle live caption injection.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q41">
-  <div class="qa__number">Question 41</div>
-  <h3 class="qa__question">How do you create a fullscreen API in HTML5?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[41] = r'''
 <p>The Fullscreen API lets web pages take over the entire screen &mdash; useful for video players, presentations, games, and immersive experiences. Despite "HTML5" branding, it's a JavaScript API exposed on DOM elements rather than declarative HTML.</p>
 <pre><code>&lt;video id="video" src="movie.mp4" controls&gt;&lt;/video&gt;
 &lt;button id="fs-btn"&gt;Go fullscreen&lt;/button&gt;
@@ -2264,15 +1914,9 @@ video::backdrop {
   <li><strong>Window Management API</strong> &mdash; multi-monitor placement for advanced apps.</li>
 </ul>
 <p>The Fullscreen API is mature and reliable. The bigger UX questions are <em>when</em> to enter fullscreen (not on load), how to exit (visible button + Esc), and how the surrounding UI adapts (CSS <code>:fullscreen</code> pseudo-class).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q42">
-  <div class="qa__number">Question 42</div>
-  <h3 class="qa__question">What is the purpose of the &lt;ruby&gt;, &lt;rt&gt;, and &lt;rp&gt; elements in HTML?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[42] = r'''
 <p>The Ruby annotation elements provide pronunciation guides for East Asian characters &mdash; particularly Japanese furigana over kanji, but also Chinese pinyin, Korean hangul guides, and pedagogical content. They're rendered as small text positioned above (or beside) the base text.</p>
 <pre><code>&lt;p&gt;
   &lt;ruby&gt;
@@ -2326,15 +1970,9 @@ rt {
 }</code></pre>
 <p><strong>Advanced features:</strong> the spec also defines <code>&lt;rb&gt;</code> (ruby base) and <code>&lt;rtc&gt;</code> (ruby text container) for complex annotations &mdash; e.g., providing both pronunciation and meaning. Browser support for these is partial; most production usage stays with the basic <code>&lt;ruby&gt;</code> + <code>&lt;rt&gt;</code> + <code>&lt;rp&gt;</code> trio.</p>
 <p><strong>Accessibility:</strong> screen readers announce both the base text and the ruby annotation. For native readers of the language, the ruby may be redundant noise; some screen readers offer settings to skip <code>&lt;rt&gt;</code> content. For learners, ruby provides essential pronunciation context.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q43">
-  <div class="qa__number">Question 43</div>
-  <h3 class="qa__question">How do you create a responsive grid layout using HTML5 and CSS Grid?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[43] = r'''
 <p>CSS Grid is the modern foundation for responsive grid layouts &mdash; a two-dimensional layout system with explicit control over both rows and columns. The <code>grid-template-columns</code> + <code>auto-fit</code>/<code>auto-fill</code> + <code>minmax()</code> trio handles the bulk of responsive cases without media queries.</p>
 <pre><code>&lt;section class="card-grid"&gt;
   &lt;article class="card"&gt;Card 1&lt;/article&gt;
@@ -2405,15 +2043,9 @@ footer { grid-area: footer; }
 </ul>
 <p><strong>Grid vs Flexbox &mdash; rule of thumb:</strong> Grid for two-dimensional layout (cards, dashboards, page shells); Flexbox for one-dimensional (nav bars, button groups, form rows). Combine them &mdash; use Grid for page structure, Flexbox inside each cell. Both are universally supported in 2026; <code>display: grid</code> is no more "advanced" than <code>display: flex</code>.</p>
 <p><strong>Performance:</strong> Grid is GPU-accelerated and scales to thousands of items without layout thrashing. The cost is initial layout calculation; for very-large grids (10k+ cells), virtualization libraries (TanStack Virtual, react-window) sit on top of CSS Grid.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q44">
-  <div class="qa__number">Question 44</div>
-  <h3 class="qa__question">What are web components, and how do you use them in HTML5?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[44] = r'''
 <p>Web Components are a suite of standards that let you create reusable, encapsulated HTML elements &mdash; with their own templates, scoped styles, and lifecycle &mdash; that work in any framework or no framework at all. The bundle comprises four primary specs: Custom Elements, Shadow DOM, HTML Templates, and ES Modules. By 2026, they're a stable, baseline-supported web platform feature.</p>
 <pre><code>&lt;!-- The custom element used like any HTML tag --&gt;
 &lt;rating-stars value="4.5" max="5"&gt;&lt;/rating-stars&gt;
@@ -2502,15 +2134,9 @@ footer { grid-area: footer; }
 </ul>
 <p><strong>When Web Components shine:</strong> design systems shared across multiple frameworks (a button used in React + Vue + Astro projects), embeddable widgets (a checkout button on third-party sites), browser extensions injecting UI into arbitrary pages. Where they struggle: complex state management (frameworks do better), SSR (improving with Declarative Shadow DOM, but more complex than React/Vue's SSR).</p>
 <p><strong>2026 ecosystem:</strong> Lit (Google) is the dominant framework for authoring Web Components &mdash; provides reactive properties, templating, and lifecycle helpers. Stencil (Ionic) compiles to vanilla Web Components plus framework-specific wrappers. Native Web Components without a library are perfectly viable for simple components.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q45">
-  <div class="qa__number">Question 45</div>
-  <h3 class="qa__question">Explain the purpose and usage of the &lt;main&gt; element in HTML5.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[45] = r'''
 <p>The <code>&lt;main&gt;</code> element marks the dominant content of the page &mdash; the unique content that distinguishes this page from others on the site. It maps to the ARIA <code>role="main"</code> landmark and provides a primary skip target for assistive tech and "Skip to content" links.</p>
 <pre><code>&lt;body&gt;
   &lt;a href="#main" class="skip-link"&gt;Skip to main content&lt;/a&gt;
@@ -2569,15 +2195,9 @@ footer { grid-area: footer; }
   <li>Repeating navigation or article-list chrome inside &mdash; users hear "main content" then encounter the same nav they just skipped.</li>
 </ul>
 <p><strong>Single-page apps:</strong> in SPAs, <code>&lt;main&gt;</code> often holds the route outlet. When the route changes, focus should programmatically move to <code>&lt;main&gt;</code> (or its first heading) so screen reader users hear the new content. React Router's <code>useLocation</code> + <code>useEffect</code> + <code>main.focus()</code> is a common pattern; tabIndex="-1" on the main makes it focusable without disturbing tab order.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q46">
-  <div class="qa__number">Question 46</div>
-  <h3 class="qa__question">How do you create a print-friendly HTML document?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[46] = r'''
 <p>Print-friendly HTML pairs the right semantic structure with a print stylesheet that strips screen-only chrome, optimizes ink usage, manages page breaks, and preserves URLs for printed-out links.</p>
 <pre><code>&lt;!-- Link a print-specific stylesheet --&gt;
 &lt;link rel="stylesheet" href="screen.css" media="screen"&gt;
@@ -2666,15 +2286,9 @@ footer { grid-area: footer; }
 </table>
 <p><strong>Testing print output</strong> via the browser's Print Preview is the only reliable workflow. Chrome DevTools' "Emulate CSS media: print" lets you iterate without paper. Print-to-PDF saves trees during testing.</p>
 <p><strong>For complex print needs</strong> &mdash; invoices, reports, books &mdash; consider headless browser PDF generation (Puppeteer, Playwright). For server-side PDFs without a browser, libraries like wkhtmltopdf, Prince, or PDFKit handle the heavy lifting; Prince has the strongest CSS Paged Media support.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q47">
-  <div class="qa__number">Question 47</div>
-  <h3 class="qa__question">What is the purpose of the &lt;blockquote&gt; element in HTML?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[47] = r'''
 <p>The <code>&lt;blockquote&gt;</code> element marks an extended quotation set off from surrounding prose &mdash; multiple sentences or paragraphs cited from another source. Browsers default-style it with left/right indent; the semantic value goes much further than the visual.</p>
 <pre><code>&lt;blockquote cite="https://www.gutenberg.org/files/1342/1342-h/1342-h.htm"&gt;
   &lt;p&gt;It is a truth universally acknowledged, that a single man
@@ -2735,15 +2349,9 @@ blockquote::before {
   <li>Putting attribution inside (semantic mismatch) &mdash; use the figure pattern.</li>
   <li>Wrapping quotes that aren't actually external citations &mdash; if it's an emphasis or pull-quote of your own writing, <code>&lt;blockquote&gt;</code> isn't right.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q48">
-  <div class="qa__number">Question 48</div>
-  <h3 class="qa__question">How do you implement ARIA roles and properties for better accessibility?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[48] = r'''
 <p>ARIA (Accessible Rich Internet Applications) bridges the gap between HTML's built-in semantics and modern interactive UIs. The first rule of ARIA is "don't use ARIA" &mdash; native HTML elements have correct semantics built in, and adding ARIA to override them creates accessibility bugs. ARIA shines when you're building components that have no native HTML equivalent.</p>
 <p><strong>The five rules of ARIA</strong> (W3C ARIA Authoring Practices, paraphrased):</p>
 <ol>
@@ -2804,15 +2412,9 @@ blockquote::before {
   <li>Overuse of <code>aria-label</code> on text-bearing elements, where it overrides the visible label.</li>
 </ul>
 <p><strong>Testing:</strong> the only reliable verification is testing with a screen reader. Run NVDA or VoiceOver through one full task flow per release; automated testing (axe-core, Lighthouse) catches the easy 30% but misses semantic and contextual issues.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q49">
-  <div class="qa__number">Question 49</div>
-  <h3 class="qa__question">Explain the concept of HTML5 Offline Web Applications.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[49] = r'''
 <p>"HTML5 Offline Web Applications" was the original AppCache standard for making sites work without a network. AppCache is now <strong>removed from all major browsers</strong> &mdash; deprecated in 2018 and removed by 2022. The modern replacement is <strong>Service Workers + Cache API</strong>, the foundation of Progressive Web Apps.</p>
 <p><strong>Why AppCache failed:</strong></p>
 <ul>
@@ -2901,15 +2503,9 @@ self.addEventListener('fetch', (event) =&gt; {
 <p><strong>2026 production reality:</strong> roll your own service worker only for simple cases. For real apps, use <strong>Workbox</strong> &mdash; Google's library that handles versioning, precaching, route registration, expiration, and edge cases. Frameworks (Next.js with <code>next-pwa</code>, Astro with PWA integration) wire it up automatically.</p>
 <p><strong>Testing offline support:</strong> Chrome DevTools Network tab &rarr; "Offline" throttling, or Application tab &rarr; Service Workers &rarr; "Offline". Lighthouse audits confirm PWA criteria: installable, fast on 3G, works offline.</p>
 <p><strong>Caveat &mdash; offline first isn't always the goal.</strong> Most CRUD apps don't benefit much from offline; the user-experience gains accrue mostly to news, docs, productivity, and field-work apps. Decide whether offline is core to the use case before adopting the architectural complexity.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q50">
-  <div class="qa__number">Question 50</div>
-  <h3 class="qa__question">How do you use the &lt;code&gt;, &lt;pre&gt;, and &lt;samp&gt; elements for displaying code snippets?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[50] = r'''
 <p>HTML provides three semantic elements for code-related content: <code>&lt;code&gt;</code>, <code>&lt;pre&gt;</code>, and <code>&lt;samp&gt;</code>. They serve different purposes and combine in idiomatic patterns for code listings, inline mentions, and program output.</p>
 <table>
   <tr><th>Tag</th><th>Meaning</th><th>Default style</th></tr>
@@ -2958,15 +2554,9 @@ drwxr-xr-x  2 user  staff   64 Apr 25 14:30 .
   <li><strong>Twoslash (Shiki Twoslash)</strong> &mdash; embeds TypeScript type info inline; great for technical docs.</li>
 </ul>
 <p><strong>Accessibility:</strong> long code blocks should be focusable for keyboard scrolling: <code>pre[tabindex="0"]</code>. Provide context with <code>aria-label</code>: <code>&lt;pre tabindex="0" aria-label="JavaScript code example"&gt;</code>. Some screen readers offer code-aware navigation when these tags are used; non-semantic <code>&lt;div&gt;</code> wrappers lose this.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q51">
-  <div class="qa__number">Question 51</div>
-  <h3 class="qa__question">What is the purpose of the &lt;cite&gt; element in HTML?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[51] = r'''
 <p>The <code>&lt;cite&gt;</code> element marks the <strong>title of a creative work</strong> &mdash; a book, film, song, painting, research paper, software, etc. It&rsquo;s narrowly defined: it&rsquo;s for <em>titles</em>, not for the people who created them or the URLs where they live.</p>
 
 <pre><code>&lt;p&gt;My favorite novel is &lt;cite&gt;The Lord of the Rings&lt;/cite&gt;
@@ -3010,15 +2600,9 @@ cite::after  { content: "\201D"; }   /* closing curly quote */</code></pre>
 &lt;p&gt;See &lt;cite&gt;The HTML Standard&lt;/cite&gt; for details.&lt;/p&gt;</code></pre>
 
 <p>The attribute is invisible and machine-readable; the element is visible and human-readable. Most browsers don&rsquo;t expose the attribute&rsquo;s URL anywhere, so its practical impact is limited to scrapers and automated tooling.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q52">
-  <div class="qa__number">Question 52</div>
-  <h3 class="qa__question">How do you use the &lt;form&gt; element with the &lt;input type=&quot;file&quot;&gt; for file uploads?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[52] = r'''
 <p>File uploads in HTML have a few non-obvious requirements that catch developers regularly. Get any of them wrong and uploads silently fail or arrive empty on the server.</p>
 
 <p><strong>The minimal correct file upload form:</strong></p>
@@ -3078,15 +2662,9 @@ input.addEventListener("change", async () =&gt; {
   <li><strong>Generate random filenames</strong> &mdash; never trust user-provided names (path traversal risk).</li>
   <li><strong>Direct-to-cloud uploads</strong> via signed URLs (S3, R2, Cloudinary) bypass your servers entirely &mdash; better for large files and high traffic.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q53">
-  <div class="qa__number">Question 53</div>
-  <h3 class="qa__question">Explain the difference between the &lt;address&gt; and &lt;footer&gt; elements.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[53] = r'''
 <p>These two semantic elements are easily confused but mean different things. <code>&lt;footer&gt;</code> describes a region of the page or article; <code>&lt;address&gt;</code> describes contact information for a person, organization, or article author.</p>
 
 <table>
@@ -3141,15 +2719,9 @@ input.addEventListener("change", async () =&gt; {
 <p><code>&lt;address&gt;</code> is for "how to contact the author of this content" &mdash; it&rsquo;s not a generic geographic-address element. The HTML spec is explicit about this.</p>
 
 <p><strong>Browsers italicize <code>&lt;address&gt;</code></strong> by default; reset with CSS if your design wants different styling. Screen readers announce both as their semantic role, helping users understand which content is contact info versus general footer matter.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q54">
-  <div class="qa__number">Question 54</div>
-  <h3 class="qa__question">How do you use the &lt;canvas&gt; element for drawing graphics in HTML5?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[54] = r'''
 <p><code>&lt;canvas&gt;</code> is a <strong>raster bitmap drawing surface</strong> &mdash; you set its size, then draw into it imperatively with JavaScript. Unlike SVG (vector), canvas is pixel-based: once drawn, the result is just an array of pixels with no inherent structure.</p>
 
 <p><strong>Two rendering contexts:</strong></p>
@@ -3224,15 +2796,9 @@ ctx.scale(dpr, dpr);</code></pre>
 <p><strong>Common use cases:</strong> particle simulations, games (Phaser, PixiJS), data visualization (Chart.js, Plotly), image editing, signature pads, drawing apps, AR/VR scenes via WebGL/WebGPU.</p>
 
 <p><strong>Accessibility:</strong> canvas pixels are opaque to assistive tech. Provide a parallel DOM representation as fallback content inside <code>&lt;canvas&gt;</code>, or use the Accessibility Object Model. Otherwise screen readers see nothing.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q55">
-  <div class="qa__number">Question 55</div>
-  <h3 class="qa__question">What is the purpose of the &lt;caption&gt; element in HTML tables?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[55] = r'''
 <p>The <code>&lt;caption&gt;</code> element is a <strong>title for an entire table</strong>. It must be the first child of <code>&lt;table&gt;</code> and tells users (and assistive tech) what the table contains before they read it.</p>
 
 <pre><code>&lt;table&gt;
@@ -3289,15 +2855,9 @@ ctx.scale(dpr, dpr);</code></pre>
 </ul>
 
 <p>For data tables in standalone contexts &mdash; reports, dashboards, downloadable views &mdash; always include a caption. It&rsquo;s a small addition with significant accessibility and clarity benefits.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q56">
-  <div class="qa__number">Question 56</div>
-  <h3 class="qa__question">How do you create an HTML5 form with placeholder text?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[56] = r'''
 <p>The <code>placeholder</code> attribute provides hint text inside an empty input. It&rsquo;s a UX convenience &mdash; not a label substitute &mdash; and using it correctly requires understanding its limits.</p>
 
 <pre><code>&lt;form&gt;
@@ -3369,15 +2929,9 @@ ctx.scale(dpr, dpr);</code></pre>
 &lt;/style&gt;</code></pre>
 
 <p>The <code>placeholder=" "</code> (a single space) keeps the input technically non-empty for the <code>:not(:placeholder-shown)</code> selector, while staying visually empty. The label "floats" up when the field is focused or contains content. Best of both worlds.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q57">
-  <div class="qa__number">Question 57</div>
-  <h3 class="qa__question">Explain the use of the &lt;optgroup&gt; element in a dropdown list.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[57] = r'''
 <p>The <code>&lt;optgroup&gt;</code> element groups related options inside a <code>&lt;select&gt;</code>. It adds a non-selectable header and visual indentation, helping users navigate long dropdowns.</p>
 
 <pre><code>&lt;label for="country"&gt;Country:&lt;/label&gt;
@@ -3440,15 +2994,9 @@ ctx.scale(dpr, dpr);</code></pre>
 </ul>
 
 <p>For most cases, native <code>&lt;optgroup&gt;</code> is sufficient and more accessible than custom alternatives. Reach for libraries only when the use case truly needs search, multi-select with chips, or rich item content.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q58">
-  <div class="qa__number">Question 58</div>
-  <h3 class="qa__question">How do you create a custom tooltip using HTML and CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[58] = r'''
 <p>HTML doesn&rsquo;t have a native <code>tooltip</code> attribute, but the <code>title</code> attribute provides browser-rendered tooltips. They&rsquo;re inconsistent across platforms, often inaccessible to keyboard users, and impossible to style &mdash; so most production apps build custom CSS-based tooltips.</p>
 
 <p><strong>Native <code>title</code> attribute</strong> &mdash; basic, free, but limited:</p>
@@ -3521,15 +3069,9 @@ ctx.scale(dpr, dpr);</code></pre>
 </ul>
 
 <p>For complex tooltip needs (chained tooltips, follow-cursor, on-demand positioning), libraries like Floating UI (formerly Popper.js) or Tippy.js handle edge cases &mdash; but the platform now covers ~90% of use cases natively.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q59">
-  <div class="qa__number">Question 59</div>
-  <h3 class="qa__question">What is the purpose of the &lt;kbd&gt; element in HTML?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[59] = r'''
 <p>The <code>&lt;kbd&gt;</code> element marks <strong>user input the reader should type</strong> &mdash; keyboard keys, key combinations, voice commands, or anything the user must enter. Browsers render it in monospace by default, signaling "this is a key or command."</p>
 
 <pre><code>&lt;p&gt;Press &lt;kbd&gt;Enter&lt;/kbd&gt; to submit.&lt;/p&gt;
@@ -3580,15 +3122,9 @@ The output will be:
 <p><code>&lt;kbd&gt;</code> for what the user types, <code>&lt;samp&gt;</code> for what the program prints back.</p>
 
 <p><strong>Accessibility note:</strong> screen readers don&rsquo;t typically distinguish <code>&lt;kbd&gt;</code> from regular text aurally &mdash; the content matters. The semantic tag mostly helps documentation tooling and CSS targeting; the visible styling carries most of the meaning to users.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q60">
-  <div class="qa__number">Question 60</div>
-  <h3 class="qa__question">How do you implement client-side storage using HTML5 Web Storage API?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[60] = r'''
 <p>The Web Storage API gives every origin two <strong>persistent key-value stores</strong> accessible from JavaScript &mdash; a vastly simpler alternative to cookies for client-side data that doesn&rsquo;t need to be sent to the server.</p>
 
 <p><strong>The two stores:</strong></p>
@@ -3654,15 +3190,9 @@ const restored = JSON.parse(localStorage.getItem("prefs") || "{}");</code></pre>
   <li>Asynchronous (doesn&rsquo;t block the main thread).</li>
   <li>Wrappers like Dexie or idb make the API friendlier.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q61">
-  <div class="qa__number">Question 61</div>
-  <h3 class="qa__question">Explain the difference between sessionStorage and localStorage in HTML5.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[61] = r'''
 <p>Both APIs share the exact same interface but differ in <strong>scope and lifetime</strong> &mdash; the difference often determines which one you should use.</p>
 
 <table>
@@ -3710,15 +3240,9 @@ console.log(sessionStorage.getItem("scratch"));   // null — private to Tab A
 <p><strong>Same security considerations apply to both:</strong> any JavaScript on the page can read all the data. Don&rsquo;t put auth tokens, passwords, or sensitive PII in either. Use <code>HttpOnly</code> cookies for auth.</p>
 
 <p>If you find yourself wanting "share between tabs but vanish on close" or "per-tab but persistent," neither API fits cleanly &mdash; you need IndexedDB plus your own cleanup logic, or a backend with sessions. The Web Storage API was designed for the simple cases.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q62">
-  <div class="qa__number">Question 62</div>
-  <h3 class="qa__question">How do you create a collapsible sidebar using HTML5 and CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[62] = r'''
 <p>A collapsible sidebar slides in/out on toggle. The cleanest pattern is CSS-only using a checkbox toggle &mdash; no JavaScript &mdash; with a JS-enhanced version for production accessibility.</p>
 
 <p><strong>JavaScript version with proper accessibility:</strong></p>
@@ -3795,15 +3319,9 @@ console.log(sessionStorage.getItem("scratch"));   // null — private to Tab A
 </ul>
 
 <p>Libraries like Headless UI and Radix Navigation Menu handle the full accessibility model for collapsible navigation patterns &mdash; saving days of work on edge cases.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q63">
-  <div class="qa__number">Question 63</div>
-  <h3 class="qa__question">What is the purpose of the &lt;base&gt; element in HTML?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[63] = r'''
 <p>The <code>&lt;base&gt;</code> element specifies a <strong>default base URL and target for all relative URLs in a page</strong>. It must be in <code>&lt;head&gt;</code>, can appear at most once, and affects every link, image, form action, and resource reference that uses a relative URL.</p>
 
 <pre><code>&lt;!DOCTYPE html&gt;
@@ -3853,15 +3371,9 @@ console.log(sessionStorage.getItem("scratch"));   // null — private to Tab A
 <p>Angular requires this for its router to work when the app is hosted at a sub-path. React Router and Vue Router can work without it but accept similar configuration.</p>
 
 <p><strong>Modern alternatives:</strong> use absolute URLs everywhere, or use a build tool that rewrites relative paths during build (Vite, Webpack handle this with <code>publicPath</code>). The <code>&lt;base&gt;</code> element solves a real problem but introduces enough surprises that most modern apps avoid it.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q64">
-  <div class="qa__number">Question 64</div>
-  <h3 class="qa__question">How do you use the &lt;form action&gt; attribute to submit form data to a server?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[64] = r'''
 <p>The <code>action</code> attribute on <code>&lt;form&gt;</code> specifies the URL where the form data is sent on submit. Combined with <code>method</code> and <code>enctype</code>, it forms the contract between the browser and your server.</p>
 
 <pre><code>&lt;form action="/api/users"
@@ -3924,15 +3436,9 @@ console.log(sessionStorage.getItem("scratch"));   // null — private to Tab A
 <p><strong>Progressive enhancement</strong> &mdash; the form works without JavaScript (browser submits to action) AND with JavaScript (fetch handles it). Critical for accessibility, slow networks, and reliability.</p>
 
 <p><strong>Same-origin restrictions:</strong> POSTing to a different origin works but the browser may not send cookies (depends on <code>credentials</code> mode in fetch, or the form&rsquo;s rendering context). For cross-origin APIs, configure CORS on the server side.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q65">
-  <div class="qa__number">Question 65</div>
-  <h3 class="qa__question">Explain the use of the &lt;noscript&gt; element in HTML.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[65] = r'''
 <p>The <code>&lt;noscript&gt;</code> element provides <strong>fallback content for browsers (or users) with JavaScript disabled</strong>. Anything inside <code>&lt;noscript&gt;</code> is only displayed when scripting isn&rsquo;t available.</p>
 
 <pre><code>&lt;noscript&gt;
@@ -3993,15 +3499,9 @@ console.log(sessionStorage.getItem("scratch"));   // null — private to Tab A
 </ul>
 
 <p><strong>Modern philosophy:</strong> build the site so it works without JavaScript at all (server-rendered HTML, real form submissions, links to navigate). Then enhance with JavaScript for richer interactions. <code>&lt;noscript&gt;</code> becomes unnecessary because the no-JS experience is just a slightly less polished version of the JS experience &mdash; not a blocking error message.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q66">
-  <div class="qa__number">Question 66</div>
-  <h3 class="qa__question">How do you create a responsive image gallery using HTML5 and CSS Flexbox?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[66] = r'''
 <p>A flexbox-based responsive image gallery flows naturally across screen sizes &mdash; images wrap onto new rows as the container narrows, with consistent gaps and aspect ratios.</p>
 
 <pre><code>&lt;section class="gallery"&gt;
@@ -4094,15 +3594,9 @@ flex-basis: 250px;   /* preferred width */</code></pre>
 </ul>
 
 <p>For lightbox/zoom on click, libraries like PhotoSwipe handle pinch-zoom and swipe gestures.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q67">
-  <div class="qa__number">Question 67</div>
-  <h3 class="qa__question">What is the purpose of the &lt;sub&gt; and &lt;sup&gt; elements in HTML?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[67] = r'''
 <p><code>&lt;sub&gt;</code> renders subscript (text below the baseline); <code>&lt;sup&gt;</code> renders superscript (text above). They&rsquo;re semantic &mdash; meaning "this is mathematically or chemically a subscript/superscript" &mdash; not just visual styling.</p>
 
 <pre><code>&lt;p&gt;The chemical formula for water is H&lt;sub&gt;2&lt;/sub&gt;O.&lt;/p&gt;
@@ -4161,15 +3655,9 @@ sup { top: -0.5em; }</code></pre>
 <p><strong>Don&rsquo;t use <code>&lt;sub&gt;</code> / <code>&lt;sup&gt;</code> for purely stylistic effects</strong> &mdash; small caps, callouts, decorative marks. CSS classes with <code>vertical-align</code> work better when there&rsquo;s no semantic meaning. Reserve these tags for actual mathematical, chemical, or numerical-position content.</p>
 
 <p><strong>For complex math, consider MathML</strong> (<code>&lt;math&gt;</code>) or KaTeX/MathJax &mdash; <code>&lt;sub&gt;</code> / <code>&lt;sup&gt;</code> work for simple cases but break down for fractions, integrals, matrices, and complex expressions.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q68">
-  <div class="qa__number">Question 68</div>
-  <h3 class="qa__question">How do you create a sticky header using HTML5 and CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[68] = r'''
 <p>A sticky header stays at the top of the viewport as the user scrolls past it. CSS <code>position: sticky</code> makes this trivial &mdash; no JavaScript needed, no fixed positioning quirks, no layout problems.</p>
 
 <pre><code>&lt;header class="site-header"&gt;
@@ -4248,15 +3736,9 @@ observer.observe(document.querySelector(".sentinel"));   // a 1px element above 
 &lt;/style&gt;</code></pre>
 
 <p>This pattern shrinks the header gracefully when scrolled, restoring it when scrolled back to the top.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q69">
-  <div class="qa__number">Question 69</div>
-  <h3 class="qa__question">Explain the concept of progressive enhancement in HTML.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[69] = r'''
 <p>Progressive enhancement is a design philosophy that builds content and functionality in <strong>layers of increasing capability</strong>. Start with semantic HTML that works everywhere; layer CSS for presentation; layer JavaScript for interactivity. Each layer enhances but doesn&rsquo;t depend on the next.</p>
 
 <p><strong>The three layers:</strong></p>
@@ -4313,15 +3795,9 @@ observer.observe(document.querySelector(".sentinel"));   // a 1px element above 
 <p><strong>Modern reality:</strong> the boundary blurs. Frameworks like Next.js, Remix, and Astro do server-side rendering by default &mdash; the HTML arrives before JS hydrates. This is progressive enhancement at the framework level: the page works pre-hydration; JS upgrades it.</p>
 
 <p><strong>Test your progressive enhancement:</strong> disable JavaScript in DevTools and try every workflow. If something breaks, you&rsquo;ve missed a layer. Many SPAs fail this test &mdash; they show a blank screen without JS &mdash; because they skipped the foundation.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q70">
-  <div class="qa__number">Question 70</div>
-  <h3 class="qa__question">How do you implement a responsive video player using HTML5 and CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[70] = r'''
 <p>A responsive video player adapts to different screen sizes while maintaining aspect ratio and offering useful playback controls. The native <code>&lt;video&gt;</code> element does most of the work; CSS handles the responsive sizing.</p>
 
 <pre><code>&lt;figure class="video-wrapper"&gt;
@@ -4406,15 +3882,9 @@ observer.observe(document.querySelector(".sentinel"));   // a 1px element above 
 &lt;/script&gt;</code></pre>
 
 <p>HLS automatically adjusts quality based on network speed &mdash; the player switches between low/med/high streams seamlessly. Services like Mux, Cloudflare Stream, AWS IVS, and BunnyCDN handle encoding and delivery; building HLS yourself is a project.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q71">
-  <div class="qa__number">Question 71</div>
-  <h3 class="qa__question">What is the purpose of the &lt;acronym&gt; element, and why is it deprecated?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[71] = r'''
 <p><code>&lt;acronym&gt;</code> was an HTML4 element used to mark acronyms with an expansion in the <code>title</code> attribute. It was <strong>removed in HTML5</strong> in favor of the broader <code>&lt;abbr&gt;</code> element.</p>
 
 <pre><code>&lt;!-- HTML4 (deprecated) --&gt;
@@ -4466,15 +3936,9 @@ observer.observe(document.querySelector(".sentinel"));   // a 1px element above 
 </table>
 
 <p>The pattern: HTML retreats from presentation to focus on structure and meaning; CSS handles look; JavaScript handles interaction. <code>&lt;acronym&gt;</code> failed this test &mdash; it was structure that overlapped with another structure element.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q72">
-  <div class="qa__number">Question 72</div>
-  <h3 class="qa__question">How do you use the &lt;meta&gt; viewport tag for responsive web design?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[72] = r'''
 <p>The viewport <code>&lt;meta&gt;</code> tag tells mobile browsers <strong>how to render the page on the device</strong>. Without it, mobile browsers assume a 980-1024px desktop layout and zoom out, making text tiny. With it, the page renders at the actual device width.</p>
 
 <p><strong>The standard tag every responsive site needs:</strong></p>
@@ -4541,15 +4005,9 @@ observer.observe(document.querySelector(".sentinel"));   // a 1px element above 
 </ul>
 
 <p>The viewport tag is the single most important addition to any responsive site. Without it, all your media queries and flexible layouts are wasted on mobile.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q73">
-  <div class="qa__number">Question 73</div>
-  <h3 class="qa__question">Explain the use of the &lt;address&gt; element in HTML.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[73] = r'''
 <p>The <code>&lt;address&gt;</code> element marks <strong>contact information for the nearest article or document author</strong>. It&rsquo;s narrowly scoped &mdash; not a generic geographic-address element &mdash; and it associates contact info semantically with its containing article or page.</p>
 
 <pre><code>&lt;article&gt;
@@ -4629,15 +4087,9 @@ observer.observe(document.querySelector(".sentinel"));   // a 1px element above 
 <p>This combination makes both screen readers and search engines understand the article&rsquo;s author.</p>
 
 <p>Using <code>&lt;address&gt;</code> incorrectly is one of the most common HTML mistakes &mdash; the spec&rsquo;s narrow definition catches developers who think it&rsquo;s for any address. Reserve it specifically for author/document contact information.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q74">
-  <div class="qa__number">Question 74</div>
-  <h3 class="qa__question">How do you create a form that supports multiple file uploads in HTML5?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[74] = r'''
 <p>Multiple file uploads use the <code>multiple</code> attribute on <code>&lt;input type="file"&gt;</code>. Combined with <code>accept</code> and proper form configuration, you can upload many files in one go &mdash; with progress, drag-and-drop, and previews built on top.</p>
 
 <pre><code>&lt;form action="/upload"
@@ -4753,15 +4205,9 @@ app.post("/upload", upload.array("documents", 20), (req, res) =&gt; {
 <p><strong>Direct-to-cloud uploads</strong> (recommended for large files): generate signed URLs on the server, upload from the browser directly to S3 / R2 / Cloudinary. Avoids your server bandwidth and disk entirely.</p>
 
 <p><strong>Production considerations:</strong> set max file size and count, validate types server-side by content (not just extension), generate random filenames, scan for malware, paginate when listing many uploads. Libraries like Uppy or Filepond handle resumable uploads, retries, and rich UIs.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q75">
-  <div class="qa__number">Question 75</div>
-  <h3 class="qa__question">What is the purpose of the &lt;q&gt; element in HTML?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[75] = r'''
 <p>The <code>&lt;q&gt;</code> element marks an <strong>inline quotation</strong> &mdash; a short quote within a sentence or paragraph. Browsers automatically wrap the content in locale-appropriate quotation marks, so you don&rsquo;t type them yourself.</p>
 
 <pre><code>&lt;p&gt;Einstein famously said &lt;q&gt;Imagination is more important than knowledge.&lt;/q&gt;&lt;/p&gt;
@@ -4819,15 +4265,9 @@ q::after  { content: close-quote; }</code></pre>
   <li><strong>Use <code>&lt;q&gt;</code></strong> when the quote is structurally a quotation that benefits from semantic markup &mdash; locale-aware quote marks, possible CSS styling, machine readability.</li>
   <li><strong>Use literal characters</strong> (<code>&ldquo;...&rdquo;</code>) when the text just happens to be in quotes for typographic reasons, not because it&rsquo;s a quotation from another source.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q76">
-  <div class="qa__number">Question 76</div>
-  <h3 class="qa__question">How do you implement a responsive card layout using HTML5 and CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[76] = r'''
 <p>Responsive card layouts use CSS Grid or Flexbox to flow card components across different screen widths. CSS Grid with <code>auto-fit</code> + <code>minmax</code> is the canonical pattern &mdash; cards reflow naturally without media queries.</p>
 
 <pre><code>&lt;section class="cards"&gt;
@@ -4937,15 +4377,9 @@ q::after  { content: close-quote; }</code></pre>
 <p>Use <code>auto-fit</code> for galleries and product grids; <code>auto-fill</code> for fixed-grid dashboards where cards shouldn&rsquo;t expand.</p>
 
 <p><strong>Modern enhancements:</strong> CSS container queries (<code>@container</code>) let card content respond to the card&rsquo;s width, not the viewport width &mdash; allowing the same card to render differently in a sidebar vs main content. Aspect-ratio property keeps card shapes consistent regardless of content.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q77">
-  <div class="qa__number">Question 77</div>
-  <h3 class="qa__question">Explain the difference between &lt;script&gt; and &lt;noscript&gt; elements.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[77] = r'''
 <p><code>&lt;script&gt;</code> embeds executable JavaScript (or other script types). <code>&lt;noscript&gt;</code> provides fallback content shown only when scripting is disabled or unavailable. They&rsquo;re paired conceptually &mdash; one runs when JavaScript works; the other replaces it when it doesn&rsquo;t.</p>
 
 <table>
@@ -5021,15 +4455,9 @@ q::after  { content: close-quote; }</code></pre>
 </ul>
 
 <p><strong>Modern preference: progressive enhancement</strong> &mdash; build with semantic HTML that works without JS, then enhance. <code>&lt;noscript&gt;</code> becomes the rare case rather than the rule. The <code>html.no-js</code>/<code>.js</code> class swap is a more flexible alternative for showing/hiding content based on JS availability.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q78">
-  <div class="qa__number">Question 78</div>
-  <h3 class="qa__question">How do you create an HTML5 form with required fields?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[78] = r'''
 <p>HTML5 form validation makes <code>required</code> fields trivial &mdash; the browser blocks submission and shows a native error if any required field is empty. Combined with type validation and patterns, you get rich validation with no JavaScript.</p>
 
 <pre><code>&lt;form action="/signup" method="post"&gt;
@@ -5129,15 +4557,9 @@ email.addEventListener("input", () =&gt; {
 </ul>
 
 <p>Always re-validate every field on the server. HTML validation reduces invalid submissions; server validation prevents invalid data from ever entering the system.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q79">
-  <div class="qa__number">Question 79</div>
-  <h3 class="qa__question">What is the purpose of the &lt;small&gt; element in HTML?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[79] = r'''
 <p>The <code>&lt;small&gt;</code> element marks <strong>side comments, fine print, copyright notices, or legal disclaimers</strong> &mdash; text that&rsquo;s typographically smaller because it&rsquo;s less prominent, not because the author is shrinking it for visual reasons.</p>
 
 <pre><code>&lt;footer&gt;
@@ -5211,15 +4633,9 @@ email.addEventListener("input", () =&gt; {
 &lt;/p&gt;</code></pre>
 
 <p>Compose <code>&lt;small&gt;</code> with <code>&lt;strong&gt;</code>, <code>&lt;em&gt;</code>, links, and other inline elements naturally &mdash; each carries its own semantic meaning.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q80">
-  <div class="qa__number">Question 80</div>
-  <h3 class="qa__question">How do you use the &lt;optgroup&gt; element to group options in a dropdown list?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[80] = r'''
 <p>The <code>&lt;optgroup&gt;</code> element groups related <code>&lt;option&gt;</code> children inside a <code>&lt;select&gt;</code>. Each group has a label (the <code>label</code> attribute), and browsers render the label as a non-selectable header above the group&rsquo;s options.</p>
 
 <pre><code>&lt;label for="course"&gt;Choose a course:&lt;/label&gt;
@@ -5289,15 +4705,9 @@ email.addEventListener("input", () =&gt; {
 </table>
 
 <p>For most use cases, native <code>&lt;optgroup&gt;</code> is enough &mdash; especially on mobile, where native pickers are far better than custom JavaScript ones. Reach for libraries (Choices.js, react-select, downshift) only when you genuinely need search or rich content. The HTML <code>&lt;selectlist&gt;</code> proposal (in development) will eventually let you style native selects, eliminating much of this trade-off.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q81">
-  <div class="qa__number">Question 81</div>
-  <h3 class="qa__question">Explain the use of the &lt;fieldset&gt; and &lt;legend&gt; elements for grouping form fields.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[81] = r'''
 <p><code>&lt;fieldset&gt;</code> groups related form controls and creates a meaningful boundary &mdash; both visually (with a default border) and semantically (for assistive technology). <code>&lt;legend&gt;</code> labels the group with a heading.</p>
 
 <pre><code>&lt;form action="/signup" method="post"&gt;
@@ -5391,15 +4801,9 @@ legend {
   &lt;label&gt;&lt;input type="radio" name="plan" value="free" required&gt; Free&lt;/label&gt;
   &lt;label&gt;&lt;input type="radio" name="plan" value="pro"&gt; Pro&lt;/label&gt;
 &lt;/fieldset&gt;</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q82">
-  <div class="qa__number">Question 82</div>
-  <h3 class="qa__question">How do you create a custom scroll bar using HTML and CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[82] = r'''
 <p>Custom scrollbars are styled with the <code>::-webkit-scrollbar</code> family of pseudo-elements (Chromium and Safari) and the standardized <code>scrollbar-width</code> + <code>scrollbar-color</code> properties (Firefox and modern Chromium). The two systems coexist in 2026 &mdash; you write both for full coverage.</p>
 
 <pre><code>&lt;div class="scroll-container"&gt;
@@ -5499,15 +4903,9 @@ legend {
 }</code></pre>
 
 <p>These properties enable scroll snapping (each section locks into place) and smooth scrolling for anchor jumps &mdash; native, performant, no JavaScript needed.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q83">
-  <div class="qa__number">Question 83</div>
-  <h3 class="qa__question">What is the purpose of the &lt;s&gt; element in HTML?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[83] = r'''
 <p>The <code>&lt;s&gt;</code> element marks <strong>text that is no longer accurate or relevant</strong> &mdash; not text that&rsquo;s been deleted from a document. It renders with strikethrough by default, but the meaning is semantic: "this used to be true; it isn&rsquo;t anymore."</p>
 
 <pre><code>&lt;p&gt;The price is &lt;s&gt;$99.99&lt;/s&gt; $79.99 (sale!).&lt;/p&gt;
@@ -5566,15 +4964,9 @@ legend {
 &lt;!-- The "Was" word makes the meaning explicit for screen readers --&gt;</code></pre>
 
 <p>Or use <code>aria-label</code> on a wrapper to clarify when the visual strikethrough is the only meaning indicator.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q84">
-  <div class="qa__number">Question 84</div>
-  <h3 class="qa__question">How do you create a multi-column layout using HTML5 and CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[84] = r'''
 <p>HTML5 + CSS multi-column layouts come in two flavors: <strong>CSS columns</strong> for fluid text that flows naturally between columns (like a newspaper), and <strong>CSS Grid</strong> for structured items placed in a grid (like cards or dashboards). Each suits different content.</p>
 
 <p><strong>CSS columns &mdash; fluid text:</strong></p>
@@ -5656,15 +5048,9 @@ legend {
 <p>Useful when a card or quote shouldn&rsquo;t be cut in half between two columns. Equivalent properties for print: <code>page-break-inside</code>.</p>
 
 <p>For most content in 2026, CSS Grid is the workhorse. <code>columns</code> shines for actual prose &mdash; magazine layouts, long FAQ lists, tag clouds &mdash; where text should naturally flow.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q85">
-  <div class="qa__number">Question 85</div>
-  <h3 class="qa__question">Explain the concept of graceful degradation in HTML.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[85] = r'''
 <p>Graceful degradation is a design philosophy that builds for the <strong>full modern experience first</strong>, then ensures the site remains usable on older browsers or in restricted environments. Features that won&rsquo;t work fall back gracefully without breaking the page.</p>
 
 <p>It&rsquo;s the conceptual <em>opposite</em> of progressive enhancement, though both achieve similar end states.</p>
@@ -5751,15 +5137,9 @@ legend {
 </ul>
 
 <p>For most modern projects, progressive enhancement is the more popular framing &mdash; build a robust baseline, layer on enhancements. But the techniques (feature queries, fallbacks, polyfills) are the same; the philosophy just differs in starting point.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q86">
-  <div class="qa__number">Question 86</div>
-  <h3 class="qa__question">How do you use the &lt;input type=&quot;color&quot;&gt; element in HTML5 forms?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[86] = r'''
 <p><code>&lt;input type="color"&gt;</code> renders a <strong>native color picker</strong> in the browser. The user clicks the input and the OS&rsquo;s built-in color chooser appears (eyedropper, hex/RGB sliders, recent colors). The submitted value is a hex string like <code>#ff6b35</code>.</p>
 
 <pre><code>&lt;form&gt;
@@ -5849,15 +5229,9 @@ button.addEventListener("click", async () =&gt; {
 </ul>
 
 <p><strong>When to build a custom color picker:</strong> if you need alpha (RGBA), HSL/HSV interfaces, theme palettes, custom swatches, or full styling control. Libraries: <code>iro.js</code>, <code>react-colorful</code> (1.5KB!), or design system pickers (Radix, shadcn). Otherwise, use native &mdash; it&rsquo;s free, accessible, and integrates with the user&rsquo;s OS.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q87">
-  <div class="qa__number">Question 87</div>
-  <h3 class="qa__question">What is the purpose of the &lt;ins&gt; and &lt;del&gt; elements in HTML?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[87] = r'''
 <p><code>&lt;ins&gt;</code> and <code>&lt;del&gt;</code> mark <strong>edits to a document</strong> &mdash; <code>&lt;ins&gt;</code> for inserted (added) content, <code>&lt;del&gt;</code> for deleted (removed) content. They&rsquo;re used for tracking changes, version diffs, and editorial revisions.</p>
 
 <pre><code>&lt;p&gt;The meeting is on
@@ -5953,15 +5327,9 @@ del {
 &lt;ins&gt;&lt;span class="sr-only"&gt;Added: &lt;/span&gt;new text&lt;/ins&gt;</code></pre>
   </li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q88">
-  <div class="qa__number">Question 88</div>
-  <h3 class="qa__question">How do you create a responsive accordion using HTML5 and CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[88] = r'''
 <p>Accordions show a list of collapsible sections where clicking a header expands to reveal content. The native <code>&lt;details&gt;</code> + <code>&lt;summary&gt;</code> combination handles this with zero JavaScript &mdash; correct keyboard, screen reader, and "find on page" behavior built in.</p>
 
 <pre><code>&lt;div class="accordion"&gt;
@@ -6082,15 +5450,9 @@ del {
 &lt;/div&gt;</code></pre>
 
 <p>Libraries like Radix UI Accordion or Headless UI Disclosure handle the full ARIA model: keyboard arrows for navigation, animation, focus management, and unmount-on-close patterns.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q89">
-  <div class="qa__number">Question 89</div>
-  <h3 class="qa__question">Explain the use of the &lt;summary&gt; element in a collapsible content section.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[89] = r'''
 <p>The <code>&lt;summary&gt;</code> element is the <strong>always-visible label inside a <code>&lt;details&gt;</code> element</strong>. Clicking it toggles the disclosure widget open or closed; the rest of the <code>&lt;details&gt;</code> content shows or hides based on the toggle state.</p>
 
 <pre><code>&lt;details&gt;
@@ -6189,15 +5551,9 @@ details.addEventListener("toggle", () =&gt; {
 </ul>
 
 <p>Native <code>&lt;summary&gt;</code> + <code>&lt;details&gt;</code> replaces 90% of "I need a custom collapsible widget" libraries with built-in HTML &mdash; better accessibility, smaller bundle size, and zero implementation cost.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q90">
-  <div class="qa__number">Question 90</div>
-  <h3 class="qa__question">How do you implement a print-specific stylesheet in HTML?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[90] = r'''
 <p>Print stylesheets target the <code>print</code> media type to <strong>customize how a page renders when printed (or saved as PDF)</strong>. Browsers apply these rules instead of (or in addition to) screen styles.</p>
 
 <p><strong>Three ways to attach print styles:</strong></p>
@@ -6319,15 +5675,9 @@ details.addEventListener("toggle", () =&gt; {
 <p><strong>Print preview testing in DevTools:</strong> open the Rendering tab in Chrome DevTools, scroll to "Emulate CSS media type," and choose "print." The page now renders with print styles in the browser viewport &mdash; faster than constantly opening Print Preview.</p>
 
 <p>Most modern sites have minimal print styles &mdash; users rarely print web pages. But for documentation, articles, recipes, and forms, a polished print stylesheet meaningfully improves the offline experience.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q91">
-  <div class="qa__number">Question 91</div>
-  <h3 class="qa__question">What is the purpose of the &lt;var&gt; element in HTML?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[91] = r'''
 <p>The <code>&lt;var&gt;</code> element marks a <strong>variable in mathematical expressions or programming contexts</strong> &mdash; a placeholder name that stands for some value. Browsers render it in italic by default to match typographic conventions for variables.</p>
 
 <pre><code>&lt;p&gt;The area of a rectangle is &lt;var&gt;width&lt;/var&gt; multiplied
@@ -6404,15 +5754,9 @@ code var {
 </ul>
 
 <p>It&rsquo;s a niche element. Most documentation just uses italics or <code>&lt;code&gt;</code> styling with a CSS class. Use <code>&lt;var&gt;</code> when you genuinely care about machine-readability of variable names &mdash; in textbook-quality technical writing or formal API docs.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q92">
-  <div class="qa__number">Question 92</div>
-  <h3 class="qa__question">How do you create a responsive layout using HTML5 and CSS Media Queries?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[92] = r'''
 <p>Responsive layouts use <strong>CSS media queries</strong> to apply different styles based on viewport size, orientation, color scheme, motion preferences, and more. Combined with flexible layouts (Flexbox, Grid) and relative units, they create designs that adapt across devices.</p>
 
 <p><strong>Mobile-first approach</strong> &mdash; default styles for mobile, then enhance for larger screens:</p>
@@ -6543,15 +5887,9 @@ code var {
 <pre><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code></pre>
 
 <p>Always include this in your HTML head &mdash; it&rsquo;s the foundation that makes media queries work correctly on mobile.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q93">
-  <div class="qa__number">Question 93</div>
-  <h3 class="qa__question">Explain the use of the &lt;bdi&gt; element for handling bidirectional text.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[93] = r'''
 <p>The <code>&lt;bdi&gt;</code> element (Bidirectional Isolation) <strong>isolates a span of text from its surrounding directional context</strong>. It&rsquo;s essential when displaying user-generated content that might be in a different direction (LTR/RTL) than the parent text &mdash; preventing layout corruption that the bidirectional algorithm would otherwise cause.</p>
 
 <p><strong>The problem it solves:</strong></p>
@@ -6632,15 +5970,9 @@ code var {
 <p>Functionally equivalent to <code>&lt;bdi&gt;</code> for the isolation effect. Use the element when you have semantic clarity about isolating user content; use the CSS property when you can&rsquo;t change the markup.</p>
 
 <p><code>&lt;bdi&gt;</code> is one of those elements that 95% of authors don&rsquo;t need but 5% absolutely must use to avoid serious bugs. If your site supports multiple languages or accepts user input that might appear in mixed-direction contexts, sprinkle it everywhere user content appears.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q94">
-  <div class="qa__number">Question 94</div>
-  <h3 class="qa__question">How do you create a form with inline validation using HTML5 attributes?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[94] = r'''
 <p>HTML5 inline form validation uses attributes that the browser checks <strong>as the user types and on submit</strong>. Combined with CSS pseudo-classes and the Constraint Validation API, you can build sophisticated validation UI without a single library.</p>
 
 <pre><code>&lt;form id="signup"&gt;
@@ -6774,15 +6106,9 @@ confirm.addEventListener("input", () =&gt; {
 });</code></pre>
 
 <p><strong>Always re-validate server-side</strong>. HTML5 validation is UX only &mdash; users can edit attributes in DevTools, paste invalid values past patterns, or send raw HTTP requests entirely. Make the happy path smooth with HTML5; make the system safe with server-side checks.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q95">
-  <div class="qa__number">Question 95</div>
-  <h3 class="qa__question">What is the purpose of the &lt;u&gt; element in HTML?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[95] = r'''
 <p>The <code>&lt;u&gt;</code> element marks <strong>text with a non-textual annotation</strong> &mdash; like a misspelled word, a proper name in Chinese (where underlines indicate names), or other non-emphatic visual cues. It renders with underline by default, but the meaning is semantic: "this text has special significance not captured by other tags."</p>
 
 <pre><code>&lt;p&gt;The word &lt;u&gt;misteak&lt;/u&gt; is misspelled.&lt;/p&gt;
@@ -6852,15 +6178,9 @@ confirm.addEventListener("input", () =&gt; {
 </ul>
 
 <p><strong>Reality check:</strong> <code>&lt;u&gt;</code> is rarely seen in practice. Most underline use cases fit better with <code>&lt;em&gt;</code>, <code>&lt;cite&gt;</code>, links, or CSS classes. The valid use cases (Chinese proper name marks, spell-check display) are niche but real. Generally: avoid <code>&lt;u&gt;</code> unless one of these specific cases applies, since the visual underline confuses users about clickability.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q96">
-  <div class="qa__number">Question 96</div>
-  <h3 class="qa__question">How do you implement a fixed navigation bar using HTML5 and CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[96] = r'''
 <p>A fixed navigation bar stays anchored to the viewport regardless of scroll. CSS <code>position: fixed</code> achieves it &mdash; or <code>position: sticky</code> for a more flexible variation that joins the page on scroll.</p>
 
 <pre><code>&lt;header class="fixed-nav"&gt;
@@ -6992,15 +6312,9 @@ window.addEventListener("scroll", () =&gt; {
   <li><strong>Hamburger menu</strong> for nav links on small screens to save space.</li>
   <li><strong>Avoid covering important content</strong> on small viewports.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q97">
-  <div class="qa__number">Question 97</div>
-  <h3 class="qa__question">Explain the use of the &lt;dl&gt;, &lt;dt&gt;, and &lt;dd&gt; elements for creating definition lists.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[97] = r'''
 <p>A definition list (<code>&lt;dl&gt;</code>) pairs <strong>terms with their definitions or descriptions</strong>. <code>&lt;dt&gt;</code> marks each term; <code>&lt;dd&gt;</code> marks the description that follows. They&rsquo;re semantic &mdash; ideal for glossaries, key-value metadata, FAQ structures, and any "name : value" pairing.</p>
 
 <pre><code>&lt;dl&gt;
@@ -7096,15 +6410,9 @@ dl.metadata dd {
 </ul>
 
 <p><strong>Accessibility</strong>: screen readers announce definition lists as "list, [N] items" and read each <code>&lt;dt&gt;</code>/<code>&lt;dd&gt;</code> pair clearly. Better than ad-hoc <code>&lt;p&gt;Author: Name&lt;/p&gt;</code> structures because the relationship is programmatically expressed.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q98">
-  <div class="qa__number">Question 98</div>
-  <h3 class="qa__question">How do you create an HTML5 form with autocomplete functionality?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[98] = r'''
 <p>HTML5 form autocomplete uses the <code>autocomplete</code> attribute to tell browsers <strong>what kind of value belongs in each field</strong>, enabling intelligent autofill from saved profile data, password managers, and credit card vaults. Done right, signup forms fill in 1 second instead of 30.</p>
 
 <pre><code>&lt;form action="/checkout" method="post"&gt;
@@ -7202,15 +6510,9 @@ dl.metadata dd {
 </ul>
 
 <p>Proper <code>autocomplete</code> attributes typically lift form completion rates 25-50% on mobile checkout flows. Tiny markup investment, massive UX win.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q99">
-  <div class="qa__number">Question 99</div>
-  <h3 class="qa__question">What is the purpose of the &lt;menu&gt; and &lt;menuitem&gt; elements in HTML5?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[99] = r'''
 <p><code>&lt;menu&gt;</code> and <code>&lt;menuitem&gt;</code> have a <strong>complicated and largely cautionary history</strong>. Both were originally intended for context menus and toolbars; <code>&lt;menuitem&gt;</code> was removed from HTML5 entirely; <code>&lt;menu&gt;</code> was redefined as a semantic alias for <code>&lt;ul&gt;</code> in toolbars.</p>
 
 <p><strong>Current state in 2026:</strong></p>
@@ -7300,15 +6602,9 @@ dl.metadata dd {
 </ul>
 
 <p>This is a great example of HTML&rsquo;s "remove what nobody uses" philosophy &mdash; <code>&lt;menuitem&gt;</code> joined <code>&lt;keygen&gt;</code>, <code>&lt;isindex&gt;</code>, and other failed elements in the spec graveyard. Knowing what doesn&rsquo;t exist is part of being an effective HTML author.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q100">
-  <div class="qa__number">Question 100</div>
-  <h3 class="qa__question">How do you use the &lt;link&gt; element to preload resources in HTML5?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[100] = r'''
 <p><code>&lt;link rel="preload"&gt;</code> tells the browser <strong>fetch this resource immediately at high priority</strong> &mdash; even before the parser would normally discover it. It&rsquo;s a performance optimization: critical fonts, hero images, and key scripts start loading earlier, improving Core Web Vitals.</p>
 
 <pre><code>&lt;head&gt;
@@ -7413,27 +6709,4 @@ dl.metadata dd {
 <p><strong>Validate your preload usage</strong>: Lighthouse and Chrome DevTools Performance tab show preload effectiveness. Look for warnings like "preload not used within a few seconds of load" &mdash; means the resource was preloaded unnecessarily.</p>
 
 <p>Used judiciously, <code>&lt;link rel="preload"&gt;</code> can shave hundreds of milliseconds off LCP &mdash; one of the highest-impact, lowest-effort performance optimizations available.</p>
-
-    
-  </div>
-</article>
-
-    <nav class="chapter-nav" aria-label="Chapter navigation">
-      <a class="chapter-nav__prev" href="html-coding.html">
-      <span class="chapter-nav__dir">← Previous</span>
-      <span class="chapter-nav__title">HTML — Coding</span>
-    </a>
-      <a class="chapter-nav__next" href="css-basic.html">
-      <span class="chapter-nav__dir">Next →</span>
-      <span class="chapter-nav__title">CSS — Basic</span>
-    </a>
-    </nav>
-
-  </section>
-
-</main>
-</div>
-
-<script src="../assets/script.js"></script>
-</body>
-</html>
+'''

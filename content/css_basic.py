@@ -1,118 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CSS — Basic · Interview Prep Mastery</title>
-<meta name="description" content="102 basic interview questions on CSS, with detailed explanations and examples.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="../assets/styles.css">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%239a6b1d'/%3E%3Ctext x='50' y='68' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold' font-size='48'%3EIP%3C/text%3E%3C/svg%3E">
-</head>
-<body>
-<header class="site-header">
-  <div class="site-header__inner">
-    <button class="menu-toggle" aria-label="Open menu" type="button">☰ Menu</button>
-    <a class="brand" href="../index.html">
-      <span class="brand__mark">IP</span>
-      <span class="brand__text">
-        <span class="brand__title">Interview Prep Mastery</span>
-        <span class="brand__subtitle">Interactive learning guide</span>
-      </span>
-    </a>
-    <nav class="header-nav">
-      <a href="../index.html#roadmap">Roadmap</a>
-      <a href="../index.html#chapters">All chapters</a>
-      <button class="theme-toggle" type="button" aria-label="Toggle color scheme">☾ Dark</button>
-    </nav>
-  </div>
-</header>
-<div class="layout">
-<aside class="sidebar" aria-label="Site navigation">
-  <div class="sidebar__header">Chapter Navigator</div>
-  
-        <div class="nav-part">
-          <div class="nav-part__label">Part 1</div>
-          <div class="nav-part__title">Core Programming Languages</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">JavaScript</li><li><a class="" href="../chapters/javascript-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/javascript-tricky.html"><span class="nav-item__title">Tricky</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-coding.html"><span class="nav-item__title">Advanced Coding</span><span class="nav-item__meta">100 questions · 100 min read</span></a></li><li><a class="" href="../chapters/javascript-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-scenario.html"><span class="nav-item__title">Advanced Scenario Based</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Python</li><li><a class="" href="../chapters/python-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/python-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 2</div>
-          <div class="nav-part__title">Web Fundamentals</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">HTML</li><li><a class="" href="../chapters/html-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/html-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/html-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CSS</li><li><a class="active" href="../chapters/css-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">102 questions · 60 min read</span></a></li><li><a class="" href="../chapters/css-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/css-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">101 questions · 90 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 3</div>
-          <div class="nav-part__title">Backend Technologies</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Node.Js</li><li><a class="" href="../chapters/nodejs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/nodejs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ExpressJS</li><li><a class="" href="../chapters/expressjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/expressjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/expressjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">API</li><li><a class="" href="../chapters/api-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/api-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 4</div>
-          <div class="nav-part__title">Frontend Frameworks</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ReactJS</li><li><a class="" href="../chapters/reactjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">101 questions · 60 min read</span></a></li><li><a class="" href="../chapters/reactjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 5</div>
-          <div class="nav-part__title">Databases</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MYSQL</li><li><a class="" href="../chapters/mysql-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mysql-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MongoDB</li><li><a class="" href="../chapters/mongodb-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mongodb-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 6</div>
-          <div class="nav-part__title">System Design &amp; DevOps</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">System Design MERN Stack</li><li><a class="" href="../chapters/system-design-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Infrastructure MERN Stack</li><li><a class="" href="../chapters/infrastructure-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/infrastructure-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CI/CD Pipeline</li><li><a class="" href="../chapters/cicd-pipeline-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-</aside>
-<main class="main" id="main">
+"""Detailed answers for CSS Basic questions."""
 
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="../index.html">Home</a>
-    <span class="breadcrumb__sep">›</span>
-    <a href="../index.html#part-2">Web Fundamentals</a>
-    <span class="breadcrumb__sep">›</span>
-    <span>CSS — Basic</span>
-  </nav>
+ANSWERS: dict[int, str] = {}
 
-  <header class="chapter-header">
-    <div class="chapter-label">CSS · Basic</div>
-    <h1 class="chapter-title">Basic CSS Interview Questions</h1>
-    <p class="chapter-lede">Foundational knowledge — definitions, syntax, and core mechanics every beginner should know.</p>
-    <div class="chapter-meta">
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Questions</span><span class="chapter-meta__value">102</span></div>
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Level</span><span class="chapter-meta__value">Basic</span></div>
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Estimated reading</span><span class="chapter-meta__value">60 min read</span></div>
-    </div>
-    
-  </header>
-
-  <section class="prose">
-
-    <div class="toc" id="toc">
-      <div class="toc__title">All questions in this chapter</div>
-      <ul class="toc__list">
-        <li><a href="#q1"><span class="toc__num">1.</span>What does CSS stand for, and what is its purpose?</a></li><li><a href="#q2"><span class="toc__num">2.</span>How do you link a CSS file to an HTML document?</a></li><li><a href="#q3"><span class="toc__num">3.</span>What is the difference between an ID selector and a class selector in CSS?</a></li><li><a href="#q4"><span class="toc__num">4.</span>How do you apply multiple CSS classes to a single HTML element?</a></li><li><a href="#q5"><span class="toc__num">5.</span>What is the CSS box model, and what are its components?</a></li><li><a href="#q6"><span class="toc__num">6.</span>How do you center an element horizontally using CSS?</a></li><li><a href="#q7"><span class="toc__num">7.</span>How do you change the background color of an element in CSS?</a></li><li><a href="#q8"><span class="toc__num">8.</span>What are the different ways to specify colors in CSS?</a></li><li><a href="#q9"><span class="toc__num">9.</span>How do you make text bold using CSS?</a></li><li><a href="#q10"><span class="toc__num">10.</span>How do you create a border around an element in CSS?</a></li><li><a href="#q11"><span class="toc__num">11.</span>What is the difference between margin and padding in CSS?</a></li><li><a href="#q12"><span class="toc__num">12.</span>How do you apply a shadow to an element in CSS?</a></li><li><a href="#q13"><span class="toc__num">13.</span>How do you create a gradient background in CSS?</a></li><li><a href="#q14"><span class="toc__num">14.</span>What is the purpose of the display property in CSS?</a></li><li><a href="#q15"><span class="toc__num">15.</span>How do you hide an element using CSS?</a></li><li><a href="#q16"><span class="toc__num">16.</span>How do you create a hover effect using CSS?</a></li><li><a href="#q17"><span class="toc__num">17.</span>What is the difference between inline and block elements in CSS?</a></li><li><a href="#q18"><span class="toc__num">18.</span>How do you change the font size of text in CSS?</a></li><li><a href="#q19"><span class="toc__num">19.</span>How do you make an image responsive using CSS?</a></li><li><a href="#q20"><span class="toc__num">20.</span>What is the purpose of the position property in CSS?</a></li><li><a href="#q21"><span class="toc__num">21.</span>How do you create a fixed header using CSS?</a></li><li><a href="#q22"><span class="toc__num">22.</span>What are CSS pseudo-classes, and how do you use them?</a></li><li><a href="#q23"><span class="toc__num">23.</span>How do you apply different styles to the first child of an element using CSS?</a></li><li><a href="#q24"><span class="toc__num">24.</span>What is the difference between the</a></li><li><a href="#q25"><span class="toc__num">25.</span>() and</a></li><li><a href="#q26"><span class="toc__num">26.</span>() pseudo-classes?</a></li><li><a href="#q27"><span class="toc__num">27.</span>How do you change the cursor to a pointer when hovering over an element in CSS?</a></li><li><a href="#q28"><span class="toc__num">28.</span>How do you apply a style to all elements of a specific type in CSS?</a></li><li><a href="#q29"><span class="toc__num">29.</span>What is the purpose of the z-index property in CSS?</a></li><li><a href="#q30"><span class="toc__num">30.</span>How do you create a flex container in CSS?</a></li><li><a href="#q31"><span class="toc__num">31.</span>How do you align items horizontally in a flex container?</a></li><li><a href="#q32"><span class="toc__num">32.</span>How do you create a grid layout using CSS Grid?</a></li><li><a href="#q33"><span class="toc__num">33.</span>How do you set the width and height of an element in CSS?</a></li><li><a href="#q34"><span class="toc__num">34.</span>How do you apply a background image to an element in CSS?</a></li><li><a href="#q35"><span class="toc__num">35.</span>How do you set a fallback font for text in CSS?</a></li><li><a href="#q36"><span class="toc__num">36.</span>How do you make text italic using CSS?</a></li><li><a href="#q37"><span class="toc__num">37.</span>What is the purpose of the float property in CSS?</a></li><li><a href="#q38"><span class="toc__num">38.</span>How do you clear floats in CSS?</a></li><li><a href="#q39"><span class="toc__num">39.</span>How do you create a navigation bar using CSS?</a></li><li><a href="#q40"><span class="toc__num">40.</span>How do you create a list with no bullet points using CSS?</a></li><li><a href="#q41"><span class="toc__num">41.</span>What is the purpose of the opacity property in CSS?</a></li><li><a href="#q42"><span class="toc__num">42.</span>How do you create a circular image using CSS?</a></li><li><a href="#q43"><span class="toc__num">43.</span>How do you change the order of elements in a flex container?</a></li><li><a href="#q44"><span class="toc__num">44.</span>How do you create a sticky footer using CSS?</a></li><li><a href="#q45"><span class="toc__num">45.</span>What is the difference between relative and absolute positioning in CSS?</a></li><li><a href="#q46"><span class="toc__num">46.</span>How do you create a drop shadow for text in CSS?</a></li><li><a href="#q47"><span class="toc__num">47.</span>How do you apply a linear gradient to an element&#x27;s background in CSS?</a></li><li><a href="#q48"><span class="toc__num">48.</span>How do you create an outline for an element in CSS?</a></li><li><a href="#q49"><span class="toc__num">49.</span>How do you use the calc() function in CSS?</a></li><li><a href="#q50"><span class="toc__num">50.</span>How do you apply styles to elements based on their attributes in CSS?</a></li><li><a href="#q51"><span class="toc__num">51.</span>What is the difference between the visibility and display properties in CSS?</a></li><li><a href="#q52"><span class="toc__num">52.</span>How do you create a transition effect in CSS?</a></li><li><a href="#q53"><span class="toc__num">53.</span>How do you use media queries to create a responsive design in CSS?</a></li><li><a href="#q54"><span class="toc__num">54.</span>How do you create a full-width element using CSS?</a></li><li><a href="#q55"><span class="toc__num">55.</span>How do you apply a style to every other element in a list using CSS?</a></li><li><a href="#q56"><span class="toc__num">56.</span>What is the purpose of the clip-path property in CSS?</a></li><li><a href="#q57"><span class="toc__num">57.</span>How do you create a button with rounded corners using CSS?</a></li><li><a href="#q58"><span class="toc__num">58.</span>How do you align text vertically within an element using CSS?</a></li><li><a href="#q59"><span class="toc__num">59.</span>How do you create a responsive layout using CSS Flexbox?</a></li><li><a href="#q60"><span class="toc__num">60.</span>How do you change the font color of text in CSS?</a></li><li><a href="#q61"><span class="toc__num">61.</span>How do you create a table with alternating row colors using CSS?</a></li><li><a href="#q62"><span class="toc__num">62.</span>How do you set the maximum width of an element in CSS?</a></li><li><a href="#q63"><span class="toc__num">63.</span>How do you center an element vertically using CSS?</a></li><li><a href="#q64"><span class="toc__num">64.</span>How do you create a tooltip using CSS?</a></li><li><a href="#q65"><span class="toc__num">65.</span>What is the purpose of the transform property in CSS?</a></li><li><a href="#q66"><span class="toc__num">66.</span>How do you rotate an element using CSS?</a></li><li><a href="#q67"><span class="toc__num">67.</span>How do you apply a style to an element when it receives focus in CSS?</a></li><li><a href="#q68"><span class="toc__num">68.</span>How do you create a simple CSS animation?</a></li><li><a href="#q69"><span class="toc__num">69.</span>How do you apply a style to all elements inside a specific container using CSS?</a></li><li><a href="#q70"><span class="toc__num">70.</span>How do you create a text shadow in CSS?</a></li><li><a href="#q71"><span class="toc__num">71.</span>How do you create a responsive grid layout using CSS Grid?</a></li><li><a href="#q72"><span class="toc__num">72.</span>How do you make an element take up the full height of its parent in CSS?</a></li><li><a href="#q73"><span class="toc__num">73.</span>How do you create a fixed sidebar using CSS?</a></li><li><a href="#q74"><span class="toc__num">74.</span>How do you create a full-screen background image using CSS?</a></li><li><a href="#q75"><span class="toc__num">75.</span>How do you change the spacing between lines of text in CSS?</a></li><li><a href="#q76"><span class="toc__num">76.</span>How do you create a border with rounded corners and a shadow in CSS?</a></li><li><a href="#q77"><span class="toc__num">77.</span>How do you create a CSS variable, and how do you use it?</a></li><li><a href="#q78"><span class="toc__num">78.</span>How do you apply a style to an element based on its state using CSS?</a></li><li><a href="#q79"><span class="toc__num">79.</span>How do you make an element visible only when hovering over another element in CSS?</a></li><li><a href="#q80"><span class="toc__num">80.</span>How do you create a multi-column layout using CSS?</a></li><li><a href="#q81"><span class="toc__num">81.</span>How do you create a responsive image gallery using CSS?</a></li><li><a href="#q82"><span class="toc__num">82.</span>How do you apply a style to the last child of an element using CSS?</a></li><li><a href="#q83"><span class="toc__num">83.</span>How do you create a responsive navigation menu using CSS Flexbox?</a></li><li><a href="#q84"><span class="toc__num">84.</span>How do you set the aspect ratio of an element in CSS?</a></li><li><a href="#q85"><span class="toc__num">85.</span>How do you create a card layout using CSS Grid?</a></li><li><a href="#q86"><span class="toc__num">86.</span>How do you apply a style to elements with a specific attribute value in CSS?</a></li><li><a href="#q87"><span class="toc__num">87.</span>How do you create a responsive footer using CSS?</a></li><li><a href="#q88"><span class="toc__num">88.</span>How do you set the minimum height of an element in CSS?</a></li><li><a href="#q89"><span class="toc__num">89.</span>How do you create a progress bar using CSS?</a></li><li><a href="#q90"><span class="toc__num">90.</span>How do you change the font family of text in CSS?</a></li><li><a href="#q91"><span class="toc__num">91.</span>How do you create a sticky header using CSS?</a></li><li><a href="#q92"><span class="toc__num">92.</span>How do you create a responsive table using CSS?</a></li><li><a href="#q93"><span class="toc__num">93.</span>How do you apply a style to the first letter of a paragraph in CSS?</a></li><li><a href="#q94"><span class="toc__num">94.</span>How do you create a responsive layout with a sidebar using CSS Grid?</a></li><li><a href="#q95"><span class="toc__num">95.</span>How do you create a gradient border using CSS?</a></li><li><a href="#q96"><span class="toc__num">96.</span>How do you create a CSS rule that only applies to screen readers?</a></li><li><a href="#q97"><span class="toc__num">97.</span>How do you create a responsive hero section using CSS?</a></li><li><a href="#q98"><span class="toc__num">98.</span>How do you set the line height of text in CSS?</a></li><li><a href="#q99"><span class="toc__num">99.</span>How do you create a fixed element that stays in place while scrolling using CSS?</a></li><li><a href="#q100"><span class="toc__num">100.</span>How do you create a full-width button using CSS?</a></li><li><a href="#q101"><span class="toc__num">101.</span>How do you create a responsive layout with multiple columns using CSS Flexbox?</a></li><li><a href="#q102"><span class="toc__num">102.</span>How do you create a responsive image slider using CSS?</a></li>
-      </ul>
-    </div>
-
-    
-<article class="qa" id="q1">
-  <div class="qa__number">Question 1</div>
-  <h3 class="qa__question">What does CSS stand for, and what is its purpose?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[1] = r'''
 <p><strong>CSS</strong> stands for <strong>Cascading Style Sheets</strong>. It&rsquo;s the standard language used to control the visual presentation of HTML documents &mdash; colors, fonts, spacing, layout, animations, and responsive behavior.</p>
 
 <p><strong>The three pillars of the web</strong> have separate concerns:</p>
@@ -137,15 +27,9 @@ h1 {
 <p><strong>Why "Cascading"?</strong> Multiple style rules can match the same element from different sources (browser defaults, external stylesheets, inline styles). The cascade defines which rule wins based on specificity, source order, and importance.</p>
 
 <p>CSS makes the web flexible: the same HTML can look completely different across themes, devices, and contexts &mdash; just by swapping stylesheets. The current standard is CSS3, but in practice the spec is now modular and continuously updated by the W3C.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q2">
-  <div class="qa__number">Question 2</div>
-  <h3 class="qa__question">How do you link a CSS file to an HTML document?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[2] = r'''
 <p>There are three ways to apply CSS to HTML, each suiting different needs.</p>
 
 <p><strong>1. External stylesheet</strong> (the standard approach):</p>
@@ -170,15 +54,9 @@ h1 {
 <p>Highest specificity but hardest to maintain. Use sparingly &mdash; for dynamic JS-set styles or email templates where stylesheets don&rsquo;t work reliably.</p>
 
 <p><strong>Best practice:</strong> external stylesheets for everything, with rare exceptions. They keep HTML clean, enable browser caching across pages, and let designers update styles without touching markup.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q3">
-  <div class="qa__number">Question 3</div>
-  <h3 class="qa__question">What is the difference between an ID selector and a class selector in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[3] = r'''
 <p>Both ID and class selectors target elements with specific attributes, but they have important differences in <strong>uniqueness, syntax, and specificity</strong>.</p>
 
 <table>
@@ -204,15 +82,9 @@ h1 {
 </ul>
 
 <p><strong>Modern best practice:</strong> avoid IDs for styling because their high specificity makes overrides difficult. Use classes instead, and reserve IDs for anchor links and JavaScript targeting.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q4">
-  <div class="qa__number">Question 4</div>
-  <h3 class="qa__question">How do you apply multiple CSS classes to a single HTML element?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[4] = r'''
 <p>An HTML element can have multiple classes by separating them with <strong>spaces</strong> in the <code>class</code> attribute. Each class&rsquo;s styles apply to the element, with later or more specific rules taking precedence.</p>
 
 <pre><code>&lt;button class="btn btn-primary btn-large"&gt;Submit&lt;/button&gt;</code></pre>
@@ -237,15 +109,9 @@ h1 {
 <p>If two classes set the same property, the later rule in the stylesheet wins (assuming equal specificity). Order in the HTML <code>class</code> attribute doesn&rsquo;t matter &mdash; only the order in the CSS source.</p>
 
 <p>Modern frameworks like Tailwind take this to an extreme: <code>class="px-4 py-2 bg-blue-500 text-white rounded"</code> &mdash; many tiny classes composing each element&rsquo;s look.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q5">
-  <div class="qa__number">Question 5</div>
-  <h3 class="qa__question">What is the CSS box model, and what are its components?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[5] = r'''
 <p>The CSS box model describes how every HTML element is rendered as a rectangular box with four nested layers.</p>
 
 <table>
@@ -278,15 +144,9 @@ h1 {
 <p>With <code>box-sizing: border-box</code>, <code>width</code> includes padding and border &mdash; far more intuitive. Adding the universal selector at the top of every project is standard practice in 2026.</p>
 
 <p>The browser&rsquo;s DevTools "Computed" tab shows the box model visually for any element, color-coded by layer &mdash; an essential debugging tool.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q6">
-  <div class="qa__number">Question 6</div>
-  <h3 class="qa__question">How do you center an element horizontally using CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[6] = r'''
 <p>Centering horizontally is one of CSS&rsquo;s most common tasks. The right approach depends on what you&rsquo;re centering and the surrounding context.</p>
 
 <p><strong>1. Center a block element (most common):</strong></p>
@@ -326,15 +186,9 @@ h1 {
   <tr><td>Center children flexibly</td><td>Flexbox <code>justify-content: center</code></td></tr>
   <tr><td>Center perfectly (both axes)</td><td>Grid <code>place-items: center</code></td></tr>
 </table>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q7">
-  <div class="qa__number">Question 7</div>
-  <h3 class="qa__question">How do you change the background color of an element in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[7] = r'''
 <p>The <code>background-color</code> property sets the fill behind an element&rsquo;s content and padding.</p>
 
 <pre><code>.banner {
@@ -365,15 +219,9 @@ h1 {
 }</code></pre>
 
 <p>The <code>background-color</code> applies to the entire box including padding (but not margin). Modern color formats like <code>oklch()</code> and the <code>color()</code> function provide perceptually uniform color spaces, increasingly supported in 2026.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q8">
-  <div class="qa__number">Question 8</div>
-  <h3 class="qa__question">What are the different ways to specify colors in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[8] = r'''
 <p>CSS supports many ways to specify colors. Each format has its strengths.</p>
 
 <table>
@@ -405,15 +253,9 @@ rgb(255 107 53 / 50%)        /* modern syntax (no comma) */
 hsl(15 100% 60% / 50%)</code></pre>
 
 <p><strong>Modern preference:</strong> <code>hsl()</code> for designs (easy to adjust shades) or <code>oklch()</code> (perceptually uniform brightness across hues). Hex remains popular because design tools (Figma, Sketch) export it by default.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q9">
-  <div class="qa__number">Question 9</div>
-  <h3 class="qa__question">How do you make text bold using CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[9] = r'''
 <p>Make text bold with the <code>font-weight</code> property. The most common values are <code>bold</code> and numeric weights from 100-900.</p>
 
 <pre><code>.title       { font-weight: bold; }       /* equivalent to 700 */
@@ -447,15 +289,9 @@ hsl(15 100% 60% / 50%)</code></pre>
 .flexible { font-weight: 437; }   /* any value within the range */</code></pre>
 
 <p><strong>Don&rsquo;t use <code>&lt;b&gt;</code> for emphasis</strong> &mdash; use <code>&lt;strong&gt;</code> in HTML for semantic emphasis (also bold by default), or use CSS classes for purely visual bold without semantic meaning.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q10">
-  <div class="qa__number">Question 10</div>
-  <h3 class="qa__question">How do you create a border around an element in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[10] = r'''
 <p>Use the <code>border</code> property (or its individual longhand properties) to draw a line around an element.</p>
 
 <p><strong>Shorthand</strong> &mdash; sets width, style, and color in one declaration:</p>
@@ -499,15 +335,9 @@ hsl(15 100% 60% / 50%)</code></pre>
 <p><strong>Border affects layout</strong> &mdash; without <code>box-sizing: border-box</code>, the border adds to the element&rsquo;s total size. Most modern projects set <code>box-sizing: border-box</code> globally to avoid this.</p>
 
 <p>For decorative borders, also consider <code>outline</code> (doesn&rsquo;t affect layout) or <code>box-shadow</code> with spread (more flexible).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q11">
-  <div class="qa__number">Question 11</div>
-  <h3 class="qa__question">What is the difference between margin and padding in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[11] = r'''
 <p>Both <code>margin</code> and <code>padding</code> create space around content, but they sit on opposite sides of the border.</p>
 
 <table>
@@ -542,15 +372,9 @@ padding: 10px 20px 30px 40px;     /* top right bottom left (clockwise) */</code>
 <p>This is intentional &mdash; designers expect typographic spacing to use the larger margin, not stack them. Padding never collapses.</p>
 
 <p><strong>Quick rule:</strong> use padding for space inside an element (around content); use margin for space outside (between elements).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q12">
-  <div class="qa__number">Question 12</div>
-  <h3 class="qa__question">How do you apply a shadow to an element in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[12] = r'''
 <p>The <code>box-shadow</code> property adds shadows to elements, creating depth and visual hierarchy.</p>
 
 <pre><code>.card {
@@ -600,15 +424,9 @@ padding: 10px 20px 30px 40px;     /* top right bottom left (clockwise) */</code>
 </ul>
 
 <p>For text, use <code>text-shadow</code> with the same syntax minus the spread parameter.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q13">
-  <div class="qa__number">Question 13</div>
-  <h3 class="qa__question">How do you create a gradient background in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[13] = r'''
 <p>CSS supports two main gradient functions for background images: <code>linear-gradient()</code> and <code>radial-gradient()</code>. Both are technically images, used wherever an image URL works.</p>
 
 <p><strong>Linear gradient</strong> &mdash; transitions colors along a line:</p>
@@ -661,15 +479,9 @@ padding: 10px 20px 30px 40px;     /* top right bottom left (clockwise) */</code>
   url("hero.jpg") center / cover;</code></pre>
 
 <p>The dark gradient over the image creates a readable backdrop for white text. Multiple backgrounds stack with the first listed on top.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q14">
-  <div class="qa__number">Question 14</div>
-  <h3 class="qa__question">What is the purpose of the display property in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[14] = r'''
 <p>The <code>display</code> property defines how an element generates a box and how it interacts with surrounding content. It&rsquo;s one of the most fundamental CSS properties.</p>
 
 <table>
@@ -702,15 +514,9 @@ button     { display: inline-block; }
 .toggle-visible { display: block; }     /* restored */</code></pre>
 
 <p><code>display: none</code> hides the element completely &mdash; it takes no space and isn&rsquo;t accessible to screen readers. Use <code>visibility: hidden</code> if you want to hide while preserving space.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q15">
-  <div class="qa__number">Question 15</div>
-  <h3 class="qa__question">How do you hide an element using CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[15] = r'''
 <p>CSS offers several ways to hide elements, each with different effects on layout and accessibility. Choose the right one based on intent.</p>
 
 <table>
@@ -747,15 +553,9 @@ button     { display: inline-block; }
 <p><strong>Use the <code>sr-only</code> pattern</strong> for content that should be invisible but accessible to screen readers (skip links, icon labels, descriptive text).</p>
 
 <p><strong>Critical:</strong> never hide focusable elements (links, buttons, inputs) with just <code>opacity: 0</code> &mdash; they&rsquo;re still tabbable and clickable, creating "phantom" interactions. Add <code>pointer-events: none</code> and <code>aria-hidden="true"</code> if you must use opacity.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q16">
-  <div class="qa__number">Question 16</div>
-  <h3 class="qa__question">How do you create a hover effect using CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[16] = r'''
 <p>Hover effects use the <code>:hover</code> pseudo-class to apply styles when the user&rsquo;s cursor is over an element. Combined with <code>transition</code>, they animate smoothly.</p>
 
 <pre><code>.button {
@@ -805,15 +605,9 @@ a:hover { color: navy; }
 }</code></pre>
 
 <p>This prevents touch users from getting "stuck" hover states after tapping. Always provide focus styles too (<code>:focus-visible</code>) so keyboard users get the same feedback.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q17">
-  <div class="qa__number">Question 17</div>
-  <h3 class="qa__question">What is the difference between inline and block elements in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[17] = r'''
 <p>Inline and block are the two fundamental display modes in HTML/CSS. Understanding the difference is essential for layout.</p>
 
 <table>
@@ -861,15 +655,9 @@ div.inline   { display: inline; }      /* div becomes inline (rare) */
 nav a        { display: inline-block; } /* anchors become click-target boxes */</code></pre>
 
 <p>Modern layouts mostly use <code>display: flex</code> or <code>display: grid</code>, but understanding inline vs block is still essential for text formatting and form elements.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q18">
-  <div class="qa__number">Question 18</div>
-  <h3 class="qa__question">How do you change the font size of text in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[18] = r'''
 <p>The <code>font-size</code> property controls how large text renders. CSS supports multiple unit types &mdash; choose the right one for your context.</p>
 
 <pre><code>.large    { font-size: 32px; }       /* absolute pixels */
@@ -905,15 +693,9 @@ p  { font-size: 1rem; }        /* 16px */
 }</code></pre>
 
 <p>One line replaces multiple media queries &mdash; text scales smoothly between minimum and maximum sizes based on viewport width.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q19">
-  <div class="qa__number">Question 19</div>
-  <h3 class="qa__question">How do you make an image responsive using CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[19] = r'''
 <p>Make images responsive so they scale to fit their container without breaking layout. The standard pattern is two CSS rules.</p>
 
 <pre><code>img {
@@ -954,15 +736,9 @@ p  { font-size: 1rem; }        /* 16px */
 }</code></pre>
 
 <p>Useful when images need consistent dimensions but shouldn&rsquo;t be distorted. Modern formats (WebP, AVIF) save 30-70% file size with the same visual quality.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q20">
-  <div class="qa__number">Question 20</div>
-  <h3 class="qa__question">What is the purpose of the position property in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[20] = r'''
 <p>The <code>position</code> property controls how an element is positioned in the document flow. It has five main values, each with distinct behavior.</p>
 
 <table>
@@ -1002,15 +778,9 @@ p  { font-size: 1rem; }        /* 16px */
 </ul>
 
 <p>Use <code>z-index</code> with positioned elements to control stacking order.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q21">
-  <div class="qa__number">Question 21</div>
-  <h3 class="qa__question">How do you create a fixed header using CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[21] = r'''
 <p>A fixed header stays at the top of the viewport while the user scrolls. The standard pattern is <code>position: fixed</code> with proper offset for the content.</p>
 
 <pre><code>&lt;header class="site-header"&gt;
@@ -1068,15 +838,9 @@ p  { font-size: 1rem; }        /* 16px */
 </table>
 
 <p><strong>Use <code>z-index</code></strong> high enough that the header stays above all content; <code>100</code> is a common convention.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q22">
-  <div class="qa__number">Question 22</div>
-  <h3 class="qa__question">What are CSS pseudo-classes, and how do you use them?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[22] = r'''
 <p>Pseudo-classes are keywords added to selectors that target an element in a specific <strong>state</strong> &mdash; not a different element, but the same element under certain conditions.</p>
 
 <pre><code>a:hover        { color: red; }       /* when hovered */
@@ -1123,15 +887,9 @@ input:invalid:not(:placeholder-shown) {
 </ul>
 
 <p>Single colon for pseudo-classes; double colon for pseudo-elements (modern syntax).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q23">
-  <div class="qa__number">Question 23</div>
-  <h3 class="qa__question">How do you apply different styles to the first child of an element using CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[23] = r'''
 <p>Two pseudo-classes target the first child element: <code>:first-child</code> matches the first sibling regardless of type, while <code>:first-of-type</code> matches the first sibling of a specific type.</p>
 
 <pre><code>li:first-child {
@@ -1186,15 +944,9 @@ article h2:first-of-type {
 </ul>
 
 <p>For more complex cases, use <code>:nth-child()</code> or <code>:nth-of-type()</code> with formulas like <code>2n+1</code> (odd) or <code>3n</code> (every third).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q24">
-  <div class="qa__number">Question 24</div>
-  <h3 class="qa__question">What is the difference between the</h3>
-  <div class="qa__answer">
-    
+ANSWERS[24] = r'''
 <p>Both <code>:nth-child()</code> and <code>:nth-of-type()</code> match elements based on their position among siblings, but they count differently.</p>
 
 <table>
@@ -1250,15 +1002,9 @@ article h2:first-of-type {
   <li>If your siblings are uniform (all <code>li</code> in a list), either works the same.</li>
   <li>If types are mixed (h2 + p in an article), use <code>:nth-of-type</code> for safer targeting.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q25">
-  <div class="qa__number">Question 25</div>
-  <h3 class="qa__question">() and</h3>
-  <div class="qa__answer">
-    
+ANSWERS[25] = r'''
 <p>Set <code>cursor: pointer</code> on an element to show the hand-pointer cursor on hover &mdash; the universal "this is clickable" indicator.</p>
 
 <pre><code>.button {
@@ -1304,15 +1050,9 @@ button:disabled {
 <p>Useful for games and creative tools, but custom cursors can confuse users in regular interfaces &mdash; use sparingly.</p>
 
 <p><strong>Best practice:</strong> the cursor should always match what happens on click. <code>pointer</code> for clickable; <code>not-allowed</code> for disabled buttons; <code>text</code> for editable areas. Mismatches confuse users about whether something is interactive.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q26">
-  <div class="qa__number">Question 26</div>
-  <h3 class="qa__question">() pseudo-classes?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[26] = r'''
 <p>The <code>:nth-of-type()</code> pseudo-class targets elements based on their position among <strong>siblings of the same tag type</strong>, while <code>:nth-child()</code> counts all children regardless of type.</p>
 
 <p>This question often duplicates Q24 in different phrasing &mdash; both are about the same distinction. Here&rsquo;s a focused recap with practical patterns.</p>
@@ -1369,15 +1109,9 @@ tbody tr:hover {
 }</code></pre>
 
 <p>This filters first by selector (<code>.visible</code>), then counts among the matches &mdash; previously impossible without JavaScript.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q27">
-  <div class="qa__number">Question 27</div>
-  <h3 class="qa__question">How do you change the cursor to a pointer when hovering over an element in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[27] = r'''
 <p>Already covered in Q25 &mdash; this question repeats the cursor topic. Here&rsquo;s a quick reference focused on the use case.</p>
 
 <pre><code>.clickable {
@@ -1419,15 +1153,9 @@ button:disabled {
 }</code></pre>
 
 <p>Always pair clickable cursors with proper accessibility (role attributes, keyboard handlers, focus styles) so the visual affordance matches functional behavior.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q28">
-  <div class="qa__number">Question 28</div>
-  <h3 class="qa__question">How do you apply a style to all elements of a specific type in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[28] = r'''
 <p>Use a <strong>type selector</strong> &mdash; just the tag name itself &mdash; to target every element of that type.</p>
 
 <pre><code>p {
@@ -1471,15 +1199,9 @@ h2 ~ p { color: #666; }                       /* p after h2 (siblings) */</code>
 <p>The comma is "OR" &mdash; styles apply to any element matching any selector in the list.</p>
 
 <p><strong>Caution:</strong> broad type selectors (<code>* { ... }</code> with many properties) can have performance implications on huge pages. Modern browsers handle this well, but resetting too aggressively can override useful defaults you&rsquo;ll then need to reapply (focus rings, button styles).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q29">
-  <div class="qa__number">Question 29</div>
-  <h3 class="qa__question">What is the purpose of the z-index property in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[29] = r'''
 <p>The <code>z-index</code> property controls the <strong>stacking order</strong> of positioned elements &mdash; which appears in front when boxes overlap. Higher values appear above lower ones.</p>
 
 <pre><code>.modal {
@@ -1534,15 +1256,9 @@ h2 ~ p { color: #666; }                       /* p after h2 (siblings) */</code>
 .modal    { z-index: var(--z-modal); }</code></pre>
 
 <p>Defining z-index tiers as variables prevents arbitrary value escalation. Modern <code>position: fixed</code> dialogs and the Popover API automatically use the top layer, eliminating most z-index needs.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q30">
-  <div class="qa__number">Question 30</div>
-  <h3 class="qa__question">How do you create a flex container in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[30] = r'''
 <p>Create a flex container by applying <code>display: flex</code> to a parent element. All direct children become flex items that lay out along a single axis (row or column).</p>
 
 <pre><code>.container {
@@ -1600,15 +1316,9 @@ h2 ~ p { color: #666; }                       /* p after h2 (siblings) */</code>
 }</code></pre>
 
 <p>Flexbox is ideal for one-dimensional layouts &mdash; rows or columns. For two-dimensional grids, use CSS Grid instead.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q31">
-  <div class="qa__number">Question 31</div>
-  <h3 class="qa__question">How do you align items horizontally in a flex container?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[31] = r'''
 <p>Align flex items horizontally with <code>justify-content</code> on the flex container. The values control how items distribute along the main axis (the horizontal axis when <code>flex-direction: row</code>).</p>
 
 <pre><code>.container {
@@ -1662,15 +1372,9 @@ h2 ~ p { color: #666; }                       /* p after h2 (siblings) */</code>
 }</code></pre>
 
 <p><strong>For column direction</strong> (<code>flex-direction: column</code>), <code>justify-content</code> aligns vertically &mdash; the main axis becomes vertical. Use <code>align-items</code> for the perpendicular axis (horizontal in column mode).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q32">
-  <div class="qa__number">Question 32</div>
-  <h3 class="qa__question">How do you create a grid layout using CSS Grid?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[32] = r'''
 <p>Create a grid layout by applying <code>display: grid</code> to a parent and defining columns and rows with <code>grid-template-columns</code> and <code>grid-template-rows</code>.</p>
 
 <pre><code>.container {
@@ -1737,15 +1441,9 @@ h2 ~ p { color: #666; }                       /* p after h2 (siblings) */</code>
 .layout footer  { grid-area: footer; }</code></pre>
 
 <p>Grid is ideal for two-dimensional layouts; Flexbox handles one-dimensional rows or columns better.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q33">
-  <div class="qa__number">Question 33</div>
-  <h3 class="qa__question">How do you set the width and height of an element in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[33] = r'''
 <p>The <code>width</code> and <code>height</code> properties set explicit dimensions. CSS supports many unit types &mdash; choose based on whether you need fixed, relative, or content-based sizing.</p>
 
 <pre><code>.box {
@@ -1804,15 +1502,9 @@ h2 ~ p { color: #666; }                       /* p after h2 (siblings) */</code>
 <pre><code>* { box-sizing: border-box; }   /* width includes padding and border */</code></pre>
 
 <p>Modern projects globally set <code>box-sizing: border-box</code> for intuitive sizing &mdash; padding and border don&rsquo;t add to declared width.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q34">
-  <div class="qa__number">Question 34</div>
-  <h3 class="qa__question">How do you apply a background image to an element in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[34] = r'''
 <p>Apply a background image with <code>background-image: url(...)</code>. Combine with sizing, positioning, and repeat properties for full control.</p>
 
 <pre><code>.hero {
@@ -1865,15 +1557,9 @@ h2 ~ p { color: #666; }                       /* p after h2 (siblings) */</code>
   "hero.webp" 1x,
   "hero@2x.webp" 2x
 );</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q35">
-  <div class="qa__number">Question 35</div>
-  <h3 class="qa__question">How do you set a fallback font for text in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[35] = r'''
 <p>Specify multiple fonts in the <code>font-family</code> property &mdash; the browser uses the first one available, falling back to the next if it&rsquo;s not installed.</p>
 
 <pre><code>body {
@@ -1921,15 +1607,9 @@ body {
 }</code></pre>
 
 <p><code>font-display: swap</code> shows the fallback font immediately and swaps to the custom font when loaded &mdash; prevents the dreaded "FOIT" (flash of invisible text) where the page is unreadable while fonts load.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q36">
-  <div class="qa__number">Question 36</div>
-  <h3 class="qa__question">How do you make text italic using CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[36] = r'''
 <p>Make text italic with <code>font-style: italic</code>. The property has three valid values.</p>
 
 <pre><code>.italic    { font-style: italic; }
@@ -1969,15 +1649,9 @@ body {
 }</code></pre>
 
 <p>Italic text often signals quotes, foreign words, technical terms, or titles of works. Pair with semantic HTML (<code>&lt;cite&gt;</code> for titles, <code>&lt;dfn&gt;</code> for definitions) for full meaning.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q37">
-  <div class="qa__number">Question 37</div>
-  <h3 class="qa__question">What is the purpose of the float property in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[37] = r'''
 <p>The <code>float</code> property removes an element from normal flow and pushes it to the left or right side of its container, with surrounding content wrapping around it. Originally used for layout; mostly replaced by Flexbox and Grid in modern CSS.</p>
 
 <pre><code>.image-left {
@@ -2026,15 +1700,9 @@ body {
 <p>Floats came from print-design conventions before CSS had real layout primitives. Pre-2017, every site used float-based grid systems (Bootstrap 3, foundation). Today, Flexbox handles 1D layouts and Grid handles 2D layouts &mdash; floats are reserved for text wrap around figures.</p>
 
 <p><strong>One quirk:</strong> floats are removed from normal flow but still affect text. The parent doesn&rsquo;t expand to contain floated children &mdash; you need to "clear" them.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q38">
-  <div class="qa__number">Question 38</div>
-  <h3 class="qa__question">How do you clear floats in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[38] = r'''
 <p>When elements are floated, their parent often "collapses" because floats are removed from normal flow. Clear the floats so the parent contains them properly.</p>
 
 <p><strong>Three common methods:</strong></p>
@@ -2089,15 +1757,9 @@ body {
 </table>
 
 <p>Best practice today: avoid floats for layout entirely &mdash; Flexbox and Grid eliminate the need to clear floats. Use floats only for magazine-style text wrap, where you typically don&rsquo;t need clearing.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q39">
-  <div class="qa__number">Question 39</div>
-  <h3 class="qa__question">How do you create a navigation bar using CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[39] = r'''
 <p>Build a navigation bar with a <code>&lt;nav&gt;</code> element containing a list of links, then style it with Flexbox for layout.</p>
 
 <pre><code>&lt;nav class="main-nav" aria-label="Main"&gt;
@@ -2165,15 +1827,9 @@ body {
 <p>Mark the current page with <code>aria-current="page"</code> for accessibility, then style with the attribute selector.</p>
 
 <p><strong>For mobile</strong>, add a hamburger menu pattern using a checkbox toggle (CSS-only) or JavaScript with <code>aria-expanded</code>. Below 768px, hide the nav and show a button that toggles a slide-down menu.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q40">
-  <div class="qa__number">Question 40</div>
-  <h3 class="qa__question">How do you create a list with no bullet points using CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[40] = r'''
 <p>Remove default bullets from a list with <code>list-style: none</code> on the <code>&lt;ul&gt;</code> or <code>&lt;ol&gt;</code>.</p>
 
 <pre><code>ul.no-bullets {
@@ -2228,15 +1884,9 @@ list-style: url("custom-bullet.png") inside;</code></pre>
 }</code></pre>
 
 <p>Keep using <code>&lt;ul&gt;</code>+<code>&lt;li&gt;</code> for semantic meaning even when bullets are visually hidden &mdash; screen readers benefit from list structure.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q41">
-  <div class="qa__number">Question 41</div>
-  <h3 class="qa__question">What is the purpose of the opacity property in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[41] = r'''
 <p>The <code>opacity</code> property controls element transparency &mdash; from 0 (fully transparent) to 1 (fully opaque). It applies to the entire element including its children.</p>
 
 <pre><code>.transparent  { opacity: 0; }       /* invisible */
@@ -2286,15 +1936,9 @@ list-style: url("custom-bullet.png") inside;</code></pre>
 </ul>
 
 <p>Modern CSS also has <code>filter: opacity(50%)</code> &mdash; same result as <code>opacity</code> but composable with other filter effects (blur, grayscale).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q42">
-  <div class="qa__number">Question 42</div>
-  <h3 class="qa__question">How do you create a circular image using CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[42] = r'''
 <p>Make an image circular with <code>border-radius: 50%</code> &mdash; this rounds all corners by half the smaller dimension, creating a perfect circle for square images and an oval for rectangles.</p>
 
 <pre><code>.avatar {
@@ -2356,15 +2000,9 @@ list-style: url("custom-bullet.png") inside;</code></pre>
 <p>Position-absolute the status dot in the corner of the avatar wrapper. Common pattern in chat apps (online/away/offline).</p>
 
 <p><strong>For non-square circular elements</strong> (oval shapes), use <code>border-radius: 50% / 50%</code> &mdash; explicit horizontal and vertical radius.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q43">
-  <div class="qa__number">Question 43</div>
-  <h3 class="qa__question">How do you change the order of elements in a flex container?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[43] = r'''
 <p>Change flex item order with the <code>order</code> property. By default, items render in source order; <code>order</code> lets you visually reorder without changing HTML.</p>
 
 <pre><code>.container {
@@ -2423,15 +2061,9 @@ list-style: url("custom-bullet.png") inside;</code></pre>
 <p><strong>Best practice:</strong> use <code>order</code> for purely visual rearrangement only when source order remains logical. For meaningful reordering, change the actual HTML or use Grid&rsquo;s <code>grid-area</code> for more control. The same caveat applies to Grid&rsquo;s <code>order</code> property.</p>
 
 <p><strong>Common mistake:</strong> using <code>order</code> to put a "Back" button after "Next" visually while keeping it before "Next" in HTML. Keyboard users hit Tab and land on Next first &mdash; surprising them.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q44">
-  <div class="qa__number">Question 44</div>
-  <h3 class="qa__question">How do you create a sticky footer using CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[44] = r'''
 <p>A sticky footer stays at the bottom of the viewport when content is short, but moves down as expected when content is long. Modern Flexbox makes this trivial.</p>
 
 <pre><code>&lt;body&gt;
@@ -2487,15 +2119,9 @@ footer {
 }</code></pre>
 
 <p><code>dvh</code> accounts for mobile browser address bars showing/hiding &mdash; <code>100vh</code> can mistakenly include the address bar height on iOS Safari, causing footer to push off-screen. <code>dvh</code> is the modern fix.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q45">
-  <div class="qa__number">Question 45</div>
-  <h3 class="qa__question">What is the difference between relative and absolute positioning in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[45] = r'''
 <p>Both <code>relative</code> and <code>absolute</code> positioning use offset properties (<code>top</code>, <code>right</code>, <code>bottom</code>, <code>left</code>), but they differ in <strong>what they&rsquo;re positioned relative to</strong> and how they affect surrounding content.</p>
 
 <table>
@@ -2553,15 +2179,9 @@ footer {
 </ul>
 
 <p>For modern centered layouts, Flexbox or Grid is usually clearer than absolute positioning.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q46">
-  <div class="qa__number">Question 46</div>
-  <h3 class="qa__question">How do you create a drop shadow for text in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[46] = r'''
 <p>Add a shadow to text with <code>text-shadow</code>. Same syntax as <code>box-shadow</code> but without the <code>spread</code> parameter and applied only to text glyphs.</p>
 
 <pre><code>.subtle-shadow {
@@ -2632,15 +2252,9 @@ footer {
 }</code></pre>
 
 <p>Modern alternative: <code>text-stroke</code> (with <code>-webkit-</code> prefix) for outlines, but <code>text-shadow</code> still works in more contexts and renders consistently. For heavy decorative effects, SVG text gives more control.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q47">
-  <div class="qa__number">Question 47</div>
-  <h3 class="qa__question">How do you apply a linear gradient to an element&#x27;s background in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[47] = r'''
 <p>Use the <code>linear-gradient()</code> function in <code>background</code> or <code>background-image</code>. Specify direction and color stops &mdash; the browser interpolates colors smoothly between them.</p>
 
 <pre><code>.banner {
@@ -2715,15 +2329,9 @@ footer {
 /* Smoother perceptual transition through purple */</code></pre>
 
 <p>Without specifying, browsers use sRGB which can produce muddy mid-colors. <code>oklch</code> color space gives more vibrant, perceptually-correct gradients.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q48">
-  <div class="qa__number">Question 48</div>
-  <h3 class="qa__question">How do you create an outline for an element in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[48] = r'''
 <p>The <code>outline</code> property draws a line around an element &mdash; similar to <code>border</code> but with one critical difference: it doesn&rsquo;t affect layout.</p>
 
 <pre><code>.focused {
@@ -2784,15 +2392,9 @@ button:focus-visible {
 <p>Add this temporarily to see the box of every element on the page &mdash; useful for diagnosing layout issues without disturbing the actual layout.</p>
 
 <p><strong>Outline supports <code>border-radius</code></strong> in modern browsers &mdash; rounded outlines for rounded buttons match perfectly without extra work.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q49">
-  <div class="qa__number">Question 49</div>
-  <h3 class="qa__question">How do you use the calc() function in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[49] = r'''
 <p>The <code>calc()</code> function lets you do math in CSS values &mdash; mixing units, performing arithmetic, and creating responsive sizing that&rsquo;s impossible with single values alone.</p>
 
 <pre><code>.box {
@@ -2870,15 +2472,9 @@ width: calc(100%* 0.5);       /* OK — but for clarity, also space the * */</co
 font-size: clamp(1rem, 2vw, 2rem); /* fluid between 1rem and 2rem */</code></pre>
 
 <p>These often replace <code>calc()</code>-based responsive patterns more elegantly.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q50">
-  <div class="qa__number">Question 50</div>
-  <h3 class="qa__question">How do you apply styles to elements based on their attributes in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[50] = r'''
 <p>Attribute selectors target elements based on their <strong>HTML attributes and values</strong>. They use square-bracket syntax and offer flexible matching beyond just exact equality.</p>
 
 <pre><code>/* Has the attribute (any value) */
@@ -2952,15 +2548,9 @@ nav a[aria-current="page"] {
 </ul>
 
 <p>Modern frameworks lean heavily on attribute selectors via data attributes &mdash; cleaner than adding CSS classes for every state.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q51">
-  <div class="qa__number">Question 51</div>
-  <h3 class="qa__question">What is the difference between the visibility and display properties in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[51] = r'''
 <p>Both <code>visibility</code> and <code>display</code> can hide elements, but they behave differently in layout, accessibility, and animations.</p>
 
 <table>
@@ -2991,15 +2581,9 @@ nav a[aria-current="page"] {
 </ul>
 
 <p>The third option, <code>opacity: 0</code>, makes the element invisible but still in the layout AND still clickable.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q52">
-  <div class="qa__number">Question 52</div>
-  <h3 class="qa__question">How do you create a transition effect in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[52] = r'''
 <p>The <code>transition</code> property animates changes to CSS values smoothly over time. Apply it on the element&rsquo;s default state, then change properties on hover, focus, or via JS.</p>
 
 <pre><code>&lt;button class="btn"&gt;Hover me&lt;/button&gt;
@@ -3044,15 +2628,9 @@ transition: background 0.2s, transform 0.3s;   /* multiple */</code></pre>
 /* Janky on slow devices */
 .slow { transition: width 0.3s; }
 .slow:hover { width: 200px; }</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q53">
-  <div class="qa__number">Question 53</div>
-  <h3 class="qa__question">How do you use media queries to create a responsive design in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[53] = r'''
 <p>Media queries apply different styles based on screen size, device features, or user preferences. They&rsquo;re the foundation of responsive design.</p>
 
 <pre><code>/* Mobile-first: default styles for mobile */
@@ -3113,15 +2691,9 @@ transition: background 0.2s, transform 0.3s;   /* multiple */</code></pre>
 
 <p><strong>Always include the viewport meta tag</strong> in HTML or media queries won&rsquo;t fire correctly on mobile:</p>
 <pre><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q54">
-  <div class="qa__number">Question 54</div>
-  <h3 class="qa__question">How do you create a full-width element using CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[54] = r'''
 <p>Several techniques make an element span the full width of its parent or the viewport.</p>
 
 <p><strong>1. Default block elements:</strong></p>
@@ -3163,15 +2735,9 @@ transition: background 0.2s, transform 0.3s;   /* multiple */</code></pre>
 <p>Negative margins push the element to the viewport edges. Combined with <code>overflow-x: hidden</code> on the body, this is the cleanest pattern for full-width sections inside a centered container.</p>
 
 <p><strong>Edge case:</strong> beware of horizontal scrollbars. <code>100vw</code> includes the scrollbar width, while parents may not &mdash; subtle 15px overflow appears on Windows. Test before shipping.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q55">
-  <div class="qa__number">Question 55</div>
-  <h3 class="qa__question">How do you apply a style to every other element in a list using CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[55] = r'''
 <p>Use <code>:nth-child()</code> with <code>odd</code> or <code>even</code> to apply styles to alternating items &mdash; the classic "zebra stripe" pattern.</p>
 
 <pre><code>&lt;ul class="list"&gt;
@@ -3225,15 +2791,9 @@ li:nth-child(n+6) {
 </table>
 
 <p>For modern alternatives, the <code>:nth-child(odd of .visible)</code> syntax filters by selector first, then applies <code>nth-child</code> &mdash; useful when items can be hidden dynamically.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q56">
-  <div class="qa__number">Question 56</div>
-  <h3 class="qa__question">What is the purpose of the clip-path property in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[56] = r'''
 <p>The <code>clip-path</code> property hides parts of an element by defining a visible region. The unclipped region shows; the rest is clipped away.</p>
 
 <pre><code>&lt;img class="circle" src="photo.jpg" alt=""&gt;
@@ -3289,15 +2849,9 @@ li:nth-child(n+6) {
 <p>Animations between two clip-path values reveal content with creative effects &mdash; circular reveals, slide-ins, custom shape transitions.</p>
 
 <p>Use online tools like Clippy (bennettfeely.com/clippy/) to design polygon paths visually instead of guessing coordinates. Combined with <code>transform</code>, clip-path enables dramatic visual effects without image editing.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q57">
-  <div class="qa__number">Question 57</div>
-  <h3 class="qa__question">How do you create a button with rounded corners using CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[57] = r'''
 <p>Use <code>border-radius</code> to round button corners. Combined with padding, background, and transitions, you can create polished buttons with pure CSS.</p>
 
 <pre><code>&lt;button class="btn"&gt;Click me&lt;/button&gt;
@@ -3365,15 +2919,9 @@ li:nth-child(n+6) {
 }</code></pre>
 
 <p>The hover and active states give satisfying tactile feedback &mdash; the button "lifts" on hover and "presses" on click.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q58">
-  <div class="qa__number">Question 58</div>
-  <h3 class="qa__question">How do you align text vertically within an element using CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[58] = r'''
 <p>Vertical centering is one of CSS&rsquo;s most asked questions. Modern Flexbox and Grid solve it in two lines.</p>
 
 <p><strong>Flexbox (most common):</strong></p>
@@ -3428,15 +2976,9 @@ li:nth-child(n+6) {
 }</code></pre>
 
 <p>Flexbox is the modern answer for almost all centering needs &mdash; works for any content, any size, multi-line, with two lines of CSS.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q59">
-  <div class="qa__number">Question 59</div>
-  <h3 class="qa__question">How do you create a responsive layout using CSS Flexbox?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[59] = r'''
 <p>Flexbox makes responsive layouts simple. Set <code>display: flex</code> on a container and the children become flex items that can wrap, grow, shrink, and align flexibly.</p>
 
 <pre><code>&lt;div class="container"&gt;
@@ -3489,15 +3031,9 @@ flex-basis: 250px;  /* preferred starting width */</code></pre>
 }</code></pre>
 
 <p>Three sections: logo (left), nav (middle), actions (right) &mdash; <code>space-between</code> distributes them across the width.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q60">
-  <div class="qa__number">Question 60</div>
-  <h3 class="qa__question">How do you change the font color of text in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[60] = r'''
 <p>Use the <code>color</code> property to change text color.</p>
 
 <pre><code>&lt;p class="primary"&gt;Important text&lt;/p&gt;
@@ -3544,15 +3080,9 @@ flex-basis: 250px;  /* preferred starting width */</code></pre>
 }</code></pre>
 
 <p>This is great for icon buttons &mdash; the SVG icon automatically matches the text color, even on hover.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q61">
-  <div class="qa__number">Question 61</div>
-  <h3 class="qa__question">How do you create a table with alternating row colors using CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[61] = r'''
 <p>Use <code>:nth-child()</code> with <code>odd</code> or <code>even</code> on <code>tbody tr</code> to create alternating row colors &mdash; the classic zebra-stripe table.</p>
 
 <pre><code>&lt;table&gt;
@@ -3601,15 +3131,9 @@ flex-basis: 250px;  /* preferred starting width */</code></pre>
 td:nth-child(3) { font-weight: 600; }          /* role column */</code></pre>
 
 <p>Zebra striping improves readability &mdash; the eye more easily tracks which cells belong to the same row, especially in tables with many columns.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q62">
-  <div class="qa__number">Question 62</div>
-  <h3 class="qa__question">How do you set the maximum width of an element in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[62] = r'''
 <p>The <code>max-width</code> property sets an upper limit on an element&rsquo;s width. The element can be narrower than this but never wider.</p>
 
 <pre><code>&lt;div class="container"&gt;
@@ -3654,15 +3178,9 @@ td:nth-child(3) { font-weight: 600; }          /* role column */</code></pre>
 </table>
 
 <p>Combine with <code>min-width</code> for both bounds: <code>min-width: 300px</code> + <code>max-width: 600px</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q63">
-  <div class="qa__number">Question 63</div>
-  <h3 class="qa__question">How do you center an element vertically using CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[63] = r'''
 <p>Vertical centering used to be CSS&rsquo;s hardest problem. Modern Flexbox and Grid solve it in 2 lines.</p>
 
 <p><strong>Flexbox (most common):</strong></p>
@@ -3724,15 +3242,9 @@ td:nth-child(3) { font-weight: 600; }          /* role column */</code></pre>
 <p>This is the canonical "center anything in the viewport" pattern &mdash; use for splash screens, login pages, error pages, and full-page modals.</p>
 
 <p>Always include <code>min-height: 100vh</code> (not just <code>height</code>) so content longer than the viewport scrolls naturally.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q64">
-  <div class="qa__number">Question 64</div>
-  <h3 class="qa__question">How do you create a tooltip using CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[64] = r'''
 <p>Build CSS-only tooltips using the <code>title</code> attribute or, for richer styling, custom <code>::after</code> pseudo-elements.</p>
 
 <p><strong>Basic title attribute (browser-rendered):</strong></p>
@@ -3803,15 +3315,9 @@ td:nth-child(3) { font-weight: 600; }          /* role column */</code></pre>
 &lt;div id="tip1" popover="hint"&gt;Click to undo&lt;/div&gt;</code></pre>
 
 <p>The Popover API gives proper focus management, dismiss-on-Escape, and top-layer rendering &mdash; without z-index battles. CSS Anchor Positioning lets you position the popover relative to its trigger automatically.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q65">
-  <div class="qa__number">Question 65</div>
-  <h3 class="qa__question">What is the purpose of the transform property in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[65] = r'''
 <p>The <code>transform</code> property applies 2D or 3D transformations to elements &mdash; translate (move), rotate, scale, skew, and matrix combinations. It&rsquo;s GPU-accelerated, making it perfect for smooth animations.</p>
 
 <pre><code>.element {
@@ -3858,15 +3364,9 @@ td:nth-child(3) { font-weight: 600; }          /* role column */</code></pre>
 }</code></pre>
 
 <p>Combined with <code>backface-visibility</code> and <code>transform-style: preserve-3d</code>, transforms enable card flips, 3D rotations, and parallax effects.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q66">
-  <div class="qa__number">Question 66</div>
-  <h3 class="qa__question">How do you rotate an element using CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[66] = r'''
 <p>Use the <code>rotate()</code> function within <code>transform</code>. Positive values rotate clockwise; negative values rotate counter-clockwise.</p>
 
 <pre><code>&lt;div class="square"&gt;Tilted&lt;/div&gt;
@@ -3932,15 +3432,9 @@ td:nth-child(3) { font-weight: 600; }          /* role column */</code></pre>
 }</code></pre>
 
 <p>By default elements rotate around their center; <code>transform-origin</code> changes the pivot point.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q67">
-  <div class="qa__number">Question 67</div>
-  <h3 class="qa__question">How do you apply a style to an element when it receives focus in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[67] = r'''
 <p>Use the <code>:focus</code> or <code>:focus-visible</code> pseudo-class. They apply when an element receives keyboard or programmatic focus &mdash; essential for accessibility.</p>
 
 <pre><code>&lt;input type="text" placeholder="Type here"&gt;
@@ -3999,15 +3493,9 @@ button:focus-visible {
 }</code></pre>
 
 <p>Useful for highlighting an entire form group when the user focuses any input inside.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q68">
-  <div class="qa__number">Question 68</div>
-  <h3 class="qa__question">How do you create a simple CSS animation?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[68] = r'''
 <p>CSS animations use <code>@keyframes</code> to define stages and the <code>animation</code> property to apply them. Unlike transitions (which animate between states), animations run autonomously.</p>
 
 <pre><code>&lt;div class="bouncy"&gt;Bouncing!&lt;/div&gt;
@@ -4068,15 +3556,9 @@ animation: pulse 1s ease-in-out infinite;</code></pre>
 }</code></pre>
 
 <p>Users with motion sensitivities benefit greatly from this single rule.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q69">
-  <div class="qa__number">Question 69</div>
-  <h3 class="qa__question">How do you apply a style to all elements inside a specific container using CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[69] = r'''
 <p>Use the <strong>descendant combinator</strong> (a space) to target all elements inside a parent, regardless of nesting depth.</p>
 
 <pre><code>&lt;article&gt;
@@ -4128,15 +3610,9 @@ article .post p { color: green; }     /* 0,1,2 */</code></pre>
 <p><strong>Modern alternatives:</strong> <code>:is()</code>, <code>:where()</code>, and <code>:has()</code> let you write cleaner selectors without specificity surprises:</p>
 <pre><code>:is(article, section) p { line-height: 1.6; }   /* either parent */
 :where(article) p { color: gray; }                /* same but 0 specificity */</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q70">
-  <div class="qa__number">Question 70</div>
-  <h3 class="qa__question">How do you create a text shadow in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[70] = r'''
 <p>Use the <code>text-shadow</code> property to add shadows to text. Same syntax as <code>box-shadow</code> but without spread or inset.</p>
 
 <pre><code>&lt;h1 class="emboss"&gt;Embossed&lt;/h1&gt;
@@ -4213,15 +3689,9 @@ article .post p { color: green; }     /* 0,1,2 */</code></pre>
 }</code></pre>
 
 <p>Better support arrives every year for true text outlines &mdash; until then, the multi-shadow trick covers most cases.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q71">
-  <div class="qa__number">Question 71</div>
-  <h3 class="qa__question">How do you create a responsive grid layout using CSS Grid?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[71] = r'''
 <p>CSS Grid with <code>auto-fit</code> and <code>minmax</code> creates responsive grids that adapt to any viewport size &mdash; with no media queries.</p>
 
 <pre><code>&lt;section class="grid"&gt;
@@ -4279,15 +3749,9 @@ article .post p { color: green; }     /* 0,1,2 */</code></pre>
 }</code></pre>
 
 <p>Grid is more powerful than Flexbox for 2D layouts. Use Flexbox for 1D (rows or columns); Grid for 2D (rows AND columns).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q72">
-  <div class="qa__number">Question 72</div>
-  <h3 class="qa__question">How do you make an element take up the full height of its parent in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[72] = r'''
 <p>Several techniques make an element fill its parent&rsquo;s height. The right one depends on the parent&rsquo;s context.</p>
 
 <p><strong>1. Percentage height (parent must have explicit height):</strong></p>
@@ -4354,15 +3818,9 @@ main {
 }</code></pre>
 
 <p>Body fills the viewport; main grows to fill remaining space; footer stays at the bottom even with little content.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q73">
-  <div class="qa__number">Question 73</div>
-  <h3 class="qa__question">How do you create a fixed sidebar using CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[73] = r'''
 <p>Use <code>position: fixed</code> to pin a sidebar to one edge of the viewport, regardless of scroll.</p>
 
 <pre><code>&lt;aside class="fixed-sidebar"&gt;
@@ -4435,15 +3893,9 @@ main {
 }</code></pre>
 
 <p>Sticky takes natural space (no margin offset needed) and only sticks once scrolled to the threshold &mdash; better in many layouts than fixed.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q74">
-  <div class="qa__number">Question 74</div>
-  <h3 class="qa__question">How do you create a full-screen background image using CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[74] = r'''
 <p>Use <code>background-image</code> with <code>background-size: cover</code> on a full-viewport element to fill the screen with an image.</p>
 
 <pre><code>&lt;section class="hero"&gt;
@@ -4505,15 +3957,9 @@ main {
   <li>Provide multiple resolutions via <code>image-set()</code> in CSS.</li>
   <li>Compress aggressively &mdash; users won&rsquo;t notice slight artifacts on a hero background.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q75">
-  <div class="qa__number">Question 75</div>
-  <h3 class="qa__question">How do you change the spacing between lines of text in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[75] = r'''
 <p>Use <code>line-height</code> to control the vertical space between lines of text. The value can be a number, length, or percentage.</p>
 
 <pre><code>&lt;p class="tight"&gt;Tight line spacing for headings.&lt;/p&gt;
@@ -4561,15 +4007,9 @@ p    { font-size: 16px; }       /* line-height becomes 24px */</code></pre>
 }</code></pre>
 
 <p>Doesn&rsquo;t work for multi-line content &mdash; use Flexbox instead in that case.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q76">
-  <div class="qa__number">Question 76</div>
-  <h3 class="qa__question">How do you create a border with rounded corners and a shadow in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[76] = r'''
 <p>Combine <code>border-radius</code> for rounded corners with <code>box-shadow</code> for the shadow:</p>
 <pre><code>.card {
   border: 1px solid #e0e0e0;
@@ -4609,15 +4049,9 @@ p    { font-size: 16px; }       /* line-height becomes 24px */</code></pre>
     0 1px 2px rgba(0, 0, 0, 0.24);
 }</code></pre>
 <p>Material Design and most design systems use this pattern extensively. Subtle shadows with low opacity (0.05-0.15) feel modern; heavy shadows feel dated.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q77">
-  <div class="qa__number">Question 77</div>
-  <h3 class="qa__question">How do you create a CSS variable, and how do you use it?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[77] = r'''
 <p>CSS variables (officially <strong>custom properties</strong>) let you store values and reuse them throughout your stylesheet. Define with <code>--</code> prefix; access with <code>var()</code>.</p>
 <pre><code>:root {
   --primary-color: #0066cc;
@@ -4666,15 +4100,9 @@ body {
 <pre><code>const root = document.documentElement;
 root.style.setProperty("--primary-color", "#ff0000");</code></pre>
 <p>Variables are dynamic at runtime &mdash; unlike Sass variables, which are compile-time only.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q78">
-  <div class="qa__number">Question 78</div>
-  <h3 class="qa__question">How do you apply a style to an element based on its state using CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[78] = r'''
 <p>Use <strong>state pseudo-classes</strong> to style elements based on their interactive state:</p>
 <pre><code>.btn {
   background: #0066cc;
@@ -4715,15 +4143,9 @@ input[type="checkbox"]:checked + label {
 .btn:focus { outline: none; }              /* hide for mouse */
 .btn:focus-visible { outline: 2px solid; } /* show for keyboard */</code></pre>
 <p>Use <code>:focus-visible</code> rather than <code>:focus</code> alone &mdash; it shows focus rings for keyboard users (who need them) but hides them for mouse clicks (which look noisy).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q79">
-  <div class="qa__number">Question 79</div>
-  <h3 class="qa__question">How do you make an element visible only when hovering over another element in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[79] = r'''
 <p>Use the <code>:hover</code> state on a parent or sibling combined with the descendant or sibling selector:</p>
 <p><strong>Show on hover of parent</strong> &mdash; the most common pattern:</p>
 <pre><code>&lt;div class="card"&gt;
@@ -4777,15 +4199,9 @@ input[type="checkbox"]:checked + label {
 <pre><code>/* Style parent when it contains a hovered link */
 .card:has(a:hover) { border-color: blue; }</code></pre>
 <p>This is the so-called "parent selector" &mdash; finally available in CSS as of 2023.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q80">
-  <div class="qa__number">Question 80</div>
-  <h3 class="qa__question">How do you create a multi-column layout using CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[80] = r'''
 <p>Use the CSS <code>columns</code> property for newspaper-style multi-column text:</p>
 <pre><code>.article {
   columns: 3 250px;            /* 3 columns, each at least 250px */
@@ -4821,15 +4237,9 @@ input[type="checkbox"]:checked + label {
   gap: 1rem;
 }</code></pre>
 <p>Use <code>columns</code> only when the content really should flow continuously between columns &mdash; like body text in a magazine layout.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q81">
-  <div class="qa__number">Question 81</div>
-  <h3 class="qa__question">How do you create a responsive image gallery using CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[81] = r'''
 <p>The cleanest modern pattern uses CSS Grid with <code>auto-fit</code> + <code>minmax</code> &mdash; images reflow automatically without media queries:</p>
 <pre><code>&lt;section class="gallery"&gt;
   &lt;img src="img1.jpg" alt=""&gt;
@@ -4877,15 +4287,9 @@ input[type="checkbox"]:checked + label {
   object-fit: cover;
 }</code></pre>
 <p><strong>Performance:</strong> add <code>loading="lazy"</code> to <code>&lt;img&gt;</code> tags below the fold to defer loading until they&rsquo;re close to viewport. Use <code>srcset</code> for responsive image sizes.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q82">
-  <div class="qa__number">Question 82</div>
-  <h3 class="qa__question">How do you apply a style to the last child of an element using CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[82] = r'''
 <p>Use the <code>:last-child</code> pseudo-class:</p>
 <pre><code>li:last-child {
   border-bottom: none;
@@ -4924,15 +4328,9 @@ input[type="checkbox"]:checked + label {
 p:last-child  { /* matches NOTHING — &lt;footer&gt; is last */ }
 p:last-of-type { /* matches the second &lt;p&gt; */ }</code></pre>
 <p>Use <code>:last-child</code> when the element is genuinely the last of all children. Use <code>:last-of-type</code> when you want the last of a specific element type.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q83">
-  <div class="qa__number">Question 83</div>
-  <h3 class="qa__question">How do you create a responsive navigation menu using CSS Flexbox?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[83] = r'''
 <p>A responsive nav stays horizontal on desktop and collapses on mobile. Flexbox handles the desktop layout cleanly:</p>
 <pre><code>&lt;nav class="main-nav"&gt;
   &lt;a href="/" class="logo"&gt;Logo&lt;/a&gt;
@@ -4990,15 +4388,9 @@ p:last-of-type { /* matches the second &lt;p&gt; */ }</code></pre>
   <li>Media query collapses to vertical on mobile.</li>
 </ul>
 <p>For a hamburger-style mobile menu, add a checkbox or button to toggle visibility &mdash; or use a JavaScript-based toggle for full ARIA accessibility.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q84">
-  <div class="qa__number">Question 84</div>
-  <h3 class="qa__question">How do you set the aspect ratio of an element in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[84] = r'''
 <p>The <code>aspect-ratio</code> property (well-supported in 2026) preserves a width-to-height proportion as the element resizes:</p>
 <pre><code>.video-thumbnail {
   width: 100%;
@@ -5043,15 +4435,9 @@ p:last-of-type { /* matches the second &lt;p&gt; */ }</code></pre>
   <tr><td>Card thumbnail</td><td><code>3 / 2</code></td></tr>
 </table>
 <p>Pair with <code>object-fit: cover</code> on contained images to fill the box without distortion.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q85">
-  <div class="qa__number">Question 85</div>
-  <h3 class="qa__question">How do you create a card layout using CSS Grid?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[85] = r'''
 <p>CSS Grid is ideal for card layouts &mdash; cards reflow to fit any screen size:</p>
 <pre><code>&lt;section class="card-grid"&gt;
   &lt;article class="card"&gt;
@@ -5101,15 +4487,9 @@ p:last-of-type { /* matches the second &lt;p&gt; */ }</code></pre>
   <li><code>flex: 1</code> on the description &mdash; ensures all cards in a row have equal heights.</li>
 </ul>
 <p><strong>Equal-height rows</strong> are a common Grid bonus: cards in the same row automatically stretch to the tallest card&rsquo;s height.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q86">
-  <div class="qa__number">Question 86</div>
-  <h3 class="qa__question">How do you apply a style to elements with a specific attribute value in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[86] = r'''
 <p>Use <strong>attribute selectors</strong> with the <code>=</code> operator to match exact values:</p>
 <pre><code>/* Inputs that are required */
 input[required] { border-color: red; }
@@ -5154,15 +4534,9 @@ input[type="password"] { letter-spacing: 0.2em; }
 :lang(en) { font-family: Georgia; }
 :lang(zh) { font-family: "PingFang SC"; }</code></pre>
 <p>Attribute selectors are essential for styling form inputs and integrating with JS-driven UIs that toggle <code>data-*</code> attributes for state.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q87">
-  <div class="qa__number">Question 87</div>
-  <h3 class="qa__question">How do you create a responsive footer using CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[87] = r'''
 <p>A responsive footer adapts from multi-column on desktop to stacked on mobile:</p>
 <pre><code>&lt;footer class="site-footer"&gt;
   &lt;div class="footer-cols"&gt;
@@ -5228,15 +4602,9 @@ input[type="password"] { letter-spacing: 0.2em; }
   }
 &lt;/style&gt;</code></pre>
 <p>Grid&rsquo;s <code>auto-fit + minmax</code> handles responsiveness without explicit breakpoints: 4+ columns on wide screens, fewer columns as space tightens, single column on phones.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q88">
-  <div class="qa__number">Question 88</div>
-  <h3 class="qa__question">How do you set the minimum height of an element in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[88] = r'''
 <p>Use the <code>min-height</code> property to set a floor &mdash; the element can grow taller, but never shorter:</p>
 <pre><code>.hero {
   min-height: 400px;        /* at least 400px tall */
@@ -5277,15 +4645,9 @@ input[type="password"] { letter-spacing: 0.2em; }
   min-height: 100dvh;       /* dynamic viewport height — accounts for mobile chrome */
 }</code></pre>
 <p><code>dvh</code> (dynamic viewport height) accounts for browser UI showing/hiding on mobile &mdash; smoother than <code>vh</code> on iOS Safari.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q89">
-  <div class="qa__number">Question 89</div>
-  <h3 class="qa__question">How do you create a progress bar using CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[89] = r'''
 <p>Use the native <code>&lt;progress&gt;</code> element &mdash; or build a custom one with two divs:</p>
 <p><strong>Native (preferred):</strong></p>
 <pre><code>&lt;progress value="65" max="100"&gt;65%&lt;/progress&gt;
@@ -5343,15 +4705,9 @@ input[type="password"] { letter-spacing: 0.2em; }
 bar.style.width = "75%";
 bar.parentElement.setAttribute("aria-valuenow", "75");</code></pre>
 <p>Always update both visual width and ARIA attributes &mdash; screen readers depend on them.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q90">
-  <div class="qa__number">Question 90</div>
-  <h3 class="qa__question">How do you change the font family of text in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[90] = r'''
 <p>Use the <code>font-family</code> property with a comma-separated list of fonts:</p>
 <pre><code>body {
   font-family: "Inter", -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
@@ -5393,15 +4749,9 @@ body { font-family: "MyFont", sans-serif; }</code></pre>
 <p><strong>System font stack</strong> &mdash; uses the OS&rsquo;s native UI font, with no download:</p>
 <pre><code>font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;</code></pre>
 <p>Fast, native, no font-loading penalty &mdash; preferred for app-like UIs.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q91">
-  <div class="qa__number">Question 91</div>
-  <h3 class="qa__question">How do you create a sticky header using CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[91] = r'''
 <p>Use <code>position: sticky</code> with <code>top: 0</code> &mdash; the header scrolls naturally with the page until it reaches the top, then sticks:</p>
 <pre><code>&lt;header class="sticky-header"&gt;
   &lt;a href="/"&gt;Logo&lt;/a&gt;
@@ -5441,15 +4791,9 @@ body { font-family: "MyFont", sans-serif; }</code></pre>
   scroll-margin-top: 70px;     /* approximately header height */
 }</code></pre>
 <p>Without this, anchor links scroll the target right under the sticky header. <code>scroll-margin-top</code> creates breathing room.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q92">
-  <div class="qa__number">Question 92</div>
-  <h3 class="qa__question">How do you create a responsive table using CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[92] = r'''
 <p>Two main approaches: <strong>horizontal scrolling</strong> for data preservation, or <strong>row stacking</strong> for mobile-friendly reading.</p>
 <p><strong>Horizontal scroll on mobile</strong> &mdash; preserves the table structure:</p>
 <pre><code>&lt;div class="table-wrapper"&gt;
@@ -5506,15 +4850,9 @@ body { font-family: "MyFont", sans-serif; }</code></pre>
 }</code></pre>
 <pre><code>&lt;td data-label="Email"&gt;alice@x.com&lt;/td&gt;</code></pre>
 <p>The <code>data-label</code> attribute provides the column name for stacked view; CSS reads it via <code>attr()</code>. This works well for tables with 5-10 columns; more columns become unwieldy.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q93">
-  <div class="qa__number">Question 93</div>
-  <h3 class="qa__question">How do you apply a style to the first letter of a paragraph in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[93] = r'''
 <p>Use the <code>::first-letter</code> pseudo-element to style the first letter of a paragraph or block element &mdash; perfect for "drop cap" magazine-style typography:</p>
 <pre><code>p::first-letter {
   font-size: 3em;
@@ -5554,15 +4892,9 @@ body { font-family: "MyFont", sans-serif; }</code></pre>
   color: #c00;
 }</code></pre>
 <p>Combine with <code>:first-of-type</code> so only the article&rsquo;s first paragraph gets a drop cap.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q94">
-  <div class="qa__number">Question 94</div>
-  <h3 class="qa__question">How do you create a responsive layout with a sidebar using CSS Grid?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[94] = r'''
 <p>CSS Grid handles a sidebar + main content layout perfectly &mdash; collapsing to single column on mobile:</p>
 <pre><code>&lt;div class="layout"&gt;
   &lt;aside&gt;
@@ -5629,15 +4961,9 @@ body { font-family: "MyFont", sans-serif; }</code></pre>
   <li>Media query collapses to single column on mobile.</li>
 </ul>
 <p>For a right sidebar instead, use <code>grid-template-columns: 1fr 250px</code>. For two sidebars, <code>200px 1fr 200px</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q95">
-  <div class="qa__number">Question 95</div>
-  <h3 class="qa__question">How do you create a gradient border using CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[95] = r'''
 <p>Use a gradient as the <code>border-image</code> source, or layer with backgrounds for a clean gradient border effect:</p>
 <p><strong>Method 1: <code>border-image</code></strong></p>
 <pre><code>.gradient-border {
@@ -5683,15 +5009,9 @@ body { font-family: "MyFont", sans-serif; }</code></pre>
   100% { background-position: 200% 50%; }
 }</code></pre>
 <p>Method 3 is the most flexible &mdash; supports rounded corners and animation cleanly.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q96">
-  <div class="qa__number">Question 96</div>
-  <h3 class="qa__question">How do you create a CSS rule that only applies to screen readers?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[96] = r'''
 <p>The <strong>visually-hidden CSS pattern</strong> hides content visually but keeps it accessible to screen readers. It&rsquo;s essential for skip links, descriptive labels, and supplementary text that&rsquo;s redundant for sighted users.</p>
 <pre><code>.sr-only {
   position: absolute;
@@ -5737,15 +5057,9 @@ body { font-family: "MyFont", sans-serif; }</code></pre>
   z-index: 100;
 }</code></pre>
 <p>This pattern reveals the skip link when keyboard-focused but hides it from sighted users by default. Most accessible site templates include this CSS.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q97">
-  <div class="qa__number">Question 97</div>
-  <h3 class="qa__question">How do you create a responsive hero section using CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[97] = r'''
 <p>A hero section is a large eye-catching banner at the top of a page. Modern responsive heroes use Flexbox or Grid for centering, with a background image and overlay for legibility:</p>
 <pre><code>&lt;section class="hero"&gt;
   &lt;div class="hero-content"&gt;
@@ -5800,15 +5114,9 @@ body { font-family: "MyFont", sans-serif; }</code></pre>
   <li>Stacked backgrounds (gradient over image) ensure text legibility on any photo.</li>
 </ul>
 <p><strong>Performance:</strong> use <code>fetchpriority="high"</code> + <code>&lt;link rel="preload"&gt;</code> on the hero image so it loads before LCP measurement.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q98">
-  <div class="qa__number">Question 98</div>
-  <h3 class="qa__question">How do you set the line height of text in CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[98] = r'''
 <p>Use the <code>line-height</code> property &mdash; it controls the vertical spacing between lines of text. The most common value is a unitless number (a multiplier of font size).</p>
 <pre><code>p { line-height: 1.5; }     /* 1.5 &times; font-size */
 
@@ -5831,15 +5139,9 @@ p  { font-size: 16px; }        /* line-height becomes 24px */</code></pre>
 </table>
 <p><strong>Accessibility:</strong> WCAG recommends <strong>line-height of at least 1.5</strong> for body text to help users with cognitive disabilities and dyslexia. Tighter line-heights make text harder to scan.</p>
 <p><strong>Vertical rhythm</strong> &mdash; advanced typography sets all line-heights to multiples of a base value (e.g., 24px), creating a consistent baseline grid throughout the page. Modern frameworks like Tailwind use this approach with their spacing scale.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q99">
-  <div class="qa__number">Question 99</div>
-  <h3 class="qa__question">How do you create a fixed element that stays in place while scrolling using CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[99] = r'''
 <p>Use <code>position: fixed</code> &mdash; the element stays anchored to the viewport regardless of scrolling:</p>
 <pre><code>.scroll-to-top {
   position: fixed;
@@ -5893,15 +5195,9 @@ main {
   });
 &lt;/script&gt;</code></pre>
 <p>Show the button only after the user has scrolled past 300px &mdash; common pattern for "scroll to top" controls.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q100">
-  <div class="qa__number">Question 100</div>
-  <h3 class="qa__question">How do you create a full-width button using CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[100] = r'''
 <p>Make a button span the full width of its container with <code>width: 100%</code> and <code>display: block</code> if needed:</p>
 <pre><code>.btn-full {
   display: block;          /* span full width if needed */
@@ -5950,15 +5246,9 @@ main {
   }
 }</code></pre>
 <p>Full-width buttons on mobile improve tap accuracy &mdash; the larger target is easier to hit. Reserve them for primary actions; secondary actions should be visually less prominent.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q101">
-  <div class="qa__number">Question 101</div>
-  <h3 class="qa__question">How do you create a responsive layout with multiple columns using CSS Flexbox?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[101] = r'''
 <p>Flexbox handles multi-column layouts that respond to viewport size with <code>flex-wrap</code>:</p>
 <pre><code>&lt;section class="features"&gt;
   &lt;article&gt;
@@ -6009,15 +5299,9 @@ main {
   <li>Phone: 1 column stacked.</li>
 </ul>
 <p><strong>Comparison with Grid:</strong> Flexbox preserves item order and gives natural wrapping. Grid (<code>auto-fit + minmax</code>) provides stronger alignment and fixed-row behavior. Both work for this pattern; pick the syntax you find clearer.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q102">
-  <div class="qa__number">Question 102</div>
-  <h3 class="qa__question">How do you create a responsive image slider using CSS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[102] = r'''
 <p>A CSS-only image slider uses <code>scroll-snap</code> for smooth, native swipe-to-scroll behavior:</p>
 <pre><code>&lt;div class="slider"&gt;
   &lt;img src="1.jpg" alt="Slide 1"&gt;
@@ -6067,27 +5351,4 @@ main {
 &lt;/script&gt;</code></pre>
 <p><strong>Add pagination dots</strong> &mdash; one per slide, clickable to jump.</p>
 <p><strong>For a true production carousel</strong> with autoplay, lazy loading, and rich accessibility (keyboard navigation, ARIA live regions, reduced-motion support), use a library like Swiper.js or Embla Carousel. The pure-CSS version handles ~80% of slider needs with zero JavaScript.</p>
-
-    
-  </div>
-</article>
-
-    <nav class="chapter-nav" aria-label="Chapter navigation">
-      <a class="chapter-nav__prev" href="html-advanced.html">
-      <span class="chapter-nav__dir">← Previous</span>
-      <span class="chapter-nav__title">HTML — Advanced</span>
-    </a>
-      <a class="chapter-nav__next" href="css-coding.html">
-      <span class="chapter-nav__dir">Next →</span>
-      <span class="chapter-nav__title">CSS — Coding</span>
-    </a>
-    </nav>
-
-  </section>
-
-</main>
-</div>
-
-<script src="../assets/script.js"></script>
-</body>
-</html>
+'''

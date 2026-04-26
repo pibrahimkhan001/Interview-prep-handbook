@@ -4,6 +4,222 @@ Session-by-session record of what was done. Latest entries at the top.
 
 Format: `## YYYY-MM-DD — Session title`
 
+## 2026-04-26 — CSS Advanced Q1-101 (CSS topic complete, 2803/4904)
+
+**Changes:**
+- Completed CSS Advanced with all 101 answers in `content/css_advanced.py` (avg 4,328 chars, range 2,683-6,452). Style: Advanced-level conventions &mdash; 100-180 words of mechanism-focused prose per answer, comparison tables for related concepts, code blocks demonstrating internals/patterns, 2026-current best practices throughout (cascade layers, container queries, :has, scroll-driven animations, view transitions, anchor positioning, oklch, color-mix, @property, subgrid, dvh/svh/lvh viewport units, popover API, Baseline references). Length trends higher than other Advanced chapters because CSS Advanced questions inherently span more concepts per topic.
+
+- Built across multiple sessions: Q1-50 from prior sessions covered fundamentals through responsive Flexbox card layouts. This session: Q51-101 (51 final answers) covering everything from CSS counters and content property through the modern stack (subgrid, @layer, mix-blend-mode, scroll-snap).
+
+- Q51-101 topics covered this turn:
+  - **Q51 content property** &mdash; values table, attr(), counter(), accessibility limitations
+  - **Q52 sticky footer** &mdash; Flexbox vs Grid approaches, dvh for mobile, comparison with negative margin legacy
+  - **Q53 filter effects** &mdash; full functions table, drop-shadow vs box-shadow, performance
+  - **Q54 spinner/loader** &mdash; border-top spinner, three-dot bouncer, conic-gradient, accessibility (role/aria-live)
+  - **Q55 scroll-behavior** &mdash; smooth scrolling + scroll-margin-top + prefers-reduced-motion
+  - **Q56 fixed background** &mdash; iOS Safari mobile bug, 3D-transform parallax, scroll-driven animations 2024+
+  - **Q57 overscroll-behavior** &mdash; contain vs none, three-axis chaining table, modal/chat use cases
+  - **Q58 nested Flexbox** &mdash; composition pattern, page/header/main hierarchy, sizing patterns table
+  - **Q59 grid-template-areas** &mdash; rules, dot for empty, common patterns, rectangular-only limit
+  - **Q60 lightbox** &mdash; :target pattern, modern Popover API alternative, trade-offs table
+  - **Q61 backdrop-filter** &mdash; frosted glass, browser support with -webkit prefix, filter vs backdrop-filter table
+  - **Q62 pricing table** &mdash; auto-fit Grid, featured plan scale + badge, equal heights with stretch
+  - **Q63 viewport units** &mdash; vw/vh/vmin/vmax + dvh/svh/lvh new units explanation, mobile bug fix
+  - **Q64 sticky sidebar** &mdash; align-self:start critical, overflow ancestor gotcha table, Flexbox variant
+  - **Q65 aspect-ratio** &mdash; ratio reference table, padding-bottom legacy hack comparison, object-fit pairing
+  - **Q66 responsive table** &mdash; horizontal scroll, stacked rows with data-label, hide secondary columns
+  - **Q67 CSS counters** &mdash; counter-reset/increment/counters() plural, hierarchical numbering, @counter-style
+  - **Q68 flip card** &mdash; perspective + preserve-3d + backface-visibility trio, hover/click triggers, accessibility
+  - **Q69 object-position** &mdash; coordinate system, real-world face-shot pattern, animatable
+  - **Q70 hero section** &mdash; Grid + clamp() typography + dvh + stacked backgrounds + LCP optimization
+  - **Q71 contain property** &mdash; size/layout/paint/strict/content values, content-visibility:auto pairing
+  - **Q72 timeline** &mdash; vertical line via ::before, dot markers, alternating zigzag pattern, mobile collapse
+  - **Q73 transforms** &mdash; 2D + 3D function tables, composition order, GPU-accelerated performance comparison, individual properties (translate/rotate/scale 2024+)
+  - **Q74 equal-height columns** &mdash; three-layer alignment (outer flex + inner column + flex:1 on description), Grid alternative
+  - **Q75 mask property** &mdash; sub-properties table, monochrome icon pattern, mask vs clip-path, animation, -webkit prefix
+  - **Q76 star rating** &mdash; radio + flex-direction:row-reverse + ~ combinator, half-star with background-clip:text, accessibility
+  - **Q77 perspective** &mdash; viewer distance values, parent property vs transform function, vanishing point control
+  - **Q78 hamburger navbar** &mdash; CSS-only checkbox toggle, hamburger-to-X animation, ARIA accessibility upgrade with JS
+  - **Q79 intrinsic vs extrinsic sizing** &mdash; auto/min-content/max-content/fit-content, default sizing per element type
+  - **Q80 masonry** &mdash; CSS columns method (universal), JS-driven Grid row-span, native masonry status 2026
+  - **Q81 shape-outside** &mdash; float-only requirement, shape functions, image silhouette wrapping, shape-margin
+  - **Q82 image slider** &mdash; scroll-snap pattern, prev/next buttons, :target-current for active state, library comparison
+  - **Q83 subgrid** &mdash; problem solved (card internal alignment), Baseline 2024, @supports fallback
+  - **Q84 countdown timer** &mdash; CSS-only limitations, @property hack for animatable integers, JavaScript-required real implementation
+  - **Q85 counter-reset/increment** &mdash; deeper dive than Q67, custom increments, parallel counters, scope rules
+  - **Q86 grid-template-areas responsive** &mdash; same elements rearrange across breakpoints, container queries variant
+  - **Q87 writing-mode** &mdash; horizontal-tb/vertical-rl/lr/sideways, block/inline axis flip, vs CSS rotation
+  - **Q88 toast notification** &mdash; CSS animation + JS state, modern Popover API, ARIA role="status"/"alert"
+  - **Q89 scroll-snap** &mdash; mandatory vs proximity, snap-align, snap-stop:always, scroll-padding for header offset
+  - **Q90 Flexbox wrap** &mdash; flex:1 1 250px pattern, vs Grid auto-fit comparison table, common pitfalls
+  - **Q91 all property** &mdash; initial/inherit/unset/revert/revert-layer values, embedded widget reset use case
+  - **Q92 progress bar** &mdash; native &lt;progress&gt; first, div-based with ARIA, striped/indeterminate/segmented, scroll-driven
+  - **Q93 place-items** &mdash; shorthand for align/justify-items, items vs content distinction, classic centering recipes
+  - **Q94 sticky header** &mdash; position:sticky, ancestor overflow gotcha table, scroll-driven shadow effect 2024+
+  - **Q95 scroll-margin/padding** &mdash; target vs container, classic anchor-behind-header fix, carousel padding for peek
+  - **Q96 vertical timeline** &mdash; line via ::before, alternating zigzag, status colors with attribute selectors, scroll-driven reveals
+  - **Q97 @layer** &mdash; cascade layer ordering, !important reversal nuance, @import with layer(), recommended architecture
+  - **Q98 subgrid responsive** &mdash; card grid internal alignment, pricing comparison, container queries combo
+  - **Q99 mix-blend-mode** &mdash; full modes table, difference for always-visible text, isolation:isolate scoping
+  - **Q100 circular progress bar** &mdash; SVG stroke-dasharray method, conic-gradient method, @property animation, activity rings
+  - **Q101 grid-template** &mdash; three forms, areas inline with row sizes, vs separate properties, vs grid shorthand
+
+- Rebuilt chapters &mdash; **28 of 49 now detailed**. Generated `chapters/css-advanced.html` at ~487 KB with 101 Q&A blocks (largest chapter so far due to mechanism depth).
+
+- Updated PROJECT_STATE (2702 &rarr; 2803, 27 &rarr; 28 chapters, ~55% &rarr; ~57%, CSS topic fully complete, ReactJS Basic flagged as 🔄 next, `css_advanced.py` added to file map, delivery status refreshed), ROADMAP (CSS Advanced checked off 2026-04-26, ReactJS Basic now next, remaining stubs 22 &rarr; 21, Phase 4 target 502 &rarr; 401), and CHANGELOG (this entry prepended).
+
+**Files touched:**
+- COMPLETED: `content/css_advanced.py` (101 answers, avg 4,328 chars; was 50 from prior sessions, now 101 total)
+- MODIFIED: `docs/PROJECT_STATE.md`, `docs/ROADMAP.md`, `docs/CHANGELOG.md`
+- REGENERATED: `chapters/css-advanced.html` (487 KB, 101 Q&A blocks), `index.html`
+- DELIVERED: `/mnt/user-data/outputs/interview-prep-guide.zip`
+
+**Progress:** 2,803 / 4,904 answers (~57%). Phase 4 Frontend at 603/1,004 (~60%). JavaScript, Python, Node.js, ExpressJS, API, HTML, **CSS** all fully done. CSS topic 303/303 complete. Only ReactJS remains in Phase 4.
+
+**Next:** ReactJS Basic (101 Q) &mdash; first React chapter. Style returns to Basic-level conventions: 80-150 words of beginner-friendly prose per answer, simple JSX/hooks code examples, comparison tables. Topics will likely cover: components (functional vs class), JSX syntax, props, state with useState, useEffect basics, event handling, conditional rendering, lists with keys, controlled inputs, fragments, simple state updates, prop drilling, default exports, basic component composition. Target ~1,300-2,000 chars per answer.
+
+---
+
+## 2026-04-26 — CSS Coding Q1-100 (CSS Coding complete, 2702/4904)
+
+**Changes:**
+- Completed CSS Coding with all 100 answers in `content/css_coding.py` (avg 1,850 chars, range 1,386-2,317). Style: Coding-level conventions &mdash; 150-250 words of setup with runnable HTML/CSS snippets, attribute tables for property reference, brief explanations focused on practical application.
+
+- Built across multiple sessions: Q1-65 from prior session covered CSS fundamentals through gradient text. This session: Q66-100 (35 final answers) covered animations (opacity fade, continuous spin, color animations, bouncing, height changes), transforms (scale, skew, flip with backface-visibility), gradients (linear-gradient backgrounds, layered with images), CSS variables (background/text/font-size with theming), layouts (Grid + Flexbox combined, sidebar Flexbox, form Grid, header/main/footer Grid named areas, equal columns, flexible sidebar Grid, fixed-width container, multiple rows/columns), interactions (hover effects with transitions, click states with :active, hover row highlighting, expanding search bar), tables (border-collapse, alternating rows, cell borders), SVG icon coloring (currentColor pattern, fill, mask), border per-side, responsive patterns (multiple columns, nested Flexbox, equal-width columns, fixed-width container with breakpoints).
+
+- Q66-100 topics covered this turn:
+  - **Q66 opacity animation** &mdash; fadeIn keyframes, pulse, animation properties table, GPU-accelerated performance
+  - **Q67 table border** &mdash; border-collapse:collapse essential, separate alternative
+  - **Q68 Grid + Flex** &mdash; Grid for page structure with named areas, Flex for card row inside
+  - **Q69 z-index** &mdash; positioning required, stacking conventions table, CSS variables for layers
+  - **Q70 hover transition** &mdash; multi-property transition, timing functions, base-not-hover rule
+  - **Q71 background-color via CSS var** &mdash; scope override, fallback values, JS update
+  - **Q72 form Grid layout** &mdash; .full grid-column 1 / -1, mobile collapse
+  - **Q73 table row hover** &mdash; combined with zebra striping, clickable rows
+  - **Q74 transform scale** &mdash; functions table, combine with rotate/translate, GPU performance
+  - **Q75 color via CSS var** &mdash; theme switching with data-theme attribute, prefers-color-scheme
+  - **Q76 continuous rotation** &mdash; spin keyframes, prefers-reduced-motion respect
+  - **Q77 gradient backgrounds** &mdash; direction syntax, color stops, subtle modern gradients
+  - **Q78 sidebar Flexbox** &mdash; flex:0 0 250px fixed, flex:1 grow, mobile stack
+  - **Q79 background-image hover** &mdash; opacity overlay crossfade trick, preload
+  - **Q80 color animation** &mdash; rainbow keyframes, two-color pulse, highlight pattern
+  - **Q81 border per side** &mdash; logical properties (block-start/inline-start), tab indicator pattern
+  - **Q82 header/main/footer Grid** &mdash; named template areas, sticky footer, sidebar variant
+  - **Q83 font-size CSS var** &mdash; type scale, responsive variables, fluid clamp()
+  - **Q84 transform skew** &mdash; ribbon/banner trick with counter-skew content
+  - **Q85 hover text color** &mdash; multi-property, currentColor pattern
+  - **Q86 nested Flexbox** &mdash; outer + inner flex composition for complex layouts
+  - **Q87 width on hover** &mdash; expanding search bar, scaleX alternative for performance
+  - **Q88 background-position keyframes** &mdash; shimmer skeleton, marching stripes
+  - **Q89 linear-gradient over image** &mdash; comma-separated layers, dark overlay/vignette/tint
+  - **Q90 multi-row/col Grid** &mdash; spanning cells, responsive breakpoints
+  - **Q91 SVG icon color** &mdash; currentColor inheritance, multi-color CSS vars, mask alternative
+  - **Q92 bounce animation** &mdash; realistic ease-out/ease-in physics, staggered delays
+  - **Q93 table cell border** &mdash; first-child accent, last-row reset
+  - **Q94 equal Flexbox columns** &mdash; flex:1 mechanic, ratio 1:2:1, wrap pattern
+  - **Q95 background on click** &mdash; :active state, scale press effect, checkbox toggle hack
+  - **Q96 transform flip** &mdash; scaleX(-1) horizontal mirror, 3D card flip with backface-visibility
+  - **Q97 fixed-width container** &mdash; max-width:1200px + width:100% + margin auto pattern
+  - **Q98 height animation** &mdash; interpolate-size 2024+ for auto, max-height fallback, ::details-content
+  - **Q99 box-shadow on hover** &mdash; lift effect, Material elevation pattern with stacked shadows
+  - **Q100 flexible sidebar Grid** &mdash; minmax(200px,250px) 1fr, collapsible variant, sticky aside
+
+- Rebuilt chapters &mdash; **27 of 49 now detailed**. Generated `chapters/css-coding.html` at ~235 KB with 100 Q&A blocks.
+
+- Updated PROJECT_STATE (2602 &rarr; 2702, 26 &rarr; 27 chapters, ~53% &rarr; ~55%, CSS Coding ✅, CSS Advanced flagged as 🔄 next, `css_coding.py` added to file map, delivery status refreshed), ROADMAP (CSS Coding checked off 2026-04-26, CSS Advanced now next, remaining stubs 23 &rarr; 22, Phase 4 target 602 &rarr; 502), and CHANGELOG (this entry prepended).
+
+**Files touched:**
+- COMPLETED: `content/css_coding.py` (100 answers, avg 1,850 chars; was 65 from prior session, now 100 total)
+- MODIFIED: `docs/PROJECT_STATE.md`, `docs/ROADMAP.md`, `docs/CHANGELOG.md`
+- REGENERATED: `chapters/css-coding.html` (235 KB, 100 Q&A blocks), `index.html`
+- DELIVERED: `/mnt/user-data/outputs/interview-prep-guide.zip`
+
+**Progress:** 2,702 / 4,904 answers (~55%). Phase 4 Frontend at 502/1,004 (~50%, halfway through Phase 4!). JavaScript, Python, Node.js, ExpressJS, API, HTML all fully done. CSS at 202/303 (~67% &mdash; one chapter remaining).
+
+**Next:** CSS Advanced (101 Q) &mdash; final CSS chapter. Style returns to Advanced-level conventions: 100-180 words of mechanism-focused prose, comparison tables for related concepts, code blocks demonstrating internals/patterns, 2026-current best practices. Topics will likely cover Grid internals (subgrid, grid-template-areas, fr unit math), Flexbox quirks, animation performance and the rendering pipeline, advanced selectors (:has, :is, :where, container queries), CSS architecture (BEM, CUBE, ITCSS), modern features (cascade layers, scope, color functions like oklch), CSS-in-JS comparisons, design tokens and theme systems. Target ~2,500-3,500 chars per answer with mechanism-level depth similar to api_advanced.
+
+---
+
+## 2026-04-26 — CSS Basic Q1-102 (CSS topic started, 2602/4904)
+
+**Changes:**
+- Completed CSS Basic with all 102 answers in `content/css_basic.py` (avg 1,994 chars, range 1,284-2,903). Style: Basic-level conventions &mdash; 80-150 words of concise prose, simple HTML/CSS examples, comparison tables for related properties (block vs inline, padding vs margin, sticky vs fixed, etc.), beginner-friendly explanations.
+
+- Built across multiple sessions: Q1-75 from prior session (1,284-2,903 char range covering CSS fundamentals through layout basics). This session: Q76-102 (27 final answers) covering advanced basics &mdash; rounded corners + shadow combos, CSS variables with theming and dark mode, state pseudo-classes (:hover/:focus/:focus-visible/:disabled), sibling-hover patterns and :has() parent selector, multi-column layouts (CSS columns vs Grid), responsive image galleries, :last-child selector with :last-of-type distinction, responsive flexbox nav, aspect-ratio property (modern + padding-bottom hack history), card grids with auto-fit minmax, attribute selectors with operator table (=, ^=, $=, *=, ~=, |=), responsive footers, min-height for sticky footer pattern + dvh unit, native progress element with accent-color, font-family stacks and @font-face loading, sticky headers with scroll-margin-top, responsive tables (horizontal scroll vs row stacking with data-label attr()), ::first-letter pseudo-element drop caps, sidebar layouts with Grid + sticky, gradient borders (3 methods including modern background-clip technique), .sr-only visually-hidden pattern for accessibility, hero sections with stacked backgrounds and clamp() typography, line-height best practices (unitless inheritance), position:fixed with show-on-scroll patterns, full-width buttons with box-sizing:border-box, flexbox multi-column with flex:1 1 250px, scroll-snap image sliders.
+
+- Q76-102 topics covered this turn:
+  - **Q76 rounded shadow combo** &mdash; border-radius + box-shadow card pattern with multiple shadow stacking
+  - **Q77 CSS variables** &mdash; :root custom properties, var() with fallbacks, dark mode via prefers-color-scheme
+  - **Q78 state styles** &mdash; :hover/:focus/:focus-visible/:active/:disabled/:checked/:valid table
+  - **Q79 hover sibling visibility** &mdash; .parent:hover .child pattern, sibling combinators ~ and +, :has() parent selector
+  - **Q80 multi-column** &mdash; CSS columns property vs Grid, column-span, break-inside
+  - **Q81 responsive gallery** &mdash; auto-fit minmax 200px Grid + object-fit:cover with hover scale
+  - **Q82 :last-child** &mdash; vs :last-of-type with example showing the difference
+  - **Q83 flex nav** &mdash; justify-content:space-between, mobile media query collapse to vertical
+  - **Q84 aspect-ratio** &mdash; 16/9 ratios, padding-bottom history, common values table
+  - **Q85 card grid** &mdash; Grid auto-fit with flex:1 inside cards for equal heights
+  - **Q86 attribute selectors** &mdash; full operator table with data-state UI patterns
+  - **Q87 responsive footer** &mdash; multi-column footer with auto-fit collapse
+  - **Q88 min-height** &mdash; vs height, sticky footer pattern, 100dvh for mobile chrome
+  - **Q89 progress bar** &mdash; native progress vs custom div with ARIA, animated stripes
+  - **Q90 font-family** &mdash; @font-face, Google Fonts preconnect, system font stack
+  - **Q91 sticky header** &mdash; vs fixed, overflow gotcha, scroll-margin-top for anchors
+  - **Q92 responsive table** &mdash; overflow-x scroll vs row stacking with data-label and attr()
+  - **Q93 ::first-letter** &mdash; drop cap pattern, pseudo-element table, restrictions
+  - **Q94 sidebar Grid layout** &mdash; 250px 1fr with sticky aside, mobile single-column collapse
+  - **Q95 gradient border** &mdash; 3 methods (border-image, ::before hack, background-clip with rounded corners)
+  - **Q96 sr-only screen reader CSS** &mdash; clip rect technique vs display:none, focus-revealing skip links
+  - **Q97 hero section** &mdash; stacked backgrounds for overlay, clamp() fluid typography
+  - **Q98 line-height** &mdash; unitless inheritance, WCAG 1.5 minimum, vertical rhythm
+  - **Q99 fixed scroll-to-top** &mdash; position:fixed, show-on-scroll JS pattern
+  - **Q100 full-width button** &mdash; width:100% + box-sizing, mobile media query pattern
+  - **Q101 flex multi-column** &mdash; flex:1 1 250px shorthand, flex-wrap, wide/tablet/phone progression
+  - **Q102 image slider** &mdash; CSS-only scroll-snap with mandatory snap-type, prev/next buttons
+
+- Rebuilt chapters &mdash; **26 of 49 now detailed**. Generated `chapters/css-basic.html` at ~253 KB with 102 Q&A blocks.
+
+- Updated PROJECT_STATE (2500 &rarr; 2602, 25 &rarr; 26 chapters, ~51% &rarr; ~53%, CSS Basic ✅, CSS Coding flagged as 🔄 next, `css_basic.py` added to file map, delivery status refreshed, duplicate row removed), ROADMAP (CSS Basic checked off 2026-04-26, CSS Coding now next, remaining stubs 24 &rarr; 23, Phase 4 target 704 &rarr; 602), and CHANGELOG (this entry prepended).
+
+**Files touched:**
+- COMPLETED: `content/css_basic.py` (102 answers, avg 1,994 chars; was 75 from prior session, now 102 total)
+- MODIFIED: `docs/PROJECT_STATE.md`, `docs/ROADMAP.md`, `docs/CHANGELOG.md`
+- REGENERATED: `chapters/css-basic.html` (253 KB, 102 Q&A blocks), `index.html`
+- DELIVERED: `/mnt/user-data/outputs/interview-prep-guide.zip`
+
+**Progress:** 2,602 / 4,904 answers (~53%). Phase 4 Frontend at 402/1,004 (~40%). JavaScript, Python, Node.js, ExpressJS, API, HTML all fully done. CSS Basic complete; 2 CSS chapters remaining (Coding + Advanced); React 4 chapters pending.
+
+**Next:** CSS Coding (100 Q) &mdash; second CSS chapter. Style shifts to Coding-level conventions: 150-250 words of setup with runnable HTML/CSS snippets showing concrete tasks (centering layouts, building components, responsive patterns), brief explanations focused on practical application, attribute tables for quick reference. Target ~1,700 chars per answer. Topics will likely cover layout patterns (centering, sticky footers, holy grail), component construction (cards, modals, navs, forms), responsive techniques, animations, and CSS frameworks integration.
+
+---
+
+## 2026-04-26 — HTML Advanced Q1-100 (HTML topic complete, past halfway, 2500/4904)
+
+**Changes:**
+- Completed HTML Advanced with all 100 answers in `content/html_advanced.py` (avg 3,713 chars, range 2,372-5,935). Style: Advanced-level conventions &mdash; 100-180 words of mechanism-focused prose, comparison tables for related concepts, code blocks demonstrating internals/patterns (not just usage), 2026-current best practices, accessibility/performance notes at the end. Each answer goes deeper than how-to: it explains why and trade-offs.
+
+- Built across multiple sessions: Q1-50 from prior session (3,458 char avg, JS-heavy topics like Web Components, Shadow DOM, Custom Elements, microdata, ARIA, lazy loading, dialog, template, slot, picture). This session: Q51-67 covered semantic edge cases (cite, address vs footer, kbd, optgroup, base, q, fieldset/legend distinctions); Q68-83 covered modern patterns (sticky header with IntersectionObserver detection, progressive enhancement layers, responsive video with AV1/H.265/H.264 + HLS, viewport-fit=cover with safe-area-inset, custom scrollbars combining scrollbar-width with WebKit pseudos, refined HTML5 meaning of s vs del); Q84-100 covered final advanced topics (CSS columns vs Grid for multi-column, graceful degradation with @supports feature queries, color input + EyeDropper API, ins/del with datetime, accordions via details/summary with name attribute and ::details-content animation, print stylesheets with @page and break-* properties, var element for math/code, media queries including container queries and prefers-reduced-motion, bdi for bidirectional isolation against Trojan Source attacks, autocomplete with passkey/webauthn integration, deprecated menu/menuitem history, link rel=preload with fetchpriority and Speculation Rules API).
+
+- Q51-100 topics covered this turn:
+  - **Q51-67 — semantic refinements:** cite (titles only per WHATWG), file upload form (3 must-rights), address vs footer narrow scoping, canvas 2d/webgl/webgpu contexts with high-DPI handling, table caption first-child rule, placeholder is NOT a label (floating label pattern with placeholder=" "), optgroup label and disabled, custom tooltips via Popover API + anchor positioning, kbd family with samp/var/code, Web Storage 5MB limit and security warnings, sessionStorage vs localStorage tab scope, collapsible sidebar with aria-controls/aria-expanded and body scroll lock, base href anchor link gotcha, form action absolute/relative URLs and per-button overrides, noscript head-only restrictions, flexbox gallery with flex 1 1 250px, sub/sup with footnote pattern.
+  - **Q68-83 — modern patterns:** sticky header detect-stuck via IntersectionObserver, progressive enhancement vs graceful degradation philosophies, responsive video with multiple sources/captions/HLS adaptive streaming, deprecated acronym replaced by abbr (full HTML5 graveyard table), viewport meta accessibility rule (never user-scalable=no) with viewport-fit=cover and theme-color, address element narrow definition not for geographic addresses, multiple file upload with drag-drop and direct-to-cloud signed URLs, q with locale-aware quotes via lang attr, responsive cards with auto-fit minmax 280px and margin-top auto for button alignment, script vs noscript with attribute table and head-only restrictions, required form fields with :user-invalid pseudo and Constraint Validation API, small for fine print/copyright (semantic not presentational), optgroup grouping (selectlist proposal mentioned), fieldset disabled superpower for radio/checkbox accessibility, custom scrollbars with modern scrollbar-width/scrollbar-color and WebKit pseudos, s element refined HTML5 meaning vs del.
+  - **Q84-100 — final batch:** multi-column CSS columns vs Grid (column-fill, break-inside), graceful degradation with @supports and polyfills, color input with EyeDropper API and validation rules, ins/del with cite/datetime for edit tracking, native accordion with name attribute and interpolate-size animation, summary as first-child label with toggle event, print stylesheet with @page rule and break-* properties (replaces page-break-*), var element for math/code variables (semantic not just italic), media queries including prefers-color-scheme/reduced-motion/contrast and container queries, bdi for bidirectional isolation (Trojan Source defense), inline validation with validity object properties and setCustomValidity for cross-field, u element for non-textual annotation (Chinese names, spellcheck), fixed nav with scroll-margin-top for anchor links and hide-on-scroll-down pattern, dl/dt/dd with multiple terms/definitions and Grid layout, autocomplete tokens table with cc-* and one-time-code and webauthn for passkeys, menu still valid but menuitem removed (Popover API replacement), link rel=preload with as attribute requirements and crossorigin font gotcha and Speculation Rules API.
+
+- Rebuilt chapters &mdash; **25 of 49 now detailed**. Generated `chapters/html-advanced.html` at ~423 KB with 100 Q&A blocks.
+
+- Updated PROJECT_STATE (2400 &rarr; 2500, 24 &rarr; 25 chapters, ~49% &rarr; ~51%, HTML Advanced ✅, CSS Basic flagged as 🔄 next, `html_advanced.py` added to file map, delivery status refreshed), ROADMAP (HTML Advanced checked off 2026-04-26, CSS Basic now next, remaining stubs 25 &rarr; 24, Phase 4 target 804 &rarr; 704), and CHANGELOG (this entry prepended).
+
+**Files touched:**
+- CREATED/COMPLETED: `content/html_advanced.py` (100 answers, avg 3,713 chars; was 50 from prior session, now 100 total)
+- MODIFIED: `docs/PROJECT_STATE.md`, `docs/ROADMAP.md`, `docs/CHANGELOG.md`
+- REGENERATED: `chapters/html-advanced.html` (423 KB, 100 Q&A blocks), `index.html`
+- DELIVERED: `/mnt/user-data/outputs/interview-prep-guide.zip`
+
+**Progress:** 2,500 / 4,904 answers (~51%) &mdash; **past the halfway mark!** Phase 4 Frontend at 300/1,004 (~30%). HTML topic 100% complete (300/300). JavaScript, Python, Node.js, ExpressJS, API, HTML all fully done.
+
+**Next:** CSS Basic (102 Q) &mdash; first CSS chapter. Style will return to Basic-level conventions: 80-150 words of concise prose, simple HTML/CSS examples, comparison tables for related properties (e.g. block vs inline-block vs flex, padding vs margin), beginner-friendly explanations of selectors, the box model, color/units, basic positioning, typography fundamentals. Target ~1,300-1,500 chars per answer. After CSS Basic comes CSS Coding (100 Q practical snippets) and CSS Advanced (101 Q internals/Grid/animations/architecture).
+
+---
+
 ## 2026-04-25 — HTML Coding Q1-100 (Phase 4 progressing, 2400/4904)
 
 **Changes:**

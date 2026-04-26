@@ -1,0 +1,35 @@
+# Python build artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.Python
+build/
+dist/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs and temp
+*.log
+*.tmp
+*.bak
+
+# Local env
+.env
+.env.local
+venv/
+.venv/
+
+# Build/output zips
+*.zip

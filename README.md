@@ -1,60 +1,80 @@
-# Interview Prep Mastery
+# Interview Prep Handbook
 
-A standalone, offline-capable learning site covering **4,898 interview questions** across 13 topics and 7 difficulty levels.
+A standalone, offline-capable learning site covering **4,904 interview questions** across 13 topics and 7 difficulty levels.
+
+🌐 **Live site:** https://pibrahimkhan001.github.io/interview-prep-handbook/
 
 ## How to use it
 
-1. **Extract** the zip file anywhere on your computer.
-2. **Open `index.html`** in any modern browser (Chrome, Firefox, Edge, Safari).
+**Online:** just visit the live site link above — works on phone, tablet, or desktop.
+
+**Offline / local:**
+1. Clone or download this repo.
+2. Open `index.html` in any modern browser (Chrome, Firefox, Edge, Safari).
 3. Browse chapters from the homepage or the left sidebar.
 
 No build step, no server, no internet required — it's a fully static site.
 
-## What's inside
+## Progress
 
-### Content status (as of this delivery)
+**2,803 / 4,904 detailed answers** (~57%) across **28 of 49 chapters**.
 
-| Part | Topic | Detailed answers |
+| Part | Topic | Status |
 | --- | --- | --- |
-| 1 | **JavaScript** (all 7 levels, 700 questions) | ✅ Complete |
-| 1 | Python | 🚧 Stubs with question list |
-| 2 | HTML, CSS | 🚧 Stubs with question list |
-| 3 | Node.js, ExpressJS, API | 🚧 Stubs with question list |
-| 4 | ReactJS | 🚧 Stubs with question list |
-| 5 | MySQL, MongoDB | 🚧 Stubs with question list |
-| 6 | System Design MERN, Infrastructure MERN, CI/CD Pipeline | 🚧 Stubs with question list |
+| 1 | **JavaScript** (7 levels, 700 Q) | ✅ Complete |
+| 1 | **Python** (4 levels, 400 Q) | ✅ Complete |
+| 2 | **HTML** (3 levels, 300 Q) | ✅ Complete |
+| 2 | **CSS** (3 levels, 303 Q) | ✅ Complete |
+| 3 | **Node.js** (4 levels, 400 Q) | ✅ Complete |
+| 3 | **ExpressJS** (3 levels, 300 Q) | ✅ Complete |
+| 3 | **API** (4 levels, 400 Q) | ✅ Complete |
+| 4 | ReactJS (4 levels, 401 Q) | ⏳ In progress |
+| 5 | MySQL, MongoDB (8 levels, 800 Q) | 📋 Stubs |
+| 6 | System Design, Infrastructure, CI/CD (9 levels, 900 Q) | 📋 Stubs |
 
 Stub chapters show every question with a "detailed answer coming soon" message, but the question list itself is complete and usable as a study checklist.
 
-### JavaScript chapter depth
+### Answer depth
 
-Every one of the 700 JavaScript questions includes:
-- A direct, beginner-friendly explanation
+Every detailed answer includes:
+- A direct, beginner-friendly explanation calibrated to the difficulty level
 - Runnable code examples in `<pre><code>` blocks
 - Callouts for gotchas, tips, and warnings
 - Comparison tables where relevant
-- References to production-grade libraries where applicable
+- References to 2026-current libraries and best practices
 
-Approximate read time: ~10-11 hours to go through every JavaScript chapter.
+Approximate read time for completed chapters: ~40-45 hours.
 
 ## Structure
 
 ```
-interview-prep-guide/
+interview-prep-handbook/
 ├── index.html                  ← start here
+├── README.md                   ← this file
+├── DEPLOYMENT.md               ← how to push to GitHub & enable Pages
 ├── assets/
 │   ├── styles.css              ← book-style theme with dark mode
 │   └── script.js               ← navigation, theme toggle
 ├── chapters/                   ← 49 chapter HTML pages
 │   ├── javascript-basic.html
-│   ├── javascript-tricky.html
 │   ├── ...
 │   └── cicd-pipeline-scenario.html
-├── content/                    ← Python modules with detailed answers (source)
-│   ├── javascript_basic.py
-│   └── ... (7 JavaScript modules)
+├── content/                    ← Python source modules with detailed answers
+│   ├── javascript_*.py         (7 files, 700 answers)
+│   ├── python_*.py             (4 files, 400 answers)
+│   ├── html_*.py               (3 files, 300 answers)
+│   ├── css_*.py                (3 files, 303 answers)
+│   ├── nodejs_*.py             (4 files, 400 answers)
+│   ├── expressjs_*.py          (3 files, 300 answers)
+│   └── api_*.py                (4 files, 400 answers)
 ├── data/
-│   └── questions.json          ← all 4,898 parsed questions
+│   └── questions.json          ← all 4,904 parsed questions
+├── docs/                       ← project documentation
+│   ├── PROJECT_STATE.md
+│   ├── ROADMAP.md
+│   ├── CHANGELOG.md
+│   ├── ARCHITECTURE.md
+│   └── CONTENT_STYLE_GUIDE.md
 └── scripts/                    ← build pipeline
     ├── build_chapters.py
     ├── build_index.py

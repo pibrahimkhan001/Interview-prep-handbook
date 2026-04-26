@@ -1,6 +1,6 @@
 # Project State
 
-**Last updated:** 2026-04-25 (Session: HTML Coding completed &mdash; Phase 4 Frontend progressing)
+**Last updated:** 2026-04-26 (Session: CSS Advanced completed &mdash; CSS topic fully done)
 
 ## At a glance
 
@@ -10,9 +10,9 @@
 | Topics | 13 |
 | Levels present (across topics) | 7 (Basic, Tricky, Coding, Advanced, Advanced Coding, Scenario Based, Advanced Scenario Based) |
 | Total topic/level chapters | 49 |
-| Chapters with detailed answers | 24 (all JavaScript + all Python + all Node.js + all ExpressJS + all API + HTML Basic + HTML Coding) |
-| Total detailed answers written | 2,400 |
-| Completion | ~49% of questions have detailed answers |
+| Chapters with detailed answers | 28 (all JavaScript + all Python + all Node.js + all ExpressJS + all API + all HTML + all CSS) |
+| Total detailed answers written | 2,803 |
+| Completion | ~57% of questions have detailed answers |
 
 ## Detailed answer inventory
 
@@ -38,16 +38,16 @@
 | **ExpressJS** | **Advanced** | **100** | **100** | ✅ **Complete** |
 | **HTML** | **Basic** | **100** | **100** | ✅ **Complete** |
 | **HTML** | **Coding** | **100** | **100** | ✅ **Complete** |
-| **HTML** | **Advanced** | **100** | **0** | 🔄 **Next up** |
-| CSS | Basic | 102 | 0 | ⬜ Pending |
-| CSS | Coding | 100 | 0 | ⬜ Pending |
-| CSS | Advanced | 101 | 0 | ⬜ Pending |
+| **HTML** | **Advanced** | **100** | **100** | ✅ **Complete** |
+| **CSS** | **Basic** | **102** | **102** | ✅ **Complete** |
+| **CSS** | **Coding** | **100** | **100** | ✅ **Complete** |
+| **CSS** | **Advanced** | **101** | **101** | ✅ **Complete** |
 | **API** | **Basic** | **100** | **100** | ✅ **Complete** |
 | **API** | **Coding** | **100** | **100** | ✅ **Complete** |
 | **API** | **Advanced** | **100** | **100** | ✅ **Complete** |
 | **API** | **Scenario Based** | **100** | **100** | ✅ **Complete** |
 | API | Scenario Based | 100 | 0 | ⬜ Pending |
-| ReactJS | Basic | 101 | 0 | ⬜ Pending |
+| **ReactJS** | **Basic** | **101** | **0** | 🔄 **Next up** |
 | ReactJS | Coding | 100 | 0 | ⬜ Pending |
 | ReactJS | Advanced | 100 | 0 | ⬜ Pending |
 | ReactJS | Scenario Based | 100 | 0 | ⬜ Pending |
@@ -109,7 +109,11 @@
 │   ├── api_advanced.py          ✅ 100
 │   ├── api_scenario.py          ✅ 100
 │   ├── html_basic.py            ✅ 100
-│   └── html_coding.py           ✅ 100
+│   ├── html_coding.py           ✅ 100
+│   ├── html_advanced.py         ✅ 100
+│   ├── css_basic.py             ✅ 102
+│   ├── css_coding.py            ✅ 100
+│   └── css_advanced.py          ✅ 101
 ├── data/
 │   └── questions.json           ← all 4,904 parsed questions
 └── scripts/
@@ -123,9 +127,9 @@
 ## Delivery status
 
 - **Latest zip:** `/mnt/user-data/outputs/interview-prep-guide.zip`
-- **Delivered (cumulative):** JavaScript (700) + Python (400) + Node.js (400) + ExpressJS (300) + API (400) + HTML Basic+Coding (200) = 2,400 Q&A + site scaffold + 25 stub chapters
-- **Topics fully completed:** JavaScript, Python, Node.js, ExpressJS, API
-- **Phase 4 in progress:** HTML Basic + HTML Coding done (200/300 HTML); HTML Advanced up next. Full Phase 4 is 1,004 questions (HTML/CSS/React).
+- **Delivered (cumulative):** JavaScript (700) + Python (400) + Node.js (400) + ExpressJS (300) + API (400) + HTML (300) + CSS (303) = 2,803 Q&A + site scaffold + 21 stub chapters
+- **Topics fully completed:** JavaScript, Python, Node.js, ExpressJS, API, HTML, CSS
+- **Phase 4 in progress:** HTML done (300/300); CSS done (303/303); React JS up next (401 Q across 4 levels). Full Phase 4 is 1,004 questions (HTML/CSS/React) &mdash; 603 done, 401 remaining.
 
 ## Update protocol
 
