@@ -549,10 +549,10 @@ Content-Type: application/json
 <p>An <strong>API key</strong> is a long, random string that identifies a specific client (app or developer account) calling an API. The client sends the key with each request, and the server uses it to authenticate and track usage.</p>
 <pre><code>// usually sent as a header
 GET /v1/weather?city=London
-X-API-Key: sk_live_4a8b3c2d9e7f1a6b5c4d3e2f
+X-API-Key: sk_live_EXAMPLE_NOT_REAL_KEY
 
 // or as a query parameter (less secure)
-GET /v1/weather?city=London&amp;api_key=sk_live_4a8b3c2d9e7f1a6b5c4d3e2f</code></pre>
+GET /v1/weather?city=London&amp;api_key=sk_live_EXAMPLE_NOT_REAL_KEY</code></pre>
 <p><strong>What API keys are good for:</strong></p>
 <ul>
   <li><strong>Identifying the client</strong> &mdash; "which app is calling?" so you can meter, log, or bill per customer.</li>
