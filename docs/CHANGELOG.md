@@ -4,6 +4,34 @@ Session-by-session record of what was done. Latest entries at the top.
 
 Format: `## YYYY-MM-DD — Session title`
 
+## 2026-04-26 — ReactJS Basic Q1-101 (React topic Basic level complete, 2904/4904)
+
+**Changes:**
+- Completed ReactJS Basic with all 101 answers in `content/reactjs_basic.py` (avg ~2,975 chars, range 1,371-5,057). Style: Basic-level conventions &mdash; 80-150 words concise prose, simple JSX/hooks code examples, comparison tables, beginner-friendly. Length trends higher than other Basic chapters because React often needs both old class-component pattern and modern functional/hooks pattern shown side by side.
+
+- Built across multiple sessions: Q1-35 from prior session (fundamentals through Context). This session completed Q36-101 in three batches:
+  - **Batch Q36-58 (23 answers)**: forms with React Hook Form mention, useReducer, useEffect side effects, fetch + TanStack Query, useCallback, performance optimization with React Compiler note, useMemo, error handling, error boundaries (functional + react-error-boundary library), lazy loading, Suspense, code splitting with Suspense, useLayoutEffect, state management hierarchy with Zustand/Jotai/RTK, React hooks overview with React 19 hooks (use, useActionState, useOptimistic), custom hooks, PropTypes (deprecated → TypeScript), default props (destructuring vs defaultProps), form validation with React Hook Form + Zod, React Router intro v6/v7, nested routes with Outlet
+  - **Batch Q59-79 (21 answers)**: BrowserRouter vs HashRouter, redirect with Navigate/useNavigate, route params, Link component, useHistory deprecation (→useNavigate), useParams, useRouteMatch deprecation (→useMatch), conditional navigation with auth guards, Redux intro (with 2026 reality table noting Zustand/Jotai for new apps), integrating Redux with Provider+RTK, actions (with createSlice auto-generation), reducers (with Immer/RTK mutating syntax), Redux store configureStore, dispatching actions, useSelector (shallowEqual, reselect), useDispatch (.unwrap() for thunks), middleware concept, async actions (createAsyncThunk vs RTK Query), Redux Thunk deep dive, Redux-Saga (generators, effects, vs Thunk table), store setup with middleware (Logger/Saga/RTK Query)
+  - **Batch Q80-101 (22 answers)**: debugging, React DevTools, inspecting component tree, animations (CSS/Framer Motion/RTG comparison), React Transition Group, CSSTransition with full lifecycle classes, testing with RTL+Vitest, Jest + matchers, unit tests with AAA pattern, Enzyme (deprecated → RTL with migration table), snapshot tests with caveats, act() function with RTL automatic wrapping, mocking API calls (fetch/axios/MSW comparison), async testing with findBy*/waitFor, fireEvent vs userEvent, simulating user interactions with userEvent v14 setup pattern, Create React App (officially deprecated 2025 → Vite), custom Webpack setup, .env files with prefix rules and security warnings, deployment options (Vercel/Netlify/Cloudflare/etc.), styling approaches (Tailwind dominant, CSS Modules, styled-components in decline), styled-components with theming and 2026 decline notes
+
+- 2026-current React tech accurately referenced throughout: React 19 (use(), useActionState, useOptimistic, React Compiler), React Router v7, Redux Toolkit + RTK Query as defaults, Zustand/Jotai for global state, TanStack Query for server state, React Hook Form + Zod for forms, React Testing Library (NOT Enzyme), Vite (NOT CRA), Tailwind CSS dominance, shadcn/ui surge, MSW for API mocking, userEvent v14 setup pattern.
+
+- Updated PROJECT_STATE.md (2803→2904 answers, 28→29 chapters with detailed answers, ~57%→~59% completion, ReactJS Basic ✅ row, ReactJS Coding flagged as 🔄 next, reactjs_basic.py added to file map).
+
+- Updated ROADMAP.md (React JS Basic checked off with date, React JS Coding now marked as next).
+
+- Rebuilt `chapters/reactjs-basic.html` (348KB, 101 questions rendered) and regenerated `index.html`.
+
+**Files changed:**
+- `content/reactjs_basic.py` (35→101 answers; +66 answers, ~245KB total)
+- `chapters/reactjs-basic.html` (regenerated)
+- `index.html` (regenerated)
+- `docs/PROJECT_STATE.md`
+- `docs/ROADMAP.md`
+- `docs/CHANGELOG.md` (this entry)
+
+**Total progress after this session:** 2,904 / 4,904 detailed answers (~59%). Phase 4 (Frontend) now at 704/1004 (70%) &mdash; HTML/CSS done, ReactJS Basic done, ReactJS Coding/Advanced/Scenario remaining (300 questions).
+
 ## 2026-04-26 — CSS Advanced Q1-101 (CSS topic complete, 2803/4904)
 
 **Changes:**

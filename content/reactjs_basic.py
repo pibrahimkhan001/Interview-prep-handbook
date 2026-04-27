@@ -1,118 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ReactJS — Basic · Interview Prep Mastery</title>
-<meta name="description" content="101 basic interview questions on ReactJS, with detailed explanations and examples.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="../assets/styles.css">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%239a6b1d'/%3E%3Ctext x='50' y='68' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold' font-size='48'%3EIP%3C/text%3E%3C/svg%3E">
-</head>
-<body>
-<header class="site-header">
-  <div class="site-header__inner">
-    <button class="menu-toggle" aria-label="Open menu" type="button">☰ Menu</button>
-    <a class="brand" href="../index.html">
-      <span class="brand__mark">IP</span>
-      <span class="brand__text">
-        <span class="brand__title">Interview Prep Mastery</span>
-        <span class="brand__subtitle">Interactive learning guide</span>
-      </span>
-    </a>
-    <nav class="header-nav">
-      <a href="../index.html#roadmap">Roadmap</a>
-      <a href="../index.html#chapters">All chapters</a>
-      <button class="theme-toggle" type="button" aria-label="Toggle color scheme">☾ Dark</button>
-    </nav>
-  </div>
-</header>
-<div class="layout">
-<aside class="sidebar" aria-label="Site navigation">
-  <div class="sidebar__header">Chapter Navigator</div>
-  
-        <div class="nav-part">
-          <div class="nav-part__label">Part 1</div>
-          <div class="nav-part__title">Core Programming Languages</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">JavaScript</li><li><a class="" href="../chapters/javascript-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/javascript-tricky.html"><span class="nav-item__title">Tricky</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-coding.html"><span class="nav-item__title">Advanced Coding</span><span class="nav-item__meta">100 questions · 100 min read</span></a></li><li><a class="" href="../chapters/javascript-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-scenario.html"><span class="nav-item__title">Advanced Scenario Based</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Python</li><li><a class="" href="../chapters/python-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/python-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 2</div>
-          <div class="nav-part__title">Web Fundamentals</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">HTML</li><li><a class="" href="../chapters/html-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/html-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/html-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CSS</li><li><a class="" href="../chapters/css-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">102 questions · 60 min read</span></a></li><li><a class="" href="../chapters/css-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/css-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">101 questions · 90 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 3</div>
-          <div class="nav-part__title">Backend Technologies</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Node.Js</li><li><a class="" href="../chapters/nodejs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/nodejs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ExpressJS</li><li><a class="" href="../chapters/expressjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/expressjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/expressjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">API</li><li><a class="" href="../chapters/api-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/api-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 4</div>
-          <div class="nav-part__title">Frontend Frameworks</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ReactJS</li><li><a class="active" href="../chapters/reactjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">101 questions · 60 min read</span></a></li><li><a class="" href="../chapters/reactjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 5</div>
-          <div class="nav-part__title">Databases</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MYSQL</li><li><a class="" href="../chapters/mysql-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mysql-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MongoDB</li><li><a class="" href="../chapters/mongodb-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mongodb-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 6</div>
-          <div class="nav-part__title">System Design &amp; DevOps</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">System Design MERN Stack</li><li><a class="" href="../chapters/system-design-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Infrastructure MERN Stack</li><li><a class="" href="../chapters/infrastructure-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/infrastructure-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CI/CD Pipeline</li><li><a class="" href="../chapters/cicd-pipeline-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-</aside>
-<main class="main" id="main">
+"""ReactJS Basic — 101 detailed answers."""
 
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="../index.html">Home</a>
-    <span class="breadcrumb__sep">›</span>
-    <a href="../index.html#part-4">Frontend Frameworks</a>
-    <span class="breadcrumb__sep">›</span>
-    <span>ReactJS — Basic</span>
-  </nav>
+ANSWERS: dict[int, str] = {}
 
-  <header class="chapter-header">
-    <div class="chapter-label">ReactJS · Basic</div>
-    <h1 class="chapter-title">Basic ReactJS Interview Questions</h1>
-    <p class="chapter-lede">Foundational knowledge — definitions, syntax, and core mechanics every beginner should know.</p>
-    <div class="chapter-meta">
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Questions</span><span class="chapter-meta__value">101</span></div>
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Level</span><span class="chapter-meta__value">Basic</span></div>
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Estimated reading</span><span class="chapter-meta__value">60 min read</span></div>
-    </div>
-    
-  </header>
 
-  <section class="prose">
-
-    <div class="toc" id="toc">
-      <div class="toc__title">All questions in this chapter</div>
-      <ul class="toc__list">
-        <li><a href="#q1"><span class="toc__num">1.</span>What is ReactJS?</a></li><li><a href="#q2"><span class="toc__num">2.</span>What are the main features of ReactJS?</a></li><li><a href="#q3"><span class="toc__num">3.</span>What is JSX?</a></li><li><a href="#q4"><span class="toc__num">4.</span>How do you create a React component?</a></li><li><a href="#q5"><span class="toc__num">5.</span>What is the difference between a functional component and a class component in React?</a></li><li><a href="#q6"><span class="toc__num">6.</span>How do you create a functional component in React?</a></li><li><a href="#q7"><span class="toc__num">7.</span>How do you create a class component in React?</a></li><li><a href="#q8"><span class="toc__num">8.</span>What is the purpose of the render() method in a class component?</a></li><li><a href="#q9"><span class="toc__num">9.</span>How do you pass data to a component using props?</a></li><li><a href="#q10"><span class="toc__num">10.</span>What is state in React?</a></li><li><a href="#q11"><span class="toc__num">11.</span>How do you initialize state in a class component?</a></li><li><a href="#q12"><span class="toc__num">12.</span>How do you initialize state in a functional component using hooks?</a></li><li><a href="#q13"><span class="toc__num">13.</span>What is the useState hook in React?</a></li><li><a href="#q14"><span class="toc__num">14.</span>How do you update state in a class component?</a></li><li><a href="#q15"><span class="toc__num">15.</span>How do you update state in a functional component using hooks?</a></li><li><a href="#q16"><span class="toc__num">16.</span>What is the lifecycle of a React component?</a></li><li><a href="#q17"><span class="toc__num">17.</span>What are the main lifecycle methods in a class component?</a></li><li><a href="#q18"><span class="toc__num">18.</span>What is the componentDidMount() method used for?</a></li><li><a href="#q19"><span class="toc__num">19.</span>What is the componentDidUpdate() method used for?</a></li><li><a href="#q20"><span class="toc__num">20.</span>What is the componentWillUnmount() method used for?</a></li><li><a href="#q21"><span class="toc__num">21.</span>What is the useEffect hook in React?</a></li><li><a href="#q22"><span class="toc__num">22.</span>How do you conditionally render components in React?</a></li><li><a href="#q23"><span class="toc__num">23.</span>How do you render a list of elements in React?</a></li><li><a href="#q24"><span class="toc__num">24.</span>What is the key prop, and why is it important in lists?</a></li><li><a href="#q25"><span class="toc__num">25.</span>How do you handle events in React?</a></li><li><a href="#q26"><span class="toc__num">26.</span>What is the difference between controlled and uncontrolled components?</a></li><li><a href="#q27"><span class="toc__num">27.</span>How do you create a controlled component in React?</a></li><li><a href="#q28"><span class="toc__num">28.</span>How do you create an uncontrolled component in React?</a></li><li><a href="#q29"><span class="toc__num">29.</span>What is the purpose of the ref attribute in React?</a></li><li><a href="#q30"><span class="toc__num">30.</span>How do you create and use refs in React?</a></li><li><a href="#q31"><span class="toc__num">31.</span>What is the context API in React?</a></li><li><a href="#q32"><span class="toc__num">32.</span>How do you create a context in React?</a></li><li><a href="#q33"><span class="toc__num">33.</span>How do you use a context in React?</a></li><li><a href="#q34"><span class="toc__num">34.</span>What is the useContext hook in React?</a></li><li><a href="#q35"><span class="toc__num">35.</span>What are React fragments, and how do you use them?</a></li><li><a href="#q36"><span class="toc__num">36.</span>How do you handle forms in React?</a></li><li><a href="#q37"><span class="toc__num">37.</span>What is the purpose of the useReducer hook in React?</a></li><li><a href="#q38"><span class="toc__num">38.</span>How do you perform side effects in a functional component using hooks?</a></li><li><a href="#q39"><span class="toc__num">39.</span>How do you fetch data from an API in</a></li><li><a href="#q40"><span class="toc__num">40.</span>a React component?</a></li><li><a href="#q41"><span class="toc__num">41.</span>What is the purpose of the useCallback hook in React?</a></li><li><a href="#q42"><span class="toc__num">42.</span>How do you optimize performance in a React application?</a></li><li><a href="#q43"><span class="toc__num">43.</span>What is the purpose of the useMemo hook in React?</a></li><li><a href="#q44"><span class="toc__num">44.</span>How do you handle errors in a React application?</a></li><li><a href="#q45"><span class="toc__num">45.</span>What is an error boundary in React?</a></li><li><a href="#q46"><span class="toc__num">46.</span>How do you create an error boundary in React?</a></li><li><a href="#q47"><span class="toc__num">47.</span>How do you lazy load a component in React?</a></li><li><a href="#q48"><span class="toc__num">48.</span>What is React Suspense?</a></li><li><a href="#q49"><span class="toc__num">49.</span>How do you use React Suspense for code splitting?</a></li><li><a href="#q50"><span class="toc__num">50.</span>What is the difference between useEffect and useLayoutEffect?</a></li><li><a href="#q51"><span class="toc__num">51.</span>How do you manage state in a React application?</a></li><li><a href="#q52"><span class="toc__num">52.</span>What are React hooks, and why are they important?</a></li><li><a href="#q53"><span class="toc__num">53.</span>How do you create a custom hook in React?</a></li><li><a href="#q54"><span class="toc__num">54.</span>What is PropTypes, and how do you use it in React?</a></li><li><a href="#q55"><span class="toc__num">55.</span>How do you set default props in a React component?</a></li><li><a href="#q56"><span class="toc__num">56.</span>How do you handle form validation in React?</a></li><li><a href="#q57"><span class="toc__num">57.</span>What is React Router, and how do you use it?</a></li><li><a href="#q58"><span class="toc__num">58.</span>How do you create nested routes in React Router?</a></li><li><a href="#q59"><span class="toc__num">59.</span>What is the difference between &lt;BrowserRouter&gt; and &lt;HashRouter&gt; in React Router?</a></li><li><a href="#q60"><span class="toc__num">60.</span>How do you redirect in React Router?</a></li><li><a href="#q61"><span class="toc__num">61.</span>How do you pass parameters to routes in React Router?</a></li><li><a href="#q62"><span class="toc__num">62.</span>What is the purpose of the Link component in React Router?</a></li><li><a href="#q63"><span class="toc__num">63.</span>How do you use the useHistory hook in React Router?</a></li><li><a href="#q64"><span class="toc__num">64.</span>How do you use the useParams hook in React Router?</a></li><li><a href="#q65"><span class="toc__num">65.</span>How do you use the useRouteMatch hook in React Router?</a></li><li><a href="#q66"><span class="toc__num">66.</span>How do you handle conditional navigation in React Router?</a></li><li><a href="#q67"><span class="toc__num">67.</span>What is Redux, and how does it relate to React?</a></li><li><a href="#q68"><span class="toc__num">68.</span>How do you integrate Redux with a React application?</a></li><li><a href="#q69"><span class="toc__num">69.</span>What are actions in Redux?</a></li><li><a href="#q70"><span class="toc__num">70.</span>What are reducers in Redux?</a></li><li><a href="#q71"><span class="toc__num">71.</span>What is the purpose of the Redux store?</a></li><li><a href="#q72"><span class="toc__num">72.</span>How do you dispatch actions in a React component using Redux?</a></li><li><a href="#q73"><span class="toc__num">73.</span>How do you use the useSelector hook in React Redux?</a></li><li><a href="#q74"><span class="toc__num">74.</span>How do you use the useDispatch hook in React Redux?</a></li><li><a href="#q75"><span class="toc__num">75.</span>What is the purpose of middleware in Redux?</a></li><li><a href="#q76"><span class="toc__num">76.</span>How do you handle asynchronous actions in Redux?</a></li><li><a href="#q77"><span class="toc__num">77.</span>What is Redux Thunk?</a></li><li><a href="#q78"><span class="toc__num">78.</span>What is Redux Saga?</a></li><li><a href="#q79"><span class="toc__num">79.</span>How do you set up a Redux store with middleware?</a></li><li><a href="#q80"><span class="toc__num">80.</span>How do you debug a React application?</a></li><li><a href="#q81"><span class="toc__num">81.</span>What is the purpose of the React Developer Tools?</a></li><li><a href="#q82"><span class="toc__num">82.</span>How do you use the React Developer Tools to inspect the component tree?</a></li><li><a href="#q83"><span class="toc__num">83.</span>How do you handle animations in React?</a></li><li><a href="#q84"><span class="toc__num">84.</span>What is the purpose of the React Transition Group library?</a></li><li><a href="#q85"><span class="toc__num">85.</span>How do you use the CSSTransition component from React Transition Group?</a></li><li><a href="#q86"><span class="toc__num">86.</span>How do you test a React component?</a></li><li><a href="#q87"><span class="toc__num">87.</span>What is Jest, and how do you use it with React?</a></li><li><a href="#q88"><span class="toc__num">88.</span>How do you write a unit test for a React component?</a></li><li><a href="#q89"><span class="toc__num">89.</span>What is Enzyme, and how do you use it with React?</a></li><li><a href="#q90"><span class="toc__num">90.</span>How do you write a snapshot test for a React component?</a></li><li><a href="#q91"><span class="toc__num">91.</span>What is the purpose of the act() function in React testing?</a></li><li><a href="#q92"><span class="toc__num">92.</span>How do you mock API calls in React tests?</a></li><li><a href="#q93"><span class="toc__num">93.</span>How do you test asynchronous code in React?</a></li><li><a href="#q94"><span class="toc__num">94.</span>What is the purpose of the fireEvent function in React testing?</a></li><li><a href="#q95"><span class="toc__num">95.</span>How do you simulate user interactions in React tests?</a></li><li><a href="#q96"><span class="toc__num">96.</span>How do you set up a React project with Create React App?</a></li><li><a href="#q97"><span class="toc__num">97.</span>How do you configure a custom Webpack setup for a React application?</a></li><li><a href="#q98"><span class="toc__num">98.</span>What is the purpose of the .env file in a React project?</a></li><li><a href="#q99"><span class="toc__num">99.</span>How do you deploy a React application?</a></li><li><a href="#q100"><span class="toc__num">100.</span>What are the different ways to style React components?</a></li><li><a href="#q101"><span class="toc__num">101.</span>How do you use styled-components in a React application?</a></li>
-      </ul>
-    </div>
-
-    
-<article class="qa" id="q1">
-  <div class="qa__number">Question 1</div>
-  <h3 class="qa__question">What is ReactJS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[1] = r'''
 <p><strong>React</strong> is a JavaScript library for building user interfaces &mdash; created by Facebook (now Meta) in 2013 and now maintained by an open-source community. It powers parts of Facebook, Instagram, Netflix, Airbnb, and thousands of other apps.</p>
 
 <p>React&rsquo;s core idea: <strong>describe what your UI should look like for any given state, and React figures out how to update the DOM efficiently when that state changes</strong>. You write components &mdash; reusable pieces that combine markup, logic, and styling &mdash; and compose them into full pages.</p>
@@ -132,15 +23,9 @@ function Welcome() {
 </ul>
 
 <p>React isn&rsquo;t a framework like Angular &mdash; it&rsquo;s focused on the view layer. For routing, forms, and data fetching, you compose React with other libraries (React Router, TanStack Query, etc.) or use a meta-framework like Next.js or Remix.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q2">
-  <div class="qa__number">Question 2</div>
-  <h3 class="qa__question">What are the main features of ReactJS?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[2] = r'''
 <p>React&rsquo;s key features make UI development faster, more predictable, and easier to scale.</p>
 
 <table>
@@ -165,15 +50,9 @@ function Welcome() {
 }</code></pre>
 
 <p>This tiny component demonstrates several features at once: JSX (HTML-like syntax), hooks (<code>useState</code>), declarative rendering (the button always shows the current count), and event handling. React updates the DOM efficiently every time you click.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q3">
-  <div class="qa__number">Question 3</div>
-  <h3 class="qa__question">What is JSX?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[3] = r'''
 <p><strong>JSX</strong> (JavaScript XML) is a syntax extension that lets you write HTML-like markup inside JavaScript. It&rsquo;s the language of React components.</p>
 
 <pre><code>const element = &lt;h1 className="greeting"&gt;Hello, {name}!&lt;/h1&gt;;</code></pre>
@@ -198,15 +77,9 @@ function Welcome() {
 </ul>
 
 <p>JSX makes components more readable than equivalent <code>createElement</code> calls. You don&rsquo;t have to use JSX to build React apps, but virtually everyone does.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q4">
-  <div class="qa__number">Question 4</div>
-  <h3 class="qa__question">How do you create a React component?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[4] = r'''
 <p>You create a React component by writing a JavaScript function that returns JSX. This is the modern, recommended approach &mdash; called a <strong>functional component</strong>.</p>
 
 <pre><code>// Greeting.jsx
@@ -246,15 +119,9 @@ function App() {
 &lt;Greeting name="Alice" /&gt;</code></pre>
 
 <p>Components are the building blocks of every React app. Compose small components into pages; each one stays small and focused on one job.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q5">
-  <div class="qa__number">Question 5</div>
-  <h3 class="qa__question">What is the difference between a functional component and a class component in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[5] = r'''
 <p>React has two ways to write components: <strong>functional</strong> and <strong>class</strong>. Modern React (since hooks shipped in 2019) strongly prefers functional components for everything.</p>
 
 <table>
@@ -287,15 +154,9 @@ class Counter extends React.Component {
 <p><strong>Why functional won:</strong> hooks gave functional components everything classes had (state, lifecycle, refs) plus better composition (custom hooks reuse logic across components). Less code, easier to test, and they avoid <code>this</code> binding bugs.</p>
 
 <p><strong>You&rsquo;ll still see classes in legacy codebases</strong> &mdash; they&rsquo;re fully supported &mdash; but every React tutorial, library, and team in 2026 uses functional components for new code.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q6">
-  <div class="qa__number">Question 6</div>
-  <h3 class="qa__question">How do you create a functional component in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[6] = r'''
 <p>A functional component is a JavaScript function that takes <strong>props</strong> as an argument and returns JSX. The simplest possible component:</p>
 
 <pre><code>function Welcome() {
@@ -344,15 +205,9 @@ function Counter() {
 }</code></pre>
 
 <p>Functional components combined with hooks are the entire modern React API. Every new component you write should be functional.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q7">
-  <div class="qa__number">Question 7</div>
-  <h3 class="qa__question">How do you create a class component in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[7] = r'''
 <p>A class component is created by extending <code>React.Component</code> and implementing a <code>render()</code> method that returns JSX. While modern React prefers functional components, class components are still fully supported and you&rsquo;ll find them in legacy codebases.</p>
 
 <pre><code>import React from "react";
@@ -407,15 +262,9 @@ export default Welcome;</code></pre>
 </ul>
 
 <p>For any new code in 2026, write functional components. Use class components only when you need to maintain or extend an older codebase.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q8">
-  <div class="qa__number">Question 8</div>
-  <h3 class="qa__question">What is the purpose of the render() method in a class component?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[8] = r'''
 <p>The <code>render()</code> method is the only required method in a class component. It returns the JSX that React should display on the screen for the component&rsquo;s current props and state.</p>
 
 <pre><code>class Greeting extends React.Component {
@@ -456,15 +305,9 @@ export default Welcome;</code></pre>
 }</code></pre>
 
 <p>The functional component equivalent has no <code>render()</code> method &mdash; the function itself IS the render. The body of the function returns JSX directly. This is one reason functional components feel cleaner.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q9">
-  <div class="qa__number">Question 9</div>
-  <h3 class="qa__question">How do you pass data to a component using props?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[9] = r'''
 <p><strong>Props</strong> (short for "properties") are how parent components pass data down to their children. Props are read-only inputs &mdash; the child receives them and uses them to render. They flow one direction: parent &rarr; child.</p>
 
 <pre><code>// Parent passes props
@@ -519,15 +362,9 @@ function Button({ onClick }) {
 }</code></pre>
 
 <p>Props + state are how React apps manage all data flow.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q10">
-  <div class="qa__number">Question 10</div>
-  <h3 class="qa__question">What is state in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[10] = r'''
 <p><strong>State</strong> is data that a component owns and can change over time. Unlike props (which come from a parent and are read-only), state is local to a component and triggers re-renders when it changes.</p>
 
 <pre><code>import { useState } from "react";
@@ -573,15 +410,9 @@ function Counter() {
 </table>
 
 <p>State is what makes components interactive. Without it, components would always render the same thing for the same inputs.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q11">
-  <div class="qa__number">Question 11</div>
-  <h3 class="qa__question">How do you initialize state in a class component?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[11] = r'''
 <p>In a class component, state is initialized either inside the constructor or as a class field (modern shorthand). Both forms create the initial <code>this.state</code> object.</p>
 
 <p><strong>Constructor form (traditional):</strong></p>
@@ -631,15 +462,9 @@ function Counter() {
 </ul>
 
 <p>The class field form is now standard &mdash; cleaner and more concise. The constructor form is legacy.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q12">
-  <div class="qa__number">Question 12</div>
-  <h3 class="qa__question">How do you initialize state in a functional component using hooks?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[12] = r'''
 <p>In a functional component, you initialize state with the <code>useState</code> hook. Pass the initial value to <code>useState()</code>; it returns an array with two items: the current state and a function to update it.</p>
 
 <pre><code>import { useState } from "react";
@@ -672,15 +497,9 @@ const [data, setData] = useState(null);              // null until loaded</code>
 <pre><code>const [data, setData] = useState(() =&gt; expensiveComputation());</code></pre>
 
 <p>This is the modern way to manage component state &mdash; far less code than class equivalents. Most components use 2-5 useState calls; for more complex state, reach for <code>useReducer</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q13">
-  <div class="qa__number">Question 13</div>
-  <h3 class="qa__question">What is the useState hook in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[13] = r'''
 <p>The <code>useState</code> hook is React&rsquo;s most fundamental hook &mdash; it lets functional components remember values between renders. Every interactive component uses it.</p>
 
 <pre><code>import { useState } from "react";
@@ -729,15 +548,9 @@ setCount(prev =&gt; prev + 1);      // safer when batching is involved</code></p
 <p>The functional form prevents stale-state bugs: in event handlers that fire rapidly or set state multiple times, the function form always gets the latest value.</p>
 
 <p><strong>Rules of hooks</strong>: only call hooks at the top level of your component (not inside loops, conditions, or nested functions), and only inside function components or custom hooks. React relies on call order to track which state belongs to which hook.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q14">
-  <div class="qa__number">Question 14</div>
-  <h3 class="qa__question">How do you update state in a class component?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[14] = r'''
 <p>In a class component, you update state with <code>this.setState()</code>. Never modify <code>this.state</code> directly &mdash; React won&rsquo;t notice and won&rsquo;t re-render.</p>
 
 <pre><code>class Counter extends React.Component {
@@ -787,15 +600,9 @@ this.setState((prevState) =&gt; ({
 <p>The optional second argument runs after the state is committed. Rarely needed in practice; <code>componentDidUpdate</code> is usually clearer.</p>
 
 <p>In modern functional components, <code>setState</code> is replaced by the setter returned from <code>useState</code> (e.g., <code>setCount</code>). Same idea, different syntax.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q15">
-  <div class="qa__number">Question 15</div>
-  <h3 class="qa__question">How do you update state in a functional component using hooks?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[15] = r'''
 <p>In a functional component, you update state by calling the setter function returned by <code>useState</code>. Pass the new value &mdash; React stores it and re-renders the component.</p>
 
 <pre><code>import { useState } from "react";
@@ -863,15 +670,9 @@ setItems(prev =&gt; prev.map(item =&gt;
 ));</code></pre>
 
 <p>Always create new objects/arrays &mdash; React detects state changes by reference, so mutating in place won&rsquo;t trigger a re-render.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q16">
-  <div class="qa__number">Question 16</div>
-  <h3 class="qa__question">What is the lifecycle of a React component?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[16] = r'''
 <p>A React component&rsquo;s lifecycle is the sequence of phases it goes through from creation to removal. Understanding the lifecycle helps you decide when to fetch data, set up timers, or clean up resources.</p>
 
 <table>
@@ -912,15 +713,9 @@ setItems(prev =&gt; prev.map(item =&gt;
 }, [/* dependencies */]);</code></pre>
 
 <p>Modern React abstracts the lifecycle into <code>useEffect</code>: empty dependency array runs once (mount); with deps runs on those changes (update); cleanup function runs on unmount and before the next effect.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q17">
-  <div class="qa__number">Question 17</div>
-  <h3 class="qa__question">What are the main lifecycle methods in a class component?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[17] = r'''
 <p>Class components have multiple lifecycle methods spanning mount, update, and unmount phases. The most common ones to know:</p>
 
 <table>
@@ -972,15 +767,9 @@ setItems(prev =&gt; prev.map(item =&gt;
 <p><strong>Deprecated in React 17+</strong>: <code>componentWillMount</code>, <code>componentWillReceiveProps</code>, <code>componentWillUpdate</code> &mdash; replaced by safer alternatives. Don&rsquo;t use them.</p>
 
 <p>For new code, use functional components with <code>useEffect</code> &mdash; one hook covers mount, update, and unmount cleanly.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q18">
-  <div class="qa__number">Question 18</div>
-  <h3 class="qa__question">What is the componentDidMount() method used for?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[18] = r'''
 <p><code>componentDidMount()</code> is called <strong>once, immediately after the component is inserted into the DOM</strong>. It&rsquo;s the standard place to do anything that needs the DOM to exist or that should run only once on creation.</p>
 
 <pre><code>class WeatherWidget extends React.Component {
@@ -1039,15 +828,9 @@ setItems(prev =&gt; prev.map(item =&gt;
 }, []);   // empty array means "run only once"</code></pre>
 
 <p><code>useEffect</code> with empty <code>[]</code> dependencies replicates <code>componentDidMount</code> exactly &mdash; the cleanup function replaces <code>componentWillUnmount</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q19">
-  <div class="qa__number">Question 19</div>
-  <h3 class="qa__question">What is the componentDidUpdate() method used for?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[19] = r'''
 <p><code>componentDidUpdate(prevProps, prevState)</code> is called <strong>after every render except the first</strong> (which uses <code>componentDidMount</code>). It receives the previous props and state, letting you compare them to current values and react to specific changes.</p>
 
 <pre><code>class UserProfile extends React.Component {
@@ -1098,15 +881,9 @@ componentDidUpdate(prevProps) {
 }, [userId]);   // only re-runs when userId changes</code></pre>
 
 <p>The dependency array <code>[userId]</code> is automatic guarding &mdash; React only re-runs the effect when the listed dependencies change. Much cleaner than manual comparisons in classes.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q20">
-  <div class="qa__number">Question 20</div>
-  <h3 class="qa__question">What is the componentWillUnmount() method used for?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[20] = r'''
 <p><code>componentWillUnmount()</code> is called <strong>once, right before a component is removed from the DOM</strong>. It&rsquo;s for cleanup &mdash; removing event listeners, canceling timers, closing subscriptions, aborting fetches.</p>
 
 <pre><code>class Clock extends React.Component {
@@ -1168,15 +945,9 @@ componentDidUpdate(prevProps) {
 }, []);</code></pre>
 
 <p>The cleanup runs when the component unmounts AND before each re-run of the effect. Cleaner than splitting cleanup logic between mount and unmount methods.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q21">
-  <div class="qa__number">Question 21</div>
-  <h3 class="qa__question">What is the useEffect hook in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[21] = r'''
 <p>The <code>useEffect</code> hook lets you perform <strong>side effects</strong> in functional components &mdash; data fetching, subscriptions, timers, DOM mutations, anything that&rsquo;s not part of pure rendering. It replaces the lifecycle methods of class components.</p>
 
 <pre><code>import { useState, useEffect } from "react";
@@ -1239,15 +1010,9 @@ useEffect(() =&gt; {
 </ul>
 
 <p><code>useEffect</code> is the second most common hook after <code>useState</code> &mdash; you&rsquo;ll use it in nearly every component that talks to the outside world.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q22">
-  <div class="qa__number">Question 22</div>
-  <h3 class="qa__question">How do you conditionally render components in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[22] = r'''
 <p>Conditional rendering means showing different UI based on application state &mdash; loading vs loaded, logged in vs logged out, error vs success. React supports several patterns for this.</p>
 
 <p><strong>1. <code>if</code> statement (early return):</strong></p>
@@ -1330,15 +1095,9 @@ function Status({ status }) {
 }</code></pre>
 
 <p>Pick the pattern that reads most clearly. Early returns for distinct states; ternaries for two alternatives; <code>&amp;&amp;</code> for show-or-hide.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q23">
-  <div class="qa__number">Question 23</div>
-  <h3 class="qa__question">How do you render a list of elements in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[23] = r'''
 <p>Render lists in React by mapping an array to JSX elements. Each item in the array becomes a React element &mdash; you put them all inside a parent (often a <code>&lt;ul&gt;</code> or <code>&lt;div&gt;</code>).</p>
 
 <pre><code>function UserList({ users }) {
@@ -1422,15 +1181,9 @@ function TodoList({ todos }) {
 }</code></pre>
 
 <p>Cleaner code, reusable item rendering, easier to test.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q24">
-  <div class="qa__number">Question 24</div>
-  <h3 class="qa__question">What is the key prop, and why is it important in lists?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[24] = r'''
 <p>The <code>key</code> prop is a special string attribute React uses to <strong>identify which items in a list changed, were added, or were removed</strong> between renders. Without keys, React can&rsquo;t efficiently update the DOM and may produce visual bugs.</p>
 
 <pre><code>function UserList({ users }) {
@@ -1479,15 +1232,9 @@ function TodoList({ todos }) {
 <p><strong>Common warning: "Each child in a list should have a unique 'key' prop"</strong> &mdash; React detected a list without keys; add them to fix.</p>
 
 <p>Keys are React&rsquo;s most important performance and correctness mechanism for lists. Always provide stable, unique keys.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q25">
-  <div class="qa__number">Question 25</div>
-  <h3 class="qa__question">How do you handle events in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[25] = r'''
 <p>React handles events using a synthetic event system &mdash; you attach handlers as props with camelCase names like <code>onClick</code>, <code>onChange</code>, <code>onSubmit</code>. The handler function receives a <strong>SyntheticEvent</strong>, a wrapper around the native browser event with consistent cross-browser behavior.</p>
 
 <pre><code>function Button() {
@@ -1559,15 +1306,9 @@ function TodoList({ todos }) {
   <li><strong>SyntheticEvent</strong> normalizes browser quirks &mdash; the same handler works identically across browsers.</li>
   <li><strong>Event delegation</strong> &mdash; React attaches one listener at the document root and dispatches to your handlers, which is why thousands of <code>onClick</code>s don&rsquo;t hurt performance.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q26">
-  <div class="qa__number">Question 26</div>
-  <h3 class="qa__question">What is the difference between controlled and uncontrolled components?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[26] = r'''
 <p>Form inputs in React come in two flavors based on who controls their value:</p>
 
 <table>
@@ -1626,15 +1367,9 @@ function TodoList({ todos }) {
 <p><strong>Default recommendation</strong>: controlled. The benefit of having form data in React state &mdash; for validation, conditional UI, and submission &mdash; outweighs the small overhead. Reach for uncontrolled when you specifically don&rsquo;t need React to track the value.</p>
 
 <p>Modern forms often use libraries like React Hook Form or Formik that combine the best of both: uncontrolled internally for performance, with hooks that give you controlled-like access for validation.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q27">
-  <div class="qa__number">Question 27</div>
-  <h3 class="qa__question">How do you create a controlled component in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[27] = r'''
 <p>A controlled component is a form input whose value is owned by React state. The state is the "single source of truth" &mdash; the input always shows what state says, and every keystroke updates state.</p>
 
 <pre><code>import { useState } from "react";
@@ -1715,15 +1450,9 @@ function NameForm() {
   <li><strong>Format on input</strong> &mdash; force uppercase, mask phone numbers, restrict to digits.</li>
   <li><strong>Submission state</strong> &mdash; data is already in React, ready to send.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q28">
-  <div class="qa__number">Question 28</div>
-  <h3 class="qa__question">How do you create an uncontrolled component in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[28] = r'''
 <p>An uncontrolled component lets the DOM hold the input&rsquo;s value &mdash; React doesn&rsquo;t track it on every keystroke. You read the value when you need it, typically on form submission, using a ref.</p>
 
 <pre><code>import { useRef } from "react";
@@ -1806,15 +1535,9 @@ function NameForm() {
 </ul>
 
 <p>For most React forms, controlled is the better default. Uncontrolled has its place but isn&rsquo;t the modern standard.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q29">
-  <div class="qa__number">Question 29</div>
-  <h3 class="qa__question">What is the purpose of the ref attribute in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[29] = r'''
 <p>The <code>ref</code> attribute lets you access a DOM node directly from React, escaping the usual declarative model. Refs are the way to do imperative things React doesn&rsquo;t handle declaratively: focusing inputs, measuring elements, integrating with non-React libraries.</p>
 
 <pre><code>import { useRef } from "react";
@@ -1891,15 +1614,9 @@ function FocusableInput() {
   <li><strong>Don&rsquo;t use refs to manage data that should be state</strong> &mdash; if a value affects what&rsquo;s rendered, it should be state.</li>
   <li><strong>Refs escape React&rsquo;s declarative model</strong> &mdash; reach for them only when nothing else fits.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q30">
-  <div class="qa__number">Question 30</div>
-  <h3 class="qa__question">How do you create and use refs in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[30] = r'''
 <p>You create a ref with the <code>useRef</code> hook and attach it to a JSX element via the <code>ref</code> attribute. Read or write the underlying value through <code>ref.current</code>.</p>
 
 <pre><code>import { useRef, useEffect } from "react";
@@ -1992,15 +1709,9 @@ function Parent() {
 }</code></pre>
 
 <p>The DOM doesn&rsquo;t exist until after React renders. Always access <code>ref.current</code> in event handlers or effects, not directly during render.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q31">
-  <div class="qa__number">Question 31</div>
-  <h3 class="qa__question">What is the context API in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[31] = r'''
 <p>The Context API lets you <strong>share data across components without passing props through every level</strong>. It solves "prop drilling" &mdash; the awkwardness of passing data through 5+ intermediate components that don&rsquo;t use it themselves.</p>
 
 <pre><code>// Without Context — prop drilling
@@ -2059,15 +1770,9 @@ function UserMenu() {
 <p><strong>Context is best for "global but stable" data</strong> &mdash; values that change rarely (theme, locale) or that almost every component needs (current user).</p>
 
 <p>For application-wide state with frequent updates, dedicated state managers (Redux, Zustand, MobX) handle performance better than vanilla Context.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q32">
-  <div class="qa__number">Question 32</div>
-  <h3 class="qa__question">How do you create a context in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[32] = r'''
 <p>You create a context with <code>createContext()</code>, optionally passing a default value used when a consumer has no matching Provider above it.</p>
 
 <pre><code>import { createContext } from "react";
@@ -2165,15 +1870,9 @@ function Toolbar() {
 &lt;/ThemeProvider&gt;</code></pre>
 
 <p>Common in real apps. For 4-5+ providers, extract a <code>&lt;Providers&gt;</code> component to keep the tree clean.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q33">
-  <div class="qa__number">Question 33</div>
-  <h3 class="qa__question">How do you use a context in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[33] = r'''
 <p>To use a context, consume it from any descendant of the matching Provider with the <code>useContext</code> hook (in functional components) or the <code>Context.Consumer</code> render prop (in class components).</p>
 
 <p><strong>Modern: <code>useContext</code> hook</strong> &mdash; the standard way:</p>
@@ -2255,15 +1954,9 @@ class ThemedButton extends React.Component {
 <p><strong>Performance gotcha</strong>: passing <code>value={{ x, y }}</code> creates a new object every render, triggering all consumers. For frequently-changing values, memoize:</p>
 <pre><code>const value = useMemo(() =&gt; ({ x, y }), [x, y]);
 &lt;Context.Provider value={value}&gt;...&lt;/Context.Provider&gt;</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q34">
-  <div class="qa__number">Question 34</div>
-  <h3 class="qa__question">What is the useContext hook in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[34] = r'''
 <p>The <code>useContext</code> hook is the modern way to read a context value in functional components. It replaces the older <code>Context.Consumer</code> render prop and the class-based <code>static contextType</code>.</p>
 
 <pre><code>import { useContext } from "react";
@@ -2343,15 +2036,9 @@ function Toolbar() {
 </ul>
 
 <p>For complex state with many updates, consider a state manager (Zustand, Redux Toolkit) instead of Context.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q35">
-  <div class="qa__number">Question 35</div>
-  <h3 class="qa__question">What are React fragments, and how do you use them?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[35] = r'''
 <p><strong>React Fragments</strong> let you group multiple elements without adding an extra DOM node. Useful when a component must return multiple siblings &mdash; React requires a single root, but you don&rsquo;t always want a wrapping <code>&lt;div&gt;</code>.</p>
 
 <pre><code>// WITHOUT fragments — extra div in the DOM
@@ -2442,15 +2129,9 @@ function Glossary({ entries }) {
 <p>Fragments don&rsquo;t render anything visible &mdash; they&rsquo;re purely a React-side mechanism. Inspect the DOM in DevTools and you&rsquo;ll see only the children, no fragment marker.</p>
 
 <p><strong>Modern React preference</strong>: use fragments when wrapping is unnecessary. Reach for a <code>&lt;div&gt;</code> only when you actually need to style or query the wrapper itself.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q36">
-  <div class="qa__number">Question 36</div>
-  <h3 class="qa__question">How do you handle forms in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[36] = r'''
 <p>Forms in React use <strong>controlled components</strong> &mdash; React state holds the input value, and an <code>onChange</code> handler updates it on each keystroke. The state is the single source of truth.</p>
 
 <pre><code>function ContactForm() {
@@ -2491,15 +2172,9 @@ const handleChange = (e) =&gt;
 &lt;input name="name" value={form.name} onChange={handleChange} /&gt;</code></pre>
 
 <p><strong>For complex forms</strong> (validation, errors, dirty tracking, arrays), libraries like <strong>React Hook Form</strong> or <strong>Formik</strong> handle the boilerplate. React 19 also introduced the new <code>useActionState</code> and <code>useFormStatus</code> hooks specifically for form handling with Server Actions &mdash; simpler patterns for forms that submit to a backend.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q37">
-  <div class="qa__number">Question 37</div>
-  <h3 class="qa__question">What is the purpose of the useReducer hook in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[37] = r'''
 <p><code>useReducer</code> is an alternative to <code>useState</code> for managing <strong>complex state</strong> &mdash; especially when state has multiple sub-values, or when the next state depends on the previous one. It mirrors Redux&rsquo;s reducer pattern at the component level.</p>
 
 <pre><code>import { useReducer } from "react";
@@ -2537,15 +2212,9 @@ function Counter() {
 </table>
 
 <p><strong>Benefits</strong>: predictable updates (one reducer handles all transitions), easier to debug (log dispatched actions), and the reducer is a pure function you can unit test in isolation. For shopping carts, multi-step forms, and undo/redo, <code>useReducer</code> is usually clearer than juggling several <code>useState</code> calls.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q38">
-  <div class="qa__number">Question 38</div>
-  <h3 class="qa__question">How do you perform side effects in a functional component using hooks?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[38] = r'''
 <p>Side effects in functional components are handled by the <code>useEffect</code> hook &mdash; it runs after render and is the place for: data fetching, subscriptions, timers, DOM manipulation, and logging. Anything that touches the world outside React goes here.</p>
 
 <pre><code>import { useState, useEffect } from "react";
@@ -2580,15 +2249,9 @@ function UserProfile({ userId }) {
 }, []);</code></pre>
 
 <p><strong>Modern alternative for data fetching</strong>: in 2026, libraries like TanStack Query, SWR, or React Server Components handle most data-fetching better than raw <code>useEffect</code> &mdash; with built-in caching, deduplication, and revalidation. Reach for <code>useEffect</code> for non-data side effects (subscriptions, browser APIs, manual DOM access).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q39">
-  <div class="qa__number">Question 39</div>
-  <h3 class="qa__question">How do you fetch data from an API in</h3>
-  <div class="qa__answer">
-    
+ANSWERS[39] = r'''
 <p>API data fetching in React typically uses <code>useEffect</code> + <code>fetch</code> (or <code>axios</code>) for simple cases &mdash; though modern apps prefer dedicated data libraries.</p>
 
 <p><strong>Basic pattern with useEffect:</strong></p>
@@ -2650,15 +2313,9 @@ function Posts() {
 <p>TanStack Query handles caching, refetching, request deduplication, retries, and pagination &mdash; replacing 50+ lines of manual <code>useEffect</code> code. In 2026 it&rsquo;s the standard for client-side data fetching.</p>
 
 <p><strong>React 19&rsquo;s <code>use()</code> hook</strong> reads promises directly (with Suspense), eliminating effect entirely for many cases.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q40">
-  <div class="qa__number">Question 40</div>
-  <h3 class="qa__question">a React component?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[40] = r'''
 <p>(Same topic as Q39 &mdash; the question split across two entries in the source. See Q39 for the full data-fetching answer.)</p>
 
 <p><strong>Quick summary of the data-fetching landscape in React (2026):</strong></p>
@@ -2693,15 +2350,9 @@ function App() {
 <p>No <code>useEffect</code>, no loading state, no error state &mdash; the Suspense boundary handles it. This pattern works best when data starts loading high in the tree (passed down as a promise prop) so it begins early, before deeper components render.</p>
 
 <p>For interview answers that ask about data fetching: lead with the basic <code>useEffect</code> pattern, then mention TanStack Query as the production tool. Demonstrating awareness of trade-offs is what interviewers look for at this level.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q41">
-  <div class="qa__number">Question 41</div>
-  <h3 class="qa__question">What is the purpose of the useCallback hook in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[41] = r'''
 <p><code>useCallback</code> memoizes a function reference so it stays the same across renders unless its dependencies change. Without it, every render creates a new function instance, which can break optimizations downstream.</p>
 
 <pre><code>import { useState, useCallback } from "react";
@@ -2737,15 +2388,9 @@ const Child = React.memo(({ onClick }) =&gt; {
 <p><strong>When NOT to use it</strong>: regular event handlers that aren&rsquo;t passed deep, prop-passing to non-memoized components, simple components where re-renders are cheap. Premature memoization adds complexity without benefit.</p>
 
 <p><strong>React 19&rsquo;s React Compiler</strong> automatically applies <code>useCallback</code> and <code>useMemo</code> where beneficial &mdash; manually wrapping is often unnecessary in modern projects.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q42">
-  <div class="qa__number">Question 42</div>
-  <h3 class="qa__question">How do you optimize performance in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[42] = r'''
 <p>Performance optimization in React focuses on <strong>preventing unnecessary re-renders</strong> and reducing bundle size. The browser is fast; React is fast; problems usually come from doing too much work on every state update.</p>
 
 <p><strong>Key optimization techniques:</strong></p>
@@ -2774,15 +2419,9 @@ const items = useMemo(() =&gt; [1, 2, 3], []);
 <p><strong>2026 reality:</strong> the <strong>React Compiler</strong> (production-ready in React 19) automatically applies memoization where beneficial. For new code, write naturally and let the compiler optimize. Manual <code>useMemo</code>/<code>useCallback</code> is needed mainly for older codebases or when the compiler can&rsquo;t verify safety.</p>
 
 <p>Bundle size matters too: tree-shake imports, prefer named imports over default for small utilities, and use the bundle analyzer to spot large dependencies.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q43">
-  <div class="qa__number">Question 43</div>
-  <h3 class="qa__question">What is the purpose of the useMemo hook in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[43] = r'''
 <p><code>useMemo</code> caches the result of an expensive computation between renders. The function only re-runs when one of its dependencies changes &mdash; otherwise the previous result is returned.</p>
 
 <pre><code>import { useState, useMemo } from "react";
@@ -2827,15 +2466,9 @@ const handler = useCallback(() =&gt; doSomething(a), [a]);
 <p><strong>When NOT to use it</strong>: simple calculations, primitive values, when the dependency itself changes every render (no memoization benefit), or to "just be safe" (the bookkeeping overhead can exceed the savings).</p>
 
 <p>As with <code>useCallback</code>, React 19&rsquo;s compiler auto-applies <code>useMemo</code> where it helps &mdash; manual usage is mostly for legacy code or compiler edge cases.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q44">
-  <div class="qa__number">Question 44</div>
-  <h3 class="qa__question">How do you handle errors in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[44] = r'''
 <p>React error handling has two layers: <strong>try/catch for async operations</strong> (data fetching, event handlers) and <strong>error boundaries</strong> for rendering errors that propagate up the component tree.</p>
 
 <p><strong>Errors during render</strong> &mdash; caught by error boundaries (see Q45-46):</p>
@@ -2881,15 +2514,9 @@ function App() {
 <p><strong>For data fetching errors</strong>, libraries like TanStack Query expose error state directly: <code>const { error } = useQuery(...)</code>. No try/catch boilerplate.</p>
 
 <p>The right pattern: <strong>error boundaries</strong> at strategic points (page-level, key features) for unexpected render failures, plus <strong>try/catch + error UI states</strong> for predictable failures (network errors, validation, etc.).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q45">
-  <div class="qa__number">Question 45</div>
-  <h3 class="qa__question">What is an error boundary in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[45] = r'''
 <p>An <strong>error boundary</strong> is a React component that catches JavaScript errors in its child component tree, logs them, and displays a fallback UI instead of crashing the entire app. They&rsquo;re React&rsquo;s implementation of a "try/catch" for the rendering lifecycle.</p>
 
 <p><strong>What error boundaries catch:</strong></p>
@@ -2929,15 +2556,9 @@ function App() {
 </ul>
 
 <p><strong>2026 note</strong>: error boundaries still must be <strong>class components</strong> (no hook equivalent yet, though discussed for future React versions). Most teams use libraries like <code>react-error-boundary</code> for cleaner functional usage. See Q46 for implementation.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q46">
-  <div class="qa__number">Question 46</div>
-  <h3 class="qa__question">How do you create an error boundary in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[46] = r'''
 <p>Error boundaries are class components that implement <code>getDerivedStateFromError</code> (to render fallback UI) and/or <code>componentDidCatch</code> (to log the error).</p>
 
 <pre><code>import { Component } from "react";
@@ -3011,15 +2632,9 @@ function FallbackUI({ error, resetErrorBoundary }) {
 &lt;/ErrorBoundary&gt;</code></pre>
 
 <p>Most teams use this library &mdash; less boilerplate, built-in reset capability, plays nicely with hooks. In 2026 it&rsquo;s the de-facto standard for error boundaries in React applications.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q47">
-  <div class="qa__number">Question 47</div>
-  <h3 class="qa__question">How do you lazy load a component in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[47] = r'''
 <p>Lazy loading defers loading a component&rsquo;s code until it&rsquo;s actually needed &mdash; reducing the initial bundle size and speeding up first page load. React provides <code>React.lazy()</code> for this, paired with <code>Suspense</code> for the loading fallback.</p>
 
 <pre><code>import { lazy, Suspense } from "react";
@@ -3072,15 +2687,9 @@ const Dashboard = lazy(() =&gt;
 );</code></pre>
 
 <p><strong>Don&rsquo;t over-split</strong>: too many chunks = many small network requests. Group related components into the same chunk for better performance.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q48">
-  <div class="qa__number">Question 48</div>
-  <h3 class="qa__question">What is React Suspense?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[48] = r'''
 <p><strong>React Suspense</strong> is a built-in component that lets parts of the tree "wait" for something before rendering &mdash; showing a fallback UI in the meantime. Originally designed for code splitting (with <code>React.lazy</code>), it&rsquo;s evolved into a general mechanism for asynchronous rendering: data fetching, code loading, and any operation that returns a promise.</p>
 
 <pre><code>import { Suspense } from "react";
@@ -3122,15 +2731,9 @@ function App() {
 <p>Each section loads independently. Header shows immediately; main and sidebar load in parallel and reveal as ready &mdash; no waterfall, smooth progressive UI.</p>
 
 <p><strong>Why it&rsquo;s powerful</strong>: instead of writing <code>{loading ? &lt;Spinner /&gt; : data}</code> dozens of times across your app, you declare loading boundaries once and let React orchestrate. Combined with React Server Components, it enables full server-rendered streaming pages.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q49">
-  <div class="qa__number">Question 49</div>
-  <h3 class="qa__question">How do you use React Suspense for code splitting?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[49] = r'''
 <p>Code splitting with Suspense is the most common pattern: combine <code>React.lazy()</code> for the component and <code>&lt;Suspense&gt;</code> for the loading state. The result: smaller initial bundles, faster page loads, deferred work for sections users may never visit.</p>
 
 <pre><code>import { lazy, Suspense } from "react";
@@ -3197,15 +2800,9 @@ function App() {
 </ul>
 
 <p>Modern build tools (Vite, Next.js) automate most of this &mdash; they detect dynamic imports and split chunks during build. You write <code>lazy(() =&gt; import(...))</code>; the bundler handles the rest.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q50">
-  <div class="qa__number">Question 50</div>
-  <h3 class="qa__question">What is the difference between useEffect and useLayoutEffect?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[50] = r'''
 <p>Both hooks run side effects, but <strong>at different times in the render cycle</strong>:</p>
 
 <table>
@@ -3253,15 +2850,9 @@ function Tooltip({ children, target }) {
 </ol>
 
 <p><strong>SSR caveat</strong>: <code>useLayoutEffect</code> doesn&rsquo;t run on the server (no DOM to measure) &mdash; React warns if used in SSR contexts. For isomorphic code, use <code>useIsomorphicLayoutEffect</code> from utility libraries, or guard with <code>typeof window !== "undefined"</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q51">
-  <div class="qa__number">Question 51</div>
-  <h3 class="qa__question">How do you manage state in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[51] = r'''
 <p>State management in React ranges from <strong>local component state</strong> to <strong>global app-wide state</strong>. Choose the simplest tool that fits the problem &mdash; complexity escalates only as needs grow.</p>
 
 <p><strong>The state management hierarchy (use in order):</strong></p>
@@ -3305,15 +2896,9 @@ function Counter() {
 </ul>
 
 <p><strong>2026 recommendation:</strong> for new apps, default to <strong>useState + Context</strong> for simple cases, <strong>Zustand</strong> for global client state, and <strong>TanStack Query</strong> for server state. Redux is still common in large legacy codebases but Redux Toolkit is the modern API if you choose it.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q52">
-  <div class="qa__number">Question 52</div>
-  <h3 class="qa__question">What are React hooks, and why are they important?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[52] = r'''
 <p><strong>React hooks</strong> are functions that let you "hook into" React features &mdash; state, lifecycle, context, refs &mdash; from functional components. Introduced in React 16.8 (2019), they replaced the need for class components and unified how reusable logic is shared.</p>
 
 <p><strong>Why hooks matter:</strong></p>
@@ -3362,15 +2947,9 @@ useEffect(() =&gt; {
 }, [loggedIn]);</code></pre>
 
 <p>Hooks are now the primary React API in 2026. Class components still work but are rarely written for new code &mdash; they&rsquo;re reserved for error boundaries (the only use case lacking a hook equivalent).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q53">
-  <div class="qa__number">Question 53</div>
-  <h3 class="qa__question">How do you create a custom hook in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[53] = r'''
 <p>A custom hook is a JavaScript function whose name starts with <code>use</code> and that calls other hooks. It encapsulates reusable stateful logic so multiple components can share it without duplication.</p>
 
 <pre><code>import { useState, useEffect } from "react";
@@ -3439,15 +3018,9 @@ const [theme, setTheme] = useLocalStorage("theme", "light");</code></pre>
 </ul>
 
 <p>Many libraries publish ready-made custom hooks: <code>react-use</code>, <code>usehooks-ts</code>, <code>@uidotdev/usehooks</code>. Useful as references and ready-to-use solutions.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q54">
-  <div class="qa__number">Question 54</div>
-  <h3 class="qa__question">What is PropTypes, and how do you use it in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[54] = r'''
 <p><strong>PropTypes</strong> is a runtime type-checking library for React component props. In development mode, it warns in the console if props don&rsquo;t match the expected types &mdash; helpful for catching bugs early.</p>
 
 <pre><code>import PropTypes from "prop-types";
@@ -3507,15 +3080,9 @@ function UserCard({ name, age, isAdmin, tags = [], onClick }: UserCardProps) {
 }</code></pre>
 
 <p>TypeScript is more powerful (catches errors at build time, integrates with editors), faster (no runtime overhead), and more thorough. PropTypes was deprecated from React itself in version 15.5 (now external package <code>prop-types</code>); <strong>for new projects, choose TypeScript over PropTypes</strong>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q55">
-  <div class="qa__number">Question 55</div>
-  <h3 class="qa__question">How do you set default props in a React component?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[55] = r'''
 <p>Default props let a component fall back to a default value when the parent doesn&rsquo;t pass that prop. The modern (and preferred) pattern uses <strong>destructuring with default values</strong>; class components and older code use <code>defaultProps</code>.</p>
 
 <p><strong>Functional component &mdash; destructuring defaults (modern):</strong></p>
@@ -3577,15 +3144,9 @@ function UserCard({ name, age, isAdmin, tags = [], onClick }: UserCardProps) {
 &lt;Button label="" /&gt;            // label = ""       ✗ (empty string is intentional)</code></pre>
 
 <p>If you want a default for null too, use <code>label ?? "Default"</code> in the body. For most cases, the standard destructuring default is exactly the right behavior.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q56">
-  <div class="qa__number">Question 56</div>
-  <h3 class="qa__question">How do you handle form validation in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[56] = r'''
 <p>Form validation in React typically combines <strong>React state</strong> for input values, <strong>validation logic</strong> on change/submit, and <strong>error display</strong> next to fields. For non-trivial forms, libraries like <strong>React Hook Form</strong> + <strong>Zod</strong> handle most of this with much less code.</p>
 
 <p><strong>Manual validation &mdash; small forms:</strong></p>
@@ -3676,15 +3237,9 @@ function SignupForm() {
 </ul>
 
 <p>For interview answers: lead with the manual pattern to show you understand the underlying mechanics, then mention React Hook Form + Zod as the production tool of choice.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q57">
-  <div class="qa__number">Question 57</div>
-  <h3 class="qa__question">What is React Router, and how do you use it?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[57] = r'''
 <p><strong>React Router</strong> is the standard library for client-side routing in React applications &mdash; mapping URLs to components, handling navigation without full page reloads, and managing browser history. Current major version is React Router v7 (2024+) which combines features from earlier v6 and Remix.</p>
 
 <pre><code>// Install: npm install react-router-dom
@@ -3751,15 +3306,9 @@ function App() {
 <p><strong>2026 note &mdash; deprecated APIs to avoid</strong>: <code>useHistory</code> (use <code>useNavigate</code>), <code>&lt;Switch&gt;</code> (use <code>&lt;Routes&gt;</code>), <code>useRouteMatch</code> (use <code>useMatch</code>). Older tutorials still show these.</p>
 
 <p>Alternatives in 2026: <strong>TanStack Router</strong> (type-safe routing, very popular for new projects), <strong>Next.js App Router</strong> (file-based routing for Next.js apps), <strong>Wouter</strong> (minimal, ~2KB).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q58">
-  <div class="qa__number">Question 58</div>
-  <h3 class="qa__question">How do you create nested routes in React Router?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[58] = r'''
 <p>Nested routes let you compose layouts &mdash; a parent route renders shared UI (like a layout with sidebar/header), and child routes fill in the content area via <code>&lt;Outlet&gt;</code>.</p>
 
 <pre><code>import { Routes, Route, Outlet, Link } from "react-router-dom";
@@ -3826,15 +3375,9 @@ function App() {
 <p>Each level renders its layout; the deepest matching route fills the innermost <code>&lt;Outlet /&gt;</code>. Each layout can have its own header, sidebar, breadcrumbs.</p>
 
 <p><strong>Why this pattern is powerful</strong>: layouts are co-located with their routes; users navigating between sibling routes don&rsquo;t lose layout state (sidebar scroll position, etc.); URL structure mirrors UI hierarchy.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q59">
-  <div class="qa__number">Question 59</div>
-  <h3 class="qa__question">What is the difference between &lt;BrowserRouter&gt; and &lt;HashRouter&gt; in React Router?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[59] = r'''
 <p>Both routers handle client-side routing in React Router; they differ in <strong>how they encode the URL</strong>.</p>
 
 <table>
@@ -3880,15 +3423,9 @@ location / {
 <p>The <code>#</code> fragment is purely client-side &mdash; the server only ever sees <code>example.com/</code>, so any host serving <code>index.html</code> works. Use this on GitHub Pages (without custom config), restricted CDNs, or static file shares where you can&rsquo;t configure URL rewrites.</p>
 
 <p><strong>2026 recommendation:</strong> use <code>BrowserRouter</code> almost always. Modern hosts (Netlify, Vercel, AWS Amplify, Cloudflare Pages) support SPA fallback rewrites natively &mdash; no manual config needed. <code>HashRouter</code> is a fallback for legacy hosts where you can&rsquo;t configure the server.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q60">
-  <div class="qa__number">Question 60</div>
-  <h3 class="qa__question">How do you redirect in React Router?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[60] = r'''
 <p>React Router supports two primary redirect patterns: <strong><code>&lt;Navigate&gt;</code> component</strong> for declarative redirects in JSX, and <strong><code>useNavigate</code> hook</strong> for programmatic redirects in event handlers or effects.</p>
 
 <p><strong>Declarative &mdash; <code>&lt;Navigate&gt;</code>:</strong></p>
@@ -3980,15 +3517,9 @@ function LoginForm() {
 }</code></pre>
 
 <p><strong>Deprecated</strong>: <code>useHistory().push()</code> from React Router v5. Use <code>useNavigate()</code> in v6+.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q61">
-  <div class="qa__number">Question 61</div>
-  <h3 class="qa__question">How do you pass parameters to routes in React Router?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[61] = r'''
 <p>Route parameters are URL segments captured as variables &mdash; defined with a colon in the path pattern (<code>:id</code>) and read with the <code>useParams</code> hook.</p>
 
 <pre><code>import { Routes, Route, useParams } from "react-router-dom";
@@ -4068,15 +3599,9 @@ function ProductList() {
 ))}</code></pre>
 
 <p>Use template literals to embed values; modern code rarely needs <code>generatePath()</code> &mdash; the explicit string is clearer for most cases.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q62">
-  <div class="qa__number">Question 62</div>
-  <h3 class="qa__question">What is the purpose of the Link component in React Router?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[62] = r'''
 <p>The <code>&lt;Link&gt;</code> component navigates between routes <strong>without a full page reload</strong>. Behind the scenes, it&rsquo;s an <code>&lt;a&gt;</code> tag with <code>onClick</code> that intercepts the navigation and uses React Router&rsquo;s history.</p>
 
 <pre><code>import { Link } from "react-router-dom";
@@ -4138,15 +3663,9 @@ function Nav() {
 navigate("/dashboard");          // imperative redirect</code></pre>
 
 <p>Use <code>&lt;Link&gt;</code> for user-initiated navigation; <code>useNavigate</code> for programmatic (after form submit, login success, etc.).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q63">
-  <div class="qa__number">Question 63</div>
-  <h3 class="qa__question">How do you use the useHistory hook in React Router?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[63] = r'''
 <p><strong><code>useHistory</code> was the React Router v5 hook for programmatic navigation</strong> &mdash; but it&rsquo;s <strong>deprecated and removed</strong> in v6 and later. The current equivalent is <code>useNavigate</code>.</p>
 
 <p><strong>Old (v5) &mdash; <code>useHistory</code>:</strong></p>
@@ -4211,15 +3730,9 @@ function Products() {
 <p><strong>For interview answers</strong>: mention that <code>useHistory</code> existed in v5, then explain it&rsquo;s replaced by <code>useNavigate</code> in v6+. Demonstrating awareness of the breaking change is valuable &mdash; many interviewers test whether candidates know this.</p>
 
 <p><strong>2026 status</strong>: React Router v7 (current) only supports the modern hooks. <code>useHistory</code> doesn&rsquo;t exist; even older tutorials should be considered out of date.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q64">
-  <div class="qa__number">Question 64</div>
-  <h3 class="qa__question">How do you use the useParams hook in React Router?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[64] = r'''
 <p>The <code>useParams</code> hook returns an <strong>object containing all route parameters</strong> defined in the current route&rsquo;s path pattern. It&rsquo;s how components read dynamic segments from the URL.</p>
 
 <pre><code>import { Routes, Route, useParams } from "react-router-dom";
@@ -4294,15 +3807,9 @@ const params = useParams();
 const restPath = params["*"];   // /files/folder/sub/file.txt -&gt; "folder/sub/file.txt"</code></pre>
 
 <p>Useful for file viewers, deeply-nested paths, or catch-all routes.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q65">
-  <div class="qa__number">Question 65</div>
-  <h3 class="qa__question">How do you use the useRouteMatch hook in React Router?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[65] = r'''
 <p><strong><code>useRouteMatch</code> was the v5 hook</strong> for matching URL patterns against the current location &mdash; useful for nested-route logic and conditional rendering. It&rsquo;s <strong>deprecated and removed</strong> in v6+; the modern equivalent is <strong><code>useMatch</code></strong>.</p>
 
 <p><strong>Old (v5) &mdash; <code>useRouteMatch</code>:</strong></p>
@@ -4371,15 +3878,9 @@ import { NavLink } from "react-router-dom";
   if (!match) return null;
   return &lt;div&gt;Admin mode active&lt;/div&gt;;
 }</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q66">
-  <div class="qa__number">Question 66</div>
-  <h3 class="qa__question">How do you handle conditional navigation in React Router?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[66] = r'''
 <p>Conditional navigation means redirecting based on app state &mdash; auth status, user permissions, feature flags, or completed onboarding. The cleanest pattern is a <strong>route guard component</strong> that wraps protected routes.</p>
 
 <p><strong>Auth-protected routes:</strong></p>
@@ -4477,15 +3978,9 @@ const dashboardLoader = async () =&gt; {
 &lt;Route path="/dashboard" loader={dashboardLoader} element={&lt;Dashboard /&gt;} /&gt;</code></pre>
 
 <p>Loaders run before render &mdash; no flash of "loading then redirect" UX. They&rsquo;re the modern recommended pattern in React Router v6.4+ and v7.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q67">
-  <div class="qa__number">Question 67</div>
-  <h3 class="qa__question">What is Redux, and how does it relate to React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[67] = r'''
 <p><strong>Redux is a predictable state container</strong> for JavaScript apps &mdash; not just React, though it&rsquo;s commonly used with React via <strong>react-redux</strong>. It centralizes app state in a single store, makes updates predictable through pure reducer functions, and provides a clear data flow: action &rarr; reducer &rarr; new state &rarr; UI.</p>
 
 <p><strong>Why Redux exists:</strong></p>
@@ -4539,15 +4034,9 @@ export const store = configureStore({ reducer: { counter: counterSlice.reducer }
 </table>
 
 <p>Redux remains common in large existing codebases. For new projects in 2026, default to simpler tools first; reach for Redux only when its action-log + middleware ecosystem genuinely helps.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q68">
-  <div class="qa__number">Question 68</div>
-  <h3 class="qa__question">How do you integrate Redux with a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[68] = r'''
 <p>Integrating Redux with a React app uses the <strong>react-redux</strong> library &mdash; it provides the <code>&lt;Provider&gt;</code> component to make the store available to all children, plus hooks (<code>useSelector</code>, <code>useDispatch</code>) for reading and updating state.</p>
 
 <p><strong>Step 1 &mdash; install:</strong></p>
@@ -4629,15 +4118,9 @@ function Counter() {
 <p><strong>Don&rsquo;t use the old <code>connect</code> HOC</strong> &mdash; it&rsquo;s legacy. The hooks API (<code>useSelector</code>, <code>useDispatch</code>) is the modern standard, cleaner, and works better with TypeScript.</p>
 
 <p><strong>For TypeScript</strong>: define typed hooks once and import them everywhere &mdash; gives full type inference for state and actions.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q69">
-  <div class="qa__number">Question 69</div>
-  <h3 class="qa__question">What are actions in Redux?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[69] = r'''
 <p>An <strong>action</strong> in Redux is a plain JavaScript object that describes <strong>what happened</strong>. Actions are the only way to change state in a Redux store &mdash; you dispatch an action, and reducers respond to it.</p>
 
 <p><strong>Action shape</strong>:</p>
@@ -4706,15 +4189,9 @@ dispatch(todoToggled(123));            // { type: "todos/todoToggled", payload: 
 </ul>
 
 <p><strong>Async actions</strong> use middleware (Thunk, Saga) &mdash; covered in Q76-78.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q70">
-  <div class="qa__number">Question 70</div>
-  <h3 class="qa__question">What are reducers in Redux?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[70] = r'''
 <p>A <strong>reducer</strong> is a pure function that takes the <strong>current state</strong> and an <strong>action</strong>, and returns the <strong>new state</strong>. The signature is always: <code>(state, action) =&gt; newState</code>. Reducers are the only place state changes happen in Redux.</p>
 
 <p><strong>Classic Redux reducer:</strong></p>
@@ -4793,15 +4270,9 @@ const store = configureStore({
 });</code></pre>
 
 <p>State shape becomes <code>{ todos: [...], user: {...}, filters: {...} }</code> &mdash; each reducer manages its own slice independently.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q71">
-  <div class="qa__number">Question 71</div>
-  <h3 class="qa__question">What is the purpose of the Redux store?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[71] = r'''
 <p>The <strong>Redux store</strong> holds the entire app state in a single JavaScript object. It&rsquo;s the <strong>single source of truth</strong> &mdash; the only place state lives, the only thing components read from, and the only thing reducers update.</p>
 
 <p><strong>The store provides three core methods:</strong></p>
@@ -4877,15 +4348,9 @@ store.dispatch({ type: "user/loggedOut" });</code></pre>
 <p>Useful in non-React code (analytics, error reporting, web sockets) but generally components should use the hooks instead.</p>
 
 <p><strong>Multiple stores</strong>: technically possible but discouraged &mdash; loses many of Redux&rsquo;s benefits. Almost always one store per app.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q72">
-  <div class="qa__number">Question 72</div>
-  <h3 class="qa__question">How do you dispatch actions in a React component using Redux?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[72] = r'''
 <p>Dispatching actions in a React component uses the <strong><code>useDispatch</code></strong> hook from <strong>react-redux</strong>. It returns the store&rsquo;s <code>dispatch</code> function, which you call with action objects (or action creators).</p>
 
 <pre><code>import { useDispatch } from "react-redux";
@@ -4973,15 +4438,9 @@ function UserProfile({ userId }) {
 </ul>
 
 <p><strong>TypeScript</strong>: define a typed <code>useDispatch</code> hook once that knows about thunks &mdash; gives full type checking on dispatched actions.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q73">
-  <div class="qa__number">Question 73</div>
-  <h3 class="qa__question">How do you use the useSelector hook in React Redux?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[73] = r'''
 <p>The <strong><code>useSelector</code></strong> hook reads data from the Redux store. It takes a selector function that receives the entire state and returns the slice you care about. The component re-renders whenever the selected value changes.</p>
 
 <pre><code>import { useSelector } from "react-redux";
@@ -5062,15 +4521,9 @@ const useAppSelector: TypedUseSelectorHook&lt;RootState&gt; = useSelector;
 const count = useAppSelector(state =&gt; state.counter.value);   // fully typed</code></pre>
 
 <p>The typed-hook pattern is the official Redux Toolkit recommendation &mdash; defines selector types once, automatic everywhere.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q74">
-  <div class="qa__number">Question 74</div>
-  <h3 class="qa__question">How do you use the useDispatch hook in React Redux?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[74] = r'''
 <p>The <strong><code>useDispatch</code></strong> hook returns the store&rsquo;s <code>dispatch</code> function, which is how components send actions to the store. It&rsquo;s the counterpart to <code>useSelector</code> &mdash; one reads, the other writes.</p>
 
 <pre><code>import { useDispatch } from "react-redux";
@@ -5170,15 +4623,9 @@ const dispatch = useAppDispatch();
 const result = await dispatch(fetchUser(id)).unwrap();   // result is fully typed</code></pre>
 
 <p>Same pattern as the typed selector hook &mdash; define once, use everywhere with full type safety.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q75">
-  <div class="qa__number">Question 75</div>
-  <h3 class="qa__question">What is the purpose of middleware in Redux?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[75] = r'''
 <p><strong>Middleware in Redux</strong> sits between dispatching an action and the action reaching the reducer. It can intercept, transform, log, delay, or replace actions &mdash; enabling cross-cutting concerns like logging, async operations, analytics, and error reporting.</p>
 
 <p><strong>The dispatch flow with middleware:</strong></p>
@@ -5258,15 +4705,9 @@ const persistMw = (storeAPI) =&gt; (next) =&gt; (action) =&gt; {
 </ul>
 
 <p><strong>Modern alternative</strong>: RTK Query (built into Redux Toolkit) handles most async data needs without explicit middleware &mdash; it generates reducers, actions, and hooks for API endpoints automatically. For new Redux projects in 2026, RTK Query handles the use cases that previously needed Thunk or Saga.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q76">
-  <div class="qa__number">Question 76</div>
-  <h3 class="qa__question">How do you handle asynchronous actions in Redux?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[76] = r'''
 <p>Asynchronous actions in Redux can&rsquo;t be plain action objects (which are synchronous). They need <strong>middleware</strong> &mdash; the most common is <strong>Redux Thunk</strong> (built into Redux Toolkit), which lets you dispatch functions that perform async work and dispatch other actions.</p>
 
 <p><strong>The standard approach &mdash; <code>createAsyncThunk</code> from RTK:</strong></p>
@@ -5367,15 +4808,9 @@ function UserProfile({ userId }) {
 }</code></pre>
 
 <p>Auto-cached, deduplicated, refetched on focus, with normalized cache &mdash; replaces 30+ lines of thunk + slice + reducer with a single endpoint definition.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q77">
-  <div class="qa__number">Question 77</div>
-  <h3 class="qa__question">What is Redux Thunk?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[77] = r'''
 <p><strong>Redux Thunk</strong> is the most common middleware for handling async logic in Redux. A "thunk" is a function returned by another function &mdash; it lets you dispatch a function instead of a plain action object. The middleware intercepts these functions, calls them with <code>dispatch</code> and <code>getState</code>, and lets you perform async operations.</p>
 
 <p><strong>What thunk middleware enables:</strong></p>
@@ -5472,15 +4907,9 @@ function loadDashboard() {
 </table>
 
 <p><strong>2026 status</strong>: thunk via <code>createAsyncThunk</code> is the default for Redux Toolkit projects. For most apps it&rsquo;s the right choice. Reach for Saga only when you have complex flows (cancellation, retries, debouncing, race-condition logic). Reach for RTK Query when your async work is fetching server data &mdash; it handles caching automatically.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q78">
-  <div class="qa__number">Question 78</div>
-  <h3 class="qa__question">What is Redux Saga?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[78] = r'''
 <p><strong>Redux-Saga</strong> is a middleware library that uses <strong>generator functions</strong> to manage complex async logic in Redux. It&rsquo;s designed for cases where Thunk isn&rsquo;t enough: cancellation, retries, debouncing, race conditions, and complex orchestration of multiple async operations.</p>
 
 <p><strong>Sagas use generator functions</strong> &mdash; functions that can pause and resume, yielding "effects" that the saga middleware executes:</p>
@@ -5571,15 +5000,9 @@ function* uploadSaga() {
 </table>
 
 <p><strong>2026 reality</strong>: Saga is mostly used in large enterprise apps with complex async flows. For typical CRUD apps, <strong>RTK Query</strong> (server state) + <strong><code>createAsyncThunk</code></strong> (other async) covers 95% of needs. Sagas remain valuable when you genuinely need their power: WebSocket message handling, complex authentication flows, multi-step wizards with cancellation, etc.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q79">
-  <div class="qa__number">Question 79</div>
-  <h3 class="qa__question">How do you set up a Redux store with middleware?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[79] = r'''
 <p>Setting up a Redux store with middleware is straightforward in <strong>Redux Toolkit</strong> &mdash; <code>configureStore</code> includes default middleware (thunk, dev checks) and lets you add custom middleware via the <code>middleware</code> option.</p>
 
 <p><strong>Default setup &mdash; just RTK&rsquo;s built-in middleware:</strong></p>
@@ -5689,15 +5112,9 @@ export const useAppSelector: TypedUseSelectorHook&lt;RootState&gt; = useSelector
 <p><strong>This is the modern standard:</strong> RTK + RTK Query + typed hooks. Components import <code>useAppDispatch</code>/<code>useAppSelector</code> instead of the raw <code>useDispatch</code>/<code>useSelector</code>, getting full TypeScript inference for state and actions.</p>
 
 <p><strong>Old <code>createStore</code> + <code>applyMiddleware</code></strong>: still works but deprecated &mdash; <code>configureStore</code> is the recommended API since 2019.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q80">
-  <div class="qa__number">Question 80</div>
-  <h3 class="qa__question">How do you debug a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[80] = r'''
 <p>Debugging React apps combines <strong>browser DevTools</strong>, <strong>React DevTools</strong> (a separate browser extension), and good old <strong><code>console.log</code></strong>. The key is using the right tool for the kind of bug you&rsquo;re hunting.</p>
 
 <p><strong>The debugging toolkit:</strong></p>
@@ -5757,15 +5174,9 @@ console.table(users);   // shows nice tabular output</code></pre>
 &lt;StrictMode&gt;
   &lt;App /&gt;
 &lt;/StrictMode&gt;</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q81">
-  <div class="qa__number">Question 81</div>
-  <h3 class="qa__question">What is the purpose of the React Developer Tools?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[81] = r'''
 <p><strong>React Developer Tools</strong> is a browser extension (Chrome, Firefox, Edge) that adds two tabs to your DevTools: <strong>Components</strong> and <strong>Profiler</strong>. It&rsquo;s essential for debugging React apps &mdash; you can inspect the component tree, see props and state, track hook values, and analyze performance.</p>
 
 <p><strong>The two tabs:</strong></p>
@@ -5821,15 +5232,9 @@ react-devtools</code></pre>
 <p>If you see grey on a known React app, the tools haven&rsquo;t loaded &mdash; refresh the page after installing.</p>
 
 <p><strong>2026 reality</strong>: React DevTools is essentially required for serious React work. Modern versions integrate with React 19 features (Server Components, useActionState, use()) and the React Compiler.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q82">
-  <div class="qa__number">Question 82</div>
-  <h3 class="qa__question">How do you use the React Developer Tools to inspect the component tree?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[82] = r'''
 <p>The <strong>Components tab</strong> in React DevTools shows the full component tree of your running app. You inspect components, view their props/state/hooks, and even edit values live to test behavior.</p>
 
 <p><strong>How to inspect the tree:</strong></p>
@@ -5898,15 +5303,9 @@ rendered by App › Layout</code></pre>
 </ol>
 
 <p><strong>For Server Components (React 19+ in Next.js)</strong>: DevTools shows them with a special icon. They have no client state &mdash; just props.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q83">
-  <div class="qa__number">Question 83</div>
-  <h3 class="qa__question">How do you handle animations in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[83] = r'''
 <p>Animations in React come in three flavors: <strong>CSS animations/transitions</strong> (simplest), <strong>animation libraries</strong> like Framer Motion (most flexible), and <strong>imperative APIs</strong> like the Web Animations API (advanced control). Choose based on complexity and animation requirements.</p>
 
 <p><strong>CSS transitions &mdash; simplest, just add a class:</strong></p>
@@ -5994,15 +5393,9 @@ function Modal({ isOpen, children }) {
 <pre><code>@media (prefers-reduced-motion: reduce) {
   * { animation-duration: 0.01ms !important; }
 }</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q84">
-  <div class="qa__number">Question 84</div>
-  <h3 class="qa__question">What is the purpose of the React Transition Group library?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[84] = r'''
 <p><strong>React Transition Group</strong> is a small, focused animation library that manages <strong>component mount/unmount transitions</strong>. It doesn&rsquo;t do animations itself &mdash; it just exposes lifecycle hooks (mounting, mounted, unmounting, unmounted) so you can apply CSS classes or trigger custom animations at the right times.</p>
 
 <p>Install with <code>npm install react-transition-group</code>. Despite its age (predates Framer Motion), it&rsquo;s still used in many production codebases &mdash; lightweight, framework-agnostic, no runtime overhead.</p>
@@ -6066,15 +5459,9 @@ function App() {
 <p><strong>2026 perspective</strong>: React Transition Group is still well-maintained and useful, but most teams reach for <strong>Framer Motion</strong> first &mdash; the API is more declarative, supports gestures and physics, and handles everything Transition Group does plus much more. Use Transition Group when you want minimal bundle size and CSS-driven animations; use Framer Motion when you want polish and flexibility.</p>
 
 <p>See Q85 for a more detailed CSSTransition example.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q85">
-  <div class="qa__number">Question 85</div>
-  <h3 class="qa__question">How do you use the CSSTransition component from React Transition Group?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[85] = r'''
 <p><strong><code>CSSTransition</code></strong> is the most-used component from React Transition Group. It applies CSS classes to a child element at each stage of mounting/unmounting &mdash; you write the actual animation in CSS.</p>
 
 <p><strong>Full example &mdash; modal with fade animation:</strong></p>
@@ -6161,15 +5548,9 @@ function TodoList({ todos }) {
 </table>
 
 <p><strong>For more complex needs</strong> &mdash; spring physics, gestures, layout animations, or list reordering &mdash; reach for <strong>Framer Motion</strong>. CSSTransition is great for simple class-based animations but lacks the polish features modern UI demands.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q86">
-  <div class="qa__number">Question 86</div>
-  <h3 class="qa__question">How do you test a React component?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[86] = r'''
 <p>Testing a React component means verifying that it <strong>renders correctly given various props</strong> and <strong>responds to user interactions</strong>. The modern standard is <strong>Vitest</strong> (or Jest) as the test runner + <strong>React Testing Library</strong> (RTL) as the rendering and querying library.</p>
 
 <p><strong>Why React Testing Library:</strong></p>
@@ -6237,15 +5618,9 @@ expect(await screen.findByText("Loaded!")).toBeInTheDocument();</code></pre>
 <p><strong>Don&rsquo;t use Enzyme in 2026</strong>: it&rsquo;s effectively abandoned (last major release supported React 17), encourages testing implementation details, and the React community has moved on. <strong>React Testing Library is the standard</strong>.</p>
 
 <p><strong>Test runner choice</strong>: <strong>Vitest</strong> (Vite-native, faster) for new projects; <strong>Jest</strong> for existing CRA/Next.js apps. Both work identically with RTL.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q87">
-  <div class="qa__number">Question 87</div>
-  <h3 class="qa__question">What is Jest, and how do you use it with React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[87] = r'''
 <p><strong>Jest</strong> is a JavaScript test runner from Meta &mdash; for years the standard for testing React apps. It provides: a test runner, an assertion library (<code>expect</code>), mocking, snapshot testing, and code coverage. Used together with React Testing Library for the actual component testing.</p>
 
 <p><strong>Setup &mdash; Jest comes pre-configured in Create React App and Next.js</strong>:</p>
@@ -6333,15 +5708,9 @@ describe("add()", () =&gt; {
 <p><strong>2026 reality &mdash; Vitest is increasingly popular</strong>: Vite-native test runner, Jest-compatible API (most Jest tests run in Vitest unchanged), much faster startup, native ESM support. For new Vite projects, choose Vitest. For CRA/Next.js, Jest remains the default. The testing patterns and matchers are nearly identical.</p>
 
 <p><strong>Snapshot testing</strong>, <strong>mocking</strong>, and <strong>async testing</strong> &mdash; covered in Q90, Q92, Q93.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q88">
-  <div class="qa__number">Question 88</div>
-  <h3 class="qa__question">How do you write a unit test for a React component?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[88] = r'''
 <p>A unit test for a React component verifies that <strong>given some props or interactions, the component renders the expected output</strong>. With React Testing Library, you focus on what the user sees and does &mdash; not internal implementation.</p>
 
 <p><strong>Component to test:</strong></p>
@@ -6450,15 +5819,9 @@ expect(onSelect).toHaveBeenCalledWith(expect.objectContaining({ id: 1 }));
 const input = screen.getByLabelText("Email");
 await user.type(input, "alice@example.com");
 expect(input).toHaveValue("alice@example.com");</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q89">
-  <div class="qa__number">Question 89</div>
-  <h3 class="qa__question">What is Enzyme, and how do you use it with React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[89] = r'''
 <p><strong>Enzyme</strong> was a popular React testing library from Airbnb that provided shallow rendering, mounting, and a jQuery-like API for traversing component trees. It was the standard from 2016-2020 but has been <strong>effectively abandoned</strong>: the last major release officially supports only up to React 16, with community-maintained adapters for React 17 but <strong>no official support for React 18 or 19</strong>.</p>
 
 <p><strong>The 2026 reality</strong>: <strong>do not use Enzyme for new projects</strong>. The React community has fully migrated to <strong>React Testing Library (RTL)</strong>, which is officially recommended by the React team.</p>
@@ -6532,15 +5895,9 @@ test("increments count on click", async () =&gt; {
 </ul>
 
 <p><strong>Bottom line for interview answers</strong>: acknowledge Enzyme exists historically, but state clearly that <strong>React Testing Library is the modern standard</strong> and that you wouldn&rsquo;t reach for Enzyme in new code. Knowing this is what interviewers want to hear.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q90">
-  <div class="qa__number">Question 90</div>
-  <h3 class="qa__question">How do you write a snapshot test for a React component?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[90] = r'''
 <p>A <strong>snapshot test</strong> renders a component and saves its output (typically the rendered HTML) to a file. On subsequent runs, the new output is compared to the saved snapshot &mdash; if they differ, the test fails. It&rsquo;s a way to detect <strong>unintended UI changes</strong>.</p>
 
 <p><strong>Basic snapshot test with Jest:</strong></p>
@@ -6623,15 +5980,9 @@ test("renders timestamped item", () =&gt; {
 });</code></pre>
 
 <p><strong>2026 perspective</strong>: snapshots are useful but commonly overused. Reach for them when comparing complex output is genuinely easier than writing specific assertions. For most components, <strong>behavior-focused RTL queries</strong> are clearer and more maintainable. Many teams reserve snapshots for design-system primitives where any change really should require explicit review.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q91">
-  <div class="qa__number">Question 91</div>
-  <h3 class="qa__question">What is the purpose of the act() function in React testing?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[91] = r'''
 <p>The <strong><code>act()</code></strong> function tells React: "I&rsquo;m about to do something that updates state &mdash; flush all the resulting renders, effects, and updates before continuing." It ensures the test sees a consistent UI state, with all React updates applied.</p>
 
 <p><strong>The good news</strong>: with React Testing Library and modern React, <strong>you almost never need to call <code>act()</code> directly</strong>. RTL wraps its methods (<code>render</code>, <code>fireEvent</code>, <code>userEvent</code>) in <code>act()</code> automatically.</p>
@@ -6713,15 +6064,9 @@ test("manual state update via ref", async () =&gt; {
 </ul>
 
 <p><strong>2026 status</strong>: <code>act</code> is now imported from <code>"react"</code> in React 18.3+ (was previously in <code>"react-dom/test-utils"</code>). For most tests, you&rsquo;ll never type <code>act</code> manually &mdash; treat <code>act</code> warnings as bug indicators that point to async issues in your tests.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q92">
-  <div class="qa__number">Question 92</div>
-  <h3 class="qa__question">How do you mock API calls in React tests?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[92] = r'''
 <p>Mocking API calls in React tests prevents real network requests, makes tests fast and deterministic, and lets you simulate any scenario (success, error, slow response, empty data). The two main approaches: <strong>mock the fetch/axios function directly</strong>, or <strong>intercept HTTP at a higher level with MSW</strong> (Mock Service Worker).</p>
 
 <p><strong>Approach 1 &mdash; mock <code>fetch</code> with Jest:</strong></p>
@@ -6833,15 +6178,9 @@ test("handles 500 error", async () =&gt; {
 <p><strong>For TanStack Query / RTK Query tests</strong>: MSW is essentially required. Mocking the data-fetching library directly defeats the purpose of those libraries.</p>
 
 <p><strong>Best practice</strong>: invest in MSW for any non-trivial app. The investment pays back many times over &mdash; tests stay valid through refactors, dev experience improves, and you have a single source of truth for mock API behavior across tests, Storybook, and local development.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q93">
-  <div class="qa__number">Question 93</div>
-  <h3 class="qa__question">How do you test asynchronous code in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[93] = r'''
 <p>Asynchronous code in React tests &mdash; data fetching, timers, animations &mdash; requires <strong>waiting</strong> for state updates to complete before asserting. React Testing Library provides three primary tools: <strong><code>findBy*</code></strong> queries (wait until found), <strong><code>waitFor</code></strong> (wait for any condition), and <strong><code>waitForElementToBeRemoved</code></strong> (wait for unmount).</p>
 
 <p><strong><code>findBy*</code> &mdash; wait for an element to appear:</strong></p>
@@ -6955,15 +6294,9 @@ expect(api.fetch).toHaveBeenCalled();</code></pre>
 <p>Override per-call: <code>findByText("foo", {}, { timeout: 5000 })</code>. Or globally in setup: <code>configure({ asyncUtilTimeout: 5000 })</code>.</p>
 
 <p><strong>Don&rsquo;t use <code>setTimeout</code> in tests</strong> &mdash; flaky and slow. Always use proper async helpers and fake timers when needed.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q94">
-  <div class="qa__number">Question 94</div>
-  <h3 class="qa__question">What is the purpose of the fireEvent function in React testing?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[94] = r'''
 <p><strong><code>fireEvent</code></strong> dispatches synthetic DOM events on elements &mdash; click, change, submit, keyboard events, etc. It&rsquo;s the lower-level event utility from React Testing Library. <strong>For most modern tests, prefer <code>userEvent</code></strong> &mdash; it more accurately simulates real user interactions.</p>
 
 <p><strong>Basic <code>fireEvent</code> usage:</strong></p>
@@ -7052,15 +6385,9 @@ test("user types in search", async () =&gt; {
 });</code></pre>
 
 <p><strong>2026 best practice</strong>: <strong>default to <code>userEvent</code></strong> for all interaction tests. It produces tests that are more representative of real user behavior, catches more bugs, and integrates well with async patterns. Reach for <code>fireEvent</code> only when you have a specific reason (a custom event, a synthetic-only DOM API, etc.).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q95">
-  <div class="qa__number">Question 95</div>
-  <h3 class="qa__question">How do you simulate user interactions in React tests?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[95] = r'''
 <p>Simulating user interactions in React tests is best done with <strong><code>@testing-library/user-event</code></strong> &mdash; a library built on top of <code>fireEvent</code> that mimics real user behavior more faithfully. It dispatches the full sequence of events that a real interaction triggers (focus, mousedown, mouseup, click, etc.) instead of a single synthetic event.</p>
 
 <p><strong>Setup:</strong></p>
@@ -7170,15 +6497,9 @@ await user.upload(screen.getByLabelText("Upload"), file);</code></pre>
 </table>
 
 <p><strong>2026 standard</strong>: <code>userEvent</code> v14+ with <code>setup()</code> pattern is the de-facto way to simulate user interactions. It works seamlessly with React 19, Vitest, and Jest.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q96">
-  <div class="qa__number">Question 96</div>
-  <h3 class="qa__question">How do you set up a React project with Create React App?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[96] = r'''
 <p><strong>Important &mdash; Create React App (CRA) is officially deprecated as of February 2025.</strong> The React team itself recommended in early 2025 that <strong>new projects should use Vite, Next.js, Remix, or other modern frameworks</strong>. CRA is no longer maintained.</p>
 
 <p><strong>For new React projects in 2026, use Vite instead:</strong></p>
@@ -7245,15 +6566,9 @@ npx create-react-app my-app --template typescript</code></pre>
 </ol>
 
 <p><strong>For interview answers in 2026</strong>: lead with the fact that CRA is deprecated. Show you know the modern alternatives. If asked about CRA specifically, explain how it worked historically and why it was retired (slow Webpack-based build, lack of customization without ejection, no SSR support).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q97">
-  <div class="qa__number">Question 97</div>
-  <h3 class="qa__question">How do you configure a custom Webpack setup for a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[97] = r'''
 <p>A custom Webpack config gives you full control over how your React app bundles &mdash; useful for specific optimizations, complex monorepos, or legacy projects. <strong>For new projects in 2026, prefer Vite</strong>; reach for custom Webpack only when you have a specific reason.</p>
 
 <p><strong>Minimal React + Webpack setup:</strong></p>
@@ -7383,15 +6698,9 @@ const apiUrl = process.env.API_URL;</code></pre>
 }</code></pre>
 
 <p><strong>2026 perspective</strong>: writing custom Webpack configs is rarely necessary anymore. <strong>Vite uses esbuild + Rollup for 10-100x faster builds</strong> with simpler config. Webpack remains entrenched in older codebases and Next.js (which uses Webpack/Turbopack). For interview answers: know how Webpack works conceptually (entry, loaders, plugins, output), but recommend modern bundlers for new projects unless there&rsquo;s a specific Webpack-only requirement.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q98">
-  <div class="qa__number">Question 98</div>
-  <h3 class="qa__question">What is the purpose of the .env file in a React project?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[98] = r'''
 <p>The <strong><code>.env</code> file</strong> stores environment variables &mdash; configuration values that vary between environments (development, staging, production) without hardcoding them in source. The build tool reads these at build time and embeds them in your JavaScript bundle.</p>
 
 <p><strong>Basic <code>.env</code> usage:</strong></p>
@@ -7491,15 +6800,9 @@ interface ImportMeta {
 }</code></pre>
 
 <p><strong>2026 best practice</strong>: use <code>.env.local</code> for personal dev secrets, commit <code>.env.development</code> and <code>.env.production</code> with environment-appropriate (non-secret) values, and use server-side environments (Vercel env vars, AWS Secrets Manager, etc.) for true secrets.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q99">
-  <div class="qa__number">Question 99</div>
-  <h3 class="qa__question">How do you deploy a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[99] = r'''
 <p>Deploying a React app means: <strong>building a production bundle</strong> (HTML + JS + CSS + assets), then <strong>uploading it to a host</strong> that serves static files. Modern hosts make this nearly automatic via Git integration.</p>
 
 <p><strong>Build the production bundle:</strong></p>
@@ -7601,15 +6904,9 @@ RewriteRule . /index.html [L]
 </table>
 
 <p><strong>2026 recommendation</strong>: for SPAs, <strong>Vercel or Netlify</strong> are the easiest wins. For Next.js apps, <strong>Vercel</strong> is the natural fit (made by the same company). For static portfolios and simple sites, <strong>Cloudflare Pages</strong> is fast and free. For AWS-native shops, <strong>S3 + CloudFront</strong> remains the standard.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q100">
-  <div class="qa__number">Question 100</div>
-  <h3 class="qa__question">What are the different ways to style React components?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[100] = r'''
 <p>React doesn&rsquo;t prescribe a styling approach &mdash; you can choose from several options based on team preference and project needs.</p>
 
 <p><strong>The main styling approaches:</strong></p>
@@ -7718,15 +7015,9 @@ import "./Component.scss";</code></pre>
 <p><strong>shadcn/ui</strong> (a code-first UI library based on Tailwind + Radix) has become extremely popular &mdash; you copy components into your project rather than installing a package. Combine with Tailwind for the modern stack many teams converge on.</p>
 
 <p><strong>How to choose</strong>: <strong>Tailwind</strong> for fast development with a design system, <strong>CSS Modules</strong> for component-scoped traditional CSS, <strong>styled-components</strong> for highly dynamic prop-driven styles, <strong>UI library</strong> for rapid app development without designing everything yourself. The "best" choice depends on team familiarity and project needs.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q101">
-  <div class="qa__number">Question 101</div>
-  <h3 class="qa__question">How do you use styled-components in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[101] = r'''
 <p><strong>styled-components</strong> is a popular CSS-in-JS library for React. You define a component&rsquo;s styles using template literals containing real CSS, and the library injects scoped class names at runtime. It supports props-based styling, theming, and global styles.</p>
 
 <p><strong>Install and basic usage:</strong></p>
@@ -7884,27 +7175,4 @@ const Button = styled.button`
 </ul>
 
 <p><strong>Should you still learn it?</strong> Yes &mdash; many existing codebases use it heavily, and it&rsquo;s still the most popular CSS-in-JS library by usage. But for new projects, evaluate Tailwind, CSS Modules, or zero-runtime CSS-in-JS first. styled-components remains a solid choice for projects that need highly dynamic prop-based styling, but the broader ecosystem trend is toward build-time solutions for better performance.</p>
-
-    
-  </div>
-</article>
-
-    <nav class="chapter-nav" aria-label="Chapter navigation">
-      <a class="chapter-nav__prev" href="api-scenario.html">
-      <span class="chapter-nav__dir">← Previous</span>
-      <span class="chapter-nav__title">API — Scenario Based</span>
-    </a>
-      <a class="chapter-nav__next" href="reactjs-coding.html">
-      <span class="chapter-nav__dir">Next →</span>
-      <span class="chapter-nav__title">ReactJS — Coding</span>
-    </a>
-    </nav>
-
-  </section>
-
-</main>
-</div>
-
-<script src="../assets/script.js"></script>
-</body>
-</html>
+'''
