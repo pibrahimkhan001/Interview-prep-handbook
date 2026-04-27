@@ -22,8 +22,8 @@ Frontend chapters round out the browser-facing half of full-stack interviews. HT
 - [x] CSS Coding (100 Q, completed 2026-04-26)
 - [x] CSS Advanced (101 Q, completed 2026-04-26)
 - [x] **React JS Basic (101 Q)** &mdash; 2026-04-26
-- [ ] **React JS Coding (100 Q)** ← next
-- [ ] React JS Advanced (100 Q)
+- [x] **React JS Coding (100 Q)** &mdash; 2026-04-27
+- [ ] **React JS Advanced (100 Q)** ← next
 - [ ] React JS Scenario Based (100 Q)
 
 **Target:** 401 more answers to finish frontend.

@@ -4,6 +4,34 @@ Session-by-session record of what was done. Latest entries at the top.
 
 Format: `## YYYY-MM-DD — Session title`
 
+## 2026-04-27 — ReactJS Coding Q1-100 (React Coding level complete, 3004/4904)
+
+**Changes:**
+- Completed ReactJS Coding with all 100 answers in `content/reactjs_coding.py` (avg ~2,892 chars, range 1,574-4,900). Style: Coding-level conventions &mdash; brief lead-in (1-2 sentences) + runnable code snippet + 1-2 sentences of key concepts. Average runs higher than other Coding chapters because React often needs full component examples with imports.
+
+- Built across multiple sessions: Q1-25 from prior session (Hello World through useCallback memoization). This session completed Q26-100 in three batches:
+  - **Batch Q26-50 (25 answers)**: file uploads with FormData, pagination Prev/Next, fetch API + AbortController, form submit with status, useLayoutEffect tooltip, load-more pattern, useImperativeHandle (with React 19 ref-as-prop note), countdown timer, axios with progress, search bar with debounce, CSS Modules, notification banner with auto-hide, fetch error handling (network vs HTTP), NavLink active state, hover tooltip, React Router setup, useHistory deprecation→useNavigate, breadcrumbs from URL path, useParams + product detail with refetch, protected route with AuthContext, GraphQL with Apollo Client, JWT auth with localStorage (with security warnings), drag-and-drop list reordering with HTML5 API, responsive grid with auto-fit minmax, useReducer with todo filtering
+  - **Batch Q51-75 (25 answers)**: dynamic phone number form, recursive tree view, interval timer + stopwatch, infinite scroll with IntersectionObserver, pie chart with Recharts, useRef for shake animation + scrollIntoView, multi-step form wizard, useReducer with lazy init for shopping cart, sortable table, theme switching with Context + CSS variables, REST API list with refresh, login flow with AuthContext, full pagination with page numbers + ellipsis, accessible tabs with keyboard nav, refetch on prop change, useFormValidation custom hook, list with delete + undo toast, dropdown options from API, select all with indeterminate state, useMemo prime calculation, modal with createPortal + dynamic content, useFetch custom hook, inline editing with Enter/Escape, useCallback with memoized children, multi-filter list with useMemo
+  - **Batch Q76-100 (25 answers)**: Firebase Realtime Database with onValue, file upload with progress (axios), bulk actions email list, load-more with skeleton loaders, video player with useRef, search+filter with useDeferredValue, GraphQL with urql (lighter than Apollo), React Hook Form + Zod, drag-and-drop with dnd-kit (modern replacement for react-beautiful-dnd), responsive nav with hamburger, useReducer with multiple action types, expandable FAQ accordion, SpaceX API public fetch, social login with Firebase Auth, sort+filter table combined, checkboxes with sticky action bar, useEffect mount + update, custom error messages with touched state, paginated filtered list with reset-to-page-1, useMemo for transaction stats, separate Select all/Deselect all buttons, OpenWeather API with env key, React 19 useActionState + useFormStatus, drag-drop sort in grid layout, inline edit with explicit Save/Cancel buttons
+
+- 2026-current React tech accurately referenced throughout: React 19 hooks (useActionState, useFormStatus, ref-as-prop), TanStack Query as production data layer, React Hook Form + Zod for forms, dnd-kit (NOT react-beautiful-dnd which is unmaintained), Firebase Auth/Clerk/Supabase for social login, urql as Apollo alternative, useDeferredValue for responsive typing on large lists, MSW for API mocking, Recharts for charts, Tailwind CSS approaches.
+
+- Updated PROJECT_STATE.md (2904→3004 answers, 29→30 chapters, ~59%→~61% completion, ReactJS Coding ✅ row, ReactJS Advanced flagged 🔄 next, reactjs_coding.py added to file map).
+
+- Updated ROADMAP.md (React JS Coding checked off with 2026-04-27 date, React JS Advanced now marked as next).
+
+- Rebuilt `chapters/reactjs-coding.html` (343KB, 100 questions rendered) and regenerated `index.html`.
+
+**Files changed:**
+- `content/reactjs_coding.py` (25→100 answers; +75 answers, ~290KB total)
+- `chapters/reactjs-coding.html` (regenerated)
+- `index.html` (regenerated)
+- `docs/PROJECT_STATE.md`
+- `docs/ROADMAP.md`
+- `docs/CHANGELOG.md` (this entry)
+
+**Total progress after this session:** 3,004 / 4,904 detailed answers (~61%). Phase 4 (Frontend) now at 804/1004 (80%) &mdash; HTML/CSS done, ReactJS Basic + Coding done, ReactJS Advanced + Scenario remaining (200 questions). 30 of 49 chapters now have detailed answers; 19 remain as stubs.
+
 ## 2026-04-26 — ReactJS Basic Q1-101 (React topic Basic level complete, 2904/4904)
 
 **Changes:**

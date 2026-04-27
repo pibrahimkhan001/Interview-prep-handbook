@@ -1,118 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ReactJS — Coding · Interview Prep Mastery</title>
-<meta name="description" content="100 coding interview questions on ReactJS, with detailed explanations and examples.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="../assets/styles.css">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%239a6b1d'/%3E%3Ctext x='50' y='68' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold' font-size='48'%3EIP%3C/text%3E%3C/svg%3E">
-</head>
-<body>
-<header class="site-header">
-  <div class="site-header__inner">
-    <button class="menu-toggle" aria-label="Open menu" type="button">☰ Menu</button>
-    <a class="brand" href="../index.html">
-      <span class="brand__mark">IP</span>
-      <span class="brand__text">
-        <span class="brand__title">Interview Prep Mastery</span>
-        <span class="brand__subtitle">Interactive learning guide</span>
-      </span>
-    </a>
-    <nav class="header-nav">
-      <a href="../index.html#roadmap">Roadmap</a>
-      <a href="../index.html#chapters">All chapters</a>
-      <button class="theme-toggle" type="button" aria-label="Toggle color scheme">☾ Dark</button>
-    </nav>
-  </div>
-</header>
-<div class="layout">
-<aside class="sidebar" aria-label="Site navigation">
-  <div class="sidebar__header">Chapter Navigator</div>
-  
-        <div class="nav-part">
-          <div class="nav-part__label">Part 1</div>
-          <div class="nav-part__title">Core Programming Languages</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">JavaScript</li><li><a class="" href="../chapters/javascript-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/javascript-tricky.html"><span class="nav-item__title">Tricky</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-coding.html"><span class="nav-item__title">Advanced Coding</span><span class="nav-item__meta">100 questions · 100 min read</span></a></li><li><a class="" href="../chapters/javascript-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-scenario.html"><span class="nav-item__title">Advanced Scenario Based</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Python</li><li><a class="" href="../chapters/python-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/python-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 2</div>
-          <div class="nav-part__title">Web Fundamentals</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">HTML</li><li><a class="" href="../chapters/html-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/html-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/html-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CSS</li><li><a class="" href="../chapters/css-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">102 questions · 60 min read</span></a></li><li><a class="" href="../chapters/css-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/css-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">101 questions · 90 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 3</div>
-          <div class="nav-part__title">Backend Technologies</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Node.Js</li><li><a class="" href="../chapters/nodejs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/nodejs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ExpressJS</li><li><a class="" href="../chapters/expressjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/expressjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/expressjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">API</li><li><a class="" href="../chapters/api-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/api-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 4</div>
-          <div class="nav-part__title">Frontend Frameworks</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ReactJS</li><li><a class="" href="../chapters/reactjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">101 questions · 60 min read</span></a></li><li><a class="active" href="../chapters/reactjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 5</div>
-          <div class="nav-part__title">Databases</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MYSQL</li><li><a class="" href="../chapters/mysql-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mysql-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MongoDB</li><li><a class="" href="../chapters/mongodb-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mongodb-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 6</div>
-          <div class="nav-part__title">System Design &amp; DevOps</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">System Design MERN Stack</li><li><a class="" href="../chapters/system-design-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Infrastructure MERN Stack</li><li><a class="" href="../chapters/infrastructure-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/infrastructure-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CI/CD Pipeline</li><li><a class="" href="../chapters/cicd-pipeline-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-</aside>
-<main class="main" id="main">
+"""ReactJS Coding (100 questions) — practical, runnable React snippets.
 
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="../index.html">Home</a>
-    <span class="breadcrumb__sep">›</span>
-    <a href="../index.html#part-4">Frontend Frameworks</a>
-    <span class="breadcrumb__sep">›</span>
-    <span>ReactJS — Coding</span>
-  </nav>
+Style: 150-250 words setup + working code. Beginner-to-intermediate React/JSX.
+"""
 
-  <header class="chapter-header">
-    <div class="chapter-label">ReactJS · Coding</div>
-    <h1 class="chapter-title">Coding ReactJS Interview Questions</h1>
-    <p class="chapter-lede">Practical coding problems with full solutions and line-by-line explanations.</p>
-    <div class="chapter-meta">
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Questions</span><span class="chapter-meta__value">100</span></div>
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Level</span><span class="chapter-meta__value">Coding</span></div>
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Estimated reading</span><span class="chapter-meta__value">90 min read</span></div>
-    </div>
-    
-  </header>
+ANSWERS: dict[int, str] = {}
 
-  <section class="prose">
-
-    <div class="toc" id="toc">
-      <div class="toc__title">All questions in this chapter</div>
-      <ul class="toc__list">
-        <li><a href="#q1"><span class="toc__num">1.</span>Write a functional component in React that displays &quot;Hello, World!&quot;.</a></li><li><a href="#q2"><span class="toc__num">2.</span>Create a class component in React that displays a counter with increment and decrement ...</a></li><li><a href="#q3"><span class="toc__num">3.</span>Write a React component that fetches data from an API and displays it in a list.</a></li><li><a href="#q4"><span class="toc__num">4.</span>Implement a controlled input component in React.</a></li><li><a href="#q5"><span class="toc__num">5.</span>Create a form in React with validation for required fields.</a></li><li><a href="#q6"><span class="toc__num">6.</span>Write a React component that conditionally renders different content based on state.</a></li><li><a href="#q7"><span class="toc__num">7.</span>Create a React component that renders a list of items and allows adding new items to th...</a></li><li><a href="#q8"><span class="toc__num">8.</span>Write a React component that toggles between two views when a button is clicked.</a></li><li><a href="#q9"><span class="toc__num">9.</span>Implement a reusable button component in React that accepts props for different styles.</a></li><li><a href="#q10"><span class="toc__num">10.</span>Create a simple todo list application in React.</a></li><li><a href="#q11"><span class="toc__num">11.</span>Write a React component that uses the useEffect hook to fetch data on component mount.</a></li><li><a href="#q12"><span class="toc__num">12.</span>Implement a custom hook in React to handle form input state.</a></li><li><a href="#q13"><span class="toc__num">13.</span>Create a React component that uses context to manage global state.</a></li><li><a href="#q14"><span class="toc__num">14.</span>Write a React component that uses the useReducer hook for state management.</a></li><li><a href="#q15"><span class="toc__num">15.</span>Implement a React component that fetches data from an API using async/await.</a></li><li><a href="#q16"><span class="toc__num">16.</span>Create a React component that displays a loading spinner while fetching data.</a></li><li><a href="#q17"><span class="toc__num">17.</span>Write a React component that uses the useRef hook to manage focus on an input field.</a></li><li><a href="#q18"><span class="toc__num">18.</span>Implement a React component that displays a modal dialog.</a></li><li><a href="#q19"><span class="toc__num">19.</span>Create a React component that uses the useContext hook to consume a context value.</a></li><li><a href="#q20"><span class="toc__num">20.</span>Write a React component that implements a simple image carousel.</a></li><li><a href="#q21"><span class="toc__num">21.</span>Implement a React component that uses PropTypes for type checking.</a></li><li><a href="#q22"><span class="toc__num">22.</span>Create a React component that renders a list of users and allows filtering by name.</a></li><li><a href="#q23"><span class="toc__num">23.</span>Write a React component that uses the useMemo hook to optimize performance.</a></li><li><a href="#q24"><span class="toc__num">24.</span>Implement a React component that lazy loads an image.</a></li><li><a href="#q25"><span class="toc__num">25.</span>Create a React component that uses the useCallback hook to memoize a function.</a></li><li><a href="#q26"><span class="toc__num">26.</span>Write a React component that handles file uploads.</a></li><li><a href="#q27"><span class="toc__num">27.</span>Implement a React component that renders a paginated list of items.</a></li><li><a href="#q28"><span class="toc__num">28.</span>Create a React component that fetches and displays data using the Fetch API.</a></li><li><a href="#q29"><span class="toc__num">29.</span>Write a React component that handles form submission and displays success or error mess...</a></li><li><a href="#q30"><span class="toc__num">30.</span>Implement a React component that uses the useLayoutEffect hook.</a></li><li><a href="#q31"><span class="toc__num">31.</span>Create a React component that renders a list of items with a &quot;load more&quot; button.</a></li><li><a href="#q32"><span class="toc__num">32.</span>Write a React component that uses the useImperativeHandle hook to expose a method.</a></li><li><a href="#q33"><span class="toc__num">33.</span>Implement a React component that displays a countdown timer.</a></li><li><a href="#q34"><span class="toc__num">34.</span>Create a React component that fetches and displays data using Axios.</a></li><li><a href="#q35"><span class="toc__num">35.</span>Write a React component that renders a list of items with a search bar.</a></li><li><a href="#q36"><span class="toc__num">36.</span>Implement a React component that uses CSS modules for styling.</a></li><li><a href="#q37"><span class="toc__num">37.</span>Create a React component that displays a notification banner with a close button.</a></li><li><a href="#q38"><span class="toc__num">38.</span>Write a React component that fetches data from an API and handles errors gracefully.</a></li><li><a href="#q39"><span class="toc__num">39.</span>Implement a React component that renders a navigation menu with active state.</a></li><li><a href="#q40"><span class="toc__num">40.</span>Create a React component that displays a tooltip on hover.</a></li><li><a href="#q41"><span class="toc__num">41.</span>Write a React component that uses the React Router for navigation.</a></li><li><a href="#q42"><span class="toc__num">42.</span>Implement a React component that uses the useHistory hook for programmatic navigation.</a></li><li><a href="#q43"><span class="toc__num">43.</span>Create a React component that renders a breadcrumb navigation.</a></li><li><a href="#q44"><span class="toc__num">44.</span>Write a React component that uses the useParams hook to access route parameters.</a></li><li><a href="#q45"><span class="toc__num">45.</span>Implement a React component that renders a protected route using React Router.</a></li><li><a href="#q46"><span class="toc__num">46.</span>Create a React component that fetches and displays data using GraphQL.</a></li><li><a href="#q47"><span class="toc__num">47.</span>Write a React component that handles authentication with JWT.</a></li><li><a href="#q48"><span class="toc__num">48.</span>Implement a React component that renders a list of items with drag-and-drop functionali...</a></li><li><a href="#q49"><span class="toc__num">49.</span>Create a React component that renders a responsive grid layout.</a></li><li><a href="#q50"><span class="toc__num">50.</span>Write a React component that uses the useReducer hook for complex state logic.</a></li><li><a href="#q51"><span class="toc__num">51.</span>Implement a React component that renders a form with dynamic fields.</a></li><li><a href="#q52"><span class="toc__num">52.</span>Create a React component that renders a tree view of items.</a></li><li><a href="#q53"><span class="toc__num">53.</span>Write a React component that uses the useEffect hook to set up an interval timer.</a></li><li><a href="#q54"><span class="toc__num">54.</span>Implement a React component that renders a list of items with infinite scroll.</a></li><li><a href="#q55"><span class="toc__num">55.</span>Create a React component that renders a pie chart using a third-party library.</a></li><li><a href="#q56"><span class="toc__num">56.</span>Write a React component that uses the useRef hook to handle animations.</a></li><li><a href="#q57"><span class="toc__num">57.</span>Implement a React component that renders a multi-step form.</a></li><li><a href="#q58"><span class="toc__num">58.</span>Create a React component that uses the useReducer hook with an initial state.</a></li><li><a href="#q59"><span class="toc__num">59.</span>Write a React component that renders a list of items with sorting functionality.</a></li><li><a href="#q60"><span class="toc__num">60.</span>Implement a React component that uses the useContext hook to manage theme switching.</a></li><li><a href="#q61"><span class="toc__num">61.</span>Create a React component that fetches and displays data from a REST API.</a></li><li><a href="#q62"><span class="toc__num">62.</span>Write a React component that handles user login and displays user information.</a></li><li><a href="#q63"><span class="toc__num">63.</span>Implement a React component that renders a list of items with pagination controls.</a></li><li><a href="#q64"><span class="toc__num">64.</span>Create a React component that renders a tabbed interface.</a></li><li><a href="#q65"><span class="toc__num">65.</span>Write a React component that uses the useEffect hook to fetch data on component update.</a></li><li><a href="#q66"><span class="toc__num">66.</span>Implement a React component that handles form validation using a custom hook.</a></li><li><a href="#q67"><span class="toc__num">67.</span>Create a React component that renders a list of items with a delete button for each item.</a></li><li><a href="#q68"><span class="toc__num">68.</span>Write a React component that renders a dropdown menu with options from an API.</a></li><li><a href="#q69"><span class="toc__num">69.</span>Implement a React component that renders a list of items with a &quot;select all&quot; checkbox.</a></li><li><a href="#q70"><span class="toc__num">70.</span>Create a React component that uses the useMemo hook to optimize a calculation.</a></li><li><a href="#q71"><span class="toc__num">71.</span>Write a React component that renders a modal dialog with dynamic content.</a></li><li><a href="#q72"><span class="toc__num">72.</span>Implement a React component that fetches data from an API using a custom hook.</a></li><li><a href="#q73"><span class="toc__num">73.</span>Create a React component that renders a list of items with inline editing.</a></li><li><a href="#q74"><span class="toc__num">74.</span>Write a React component that uses the useCallback hook to handle an event.</a></li><li><a href="#q75"><span class="toc__num">75.</span>Implement a React component that renders a list of items with filter options.</a></li><li><a href="#q76"><span class="toc__num">76.</span>Create a React component that fetches and displays data from a Firebase database.</a></li><li><a href="#q77"><span class="toc__num">77.</span>Write a React component that handles file uploads with a progress bar.</a></li><li><a href="#q78"><span class="toc__num">78.</span>Implement a React component that renders a list of items with bulk actions.</a></li><li><a href="#q79"><span class="toc__num">79.</span>Create a React component that renders a list of items with a &quot;load more&quot; button.</a></li><li><a href="#q80"><span class="toc__num">80.</span>Write a React component that uses the useRef hook to manage a video player.</a></li><li><a href="#q81"><span class="toc__num">81.</span>Implement a React component that renders a list of items with a search bar and filter o...</a></li><li><a href="#q82"><span class="toc__num">82.</span>Create a React component that fetches and displays data from a GraphQL API.</a></li><li><a href="#q83"><span class="toc__num">83.</span>Write a React component that handles form submission with validation and error handling.</a></li><li><a href="#q84"><span class="toc__num">84.</span>Implement a React component that renders a list of items with drag-and-drop reordering.</a></li><li><a href="#q85"><span class="toc__num">85.</span>Create a React component that renders a responsive navigation menu.</a></li><li><a href="#q86"><span class="toc__num">86.</span>Write a React component that uses the useReducer hook for state management with multipl...</a></li><li><a href="#q87"><span class="toc__num">87.</span>Implement a React component that renders a list of items with expandable details.</a></li><li><a href="#q88"><span class="toc__num">88.</span>Create a React component that fetches and displays data from an external API.</a></li><li><a href="#q89"><span class="toc__num">89.</span>Write a React component that handles authentication with social media login.</a></li><li><a href="#q90"><span class="toc__num">90.</span>Implement a React component that renders a list of items with sorting and filtering opt...</a></li><li><a href="#q91"><span class="toc__num">91.</span>Create a React component that renders a list of items with checkboxes for selection.</a></li><li><a href="#q92"><span class="toc__num">92.</span>Write a React component that uses the useEffect hook to fetch data on component mount a...</a></li><li><a href="#q93"><span class="toc__num">93.</span>Implement a React component that handles form validation with custom error messages.</a></li><li><a href="#q94"><span class="toc__num">94.</span>Create a React component that renders a list of items with pagination and filter options.</a></li><li><a href="#q95"><span class="toc__num">95.</span>Write a React component that uses the useMemo hook to optimize a complex calculation.</a></li><li><a href="#q96"><span class="toc__num">96.</span>Implement a React component that renders a list of items with a &quot;select all&quot; and &quot;desel...</a></li><li><a href="#q97"><span class="toc__num">97.</span>Create a React component that fetches and displays data from a third-party API.</a></li><li><a href="#q98"><span class="toc__num">98.</span>Write a React component that handles form submission with validation and success/error ...</a></li><li><a href="#q99"><span class="toc__num">99.</span>Implement a React component that renders a list of items with drag-and-drop sorting.</a></li><li><a href="#q100"><span class="toc__num">100.</span>Create a React component that renders a list of items with inline editing and save/canc...</a></li>
-      </ul>
-    </div>
-
-    
-<article class="qa" id="q1">
-  <div class="qa__number">Question 1</div>
-  <h3 class="qa__question">Write a functional component in React that displays &quot;Hello, World!&quot;.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[1] = r'''
 <p>The simplest possible React component &mdash; a function that returns JSX. With React 17+ and the new JSX transform, you don&rsquo;t even need to import React explicitly.</p>
 
 <pre><code>// HelloWorld.jsx
@@ -165,15 +58,9 @@ function Hello({ name = "World" }) {
 &lt;Hello name="Alice" /&gt;       // → "Hello, Alice!"</code></pre>
 
 <p>Component names <strong>must start with an uppercase letter</strong> &mdash; lowercase names are treated as HTML elements by JSX.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q2">
-  <div class="qa__number">Question 2</div>
-  <h3 class="qa__question">Create a class component in React that displays a counter with increment and decrement buttons.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[2] = r'''
 <p>A class component with state and event handlers. Class components are still valid React, though functional + hooks is the modern preference.</p>
 
 <pre><code>import { Component } from "react";
@@ -224,15 +111,9 @@ function Counter() {
 }</code></pre>
 
 <p>Same behavior, less code. In 2026, write functional components with hooks unless you specifically need an error boundary (the only remaining class-only feature).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q3">
-  <div class="qa__number">Question 3</div>
-  <h3 class="qa__question">Write a React component that fetches data from an API and displays it in a list.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[3] = r'''
 <p>Fetch data on mount, store in state, render the list. Always handle three UI states: loading, error, success.</p>
 
 <pre><code>import { useState, useEffect } from "react";
@@ -299,15 +180,9 @@ function UserList() {
   if (error) return &lt;p&gt;Error&lt;/p&gt;;
   return &lt;ul&gt;{data.map(u =&gt; &lt;li key={u.id}&gt;{u.name}&lt;/li&gt;)}&lt;/ul&gt;;
 }</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q4">
-  <div class="qa__number">Question 4</div>
-  <h3 class="qa__question">Implement a controlled input component in React.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[4] = r'''
 <p>A controlled component is one where React state is the single source of truth for an input&rsquo;s value &mdash; the input&rsquo;s <code>value</code> always reflects state, and changes go through <code>onChange</code>.</p>
 
 <pre><code>import { useState } from "react";
@@ -360,15 +235,9 @@ export default ControlledInput;</code></pre>
 }</code></pre>
 
 <p><strong>Benefits of controlled inputs</strong>: easy validation, transformation (uppercase, trimming), conditional disabling of submit, syncing across components, and predictable testing.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q5">
-  <div class="qa__number">Question 5</div>
-  <h3 class="qa__question">Create a form in React with validation for required fields.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[5] = r'''
 <p>Form validation with required fields &mdash; check on submit, show errors per field, prevent submission until all valid.</p>
 
 <pre><code>import { useState } from "react";
@@ -430,15 +299,9 @@ function SignupForm() {
 <p><strong>Validation patterns</strong>: validate on submit (shown above), on blur (good UX), or on change (eager). The <code>noValidate</code> attribute disables browser&rsquo;s built-in HTML validation so we control errors entirely.</p>
 
 <p><strong>Production tip</strong>: for forms with more than ~5 fields, use <strong>React Hook Form + Zod</strong>. It removes 80% of the boilerplate and gives you typed schemas.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q6">
-  <div class="qa__number">Question 6</div>
-  <h3 class="qa__question">Write a React component that conditionally renders different content based on state.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[6] = r'''
 <p>Conditional rendering &mdash; show different UI based on state. The most common patterns: ternary, logical AND, early return, and switch statement.</p>
 
 <pre><code>import { useState } from "react";
@@ -498,15 +361,9 @@ export default StatusDisplay;</code></pre>
 }</code></pre>
 
 <p><strong>Common pitfall &mdash; the "0" gotcha</strong>: <code>{count &amp;&amp; &lt;p&gt;Items: {count}&lt;/p&gt;}</code> renders <code>0</code> instead of nothing when count is zero. Use <code>{count &gt; 0 &amp;&amp; ...}</code> or a ternary instead.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q7">
-  <div class="qa__number">Question 7</div>
-  <h3 class="qa__question">Create a React component that renders a list of items and allows adding new items to the list.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[7] = r'''
 <p>Render a list and let the user add items. Uses controlled input + array state.</p>
 
 <pre><code>import { useState } from "react";
@@ -593,15 +450,9 @@ export default ItemList;</code></pre>
 }</code></pre>
 
 <p><strong>Always use spread (<code>[...items, x]</code>) or filter</strong> &mdash; never <code>items.push()</code>, which mutates state directly and won&rsquo;t trigger re-render.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q8">
-  <div class="qa__number">Question 8</div>
-  <h3 class="qa__question">Write a React component that toggles between two views when a button is clicked.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[8] = r'''
 <p>Toggle between two views by tracking a boolean state. Common UI pattern for tabs, accordions, mode switchers.</p>
 
 <pre><code>import { useState } from "react";
@@ -676,15 +527,9 @@ export default ViewToggle;</code></pre>
 }</code></pre>
 
 <p>Same pattern, just with a string state instead of boolean &mdash; scales to any number of views.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q9">
-  <div class="qa__number">Question 9</div>
-  <h3 class="qa__question">Implement a reusable button component in React that accepts props for different styles.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[9] = r'''
 <p>A reusable button that accepts variant, size, and other props. Common foundation component for any design system.</p>
 
 <pre><code>function Button({
@@ -760,15 +605,9 @@ export default Button;</code></pre>
 </ul>
 
 <p>For production design systems, use Tailwind classes or CSS Modules instead of inline styles &mdash; better caching, supports hover/focus states.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q10">
-  <div class="qa__number">Question 10</div>
-  <h3 class="qa__question">Create a simple todo list application in React.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[10] = r'''
 <p>Classic todo list &mdash; add, toggle complete, delete, filter. Hits all the basic React patterns at once.</p>
 
 <pre><code>import { useState } from "react";
@@ -863,15 +702,9 @@ export default TodoApp;</code></pre>
 </ul>
 
 <p>For persistence, save <code>todos</code> to localStorage in a <code>useEffect</code>. For complex apps, switch to <code>useReducer</code> or Zustand.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q11">
-  <div class="qa__number">Question 11</div>
-  <h3 class="qa__question">Write a React component that uses the useEffect hook to fetch data on component mount.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[11] = r'''
 <p>Fetch data on mount with <code>useEffect</code> &mdash; the most common pattern in any React app. The empty dependency array makes it run once, after the first render.</p>
 
 <pre><code>import { useState, useEffect } from "react";
@@ -948,15 +781,9 @@ export default PostList;</code></pre>
   <li><strong>StrictMode runs effects twice in dev</strong> &mdash; this surfaces missing cleanup. Production runs once.</li>
   <li><strong>Use <code>cancelled</code> flag</strong> to ignore late responses if component unmounts mid-fetch.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q12">
-  <div class="qa__number">Question 12</div>
-  <h3 class="qa__question">Implement a custom hook in React to handle form input state.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[12] = r'''
 <p>A custom hook for managing form state &mdash; reusable across multiple forms.</p>
 
 <pre><code>// useForm.js
@@ -1052,15 +879,9 @@ function SignupForm() {
 }</code></pre>
 
 <p>For production, <strong>React Hook Form</strong> already implements this far better &mdash; reach for it once your forms get complex.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q13">
-  <div class="qa__number">Question 13</div>
-  <h3 class="qa__question">Create a React component that uses context to manage global state.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[13] = r'''
 <p>Use Context API to share state across deeply nested components without prop drilling. Here&rsquo;s a theme switcher.</p>
 
 <pre><code>// ThemeContext.jsx
@@ -1140,15 +961,9 @@ function Page() {
 </ul>
 
 <p>Context isn&rsquo;t a state manager &mdash; it&rsquo;s a way to <em>pass</em> state. The state itself comes from <code>useState</code> inside the provider.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q14">
-  <div class="qa__number">Question 14</div>
-  <h3 class="qa__question">Write a React component that uses the useReducer hook for state management.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[14] = r'''
 <p><code>useReducer</code> is ideal for complex state with multiple related actions. Here&rsquo;s a counter with multiple operations:</p>
 
 <pre><code>import { useReducer } from "react";
@@ -1223,15 +1038,9 @@ test("increment increases count by 1", () =&gt; {
 });</code></pre>
 
 <p>That testability is one of the biggest wins of <code>useReducer</code> &mdash; you can verify all state transitions without rendering anything.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q15">
-  <div class="qa__number">Question 15</div>
-  <h3 class="qa__question">Implement a React component that fetches data from an API using async/await.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[15] = r'''
 <p>Async/await makes fetch flows readable. Combine with try/catch for error handling.</p>
 
 <pre><code>import { useState, useEffect } from "react";
@@ -1310,15 +1119,9 @@ export default ProductDetails;</code></pre>
 </ul>
 
 <p><strong>2026 production tip</strong>: TanStack Query handles all of this (caching, retry, dedup, refetch, abort) with one line: <code>useQuery({ queryKey: ["product", id], queryFn: ... })</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q16">
-  <div class="qa__number">Question 16</div>
-  <h3 class="qa__question">Create a React component that displays a loading spinner while fetching data.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[16] = r'''
 <p>A loading spinner during data fetch. Show the spinner immediately, hide it when data arrives.</p>
 
 <pre><code>import { useState, useEffect } from "react";
@@ -1401,15 +1204,9 @@ export default UserProfile;</code></pre>
 }</code></pre>
 
 <p>Skeletons feel faster because users see the eventual layout immediately. Match the skeleton shape to your real content.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q17">
-  <div class="qa__number">Question 17</div>
-  <h3 class="qa__question">Write a React component that uses the useRef hook to manage focus on an input field.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[17] = r'''
 <p><code>useRef</code> stores a mutable reference that persists across renders. Common use: focusing an input, accessing DOM nodes imperatively.</p>
 
 <pre><code>import { useRef, useEffect } from "react";
@@ -1488,15 +1285,9 @@ function SearchBox() {
 </ul>
 
 <p><strong>When to use refs vs state</strong>: state when changes should trigger re-render and reflect in the UI; refs for things that don&rsquo;t affect rendering (DOM access, timers, latest-callback patterns).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q18">
-  <div class="qa__number">Question 18</div>
-  <h3 class="qa__question">Implement a React component that displays a modal dialog.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[18] = r'''
 <p>A modal dialog &mdash; usually rendered with a portal so it&rsquo;s outside parent CSS. Manages focus, ESC-to-close, and click-outside.</p>
 
 <pre><code>import { useEffect } from "react";
@@ -1592,15 +1383,9 @@ function App() {
 </ul>
 
 <p>For full accessibility (focus trap, return focus on close), use <strong>Radix UI Dialog</strong> or <strong>React Aria</strong>. They handle the WCAG details correctly.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q19">
-  <div class="qa__number">Question 19</div>
-  <h3 class="qa__question">Create a React component that uses the useContext hook to consume a context value.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[19] = r'''
 <p>Reading a Context value with <code>useContext</code> &mdash; the consumer side of Context API. Pair with a Provider higher in the tree.</p>
 
 <pre><code>// UserContext.jsx
@@ -1689,15 +1474,9 @@ function Profile() {
 <p><strong>Why custom hooks like <code>useUser</code> are better:</strong> hide the context import, throw helpful errors when used outside provider, allow you to swap implementation later (Zustand, Redux) without changing all consumers.</p>
 
 <p><strong>React 19 alternative</strong>: the new <code>use(MyContext)</code> hook works the same as <code>useContext</code> but can be called conditionally &mdash; useful in some edge cases.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q20">
-  <div class="qa__number">Question 20</div>
-  <h3 class="qa__question">Write a React component that implements a simple image carousel.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[20] = r'''
 <p>Image carousel &mdash; auto-advances and lets users navigate manually.</p>
 
 <pre><code>import { useState, useEffect } from "react";
@@ -1783,15 +1562,9 @@ export default Carousel;</code></pre>
 </ul>
 
 <p>For animated transitions between slides, add CSS transitions on opacity or transform, or use Framer Motion&rsquo;s <code>AnimatePresence</code> for smooth swap effects.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q21">
-  <div class="qa__number">Question 21</div>
-  <h3 class="qa__question">Implement a React component that uses PropTypes for type checking.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[21] = r'''
 <p>PropTypes adds runtime type checking in development. Note: in 2026, most teams use TypeScript instead, but PropTypes still works fine.</p>
 
 <pre><code>// Install: npm install prop-types
@@ -1873,15 +1646,9 @@ function UserCard({ user, onSelect, isActive = false, tags = [] }: UserCardProps
 }</code></pre>
 
 <p>TypeScript catches errors before runtime, integrates with editors for autocomplete, and has zero runtime overhead. <strong>For new projects in 2026, choose TypeScript over PropTypes.</strong></p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q22">
-  <div class="qa__number">Question 22</div>
-  <h3 class="qa__question">Create a React component that renders a list of users and allows filtering by name.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[22] = r'''
 <p>Filter a list of users by name &mdash; combines controlled input with derived list state.</p>
 
 <pre><code>import { useState } from "react";
@@ -1965,15 +1732,9 @@ useEffect(() =&gt; {
 }, [search]);
 
 // Use debouncedSearch for the actual filter / API call</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q23">
-  <div class="qa__number">Question 23</div>
-  <h3 class="qa__question">Write a React component that uses the useMemo hook to optimize performance.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[23] = r'''
 <p><code>useMemo</code> caches an expensive computation. Only re-runs when its dependencies change.</p>
 
 <pre><code>import { useState, useMemo } from "react";
@@ -2046,15 +1807,9 @@ export default PrimeCalculator;</code></pre>
 <p><strong>When NOT to use <code>useMemo</code></strong>: simple calculations (the bookkeeping costs more than the savings), values that change every render anyway, or "just to be safe." Profile first, optimize what&rsquo;s actually slow.</p>
 
 <p><strong>2026 note</strong>: React Compiler (production-ready in React 19) automatically applies <code>useMemo</code> where beneficial. For new code, write naturally and let the compiler optimize.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q24">
-  <div class="qa__number">Question 24</div>
-  <h3 class="qa__question">Implement a React component that lazy loads an image.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[24] = r'''
 <p>Lazy load images &mdash; only load when they enter the viewport. Saves bandwidth and improves performance.</p>
 
 <p><strong>Easiest approach &mdash; native HTML attribute (modern browsers):</strong></p>
@@ -2145,15 +1900,9 @@ export default LazyImage;</code></pre>
 </ul>
 
 <p><strong>Modern alternative &mdash; libraries</strong>: <code>react-lazy-load-image-component</code> wraps this with built-in placeholder support. Or use <code>next/image</code> in Next.js apps for automatic optimization, blur placeholders, and responsive images.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q25">
-  <div class="qa__number">Question 25</div>
-  <h3 class="qa__question">Create a React component that uses the useCallback hook to memoize a function.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[25] = r'''
 <p><code>useCallback</code> memoizes a function so its reference stays stable across renders. Critical when passing handlers to memoized child components.</p>
 
 <pre><code>import { useState, useCallback, memo } from "react";
@@ -2228,15 +1977,9 @@ function TodoList() {
 <p><strong>When NOT to use it</strong>: regular event handlers, when child isn&rsquo;t memoized, simple components. Premature memoization adds complexity without benefit.</p>
 
 <p><strong>2026</strong>: React Compiler auto-applies <code>useCallback</code> where it helps. For new code, write naturally; the compiler optimizes.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q26">
-  <div class="qa__number">Question 26</div>
-  <h3 class="qa__question">Write a React component that handles file uploads.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[26] = r'''
 <p>File uploads in React use a controlled <code>&lt;input type="file"&gt;</code> &mdash; you read the selected file from the change event and upload it via FormData. Single-file pattern below; add <code>multiple</code> for multi-file.</p>
 
 <pre><code>import { useState } from "react";
@@ -2288,15 +2031,9 @@ function FileUpload() {
 }</code></pre>
 
 <p><strong>Key points</strong>: don&rsquo;t set <code>Content-Type</code> header manually for FormData &mdash; the browser auto-generates the multipart boundary. Use <code>accept</code> on the input to filter file types in the picker. For progress bars, use XMLHttpRequest or axios (see Q77).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q27">
-  <div class="qa__number">Question 27</div>
-  <h3 class="qa__question">Implement a React component that renders a paginated list of items.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[27] = r'''
 <p>Paginated lists slice data into pages and let users navigate via Prev/Next buttons. Server-side pagination is the production approach; client-side works for smaller datasets.</p>
 
 <pre><code>import { useState, useEffect } from "react";
@@ -2351,15 +2088,9 @@ function PaginatedPosts() {
 }</code></pre>
 
 <p><strong>Production tip</strong>: TanStack Query handles pagination elegantly with <code>keepPreviousData: true</code> &mdash; old page stays visible while new page loads, no flickering. Also supports prefetching the next page on hover for instant navigation.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q28">
-  <div class="qa__number">Question 28</div>
-  <h3 class="qa__question">Create a React component that fetches and displays data using the Fetch API.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[28] = r'''
 <p>The Fetch API is the browser&rsquo;s built-in HTTP client &mdash; promise-based, simple, no library needed. Always check <code>res.ok</code> and handle errors explicitly.</p>
 
 <pre><code>import { useState, useEffect } from "react";
@@ -2408,15 +2139,9 @@ function UserList() {
   <li><strong>Use AbortController</strong> for cleanup &mdash; prevents state updates on unmounted components.</li>
   <li><strong>For POST/PUT</strong>, set <code>headers: { "Content-Type": "application/json" }</code> and <code>body: JSON.stringify(data)</code>.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q29">
-  <div class="qa__number">Question 29</div>
-  <h3 class="qa__question">Write a React component that handles form submission and displays success or error messages.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[29] = r'''
 <p>A form with submit handling, success/error states, and disabled-during-submit pattern. The submit handler is async; UI reflects all three phases (idle, submitting, result).</p>
 
 <pre><code>import { useState } from "react";
@@ -2484,15 +2209,9 @@ function ContactForm() {
 }</code></pre>
 
 <p>Disabling inputs during submit prevents double-submission. The single status object beats four boolean flags &mdash; one piece of state, one source of truth.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q30">
-  <div class="qa__number">Question 30</div>
-  <h3 class="qa__question">Implement a React component that uses the useLayoutEffect hook.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[30] = r'''
 <p><code>useLayoutEffect</code> runs synchronously after DOM mutations, before the browser paints &mdash; ideal for measuring DOM and updating state without flicker.</p>
 
 <pre><code>import { useState, useLayoutEffect, useRef } from "react";
@@ -2552,15 +2271,9 @@ function App() {
 }</code></pre>
 
 <p><strong>Why <code>useLayoutEffect</code> here</strong>: with <code>useEffect</code>, the tooltip would render at <code>(0, 0)</code> first, then snap to position &mdash; visible flicker. <code>useLayoutEffect</code> runs before paint, so the tooltip appears in the right spot immediately. Use it sparingly &mdash; it blocks paint.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q31">
-  <div class="qa__number">Question 31</div>
-  <h3 class="qa__question">Create a React component that renders a list of items with a &quot;load more&quot; button.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[31] = r'''
 <p>"Load more" pagination: append new items to the existing list each time the user clicks the button. Works well for infinite-feed UIs (Twitter, Reddit) where users prefer scrolling over page navigation.</p>
 
 <pre><code>import { useState, useEffect } from "react";
@@ -2614,15 +2327,9 @@ function LoadMorePosts() {
 }</code></pre>
 
 <p><strong>Key detail</strong>: append with <code>setPosts(prev =&gt; [...prev, ...data.items])</code> instead of replacing. <code>hasMore</code> is true while a full page comes back; when the API returns fewer than <code>PAGE_SIZE</code>, we&rsquo;ve hit the end. For automatic loading on scroll, see Q54 (infinite scroll with IntersectionObserver).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q32">
-  <div class="qa__number">Question 32</div>
-  <h3 class="qa__question">Write a React component that uses the useImperativeHandle hook to expose a method.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[32] = r'''
 <p><code>useImperativeHandle</code> + <code>forwardRef</code> exposes specific methods of a child component to its parent. Use sparingly &mdash; React prefers props/state over imperative APIs &mdash; but useful for things like custom inputs that need <code>focus()</code> or <code>scrollIntoView()</code>.</p>
 
 <pre><code>import { useRef, useImperativeHandle, forwardRef } from "react";
@@ -2657,15 +2364,9 @@ function App() {
 }</code></pre>
 
 <p><strong>Why use it instead of forwarding the raw ref</strong>: parent gets a curated API instead of full DOM access &mdash; the child controls what&rsquo;s exposed. The parent can&rsquo;t accidentally call <code>.remove()</code> or read internal styling. <strong>React 19 note</strong>: <code>forwardRef</code> is no longer needed &mdash; <code>ref</code> is now a regular prop. The component above can be written as <code>function FancyInput({ placeholder, ref }) { ... }</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q33">
-  <div class="qa__number">Question 33</div>
-  <h3 class="qa__question">Implement a React component that displays a countdown timer.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[33] = r'''
 <p>Countdown timer using <code>useEffect</code> + <code>setInterval</code>. The cleanup function clears the interval on unmount or when the deadline changes &mdash; essential to prevent leaks.</p>
 
 <pre><code>import { useState, useEffect } from "react";
@@ -2714,15 +2415,9 @@ const pad = (n) =&gt; String(n).padStart(2, "0");
 &lt;Countdown targetDate="2026-12-31T23:59:59" /&gt;</code></pre>
 
 <p><strong>Critical patterns</strong>: <code>setTimeLeft(calc(...))</code> uses the latest target via the dep; the cleanup function clears the interval before the next effect runs (prevents multiple parallel intervals); the lazy initializer <code>() =&gt; calc(targetDate)</code> avoids recomputing on every render.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q34">
-  <div class="qa__number">Question 34</div>
-  <h3 class="qa__question">Create a React component that fetches and displays data using Axios.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[34] = r'''
 <p>Axios is a popular HTTP client with simpler API than fetch &mdash; auto JSON, request/response interceptors, request cancellation, error handling. Many teams prefer it for production apps.</p>
 
 <pre><code>// Install: npm install axios
@@ -2776,15 +2471,9 @@ function PostList() {
 </ul>
 
 <p><strong>Common axios patterns</strong>: <code>axios.post("/api/login", { email, password })</code> auto-stringifies JSON. Configure base URL once: <code>const api = axios.create({ baseURL: "/api", timeout: 5000 });</code> then <code>api.get("/users")</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q35">
-  <div class="qa__number">Question 35</div>
-  <h3 class="qa__question">Write a React component that renders a list of items with a search bar.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[35] = r'''
 <p>List with search bar &mdash; filter items as the user types. For small lists, filter on every keystroke; for large lists or API-backed search, debounce the input.</p>
 
 <pre><code>import { useState, useMemo } from "react";
@@ -2855,15 +2544,9 @@ useEffect(() =&gt; {
 }, [query]);</code></pre>
 
 <p>The 300ms debounce waits until typing pauses before firing the request &mdash; saves bandwidth and reduces server load. <strong>useMemo</strong> in the local-filter version prevents re-filtering when unrelated state changes.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q36">
-  <div class="qa__number">Question 36</div>
-  <h3 class="qa__question">Implement a React component that uses CSS modules for styling.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[36] = r'''
 <p>CSS Modules give component-scoped class names automatically &mdash; the bundler renames classes to be unique, so you can&rsquo;t accidentally collide with other files.</p>
 
 <pre><code>// Card.module.css
@@ -2925,15 +2608,9 @@ const className = clsx(styles.card, {
 });</code></pre>
 
 <p><strong>Built into all modern bundlers</strong> &mdash; Vite, Next.js, Webpack with css-loader. No extra config needed for the basic setup.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q37">
-  <div class="qa__number">Question 37</div>
-  <h3 class="qa__question">Create a React component that displays a notification banner with a close button.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[37] = r'''
 <p>A notification banner with a close button: render conditionally based on visible state, dismiss on click, optionally auto-hide after a delay.</p>
 
 <pre><code>import { useState, useEffect } from "react";
@@ -3001,15 +2678,9 @@ function App() {
 }</code></pre>
 
 <p><strong>Accessibility</strong>: <code>role="alert"</code> for errors (announced immediately by screen readers), <code>role="status"</code> for info/success (announced politely). The close button has <code>aria-label</code> for keyboard/screen-reader users. <code>autoHide=0</code> disables auto-hide for persistent messages.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q38">
-  <div class="qa__number">Question 38</div>
-  <h3 class="qa__question">Write a React component that fetches data from an API and handles errors gracefully.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[38] = r'''
 <p>Robust error handling for fetch: distinguish network errors (no connection) from HTTP errors (4xx/5xx) and parse errors, show appropriate UI for each.</p>
 
 <pre><code>import { useState, useEffect } from "react";
@@ -3073,15 +2744,9 @@ function UserProfile({ userId }) {
 }</code></pre>
 
 <p><strong>Three error categories handled</strong>: network failures (TypeError from fetch), HTTP errors (status codes), and abort signals (ignored intentionally). Showing actionable error messages (&ldquo;User not found&rdquo;) is more useful than a generic &ldquo;Error&rdquo; string. The retry button gives the user a way out.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q39">
-  <div class="qa__number">Question 39</div>
-  <h3 class="qa__question">Implement a React component that renders a navigation menu with active state.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[39] = r'''
 <p>Navigation menu with active state highlighting using <code>NavLink</code> from React Router &mdash; it auto-applies an active class when the URL matches.</p>
 
 <pre><code>import { NavLink, BrowserRouter, Routes, Route } from "react-router-dom";
@@ -3135,15 +2800,9 @@ function App() {
 }</code></pre>
 
 <p><strong>Key details</strong>: <code>NavLink</code> passes <code>{ isActive }</code> to its style/className callback. The <code>end</code> prop on the home link forces exact matching &mdash; without it, <code>/</code> matches any path. For className-based styling, use <code>className={({ isActive }) =&gt; isActive ? "active" : ""}</code>. Mobile-friendly: add a hamburger toggle that conditionally shows/hides the nav list.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q40">
-  <div class="qa__number">Question 40</div>
-  <h3 class="qa__question">Create a React component that displays a tooltip on hover.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[40] = r'''
 <p>Tooltip on hover: show a small popup near the target element when the mouse enters, hide when it leaves. Position the tooltip with absolute positioning relative to the wrapper.</p>
 
 <pre><code>import { useState } from "react";
@@ -3207,15 +2866,9 @@ function App() {
 <p><strong>Accessibility</strong>: <code>role="tooltip"</code> identifies the element to assistive tech. The <code>onFocus</code>/<code>onBlur</code> handlers ensure tooltips also appear on keyboard focus, not just mouse hover. <code>pointerEvents: none</code> prevents the tooltip from intercepting mouse events.</p>
 
 <p><strong>For production</strong>, use libraries like <strong>Floating UI</strong> or <strong>Radix UI Tooltip</strong> &mdash; they handle edge cases (viewport collisions, scroll repositioning, mobile/touch, complete a11y).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q41">
-  <div class="qa__number">Question 41</div>
-  <h3 class="qa__question">Write a React component that uses the React Router for navigation.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[41] = r'''
 <p>React Router setup with <code>BrowserRouter</code>, route definitions, and navigation between pages.</p>
 
 <pre><code>// Install: npm install react-router-dom
@@ -3268,15 +2921,9 @@ export default App;</code></pre>
 <p><strong>Catch-all 404</strong>: <code>path="*"</code> matches anything that didn&rsquo;t match other routes. Always include this for graceful unknown-URL handling.</p>
 
 <p><strong>Server config note</strong>: BrowserRouter URLs need server-side fallback to <code>index.html</code> for direct visits. Vercel/Netlify handle this automatically; nginx needs <code>try_files $uri $uri/ /index.html;</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q42">
-  <div class="qa__number">Question 42</div>
-  <h3 class="qa__question">Implement a React component that uses the useHistory hook for programmatic navigation.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[42] = r'''
 <p><strong><code>useHistory</code> was the React Router v5 hook for programmatic navigation</strong> &mdash; deprecated and removed in v6+. The modern equivalent is <code>useNavigate</code>. Showing both for comparison since both still appear in real codebases.</p>
 
 <pre><code>// === OLD (React Router v5) — useHistory ===
@@ -3345,15 +2992,9 @@ function LoginForm() {
 }</code></pre>
 
 <p><strong>Migration cheat sheet</strong>: <code>history.push("/x")</code> → <code>navigate("/x")</code>; <code>history.replace("/x")</code> → <code>navigate("/x", { replace: true })</code>; <code>history.goBack()</code> → <code>navigate(-1)</code>; <code>history.go(2)</code> → <code>navigate(2)</code>. <code>useNavigate</code>&rsquo;s reference is stable, safe to use in <code>useEffect</code> dep arrays.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q43">
-  <div class="qa__number">Question 43</div>
-  <h3 class="qa__question">Create a React component that renders a breadcrumb navigation.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[43] = r'''
 <p>Breadcrumb navigation built from the current URL path, with React Router. Splits the path on <code>/</code> and renders each segment as a link to its level.</p>
 
 <pre><code>import { Link, useLocation } from "react-router-dom";
@@ -3409,15 +3050,9 @@ function App() {
 <p><strong>How it works</strong>: <code>useLocation</code> gives the current path. We split on <code>/</code>, filter empty segments, and build cumulative URLs (<code>/products</code>, <code>/products/electronics</code>, etc.). The last segment is the current page and renders as plain text with <code>aria-current="page"</code>.</p>
 
 <p><strong>For dynamic routes</strong> with IDs (e.g., <code>/products/42</code>), the <code>labelMap</code> approach won&rsquo;t work for the ID segment. In production, fetch the entity name and pass through props or state, or build breadcrumbs from a route config that knows segment names. <strong>Accessibility</strong>: <code>aria-label="Breadcrumb"</code> on <code>nav</code>; <code>aria-current="page"</code> on the current page item.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q44">
-  <div class="qa__number">Question 44</div>
-  <h3 class="qa__question">Write a React component that uses the useParams hook to access route parameters.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[44] = r'''
 <p><code>useParams</code> reads URL parameters declared with <code>:name</code> in the route pattern. Always strings &mdash; convert to numbers when needed.</p>
 
 <pre><code>import { BrowserRouter, Routes, Route, useParams, Link } from "react-router-dom";
@@ -3480,15 +3115,9 @@ function App() {
 <p><strong>Multiple parameters</strong>: <code>path="/users/:userId/posts/:postId"</code> &mdash; <code>useParams</code> returns <code>{ userId, postId }</code>.</p>
 
 <p><strong>Critical: <code>id</code> in the dep array</strong>. Without it, navigating from <code>/products/1</code> to <code>/products/2</code> would not refetch &mdash; the component instance is reused, only the param changes. Including <code>id</code> as a dependency triggers re-fetch on each navigation.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q45">
-  <div class="qa__number">Question 45</div>
-  <h3 class="qa__question">Implement a React component that renders a protected route using React Router.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[45] = r'''
 <p>Protected route: redirect to login if user isn&rsquo;t authenticated, otherwise render the protected content. Save the intended destination so login can redirect back after success.</p>
 
 <pre><code>import { Navigate, useLocation, BrowserRouter, Routes, Route } from "react-router-dom";
@@ -3567,15 +3196,9 @@ function App() {
 }</code></pre>
 
 <p><strong>The pattern</strong>: <code>ProtectedRoute</code> wraps any page that requires authentication. If <code>user</code> is null, <code>&lt;Navigate&gt;</code> redirects to <code>/login</code> and stores the original location in router state. The login form reads that state and navigates back after authentication. <code>replace</code> on the redirect prevents the protected URL from cluttering history. <strong>For role-based access</strong>, extend with <code>requiredRole</code> prop and check <code>user.role</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q46">
-  <div class="qa__number">Question 46</div>
-  <h3 class="qa__question">Create a React component that fetches and displays data using GraphQL.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[46] = r'''
 <p>GraphQL via <strong>Apollo Client</strong> &mdash; the most popular React GraphQL library. Client caches queries automatically and exposes hooks for data, loading, and error states.</p>
 
 <pre><code>// Install: npm install @apollo/client graphql
@@ -3661,15 +3284,9 @@ function UserDetail({ userId }) {
 }</code></pre>
 
 <p><strong>Why Apollo Client</strong>: automatic normalized cache (one source of truth across components), variables support, refetching, optimistic updates, mutations with cache updates, dev tools. <strong>Alternatives</strong>: <strong>urql</strong> (lighter), <strong>TanStack Query + graphql-request</strong> (no cache normalization but simpler), <strong>Relay</strong> (Meta&rsquo;s library, very powerful but complex).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q47">
-  <div class="qa__number">Question 47</div>
-  <h3 class="qa__question">Write a React component that handles authentication with JWT.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[47] = r'''
 <p>JWT (JSON Web Token) authentication: server returns a token on login, client stores it, includes it in subsequent requests as <code>Authorization: Bearer &lt;token&gt;</code>.</p>
 
 <pre><code>import { useState, createContext, useContext, useEffect } from "react";
@@ -3762,15 +3379,9 @@ function LoginForm() {
 }</code></pre>
 
 <p><strong>Security warning</strong>: <code>localStorage</code> is vulnerable to XSS. For higher security, use <strong>httpOnly cookies</strong> (server-set, JS can&rsquo;t read them) with CSRF protection. The token decoder (<code>atob(...)</code>) reads the payload but does NOT verify the signature &mdash; only the server can verify. Never trust JWT contents on the client beyond display purposes; always re-validate server-side on each request.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q48">
-  <div class="qa__number">Question 48</div>
-  <h3 class="qa__question">Implement a React component that renders a list of items with drag-and-drop functionality.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[48] = r'''
 <p>Drag-and-drop list reordering using HTML5 drag API. Track which item is being dragged, swap positions when dragged over another item.</p>
 
 <pre><code>import { useState } from "react";
@@ -3833,15 +3444,9 @@ function DraggableList() {
 <p><strong>Critical details</strong>: <code>draggable</code> attribute makes the element draggable. <code>onDragOver</code> must call <code>e.preventDefault()</code> &mdash; without it, drop is rejected. The reorder logic uses <code>splice</code> to move the dragged item to the hovered position. Updating <code>dragIndex</code> during dragover lets the user continue moving across multiple items in one drag gesture.</p>
 
 <p><strong>For production drag-and-drop</strong>, use <strong>dnd-kit</strong> (modern, accessible, great touch support) or <strong>react-beautiful-dnd</strong> (popular but unmaintained as of 2024). They handle keyboard accessibility, touch devices, virtualized lists, and animations &mdash; all painful to implement manually.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q49">
-  <div class="qa__number">Question 49</div>
-  <h3 class="qa__question">Create a React component that renders a responsive grid layout.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[49] = r'''
 <p>Responsive grid using CSS Grid&rsquo;s <code>auto-fit</code> + <code>minmax</code> &mdash; columns automatically adjust based on viewport width without media queries.</p>
 
 <pre><code>import "./grid.css";
@@ -3912,15 +3517,9 @@ function App() {
 </ul>
 
 <p>Result: 1 column on phones (under ~530px), 2 on tablets, 3-4+ on desktops. <strong>No media queries needed</strong>. Tailwind users: <code>grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q50">
-  <div class="qa__number">Question 50</div>
-  <h3 class="qa__question">Write a React component that uses the useReducer hook for complex state logic.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[50] = r'''
 <p><code>useReducer</code> is excellent for complex state with multiple related values and many actions &mdash; like a multi-step wizard, shopping cart, or in this example, a todo list with several operation types.</p>
 
 <pre><code>import { useReducer } from "react";
@@ -4028,15 +3627,9 @@ function TodoApp() {
 }</code></pre>
 
 <p><strong>Why useReducer over multiple useStates</strong>: all state transitions live in one pure function (testable, predictable), updates are atomic (no inconsistencies during multi-step changes), and the reducer can be exported/tested without rendering anything.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q51">
-  <div class="qa__number">Question 51</div>
-  <h3 class="qa__question">Implement a React component that renders a form with dynamic fields.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[51] = r'''
 <p>Dynamic form fields: let users add/remove rows of inputs (e.g., adding multiple emails, phone numbers, work experiences). Each row has a unique key for React&rsquo;s reconciliation.</p>
 
 <pre><code>import { useState } from "react";
@@ -4109,15 +3702,9 @@ function PhoneNumberForm() {
 }</code></pre>
 
 <p><strong>Critical: stable unique keys.</strong> Using <code>Date.now()</code> for new rows ensures keys don&rsquo;t collide. Using array index as key would cause bugs &mdash; if you remove an item, React would mismatch state with the wrong row. <strong>For complex dynamic forms</strong>, React Hook Form&rsquo;s <code>useFieldArray</code> handles this with less boilerplate including built-in validation per field.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q52">
-  <div class="qa__number">Question 52</div>
-  <h3 class="qa__question">Create a React component that renders a tree view of items.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[52] = r'''
 <p>Recursive tree view: each node renders itself and its children recursively, with expand/collapse state per node.</p>
 
 <pre><code>import { useState } from "react";
@@ -4186,15 +3773,9 @@ function TreeView() {
 <p><strong>How recursion works</strong>: <code>TreeNode</code> renders itself, then maps over its children &mdash; each child is also a <code>TreeNode</code>, which recursively does the same. The <code>level</code> prop tracks depth for indentation.</p>
 
 <p><strong>Each node owns its expanded state</strong>. For "expand all" / "collapse all" buttons, lift state to parent and pass an <code>expandedIds</code> Set down. For very deep/wide trees (1000+ nodes), virtualize with <code>react-arborist</code> or <code>react-window</code> to render only visible nodes.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q53">
-  <div class="qa__number">Question 53</div>
-  <h3 class="qa__question">Write a React component that uses the useEffect hook to set up an interval timer.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[53] = r'''
 <p>Interval timer with <code>useEffect</code> + <code>setInterval</code>. Cleanup on unmount or interval change is essential &mdash; without it, the interval keeps firing after the component is gone.</p>
 
 <pre><code>import { useState, useEffect } from "react";
@@ -4258,15 +3839,9 @@ function Stopwatch() {
 </ul>
 
 <p><strong>For accurate timing</strong> (game timers, animations), use <code>requestAnimationFrame</code> with timestamps instead &mdash; <code>setInterval</code> can drift by 50-100ms over long durations as the browser deprioritizes background tabs.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q54">
-  <div class="qa__number">Question 54</div>
-  <h3 class="qa__question">Implement a React component that renders a list of items with infinite scroll.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[54] = r'''
 <p>Infinite scroll loads more items automatically when the user scrolls near the bottom. <code>IntersectionObserver</code> is the modern, performant API &mdash; better than scroll-event listeners.</p>
 
 <pre><code>import { useState, useEffect, useRef, useCallback } from "react";
@@ -4336,15 +3911,9 @@ function InfiniteScrollList() {
 <p><strong>How it works</strong>: a small invisible "sentinel" div sits at the bottom of the list. <code>IntersectionObserver</code> watches when it enters the viewport and triggers loading the next page. <code>rootMargin: "200px"</code> starts loading 200px before the sentinel actually appears, so users see a smooth experience instead of waiting after the bottom.</p>
 
 <p><strong>Why IntersectionObserver beats scroll listeners</strong>: scroll fires hundreds of times per second; IntersectionObserver fires only when the element enters/leaves the viewport. Massively better performance, especially on mobile.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q55">
-  <div class="qa__number">Question 55</div>
-  <h3 class="qa__question">Create a React component that renders a pie chart using a third-party library.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[55] = r'''
 <p>Pie chart using <strong>Recharts</strong> &mdash; one of the most popular React charting libraries, declarative API built on D3 and SVG.</p>
 
 <pre><code>// Install: npm install recharts
@@ -4407,15 +3976,9 @@ function DeviceBreakdown() {
 </table>
 
 <p>For dashboards in 2026, <strong>Recharts</strong> or <strong>Tremor</strong> get most teams to a great result quickly.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q56">
-  <div class="qa__number">Question 56</div>
-  <h3 class="qa__question">Write a React component that uses the useRef hook to handle animations.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[56] = r'''
 <p><code>useRef</code> for animations: imperatively trigger CSS class changes or transitions on a DOM node without managing render state. Useful for entrance animations, focus rings, scroll-into-view, and CSS animation restarts.</p>
 
 <pre><code>import { useRef, useState, useEffect } from "react";
@@ -4494,15 +4057,9 @@ function ScrollableList({ items }) {
 }</code></pre>
 
 <p><strong>Key patterns</strong>: <code>useRef</code> gives you the DOM node; <code>void el.offsetWidth</code> forces a reflow, which restarts a CSS animation when re-applying the same class (browser otherwise no-ops the change). <code>scrollIntoView</code> with <code>behavior: "smooth"</code> animates the scroll natively. <strong>For complex animations</strong>, prefer <strong>Framer Motion</strong> &mdash; declarative, props-driven, no manual ref manipulation needed.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q57">
-  <div class="qa__number">Question 57</div>
-  <h3 class="qa__question">Implement a React component that renders a multi-step form.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[57] = r'''
 <p>Multi-step form (wizard): track current step, accumulate data across steps, allow navigation back/forward.</p>
 
 <pre><code>import { useState } from "react";
@@ -4583,15 +4140,9 @@ function MultiStepForm() {
 }</code></pre>
 
 <p><strong>State design</strong>: keep ALL form data in one object accumulated across steps &mdash; switching steps doesn&rsquo;t lose previous values. Each step renders only when active; native form validation (<code>required</code>) prevents progressing with empty fields if you wrap each step in its own <code>&lt;form&gt;</code> tag, but here we use a single form to keep state simple. <strong>For production</strong>, pair with React Hook Form + Zod for per-step schema validation.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q58">
-  <div class="qa__number">Question 58</div>
-  <h3 class="qa__question">Create a React component that uses the useReducer hook with an initial state.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[58] = r'''
 <p><code>useReducer</code> with an initial state object &mdash; useful when initial values come from props, localStorage, or computation.</p>
 
 <pre><code>import { useReducer } from "react";
@@ -4686,15 +4237,9 @@ function App() {
 }</code></pre>
 
 <p><strong>The lazy initializer pattern</strong>: <code>useReducer(reducer, initialArg, init)</code>. <code>init(initialArg)</code> runs once on mount to compute the actual initial state &mdash; useful for expensive computations or transforming props into state shape. Without it, you&rsquo;d set initial state inline (which still works but is less clean for complex setup).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q59">
-  <div class="qa__number">Question 59</div>
-  <h3 class="qa__question">Write a React component that renders a list of items with sorting functionality.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[59] = r'''
 <p>Sortable list: click column headers to sort by that field, toggle direction on repeat click. <code>useMemo</code> avoids re-sorting on unrelated re-renders.</p>
 
 <pre><code>import { useState, useMemo } from "react";
@@ -4762,15 +4307,9 @@ function SortableTable() {
 <p><strong>Key details</strong>: <code>[...USERS]</code> avoids mutating the original array. <code>localeCompare</code> handles strings (Unicode-aware, case-insensitive options). For numbers, simple subtraction works. Toggle direction when clicking the same column; reset to ascending when switching columns.</p>
 
 <p><strong>For large datasets or complex tables</strong>, use <strong>TanStack Table</strong> (formerly React Table) &mdash; headless library that handles sorting, filtering, pagination, virtualization, with full type safety. Roll-your-own works for &lt; 1000 rows; beyond that, the library&rsquo;s features pay off.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q60">
-  <div class="qa__number">Question 60</div>
-  <h3 class="qa__question">Implement a React component that uses the useContext hook to manage theme switching.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[60] = r'''
 <p>Theme switching with Context: provider holds the theme value, components read it via <code>useContext</code>, a toggle button updates it. Persist to localStorage so the choice survives refreshes.</p>
 
 <pre><code>import { createContext, useContext, useState, useEffect } from "react";
@@ -4846,15 +4385,9 @@ button { background: var(--primary); color: white; }</code></pre>
 <p><strong>Why this pattern wins</strong>: theme drives a single CSS attribute (<code>data-theme</code>); all styling responds via CSS variables &mdash; no per-component JavaScript styling. Works with Tailwind&rsquo;s dark mode (<code>darkMode: ["class", '[data-theme="dark"]']</code>), CSS Modules, plain CSS &mdash; everything.</p>
 
 <p><strong>Respect user preference</strong>: initial value can also check <code>window.matchMedia("(prefers-color-scheme: dark)").matches</code> for OS-level preference. <strong>Avoid flash on load</strong>: set the attribute in the HTML head before React hydrates (small inline script).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q61">
-  <div class="qa__number">Question 61</div>
-  <h3 class="qa__question">Create a React component that fetches and displays data from a REST API.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[61] = r'''
 <p>Fetching from a REST API with full lifecycle management: loading, success, error, and refresh. Common pattern for any list page in a React app.</p>
 
 <pre><code>import { useState, useEffect } from "react";
@@ -4928,15 +4461,9 @@ function ProductList() {
 <p><strong>The refreshKey pattern</strong>: bumping a counter re-triggers the effect &mdash; cleaner than tracking refresh state separately. Since the effect closure captures the controller, each refresh gets a fresh AbortController; previous in-flight requests get cancelled.</p>
 
 <p><strong>For production</strong>, use TanStack Query instead &mdash; it provides caching, background refetch on focus, retry on error, request deduplication, and stale-while-revalidate &mdash; all with less code than this manual pattern.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q62">
-  <div class="qa__number">Question 62</div>
-  <h3 class="qa__question">Write a React component that handles user login and displays user information.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[62] = r'''
 <p>Login flow: form submits credentials, on success store user info, redirect to authenticated area. Pairs with a Context to make user accessible app-wide.</p>
 
 <pre><code>import { useState, createContext, useContext } from "react";
@@ -5043,15 +4570,9 @@ function App() {
 }</code></pre>
 
 <p><strong>Three details that matter</strong>: <code>navigate(..., { replace: true })</code> so the Back button doesn&rsquo;t take users back to the login form; <code>disabled={loading}</code> on inputs/button prevents double-submit; specific error message from the server (with fallback) helps users self-correct.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q63">
-  <div class="qa__number">Question 63</div>
-  <h3 class="qa__question">Implement a React component that renders a list of items with pagination controls.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[63] = r'''
 <p>List with full pagination controls: prev/next, page numbers, jump-to-page. More feature-complete than the basic version in Q27.</p>
 
 <pre><code>import { useState, useEffect } from "react";
@@ -5145,15 +4666,9 @@ function PaginatedList() {
 }</code></pre>
 
 <p><strong>The page-numbers algorithm</strong> shows: first page, last page, current page, and pages immediately around current. Other pages collapse to "..." &mdash; keeps the UI compact even with 100+ pages. <strong>Accessibility</strong>: <code>aria-current="page"</code> identifies the current page for screen readers.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q64">
-  <div class="qa__number">Question 64</div>
-  <h3 class="qa__question">Create a React component that renders a tabbed interface.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[64] = r'''
 <p>Tabbed interface: switch between content panels via tab clicks. Each tab is a button; only the active panel renders.</p>
 
 <pre><code>import { useState } from "react";
@@ -5231,15 +4746,9 @@ function Tabs() {
 </ul>
 
 <p><strong>For production</strong>, use <strong>Radix UI Tabs</strong>, <strong>shadcn/ui Tabs</strong>, or <strong>React Aria Tabs</strong> &mdash; they handle all the accessibility details, focus management, and edge cases that are easy to miss.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q65">
-  <div class="qa__number">Question 65</div>
-  <h3 class="qa__question">Write a React component that uses the useEffect hook to fetch data on component update.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[65] = r'''
 <p>Refetching when a prop changes: list a parent prop in the <code>useEffect</code> dependency array so the effect re-runs whenever it changes.</p>
 
 <pre><code>import { useState, useEffect } from "react";
@@ -5308,15 +4817,9 @@ function App() {
 <p><strong>The AbortController pattern is critical here</strong>: without it, switching from user 1 to user 2 quickly could result in user 1&rsquo;s response arriving AFTER user 2&rsquo;s &mdash; you&rsquo;d see user 1&rsquo;s posts despite having selected user 2. Aborting prevents this race condition.</p>
 
 <p><strong>ESLint exhaustive-deps</strong>: the <code>react-hooks/exhaustive-deps</code> rule warns if you forget a dep. Don&rsquo;t silence the warning &mdash; missing deps are real bugs. If a dep changes too often, address it (move outside, useCallback, or useReducer).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q66">
-  <div class="qa__number">Question 66</div>
-  <h3 class="qa__question">Implement a React component that handles form validation using a custom hook.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[66] = r'''
 <p>Custom hook for form validation: encapsulates field values, errors, and validation logic. Reusable across forms.</p>
 
 <pre><code>import { useState } from "react";
@@ -5423,15 +4926,9 @@ function SignupForm() {
 <p><strong>Why this pattern works</strong>: the hook handles the boring parts (state, change handlers, error tracking, touched state). You inject the validation function for the form-specific logic. The <code>touched</code> tracking shows errors only after a field has been interacted with &mdash; less noisy than showing all errors immediately on page load.</p>
 
 <p><strong>For production</strong>, use <strong>React Hook Form + Zod</strong> &mdash; provides this pattern with much more (uncontrolled inputs for performance, schema validation, async validation, field arrays). Roll-your-own is great for understanding the concept.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q67">
-  <div class="qa__number">Question 67</div>
-  <h3 class="qa__question">Create a React component that renders a list of items with a delete button for each item.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[67] = r'''
 <p>List with delete buttons: each item has its own delete handler that removes the item from state. Confirm before destructive actions for important data.</p>
 
 <pre><code>import { useState } from "react";
@@ -5518,15 +5015,9 @@ function TodoListWithDelete() {
 <p><strong>Two patterns shown</strong>: hard delete with confirm prompt, and soft delete with undo toast (better UX &mdash; users don&rsquo;t need to confirm every deletion, and accidental deletes are recoverable). The undo pattern is what Gmail/Slack/most modern apps use.</p>
 
 <p><strong>Accessibility</strong>: <code>aria-label</code> on the delete button identifies which item it deletes for screen readers. For server-backed apps, debounce the actual API delete call by the undo window &mdash; if user undoes, you never made the API call.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q68">
-  <div class="qa__number">Question 68</div>
-  <h3 class="qa__question">Write a React component that renders a dropdown menu with options from an API.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[68] = r'''
 <p>Dropdown with options loaded from an API: fetch on mount, populate the <code>&lt;select&gt;</code>, handle loading and empty states.</p>
 
 <pre><code>import { useState, useEffect } from "react";
@@ -5610,15 +5101,9 @@ function ProductForm() {
 <p><strong>Three UX details</strong>: disable the dropdown while loading (prevents user from clicking before options arrive); show "Loading..." in the placeholder option; submit button disabled until a category is selected.</p>
 
 <p><strong>For searchable dropdowns or thousands of options</strong>, use a combobox like <strong>react-select</strong>, <strong>Headless UI Combobox</strong>, or <strong>shadcn/ui Combobox</strong> &mdash; native <code>&lt;select&gt;</code> is poor for long lists. <strong>For dependent dropdowns</strong> (state → city), put the secondary fetch&rsquo;s effect dep on the parent value.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q69">
-  <div class="qa__number">Question 69</div>
-  <h3 class="qa__question">Implement a React component that renders a list of items with a &quot;select all&quot; checkbox.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[69] = r'''
 <p>"Select all" checkbox: master checkbox that toggles all rows; reflects "all"/"none"/"some selected" state correctly. The "some selected" indeterminate state needs a ref &mdash; HTML doesn&rsquo;t expose it as a prop.</p>
 
 <pre><code>import { useState, useRef, useEffect } from "react";
@@ -5709,15 +5194,9 @@ function SelectAllList() {
 </table>
 
 <p><strong>Using a Set for selected IDs</strong>: O(1) <code>has</code>/<code>add</code>/<code>delete</code> &mdash; better than arrays which are O(n). The <code>new Set(prev)</code> creates a new reference for React state immutability.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q70">
-  <div class="qa__number">Question 70</div>
-  <h3 class="qa__question">Create a React component that uses the useMemo hook to optimize a calculation.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[70] = r'''
 <p><code>useMemo</code> caches an expensive calculation result &mdash; only re-runs when dependencies change. Without it, the calculation runs on every render even when inputs haven&rsquo;t changed.</p>
 
 <pre><code>import { useState, useMemo } from "react";
@@ -5777,15 +5256,9 @@ function PrimeFinder() {
 </ul>
 
 <p><strong>When NOT to use it</strong>: simple additions, primitive-returning calcs, when deps change every render anyway. Premature memoization adds complexity for no benefit. <strong>React 19 React Compiler</strong> auto-applies memoization where beneficial &mdash; many manual <code>useMemo</code> calls become unnecessary in modern projects.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q71">
-  <div class="qa__number">Question 71</div>
-  <h3 class="qa__question">Write a React component that renders a modal dialog with dynamic content.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[71] = r'''
 <p>Modal with dynamic content: render different content depending on what triggered the modal. Single Modal component receives the content as children.</p>
 
 <pre><code>import { useState, useEffect } from "react";
@@ -5881,15 +5354,9 @@ function App() {
 <p><strong>Why portal</strong>: rendering into <code>document.body</code> escapes parent <code>overflow: hidden</code>, <code>z-index</code> stacking contexts, and CSS transforms that would otherwise clip the modal. <strong>The <code>e.stopPropagation()</code></strong> on the modal content prevents clicks inside the dialog from closing it (clicks on the backdrop trigger <code>onClose</code>).</p>
 
 <p><strong>Production note</strong>: use <code>&lt;dialog&gt;</code> with the new Popover API or libraries like <strong>Radix Dialog</strong>, <strong>shadcn/ui Dialog</strong>, or <strong>Headless UI Dialog</strong> &mdash; they handle focus trapping, return focus on close, and full a11y.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q72">
-  <div class="qa__number">Question 72</div>
-  <h3 class="qa__question">Implement a React component that fetches data from an API using a custom hook.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[72] = r'''
 <p>Custom <code>useFetch</code> hook: encapsulates the data-fetching boilerplate (loading, error, data, abort) so components stay clean.</p>
 
 <pre><code>import { useState, useEffect, useCallback } from "react";
@@ -5965,15 +5432,9 @@ function CategoryList() {
 <p><strong>Benefits of this hook</strong>: each consumer gets data, loading, error, refresh in one line. Repeating <code>useState</code>+<code>useEffect</code>+<code>fetch</code> across 20 components is replaced with <code>useFetch(url)</code>. The <code>useCallback</code> on <code>refresh</code> gives a stable reference so it can be passed to memoized children.</p>
 
 <p><strong>Limitations of a roll-your-own</strong>: no caching (every component fetches independently), no deduplication (5 components fetching the same URL fire 5 requests), no automatic refetch on window focus, no stale-while-revalidate. <strong>For production</strong>, use <strong>TanStack Query</strong> or <strong>SWR</strong> &mdash; they implement all of this. The custom hook is the right tool for understanding the pattern; libraries are the right tool for shipping.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q73">
-  <div class="qa__number">Question 73</div>
-  <h3 class="qa__question">Create a React component that renders a list of items with inline editing.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[73] = r'''
 <p>Inline editing: click a row to edit it, type in the input, save or cancel. Each row tracks its own edit mode locally.</p>
 
 <pre><code>import { useState, useRef, useEffect } from "react";
@@ -6068,15 +5529,9 @@ function EditableList() {
 </ul>
 
 <p><strong>State design</strong>: each row owns its own edit mode &mdash; no central editing state needed. <code>draft</code> holds the in-progress value, separated from <code>item.text</code> so canceling restores the original. For server-backed apps, debounce the save to avoid excessive API calls when users type quickly.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q74">
-  <div class="qa__number">Question 74</div>
-  <h3 class="qa__question">Write a React component that uses the useCallback hook to handle an event.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[74] = r'''
 <p><code>useCallback</code> memoizes a function reference so it stays stable across renders. Critical when passing event handlers to memoized child components or as <code>useEffect</code> dependencies.</p>
 
 <pre><code>import { useState, useCallback, memo } from "react";
@@ -6133,15 +5588,9 @@ function Parent() {
 </ul>
 
 <p><strong>When NOT to use it</strong>: function passed to native HTML elements (no memoization), simple components where re-renders are cheap, or when deps change every render anyway. <strong>React 19&rsquo;s Compiler</strong> auto-applies <code>useCallback</code> where beneficial &mdash; manual usage becomes mostly unnecessary in compiler-enabled projects.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q75">
-  <div class="qa__number">Question 75</div>
-  <h3 class="qa__question">Implement a React component that renders a list of items with filter options.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[75] = r'''
 <p>List with multiple filter options: combine search, category, and price-range filters. Each filter narrows the result set independently.</p>
 
 <pre><code>import { useState, useMemo } from "react";
@@ -6239,15 +5688,9 @@ function FilterableProductList() {
 <p><strong>Three things to notice</strong>: filters compose with AND logic (each narrows further); <code>useMemo</code> avoids re-filtering on unrelated re-renders; reset button clears all filters at once.</p>
 
 <p><strong>For URL-shareable filters</strong>, sync state with <code>useSearchParams</code> from React Router &mdash; users can bookmark or share the filtered view. <strong>For server-side filtering</strong>, debounce the filters and pass to the API instead of filtering locally &mdash; essential for large catalogs.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q76">
-  <div class="qa__number">Question 76</div>
-  <h3 class="qa__question">Create a React component that fetches and displays data from a Firebase database.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[76] = r'''
 <p>Fetch and display data from a <strong>Firebase Realtime Database</strong> using the modular Firebase v9+ SDK. Real-time listeners auto-update the UI when data changes server-side.</p>
 
 <pre><code>// Install: npm install firebase
@@ -6327,15 +5770,9 @@ function MessageList() {
 <p><strong>Cleanup is critical</strong>: <code>unsubscribe()</code> in the effect&rsquo;s return prevents memory leaks &mdash; without it, the listener keeps firing after the component unmounts.</p>
 
 <p><strong>For Firestore (newer Firebase database)</strong>, use <code>onSnapshot</code> with collection/document references instead. Firestore is generally preferred for new apps &mdash; better querying, scaling, and offline support. <strong>For production</strong>, set Firebase security rules so the database isn&rsquo;t world-writable, and consider <strong>react-firebase-hooks</strong> for cleaner integration.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q77">
-  <div class="qa__number">Question 77</div>
-  <h3 class="qa__question">Write a React component that handles file uploads with a progress bar.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[77] = r'''
 <p>File upload with progress bar requires <strong>XMLHttpRequest</strong> or <strong>axios</strong> &mdash; the Fetch API doesn&rsquo;t expose progress events. Showing percentage uploaded gives users feedback for large files.</p>
 
 <pre><code>// Install: npm install axios
@@ -6427,15 +5864,9 @@ function FileUploadWithProgress() {
 <p><strong>Why axios for this</strong>: the <code>onUploadProgress</code> callback fires multiple times during the upload with bytes-loaded vs total &mdash; perfect for a progress bar. Fetch API still doesn&rsquo;t support upload progress as of 2026 (the streams-based proposal hasn&rsquo;t shipped widely).</p>
 
 <p><strong>Accessibility</strong>: <code>role="progressbar"</code> with <code>aria-valuenow</code>, <code>aria-valuemin</code>, <code>aria-valuemax</code> &mdash; screen readers announce upload progress. <strong>For chunked/resumable uploads</strong> of large files (videos, datasets), use <strong>tus-js-client</strong> or platform-specific SDKs (S3 multipart, Cloudinary, Uploadcare).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q78">
-  <div class="qa__number">Question 78</div>
-  <h3 class="qa__question">Implement a React component that renders a list of items with bulk actions.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[78] = r'''
 <p>List with bulk actions: select multiple items via checkboxes, then perform an action (delete, archive, mark as read) on all selected at once.</p>
 
 <pre><code>import { useState } from "react";
@@ -6540,15 +5971,9 @@ function EmailListWithBulkActions() {
 <p><strong>The bulk-action toolbar pattern</strong>: contextual actions appear only when items are selected (Gmail-style). The selection bar shows count and offers actions that operate on the entire selection. After action completes, clear the selection &mdash; users expect a "fresh start" each operation.</p>
 
 <p><strong>Set vs Array for selection</strong>: O(1) lookups with <code>.has()</code>; cleaner toggle semantics. Always create a new Set for state immutability: <code>new Set(prev)</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q79">
-  <div class="qa__number">Question 79</div>
-  <h3 class="qa__question">Create a React component that renders a list of items with a &quot;load more&quot; button.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[79] = r'''
 <p>Load-more pagination with a skeleton loader for better perceived performance. Skeletons hint at the layout shape before content arrives.</p>
 
 <pre><code>import { useState, useEffect } from "react";
@@ -6643,15 +6068,9 @@ function LoadMoreArticles() {
 }</code></pre>
 
 <p><strong>Why skeletons beat spinners</strong>: research shows users perceive skeleton-loaded pages as 30-40% faster than spinner-loaded ones, even when actual load times are identical. The shimmer animation reads as "loading" while showing the eventual layout shape. <strong>Libraries</strong>: <code>react-loading-skeleton</code> for prebuilt skeletons; <strong>shadcn/ui Skeleton</strong> as a Tailwind-based primitive.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q80">
-  <div class="qa__number">Question 80</div>
-  <h3 class="qa__question">Write a React component that uses the useRef hook to manage a video player.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[80] = r'''
 <p><code>useRef</code> for managing a video player: directly call HTMLVideoElement methods (<code>play</code>, <code>pause</code>, <code>currentTime</code>) without rendering through React.</p>
 
 <pre><code>import { useRef, useState, useEffect } from "react";
@@ -6745,15 +6164,9 @@ function VideoPlayer({ src }) {
 <p><strong>What goes in state</strong>: the values that need to render in the UI (timeline position, play/pause icon, mute icon). <strong>What goes in the ref</strong>: the imperative video element itself. Sync state ← ref via event listeners (<code>timeupdate</code>, <code>ended</code>).</p>
 
 <p><strong>For HLS/DASH streaming or DRM</strong>, use <strong>Video.js</strong>, <strong>Plyr</strong>, or <strong>react-player</strong>. Native <code>&lt;video&gt;</code> handles MP4/WebM but not adaptive streaming protocols.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q81">
-  <div class="qa__number">Question 81</div>
-  <h3 class="qa__question">Implement a React component that renders a list of items with a search bar and filter options.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[81] = r'''
 <p>List with combined search + filter: search box narrows by name, filter dropdowns narrow by category and status. All filters compose with AND.</p>
 
 <pre><code>import { useState, useMemo, useDeferredValue } from "react";
@@ -6836,15 +6249,9 @@ function TaskBoard() {
 <p><strong>The <code>useDeferredValue</code> hook</strong> (React 18+): keeps the input responsive as you type by deferring the expensive filter operation. The search input updates immediately; the filtered list catches up after typing pauses. For lists under 100 items this overhead is unnecessary; for 10,000+ items, it makes the UI feel snappy.</p>
 
 <p><strong>Differentiating from Q35/Q75</strong>: this version composes search+multiple filters and uses React 18&rsquo;s concurrent features. For URL-shareable filter state, sync with <code>useSearchParams</code> from React Router.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q82">
-  <div class="qa__number">Question 82</div>
-  <h3 class="qa__question">Create a React component that fetches and displays data from a GraphQL API.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[82] = r'''
 <p>GraphQL with <strong>urql</strong> &mdash; a lighter alternative to Apollo Client. Different angle from Q46 (which used Apollo): smaller bundle, simpler API, similar developer experience.</p>
 
 <pre><code>// Install: npm install urql graphql
@@ -6944,15 +6351,9 @@ function LikeButton({ postId, currentLikes }) {
 </table>
 
 <p><strong>The exchange architecture</strong>: urql is composable via "exchanges" (middleware). Add <code>cacheExchange</code>, <code>fetchExchange</code>, <code>retryExchange</code>, <code>persistedExchange</code>, etc. as needed. <strong>For Relay-style normalized caching with urql</strong>, add <code>@urql/exchange-graphcache</code>. <strong>Other options in 2026</strong>: TanStack Query + <code>graphql-request</code> (simple, no GraphQL-specific features), <strong>Relay</strong> (Meta&rsquo;s, very powerful but complex).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q83">
-  <div class="qa__number">Question 83</div>
-  <h3 class="qa__question">Write a React component that handles form submission with validation and error handling.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[83] = r'''
 <p>Form submission with validation + error handling using <strong>React Hook Form + Zod</strong> &mdash; the modern production stack for forms. Different angle from Q29 which used manual state.</p>
 
 <pre><code>// Install: npm install react-hook-form zod @hookform/resolvers
@@ -7058,15 +6459,9 @@ function SignupForm() {
 <p><strong>Why this stack wins</strong>: schema lives in one place (Zod) and runs on both client and server (TypeScript types inferred from schema); React Hook Form uses uncontrolled inputs for performance (no re-render on every keystroke); built-in submit-state tracking (<code>isSubmitting</code>, <code>isSubmitSuccessful</code>); server errors integrated via <code>setError("field", ...)</code>.</p>
 
 <p><strong>For interview answers</strong>: lead with manual approach (Q29) to show fundamentals, then mention React Hook Form + Zod as the production tool. Acknowledging that "rolling your own" works but production prefers libraries shows architectural maturity.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q84">
-  <div class="qa__number">Question 84</div>
-  <h3 class="qa__question">Implement a React component that renders a list of items with drag-and-drop reordering.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[84] = r'''
 <p>Drag-and-drop reordering with <strong>dnd-kit</strong> &mdash; the modern, accessible library that replaced the now-unmaintained <code>react-beautiful-dnd</code>. Different from Q48 which used HTML5 drag API.</p>
 
 <pre><code>// Install: npm install @dnd-kit/core @dnd-kit/sortable
@@ -7166,15 +6561,9 @@ function SortableList() {
 </table>
 
 <p><strong>Why not react-beautiful-dnd</strong>: marked unmaintained as of late 2023 by Atlassian; doesn&rsquo;t officially support React 18+. dnd-kit is the de-facto replacement &mdash; actively developed, fully accessible, supports both list and grid sorting.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q85">
-  <div class="qa__number">Question 85</div>
-  <h3 class="qa__question">Create a React component that renders a responsive navigation menu.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[85] = r'''
 <p>Responsive navigation menu: full menu on desktop, hamburger toggle on mobile. Click outside to close; close on link click; trap focus when open.</p>
 
 <pre><code>import { useState, useEffect, useRef } from "react";
@@ -7287,15 +6676,9 @@ function ResponsiveNav() {
 <p><strong>The four UX details</strong>: open/close on hamburger click; close when clicking outside; close on Escape; close after clicking a link (mobile only &mdash; desktop never has the menu &ldquo;closed&rdquo;). <strong>Accessibility</strong>: <code>aria-expanded</code>, <code>aria-controls</code>, <code>aria-label</code> on the hamburger; the button reads as &ldquo;Open menu&rdquo; or &ldquo;Close menu&rdquo; in screen readers.</p>
 
 <p><strong>For production</strong>, use <strong>Radix Navigation Menu</strong> or <strong>shadcn/ui Sheet</strong> &mdash; they handle focus trapping, sub-menus, animations, and complete accessibility audit-pass.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q86">
-  <div class="qa__number">Question 86</div>
-  <h3 class="qa__question">Write a React component that uses the useReducer hook for state management with multiple actions.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[86] = r'''
 <p><code>useReducer</code> with multiple action types &mdash; great for complex state with many transitions. Different angle from Q50/Q58: this version shows a wider action set and demonstrates payload validation.</p>
 
 <pre><code>import { useReducer } from "react";
@@ -7411,15 +6794,9 @@ function App() {
 }</code></pre>
 
 <p><strong>Why useReducer scales better than multiple useStates</strong> for this kind of state: 11 actions could otherwise mean ~5 useState calls and lots of update functions; here it&rsquo;s one reducer and one dispatch. All transitions are documented in one switch statement &mdash; easy to test, easy to read, easy to extend. <strong>For app-wide state</strong>, lift this reducer into Context or use Zustand/Redux Toolkit.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q87">
-  <div class="qa__number">Question 87</div>
-  <h3 class="qa__question">Implement a React component that renders a list of items with expandable details.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[87] = r'''
 <p>List with expandable details: each row shows summary; clicking expands to show full info. Multiple rows can be expanded simultaneously (or restrict to one).</p>
 
 <pre><code>import { useState } from "react";
@@ -7509,15 +6886,9 @@ const toggle = (id) =&gt; setOpenId(prev =&gt; prev === id ? null : id);
 const isOpen = (id) =&gt; openId === id;</code></pre>
 
 <p><strong>Accessibility checklist</strong>: each toggle is a real <code>&lt;button&gt;</code>; <code>aria-expanded</code> reflects open state; <code>aria-controls</code> + <code>id</code> link button to panel; <code>role="region"</code> on the panel. <strong>For production</strong>, use <strong>Radix UI Accordion</strong> or <strong>shadcn/ui Accordion</strong> &mdash; they include keyboard navigation (arrow keys), animations, and edge cases handled.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q88">
-  <div class="qa__number">Question 88</div>
-  <h3 class="qa__question">Create a React component that fetches and displays data from an external API.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[88] = r'''
 <p>Fetch and display data from a public external API &mdash; the SpaceX API, no auth required. Useful pattern for any read-only public API integration.</p>
 
 <pre><code>import { useState, useEffect } from "react";
@@ -7599,15 +6970,9 @@ function NextSpaceXLaunch() {
 </ul>
 
 <p><strong>Other beginner-friendly public APIs</strong>: PokeAPI (<code>pokeapi.co</code>), Open Notify (<code>open-notify.org</code> for ISS location), JSONPlaceholder (<code>jsonplaceholder.typicode.com</code>), GitHub API (<code>api.github.com</code>), TheCocktailDB. All free, no auth, perfect for portfolio projects and learning.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q89">
-  <div class="qa__number">Question 89</div>
-  <h3 class="qa__question">Write a React component that handles authentication with social media login.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[89] = r'''
 <p>Social login (Google, GitHub, etc.) using <strong>OAuth 2.0</strong>. Frontend redirects users to the provider&rsquo;s auth page; provider redirects back with a code; backend exchanges the code for tokens. Modern services like <strong>Auth0</strong>, <strong>Clerk</strong>, <strong>Supabase Auth</strong>, or <strong>Firebase Auth</strong> handle the complexity.</p>
 
 <pre><code>// Approach 1: Firebase Auth (easiest)
@@ -7717,15 +7082,9 @@ function LoginButtons() {
 </table>
 
 <p><strong>Don&rsquo;t roll your own OAuth from scratch</strong> &mdash; the security details (PKCE, CSRF, state parameter, token rotation) are subtle and getting them wrong creates real vulnerabilities. Use a service or a well-tested library.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q90">
-  <div class="qa__number">Question 90</div>
-  <h3 class="qa__question">Implement a React component that renders a list of items with sorting and filtering options.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[90] = r'''
 <p>List with sort + filter combined. Sort by any column, filter by category, search by name &mdash; all composable. Different angle from Q59 (sort only) and Q75 (filter only).</p>
 
 <pre><code>import { useState, useMemo } from "react";
@@ -7830,15 +7189,9 @@ function SortableFilterableTable() {
 }</code></pre>
 
 <p><strong>Why filter THEN sort</strong> (not sort then filter): mathematically the same result, but filtering first reduces the dataset before the more expensive sort &mdash; faster on large lists. <strong>useMemo</strong> avoids redoing the work when unrelated state changes. <strong>For thousands of rows</strong>, use <strong>TanStack Table</strong> with built-in sort/filter and virtualization.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q91">
-  <div class="qa__number">Question 91</div>
-  <h3 class="qa__question">Create a React component that renders a list of items with checkboxes for selection.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[91] = r'''
 <p>List with checkboxes for individual selection. Track selected items in state, show count, allow batch operations on selected. Different from Q69 in focus: this version is purely about per-item selection patterns.</p>
 
 <pre><code>import { useState } from "react";
@@ -7930,15 +7283,9 @@ function CheckboxList() {
 </ul>
 
 <p><strong>Visual feedback</strong>: highlighting the selected row (light blue background) makes selection state obvious at a glance. Some UIs show a checkbox count badge in the corner; others change the toolbar contextually like this example.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q92">
-  <div class="qa__number">Question 92</div>
-  <h3 class="qa__question">Write a React component that uses the useEffect hook to fetch data on component mount and update.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[92] = r'''
 <p><code>useEffect</code> that runs both on component mount AND on prop/state updates. The dep array controls when the effect re-runs &mdash; include all values referenced inside.</p>
 
 <pre><code>import { useState, useEffect } from "react";
@@ -8021,15 +7368,9 @@ function App() {
 <p><strong>The cancelled flag</strong> prevents updating state after unmount or after a newer effect run started. Without it, you can get race conditions: switching from user 1 → user 2 quickly might result in user 1&rsquo;s response arriving last and overwriting user 2&rsquo;s data on screen.</p>
 
 <p><strong>ESLint <code>react-hooks/exhaustive-deps</code></strong>: warns when you forget a dep. Always satisfy it &mdash; missing deps create hard-to-find bugs. If a dep changes too often, address it (move outside, useCallback, useReducer).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q93">
-  <div class="qa__number">Question 93</div>
-  <h3 class="qa__question">Implement a React component that handles form validation with custom error messages.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[93] = r'''
 <p>Form validation with custom error messages tailored to each field, with inline error display that shows after blur (not while typing).</p>
 
 <pre><code>import { useState } from "react";
@@ -8167,15 +7508,9 @@ function CheckoutForm() {
 <p><strong>Error timing</strong>: don&rsquo;t show errors while the user is typing the first time &mdash; only after they&rsquo;ve blurred the field (touched). After they&rsquo;ve seen the error once, validate on every keystroke so they see it disappear as they fix it. This is the standard UX pattern.</p>
 
 <p><strong>Custom messages per field</strong>: each validator returns a specific, actionable message (&ldquo;Use MM/YY format&rdquo; vs generic &ldquo;Invalid&rdquo;). <strong>Accessibility</strong>: <code>aria-invalid</code> tells assistive tech which fields have errors. <strong>For production</strong>, use React Hook Form + Zod for the same UX with much less code.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q94">
-  <div class="qa__number">Question 94</div>
-  <h3 class="qa__question">Create a React component that renders a list of items with pagination and filter options.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[94] = r'''
 <p>List with pagination AND filter options &mdash; both work together. Filter narrows the dataset; pagination shows pages of the filtered result.</p>
 
 <pre><code>import { useState, useEffect, useMemo } from "react";
@@ -8271,15 +7606,9 @@ function PaginatedFilteredList() {
 <p><strong>The critical detail</strong>: reset <code>page</code> to 1 when filters change. Otherwise: filter narrows from 100 items to 12 items, but you&rsquo;re on page 5 → empty page (offset 20+, but only 12 items exist). The <code>useEffect</code> watching filter values handles this automatically.</p>
 
 <p><strong>Pattern variation</strong>: for server-side filter+pagination, send both as query params: <code>fetch(`/api/products?category=${category}&amp;search=${search}&amp;page=${page}`)</code>. Server applies filter then paginates. Better for large datasets &mdash; client never holds the full unfiltered list.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q95">
-  <div class="qa__number">Question 95</div>
-  <h3 class="qa__question">Write a React component that uses the useMemo hook to optimize a complex calculation.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[95] = r'''
 <p><code>useMemo</code> for an expensive complex calculation: derived values, statistics, complex transforms. Different angle from Q70 (which was about basic primes) &mdash; this version computes multiple stats from a transactions list.</p>
 
 <pre><code>import { useState, useMemo } from "react";
@@ -8377,15 +7706,9 @@ function TransactionDashboard({ transactions, filterCategory }) {
 <p><strong>The console.log inside the memo</strong> proves it only re-runs when its actual deps change &mdash; not on every render. Toggling the sort dropdown won&rsquo;t fire it; changing the filter or transactions does.</p>
 
 <p><strong>For genuinely expensive calculations</strong> (charts with thousands of points, image processing, complex graphs), consider Web Workers via <code>Comlink</code> &mdash; offloads the work entirely off the main thread.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q96">
-  <div class="qa__number">Question 96</div>
-  <h3 class="qa__question">Implement a React component that renders a list of items with a &quot;select all&quot; and &quot;deselect all&quot; button.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[96] = r'''
 <p>List with separate "Select all" and "Deselect all" buttons. Different from Q69 (which used a single master checkbox with indeterminate state) &mdash; here we have explicit, separate actions.</p>
 
 <pre><code>import { useState } from "react";
@@ -8502,15 +7825,9 @@ function PhotoSelector() {
 <p><strong>Why two buttons instead of one toggle</strong>: clearer for users with large datasets. With a single toggle, the action depends on current state (sometimes selects, sometimes deselects) which can confuse. Explicit "Select all" and "Deselect all" make the intent unambiguous. Disable the buttons when their action would be a no-op (already all selected → "Select all" disabled).</p>
 
 <p><strong>Visual feedback</strong>: blue outline + opacity dim on selected items. Counter in the toolbar shows progress. Sticky action bar appears when selection is non-empty &mdash; matches photo gallery UX in Google Photos / Apple Photos.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q97">
-  <div class="qa__number">Question 97</div>
-  <h3 class="qa__question">Create a React component that fetches and displays data from a third-party API.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[97] = r'''
 <p>Fetching from a third-party API (OpenWeatherMap) with API key from env vars. Different from Q88 (no-auth public API) and Q28 (any fetch) &mdash; this version covers the common pattern of an authenticated third-party API.</p>
 
 <pre><code>import { useState, useEffect } from "react";
@@ -8604,15 +7921,9 @@ function WeatherWidget({ city = "London" }) {
 </ul>
 
 <p><strong>For server-secret API keys</strong> (Stripe secret, OpenAI key, etc.), NEVER expose them in client code &mdash; even with the <code>VITE_</code> prefix. Build a thin server endpoint that calls the third-party API; client calls your endpoint, server adds the secret. <strong>Caching tip</strong>: weather doesn&rsquo;t change every second; cache responses for 5-10 minutes (or use TanStack Query&rsquo;s <code>staleTime</code>).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q98">
-  <div class="qa__number">Question 98</div>
-  <h3 class="qa__question">Write a React component that handles form submission with validation and success/error messages.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[98] = r'''
 <p>Form submission with React 19&rsquo;s <strong><code>useActionState</code></strong> hook + <strong><code>useFormStatus</code></strong> &mdash; the modern pattern for forms. Cleaner than manual state management; built specifically for form actions.</p>
 
 <pre><code>import { useActionState } from "react";
@@ -8728,15 +8039,9 @@ function ContactForm() {
 <p><strong>Why this is cleaner</strong>: no <code>useState</code> for inputs (use <code>defaultValue</code> for uncontrolled), no manual loading state (use <code>useFormStatus</code>), no <code>onSubmit</code> handler. The action function receives the form&rsquo;s data and returns the next state &mdash; mirroring server actions in Next.js / Remix.</p>
 
 <p><strong>For interview answers</strong>: mention this is React 19&rsquo;s new approach for forms; show you know it but also that React Hook Form remains common for client-only complex forms (better validation ergonomics).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q99">
-  <div class="qa__number">Question 99</div>
-  <h3 class="qa__question">Implement a React component that renders a list of items with drag-and-drop sorting.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[99] = r'''
 <p>Drag-and-drop sorting in a grid using <strong>dnd-kit</strong> &mdash; sorts by reordering items within a wrapped grid layout. Different from Q48 (HTML5 list) and Q84 (vertical list) &mdash; this version uses grid layout.</p>
 
 <pre><code>// Install: npm install @dnd-kit/core @dnd-kit/sortable
@@ -8846,15 +8151,9 @@ function SortableGrid() {
 <p><strong>For Trello-like multi-column boards</strong>, use multiple <code>&lt;SortableContext&gt;</code> &mdash; one per column &mdash; with a single <code>&lt;DndContext&gt;</code> wrapping them all. dnd-kit&rsquo;s docs show this exact pattern.</p>
 
 <p><strong>Persistence</strong>: real apps save the new order to a backend after each drag end &mdash; usually with a debounce or batch save to avoid hammering the API on rapid reorders.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q100">
-  <div class="qa__number">Question 100</div>
-  <h3 class="qa__question">Create a React component that renders a list of items with inline editing and save/cancel buttons.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[100] = r'''
 <p>Inline editing with explicit Save and Cancel buttons. Different from Q73 (which auto-saved on blur) &mdash; this version requires explicit user confirmation, suitable for important data where accidental edits should be reversible.</p>
 
 <pre><code>import { useState, useRef, useEffect } from "react";
@@ -9000,27 +8299,4 @@ function ContactsTable() {
 </ul>
 
 <p><strong>Save vs auto-save</strong>: explicit save+cancel gives users a chance to back out. Auto-save (Q73) reduces friction but risks accidental edits going through. Choose based on how destructive errors would be: contact info → explicit save; quick-status updates → auto-save with undo (Q67 pattern).</p>
-
-    
-  </div>
-</article>
-
-    <nav class="chapter-nav" aria-label="Chapter navigation">
-      <a class="chapter-nav__prev" href="reactjs-basic.html">
-      <span class="chapter-nav__dir">← Previous</span>
-      <span class="chapter-nav__title">ReactJS — Basic</span>
-    </a>
-      <a class="chapter-nav__next" href="reactjs-advanced.html">
-      <span class="chapter-nav__dir">Next →</span>
-      <span class="chapter-nav__title">ReactJS — Advanced</span>
-    </a>
-    </nav>
-
-  </section>
-
-</main>
-</div>
-
-<script src="../assets/script.js"></script>
-</body>
-</html>
+'''

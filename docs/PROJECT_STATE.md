@@ -1,6 +1,6 @@
 # Project State
 
-**Last updated:** 2026-04-26 (Session: ReactJS Basic completed &mdash; React topic Basic level done)
+**Last updated:** 2026-04-27 (Session: ReactJS Coding completed &mdash; 30 detailed chapters, 3004/4904)
 
 ## At a glance
 
@@ -10,9 +10,9 @@
 | Topics | 13 |
 | Levels present (across topics) | 7 (Basic, Tricky, Coding, Advanced, Advanced Coding, Scenario Based, Advanced Scenario Based) |
 | Total topic/level chapters | 49 |
-| Chapters with detailed answers | 29 (all JavaScript + all Python + all Node.js + all ExpressJS + all API + all HTML + all CSS + ReactJS Basic) |
-| Total detailed answers written | 2,904 |
-| Completion | ~59% of questions have detailed answers |
+| Chapters with detailed answers | 30 (all JavaScript + all Python + all Node.js + all ExpressJS + all API + all HTML + all CSS + ReactJS Basic + ReactJS Coding) |
+| Total detailed answers written | 3,004 |
+| Completion | ~61% of questions have detailed answers |
 
 ## Detailed answer inventory
 
@@ -48,8 +48,8 @@
 | **API** | **Scenario Based** | **100** | **100** | ✅ **Complete** |
 | API | Scenario Based | 100 | 100 | ✅ Complete |
 | **ReactJS** | **Basic** | **101** | **101** | ✅ **Complete** |
-| **ReactJS** | **Coding** | **100** | **0** | 🔄 **Next up** |
-| ReactJS | Advanced | 100 | 0 | ⬜ Pending |
+| **ReactJS** | **Coding** | **100** | **100** | ✅ **Complete** |
+| **ReactJS** | **Advanced** | **100** | **0** | 🔄 **Next up** |
 | ReactJS | Scenario Based | 100 | 0 | ⬜ Pending |
 | MYSQL | Basic | 100 | 0 | ⬜ Pending |
 | MYSQL | Coding | 100 | 0 | ⬜ Pending |
@@ -114,7 +114,8 @@
 │   ├── css_basic.py             ✅ 102
 │   ├── css_coding.py            ✅ 100
 │   ├── css_advanced.py          ✅ 101
-│   └── reactjs_basic.py         ✅ 101
+│   ├── reactjs_basic.py         ✅ 101
+│   └── reactjs_coding.py        ✅ 100
 ├── data/
 │   └── questions.json           ← all 4,904 parsed questions
 └── scripts/
@@ -128,9 +129,9 @@
 ## Delivery status
 
 - **Latest zip:** `/mnt/user-data/outputs/interview-prep-guide.zip`
-- **Delivered (cumulative):** JavaScript (700) + Python (400) + Node.js (400) + ExpressJS (300) + API (400) + HTML (300) + CSS (303) + ReactJS Basic (101) = 2,904 Q&A + site scaffold + 20 stub chapters
+- **Delivered (cumulative):** JavaScript (700) + Python (400) + Node.js (400) + ExpressJS (300) + API (400) + HTML (300) + CSS (303) + ReactJS Basic (101) + ReactJS Coding (100) = 3,004 Q&A + site scaffold + 19 stub chapters
 - **Topics fully completed:** JavaScript, Python, Node.js, ExpressJS, API, HTML, CSS
-- **Phase 4 in progress:** HTML done (300/300); CSS done (303/303); ReactJS Basic done (101/101); ReactJS Coding/Advanced/Scenario remaining (300 Q). Full Phase 4 is 1,004 questions (HTML/CSS/React) &mdash; 704 done (~70%), 300 remaining.
+- **Phase 4 in progress:** HTML done (300/300); CSS done (303/303); ReactJS Basic done (101/101); ReactJS Coding done (100/100); ReactJS Advanced/Scenario remaining (200 Q). Full Phase 4 is 1,004 questions (HTML/CSS/React) &mdash; 804 done (~80%), 200 remaining.
 
 ## Update protocol
 
