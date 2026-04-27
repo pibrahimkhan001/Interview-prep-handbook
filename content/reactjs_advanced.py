@@ -1,118 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ReactJS — Advanced · Interview Prep Mastery</title>
-<meta name="description" content="100 advanced interview questions on ReactJS, with detailed explanations and examples.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="../assets/styles.css">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%239a6b1d'/%3E%3Ctext x='50' y='68' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold' font-size='48'%3EIP%3C/text%3E%3C/svg%3E">
-</head>
-<body>
-<header class="site-header">
-  <div class="site-header__inner">
-    <button class="menu-toggle" aria-label="Open menu" type="button">☰ Menu</button>
-    <a class="brand" href="../index.html">
-      <span class="brand__mark">IP</span>
-      <span class="brand__text">
-        <span class="brand__title">Interview Prep Mastery</span>
-        <span class="brand__subtitle">Interactive learning guide</span>
-      </span>
-    </a>
-    <nav class="header-nav">
-      <a href="../index.html#roadmap">Roadmap</a>
-      <a href="../index.html#chapters">All chapters</a>
-      <button class="theme-toggle" type="button" aria-label="Toggle color scheme">☾ Dark</button>
-    </nav>
-  </div>
-</header>
-<div class="layout">
-<aside class="sidebar" aria-label="Site navigation">
-  <div class="sidebar__header">Chapter Navigator</div>
-  
-        <div class="nav-part">
-          <div class="nav-part__label">Part 1</div>
-          <div class="nav-part__title">Core Programming Languages</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">JavaScript</li><li><a class="" href="../chapters/javascript-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/javascript-tricky.html"><span class="nav-item__title">Tricky</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-coding.html"><span class="nav-item__title">Advanced Coding</span><span class="nav-item__meta">100 questions · 100 min read</span></a></li><li><a class="" href="../chapters/javascript-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-scenario.html"><span class="nav-item__title">Advanced Scenario Based</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Python</li><li><a class="" href="../chapters/python-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/python-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 2</div>
-          <div class="nav-part__title">Web Fundamentals</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">HTML</li><li><a class="" href="../chapters/html-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/html-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/html-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CSS</li><li><a class="" href="../chapters/css-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">102 questions · 60 min read</span></a></li><li><a class="" href="../chapters/css-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/css-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">101 questions · 90 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 3</div>
-          <div class="nav-part__title">Backend Technologies</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Node.Js</li><li><a class="" href="../chapters/nodejs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/nodejs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ExpressJS</li><li><a class="" href="../chapters/expressjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/expressjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/expressjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">API</li><li><a class="" href="../chapters/api-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/api-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 4</div>
-          <div class="nav-part__title">Frontend Frameworks</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ReactJS</li><li><a class="" href="../chapters/reactjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">101 questions · 60 min read</span></a></li><li><a class="" href="../chapters/reactjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="active" href="../chapters/reactjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 5</div>
-          <div class="nav-part__title">Databases</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MYSQL</li><li><a class="" href="../chapters/mysql-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mysql-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MongoDB</li><li><a class="" href="../chapters/mongodb-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mongodb-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 6</div>
-          <div class="nav-part__title">System Design &amp; DevOps</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">System Design MERN Stack</li><li><a class="" href="../chapters/system-design-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Infrastructure MERN Stack</li><li><a class="" href="../chapters/infrastructure-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/infrastructure-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CI/CD Pipeline</li><li><a class="" href="../chapters/cicd-pipeline-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-</aside>
-<main class="main" id="main">
+ANSWERS: dict[int, str] = {}
 
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="../index.html">Home</a>
-    <span class="breadcrumb__sep">›</span>
-    <a href="../index.html#part-4">Frontend Frameworks</a>
-    <span class="breadcrumb__sep">›</span>
-    <span>ReactJS — Advanced</span>
-  </nav>
-
-  <header class="chapter-header">
-    <div class="chapter-label">ReactJS · Advanced</div>
-    <h1 class="chapter-title">Advanced ReactJS Interview Questions</h1>
-    <p class="chapter-lede">Deep internals, architecture decisions, and questions typical of senior-level interviews.</p>
-    <div class="chapter-meta">
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Questions</span><span class="chapter-meta__value">100</span></div>
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Level</span><span class="chapter-meta__value">Advanced</span></div>
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Estimated reading</span><span class="chapter-meta__value">90 min read</span></div>
-    </div>
-    
-  </header>
-
-  <section class="prose">
-
-    <div class="toc" id="toc">
-      <div class="toc__title">All questions in this chapter</div>
-      <ul class="toc__list">
-        <li><a href="#q1"><span class="toc__num">1.</span>Explain the concept of reconciliation in React.</a></li><li><a href="#q2"><span class="toc__num">2.</span>How does the virtual DOM work in React?</a></li><li><a href="#q3"><span class="toc__num">3.</span>What are React portals, and when would you use them?</a></li><li><a href="#q4"><span class="toc__num">4.</span>How does React handle state management under the hood?</a></li><li><a href="#q5"><span class="toc__num">5.</span>Explain the purpose and use cases for the useContext hook.</a></li><li><a href="#q6"><span class="toc__num">6.</span>How do you implement memoization in React components?</a></li><li><a href="#q7"><span class="toc__num">7.</span>What are higher-order components (HOCs), and how do you create one?</a></li><li><a href="#q8"><span class="toc__num">8.</span>How do you manage global state in a large React application?</a></li><li><a href="#q9"><span class="toc__num">9.</span>What are render props, and how do you use them in React?</a></li><li><a href="#q10"><span class="toc__num">10.</span>Explain the difference between controlled and uncontrolled components with examples.</a></li><li><a href="#q11"><span class="toc__num">11.</span>How do you optimize React application performance?</a></li><li><a href="#q12"><span class="toc__num">12.</span>What is server-side rendering (SSR), and how do you implement it with React?</a></li><li><a href="#q13"><span class="toc__num">13.</span>How does hydration work in React?</a></li><li><a href="#q14"><span class="toc__num">14.</span>What are React hooks, and why were they introduced?</a></li><li><a href="#q15"><span class="toc__num">15.</span>Explain the use of the useReducer hook in complex state management.</a></li><li><a href="#q16"><span class="toc__num">16.</span>How do you handle side effects in React with hooks?</a></li><li><a href="#q17"><span class="toc__num">17.</span>What is the purpose of the useImperativeHandle hook?</a></li><li><a href="#q18"><span class="toc__num">18.</span>How do you create and use custom hooks in React?</a></li><li><a href="#q19"><span class="toc__num">19.</span>Explain the concept of compound components in React.</a></li><li><a href="#q20"><span class="toc__num">20.</span>How do you handle errors in functional components using hooks?</a></li><li><a href="#q21"><span class="toc__num">21.</span>What is React Fiber, and how does it improve React&#x27;s performance?</a></li><li><a href="#q22"><span class="toc__num">22.</span>How do you implement lazy loading for routes and components in React?</a></li><li><a href="#q23"><span class="toc__num">23.</span>Explain how to use the Suspense component for data fetching.</a></li><li><a href="#q24"><span class="toc__num">24.</span>What are the benefits of using TypeScript with React?</a></li><li><a href="#q25"><span class="toc__num">25.</span>How do you use React with GraphQL?</a></li><li><a href="#q26"><span class="toc__num">26.</span>What is the Context API, and how does it compare to Redux?</a></li><li><a href="#q27"><span class="toc__num">27.</span>Explain the concept of code splitting in React and its benefits.</a></li><li><a href="#q28"><span class="toc__num">28.</span>How do you implement authentication in a React application?</a></li><li><a href="#q29"><span class="toc__num">29.</span>How do you use the React DevTools Profiler to diagnose performance issues?</a></li><li><a href="#q30"><span class="toc__num">30.</span>What is the difference between useEffect and useLayoutEffect?</a></li><li><a href="#q31"><span class="toc__num">31.</span>How do you handle conditional rendering in React?</a></li><li><a href="#q32"><span class="toc__num">32.</span>What are the best practices for structuring a large React application?</a></li><li><a href="#q33"><span class="toc__num">33.</span>How do you implement form validation in React?</a></li><li><a href="#q34"><span class="toc__num">34.</span>How do you manage side effects in a Redux application?</a></li><li><a href="#q35"><span class="toc__num">35.</span>Explain the concept of prop drilling and how to avoid it.</a></li><li><a href="#q36"><span class="toc__num">36.</span>What are React refs, and how do you use them?</a></li><li><a href="#q37"><span class="toc__num">37.</span>How do you implement drag-and-drop functionality in React?</a></li><li><a href="#q38"><span class="toc__num">38.</span>How do you integrate React with a third-party library like D3 or Three.js?</a></li><li><a href="#q39"><span class="toc__num">39.</span>What is the role of React keys, and how do they help in rendering lists?</a></li><li><a href="#q40"><span class="toc__num">40.</span>How do you handle animations in React using libraries like Framer Motion or React Spring?</a></li><li><a href="#q41"><span class="toc__num">41.</span>Explain how to use the useRef hook for keeping track of mutable values.</a></li><li><a href="#q42"><span class="toc__num">42.</span>What are the potential issues with using index as keys in lists?</a></li><li><a href="#q43"><span class="toc__num">43.</span>How do you implement an infinite scroll in React?</a></li><li><a href="#q44"><span class="toc__num">44.</span>What is the difference between React Context and Redux for state management?</a></li><li><a href="#q45"><span class="toc__num">45.</span>How do you manage theme switching in a React application?</a></li><li><a href="#q46"><span class="toc__num">46.</span>How do you test React components using Jest and Enzyme?</a></li><li><a href="#q47"><span class="toc__num">47.</span>Explain the concept of shallow rendering in testing React components.</a></li><li><a href="#q48"><span class="toc__num">48.</span>How do you handle server-side rendering (SSR) with Next.js?</a></li><li><a href="#q49"><span class="toc__num">49.</span>What is the difference between class components and functional components in React?</a></li><li><a href="#q50"><span class="toc__num">50.</span>How do you create a reusable component library in React?</a></li><li><a href="#q51"><span class="toc__num">51.</span>What are the best practices for managing forms in React?</a></li><li><a href="#q52"><span class="toc__num">52.</span>How do you handle real-time data in a React application?</a></li><li><a href="#q53"><span class="toc__num">53.</span>What are some common performance pitfalls in React, and how do you avoid them?</a></li><li><a href="#q54"><span class="toc__num">54.</span>How do you implement a custom hook for data fetching?</a></li><li><a href="#q55"><span class="toc__num">55.</span>What is the purpose of the useDebugValue hook in React?</a></li><li><a href="#q56"><span class="toc__num">56.</span>How do you handle file uploads in a React application?</a></li><li><a href="#q57"><span class="toc__num">57.</span>Explain the concept of &quot;lifting state up&quot; in React.</a></li><li><a href="#q58"><span class="toc__num">58.</span>How do you implement context-based theming in React?</a></li><li><a href="#q59"><span class="toc__num">59.</span>What are the trade-offs between using Redux and the Context API?</a></li><li><a href="#q60"><span class="toc__num">60.</span>How do you handle accessibility in a React application?</a></li><li><a href="#q61"><span class="toc__num">61.</span>What are the advantages of using Immer with Redux?</a></li><li><a href="#q62"><span class="toc__num">62.</span>How do you implement a responsive design in React?</a></li><li><a href="#q63"><span class="toc__num">63.</span>What are React error boundaries, and how do you use them?</a></li><li><a href="#q64"><span class="toc__num">64.</span>How do you optimize the bundle size of a React application?</a></li><li><a href="#q65"><span class="toc__num">65.</span>Explain the concept of suspense for data fetching in React.</a></li><li><a href="#q66"><span class="toc__num">66.</span>How do you implement server-side rendering (SSR) with Redux?</a></li><li><a href="#q67"><span class="toc__num">67.</span>What is React Concurrent Mode, and how does it improve user experience?</a></li><li><a href="#q68"><span class="toc__num">68.</span>How do you handle complex animations in React?</a></li><li><a href="#q69"><span class="toc__num">69.</span>What are the differences between useMemo and useCallback?</a></li><li><a href="#q70"><span class="toc__num">70.</span>How do you integrate React with a CMS (Content Management System)?</a></li><li><a href="#q71"><span class="toc__num">71.</span>How do you handle state persistence in a React application?</a></li><li><a href="#q72"><span class="toc__num">72.</span>Explain the concept of &quot;container&quot; and &quot;presentational&quot; components in React.</a></li><li><a href="#q73"><span class="toc__num">73.</span>How do you manage WebSocket connections in a React application?</a></li><li><a href="#q74"><span class="toc__num">74.</span>What is the purpose of the forwardRef function in React?</a></li><li><a href="#q75"><span class="toc__num">75.</span>How do you implement a wizard form with multiple steps in React?</a></li><li><a href="#q76"><span class="toc__num">76.</span>What are some strategies for debugging React applications?</a></li><li><a href="#q77"><span class="toc__num">77.</span>How do you handle state synchronization between multiple components?</a></li><li><a href="#q78"><span class="toc__num">78.</span>Explain the concept of the React &quot;reducer pattern&quot;.</a></li><li><a href="#q79"><span class="toc__num">79.</span>How do you manage environment variables in a React application?</a></li><li><a href="#q80"><span class="toc__num">80.</span>How do you implement error logging in a React application?</a></li><li><a href="#q81"><span class="toc__num">81.</span>How do you handle optimistic updates in a React application?</a></li><li><a href="#q82"><span class="toc__num">82.</span>Explain the concept of &quot;memoization&quot; in React.</a></li><li><a href="#q83"><span class="toc__num">83.</span>How do you use the React Refs for accessing the DOM directly?</a></li><li><a href="#q84"><span class="toc__num">84.</span>What are the benefits of using the React.memo HOC?</a></li><li><a href="#q85"><span class="toc__num">85.</span>How do you handle data fetching in a server-side rendered React application?</a></li><li><a href="#q86"><span class="toc__num">86.</span>How do you implement a search functionality in React?</a></li><li><a href="#q87"><span class="toc__num">87.</span>What are React portals, and how do you use them?</a></li><li><a href="#q88"><span class="toc__num">88.</span>How do you handle state and lifecycle methods with hooks?</a></li><li><a href="#q89"><span class="toc__num">89.</span>Explain the concept of context-based state management.</a></li><li><a href="#q90"><span class="toc__num">90.</span>How do you use TypeScript to improve the development experience in React?</a></li><li><a href="#q91"><span class="toc__num">91.</span>How do you implement internationalization (i18n) in a React application?</a></li><li><a href="#q92"><span class="toc__num">92.</span>How do you use the new React Concurrent features?</a></li><li><a href="#q93"><span class="toc__num">93.</span>What are the differences between controlled and uncontrolled forms in React?</a></li><li><a href="#q94"><span class="toc__num">94.</span>How do you implement a protected route in React?</a></li><li><a href="#q95"><span class="toc__num">95.</span>How do you handle image lazy loading in React?</a></li><li><a href="#q96"><span class="toc__num">96.</span>Explain the concept of React &quot;hooks rules&quot;.</a></li><li><a href="#q97"><span class="toc__num">97.</span>How do you handle state management in a React Native application?</a></li><li><a href="#q98"><span class="toc__num">98.</span>How do you use the useReducer hook for complex state logic?</a></li><li><a href="#q99"><span class="toc__num">99.</span>How do you handle nested routes in React Router?</a></li><li><a href="#q100"><span class="toc__num">100.</span>What are the best practices for writing scalable and maintainable React code?</a></li>
-      </ul>
-    </div>
-
-    
-<article class="qa" id="q1">
-  <div class="qa__number">Question 1</div>
-  <h3 class="qa__question">Explain the concept of reconciliation in React.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[1] = r'''
 <p><strong>Reconciliation</strong> is React&rsquo;s algorithm for determining what changed between two render outputs and updating the DOM as efficiently as possible. After a component re-renders, React produces a new tree of React elements (the &ldquo;virtual DOM&rdquo;) and compares it against the previous tree to compute the minimum set of DOM mutations.</p>
 
 <p><strong>The diffing rules</strong> are deliberately simple to keep the algorithm O(n) instead of O(n³):</p>
@@ -131,15 +19,9 @@
 <p><strong>React Fiber</strong> (since React 16) split reconciliation into two phases: a <strong>render phase</strong> (interruptible, builds work-in-progress tree) and a <strong>commit phase</strong> (synchronous, applies DOM mutations). This is what enables Concurrent Mode features like <code>useTransition</code>, <code>useDeferredValue</code>, and Suspense &mdash; React can pause work for high-priority updates and resume later.</p>
 
 <p>In practice, reconciliation is invisible to most code. You write components; React figures out the minimal DOM mutations. Where it shows up: bad keys causing extra renders, type changes thrashing subtrees, or component types that change between renders (defining components inside other components is a common pitfall &mdash; new type each render = full unmount/remount).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q2">
-  <div class="qa__number">Question 2</div>
-  <h3 class="qa__question">How does the virtual DOM work in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[2] = r'''
 <p>The <strong>virtual DOM</strong> is an in-memory representation of the UI as a tree of plain JavaScript objects (React elements). When state changes, React builds a new tree, compares it to the previous one, and applies the minimal set of mutations to the real DOM.</p>
 
 <p><strong>Why it exists</strong>: real DOM operations are expensive (layout, paint, composite). Reading/writing DOM nodes individually triggers reflows. By batching changes through an intermediate representation, React minimizes work and provides a declarative programming model &mdash; you describe what the UI should look like, React figures out how to get there.</p>
@@ -165,15 +47,9 @@
 </table>
 
 <p><strong>Modern alternatives</strong>: Svelte and SolidJS skip the virtual DOM entirely &mdash; they compile components to direct DOM updates at build time. Often faster for narrow benchmarks. React&rsquo;s VDOM is the trade-off for its component model and ecosystem; the React Compiler (R19+) closes some of the gap by auto-memoizing.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q3">
-  <div class="qa__number">Question 3</div>
-  <h3 class="qa__question">What are React portals, and when would you use them?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[3] = r'''
 <p><strong>React portals</strong> render a component&rsquo;s output into a different part of the DOM tree than its parent &mdash; while keeping the React tree relationship intact (events, context, state). Created with <code>createPortal(children, container)</code>.</p>
 
 <p><strong>The key insight</strong>: a portal lets you escape DOM-level constraints (overflow clipping, z-index stacking, CSS transforms) without breaking React&rsquo;s logical hierarchy. The component still receives Context from React parents and bubbles synthetic events upward through them &mdash; even though it lives in a separate DOM subtree.</p>
@@ -201,15 +77,9 @@ function Modal({ children }) {
 <p><strong>Event bubbling caveat</strong>: synthetic events bubble through the React tree, NOT the DOM tree. A click inside a portaled modal still bubbles to the parent component that rendered it &mdash; useful for click-outside detection but surprising if you expect DOM-level bubbling.</p>
 
 <p><strong>Modern alternatives</strong>: HTML5&rsquo;s <code>&lt;dialog&gt;</code> element + the Popover API (<code>popover</code> attribute) handle many use cases natively in 2026, with built-in focus management and top-layer rendering. Libraries like Radix UI and shadcn/ui still use portals under the hood for compatibility &mdash; but new code can lean on platform features for simpler cases.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q4">
-  <div class="qa__number">Question 4</div>
-  <h3 class="qa__question">How does React handle state management under the hood?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[4] = r'''
 <p>React stores component state on <strong>Fiber nodes</strong> &mdash; internal work units that mirror the component tree. Each functional component instance has a Fiber with a linked list of hook records; class components store state directly on the Fiber.</p>
 
 <p><strong>The mechanism, simplified</strong>:</p>
@@ -240,15 +110,9 @@ setCount(c =&gt; c + 1);   // queue: [+1, +1, +1]
 </table>
 
 <p><strong>Why this matters in practice</strong>: hook order is fragile. Conditional hooks break the positional matching. Defining a component inside another creates a new Fiber on every parent render &mdash; all internal state is lost.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q5">
-  <div class="qa__number">Question 5</div>
-  <h3 class="qa__question">Explain the purpose and use cases for the useContext hook.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[5] = r'''
 <p><code>useContext</code> reads the nearest matching Context Provider&rsquo;s current value. It&rsquo;s React&rsquo;s built-in solution for sharing values across components without prop drilling &mdash; theme, current user, language, feature flags, dependency injection.</p>
 
 <p><strong>The mechanism</strong>: Context creates a Provider component that publishes a value, and consumers (<code>useContext</code> or <code>&lt;Context.Consumer&gt;</code>) read it. When the Provider&rsquo;s value changes, ALL descendant consumers re-render &mdash; not just the ones whose specific data changed.</p>
@@ -284,15 +148,9 @@ function DeepChild() {
 <p><strong>Selector pattern for fine-grained subscriptions</strong>: libraries like <code>use-context-selector</code> let consumers subscribe to a slice and re-render only when their slice changes. React 19&rsquo;s <code>use(Context)</code> hook reads context conditionally (allowed inside if/loops &mdash; unique to <code>use</code>); still triggers full subtree re-render on change.</p>
 
 <p><strong>Context vs Redux vs Zustand</strong>: Context excels at infrequent app-wide values; Zustand/Jotai are better for granular subscriptions; Redux Toolkit shines when you need action logging, middleware, and complex state machines.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q6">
-  <div class="qa__number">Question 6</div>
-  <h3 class="qa__question">How do you implement memoization in React components?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[6] = r'''
 <p>Memoization in React caches a computed value or rendered output, returning the cached result when inputs haven&rsquo;t changed. React provides three primary tools: <strong><code>React.memo</code></strong> (component-level), <strong><code>useMemo</code></strong> (value-level), and <strong><code>useCallback</code></strong> (function reference-level).</p>
 
 <table>
@@ -319,15 +177,9 @@ function DeepChild() {
 <p><strong>2026 reality &mdash; the React Compiler</strong>: included in React 19+, automatically applies memoization where beneficial by analyzing component code. Most manual <code>useMemo</code>/<code>useCallback</code>/<code>memo</code> calls become unnecessary in compiler-enabled projects. The compiler errs on the side of correctness; you can opt out with <code>"use no memo"</code> directive if needed.</p>
 
 <p><strong>Profile before memoizing</strong>: React DevTools Profiler shows actual render times. Premature optimization adds complexity for no measured benefit; memoize what&rsquo;s actually slow.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q7">
-  <div class="qa__number">Question 7</div>
-  <h3 class="qa__question">What are higher-order components (HOCs), and how do you create one?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[7] = r'''
 <p>A <strong>higher-order component (HOC)</strong> is a function that takes a component and returns a new component with additional props or behavior. The pattern was the dominant code-sharing mechanism in React until hooks (2019) replaced most use cases.</p>
 
 <pre><code>function withAuth(WrappedComponent) {
@@ -376,15 +228,9 @@ function Page() {
 </table>
 
 <p><strong>When HOCs still make sense in 2026</strong>: error boundaries (still must be class components &mdash; the only common HOC use case left), library APIs that need to inject behavior wholesale (<code>react-redux</code>&rsquo;s legacy <code>connect</code>, <code>react-router</code>&rsquo;s deprecated <code>withRouter</code>). For new code, <strong>prefer custom hooks</strong>; reach for HOCs only when wrapping behavior that hooks can&rsquo;t express (rare).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q8">
-  <div class="qa__number">Question 8</div>
-  <h3 class="qa__question">How do you manage global state in a large React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[8] = r'''
 <p>Global state in large React apps means data that multiple unrelated components need to read or update &mdash; auth user, theme, cart, notifications, server data. The right tool depends on what kind of state and how it changes.</p>
 
 <table>
@@ -416,15 +262,9 @@ function Page() {
 <p><strong>Avoid these antipatterns</strong>: putting all state in one giant Redux store (forces re-renders), using Context for high-frequency data (mouse position, scroll), prop-drilling 5+ levels (a Context or store is warranted).</p>
 
 <p><strong>Migration in 2026</strong>: many teams are moving server data out of Redux into TanStack Query, keeping Redux Toolkit for genuine client state with complex transitions. New apps often skip Redux entirely &mdash; Zustand + TanStack Query covers most needs with less boilerplate.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q9">
-  <div class="qa__number">Question 9</div>
-  <h3 class="qa__question">What are render props, and how do you use them in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[9] = r'''
 <p><strong>Render props</strong> is a pattern where a component accepts a function as a prop and calls it to determine what to render. The function receives data/state from the wrapping component and returns JSX.</p>
 
 <pre><code>function MouseTracker({ render }) {
@@ -470,15 +310,9 @@ function Page() {
 </ul>
 
 <p><strong>For new application code</strong>: prefer custom hooks. Reach for render props only when you&rsquo;re writing reusable library components that need maximum layout flexibility.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q10">
-  <div class="qa__number">Question 10</div>
-  <h3 class="qa__question">Explain the difference between controlled and uncontrolled components with examples.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[10] = r'''
 <p><strong>Controlled components</strong> have their value driven by React state &mdash; every change goes through <code>onChange</code> + <code>setState</code>. <strong>Uncontrolled components</strong> manage their own internal state in the DOM; React reads it via refs only when needed.</p>
 
 <table>
@@ -527,15 +361,9 @@ function Page() {
 <p><strong>React Hook Form&rsquo;s clever trick</strong>: it uses uncontrolled inputs by default for performance &mdash; the inputs manage their own values; RHF reads them via refs at submit time. Validation on blur or submit. The result: large forms with 50+ fields stay snappy.</p>
 
 <p><strong>Common gotcha</strong>: don&rsquo;t mix &mdash; React warns if a component switches from controlled to uncontrolled mid-life (passing <code>value={undefined}</code> when it was previously a string, for example). Always provide an initial empty string or use the right mode from the start.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q11">
-  <div class="qa__number">Question 11</div>
-  <h3 class="qa__question">How do you optimize React application performance?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[11] = r'''
 <p>React performance optimization happens at three levels: <strong>fewer renders</strong>, <strong>cheaper renders</strong>, and <strong>smaller bundles</strong>. Profile first &mdash; React DevTools Profiler shows what&rsquo;s slow; optimizing without measurement adds complexity for no benefit.</p>
 
 <p><strong>Fewer renders &mdash; reduce work React does:</strong></p>
@@ -569,15 +397,9 @@ function Page() {
 <p><strong>2026-current tools</strong>: <strong>React Compiler</strong> (R19+) auto-applies memoization where beneficial &mdash; many manual <code>useMemo</code>/<code>useCallback</code> calls are unnecessary in compiler-enabled projects. <strong>React Server Components</strong> shift work to the server; client never sees server-component code. <strong>Million.js</strong> as a drop-in optimizer that re-implements parts of the VDOM for hot list rendering.</p>
 
 <p><strong>The 80/20 rule</strong>: most apps are slow because of (1) un-virtualized large lists, (2) re-renders from inline object props, (3) too much in one Context. Fix these three before reaching for advanced techniques.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q12">
-  <div class="qa__number">Question 12</div>
-  <h3 class="qa__question">What is server-side rendering (SSR), and how do you implement it with React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[12] = r'''
 <p><strong>Server-side rendering (SSR)</strong> generates HTML on the server for each request, sends it to the browser, and then &ldquo;hydrates&rdquo; on the client by attaching React event handlers to the existing DOM. Benefits: faster First Contentful Paint, better SEO, content visible before JS loads.</p>
 
 <p><strong>You don&rsquo;t implement SSR by hand in 2026</strong>. Use a framework:</p>
@@ -617,15 +439,9 @@ async function ProductsPage() {
 }</code></pre>
 
 <p><strong>SSG vs SSR vs ISR vs CSR</strong>: SSR renders per request; <strong>SSG</strong> (static-site generation) renders at build time; <strong>ISR</strong> (incremental static regeneration) regenerates pages periodically; <strong>CSR</strong> (client-side rendering) sends an empty shell and renders in the browser. Most apps mix &mdash; static for marketing, SSR for dynamic, CSR for highly interactive.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q13">
-  <div class="qa__number">Question 13</div>
-  <h3 class="qa__question">How does hydration work in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[13] = r'''
 <p><strong>Hydration</strong> is the process where React attaches event listeners to server-rendered HTML on the client &mdash; turning static markup into an interactive React app. The DOM is already there; React walks it, matching nodes to React elements, registering handlers, restoring state.</p>
 
 <p><strong>Why it&rsquo;s necessary</strong>: SSR sends HTML, but HTML alone is not interactive. Buttons don&rsquo;t respond to clicks, forms don&rsquo;t handle submissions, hooks haven&rsquo;t run. Hydration is React&rsquo;s &ldquo;wake up&rdquo; pass.</p>
@@ -660,15 +476,9 @@ hydrateRoot(document.getElementById("root"), &lt;App /&gt;);</code></pre>
 </ul>
 
 <p><strong>2026 trend</strong>: less hydration overall &mdash; React Server Components shift the model. Most page content stays as static HTML; only the genuinely-interactive parts (forms, dropdowns, modals) ship JS and hydrate.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q14">
-  <div class="qa__number">Question 14</div>
-  <h3 class="qa__question">What are React hooks, and why were they introduced?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[14] = r'''
 <p><strong>React hooks</strong> are functions starting with <code>use</code> that let you tap into React features (state, lifecycle, context, refs) from functional components. Introduced in React 16.8 (Feb 2019), they replaced the need for class components and unified how reusable logic is shared.</p>
 
 <p><strong>Why they were introduced</strong>:</p>
@@ -705,15 +515,9 @@ useEffect(() =&gt; {
 <p><strong>The two rules of hooks</strong>: (1) only call at the top level &mdash; not in conditionals/loops/nested functions; (2) only call from React function components or other hooks. The ESLint plugin <code>eslint-plugin-react-hooks</code> enforces both. Reason: React identifies hooks by call order; a conditional skip breaks the matching.</p>
 
 <p><strong>2026 status</strong>: hooks are the primary React API. Class components still work but are rarely written for new code. Error boundaries are the lone exception &mdash; still must be classes (a hook equivalent has been discussed for future React versions but isn&rsquo;t shipped).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q15">
-  <div class="qa__number">Question 15</div>
-  <h3 class="qa__question">Explain the use of the useReducer hook in complex state management.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[15] = r'''
 <p><code>useReducer</code> is React&rsquo;s built-in implementation of the reducer pattern: state transitions are described by pure functions of <code>(state, action) =&gt; newState</code>. It excels for state with multiple sub-values, multiple actions, or transitions where the next state depends on the previous one.</p>
 
 <pre><code>const initialState = { items: [], filter: "all", loading: false };
@@ -774,15 +578,9 @@ function Provider({ children }) {
 <p>Splitting state and dispatch into two contexts means components that only dispatch (don&rsquo;t read state) won&rsquo;t re-render on state changes. <code>dispatch</code> identity is stable across renders.</p>
 
 <p><strong>When to graduate to Redux Toolkit</strong>: action logging, time-travel debugging, devtools introspection, middleware (sagas, persistence), or many independent slices that share patterns. For component-local complex state, <code>useReducer</code> is ideal &mdash; no library, no boilerplate.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q16">
-  <div class="qa__number">Question 16</div>
-  <h3 class="qa__question">How do you handle side effects in React with hooks?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[16] = r'''
 <p>Side effects in functional components are handled by <strong><code>useEffect</code></strong> for non-blocking effects (data fetch, subscriptions, timers) and <strong><code>useLayoutEffect</code></strong> for synchronous effects that must run before browser paint (DOM measurements, synchronous DOM mutations).</p>
 
 <p><strong>The mental model</strong>: an effect describes a synchronization between your component and an external system &mdash; the network, a subscription, the DOM, a timer. React runs the effect after rendering, runs cleanup before re-running it or unmounting.</p>
@@ -829,15 +627,9 @@ function Provider({ children }) {
 <p><strong>2026 alternatives for data fetching</strong>: TanStack Query, SWR, RTK Query handle the loading/error/refetch lifecycle better than raw <code>useEffect</code>. React 19&rsquo;s <code>use(promise)</code> with Suspense reads promises directly without effects. Reach for <code>useEffect</code> for non-data side effects (subscriptions, browser APIs, manual DOM).</p>
 
 <p><strong>Strict Mode double-invocation</strong>: in dev, React runs effects twice on mount to surface bugs (missing cleanup, side effects in render). Effects must be idempotent &mdash; safe to run twice.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q17">
-  <div class="qa__number">Question 17</div>
-  <h3 class="qa__question">What is the purpose of the useImperativeHandle hook?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[17] = r'''
 <p><code>useImperativeHandle</code> customizes what a parent receives when it attaches a ref to a component &mdash; instead of getting the underlying DOM node, the parent gets a curated object of methods you choose to expose.</p>
 
 <pre><code>import { useRef, useImperativeHandle, forwardRef } from "react";
@@ -892,15 +684,9 @@ function App() {
 }</code></pre>
 
 <p><strong>Anti-pattern</strong>: don&rsquo;t use <code>useImperativeHandle</code> to expose state mutators (<code>setValue</code>, <code>setOpen</code>). That belongs in props with <code>value</code>/<code>onChange</code>. Reserve it for genuinely imperative actions.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q18">
-  <div class="qa__number">Question 18</div>
-  <h3 class="qa__question">How do you create and use custom hooks in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[18] = r'''
 <p>A <strong>custom hook</strong> is a function whose name starts with <code>use</code> and that calls other hooks. It encapsulates reusable stateful logic so components can share behavior without duplication or wrapper hell.</p>
 
 <pre><code>// Custom hook: track an external value with localStorage sync
@@ -952,15 +738,9 @@ const [theme, setTheme] = useLocalStorage("theme", "light");</code></pre>
 <p><strong>Custom hooks vs HOCs/render props</strong>: hooks won. Sharing logic via custom hooks produces flatter component trees, better TypeScript inference, and natural composition (you can use ten custom hooks side by side; ten HOCs nest pyramidally).</p>
 
 <p><strong>Library hooks in 2026</strong>: <code>react-use</code>, <code>usehooks-ts</code>, <code>@uidotdev/usehooks</code>, <code>react-hook-form</code>, <code>@tanstack/react-query</code>, <code>@react-aria/*</code>. Most app-specific logic is still better as your own hook (custom to your domain), but these libraries cover hundreds of common cases.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q19">
-  <div class="qa__number">Question 19</div>
-  <h3 class="qa__question">Explain the concept of compound components in React.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[19] = r'''
 <p><strong>Compound components</strong> is a pattern where a parent component shares implicit state with its children via Context, letting consumers compose UIs declaratively without prop drilling. The classic example is HTML&rsquo;s native <code>&lt;select&gt;</code> + <code>&lt;option&gt;</code> &mdash; the parent manages selection; children declare options.</p>
 
 <pre><code>// Compound component: Tabs
@@ -1036,15 +816,9 @@ Tabs.Panel = TabPanel;
 <p><strong>Real-world examples</strong>: <code>shadcn/ui</code>, <code>Radix UI</code>, <code>React Aria Components</code>, <code>Reach UI</code>, <code>Headless UI</code> &mdash; all major headless component libraries use this pattern. <code>Dialog.Root</code>, <code>Dialog.Trigger</code>, <code>Dialog.Content</code> is the standard ergonomic shape.</p>
 
 <p><strong>Best practices</strong>: throw a clear error if a child is used without its Provider parent (<code>useTabsContext</code> hook can do this). Document required parent-child relationships. Memoize the Context value to prevent over-rendering.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q20">
-  <div class="qa__number">Question 20</div>
-  <h3 class="qa__question">How do you handle errors in functional components using hooks?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[20] = r'''
 <p>Functional components handle errors at three levels: <strong>try/catch in event handlers/effects</strong> (synchronous and async errors), <strong>error boundaries</strong> (rendering errors that bubble up), and <strong>data-library error states</strong> (TanStack Query <code>error</code>, etc.).</p>
 
 <p><strong>Critically: error boundaries do NOT catch:</strong></p>
@@ -1129,15 +903,9 @@ function FallbackUI({ error, resetErrorBoundary }) {
 </table>
 
 <p><strong>2026 stack</strong>: <code>react-error-boundary</code> + Sentry/Datadog for boundary errors; TanStack Query for data errors; try/catch for events. The combination handles the vast majority of error scenarios with minimal boilerplate. Suspense + the new <code>use(promise)</code> hook in React 19 lets error boundaries catch async errors thrown via Suspense &mdash; closing one of the longstanding gaps.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q21">
-  <div class="qa__number">Question 21</div>
-  <h3 class="qa__question">What is React Fiber, and how does it improve React&#x27;s performance?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[21] = r'''
 <p><strong>React Fiber</strong> is the rewrite of React&rsquo;s reconciliation engine, shipped in React 16 (Sept 2017). It replaced the old recursive stack-based reconciler with a linked-list of work units (Fibers) that React can pause, abort, and resume &mdash; enabling concurrent rendering features.</p>
 
 <p><strong>Why Fiber was needed</strong>: the old reconciler walked the entire tree synchronously. Once started, it had to finish before the browser could paint or respond to input &mdash; long renders caused jank. Fiber splits work into chunks; React processes them, yields control to the browser between chunks, and resumes when it&rsquo;s safe.</p>
@@ -1178,15 +946,9 @@ function FallbackUI({ error, resetErrorBoundary }) {
 <p><strong>Performance characteristics</strong>: Fiber doesn&rsquo;t make any single render faster &mdash; it makes long renders less disruptive. A 50ms render still takes 50ms in total work, but Fiber spreads it across several frames, leaving room for the browser to paint and respond. The user perceives the app as smooth even though the same total work happens.</p>
 
 <p><strong>2026 reality</strong>: Fiber is a foundational implementation detail you almost never interact with directly. Its API surface (concurrent rendering primitives) is the practical face of Fiber for application code.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q22">
-  <div class="qa__number">Question 22</div>
-  <h3 class="qa__question">How do you implement lazy loading for routes and components in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[22] = r'''
 <p>Lazy loading defers loading code until it&rsquo;s actually needed &mdash; smaller initial bundle, faster first paint, deferred work for sections users may never visit. React provides <code>React.lazy()</code> + Suspense for component-level splits; bundlers (Vite, Webpack) implement the chunk creation behind dynamic <code>import()</code>.</p>
 
 <pre><code>import { lazy, Suspense } from "react";
@@ -1247,15 +1009,9 @@ function App() {
 </ul>
 
 <p><strong>Modern frameworks</strong>: Next.js, Remix, TanStack Start all do route-level splitting automatically. You write standard imports; the framework figures out chunks. Vite-based SPAs need explicit <code>React.lazy</code> per route. <strong>React Server Components</strong> obviate much of this &mdash; server-component code never ships at all.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q23">
-  <div class="qa__number">Question 23</div>
-  <h3 class="qa__question">Explain how to use the Suspense component for data fetching.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[23] = r'''
 <p><strong>Suspense for data fetching</strong> lets components &ldquo;wait&rdquo; for a promise to resolve before rendering, with React showing a fallback UI in the meantime. The component throws a promise; Suspense catches it; React re-renders the subtree when the promise resolves.</p>
 
 <p>Originally used only for code splitting (<code>React.lazy</code>), Suspense became a general async-rendering primitive in React 18+. The cleanest API is <strong>React 19&rsquo;s <code>use(promise)</code> hook</strong>, which reads a promise directly and suspends until it resolves.</p>
@@ -1319,15 +1075,9 @@ function App() {
 <p><strong>Where Suspense data fetching shines</strong>: server components and SSR. Server-rendered pages can stream HTML chunk-by-chunk as data resolves &mdash; clients see content fast, JS isn&rsquo;t blocking. Combined with parallel data fetching at the route level, this eliminates classic SSR waterfalls.</p>
 
 <p><strong>Caveats</strong>: client-side, you must memoize the promise &mdash; creating a new one on every render means it never resolves consistently. TanStack Query/SWR handle this for you. <code>use()</code> works with Context too: <code>const value = use(MyContext)</code> &mdash; readable in conditionals, unlike <code>useContext</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q24">
-  <div class="qa__number">Question 24</div>
-  <h3 class="qa__question">What are the benefits of using TypeScript with React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[24] = r'''
 <p><strong>TypeScript</strong> adds static type checking to JavaScript at compile time &mdash; catching errors before code runs, providing autocomplete, and documenting component APIs through types. In 2026, the React community has decisively moved to TypeScript-first; <code>create-react-app</code>, Vite, Next.js, Remix all default to TS.</p>
 
 <p><strong>Concrete benefits in React</strong>:</p>
@@ -1401,15 +1151,9 @@ const [state, dispatch] = useReducer&lt;State, Action&gt;(reducer, init);</code>
 <p><strong>Inference with libraries</strong>: Zod schemas → TypeScript types via <code>z.infer&lt;typeof schema&gt;</code>. tRPC infers types from server to client. TanStack Query infers data types from query functions. The pattern is the same: write the source of truth once, infer types everywhere.</p>
 
 <p><strong>Why TypeScript replaced PropTypes</strong>: PropTypes ran at runtime in development only; TypeScript catches errors at compile time. PropTypes can&rsquo;t describe complex shapes well; TypeScript&rsquo;s type system is far more expressive (unions, generics, mapped types). PropTypes was deprecated from React 15.5; TypeScript is the default for new projects in 2026.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q25">
-  <div class="qa__number">Question 25</div>
-  <h3 class="qa__question">How do you use React with GraphQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[25] = r'''
 <p>React with GraphQL means using a GraphQL client to fetch typed, declarative data. The dominant 2026 options are <strong>Apollo Client</strong>, <strong>urql</strong>, <strong>Relay</strong>, and <strong>TanStack Query + graphql-request</strong>.</p>
 
 <table>
@@ -1498,15 +1242,9 @@ const { data } = useQuery&lt;GetUserQuery, GetUserQueryVariables&gt;(GET_USER, {
 <p><strong>When to choose GraphQL over REST</strong>: when your client needs flexible, deeply-nested data and you control the backend. <strong>When to stick with REST</strong>: simple CRUD; existing REST API; team unfamiliarity with GraphQL trade-offs (over-fetching the schema instead of under-fetching endpoints; N+1 query problems on the backend; cache complexity).</p>
 
 <p><strong>Modern alternatives</strong>: <strong>tRPC</strong> for full-stack TypeScript apps gives end-to-end type safety without a schema language. Many teams now choose tRPC for internal APIs and reserve GraphQL for public APIs or federated services.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q26">
-  <div class="qa__number">Question 26</div>
-  <h3 class="qa__question">What is the Context API, and how does it compare to Redux?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[26] = r'''
 <p>The <strong>Context API</strong> is React&rsquo;s built-in mechanism to pass data through the component tree without prop drilling. <strong>Redux</strong> is a separate library implementing a centralized store with strict patterns (actions, reducers, immutability). They overlap conceptually but solve different problems at different scales.</p>
 
 <table>
@@ -1529,15 +1267,9 @@ const { items, total, addItem } = useContext(CartContext);
 const total = useSelector(s =&gt; s.cart.total);</code></pre>
 
 <p><strong>2026 reality</strong>: most new apps use neither directly. <strong>Zustand/Jotai</strong> for client state (Context-like ergonomics, Redux-like selective subscription, no provider boilerplate). <strong>TanStack Query</strong> for server state (caching, refetch, deduplication). Reach for Context for truly global low-frequency values; Redux for legacy or genuinely complex state machines.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q27">
-  <div class="qa__number">Question 27</div>
-  <h3 class="qa__question">Explain the concept of code splitting in React and its benefits.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[27] = r'''
 <p>Code splitting breaks a single large bundle into smaller chunks loaded on demand &mdash; reducing initial load time. The browser only downloads what&rsquo;s needed for the current view; other features stream in as users navigate to them.</p>
 
 <p><strong>Three splitting strategies</strong>:</p>
@@ -1585,15 +1317,9 @@ function App() {
 <p><strong>Benefits</strong>: smaller initial JS payload (faster Time To Interactive), better cache hits (unchanged chunks reused across deploys), parallel loading (browser fetches multiple chunks concurrently).</p>
 
 <p><strong>Don&rsquo;t over-split</strong>: too many small chunks means too many network requests. Group related code; aim for chunks of 50-200 KB. <strong>Modern frameworks</strong> (Next.js, Remix, TanStack Start) auto-split routes &mdash; no manual <code>React.lazy</code> needed.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q28">
-  <div class="qa__number">Question 28</div>
-  <h3 class="qa__question">How do you implement authentication in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[28] = r'''
 <p>Authentication in a React app has two halves: <strong>authentication</strong> (proving who the user is) and <strong>authorization</strong> (what they can access). The frontend coordinates the user-facing flow; security ultimately lives on the server.</p>
 
 <p><strong>Three common auth strategies</strong>:</p>
@@ -1660,15 +1386,9 @@ function ProtectedRoute({ children, requiredRole }) {
 <p><strong>Production stack in 2026</strong>: <strong>Clerk</strong>, <strong>Auth0</strong>, <strong>Supabase Auth</strong>, <strong>Firebase Auth</strong>, or <strong>NextAuth.js</strong> &mdash; they handle OAuth providers, MFA, password resets, session rotation, and audit logging. Don&rsquo;t roll your own auth from scratch &mdash; the cryptographic and protocol details are unforgiving.</p>
 
 <p><strong>Defense in depth</strong>: client-side guards prevent unauthorized UI access, but server endpoints MUST re-validate every request. Never trust client-side <code>user.role</code> for authorization decisions on the server.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q29">
-  <div class="qa__number">Question 29</div>
-  <h3 class="qa__question">How do you use the React DevTools Profiler to diagnose performance issues?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[29] = r'''
 <p>The <strong>React DevTools Profiler</strong> records render performance and shows which components re-rendered, why, and how long each render took. Essential for diagnosing performance issues that aren&rsquo;t obvious from looking at the code.</p>
 
 <p><strong>Recording a session</strong>:</p>
@@ -1711,15 +1431,9 @@ function ProtectedRoute({ children, requiredRole }) {
 <p><strong>Quantitative discipline</strong>: profile <em>before</em> optimizing. Profile <em>after</em> the fix to confirm improvement. Eyeballing &ldquo;this seems faster&rdquo; is unreliable &mdash; the Profiler gives concrete numbers (ms per render).</p>
 
 <p><strong>2026 update</strong>: the React Compiler (production-ready in React 19) auto-applies memoization where beneficial &mdash; many cases that previously required manual <code>useMemo</code>/<code>useCallback</code> are handled automatically. The Profiler still earns its keep for measuring real-world impact.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q30">
-  <div class="qa__number">Question 30</div>
-  <h3 class="qa__question">What is the difference between useEffect and useLayoutEffect?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[30] = r'''
 <p>Both run side effects, but at different times in the render-commit cycle. <strong><code>useEffect</code></strong> fires <strong>after browser paint</strong> &mdash; non-blocking. <strong><code>useLayoutEffect</code></strong> fires <strong>synchronously after DOM mutation, before paint</strong> &mdash; blocks rendering until done.</p>
 
 <table>
@@ -1758,15 +1472,9 @@ useEffect(() =&gt; {
 <p><strong>Why default to useEffect</strong>: it doesn&rsquo;t block the browser&rsquo;s rendering pipeline. Frequent <code>useLayoutEffect</code> usage degrades responsiveness because each one delays paint. Reserve it for measure-then-update DOM scenarios where flicker would otherwise be visible.</p>
 
 <p><strong>SSR caveat</strong>: <code>useLayoutEffect</code> doesn&rsquo;t run on the server (no DOM to measure). React warns when SSR-rendered components use it. For isomorphic libraries, the common pattern is <code>useIsomorphicLayoutEffect</code> &mdash; equals <code>useLayoutEffect</code> in browsers, <code>useEffect</code> on the server.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q31">
-  <div class="qa__number">Question 31</div>
-  <h3 class="qa__question">How do you handle conditional rendering in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[31] = r'''
 <p>Conditional rendering returns different JSX based on state, props, or computed conditions. React supports several patterns; choose by readability and the kind of decision you&rsquo;re making.</p>
 
 <p><strong>Five idiomatic patterns</strong>:</p>
@@ -1812,15 +1520,9 @@ return STATUS_VIEWS[status] || null;
 <p><strong>Avoid deeply nested ternaries</strong> &mdash; once you have three or more branches, switch to a lookup or extract to a helper component. Nested ternaries are a readability tax with no compensating benefit.</p>
 
 <p><strong>Don&rsquo;t hide via CSS what should be unmounted</strong>: <code>{shouldShow &amp;&amp; &lt;Heavy /&gt;}</code> avoids mounting <code>Heavy</code> until needed. <code>&lt;Heavy style={{ display: shouldShow ? "block" : "none" }} /&gt;</code> mounts it always, paying its render cost. Choose by whether the component is heavy or has side effects (timers, subscriptions).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q32">
-  <div class="qa__number">Question 32</div>
-  <h3 class="qa__question">What are the best practices for structuring a large React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[32] = r'''
 <p>A large React app needs structure to stay maintainable as features grow. The dominant 2026 patterns are <strong>feature-based folders</strong> (preferred) over <strong>type-based folders</strong> (legacy), with strong conventions around imports, testing, and shared code.</p>
 
 <p><strong>Feature-based structure</strong> (recommended):</p>
@@ -1873,15 +1575,9 @@ import { useAuth } from "@/features/auth";</code></pre>
 <p><strong>Other discipline that pays off in large apps</strong>: shared design system (Tailwind + shadcn/ui or a component library); strict TypeScript with no <code>any</code>; ESLint with <code>react/exhaustive-deps</code> and import boundaries enforced; testing pyramid (unit > integration > e2e); CI that blocks merges on test/lint failures; Storybook for component documentation; well-defined Git workflow with PR reviews.</p>
 
 <p><strong>Modular monolith over microfrontends</strong> for most teams: keep one repo, but enforce boundaries with <code>eslint-plugin-boundaries</code>. Microfrontends are valuable at the scale of dozens of teams; below that, the operational complexity outweighs the benefits.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q33">
-  <div class="qa__number">Question 33</div>
-  <h3 class="qa__question">How do you implement form validation in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[33] = r'''
 <p>Form validation in React covers <strong>schema</strong> (what valid data looks like), <strong>timing</strong> (when to show errors), and <strong>UX</strong> (how to surface them). The 2026 standard combines <strong>React Hook Form</strong> (for state and submission flow) with <strong>Zod</strong> (for schema and TypeScript types).</p>
 
 <p><strong>Why React Hook Form + Zod</strong>:</p>
@@ -1951,15 +1647,9 @@ function SignupForm() {
 <p><strong>Server-side validation matters too</strong>: validate the same Zod schema on the server (Node.js + Zod work identically). Client validation is for UX; server validation is the security boundary.</p>
 
 <p><strong>React 19&rsquo;s <code>useActionState</code></strong> is a viable alternative for server-action-driven forms in Next.js / Remix &mdash; combines validation with submit state in fewer hooks.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q34">
-  <div class="qa__number">Question 34</div>
-  <h3 class="qa__question">How do you manage side effects in a Redux application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[34] = r'''
 <p>Side effects in Redux mean async work that can&rsquo;t live in reducers (which must be pure). Three middleware patterns dominate: <strong>thunks</strong> (simple), <strong>sagas</strong> (complex orchestration), and <strong>RTK Query</strong> (declarative server state).</p>
 
 <table>
@@ -2025,15 +1715,9 @@ export const { useGetUserQuery, useUpdateUserMutation } = api;</code></pre>
 <p><strong>When sagas are worth the complexity</strong>: cancellable uploads, debounced search across many fields, multi-step wizards with rollback, complex authentication flows, WebSocket message orchestration. For typical CRUD apps, RTK Query covers the use cases at a fraction of the code.</p>
 
 <p><strong>2026 default</strong>: RTK Query for server state; <code>createAsyncThunk</code> for non-fetch async; reach for sagas only when their power genuinely earns the learning curve.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q35">
-  <div class="qa__number">Question 35</div>
-  <h3 class="qa__question">Explain the concept of prop drilling and how to avoid it.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[35] = r'''
 <p><strong>Prop drilling</strong> is passing data through multiple intermediate components that don&rsquo;t use it themselves &mdash; just to deliver it to a deeply-nested descendant. Painful to maintain: rename a prop and you touch many files; add a new field and every layer must forward it.</p>
 
 <pre><code>// Painful: theme drills through 4 layers to reach Button
@@ -2098,15 +1782,9 @@ function Button() {
 <p><strong>Don&rsquo;t over-Context</strong>: Context is global; every consumer re-renders when the value changes. Don&rsquo;t put fast-changing or component-specific data in Context. Reserve it for low-frequency, truly cross-cutting values.</p>
 
 <p><strong>Heuristic</strong>: if a prop passes through more than 2-3 layers without being used, refactor. Small drilling is fine; deep drilling indicates that the data needs a different mechanism (Context, state library, or composition).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q36">
-  <div class="qa__number">Question 36</div>
-  <h3 class="qa__question">What are React refs, and how do you use them?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[36] = r'''
 <p>Refs are React&rsquo;s escape hatch for accessing DOM nodes, storing mutable values that don&rsquo;t trigger re-renders, and exposing imperative APIs from components. Created with <code>useRef</code> in functional components or <code>createRef</code>/<code>React.createRef</code> in class components.</p>
 
 <p><strong>Three primary use cases</strong>:</p>
@@ -2179,15 +1857,9 @@ function FancyInput({ ref, ...props }) {
 }</code></pre>
 
 <p><strong>Don&rsquo;t use refs as a substitute for state</strong>. If something should affect what&rsquo;s rendered, it&rsquo;s state. Refs are for things React shouldn&rsquo;t care about: DOM nodes, third-party library instances, mutable counters used in side effects.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q37">
-  <div class="qa__number">Question 37</div>
-  <h3 class="qa__question">How do you implement drag-and-drop functionality in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[37] = r'''
 <p>Drag-and-drop in React in 2026 is best done with <strong>dnd-kit</strong> &mdash; the modern, accessible, well-maintained library. The HTML5 Drag-and-Drop API works natively but lacks touch, accessibility, and animation support. <strong>react-beautiful-dnd</strong> (Atlassian) was the previous standard but is now unmaintained.</p>
 
 <table>
@@ -2254,15 +1926,9 @@ function App() {
 <p><strong>dnd-kit&rsquo;s architecture</strong>: <code>DndContext</code> establishes the drag environment; <strong>sensors</strong> define input methods (pointer, touch, keyboard); <strong>collision detection</strong> determines drop targets; <strong>strategies</strong> control how items reflow during drag. Every layer is pluggable.</p>
 
 <p><strong>Production patterns</strong>: persist new order to backend after each drag-end (debounced); use optimistic updates &mdash; UI reflects new order immediately, rollback on save failure; for Kanban-style multi-list, use one <code>DndContext</code> wrapping multiple <code>SortableContext</code>s; for grids, use <code>rectSortingStrategy</code>; for very large lists, virtualize with <code>@dnd-kit/sortable</code> + <code>react-virtual</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q38">
-  <div class="qa__number">Question 38</div>
-  <h3 class="qa__question">How do you integrate React with a third-party library like D3 or Three.js?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[38] = r'''
 <p>Integrating imperative third-party libraries (D3, Three.js, Mapbox, Chart.js) with React requires bridging React&rsquo;s declarative model with the library&rsquo;s direct DOM/canvas/WebGL manipulation. The dominant pattern: <strong>React owns the container; the library owns its contents</strong>.</p>
 
 <p><strong>Three integration approaches</strong>:</p>
@@ -2352,15 +2018,9 @@ function Scene() {
 </table>
 
 <p>The wrappers handle lifecycle, prop syncing, and cleanup &mdash; orders of magnitude less boilerplate than manual integration.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q39">
-  <div class="qa__number">Question 39</div>
-  <h3 class="qa__question">What is the role of React keys, and how do they help in rendering lists?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[39] = r'''
 <p>Keys are React&rsquo;s identity hint for list items &mdash; they tell the reconciler which elements correspond between renders. Without stable keys, React falls back to position-based matching, which causes incorrect state preservation, lost focus, and DOM mutations that should have been moves.</p>
 
 <p><strong>What keys do</strong>:</p>
@@ -2415,15 +2075,9 @@ function Scene() {
 <p><strong>Composite keys for list items without natural IDs</strong>: <code>key={`${userId}-${date}`}</code> if combined fields are unique. For static option lists, the option value works: <code>key={option.value}</code>.</p>
 
 <p><strong>Keys are local to siblings</strong>: two different lists can use the same key value safely. The reconciler only compares siblings within the same parent.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q40">
-  <div class="qa__number">Question 40</div>
-  <h3 class="qa__question">How do you handle animations in React using libraries like Framer Motion or React Spring?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[40] = r'''
 <p>React animations span CSS transitions (simplest), <strong>Framer Motion</strong> (most popular), <strong>React Spring</strong> (physics-based), and <strong>GSAP</strong> (timeline-heavy). Choose based on the kind of motion needed and complexity tolerance.</p>
 
 <table>
@@ -2498,15 +2152,9 @@ function Modal({ isOpen, onClose }) {
     transition-duration: 0.01ms !important;
   }
 }</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q41">
-  <div class="qa__number">Question 41</div>
-  <h3 class="qa__question">Explain how to use the useRef hook for keeping track of mutable values.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[41] = r'''
 <p><code>useRef</code> creates a mutable container that persists across renders without triggering a re-render when its <code>.current</code> property changes. It&rsquo;s designed for two distinct purposes: <strong>accessing DOM nodes</strong> and <strong>storing mutable values that don&rsquo;t affect rendering</strong>.</p>
 
 <p><strong>Use case: tracking mutable values that survive re-renders</strong></p>
@@ -2574,15 +2222,9 @@ function PriceTracker({ price }) {
 <p><strong>Reading <code>.current</code> in render is a code smell</strong>: it suggests the value should drive UI, in which case it should be state. Refs are for things React shouldn&rsquo;t care about: timer IDs, previous values for comparison, third-party library instances, mutable counters used in side effects.</p>
 
 <p><strong>Initial value is computed once</strong>: <code>useRef(expensiveCompute())</code> still calls <code>expensiveCompute()</code> on every render (even though the ref keeps its initial value). For lazy initialization, do <code>const ref = useRef(null); if (ref.current === null) ref.current = compute();</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q42">
-  <div class="qa__number">Question 42</div>
-  <h3 class="qa__question">What are the potential issues with using index as keys in lists?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[42] = r'''
 <p>Using array index as a list key tells React: &ldquo;the element at position N is the same element across renders.&rdquo; This breaks badly whenever the list reorders, has insertions/deletions in the middle, or items can be filtered.</p>
 
 <p><strong>Three concrete bugs index-as-key causes</strong>:</p>
@@ -2654,15 +2296,9 @@ function LabelInput({ label }) {
 </table>
 
 <p>Don&rsquo;t use <code>Math.random()</code> or <code>Date.now()</code> at render time &mdash; new key on every render breaks reconciliation entirely. Generate the ID once at item creation and store it in your data.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q43">
-  <div class="qa__number">Question 43</div>
-  <h3 class="qa__question">How do you implement an infinite scroll in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[43] = r'''
 <p>Infinite scroll loads more items as the user nears the bottom of the list. The modern, performant approach uses <strong><code>IntersectionObserver</code></strong> to watch a sentinel element &mdash; far better than scroll listeners that fire 60+ times per second.</p>
 
 <p><strong>Three implementation approaches</strong>:</p>
@@ -2734,15 +2370,9 @@ function InfiniteList() {
 <p><strong>For very long lists, virtualize</strong>: render only visible items with <strong>TanStack Virtual</strong> or <strong>react-window</strong>. Combined with infinite scroll, you can have 100,000 items rendered as 20 DOM nodes. Without virtualization, the DOM grows unbounded; eventually memory and rendering performance degrade noticeably.</p>
 
 <p><strong>Modern alternative: TanStack Query&rsquo;s <code>useInfiniteQuery</code></strong> handles the pagination state, caching, and refetching automatically. The hook returns <code>data.pages</code>, <code>fetchNextPage</code>, <code>hasNextPage</code> &mdash; you only wire up the trigger (sentinel or button). Highly recommended for production.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q44">
-  <div class="qa__number">Question 44</div>
-  <h3 class="qa__question">What is the difference between React Context and Redux for state management?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[44] = r'''
 <p>Both Context and Redux propagate data across components without prop drilling, but they differ in <strong>scope</strong>, <strong>performance characteristics</strong>, and <strong>tooling</strong>. The choice depends on the kind and frequency of state being managed.</p>
 
 <table>
@@ -2790,15 +2420,9 @@ const userName = useSelector(s =&gt; s.user.name);
 </ul>
 
 <p><strong>The proper mental model</strong>: separate <strong>server state</strong> (data from APIs) from <strong>client state</strong> (UI state, form values, selected items). Use TanStack Query for server state in nearly all cases. For client state: <code>useState</code> first, lift up second, Context for true app-wide values, Zustand/Jotai for global, Redux only when its specific tooling earns its weight.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q45">
-  <div class="qa__number">Question 45</div>
-  <h3 class="qa__question">How do you manage theme switching in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[45] = r'''
 <p>Theme switching combines a <strong>state holder</strong> (current theme), <strong>persistence</strong> (so refreshes don&rsquo;t reset), <strong>system preference detection</strong>, and <strong>application</strong> (CSS variables, data attributes, or class names). The cleanest approach: theme state in Context drives a single <code>data-theme</code> attribute; CSS variables do the rest.</p>
 
 <pre><code>import { createContext, useContext, useEffect, useState } from "react";
@@ -2885,15 +2509,9 @@ body { background: var(--bg); color: var(--text); }</code></pre>
 <p><strong>Why this approach over JavaScript-driven styling</strong>: CSS variables propagate instantly to every styled element. No prop drilling, no re-renders, no per-component theme logic. Tailwind&rsquo;s dark mode (<code>darkMode: ["class", '[data-theme="dark"]']</code>) integrates with this attribute pattern.</p>
 
 <p><strong>Library options</strong>: <strong>next-themes</strong> for Next.js apps (handles SSR + flash prevention), <strong>shadcn/ui&rsquo;s theme toggle</strong> as a copy-paste reference. Don&rsquo;t reinvent the flash-prevention script &mdash; the edge cases are subtle.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q46">
-  <div class="qa__number">Question 46</div>
-  <h3 class="qa__question">How do you test React components using Jest and Enzyme?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[46] = r'''
 <p><strong>Note: Enzyme is unmaintained as of 2024 and never officially supported React 18+.</strong> The 2026 testing standard is <strong>Vitest</strong> (or Jest) + <strong>React Testing Library</strong> (RTL) + <strong>userEvent</strong>. The question asks about Enzyme; the modern answer prioritizes RTL.</p>
 
 <table>
@@ -2956,15 +2574,9 @@ describe("UserProfile", () =&gt; {
 <p><strong>If you must work in an Enzyme codebase</strong>: don&rsquo;t add new Enzyme tests. Migrate gradually &mdash; convert tests to RTL when you change the component anyway. For React 18+ with Enzyme, use <code>@cfaester/enzyme-adapter-react-18</code> (unofficial) but accept that breakage risk grows over time.</p>
 
 <p><strong>Test pyramid for React apps</strong>: many unit tests for hooks and pure functions, integration tests for components (RTL), few end-to-end tests for critical user journeys (Playwright). Skip snapshots except for design-system primitives where any change should require explicit review.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q47">
-  <div class="qa__number">Question 47</div>
-  <h3 class="qa__question">Explain the concept of shallow rendering in testing React components.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[47] = r'''
 <p><strong>Shallow rendering</strong> (Enzyme&rsquo;s <code>shallow()</code>) renders only the component under test and stub-renders its children &mdash; you see the top-level component&rsquo;s output but not what its children produce. Conceptually attractive for &ldquo;isolation&rdquo;, but in practice it&rsquo;s problematic and the modern testing community has moved away from it.</p>
 
 <p><strong>How shallow rendering looked</strong>:</p>
@@ -3028,15 +2640,9 @@ expect(screen.getByText(/3 posts/)).toBeInTheDocument();
 </ul>
 
 <p>Shallow rendering as a general tool is largely abandoned. Mock at the right boundary (network or module), render fully, query by behavior &mdash; the tests are more useful and survive refactors.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q48">
-  <div class="qa__number">Question 48</div>
-  <h3 class="qa__question">How do you handle server-side rendering (SSR) with Next.js?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[48] = r'''
 <p><strong>Next.js</strong> is the dominant React framework for SSR/SSG/ISR/RSC in 2026. The current App Router (Next.js 13.4+) defaults to <strong>React Server Components</strong> &mdash; a fundamentally different rendering model than older Pages Router SSR.</p>
 
 <table>
@@ -3122,15 +2728,9 @@ export default function Contact() {
 <p><strong>Streaming with Suspense</strong>: each <code>&lt;Suspense&gt;</code> boundary streams HTML as its data resolves. Fast above-the-fold content arrives first; slow analytics widgets stream in independently.</p>
 
 <p><strong>2026 alternatives</strong>: <strong>Remix</strong> (web standards-focused), <strong>TanStack Start</strong> (type-safe full-stack), <strong>Astro</strong> (content-heavy with islands of React). Next.js dominates by share, but Remix offers compelling ergonomics for forms and mutations.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q49">
-  <div class="qa__number">Question 49</div>
-  <h3 class="qa__question">What is the difference between class components and functional components in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[49] = r'''
 <p>React supports both <strong>class components</strong> and <strong>functional components</strong>. Functional components with hooks (introduced in React 16.8, 2019) are now the standard; class components remain valid but are rarely written for new code.</p>
 
 <table>
@@ -3197,15 +2797,9 @@ class UserProfile extends Component {
 <p><strong>The remaining class use case</strong>: <strong>error boundaries</strong>. As of React 19, the only way to catch errors during render is <code>componentDidCatch</code> + <code>getDerivedStateFromError</code> &mdash; class methods. The community wraps them in <code>react-error-boundary</code> so functional code stays untouched.</p>
 
 <p><strong>For interview answers</strong>: lead with &ldquo;hooks are the standard&rdquo;, then explain class lifecycle equivalents to show you understand both. Don&rsquo;t recommend writing new class components except for error boundaries.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q50">
-  <div class="qa__number">Question 50</div>
-  <h3 class="qa__question">How do you create a reusable component library in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[50] = r'''
 <p>Building a reusable component library means designing components that work outside any specific project, with clean APIs, predictable styling, full accessibility, and excellent developer experience. Major decisions: <strong>headless vs. styled</strong>, <strong>distribution mechanism</strong>, <strong>styling approach</strong>, <strong>typing</strong>, and <strong>versioning</strong>.</p>
 
 <p><strong>Three architectural approaches</strong>:</p>
@@ -3280,15 +2874,9 @@ Button.displayName = "Button";</code></pre>
 </ul>
 
 <p>For startup teams in 2026: build on Radix UI primitives + Tailwind, copy from shadcn/ui as a starting point, document with Storybook, ship via internal npm or monorepo. Don&rsquo;t reinvent accessibility &mdash; Radix and React Aria handle the hard parts.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q51">
-  <div class="qa__number">Question 51</div>
-  <h3 class="qa__question">What are the best practices for managing forms in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[51] = r'''
 <p>Form management in React has evolved significantly &mdash; in 2026, best practices center on schema-validated, mostly uncontrolled forms with co-located validation, accessibility built in, and clear submission state.</p>
 
 <p><strong>The recommended modern stack:</strong></p>
@@ -3340,15 +2928,9 @@ function LoginForm() {
 </ul>
 
 <p><strong>For React 19 server-action forms</strong>, use the new <code>useActionState</code> + <code>useFormStatus</code> hooks &mdash; the form action signature receives FormData and returns the next state, eliminating boilerplate. RSC-driven apps (Next.js App Router, Remix v3) push this further with progressive enhancement: forms work without JS.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q52">
-  <div class="qa__number">Question 52</div>
-  <h3 class="qa__question">How do you handle real-time data in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[52] = r'''
 <p>Real-time data in React means UI updates as server state changes &mdash; without polling. Three primary mechanisms: <strong>WebSockets</strong> (bi-directional, full-duplex), <strong>Server-Sent Events</strong> (server → client only, simpler), and <strong>polling</strong> (last resort). Modern apps often abstract these via libraries.</p>
 
 <p><strong>Native WebSocket pattern:</strong></p>
@@ -3403,15 +2985,9 @@ useEffect(() =&gt; {
 }, []);</code></pre>
 
 <p>This pattern keeps "what data exists" declarative (<code>useQuery</code>) while real-time signals only trigger refresh &mdash; you don&rsquo;t hand-merge socket payloads into local state. <strong>For collaborative editing</strong> (cursors, multi-user docs), consider <strong>Yjs</strong> or <strong>Automerge</strong> &mdash; CRDT-based libraries that handle conflict-free merging across clients.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q53">
-  <div class="qa__number">Question 53</div>
-  <h3 class="qa__question">What are some common performance pitfalls in React, and how do you avoid them?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[53] = r'''
 <p>The most common React performance pitfalls aren&rsquo;t about React itself &mdash; they&rsquo;re patterns that cause unnecessary re-renders, work in the wrong place, or trigger expensive operations on every keystroke.</p>
 
 <p><strong>The most damaging pitfalls and their fixes:</strong></p>
@@ -3448,15 +3024,9 @@ function Parent({ user }) {
 <p><strong>React 19&rsquo;s React Compiler</strong> auto-applies <code>useMemo</code>/<code>useCallback</code> where beneficial, eliminating most manual memoization. Once your codebase has the compiler enabled, several entries in this table become non-issues &mdash; the compiler stabilizes references automatically. Until then (or for cases the compiler can&rsquo;t verify), manual memoization remains necessary.</p>
 
 <p>Don&rsquo;t over-optimize: most apps are fast by default. Reach for these techniques when profiling identifies a real problem, not preemptively.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q54">
-  <div class="qa__number">Question 54</div>
-  <h3 class="qa__question">How do you implement a custom hook for data fetching?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[54] = r'''
 <p>A custom data-fetching hook abstracts the common loading/error/data state machine into one reusable function. Roll-your-own teaches the pattern; production apps use <strong>TanStack Query</strong> or <strong>SWR</strong> for the same shape with caching, deduplication, and revalidation.</p>
 
 <p><strong>Hand-rolled <code>useFetch</code>:</strong></p>
@@ -3518,15 +3088,9 @@ const { data, isLoading, error, refetch } = useUsers();</code></pre>
 <p><strong>When the custom hook still makes sense</strong>: simple internal apps with small data needs, learning React, when adding a dependency isn&rsquo;t worth it for two API calls. <strong>For production apps with more than ~5 endpoints</strong>, the library investment pays off many times over.</p>
 
 <p><strong>For RSC / Suspense-based fetching</strong> (React 19+), the pattern shifts: components <code>use(promise)</code> and Suspense boundaries handle loading state &mdash; no hook needed. The shape of "data fetching in React" continues evolving as Server Components mature.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q55">
-  <div class="qa__number">Question 55</div>
-  <h3 class="qa__question">What is the purpose of the useDebugValue hook in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[55] = r'''
 <p><code>useDebugValue</code> labels custom hooks in React DevTools, making them easier to identify when inspecting components. Library-grade hooks should add it; one-off hooks rarely need it.</p>
 
 <p><strong>Without useDebugValue</strong>, custom hooks show up generically:</p>
@@ -3586,15 +3150,9 @@ function useOnlineStatus() {
 <p><strong>Production impact</strong>: zero. <code>useDebugValue</code> is a no-op in production builds &mdash; only DevTools in development reads the labels. Don&rsquo;t worry about performance.</p>
 
 <p>This hook is one of React&rsquo;s underused features &mdash; many engineers don&rsquo;t know it exists. For interview answers: knowing it exists and when to use it (libraries, not apps) signals depth.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q56">
-  <div class="qa__number">Question 56</div>
-  <h3 class="qa__question">How do you handle file uploads in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[56] = r'''
 <p>File uploads in production-grade React apps require: progress tracking, drag-and-drop UX, multiple file support, client-side validation (size, type), chunked uploads for large files, and resilience to network failures. Native <code>fetch</code> doesn&rsquo;t support upload progress; <code>axios</code> or <code>XMLHttpRequest</code> do.</p>
 
 <p><strong>Production patterns:</strong></p>
@@ -3652,15 +3210,9 @@ upload.start();</code></pre>
 <p><strong>Validation matters</strong>: validate type (MIME + extension), size, and dimensions before uploading. Show user-friendly errors. Server must always re-validate &mdash; client validation is UX only, not security.</p>
 
 <p><strong>For complete upload UI</strong>: <strong>Uppy</strong> (full-featured, multi-source: webcam, URL, Dropbox, Google Drive) or <strong>react-dropzone</strong> (just the drag-drop primitives, you build the UI). Both production-tested.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q57">
-  <div class="qa__number">Question 57</div>
-  <h3 class="qa__question">Explain the concept of &quot;lifting state up&quot; in React.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[57] = r'''
 <p>"Lifting state up" is the React pattern for sharing state between sibling components: move the state to their nearest common ancestor and pass it down via props. It&rsquo;s the simplest form of state sharing &mdash; before reaching for Context or Redux, lift first.</p>
 
 <p><strong>The problem &mdash; state in a leaf component:</strong></p>
@@ -3727,15 +3279,9 @@ function BoilingVerdict({ celsius }) {
 <p><strong>Composition can replace lifting</strong>: instead of <code>&lt;Layout sidebar={...} content={...} /&gt;</code>, use <code>&lt;Layout&gt;&lt;Sidebar /&gt;&lt;Content /&gt;&lt;/Layout&gt;</code> &mdash; children are passed in already-rendered, no prop forwarding needed. This is one of React&rsquo;s most underused techniques for keeping data flow simple.</p>
 
 <p>Lifting state up is the foundational pattern; everything else (Context, Redux, Zustand) is an optimization for specific cases where lifting becomes unwieldy.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q58">
-  <div class="qa__number">Question 58</div>
-  <h3 class="qa__question">How do you implement context-based theming in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[58] = r'''
 <p>Context-based theming centralizes theme state (light/dark/custom) in a Context provider, exposes it via a custom hook, and drives styling through CSS variables or library-specific theme objects. The pattern works for any React app regardless of styling approach.</p>
 
 <p><strong>The complete pattern with persistence and system preference:</strong></p>
@@ -3835,15 +3381,9 @@ body { background: var(--bg); color: var(--text); }</code></pre>
 &lt;/script&gt;</code></pre>
 
 <p><strong>For Tailwind CSS</strong>, configure <code>darkMode: ["class", '[data-theme="dark"]']</code> &mdash; Tailwind&rsquo;s <code>dark:</code> utilities then trigger off your data attribute. <strong>For component libraries</strong> (Material UI, Chakra), wrap in their ThemeProvider with values driven by your context. <strong>shadcn/ui</strong> uses CSS variables natively, so this pattern works directly with no integration.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q59">
-  <div class="qa__number">Question 59</div>
-  <h3 class="qa__question">What are the trade-offs between using Redux and the Context API?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[59] = r'''
 <p>Redux and Context API solve different problems despite both providing "share state across components." Choosing between them &mdash; and knowing when to use neither &mdash; is a common architectural decision.</p>
 
 <p><strong>The fundamental difference</strong>: Context is a <strong>delivery mechanism</strong> for values down the tree (avoiding prop drilling); Redux is a <strong>state management library</strong> with predictable update patterns, dev tools, and middleware. They aren&rsquo;t direct competitors &mdash; many apps use both.</p>
@@ -3884,15 +3424,9 @@ body { background: var(--bg); color: var(--text); }</code></pre>
 <p><strong>Decision flow</strong>: is the data from a server? → use TanStack Query (don&rsquo;t put server data in Redux/Context). Is it UI state local to one component? → useState. Is it shared across siblings? → lift state up. Does it cross many levels of the tree? → Context. Do you need action history, time-travel, complex middleware, or 50+ types of state changes? → Redux Toolkit.</p>
 
 <p>Most apps in 2026 land at: TanStack Query + useState + Context (theme, auth) + Zustand (occasional cross-tree state). Redux remains common in established codebases and apps with genuine action-history needs.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q60">
-  <div class="qa__number">Question 60</div>
-  <h3 class="qa__question">How do you handle accessibility in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[60] = r'''
 <p>Accessibility (a11y) in React isn&rsquo;t about React-specific APIs &mdash; it&rsquo;s about generating semantically correct HTML, providing keyboard equivalents to mouse interactions, and respecting assistive technology conventions. React makes a11y harder than vanilla HTML in some ways (custom components hide native behavior) and easier in others (consistent patterns).</p>
 
 <p><strong>The accessibility checklist for React apps:</strong></p>
@@ -3968,15 +3502,9 @@ body { background: var(--bg); color: var(--text); }</code></pre>
 <p><code>aria-live="polite"</code> announces after current speech finishes; <code>"assertive"</code> interrupts (use sparingly &mdash; for errors, alerts).</p>
 
 <p>A11y isn&rsquo;t optional &mdash; it&rsquo;s legally required in many jurisdictions (ADA, EU Accessibility Act 2025), and good a11y improves UX for everyone (clean keyboard nav, clear labels, logical tab order benefit power users too).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q61">
-  <div class="qa__number">Question 61</div>
-  <h3 class="qa__question">What are the advantages of using Immer with Redux?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[61] = r'''
 <p><strong>Immer</strong> is a library that lets you write state updates as if mutating, while producing immutable updates under the hood. Redux Toolkit (RTK) bakes Immer into <code>createSlice</code> by default, eliminating most of the spread-operator gymnastics of classic Redux.</p>
 
 <p><strong>Without Immer (classic Redux):</strong></p>
@@ -4042,15 +3570,9 @@ const next = produce(current, (draft) =&gt; {
 <p><strong>Performance</strong>: Immer is fast enough for almost all use cases. The proxy overhead is small compared to network/render costs. If you have a hot loop processing 100,000 items, profile &mdash; in extreme cases, hand-written immutable code can be faster, but this is rarely the bottleneck.</p>
 
 <p><strong>Beyond Redux</strong>: Immer is useful anywhere you need immutable updates &mdash; <code>useImmerReducer</code> for component-level reducers, Zustand has Immer middleware, even <code>setState</code> can use it via <code>useImmer</code>. <strong>For React 19 with the React Compiler</strong>, Immer&rsquo;s value persists &mdash; the compiler optimizes referential equality, but Immer makes the code itself cleaner.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q62">
-  <div class="qa__number">Question 62</div>
-  <h3 class="qa__question">How do you implement a responsive design in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[62] = r'''
 <p>Responsive design in React is done primarily through CSS &mdash; not JavaScript. The browser is far more efficient at responding to viewport changes than re-rendering React components on every resize. JavaScript-based responsiveness (<code>useMediaQuery</code> hooks) is a last resort for cases where layout truly depends on render-time logic.</p>
 
 <p><strong>The CSS-first toolkit:</strong></p>
@@ -4124,15 +3646,9 @@ function Nav() {
 <p><strong>Don&rsquo;t use <code>window.innerWidth</code> in render</strong> &mdash; it doesn&rsquo;t trigger re-renders, breaks SSR. Always go through <code>matchMedia</code> + listener.</p>
 
 <p>Modern responsive design is mostly CSS; React enters when you need to load different components or fundamentally restructure UI based on size. Default to CSS &mdash; it&rsquo;s faster and simpler.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q63">
-  <div class="qa__number">Question 63</div>
-  <h3 class="qa__question">What are React error boundaries, and how do you use them?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[63] = r'''
 <p>Error boundaries are React components that catch JavaScript errors in their child component tree, log them, and display a fallback UI instead of crashing the entire app. They&rsquo;re React&rsquo;s closest equivalent to a try/catch for the rendering lifecycle.</p>
 
 <p><strong>What they catch:</strong></p>
@@ -4228,15 +3744,9 @@ function Fallback({ error, resetErrorBoundary }) {
 <p><strong>Future</strong>: React team has discussed a hook-based error boundary API for years; as of React 19, class components are still required. The <code>react-error-boundary</code> library is the de-facto standard until that ships.</p>
 
 <p>Production app pattern: top-level boundary for catastrophic errors (logs + "refresh page" message), feature boundaries around major sections (logs + retry), and widget boundaries around third-party or risky components (silently degrade).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q64">
-  <div class="qa__number">Question 64</div>
-  <h3 class="qa__question">How do you optimize the bundle size of a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[64] = r'''
 <p>Bundle size affects time-to-interactive on first load &mdash; especially on mobile networks. The optimization goal: ship the smallest JS needed for the initial view, defer the rest. Modern bundlers (Vite/Rollup, esbuild, Turbopack) automate most of this; the developer&rsquo;s job is enabling the right patterns.</p>
 
 <p><strong>The bundle optimization toolkit:</strong></p>
@@ -4313,15 +3823,9 @@ ANALYZE=true npm run build</code></pre>
 <p><strong>Performance budget</strong>: agree on a maximum gzipped initial bundle size (e.g., 200KB). Add a CI check that fails when exceeded. <strong>Keep an eye on</strong>: page weight (HTML + JS + CSS), critical render path, and Lighthouse&rsquo;s "Total Blocking Time" metric &mdash; these matter more than raw KB.</p>
 
 <p><strong>Modern apps</strong> using Next.js with RSC can ship under 100KB initial JS for a dashboard &mdash; most logic runs server-side, client gets only the interactive bits.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q65">
-  <div class="qa__number">Question 65</div>
-  <h3 class="qa__question">Explain the concept of suspense for data fetching in React.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[65] = r'''
 <p>Suspense for data fetching is React&rsquo;s mechanism for declaratively waiting on async data &mdash; instead of every component managing its own loading state, a Suspense boundary catches the "I&rsquo;m not ready" signal from any descendant and renders a fallback. With React 19&rsquo;s <code>use()</code> hook, this pattern is finally first-class.</p>
 
 <p><strong>The React 19 <code>use()</code> hook:</strong></p>
@@ -4408,15 +3912,9 @@ function App() {
 <p><strong>Server Components alignment</strong>: in Next.js App Router, <code>async</code> server components <code>await</code> data and stream HTML to the client &mdash; no client-side <code>useEffect</code> or loading state. Suspense boundaries handle the streaming. The new mental model is: data fetches as close to the data as possible (server, when possible), client just renders.</p>
 
 <p>Suspense for data fetching turns React into a coordinator of async work rather than a coordinator of state machines &mdash; cleaner, more performant, but requires libraries or RSC to use it well.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q66">
-  <div class="qa__number">Question 66</div>
-  <h3 class="qa__question">How do you implement server-side rendering (SSR) with Redux?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[66] = r'''
 <p>SSR with Redux: the server creates a fresh store per request, dispatches initial actions to populate state, renders the React tree to HTML, and sends both the HTML and the serialized state to the client. The client hydrates the same tree with the same state, avoiding a content flash.</p>
 
 <p><strong>The five-step flow:</strong></p>
@@ -4506,15 +4004,9 @@ hydrateRoot(
 <p><strong>For Next.js (App Router) with Server Components</strong>: server data lives in the RSC layer, doesn&rsquo;t need Redux to bridge SSR. Redux remains useful for client-only state (UI-heavy local state, multi-step wizards). The split is cleaner: server data via RSC + TanStack Query; client UI state via Redux Toolkit or Zustand.</p>
 
 <p><strong>2026 reality</strong>: SSR + Redux is increasingly rare for new projects. The framework solutions (Next.js App Router, Remix loaders, TanStack Start) handle data flow without Redux entirely. Use Redux SSR primarily for legacy migration or apps with genuinely complex client-side action logs that benefit from server hydration.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q67">
-  <div class="qa__number">Question 67</div>
-  <h3 class="qa__question">What is React Concurrent Mode, and how does it improve user experience?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[67] = r'''
 <p><strong>React Concurrent Mode</strong> (now stable since React 18) is a set of features that make React rendering interruptible &mdash; allowing React to pause work, prioritize urgent updates, and avoid blocking the main thread. The key shift: rendering became <strong>concurrent</strong> rather than always synchronous.</p>
 
 <p><strong>The three concurrent features that shipped in React 18+:</strong></p>
@@ -4584,15 +4076,9 @@ function SearchableList({ items }) {
 <p><strong>React 19 builds on this</strong>: the <code>use()</code> hook for promises, Server Components, and the React Compiler all rely on concurrent foundations. Concurrent rendering isn&rsquo;t a feature you toggle &mdash; it&rsquo;s the runtime React now uses by default.</p>
 
 <p><strong>Practical advice</strong>: for most apps, you don&rsquo;t need to think about concurrent features explicitly. Reach for <code>useTransition</code> when you have a specific expensive render that lags input (search filters over big lists, expensive charts, heavy reorganization on data change). Profile first; don&rsquo;t add transitions speculatively.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q68">
-  <div class="qa__number">Question 68</div>
-  <h3 class="qa__question">How do you handle complex animations in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[68] = r'''
 <p>Complex animations in React span: layout-driven transitions (mount/unmount, reorder), gesture-driven (drag, swipe, pinch), choreographed sequences (staggered reveals), physics-based (springs, momentum), and timeline-based (scrubbable, scroll-driven). Different needs map to different libraries.</p>
 
 <p><strong>The library landscape (2026):</strong></p>
@@ -4685,15 +4171,9 @@ function Animated() {
 <p><strong>Cross-page transitions</strong>: the <strong>View Transitions API</strong> (Chrome 111+, increasing browser support) lets you animate between page states declaratively. Next.js and Remix have integrations; React Router v7 supports it natively.</p>
 
 <p><strong>For complex orchestration</strong> (animations driven by data changes, multi-step sequences, animations that branch): React Spring&rsquo;s imperative API is more flexible than Framer Motion&rsquo;s declarative props. Choose based on whether your animation logic fits in render or needs to be programmatic.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q69">
-  <div class="qa__number">Question 69</div>
-  <h3 class="qa__question">What are the differences between useMemo and useCallback?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[69] = r'''
 <p><code>useMemo</code> and <code>useCallback</code> both memoize values across renders, but for different things: <code>useMemo</code> caches the <strong>result</strong> of a function; <code>useCallback</code> caches the <strong>function itself</strong>. They&rsquo;re close cousins &mdash; <code>useCallback(fn, deps)</code> is equivalent to <code>useMemo(() =&gt; fn, deps)</code>.</p>
 
 <table>
@@ -4762,15 +4242,9 @@ function Parent() {
 <p><strong>React 19&rsquo;s React Compiler</strong> automatically applies <code>useMemo</code>/<code>useCallback</code> where beneficial &mdash; the compiler analyzes your code and inserts memoization at compile time. With the compiler enabled, manual <code>useMemo</code>/<code>useCallback</code> becomes mostly unnecessary. For new code targeting React 19+, write naturally; let the compiler optimize.</p>
 
 <p><strong>Mental model</strong>: <code>useMemo</code> is a cache for "the result of computing X with these inputs"; <code>useCallback</code> is a cache for "this exact function definition." Both exist to keep referential equality stable so memoization downstream isn&rsquo;t defeated.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q70">
-  <div class="qa__number">Question 70</div>
-  <h3 class="qa__question">How do you integrate React with a CMS (Content Management System)?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[70] = r'''
 <p>Integrating React with a CMS depends on the CMS type: <strong>headless</strong> (CMS provides content via API; React app renders) or <strong>traditional/coupled</strong> (CMS owns rendering; you embed React widgets). Modern stacks favor headless &mdash; React fully owns the UI; CMS is just a data source.</p>
 
 <p><strong>The headless CMS landscape (2026):</strong></p>
@@ -4858,15 +4332,9 @@ const components = {
 <p>Each content block is rendered by a React component &mdash; full control over structured content. Better than serving HTML strings (XSS risk, no React component features).</p>
 
 <p><strong>For e-commerce</strong>: Shopify, BigCommerce, Commerce.js follow the same pattern &mdash; product/cart APIs consumed by React. Many sites pair: <strong>Sanity for content + Shopify for commerce + Algolia for search</strong>, all behind a Next.js facade.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q71">
-  <div class="qa__number">Question 71</div>
-  <h3 class="qa__question">How do you handle state persistence in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[71] = r'''
 <p>State persistence keeps user data across page reloads, browser restarts, and sessions. React provides no built-in persistence &mdash; you choose the storage mechanism based on data sensitivity, size, and lifetime needs.</p>
 
 <p><strong>Storage options:</strong></p>
@@ -4970,15 +4438,9 @@ const useStore = create(
 <p><strong>For offline-first apps</strong>, IndexedDB via libraries like <strong>Dexie</strong> or <strong>RxDB</strong> handles much larger datasets than localStorage. <strong>For TanStack Query</strong>, the <code>persistQueryClient</code> plugin caches API responses to localStorage/IndexedDB &mdash; instant loads on repeat visits.</p>
 
 <p><strong>SSR / Next.js consideration</strong>: localStorage doesn&rsquo;t exist on the server. Persistent state must initialize on the client only, after hydration. Reading it during the initial server render or pre-hydration causes errors. Use <code>useEffect</code> to hydrate from storage post-mount.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q72">
-  <div class="qa__number">Question 72</div>
-  <h3 class="qa__question">Explain the concept of &quot;container&quot; and &quot;presentational&quot; components in React.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[72] = r'''
 <p>The "container vs presentational" pattern (popularized by Dan Abramov in 2015) splits components into: <strong>container</strong> components that fetch data, manage state, and orchestrate; and <strong>presentational</strong> components that just render UI from props. The pattern brought clarity to a confusing era &mdash; but with hooks, it&rsquo;s mostly obsolete in 2026.</p>
 
 <p><strong>The classic split:</strong></p>
@@ -5067,15 +4529,9 @@ function UserList({ onSelect }) {
 <p><strong>For React Server Components</strong> (Next.js App Router, future direction): the new natural split is <strong>server components</strong> (data fetching, no interactivity) + <strong>client components</strong> (interactivity, no data fetching). This subsumes container/presentational with an architectural enforcement &mdash; the boundary is the network rather than a developer convention.</p>
 
 <p><strong>Bottom line for interview answers</strong>: explain the pattern&rsquo;s history and rationale, then note that hooks made it less necessary, and modern apps achieve the same separation through custom hooks + pure UI components in design systems. Knowing the history shows depth; knowing it&rsquo;s outdated shows currency.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q73">
-  <div class="qa__number">Question 73</div>
-  <h3 class="qa__question">How do you manage WebSocket connections in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[73] = r'''
 <p>WebSocket connections in React need: connection lifecycle management (open, close, reconnect), message handling, sharing the connection across components, and graceful cleanup on unmount. A custom hook plus Context (or a state library) typically handles this; production apps reach for libraries like Socket.IO.</p>
 
 <p><strong>Custom hook for a single connection:</strong></p>
@@ -5186,15 +4642,9 @@ const useWS = () =&gt; {
 <p>The query refetches automatically; UI updates via the same code path as initial loads. Avoids hand-merging socket payloads into local state &mdash; one source of truth.</p>
 
 <p><strong>Authentication for WebSockets</strong>: pass token via query string (<code>ws://api/?token=...</code>) for the handshake, or use a cookie if same-origin. The standard WebSocket API doesn&rsquo;t support custom headers in the browser. Validate the token server-side on connect; close immediately if invalid.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q74">
-  <div class="qa__number">Question 74</div>
-  <h3 class="qa__question">What is the purpose of the forwardRef function in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[74] = r'''
 <p><code>forwardRef</code> lets a component pass a ref through to a child DOM element. Without it, a parent that wants direct access to a custom component&rsquo;s underlying DOM (to focus an input, scroll into view, measure) couldn&rsquo;t reach it &mdash; refs only attach to DOM elements and class components, not function components by default.</p>
 
 <p><strong>The classic pattern (React 18 and earlier):</strong></p>
@@ -5280,15 +4730,9 @@ const value = inputApi.current?.getValue();</code></pre>
 <p><strong>Library design implications</strong>: any reusable component that wraps a DOM element should forward refs &mdash; otherwise consumers can&rsquo;t do focus management, animations, or DOM measurements. shadcn/ui, Radix, Material UI, Mantine all forward refs on every primitive component.</p>
 
 <p><strong>Don&rsquo;t reach for refs first</strong>: most React UI is declarative state-driven. Use refs only when you genuinely need imperative DOM access. Common React mistakes include using refs to share state between components (use lifting or Context instead) and using refs to read DOM that&rsquo;s already in render output.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q75">
-  <div class="qa__number">Question 75</div>
-  <h3 class="qa__question">How do you implement a wizard form with multiple steps in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[75] = r'''
 <p>A multi-step form (wizard) splits a long form into discrete steps. Patterns: maintain accumulated form state across steps, validate per step before advancing, allow back navigation without losing data, persist state for refresh resilience, show progress indicator.</p>
 
 <p><strong>Production-ready architecture:</strong></p>
@@ -5422,15 +4866,9 @@ function CheckoutWizard() {
 <p><strong>For production wizards</strong>: <strong>React Hook Form</strong> + <strong>Zod</strong> handles per-step schema validation cleanly &mdash; one Zod schema per step, validates before advancing. Pair with Framer Motion for slide transitions between steps. <strong>For very dynamic wizards</strong> (steps depend on previous answers), use a state machine library like <strong>XState</strong> &mdash; explicit state transitions prevent reaching impossible states.</p>
 
 <p><strong>URL-driven wizards</strong>: store the current step in the URL (<code>/checkout/payment</code>). Users can refresh, share, or browser-back/forward through steps. Pair with React Router&rsquo;s nested routes for clean step components.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q76">
-  <div class="qa__number">Question 76</div>
-  <h3 class="qa__question">What are some strategies for debugging React applications?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[76] = r'''
 <p>Effective React debugging combines <strong>browser DevTools</strong>, <strong>React DevTools extension</strong>, source maps, and intentional logging strategies. The choice of tool depends on the bug class &mdash; render issues, state bugs, performance, async failures, or production errors all need different approaches.</p>
 
 <p><strong>Toolkit by problem class:</strong></p>
@@ -5453,15 +4891,9 @@ function CheckoutWizard() {
 <p><strong>The <code>debugger</code> statement</strong> beats <code>console.log</code> for stepping through code paths &mdash; with DevTools open, execution pauses; you can inspect locals, walk the call stack, and resume. <strong>Conditional breakpoints</strong> in Sources tab are even better &mdash; pause only when <code>userId === 42</code>, no code edits needed.</p>
 
 <p><strong>2026 production observability</strong>: <strong>Sentry</strong> (errors + performance), <strong>Datadog RUM</strong> (real user monitoring), <strong>LogRocket</strong> / <strong>FullStory</strong> (session replay) &mdash; together they catch the bugs you can&rsquo;t reproduce locally. Wire them in early, configure source map upload, and tag releases for diff visibility.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q77">
-  <div class="qa__number">Question 77</div>
-  <h3 class="qa__question">How do you handle state synchronization between multiple components?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[77] = r'''
 <p>Synchronizing state between multiple components requires choosing the right pattern based on <strong>distance</strong> (sibling, distant cousin, app-wide) and <strong>change frequency</strong>. Wrong choice creates either prop-drilling hell or unnecessary re-renders.</p>
 
 <p><strong>The synchronization toolkit, by scope:</strong></p>
@@ -5491,15 +4923,9 @@ channel.onmessage = (e) =&gt; {
 };</code></pre>
 
 <p><strong>Deriving instead of synchronizing</strong>: if A and B should always show the same thing, don&rsquo;t store the same value twice and try to keep them in sync. Store it once; both components compute their view from that source. The bug class &ldquo;A and B disagreed&rdquo; disappears entirely when there&rsquo;s only one source of truth.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q78">
-  <div class="qa__number">Question 78</div>
-  <h3 class="qa__question">Explain the concept of the React &quot;reducer pattern&quot;.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[78] = r'''
 <p>The <strong>reducer pattern</strong> centralizes state updates into a pure function: <code>(state, action) =&gt; newState</code>. React exposes it via <code>useReducer</code> (component-local) and via Redux/RTK (app-wide). The pattern&rsquo;s strength is <strong>explicit state transitions</strong> &mdash; every change has a name and a single place where it&rsquo;s implemented.</p>
 
 <p><strong>Three properties of a proper reducer:</strong></p>
@@ -5532,15 +4958,9 @@ channel.onmessage = (e) =&gt; {
 <p><strong>Reducer + middleware composition</strong>: middleware sits between dispatch and reducer, enabling logging, async actions (Thunk), complex orchestration (Saga), or auto-generated server cache (RTK Query). The reducer stays pure; effects live in middleware.</p>
 
 <p><strong>2026 reality</strong>: for new apps, default to <code>useReducer</code> for component-local complex state and <strong>Zustand</strong> for global state (lighter than Redux, similar pattern). Redux Toolkit remains the right choice for large apps with strong action-log requirements (audit trails, time-travel debugging, complex middleware ecosystems).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q79">
-  <div class="qa__number">Question 79</div>
-  <h3 class="qa__question">How do you manage environment variables in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[79] = r'''
 <p>Environment variables in React apps live in <strong><code>.env</code> files</strong>, are read at <strong>build time</strong> (not runtime), and require a <strong>build-tool prefix</strong> to reach client code. Misunderstanding any of these creates real bugs and security issues.</p>
 
 <p><strong>Build-time vs runtime &mdash; the critical distinction</strong>: when you reference <code>import.meta.env.VITE_API_URL</code> in code, the bundler replaces it with the literal string at build time. Production builds bake in production env values. Same code can&rsquo;t use different env values across environments without rebuilding.</p>
@@ -5572,15 +4992,9 @@ channel.onmessage = (e) =&gt; {
 <p><strong>Runtime-mutable env</strong>: if you genuinely need different values per environment without rebuilding, ship a <code>/config.json</code> served by the host that the app fetches at startup. Or use a feature-flag service (LaunchDarkly, Statsig). Don&rsquo;t hack <code>window.__ENV</code> &mdash; it&rsquo;s a maintenance trap.</p>
 
 <p><strong>TypeScript autocomplete</strong>: declare <code>ImportMetaEnv</code> in <code>vite-env.d.ts</code> with your variable types &mdash; misspellings and missing variables become compile errors. Production hosts (Vercel, Netlify) inject env values at build time from their dashboards; never commit production secrets to git, even in <code>.env.production</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q80">
-  <div class="qa__number">Question 80</div>
-  <h3 class="qa__question">How do you implement error logging in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[80] = r'''
 <p>Production error logging captures unhandled errors, sends them to a monitoring service with enough context to debug, and surfaces patterns through dashboards. <strong>Sentry</strong> dominates 2026; <strong>Datadog RUM</strong>, <strong>Bugsnag</strong>, and <strong>Rollbar</strong> are similar alternatives.</p>
 
 <p><strong>What to capture for each error</strong>:</p>
@@ -5632,15 +5046,9 @@ const App = Sentry.withErrorBoundary(MyApp, {
 <p><strong>Don&rsquo;t log everything</strong>: noisy errors (ResizeObserver loops, browser extension errors, network errors during navigation) drown out real bugs. Filter aggressively in <code>beforeSend</code>. Tag releases so you can compare error rates pre/post deploy. Set up alerts for new error types and rate spikes &mdash; the goal is "fewer surprises in production," not "more data."</p>
 
 <p><strong>PII discipline</strong>: never log passwords, tokens, full credit card numbers. Sentry&rsquo;s data scrubbing helps, but defense-in-depth means not putting secrets into <code>console.log</code> calls in the first place. Many compliance frameworks (HIPAA, PCI) require this.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q81">
-  <div class="qa__number">Question 81</div>
-  <h3 class="qa__question">How do you handle optimistic updates in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[81] = r'''
 <p>Optimistic updates show the result of an action <strong>before</strong> the server confirms it &mdash; UI updates instantly, request fires in background, server response either confirms or rolls back. Critical for perceived performance: a "like" button that waits 200ms feels broken; one that updates instantly feels native.</p>
 
 <p><strong>The pattern, in three steps:</strong></p>
@@ -5704,15 +5112,9 @@ function LikeButton({ postId, initialLikes }) {
 </table>
 
 <p><strong>The hard part is rollback UX</strong>: if a like reverts after 2 seconds, users notice. Best to be conservative &mdash; show a toast explaining the failure, offer retry. For genuinely high-stakes operations (payments, deletions of important data), don&rsquo;t use optimistic updates &mdash; show a spinner and confirm on success. <strong>Reconciliation order matters</strong>: with concurrent likes from multiple tabs, the local optimistic count can diverge from server state; the <code>onSettled</code> refetch resolves this.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q82">
-  <div class="qa__number">Question 82</div>
-  <h3 class="qa__question">Explain the concept of &quot;memoization&quot; in React.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[82] = r'''
 <p><strong>Memoization</strong> in React caches the result of a computation so it doesn&rsquo;t re-run when inputs haven&rsquo;t changed. The three primary tools: <strong><code>useMemo</code></strong> (cache values), <strong><code>useCallback</code></strong> (cache functions), and <strong><code>React.memo</code></strong> (skip re-render of a component). Each compares dependencies/props by reference equality.</p>
 
 <p><strong>The three tools, side by side:</strong></p>
@@ -5747,15 +5149,9 @@ const ExpensiveList = React.memo(({ items, config, onSelect }) =&gt; {
 </ul>
 
 <p><strong>2026 reality</strong>: <strong>React Compiler</strong> (production-ready in React 19) auto-applies <code>useMemo</code>/<code>useCallback</code>/<code>memo</code> where beneficial. For new code with the compiler enabled, manual memoization is rarely needed &mdash; write naturally. For older codebases or compiler edge cases, the manual tools above remain essential. <strong>Profile before memoizing</strong>: React DevTools Profiler shows actual render times. Optimize what&rsquo;s actually slow, not what looks expensive.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q83">
-  <div class="qa__number">Question 83</div>
-  <h3 class="qa__question">How do you use the React Refs for accessing the DOM directly?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[83] = r'''
 <p><strong>Refs</strong> give you direct access to a DOM node or any mutable value that doesn&rsquo;t belong in render output. They escape React&rsquo;s declarative model intentionally &mdash; for the cases where it&rsquo;s the right tool: focus management, scrolling, measuring, integrating imperative third-party libraries, and persisting values across renders without triggering re-renders.</p>
 
 <p><strong>The two ref shapes:</strong></p>
@@ -5815,15 +5211,9 @@ function MeasureBox() {
 <p><strong>Common imperative needs</strong>: third-party libraries that aren&rsquo;t React-aware (chart libs that need DOM, video players, autocomplete plugins, animation libs). Wrap them in a component that uses ref + <code>useEffect</code> to instantiate the library, and cleanup to destroy it.</p>
 
 <p><strong>React 19 changes</strong>: <code>forwardRef</code> is no longer required; <code>ref</code> is now a regular prop. <code>useImperativeHandle</code> still exists for exposing curated APIs from a child to parent. <strong>Don&rsquo;t use refs to read state during render</strong> &mdash; that&rsquo;s a render bug waiting to happen. Refs are for side-effect interactions, not for sharing state across components (use state, context, or external store for that).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q84">
-  <div class="qa__number">Question 84</div>
-  <h3 class="qa__question">What are the benefits of using the React.memo HOC?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[84] = r'''
 <p><strong><code>React.memo</code></strong> is a higher-order component that wraps a function component and skips re-rendering when its props are shallow-equal to the previous render. Used correctly, it eliminates wasted renders down expensive subtrees; used carelessly, it adds bookkeeping overhead with no benefit.</p>
 
 <p><strong>How shallow comparison works</strong>: React compares each prop to its previous value with <code>Object.is</code>. Primitives (strings, numbers, booleans) compare by value &mdash; <code>"hello" === "hello"</code> is true. Objects/arrays/functions compare by reference &mdash; even <code>{ a: 1 } !== { a: 1 }</code>.</p>
@@ -5864,15 +5254,9 @@ return &lt;ExpensiveList items={items} config={filterConfig} /&gt;;</code></pre>
 <p>Only reach for this when you have specific knowledge that shallow equality is wrong for your component (e.g., comparing only the id field of a deeply-nested object). Most cases should pass shallow equality and structure props for stability.</p>
 
 <p><strong>2026 with React Compiler</strong>: the compiler auto-applies <code>memo</code> equivalents where beneficial &mdash; manual <code>React.memo</code> often becomes unnecessary in compiler-enabled projects. For older code or compiler edge cases, it remains the right tool. <strong>Profile first</strong>: React DevTools Profiler&rsquo;s &ldquo;Highlight updates when components render&rdquo; setting shows which components are re-rendering. Optimize what&rsquo;s actually re-rendering wastefully &mdash; don&rsquo;t add <code>React.memo</code> to everything &ldquo;for safety.&rdquo;</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q85">
-  <div class="qa__number">Question 85</div>
-  <h3 class="qa__question">How do you handle data fetching in a server-side rendered React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[85] = r'''
 <p>Data fetching in SSR has two phases: <strong>fetch on server</strong> (during HTML generation) and <strong>hydrate on client</strong> (continue interaction). The challenge is avoiding double-fetch (server fetched, client refetches) while keeping data fresh. <strong>Next.js App Router</strong> with React Server Components is the dominant 2026 solution.</p>
 
 <p><strong>The four primary data-fetching strategies in Next.js (2026):</strong></p>
@@ -5924,15 +5308,9 @@ export default async function Page() {
 <p><strong>Streaming with Suspense</strong>: server starts sending HTML before all data resolves; sections of the page reveal as their data becomes ready. Eliminates the all-or-nothing wait that classic SSR had.</p>
 
 <p><strong>Pitfalls to avoid</strong>: don&rsquo;t fetch sensitive data in pre-rendered HTML (it ships to all users); don&rsquo;t use Server Components for data that changes per-keystroke (that&rsquo;s client work); don&rsquo;t block initial render on slow third-party APIs &mdash; use <code>&lt;Suspense&gt;</code> boundaries to isolate them. <strong>Cache strategy</strong> matters: <code>force-cache</code> for build-time-stable data, <code>no-store</code> for real-time, <code>revalidate: N</code> for ISR. The right policy per fetch is the difference between fast and slow apps.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q86">
-  <div class="qa__number">Question 86</div>
-  <h3 class="qa__question">How do you implement a search functionality in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[86] = r'''
 <p>Search functionality has three implementations of increasing power: <strong>client-side filter</strong> (small datasets), <strong>debounced API search</strong> (medium datasets), and <strong>dedicated search service</strong> (large datasets, full-text, fuzzy matching, relevance ranking).</p>
 
 <p><strong>Decision matrix:</strong></p>
@@ -6012,15 +5390,9 @@ function App() {
 <p>Algolia gives sub-50ms typo-tolerant search, faceting, geo, and analytics out of the box. Index your data; Algolia handles ranking. <strong>Self-hostable alternatives</strong>: Meilisearch (modern, fast, simple), Typesense (similar feature set), Elasticsearch (powerful but operational complexity).</p>
 
 <p><strong>UX details that matter</strong>: keep input controlled and instant; show fetching state distinct from empty results; preserve previous results during refetch (don&rsquo;t flash); URL-sync the query for shareable searches; show "no results for X" with suggestions; handle null/empty input states; throttle requests; cancel stale requests (TanStack Query auto-handles this via query keys).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q87">
-  <div class="qa__number">Question 87</div>
-  <h3 class="qa__question">What are React portals, and how do you use them?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[87] = r'''
 <p><strong>Portals</strong> render a child into a DOM node outside the parent component&rsquo;s DOM hierarchy. The component still belongs to the React tree (state, context, events bubble up); only the DOM placement changes. Essential for modals, tooltips, popovers, toasts, and dropdowns that need to escape parent <code>overflow</code>, <code>z-index</code>, or <code>transform</code> contexts.</p>
 
 <p><strong>The mechanism</strong>:</p>
@@ -6078,15 +5450,9 @@ function ProductCard() {
 </table>
 
 <p><strong>Don&rsquo;t roll your own modal in production</strong>: focus trapping, return-focus on close, ARIA roles, scroll locking, escape handling, and click-outside detection are subtle. Libraries get this right; hand-rolled modals usually don&rsquo;t. The portal is just one piece of a proper modal &mdash; the rest is significant a11y plumbing.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q88">
-  <div class="qa__number">Question 88</div>
-  <h3 class="qa__question">How do you handle state and lifecycle methods with hooks?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[88] = r'''
 <p>Hooks unify what class components did across <code>state</code>, <code>componentDidMount</code>, <code>componentDidUpdate</code>, and <code>componentWillUnmount</code>. The mental model shifts from "lifecycle phases" to "synchronizing with external systems via effects."</p>
 
 <p><strong>The lifecycle equivalents:</strong></p>
@@ -6138,15 +5504,9 @@ function Chat({ userId }) {
 </ul>
 
 <p><strong>2026 reality</strong>: hooks are the primary API for React; class components are largely legacy. New code should be functional + hooks. The only place classes remain necessary is error boundaries (no hook equivalent yet, though discussed for future versions). Even legacy codebases mostly migrate gradually &mdash; you don&rsquo;t need to rewrite everything at once; functional and class components interoperate freely.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q89">
-  <div class="qa__number">Question 89</div>
-  <h3 class="qa__question">Explain the concept of context-based state management.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[89] = r'''
 <p>Context-based state management uses React&rsquo;s built-in <strong>Context API</strong> + a state primitive (<code>useState</code> or <code>useReducer</code>) to share state across many components without prop-drilling. It&rsquo;s the simplest path to global state &mdash; no extra library &mdash; but has performance characteristics that make it suitable only for low-frequency updates.</p>
 
 <p><strong>The pattern (Context + useReducer):</strong></p>
@@ -6206,15 +5566,9 @@ const count = useStore(state =&gt; state.count);
 // Equivalent Context behavior would require splitting state into many contexts</code></pre>
 
 <p><strong>2026 default for new apps</strong>: <strong>Zustand</strong> for client state, <strong>TanStack Query</strong> for server state, <strong>Context</strong> for theme/auth/locale (low-frequency). Redux remains common in large existing apps. Don&rsquo;t over-engineer &mdash; many apps run perfectly with just <code>useState</code> + Context for the bits that genuinely need to be global.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q90">
-  <div class="qa__number">Question 90</div>
-  <h3 class="qa__question">How do you use TypeScript to improve the development experience in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[90] = r'''
 <p>TypeScript transforms React DX from "hope I got the props right" to "compiler tells me what&rsquo;s wrong before I run the code." It catches missing props, wrong types, undefined accesses, and renames refactor-safely. In 2026, TypeScript is the default for production React codebases.</p>
 
 <p><strong>The five biggest wins:</strong></p>
@@ -6298,15 +5652,9 @@ type User = z.infer&lt;typeof userSchema&gt;;
 <p>One source of truth &mdash; runtime validation + compile-time types.</p>
 
 <p><strong>2026 TypeScript practices</strong>: prefer <code>type</code> over <code>interface</code> (more flexible composability); avoid <code>any</code> &mdash; use <code>unknown</code> for genuinely-unknown values; enable <code>strict</code> mode (<code>strictNullChecks</code> alone eliminates most null-related crashes); use <code>satisfies</code> for type-checked literals without losing inference. <strong>For tooling</strong>: TypeScript&rsquo;s LSP integration with VSCode/Cursor gives autocomplete, inline error feedback, and hover docs &mdash; the IDE experience is dramatically better than plain JS.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q91">
-  <div class="qa__number">Question 91</div>
-  <h3 class="qa__question">How do you implement internationalization (i18n) in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[91] = r'''
 <p>Internationalization (i18n) makes a React app render correctly across locales: translated strings, locale-appropriate number/date/currency formats, RTL layouts, pluralization rules, and date math. The dominant 2026 library is <strong>react-i18next</strong>; <strong>FormatJS / react-intl</strong> and <strong>Lingui</strong> are alternatives.</p>
 
 <p><strong>What i18n encompasses (it&rsquo;s more than translations):</strong></p>
@@ -6395,15 +5743,9 @@ new Intl.RelativeTimeFormat("en", { numeric: "auto" }).format(-1, "day");
 &lt;html lang={i18n.language} dir={i18n.dir()}&gt;</code></pre>
 
 <p><strong>2026 best practices</strong>: keep translation keys descriptive (<code>"checkout.payment.cardNumberLabel"</code>, not <code>"label1"</code>); collaborate with translators via TMS like Lokalise, Crowdin, Phrase; lazy-load translation namespaces by route to keep initial bundle small; use <code>Intl</code> for everything formatting-related; test with pseudo-locales (<code>en-XA</code>) to catch hardcoded strings. <strong>Next.js 15+</strong> has first-class i18n via App Router segments per locale.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q92">
-  <div class="qa__number">Question 92</div>
-  <h3 class="qa__question">How do you use the new React Concurrent features?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[92] = r'''
 <p>React&rsquo;s <strong>concurrent features</strong> (React 18+) let React interrupt, prioritize, and batch renders intelligently &mdash; keeping the UI responsive even during expensive updates. The key APIs are <code>useTransition</code>, <code>useDeferredValue</code>, <code>Suspense</code>, and the <code>use()</code> hook (React 19+).</p>
 
 <p><strong>The five primary concurrent APIs:</strong></p>
@@ -6484,15 +5826,9 @@ function App() {
 <p><strong>Streaming SSR with Suspense</strong>: server starts sending HTML before all data resolves; sections of the page reveal progressively as their data becomes ready. This is what powers Next.js App Router&rsquo;s streaming model.</p>
 
 <p><strong>When NOT to reach for these features</strong>: small lists, simple components, anything where rendering is already fast. Concurrent features add cognitive overhead; only use them where they solve a real responsiveness problem. Profile first &mdash; the React DevTools Profiler shows actual render times.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q93">
-  <div class="qa__number">Question 93</div>
-  <h3 class="qa__question">What are the differences between controlled and uncontrolled forms in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[93] = r'''
 <p>Controlled forms have React state hold the input value; uncontrolled forms let the DOM hold it and read on submit. Both are valid; the choice depends on whether you need to <strong>react to every keystroke</strong> or just <strong>collect the final values</strong>.</p>
 
 <p><strong>The decision framework:</strong></p>
@@ -6577,15 +5913,9 @@ function App() {
 <p><strong>React 19 form actions</strong> (<code>useActionState</code>) shift more work to the form action receiving FormData &mdash; aligning with Server Actions in Next.js. Components stay simple; logic moves to async functions that take FormData and return state.</p>
 
 <p><strong>2026 recommendation</strong>: small forms with reactive UI (live validation, dependent fields) &rarr; controlled. Medium-to-large production forms &rarr; React Hook Form. Forms tied to server actions &rarr; React 19&rsquo;s <code>useActionState</code> with uncontrolled inputs and FormData. Avoid raw uncontrolled refs unless you have a specific reason &mdash; they&rsquo;re fine but less ergonomic than the alternatives.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q94">
-  <div class="qa__number">Question 94</div>
-  <h3 class="qa__question">How do you implement a protected route in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[94] = r'''
 <p>Protected routes restrict access to authenticated users (or users with specific roles). The pattern wraps protected pages with a guard component that redirects unauthenticated users to login &mdash; preserving their intended destination so they return there after sign-in.</p>
 
 <p><strong>The core pattern (React Router v6+)</strong>:</p>
@@ -6663,15 +5993,9 @@ const dashboardLoader = async () =&gt; {
 <p><strong>Server-side checks are mandatory</strong>: client-side route guards are a UX optimization, NOT security. Anyone can disable JS, modify the bundle, or call your API directly. Every protected API endpoint must verify auth on the server &mdash; the route guard just prevents authenticated users from seeing a broken UI.</p>
 
 <p><strong>For Next.js apps</strong>, middleware (<code>middleware.ts</code>) handles route protection at the edge before any React code runs &mdash; faster and more secure than client-side guards. Modern auth libraries (Clerk, NextAuth.js, Supabase Auth) provide drop-in middleware integrations.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q95">
-  <div class="qa__number">Question 95</div>
-  <h3 class="qa__question">How do you handle image lazy loading in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[95] = r'''
 <p>Image lazy loading defers loading off-screen images until they&rsquo;re about to enter the viewport. Cuts initial page weight, accelerates first paint, and saves bandwidth for content users may never reach. The 2026 default: <strong>native browser lazy loading</strong> via <code>loading="lazy"</code>; libraries fill in for advanced needs.</p>
 
 <p><strong>Native lazy loading &mdash; one attribute</strong>:</p>
@@ -6738,15 +6062,9 @@ const dashboardLoader = async () =&gt; {
 <p>Auto-generates responsive srcsets, optimizes format (WebP/AVIF), serves from CDN, lazy loads, prevents layout shift. <strong>For non-Next apps</strong>: <strong>react-lazy-load-image-component</strong>, <strong>Cloudinary&rsquo;s react SDK</strong>, or build with native + IntersectionObserver for custom needs.</p>
 
 <p><strong>The whole-page perspective</strong>: lazy loading is one of several image optimizations. The full stack is responsive sizes (<code>srcset</code>), modern formats (AVIF/WebP), lazy loading, CDN delivery, dimensions to prevent CLS, and image-CDN auto-optimization. Done well, image weight drops 60-80% with no perceptible quality loss.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q96">
-  <div class="qa__number">Question 96</div>
-  <h3 class="qa__question">Explain the concept of React &quot;hooks rules&quot;.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[96] = r'''
 <p>The <strong>Rules of Hooks</strong> are two non-negotiable constraints that React requires. Violating them causes subtle, hard-to-debug bugs &mdash; or simply makes hooks not work. They&rsquo;re enforced by ESLint via <code>eslint-plugin-react-hooks</code>.</p>
 
 <p><strong>The two rules:</strong></p>
@@ -6812,15 +6130,9 @@ function Profile({ userId }) {
 <p><strong>The lint rule is your friend</strong> &mdash; configure <code>eslint-plugin-react-hooks</code> with errors enabled (not warnings). Catching violations at lint time saves debugging at runtime. The <code>react-hooks/exhaustive-deps</code> rule (also from this plugin) catches missing dependencies in effect arrays &mdash; another high-value bug class.</p>
 
 <p><strong>Why these rules exist (the deeper reason)</strong>: hooks were designed to fit inside React&rsquo;s render cycle. The constraints aren&rsquo;t arbitrary &mdash; they&rsquo;re what makes hooks possible without per-component instance state or class boilerplate. Conditional hooks would require either tagging each hook with an identifier (verbose, error-prone) or React tracking hooks by call site (impossible in JS without compiler magic). The rules trade a small constraint for a clean API.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q97">
-  <div class="qa__number">Question 97</div>
-  <h3 class="qa__question">How do you handle state management in a React Native application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[97] = r'''
 <p>State management in React Native uses the same React fundamentals as web (hooks, Context, external libraries) plus mobile-specific concerns: persistence across app restarts, AsyncStorage, sync between native modules, and offline-first patterns. <strong>Zustand</strong>, <strong>Redux Toolkit</strong>, and <strong>Jotai</strong> all work identically; <strong>TanStack Query</strong> handles server state.</p>
 
 <p><strong>The state landscape in RN (2026):</strong></p>
@@ -6897,15 +6209,9 @@ persistQueryClient({ queryClient, persister });</code></pre>
 </table>
 
 <p><strong>Don&rsquo;t put navigation state in your global store</strong>: React Navigation has its own state machine. Mixing creates desync bugs. Keep them separate; pass relevant data via route params or sync explicit fields. <strong>For real-time data</strong> (chat, presence), pair Zustand/Redux with WebSocket via custom hook + <code>useEffect</code>; or use libraries like Liveblocks or Convex with first-class RN support.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q98">
-  <div class="qa__number">Question 98</div>
-  <h3 class="qa__question">How do you use the useReducer hook for complex state logic?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[98] = r'''
 <p><code>useReducer</code> shines for <strong>complex state logic</strong>: many transitions, derived state, validation rules, undo/redo, or state shape that must maintain invariants. Where <code>useState</code> grows ugly fast, <code>useReducer</code> stays clean &mdash; all transitions live in one place, the reducer.</p>
 
 <p><strong>When to graduate from useState to useReducer:</strong></p>
@@ -7002,15 +6308,9 @@ function CheckoutWizard() {
 // init() runs once, returns initial state — useful when computing from props or storage</code></pre>
 
 <p><strong>For app-wide complex state</strong>: lift this reducer into Context (Q89), or graduate to Redux Toolkit / Zustand. <code>useReducer</code> stays component-local; Redux Toolkit is essentially the same pattern app-wide with better tooling, middleware, and selectors.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q99">
-  <div class="qa__number">Question 99</div>
-  <h3 class="qa__question">How do you handle nested routes in React Router?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[99] = r'''
 <p>Nested routes let you compose UI by nesting routes inside a parent layout. The parent renders shared chrome (sidebar, header, breadcrumbs); the matching child fills in the content area via <code>&lt;Outlet /&gt;</code>. URL structure mirrors UI hierarchy.</p>
 
 <p><strong>The pattern with React Router v6+</strong>:</p>
@@ -7110,15 +6410,9 @@ createBrowserRouter([
 <p>Each loader runs in parallel where possible &mdash; React Router waits for all of them, then renders the full nested tree. <strong>Next.js App Router</strong> goes even further: nested routes are file-system-based (each <code>page.tsx</code> in nested folders) with native streaming, server components, and per-segment loaders/error boundaries.</p>
 
 <p><strong>Pitfalls</strong>: forgetting <code>&lt;Outlet /&gt;</code> in the parent (children never appear); forgetting the <code>index</code> route (parent path renders empty); using absolute paths inside nested routes (use relative paths so they compose).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q100">
-  <div class="qa__number">Question 100</div>
-  <h3 class="qa__question">What are the best practices for writing scalable and maintainable React code?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[100] = r'''
 <p>Scalable, maintainable React code is built on consistent patterns: clear file organization, type safety, separation of concerns, well-bounded components, deliberate state management, automated quality gates, and strong testing culture. The principles below scale a 10-component prototype into a 1000-component product.</p>
 
 <p><strong>1. File organization &mdash; feature-based, not type-based:</strong></p>
@@ -7195,27 +6489,4 @@ Pure utilities      → no React; testable in isolation</code></pre>
 <p><strong>7. Documentation that doesn&rsquo;t rot</strong>: TypeScript types are documentation; JSDoc on public APIs; Storybook for components; README per feature with the &ldquo;why&rdquo;; CHANGELOG for releases.</p>
 
 <p><strong>8. The bigger picture</strong>: scalability isn&rsquo;t about premature abstraction. Most "clever" patterns (HOCs everywhere, complex generic hooks, framework-on-top-of-React) hurt more than they help. The teams that ship reliably for years use boring code: TypeScript, hooks, Zustand/TanStack Query, RTL tests, Prettier. <strong>Boring is good</strong>; novelty has costs. The goal is code your replacement can extend in a year &mdash; not code that demonstrates how clever you are.</p>
-
-    
-  </div>
-</article>
-
-    <nav class="chapter-nav" aria-label="Chapter navigation">
-      <a class="chapter-nav__prev" href="reactjs-coding.html">
-      <span class="chapter-nav__dir">← Previous</span>
-      <span class="chapter-nav__title">ReactJS — Coding</span>
-    </a>
-      <a class="chapter-nav__next" href="reactjs-scenario.html">
-      <span class="chapter-nav__dir">Next →</span>
-      <span class="chapter-nav__title">ReactJS — Scenario Based</span>
-    </a>
-    </nav>
-
-  </section>
-
-</main>
-</div>
-
-<script src="../assets/script.js"></script>
-</body>
-</html>
+'''
