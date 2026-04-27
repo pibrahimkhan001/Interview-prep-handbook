@@ -33,7 +33,11 @@ Frontend chapters round out the browser-facing half of full-stack interviews. HT
 ### Phase 5: Databases (Part 5)
 MySQL and MongoDB parallel each other nicely — many questions are about analogous concepts in different DB families.
 
-- MYSQL Basic, Coding, Advanced, Scenario Based (400 Q) &mdash; **MySQL Basic ← next**
+- MYSQL (400 Q):
+  - [x] **MySQL Basic (100 Q)** &mdash; 2026-04-27
+  - [ ] **MySQL Coding (100 Q)** ← next
+  - [ ] MySQL Advanced (100 Q)
+  - [ ] MySQL Scenario Based (100 Q)
 - MongoDB Basic, Coding, Advanced, Scenario Based (400 Q)
 
 **Total:** 800 answers.

@@ -1,118 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MYSQL — Basic · Interview Prep Mastery</title>
-<meta name="description" content="100 basic interview questions on MYSQL, with detailed explanations and examples.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="../assets/styles.css">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%239a6b1d'/%3E%3Ctext x='50' y='68' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold' font-size='48'%3EIP%3C/text%3E%3C/svg%3E">
-</head>
-<body>
-<header class="site-header">
-  <div class="site-header__inner">
-    <button class="menu-toggle" aria-label="Open menu" type="button">☰ Menu</button>
-    <a class="brand" href="../index.html">
-      <span class="brand__mark">IP</span>
-      <span class="brand__text">
-        <span class="brand__title">Interview Prep Mastery</span>
-        <span class="brand__subtitle">Interactive learning guide</span>
-      </span>
-    </a>
-    <nav class="header-nav">
-      <a href="../index.html#roadmap">Roadmap</a>
-      <a href="../index.html#chapters">All chapters</a>
-      <button class="theme-toggle" type="button" aria-label="Toggle color scheme">☾ Dark</button>
-    </nav>
-  </div>
-</header>
-<div class="layout">
-<aside class="sidebar" aria-label="Site navigation">
-  <div class="sidebar__header">Chapter Navigator</div>
-  
-        <div class="nav-part">
-          <div class="nav-part__label">Part 1</div>
-          <div class="nav-part__title">Core Programming Languages</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">JavaScript</li><li><a class="" href="../chapters/javascript-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/javascript-tricky.html"><span class="nav-item__title">Tricky</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-coding.html"><span class="nav-item__title">Advanced Coding</span><span class="nav-item__meta">100 questions · 100 min read</span></a></li><li><a class="" href="../chapters/javascript-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-scenario.html"><span class="nav-item__title">Advanced Scenario Based</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Python</li><li><a class="" href="../chapters/python-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/python-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 2</div>
-          <div class="nav-part__title">Web Fundamentals</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">HTML</li><li><a class="" href="../chapters/html-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/html-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/html-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CSS</li><li><a class="" href="../chapters/css-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">102 questions · 60 min read</span></a></li><li><a class="" href="../chapters/css-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/css-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">101 questions · 90 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 3</div>
-          <div class="nav-part__title">Backend Technologies</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Node.Js</li><li><a class="" href="../chapters/nodejs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/nodejs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ExpressJS</li><li><a class="" href="../chapters/expressjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/expressjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/expressjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">API</li><li><a class="" href="../chapters/api-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/api-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 4</div>
-          <div class="nav-part__title">Frontend Frameworks</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ReactJS</li><li><a class="" href="../chapters/reactjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">101 questions · 60 min read</span></a></li><li><a class="" href="../chapters/reactjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 5</div>
-          <div class="nav-part__title">Databases</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MYSQL</li><li><a class="active" href="../chapters/mysql-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mysql-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MongoDB</li><li><a class="" href="../chapters/mongodb-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mongodb-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 6</div>
-          <div class="nav-part__title">System Design &amp; DevOps</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">System Design MERN Stack</li><li><a class="" href="../chapters/system-design-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Infrastructure MERN Stack</li><li><a class="" href="../chapters/infrastructure-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/infrastructure-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CI/CD Pipeline</li><li><a class="" href="../chapters/cicd-pipeline-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-</aside>
-<main class="main" id="main">
+"""MySQL Basic — Q1-100 detailed answers.
 
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="../index.html">Home</a>
-    <span class="breadcrumb__sep">›</span>
-    <a href="../index.html#part-5">Databases</a>
-    <span class="breadcrumb__sep">›</span>
-    <span>MYSQL — Basic</span>
-  </nav>
+Style: Basic-level conventions. 80-150 word concise prose explanations.
+Simple SQL examples. Comparison tables for related concepts.
+Beginner-friendly tone. ~1,500-2,500 chars per answer.
+"""
 
-  <header class="chapter-header">
-    <div class="chapter-label">MYSQL · Basic</div>
-    <h1 class="chapter-title">Basic MYSQL Interview Questions</h1>
-    <p class="chapter-lede">Foundational knowledge — definitions, syntax, and core mechanics every beginner should know.</p>
-    <div class="chapter-meta">
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Questions</span><span class="chapter-meta__value">100</span></div>
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Level</span><span class="chapter-meta__value">Basic</span></div>
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Estimated reading</span><span class="chapter-meta__value">60 min read</span></div>
-    </div>
-    
-  </header>
+ANSWERS: dict[int, str] = {}
 
-  <section class="prose">
 
-    <div class="toc" id="toc">
-      <div class="toc__title">All questions in this chapter</div>
-      <ul class="toc__list">
-        <li><a href="#q1"><span class="toc__num">1.</span>What is MySQL?</a></li><li><a href="#q2"><span class="toc__num">2.</span>How do you install MySQL on your system?</a></li><li><a href="#q3"><span class="toc__num">3.</span>How do you start and stop the MySQL service?</a></li><li><a href="#q4"><span class="toc__num">4.</span>What is the default port for MySQL?</a></li><li><a href="#q5"><span class="toc__num">5.</span>How do you create a new database in MySQL?</a></li><li><a href="#q6"><span class="toc__num">6.</span>How do you delete a database in MySQL?</a></li><li><a href="#q7"><span class="toc__num">7.</span>How do you create a new table in MySQL?</a></li><li><a href="#q8"><span class="toc__num">8.</span>How do you delete a table in MySQL?</a></li><li><a href="#q9"><span class="toc__num">9.</span>What are the different data types available in MySQL?</a></li><li><a href="#q10"><span class="toc__num">10.</span>How do you insert data into a table in MySQL?</a></li><li><a href="#q11"><span class="toc__num">11.</span>How do you update data in a MySQL table?</a></li><li><a href="#q12"><span class="toc__num">12.</span>How do you delete data from a MySQL table?</a></li><li><a href="#q13"><span class="toc__num">13.</span>How do you retrieve data from a MySQL table?</a></li><li><a href="#q14"><span class="toc__num">14.</span>What is a primary key in MySQL?</a></li><li><a href="#q15"><span class="toc__num">15.</span>How do you set a primary key in a MySQL table?</a></li><li><a href="#q16"><span class="toc__num">16.</span>What is a foreign key in MySQL?</a></li><li><a href="#q17"><span class="toc__num">17.</span>How do you create a foreign key in MySQL?</a></li><li><a href="#q18"><span class="toc__num">18.</span>What are indexes in MySQL, and why are they used?</a></li><li><a href="#q19"><span class="toc__num">19.</span>How do you create an index in MySQL?</a></li><li><a href="#q20"><span class="toc__num">20.</span>How do you delete an index in MySQL?</a></li><li><a href="#q21"><span class="toc__num">21.</span>What is a unique key in MySQL?</a></li><li><a href="#q22"><span class="toc__num">22.</span>How do you create a unique key in MySQL?</a></li><li><a href="#q23"><span class="toc__num">23.</span>How do you join two tables in MySQL?</a></li><li><a href="#q24"><span class="toc__num">24.</span>What are the different types of joins in MySQL?</a></li><li><a href="#q25"><span class="toc__num">25.</span>How do you perform an inner join in MySQL?</a></li><li><a href="#q26"><span class="toc__num">26.</span>How do you perform a left join in MySQL?</a></li><li><a href="#q27"><span class="toc__num">27.</span>How do you perform a right join in MySQL?</a></li><li><a href="#q28"><span class="toc__num">28.</span>How do you perform a full join in MySQL?</a></li><li><a href="#q29"><span class="toc__num">29.</span>What is a subquery in MySQL?</a></li><li><a href="#q30"><span class="toc__num">30.</span>How do you write a subquery in MySQL?</a></li><li><a href="#q31"><span class="toc__num">31.</span>What is a stored procedure in MySQL?</a></li><li><a href="#q32"><span class="toc__num">32.</span>How do you create a stored procedure in MySQL?</a></li><li><a href="#q33"><span class="toc__num">33.</span>How do you execute a stored procedure in MySQL?</a></li><li><a href="#q34"><span class="toc__num">34.</span>How do you delete a stored procedure in MySQL?</a></li><li><a href="#q35"><span class="toc__num">35.</span>What is a trigger in MySQL?</a></li><li><a href="#q36"><span class="toc__num">36.</span>How do you create a trigger in MySQL?</a></li><li><a href="#q37"><span class="toc__num">37.</span>How do you delete a trigger in MySQL?</a></li><li><a href="#q38"><span class="toc__num">38.</span>What is a view in MySQL?</a></li><li><a href="#q39"><span class="toc__num">39.</span>How do you create a view in MySQL?</a></li><li><a href="#q40"><span class="toc__num">40.</span>How do you delete a view in MySQL?</a></li><li><a href="#q41"><span class="toc__num">41.</span>What is a transaction in MySQL?</a></li><li><a href="#q42"><span class="toc__num">42.</span>How do you start a transaction in MySQL?</a></li><li><a href="#q43"><span class="toc__num">43.</span>How do you commit a transaction in MySQL?</a></li><li><a href="#q44"><span class="toc__num">44.</span>How do you roll back a transaction in MySQL?</a></li><li><a href="#q45"><span class="toc__num">45.</span>What are the ACID properties in MySQL?</a></li><li><a href="#q46"><span class="toc__num">46.</span>How do you set auto-increment in MySQL?</a></li><li><a href="#q47"><span class="toc__num">47.</span>How do you retrieve the last inserted ID in MySQL?</a></li><li><a href="#q48"><span class="toc__num">48.</span>What is a default constraint in MySQL?</a></li><li><a href="#q49"><span class="toc__num">49.</span>How do you set a default value for a column in MySQL?</a></li><li><a href="#q50"><span class="toc__num">50.</span>What is a composite key in MySQL?</a></li><li><a href="#q51"><span class="toc__num">51.</span>How do you create a composite key in MySQL?</a></li><li><a href="#q52"><span class="toc__num">52.</span>What is normalization in MySQL?</a></li><li><a href="#q53"><span class="toc__num">53.</span>What are the different normal forms in MySQL?</a></li><li><a href="#q54"><span class="toc__num">54.</span>What is denormalization in MySQL?</a></li><li><a href="#q55"><span class="toc__num">55.</span>What is a MySQL schema?</a></li><li><a href="#q56"><span class="toc__num">56.</span>How do you switch between databases in MySQL?</a></li><li><a href="#q57"><span class="toc__num">57.</span>How do you list all tables in a MySQL database?</a></li><li><a href="#q58"><span class="toc__num">58.</span>How do you describe the structure of a table in MySQL?</a></li><li><a href="#q59"><span class="toc__num">59.</span>How do you rename a table in MySQL?</a></li><li><a href="#q60"><span class="toc__num">60.</span>How do you add a column to an existing table in MySQL?</a></li><li><a href="#q61"><span class="toc__num">61.</span>How do you drop a column from a table in MySQL?</a></li><li><a href="#q62"><span class="toc__num">62.</span>How do you modify a column in a MySQL table?</a></li><li><a href="#q63"><span class="toc__num">63.</span>What is the difference between CHAR and VARCHAR in MySQL?</a></li><li><a href="#q64"><span class="toc__num">64.</span>How do you use the CONCAT function in MySQL?</a></li><li><a href="#q65"><span class="toc__num">65.</span>How do you use the LIKE operator in MySQL?</a></li><li><a href="#q66"><span class="toc__num">66.</span>How do you use the IN operator in MySQL?</a></li><li><a href="#q67"><span class="toc__num">67.</span>What is the difference between WHERE and HAVING clauses in MySQL?</a></li><li><a href="#q68"><span class="toc__num">68.</span>How do you use the GROUP BY clause in MySQL?</a></li><li><a href="#q69"><span class="toc__num">69.</span>How do you use the ORDER BY clause in MySQL?</a></li><li><a href="#q70"><span class="toc__num">70.</span>How do you use the LIMIT clause in MySQL?</a></li><li><a href="#q71"><span class="toc__num">71.</span>How do you find the maximum value in a column in MySQL?</a></li><li><a href="#q72"><span class="toc__num">72.</span>How do you find the minimum value in a column in MySQL?</a></li><li><a href="#q73"><span class="toc__num">73.</span>How do you calculate the average value of a column in MySQL?</a></li><li><a href="#q74"><span class="toc__num">74.</span>How do you count the number of rows in a table in MySQL?</a></li><li><a href="#q75"><span class="toc__num">75.</span>How do you sum the values of a column in MySQL?</a></li><li><a href="#q76"><span class="toc__num">76.</span>How do you use the DISTINCT keyword in MySQL?</a></li><li><a href="#q77"><span class="toc__num">77.</span>How do you create a backup of a MySQL database?</a></li><li><a href="#q78"><span class="toc__num">78.</span>How do you restore a MySQL database from a backup?</a></li><li><a href="#q79"><span class="toc__num">79.</span>How do you import data from a CSV file into a MySQL table?</a></li><li><a href="#q80"><span class="toc__num">80.</span>How do you export data from a MySQL table to a CSV file?</a></li><li><a href="#q81"><span class="toc__num">81.</span>What is a MySQL client, and how do you use it?</a></li><li><a href="#q82"><span class="toc__num">82.</span>How do you set user privileges in MySQL?</a></li><li><a href="#q83"><span class="toc__num">83.</span>How do you create a new user in MySQL?</a></li><li><a href="#q84"><span class="toc__num">84.</span>How do you delete a user in MySQL?</a></li><li><a href="#q85"><span class="toc__num">85.</span>How do you change a user&#x27;s password in MySQL?</a></li><li><a href="#q86"><span class="toc__num">86.</span>How do you grant all privileges to a user in MySQL?</a></li><li><a href="#q87"><span class="toc__num">87.</span>How do you revoke privileges from a user in MySQL?</a></li><li><a href="#q88"><span class="toc__num">88.</span>How do you list all users in MySQL?</a></li><li><a href="#q89"><span class="toc__num">89.</span>How do you check the MySQL version?</a></li><li><a href="#q90"><span class="toc__num">90.</span>How do you optimize a MySQL database?</a></li><li><a href="#q91"><span class="toc__num">91.</span>How do you repair a MySQL table?</a></li><li><a href="#q92"><span class="toc__num">92.</span>How do you check the status of a MySQL server?</a></li><li><a href="#q93"><span class="toc__num">93.</span>How do you enable slow query logging in MySQL?</a></li><li><a href="#q94"><span class="toc__num">94.</span>What are MySQL storage engines?</a></li><li><a href="#q95"><span class="toc__num">95.</span>How do you change the storage engine of a table in MySQL?</a></li><li><a href="#q96"><span class="toc__num">96.</span>What is MySQL replication?</a></li><li><a href="#q97"><span class="toc__num">97.</span>How do you set up master-slave replication in MySQL?</a></li><li><a href="#q98"><span class="toc__num">98.</span>How do you monitor MySQL performance?</a></li><li><a href="#q99"><span class="toc__num">99.</span>How do you handle NULL values in MySQL?</a></li><li><a href="#q100"><span class="toc__num">100.</span>How do you use the IFNULL function in MySQL?</a></li>
-      </ul>
-    </div>
-
-    
-<article class="qa" id="q1">
-  <div class="qa__number">Question 1</div>
-  <h3 class="qa__question">What is MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[1] = r'''
 <p><strong>MySQL</strong> is an open-source <strong>relational database management system (RDBMS)</strong> &mdash; software that stores, organizes, and retrieves data in tables made of rows and columns. Originally created in 1995, it&rsquo;s now owned by Oracle and remains one of the most widely deployed databases in the world, powering apps from small blogs to large companies (Facebook, Twitter, YouTube all use or have used it).</p>
 
 <p>You communicate with MySQL using <strong>SQL</strong> (Structured Query Language) &mdash; a standardized language for asking the database to <em>create</em>, <em>read</em>, <em>update</em>, and <em>delete</em> data.</p>
@@ -129,15 +25,9 @@
 </ul>
 
 <p>MariaDB is a community-developed fork of MySQL that&rsquo;s mostly compatible &mdash; you&rsquo;ll see it as a drop-in replacement on many Linux distributions.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q2">
-  <div class="qa__number">Question 2</div>
-  <h3 class="qa__question">How do you install MySQL on your system?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[2] = r'''
 <p>Installation depends on your operating system &mdash; the official MySQL installers are available at <code>dev.mysql.com/downloads</code>.</p>
 
 <p><strong>Windows</strong>: download the <em>MySQL Installer</em>, run it, and pick <em>Server only</em> or <em>Developer Default</em> (which includes Workbench, the GUI client). The wizard walks you through setting a root password and starting the service.</p>
@@ -159,15 +49,9 @@ sudo mysql_secure_installation</code></pre>
   -p 3306:3306 -d mysql:8.0</code></pre>
 
 <p>Verify the install by running <code>mysql --version</code> and connecting via <code>mysql -u root -p</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q3">
-  <div class="qa__number">Question 3</div>
-  <h3 class="qa__question">How do you start and stop the MySQL service?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[3] = r'''
 <p>How you control the MySQL service depends on the operating system &mdash; MySQL runs as a background <em>service</em> (Windows) or <em>daemon</em> (Linux/macOS) called <code>mysqld</code>.</p>
 
 <p><strong>Linux (systemd)</strong>:</p>
@@ -194,15 +78,9 @@ net stop MySQL80</code></pre>
 docker start mysql-dev</code></pre>
 
 <p>Always stop MySQL gracefully &mdash; abrupt termination can leave tables in an inconsistent state. The service stop commands above wait for in-progress transactions to finish before shutting down.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q4">
-  <div class="qa__number">Question 4</div>
-  <h3 class="qa__question">What is the default port for MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[4] = r'''
 <p>The default MySQL port is <strong>3306</strong>. Clients connect to the server on this port using TCP/IP. When you run <code>mysql -u root -p</code> without specifying a host, it tries to connect via local socket (faster); when you connect over the network, it uses 3306 by default.</p>
 
 <pre><code># Explicit host and port
@@ -227,15 +105,9 @@ port=3307</code></pre>
 </table>
 
 <p>Firewall rules must allow 3306 if you connect remotely, but it&rsquo;s generally safer to keep it closed and connect through SSH tunnels or a VPN.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q5">
-  <div class="qa__number">Question 5</div>
-  <h3 class="qa__question">How do you create a new database in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[5] = r'''
 <p>Use the <code>CREATE DATABASE</code> statement &mdash; it sets up an empty container where you&rsquo;ll later define tables.</p>
 
 <pre><code>CREATE DATABASE shop;</code></pre>
@@ -258,15 +130,9 @@ CREATE TABLE products (id INT PRIMARY KEY, name VARCHAR(100));</code></pre>
 <pre><code>SHOW DATABASES;</code></pre>
 
 <p>Note: in MySQL, the terms "<em>database</em>" and "<em>schema</em>" are synonymous (unlike PostgreSQL, where they differ). Permission to create databases requires the <code>CREATE</code> privilege, which root has by default.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q6">
-  <div class="qa__number">Question 6</div>
-  <h3 class="qa__question">How do you delete a database in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[6] = r'''
 <p>Use the <code>DROP DATABASE</code> statement &mdash; this <strong>permanently deletes</strong> the database <em>and all tables, data, and procedures inside it</em>. There is no recycle bin; back up first if there&rsquo;s any chance you&rsquo;ll need the data.</p>
 
 <pre><code>DROP DATABASE shop;</code></pre>
@@ -287,15 +153,9 @@ DROP DATABASE shop;</code></pre>
 
 <p>Required privileges: <code>DROP</code> permission on the database. To check what databases your user can drop, look at the privilege grants:</p>
 <pre><code>SHOW GRANTS FOR 'username'@'host';</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q7">
-  <div class="qa__number">Question 7</div>
-  <h3 class="qa__question">How do you create a new table in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[7] = r'''
 <p>Use <code>CREATE TABLE</code> to define a new table &mdash; specify the column names, their data types, and any constraints.</p>
 
 <pre><code>CREATE TABLE users (
@@ -327,15 +187,9 @@ DROP DATABASE shop;</code></pre>
 <pre><code>CREATE TABLE users (...) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;</code></pre>
 
 <p><strong>InnoDB</strong> is the default modern engine &mdash; it supports transactions and foreign keys.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q8">
-  <div class="qa__number">Question 8</div>
-  <h3 class="qa__question">How do you delete a table in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[8] = r'''
 <p>Use <code>DROP TABLE</code> to permanently remove a table along with all its data, indexes, and triggers. Like <code>DROP DATABASE</code>, this is irreversible &mdash; back up first if you may need the data.</p>
 
 <pre><code>DROP TABLE users;</code></pre>
@@ -360,15 +214,9 @@ DROP TABLE users;
 SET FOREIGN_KEY_CHECKS = 1;</code></pre>
 
 <p>Required privilege: <code>DROP</code> on the table.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q9">
-  <div class="qa__number">Question 9</div>
-  <h3 class="qa__question">What are the different data types available in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[9] = r'''
 <p>MySQL data types fall into a few main categories:</p>
 
 <p><strong>Numeric types</strong>:</p>
@@ -402,15 +250,9 @@ SET FOREIGN_KEY_CHECKS = 1;</code></pre>
 <p><strong>Other types</strong>: <code>BOOLEAN</code> (alias for TINYINT(1)), <code>ENUM</code> (predefined list), <code>BLOB</code> (binary data).</p>
 
 <p>Pick the smallest type that fits your data &mdash; smaller types mean less storage, faster queries, and smaller indexes.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q10">
-  <div class="qa__number">Question 10</div>
-  <h3 class="qa__question">How do you insert data into a table in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[10] = r'''
 <p>Use the <code>INSERT</code> statement. The most common form lists columns explicitly and provides values:</p>
 
 <pre><code>INSERT INTO users (email, name, age)
@@ -437,15 +279,9 @@ SELECT email, name FROM users WHERE last_login &lt; '2020-01-01';</code></pre>
 </ul>
 
 <p>From application code, always use <strong>parameterized queries</strong> (<code>?</code> placeholders) &mdash; never concatenate user input into SQL strings, or you create a SQL injection vulnerability.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q11">
-  <div class="qa__number">Question 11</div>
-  <h3 class="qa__question">How do you update data in a MySQL table?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[11] = r'''
 <p>Use the <code>UPDATE</code> statement with a <code>WHERE</code> clause to modify existing rows. The <code>SET</code> clause lists columns to change.</p>
 
 <pre><code>UPDATE users
@@ -474,15 +310,9 @@ UPDATE users SET age = 30;</code></pre>
 UPDATE users SET age = 29 WHERE email = 'alice@example.com';</code></pre>
 
 <p>Wrap risky updates in a transaction so you can roll back if it goes wrong.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q12">
-  <div class="qa__number">Question 12</div>
-  <h3 class="qa__question">How do you delete data from a MySQL table?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[12] = r'''
 <p>Use <code>DELETE FROM</code> with a <code>WHERE</code> clause to remove specific rows.</p>
 
 <pre><code>DELETE FROM users
@@ -516,15 +346,9 @@ DELETE FROM orders WHERE customer_id = 5;
 ROLLBACK;     -- or COMMIT if happy</code></pre>
 
 <p>Many apps use <em>soft deletes</em> instead &mdash; add a <code>deleted_at</code> column and update it rather than physically removing rows. Lets you recover and audit.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q13">
-  <div class="qa__number">Question 13</div>
-  <h3 class="qa__question">How do you retrieve data from a MySQL table?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[13] = r'''
 <p>Use the <code>SELECT</code> statement &mdash; the most-used SQL command. Specify which columns you want and from which table.</p>
 
 <pre><code>SELECT name, email FROM users;</code></pre>
@@ -561,15 +385,9 @@ const [rows] = await conn.execute(
   'SELECT * FROM users WHERE email = ?',
   [userEmail]
 );</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q14">
-  <div class="qa__number">Question 14</div>
-  <h3 class="qa__question">What is a primary key in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[14] = r'''
 <p>A <strong>primary key</strong> is a column (or combination of columns) that uniquely identifies each row in a table. Two rules:</p>
 <ol>
   <li>Values must be <strong>unique</strong> &mdash; no two rows can share a primary key value.</li>
@@ -605,15 +423,9 @@ SELECT * FROM users WHERE id = 1;</code></pre>
 </table>
 
 <p>Always have a primary key on every table.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q15">
-  <div class="qa__number">Question 15</div>
-  <h3 class="qa__question">How do you set a primary key in a MySQL table?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[15] = r'''
 <p>You can declare a primary key three ways: inline at column definition, as a separate clause, or with <code>ALTER TABLE</code> after creation.</p>
 
 <p><strong>Inline (most common, single-column)</strong>:</p>
@@ -648,15 +460,9 @@ DROP PRIMARY KEY;</code></pre>
 );</code></pre>
 
 <p>The PK column is automatically <code>NOT NULL</code>; no need to declare it. MySQL also auto-creates a B-tree index on the PK for fast lookups.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q16">
-  <div class="qa__number">Question 16</div>
-  <h3 class="qa__question">What is a foreign key in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[16] = r'''
 <p>A <strong>foreign key</strong> is a column (or set of columns) in one table that <em>references</em> the primary key of another table &mdash; this enforces a relationship between the two tables. The database refuses to insert rows whose foreign key value doesn&rsquo;t match an existing row in the referenced table.</p>
 
 <pre><code>CREATE TABLE customers (
@@ -688,15 +494,9 @@ CREATE TABLE orders (
 <p>Other options: <code>SET NULL</code> (FK becomes NULL), <code>RESTRICT</code> (refuse the parent delete), <code>NO ACTION</code> (similar to RESTRICT).</p>
 
 <p>Foreign keys require the InnoDB storage engine (the default).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q17">
-  <div class="qa__number">Question 17</div>
-  <h3 class="qa__question">How do you create a foreign key in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[17] = r'''
 <p>Three ways to declare a foreign key: inline in <code>CREATE TABLE</code>, as a table-level constraint, or via <code>ALTER TABLE</code> after creation.</p>
 
 <p><strong>In CREATE TABLE (table-level constraint)</strong>:</p>
@@ -734,15 +534,9 @@ DROP FOREIGN KEY fk_orders_customer;</code></pre>
   <li>Forgetting to index the foreign key column for performance &mdash; MySQL auto-creates an index, but verify with <code>SHOW INDEX FROM table</code>.</li>
   <li>Setting <code>ON DELETE CASCADE</code> too liberally &mdash; can wipe more rows than expected.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q18">
-  <div class="qa__number">Question 18</div>
-  <h3 class="qa__question">What are indexes in MySQL, and why are they used?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[18] = r'''
 <p>An <strong>index</strong> is a separate data structure (typically a B-tree) that MySQL maintains to make lookups fast &mdash; like the index at the back of a book. Without one, MySQL must scan every row of the table to find matching values; with one, it can jump directly to the right rows.</p>
 
 <pre><code>-- Without index — full table scan
@@ -772,15 +566,9 @@ CREATE INDEX idx_users_email ON users(email);
 <p><strong>Don&rsquo;t over-index</strong>. Each index slows writes and uses storage. Profile with <code>EXPLAIN</code> to see if your query benefits before adding one.</p>
 
 <p>Special index types: <strong>UNIQUE</strong> (enforces uniqueness), <strong>FULLTEXT</strong> (text search), <strong>composite</strong> (multiple columns).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q19">
-  <div class="qa__number">Question 19</div>
-  <h3 class="qa__question">How do you create an index in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[19] = r'''
 <p>Use <code>CREATE INDEX</code> to add an index after the table exists, or include it in <code>CREATE TABLE</code> upfront.</p>
 
 <p><strong>Standalone CREATE INDEX</strong>:</p>
@@ -811,15 +599,9 @@ SELECT * FROM articles WHERE MATCH(body) AGAINST('mysql');</code></pre>
 
 <p>Verify the index after creation:</p>
 <pre><code>SHOW INDEX FROM users;</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q20">
-  <div class="qa__number">Question 20</div>
-  <h3 class="qa__question">How do you delete an index in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[20] = r'''
 <p>Use <code>DROP INDEX</code> &mdash; identify the index by name and the table it&rsquo;s on.</p>
 
 <pre><code>DROP INDEX idx_users_email ON users;</code></pre>
@@ -847,15 +629,9 @@ DROP INDEX idx_users_email;</code></pre>
 <p>If the index supports a foreign key constraint, drop the FK first.</p>
 
 <p><strong>Test before dropping in production</strong>: in a copy of the schema, profile your queries with <code>EXPLAIN</code> after dropping. The query optimizer might suddenly choose a much slower plan.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q21">
-  <div class="qa__number">Question 21</div>
-  <h3 class="qa__question">What is a unique key in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[21] = r'''
 <p>A <strong>unique key</strong> is a constraint that ensures all values in a column (or combination of columns) are unique &mdash; no two rows can share the same value. It&rsquo;s similar to a primary key but with two differences:</p>
 <ul>
   <li>A table can have <em>multiple</em> unique keys (only one primary key).</li>
@@ -885,15 +661,9 @@ INSERT INTO users (email, username) VALUES ('a@b.com', 'bob');
 </table>
 
 <p>MySQL automatically creates an index on every unique key, making lookups fast.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q22">
-  <div class="qa__number">Question 22</div>
-  <h3 class="qa__question">How do you create a unique key in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[22] = r'''
 <p>Three ways to declare a unique key: inline at column definition, as a table constraint, or via <code>ALTER TABLE</code>.</p>
 
 <p><strong>Inline at column level</strong>:</p>
@@ -935,15 +705,9 @@ ALTER TABLE users ADD UNIQUE (email);</code></pre>
 <p>(Internally, MySQL implements unique keys as unique indexes, hence the <code>DROP INDEX</code>.)</p>
 
 <p>If existing rows already violate uniqueness, the ALTER fails. Clean up duplicates first using GROUP BY or window functions.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q23">
-  <div class="qa__number">Question 23</div>
-  <h3 class="qa__question">How do you join two tables in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[23] = r'''
 <p>Use a <strong>JOIN</strong> clause to combine rows from two tables based on a related column. The most common is <strong>INNER JOIN</strong>, which returns only rows where the join condition matches in both tables.</p>
 
 <pre><code>SELECT u.name, o.total
@@ -981,15 +745,9 @@ Result of the INNER JOIN above:
 </ul>
 
 <p>Always have indexes on join columns (foreign keys typically) or join performance falls off a cliff.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q24">
-  <div class="qa__number">Question 24</div>
-  <h3 class="qa__question">What are the different types of joins in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[24] = r'''
 <p>MySQL supports several JOIN types &mdash; they differ in which non-matching rows they include.</p>
 
 <table>
@@ -1021,15 +779,9 @@ UNION
 SELECT * FROM a RIGHT JOIN b ON a.id = b.a_id;</code></pre>
 
 <p>The plain word <code>JOIN</code> with no qualifier is treated as <code>INNER JOIN</code> in MySQL. Adding <code>OUTER</code> to <code>LEFT</code>/<code>RIGHT</code>/<code>FULL</code> is optional &mdash; <code>LEFT JOIN</code> means <code>LEFT OUTER JOIN</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q25">
-  <div class="qa__number">Question 25</div>
-  <h3 class="qa__question">How do you perform an inner join in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[25] = r'''
 <p>An <strong>INNER JOIN</strong> returns only rows where the join condition is satisfied in <em>both</em> tables. Non-matching rows from either table are excluded.</p>
 
 <pre><code>SELECT u.name, o.id, o.total
@@ -1058,15 +810,9 @@ WHERE o.created_at &gt;= '2026-01-01';</code></pre>
 <p><strong>Common gotcha</strong>: forgetting the <code>ON</code> clause produces a CROSS JOIN (every combination &mdash; potentially millions of rows). MySQL will warn but execute.</p>
 
 <p>Always have indexes on the join columns &mdash; without them, MySQL falls back to nested-loop joins that scan the entire right table for each left row.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q26">
-  <div class="qa__number">Question 26</div>
-  <h3 class="qa__question">How do you perform a left join in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[26] = r'''
 <p>A <strong>LEFT JOIN</strong> returns all rows from the left table, and the matching rows from the right table. Rows in the left table without matches still appear, with <code>NULL</code> values for the right-table columns.</p>
 
 <pre><code>SELECT u.name, o.id, o.total
@@ -1098,15 +844,9 @@ GROUP BY u.id, u.name;
 <p>The keyword <code>OUTER</code> is optional &mdash; <code>LEFT JOIN</code> and <code>LEFT OUTER JOIN</code> mean the same thing.</p>
 
 <p>Make sure to index the right-table column used in the join condition, or LEFT JOIN scans degrade quickly.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q27">
-  <div class="qa__number">Question 27</div>
-  <h3 class="qa__question">How do you perform a right join in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[27] = r'''
 <p>A <strong>RIGHT JOIN</strong> is the mirror image of LEFT JOIN &mdash; it returns all rows from the right table, plus matching rows from the left. Non-matching left-side rows produce <code>NULL</code> values.</p>
 
 <pre><code>SELECT u.name, o.id, o.total
@@ -1131,15 +871,9 @@ SELECT * FROM orders o LEFT JOIN users u ON u.id = o.user_id;</code></pre>
 <p><strong>In practice, prefer LEFT JOIN</strong>. It&rsquo;s more idiomatic, more common, and easier to read &mdash; the table you&rsquo;re primarily interested in goes on the left, where readers expect it. Most production codebases use LEFT JOIN almost exclusively.</p>
 
 <p>The <code>OUTER</code> keyword is optional &mdash; <code>RIGHT JOIN</code> means <code>RIGHT OUTER JOIN</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q28">
-  <div class="qa__number">Question 28</div>
-  <h3 class="qa__question">How do you perform a full join in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[28] = r'''
 <p>MySQL <strong>does not natively support FULL OUTER JOIN</strong> (unlike PostgreSQL or SQL Server). A FULL JOIN would return all rows from both tables, with NULLs where there&rsquo;s no match on either side.</p>
 
 <p><strong>Simulate it with <code>UNION</code></strong>:</p>
@@ -1178,15 +912,9 @@ FROM employees e RIGHT JOIN payroll p ON e.id = p.employee_id
 WHERE e.id IS NULL OR p.employee_id IS NULL;</code></pre>
 
 <p>FULL JOIN simulations are rare in practice &mdash; if you need them often, the schema may need foreign keys to prevent the orphans.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q29">
-  <div class="qa__number">Question 29</div>
-  <h3 class="qa__question">What is a subquery in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[29] = r'''
 <p>A <strong>subquery</strong> (or "inner query") is a SELECT statement nested inside another SQL statement &mdash; SELECT, INSERT, UPDATE, or DELETE. The inner query runs first; its result feeds the outer query.</p>
 
 <pre><code>-- Find users whose age is above the average
@@ -1214,15 +942,9 @@ FROM users u;</code></pre>
 <p>The inner query runs once <em>per row</em> of the outer query &mdash; can be slow on large tables. Often a JOIN with GROUP BY is faster.</p>
 
 <p><strong>Subquery vs JOIN</strong>: many subqueries can be rewritten as JOINs. The optimizer often produces the same plan, but JOINs tend to be more readable and sometimes perform better. Use <code>EXPLAIN</code> to compare.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q30">
-  <div class="qa__number">Question 30</div>
-  <h3 class="qa__question">How do you write a subquery in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[30] = r'''
 <p>Wrap the inner query in parentheses and place it where you&rsquo;d normally put a value, list, or table.</p>
 
 <p><strong>Subquery in WHERE (scalar)</strong>:</p>
@@ -1261,15 +983,9 @@ FROM users u;</code></pre>
   <li>Correlated subqueries on huge tables &mdash; slow. Rewrite as JOIN with GROUP BY.</li>
   <li>Forgetting alias on derived table &mdash; syntax error.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q31">
-  <div class="qa__number">Question 31</div>
-  <h3 class="qa__question">What is a stored procedure in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[31] = r'''
 <p>A <strong>stored procedure</strong> is a precompiled set of SQL statements stored in the database itself, callable by name. Think of it as a function that lives in MySQL &mdash; you can pass parameters, perform multiple operations, and return results.</p>
 
 <pre><code>DELIMITER //
@@ -1304,15 +1020,9 @@ CALL GetUserOrders(1);</code></pre>
 </ul>
 
 <p>The <code>DELIMITER</code> change is needed because the procedure body uses <code>;</code> for individual statements; without changing the delimiter, MySQL would think the first <code>;</code> ends the CREATE.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q32">
-  <div class="qa__number">Question 32</div>
-  <h3 class="qa__question">How do you create a stored procedure in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[32] = r'''
 <p>Use the <code>CREATE PROCEDURE</code> syntax. The procedure body is wrapped in <code>BEGIN ... END</code>; if it contains semicolons, change the statement delimiter first.</p>
 
 <pre><code>DELIMITER //
@@ -1362,15 +1072,9 @@ BEGIN
 END //</code></pre>
 
 <p>MySQL supports <code>IF</code>, <code>CASE</code>, <code>WHILE</code>, <code>LOOP</code>, <code>REPEAT</code>, and cursors inside procedures &mdash; basically a small procedural language.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q33">
-  <div class="qa__number">Question 33</div>
-  <h3 class="qa__question">How do you execute a stored procedure in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[33] = r'''
 <p>Use the <code>CALL</code> statement, passing arguments matching the procedure&rsquo;s parameters.</p>
 
 <pre><code>CALL GetUserOrders(1);
@@ -1404,15 +1108,9 @@ for row in cur.fetchall():
 
 <p>To find what procedures exist in the current database:</p>
 <pre><code>SHOW PROCEDURE STATUS WHERE Db = 'mydb';</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q34">
-  <div class="qa__number">Question 34</div>
-  <h3 class="qa__question">How do you delete a stored procedure in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[34] = r'''
 <p>Use the <code>DROP PROCEDURE</code> statement &mdash; specify the procedure name (no parentheses, no parameter list).</p>
 
 <pre><code>DROP PROCEDURE GetUserOrders;</code></pre>
@@ -1444,15 +1142,9 @@ DELIMITER ;</code></pre>
 <p>Required privilege: <code>ALTER ROUTINE</code> permission. Procedures created by other users are visible to you but you may not have permission to drop them.</p>
 
 <p>If you have apps actively calling a procedure, drop-and-recreate causes a brief window where calls fail. In production, deploy procedures during maintenance windows or use blue/green strategies.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q35">
-  <div class="qa__number">Question 35</div>
-  <h3 class="qa__question">What is a trigger in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[35] = r'''
 <p>A <strong>trigger</strong> is a special stored program that automatically runs (<em>fires</em>) in response to an event on a specific table &mdash; typically an INSERT, UPDATE, or DELETE. Triggers let the database enforce rules or maintain related data without application code remembering to do it.</p>
 
 <pre><code>DELIMITER //
@@ -1486,15 +1178,9 @@ DELIMITER ;</code></pre>
 <p><strong>Common uses</strong>: audit logs, derived columns (e.g., <code>full_name = first || ' ' || last</code>), referential integrity beyond foreign keys, automatic timestamps, validation.</p>
 
 <p><strong>Caveats</strong>: triggers are invisible &mdash; engineers can be confused why data changes "by itself." They run inside the same transaction, so a slow trigger slows every write. Use sparingly and document them.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q36">
-  <div class="qa__number">Question 36</div>
-  <h3 class="qa__question">How do you create a trigger in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[36] = r'''
 <p>Use the <code>CREATE TRIGGER</code> syntax. Specify the timing (BEFORE/AFTER), event (INSERT/UPDATE/DELETE), table, and body.</p>
 
 <pre><code>DELIMITER //
@@ -1543,15 +1229,9 @@ END //</code></pre>
 
 <p>List triggers in a database:</p>
 <pre><code>SHOW TRIGGERS FROM mydb;</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q37">
-  <div class="qa__number">Question 37</div>
-  <h3 class="qa__question">How do you delete a trigger in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[37] = r'''
 <p>Use the <code>DROP TRIGGER</code> statement.</p>
 
 <pre><code>DROP TRIGGER audit_user_changes;</code></pre>
@@ -1591,15 +1271,9 @@ END //
 DELIMITER ;</code></pre>
 
 <p>Wrap drop+recreate in a transaction during low-traffic times to minimize the window where audit/derived data isn&rsquo;t recorded.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q38">
-  <div class="qa__number">Question 38</div>
-  <h3 class="qa__question">What is a view in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[38] = r'''
 <p>A <strong>view</strong> is a saved SELECT query treated like a virtual table. It doesn&rsquo;t store data &mdash; it&rsquo;s just a stored query definition. When you SELECT from a view, MySQL runs the underlying query.</p>
 
 <pre><code>CREATE VIEW active_users AS
@@ -1626,15 +1300,9 @@ SELECT name FROM active_users WHERE id = 5;</code></pre>
 <p>To be updatable, a view must be a simple one-to-one mapping with the base table &mdash; no <code>GROUP BY</code>, <code>DISTINCT</code>, joins, or aggregates.</p>
 
 <p><strong>Performance</strong>: views are <em>not</em> automatically faster than the underlying query &mdash; they execute the query each time. For repeated heavy queries, consider materialized views (which MySQL doesn&rsquo;t natively support &mdash; emulate with cron + a real table).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q39">
-  <div class="qa__number">Question 39</div>
-  <h3 class="qa__question">How do you create a view in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[39] = r'''
 <p>Use <code>CREATE VIEW</code> with a <code>SELECT</code> query that defines what the view returns.</p>
 
 <pre><code>CREATE VIEW order_summary AS
@@ -1679,15 +1347,9 @@ INSERT INTO active_users (name, active) VALUES ('Bob', 0);</code></pre>
 </ul>
 
 <p>List views with <code>SHOW FULL TABLES WHERE Table_type = 'VIEW';</code></p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q40">
-  <div class="qa__number">Question 40</div>
-  <h3 class="qa__question">How do you delete a view in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[40] = r'''
 <p>Use <code>DROP VIEW</code> to remove a view. The underlying tables and data are unaffected &mdash; only the view definition disappears.</p>
 
 <pre><code>DROP VIEW active_users;</code></pre>
@@ -1720,15 +1382,9 @@ SELECT id, name FROM users WHERE active = 1;</code></pre>
 <p><strong>If apps query the view</strong>: dropping it breaks those queries until something replaces it. Coordinate with deployments; use <code>CREATE OR REPLACE</code> if updating, not removing.</p>
 
 <p>Note: views are not in the <code>information_schema.TABLES</code> table&rsquo;s default Type column &mdash; they show as <code>VIEW</code>, not <code>BASE TABLE</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q41">
-  <div class="qa__number">Question 41</div>
-  <h3 class="qa__question">What is a transaction in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[41] = r'''
 <p>A <strong>transaction</strong> is a group of one or more SQL statements treated as a single unit of work &mdash; either all of them succeed and the changes are saved, or none of them are. This is the foundation of data consistency in databases.</p>
 
 <p><strong>Classic example: bank transfer.</strong> You must subtract from one account and add to another. If only one of those operations succeeds, money disappears or appears out of thin air.</p>
@@ -1756,15 +1412,9 @@ ROLLBACK;
 </table>
 
 <p><strong>Engine matters</strong>: only <strong>InnoDB</strong> supports transactions in MySQL. The older MyISAM engine doesn&rsquo;t. InnoDB has been the default since MySQL 5.5.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q42">
-  <div class="qa__number">Question 42</div>
-  <h3 class="qa__question">How do you start a transaction in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[42] = r'''
 <p>Three ways to start a transaction in MySQL:</p>
 
 <p><strong>1. Explicit START TRANSACTION (most common)</strong>:</p>
@@ -1809,15 +1459,9 @@ try {
 <p>Many ORMs (Sequelize, TypeORM, Prisma) provide a <code>transaction()</code> helper that handles begin/commit/rollback automatically based on whether the callback throws.</p>
 
 <p><strong>Note</strong>: starting a new transaction in the middle of one auto-commits the open one. Nested transactions must use <code>SAVEPOINT</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q43">
-  <div class="qa__number">Question 43</div>
-  <h3 class="qa__question">How do you commit a transaction in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[43] = r'''
 <p>Use the <code>COMMIT</code> statement to make all changes from the current transaction permanent. After commit:</p>
 <ul>
   <li>The changes are written to disk and durable (the D in ACID).</li>
@@ -1853,15 +1497,9 @@ try {
 <p>This means you can&rsquo;t group <code>CREATE TABLE</code> with row inserts in a rollback-able transaction in MySQL.</p>
 
 <p><strong>Once committed, a transaction cannot be rolled back</strong>. To "undo" committed changes, you must run new SQL that reverses them &mdash; or restore from a backup. Always test risky queries by running them inside an uncommitted transaction first.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q44">
-  <div class="qa__number">Question 44</div>
-  <h3 class="qa__question">How do you roll back a transaction in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[44] = r'''
 <p>Use the <code>ROLLBACK</code> statement to undo all changes made in the current transaction. The database returns to the state it was in when the transaction started.</p>
 
 <pre><code>START TRANSACTION;
@@ -1906,15 +1544,9 @@ COMMIT;</code></pre>
 <p><strong>Cannot roll back DDL</strong>: <code>CREATE TABLE</code>, <code>DROP TABLE</code>, etc. auto-commit in MySQL &mdash; you can&rsquo;t undo them with ROLLBACK. Always back up before structural changes.</p>
 
 <p>If the connection drops mid-transaction, MySQL automatically rolls back &mdash; which is why short-lived transactions are safer than long ones.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q45">
-  <div class="qa__number">Question 45</div>
-  <h3 class="qa__question">What are the ACID properties in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[45] = r'''
 <p><strong>ACID</strong> is a set of properties that guarantee database transactions are processed reliably. The acronym stands for:</p>
 
 <table>
@@ -1936,15 +1568,9 @@ COMMIT;</code></pre>
 <p><strong>MySQL provides ACID via the InnoDB engine</strong>. The older MyISAM engine doesn&rsquo;t support transactions, so it&rsquo;s not ACID-compliant. InnoDB has been the default since MySQL 5.5 (2010); always use it for any application that cares about data integrity.</p>
 
 <p>Isolation has configurable levels: READ UNCOMMITTED, READ COMMITTED, REPEATABLE READ (MySQL default), SERIALIZABLE &mdash; trade-offs between strictness and concurrency.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q46">
-  <div class="qa__number">Question 46</div>
-  <h3 class="qa__question">How do you set auto-increment in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[46] = r'''
 <p>Add the <code>AUTO_INCREMENT</code> attribute to a column &mdash; MySQL automatically assigns the next number when you insert a row without specifying that column. Used almost universally for primary key id columns.</p>
 
 <pre><code>CREATE TABLE users (
@@ -1982,15 +1608,9 @@ ALTER TABLE orders AUTO_INCREMENT = 5000;</code></pre>
   <li><strong>Reach the max</strong>: INT max is 2.1 billion; BIGINT max is 9 quintillion. Pick the right size up front &mdash; growing the column requires rebuilding the table on huge tables.</li>
   <li><strong>Replication</strong>: in master-master setups, set different <code>auto_increment_increment</code> values to avoid ID collisions.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q47">
-  <div class="qa__number">Question 47</div>
-  <h3 class="qa__question">How do you retrieve the last inserted ID in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[47] = r'''
 <p>Use the <code>LAST_INSERT_ID()</code> function &mdash; it returns the AUTO_INCREMENT value generated by the most recent successful INSERT in the current connection.</p>
 
 <pre><code>INSERT INTO users (name, email) VALUES ('Alice', 'a@b.com');
@@ -2026,15 +1646,9 @@ INSERT INTO order_items (order_id, product_id, qty)
   VALUES (@order_id, 5, 2), (@order_id, 7, 1);</code></pre>
 
 <p>Wrap in a transaction to ensure atomicity. If you need the ID after multiple inserts, capture it immediately after the relevant INSERT &mdash; later operations will overwrite it.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q48">
-  <div class="qa__number">Question 48</div>
-  <h3 class="qa__question">What is a default constraint in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[48] = r'''
 <p>A <strong>DEFAULT constraint</strong> specifies a value that MySQL assigns to a column automatically when an INSERT doesn&rsquo;t provide one. Useful for timestamps, status flags, and sensible fallbacks.</p>
 
 <pre><code>CREATE TABLE orders (
@@ -2073,15 +1687,9 @@ INSERT INTO orders (id) VALUES (1);
 </ul>
 
 <p><strong>vs NOT NULL</strong>: DEFAULT and NOT NULL are different. DEFAULT supplies a value when none is given; NOT NULL forbids storing NULL. Combining them is common: a column that can&rsquo;t be null and has a fallback if you forget to provide one.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q49">
-  <div class="qa__number">Question 49</div>
-  <h3 class="qa__question">How do you set a default value for a column in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[49] = r'''
 <p>Add the <code>DEFAULT</code> clause after the data type in a column definition. The value is used when an INSERT omits this column.</p>
 
 <p><strong>In CREATE TABLE</strong>:</p>
@@ -2122,15 +1730,9 @@ ALTER COLUMN status DROP DEFAULT;</code></pre>
 <pre><code>middle_name VARCHAR(50) DEFAULT NULL  -- explicit "no value"</code></pre>
 
 <p>This is also the <em>implicit</em> default for nullable columns &mdash; specifying it just makes intent clear.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q50">
-  <div class="qa__number">Question 50</div>
-  <h3 class="qa__question">What is a composite key in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[50] = r'''
 <p>A <strong>composite key</strong> is a primary key (or unique key) made up of two or more columns. The combination must be unique &mdash; individual columns can repeat, but the tuple of values cannot.</p>
 
 <pre><code>CREATE TABLE enrollments (
@@ -2168,15 +1770,9 @@ INSERT INTO enrollments VALUES (1, 100, '2026-02-01');
 <p>Pros: simpler foreign-key references from other tables; uniform ID column. Cons: extra index. The right choice depends on whether other tables need to reference enrollments.</p>
 
 <p>The order of columns in a composite key matters for index performance &mdash; queries that filter by the leftmost column(s) use the index; queries that filter only by later columns can&rsquo;t.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q51">
-  <div class="qa__number">Question 51</div>
-  <h3 class="qa__question">How do you create a composite key in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[51] = r'''
 <p>Declare a composite key by listing multiple columns in the <code>PRIMARY KEY</code> clause when creating the table. The combination of the listed columns must be unique.</p>
 
 <pre><code>CREATE TABLE order_items (
@@ -2206,15 +1802,9 @@ ADD PRIMARY KEY (order_id, product_id);</code></pre>
 <p><strong>Column order matters</strong> for the index that backs the key. MySQL can use a composite index <code>(a, b, c)</code> to satisfy queries on <code>(a)</code>, <code>(a, b)</code>, or <code>(a, b, c)</code> &mdash; but not on <code>(b)</code> alone or <code>(b, c)</code>. Put the most-frequently-filtered column first.</p>
 
 <p><strong>When to use a composite key</strong>: junction tables for many-to-many relationships, natural keys made of multiple business identifiers, time-series data partitioned by date + entity. When in doubt, use a single auto-increment ID and add a composite UNIQUE constraint &mdash; simpler to reference from foreign keys.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q52">
-  <div class="qa__number">Question 52</div>
-  <h3 class="qa__question">What is normalization in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[52] = r'''
 <p><strong>Normalization</strong> is the process of organizing tables to reduce data redundancy and prevent update anomalies. The idea: store each fact in exactly one place. Normalization is achieved by following a series of rules called <em>normal forms</em>.</p>
 
 <p><strong>The problem normalization solves</strong> &mdash; consider this denormalized table:</p>
@@ -2244,15 +1834,9 @@ ADD PRIMARY KEY (order_id, product_id);</code></pre>
 <p>Now Alice&rsquo;s email lives in exactly one row. Updating it changes one row.</p>
 
 <p><strong>Benefits</strong>: less storage, no inconsistent duplicates, easier updates, smaller indexes. <strong>Trade-off</strong>: queries often need joins. For read-heavy analytics, denormalization is sometimes preferred for speed.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q53">
-  <div class="qa__number">Question 53</div>
-  <h3 class="qa__question">What are the different normal forms in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[53] = r'''
 <p><strong>Normal forms</strong> are a sequence of rules &mdash; each builds on the previous. The first three are the most important; higher forms address rarer issues.</p>
 
 <table>
@@ -2281,15 +1865,9 @@ phones (user_id, phone)</code></pre>
 -- ✅ Good: customers(id, city, zip);  orders(id, customer_id)</code></pre>
 
 <p><strong>In practice</strong>, most application schemas aim for <strong>3NF</strong> &mdash; it eliminates the common anomalies without becoming impractical. BCNF and beyond rarely add value for typical apps.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q54">
-  <div class="qa__number">Question 54</div>
-  <h3 class="qa__question">What is denormalization in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[54] = r'''
 <p><strong>Denormalization</strong> is the deliberate addition of redundant data to a normalized schema to improve read performance. Instead of joining tables to compute a value, you store the value directly &mdash; faster reads at the cost of duplicated data and harder updates.</p>
 
 <p><strong>Example</strong> &mdash; a normalized schema requires a join to display recent orders with customer names:</p>
@@ -2317,15 +1895,9 @@ ORDER BY created_at DESC LIMIT 100;
 <p><strong>Trade-offs</strong>: writes get more complex (every customer name change must update many order rows), and inconsistencies can creep in if the duplication isn&rsquo;t maintained correctly. Use triggers, application-layer logic, or scheduled jobs to keep denormalized data in sync.</p>
 
 <p>Rule of thumb: <em>normalize until it hurts; denormalize until it works</em>. Start normalized, denormalize specific hot paths only when measurements show the join is the bottleneck.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q55">
-  <div class="qa__number">Question 55</div>
-  <h3 class="qa__question">What is a MySQL schema?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[55] = r'''
 <p>In MySQL, the words <strong>schema</strong> and <strong>database</strong> are synonyms &mdash; both refer to a collection of tables, views, indexes, and procedures grouped under a single name.</p>
 
 <pre><code>-- These are equivalent in MySQL:
@@ -2357,15 +1929,9 @@ SHOW DATABASES;  -- same as SHOW SCHEMAS;</code></pre>
 <p>Don&rsquo;t store application data in these &mdash; they&rsquo;re managed by MySQL itself.</p>
 
 <p>The terms <strong>"schema design"</strong> or <strong>"schema migration"</strong> refer to how tables are structured and how you evolve that structure over time &mdash; the deliberate organization of your data model.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q56">
-  <div class="qa__number">Question 56</div>
-  <h3 class="qa__question">How do you switch between databases in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[56] = r'''
 <p>Use the <code>USE</code> statement to switch the current database context. Subsequent unqualified table names will resolve against the chosen database.</p>
 
 <pre><code>USE shop;
@@ -2400,15 +1966,9 @@ JOIN blog.posts p ON p.author_id = u.id;</code></pre>
 -- Returns 'shop' or NULL if no database is selected.</code></pre>
 
 <p>If you forget <code>USE</code> and run an unqualified query, you&rsquo;ll get an error like <code>"No database selected"</code>. Always either set a default or fully-qualify table names.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q57">
-  <div class="qa__number">Question 57</div>
-  <h3 class="qa__question">How do you list all tables in a MySQL database?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[57] = r'''
 <p>Use <code>SHOW TABLES</code>. It lists all tables in the currently-selected database.</p>
 
 <pre><code>USE shop;
@@ -2458,15 +2018,9 @@ WHERE TABLE_SCHEMA = 'shop'
 ORDER BY DATA_LENGTH DESC;</code></pre>
 
 <p>Note that <code>TABLE_ROWS</code> for InnoDB tables is an estimate, not exact. For an exact count run <code>SELECT COUNT(*) FROM users</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q58">
-  <div class="qa__number">Question 58</div>
-  <h3 class="qa__question">How do you describe the structure of a table in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[58] = r'''
 <p>Use <code>DESCRIBE</code> (or its short form <code>DESC</code>) to see column names, types, nullability, keys, defaults, and extras.</p>
 
 <pre><code>DESCRIBE users;
@@ -2508,15 +2062,9 @@ WHERE TABLE_SCHEMA = 'shop' AND TABLE_NAME = 'users'
 ORDER BY ORDINAL_POSITION;</code></pre>
 
 <p><strong>For indexes specifically</strong> &mdash; <code>SHOW INDEX FROM users</code> lists every index on the table including the primary key.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q59">
-  <div class="qa__number">Question 59</div>
-  <h3 class="qa__question">How do you rename a table in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[59] = r'''
 <p>Use <code>RENAME TABLE</code>:</p>
 
 <pre><code>RENAME TABLE old_name TO new_name;</code></pre>
@@ -2551,15 +2099,9 @@ ORDER BY ORDINAL_POSITION;</code></pre>
   <li>The renaming user needs <code>ALTER</code> and <code>DROP</code> privileges on the old table and <code>CREATE</code> and <code>INSERT</code> on the new.</li>
   <li>Application code must also be updated &mdash; rename the table in code at the same time, or use a view as a compatibility layer during a transition.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q60">
-  <div class="qa__number">Question 60</div>
-  <h3 class="qa__question">How do you add a column to an existing table in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[60] = r'''
 <p>Use <code>ALTER TABLE ... ADD COLUMN</code>:</p>
 
 <pre><code>ALTER TABLE users
@@ -2592,15 +2134,9 @@ ADD COLUMN new_col INT,
 ALGORITHM=INSTANT;</code></pre>
 
 <p>For online schema changes on production tables, use tools like <strong>pt-online-schema-change</strong> (Percona) or <strong>gh-ost</strong> (GitHub&rsquo;s tool) which copy the table in the background and atomically swap.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q61">
-  <div class="qa__number">Question 61</div>
-  <h3 class="qa__question">How do you drop a column from a table in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[61] = r'''
 <p>Use <code>ALTER TABLE ... DROP COLUMN</code>:</p>
 
 <pre><code>ALTER TABLE users
@@ -2633,15 +2169,9 @@ DROP COLUMN unused_col,
 ALGORITHM=INPLACE, LOCK=NONE;</code></pre>
 
 <p><strong>Safer pattern in production</strong>: stop writing to the column from application code, deploy and verify, <em>then</em> drop it later. If you drop first and find the column was still being read somewhere, you&rsquo;ve broken production.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q62">
-  <div class="qa__number">Question 62</div>
-  <h3 class="qa__question">How do you modify a column in a MySQL table?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[62] = r'''
 <p>Use <code>ALTER TABLE ... MODIFY COLUMN</code> to change a column&rsquo;s type, nullability, or default. Use <code>CHANGE COLUMN</code> to also rename the column.</p>
 
 <pre><code>-- Change type / size only
@@ -2680,15 +2210,9 @@ MODIFY COLUMN role VARCHAR(20) DEFAULT 'member';</code></pre>
 <p><strong>For production safety</strong>: do the change in a staging environment first; test that constraints, foreign keys, and queries still work; for very large tables use online-schema-change tools (<code>pt-osc</code>, <code>gh-ost</code>) so the change is non-blocking.</p>
 
 <p><strong>Note</strong>: when modifying, you must restate the full column definition each time &mdash; MySQL doesn&rsquo;t merge changes. <code>MODIFY COLUMN name VARCHAR(200)</code> drops the old <code>NOT NULL</code> if you don&rsquo;t restate it.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q63">
-  <div class="qa__number">Question 63</div>
-  <h3 class="qa__question">What is the difference between CHAR and VARCHAR in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[63] = r'''
 <p><strong>CHAR</strong> stores fixed-length strings, padded with spaces to fill the declared length. <strong>VARCHAR</strong> stores variable-length strings &mdash; only the actual content plus a 1- or 2-byte length prefix.</p>
 
 <table>
@@ -2720,15 +2244,9 @@ VALUES ('US', 'a@x.com');
 </ul>
 
 <p><strong>Modern advice</strong>: prefer VARCHAR by default. CHAR&rsquo;s storage savings rarely matter today, and the trailing-space stripping behavior is a frequent source of bugs.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q64">
-  <div class="qa__number">Question 64</div>
-  <h3 class="qa__question">How do you use the CONCAT function in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[64] = r'''
 <p><code>CONCAT</code> joins two or more strings into one. Pass any number of arguments &mdash; they&rsquo;re concatenated in order.</p>
 
 <pre><code>SELECT CONCAT('Hello, ', 'world!') AS greeting;
@@ -2764,15 +2282,9 @@ FROM orders;
 </ul>
 
 <p>The <code>||</code> operator is SQL-standard string concatenation, but in MySQL <code>||</code> defaults to logical OR. Use <code>CONCAT</code> for portability.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q65">
-  <div class="qa__number">Question 65</div>
-  <h3 class="qa__question">How do you use the LIKE operator in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[65] = r'''
 <p>The <code>LIKE</code> operator filters rows based on a string pattern. It uses two wildcards:</p>
 
 <table>
@@ -2806,15 +2318,9 @@ SELECT * FROM users WHERE phone LIKE '555-____';</code></pre>
 SELECT * FROM products WHERE name LIKE '50!%off%' ESCAPE '!';</code></pre>
 
 <p><strong>Performance</strong>: <code>LIKE 'pattern%'</code> (anchored at the start) can use a B-tree index. <code>LIKE '%pattern'</code> or <code>LIKE '%pattern%'</code> cannot &mdash; MySQL must scan every row. For full-text or substring search on large tables, use <code>FULLTEXT</code> indexes or a dedicated search engine like Elasticsearch / Meilisearch.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q66">
-  <div class="qa__number">Question 66</div>
-  <h3 class="qa__question">How do you use the IN operator in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[66] = r'''
 <p>The <code>IN</code> operator filters rows where a column matches any value in a given list. Cleaner than chaining many <code>OR</code> conditions.</p>
 
 <pre><code>-- Verbose
@@ -2857,15 +2363,9 @@ WHERE NOT EXISTS (
 <p><strong>Performance</strong>: with a small list, <code>IN</code> is fast and often uses an index. With a huge list (thousands of values), it can be slower than a join &mdash; consider loading the list into a temp table and joining instead.</p>
 
 <p>From application code, always <strong>parameterize</strong> &mdash; never build <code>IN ('a', 'b', 'c')</code> from user input by string concatenation, as this is a SQL injection vector.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q67">
-  <div class="qa__number">Question 67</div>
-  <h3 class="qa__question">What is the difference between WHERE and HAVING clauses in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[67] = r'''
 <p>Both filter rows, but they apply at different stages of query processing. <strong>WHERE</strong> filters rows <em>before</em> grouping; <strong>HAVING</strong> filters groups <em>after</em> aggregation.</p>
 
 <pre><code>-- WHERE filters individual rows BEFORE GROUP BY
@@ -2911,15 +2411,9 @@ ORDER BY total_revenue DESC;</code></pre>
 <p>Reads as: from 2026 sales, group by category, keep only categories whose total exceeds $100K, sort highest first.</p>
 
 <p><strong>Performance</strong>: filtering early via <code>WHERE</code> means fewer rows are aggregated &mdash; almost always faster. Use <code>HAVING</code> only for conditions that genuinely need aggregate values.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q68">
-  <div class="qa__number">Question 68</div>
-  <h3 class="qa__question">How do you use the GROUP BY clause in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[68] = r'''
 <p><code>GROUP BY</code> collapses rows that share values in the listed columns into a single row, allowing aggregate functions (<code>COUNT</code>, <code>SUM</code>, <code>AVG</code>, etc.) to compute over each group.</p>
 
 <pre><code>-- Total sales per category
@@ -2966,15 +2460,9 @@ FROM orders
 GROUP BY category
 HAVING total &gt; 1000
 ORDER BY total DESC;</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q69">
-  <div class="qa__number">Question 69</div>
-  <h3 class="qa__question">How do you use the ORDER BY clause in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[69] = r'''
 <p><code>ORDER BY</code> sorts the result rows by one or more columns. Default direction is ascending (<code>ASC</code>); use <code>DESC</code> for descending.</p>
 
 <pre><code>-- Ascending by name
@@ -3019,15 +2507,9 @@ ORDER BY 3 DESC;  -- 3rd column = created_at</code></pre>
 <p><strong>Performance</strong>: sorting can be expensive on large result sets. An index that matches the <code>ORDER BY</code> can let MySQL skip a separate sort step. <code>EXPLAIN</code> output shows <code>Using filesort</code> when MySQL has to sort manually &mdash; fine for small results, slow for huge ones.</p>
 
 <p>Always combine with <code>LIMIT</code> when paging through long results &mdash; otherwise you transmit and sort everything just to discard most of it.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q70">
-  <div class="qa__number">Question 70</div>
-  <h3 class="qa__question">How do you use the LIMIT clause in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[70] = r'''
 <p><code>LIMIT</code> caps the number of rows returned. Often combined with <code>OFFSET</code> for pagination &mdash; skip a number of rows before returning.</p>
 
 <pre><code>-- First 10 rows
@@ -3067,15 +2549,9 @@ SELECT * FROM events ORDER BY created_at DESC LIMIT 1;
 
 -- Sample without sort (any 5 rows; useful for spot-checking)
 SELECT * FROM users LIMIT 5;</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q71">
-  <div class="qa__number">Question 71</div>
-  <h3 class="qa__question">How do you find the maximum value in a column in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[71] = r'''
 <p>Use the <code>MAX()</code> aggregate function. Returns the largest value in the column &mdash; ignoring <code>NULL</code>s.</p>
 
 <pre><code>-- Highest order total ever
@@ -3118,15 +2594,9 @@ WHERE rn = 1;</code></pre>
 SELECT MAX(created_at) FROM orders; -- most recent date/time</code></pre>
 
 <p><strong>Performance</strong>: <code>MAX()</code> on an indexed column is very fast &mdash; MySQL reads the last (or first for <code>MIN</code>) entry of the index without scanning. <code>EXPLAIN</code> shows <code>Select tables optimized away</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q72">
-  <div class="qa__number">Question 72</div>
-  <h3 class="qa__question">How do you find the minimum value in a column in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[72] = r'''
 <p>Use the <code>MIN()</code> aggregate function. Returns the smallest value, ignoring <code>NULL</code>s. Mirrors <code>MAX</code> exactly.</p>
 
 <pre><code>-- Cheapest product
@@ -3174,15 +2644,9 @@ LIMIT 1;</code></pre>
 <p>Use <code>COALESCE(MIN(price), 0)</code> if you need <code>NULL</code> to display as something else.</p>
 
 <p><strong>Performance</strong>: like <code>MAX</code>, <code>MIN</code> on an indexed column is essentially free &mdash; MySQL reads the first index entry directly.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q73">
-  <div class="qa__number">Question 73</div>
-  <h3 class="qa__question">How do you calculate the average value of a column in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[73] = r'''
 <p>Use the <code>AVG()</code> aggregate function. Returns the arithmetic mean of the values, ignoring <code>NULL</code>.</p>
 
 <pre><code>-- Average product price
@@ -3221,15 +2685,9 @@ FROM users;
 <p><strong>Result type</strong>: <code>AVG</code> on integer columns returns a <code>DECIMAL</code> &mdash; <code>AVG(1, 2, 4) = 2.3333</code>, not <code>2</code>. If you need integer division behavior, cast: <code>FLOOR(AVG(col))</code>.</p>
 
 <p><strong>For median, mode, percentiles</strong>: there&rsquo;s no built-in <code>MEDIAN()</code> in MySQL. Use window functions (<code>PERCENT_RANK</code>, <code>NTILE</code>) or compute application-side. AVG is mean only.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q74">
-  <div class="qa__number">Question 74</div>
-  <h3 class="qa__question">How do you count the number of rows in a table in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[74] = r'''
 <p>Use the <code>COUNT()</code> aggregate function. There are three common forms with subtly different behaviors.</p>
 
 <pre><code>-- All rows in the table
@@ -3274,15 +2732,9 @@ GROUP BY country
 ORDER BY user_count DESC;</code></pre>
 
 <p><strong>Performance note</strong>: on InnoDB, <code>COUNT(*)</code> without a <code>WHERE</code> clause requires scanning rows or an index &mdash; not instant on huge tables. For approximate counts, <code>information_schema.TABLES.TABLE_ROWS</code> gives a fast estimate. For exact counts of huge tables, maintain a counter column updated by triggers, or accept the scan cost.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q75">
-  <div class="qa__number">Question 75</div>
-  <h3 class="qa__question">How do you sum the values of a column in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[75] = r'''
 <p>Use the <code>SUM()</code> aggregate function. Adds up numeric values, ignoring <code>NULL</code>s.</p>
 
 <pre><code>-- Total revenue
@@ -3330,15 +2782,9 @@ WHERE customer_id = 999;</code></pre>
   MAX(total) AS biggest_order
 FROM orders
 WHERE status = 'completed';</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q76">
-  <div class="qa__number">Question 76</div>
-  <h3 class="qa__question">How do you use the DISTINCT keyword in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[76] = r'''
 <p>The <code>DISTINCT</code> keyword removes duplicate rows from the result set. Apply it directly after <code>SELECT</code>.</p>
 
 <pre><code>-- Unique countries from users table
@@ -3371,15 +2817,9 @@ GROUP BY country;</code></pre>
 </ul>
 
 <p><strong>Don&rsquo;t confuse with UNIQUE</strong>: <code>UNIQUE</code> is a <em>constraint</em> at the table-definition level (preventing duplicate inserts); <code>DISTINCT</code> is a <em>query operation</em> at read time.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q77">
-  <div class="qa__number">Question 77</div>
-  <h3 class="qa__question">How do you create a backup of a MySQL database?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[77] = r'''
 <p>Use the <code>mysqldump</code> command-line tool. It generates a <code>.sql</code> file containing the SQL statements needed to recreate the database &mdash; tables, schema, and data.</p>
 
 <pre><code># Single database
@@ -3420,15 +2860,9 @@ mysqldump -u root -p shop users orders &gt; partial.sql</code></pre>
 </ul>
 
 <p><strong>Always test your backups</strong>. A backup you&rsquo;ve never restored is not a backup. Schedule regular restore drills to a staging environment.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q78">
-  <div class="qa__number">Question 78</div>
-  <h3 class="qa__question">How do you restore a MySQL database from a backup?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[78] = r'''
 <p>Pipe the backup file into the <code>mysql</code> command-line client. The SQL statements in the dump recreate the schema and reload the data.</p>
 
 <pre><code># Restore to existing database
@@ -3473,15 +2907,9 @@ SET foreign_key_checks=1;</code></pre>
 </ul>
 
 <p><strong>Caution</strong>: restoring overwrites the target database. Take a fresh backup of whatever&rsquo;s currently there before restoring an older one.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q79">
-  <div class="qa__number">Question 79</div>
-  <h3 class="qa__question">How do you import data from a CSV file into a MySQL table?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[79] = r'''
 <p>Two main approaches: SQL&rsquo;s built-in <code>LOAD DATA INFILE</code>, or external tools like <code>mysqlimport</code> or scripts.</p>
 
 <p><strong>LOAD DATA INFILE</strong> &mdash; the fastest for bulk loading:</p>
@@ -3528,15 +2956,9 @@ SET age = NULLIF(@raw_age, ''),                          -- empty string → NUL
 -- Table name is taken from the file name (users.csv → users)</code></pre>
 
 <p><strong>For complex transformations</strong>, write a short application script (Python with pandas, Node.js with csv-parse) that reads the CSV, validates rows, and inserts via prepared statements. Slower than LOAD DATA, but more flexible.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q80">
-  <div class="qa__number">Question 80</div>
-  <h3 class="qa__question">How do you export data from a MySQL table to a CSV file?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[80] = r'''
 <p>Use <code>SELECT ... INTO OUTFILE</code> &mdash; the SQL counterpart of <code>LOAD DATA INFILE</code>.</p>
 
 <pre><code>SELECT id, name, email, created_at
@@ -3579,15 +3001,9 @@ LINES TERMINATED BY '\n';</code></pre>
   <li><strong>mysqldump</strong> with <code>--tab</code> writes tab-delimited files plus a schema file per table.</li>
   <li><strong>Application code</strong> (Node.js with <code>csv-stringify</code>, Python with <code>pandas.to_csv</code>) handles edge cases like embedded newlines and quotes properly.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q81">
-  <div class="qa__number">Question 81</div>
-  <h3 class="qa__question">What is a MySQL client, and how do you use it?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[81] = r'''
 <p>The <strong>MySQL client</strong> is the command-line program that connects to a MySQL server, sends SQL, and displays results. It&rsquo;s installed alongside the server, but can also be installed standalone.</p>
 
 <pre><code># Connect to local server
@@ -3636,15 +3052,9 @@ edit      -- edit current input in $EDITOR</code></pre>
   <li><strong>TablePlus</strong> &mdash; modern, paid (free tier limited).</li>
   <li><strong>phpMyAdmin</strong> &mdash; web-based, common with shared hosting.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q82">
-  <div class="qa__number">Question 82</div>
-  <h3 class="qa__question">How do you set user privileges in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[82] = r'''
 <p>Use the <code>GRANT</code> statement to give privileges and <code>REVOKE</code> to take them away. Privileges can be assigned at the global, database, table, or column level.</p>
 
 <pre><code>-- Read-only access on one database
@@ -3685,15 +3095,9 @@ FLUSH PRIVILEGES;</code></pre>
 <pre><code>SHOW GRANTS FOR 'app_user'@'localhost';</code></pre>
 
 <p><strong>Principle of least privilege</strong>: application connections should use a user with only the minimum privileges they need. Never have your web app connect as <code>root</code>. Read-only reporting tools get <code>SELECT</code> only. Migration scripts may need <code>CREATE</code>/<code>ALTER</code> &mdash; but use a separate, more privileged user for those, distinct from the runtime app user.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q83">
-  <div class="qa__number">Question 83</div>
-  <h3 class="qa__question">How do you create a new user in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[83] = r'''
 <p>Use the <code>CREATE USER</code> statement. A MySQL user is identified by both <em>username</em> and <em>host</em> &mdash; the same name can have different permissions depending on where they connect from.</p>
 
 <pre><code>-- Local connections only
@@ -3745,15 +3149,9 @@ ACCOUNT LOCK;</code></pre>
   <li>Use SSL/TLS for non-localhost connections: <code>REQUIRE SSL</code>.</li>
   <li>Rotate passwords periodically.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q84">
-  <div class="qa__number">Question 84</div>
-  <h3 class="qa__question">How do you delete a user in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[84] = r'''
 <p>Use the <code>DROP USER</code> statement. The user is removed from the system and can no longer connect.</p>
 
 <pre><code>DROP USER 'app_user'@'localhost';</code></pre>
@@ -3789,15 +3187,9 @@ KILL 12345;</code></pre>
 ALTER USER 'app_user'@'%' ACCOUNT UNLOCK;</code></pre>
 
 <p>Drop only when you&rsquo;re certain the user won&rsquo;t be needed again &mdash; for instance, after decommissioning a service.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q85">
-  <div class="qa__number">Question 85</div>
-  <h3 class="qa__question">How do you change a user&#x27;s password in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[85] = r'''
 <p>Use <code>ALTER USER</code> with the <code>IDENTIFIED BY</code> clause to set a new password.</p>
 
 <pre><code>ALTER USER 'app_user'@'localhost'
@@ -3835,15 +3227,9 @@ PASSWORD EXPIRE;</code></pre>
   <li>Rotate periodically &mdash; especially for users with broad privileges.</li>
   <li>Use a strong password generator (<code>openssl rand -base64 32</code>).</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q86">
-  <div class="qa__number">Question 86</div>
-  <h3 class="qa__question">How do you grant all privileges to a user in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[86] = r'''
 <p>Use <code>GRANT ALL PRIVILEGES</code>. The scope (<code>*.*</code>, <code>db.*</code>, etc.) determines whether it&rsquo;s server-wide or limited.</p>
 
 <pre><code>-- All privileges on a single database
@@ -3890,15 +3276,9 @@ GRANT CREATE, DROP, ALTER, INDEX, REFERENCES ON shop.* TO 'migrator'@'localhost'
 </ul>
 
 <p>For production application users, never grant <code>ALL PRIVILEGES</code> &mdash; list the specific operations the application actually performs.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q87">
-  <div class="qa__number">Question 87</div>
-  <h3 class="qa__question">How do you revoke privileges from a user in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[87] = r'''
 <p>Use the <code>REVOKE</code> statement &mdash; it mirrors <code>GRANT</code> in syntax but removes privileges instead.</p>
 
 <pre><code>-- Revoke a specific privilege
@@ -3942,15 +3322,9 @@ WHERE user = 'app_user';
 KILL 12345;
 KILL 12346;
 -- ... etc</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q88">
-  <div class="qa__number">Question 88</div>
-  <h3 class="qa__question">How do you list all users in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[88] = r'''
 <p>Query the <code>mysql.user</code> system table directly. There&rsquo;s no <code>SHOW USERS</code> command in MySQL.</p>
 
 <pre><code>SELECT user, host FROM mysql.user;
@@ -3993,15 +3367,9 @@ FROM information_schema.processlist
 ORDER BY time DESC;</code></pre>
 
 <p>This shows ongoing connections, including idle ones, with elapsed time and the database they&rsquo;re using.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q89">
-  <div class="qa__number">Question 89</div>
-  <h3 class="qa__question">How do you check the MySQL version?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[89] = r'''
 <p>Several ways depending on whether you have a connection or just shell access.</p>
 
 <p><strong>From inside the MySQL client</strong>:</p>
@@ -4040,15 +3408,9 @@ Server version: 8.4.0 MySQL Community Server - GPL
 </ul>
 
 <p><strong>MySQL vs MariaDB</strong>: they share heritage but diverged. <code>SELECT VERSION()</code> on MariaDB returns something like <code>10.11.6-MariaDB</code>. Many SQL features are compatible, but admin commands and some behaviors differ &mdash; check the documentation that matches your installation.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q90">
-  <div class="qa__number">Question 90</div>
-  <h3 class="qa__question">How do you optimize a MySQL database?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[90] = r'''
 <p>"Optimization" in MySQL covers several distinct concerns. Here are the practical levers, roughly in order of impact.</p>
 
 <p><strong>1. Add the right indexes.</strong> The single biggest performance lever. Find slow queries and add indexes covering their <code>WHERE</code>, <code>JOIN</code>, and <code>ORDER BY</code> columns:</p>
@@ -4096,15 +3458,9 @@ SET GLOBAL long_query_time = 0.5;
 </ul>
 
 <p>Always <strong>measure</strong> before and after &mdash; don&rsquo;t tune blindly.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q91">
-  <div class="qa__number">Question 91</div>
-  <h3 class="qa__question">How do you repair a MySQL table?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[91] = r'''
 <p>Use the <code>REPAIR TABLE</code> command. It attempts to fix corruption in MyISAM, ARCHIVE, and CSV tables. <strong>InnoDB tables (the default in modern MySQL) cannot be repaired this way</strong> &mdash; InnoDB has its own crash recovery via the redo log.</p>
 
 <pre><code>REPAIR TABLE users;</code></pre>
@@ -4139,15 +3495,9 @@ innodb_force_recovery = 1   # try 1, then 2, 3... up to 6</code></pre>
 <p><strong>Modern reality</strong>: InnoDB corruption in MySQL 8 is very rare. Hardware failure, OS-level disk issues, or a botched filesystem operation are typical causes. <strong>Backups are your real protection</strong> &mdash; if a table is unrecoverable, restore from the most recent backup. Test backup restoration regularly.</p>
 
 <p>For very old MyISAM tables, <code>myisamchk</code> (a separate tool that operates on <code>.myi</code> files directly while the server is stopped) is the most powerful repair option.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q92">
-  <div class="qa__number">Question 92</div>
-  <h3 class="qa__question">How do you check the status of a MySQL server?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[92] = r'''
 <p>Use <code>SHOW STATUS</code> for runtime statistics, <code>SHOW VARIABLES</code> for configuration, and <code>SHOW PROCESSLIST</code> for active connections.</p>
 
 <pre><code>-- Runtime metrics: uptime, queries handled, threads, traffic, etc.
@@ -4200,15 +3550,9 @@ SELECT user, COUNT(*) FROM information_schema.processlist GROUP BY user;</code><
 </ul>
 
 <p>For continuous monitoring in production, use a metrics tool: Prometheus + mysqld_exporter, Datadog, New Relic, Percona Monitoring &amp; Management.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q93">
-  <div class="qa__number">Question 93</div>
-  <h3 class="qa__question">How do you enable slow query logging in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[93] = r'''
 <p>The <strong>slow query log</strong> records queries that exceed a configurable execution-time threshold &mdash; essential for finding which queries to optimize.</p>
 
 <p><strong>Enable at runtime</strong> (no restart needed):</p>
@@ -4258,15 +3602,9 @@ mysqldumpslow -t 10 -s c /var/log/mysql/slow.log</code></pre>
 </ul>
 
 <p><strong>Don&rsquo;t leave at <code>long_query_time = 0</code> in production</strong> &mdash; it logs every query, can fill disk fast, and adds I/O overhead. Start at 1-2 seconds in production; tune lower in staging when hunting specific issues.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q94">
-  <div class="qa__number">Question 94</div>
-  <h3 class="qa__question">What are MySQL storage engines?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[94] = r'''
 <p>A <strong>storage engine</strong> is the underlying component that handles how data is stored, read, written, and indexed. MySQL is unusual in supporting multiple engines &mdash; you can pick a different engine per table, though most modern apps stick with one (InnoDB).</p>
 
 <p><strong>Common engines</strong>:</p>
@@ -4311,15 +3649,9 @@ FROM information_schema.TABLES
 WHERE TABLE_SCHEMA = 'shop';</code></pre>
 
 <p>For new applications: use <strong>InnoDB everywhere</strong>. The other engines have niche uses but are not appropriate for general-purpose application data.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q95">
-  <div class="qa__number">Question 95</div>
-  <h3 class="qa__question">How do you change the storage engine of a table in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[95] = r'''
 <p>Use <code>ALTER TABLE ... ENGINE = ...</code>. MySQL rebuilds the table using the new engine.</p>
 
 <pre><code>-- Convert MyISAM to InnoDB (most common direction in legacy upgrades)
@@ -4368,15 +3700,9 @@ WHERE TABLE_SCHEMA = 'shop' AND ENGINE = 'MyISAM';
 -- Run output as SQL.</code></pre>
 
 <p>The default engine for new tables is set by <code>default_storage_engine</code> in <code>my.cnf</code> (InnoDB by default in modern MySQL).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q96">
-  <div class="qa__number">Question 96</div>
-  <h3 class="qa__question">What is MySQL replication?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[96] = r'''
 <p><strong>Replication</strong> copies data from one MySQL server (the <strong>source</strong>, traditionally called <em>master</em>) to one or more other servers (<strong>replicas</strong>, traditionally <em>slaves</em>). Replicas continuously apply the same writes the source did, kept in sync via a stream of changes.</p>
 
 <p><strong>Why use it</strong>:</p>
@@ -4417,15 +3743,9 @@ WHERE TABLE_SCHEMA = 'shop' AND ENGINE = 'MyISAM';
 <p><strong>Important caveat</strong>: replicas are <em>eventually consistent</em>. There&rsquo;s typically a small lag (milliseconds to seconds) between the source and replicas. Reading from a replica immediately after a write may return stale data.</p>
 
 <p>Modern managed databases (AWS RDS, Google Cloud SQL, PlanetScale) handle replication setup and failover automatically &mdash; you typically don&rsquo;t configure binlog details manually.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q97">
-  <div class="qa__number">Question 97</div>
-  <h3 class="qa__question">How do you set up master-slave replication in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[97] = r'''
 <p>Setting up classic source-replica replication involves: configuring both servers, establishing a replication user, snapshotting the source, and starting the replica.</p>
 
 <p><strong>1. Configure the source</strong> &mdash; in <code>my.cnf</code>:</p>
@@ -4494,15 +3814,9 @@ START REPLICA;</code></pre>
 <p>If both are <code>Yes</code> and lag is small, replication is working.</p>
 
 <p><strong>Modern alternatives</strong>: managed services (AWS RDS, GCP Cloud SQL, Azure Database for MySQL, PlanetScale) configure replication automatically. <strong>InnoDB Cluster</strong> using Group Replication provides multi-primary HA without manual replica setup. For new deployments, prefer these over hand-configured source-replica.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q98">
-  <div class="qa__number">Question 98</div>
-  <h3 class="qa__question">How do you monitor MySQL performance?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[98] = r'''
 <p>Several layers, from quick interactive checks to full production observability.</p>
 
 <p><strong>1. Quick interactive checks</strong>:</p>
@@ -4559,15 +3873,9 @@ ORDER BY count_read DESC LIMIT 10;</code></pre>
 </ul>
 
 <p>Set alerts on these so you find out before users do.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q99">
-  <div class="qa__number">Question 99</div>
-  <h3 class="qa__question">How do you handle NULL values in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[99] = r'''
 <p><strong>NULL</strong> in SQL means "unknown" or "no value" &mdash; not zero, not empty string, not false. Special rules apply because comparisons with unknowns can&rsquo;t be true or false.</p>
 
 <p><strong>Key rule: NULL is not equal to anything &mdash; even itself</strong>:</p>
@@ -4615,15 +3923,9 @@ SELECT IFNULL(name, 'Anonymous') FROM users;</code></pre>
 SELECT NULL &lt;=&gt; 5;      -- 0 (FALSE)</code></pre>
 
 <p><strong>Schema design</strong>: prefer <code>NOT NULL</code> with sensible defaults whenever possible. Nullable columns force every query to think about three-valued logic. Make NULL meaningful only when "unknown" or "not applicable" is genuinely a distinct state from any value.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q100">
-  <div class="qa__number">Question 100</div>
-  <h3 class="qa__question">How do you use the IFNULL function in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[100] = r'''
 <p><code>IFNULL(expr1, expr2)</code> returns <code>expr1</code> if it is not NULL; otherwise it returns <code>expr2</code>. Useful for substituting a sensible default when data may be missing.</p>
 
 <pre><code>SELECT IFNULL(name, 'Anonymous') AS display_name FROM users;
@@ -4678,27 +3980,4 @@ SELECT name, IFNULL(profile_pic, '/img/default-avatar.png') AS avatar FROM users
 SELECT CONCAT(first_name, ' ', IFNULL(middle_name, ''), ' ', last_name) FROM users;
 -- Or simpler with CONCAT_WS, which skips NULLs natively:
 SELECT CONCAT_WS(' ', first_name, middle_name, last_name) FROM users;</code></pre>
-
-    
-  </div>
-</article>
-
-    <nav class="chapter-nav" aria-label="Chapter navigation">
-      <a class="chapter-nav__prev" href="reactjs-scenario.html">
-      <span class="chapter-nav__dir">← Previous</span>
-      <span class="chapter-nav__title">ReactJS — Scenario Based</span>
-    </a>
-      <a class="chapter-nav__next" href="mysql-coding.html">
-      <span class="chapter-nav__dir">Next →</span>
-      <span class="chapter-nav__title">MYSQL — Coding</span>
-    </a>
-    </nav>
-
-  </section>
-
-</main>
-</div>
-
-<script src="../assets/script.js"></script>
-</body>
-</html>
+'''

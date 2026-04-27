@@ -4,6 +4,35 @@ Session-by-session record of what was done. Latest entries at the top.
 
 Format: `## YYYY-MM-DD — Session title`
 
+## 2026-04-27 — MySQL Basic Q1-100 (Phase 5 (Databases) begins, 33 detailed chapters, 3304/4904)
+
+**Changes:**
+- Completed **MySQL Basic** with all 100 answers in `content/mysql_basic.py` (avg 1,794 chars, range 1,200-2,889). Style: Basic-level conventions &mdash; concise prose definition, SQL code example, bulleted variants/use cases, brief caveats. Beginner-friendly throughout.
+
+- Built across multiple sessions: Q1-50 from a prior session (intro through composite keys, normalized to existing concise SQL-heavy style at avg ~1,579 chars). This session completed Q51-100 in one batch (avg ~2,009 chars):
+  - **Batch Q51-100 (50 answers)**: composite key creation, normalization, normal forms (1NF/2NF/3NF/BCNF/4NF/5NF table), denormalization, MySQL schema vs database, switch databases, list tables (SHOW TABLES + information_schema), describe table structure (DESCRIBE/SHOW CREATE TABLE), rename table (atomic multi-rename swap pattern), add/drop/modify column (ALGORITHM=INSTANT, pt-online-schema-change, gh-ost), CHAR vs VARCHAR comparison, CONCAT/CONCAT_WS, LIKE wildcards (% and _, case sensitivity, performance), IN operator (with subquery, NULL gotcha with NOT IN), WHERE vs HAVING (query processing order), GROUP BY (aggregates table, ONLY_FULL_GROUP_BY mode), ORDER BY (multi-column, NULL handling), LIMIT (offset/count + keyset pagination for deep pages), MAX/MIN/AVG/COUNT/SUM (with GROUP BY, conditional aggregates, NULL handling), DISTINCT (vs GROUP BY, vs UNIQUE constraint), backup with mysqldump (--single-transaction, mysqlpump, Percona XtraBackup), restore (FOREIGN_KEY_CHECKS speedup), CSV import (LOAD DATA INFILE, mysqlimport, SET column transforms), CSV export (INTO OUTFILE, secure_file_priv, mysql --batch piping), MySQL client (command-line flags, GUI alternatives), set user privileges (GRANT scopes table, principle of least privilege), create user (CREATE USER@host, auth plugins, password policies), delete user (DROP USER, ACCOUNT LOCK alternative), change password (ALTER USER IDENTIFIED BY, RANDOM PASSWORD), grant all privileges (WITH GRANT OPTION, why risky), revoke privileges (scope must match, kill active sessions), list users (mysql.user table, system user filter), check version (SELECT VERSION, mysqld --version, feature support timeline), optimize database (indexes + OPTIMIZE TABLE + tune config + ANALYZE TABLE + slow log), repair table (REPAIR TABLE for MyISAM, innodb_force_recovery for InnoDB), server status (SHOW STATUS/VARIABLES/PROCESSLIST + OS-level checks), slow query log (long_query_time, mysqldumpslow, pt-query-digest), storage engines (InnoDB/MyISAM/MEMORY/ARCHIVE/CSV/BLACKHOLE/NDB comparison table), change engine (ALTER TABLE ENGINE, gotchas), replication concepts (source-replica, binlog formats STATEMENT/ROW/MIXED, topologies, eventual consistency), master-slave replication setup (server-id, log_bin, GTID, CHANGE REPLICATION SOURCE TO, SHOW REPLICA STATUS), monitor performance (Performance Schema, EXPLAIN ANALYZE, Prometheus + mysqld_exporter, PMM, Datadog, key metrics list), NULL handling (three-valued logic, IS NULL, COALESCE/IFNULL, NULL-safe equality &lt;=&gt;), IFNULL function (vs COALESCE table, related NULL functions, practical patterns).
+
+- 2026-current MySQL ecosystem accurately referenced throughout: MySQL 8.4 (LTS) + 8.0 features, ALGORITHM=INSTANT for online DDL, pt-online-schema-change and gh-ost for production schema migrations, Percona XtraBackup, Percona Toolkit (pt-query-digest, pt-osc), Percona Monitoring &amp; Management (PMM), GTID-based replication, InnoDB Cluster + Group Replication, managed services (AWS RDS, GCP Cloud SQL, Azure Database for MySQL, PlanetScale), Performance Schema for structured runtime metrics, mysqld_exporter + Prometheus + Grafana for observability, ProxySQL/MaxScale for connection pooling, modern auth (caching_sha2_password as MySQL 8 default).
+
+- **Phase 5 (Databases) is now 12.5% complete**: MySQL Basic 100/100; remaining for Phase 5 = MySQL Coding/Advanced/Scenario (300) + MongoDB Basic/Coding/Advanced/Scenario (400) = 700 questions to go.
+
+- Updated PROJECT_STATE.md (3204→3304 answers, 32→33 chapters with detailed answers, ~65%→~67% completion, MYSQL Basic ✅ row, MYSQL Coding flagged 🔄 next, mysql_basic.py added to file map, Phase 5 section showing 12.5% progress).
+
+- Updated ROADMAP.md (Phase 5 MySQL line expanded to per-level checklist; MySQL Basic checked off with 2026-04-27 date; MySQL Coding now marked as next).
+
+- Rebuilt `chapters/mysql-basic.html` (226KB, 100 questions rendered) and regenerated `index.html`. 33 chapters now show detailed answers.
+
+**Files changed:**
+- `content/mysql_basic.py` (50→100 answers; +50 answers, ~180KB total)
+- `chapters/mysql-basic.html` (regenerated)
+- `index.html` (regenerated)
+- `docs/PROJECT_STATE.md`
+- `docs/ROADMAP.md`
+- `docs/CHANGELOG.md` (this entry)
+
+**Milestone:** Phase 5 (Databases) under way. MySQL Basic is the first database chapter delivered. Next: MySQL Coding (100 Q).
+
+
 ## 2026-04-27 — ReactJS Scenario Based Q1-100 (ReactJS complete &mdash; **Phase 4 (Frontend) 100% done**, 3204/4904)
 
 **Changes:**

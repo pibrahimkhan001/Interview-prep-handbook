@@ -1,6 +1,6 @@
 # Project State
 
-**Last updated:** 2026-04-27 (Session: ReactJS Scenario Based completed &mdash; Phase 4 (Frontend) at 100%, 32 detailed chapters, 3204/4904)
+**Last updated:** 2026-04-27 (Session: MySQL Basic completed &mdash; Phase 5 (Databases) underway, 33 detailed chapters, 3304/4904)
 
 ## At a glance
 
@@ -10,9 +10,9 @@
 | Topics | 13 |
 | Levels present (across topics) | 7 (Basic, Tricky, Coding, Advanced, Advanced Coding, Scenario Based, Advanced Scenario Based) |
 | Total topic/level chapters | 49 |
-| Chapters with detailed answers | 32 (all JavaScript + all Python + all Node.js + all ExpressJS + all API + all HTML + all CSS + all ReactJS) |
-| Total detailed answers written | 3,204 |
-| Completion | ~65% of questions have detailed answers |
+| Chapters with detailed answers | 33 (all JavaScript + all Python + all Node.js + all ExpressJS + all API + all HTML + all CSS + all ReactJS + MySQL Basic) |
+| Total detailed answers written | 3,304 |
+| Completion | ~67% of questions have detailed answers |
 
 ## Detailed answer inventory
 
@@ -49,9 +49,9 @@
 | ReactJS | Basic | 101 | 101 | ✅ Complete |
 | ReactJS | Coding | 100 | 100 | ✅ Complete |
 | ReactJS | Advanced | 100 | 100 | ✅ Complete |
-| **ReactJS** | **Scenario Based** | **100** | **100** | ✅ **Complete** |
-| **MYSQL** | **Basic** | **100** | **0** | 🔄 **Next up** |
-| MYSQL | Coding | 100 | 0 | ⬜ Pending |
+| ReactJS | Scenario Based | 100 | 100 | ✅ Complete |
+| **MYSQL** | **Basic** | **100** | **100** | ✅ **Complete** |
+| **MYSQL** | **Coding** | **100** | **0** | 🔄 **Next up** |
 | MYSQL | Advanced | 100 | 0 | ⬜ Pending |
 | MYSQL | Scenario Based | 100 | 0 | ⬜ Pending |
 | MongoDB | Basic | 100 | 0 | ⬜ Pending |
@@ -116,7 +116,8 @@
 │   ├── reactjs_basic.py         ✅ 101
 │   ├── reactjs_coding.py        ✅ 100
 │   ├── reactjs_advanced.py      ✅ 100
-│   └── reactjs_scenario.py      ✅ 100
+│   ├── reactjs_scenario.py      ✅ 100
+│   └── mysql_basic.py           ✅ 100
 ├── data/
 │   └── questions.json           ← all 4,904 parsed questions
 └── scripts/
@@ -130,10 +131,10 @@
 ## Delivery status
 
 - **Latest zip:** `/mnt/user-data/outputs/interview-prep-guide.zip`
-- **Delivered (cumulative):** JavaScript (700) + Python (400) + Node.js (400) + ExpressJS (300) + API (400) + HTML (300) + CSS (303) + ReactJS (401) = **3,204 Q&A** + site scaffold + 17 stub chapters
-- **Topics fully completed:** JavaScript, Python, Node.js, ExpressJS, API, HTML, CSS, **ReactJS**
-- **Phase 4 (Frontend) is 100% complete.** All HTML/CSS/React levels done (1,004/1,004 questions).
-- **Phase 5 (Databases) starts next:** MySQL Basic is the next chapter to write.
+- **Delivered (cumulative):** JavaScript (700) + Python (400) + Node.js (400) + ExpressJS (300) + API (400) + HTML (300) + CSS (303) + ReactJS (401) + MySQL Basic (100) = **3,304 Q&A** + site scaffold + 16 stub chapters
+- **Topics fully completed:** JavaScript, Python, Node.js, ExpressJS, API, HTML, CSS, ReactJS
+- **Phase 5 (Databases) in progress:** MySQL Basic done (100/100); MySQL Coding next.
+- Phase 5 is 800 questions total &mdash; 100 done (12.5%), 700 remaining (MySQL: 300; MongoDB: 400).
 
 ## Update protocol
 
