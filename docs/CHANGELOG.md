@@ -4,6 +4,35 @@ Session-by-session record of what was done. Latest entries at the top.
 
 Format: `## YYYY-MM-DD — Session title`
 
+## 2026-04-27 — ReactJS Scenario Based Q1-100 (ReactJS complete &mdash; **Phase 4 (Frontend) 100% done**, 3204/4904)
+
+**Changes:**
+- Completed **ReactJS Scenario Based** with all 100 answers in `content/reactjs_scenario.py` (avg 5,355 chars, range 3,268-7,995). Style: Scenario-level conventions &mdash; explicit `<strong>Situation:</strong>` / `<strong>Approach:</strong>` / `<strong>Trade-offs:</strong>` structure, production-grade code samples, comparison/decision tables for alternatives, 2026-current libraries throughout.
+
+- Built across multiple sessions: Q1-75 from prior sessions (search through useReducer for complex state). This session completed Q76-100 in one batch:
+  - **Batch Q76-100 (25 answers)**: breadcrumbs (useMatches + handle metadata + JSON-LD BreadcrumbList for SEO), user feedback/ratings (radio-fieldset star rating + RHF/Zod + optimistic mutation + AggregateRating schema), responsive grid layout (CSS auto-fit/minmax + container queries + masonry alternatives), notifications/alerts (Sonner toasts + persistent banner system + decision matrix per use case), responsive image carousel (Embla Carousel + Swiper + native scroll-snap baseline), autocomplete (Downshift + TanStack Query + Algolia/cmdk), user data sync (TanStack Query + BroadcastChannel + WebSocket + CRDT for collab via Yjs/Liveblocks/Convex), access/refresh tokens (single-flight refresh + httpOnly cookie + token rotation + storage trade-off table), concurrent API requests (parallel useQuery + useQueries + Promise.allSettled + React Router loaders), tag input (chips + keyboard nav + paste with delimiters + Downshift typeahead), focus management (auto-focus first error + Radix Dialog trap + SPA navigation focus + checklist), rate limiter for API calls (p-limit concurrency + token bucket + Retry-After + algorithm comparison), unmounting cleanup (cleanup function table + AbortController + Strict Mode double-invocation), custom API hook (TanStack Query domain wrappers vs hand-rolled useFetch), split view layout (react-resizable-panels + nested groups + mobile tabs fallback), user onboarding (state machine + react-joyride tour + empty states + SaaS tools), sticky header (position sticky + IntersectionObserver sentinel + hide-on-scroll-down + iOS gotchas), lightbox (yet-another-react-lightbox + PhotoSwipe + preload neighbors + a11y), WYSIWYG editor (TipTap + Lexical + image upload + DOMPurify XSS + Yjs collab), multi-select dropdown (react-select + AsyncSelect + Downshift + virtualize for large lists), data caching (TanStack Query staleTime/gcTime tuning + persistQueryClient + multi-layer cache + invalidation patterns), responsive modal (Radix Dialog + Vaul bottom sheet + iOS env() safe-area + 100dvh + sizing patterns), complex nested state updates (Immer produce + useImmerReducer + normalize state shape + nest vs normalize decision), API client retry logic (TanStack Query retry + ky + exponential backoff + jitter + Retry-After + idempotency keys + retry-or-not status table), user input validation custom error messages (RHF + Zod schema with custom messages + async refine + setError for server errors + i18n with zod-i18n-map + validation timing modes + accessibility).
+
+- 2026-current React tech accurately referenced throughout: TanStack Query as production data layer, React Hook Form + Zod for forms, Radix UI / shadcn/ui for accessible primitives, Vaul for mobile drawers, react-resizable-panels for split views, yet-another-react-lightbox for lightbox UI, TipTap (ProseMirror) and Lexical for WYSIWYG, Sonner for toasts, Embla Carousel for image carousels, Downshift for combobox primitives, react-select for multi-select, react-joyride for product tours, Algolia/Meilisearch/Typesense for search at scale, Yjs/Liveblocks/Convex for real-time collaboration, Immer for nested-state updates, ky for fetch-with-retry, p-limit for concurrency control, BroadcastChannel for cross-tab sync.
+
+- **Phase 4 (Frontend) is now 100% complete**: HTML (300), CSS (303), ReactJS (401) = 1,004/1,004 questions. ReactJS as a topic is fully done (Basic 101 + Coding 100 + Advanced 100 + Scenario Based 100 = 401 questions).
+
+- Updated PROJECT_STATE.md (3104→3204 answers, 31→32 chapters with detailed answers, ~63%→~65% completion, ReactJS Scenario ✅ row, MYSQL Basic flagged 🔄 next, reactjs_scenario.py added to file map, Phase 4 marked 100% complete in delivery status, fixed prior duplicate API Scenario row).
+
+- Updated ROADMAP.md (React JS Scenario Based checked off with 2026-04-27 date and "Phase 4 complete (1,004/1,004)" annotation; Phase 5 MySQL Basic now marked as next).
+
+- Rebuilt `chapters/reactjs-scenario.html` (588KB, 100 questions rendered) and regenerated `index.html`. 32 chapters now show detailed answers.
+
+**Files changed:**
+- `content/reactjs_scenario.py` (75→100 answers; +25 answers, ~535KB total)
+- `chapters/reactjs-scenario.html` (regenerated)
+- `index.html` (regenerated)
+- `docs/PROJECT_STATE.md`
+- `docs/ROADMAP.md`
+- `docs/CHANGELOG.md` (this entry)
+
+**Milestone:** Phase 4 (Frontend) 100% done. Next phase: Phase 5 (Databases). MySQL Basic is the next chapter to write.
+
+
 ## 2026-04-27 — ReactJS Advanced Q1-100 (React Advanced level complete, 3104/4904)
 
 **Changes:**

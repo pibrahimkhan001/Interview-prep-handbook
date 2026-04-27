@@ -1,118 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ReactJS — Scenario Based · Interview Prep Mastery</title>
-<meta name="description" content="100 scenario based interview questions on ReactJS, with detailed explanations and examples.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="../assets/styles.css">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%239a6b1d'/%3E%3Ctext x='50' y='68' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold' font-size='48'%3EIP%3C/text%3E%3C/svg%3E">
-</head>
-<body>
-<header class="site-header">
-  <div class="site-header__inner">
-    <button class="menu-toggle" aria-label="Open menu" type="button">☰ Menu</button>
-    <a class="brand" href="../index.html">
-      <span class="brand__mark">IP</span>
-      <span class="brand__text">
-        <span class="brand__title">Interview Prep Mastery</span>
-        <span class="brand__subtitle">Interactive learning guide</span>
-      </span>
-    </a>
-    <nav class="header-nav">
-      <a href="../index.html#roadmap">Roadmap</a>
-      <a href="../index.html#chapters">All chapters</a>
-      <button class="theme-toggle" type="button" aria-label="Toggle color scheme">☾ Dark</button>
-    </nav>
-  </div>
-</header>
-<div class="layout">
-<aside class="sidebar" aria-label="Site navigation">
-  <div class="sidebar__header">Chapter Navigator</div>
-  
-        <div class="nav-part">
-          <div class="nav-part__label">Part 1</div>
-          <div class="nav-part__title">Core Programming Languages</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">JavaScript</li><li><a class="" href="../chapters/javascript-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/javascript-tricky.html"><span class="nav-item__title">Tricky</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-coding.html"><span class="nav-item__title">Advanced Coding</span><span class="nav-item__meta">100 questions · 100 min read</span></a></li><li><a class="" href="../chapters/javascript-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-scenario.html"><span class="nav-item__title">Advanced Scenario Based</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Python</li><li><a class="" href="../chapters/python-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/python-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 2</div>
-          <div class="nav-part__title">Web Fundamentals</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">HTML</li><li><a class="" href="../chapters/html-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/html-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/html-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CSS</li><li><a class="" href="../chapters/css-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">102 questions · 60 min read</span></a></li><li><a class="" href="../chapters/css-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/css-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">101 questions · 90 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 3</div>
-          <div class="nav-part__title">Backend Technologies</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Node.Js</li><li><a class="" href="../chapters/nodejs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/nodejs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ExpressJS</li><li><a class="" href="../chapters/expressjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/expressjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/expressjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">API</li><li><a class="" href="../chapters/api-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/api-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 4</div>
-          <div class="nav-part__title">Frontend Frameworks</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ReactJS</li><li><a class="" href="../chapters/reactjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">101 questions · 60 min read</span></a></li><li><a class="" href="../chapters/reactjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="active" href="../chapters/reactjs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 5</div>
-          <div class="nav-part__title">Databases</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MYSQL</li><li><a class="" href="../chapters/mysql-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mysql-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MongoDB</li><li><a class="" href="../chapters/mongodb-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mongodb-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 6</div>
-          <div class="nav-part__title">System Design &amp; DevOps</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">System Design MERN Stack</li><li><a class="" href="../chapters/system-design-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Infrastructure MERN Stack</li><li><a class="" href="../chapters/infrastructure-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/infrastructure-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CI/CD Pipeline</li><li><a class="" href="../chapters/cicd-pipeline-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-</aside>
-<main class="main" id="main">
+"""ReactJS Scenario Based answers.
 
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="../index.html">Home</a>
-    <span class="breadcrumb__sep">›</span>
-    <a href="../index.html#part-4">Frontend Frameworks</a>
-    <span class="breadcrumb__sep">›</span>
-    <span>ReactJS — Scenario Based</span>
-  </nav>
+Each answer is HTML-formatted prose for the chapter renderer.
+Style: Scenario-Based — Situation → Approach → Trade-offs structure.
+"""
 
-  <header class="chapter-header">
-    <div class="chapter-label">ReactJS · Scenario Based</div>
-    <h1 class="chapter-title">Scenario Based ReactJS Interview Questions</h1>
-    <p class="chapter-lede">Real-world situational questions — how you&#x27;d approach a concrete design or debugging problem.</p>
-    <div class="chapter-meta">
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Questions</span><span class="chapter-meta__value">100</span></div>
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Level</span><span class="chapter-meta__value">Scenario Based</span></div>
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Estimated reading</span><span class="chapter-meta__value">75 min read</span></div>
-    </div>
-    
-  </header>
+ANSWERS: dict[int, str] = {}
 
-  <section class="prose">
-
-    <div class="toc" id="toc">
-      <div class="toc__title">All questions in this chapter</div>
-      <ul class="toc__list">
-        <li><a href="#q1"><span class="toc__num">1.</span>How would you implement a search bar in a React application that filters a list of item...</a></li><li><a href="#q2"><span class="toc__num">2.</span>You need to fetch data from an API and display it in a paginated table. How would you i...</a></li><li><a href="#q3"><span class="toc__num">3.</span>How would you handle form validation in a multi-step form in React?</a></li><li><a href="#q4"><span class="toc__num">4.</span>Describe how you would implement infinite scrolling in a React component.</a></li><li><a href="#q5"><span class="toc__num">5.</span>How would you manage global state in a large React application?</a></li><li><a href="#q6"><span class="toc__num">6.</span>How would you optimize a React application that has performance issues due to large lis...</a></li><li><a href="#q7"><span class="toc__num">7.</span>How would you implement user authentication in a React application?</a></li><li><a href="#q8"><span class="toc__num">8.</span>Describe how you would handle dark mode and light mode theme switching in React.</a></li><li><a href="#q9"><span class="toc__num">9.</span>How would you implement a file upload component in React, including a progress bar?</a></li><li><a href="#q10"><span class="toc__num">10.</span>How would you handle error boundaries in React to catch errors in the component tree?</a></li><li><a href="#q11"><span class="toc__num">11.</span>How would you create a responsive navigation menu in React?</a></li><li><a href="#q12"><span class="toc__num">12.</span>How would you integrate a third-party charting library (like Chart.js or D3) in a React...</a></li><li><a href="#q13"><span class="toc__num">13.</span>Describe how you would set up server-side rendering (SSR) in a React application.</a></li><li><a href="#q14"><span class="toc__num">14.</span>How would you handle user authentication with social login (Google, Facebook) in React?</a></li><li><a href="#q15"><span class="toc__num">15.</span>How would you implement a modal component in React that can be used throughout your app...</a></li><li><a href="#q16"><span class="toc__num">16.</span>How would you handle component communication in a deeply nested component tree?</a></li><li><a href="#q17"><span class="toc__num">17.</span>Describe how you would use the Context API to manage theme settings in a React applicat...</a></li><li><a href="#q18"><span class="toc__num">18.</span>How would you handle protected routes in a React application?</a></li><li><a href="#q19"><span class="toc__num">19.</span>How would you implement form submission with validation and error handling in React?</a></li><li><a href="#q20"><span class="toc__num">20.</span>How would you manage state in a React application using Redux?</a></li><li><a href="#q21"><span class="toc__num">21.</span>How would you handle loading states and error states while fetching data from an API in...</a></li><li><a href="#q22"><span class="toc__num">22.</span>How would you implement optimistic UI updates in a React application?</a></li><li><a href="#q23"><span class="toc__num">23.</span>How would you handle dynamic imports and code splitting in a React application?</a></li><li><a href="#q24"><span class="toc__num">24.</span>Describe how you would implement drag-and-drop functionality in a React application.</a></li><li><a href="#q25"><span class="toc__num">25.</span>How would you handle real-time data updates using WebSockets in a React application?</a></li><li><a href="#q26"><span class="toc__num">26.</span>How would you implement a global notification system in a React application?</a></li><li><a href="#q27"><span class="toc__num">27.</span>How would you handle localization and internationalization (i18n) in a React application?</a></li><li><a href="#q28"><span class="toc__num">28.</span>Describe how you would test a React component that makes API calls.</a></li><li><a href="#q29"><span class="toc__num">29.</span>How would you handle component lifecycle methods in a functional component using hooks?</a></li><li><a href="#q30"><span class="toc__num">30.</span>How would you manage environment variables in a React application?</a></li><li><a href="#q31"><span class="toc__num">31.</span>How would you implement a custom hook for data fetching in React?</a></li><li><a href="#q32"><span class="toc__num">32.</span>How would you implement pagination for a list of items fetched from an API in React?</a></li><li><a href="#q33"><span class="toc__num">33.</span>How would you optimize the performance of a React application with multiple re-renders?</a></li><li><a href="#q34"><span class="toc__num">34.</span>How would you handle nested routes in a React application using React Router?</a></li><li><a href="#q35"><span class="toc__num">35.</span>Describe how you would implement a typeahead search component in React.</a></li><li><a href="#q36"><span class="toc__num">36.</span>How would you create a reusable button component in React that supports different style...</a></li><li><a href="#q37"><span class="toc__num">37.</span>How would you implement a countdown timer in React that updates every second?</a></li><li><a href="#q38"><span class="toc__num">38.</span>How would you handle user permissions and role-based access control (RBAC) in a React a...</a></li><li><a href="#q39"><span class="toc__num">39.</span>How would you handle component animations and transitions in React?</a></li><li><a href="#q40"><span class="toc__num">40.</span>Describe how you would set up a unit testing environment for a React application.</a></li><li><a href="#q41"><span class="toc__num">41.</span>How would you manage a large form with many fields in React?</a></li><li><a href="#q42"><span class="toc__num">42.</span>How would you handle file downloads in a React application?</a></li><li><a href="#q43"><span class="toc__num">43.</span>How would you implement a reusable table component in React that supports sorting and f...</a></li><li><a href="#q44"><span class="toc__num">44.</span>How would you integrate a payment gateway (like Stripe) into a React application?</a></li><li><a href="#q45"><span class="toc__num">45.</span>Describe how you would handle side effects in a functional component using hooks.</a></li><li><a href="#q46"><span class="toc__num">46.</span>How would you implement a wizard form in React with multiple steps and navigation?</a></li><li><a href="#q47"><span class="toc__num">47.</span>How would you use the useContext hook to share state between multiple components?</a></li><li><a href="#q48"><span class="toc__num">48.</span>How would you handle real-time notifications using a service like Firebase in React?</a></li><li><a href="#q49"><span class="toc__num">49.</span>How would you create a dashboard with multiple widgets in React?</a></li><li><a href="#q50"><span class="toc__num">50.</span>How would you handle asynchronous actions in Redux?</a></li><li><a href="#q51"><span class="toc__num">51.</span>How would you implement an image gallery with lazy loading in React?</a></li><li><a href="#q52"><span class="toc__num">52.</span>How would you handle form submission and display success or error messages in React?</a></li><li><a href="#q53"><span class="toc__num">53.</span>How would you implement a sortable list in React?</a></li><li><a href="#q54"><span class="toc__num">54.</span>How would you handle component state that needs to be reset based on props changes in R...</a></li><li><a href="#q55"><span class="toc__num">55.</span>How would you implement a login form with remember me functionality in React?</a></li><li><a href="#q56"><span class="toc__num">56.</span>How would you handle API errors globally in a React application?</a></li><li><a href="#q57"><span class="toc__num">57.</span>How would you implement a custom error page for 404 and 500 errors in React?</a></li><li><a href="#q58"><span class="toc__num">58.</span>How would you manage user sessions and tokens in a React application?</a></li><li><a href="#q59"><span class="toc__num">59.</span>How would you implement a theme provider to manage themes in a React application?</a></li><li><a href="#q60"><span class="toc__num">60.</span>How would you handle drag-and-drop file uploads in React?</a></li><li><a href="#q61"><span class="toc__num">61.</span>How would you implement a collapsible sidebar in a React application?</a></li><li><a href="#q62"><span class="toc__num">62.</span>How would you integrate GraphQL with a React application?</a></li><li><a href="#q63"><span class="toc__num">63.</span>How would you implement debounce functionality in a search input in React?</a></li><li><a href="#q64"><span class="toc__num">64.</span>How would you handle state updates that depend on previous state in React?</a></li><li><a href="#q65"><span class="toc__num">65.</span>How would you implement a tooltip component in React?</a></li><li><a href="#q66"><span class="toc__num">66.</span>How would you manage a list of dynamic form fields in React?</a></li><li><a href="#q67"><span class="toc__num">67.</span>How would you handle user logout and redirect in a React application?</a></li><li><a href="#q68"><span class="toc__num">68.</span>How would you implement a slider component in React?</a></li><li><a href="#q69"><span class="toc__num">69.</span>How would you integrate a map service (like Google Maps) into a React application?</a></li><li><a href="#q70"><span class="toc__num">70.</span>How would you handle nested forms in React?</a></li><li><a href="#q71"><span class="toc__num">71.</span>How would you implement server-side rendering with Next.js in a React application?</a></li><li><a href="#q72"><span class="toc__num">72.</span>How would you create a reusable input component in React that supports validation?</a></li><li><a href="#q73"><span class="toc__num">73.</span>How would you handle client-side routing in a React application?</a></li><li><a href="#q74"><span class="toc__num">74.</span>How would you implement a tree view component in React?</a></li><li><a href="#q75"><span class="toc__num">75.</span>How would you handle complex state logic in a React component using the useReducer hook?</a></li><li><a href="#q76"><span class="toc__num">76.</span>How would you implement breadcrumbs navigation in a React application?</a></li><li><a href="#q77"><span class="toc__num">77.</span>How would you handle user feedback and ratings in a React application?</a></li><li><a href="#q78"><span class="toc__num">78.</span>How would you implement a responsive grid layout in React?</a></li><li><a href="#q79"><span class="toc__num">79.</span>How would you handle notifications and alerts in a React application?</a></li><li><a href="#q80"><span class="toc__num">80.</span>How would you create a responsive image carousel in React?</a></li><li><a href="#q81"><span class="toc__num">81.</span>How would you implement an autocomplete component in React?</a></li><li><a href="#q82"><span class="toc__num">82.</span>How would you handle user data synchronization in a React application?</a></li><li><a href="#q83"><span class="toc__num">83.</span>How would you implement access tokens and refresh tokens in a React application?</a></li><li><a href="#q84"><span class="toc__num">84.</span>How would you handle concurrent API requests in a React application?</a></li><li><a href="#q85"><span class="toc__num">85.</span>How would you implement a tag input component in React?</a></li><li><a href="#q86"><span class="toc__num">86.</span>How would you handle focus management in a React form?</a></li><li><a href="#q87"><span class="toc__num">87.</span>How would you implement a rate limiter for API calls in a React application?</a></li><li><a href="#q88"><span class="toc__num">88.</span>How would you handle component unmounting and cleanup in React?</a></li><li><a href="#q89"><span class="toc__num">89.</span>How would you implement a custom hook to manage API calls in React?</a></li><li><a href="#q90"><span class="toc__num">90.</span>How would you create a split view layout in React?</a></li><li><a href="#q91"><span class="toc__num">91.</span>How would you handle user onboarding in a React application?</a></li><li><a href="#q92"><span class="toc__num">92.</span>How would you implement a sticky header in React?</a></li><li><a href="#q93"><span class="toc__num">93.</span>How would you handle lightbox functionality for images in React?</a></li><li><a href="#q94"><span class="toc__num">94.</span>How would you integrate a WYSIWYG editor into a React application?</a></li><li><a href="#q95"><span class="toc__num">95.</span>How would you implement a multi-select dropdown in React?</a></li><li><a href="#q96"><span class="toc__num">96.</span>How would you handle data caching in a React application?</a></li><li><a href="#q97"><span class="toc__num">97.</span>How would you implement a responsive modal dialog in React?</a></li><li><a href="#q98"><span class="toc__num">98.</span>How would you handle complex nested state updates in React?</a></li><li><a href="#q99"><span class="toc__num">99.</span>How would you implement an API client with retry logic in React?</a></li><li><a href="#q100"><span class="toc__num">100.</span>How would you handle user input validation with custom error messages in React?</a></li>
-      </ul>
-    </div>
-
-    
-<article class="qa" id="q1">
-  <div class="qa__number">Question 1</div>
-  <h3 class="qa__question">How would you implement a search bar in a React application that filters a list of items in real-time as the user types?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[1] = r'''
 <p><strong>Situation:</strong> a list of items needs to filter as the user types in a search bar. The dataset can range from a few dozen items (client-side filter is fine) to hundreds of thousands (server-side, with debouncing) &mdash; the right architecture depends on size, freshness, and query complexity.</p>
 
 <p><strong>Approach:</strong> for small client datasets, filter in <code>useMemo</code>; for large or server-backed datasets, debounce the query and fetch from an API. Use <code>useDeferredValue</code> (React 18+) to keep the input responsive when filtering is expensive.</p>
@@ -182,15 +76,9 @@ function ServerSearch() {
 </table>
 
 <p><strong>Production polish:</strong> debounce 250-400ms (catches typing pauses without feeling laggy); cancel stale requests (TanStack Query auto-handles via query keys); URL-sync via <code>useSearchParams</code> for shareable searches; show "no results for X" with suggestions; preserve previous results during refetch (prevents flickering).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q2">
-  <div class="qa__number">Question 2</div>
-  <h3 class="qa__question">You need to fetch data from an API and display it in a paginated table. How would you implement this in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[2] = r'''
 <p><strong>Situation:</strong> displaying server data in a paginated table is one of the most common React patterns &mdash; admin panels, e-commerce listings, log viewers. Real production tables also need sorting, filtering, column resizing, row selection, and accessibility. Roll-your-own works to ~500 rows with simple needs; for production, a headless table library scales better.</p>
 
 <p><strong>Approach:</strong> use <strong>TanStack Query</strong> for server fetching with <code>keepPreviousData</code> (smooth pagination), <strong>TanStack Table</strong> for sorting/filtering/columns, and URL state via <code>useSearchParams</code> for shareability.</p>
@@ -260,15 +148,9 @@ function ProductsTable() {
 </table>
 
 <p><strong>Production polish:</strong> URL-driven state means the back button works correctly, refreshes preserve the page, and links can be shared. <code>keepPreviousData</code> prevents the table from flashing empty between pages. Cursor pagination beats offset for fast-changing lists (offset can show duplicates or skip rows when items are added/deleted between fetches). For 10k+ visible rows, virtualize with TanStack Virtual.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q3">
-  <div class="qa__number">Question 3</div>
-  <h3 class="qa__question">How would you handle form validation in a multi-step form in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[3] = r'''
 <p><strong>Situation:</strong> multi-step forms (checkout flows, onboarding wizards, application forms) require accumulating data across steps, validating each step before advancing, allowing back navigation without losing data, and ideally surviving accidental refresh. Common pitfalls: losing data on back, validating incorrectly when fields aren&rsquo;t shown, and breaking on browser back/refresh.</p>
 
 <p><strong>Approach:</strong> single source of truth for accumulated form state (<code>useReducer</code> or React Hook Form), validation per-step with Zod schemas, persistence to <code>sessionStorage</code> for refresh resilience, URL-driven step (so browser back works).</p>
@@ -350,15 +232,9 @@ function CheckoutWizard() {
 </table>
 
 <p><strong>Production polish:</strong> always re-validate on the server &mdash; client validation is UX, not security. Show progress (step N of M) so users know how far they have to go. For long forms, save partial progress server-side after each step so users can resume on a different device. <strong>Final-step idempotency:</strong> use a request key to prevent double-submit (a payment step that double-charges is a serious bug).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q4">
-  <div class="qa__number">Question 4</div>
-  <h3 class="qa__question">Describe how you would implement infinite scrolling in a React component.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[4] = r'''
 <p><strong>Situation:</strong> infinite scroll loads more items as the user reaches the bottom of a list. Used in social feeds, search results, image galleries. Common pitfalls: scroll-event listeners that fire too often (kill performance), missing cleanup (memory leaks), forgetting "no more data" state, and breaking accessibility (keyboard users can&rsquo;t reach footer content below an infinite list).</p>
 
 <p><strong>Approach:</strong> <strong>IntersectionObserver</strong> with a sentinel element &mdash; far better than scroll listeners. Pair with <strong>TanStack Query&rsquo;s <code>useInfiniteQuery</code></strong> for server-backed pagination; for tiny client datasets, manually batch.</p>
@@ -436,15 +312,9 @@ function InfiniteFeed() {
   <li><strong>Accessibility</strong> &mdash; provide a "Skip to footer" link. Add <code>aria-busy</code> on the list during load. Make sure the sentinel never has focusable content (would trap keyboard users).</li>
   <li><strong>Sentinel positioning</strong> &mdash; <code>rootMargin: "200px"</code> starts loading <em>before</em> the sentinel enters viewport, so users see no pause.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q5">
-  <div class="qa__number">Question 5</div>
-  <h3 class="qa__question">How would you manage global state in a large React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[5] = r'''
 <p><strong>Situation:</strong> a large React app has state that needs to be shared across many components &mdash; auth, user preferences, shopping cart, notifications, server data. Wrong choice creates either prop-drilling hell, performance disasters, or unmaintainable spaghetti. The right architecture separates <strong>server state</strong> (cached API data) from <strong>client state</strong> (UI/auth/user choices) and uses different tools for each.</p>
 
 <p><strong>Approach:</strong> the modern 2026 stack &mdash; <strong>TanStack Query</strong> for server state, <strong>Zustand</strong> for global client state, <strong>Context</strong> for tree-scoped values (theme, locale, auth), <strong><code>useState</code>/<code>useReducer</code></strong> for component-local state. Use the simplest tool that fits each piece.</p>
@@ -514,15 +384,9 @@ function App() {
 <p><strong>When Redux Toolkit still wins:</strong> large apps with strong action-log requirements (audit trails, time-travel debugging), complex middleware pipelines, or teams already familiar with Redux. RTK Query gives you Redux + TanStack-Query-like server caching in one package.</p>
 
 <p><strong>For very small apps</strong>, you may not need any of this &mdash; <code>useState</code> + Context is fine until proven otherwise. Premature global state is technical debt.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q6">
-  <div class="qa__number">Question 6</div>
-  <h3 class="qa__question">How would you optimize a React application that has performance issues due to large lists rendering?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[6] = r'''
 <p><strong>Situation:</strong> a list with hundreds or thousands of items renders slowly &mdash; scrolling stutters, typing in search lags, the page freezes during updates. Common causes: rendering all items even though only ~20 are visible, expensive computations on every render, deep object props that defeat memoization, and inefficient key strategy.</p>
 
 <p><strong>Approach:</strong> apply optimizations in order of impact: <strong>virtualization</strong> first (biggest win), then memoization (specific bottlenecks), then concurrent features (smooth interactions). <strong>Profile with React DevTools first</strong> &mdash; don&rsquo;t guess.</p>
@@ -595,15 +459,9 @@ function ParentList({ items }) {
 </ul>
 
 <p>Use <strong>React DevTools Profiler</strong> with "Highlight updates when components render" enabled to actually see what&rsquo;s happening. Performance optimization based on speculation almost always misses the real bottleneck.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q7">
-  <div class="qa__number">Question 7</div>
-  <h3 class="qa__question">How would you implement user authentication in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[7] = r'''
 <p><strong>Situation:</strong> a React app needs login/logout, persistent sessions across page reloads, protected routes, and authenticated API calls. The wrong approach (storing tokens in localStorage, no refresh logic, weak server validation) creates both UX problems and real security vulnerabilities.</p>
 
 <p><strong>Approach:</strong> for new apps in 2026, use a managed service &mdash; <strong>Clerk</strong>, <strong>Supabase Auth</strong>, <strong>Auth0</strong>, or <strong>Firebase Auth</strong> &mdash; rather than rolling your own. They handle token rotation, OAuth flows, MFA, and security audits. For self-hosted, use <strong>httpOnly cookies</strong> with backend session validation, never localStorage tokens.</p>
@@ -681,15 +539,9 @@ function ProtectedRoute({ children }) {
 <p><strong>Critical: server-side validation is mandatory.</strong> Client-side route guards are UX, not security. Anyone can disable JS or call your API directly. Every protected endpoint must verify the session/token on the server. Never trust the client&rsquo;s claim about the current user.</p>
 
 <p><strong>For Next.js apps:</strong> use middleware (<code>middleware.ts</code>) to protect routes at the edge before any React code runs &mdash; faster than client-side guards and harder to bypass.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q8">
-  <div class="qa__number">Question 8</div>
-  <h3 class="qa__question">Describe how you would handle dark mode and light mode theme switching in React.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[8] = r'''
 <p><strong>Situation:</strong> users want light/dark theme switching with respect for OS preference, persistence across visits, no flash of wrong theme on load, and integration with all styling (Tailwind, CSS variables, component libraries). The naive implementation flashes the wrong theme on every page load &mdash; jarring UX.</p>
 
 <p><strong>Approach:</strong> drive everything from a single CSS attribute (<code>data-theme</code> or class on <code>&lt;html&gt;</code>); use CSS variables so all styling responds; persist to localStorage; <strong>set the attribute before React hydrates</strong> via inline script in HTML head to prevent flash.</p>
@@ -799,15 +651,9 @@ module.exports = {
 </ul>
 
 <p><strong>Server-rendered apps</strong> (Next.js): use <code>next-themes</code> &mdash; it handles the &ldquo;no flash&rdquo; problem automatically with proper SSR support.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q9">
-  <div class="qa__number">Question 9</div>
-  <h3 class="qa__question">How would you implement a file upload component in React, including a progress bar?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[9] = r'''
 <p><strong>Situation:</strong> users need to upload files (images, documents, videos) with progress feedback, multiple file support, and clear error handling. The Fetch API doesn&rsquo;t support upload progress &mdash; you need <code>XMLHttpRequest</code> or <code>axios</code>. Production also needs file-type validation, size limits, drag-and-drop, and resumable uploads for large files.</p>
 
 <p><strong>Approach:</strong> use <strong>axios</strong> for the progress callback. Validate on the client (UX) and server (security). For files &gt; 50MB, use chunked/resumable uploads via <strong>tus-js-client</strong> or platform SDKs. For images, use a service like Cloudinary/Uploadcare/UploadThing in production.</p>
@@ -922,15 +768,9 @@ function FileUploader({ onComplete }) {
   <li><strong>Cancel in-flight uploads:</strong> <code>AbortController</code> with axios; clean state when user removes a file mid-upload.</li>
   <li><strong>Accessibility:</strong> visible file picker, keyboard-accessible drop zone, progress as <code>aria-valuenow</code>, status updates announced via <code>aria-live</code>.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q10">
-  <div class="qa__number">Question 10</div>
-  <h3 class="qa__question">How would you handle error boundaries in React to catch errors in the component tree?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[10] = r'''
 <p><strong>Situation:</strong> a runtime error in any component (failed render, undefined access, third-party library crash) tears down the entire React tree &mdash; users see a blank white page. Error boundaries catch render errors in their child subtree and show a fallback UI, scoping the damage and preserving the rest of the app.</p>
 
 <p><strong>Approach:</strong> use the <strong><code>react-error-boundary</code></strong> library (cleaner API than rolling your own class component), place boundaries strategically (page-level, feature-level, around third-party widgets), report errors to <strong>Sentry</strong> in production, and ensure the boundary UI itself can&rsquo;t throw.</p>
@@ -1024,15 +864,9 @@ window.addEventListener("error", (e) =&gt; Sentry.captureException(e.error));</c
 </ul>
 
 <p><strong>For Suspense + error combinations</strong> (data loading): wrap with <code>ErrorBoundary</code> outside <code>Suspense</code> &mdash; loading states inside, errors outside. The pattern handles "loading," "error," and "success" cleanly with no manual state.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q11">
-  <div class="qa__number">Question 11</div>
-  <h3 class="qa__question">How would you create a responsive navigation menu in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[11] = r'''
 <p><strong>Situation:</strong> a navigation menu must work across mobile (hamburger toggle, drawer or full-screen overlay), tablet (collapsed or full), and desktop (full inline menu). It needs keyboard navigation, focus trapping when open on mobile, click-outside-to-close, escape-to-close, and active-route highlighting. Accessibility-first design is essential &mdash; navigation is the most-used element on every page.</p>
 
 <p><strong>Approach:</strong> CSS-driven layout for the breakpoint behavior (don&rsquo;t use JS to detect screen size); React state for the mobile open/close; <code>NavLink</code> for active styling; focus trap when mobile menu is open.</p>
@@ -1152,15 +986,9 @@ function Nav() {
   <li><strong>Sticky/transparent header:</strong> trade-offs with content scrolling underneath; backdrop-filter for "glassmorphism" is popular but consumes performance.</li>
   <li><strong>Use a library for production:</strong> <strong>Radix Navigation Menu</strong> or <strong>shadcn/ui Sheet</strong> handle focus management, animations, sub-menus, ARIA &mdash; covering edge cases that hand-rolled menus often miss.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q12">
-  <div class="qa__number">Question 12</div>
-  <h3 class="qa__question">How would you integrate a third-party charting library (like Chart.js or D3) in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[12] = r'''
 <p><strong>Situation:</strong> a dashboard or analytics page needs charts &mdash; bar, line, pie, scatter, geo. Native SVG is too low-level for most cases. Library choice involves trade-offs: declarative React API vs imperative D3, bundle size, customization depth, server rendering, and animation support.</p>
 
 <p><strong>Approach:</strong> for most React projects in 2026, <strong>Recharts</strong> is the sweet spot &mdash; declarative React components, responsive, built on D3. For full design control or scientific visualization, drop down to <strong>visx</strong> (React + D3 wrappers) or raw <strong>D3</strong>. <strong>Chart.js + react-chartjs-2</strong> is canvas-based (faster for huge datasets); <strong>Tremor</strong> and <strong>Nivo</strong> offer beautiful defaults.</p>
@@ -1257,15 +1085,9 @@ function CustomChart({ data }) {
   <li><strong>SSR:</strong> Recharts and Chart.js require client-only rendering (use <code>ssr: false</code> in Next.js dynamic imports). visx supports SSR.</li>
   <li><strong>Accessibility:</strong> all charts need a <strong>data table fallback</strong> or text alternative for screen readers. SVG charts can include <code>&lt;title&gt;</code> and <code>&lt;desc&gt;</code> elements; data tables are most accessible.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q13">
-  <div class="qa__number">Question 13</div>
-  <h3 class="qa__question">Describe how you would set up server-side rendering (SSR) in a React application.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[13] = r'''
 <p><strong>Situation:</strong> a React app needs SSR (or SSG) for: SEO (search engines see real content), faster first paint, social media link previews, and improved Core Web Vitals. Roll-your-own SSR is months of work; for production, use <strong>Next.js</strong>, <strong>Remix</strong>, or <strong>TanStack Start</strong> rather than building custom infrastructure on Vite/Webpack.</p>
 
 <p><strong>Approach for new projects in 2026:</strong> Next.js App Router with React Server Components (default rendering on server), opting into client components only for interactivity. Streaming rendering with Suspense delivers HTML progressively.</p>
@@ -1358,15 +1180,9 @@ export function AddToCartButton({ productId }) {
 </ul>
 
 <p><strong>For 95% of React apps in 2026 needing SSR, Next.js is the answer.</strong> The framework absorbs the complexity (build, deploy, caching, streaming, image optimization) so you can focus on product code.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q14">
-  <div class="qa__number">Question 14</div>
-  <h3 class="qa__question">How would you handle user authentication with social login (Google, Facebook) in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[14] = r'''
 <p><strong>Situation:</strong> users want to "Sign in with Google" or "Sign in with GitHub" instead of yet another username/password. Implementing OAuth from scratch involves PKCE, state parameter verification, token rotation, account linking, and security pitfalls that take months to get right. Modern services solve this in an afternoon.</p>
 
 <p><strong>Approach for 2026:</strong> use a managed auth provider &mdash; <strong>Clerk</strong>, <strong>Supabase Auth</strong>, <strong>Firebase Auth</strong>, <strong>Auth0</strong>, or <strong>NextAuth.js</strong>. Each handles social provider integration, session management, account linking, and security audits. Self-rolling is rarely justified.</p>
@@ -1467,15 +1283,9 @@ function AuthListener() {
 </ul>
 
 <p><strong>Critical security &mdash; never trust client claims about identity.</strong> Server-side, verify the JWT signature using the provider&rsquo;s public keys. Don&rsquo;t use unverified token contents for authorization. Rate-limit auth endpoints to prevent abuse. Log sign-ins for audit and anomaly detection.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q15">
-  <div class="qa__number">Question 15</div>
-  <h3 class="qa__question">How would you implement a modal component in React that can be used throughout your application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[15] = r'''
 <p><strong>Situation:</strong> the app needs modal dialogs throughout &mdash; confirmation prompts, forms, image lightboxes, settings panels. A reusable modal component should: render via portal (escape parent CSS constraints), trap focus when open, close on Escape, lock body scroll, restore focus to the trigger when closed, and meet ARIA dialog requirements.</p>
 
 <p><strong>Approach:</strong> for production, <strong>don&rsquo;t roll your own.</strong> Use <strong>Radix Dialog</strong>, <strong>shadcn/ui Dialog</strong>, <strong>Headless UI Dialog</strong>, or the native <strong><code>&lt;dialog&gt;</code></strong> element with <code>showModal()</code>. Hand-rolled modals frequently miss focus management or accessibility details. Below is a roll-your-own for understanding, plus the production recommendation.</p>
@@ -1619,15 +1429,9 @@ function ConfirmDialog({ open, onOpenChange, onConfirm }) {
 </table>
 
 <p><strong>Common pitfalls in roll-your-own:</strong> not trapping focus (Tab escapes the modal), not restoring focus on close (jumps to top of page), missing ARIA roles, scroll bar shifts, multiple modals stacking. Libraries solve all of these.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q16">
-  <div class="qa__number">Question 16</div>
-  <h3 class="qa__question">How would you handle component communication in a deeply nested component tree?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[16] = r'''
 <p><strong>Situation:</strong> a deeply nested component tree needs to share state &mdash; e.g., a settings dropdown 5 levels deep needs to update theme; a "sidebar collapse" state in the layout affects components 4 levels down; a notification toast triggered from a leaf component must appear at the app root. Passing props through every intermediate level (prop drilling) becomes painful and tightly couples components.</p>
 
 <p><strong>Approach:</strong> the right tool depends on the relationship and update frequency. Common solutions: <strong>Context</strong> for tree-scoped values, <strong>composition (children prop)</strong> to flatten trees, <strong>Zustand</strong> for cross-feature global state, and <strong>event-based pub/sub</strong> for decoupled cross-tree communication.</p>
@@ -1736,15 +1540,9 @@ function Layout({ header, children }) {
   <li><strong>Avoid Redux as a prop-drilling cure</strong>: Redux solves complex state, not "I need to share a value." Reach for Context first; only graduate to Redux/Zustand when state has cross-cutting complexity.</li>
   <li><strong>Custom events / pub-sub:</strong> rarely needed in React. The framework&rsquo;s data flow handles 99% of cases. Custom events are useful for cross-iframe or cross-window messaging, but not within a single React tree.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q17">
-  <div class="qa__number">Question 17</div>
-  <h3 class="qa__question">Describe how you would use the Context API to manage theme settings in a React application.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[17] = r'''
 <p><strong>Situation:</strong> light/dark theme switching across the app, with values (colors, spacing) accessible to any component. Themes can extend beyond colors &mdash; spacing scales, typography, border radii. The ThemeProvider pattern via Context keeps the implementation decoupled from any styling library.</p>
 
 <p><strong>Approach:</strong> Context provider wraps the app; theme value is a JS object describing the design tokens; persistent via localStorage; CSS variables drive actual styles (so even non-React parts respond). Pair with a theming-aware UI library (Tailwind dark mode, MUI ThemeProvider, etc.) for full integration.</p>
@@ -1857,15 +1655,9 @@ function Card({ children }) {
 </ul>
 
 <p><strong>For component libraries:</strong> Material UI, Chakra, Mantine all have ThemeProvider built in. If you&rsquo;re using one, use its provider rather than duplicating the system.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q18">
-  <div class="qa__number">Question 18</div>
-  <h3 class="qa__question">How would you handle protected routes in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[18] = r'''
 <p><strong>Situation:</strong> some routes (dashboard, admin pages) require authentication; some require specific roles (admin, billing manager). Without protection, anyone can navigate to <code>/admin</code> and see the UI &mdash; even if API calls would fail, the brief flash of authenticated content is a security and UX problem.</p>
 
 <p><strong>Approach:</strong> a <code>ProtectedRoute</code> wrapper that checks auth before rendering, redirects to <code>/login</code> with the intended destination preserved, supports role-based access. For React Router v6.4+, use <strong>loaders</strong> &mdash; they run before render, eliminating any flash of unauthenticated content. Always re-validate on the server &mdash; client guards are UX, not security.</p>
@@ -1988,15 +1780,9 @@ const router = createBrowserRouter([
   <li><strong>Forbidden page UX</strong>: explain why access was denied. "You need admin access to view this page" is more helpful than a generic 403.</li>
   <li><strong>Audit log</strong> &mdash; log access attempts to sensitive routes server-side. Helps detect attacks and unauthorized access patterns.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q19">
-  <div class="qa__number">Question 19</div>
-  <h3 class="qa__question">How would you implement form submission with validation and error handling in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[19] = r'''
 <p><strong>Situation:</strong> a form with multiple fields, validation rules, async submission, and clear error display. The naive approach (manual <code>useState</code> for every field) doesn&rsquo;t scale &mdash; validation logic spreads across handlers, error timing is awkward, and the code becomes hard to maintain. Production forms benefit from <strong>React Hook Form + Zod</strong>: schema-first validation, performance via uncontrolled inputs, integrated error handling.</p>
 
 <p><strong>Approach:</strong> Zod schema defines validation rules and types in one place; React Hook Form handles state, errors, and submission orchestration; React 19&rsquo;s <code>useFormStatus</code> can layer in pending state for nested buttons.</p>
@@ -2119,15 +1905,9 @@ function SignupForm({ onSuccess }: { onSuccess?: () =&gt; void }) {
 </ul>
 
 <p><strong>Critical &mdash; always re-validate on the server.</strong> Client validation is UX. The server&rsquo;s Zod schema (which can be the SAME schema imported into both) is the security boundary.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q20">
-  <div class="qa__number">Question 20</div>
-  <h3 class="qa__question">How would you manage state in a React application using Redux?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[20] = r'''
 <p><strong>Situation:</strong> a React app uses Redux for state management. In 2026, this means <strong>Redux Toolkit (RTK)</strong> &mdash; the official, recommended approach. Classic Redux (manual action types, switch reducers, immutable spreading) is legacy. RTK reduces boilerplate by ~80%, includes Redux DevTools, has TypeScript-first APIs, and ships RTK Query for server data.</p>
 
 <p><strong>Approach:</strong> <code>configureStore</code> for the store, <code>createSlice</code> for reducers + actions, <code>createAsyncThunk</code> for async actions (or RTK Query for server data), typed hooks for <code>useSelector</code>/<code>useDispatch</code>. Split state into domain slices.</p>
@@ -2248,15 +2028,9 @@ function ProductList() {
 </table>
 
 <p><strong>2026 reality:</strong> Redux is no longer the default for new apps. Most projects start with Zustand + TanStack Query. Redux remains the right choice for: (1) large existing codebases, (2) apps requiring strict action logs / time-travel debugging, (3) teams with deep Redux experience. <strong>If you choose Redux, choose RTK</strong> &mdash; classic Redux is unnecessary boilerplate in 2026. <strong>Don&rsquo;t put server data in Redux state</strong> &mdash; use RTK Query for that and keep client state in slices.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q21">
-  <div class="qa__number">Question 21</div>
-  <h3 class="qa__question">How would you handle loading states and error states while fetching data from an API in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[21] = r'''
 <p><strong>Situation:</strong> any data fetch can be in three states &mdash; loading, error, or success. Naive code shows blank screens during load, generic "Error" messages on failure, and breaks when the user navigates mid-fetch. Production patterns handle all three states with clear UI, retry capability, and proper cleanup.</p>
 
 <p><strong>Approach:</strong> use <strong>TanStack Query</strong> as the production tool &mdash; it handles loading/error/success states, caching, retries, and refetching declaratively. For learning the underlying pattern, the manual <code>useState</code> + <code>useEffect</code> approach shows what&rsquo;s happening.</p>
@@ -2362,15 +2136,9 @@ function UserProfile({ userId }) {
 </ul>
 
 <p><strong>Production polish:</strong> log all errors to Sentry with context (user id, request URL, response body); rate-limit retries (exponential backoff &mdash; 1s, 2s, 4s); don&rsquo;t retry 4xx (client errors, retrying won&rsquo;t help); preserve existing data during refetch (don&rsquo;t flash empty); test error states explicitly (force 500 in DevTools network conditions).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q22">
-  <div class="qa__number">Question 22</div>
-  <h3 class="qa__question">How would you implement optimistic UI updates in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[22] = r'''
 <p><strong>Situation:</strong> users perform an action (like, follow, add to cart) and the UI should respond instantly &mdash; not wait 200-500ms for the server. Optimistic updates show the new state immediately, fire the request in the background, and revert on failure. Critical for perceived performance: a like button that lags feels broken; one that updates instantly feels native.</p>
 
 <p><strong>Approach:</strong> use <strong>TanStack Query mutations with optimistic updates</strong> (the production pattern) or <strong>React 19&rsquo;s <code>useOptimistic</code> hook</strong> for simpler cases. Both implement: snapshot current state, apply optimistic change, fire request, revert on error.</p>
@@ -2478,15 +2246,9 @@ function LikeButton({ postId, initialLikes }) {
   <li><strong>Telemetry</strong>: track optimistic-update failure rates. High failures = unreliable backend or aggressive validation; investigate.</li>
   <li><strong>Server idempotency</strong>: send a request key with mutations; server dedups. Prevents duplicate submissions on retry.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q23">
-  <div class="qa__number">Question 23</div>
-  <h3 class="qa__question">How would you handle dynamic imports and code splitting in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[23] = r'''
 <p><strong>Situation:</strong> the React app&rsquo;s initial JavaScript bundle is hundreds of KB (or MB) because it includes code for every page, every modal, every chart library &mdash; even though most users only see a small subset on first load. The fix is <strong>code splitting</strong>: load chunks on-demand rather than all upfront. Smaller initial bundle means faster first paint, faster Time to Interactive, better Core Web Vitals.</p>
 
 <p><strong>Approach:</strong> <strong>route-based splitting</strong> (every top-level route as its own chunk) is the highest-leverage starting point; then split on <strong>modals</strong>, <strong>tabs</strong>, and <strong>heavy below-the-fold features</strong>. Modern bundlers (Vite, Next.js) handle the actual splitting; your job is to use <code>React.lazy()</code> + dynamic imports.</p>
@@ -2599,15 +2361,9 @@ ANALYZE=true npm run build   // with @next/bundle-analyzer</code></pre>
   <li><strong>Over-splitting tiny components:</strong> 5KB chunk creates a network roundtrip cost that exceeds the savings. Group related components.</li>
   <li><strong>Bundle-of-bundles problem:</strong> shared dependencies (React, lodash) end up in every chunk. Configure your bundler&rsquo;s shared chunk strategy (<code>splitChunks</code> in Webpack; automatic in Vite/Next.js).</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q24">
-  <div class="qa__number">Question 24</div>
-  <h3 class="qa__question">Describe how you would implement drag-and-drop functionality in a React application.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[24] = r'''
 <p><strong>Situation:</strong> drag-and-drop is needed for: reordering list items (todos, kanban cards), file uploads (drag files into drop zone), moving items between containers (Trello-like boards), or sortable grids (image galleries). Native HTML5 drag API works on desktop but fails on mobile; <strong>react-beautiful-dnd</strong> is unmaintained as of late 2023; <strong>dnd-kit</strong> is the modern replacement.</p>
 
 <p><strong>Approach:</strong> use <strong>dnd-kit</strong> for production. It supports mouse, touch, keyboard navigation (a11y), works on mobile, animates smoothly, supports list/grid/multi-container patterns. Native HTML5 only for trivial cases or file-drop zones.</p>
@@ -2760,15 +2516,9 @@ function SortableList() {
   <li><strong>Animation:</strong> dnd-kit auto-animates the swap. For Framer Motion-style transitions, use <code>AnimatePresence</code> with item layout animations.</li>
   <li><strong>Virtualization compatibility:</strong> dnd-kit works with TanStack Virtual via the SortableContext + virtualizer integration; non-trivial setup but possible.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q25">
-  <div class="qa__number">Question 25</div>
-  <h3 class="qa__question">How would you handle real-time data updates using WebSockets in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[25] = r'''
 <p><strong>Situation:</strong> a React app needs real-time data &mdash; chat messages, live notifications, collaborative editing, presence indicators, stock tickers. WebSockets enable bi-directional communication; alternatives include Server-Sent Events (one-way), long-polling, and managed services that abstract the protocol.</p>
 
 <p><strong>Approach:</strong> for new apps in 2026, prefer <strong>managed real-time services</strong> &mdash; <strong>Liveblocks</strong> (collaboration), <strong>Pusher</strong>/<strong>Ably</strong> (pub/sub), <strong>Supabase Realtime</strong>, <strong>Convex</strong>, or <strong>Firebase Realtime Database/Firestore</strong> &mdash; rather than building from raw WebSockets. They handle reconnection, scaling, presence, message ordering. Roll-your-own only if you have specific protocol or self-hosting requirements.</p>
@@ -2903,15 +2653,9 @@ function Chat({ roomId }) {
 <p><strong>SSE vs WebSockets:</strong> Server-Sent Events are simpler when you only need server-to-client (notifications, live feed). They auto-reconnect, work over standard HTTP, no special server. Use SSE first; reach for WebSockets only when client needs to send messages too.</p>
 
 <p><strong>For collaborative apps</strong> (multiple users editing same doc), don&rsquo;t roll your own conflict resolution &mdash; use <strong>Liveblocks</strong>, <strong>Yjs</strong>, or <strong>Automerge</strong>. CRDTs handle merges correctly; manual approaches reliably create bugs at scale.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q26">
-  <div class="qa__number">Question 26</div>
-  <h3 class="qa__question">How would you implement a global notification system in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[26] = r'''
 <p><strong>Situation:</strong> the app needs notifications visible app-wide &mdash; success after save, error after failed request, info when something happens in another tab. They should appear from anywhere (deep components, hooks, async code), stack visually, auto-dismiss, and be accessible.</p>
 
 <p><strong>Approach:</strong> a singleton notification store (Zustand or Context) + a portal-rendered <code>&lt;NotificationCenter&gt;</code> at the app root. Any code can <code>notify.success("Saved!")</code> &mdash; the store updates, the center re-renders. For 2026 production, <strong>react-hot-toast</strong> or <strong>Sonner</strong> ship this pattern with great UX out of the box.</p>
@@ -2991,15 +2735,9 @@ async function handleSave() {
 </table>
 
 <p><strong>For Sonner (the 2026 default)</strong>: <code>toast.success("Saved!")</code> from anywhere; <code>&lt;Toaster /&gt;</code> at root. Done. Roll-your-own only if you have specific design constraints.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q27">
-  <div class="qa__number">Question 27</div>
-  <h3 class="qa__question">How would you handle localization and internationalization (i18n) in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[27] = r'''
 <p><strong>Situation:</strong> the app must support multiple languages: translated strings, locale-aware date/number/currency formats, plurals, and right-to-left layouts for Arabic/Hebrew. Translation strings live in JSON files; the active locale switches at runtime; URL routes per locale (<code>/en/about</code>, <code>/es/about</code>) for SEO and shareability.</p>
 
 <p><strong>Approach:</strong> use <strong>react-i18next</strong> for string translation + native <code>Intl</code> APIs for formatting. Keep formatting OUT of translation files &mdash; <code>Intl.NumberFormat</code> handles currency/number/date locale-correctly. For Next.js, use App Router with <code>[lang]</code> dynamic segment and middleware for locale detection.</p>
@@ -3087,15 +2825,9 @@ function Price({ amount, currency }) {
 </table>
 
 <p><strong>2026 alternatives:</strong> <strong>FormatJS / react-intl</strong> (mature, FormatJS spec); <strong>Lingui</strong> (compile-time extraction). For Next.js App Router, <strong>next-intl</strong> integrates cleanly with Server Components. Don&rsquo;t store translation strings in components &mdash; extract them to JSON or you&rsquo;ll repeat the work when adding the next language.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q28">
-  <div class="qa__number">Question 28</div>
-  <h3 class="qa__question">Describe how you would test a React component that makes API calls.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[28] = r'''
 <p><strong>Situation:</strong> a component fetches data on mount and renders loading, success, and error states. Tests must verify all three paths work, without hitting the real API. Standard practice: <strong>Vitest + React Testing Library + MSW</strong> (Mock Service Worker) for HTTP mocking at the network layer.</p>
 
 <p><strong>Approach:</strong> MSW intercepts fetch/XHR calls in tests and returns the responses you define &mdash; so tests verify the component-network integration, not just unit behavior. Tests focus on what users see (rendered output) rather than implementation details (which hook called which fn).</p>
@@ -3184,15 +2916,9 @@ describe("&lt;UserList /&gt;", () =&gt; {
 </table>
 
 <p><strong>Critical RTL principles:</strong> query by accessible roles/labels (<code>getByRole</code>, <code>getByLabelText</code>) &mdash; not classes/test-ids; use <code>findBy*</code> for async appearance; <code>userEvent</code> over <code>fireEvent</code> for typing/clicking; never query by component instance &mdash; query by what users see. <strong>Don&rsquo;t mock everything</strong> &mdash; over-mocked tests pass even when production fails. MSW gives realistic integration without flake. Old &ldquo;Enzyme + shallow render&rdquo; pattern is now legacy; RTL is the standard.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q29">
-  <div class="qa__number">Question 29</div>
-  <h3 class="qa__question">How would you handle component lifecycle methods in a functional component using hooks?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[29] = r'''
 <p><strong>Situation:</strong> functional components don&rsquo;t have lifecycle methods. The hook equivalents handle mount, update, unmount, and other patterns &mdash; but the model is different: instead of "do X at lifecycle phase Y," you express "synchronize this side effect with these dependencies."</p>
 
 <p><strong>Approach:</strong> map each class lifecycle need to a hook pattern. <code>useEffect</code> handles 90% of cases; <code>useLayoutEffect</code> for DOM-measurement; refs for instance variables. The mental shift: stop thinking in phases, start thinking in synchronization.</p>
@@ -3257,15 +2983,9 @@ function Stopwatch() {
 </table>
 
 <p><strong>The synchronization model</strong>: <code>useEffect(setup, deps)</code> means "ensure setup matches deps; if deps change, clean up the old setup and run a new one." This unifies mount/update/unmount &mdash; one effect, three phases automatically. <strong>For error boundaries</strong>, classes are still required (no hook yet); use <code>react-error-boundary</code> for the friendliest API. Otherwise, hooks fully replace lifecycle methods in 2026 codebases.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q30">
-  <div class="qa__number">Question 30</div>
-  <h3 class="qa__question">How would you manage environment variables in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[30] = r'''
 <p><strong>Situation:</strong> the app needs different config per environment (development, staging, production) &mdash; API URLs, feature flags, third-party keys. The pattern: env files committed for dev/staging defaults, secrets injected at build time, prefixes to control client exposure.</p>
 
 <p><strong>Approach:</strong> <code>.env</code> files with build-tool prefix (<code>VITE_</code>, <code>NEXT_PUBLIC_</code>). Variables WITHOUT the prefix stay server-only. Production secrets come from the host&rsquo;s dashboard (Vercel, Netlify, AWS), never committed.</p>
@@ -3334,15 +3054,9 @@ interface ImportMetaEnv {
 </table>
 
 <p><strong>For Next.js</strong>: prefix with <code>NEXT_PUBLIC_</code> for client; no prefix for server-only (Server Components, API routes, middleware). Don&rsquo;t access server-only env in Client Components &mdash; you&rsquo;ll get <code>undefined</code> in the browser. <strong>For monorepos</strong> (Turborepo, Nx): <code>turbo.json</code>&rsquo;s <code>globalEnv</code> declares which vars affect builds &mdash; cache invalidates correctly when vars change.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q31">
-  <div class="qa__number">Question 31</div>
-  <h3 class="qa__question">How would you implement a custom hook for data fetching in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[31] = r'''
 <p><strong>Situation:</strong> the app fetches data in many components (user lists, products, etc.). Repeating <code>useState</code>+<code>useEffect</code>+fetch+abort+error boilerplate everywhere is wasteful. A custom hook centralizes the pattern.</p>
 
 <p><strong>Approach:</strong> roll a <code>useFetch</code> hook for understanding (the boilerplate it eliminates is the lesson). For production, use <strong>TanStack Query</strong> &mdash; it provides cache, deduplication, refetch on focus, retry, stale-while-revalidate &mdash; all of which matter and none of which a roll-your-own hook does.</p>
@@ -3424,15 +3138,9 @@ function UserProfile({ id }) {
 </table>
 
 <p><strong>When roll-your-own is correct:</strong> a tiny app where you literally fetch one or two endpoints and don&rsquo;t care about cache. <strong>When TanStack Query is correct:</strong> any app with more than a handful of endpoints, or any app where stale data, refetch behavior, or cache invalidation matters. <strong>SWR</strong> is similar (smaller, slightly less feature-rich); pick either &mdash; both are excellent.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q32">
-  <div class="qa__number">Question 32</div>
-  <h3 class="qa__question">How would you implement pagination for a list of items fetched from an API in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[32] = r'''
 <p><strong>Situation:</strong> the API returns paginated data (page 1 of 50). Users navigate via Prev/Next buttons or page numbers. Implementation must keep URL synced (<code>?page=3</code> shareable), preserve scroll position, prefetch next page for instant feel.</p>
 
 <p><strong>Approach:</strong> use TanStack Query with <code>keepPreviousData</code> for smooth transitions + <code>useSearchParams</code> for URL state. Server returns <code>{ items, total, page, pageSize }</code>; UI computes total pages and disabled states.</p>
@@ -3521,15 +3229,9 @@ function PaginatedProductsPage() {
 </table>
 
 <p><strong>For social feeds and large datasets, prefer cursor pagination</strong>. For admin dashboards where users want page 47, page numbers are fine. <strong>Don&rsquo;t mix</strong>: use one approach consistently per endpoint.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q33">
-  <div class="qa__number">Question 33</div>
-  <h3 class="qa__question">How would you optimize the performance of a React application with multiple re-renders?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[33] = r'''
 <p><strong>Situation:</strong> the app has noticeable lag when typing, scrolling, or interacting. React DevTools Profiler shows many components re-rendering on every state change &mdash; even ones whose data hasn&rsquo;t changed. Goal: cut wasteful re-renders while keeping code readable.</p>
 
 <p><strong>Approach:</strong> profile first to identify actual hotspots; apply targeted fixes (state placement, memoization, list virtualization, lifting computation out of render). Don&rsquo;t pre-optimize everything &mdash; most of the codebase doesn&rsquo;t need it.</p>
@@ -3629,15 +3331,9 @@ function VirtualList({ items }) {
 </table>
 
 <p><strong>2026 reality with React Compiler:</strong> auto-applies memoization where beneficial &mdash; many manual fixes become unnecessary. State placement still matters; virtualization still required for big lists. <strong>Don&rsquo;t memoize everything &ldquo;to be safe&rdquo;</strong> &mdash; that adds bookkeeping overhead with no benefit and obscures which components actually needed it. Profile, identify, fix; rinse and repeat.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q34">
-  <div class="qa__number">Question 34</div>
-  <h3 class="qa__question">How would you handle nested routes in a React application using React Router?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[34] = r'''
 <p><strong>Situation:</strong> the app has hierarchical pages: <code>/dashboard</code> with sub-pages <code>/dashboard/users</code>, <code>/dashboard/users/:id</code>, <code>/dashboard/settings</code>. Each level shares chrome (sidebar, breadcrumbs). Hard-coding layout in every page leads to duplication and bugs.</p>
 
 <p><strong>Approach:</strong> use React Router&rsquo;s nested routes with <code>&lt;Outlet /&gt;</code>. Parent layout renders shared chrome and an <code>&lt;Outlet /&gt;</code> placeholder; matching child route fills in. URL structure mirrors UI hierarchy. With v6.4+ data routers, add per-route loaders for parallel data fetching.</p>
@@ -3733,15 +3429,9 @@ function App() {
 </table>
 
 <p><strong>For Next.js (App Router)</strong>: the same pattern is file-system-based. Folders define routes; <code>layout.tsx</code> per folder is the layout; <code>page.tsx</code> is the leaf; <code>loading.tsx</code> and <code>error.tsx</code> handle states. Server-side by default, with streaming. The mental model is identical &mdash; just expressed via the file system instead of route config.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q35">
-  <div class="qa__number">Question 35</div>
-  <h3 class="qa__question">Describe how you would implement a typeahead search component in React.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[35] = r'''
 <p><strong>Situation:</strong> the app has a search input that suggests results as the user types &mdash; like Google&rsquo;s search box. Suggestions update on each keystroke, fetched from a server-side endpoint. UI must stay responsive (no laggy input), avoid hammering the API, and handle keyboard navigation (arrow keys + Enter).</p>
 
 <p><strong>Approach:</strong> debounce input → fetch with TanStack Query → render suggestions list → handle keyboard nav. Cancel in-flight requests when input changes. <code>placeholderData: keepPreviousData</code> keeps suggestions visible during refetch.</p>
@@ -3841,15 +3531,9 @@ function Typeahead() {
 </table>
 
 <p><strong>For production-grade typeahead</strong>: use <strong>Headless UI Combobox</strong>, <strong>Radix Combobox</strong>, <strong>shadcn/ui Combobox</strong>, or <strong>Downshift</strong>. ARIA combobox is one of the trickiest patterns &mdash; libraries get it right. <strong>For very fast typeahead at scale</strong>, use <strong>Algolia</strong> or <strong>Meilisearch</strong> &mdash; sub-50ms responses with typo tolerance, ranking, faceting. Roll-your-own for the learning experience; ship libraries for production.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q36">
-  <div class="qa__number">Question 36</div>
-  <h3 class="qa__question">How would you create a reusable button component in React that supports different styles and sizes?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[36] = r'''
 <p><strong>Situation:</strong> the app needs many buttons across many features &mdash; primary, secondary, danger, ghost; small, medium, large; with optional icons, loading states, full-width variants. Without a reusable component, you get inconsistent styles and dozens of one-off buttons.</p>
 
 <p><strong>Approach:</strong> a single <code>&lt;Button&gt;</code> with <code>variant</code> + <code>size</code> + state props, polymorphism via <code>asChild</code> for rendering as <code>&lt;a&gt;</code> or <code>&lt;Link&gt;</code>, type-safe variants via <code>cva</code> (class-variance-authority). This is exactly the shadcn/ui pattern &mdash; production-ready primitives.</p>
@@ -3934,15 +3618,9 @@ Button.displayName = "Button";</code></pre>
 <p><strong>Common variants beyond this:</strong> compound buttons (icon + label), button groups (Toolbar), split buttons (action + dropdown), loading with progress (file upload). Each is a small extension of this pattern.</p>
 
 <p><strong>Don&rsquo;t reinvent for production.</strong> <strong>shadcn/ui Button</strong> is exactly this pattern &mdash; copy it into your project and customize. <strong>Radix UI</strong> provides unstyled accessible primitives. <strong>Mantine</strong>, <strong>Chakra UI</strong>, <strong>Mui</strong> bundle complete design systems. The only reason to roll your own is design uniqueness; even then, start from a primitive and customize. The accessibility plumbing (focus rings, disabled handling, asChild slotting) is the value &mdash; not the styling.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q37">
-  <div class="qa__number">Question 37</div>
-  <h3 class="qa__question">How would you implement a countdown timer in React that updates every second?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[37] = r'''
 <p><strong>Situation:</strong> a countdown timer counts down to a target date or duration, updating every second, displaying days/hours/minutes/seconds. When zero, fires a callback. Common uses: launch countdowns, sale timers, exam timers, OTP expiry indicators.</p>
 
 <p><strong>Approach:</strong> use <code>setInterval</code> in <code>useEffect</code> with cleanup. Re-compute time-left on each tick from the current timestamp &mdash; not by decrementing state &mdash; so it stays accurate even if the tab was backgrounded (browsers throttle <code>setInterval</code> to 1/min when hidden). Return tick cleanup on unmount.</p>
@@ -4014,15 +3692,9 @@ function Countdown({ targetDate, onComplete }: { targetDate: Date; onComplete?: 
 </table>
 
 <p><strong>For complex needs</strong>: <strong>react-countdown</strong> handles edge cases (auto-start, completed callback, custom renderer, onTick). <strong>For game timers / animations</strong>, use <code>requestAnimationFrame</code> with timestamps &mdash; ~60fps and no <code>setInterval</code> drift. The pattern of computing from current time (not decrementing state) is the key takeaway &mdash; works in every variant.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q38">
-  <div class="qa__number">Question 38</div>
-  <h3 class="qa__question">How would you handle user permissions and role-based access control (RBAC) in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[38] = r'''
 <p><strong>Situation:</strong> the app has multiple user roles (viewer, editor, admin) with permissions: viewers read; editors read+write; admins do everything. UI must hide actions users can&rsquo;t perform; routes must block unauthorized access; API must enforce on the server (UI hiding is UX, not security).</p>
 
 <p><strong>Approach:</strong> permissions as discrete strings (<code>"posts:create"</code>, <code>"users:delete"</code>) attached to the user. Roles are bundles of permissions. UI checks <code>hasPermission(user, perm)</code> for show/hide. Routes use guards. Server independently validates every API call.</p>
@@ -4103,15 +3775,9 @@ createBrowserRouter([
 </table>
 
 <p><strong>Open-source RBAC libraries</strong>: <strong>CASL</strong> (declarative abilities, conditions on fields), <strong>Permify</strong> (centralized service, Zanzibar-style). <strong>Auth services with built-in RBAC</strong>: Clerk, Auth0, Permit.io. <strong>For complex hierarchies and resource-level rules</strong>, attribute-based access control (ABAC) generalizes RBAC &mdash; rules over user attributes + resource attributes. <strong>Critical reminder</strong>: client checks are optimization for UX. Every protected operation must be re-validated server-side. Don&rsquo;t trust the client.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q39">
-  <div class="qa__number">Question 39</div>
-  <h3 class="qa__question">How would you handle component animations and transitions in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[39] = r'''
 <p><strong>Situation:</strong> the app needs animations &mdash; element entrance/exit, layout transitions, gesture-driven interactions, page transitions. Manual CSS works for simple cases but breaks for entrance/exit animation (element gone before animation finishes), layout animations, and gesture choreography.</p>
 
 <p><strong>Approach:</strong> default to <strong>CSS transitions</strong> for hover/focus/state changes (cheapest, GPU-friendly). Use <strong>Framer Motion</strong> for component entrance/exit, layout animations, gestures. Use <strong>view-transitions API</strong> for page transitions (browser-native).</p>
@@ -4218,15 +3884,9 @@ function navigate(href) {
 </ul>
 
 <p><strong>2026 default:</strong> CSS for the basics, Framer Motion for the interesting parts, View Transitions API for page-level. Reach for GSAP/React Spring only when those don&rsquo;t fit. Skip Lottie unless you specifically need designer-authored vector animations.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q40">
-  <div class="qa__number">Question 40</div>
-  <h3 class="qa__question">Describe how you would set up a unit testing environment for a React application.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[40] = r'''
 <p><strong>Situation:</strong> the app needs unit tests for components and hooks, integration tests for flows, and E2E tests for critical paths. Setup must be fast, debuggable, run on CI, and produce clear failures. The 2026 standard: <strong>Vitest + React Testing Library + MSW + Playwright</strong>.</p>
 
 <p><strong>Approach:</strong> Vitest replaces Jest (faster, native ESM, same API). RTL for component tests (user-centric queries). MSW for API mocks at network layer. Playwright for E2E. <code>userEvent</code> over <code>fireEvent</code> for realistic interactions.</p>
@@ -4334,15 +3994,9 @@ it("shows error on bad credentials", async () =&gt; {
 </ul>
 
 <p><strong>Coverage targets:</strong> aim for ~80% line coverage on business logic; lower OK for pure UI. Coverage isn&rsquo;t the goal &mdash; finding bugs is. Critical paths get E2E even if coverage is high. Skip testing trivial code (one-line components, glue code) &mdash; ROI is poor.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q41">
-  <div class="qa__number">Question 41</div>
-  <h3 class="qa__question">How would you manage a large form with many fields in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[41] = r'''
 <p><strong>Situation:</strong> a multi-section form (profile + address + preferences) has 30+ fields. Naive implementation with <code>useState</code> per field is tedious and slow (every keystroke re-renders the whole form). Validation, dependent fields, and submit handling compound the complexity.</p>
 
 <p><strong>Approach:</strong> use <strong>React Hook Form + Zod</strong> &mdash; uncontrolled inputs (no re-render per keystroke), schema-driven validation, easy server-error mapping. For very large forms, split into sections with their own state and submit independently or coordinate via parent.</p>
@@ -4470,15 +4124,9 @@ function LargeForm({ initial }: { initial?: Partial&lt;FormValues&gt; }) {
 </table>
 
 <p><strong>For wizards / multi-step</strong>, see Q46 &mdash; combine RHF state with step navigation. <strong>Schema-first design</strong> pays off: the same Zod schema validates client-side AND server-side (Node/Bun); types come from <code>z.infer</code>; one place to change rules.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q42">
-  <div class="qa__number">Question 42</div>
-  <h3 class="qa__question">How would you handle file downloads in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[42] = r'''
 <p><strong>Situation:</strong> the app must let users download files &mdash; reports, exports, attachments, generated PDFs. Files come from authenticated endpoints (need auth header), are sometimes large, and may need progress feedback. Browser&rsquo;s native download flow handles small files; large/authenticated downloads need extra plumbing.</p>
 
 <p><strong>Approach:</strong> for simple authenticated downloads &mdash; fetch as blob, create object URL, trigger anchor click, revoke URL. For large files &mdash; either redirect to a signed URL or use streaming (<code>showSaveFilePicker</code> when available). Use <code>Content-Disposition: attachment</code> server-side for filename hints.</p>
@@ -4588,15 +4236,9 @@ async function streamDownload(url: string, suggestedName: string) {
 </table>
 
 <p><strong>Common pitfalls:</strong> forgetting <code>URL.revokeObjectURL</code> (memory leak); not handling errors (silent failure); using GET with sensitive data in URL (logged everywhere &mdash; use POST with body); CORS issues on cross-origin downloads (Origin must allow <code>Content-Disposition</code>).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q43">
-  <div class="qa__number">Question 43</div>
-  <h3 class="qa__question">How would you implement a reusable table component in React that supports sorting and filtering?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[43] = r'''
 <p><strong>Situation:</strong> the app has many tables &mdash; users, orders, products, logs &mdash; each needs sorting (any column), filtering (search, dropdowns), and pagination. Building each independently leads to inconsistent UX and duplicated code. A single reusable table component handles all of them.</p>
 
 <p><strong>Approach:</strong> use <strong>TanStack Table</strong> (formerly React Table) &mdash; a headless library that provides the logic (sorting, filtering, pagination, virtualization) without imposing markup. You bring the JSX. Combine with <strong>shadcn/ui</strong>&rsquo;s data-table starter for production-ready styles.</p>
@@ -4711,15 +4353,9 @@ function DataTable&lt;T&gt;({ data, columns }: { data: T[]; columns: any[] }) {
 </table>
 
 <p><strong>Why headless wins</strong>: complete styling control + framework-agnostic logic. <strong>shadcn/ui</strong>&rsquo;s data-table example combines TanStack Table + Tailwind + Radix primitives &mdash; copy that into your project for production-ready setup. <strong>For maximum scale</strong>: AG Grid (commercial), MUI X DataGrid (commercial Pro features), Glide Data Grid (canvas-based, handles millions of rows).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q44">
-  <div class="qa__number">Question 44</div>
-  <h3 class="qa__question">How would you integrate a payment gateway (like Stripe) into a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[44] = r'''
 <p><strong>Situation:</strong> the app collects payment for orders, subscriptions, or one-time purchases. Stripe is the dominant 2026 choice. The challenge: PCI compliance &mdash; you cannot touch raw card data. Stripe Elements handles card UI; your server processes the payment via the Stripe API.</p>
 
 <p><strong>Approach:</strong> use <strong>@stripe/react-stripe-js</strong> + <strong>Stripe Elements</strong>. The card form lives in an iframe controlled by Stripe &mdash; PCI scope stays with Stripe, not you. Server creates a PaymentIntent; client confirms payment with the Stripe SDK; webhook handles the success/failure.</p>
@@ -4846,15 +4482,9 @@ app.post("/api/stripe/webhook", express.raw({ type: "application/json" }), async
 </table>
 
 <p><strong>Critical reminders:</strong> never log full card data; never trust client-computed totals; always use webhooks for fulfillment; test in test mode first; use idempotency keys on PaymentIntent creation; verify webhook signatures. <strong>Alternatives:</strong> PayPal SDK, Adyen Web, Square (similar patterns); for crypto, Coinbase Commerce. Stripe&rsquo;s docs are exemplary &mdash; follow them rather than inventing your own flow.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q45">
-  <div class="qa__number">Question 45</div>
-  <h3 class="qa__question">Describe how you would handle side effects in a functional component using hooks.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[45] = r'''
 <p><strong>Situation:</strong> a component must perform side effects &mdash; fetching data, subscribing to an event source, setting up timers, syncing with localStorage, integrating non-React libraries. Side effects must run at the right time, clean up properly, and not race with each other when deps change.</p>
 
 <p><strong>Approach:</strong> use <code>useEffect</code> for most cases (runs after render commit, async-friendly), <code>useLayoutEffect</code> when you need to mutate DOM before paint, and refs for values that must persist across renders without triggering re-renders. Always include cleanup; always declare dependencies honestly.</p>
@@ -4964,15 +4594,9 @@ function MapView({ lat, lng }) {
 <p><strong>The mental model:</strong> "useEffect synchronizes my component with an external system." Setup matches deps; if deps change, clean up old setup, run new. Don&rsquo;t use it to chain state updates &mdash; that&rsquo;s a code smell pointing toward derived state or events.</p>
 
 <p><strong>2026 reality:</strong> for data fetching specifically, prefer <strong>TanStack Query</strong> (cleaner abstractions, built-in cache/retry/deduplication). Reach for raw <code>useEffect</code> when synchronizing with subscriptions, browser APIs, third-party libraries &mdash; the cases TanStack Query doesn&rsquo;t cover. Use <strong>useEffect Event</strong> when stable in React (separates &ldquo;reactive deps&rdquo; from &ldquo;just read latest value&rdquo;).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q46">
-  <div class="qa__number">Question 46</div>
-  <h3 class="qa__question">How would you implement a wizard form in React with multiple steps and navigation?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[46] = r'''
 <p><strong>Situation:</strong> the app needs a multi-step checkout/onboarding flow &mdash; address, shipping, payment, review. Each step validates before advancing; back navigation preserves data; URL syncs to the current step (refresh-safe + shareable). Final submit collects all data and sends one request.</p>
 
 <p><strong>Approach:</strong> URL-driven steps via React Router child routes. Form state in React Hook Form + Zod, lifted to a parent context shared across steps. Each step validates its slice of the schema before advancing. Persistence to sessionStorage so refresh doesn&rsquo;t lose progress.</p>
@@ -5104,15 +4728,9 @@ function CheckoutLayout() {
 </table>
 
 <p><strong>Mature wizard libs:</strong> <strong>react-hook-form</strong>&rsquo;s docs include this pattern (it&rsquo;s lean and works); <strong>formik-wizard</strong> (Formik-based, slightly older); <strong>@reactgular/react-stepper</strong>. <strong>For very long signup flows</strong>, consider authoring the form server-side and submitting per-step via Server Actions (Next.js) &mdash; less client state, more progressive enhancement.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q47">
-  <div class="qa__number">Question 47</div>
-  <h3 class="qa__question">How would you use the useContext hook to share state between multiple components?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[47] = r'''
 <p><strong>Situation:</strong> several components scattered across the tree need to read or update the same state &mdash; e.g., the current user, theme, language, or notification queue. Prop drilling is impractical (passing through 5 layers of intermediate components). The simplest answer that doesn&rsquo;t add a library: Context.</p>
 
 <p><strong>Approach:</strong> Create a Context with both state and dispatch (or setter). Wrap the app with a provider. Components read via <code>useContext</code>. Split state and dispatch into separate Contexts to avoid re-rendering pure consumers. For complex global state, graduate to Zustand or a similar library.</p>
@@ -5231,15 +4849,9 @@ function App() {
 </ul>
 
 <p><strong>Default for 2026:</strong> Context for low-frequency app-wide state (auth, theme, locale). Zustand for everything else. TanStack Query for server data. Never mix server data into your client state.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q48">
-  <div class="qa__number">Question 48</div>
-  <h3 class="qa__question">How would you handle real-time notifications using a service like Firebase in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[48] = r'''
 <p><strong>Situation:</strong> the app needs real-time push notifications &mdash; new message, friend request, payment received. Polling wastes battery and bandwidth; WebSockets require extra infrastructure. <strong>Firebase Cloud Messaging (FCM)</strong> piggybacks on Google&rsquo;s push infrastructure; the Web Push API delivers them even when the tab is closed.</p>
 
 <p><strong>Approach:</strong> register a service worker, request notification permission, get an FCM token, store it server-side per user. When server wants to push, it calls FCM with the token; FCM delivers via Web Push. Foreground messages go through <code>onMessage</code>; background messages through the service worker.</p>
@@ -5353,15 +4965,9 @@ await admin.messaging().send({
 </table>
 
 <p><strong>Alternatives in 2026:</strong> <strong>OneSignal</strong> (cross-platform, generous free tier, good admin UI), <strong>Pusher Beams</strong>, <strong>Knock</strong> (notification routing across email/push/in-app/SMS &mdash; great for multi-channel), <strong>Apple Push Notification Service</strong> for native iOS. <strong>For real-time in-app updates without OS notifications</strong> (someone joined the chat, new comment), use WebSockets/Pusher/Convex/Liveblocks &mdash; FCM is for OS-level push.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q49">
-  <div class="qa__number">Question 49</div>
-  <h3 class="qa__question">How would you create a dashboard with multiple widgets in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[49] = r'''
 <p><strong>Situation:</strong> the app has a dashboard with multiple widgets &mdash; sales chart, recent orders, KPI cards, activity feed. Each widget fetches independently; users can rearrange/resize/toggle them; layout persists. Common in admin panels, BI tools, monitoring apps.</p>
 
 <p><strong>Approach:</strong> compose dashboards from independent widget components, each owning its own data and loading state. Use <strong>react-grid-layout</strong> for resizable/draggable layout, persist to backend or localStorage. Each widget uses <strong>TanStack Query</strong> with appropriate <code>staleTime</code> and refetch interval.</p>
@@ -5501,15 +5107,9 @@ function Dashboard() {
 </table>
 
 <p><strong>For real-time dashboards</strong>, layer in WebSocket subscriptions or SSE for live KPIs (Q73). <strong>For huge datasets</strong>, server-side aggregation (don&rsquo;t fetch raw rows; fetch pre-aggregated stats) and virtualization. The architecture pattern stays the same; the data source changes.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q50">
-  <div class="qa__number">Question 50</div>
-  <h3 class="qa__question">How would you handle asynchronous actions in Redux?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[50] = r'''
 <p><strong>Situation:</strong> Redux state changes need to fire async actions &mdash; fetch data, call APIs, talk to WebSockets, debounce/batch operations. Reducers must be pure, so async logic lives in middleware. The 2026 default: <strong>RTK Query</strong> for data fetching + <strong>createAsyncThunk</strong> for everything else.</p>
 
 <p><strong>Approach:</strong> use Redux Toolkit. <strong>RTK Query</strong> auto-generates reducers, hooks, and cache for any HTTP API &mdash; handles loading/error/cache automatically. <strong>createAsyncThunk</strong> handles arbitrary async logic with auto-dispatched lifecycle actions (pending/fulfilled/rejected).</p>
@@ -5643,15 +5243,9 @@ function LoginForm() {
 </table>
 
 <p><strong>2026 reality:</strong> for new apps, ask yourself if you need Redux at all. <strong>TanStack Query + Zustand</strong> handles 90% of state needs with less boilerplate. Redux Toolkit remains valuable for: large apps with strong action-log requirements (audit trails, undo/redo), teams already on Redux, complex middleware ecosystems. <strong>Don&rsquo;t put server data in client state</strong> &mdash; RTK Query (or TanStack Query) gives you cache, deduplication, refetch on focus, optimistic updates &mdash; manually replicating these in plain Redux is wasted effort. <strong>For optimistic updates</strong>, RTK Query has <code>onQueryStarted</code> + <code>updateQueryData</code> for the snapshot/rollback pattern.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q51">
-  <div class="qa__number">Question 51</div>
-  <h3 class="qa__question">How would you implement an image gallery with lazy loading in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[51] = r'''
 <p><strong>Situation:</strong> a photo gallery shows hundreds of images. Loading all of them upfront wastes bandwidth and freezes the page; users may scroll only halfway. Lazy loading defers image fetches until they&rsquo;re about to enter the viewport &mdash; cutting initial weight by 70-80% on long galleries.</p>
 
 <p><strong>Approach:</strong> use the <strong>native <code>loading="lazy"</code></strong> attribute as the foundation; layer on responsive sizing (<code>srcset</code> + <code>sizes</code>), modern formats (AVIF/WebP via <code>&lt;picture&gt;</code>), explicit dimensions to prevent CLS, and a placeholder/blur effect for perceived performance. For Next.js apps, <code>next/image</code> provides all of this in one component.</p>
@@ -5754,15 +5348,9 @@ function NextGallery({ photos }) {
 </table>
 
 <p><strong>Critical do&rsquo;s and don&rsquo;ts:</strong> always specify <code>width</code>/<code>height</code> (prevents CLS); use <code>fetchpriority="high"</code> on the LCP image; use <code>loading="eager"</code> for above-fold images (lazy loading them hurts LCP); serve AVIF/WebP first (30-50% smaller than JPEG); generate responsive sizes (<code>srcset</code>) so phones don&rsquo;t download desktop images. <strong>For production at scale</strong>: an image CDN (Cloudinary, imgix, Vercel Image Optimization) handles format negotiation, resizing, and caching automatically &mdash; you upload one source image and the CDN generates everything else on demand.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q52">
-  <div class="qa__number">Question 52</div>
-  <h3 class="qa__question">How would you handle form submission and display success or error messages in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[52] = r'''
 <p><strong>Situation:</strong> a form needs to submit data to a server, show success or error feedback, prevent double-submission, and handle network/validation failures gracefully. The pattern applies to almost every form in a real app &mdash; sign-up, contact, checkout, profile updates.</p>
 
 <p><strong>Approach:</strong> use <strong>React Hook Form + Zod</strong> for validation; track submit state separately from form state; show specific error messages from the server; disable the form during submission to prevent duplicates. For React 19, <code>useActionState</code> + form actions is the modern alternative.</p>
@@ -5890,15 +5478,9 @@ function ContactForm() {
 </table>
 
 <p><strong>Critical UX details</strong>: disable inputs <em>and</em> button during submit (prevents double-submission); distinguish field-level errors (next to input) from form-level errors (banner); reset only after a confirmed success; show loading state inline (button text); offer a clear &ldquo;send another&rdquo; path after success. <strong>Server-side errors</strong> should map to specific fields when possible (e.g., &ldquo;email already exists&rdquo; → set on email field) so users can fix without searching.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q53">
-  <div class="qa__number">Question 53</div>
-  <h3 class="qa__question">How would you implement a sortable list in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[53] = r'''
 <p><strong>Situation:</strong> users need to reorder a list by dragging items. Use cases: priority queue, kanban columns, photo album, playlists, settings preferences. Modern solution: <strong>dnd-kit</strong> &mdash; accessible, touch-friendly, the de-facto standard since react-beautiful-dnd was archived in late 2023.</p>
 
 <p><strong>Approach:</strong> wrap the list in <code>&lt;DndContext&gt;</code> + <code>&lt;SortableContext&gt;</code>; each item uses the <code>useSortable</code> hook for drag/drop affordances. On drag end, use <code>arrayMove</code> to reorder the array in state. Add keyboard sensors for accessibility &mdash; arrow keys + Enter must move items.</p>
@@ -6019,15 +5601,9 @@ function SortableTaskList() {
 </table>
 
 <p><strong>Production concerns</strong>: persist new order via API (debounce or batch if rapid drags); rollback optimistically applied changes on failure; show subtle drag preview (dnd-kit&rsquo;s <code>DragOverlay</code> for sticky preview); distinguish drag from click (<code>activationConstraint: { distance: 5 }</code>); test keyboard flow (Tab → Space picks up → arrows move → Space drops); add <code>aria-live</code> announcements for screen readers (dnd-kit provides defaults). <strong>Multi-container drag</strong> (Trello-style) uses one <code>DndContext</code> wrapping multiple <code>SortableContext</code> &mdash; one per column.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q54">
-  <div class="qa__number">Question 54</div>
-  <h3 class="qa__question">How would you handle component state that needs to be reset based on props changes in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[54] = r'''
 <p><strong>Situation:</strong> a component holds local state that should reset when a key prop changes &mdash; e.g., a profile editor showing user A&rsquo;s data; user prop switches to user B; the form must reset to user B&rsquo;s data, not retain user A&rsquo;s edits. Several patterns solve this; the right choice depends on whether you control the component or it&rsquo;s third-party.</p>
 
 <p><strong>Approach:</strong> the cleanest solution is the <strong><code>key</code> prop trick</strong> &mdash; changing the key forces React to unmount and remount, which resets all internal state. For more nuanced control, derive state from props during render (no <code>useEffect</code> needed) or use the <code>useEffect</code> + <code>useState</code> pattern as a last resort.</p>
@@ -6115,15 +5691,9 @@ useEffect(() =&gt; {
 <p>This causes two renders (initial render with stale state → effect fires → setState → re-render). Worse, the user briefly sees stale state. <code>key</code> prop or in-render reset both avoid this.</p>
 
 <p><strong>When to choose what</strong>: if state is fully derived from props, derive it &mdash; don&rsquo;t store it. If state involves user input that should reset on prop change, use <code>key</code> for full reset OR the in-render reset pattern for partial reset. Reach for <code>useEffect</code> only when you need a side effect (network call, subscription) &mdash; not for syncing state.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q55">
-  <div class="qa__number">Question 55</div>
-  <h3 class="qa__question">How would you implement a login form with remember me functionality in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[55] = r'''
 <p><strong>Situation:</strong> a login form needs a "Remember me" checkbox &mdash; checked → keep user signed in across browser restarts; unchecked → log out when the browser closes. The mechanism choice (long-lived JWT in localStorage vs httpOnly cookies vs refresh tokens) has real security implications.</p>
 
 <p><strong>Approach:</strong> for production security, use <strong>httpOnly cookies</strong> for the auth token (immune to XSS); the &ldquo;remember me&rdquo; flag is sent to the server, which sets either a session cookie (no expiry &mdash; cleared on browser close) or a long-lived cookie (e.g., 30 days). Pair with refresh token rotation for high-security apps. For lower-security/internal apps, JWT in <code>localStorage</code> (remember me) vs <code>sessionStorage</code> (session only) works.</p>
@@ -6249,15 +5819,9 @@ function LoginForm() {
 </table>
 
 <p><strong>Critical security notes</strong>: <code>localStorage</code>-stored JWTs are vulnerable to any XSS &mdash; a single injected script can exfiltrate them. Cookies with <code>httpOnly</code> + <code>SameSite=Lax</code> + <code>Secure</code> are immune to XSS reads but require CSRF protection. <strong>For new apps in 2026</strong>: use a managed auth service (Clerk, Supabase Auth, Auth0, NextAuth.js) &mdash; they handle remember-me, refresh tokens, session management, and security correctly. Don&rsquo;t store the password in localStorage even if "remember me" is checked &mdash; only the email at most.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q56">
-  <div class="qa__number">Question 56</div>
-  <h3 class="qa__question">How would you handle API errors globally in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[56] = r'''
 <p><strong>Situation:</strong> an app makes API calls from many components. Without centralized error handling, every component repeats try/catch logic, errors get displayed inconsistently, and unauthenticated 401s aren&rsquo;t globally redirecting to login. Need one place to intercept failures, classify them, and respond consistently.</p>
 
 <p><strong>Approach:</strong> use a <strong>fetch wrapper</strong> or <strong>axios interceptors</strong> to centralize error handling. Combine with <strong>TanStack Query</strong>&rsquo;s built-in retry/error machinery and a global error boundary for render errors. Send all production errors to <strong>Sentry</strong> for monitoring. Show a global error toast for unrecoverable errors; let components show inline messages for expected errors.</p>
@@ -6390,15 +5954,9 @@ function App() {
 </table>
 
 <p><strong>Critical principle</strong>: not all errors are equal. <strong>Recoverable errors</strong> (network blip, rate limit) → retry automatically. <strong>User errors</strong> (validation) → inline feedback. <strong>System errors</strong> (500, render crash) → log to Sentry + show fallback. <strong>Auth errors</strong> → centralized redirect. Don&rsquo;t blanket every error with "Something went wrong" &mdash; specific messages let users self-correct.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q57">
-  <div class="qa__number">Question 57</div>
-  <h3 class="qa__question">How would you implement a custom error page for 404 and 500 errors in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[57] = r'''
 <p><strong>Situation:</strong> users will visit URLs that don&rsquo;t exist, navigate to deleted resources, or hit unhandled exceptions during page load. Default browser 404s and white-screen JS crashes feel broken. Custom 404 and 500 pages give users a way out (link home, search, contact support) and let you log the failure for fixing.</p>
 
 <p><strong>Approach:</strong> for 404, use React Router&rsquo;s catch-all route (<code>path="*"</code>) and conditional rendering when API resource is missing. For 500 (render crashes and unhandled errors), use error boundaries. In Next.js, use <code>not-found.tsx</code> and <code>error.tsx</code> conventions per route segment.</p>
@@ -6530,15 +6088,9 @@ export default function Error({ error, reset }: any) {
 <p><strong>Server config matters</strong>: BrowserRouter URLs need server fallback to <code>index.html</code> &mdash; without it, refreshing on <code>/products/42</code> hits the server, which returns its own 404 (not your React 404). Configure: Vercel/Netlify auto-handle this; nginx needs <code>try_files $uri $uri/ /index.html;</code>. <strong>SEO note</strong>: real 404 pages should return HTTP status 404 (not 200). With SPAs this requires server cooperation; with Next.js / Remix, frameworks set the status correctly.</p>
 
 <p><strong>UX details that matter</strong>: don&rsquo;t blame the user (&ldquo;You went the wrong way&rdquo;); offer 2-3 escape paths (home, search, support); preserve the URL for analytics; reset error boundary state when navigating away (<code>resetKeys</code> with route changes). Production error pages also need basic styling that works without the rest of the app loading &mdash; if a chunk fails to load, the error page must still render.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q58">
-  <div class="qa__number">Question 58</div>
-  <h3 class="qa__question">How would you manage user sessions and tokens in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[58] = r'''
 <p><strong>Situation:</strong> a React app needs to manage user sessions: store the auth token securely, attach it to API requests, refresh expired tokens automatically, log users out cleanly, and survive page refreshes. The 2026 sweet spot: <strong>httpOnly cookies + refresh token rotation</strong> for security; <strong>Clerk/Supabase/Auth0</strong> for managed solutions.</p>
 
 <p><strong>Approach:</strong> use httpOnly cookies for tokens (XSS-safe). Implement refresh token rotation: short-lived access token (15 min) + long-lived refresh token (30 days). On 401, attempt token refresh; if refresh fails, redirect to login. Store auth state in React Context for synchronous access; sync with the cookie via API calls.</p>
@@ -6666,15 +6218,9 @@ useEffect(() =&gt; {
 </table>
 
 <p><strong>Critical security details</strong>: <strong>refresh token rotation</strong> &mdash; each refresh issues a new refresh token; reusing an old one is a sign of theft and revokes the family. <strong>Single-flight protection</strong> &mdash; multiple 401s should trigger one refresh, not N. <strong>Cross-tab sync</strong> &mdash; BroadcastChannel lets logout in one tab log out all others. <strong>CSRF protection</strong> &mdash; cookies need <code>SameSite=Lax</code> + CSRF tokens for sensitive operations. <strong>Don&rsquo;t implement crypto/signing yourself</strong>; use established libraries (jose, jsonwebtoken with proven config) or managed services.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q59">
-  <div class="qa__number">Question 59</div>
-  <h3 class="qa__question">How would you implement a theme provider to manage themes in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[59] = r'''
 <p><strong>Situation:</strong> an app needs centralized theme management &mdash; light/dark mode, accent color, font size preferences, density. Every component must respond to changes consistently; user preferences should persist across sessions and respect OS-level settings. Repeated styling logic per component is a maintenance disaster.</p>
 
 <p><strong>Approach:</strong> single source of truth in a <strong>ThemeProvider</strong> using Context. Theme drives a <code>data-theme</code> attribute on the root; CSS variables resolve based on that attribute &mdash; all styling responds via CSS, not JS. Persist choice to localStorage; respect <code>prefers-color-scheme</code> for default; inline a script in HTML head to prevent flash of unstyled content (FOUC).</p>
@@ -6797,15 +6343,9 @@ body { background: var(--bg); color: var(--text); transition: background 200ms; 
 </table>
 
 <p><strong>The flash-of-wrong-theme bug</strong>: without the inline script, the page renders with default theme briefly before React hydrates and applies the user&rsquo;s stored preference &mdash; jarring. The synchronous script in <code>&lt;head&gt;</code> sets <code>data-theme</code> before any CSS runs &mdash; first paint shows the right colors. Tailwind&rsquo;s <code>darkMode: ["class", '[data-theme="dark"]']</code> config integrates with this approach. <strong>For Next.js</strong>, use the <code>next-themes</code> library &mdash; it handles SSR + flash prevention automatically.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q60">
-  <div class="qa__number">Question 60</div>
-  <h3 class="qa__question">How would you handle drag-and-drop file uploads in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[60] = r'''
 <p><strong>Situation:</strong> users need to upload files via drag-and-drop &mdash; drop a file onto a target area, see preview/progress, support multiple files, optionally upload images/documents only. Use cases: profile photos, document submission, attachment upload in a chat or email composer.</p>
 
 <p><strong>Approach:</strong> use the HTML5 drag-and-drop API for the drop zone behavior; use <strong>react-dropzone</strong> for production (handles edge cases like nested drag events, accessibility, file type filtering). Pair with axios <code>onUploadProgress</code> or fetch with streams for progress reporting; show per-file status and allow cancellation.</p>
@@ -6965,15 +6505,9 @@ function FileUploader({ onUploadComplete }: { onUploadComplete?: (urls: string[]
 </table>
 
 <p><strong>Production concerns</strong>: validate file type/size <em>both</em> client and server (client-side checks improve UX but aren&rsquo;t security); generate stable IDs with <code>crypto.randomUUID</code> (not <code>Date.now()</code> &mdash; collisions on rapid drops); show progress per-file; allow cancellation via <code>AbortController</code>; for sensitive content (medical, financial), encrypt at rest and validate MIME types server-side &mdash; client-reported types are spoofable. <strong>Server uploads scale badly</strong> &mdash; for any non-trivial file size, switch to direct-to-cloud uploads with pre-signed URLs.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q61">
-  <div class="qa__number">Question 61</div>
-  <h3 class="qa__question">How would you implement a collapsible sidebar in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[61] = r'''
 <p><strong>Situation:</strong> a dashboard / admin app needs a sidebar that collapses to icons on small screens or to give users more content area. Common in CMS, admin panels, IDE-like apps, project management tools.</p>
 
 <p><strong>Approach:</strong> two collapse modes &mdash; <strong>icon-only</strong> (desktop, more screen real estate) and <strong>fully hidden</strong> (mobile, full-screen content). Use CSS transitions for smooth motion; persist user preference to localStorage; auto-collapse on narrow viewports; preserve keyboard navigation and accessibility.</p>
@@ -7117,15 +6651,9 @@ function CollapsibleSidebar() {
 </table>
 
 <p><strong>Accessibility checklist</strong>: <code>aria-expanded</code> on toggle button; <code>aria-label</code> for sidebar landmark; <code>aria-controls</code> linking toggle to sidebar; ESC closes mobile sidebar; backdrop click closes; collapsed icons have <code>title</code> for screen-reader-friendly tooltips. <strong>For complex apps</strong>, use <strong>Radix UI&rsquo;s Sheet</strong> (mobile sidebar) or <strong>shadcn/ui Sheet</strong> &mdash; they handle focus trapping, return-focus, and animations.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q62">
-  <div class="qa__number">Question 62</div>
-  <h3 class="qa__question">How would you integrate GraphQL with a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[62] = r'''
 <p><strong>Situation:</strong> an app uses a GraphQL backend; the React frontend needs to query data, handle subscriptions, manage cache, and stay in sync. Choices: <strong>Apollo Client</strong> (full-featured, normalized cache), <strong>urql</strong> (lighter), <strong>Relay</strong> (Meta-built, very powerful), or <strong>TanStack Query + graphql-request</strong> (simple, no normalization).</p>
 
 <p><strong>Approach:</strong> for most teams in 2026, <strong>Apollo Client</strong> remains the production default &mdash; mature, well-documented, normalized cache with automatic UI updates. Use <code>graphql-codegen</code> to generate type-safe hooks from your schema. For lighter footprint or simpler needs, urql; for Meta-scale apps with intense caching needs, Relay.</p>
@@ -7265,15 +6793,9 @@ function LiveCommentCount({ postId }) {
 </table>
 
 <p><strong>Critical patterns</strong>: <strong>graphql-codegen</strong> generates fully-typed hooks from your schema &mdash; catches schema/query mismatches at compile time. <strong>Normalized cache</strong> means updating one entity reflects everywhere it&rsquo;s used (no manual cache invalidation). <strong>Optimistic responses</strong> + cache <code>update</code> functions give instant UI updates with rollback on error. <strong>Persisted queries</strong> (Apollo, urql) reduce request size and protect against arbitrary query DoS. <strong>Don&rsquo;t over-fetch</strong> &mdash; one of GraphQL&rsquo;s benefits is you only get what you query for; specify exactly the fields each component needs.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q63">
-  <div class="qa__number">Question 63</div>
-  <h3 class="qa__question">How would you implement debounce functionality in a search input in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[63] = r'''
 <p><strong>Situation:</strong> a search input fires an API request on every keystroke &mdash; 10 characters typed = 10 requests, most of which become irrelevant before they return. Debouncing waits until the user stops typing for N ms, then fires one request &mdash; saves bandwidth, server load, and prevents flickering results.</p>
 
 <p><strong>Approach:</strong> for typed search, two complementary techniques: <strong>debouncing</strong> (delay the trigger) and <strong>request cancellation</strong> (abort stale in-flight requests). With <strong>TanStack Query</strong>, debounce the query key; the library auto-cancels stale requests via signal integration. For roll-your-own, a <code>useDebouncedValue</code> hook + AbortController is enough.</p>
@@ -7403,15 +6925,9 @@ function ClientFilter({ items }) {
 </table>
 
 <p><strong>Pick the right delay</strong>: 200-300ms is the sweet spot for search &mdash; long enough to catch typing pauses, short enough to feel responsive. 100ms feels instant but fires too many requests; 600ms feels laggy. <strong>Library options</strong>: <code>use-debounce</code> (popular, well-tested), <code>lodash.debounce</code>, or roll your own as above. <strong>For typeahead/autocomplete</strong>, combine debouncing + <code>placeholderData: keepPreviousData</code> (TanStack Query) so old results stay visible while new ones load &mdash; eliminates flicker. <strong>useDeferredValue is NOT a debounce replacement for API calls</strong> &mdash; it&rsquo;s for purely client-side work; for API requests, debounce.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q64">
-  <div class="qa__number">Question 64</div>
-  <h3 class="qa__question">How would you handle state updates that depend on previous state in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[64] = r'''
 <p><strong>Situation:</strong> state updates that depend on the previous state can race when batched or queued. <code>setCount(count + 1)</code> called twice in the same event handler increments by 1, not 2 &mdash; both reads see the same stale <code>count</code>. The fix: use the <strong>updater function form</strong> of <code>setState</code> &mdash; it receives the current state and returns the new one.</p>
 
 <p><strong>Approach:</strong> always use the updater function when next state depends on previous: <code>setCount(prev =&gt; prev + 1)</code>. React queues these and applies them in order, each operating on the result of the previous &mdash; no stale reads. This matters in event handlers, async callbacks, intervals, and any code that runs across multiple renders.</p>
@@ -7527,15 +7043,9 @@ const [state, dispatch] = useReducer(reducer, initialState);
 <p><strong>The exhaustive-deps lint rule</strong>: ESLint&rsquo;s <code>react-hooks/exhaustive-deps</code> warns about missing dependencies in effects/callbacks &mdash; including state values used inside. The fix is often to use the updater form (which lets you remove the state from deps) or include it (which causes effect to re-run on every change). <strong>Don&rsquo;t silence the warning</strong> &mdash; missing deps are real bugs.</p>
 
 <p><strong>For functional updates with multiple state pieces</strong>: if multiple states update together, use <code>useReducer</code> &mdash; one dispatch, atomic transition, no chance of inconsistency between pieces.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q65">
-  <div class="qa__number">Question 65</div>
-  <h3 class="qa__question">How would you implement a tooltip component in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[65] = r'''
 <p><strong>Situation:</strong> a tooltip needs to appear when users hover or focus on an element &mdash; explanation of an icon button, abbreviation expansion, help text. Must handle keyboard users (focus, not just hover), avoid clipping at viewport edges, and announce content to screen readers.</p>
 
 <p><strong>Approach:</strong> for production, use <strong>Radix UI Tooltip</strong> or <strong>shadcn/ui Tooltip</strong> (Radix-based). They handle all the edge cases &mdash; positioning, collision detection, focus management, ARIA roles, escape key, hover delay. For learning purposes, build a basic version with <strong>Floating UI</strong> for positioning.</p>
@@ -7686,15 +7196,9 @@ function NaiveTooltip({ children, text }) {
 </ul>
 
 <p><strong>Don&rsquo;t use tooltips for critical info</strong>: tooltips are progressive disclosure for "nice to have" info. Anything users <em>need</em> should be visible (label below an icon, helper text in a form). Tooltips also fail on touch devices &mdash; phones don&rsquo;t have hover. Pair tooltips with visible labels in mobile breakpoints.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q66">
-  <div class="qa__number">Question 66</div>
-  <h3 class="qa__question">How would you manage a list of dynamic form fields in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[66] = r'''
 <p><strong>Situation:</strong> a form needs dynamically added/removed fields &mdash; users can add multiple emails, phone numbers, work experiences, family members, ingredients in a recipe. Each &ldquo;row&rdquo; has its own validation; the array length is user-controlled.</p>
 
 <p><strong>Approach:</strong> for simple cases, manage as an array in <code>useState</code> with stable IDs (<code>crypto.randomUUID()</code>, never indexes). For production, use <strong>React Hook Form&rsquo;s <code>useFieldArray</code></strong> &mdash; it handles add/remove, key management, and per-field validation natively.</p>
@@ -7856,15 +7360,9 @@ function ManualDynamicForm() {
 </table>
 
 <p><strong>Critical: never use array index as key</strong>. If user removes the second item, React reuses the third item&rsquo;s state for what is now the second position &mdash; classic data corruption bug. Use <code>crypto.randomUUID()</code> or RHF&rsquo;s built-in IDs. <strong>Validation per row</strong> &mdash; RHF + Zod arrays validate each item independently with per-field error mapping. <strong>Min/max enforcement</strong> &mdash; disable the remove button when at minimum, hide add button at maximum (or show a message). <strong>Reordering</strong> &mdash; RHF&rsquo;s <code>move(from, to)</code> lets users drag-and-drop rows; combine with dnd-kit for the drag UI.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q67">
-  <div class="qa__number">Question 67</div>
-  <h3 class="qa__question">How would you handle user logout and redirect in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[67] = r'''
 <p><strong>Situation:</strong> a logout button needs to clear the user&rsquo;s session, invalidate cached data, sync the logout across browser tabs, and redirect to the login page or home. Half-implemented logout creates security issues (cached data still showing) and bad UX (logged out in one tab, still &ldquo;logged in&rdquo; in another).</p>
 
 <p><strong>Approach:</strong> a complete logout flow: call the server logout endpoint (invalidates session/refresh token); clear local auth state and cookies; wipe TanStack Query cache; broadcast logout to other tabs via BroadcastChannel; redirect with <code>replace: true</code> so back button doesn&rsquo;t return to authenticated pages.</p>
@@ -8017,15 +7515,9 @@ function useInactivityLogout(timeoutMinutes = 30) {
 <p><strong>Critical security details</strong>: <strong>always wipe cached data</strong> &mdash; <code>queryClient.clear()</code> prevents next user (or back-navigation) from seeing previous user&rsquo;s data. <strong>Server-side invalidation</strong> &mdash; client-only logout still leaves the token valid; the server must add it to a revocation list (or rotate refresh tokens). <strong>HttpOnly cookies</strong> are cleared by the server&rsquo;s logout response setting an expired cookie. <strong>Don&rsquo;t use <code>window.location.href</code></strong> for the redirect &mdash; use React Router&rsquo;s <code>navigate</code> for SPA behavior; <code>replace: true</code> prevents back-button reaching authenticated pages.</p>
 
 <p><strong>Production additions</strong>: log logout events for security auditing; rate-limit logout endpoint to prevent abuse; for highly sensitive apps, consider re-authentication for sensitive actions (privilege escalation) rather than just session length.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q68">
-  <div class="qa__number">Question 68</div>
-  <h3 class="qa__question">How would you implement a slider component in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[68] = r'''
 <p><strong>Situation:</strong> need a slider control for selecting a numeric value or range &mdash; volume, price filter, image opacity, brightness, year picker. The native <code>&lt;input type="range"&gt;</code> works but has limitations: no two-thumb range selection, awkward styling across browsers, no rich tooltips during drag.</p>
 
 <p><strong>Approach:</strong> for single-value sliders, native <code>&lt;input type="range"&gt;</code> with custom CSS is fine. For range sliders (two thumbs), or rich features (markers, tooltips, custom rendering), use <strong>Radix UI Slider</strong> or <strong>shadcn/ui Slider</strong> &mdash; accessible, keyboard-friendly, fully stylable.</p>
@@ -8196,15 +7688,9 @@ function PriceFilter() {
 </table>
 
 <p><strong>Accessibility checklist</strong>: each thumb has an <code>aria-label</code>; arrow keys move ±step; Page Up/Down move by larger increments; Home/End jump to min/max; current value announced via <code>aria-valuenow</code>. Radix handles all of this. <strong>Performance</strong> &mdash; for sliders that filter large data, debounce the change event (300ms typical) so the filter doesn&rsquo;t fire on every pixel of dragging. <strong>Touch devices</strong> &mdash; the default thumb size (16-18px) is too small; consider 24-28px for mobile breakpoints. Radix and shadcn/ui handle pointer events that work for both mouse and touch.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q69">
-  <div class="qa__number">Question 69</div>
-  <h3 class="qa__question">How would you integrate a map service (like Google Maps) into a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[69] = r'''
 <p><strong>Situation:</strong> an app needs to display a map &mdash; show a location, plot multiple markers, draw routes, allow user interaction. Use cases: contact page (&ldquo;our office&rdquo;), real estate listings, ride-hailing, delivery tracking, store finder. The Google Maps JavaScript API is the industry default; alternatives include Mapbox, Leaflet, and OpenStreetMap.</p>
 
 <p><strong>Approach:</strong> use <strong><code>@vis.gl/react-google-maps</code></strong> &mdash; the official React wrapper from Google&rsquo;s visualization team (replaces the older <code>@react-google-maps/api</code>). Provides typed hooks, declarative components, and automatic map lifecycle management.</p>
@@ -8328,15 +7814,9 @@ function MapWithControls() {
 <p><strong>Production considerations</strong>: <strong>API keys</strong> &mdash; restrict by HTTP referrer in Google Cloud Console; never expose unrestricted keys (you&rsquo;ll get billed for someone else&rsquo;s usage). <strong>Lazy load the map library</strong> &mdash; use dynamic <code>import()</code> for routes that don&rsquo;t always need the map (saves ~200KB on initial bundle). <strong>Geolocation requires HTTPS</strong> in modern browsers and explicit user consent. <strong>Many markers</strong> (1000+) &mdash; use marker clustering (<code>@googlemaps/markerclusterer</code>) to avoid janky rendering. <strong>SSR</strong> &mdash; map libraries are client-only; in Next.js, use dynamic import with <code>ssr: false</code> or render in a Client Component.</p>
 
 <p><strong>For very simple needs</strong> (just show one address): an iframe with Google Maps embed URL is free and zero-JS &mdash; no API key needed. <code>&lt;iframe src="https://www.google.com/maps?q=..." /&gt;</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q70">
-  <div class="qa__number">Question 70</div>
-  <h3 class="qa__question">How would you handle nested forms in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[70] = r'''
 <p><strong>Situation:</strong> a form has nested objects &mdash; e.g., a user profile with shipping address (street, city, zip), billing address, and a list of children with their own fields. Each nested entity has its own validation; the data structure mirrors the API/database shape. Flattening everything into <code>userName_streetLine1</code> field names is fragile and ugly.</p>
 
 <p><strong>Approach:</strong> use <strong>React Hook Form&rsquo;s dot notation</strong> for nested registration (<code>{...register("address.city")}</code>) and <strong>Zod schemas</strong> for nested validation. RHF handles the nested state; Zod validates the structure. For arrays of nested objects, combine with <code>useFieldArray</code>.</p>
@@ -8501,15 +7981,9 @@ import { FormProvider, useFormContext } from "react-hook-form";</code></pre>
 </table>
 
 <p><strong>Reusable nested components</strong> &mdash; pass a <code>prefix</code> prop and use <code>useFormContext()</code> from RHF&rsquo;s <code>FormProvider</code>; the same <code>AddressFieldset</code> works for shipping AND billing. <strong>Conditional fields</strong> &mdash; use <code>watch</code> to react to other fields (e.g., show "company name" if "type === &lsquo;business&rsquo;"). <strong>Server validation errors mapped to nested paths</strong> &mdash; RHF&rsquo;s <code>setError("shipping.zip", { message: "Invalid for region" })</code> places the error on the right nested field. <strong>Performance</strong> &mdash; RHF doesn&rsquo;t re-render the whole form when one nested field changes; only the field with the error updates. <strong>Submission</strong> &mdash; the data structure passed to your handler is already nested correctly &mdash; submit it directly to your API.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q71">
-  <div class="qa__number">Question 71</div>
-  <h3 class="qa__question">How would you implement server-side rendering with Next.js in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[71] = r'''
 <p><strong>Situation:</strong> an app needs SSR for SEO, faster first paint, and social sharing previews. Modern React SSR is dominated by <strong>Next.js</strong> &mdash; especially the App Router with React Server Components, which moves data fetching and rendering to the server by default.</p>
 
 <p><strong>Approach:</strong> use <strong>Next.js 15+ App Router</strong>. Components are Server Components by default (rendered on server, no JS shipped); add <code>"use client"</code> only where you need interactivity. Data is fetched in components via async/await; the bundler handles streaming HTML to the client.</p>
@@ -8672,15 +8146,9 @@ async function Stats() {
 <p><strong>Critical Server Component rules</strong>: can&rsquo;t use hooks, browser APIs, or event handlers; can be async; receives props from URL params and search params; runs once per request. <strong>Critical Client Component rules</strong>: must declare <code>"use client"</code> at top of file; can use all React features; ships JS to browser; can&rsquo;t be async by default. <strong>The <code>"use client"</code> boundary</strong> &mdash; once you&rsquo;re inside a Client Component, all imported components are also client (even without their own directive).</p>
 
 <p><strong>For non-Next.js apps</strong>: <strong>Remix / React Router v7</strong> with loaders is the closest alternative; <strong>Astro</strong> for content-heavy sites with islands of interactivity; manual SSR with <code>renderToPipeableStream</code> + Express works but you&rsquo;re re-implementing what Next.js does. <strong>Don&rsquo;t add SSR to a CSR app to "improve performance"</strong> &mdash; the migration cost is high; use it from the start when SEO/social previews matter.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q72">
-  <div class="qa__number">Question 72</div>
-  <h3 class="qa__question">How would you create a reusable input component in React that supports validation?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[72] = r'''
 <p><strong>Situation:</strong> a design system needs a single <code>&lt;Input&gt;</code> component that handles labels, validation states, error messages, helper text, and accessibility &mdash; reused across dozens of forms. Doing this per-input form-by-form leads to inconsistent UX and accessibility gaps.</p>
 
 <p><strong>Approach:</strong> build a flexible Input component that wraps the native input, accepts label/error/hint props, generates IDs for label association and ARIA attributes, and integrates cleanly with React Hook Form via <code>forwardRef</code> (or React 19&rsquo;s ref-as-prop).</p>
@@ -8834,15 +8302,9 @@ function InputV19({
 <p><strong>Accessibility checklist that the example above covers</strong>: <code>useId</code> for unique label-input pairing; <code>aria-invalid</code> when there&rsquo;s an error; <code>aria-describedby</code> linking to hint/error text; <code>role="alert"</code> on errors so screen readers announce them; the <code>htmlFor</code> on label so clicking it focuses the input; required indicator with <code>aria-hidden</code> so screen readers don&rsquo;t announce the asterisk twice (the <code>required</code> attribute itself is announced).</p>
 
 <p><strong>Don&rsquo;t reinvent native inputs</strong>: native <code>&lt;input&gt;</code> handles focus, keyboard, spellcheck, autofill, password managers, autocomplete. A custom &ldquo;input&rdquo; built from divs + contenteditable breaks all of these. Wrap the native input; don&rsquo;t replace it. <strong>Composable variants</strong> &mdash; <code>variant</code>, <code>size</code>, <code>density</code> as props let you build complex UI from one component. <strong>For password fields</strong>, add a show/hide toggle (right icon area); for search, add a clear button; for currency, format the value on blur. These domain-specific behaviors should live in specialized components (PasswordInput, SearchInput) that compose from the base Input.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q73">
-  <div class="qa__number">Question 73</div>
-  <h3 class="qa__question">How would you handle client-side routing in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[73] = r'''
 <p><strong>Situation:</strong> an app needs URL-driven page navigation without full page reloads &mdash; users see different views, the URL updates, browser back/forward work, and direct links to inner pages work. The 2026 React choice: <strong>React Router v6.4+</strong> (the data API version with loaders/actions) or <strong>v7</strong> (which is essentially Remix as a router); for Next.js apps, the App Router replaces React Router entirely.</p>
 
 <p><strong>Approach:</strong> declare routes via <code>createBrowserRouter</code>; add loaders for per-route data fetching; use <code>useNavigate</code>/<code>Link</code> for programmatic and declarative navigation; handle 404 with a catch-all route. Configure server fallback for direct URL hits.</p>
@@ -9013,15 +8475,9 @@ function ProductFilters() {
 <p><strong>Don&rsquo;t use <code>HashRouter</code> for new apps</strong> &mdash; ugly URLs (<code>#/products</code>), bad SEO, harder to share. Only use it when you can&rsquo;t configure server fallback (e.g., static GitHub Pages without rewrite support, but even there workarounds exist).</p>
 
 <p><strong>Migrate from old patterns</strong>: <code>useHistory</code> → <code>useNavigate</code>; <code>history.push</code> → <code>navigate(to)</code>; <code>history.replace</code> → <code>navigate(to, { replace: true })</code>. Switch to data API for any new code; the old <code>&lt;Routes&gt;</code> + <code>&lt;Route&gt;</code> with <code>useEffect</code>-based fetching still works but loses the loader benefits (parallel data fetching, no flash of loading state).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q74">
-  <div class="qa__number">Question 74</div>
-  <h3 class="qa__question">How would you implement a tree view component in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[74] = r'''
 <p><strong>Situation:</strong> a UI needs to display hierarchical data &mdash; file system, organization chart, product categories, comment threads. Each node may have children, be expandable, support selection, and operations (rename, delete). For 100+ deeply-nested items, virtualization becomes essential.</p>
 
 <p><strong>Approach:</strong> for simple cases, recursive <code>TreeNode</code> component that renders itself + children. For production with thousands of nodes, drag-drop, multi-select, and virtualization, use <strong>react-arborist</strong> &mdash; the modern recommended library that handles all of this.</p>
@@ -9180,15 +8636,9 @@ function SelectableTree() {
 <p><strong>Lazy loading children</strong>: for trees backed by an API where loading all data upfront is wasteful (file system browser, S3 explorer, large org chart), fetch a node&rsquo;s children only when expanded. Show a loading state inline; cache results in TanStack Query keyed by parent ID.</p>
 
 <p><strong>Drag-and-drop in tree views is genuinely hard</strong> &mdash; collision detection across levels, validation (can&rsquo;t drop a parent into its descendant), visual feedback for valid/invalid drop targets. react-arborist gets all this right; rolling your own with raw dnd-kit is a substantial project.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q75">
-  <div class="qa__number">Question 75</div>
-  <h3 class="qa__question">How would you handle complex state logic in a React component using the useReducer hook?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[75] = r'''
 <p><strong>Situation:</strong> a multi-step form (wizard) needs to manage accumulated state across steps, validate per-step before advancing, allow backward navigation without losing data, persist across reloads, and submit a combined payload. Patterns: maintain accumulated form state, validate per step before advancing, allow back navigation without losing data, persist state for refresh resilience, show progress indicator.</p>
 
 <p><strong>Approach:</strong> use <code>useReducer</code> for the wizard state machine (step + per-section data + errors); use <strong>React Hook Form + Zod</strong> per step for field validation; persist to <code>sessionStorage</code> for refresh resilience; URL-drive the step number for shareable progress.</p>
@@ -9395,15 +8845,9 @@ function ProgressIndicator({ step, totalSteps }: { step: number; totalSteps: num
 </ul>
 
 <p><strong>Branching wizards</strong> (different paths based on selections) are where <strong>XState</strong> shines &mdash; visualize the state machine, prevent invalid transitions. For linear wizards, useReducer is plenty. <strong>Don&rsquo;t blindly use sessionStorage for sensitive data</strong> &mdash; payment fields shouldn&rsquo;t persist; mark them as ephemeral and only submit them at final step.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q76">
-  <div class="qa__number">Question 76</div>
-  <h3 class="qa__question">How would you implement breadcrumbs navigation in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[76] = r'''
 <p><strong>Situation:</strong> Multi-level navigation needs breadcrumbs &mdash; "<em>Home / Products / Electronics / Laptops / Dell XPS</em>" &mdash; that auto-derive from the current route, support clickable parent links, and stay consistent across the app without each page hand-coding them.</p>
 
 <p><strong>Approach:</strong> Two solid patterns &mdash; <strong>(1)</strong> derive from React Router&rsquo;s <code>useMatches()</code> + per-route <code>handle</code> metadata, or <strong>(2)</strong> a <code>BreadcrumbContext</code> where pages register their crumbs imperatively. Pattern 1 is preferred because routes are the source of truth.</p>
@@ -9477,15 +8921,9 @@ function Breadcrumbs() {
 <p><strong>JSON-LD for SEO</strong>: search engines parse breadcrumb structured data and display them in results. Add a <code>&lt;script type="application/ld+json"&gt;</code> with <code>BreadcrumbList</code> schema reflecting the same crumbs.</p>
 
 <p><strong>Trade-offs:</strong> Auto-derived breadcrumbs are correct by construction but require route metadata discipline &mdash; every route needs a crumb function. Loader-driven labels (e.g., product name from data) couple breadcrumbs to data fetching &mdash; convenient but means breadcrumbs render late if loaders are slow; render placeholder ("...") for the dynamic segment while loading. <strong>Accessibility</strong>: <code>nav aria-label="Breadcrumb"</code>, <code>aria-current="page"</code> on the last crumb, and visible separator characters that are <code>aria-hidden</code> so screen readers don&rsquo;t announce them. Don&rsquo;t make the last crumb a link &mdash; users are already there.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q77">
-  <div class="qa__number">Question 77</div>
-  <h3 class="qa__question">How would you handle user feedback and ratings in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[77] = r'''
 <p><strong>Situation:</strong> Users should rate products with stars (1-5), optionally leave written reviews, and see aggregated ratings. The system needs accessible star input, optimistic submission, edit/delete of own reviews, sort/filter, and protection against ballot stuffing.</p>
 
 <p><strong>Approach:</strong> Build a star-rating primitive on top of accessible radio buttons (each star is a radio), back it with TanStack Query mutations for optimistic UX, and pair with a review form using React Hook Form + Zod.</p>
@@ -9568,15 +9006,9 @@ function ReviewForm({ productId }) {
 </table>
 
 <p><strong>Trade-offs:</strong> The radio-fieldset pattern gives keyboard navigation, screen-reader announcements, and form-submit integration for free &mdash; building stars from buttons or divs requires reimplementing all of that. <strong>Spam protection</strong>: rate-limit per user/IP server-side; require verified purchase or account; flag identical text across reviews; use hCaptcha for anonymous reviews. <strong>Editing</strong>: allow within a window (24-72 hours) then lock; show "edited" badge with timestamp. <strong>JSON-LD <code>AggregateRating</code></strong> schema for SEO &mdash; rich-result stars in Google. Don&rsquo;t expose raw counts to manipulation by treating the displayed number as authoritative client-side; always recompute server-side after writes.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q78">
-  <div class="qa__number">Question 78</div>
-  <h3 class="qa__question">How would you implement a responsive grid layout in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[78] = r'''
 <p><strong>Situation:</strong> A product grid, dashboard, or photo wall must adapt fluidly across phone (1 column), tablet (2-3), desktop (4-6), and ultra-wide (8+) without manual breakpoint maintenance. Items vary in count; layout should look balanced at every width.</p>
 
 <p><strong>Approach:</strong> Use <strong>CSS Grid&rsquo;s <code>auto-fit</code> + <code>minmax()</code></strong> &mdash; the browser computes column count from container width. No JS, no breakpoint media queries, no resize listeners. Pair with <code>aspect-ratio</code> for consistent card heights.</p>
@@ -9639,15 +9071,9 @@ function ReviewForm({ productId }) {
 <p><strong>Image discipline inside cards</strong>: always set <code>width</code>/<code>height</code> attributes (or <code>aspect-ratio</code>) to prevent CLS; use <code>srcset</code> for responsive variants; <code>loading="lazy"</code> for off-screen items. A grid that "settles" as images load destroys perceived performance even if computed metrics look fine.</p>
 
 <p><strong>Trade-offs:</strong> CSS Grid <code>auto-fit</code> is the simplest answer for 90% of cases &mdash; no JS, no edge cases, scales to any viewport. <strong>Limit</strong>: when columns must align across multiple grids (homepage hero alignment), grid auto-sizing per container produces mismatches; explicit breakpoints serve better there. <strong>For very large lists</strong> (1000+ items), grid layouts force the browser to lay out everything; pair with virtualization (TanStack Virtual, react-virtuoso) and keep grid-by-row but virtualize rows. <strong>Don&rsquo;t reinvent</strong>: Tailwind&rsquo;s <code>grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4</code> works fine, but loses the auto-fit gracefulness; pick based on whether you want fluid (auto-fit) or stepped (breakpoints) responsiveness.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q79">
-  <div class="qa__number">Question 79</div>
-  <h3 class="qa__question">How would you handle notifications and alerts in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[79] = r'''
 <p><strong>Situation:</strong> The app needs a notification system for transient feedback (success toasts, errors, info), persistent alerts (banner: "scheduled maintenance Sunday"), and inline status (form-level errors). Each has different UX requirements: dismissibility, urgency, screen-reader behavior, queueing.</p>
 
 <p><strong>Approach:</strong> Use <strong>Sonner</strong> (the 2026 standard for toasts), a banner context for persistent alerts, and inline alerts for form feedback. Don&rsquo;t conflate them &mdash; toasts are ephemeral, banners are persistent until dismissed.</p>
@@ -9737,15 +9163,9 @@ function BannerProvider({ children }) {
 </table>
 
 <p><strong>Trade-offs:</strong> Sonner ships with sensible defaults: stacking, swipe-to-dismiss, screen-reader announcements, position presets, dark mode. Reaching for it ends most toast discussions. <strong>Don&rsquo;t toast everything</strong> &mdash; success toasts on every interaction become noise; reserve them for actions where users need confirmation that something went off-screen (deleted, sent, saved). <strong>Errors should be persistent enough to read</strong> &mdash; default 4s timeout is too fast for long error messages; bump to 8s or require dismissal for severe errors. <strong>Accessibility</strong>: <code>role="alert"</code> announces immediately and rudely (use sparingly &mdash; only true alerts); <code>role="status"</code> announces politely after current speech finishes (the right default for success/info). <strong>Don&rsquo;t put crucial info only in toasts</strong> &mdash; users may miss them entirely; show form errors inline AND optionally toast for global feedback.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q80">
-  <div class="qa__number">Question 80</div>
-  <h3 class="qa__question">How would you create a responsive image carousel in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[80] = r'''
 <p><strong>Situation:</strong> A product page or landing hero needs an image carousel with multiple slides, navigation controls, swipe gestures on touch, autoplay with pause-on-hover, and lazy-loaded images. Must be accessible (keyboard, screen readers) and not bloat the bundle.</p>
 
 <p><strong>Approach:</strong> Reach for <strong>Embla Carousel</strong> (the 2026 standard &mdash; lightweight, accessible, momentum scrolling, no jQuery) or <strong>Swiper.js</strong> for richer feature set. Avoid building from scratch &mdash; touch handling, momentum, peek scrolling, and a11y are all subtle.</p>
@@ -9843,15 +9263,9 @@ function HeroCarousel({ slides }) {
 <p>Works for content shelves where users just scroll &mdash; no autoplay, no dots needed. Free and bulletproof.</p>
 
 <p><strong>Trade-offs:</strong> Hand-rolled carousels almost always have bugs &mdash; flicker on resize, broken keyboard nav, autoplay that won&rsquo;t pause for screen readers, performance jank during transitions. <strong>Autoplay considerations</strong>: WCAG requires pause/play controls and pausing on hover or focus; never autoplay if there&rsquo;s text content users need to read. Provide a visible pause button. <strong>For hero carousels</strong>, single-slide-per-view + manual nav often beats autoplay (autoplay is criticized by UX research &mdash; users miss content as it slides away). <strong>Mobile-first</strong>: swipe gestures require <code>touch-action: pan-y</code> on the container so vertical scroll still works; Embla/Swiper handle this. <strong>Performance</strong>: lazy-load all but the first slide; use <code>fetchpriority="high"</code> on the first hero image to win the LCP race; preload only when moving toward a slide. <strong>SEO</strong>: all slide content should be in the HTML at render time (don&rsquo;t lazy-mount slides) so crawlers see it.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q81">
-  <div class="qa__number">Question 81</div>
-  <h3 class="qa__question">How would you implement an autocomplete component in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[81] = r'''
 <p><strong>Situation:</strong> A search input needs autocomplete &mdash; as users type, suggestions appear in a dropdown; arrow keys navigate; Enter selects. Suggestions come from an API (with debounce, cancellation, caching) or a local list. Critical use cases: cities, products, users, tags &mdash; the primary search affordance for many apps.</p>
 
 <p><strong>Approach:</strong> Use <strong>Downshift</strong> or <strong>cmdk</strong> for behavior + state machine; pair with TanStack Query for server suggestions. Don&rsquo;t hand-roll &mdash; the keyboard nav, ARIA combobox pattern, and focus management are subtle.</p>
@@ -9933,15 +9347,9 @@ function ProductAutocomplete({ onSelect }) {
 </table>
 
 <p><strong>Trade-offs:</strong> Debounce timing matters &mdash; 250ms is the sweet spot; less wastes API calls, more feels laggy. <strong>Cancellation</strong>: TanStack Query auto-cancels stale queries via the AbortSignal &mdash; without this, slow earlier responses can override fast newer ones (race-condition bug). <strong>Server-side filtering</strong> for &gt;1000 items; client-side for known-small datasets (forms, dropdowns). <strong>For full-text search</strong>: pair with Algolia / Meilisearch / Typesense for typo-tolerance and ranking; raw SQL <code>LIKE</code> queries don&rsquo;t scale beyond a few thousand rows. <strong>Mobile</strong>: virtual keyboards push the dropdown off-screen; use <code>position: fixed</code> for the dropdown on mobile or use a full-screen search overlay (the iOS / Android pattern).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q82">
-  <div class="qa__number">Question 82</div>
-  <h3 class="qa__question">How would you handle user data synchronization in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[82] = r'''
 <p><strong>Situation:</strong> User data (settings, preferences, profile, drafts) must stay synchronized across the user&rsquo;s devices, multiple browser tabs, and after coming back online from a network drop. Conflicts must be resolved sensibly, not silently lost.</p>
 
 <p><strong>Approach:</strong> Three layers: <strong>(1)</strong> server as source of truth, <strong>(2)</strong> per-device cache with TanStack Query, <strong>(3)</strong> live sync via WebSockets/SSE for active sessions, plus cross-tab sync via BroadcastChannel. For collaborative editing, reach for <strong>Yjs</strong>/<strong>Liveblocks</strong>/<strong>Convex</strong>.</p>
@@ -10025,15 +9433,9 @@ useEffect(() =&gt; {
 </table>
 
 <p><strong>Trade-offs:</strong> Most apps don&rsquo;t need full CRDT collaboration &mdash; TanStack Query + WebSocket invalidation gives "near real-time" sync for 95% of use cases at a fraction of the complexity. Reach for CRDTs only when concurrent editing is core to the product (docs, whiteboards, design tools). <strong>Offline support</strong> is a major investment: service worker for asset caching, IndexedDB for data, mutation queue for offline writes, conflict resolution on reconnect, queue retry policy. PWA territory; don&rsquo;t add it casually. <strong>Single-flight refresh</strong>: when WebSocket and a manual refetch both fire, deduplicate (TanStack Query handles this via query keys). <strong>Testing</strong>: simulate offline (DevTools network), multiple tabs, slow networks, mid-flight disconnects &mdash; sync bugs only manifest under these conditions. <strong>Privacy</strong>: don&rsquo;t broadcast user data via BroadcastChannel if other browser users (shared device) might have other tabs; scope by user ID and clear on logout.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q83">
-  <div class="qa__number">Question 83</div>
-  <h3 class="qa__question">How would you implement access tokens and refresh tokens in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[83] = r'''
 <p><strong>Situation:</strong> The app uses JWT auth with short-lived access tokens (15 min) and longer-lived refresh tokens. Need to: refresh transparently on access-token expiry, prevent multiple concurrent refreshes, rotate refresh tokens on each use (security), survive page refreshes, and handle refresh-token expiry by forcing re-login.</p>
 
 <p><strong>Approach:</strong> Store access token in memory (or short-lived cookie); refresh token in <strong>httpOnly secure cookie</strong> (never in JS-accessible storage). Use a fetch wrapper that detects 401, refreshes once (single-flight), retries the original request.</p>
@@ -10127,15 +9529,9 @@ useEffect(() =&gt; {
 </table>
 
 <p><strong>Trade-offs:</strong> The httpOnly cookie + in-memory access token combo is the modern standard for SPA auth &mdash; it&rsquo;s the only configuration that resists both XSS and CSRF. Same-site cookies and CORS configuration must be correct (frontend and API on same registrable domain or use proper CORS + credentials). <strong>Single-flight refresh is critical</strong>: without it, 5 concurrent failing requests trigger 5 refresh calls, racing each other &mdash; one succeeds, the others see 401 and chain-fail; some refresh tokens are consumed and invalidated mid-flight. The promise-cache pattern above prevents this. <strong>Don&rsquo;t pre-emptively refresh on every request</strong> &mdash; doubles API traffic; instead, react to 401 OR refresh on a timer slightly before expiry. <strong>Logout</strong> must clear access token in memory AND call <code>/auth/logout</code> to invalidate refresh token server-side AND broadcast to other tabs. <strong>Modern alternatives</strong>: services like Clerk, Auth0, Supabase Auth, NextAuth.js handle all of this correctly out of the box &mdash; reach for them rather than rolling your own JWT handling unless you have specific reasons.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q84">
-  <div class="qa__number">Question 84</div>
-  <h3 class="qa__question">How would you handle concurrent API requests in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[84] = r'''
 <p><strong>Situation:</strong> A page needs to fire several API requests &mdash; user profile, dashboard stats, recent activity, notifications &mdash; concurrently rather than sequentially. Some depend on others; some can fail without breaking the page; total page wait should equal the slowest request, not the sum.</p>
 
 <p><strong>Approach:</strong> TanStack Query handles this elegantly &mdash; multiple <code>useQuery</code> calls in one component fire in parallel automatically. For dependent queries, use <code>enabled</code>. For waterfalls, use <code>useQueries</code>. For "succeed if any one succeeds" patterns, use <code>Promise.allSettled</code>.</p>
@@ -10235,15 +9631,9 @@ async function loadDashboardData() {
 <p>Loader runs once before page render &mdash; eliminates loading spinners for primary data; React Router waits for all and renders the full tree.</p>
 
 <p><strong>Trade-offs:</strong> The biggest mistake is sequential awaits &mdash; <code>await api.a(); await api.b()</code> serializes them. Use <code>Promise.all</code> when fetches are independent. <strong>Concurrency limits</strong>: firing 200 parallel API calls overwhelms the server (and exhausts browser connection pool &mdash; usually 6 per origin). Use a queue with concurrency limit (libraries like <code>p-limit</code>) for batch operations. <strong>Cancellation</strong>: TanStack Query auto-cancels stale queries via AbortSignal &mdash; without this, "rapid type then click result" races can show stale data. <strong>Error UX</strong>: with parallel queries, decide upfront which failures break the whole page (must-have data) vs which are best-effort (notifications, recommendations). Best-effort failures should silently render fallback or empty state &mdash; don&rsquo;t crash the whole dashboard if recommendations API is down. <strong>Streaming SSR with Suspense</strong> (Next.js): kick off all data fetches; stream HTML as each resolves; users see the fastest sections immediately while slow ones spinner-load. The right pattern for fast-first-paint with multi-source pages.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q85">
-  <div class="qa__number">Question 85</div>
-  <h3 class="qa__question">How would you implement a tag input component in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[85] = r'''
 <p><strong>Situation:</strong> Form needs a tag input &mdash; users type tags separated by Enter/comma, see them as removable chips, can navigate with arrow keys, paste comma-separated lists, and have inputs validated/de-duplicated. Examples: email recipients, post tags, skills, recipients.</p>
 
 <p><strong>Approach:</strong> Build on top of <strong>react-tag-input-component</strong>, <strong>cmdk</strong> (for tag-with-suggestions), or hand-roll for full control. The pattern: array of tag strings + uncommitted draft input + keyboard handlers.</p>
@@ -10366,15 +9756,9 @@ const matching = suggestions.filter(
 </table>
 
 <p><strong>Trade-offs:</strong> The pattern is straightforward, but a11y is easy to break: tag list should announce as a list (<code>role="list"</code> implicit on ul/li); each remove button needs an accessible label including the tag value; the live region for errors needs <code>role="alert"</code> or <code>aria-live="polite"</code>. <strong>Validation strategy</strong>: client-side for format (email regex, length); server-side for uniqueness or constraints (already-used tags in the system). <strong>Performance</strong>: tags shouldn&rsquo;t use array index as key when reorderable &mdash; if the same tag string can repeat, use a synthetic ID. <strong>Mobile</strong>: virtual keyboards behave oddly with chips; ensure tap targets are ≥44px; consider a "Done" button or full-screen tag editor on small screens. <strong>Multi-line wrap</strong>: tags should wrap to multiple lines as they fill the row; flexbox + <code>flex-wrap: wrap</code> handles this naturally.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q86">
-  <div class="qa__number">Question 86</div>
-  <h3 class="qa__question">How would you handle focus management in a React form?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[86] = r'''
 <p><strong>Situation:</strong> Forms, modals, and wizard steps need correct focus behavior &mdash; first input focused on mount, focus trapped inside modals, focus returned to trigger on close, error fields focused on submission failure, and skip-to-content links for keyboard users. Bad focus management is the most common a11y failure.</p>
 
 <p><strong>Approach:</strong> Use <strong>react-aria</strong>, <strong>focus-trap-react</strong>, or <strong>Radix UI</strong> primitives for production-grade focus handling. Hand-rolled focus is full of edge cases. For form errors, manage focus imperatively after submit.</p>
@@ -10486,15 +9870,9 @@ function PageContainer({ children }) {
 </table>
 
 <p><strong>Trade-offs:</strong> Reach for libraries: <strong>Radix UI</strong> primitives, <strong>react-aria</strong> hooks, or <strong>focus-trap-react</strong> handle the dozen subtle cases hand-rolled implementations get wrong. <strong>Don&rsquo;t fight the browser</strong>: the browser&rsquo;s focus order is correct for most cases; intervene only when the natural order breaks UX (e.g., modal portal&rsquo;d outside the trigger). <strong>Test with keyboard only</strong>: Tab through every interactive element on every page; the worst a11y bugs are invisible until you stop using a mouse. <strong>Screen reader testing</strong>: NVDA (Windows, free) or VoiceOver (Mac built-in) reveal whether focus changes are announced or silent &mdash; many "focused but silent" failures aren&rsquo;t visible until tested with AT. <strong>Don&rsquo;t use autoFocus on every page</strong>: it can confuse users on landing pages and break browser back-button restoration of scroll position.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q87">
-  <div class="qa__number">Question 87</div>
-  <h3 class="qa__question">How would you implement a rate limiter for API calls in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[87] = r'''
 <p><strong>Situation:</strong> The frontend must rate-limit outbound API calls &mdash; protect against accidental loops, respect server limits (e.g., 100 req/min), space out batch operations, and queue overflow rather than firing 1000 requests at once.</p>
 
 <p><strong>Approach:</strong> Use a client-side <strong>token bucket</strong> or <strong>p-limit</strong> for concurrency control. Combine with HTTP-level retry-after handling. Don&rsquo;t reinvent rate-limiting algorithms &mdash; battle-tested libraries handle the edge cases.</p>
@@ -10595,15 +9973,9 @@ async function smartFetch(url, opts, retries = 3) {
 </table>
 
 <p><strong>Trade-offs:</strong> Frontend rate limiting is a <em>good citizen</em> measure, not a security boundary &mdash; the server must still enforce its own limits, since a malicious client can disable rate limiting. <strong>Bursty vs smooth</strong>: token bucket allows occasional bursts (good UX for normal use); leaky bucket pre-paces requests (predictable load). <strong>Queue overflow</strong>: if 10,000 items queue up, memory pressure and stale requests become problems. Cap queue size; reject or notify when exceeded. <strong>Cancellation</strong>: when components unmount, abort in-flight requests via AbortController; otherwise rate-limited queues hold references to dead components. <strong>Server-driven backoff</strong>: respect <code>Retry-After</code> header on 429s (HTTP standard); honor <code>X-RateLimit-*</code> headers to slow proactively before hitting the limit. <strong>Don&rsquo;t over-engineer</strong>: most apps need at most concurrency limit + 429 retry; full token-bucket libraries are appropriate for batch operations and admin-tool bulk actions.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q88">
-  <div class="qa__number">Question 88</div>
-  <h3 class="qa__question">How would you handle component unmounting and cleanup in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[88] = r'''
 <p><strong>Situation:</strong> Components subscribe to events, set timers, open WebSockets, attach DOM listeners, fire fetches. Without proper cleanup, unmounted components leak memory, run setState on dead components ("Can&rsquo;t perform a React state update on an unmounted component"), and produce double-handlers in development with Strict Mode.</p>
 
 <p><strong>Approach:</strong> Every <code>useEffect</code> that creates a subscription, timer, listener, or in-flight async operation MUST return a cleanup function. The cleanup runs before the next effect (or on unmount). Strict Mode in dev double-invokes effects to surface missing cleanups.</p>
@@ -10712,15 +10084,9 @@ useEffect(() =&gt; {
 </table>
 
 <p><strong>Trade-offs:</strong> The mental model: <em>"every effect that opens something must close it"</em>. The cleanup function runs in two cases &mdash; before the next effect run (deps changed) AND on unmount. This unification is what makes the pattern work elegantly. <strong>useRef for cleanup-time values</strong>: cleanup closures capture values at setup time; if the cleanup needs the latest value (e.g., notifying the server with the current user ID), use a ref that&rsquo;s updated each render. <strong>Class components</strong> required <code>componentWillUnmount</code> for cleanup &mdash; with hooks, setup and cleanup co-locate, eliminating the "set up here, clean up there" desynchronization that caused most class-component leaks. <strong>TanStack Query</strong> handles cleanup automatically &mdash; it cancels in-flight queries when components unmount, and removes data from cache on a configurable schedule (gcTime). For most data fetching, you don&rsquo;t write cleanup at all. <strong>For native/RN</strong>: AppState changes (background/foreground) need explicit cleanup of timers and connections that shouldn&rsquo;t run when the app is backgrounded.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q89">
-  <div class="qa__number">Question 89</div>
-  <h3 class="qa__question">How would you implement a custom hook to manage API calls in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[89] = r'''
 <p><strong>Situation:</strong> Multiple components fetch data with similar patterns &mdash; loading states, errors, refetching, caching, request cancellation. Without abstraction, each component duplicates 30+ lines of fetching boilerplate. Need a reusable hook that captures the pattern.</p>
 
 <p><strong>Approach:</strong> In 2026, <strong>don&rsquo;t roll your own &mdash; use TanStack Query</strong>. It is the API hook. Hand-rolling for learning is fine; using it in production reinvents a battle-tested wheel. Build domain-specific hooks <em>on top of</em> TanStack Query.</p>
@@ -10822,15 +10188,9 @@ function ProfilePage({ userId }) {
 </table>
 
 <p><strong>Trade-offs:</strong> Building data-fetching hooks from <code>useEffect</code> + <code>fetch</code> seems simple but rapidly accumulates complexity: cancellation, race conditions (slow earlier requests overriding fast later ones), cache, error handling, retry, refetch on focus, dependent queries. By the time you&rsquo;ve handled all cases, you&rsquo;ve recreated a worse version of TanStack Query. <strong>The wrapper layer matters</strong>: even with TanStack Query, encapsulate domain hooks (<code>useUser</code>, <code>useProducts</code>) so query keys, fetcher functions, and select transforms are centralized &mdash; components shouldn&rsquo;t know <code>queryKey</code> conventions. <strong>Server Components in Next.js</strong> often eliminate the need for client-side fetch hooks entirely &mdash; fetch in the component itself, no <code>useQuery</code>, no loading state. Use TanStack Query for client-side interactive data; Server Components for initial render data.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q90">
-  <div class="qa__number">Question 90</div>
-  <h3 class="qa__question">How would you create a split view layout in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[90] = r'''
 <p><strong>Situation:</strong> An IDE-style or email-app-style layout has a resizable left pane (file tree) and right pane (content). Users drag the divider; positions persist; mobile collapses to single pane. Used in dashboards, file explorers, code editors, mail clients.</p>
 
 <p><strong>Approach:</strong> Use <strong>react-resizable-panels</strong> (modern, accessible, persistence built-in) for production. CSS Grid + JS for custom needs. On mobile, switch to single-pane with toggle.</p>
@@ -10964,15 +10324,9 @@ function SplitView() {
 </table>
 
 <p><strong>Trade-offs:</strong> react-resizable-panels handles every detail you&rsquo;d otherwise rebuild: nested groups, collapse/expand, persistence with versioning, keyboard navigation, ARIA separator roles, mouse + touch + pointer events, performance (throttled resize). <strong>Performance during drag</strong>: avoid re-rendering heavy children mid-drag &mdash; react-resizable-panels uses CSS variables for sizes during drag and only commits state at end. Hand-rolled implementations re-render every frame and lag with complex panes. <strong>Persistence</strong>: store per-layout, not globally; if a user has multiple workspaces, each should remember its split sizes. <strong>Touch interactions</strong>: 4px handles are too narrow for fingers; use a hit target ≥16px even if the visual handle is 4px. <strong>iframe-heavy panes</strong> (like embedded editors) capture pointer events &mdash; cover them with an overlay during drag so the resize handle doesn&rsquo;t lose tracking.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q91">
-  <div class="qa__number">Question 91</div>
-  <h3 class="qa__question">How would you handle user onboarding in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[91] = r'''
 <p><strong>Situation:</strong> First-time users land in the app and need guided introduction &mdash; profile setup, feature tour, sample data. Bad onboarding loses 60-80% of signups; good onboarding shows time-to-value within minutes. Patterns: progressive disclosure, contextual tooltips, sample workspace, interactive tutorial.</p>
 
 <p><strong>Approach:</strong> Combine: <strong>(1)</strong> a multi-step setup wizard for required info, <strong>(2)</strong> contextual product tour with libraries like <strong>Shepherd.js</strong>, <strong>react-joyride</strong>, or <strong>Intro.js</strong>, <strong>(3)</strong> empty states with calls-to-action, <strong>(4)</strong> server-side tracking of completion so users can resume, <strong>(5)</strong> dismissibility so power users can skip.</p>
@@ -11082,15 +10436,9 @@ function ProductTour({ onComplete }) {
 </table>
 
 <p><strong>Trade-offs:</strong> Onboarding fights with itself: thoroughness vs friction. Every required step loses some users to abandonment. Aim for one minimum-viable goal (sign up + create first thing) inside 90 seconds; defer optional steps. <strong>Server-track completion</strong>: persist <code>onboarding_step</code> on the user; users abandoning mid-flow return to the right place. <strong>A/B test ruthlessly</strong>: onboarding is the single biggest activation lever; measure conversion per step; prune steps that lose users. <strong>Skippable always</strong>: power users (returning customers, switchers from competitors) hate forced tours; provide "skip tour" prominently; don&rsquo;t hide it. <strong>Sample data</strong> beats empty starting state &mdash; users learn the app interacting with realistic content rather than staring at "Click here to begin." <strong>Progressive onboarding</strong>: don&rsquo;t teach everything upfront; introduce features contextually as users encounter them ("First time using filters? Here&rsquo;s how..."). <strong>SaaS tools (Userpilot, Appcues)</strong>: PMs and CS teams modify flows without engineering &mdash; useful for growth experimentation; expensive at scale.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q92">
-  <div class="qa__number">Question 92</div>
-  <h3 class="qa__question">How would you implement a sticky header in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[92] = r'''
 <p><strong>Situation:</strong> A page header (or section header inside a long page) should stay pinned to the top as the user scrolls past it. Variations: header that shrinks/changes style when stuck, hides on scroll-down and reveals on scroll-up, or stays sticky only within its section.</p>
 
 <p><strong>Approach:</strong> CSS <code>position: sticky</code> handles 90% of cases natively &mdash; no JS needed. Use IntersectionObserver to detect when the header has become "stuck" for style changes. Use scroll-direction detection for hide-on-scroll-down behavior.</p>
@@ -11206,15 +10554,9 @@ function ProductTour({ onComplete }) {
 </table>
 
 <p><strong>Trade-offs:</strong> <code>position: sticky</code> is performant because the browser handles it on the compositor thread &mdash; no JS scroll handlers, no jank. Reach for it first. Add JS only when sticky alone can&rsquo;t express the behavior (style changes, hide-on-scroll-down). <strong>Mobile considerations</strong>: small screens have less vertical space; aggressive sticky headers cost users content. Hide-on-scroll-down is friendlier on mobile. Bottom navigation often serves better than sticky top headers on mobile (thumbs reach the bottom). <strong>Performance</strong>: scroll handlers must be passive (<code>{ passive: true }</code>) to allow the browser to keep scrolling smooth; rAF-throttled for state updates. <strong>Accessibility</strong>: sticky headers must not cover content the user just navigated to via anchor link &mdash; <code>scroll-margin-top: var(--header-height)</code> on anchored elements ensures they appear below the header. Skip-link to main content remains required even with sticky header.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q93">
-  <div class="qa__number">Question 93</div>
-  <h3 class="qa__question">How would you handle lightbox functionality for images in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[93] = r'''
 <p><strong>Situation:</strong> Image gallery, product page, or article needs a lightbox &mdash; click a thumbnail and the image expands full-screen with overlay, navigation between images (next/prev), zoom, swipe gestures on mobile, and keyboard navigation (arrows, Escape).</p>
 
 <p><strong>Approach:</strong> Use a battle-tested library &mdash; <strong>yet-another-react-lightbox</strong>, <strong>PhotoSwipe</strong>, or <strong>react-image-gallery</strong>. Don&rsquo;t hand-roll &mdash; gesture handling, focus trap, image preloading, and zoom UX have many edge cases.</p>
@@ -11349,15 +10691,9 @@ function ProductGallery({ images }) {
 </table>
 
 <p><strong>Trade-offs:</strong> Hand-rolled lightboxes ship with at least 5 a11y bugs. Every gesture combination, focus trap edge case, and preloading strategy in the libraries is the result of years of bug reports &mdash; reuse that work. <strong>Performance</strong>: full-resolution images can be huge; serve appropriately-sized variants based on viewport (srcSet); lazy-load non-visible thumbnails. <strong>Animation</strong>: a smooth thumbnail-to-fullscreen transition (FLIP technique or shared-element transition) feels native; abrupt show/hide feels cheap. <strong>SEO/social sharing</strong>: thumbnails must remain in the DOM (not fetched only on lightbox open) so crawlers see them; lightbox itself doesn&rsquo;t need to be SSR&rsquo;d. <strong>Mobile</strong>: full-screen lightboxes should respect notches and dynamic viewport (use <code>100dvh</code> not <code>100vh</code>); pinch zoom requires <code>touch-action: pinch-zoom</code> on the image container.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q94">
-  <div class="qa__number">Question 94</div>
-  <h3 class="qa__question">How would you integrate a WYSIWYG editor into a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[94] = r'''
 <p><strong>Situation:</strong> Need a rich-text editor for posts, comments, descriptions, or documentation. Requirements: bold/italic/lists, headings, links, images, code blocks, paste-from-Word handling, mentions/hashtags, collaborative editing, mobile support. Not a textarea or markdown field &mdash; full WYSIWYG.</p>
 
 <p><strong>Approach:</strong> Use <strong>TipTap</strong> (built on ProseMirror) &mdash; the 2026 default for new React WYSIWYG. Alternatives: <strong>Lexical</strong> (Meta&rsquo;s, used in Facebook), <strong>Slate</strong>, <strong>Editor.js</strong>. Avoid: Quill (legacy maintenance), Draft.js (deprecated by Meta), CKEditor (commercial, heavy).</p>
@@ -11490,15 +10826,9 @@ editor.setOptions({
 </table>
 
 <p><strong>Trade-offs:</strong> WYSIWYG editors are enormous projects when hand-rolled; ProseMirror (the engine under TipTap) represents thousands of hours solving the hard problems &mdash; collaborative editing, undo/redo with operational transforms, paste from Word, IME composition, mobile keyboards. Use the libraries. <strong>XSS prevention is critical</strong>: editor output is HTML &mdash; if rendered with <code>dangerouslySetInnerHTML</code>, sanitize first with <strong>DOMPurify</strong>. Better: use the editor&rsquo;s renderer instead of dangerouslySetInnerHTML. <strong>Collaboration</strong>: TipTap + Yjs gives real-time multi-user editing in ~50 lines. Don&rsquo;t roll your own &mdash; CRDTs are doctorate-level work. <strong>Mobile</strong>: virtual keyboards, IME composition, native paste menus all interact with rich editors in subtle ways; libraries handle this. Always test on real iOS/Android. <strong>SSR considerations</strong>: TipTap requires browser APIs; render only on client (<code>useEffect</code> + state) or use the SSR-friendly extensions. <strong>Bundle size</strong>: full WYSIWYG is 100KB+ minified; lazy-load the editor on first edit attempt to keep initial bundle small.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q95">
-  <div class="qa__number">Question 95</div>
-  <h3 class="qa__question">How would you implement a multi-select dropdown in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[95] = r'''
 <p><strong>Situation:</strong> Form needs multi-select &mdash; users pick multiple options from a list. Requirements: searchable, keyboard navigable, shows selected as chips, support for large option lists (1000+), grouping, async-loaded options, accessible.</p>
 
 <p><strong>Approach:</strong> Use <strong>react-select</strong> (the established standard), <strong>shadcn/ui combobox</strong> (multi-select variant), or <strong>react-aria&rsquo;s <code>useListBox</code></strong> for full custom control. Don&rsquo;t hand-roll &mdash; the ARIA listbox + combobox pattern is dense.</p>
@@ -11642,15 +10972,9 @@ const loadOptions = async (input) =&gt; {
 </table>
 
 <p><strong>Trade-offs:</strong> react-select is the safe production pick &mdash; thousands of apps, mature, accessible, well-documented. ~30KB is its main cost. <strong>For Tailwind/design-system codebases</strong>, shadcn/ui combobox built on cmdk + Radix gives full styling control with accessible primitives &mdash; sometimes worth replacing react-select for visual consistency. <strong>Performance with large lists</strong>: react-select handles ~1000 options before performance degrades; beyond that, virtualize the menu (<code>react-window</code> or <code>react-virtuoso</code>) or move to async-loaded options. <strong>Mobile UX</strong>: native <code>&lt;select multiple&gt;</code> on iOS/Android is awkward; libraries provide better touch UX with full-screen modals on small viewports. <strong>Form integration</strong>: with React Hook Form, use Controller wrapper since react-select doesn&rsquo;t use standard input events; with Zod, validate the array of selected values. <strong>A11y minimum</strong>: combobox role + listbox role + aria-multiselectable + aria-selected per option + announcement of selections via live region.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q96">
-  <div class="qa__number">Question 96</div>
-  <h3 class="qa__question">How would you handle data caching in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[96] = r'''
 <p><strong>Situation:</strong> The app makes the same API calls repeatedly &mdash; user profile fetched on every page load, lookup tables refetched constantly, dashboard widgets each refetch the same metrics. Need a caching strategy that&rsquo;s fast, fresh enough, and works offline.</p>
 
 <p><strong>Approach:</strong> <strong>TanStack Query</strong> as the universal client-side data cache. Tune <code>staleTime</code> + <code>gcTime</code> per query type. For offline support, persist to localStorage/IndexedDB. For HTTP-level caching, set proper <code>Cache-Control</code> headers server-side and let the browser do work.</p>
@@ -11763,15 +11087,9 @@ queryClient.invalidateQueries({ queryKey: ["users", "detail", id] }); // one use
 </table>
 
 <p><strong>Trade-offs:</strong> Cache freshness vs traffic is the central tension. Aggressive caching (long staleTime) means fewer requests but stale data risk; aggressive refetch means fresh data but server load. Tune per data type, not globally. <strong>Don&rsquo;t cache stale-sensitive data forever</strong> &mdash; pricing, inventory, balance, anything financial: keep staleTime low or use WebSockets. <strong>Cache busting on deploy</strong> &mdash; the persisted cache must include a build ID so old cached data structures don&rsquo;t break a new app version. <strong>HTTP caching often beats client caching</strong>: a properly-configured CDN with <code>Cache-Control: public, max-age=300, stale-while-revalidate=60</code> caches at the edge for all users globally; client-side caching only helps the same user. Use both. <strong>Privacy</strong>: don&rsquo;t persist personally-sensitive data to localStorage on shared devices; selectively persist (e.g., exclude queries containing PII) or scope by user ID and clear on logout.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q97">
-  <div class="qa__number">Question 97</div>
-  <h3 class="qa__question">How would you implement a responsive modal dialog in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[97] = r'''
 <p><strong>Situation:</strong> Modal dialogs must work across viewports &mdash; centered overlay on desktop, full-screen sheet on phones, possibly bottom-sheet style for mobile-native UX. Content varies in length; modals must scroll within themselves; never break the underlying page; respect safe-areas on iOS notches.</p>
 
 <p><strong>Approach:</strong> Use <strong>Radix Dialog</strong> for behavior; layer responsive CSS for sizing. For mobile bottom-sheet UX, <strong>Vaul</strong> (the 2026 React drawer/sheet library) gives native-feel drag-to-dismiss; combine with Dialog at desktop sizes via media query.</p>
@@ -11899,15 +11217,9 @@ function Modal({ open, onClose, children, title }) {
 </table>
 
 <p><strong>Trade-offs:</strong> Bottom sheets feel native on mobile (matches iOS sheet, Android Material) but require more code than scaling a desktop modal full-screen. For most apps, full-screen mobile modal is good enough; reserve bottom sheets for primary touch interactions (filters, options menus). <strong>Radix Dialog gives you</strong>: focus trap, restore focus on close, body scroll lock, Escape to close, click-outside to close, ARIA roles. Don&rsquo;t hand-roll &mdash; the a11y is dense. <strong>Animation timing</strong>: 150-200ms for desktop modals, 200-300ms for mobile sheets; faster than 100ms feels instant (jarring); slower than 300ms feels sluggish. Use ease-out for entrance, ease-in for exit. <strong>Long content</strong>: scroll within the modal body, not the page; the modal header/footer stay fixed for context. <strong>Stack management</strong>: nested modals are an antipattern &mdash; one modal at a time. If you need a "second step," replace content within the same modal.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q98">
-  <div class="qa__number">Question 98</div>
-  <h3 class="qa__question">How would you handle complex nested state updates in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[98] = r'''
 <p><strong>Situation:</strong> State has nested structure &mdash; user with addresses with phone numbers, form with sections with fields with options, document with pages with elements. Updating deeply requires preserving immutability without spreading every level manually. Hand-spread updates become unreadable and error-prone.</p>
 
 <p><strong>Approach:</strong> Use <strong>Immer</strong> for mutate-style updates that produce immutable results. Already built into <strong>Redux Toolkit</strong> and <strong>Zustand&rsquo;s middleware</strong>. For component-local complex state, combine <code>useReducer</code> + Immer (<code>useImmerReducer</code>).</p>
@@ -12026,15 +11338,9 @@ draft.phones.byId[100].number = newNumber;</code></pre>
 <p><strong>TypeScript with Immer</strong> works seamlessly &mdash; the draft type is inferred as a writable version of the state type; the result is properly typed back. <strong>Performance</strong>: Immer&rsquo;s proxy adds a small overhead but it&rsquo;s negligible for typical state sizes (under 100ms even for very large states). For hot loops with millions of updates, manual spread can be faster &mdash; but that&rsquo;s rare.</p>
 
 <p><strong>Trade-offs:</strong> Immer is the productivity multiplier for nested state &mdash; the readable, intuitive way to write deep updates without giving up immutability. Redux Toolkit and Zustand bake it in; using it elsewhere is one import. <strong>Don&rsquo;t reach for Immer to "fix" badly-shaped state</strong>: if you&rsquo;re writing 5-level deep updates frequently, the state shape is wrong &mdash; normalize first. Immer makes deep updates tolerable; normalization makes them disappear. <strong>Identity preservation</strong>: Immer only creates new references for branches that changed; unchanged branches keep their references &mdash; React.memo/useMemo continue to work correctly. <strong>Don&rsquo;t use Immer outside of state updates</strong>: it&rsquo;s for state transitions; using it for general data manipulation just hides the immutability semantic. <strong>Patches</strong>: Immer can produce patches and inverse patches; useful for undo/redo, server sync (send only diffs), and audit logs.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q99">
-  <div class="qa__number">Question 99</div>
-  <h3 class="qa__question">How would you implement an API client with retry logic in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[99] = r'''
 <p><strong>Situation:</strong> The frontend talks to flaky APIs &mdash; transient network errors, 5xx server hiccups, rate-limit 429s. Without retry logic, every flake becomes a user-visible error. Need automatic retry with exponential backoff, jitter, idempotency awareness, and "give up after N tries" handling.</p>
 
 <p><strong>Approach:</strong> If using TanStack Query, configure its built-in retry &mdash; you&rsquo;re mostly done. For non-React-Query code, build a fetch wrapper using <strong>axios-retry</strong>, <strong>ky</strong> (with retry built-in), or roll your own minimal version.</p>
@@ -12180,15 +11486,9 @@ class HttpError extends Error {
 <p><strong>Idempotency keys for POSTs</strong>: client generates a UUID per logical operation; sends as <code>Idempotency-Key</code> header; server stores and returns the same response on retry. Stripe&rsquo;s API uses this pattern; payment APIs must use it.</p>
 
 <p><strong>Trade-offs:</strong> Retry logic is a minefield of subtle bugs &mdash; libraries (TanStack Query, ky, axios-retry) get it right. Don&rsquo;t hand-roll unless you have specific needs. <strong>Exponential backoff + jitter is essential</strong>: without jitter, all retrying clients hit the server simultaneously after each backoff window (thundering herd) &mdash; jitter spreads them out and breaks the cascade. <strong>Honor Retry-After</strong>: when the server tells you to wait 60s, do it; ignoring this header can get your client IP rate-limited or banned. <strong>Don&rsquo;t retry forever</strong>: cap at 3-5 attempts; surface failure to the user with retry button. <strong>User-cancellable</strong>: pass an AbortSignal through retry loops; users navigating away should cancel pending retries. <strong>Mutation retries need idempotency</strong>: never blindly retry a POST that creates payments, sends emails, or charges accounts &mdash; require server-side dedup via idempotency key. <strong>Observability</strong>: log retry attempts to Sentry/Datadog with attempt count; sustained retry rates indicate upstream issues you can alert on.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q100">
-  <div class="qa__number">Question 100</div>
-  <h3 class="qa__question">How would you handle user input validation with custom error messages in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[100] = r'''
 <p><strong>Situation:</strong> Forms must validate user input with custom error messages &mdash; not just "required" but contextually meaningful messages ("Password must include a number", "Email must be a work address", "Username already taken"). Validation runs client-side for instant feedback and server-side for trust. Messages must be translatable.</p>
 
 <p><strong>Approach:</strong> Use <strong>React Hook Form</strong> + <strong>Zod</strong> &mdash; the 2026 standard. Zod schemas declare both shape and messages; types and runtime validation share one source. Custom messages for each rule; async validation for server-checked rules.</p>
@@ -12360,27 +11660,4 @@ z.setErrorMap(zodI18nMap);   // all default errors translated</code></pre>
 <p><strong>Server-side validation must mirror client</strong>: never trust client validation alone. Use the same Zod schema on the server (Node.js) for guaranteed parity, or use a different validator if backend is in another language &mdash; just keep rules in sync. Server returns field-keyed errors; client maps them to <code>setError(field, ...)</code>.</p>
 
 <p><strong>Trade-offs:</strong> Zod + React Hook Form is the production sweet spot &mdash; declarative schemas, custom messages, async validation, full TypeScript inference, server-side reuse. Alternatives: Yup (older but mature), Valibot (lighter weight), AJV (JSON Schema standard). <strong>Don&rsquo;t over-validate</strong>: too many rules ("must contain a special character but not these specific ones, length 9-15, no consecutive identical chars") frustrate users and don&rsquo;t add security. The CISA / NIST 2024+ guidance is "longer is better than complex" &mdash; let users pick passwords they can remember; use <code>haveibeenpwned</code> API to block known-breached passwords instead. <strong>Async validation UX</strong>: show "Checking..." indicator during async checks (email-taken, username-available); debounce 500ms so it doesn&rsquo;t fire on every keystroke; cancel in-flight checks when input changes. <strong>Accessibility</strong>: <code>aria-invalid</code>, <code>aria-describedby</code> linking to error message, <code>role="alert"</code> for errors that appear, focus the first error after failed submit, never rely solely on color (red text + icon + label change). <strong>Don&rsquo;t reveal too much</strong>: "Email or password incorrect" beats "Password incorrect" (the latter confirms the email exists, useful to attackers).</p>
-
-    
-  </div>
-</article>
-
-    <nav class="chapter-nav" aria-label="Chapter navigation">
-      <a class="chapter-nav__prev" href="reactjs-advanced.html">
-      <span class="chapter-nav__dir">← Previous</span>
-      <span class="chapter-nav__title">ReactJS — Advanced</span>
-    </a>
-      <a class="chapter-nav__next" href="mysql-basic.html">
-      <span class="chapter-nav__dir">Next →</span>
-      <span class="chapter-nav__title">MYSQL — Basic</span>
-    </a>
-    </nav>
-
-  </section>
-
-</main>
-</div>
-
-<script src="../assets/script.js"></script>
-</body>
-</html>
+'''

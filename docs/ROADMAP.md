@@ -24,7 +24,7 @@ Frontend chapters round out the browser-facing half of full-stack interviews. HT
 - [x] **React JS Basic (101 Q)** &mdash; 2026-04-26
 - [x] **React JS Coding (100 Q)** &mdash; 2026-04-27
 - [x] **React JS Advanced (100 Q)** &mdash; 2026-04-27
-- [ ] **React JS Scenario Based (100 Q)** ← next
+- [x] **React JS Scenario Based (100 Q)** &mdash; 2026-04-27 &mdash; **Phase 4 complete (1,004/1,004)**
 
 **Target:** 401 more answers to finish frontend.
 
@@ -33,7 +33,7 @@ Frontend chapters round out the browser-facing half of full-stack interviews. HT
 ### Phase 5: Databases (Part 5)
 MySQL and MongoDB parallel each other nicely — many questions are about analogous concepts in different DB families.
 
-- MYSQL Basic, Coding, Advanced, Scenario Based (400 Q)
+- MYSQL Basic, Coding, Advanced, Scenario Based (400 Q) &mdash; **MySQL Basic ← next**
 - MongoDB Basic, Coding, Advanced, Scenario Based (400 Q)
 
 **Total:** 800 answers.
