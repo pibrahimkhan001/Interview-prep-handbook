@@ -1,6 +1,6 @@
 # Project State
 
-**Last updated:** 2026-04-27 (Session: MySQL Basic completed &mdash; Phase 5 (Databases) underway, 33 detailed chapters, 3304/4904)
+**Last updated:** 2026-04-28 (Session: MongoDB Basic completed &mdash; Phase 5 (Databases) progressing, 37 detailed chapters, 3704/4904)
 
 ## At a glance
 
@@ -10,9 +10,9 @@
 | Topics | 13 |
 | Levels present (across topics) | 7 (Basic, Tricky, Coding, Advanced, Advanced Coding, Scenario Based, Advanced Scenario Based) |
 | Total topic/level chapters | 49 |
-| Chapters with detailed answers | 33 (all JavaScript + all Python + all Node.js + all ExpressJS + all API + all HTML + all CSS + all ReactJS + MySQL Basic) |
-| Total detailed answers written | 3,304 |
-| Completion | ~67% of questions have detailed answers |
+| Chapters with detailed answers | 37 (all JavaScript + all Python + all Node.js + all ExpressJS + all API + all HTML + all CSS + all ReactJS + all MySQL + MongoDB Basic) |
+| Total detailed answers written | 3,704 |
+| Completion | ~76% of questions have detailed answers |
 
 ## Detailed answer inventory
 
@@ -51,11 +51,11 @@
 | ReactJS | Advanced | 100 | 100 | ✅ Complete |
 | ReactJS | Scenario Based | 100 | 100 | ✅ Complete |
 | **MYSQL** | **Basic** | **100** | **100** | ✅ **Complete** |
-| **MYSQL** | **Coding** | **100** | **0** | 🔄 **Next up** |
-| MYSQL | Advanced | 100 | 0 | ⬜ Pending |
-| MYSQL | Scenario Based | 100 | 0 | ⬜ Pending |
-| MongoDB | Basic | 100 | 0 | ⬜ Pending |
-| MongoDB | Coding | 100 | 0 | ⬜ Pending |
+| **MYSQL** | **Coding** | **100** | **100** | ✅ **Complete** |
+| **MYSQL** | **Advanced** | **100** | **100** | ✅ **Complete** |
+| **MYSQL** | **Scenario Based** | **100** | **100** | ✅ **Complete** |
+| **MongoDB** | **Basic** | **100** | **100** | ✅ **Complete** |
+| **MongoDB** | **Coding** | **100** | **0** | 🔄 **Next up** |
 | MongoDB | Advanced | 100 | 0 | ⬜ Pending |
 | MongoDB | Scenario Based | 100 | 0 | ⬜ Pending |
 | System Design MERN | Basic | 100 | 0 | ⬜ Pending |
@@ -117,7 +117,11 @@
 │   ├── reactjs_coding.py        ✅ 100
 │   ├── reactjs_advanced.py      ✅ 100
 │   ├── reactjs_scenario.py      ✅ 100
-│   └── mysql_basic.py           ✅ 100
+│   ├── mysql_basic.py           ✅ 100
+│   ├── mysql_coding.py          ✅ 100
+│   ├── mysql_advanced.py        ✅ 100
+│   ├── mysql_scenario.py        ✅ 100
+│   └── mongodb_basic.py         ✅ 100
 ├── data/
 │   └── questions.json           ← all 4,904 parsed questions
 └── scripts/
@@ -131,10 +135,10 @@
 ## Delivery status
 
 - **Latest zip:** `/mnt/user-data/outputs/interview-prep-guide.zip`
-- **Delivered (cumulative):** JavaScript (700) + Python (400) + Node.js (400) + ExpressJS (300) + API (400) + HTML (300) + CSS (303) + ReactJS (401) + MySQL Basic (100) = **3,304 Q&A** + site scaffold + 16 stub chapters
-- **Topics fully completed:** JavaScript, Python, Node.js, ExpressJS, API, HTML, CSS, ReactJS
-- **Phase 5 (Databases) in progress:** MySQL Basic done (100/100); MySQL Coding next.
-- Phase 5 is 800 questions total &mdash; 100 done (12.5%), 700 remaining (MySQL: 300; MongoDB: 400).
+- **Delivered (cumulative):** JavaScript (700) + Python (400) + Node.js (400) + ExpressJS (300) + API (400) + HTML (300) + CSS (303) + ReactJS (401) + MySQL all four levels (400) + MongoDB Basic (100) = **3,704 Q&A** + site scaffold + 12 stub chapters
+- **Topics fully completed:** JavaScript, Python, Node.js, ExpressJS, API, HTML, CSS, ReactJS, MySQL
+- **Phase 5 (Databases) in progress:** MySQL all four levels ✅ + MongoDB Basic ✅ (500/800 = 62.5%); MongoDB Coding next.
+- Phase 5 is 800 questions total &mdash; 500 done (62.5%), 300 remaining (MongoDB Coding/Advanced/Scenario).
 
 ## Update protocol
 

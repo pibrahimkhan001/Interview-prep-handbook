@@ -1,118 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MYSQL — Scenario Based · Interview Prep Mastery</title>
-<meta name="description" content="100 scenario based interview questions on MYSQL, with detailed explanations and examples.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="../assets/styles.css">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%239a6b1d'/%3E%3Ctext x='50' y='68' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold' font-size='48'%3EIP%3C/text%3E%3C/svg%3E">
-</head>
-<body>
-<header class="site-header">
-  <div class="site-header__inner">
-    <button class="menu-toggle" aria-label="Open menu" type="button">☰ Menu</button>
-    <a class="brand" href="../index.html">
-      <span class="brand__mark">IP</span>
-      <span class="brand__text">
-        <span class="brand__title">Interview Prep Mastery</span>
-        <span class="brand__subtitle">Interactive learning guide</span>
-      </span>
-    </a>
-    <nav class="header-nav">
-      <a href="../index.html#roadmap">Roadmap</a>
-      <a href="../index.html#chapters">All chapters</a>
-      <button class="theme-toggle" type="button" aria-label="Toggle color scheme">☾ Dark</button>
-    </nav>
-  </div>
-</header>
-<div class="layout">
-<aside class="sidebar" aria-label="Site navigation">
-  <div class="sidebar__header">Chapter Navigator</div>
-  
-        <div class="nav-part">
-          <div class="nav-part__label">Part 1</div>
-          <div class="nav-part__title">Core Programming Languages</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">JavaScript</li><li><a class="" href="../chapters/javascript-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/javascript-tricky.html"><span class="nav-item__title">Tricky</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-coding.html"><span class="nav-item__title">Advanced Coding</span><span class="nav-item__meta">100 questions · 100 min read</span></a></li><li><a class="" href="../chapters/javascript-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-scenario.html"><span class="nav-item__title">Advanced Scenario Based</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Python</li><li><a class="" href="../chapters/python-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/python-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 2</div>
-          <div class="nav-part__title">Web Fundamentals</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">HTML</li><li><a class="" href="../chapters/html-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/html-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/html-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CSS</li><li><a class="" href="../chapters/css-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">102 questions · 60 min read</span></a></li><li><a class="" href="../chapters/css-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/css-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">101 questions · 90 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 3</div>
-          <div class="nav-part__title">Backend Technologies</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Node.Js</li><li><a class="" href="../chapters/nodejs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/nodejs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ExpressJS</li><li><a class="" href="../chapters/expressjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/expressjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/expressjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">API</li><li><a class="" href="../chapters/api-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/api-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 4</div>
-          <div class="nav-part__title">Frontend Frameworks</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ReactJS</li><li><a class="" href="../chapters/reactjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">101 questions · 60 min read</span></a></li><li><a class="" href="../chapters/reactjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 5</div>
-          <div class="nav-part__title">Databases</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MYSQL</li><li><a class="" href="../chapters/mysql-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mysql-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="active" href="../chapters/mysql-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MongoDB</li><li><a class="" href="../chapters/mongodb-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mongodb-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 6</div>
-          <div class="nav-part__title">System Design &amp; DevOps</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">System Design MERN Stack</li><li><a class="" href="../chapters/system-design-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Infrastructure MERN Stack</li><li><a class="" href="../chapters/infrastructure-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/infrastructure-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CI/CD Pipeline</li><li><a class="" href="../chapters/cicd-pipeline-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-</aside>
-<main class="main" id="main">
+"""
+MySQL Scenario Based answers (Q1-Q100).
 
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="../index.html">Home</a>
-    <span class="breadcrumb__sep">›</span>
-    <a href="../index.html#part-5">Databases</a>
-    <span class="breadcrumb__sep">›</span>
-    <span>MYSQL — Scenario Based</span>
-  </nav>
+Style:
+- Situation -> Approach (with production-grade SQL/code) -> Trade-offs (table) -> Production polish
+- Modern (2026) MySQL ecosystem references throughout
+- HTML uses <p>, <table>, <pre><code>, &lt; &gt; &amp; escapes, smart quotes
+"""
 
-  <header class="chapter-header">
-    <div class="chapter-label">MYSQL · Scenario Based</div>
-    <h1 class="chapter-title">Scenario Based MYSQL Interview Questions</h1>
-    <p class="chapter-lede">Real-world situational questions — how you&#x27;d approach a concrete design or debugging problem.</p>
-    <div class="chapter-meta">
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Questions</span><span class="chapter-meta__value">100</span></div>
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Level</span><span class="chapter-meta__value">Scenario Based</span></div>
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Estimated reading</span><span class="chapter-meta__value">75 min read</span></div>
-    </div>
-    
-  </header>
+ANSWERS: dict[int, str] = {}
 
-  <section class="prose">
-
-    <div class="toc" id="toc">
-      <div class="toc__title">All questions in this chapter</div>
-      <ul class="toc__list">
-        <li><a href="#q1"><span class="toc__num">1.</span>How would you design a database schema for an e-commerce website with products, categor...</a></li><li><a href="#q2"><span class="toc__num">2.</span>Describe how you would implement a user authentication system using MySQL.</a></li><li><a href="#q3"><span class="toc__num">3.</span>How would you design a database to handle a blogging platform with posts, comments, and...</a></li><li><a href="#q4"><span class="toc__num">4.</span>Explain how you would implement a many-to-many relationship between students and course...</a></li><li><a href="#q5"><span class="toc__num">5.</span>How would you design a database schema for a library management system with books, auth...</a></li><li><a href="#q6"><span class="toc__num">6.</span>Describe how you would handle data migration from one MySQL database to another.</a></li><li><a href="#q7"><span class="toc__num">7.</span>How would you design a schema for tracking employee attendance in a company?</a></li><li><a href="#q8"><span class="toc__num">8.</span>Explain how you would implement a notification system that stores notifications for use...</a></li><li><a href="#q9"><span class="toc__num">9.</span>How would you handle versioning of records in a MySQL database?</a></li><li><a href="#q10"><span class="toc__num">10.</span>Describe how you would optimize a slow query that retrieves the top-selling products fr...</a></li><li><a href="#q11"><span class="toc__num">11.</span>How would you design a database schema for a social media platform with users, posts, l...</a></li><li><a href="#q12"><span class="toc__num">12.</span>Explain how you would handle database backups and restores in a production environment.</a></li><li><a href="#q13"><span class="toc__num">13.</span>How would you implement a tagging system where multiple tags can be associated with mul...</a></li><li><a href="#q14"><span class="toc__num">14.</span>Describe how you would create a reporting system that aggregates sales data by region a...</a></li><li><a href="#q15"><span class="toc__num">15.</span>How would you design a schema for storing hierarchical data, such as categories and sub...</a></li><li><a href="#q16"><span class="toc__num">16.</span>Explain how you would implement full-text search for an articles table in a MySQL datab...</a></li><li><a href="#q17"><span class="toc__num">17.</span>How would you handle archiving old data in a high-transaction MySQL database?</a></li><li><a href="#q18"><span class="toc__num">18.</span>Describe how you would design a schema for a movie rental system with movies, customers...</a></li><li><a href="#q19"><span class="toc__num">19.</span>How would you implement a system to track inventory levels for products in a warehouse?</a></li><li><a href="#q20"><span class="toc__num">20.</span>Explain how you would design a database to handle customer reviews and ratings for prod...</a></li><li><a href="#q21"><span class="toc__num">21.</span>How would you handle database sharding for a large-scale application?</a></li><li><a href="#q22"><span class="toc__num">22.</span>Describe how you would implement a leaderboard system that ranks players based on their...</a></li><li><a href="#q23"><span class="toc__num">23.</span>How would you design a schema for an online booking system with users, events, and rese...</a></li><li><a href="#q24"><span class="toc__num">24.</span>Explain how you would implement audit logging to track changes to critical data in a My...</a></li><li><a href="#q25"><span class="toc__num">25.</span>How would you handle data integrity and consistency in a distributed MySQL environment?</a></li><li><a href="#q26"><span class="toc__num">26.</span>Describe how you would optimize the performance of a MySQL database handling millions o...</a></li><li><a href="#q27"><span class="toc__num">27.</span>How would you design a schema to store time-series data, such as temperature readings o...</a></li><li><a href="#q28"><span class="toc__num">28.</span>Explain how you would implement role-based access control (RBAC) in a MySQL database.</a></li><li><a href="#q29"><span class="toc__num">29.</span>How would you handle data synchronization between multiple MySQL databases?</a></li><li><a href="#q30"><span class="toc__num">30.</span>Describe how you would design a schema for a messaging app with users, messages, and co...</a></li><li><a href="#q31"><span class="toc__num">31.</span>How would you implement a system to track changes to records, such as an audit trail or...</a></li><li><a href="#q32"><span class="toc__num">32.</span>Explain how you would design a database to handle multi-tenancy for a SaaS application.</a></li><li><a href="#q33"><span class="toc__num">33.</span>How would you handle database replication to ensure high availability and disaster reco...</a></li><li><a href="#q34"><span class="toc__num">34.</span>Describe how you would design a schema for a customer support system with tickets, agen...</a></li><li><a href="#q35"><span class="toc__num">35.</span>How would you implement a recommendation system that suggests products to users based o...</a></li><li><a href="#q36"><span class="toc__num">36.</span>Explain how you would handle schema changes in a live production database without downt...</a></li><li><a href="#q37"><span class="toc__num">37.</span>How would you design a schema for a project management tool with projects, tasks, and u...</a></li><li><a href="#q38"><span class="toc__num">38.</span>Describe how you would optimize a query that joins multiple large tables.</a></li><li><a href="#q39"><span class="toc__num">39.</span>How would you implement a data retention policy to automatically delete old records fro...</a></li><li><a href="#q40"><span class="toc__num">40.</span>Explain how you would design a database to handle recurring billing and subscription ma...</a></li><li><a href="#q41"><span class="toc__num">41.</span>How would you handle data partitioning in a large MySQL table to improve query performa...</a></li><li><a href="#q42"><span class="toc__num">42.</span>Describe how you would design a schema for a job portal with employers, job listings, a...</a></li><li><a href="#q43"><span class="toc__num">43.</span>How would you implement a voting system where users can upvote or downvote posts?</a></li><li><a href="#q44"><span class="toc__num">44.</span>Explain how you would handle database connection pooling to optimize resource usage.</a></li><li><a href="#q45"><span class="toc__num">45.</span>How would you design a schema for a fitness tracking app with users, workouts, and goals?</a></li><li><a href="#q46"><span class="toc__num">46.</span>Describe how you would implement a schema to handle multiple languages and translations...</a></li><li><a href="#q47"><span class="toc__num">47.</span>How would you handle data encryption and security for sensitive information stored in M...</a></li><li><a href="#q48"><span class="toc__num">48.</span>Explain how you would design a database to support A/B testing and feature flagging.</a></li><li><a href="#q49"><span class="toc__num">49.</span>How would you implement a recommendation engine that suggests similar products based on...</a></li><li><a href="#q50"><span class="toc__num">50.</span>Describe how you would design a schema for a reservation system with hotels, rooms, and...</a></li><li><a href="#q51"><span class="toc__num">51.</span>How would you handle database indexing to optimize read and write performance for large...</a></li><li><a href="#q52"><span class="toc__num">52.</span>Explain how you would design a schema for a crowdfunding platform with campaigns, backe...</a></li><li><a href="#q53"><span class="toc__num">53.</span>How would you handle schema versioning and migrations in a MySQL database?</a></li><li><a href="#q54"><span class="toc__num">54.</span>Describe how you would implement a database for a real-time chat application.</a></li><li><a href="#q55"><span class="toc__num">55.</span>How would you handle data consistency and integrity in a multi-master replication setup?</a></li><li><a href="#q56"><span class="toc__num">56.</span>Explain how you would design a schema for an online marketplace with buyers, sellers, a...</a></li><li><a href="#q57"><span class="toc__num">57.</span>How would you implement a logging system to capture and store application logs in MySQL?</a></li><li><a href="#q58"><span class="toc__num">58.</span>Describe how you would design a schema for an educational platform with courses, studen...</a></li><li><a href="#q59"><span class="toc__num">59.</span>How would you handle data deduplication to remove duplicate records from a MySQL databa...</a></li><li><a href="#q60"><span class="toc__num">60.</span>Explain how you would design a database to support dynamic and customizable user profil...</a></li><li><a href="#q61"><span class="toc__num">61.</span>How would you implement a search functionality that allows users to filter results by m...</a></li><li><a href="#q62"><span class="toc__num">62.</span>Describe how you would design a schema for a restaurant management system with tables, ...</a></li><li><a href="#q63"><span class="toc__num">63.</span>How would you handle schema changes and data migrations in a microservices architecture?</a></li><li><a href="#q64"><span class="toc__num">64.</span>Explain how you would design a schema for a photo-sharing app with users, photos, and c...</a></li><li><a href="#q65"><span class="toc__num">65.</span>How would you implement a caching strategy to reduce database load and improve performa...</a></li><li><a href="#q66"><span class="toc__num">66.</span>Describe how you would design a schema for an inventory management system with products...</a></li><li><a href="#q67"><span class="toc__num">67.</span>How would you handle database monitoring and alerting to detect and resolve performance...</a></li><li><a href="#q68"><span class="toc__num">68.</span>Explain how you would design a schema for a travel booking platform with flights, hotel...</a></li><li><a href="#q69"><span class="toc__num">69.</span>How would you implement a tagging system that allows users to categorize and search for...</a></li><li><a href="#q70"><span class="toc__num">70.</span>Describe how you would handle data synchronization between an online and offline mode i...</a></li><li><a href="#q71"><span class="toc__num">71.</span>How would you design a schema for a content management system with articles, authors, a...</a></li><li><a href="#q72"><span class="toc__num">72.</span>Explain how you would implement a schema to support user-generated content and moderati...</a></li><li><a href="#q73"><span class="toc__num">73.</span>How would you handle data recovery and restoration in case of a database failure?</a></li><li><a href="#q74"><span class="toc__num">74.</span>Describe how you would design a schema for a learning management system with courses, q...</a></li><li><a href="#q75"><span class="toc__num">75.</span>How would you implement a system to track and manage software licenses and subscriptions?</a></li><li><a href="#q76"><span class="toc__num">76.</span>Explain how you would design a schema for an event management platform with events, att...</a></li><li><a href="#q77"><span class="toc__num">77.</span>How would you handle data compression and storage optimization in a MySQL database?</a></li><li><a href="#q78"><span class="toc__num">78.</span>Describe how you would design a schema for a recruitment platform with job postings, ap...</a></li><li><a href="#q79"><span class="toc__num">79.</span>How would you implement a system to track user activity and engagement metrics?</a></li><li><a href="#q80"><span class="toc__num">80.</span>Explain how you would design a schema for a real estate platform with properties, agent...</a></li><li><a href="#q81"><span class="toc__num">81.</span>How would you handle database schema changes and migrations in a continuous deployment ...</a></li><li><a href="#q82"><span class="toc__num">82.</span>Describe how you would design a schema for a subscription-based news platform with arti...</a></li><li><a href="#q83"><span class="toc__num">83.</span>How would you implement a system to manage and track software development projects and ...</a></li><li><a href="#q84"><span class="toc__num">84.</span>Explain how you would design a schema for a healthcare platform with patients, doctors,...</a></li><li><a href="#q85"><span class="toc__num">85.</span>How would you handle database performance tuning and optimization for high-traffic appl...</a></li><li><a href="#q86"><span class="toc__num">86.</span>Describe how you would design a schema for a music streaming platform with users, playl...</a></li><li><a href="#q87"><span class="toc__num">87.</span>How would you implement a system to manage user permissions and access control?</a></li><li><a href="#q88"><span class="toc__num">88.</span>Explain how you would design a schema for a loyalty program with customers, points, and...</a></li><li><a href="#q89"><span class="toc__num">89.</span>How would you handle data validation and integrity checks in a MySQL database?</a></li><li><a href="#q90"><span class="toc__num">90.</span>Describe how you would design a schema for a fitness app with workout plans, exercises,...</a></li><li><a href="#q91"><span class="toc__num">91.</span>How would you implement a system to track and manage customer feedback and reviews?</a></li><li><a href="#q92"><span class="toc__num">92.</span>Explain how you would design a schema for an online auction platform with items, bids, ...</a></li><li><a href="#q93"><span class="toc__num">93.</span>How would you handle database replication and failover to ensure high availability?</a></li><li><a href="#q94"><span class="toc__num">94.</span>Describe how you would design a schema for a weather monitoring system with sensors, lo...</a></li><li><a href="#q95"><span class="toc__num">95.</span>How would you implement a system to track and manage inventory across multiple warehous...</a></li><li><a href="#q96"><span class="toc__num">96.</span>Explain how you would design a schema for a peer-to-peer lending platform with lenders,...</a></li><li><a href="#q97"><span class="toc__num">97.</span>How would you handle data import and export to and from a MySQL database?</a></li><li><a href="#q98"><span class="toc__num">98.</span>Describe how you would design a schema for a freelance marketplace with freelancers, cl...</a></li><li><a href="#q99"><span class="toc__num">99.</span>How would you implement a system to track and manage digital assets and content?</a></li><li><a href="#q100"><span class="toc__num">100.</span>Explain how you would design a schema for a food delivery platform with restaurants, me...</a></li>
-      </ul>
-    </div>
-
-    
-<article class="qa" id="q1">
-  <div class="qa__number">Question 1</div>
-  <h3 class="qa__question">How would you design a database schema for an e-commerce website with products, categories, customers, and orders?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[1] = r'''
 <p><strong>Situation:</strong> an e-commerce platform needs to model products with categories, customers placing orders containing line items, payment state, and inventory &mdash; all while staying performant as catalog and order volume grow.</p>
 
 <p><strong>Approach:</strong> normalize the core entities, denormalize a few hot paths (order line snapshots), use a hierarchical category model, and keep money in <code>DECIMAL</code>.</p>
@@ -200,15 +97,9 @@ CREATE TABLE order_items (
 </table>
 
 <p><strong>Production polish:</strong> use <code>SELECT ... FOR UPDATE</code> when reserving inventory inside a transaction; index hot reporting columns (<code>placed_at</code>, <code>status</code>); partition <code>orders</code> by month once you cross ~50M rows; push search to <strong>Meilisearch</strong> or <strong>Elasticsearch</strong> for fuzzy matching, faceted filters, and multilingual stemming; run analytics off a read replica or stream to <strong>ClickHouse</strong> via <strong>Debezium</strong> &mdash; reporting on the OLTP database is the #1 cause of e-commerce database fires.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q2">
-  <div class="qa__number">Question 2</div>
-  <h3 class="qa__question">Describe how you would implement a user authentication system using MySQL.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[2] = r'''
 <p><strong>Situation:</strong> a web app needs login with email + password, password reset, "remember me," optional MFA, and protection against brute force. The schema must store credentials safely and support session or token-based auth.</p>
 
 <p><strong>Approach:</strong> separate <code>users</code>, <code>credentials</code>, <code>sessions</code>, and <code>auth_attempts</code> tables. Hash passwords with bcrypt or argon2id; store the algorithm + cost so you can rotate.</p>
@@ -314,15 +205,9 @@ async function login(email, password, ip, userAgent) {
 </table>
 
 <p><strong>Production polish:</strong> use cookies with <code>HttpOnly; Secure; SameSite=Lax</code>; rotate session ID on privilege changes; add <code>auth_attempts</code> cleanup job (prune &gt; 30 days); store <code>totp_secret</code> encrypted via column-level <strong>AES_ENCRYPT</strong> with key in <strong>HashiCorp Vault</strong> or <strong>AWS KMS</strong>; consider stepping up to <strong>WebAuthn / passkeys</strong> &mdash; the modern stack (Auth0, Clerk, WorkOS, Stytch) handles all of this so you can focus on application logic.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q3">
-  <div class="qa__number">Question 3</div>
-  <h3 class="qa__question">How would you design a database to handle a blogging platform with posts, comments, and tags?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[3] = r'''
 <p><strong>Situation:</strong> a blog needs posts with rich content, threaded comments, and many-to-many tags. Common queries: posts by tag, comments on a post, search by keyword, recent posts feed.</p>
 
 <p><strong>Approach:</strong> three core tables (<code>posts</code>, <code>comments</code>, <code>tags</code>) plus a junction table for the post-tag M2M. Use <code>FULLTEXT</code> for search; index for the access patterns you actually have.</p>
@@ -424,15 +309,9 @@ LIMIT 20;</code></pre>
 </table>
 
 <p><strong>Production polish:</strong> add a "tag cloud" view backed by <code>SELECT tag_id, COUNT(*) FROM post_tags</code> (cache 5 min); paginate comments at depth-2 (load more via API); store post bodies as Markdown, render server-side; for blogs &gt; 100k posts, replace FULLTEXT with <strong>Meilisearch</strong> or <strong>Typesense</strong> &mdash; both ship a single-binary self-hosted search engine and crush MySQL FULLTEXT for relevance and typo tolerance.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q4">
-  <div class="qa__number">Question 4</div>
-  <h3 class="qa__question">Explain how you would implement a many-to-many relationship between students and courses in a school database.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[4] = r'''
 <p><strong>Situation:</strong> a school database needs to model students taking many courses, courses having many students, with the relationship carrying its own attributes &mdash; enrollment date, grade, status. The classic many-to-many problem.</p>
 
 <p><strong>Approach:</strong> a junction table <code>enrollments</code> &mdash; not just a pair of foreign keys, but a first-class entity because the enrollment <em>itself</em> has data attached.</p>
@@ -534,15 +413,9 @@ END IF;</code></pre>
 </table>
 
 <p><strong>Production polish:</strong> partition <code>enrollments</code> by <code>semester</code> once you cross ~10M rows (drop old semesters as a partition operation, instant); add <code>capacity</code> + <code>waitlist_position</code> for over-enrollment workflows; consider <code>SELECT ... FOR UPDATE SKIP LOCKED</code> for waitlist promotion processing; archive completed semesters to a <strong>ClickHouse</strong> warehouse for historical analytics, keep MySQL focused on the active term.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q5">
-  <div class="qa__number">Question 5</div>
-  <h3 class="qa__question">How would you design a database schema for a library management system with books, authors, members, and loans?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[5] = r'''
 <p><strong>Situation:</strong> a library system tracks books (with multiple authors), members (who can borrow), loans (which book, who, when due), and returns. Common queries: what does this member have out, what books are overdue, find a book by title or author.</p>
 
 <p><strong>Approach:</strong> separate <code>books</code> from <code>book_copies</code> (you have multiple physical copies of one title); M2M between books and authors; <code>loans</code> tracks the active and historical borrowing.</p>
@@ -669,15 +542,9 @@ END IF;</code></pre>
 </table>
 
 <p><strong>Production polish:</strong> a scheduled job promotes overdue loans to "fines" status; reservations queue uses <code>FOR UPDATE SKIP LOCKED</code>; for very large libraries, partition <code>loans</code> by year (instant drop of old data); modern systems often use <strong>Koha</strong> or <strong>FOLIO</strong> as off-the-shelf library management software &mdash; the schema above is what they look like under the hood.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q6">
-  <div class="qa__number">Question 6</div>
-  <h3 class="qa__question">Describe how you would handle data migration from one MySQL database to another.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[6] = r'''
 <p><strong>Situation:</strong> migrating data between MySQL databases &mdash; could be a version upgrade (5.7 → 8.x), provider switch (self-hosted → RDS / Cloud SQL / PlanetScale), region move, or schema overhaul. Whether downtime is acceptable changes everything.</p>
 
 <p><strong>Approach (zero-downtime):</strong> source + target run in parallel; replicate continuously; cut over apps when target is caught up.</p>
@@ -753,15 +620,9 @@ pt-online-schema-change \
 </table>
 
 <p><strong>Production polish:</strong> always do a dry-run against a snapshot in staging; data parity check post-migration via <strong>pt-table-checksum</strong> or row-count + checksum-per-table queries; keep the source running read-only for a week as a fallback; for cross-version upgrades validate <code>information_schema</code> for deprecated features; cloud migrations into <strong>Aurora</strong> or <strong>Cloud SQL</strong> have built-in <strong>DMS</strong> / <strong>Datastream</strong> services that automate the snapshot + CDC pipeline &mdash; usually the right path over hand-rolled tools.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q7">
-  <div class="qa__number">Question 7</div>
-  <h3 class="qa__question">How would you design a schema for tracking employee attendance in a company?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[7] = r'''
 <p><strong>Situation:</strong> tracking employee attendance &mdash; clock-in / clock-out, breaks, time off, leave types, plus reporting (hours per week, late arrivals, overtime). Schema must support audit, scale to thousands of employees, and integrate with payroll.</p>
 
 <p><strong>Approach:</strong> separate <code>employees</code>, <code>attendance_events</code> (raw clock punches), <code>shifts</code> (planned schedule), and <code>leave_requests</code> (vacation/sick/PTO). Aggregations are computed from raw events, not stored as derived state.</p>
@@ -860,15 +721,9 @@ ORDER BY work_date, employee_id;</code></pre>
 </table>
 
 <p><strong>Production polish:</strong> add a <code>corrections</code> event type for manager-edited entries (preserves the original); a nightly rollup job populates <code>daily_attendance_summary</code> for fast reports; integrate with payroll via CSV export or API webhook on shift completion; for fleets &gt; 50k employees, stream attendance events into <strong>ClickHouse</strong> via <strong>Debezium</strong> and run analytics there &mdash; MySQL handles the operational workload, ClickHouse handles "show me a year of attendance heatmaps."</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q8">
-  <div class="qa__number">Question 8</div>
-  <h3 class="qa__question">Explain how you would implement a notification system that stores notifications for users in a MySQL database.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[8] = r'''
 <p><strong>Situation:</strong> users in an app should receive notifications &mdash; comments on their post, mentions, system alerts, marketing &mdash; with read/unread state, channels (in-app, email, push), and an unread badge count.</p>
 
 <p><strong>Approach:</strong> a single <code>notifications</code> table with polymorphic actor/target via type + ID columns; one row per user per notification; pivot the unread count via a denormalized counter or a fast indexed query.</p>
@@ -949,15 +804,9 @@ WHERE w.post_id = ?
 </table>
 
 <p><strong>Production polish:</strong> partition by month and drop notifications older than 90 days; offload email/push delivery to a queue (<strong>SQS</strong>, <strong>BullMQ</strong> on Redis, <strong>Kafka</strong>) so DB writes commit fast and worker processes handle external APIs (SES, SendGrid, FCM, Twilio); for unread badges at very high scale, denormalize a <code>users.unread_count</code> column updated on insert/read; the modern hosted alternative is <strong>Knock</strong>, <strong>Courier</strong>, or <strong>Novu</strong> &mdash; they handle template management, multi-channel delivery, and digest grouping out of the box.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q9">
-  <div class="qa__number">Question 9</div>
-  <h3 class="qa__question">How would you handle versioning of records in a MySQL database?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[9] = r'''
 <p><strong>Situation:</strong> a record needs version history &mdash; "what did this row look like last Tuesday?", "who changed it?", "revert to v3". Common in CMS articles, regulated data (medical records), and compliance audits.</p>
 
 <p><strong>Approach:</strong> three patterns, picked based on how often you query history vs only-current. Most teams use the first.</p>
@@ -1052,15 +901,9 @@ WHERE id = 42 AND valid_to = '9999-12-31';</code></pre>
 </table>
 
 <p><strong>Production polish:</strong> for compliance-grade auditing, layer history-table + CDC; ensure history tables are append-only (revoke UPDATE/DELETE); periodically archive old versions to S3 or cold storage; for very large entities, store body diffs (git-style) instead of full snapshots; consider PostgreSQL&rsquo;s native temporal tables or <strong>Snowflake</strong> Time Travel if "as-of" queries are central to your product.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q10">
-  <div class="qa__number">Question 10</div>
-  <h3 class="qa__question">Describe how you would optimize a slow query that retrieves the top-selling products from an orders table.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[10] = r'''
 <p><strong>Situation:</strong> "top-selling products this month" runs slowly on a 50M-row orders table. The current query joins orders + order_items + products and aggregates &mdash; takes 8 seconds. Need it under 200ms for the dashboard.</p>
 
 <p><strong>Approach:</strong> diagnose with EXPLAIN, then layer fixes &mdash; index for filters, narrow the result set early, denormalize a counter, or roll up to a summary table updated incrementally.</p>
@@ -1139,15 +982,9 @@ LIMIT 10;</code></pre>
 </table>
 
 <p><strong>Production polish:</strong> always EXPLAIN the new query in production-like data sizes &mdash; not your 1k-row dev DB; track query digest in <code>performance_schema.events_statements_summary_by_digest</code> and alert when the top query&rsquo;s avg time regresses; for top-N type queries with very high concurrency, push to <strong>Redis</strong> sorted sets updated on order completion; for genuinely warehouse-scale analytics, stream orders to <strong>ClickHouse</strong> via <strong>Debezium</strong> and answer the same question in 50ms over years of data.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q11">
-  <div class="qa__number">Question 11</div>
-  <h3 class="qa__question">How would you design a database schema for a social media platform with users, posts, likes, and comments?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[11] = r'''
 <p><strong>Situation:</strong> social platform with users posting content, others liking and commenting, a feed that&rsquo;s the home page, and follower relationships. Has to scale to millions of users and remain responsive.</p>
 
 <p><strong>Approach:</strong> normalize entities, denormalize hot counters, design for the feed-read pattern (which dominates traffic).</p>
@@ -1249,15 +1086,9 @@ COMMIT;</code></pre>
 </table>
 
 <p><strong>Production polish:</strong> at significant scale (&gt; 10M MAU), pull-model feed bottlenecks on celebrities &mdash; switch to <strong>fan-out on write</strong> for normal users (push posts to follower inboxes via <strong>Kafka</strong> + <strong>Redis</strong> sorted sets) and pull for celebrities; cache hot post pages in <strong>Redis</strong> with TTL; offload media URLs to <strong>S3 / CloudFront</strong>; for trending/recommendation features, stream events into <strong>ClickHouse</strong> or a dedicated graph DB &mdash; MySQL stays the source of truth, specialized systems serve the queries it&rsquo;s bad at.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q12">
-  <div class="qa__number">Question 12</div>
-  <h3 class="qa__question">Explain how you would handle database backups and restores in a production environment.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[12] = r'''
 <p><strong>Situation:</strong> production MySQL holds the entire business; backups must restore reliably, the strategy must work without downtime, and recovery time must meet a written SLA (RPO/RTO). "We have backups" without "we tested restore" is a fairytale.</p>
 
 <p><strong>Approach:</strong> layered backups (logical + physical + binlog), automated, encrypted, off-site, with quarterly restore drills. Different layers cover different failure modes.</p>
@@ -1336,15 +1167,9 @@ mysqlbinlog \
 <p><strong>Cloud reality:</strong> <strong>Aurora</strong>, <strong>RDS</strong>, <strong>Cloud SQL</strong>, <strong>PlanetScale</strong> handle most of this automatically &mdash; continuous backups with PITR, automated snapshots, cross-region replication. Self-hosted requires the discipline above; managed services let you focus on application correctness. Either way: <strong>test the restore</strong>. Untested backups fail at the worst possible time.</p>
 
 <p><strong>Production polish:</strong> document RPO (max acceptable data loss) and RTO (max acceptable downtime) per database; alert on missing backups within 1 hour of expected; encrypt backup transport in addition to at-rest; rotate backup credentials quarterly; use <strong>AWS Backup Vault Lock</strong> or <strong>S3 Object Lock</strong> for ransomware-resistant immutable backups.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q13">
-  <div class="qa__number">Question 13</div>
-  <h3 class="qa__question">How would you implement a tagging system where multiple tags can be associated with multiple posts?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[13] = r'''
 <p><strong>Situation:</strong> a content platform needs tags &mdash; users tag posts with multiple keywords, queries support "posts tagged X" and "posts tagged X AND Y", "popular tags". Standard many-to-many.</p>
 
 <p><strong>Approach:</strong> three tables &mdash; <code>posts</code>, <code>tags</code>, junction <code>post_tags</code>. Composite primary key on the junction prevents duplicates and gives free indexes both directions.</p>
@@ -1449,15 +1274,9 @@ COMMIT;</code></pre>
 </table>
 
 <p><strong>Production polish:</strong> tag input should suggest existing tags (typeahead from <code>tags</code> table); enforce a tag-count limit per post (e.g., 10) at the app layer; for very large platforms (&gt; 100M posts) push tag-search to <strong>Elasticsearch</strong> &mdash; faceted filtering and "more like this" become first-class; the modern alternative for content discovery is <strong>Algolia</strong> or <strong>Meilisearch</strong> indexed off MySQL via <strong>Debezium</strong>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q14">
-  <div class="qa__number">Question 14</div>
-  <h3 class="qa__question">Describe how you would create a reporting system that aggregates sales data by region and time period.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[14] = r'''
 <p><strong>Situation:</strong> sales reporting needs aggregations &mdash; revenue by region by month, top products by quarter, year-over-year growth. Running these on the live <code>orders</code> table is slow and competes with the OLTP workload.</p>
 
 <p><strong>Approach:</strong> roll up raw orders into a star-schema fact table refreshed nightly, with denormalized region/time dimensions. Reports read the rollup, not the raw data.</p>
@@ -1547,15 +1366,9 @@ ORDER BY region_id, revenue DESC;</code></pre>
 </table>
 
 <p><strong>Production polish:</strong> for sub-hour freshness, switch to <strong>Materialize</strong> or <strong>RisingWave</strong> &mdash; streaming materialized views over the binlog; for true warehouse scale (multi-billion rows, ad-hoc dimensions), stream into <strong>ClickHouse</strong>, <strong>BigQuery</strong>, or <strong>Snowflake</strong> via <strong>Debezium</strong> and run all analytics there. MySQL keeps the OLTP workload; the warehouse handles "give me revenue by region by hour by product variant for the last 3 years" in 200ms.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q15">
-  <div class="qa__number">Question 15</div>
-  <h3 class="qa__question">How would you design a schema for storing hierarchical data, such as categories and subcategories?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[15] = r'''
 <p><strong>Situation:</strong> a category tree where a category has subcategories, those have sub-subcategories, with arbitrary depth. Common queries: full subtree of a category, breadcrumb path, all root categories.</p>
 
 <p><strong>Approach:</strong> the four standard hierarchical patterns trade reads against writes. For most product catalogs, <strong>adjacency list</strong> + recursive CTE is the right starting point.</p>
@@ -1656,15 +1469,9 @@ SELECT * FROM categories WHERE path LIKE '/1/4/5/%';</code></pre>
 </table>
 
 <p><strong>Production polish:</strong> store category breadcrumb in a JSON column or denormalized <code>full_path</code> string for the product page (avoid the recursive query on every render); pre-compute and cache the entire tree in the application as a tree object refreshed every 5 minutes &mdash; categories change rarely; for very deep / many-to-many graph data (org charts, social graphs), look at <strong>Neo4j</strong> or PostgreSQL&rsquo;s <code>ltree</code>; in MySQL 8 the recursive CTE is fast enough for nearly every catalog use case.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q16">
-  <div class="qa__number">Question 16</div>
-  <h3 class="qa__question">Explain how you would implement full-text search for an articles table in a MySQL database.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[16] = r'''
 <p><strong>Situation:</strong> articles table has 200k rows; users need to search by keyword in title and body. <code>LIKE '%term%'</code> is slow (no index can be used) and lacks ranking.</p>
 
 <p><strong>Approach:</strong> add a FULLTEXT index on the searchable columns; query with <code>MATCH(...) AGAINST(...)</code>. Works well for moderate scale and English content; for advanced search, push out to a dedicated engine.</p>
@@ -1745,15 +1552,9 @@ SET GLOBAL innodb_ft_server_stopword_table = 'mydb/my_stopwords';</code></pre>
 </table>
 
 <p><strong>Production polish:</strong> use FULLTEXT for blogs, support docs, and most product catalogs &mdash; it&rsquo;s genuinely good enough; index sync is automatic (no separate process). For e-commerce search with facets, instant-search UIs, and millions of docs, push to <strong>Meilisearch</strong> (single binary, easy ops) or <strong>Typesense</strong> (similar) for self-host, or <strong>Algolia</strong> as a SaaS; sync via <strong>Debezium</strong> CDC. For semantic / "find similar" use vector search &mdash; <strong>pgvector</strong> on Postgres, <strong>Pinecone</strong>, <strong>Weaviate</strong>, <strong>Qdrant</strong>, <strong>Milvus</strong> indexed with embeddings.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q17">
-  <div class="qa__number">Question 17</div>
-  <h3 class="qa__question">How would you handle archiving old data in a high-transaction MySQL database?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[17] = r'''
 <p><strong>Situation:</strong> a high-write OLTP database (orders, events, logs) grows by millions of rows daily. Old data is rarely queried but takes space, slows backups, and bloats indexes. Need to archive old rows without losing them.</p>
 
 <p><strong>Approach:</strong> a layered strategy &mdash; partition the active table by time, drop old partitions to an archive table or S3, and serve historical reads from a read replica or warehouse.</p>
@@ -1832,15 +1633,9 @@ LINES TERMINATED BY '\n';
 </table>
 
 <p><strong>Production polish:</strong> automate the archival job in <strong>Airflow</strong>, <strong>Dagster</strong>, or a Kubernetes CronJob; verify row count parity before dropping partitions; for compliance use cases (GDPR, HIPAA) ensure the archive supports targeted deletion of a single user&rsquo;s history; modern alternative for high-velocity event data is to bypass MySQL archival entirely &mdash; write events to <strong>ClickHouse</strong> or <strong>BigQuery</strong> from the start (via <strong>Kafka</strong> or <strong>Debezium</strong>) and keep MySQL for transactional state only.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q18">
-  <div class="qa__number">Question 18</div>
-  <h3 class="qa__question">Describe how you would design a schema for a movie rental system with movies, customers, and rentals.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[18] = r'''
 <p><strong>Situation:</strong> a movie rental system tracks the catalog (movies, genres, multiple physical/digital copies), customers, rentals (who rented what when, when due, when returned), and late fees.</p>
 
 <p><strong>Approach:</strong> separate <code>movies</code> from <code>movie_copies</code> (multiple copies of one title); rentals reference the copy, not the title; soft-archive customers and movies rather than deleting.</p>
@@ -1964,15 +1759,9 @@ LIMIT 10;</code></pre>
 </table>
 
 <p><strong>Production polish:</strong> a scheduled job calculates and applies late fees at midnight (<code>UPDATE rentals SET late_fee_cents = ... WHERE returned_at IS NULL AND due_at &lt; NOW() - INTERVAL 1 DAY</code>); reservations queue uses <code>FOR UPDATE SKIP LOCKED</code>; for streaming-rental services the schema simplifies (no copies, just licenses + concurrent-stream limits per customer); use <strong>Stripe</strong> or <strong>Adyen</strong> for payment and webhook back to update <code>payment_status</code>; modern equivalents like Plex/Hulu/Netflix run effectively this same schema for their library/holdings, with a streaming layer (DRM, CDN) on top.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q19">
-  <div class="qa__number">Question 19</div>
-  <h3 class="qa__question">How would you implement a system to track inventory levels for products in a warehouse?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[19] = r'''
 <p><strong>Situation:</strong> a warehouse needs to track stock levels for products across multiple bins/locations, support reservations (held for a pending order), record receipts and adjustments, and prevent overselling under concurrency.</p>
 
 <p><strong>Approach:</strong> separate "current state" from "movement history." Use atomic UPDATE for adjustments; an append-only ledger gives audit + reconciliation.</p>
@@ -2077,15 +1866,9 @@ WHERE i.on_hand - i.reserved &lt; p.reorder_point;</code></pre>
 </table>
 
 <p><strong>Production polish:</strong> nightly reconciliation job recomputes <code>on_hand</code> from movement log to detect drift; integrate with WMS via webhooks; for chains with thousands of stores, partition <code>inventory_movements</code> by month; for very high-throughput inventory (Amazon-scale), consider an event-sourced design with <strong>Kafka</strong> as the source of truth and MySQL/Redis as projections; the modern stack for retail uses <strong>Square</strong>, <strong>Shopify</strong>, or <strong>SAP</strong> as the system of record &mdash; each implements approximately this schema.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q20">
-  <div class="qa__number">Question 20</div>
-  <h3 class="qa__question">Explain how you would design a database to handle customer reviews and ratings for products.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[20] = r'''
 <p><strong>Situation:</strong> products on a marketplace need customer reviews (1-5 stars + text), with one review per customer per product, helpful/unhelpful voting, moderation, and aggregate ratings on product pages.</p>
 
 <p><strong>Approach:</strong> reviews table with unique (product, customer); separate votes table; denormalized aggregates on the product to avoid <code>AVG</code> per page render.</p>
@@ -2196,15 +1979,9 @@ ORDER BY r.created_at;</code></pre>
 </table>
 
 <p><strong>Production polish:</strong> rate-limit submissions per customer (1 review per product, ~5 reviews per day across products); run new reviews through a moderation pipeline (regex + ML toxicity classifier or <strong>Perspective API</strong>); for very large catalogs, run aggregate reads off a read replica and rebuild aggregates incrementally rather than per-write; the modern stack for review-heavy commerce uses <strong>Yotpo</strong>, <strong>Bazaarvoice</strong>, or <strong>Trustpilot</strong> as a hosted layer with the schema above as the canonical store.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q21">
-  <div class="qa__number">Question 21</div>
-  <h3 class="qa__question">How would you handle database sharding for a large-scale application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[21] = r'''
 <p><strong>Situation:</strong> a single MySQL instance has hit its limits &mdash; storage saturating, write throughput plateaued, even hot read paths feel slow. Vertical scaling, caching, and read replicas have been pushed to their limit. Need to spread the data across multiple databases.</p>
 
 <p><strong>Approach:</strong> shard horizontally by a chosen <strong>shard key</strong>. Most teams reach for a hosted solution (Vitess / PlanetScale / TiDB) before rolling their own &mdash; the operational burden of DIY sharding is significant.</p>
@@ -2273,15 +2050,9 @@ const result = await router.query(
 </ul>
 
 <p><strong>Realistic recommendation:</strong> for nearly all teams, picking a managed sharded DB (PlanetScale, TiDB Cloud, AlloyDB) is dramatically cheaper than DIY sharding. The exception is teams with the operational maturity and scale of YouTube/Slack/Etsy, who built or adopted Vitess.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q22">
-  <div class="qa__number">Question 22</div>
-  <h3 class="qa__question">Describe how you would implement a leaderboard system that ranks players based on their scores.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[22] = r'''
 <p><strong>Situation:</strong> a game leaderboard ranks players by score. Common operations: get top 100, get my rank, get scores around me ("rank 15234 ± 5"). Updates are frequent; ranks should be fresh.</p>
 
 <p><strong>Approach:</strong> for moderate scale, MySQL with the right index works; for high concurrency or huge player counts, <strong>Redis sorted sets</strong> are the right tool with MySQL as the durable store.</p>
@@ -2374,15 +2145,9 @@ ZREVRANGE leaderboard:global (my_rank - 5) (my_rank + 5) WITHSCORES</code></pre>
 </table>
 
 <p><strong>Production polish:</strong> store the source of truth in MySQL (durable, queryable, anti-cheat); cache the top 100 in Redis with TTL; use Redis sorted sets for live "my rank" if the game is high-traffic; for tournament play, build per-tournament sorted sets keyed by event; for cross-region leaderboards, use Redis Cluster or per-region sets and merge top-N at query time; modern game backends commonly use <strong>PlayFab</strong>, <strong>Firebase</strong>, or custom Redis + relational hybrid &mdash; the schema above is what they look like under the hood.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q23">
-  <div class="qa__number">Question 23</div>
-  <h3 class="qa__question">How would you design a schema for an online booking system with users, events, and reservations?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[23] = r'''
 <p><strong>Situation:</strong> an event-booking platform &mdash; concerts, conferences, classes &mdash; with users reserving seats. Concurrency must prevent double-booking; cancellations free seats; admins manage events and capacity.</p>
 
 <p><strong>Approach:</strong> separate <code>events</code> from <code>event_seats</code> (one row per seat); reservations claim seats with <code>FOR UPDATE</code> for atomicity. For general-admission events, an inventory counter pattern works.</p>
@@ -2492,15 +2257,9 @@ WHERE r.status = 'pending' AND r.created_at &lt; NOW() - INTERVAL 15 MINUTE;</co
 </table>
 
 <p><strong>Production polish:</strong> integrate with <strong>Stripe</strong> or <strong>Adyen</strong> for payment; use webhooks to confirm reservations on payment success; support waitlists with <code>FOR UPDATE SKIP LOCKED</code> when seats free up; for very large venues (&gt; 100k tickets) cache seat status in <strong>Redis</strong> for fast availability map renders, MySQL stays the durable record; modern booking platforms (Eventbrite, Ticketmaster, SeatGeek) implement variations of this; <strong>Hopin</strong>, <strong>Luma</strong>, and <strong>Sched</strong> for conferences add session-level scheduling but the core booking model is the same.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q24">
-  <div class="qa__number">Question 24</div>
-  <h3 class="qa__question">Explain how you would implement audit logging to track changes to critical data in a MySQL database.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[24] = r'''
 <p><strong>Situation:</strong> regulatory or compliance requirements demand a tamper-evident audit log of changes to critical tables (orders, balances, user PII). Auditors need: who, what, when, before, after &mdash; and they need it to survive even if the application is compromised.</p>
 
 <p><strong>Approach:</strong> three layers, picked based on rigor needed:</p>
@@ -2600,15 +2359,9 @@ enforce_gtid_consistency = ON
 </table>
 
 <p><strong>Production polish:</strong> revoke UPDATE/DELETE on audit tables to prevent post-hoc tampering (audit user has INSERT only); ship audit logs off the production DB to cold storage (S3 with Object Lock for immutability); for SOX/HIPAA/PCI compliance, layer multiple approaches; build user-friendly "audit viewer" tooling so investigators don&rsquo;t need DB access; modern compliance platforms (<strong>Drata</strong>, <strong>Vanta</strong>, <strong>Sumo Logic</strong>, <strong>Datadog Cloud SIEM</strong>) consume these streams and produce auditor-ready reports.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q25">
-  <div class="qa__number">Question 25</div>
-  <h3 class="qa__question">How would you handle data integrity and consistency in a distributed MySQL environment?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[25] = r'''
 <p><strong>Situation:</strong> a system spans multiple MySQL instances &mdash; sharded by region, or replicated across data centers, or in a multi-master setup. Reads or writes happen on different nodes; data must remain consistent enough for correctness without sacrificing too much availability or performance.</p>
 
 <p><strong>Approach:</strong> consistency in distributed systems is a spectrum &mdash; pick the right model per workload. The CAP theorem says you can&rsquo;t have consistency, availability, and partition tolerance all at once during a network partition; modern choices land on a sliding scale.</p>
@@ -2677,15 +2430,9 @@ SET GLOBAL rpl_semi_sync_source_enabled = ON;
 </ul>
 
 <p><strong>Modern stack:</strong> for multi-region strong consistency, native distributed databases like <strong>CockroachDB</strong>, <strong>Spanner</strong>, <strong>YugabyteDB</strong>, or <strong>TiDB</strong> handle the hard parts (consensus, conflict resolution) instead of bolting them onto MySQL. <strong>PlanetScale</strong> offers MySQL-compatible distributed via Vitess; <strong>Aurora Global Database</strong> gives sub-second cross-region replication. For most teams: pick a managed system that matches your consistency needs, not roll your own.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q26">
-  <div class="qa__number">Question 26</div>
-  <h3 class="qa__question">Describe how you would optimize the performance of a MySQL database handling millions of transactions per day.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[26] = r'''
 <p><strong>Situation:</strong> a system processes millions of transactions per day &mdash; an order pipeline, payment ledger, ticketing platform &mdash; and MySQL must handle the write throughput plus concurrent analytical reads without falling over.</p>
 
 <p><strong>Approach:</strong> the optimization stack runs from schema and indexing up through hardware. Address each layer; skipping straight to bigger hardware wastes money on inefficient queries.</p>
@@ -2736,15 +2483,9 @@ INSERT INTO order_events (order_id, event, ts) VALUES
 </table>
 
 <p><strong>Production polish</strong>: profile <em>before</em> tuning &mdash; <code>EXPLAIN ANALYZE</code>, <strong>Percona PMM</strong> or <strong>Datadog DBM</strong> to find the top-N expensive queries (<code>sys.statement_analysis</code>). Keep <strong>ProxySQL</strong> or <strong>RDS Proxy</strong> in front for connection pooling and read/write splitting. Push aggregations to <strong>ClickHouse</strong> via <strong>Debezium</strong> CDC instead of running them on the OLTP primary &mdash; that single move buys most platforms a year of headroom. <strong>Aurora MySQL</strong> or <strong>PlanetScale</strong> (Vitess) absorb traffic that would otherwise force sharding. The order in 2026: tune queries &rarr; add replicas &rarr; cache (<strong>Redis</strong>) &rarr; offload analytics &rarr; <em>then</em> consider sharding. Most "MySQL can&rsquo;t handle our load" stories are missing indexes.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q27">
-  <div class="qa__number">Question 27</div>
-  <h3 class="qa__question">How would you design a schema to store time-series data, such as temperature readings over time?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[27] = r'''
 <p><strong>Situation:</strong> the system records continuous measurements over time &mdash; sensor temperatures, app metrics, IoT telemetry, stock ticks &mdash; with high write rates, append-mostly access, and queries that aggregate over time windows.</p>
 
 <p><strong>Approach:</strong> use a narrow append-only schema, partition by time, build only indexes the dashboards need, and downsample old data to keep the table size bounded. MySQL works for moderate volumes; for true time-series scale, pair with <strong>TimescaleDB</strong> or <strong>ClickHouse</strong>.</p>
@@ -2808,15 +2549,9 @@ WHERE  sensor_id = 42
 </table>
 
 <p><strong>Production polish</strong>: run a scheduled event to add next month&rsquo;s partition and drop ones past retention &mdash; <code>ALTER TABLE ... ADD PARTITION</code> / <code>DROP PARTITION</code>. The drop is metadata-only and instant, vastly better than <code>DELETE</code>. Roll up readings via a cron-driven query or <strong>Materialize</strong> / <strong>RisingWave</strong> for streaming aggregates. At meaningful scale the answer in 2026 is <strong>TimescaleDB</strong> (Postgres-based, hypertables + continuous aggregates), <strong>ClickHouse</strong> (columnar, MergeTree partitioning), or <strong>InfluxDB 3.0</strong>. Stream raw points via <strong>Kafka</strong> or <strong>Redpanda</strong>, write through <strong>Telegraf</strong> or <strong>Vector</strong>. <strong>Grafana</strong> sits on top regardless of backend. MySQL is fine up to a few thousand writes/sec; past that, the time-series specialists pay for themselves quickly.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q28">
-  <div class="qa__number">Question 28</div>
-  <h3 class="qa__question">Explain how you would implement role-based access control (RBAC) in a MySQL database.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[28] = r'''
 <p><strong>Situation:</strong> a multi-user application needs role-based access control &mdash; admins, editors, viewers, plus custom team-level roles. Permissions must be auditable, easy to update, and fast to evaluate on every request.</p>
 
 <p><strong>Approach:</strong> classic three-table RBAC: <code>users</code>, <code>roles</code>, <code>permissions</code>, joined by two M2M tables. Permissions are fine-grained verbs on resources; roles are bundles of permissions; users get one or more roles. Cache the resolved permission set per user.</p>
@@ -2880,15 +2615,9 @@ CREATE TABLE post_acl (
 </table>
 
 <p><strong>Production polish</strong>: cache the resolved permission set in <strong>Redis</strong> per user with a 5-15 minute TTL; invalidate on role changes via pub/sub. Audit every grant via a <code>role_grants_log</code> append-only table &mdash; SOC 2 auditors will ask. For the simple case, libraries like <strong>Casbin</strong> (config-as-code policies, multi-language) or <strong>CASL</strong> (JS/TS, ability-checking in UI + API) sit on top of this schema. For complex sharing graphs &mdash; folders inside teams inside orgs &mdash; the 2026 standard is <strong>Zanzibar-style ReBAC</strong>: <strong>SpiceDB</strong> (Authzed), <strong>Permify</strong>, <strong>OpenFGA</strong> (CNCF, originally Auth0), or <strong>Oso Cloud</strong>. They evaluate "can user X do Y on object Z" in single-digit ms with consistency guarantees. Don&rsquo;t reinvent &mdash; permission systems get gnarly fast and security bugs here are catastrophic.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q29">
-  <div class="qa__number">Question 29</div>
-  <h3 class="qa__question">How would you handle data synchronization between multiple MySQL databases?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[29] = r'''
 <p><strong>Situation:</strong> data must stay synchronized across multiple MySQL databases &mdash; primary &harr; replica for HA, region &harr; region for global reads, OLTP &rarr; analytics warehouse, or microservice &harr; microservice. The choice of mechanism depends on the consistency and lag tolerances.</p>
 
 <p><strong>Approach:</strong> three production patterns dominate &mdash; native replication, change data capture, and dual-write through an outbox. Pick by direction (one-way vs bidirectional), latency budget (sync vs async), and how strict the consistency requirement is.</p>
@@ -2946,15 +2675,9 @@ COMMIT;
 </table>
 
 <p><strong>Production polish</strong>: for HA inside one DC, <strong>InnoDB Cluster</strong> + <strong>MySQL Router</strong> or managed services like <strong>Aurora MySQL</strong>, <strong>PlanetScale</strong>, <strong>Cloud SQL</strong>. For global, <strong>Aurora Global Database</strong> (sub-second cross-region), <strong>PlanetScale</strong> regions, <strong>Vitess</strong> with VReplication, or <strong>YugabyteDB</strong> / <strong>CockroachDB</strong> as MySQL-/Postgres-compatible distributed alternatives. For OLTP &rarr; analytics, <strong>Debezium</strong> &rarr; <strong>Kafka</strong> &rarr; <strong>ClickHouse</strong> / <strong>Snowflake</strong> / <strong>BigQuery</strong> is the default 2026 pipeline. Avoid bidirectional replication where possible &mdash; conflict resolution is genuinely painful. If you must go bidirectional, use a CRDT layer or designate one row owner per region.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q30">
-  <div class="qa__number">Question 30</div>
-  <h3 class="qa__question">Describe how you would design a schema for a messaging app with users, messages, and conversations.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[30] = r'''
 <p><strong>Situation:</strong> a messaging app needs users, conversations (1:1 and group), messages, read receipts, attachments, presence, and typing state &mdash; with chronological ordering and fast unread counts.</p>
 
 <p><strong>Approach:</strong> normalize conversations and participants; treat messages as an append-only log partitioned by time. Avoid scanning all messages to compute unread counts &mdash; track "last read" per participant.</p>
@@ -3030,15 +2753,9 @@ LIMIT  50;</code></pre>
 </table>
 
 <p><strong>Production polish</strong>: presence and typing indicators belong in <strong>Redis</strong> (sets with TTL) or <strong>Pusher</strong> / <strong>Ably</strong>, not MySQL &mdash; the write rate destroys throughput. Real-time delivery is <strong>WebSocket</strong> via <strong>Socket.IO</strong>, <strong>Phoenix Channels</strong>, or managed services like <strong>Pusher Channels</strong>, <strong>Ably</strong>, <strong>PubNub</strong>. End-to-end encryption uses <strong>libsignal</strong> (the protocol behind WhatsApp and Signal). At chat-app scale &mdash; Slack, Discord territory &mdash; messages move to <strong>Cassandra</strong> or <strong>ScyllaDB</strong> (write-optimized, partition by conversation_id). Push notifications via <strong>FCM</strong> / <strong>APNs</strong>. Search via <strong>Meilisearch</strong> / <strong>Typesense</strong> for small apps, <strong>Elasticsearch</strong> / <strong>OpenSearch</strong> for large. The MySQL schema above carries small-to-medium apps comfortably; specialized stores enter at "millions of DAU" scale.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q31">
-  <div class="qa__number">Question 31</div>
-  <h3 class="qa__question">How would you implement a system to track changes to records, such as an audit trail or history table?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[31] = r'''
 <p><strong>Situation:</strong> a system needs to track changes to records &mdash; who changed what, when, from what to what &mdash; for compliance (SOC 2, HIPAA, GDPR), debugging, undo features, or temporal queries.</p>
 
 <p><strong>Approach:</strong> three competing patterns &mdash; (1) shadow history table populated by triggers, (2) effective-dated rows where every change is a new row, or (3) CDC streaming change events to an external store. The right answer depends on what you query.</p>
@@ -3115,15 +2832,9 @@ CREATE TABLE audit_log (
 </table>
 
 <p><strong>Production polish</strong>: which user made the change is the easiest thing to lose. Set <code>SET @app_user_id = ?</code> at session start so triggers can read it, or include <code>updated_by</code> in every UPDATE explicitly. For compliance-grade audit, the 2026 path is <strong>Debezium</strong> CDC streaming to <strong>S3 with Object Lock</strong> (WORM) or <strong>Snowflake</strong> &mdash; tamper-evident, append-only, queryable for years. Tools like <strong>Datadog Audit Trail</strong>, <strong>Drata</strong>, <strong>Vanta</strong>, <strong>Tugboat Logic</strong> integrate the audit table directly into evidence collection for SOC 2 / ISO 27001. <strong>MariaDB Audit Plugin</strong> or the commercial <strong>MySQL Enterprise Audit</strong> capture <em>every</em> SQL statement at the server &mdash; useful for DBA/ops audit but heavy. Keep history tables in InnoDB (not MyISAM) so they participate in transactions: an INSERT into history that survives a rolled-back UPDATE is worse than no audit at all.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q32">
-  <div class="qa__number">Question 32</div>
-  <h3 class="qa__question">Explain how you would design a database to handle multi-tenancy for a SaaS application.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[32] = r'''
 <p><strong>Situation:</strong> a SaaS product serves many tenants &mdash; companies, organizations, customers &mdash; from one application. The data must be isolated, performant per tenant, and easy to operate across all tenants (backups, migrations, billing).</p>
 
 <p><strong>Approach:</strong> three industry patterns &mdash; pooled (single schema, <code>tenant_id</code> column), schema-per-tenant, and database-per-tenant. The right one depends on tenant count, isolation requirements, and noisy-neighbor concerns. Pooled is the default until you have a strong reason otherwise.</p>
@@ -3182,15 +2893,9 @@ CREATE TABLE tenant_acme.projects (...);
 </table>
 
 <p><strong>Production polish</strong>: the <em>biggest</em> risk in pooled multi-tenancy is leaking data across tenants &mdash; a missing <code>WHERE tenant_id = ?</code> in one query and a customer sees another customer&rsquo;s data. Mitigations: an ORM/middleware layer (<strong>Prisma</strong> middleware, <strong>SQLAlchemy</strong> session events, <strong>Hibernate</strong> filters) that injects the predicate automatically, code review checklists, and integration tests that cross-check tenant access. Postgres has true row-level security; MySQL does not, so this discipline matters more. For noisy neighbors, <strong>PlanetScale</strong> or <strong>Vitess</strong> shard by <code>tenant_id</code> using consistent hashing &mdash; large tenants get their own shard. Per-tenant backup/restore is dramatically simpler in schema/database-per-tenant. The 2026 pragmatic answer at most SaaS scales: pooled with <code>tenant_id</code> + <strong>Prisma</strong>/<strong>Drizzle</strong> middleware enforcement, with a tiny escape hatch to move whales to dedicated databases when revenue justifies it.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q33">
-  <div class="qa__number">Question 33</div>
-  <h3 class="qa__question">How would you handle database replication to ensure high availability and disaster recovery?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[33] = r'''
 <p><strong>Situation:</strong> the database must remain available during instance failures, AZ outages, and ideally region-level disasters &mdash; with bounded data loss (RPO) and quick recovery time (RTO). Production-grade ops requires a documented replication and failover strategy.</p>
 
 <p><strong>Approach:</strong> deploy a primary with multiple replicas across availability zones, set RPO/RTO targets, automate failover, and run regular DR drills. Use semi-sync or Group Replication where data loss is unacceptable.</p>
@@ -3236,15 +2941,9 @@ xtrabackup --backup --target-dir=/backups/$(date +%F)                  -- large;
 </table>
 
 <p><strong>Production polish</strong>: the standard 2026 stack is managed &mdash; <strong>Aurora MySQL</strong> (sub-minute failover, 6-way storage replication across 3 AZs, Aurora Global for &lt;1s cross-region), <strong>PlanetScale</strong> (Vitess-based, automatic failover), <strong>Cloud SQL</strong> with HA, <strong>Azure Database for MySQL Flexible Server</strong>. Self-hosted: <strong>Orchestrator</strong> by GitHub for topology management and failover, <strong>ProxySQL</strong> for routing. <strong>InnoDB Cluster</strong> bundles Group Replication + MySQL Router + MySQL Shell. Drill DR quarterly: write a runbook, simulate primary failure, time RTO, validate RPO from binlog gaps. Keep <strong>backups separate from primary</strong>: encrypted, off-region, immutable (S3 Object Lock). Point-in-time recovery via binlog replay is the difference between losing 5 minutes vs an entire day after corruption events. The number-one DR failure mode isn&rsquo;t infrastructure &mdash; it&rsquo;s never having tested the runbook.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q34">
-  <div class="qa__number">Question 34</div>
-  <h3 class="qa__question">Describe how you would design a schema for a customer support system with tickets, agents, and responses.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[34] = r'''
 <p><strong>Situation:</strong> a customer support platform needs tickets, agents, customers, threaded responses, attachments, SLA tracking, tags, and queue routing. Reports need ticket counts by status, response times, and CSAT.</p>
 
 <p><strong>Approach:</strong> normalize tickets and messages; track SLAs with explicit timestamps; denormalize hot ticket fields used in queue views.</p>
@@ -3331,15 +3030,9 @@ WHERE  due_at &lt; NOW() AND resolved_at IS NULL;</code></pre>
 </table>
 
 <p><strong>Production polish</strong>: SLA calculation should account for business hours and customer time zones &mdash; "respond within 4 business hours" is not <code>NOW() + 4 HOUR</code>. Libraries like <strong>BullHours</strong> or service-side rules in <strong>Zendesk</strong> / <strong>Intercom</strong> / <strong>Front</strong> handle this. Full-text search across messages via <strong>Meilisearch</strong>, <strong>Typesense</strong>, or <strong>Elasticsearch</strong>. AI triage and summarization in 2026 is standard: <strong>Intercom Fin</strong>, <strong>Zendesk Resolution Bot</strong>, <strong>Kustomer IQ</strong>, or <strong>Claude</strong>/<strong>GPT-4</strong> APIs invoked from the app to suggest replies and auto-tag. Stream ticket events to <strong>Snowflake</strong> / <strong>BigQuery</strong> via <strong>Debezium</strong> for analytics: response-time distributions, agent productivity, CSAT correlation. <strong>PagerDuty</strong> / <strong>Opsgenie</strong> hooks for "urgent + new + unassigned &gt; 5 min" tickets. Most teams build the schema then realize they should have started with <strong>Zendesk</strong>, <strong>Front</strong>, or <strong>Plain</strong> &mdash; build only when the integrations and AI features of off-the-shelf no longer meet the need.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q35">
-  <div class="qa__number">Question 35</div>
-  <h3 class="qa__question">How would you implement a recommendation system that suggests products to users based on their purchase history?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[35] = r'''
 <p><strong>Situation:</strong> an e-commerce or content platform wants to recommend products to users based on their purchase history &mdash; "people who bought X also bought Y", category affinities, similar-user clusters &mdash; with reasonable accuracy and sub-100ms response time.</p>
 
 <p><strong>Approach:</strong> three layers &mdash; (1) compute item-item co-occurrence offline, (2) store recommendations precomputed per user, (3) serve from a fast lookup. MySQL handles the storage; the modeling moves to a warehouse + ML platform.</p>
@@ -3413,15 +3106,9 @@ LIMIT  10;</code></pre>
 </table>
 
 <p><strong>Production polish</strong>: in 2026 the realistic stack is &mdash; raw events stream to <strong>Snowflake</strong>, <strong>BigQuery</strong>, or <strong>Databricks</strong> via <strong>Debezium</strong> CDC; train a model with <strong>Spark MLlib</strong>, <strong>TensorFlow Recommenders</strong>, <strong>PyTorch</strong>, or hosted services like <strong>AWS Personalize</strong>, <strong>Vertex AI Recommendations</strong>, or specialized vendors <strong>Algolia Recommend</strong>, <strong>Recombee</strong>, <strong>Coveo</strong>; write back the user_recommendations table or push to <strong>Redis</strong> / <strong>DynamoDB</strong> for sub-10ms reads. Modern fashion / catalog apps use embedding-based similarity: encode products with <strong>OpenAI</strong> / <strong>Cohere</strong> / <strong>VoyageAI</strong> / <strong>Sentence-Transformers</strong>, store vectors in <strong>pgvector</strong>, <strong>Pinecone</strong>, <strong>Weaviate</strong>, <strong>Milvus</strong>, <strong>Qdrant</strong>, or <strong>Vespa</strong>, and run kNN at query time. A/B test religiously &mdash; recommendation models can look great offline and tank conversion. Always log impressions, clicks, and purchases back into the training data; the feedback loop is what makes recommenders improve over time. The MySQL piece is just the system-of-record and the lookup cache; the ML lives elsewhere.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q36">
-  <div class="qa__number">Question 36</div>
-  <h3 class="qa__question">Explain how you would handle schema changes in a live production database without downtime.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[36] = r'''
 <p><strong>Situation:</strong> a production database needs schema changes &mdash; new columns, dropped columns, type changes, index additions &mdash; without taking the application offline. A long ALTER on a billion-row table can lock the table for hours.</p>
 
 <p><strong>Approach:</strong> MySQL 8 supports <code>ALGORITHM=INSTANT</code> for many changes; for everything else, use online schema-change tools (<strong>gh-ost</strong>, <strong>pt-online-schema-change</strong>). Always run an expand-contract migration over multiple deploys for behavior changes.</p>
@@ -3469,15 +3156,9 @@ ALTER TABLE users DROP COLUMN email, ALGORITHM=INSTANT;</code></pre>
 </table>
 
 <p><strong>Production polish</strong>: all schema changes go through migration tooling &mdash; <strong>Flyway</strong>, <strong>Liquibase</strong>, <strong>Atlas</strong>, <strong>Sqitch</strong>, or framework-native (<strong>Prisma Migrate</strong>, <strong>Drizzle</strong>, <strong>Rails</strong>, <strong>Django</strong>) &mdash; tracked in version control, applied by CI/CD, never by hand on production. <strong>PlanetScale</strong> turns this entire problem into deploy-the-branch via Vitess + branching; <strong>Aurora</strong> handles many ALTERs online via storage-level mechanisms. <strong>Atlas</strong> by Ariga adds plan/preview/lint to detect destructive ops before merge. Always test the migration on a production-sized clone &mdash; an INSTANT operation in a 100GB test DB might be COPY in production due to row format. Coordinate with replicas: a long ALTER on the primary replicates and runs on every replica. The cardinal rule: <em>never</em> change a column&rsquo;s meaning in place &mdash; expand-contract every time. Apps and databases must be deployable in either order during the rollout.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q37">
-  <div class="qa__number">Question 37</div>
-  <h3 class="qa__question">How would you design a schema for a project management tool with projects, tasks, and users?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[37] = r'''
 <p><strong>Situation:</strong> a project management tool (think Asana, Linear, Jira) needs projects, tasks, subtasks, users, assignments, statuses, comments, attachments, custom fields, and activity history.</p>
 
 <p><strong>Approach:</strong> normalize core entities; use adjacency-list for subtasks; track status changes via an activity log. Keep custom fields flexible via JSON or EAV depending on query patterns.</p>
@@ -3560,15 +3241,9 @@ ORDER  BY t.due_date IS NULL, t.due_date, t.priority DESC;</code></pre>
 </table>
 
 <p><strong>Production polish</strong>: real-time collaboration uses CRDTs &mdash; <strong>Yjs</strong>, <strong>Automerge</strong> &mdash; with <strong>Liveblocks</strong>, <strong>Hocuspocus</strong>, <strong>Partykit</strong>, or self-hosted via <strong>WebSocket</strong>; the database stores periodic snapshots, not every keystroke. Search with <strong>Meilisearch</strong>, <strong>Typesense</strong>, or <strong>Elasticsearch</strong> across tasks/comments/projects. AI summarization, "explain what changed this week", and auto-prioritization are 2026 table-stakes &mdash; <strong>Linear</strong> and <strong>Asana</strong> both ship them via <strong>OpenAI</strong> / <strong>Anthropic</strong> APIs. Notifications via <strong>Knock</strong>, <strong>Courier</strong>, or <strong>Novu</strong> deduplicate "X assigned 5 tasks to you" into a single digest. For activity feeds at scale, <strong>Stream</strong> (getstream.io) is the off-the-shelf option. The hardest UX problem is dependencies and Gantt: model dependencies as <code>task_dependencies(blocker_id, blocked_id)</code>, compute critical path on the server, render with <strong>Frappe Gantt</strong> or <strong>DHTMLX</strong>. The schema is the easy part &mdash; the value is in the integrations and AI layer above it.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q38">
-  <div class="qa__number">Question 38</div>
-  <h3 class="qa__question">Describe how you would optimize a query that joins multiple large tables.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[38] = r'''
 <p><strong>Situation:</strong> a query joins three or more large tables &mdash; orders, customers, products, payments &mdash; runs in 30+ seconds, and the table scans are killing the database. Need to bring it under 200 ms.</p>
 
 <p><strong>Approach:</strong> understand the plan with <code>EXPLAIN ANALYZE</code>, then attack join order, indexes (especially covering ones), filter pushdown, and last-resort approaches like denormalization or pre-aggregated rollups.</p>
@@ -3640,15 +3315,9 @@ CREATE TABLE order_summary_daily (
 </table>
 
 <p><strong>Production polish</strong>: the biggest wins are usually a <em>missing index</em> and a <em>filter that can&rsquo;t use the index</em> (<code>WHERE DATE(created_at) = '2026-01-01'</code> &mdash; the function call disables the index; rewrite to <code>created_at &gt;= '2026-01-01' AND created_at &lt; '2026-01-02'</code>). Use <strong>pt-query-digest</strong> on the slow log or <strong>sys.statement_analysis</strong> to find the worst queries. <strong>Percona PMM</strong> and <strong>Datadog DBM</strong> visualize plans over time. For genuinely complex analytics, push to <strong>ClickHouse</strong> (joins on billions of rows in seconds), <strong>Snowflake</strong>, <strong>BigQuery</strong>, or <strong>DuckDB</strong> via <strong>Debezium</strong> CDC; the OLTP database focuses on transactional reads. <strong>Materialize</strong> and <strong>RisingWave</strong> incrementally maintain materialized views &mdash; the join is computed once, then updated by deltas. The 2026 hierarchy: index correctly &rarr; rewrite query &rarr; cache (<strong>Redis</strong>) &rarr; rollup table &rarr; columnar store. Don&rsquo;t skip steps; an index fix is hours, a columnar migration is weeks.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q39">
-  <div class="qa__number">Question 39</div>
-  <h3 class="qa__question">How would you implement a data retention policy to automatically delete old records from a MySQL database?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[39] = r'''
 <p><strong>Situation:</strong> the system stores logs, events, sessions, or user-generated content with regulatory or business retention windows &mdash; "delete logs older than 90 days", "purge inactive accounts after 3 years". GDPR, CCPA, and HIPAA add legal teeth. Manual cleanup doesn&rsquo;t scale.</p>
 
 <p><strong>Approach:</strong> use partitioned tables for time-based data so deletion is O(1) (drop partition); use scheduled events or external cron + chunked deletes for non-partitioned data; document retention policy and audit deletions.</p>
@@ -3712,15 +3381,9 @@ DELETE FROM users WHERE deleted_at &lt; NOW() - INTERVAL 30 DAY;</code></pre>
 </table>
 
 <p><strong>Production polish</strong>: write the retention policy in a document signed off by legal &mdash; "logs: 90 days; orders: 7 years; PII: erase within 30 days of account close". Implement it as code, not a manual checklist. <strong>MySQL Events</strong> are easy to forget about; consider running cron via <strong>Kubernetes CronJobs</strong>, <strong>AWS EventBridge</strong>, <strong>Airflow</strong>, or <strong>Temporal</strong> &mdash; visible to ops and observable. Archive purged data to <strong>S3</strong> in <strong>Parquet</strong> via <strong>AWS DMS</strong>, <strong>Datastream</strong>, or a custom job &mdash; queryable by <strong>Athena</strong> / <strong>Trino</strong> / <strong>DuckDB</strong> when auditors come knocking. For GDPR specifically: maintain an "erasure log" recording who was erased and when, and ensure backups don&rsquo;t resurrect them &mdash; this is harder than the live deletion. Compliance platforms (<strong>Vanta</strong>, <strong>Drata</strong>, <strong>OneTrust</strong>) check that you actually run the policy. Big lesson: the cheap part is deleting; the expensive part is proving you deleted on schedule and propagated to backups, replicas, and downstream systems (warehouse, search index, cache).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q40">
-  <div class="qa__number">Question 40</div>
-  <h3 class="qa__question">Explain how you would design a database to handle recurring billing and subscription management.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[40] = r'''
 <p><strong>Situation:</strong> a SaaS or media company sells subscriptions &mdash; monthly, annual, with proration, cancellations, plan changes, failed payments, dunning &mdash; plus invoices, taxes, and receipts. The schema must reconcile with finance and survive payment-provider weirdness.</p>
 
 <p><strong>Approach:</strong> model plans, subscriptions, invoices, and payments as separate concerns. Capture every state change as an immutable event. Most teams should use <strong>Stripe Billing</strong> / <strong>Chargebee</strong> / <strong>Recurly</strong> for the actual logic and just sync; rolling your own billing is the most regretted backend choice.</p>
@@ -3811,15 +3474,9 @@ WHERE  status = 'active'
 </table>
 
 <p><strong>Production polish</strong>: in 2026 the right answer for almost everyone is <strong>Stripe Billing</strong> &mdash; or <strong>Chargebee</strong>, <strong>Recurly</strong>, <strong>Maxio</strong> (formerly Chargify), <strong>Paddle</strong> (handles VAT/MoR for digital goods), <strong>Lemon Squeezy</strong>, <strong>Orb</strong>, <strong>Metronome</strong>, <strong>m3ter</strong> for usage billing. They handle proration, dunning, tax (<strong>Stripe Tax</strong>, <strong>Avalara</strong>, <strong>TaxJar</strong>), and SCA/3DS. Mirror their state into your DB via webhooks &mdash; never reimplement the logic. Failed payments need dunning: retry with exponential backoff, send "update card" emails (<strong>Stripe Smart Retries</strong> does this automatically). For receipt PDFs, <strong>Stripe Hosted Invoices</strong> or libraries like <strong>react-pdf</strong>, <strong>Puppeteer</strong>. Keep finance happy with a daily reconciliation job comparing your <code>invoices</code>/<code>payments</code> tables to the Stripe Sigma export &mdash; mismatches indicate webhook drops or manual edits. Usage-based / metered billing is its own world: pre-aggregate events in <strong>ClickHouse</strong> or <strong>Druid</strong>, push usage records to Stripe / Orb / m3ter on a schedule. The schema above is right; the operational complexity is what kills home-grown billing systems.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q41">
-  <div class="qa__number">Question 41</div>
-  <h3 class="qa__question">How would you handle data partitioning in a large MySQL table to improve query performance?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[41] = r'''
 <p><strong>Situation:</strong> a single MySQL table has billions of rows &mdash; orders history, events, logs &mdash; and queries scanning subsets are slow. Indexes help but the table itself is too big for efficient maintenance: ALTER takes hours, backups are huge, query planner stats lag.</p>
 
 <p><strong>Approach:</strong> partition the table by a column that matches access patterns &mdash; almost always time. The optimizer can skip partitions that don&rsquo;t match the WHERE, and partition drops are O(1).</p>
@@ -3886,15 +3543,9 @@ ALTER TABLE events DROP PARTITION p202601;     -- instant 90-day-retention</code
 </table>
 
 <p><strong>Production polish</strong>: <em>partitioning is not sharding</em> &mdash; partitioned tables still live on one server. The cap is roughly the largest single host: tens of TB, ~500K QPS. Beyond that, sharding via <strong>Vitess</strong>, <strong>PlanetScale</strong>, or <strong>TiDB</strong> is the next step. The biggest mistake is partitioning without checking the optimizer actually prunes &mdash; <code>EXPLAIN PARTITIONS</code> in dev catches this. Constraint: every UNIQUE/PRIMARY KEY must include the partition key, which often means changing the PK design. Foreign keys are not supported on partitioned tables &mdash; enforce in app code or use triggers. Always keep a <code>pmax</code> catch-all so unexpected dates don&rsquo;t error out. Automate partition rotation via a scheduled event, <strong>pt-online-schema-change</strong>, or external cron &mdash; nothing kills a service at 3am like a missing partition. For analytics over partitioned data, consider streaming via <strong>Debezium</strong> to <strong>ClickHouse</strong> &mdash; columnar engines partition far more flexibly. <strong>Aurora MySQL</strong> and <strong>PlanetScale</strong> use storage-level mechanisms that make this less acute, but the partitioning concept still applies.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q42">
-  <div class="qa__number">Question 42</div>
-  <h3 class="qa__question">Describe how you would design a schema for a job portal with employers, job listings, and applicants.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[42] = r'''
 <p><strong>Situation:</strong> a job portal needs employers, jobs (with detailed requirements, location, salary), applicants (with resumes, skills, work history), applications (linking applicant to job), and search/filter that&rsquo;s fast over millions of listings.</p>
 
 <p><strong>Approach:</strong> normalize core entities; M2M for skills; offload free-text and geo search to a search engine; track application state transitions.</p>
@@ -3999,15 +3650,9 @@ LIMIT  20;</code></pre>
 </table>
 
 <p><strong>Production polish</strong>: free-text + geographic + faceted search across millions of jobs is a search-engine job, not a SQL job. <strong>Elasticsearch</strong> / <strong>OpenSearch</strong> dominate at scale; <strong>Meilisearch</strong>, <strong>Typesense</strong>, <strong>Algolia</strong> for managed/easier ops; <strong>Vespa</strong> for ranking-heavy use. Sync via <strong>Debezium</strong> CDC. Geographic search uses geohashing or vector tiles &mdash; ES native, or <strong>PostGIS</strong> on Postgres if you migrated. Resume parsing is its own market: <strong>Affinda</strong>, <strong>Sovren</strong>, <strong>HireAbility</strong>, or in-house with <strong>OpenAI</strong> / <strong>Anthropic</strong> APIs. Skill-matching has moved to embedding similarity in 2026: encode JD and resume with <strong>VoyageAI</strong> / <strong>Cohere</strong> / <strong>OpenAI</strong>, store in <strong>pgvector</strong> / <strong>Pinecone</strong> / <strong>Weaviate</strong>, score with kNN; this catches "Python developer" matching "Django engineer" without hand-curated synonyms. ATS workflows (interview scheduling, scorecards) are usually <strong>Greenhouse</strong>, <strong>Lever</strong>, <strong>Ashby</strong>, <strong>Workable</strong> &mdash; few teams build this from scratch successfully.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q43">
-  <div class="qa__number">Question 43</div>
-  <h3 class="qa__question">How would you implement a voting system where users can upvote or downvote posts?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[43] = r'''
 <p><strong>Situation:</strong> a content platform (Reddit/HN style) lets users upvote and downvote posts and comments; needs to display vote counts, "current user&rsquo;s vote", and rank by score. Vote integrity matters: one user, one vote per item.</p>
 
 <p><strong>Approach:</strong> separate table for individual votes (with UNIQUE constraint), denormalized counter on the item for fast reads, and idempotent UPSERT for vote toggling.</p>
@@ -4086,15 +3731,9 @@ LIMIT  30;</code></pre>
 </table>
 
 <p><strong>Production polish</strong>: at scale, the vote counter is a contention hotspot &mdash; many users hammering the same row. Solutions: (1) write votes to <strong>Redis</strong> (<code>HINCRBY post:1234 upvotes 1</code>), drain to MySQL every minute; (2) shard the counter into N rows summed at read; (3) use <strong>Aurora MySQL</strong> which handles single-row contention better. The ranking formula matters more than the schema &mdash; Reddit&rsquo;s "hot" weighs early votes heavily, "best" uses Wilson lower bound, "controversial" boosts items with both up and down. Compute on the fly for small feeds, materialize a <code>posts_ranked_hourly</code> table for large ones, or use <strong>ClickHouse</strong> for "top of all time" queries. Anti-fraud is essential: rate-limit votes per user, detect ring voting (graph cluster of accounts upvoting each other) via <strong>Neo4j</strong> or app logic. Show the user&rsquo;s vote without an extra query by joining or by storing in a session/cookie. Vote brigading and abuse tooling is harder than the schema.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q44">
-  <div class="qa__number">Question 44</div>
-  <h3 class="qa__question">Explain how you would handle database connection pooling to optimize resource usage.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[44] = r'''
 <p><strong>Situation:</strong> the application opens a new MySQL connection per request; under load, connection establishment becomes the bottleneck (TLS handshake, auth, allocation). MySQL itself caps at <code>max_connections</code> (default 151), and exceeding it returns <code>Too many connections</code>.</p>
 
 <p><strong>Approach:</strong> use a connection pool in the application, and put a connection multiplexer (<strong>ProxySQL</strong>, <strong>RDS Proxy</strong>) in front of MySQL when the app is multi-process or serverless.</p>
@@ -4156,15 +3795,9 @@ SAVE MYSQL USERS   TO DISK;</code></pre>
 </table>
 
 <p><strong>Production polish</strong>: pool sizing is empirical &mdash; total app connections (= pool size &times; instances) should not exceed <code>max_connections</code> minus headroom for admin sessions and replicas&rsquo; replication threads. Common starting point: <code>pool_size = (number_of_cores &times; 2) + spindles</code>; tune with monitoring. Connection-storm: when 1000 Lambdas each open 10 connections, the database melts &mdash; <strong>RDS Proxy</strong>, <strong>Aurora Data API</strong>, <strong>PlanetScale</strong>&rsquo;s native HTTP API, <strong>Neon</strong>&rsquo;s serverless driver, or <strong>Cloudflare Hyperdrive</strong> solve this for serverless. Always set <code>pool_recycle</code> &mdash; idle connections die from server-side <code>wait_timeout</code> or NAT/firewall idle drops; pre-ping prevents stale-conn errors. Watch <code>Threads_running</code>, not <code>Threads_connected</code> &mdash; running threads compete for CPU. <strong>ProxySQL</strong> additionally adds query routing (read &harr; write split), query caching, and rate limiting. <strong>Datadog DBM</strong>, <strong>PMM</strong>, <strong>SolarWinds DPA</strong> graph it. The 2026 default for Lambda-or-similar: managed proxy in front of managed MySQL; for VMs/k8s pods: in-process pool sized to a fraction of <code>max_connections</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q45">
-  <div class="qa__number">Question 45</div>
-  <h3 class="qa__question">How would you design a schema for a fitness tracking app with users, workouts, and goals?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[45] = r'''
 <p><strong>Situation:</strong> a fitness tracking app needs users, workouts (cardio, strength, classes), exercises within workouts (sets, reps, weight), goals, and progress over time. Reports show "weekly volume", "1RM trend", "consistency streak".</p>
 
 <p><strong>Approach:</strong> normalize workouts and exercises with a junction table for the per-set records; treat workouts as time-series. Goals are a separate entity tracked via progress events.</p>
@@ -4265,15 +3898,9 @@ FROM grp GROUP BY g ORDER BY length DESC LIMIT 1;</code></pre>
 </table>
 
 <p><strong>Production polish</strong>: device sync &mdash; Apple Watch, Garmin, Fitbit, Whoop, Oura, Strava &mdash; goes through <strong>Apple HealthKit</strong>, <strong>Google Health Connect</strong>, <strong>Strava API</strong>, <strong>Garmin Connect</strong>, <strong>Terra API</strong>, or <strong>Vital</strong>; the schema above stores normalized output. GPS tracks for runs/rides are large &mdash; store as compressed GPX/FIT in S3, summary metrics (distance, pace, elevation) in MySQL. AI form coaching from video (<strong>Onform</strong>, <strong>HomeCourt</strong>, <strong>BurnLab</strong>) and AI-generated programs (<strong>Future</strong>, <strong>Fitbod</strong>, <strong>Centr</strong>) are 2026 differentiators &mdash; LLMs reading user history (<strong>OpenAI</strong>, <strong>Anthropic</strong>) generate next-week programs. Real-time leaderboards via <strong>Redis Sorted Sets</strong>. Wearable streams (heart rate during a workout) belong in <strong>InfluxDB</strong> / <strong>TimescaleDB</strong>; the per-set table is fine in MySQL even at billions of rows once partitioned. Subscription billing is its own layer (see Q40).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q46">
-  <div class="qa__number">Question 46</div>
-  <h3 class="qa__question">Describe how you would implement a schema to handle multiple languages and translations for content.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[46] = r'''
 <p><strong>Situation:</strong> the application supports multiple languages &mdash; English, Spanish, Japanese, Arabic, Hindi &mdash; and content (product names, descriptions, UI strings, articles) needs translations. Translations may be partial (only popular languages get all content), and editors update them over time.</p>
 
 <p><strong>Approach:</strong> separate the entity from its translatable fields via a translations table keyed by entity + locale. Always have a fallback locale. Translation memory and machine translation hooks accelerate coverage.</p>
@@ -4343,15 +3970,9 @@ SELECT JSON_EXTRACT(name_i18n, '$.es') AS name_es FROM products;</code></pre>
 </table>
 
 <p><strong>Production polish</strong>: a translation management system &mdash; <strong>Crowdin</strong>, <strong>Lokalise</strong>, <strong>Phrase</strong>, <strong>Tolgee</strong>, <strong>Localazy</strong>, or <strong>Smartling</strong> &mdash; handles the editor workflow, version control of strings, and integration with translators. Push canonical English &rarr; pull localized translations via API or webhooks. Machine translation as first pass: <strong>DeepL</strong> for European languages (best quality), <strong>Google Cloud Translate</strong>, <strong>Amazon Translate</strong>, or LLMs (<strong>GPT-4</strong>, <strong>Claude</strong>) for context-aware translation; mark MT&rsquo;d strings <code>reviewed_at IS NULL</code> so humans can polish. Right-to-left languages (Arabic, Hebrew) need UI direction flag and Unicode-clean fonts (<strong>Noto Sans</strong>). Locale isn&rsquo;t just language: <strong>ICU</strong>-formatted dates/numbers/currencies via <strong>Intl</strong> in JS or <strong>Babel</strong> in Python. SEO with locale subpaths (<code>/es/products/...</code>) and <code>hreflang</code> tags. The schema above is the foundation; the operational discipline is making sure every new field added to <code>products</code> gets a corresponding migration in <code>product_translations</code> &mdash; build it as a single workflow.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q47">
-  <div class="qa__number">Question 47</div>
-  <h3 class="qa__question">How would you handle data encryption and security for sensitive information stored in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[47] = r'''
 <p><strong>Situation:</strong> sensitive data &mdash; payment details, government IDs, health records, credentials, PII &mdash; lives in MySQL, and regulations (PCI DSS, HIPAA, GDPR) plus business risk demand encryption at rest, in transit, and ideally at the column level for the most sensitive fields.</p>
 
 <p><strong>Approach:</strong> three layers &mdash; (1) TLS for connections (in-transit), (2) full-disk / tablespace encryption (at-rest), (3) column-level encryption for crown jewels with a separate KMS-managed key. Hash, don&rsquo;t encrypt, things like passwords.</p>
@@ -4411,15 +4032,9 @@ SELECT * FROM customers WHERE email_lookup = ?;</code></pre>
 </table>
 
 <p><strong>Production polish</strong>: managed services bake this in &mdash; <strong>Aurora</strong>, <strong>RDS</strong>, <strong>Cloud SQL</strong>, <strong>Azure DB for MySQL</strong>, <strong>PlanetScale</strong> all encrypt at-rest by default with cloud-provider-managed keys. Bring-your-own-key (BYOK) via <strong>AWS KMS</strong>, <strong>GCP KMS</strong>, <strong>Azure Key Vault</strong>, or <strong>HashiCorp Vault</strong> for compliance. The hardest column-level problem is searchability: encrypted ciphertext breaks <code>WHERE email = ?</code>. Solutions: deterministic hashing (above), <strong>blind indexing</strong>, or specialized formats like <strong>CipherStash</strong>, <strong>EvenVault</strong> that support encrypted equality and range queries. Tokenization for credit cards: <strong>Basis Theory</strong>, <strong>VGS</strong>, <strong>Skyflow</strong>, or PCI-compliant gateways (<strong>Stripe</strong>, <strong>Adyen</strong>) hold the real PAN; you store tokens. Rotate keys on a schedule (90 days for high-sensitivity), enforced by KMS. Audit access via <strong>MariaDB Audit Plugin</strong> or <strong>MySQL Enterprise Audit</strong>. The single biggest failure mode: encrypting at the database level then logging plaintext in application logs &mdash; review logging configs end-to-end, redact in <strong>Datadog</strong>, <strong>Splunk</strong>, <strong>Sentry</strong>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q48">
-  <div class="qa__number">Question 48</div>
-  <h3 class="qa__question">Explain how you would design a database to support A/B testing and feature flagging.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[48] = r'''
 <p><strong>Situation:</strong> the product team needs to run A/B tests &mdash; assigning users to variants, tracking conversion, calculating significance &mdash; plus feature flags for gradual rollouts and kill switches. Engineering wants a clean separation: which user sees which feature is decided by config, not code.</p>
 
 <p><strong>Approach:</strong> three core entities &mdash; experiments, variant assignments, exposure events. Use a feature-flag service for gating; use the analytics warehouse for stats, not the OLTP DB.</p>
@@ -4498,15 +4113,9 @@ WHERE  a.experiment_id = ? AND a.user_id = ?;
 </table>
 
 <p><strong>Production polish</strong>: the OLTP database stores assignments and config; the <em>statistics</em> happen in the warehouse. Stream <code>experiment_exposures</code> + conversion events to <strong>Snowflake</strong>, <strong>BigQuery</strong>, <strong>ClickHouse</strong>, or a dedicated <strong>Eppo</strong> / <strong>Statsig</strong> / <strong>GrowthBook</strong> / <strong>Optimizely</strong> / <strong>LaunchDarkly Experimentation</strong> backend that computes p-values, confidence intervals, sequential tests (CUPED variance reduction, Bayesian methods). Modern flag platforms &mdash; <strong>LaunchDarkly</strong>, <strong>Statsig</strong>, <strong>Unleash</strong>, <strong>Flagsmith</strong>, <strong>ConfigCat</strong>, <strong>PostHog</strong>, <strong>GrowthBook</strong> &mdash; cache flag state in their SDK so checks are sub-millisecond and don&rsquo;t hit the DB. They also handle targeting rules ("EU users with feature_x enabled who are in cohort Y"), gradual rollouts (5% &rarr; 25% &rarr; 100%), and kill switches. Don&rsquo;t reinvent these unless your scale or compliance demands it. Most-cited mistake: peeking at A/B results before reaching the planned sample size and calling significance &mdash; build sample-size guardrails into the workflow, or use sequential testing tools that handle this correctly.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q49">
-  <div class="qa__number">Question 49</div>
-  <h3 class="qa__question">How would you implement a recommendation engine that suggests similar products based on user behavior?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[49] = r'''
 <p><strong>Situation:</strong> a recommendation engine should suggest "products similar to this one" or "users you might like" based on user behavior &mdash; views, purchases, time spent, ratings &mdash; not just static categories.</p>
 
 <p><strong>Approach:</strong> compute embeddings (vectors) representing each product/user from behavior data, store the embeddings, and serve nearest-neighbor lookups at query time. MySQL stores the metadata; a vector store handles the similarity.</p>
@@ -4572,15 +4181,9 @@ LIMIT  10;
 </table>
 
 <p><strong>Production polish</strong>: in 2026 the standard recipe is &mdash; encode products with a multimodal embedding (text + image) using <strong>OpenAI text-embedding-3</strong>, <strong>Cohere</strong>, <strong>VoyageAI</strong>, <strong>Sentence-Transformers</strong>, or vision-text models for images (<strong>CLIP</strong>, <strong>SigLIP</strong>); store vectors in <strong>Pinecone</strong>, <strong>Weaviate</strong>, <strong>Qdrant</strong>, <strong>Milvus</strong>, <strong>pgvector</strong>, <strong>Vespa</strong>, or <strong>MongoDB Atlas Vector Search</strong>; query with HNSW or IVF index for sub-50ms kNN over millions of items. <strong>MySQL 9</strong> introduced a VECTOR type but lacks a true ANN index &mdash; pair with a vector DB for now. Layer behavioral signals: <strong>matrix factorization</strong> (<strong>Spark ALS</strong>), <strong>two-tower neural retrieval</strong> (<strong>TensorFlow Recommenders</strong>, <strong>Vertex AI Matching Engine</strong>), or off-the-shelf <strong>AWS Personalize</strong>, <strong>Recombee</strong>, <strong>Algolia Recommend</strong>. Always rerank with a small model (LightGBM) using business signals (margin, in-stock, freshness). The hard part is feedback loops: log impressions and clicks back into training. A/B test recommender changes against revenue per session, not click-through rate alone &mdash; recommendations that get clicks but don&rsquo;t convert are anti-features.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q50">
-  <div class="qa__number">Question 50</div>
-  <h3 class="qa__question">Describe how you would design a schema for a reservation system with hotels, rooms, and bookings.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[50] = r'''
 <p><strong>Situation:</strong> a hotel reservation system needs hotels, rooms (with types), guests, bookings, availability, pricing (which varies by date), and prevention of double-booking under concurrent requests.</p>
 
 <p><strong>Approach:</strong> separate room <em>types</em> from physical rooms; track availability via the bookings themselves (not a per-day table); use locking or atomic inserts to prevent double-booking; price comes from a date-keyed pricing table.</p>
@@ -4696,15 +4299,9 @@ COMMIT;</code></pre>
 </table>
 
 <p><strong>Production polish</strong>: real hotel ops integrate with channel managers (<strong>SiteMinder</strong>, <strong>Cloudbeds</strong>, <strong>RoomRaccoon</strong>) and OTAs (Booking.com, Expedia, Airbnb) via <strong>iCal</strong> sync or partner APIs &mdash; double-bookings across channels are the #1 risk. Yield management uses an algorithm or vendor (<strong>Duetto</strong>, <strong>IDeaS</strong>, <strong>Atomize</strong>) to set <code>price</code> dynamically based on demand, competitor pricing, day-of-week. Search at scale (geographic + filters + dates) needs <strong>Elasticsearch</strong> / <strong>OpenSearch</strong> with date availability indexed alongside hotel attributes &mdash; SQL won&rsquo;t serve "show me Paris hotels with pool, wi-fi, $150-300, July 4-7" fast across 100k+ hotels. Payment via <strong>Stripe</strong> / <strong>Adyen</strong>; PCI scope on the property side via tokenization. Cancellation policies as JSON rules tied to bookings. The toughest correctness problem isn&rsquo;t the schema &mdash; it&rsquo;s edge cases like overbooking strategy (intentional 5% over to absorb no-shows), group bookings, day-use rooms, and time-zone math when check-in is local.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q51">
-  <div class="qa__number">Question 51</div>
-  <h3 class="qa__question">How would you handle database indexing to optimize read and write performance for large datasets?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[51] = r'''
 <p><strong>Situation:</strong> a large dataset has both heavy reads (lists, dashboards, search) and heavy writes (logs, orders, events). Indexes that speed up reads slow down writes; getting the balance wrong kills throughput in one direction or the other.</p>
 
 <p><strong>Approach:</strong> index for the hot read patterns, drop indexes that aren&rsquo;t actually used, prefer composite covering indexes for top queries, and isolate write-heavy paths with techniques like deferred indexing or insert buffering.</p>
@@ -4764,15 +4361,9 @@ ALTER TABLE events PARTITION BY RANGE (TO_DAYS(ts)) ( ... );
 </table>
 
 <p><strong>Production polish</strong>: the rule of thumb is to design indexes for the top 10-20 queries by frequency, not every possible query. Tools to identify them: <strong>pt-query-digest</strong> on the slow log, <strong>sys.statement_analysis</strong>, <strong>Datadog DBM</strong>, <strong>Percona PMM</strong>, <strong>SolarWinds DPA</strong>. <strong>EverSQL</strong>, <strong>pganalyze</strong> (Postgres) and <strong>SchemaHero</strong> can suggest index changes. <strong>MySQL 8</strong> functional indexes (<code>CREATE INDEX ... ON t ((LOWER(email)))</code>) and invisible indexes (test impact of dropping without actually dropping &mdash; <code>ALTER TABLE ... ALTER INDEX i INVISIBLE</code>) are powerful tuning aids. Hash indexes (memory storage engine) are useless for InnoDB. <strong>Aurora MySQL</strong>&rsquo;s "I/O optimized" mode and <strong>PlanetScale</strong>&rsquo;s Vitess split read/write workloads. The 2026 baseline workflow: enable slow log + Performance Schema, weekly review of top queries, EXPLAIN ANALYZE, add/remove indexes via online DDL, monitor write latency. Most apps add indexes liberally and never remove them &mdash; the audit usually finds 30-50% of indexes never read in production.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q52">
-  <div class="qa__number">Question 52</div>
-  <h3 class="qa__question">Explain how you would design a schema for a crowdfunding platform with campaigns, backers, and pledges.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[52] = r'''
 <p><strong>Situation:</strong> a crowdfunding platform (Kickstarter / Indiegogo / GoFundMe style) needs campaigns with funding goals, deadline, rewards/tiers, backers pledging amounts, payment processing, and accurate progress tracking under concurrent pledges.</p>
 
 <p><strong>Approach:</strong> normalize campaigns, rewards, pledges; track payment status separately; use atomic counters for raised totals; trigger payouts only on successful campaigns at deadline.</p>
@@ -4872,15 +4463,9 @@ WHERE  status = 'active' AND ends_at &lt; NOW()
 </table>
 
 <p><strong>Production polish</strong>: the auth-then-capture flow needs a robust scheduler &mdash; <strong>Stripe</strong> auths expire after 7 days, so for long campaigns use <strong>Stripe SetupIntents</strong> + off-session charges at deadline, or charge-on-pledge with explicit refund policy. Use <strong>Stripe Connect</strong> (or <strong>Adyen for Platforms</strong>, <strong>Stripe Express accounts</strong>) to pay out to creators after success &mdash; you don&rsquo;t want to be a money services business. Compliance: KYC creators above thresholds via <strong>Stripe Identity</strong>, <strong>Persona</strong>, <strong>Onfido</strong>. Counter contention on hot campaigns: write to <strong>Redis</strong>, drain to MySQL every minute, or shard the counter row. Notifications via <strong>Customer.io</strong>, <strong>Knock</strong>, <strong>Courier</strong>. Search via <strong>Algolia</strong> / <strong>Meilisearch</strong>. Anti-fraud is significant: stolen-card pledges, friend-circle inflated funding &mdash; <strong>Stripe Radar</strong>, <strong>Sift</strong>, <strong>Persona</strong>, <strong>Sardine</strong> score risk. Customer trust comes from clear "campaign failed" refund timelines (3-5 business days) and reward fulfillment tracking after success.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q53">
-  <div class="qa__number">Question 53</div>
-  <h3 class="qa__question">How would you handle schema versioning and migrations in a MySQL database?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[53] = r'''
 <p><strong>Situation:</strong> the schema evolves over the lifetime of the application &mdash; new tables, columns, indexes, dropped columns, type changes, data backfills. Multiple developers, multiple environments (dev/staging/prod), and CI/CD all need consistent, reversible, idempotent migrations.</p>
 
 <p><strong>Approach:</strong> migrations live in version control as numbered SQL files; a tool tracks which have been applied per environment via a metadata table; CI runs them automatically; rollbacks are documented but reverse-migration scripts are limited.</p>
@@ -4937,15 +4522,9 @@ ALTER TABLE orders DROP COLUMN status;</code></pre>
 </table>
 
 <p><strong>Production polish</strong>: the 2026 default tools are <strong>Atlas</strong> (Ariga, declarative + linter), <strong>Flyway</strong> (mature, JVM), <strong>Liquibase</strong> (XML/YAML, enterprise), <strong>Sqitch</strong> (deploy-tag-revert model). ORM-bundled: <strong>Prisma Migrate</strong>, <strong>Drizzle</strong>, <strong>TypeORM</strong>, <strong>Knex</strong> for Node; <strong>Alembic</strong> (SQLAlchemy), <strong>Django migrations</strong>, <strong>Rails</strong> for those ecosystems. <strong>PlanetScale</strong>&rsquo;s deploy-the-branch workflow is a paradigm shift &mdash; develop on a branch, request a deploy, gh-ost handles the schema change online. <strong>Atlas</strong> adds linting (catches destructive ops, missing indexes) and CI integration. The hardest principle to enforce: never make destructive changes without expand-contract (see Q36) &mdash; renaming a column in one migration breaks every running app instance during deploy. Code reviews should reject "rename column" or "drop column with reads" without expand-contract. Backfills are not migrations &mdash; they should be runnable jobs that handle large datasets in batches with progress tracking, separate from DDL. Always run migrations on a production-sized clone first. <strong>Bytebase</strong> and <strong>Schemachange</strong> add governance/approval flows for compliance environments.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q54">
-  <div class="qa__number">Question 54</div>
-  <h3 class="qa__question">Describe how you would implement a database for a real-time chat application.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[54] = r'''
 <p><strong>Situation:</strong> a real-time chat app needs millions of messages per day, sub-second delivery, online presence, typing indicators, read receipts, and historical scroll-back. The DB must handle high write rates without becoming the bottleneck for delivery.</p>
 
 <p><strong>Approach:</strong> MySQL stores the persistent message log and conversation metadata; real-time delivery, presence, and typing happen over WebSocket via a pub/sub layer (Redis, NATS) &mdash; the DB is not in the hot delivery path.</p>
@@ -5024,15 +4603,9 @@ LIMIT  50;</code></pre>
 </table>
 
 <p><strong>Production polish</strong>: the real-time layer in 2026 is one of &mdash; managed services like <strong>Pusher Channels</strong>, <strong>Ably</strong>, <strong>PubNub</strong>, <strong>Supabase Realtime</strong>; building blocks <strong>Socket.IO</strong> + Redis adapter, <strong>Phoenix Channels</strong> (Elixir), <strong>SignalR</strong> (.NET), <strong>Centrifugo</strong>; or chat-specific platforms <strong>Stream Chat</strong>, <strong>SendBird</strong>, <strong>CometChat</strong>, <strong>Twilio Conversations</strong>. Presence and typing live in <strong>Redis</strong> with TTLs (<code>SET presence:user:42 online EX 30</code>) &mdash; refreshed every 20s by the client. Push notifications via <strong>FCM</strong> / <strong>APNs</strong> for offline users. End-to-end encryption with <strong>libsignal</strong> (the protocol behind Signal/WhatsApp). At "Discord/Slack" scale, messages migrate from MySQL to <strong>Cassandra</strong>, <strong>ScyllaDB</strong>, or <strong>FoundationDB</strong> with conversation_id as partition key &mdash; write amplification stays bounded. AI moderation (toxicity, spam) via <strong>OpenAI Moderation</strong>, <strong>Perspective API</strong>, <strong>Hive</strong>. The schema above plus Redis pub/sub carries chat apps comfortably to hundreds of thousands of DAU; specialized stores enter beyond that.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q55">
-  <div class="qa__number">Question 55</div>
-  <h3 class="qa__question">How would you handle data consistency and integrity in a multi-master replication setup?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[55] = r'''
 <p><strong>Situation:</strong> the system uses multi-master replication &mdash; multiple writeable nodes accepting traffic in different regions or DCs &mdash; and conflicts are inevitable: two users update the same row from different masters at the same time. Without a strategy, data corrupts or rows oscillate.</p>
 
 <p><strong>Approach:</strong> avoid multi-master where possible (single-primary with regional replicas is far simpler). When you can&rsquo;t avoid it, choose a conflict resolution strategy &mdash; last-write-wins, vector clocks, application-level reconciliation, or CRDT-style data types &mdash; and partition writes by ownership.</p>
@@ -5084,15 +4657,9 @@ ALTER TABLE products ADD COLUMN version BIGINT NOT NULL DEFAULT 0;
 </table>
 
 <p><strong>Production polish</strong>: 99% of teams that think they need multi-master actually need <em>multi-region with single primary plus read replicas</em>. <strong>Aurora Global Database</strong>, <strong>PlanetScale</strong>, <strong>Vitess</strong> with VReplication, <strong>YugabyteDB</strong>, <strong>CockroachDB</strong>, <strong>TiDB</strong>, <strong>Spanner</strong>-like Distributed SQL eliminate the problem with consensus protocols (Raft, Paxos). For genuine multi-master cases &mdash; offline-capable mobile apps syncing back, IoT edges &mdash; use a CRDT layer (<strong>Automerge</strong>, <strong>Yjs</strong>) or specialized DB (<strong>RethinkDB</strong>&rsquo;s former realtime, <strong>Couchbase Mobile</strong>, <strong>PouchDB</strong>+<strong>CouchDB</strong>); <strong>ElectricSQL</strong> brings CRDTs to Postgres-like SQL. Always log conflicts to a table or Sentry/Datadog &mdash; "no conflicts ever happened" usually means you&rsquo;re not detecting them. Run chaos tests: simulate cross-region partitions and verify convergence. The hardest part is auditing data accuracy after months of operation &mdash; build periodic diff jobs that compare primaries pairwise and alert on divergence. The 2026 reality: distributed SQL has matured enough that hand-rolling multi-master MySQL is a path most teams now skip.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q56">
-  <div class="qa__number">Question 56</div>
-  <h3 class="qa__question">Explain how you would design a schema for an online marketplace with buyers, sellers, and transactions.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[56] = r'''
 <p><strong>Situation:</strong> an online marketplace (eBay, Etsy, Airbnb-style) needs buyers, sellers, listings, transactions, payments, escrow/holds, reviews, and dispute handling. Both sides of the marketplace need their own dashboards.</p>
 
 <p><strong>Approach:</strong> separate user roles (buyer/seller often the same user); listings own by seller; transactions track the money flow with explicit state machine; reviews are post-transaction.</p>
@@ -5195,15 +4762,9 @@ COMMIT;</code></pre>
 </table>
 
 <p><strong>Production polish</strong>: marketplaces are <em>regulated</em> &mdash; you&rsquo;re a money services business in many jurisdictions. <strong>Stripe Connect</strong> (Express or Custom accounts), <strong>Adyen for Platforms</strong>, <strong>PayPal Marketplaces</strong>, <strong>Mangopay</strong> handle KYC, payouts, and split payments. Held funds + dispute window via <strong>Stripe Connect</strong> with <code>transfer_data</code> + delayed payouts. Search across millions of listings: <strong>Elasticsearch</strong> / <strong>OpenSearch</strong>, <strong>Algolia</strong>, <strong>Typesense</strong>, <strong>Meilisearch</strong>; faceted (price ranges, categories, location, rating). Recommendations via <strong>AWS Personalize</strong>, <strong>Recombee</strong>, embeddings (Q49). Trust &amp; safety is its own product: <strong>Sift</strong>, <strong>Sardine</strong>, <strong>Persona</strong>, <strong>Stripe Radar</strong> for fraud; <strong>Trustpilot</strong> integration; LLM-based listing moderation (<strong>OpenAI</strong> Moderation, <strong>Hive</strong>). Photos in S3 with <strong>imgix</strong>, <strong>Cloudinary</strong>, or <strong>Imgproxy</strong> for resizing. Analytics on user behavior (<strong>Amplitude</strong>, <strong>Mixpanel</strong>, <strong>PostHog</strong>) feeds back into recommendations. Tax handling differs by jurisdiction &mdash; <strong>Stripe Tax</strong>, <strong>TaxJar</strong>, <strong>Avalara</strong>; marketplaces in EU/India/Australia have specific marketplace tax obligations. The schema is the foundation; the value is in the trust, search, and payments operations layered on top.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q57">
-  <div class="qa__number">Question 57</div>
-  <h3 class="qa__question">How would you implement a logging system to capture and store application logs in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[57] = r'''
 <p><strong>Situation:</strong> the application generates large volumes of structured logs &mdash; HTTP requests, errors, business events, audit trail &mdash; and the team wants centralized storage, structured querying, retention, and dashboards. MySQL is being considered.</p>
 
 <p><strong>Approach:</strong> MySQL is workable for low-volume audit-style logs but a poor fit for high-throughput application logs &mdash; use it for structured business events (orders, signups) and a purpose-built log store (Elasticsearch, ClickHouse, Loki) for everything else.</p>
@@ -5261,15 +4822,9 @@ ALTER TABLE app_events DROP PARTITION p202601;
 </table>
 
 <p><strong>Production polish</strong>: in 2026 the standard is structured JSON logs from the app via <strong>Pino</strong>, <strong>Winston</strong>, <strong>Bunyan</strong> (Node), <strong>structlog</strong> (Python), <strong>Zap</strong> (Go), <strong>Logback</strong> (JVM). Ship via <strong>Vector</strong>, <strong>Fluent Bit</strong>, <strong>Fluentd</strong>, or <strong>OpenTelemetry Collector</strong> to a backend. Backends: <strong>Datadog Logs</strong>, <strong>New Relic</strong>, <strong>Splunk</strong>, <strong>Honeycomb</strong>, <strong>Logz.io</strong>, <strong>Better Stack</strong>, <strong>Coralogix</strong>; self-hosted <strong>Elasticsearch + Kibana</strong> or <strong>Loki + Grafana</strong>; columnar option <strong>ClickHouse</strong> or <strong>Quickwit</strong>. Trace IDs from <strong>OpenTelemetry</strong> tie logs to traces (<strong>Jaeger</strong>, <strong>Tempo</strong>, <strong>Honeycomb</strong>). Audit logs (who did what, when, with what permissions) <em>do</em> belong in MySQL or a dedicated audit store with WORM (S3 Object Lock, <strong>AWS QLDB</strong>, <strong>Confluent Audit Log</strong>) for compliance. Don&rsquo;t mix high-volume request logs with business event audit; the access patterns and retention requirements are different. PII redaction is critical before logs leave the app &mdash; field-level redaction in the logger config; <strong>Datadog Sensitive Data Scanner</strong> as a backstop. Reserve MySQL for the events you&rsquo;ll actually JOIN with other business data.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q58">
-  <div class="qa__number">Question 58</div>
-  <h3 class="qa__question">Describe how you would design a schema for an educational platform with courses, students, and instructors.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[58] = r'''
 <p><strong>Situation:</strong> an educational platform (Coursera/Udemy/edX style) needs courses with modules and lessons, instructors, students, enrollments, progress tracking, quizzes, certificates, and discussion threads.</p>
 
 <p><strong>Approach:</strong> hierarchical content model (course &rarr; module &rarr; lesson), separate enrollment from progress, track per-lesson completion, quizzes as their own subsystem.</p>
@@ -5393,15 +4948,9 @@ WHERE  m.course_id = ?;</code></pre>
 </table>
 
 <p><strong>Production polish</strong>: video is the costliest piece &mdash; <strong>Mux</strong>, <strong>Vimeo OTT</strong>, <strong>JW Player</strong>, <strong>Brightcove</strong>, <strong>Bunny Stream</strong>, or self-hosted <strong>HLS</strong> via <strong>FFmpeg</strong> + <strong>CloudFront</strong>; signed URLs prevent unauthorized embeds. Captions (auto via <strong>AssemblyAI</strong>, <strong>Rev.ai</strong>, <strong>OpenAI Whisper</strong>) are accessibility table stakes. Certificate generation: <strong>react-pdf</strong>, <strong>Puppeteer</strong>, <strong>Accredible</strong>, <strong>Sertifier</strong>, <strong>Credly</strong> &mdash; verify via blockchain or signed URL. Live courses: <strong>Zoom</strong> / <strong>Whereby</strong> / <strong>100ms</strong> / <strong>LiveKit</strong>. AI-generated summaries, "ask the course" Q&amp;A via <strong>RAG</strong> over course transcripts using <strong>OpenAI</strong> / <strong>Anthropic</strong> + a vector store (<strong>Pinecone</strong>, <strong>Weaviate</strong>, <strong>pgvector</strong>) is now standard on platforms like Coursera, Udacity, MasterClass. Discussion forums: <strong>Discourse</strong>, <strong>Circle</strong>, <strong>Discord</strong>, or built-in. Payments + revenue share via <strong>Stripe Connect</strong>. Anti-cheating in quizzes: shuffle questions, time-limit, proctor with <strong>Honorlock</strong>, <strong>ProctorU</strong>. The 2026 differentiator is adaptive learning: track which questions a student misses, recommend remediation lessons, generate practice questions with LLMs.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q59">
-  <div class="qa__number">Question 59</div>
-  <h3 class="qa__question">How would you handle data deduplication to remove duplicate records from a MySQL database?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[59] = r'''
 <p><strong>Situation:</strong> the database has duplicate records &mdash; same customer entered twice with slight variations, repeated event ingestion from a flaky producer, two import jobs creating the same row. Need to identify, merge, and prevent recurrence.</p>
 
 <p><strong>Approach:</strong> add a UNIQUE constraint on the natural key going forward; deduplicate existing data with a query that ranks duplicates and keeps the canonical row; for fuzzy duplicates (typos, casing), use normalization or external matching.</p>
@@ -5470,15 +5019,9 @@ ON DUPLICATE KEY UPDATE id = id;                        -- no-op; idempotent</co
 </table>
 
 <p><strong>Production polish</strong>: prevention is far cheaper than cleanup. Every ingest endpoint should require an idempotency key (<strong>Stripe</strong>-style <code>Idempotency-Key</code> header), enforced via UNIQUE constraint &mdash; this single discipline eliminates 80% of duplicate problems. Email normalization should account for plus addressing (<code>user+tag@gmail.com</code> = <code>user@gmail.com</code> in some interpretations &mdash; debatable; document the policy). For names/addresses, fuzzy matching libraries: <strong>fuzzywuzzy</strong>/<strong>RapidFuzz</strong> (Python), <strong>fuse.js</strong> (JS), <strong>libpostal</strong> (addresses), <strong>recordlinkage</strong> (Python). Specialized MDM platforms: <strong>Tilores</strong>, <strong>Dedupe.io</strong>, <strong>Talend Data Stewardship</strong>, <strong>Informatica MDM</strong>. CRM-specific: <strong>Salesforce Duplicate Management</strong>, <strong>HubSpot</strong> dedupe. For B2B: <strong>Clearbit</strong>, <strong>ZoomInfo</strong> enrich+match against canonical company records. Always log the merge action with both record IDs and a "merged_into" reference so you can unwind mistakes &mdash; deletes are forever, but a soft-delete flag plus a foreign-key remap is reversible. Audit periodically: a daily job counting (email, count(*)) groups with count &gt; 1 should always return zero on a healthy table.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q60">
-  <div class="qa__number">Question 60</div>
-  <h3 class="qa__question">Explain how you would design a database to support dynamic and customizable user profiles.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[60] = r'''
 <p><strong>Situation:</strong> the application supports user profiles where users (or admins) can add custom fields beyond the standard ones &mdash; preferred pronouns, third-party IDs, hobbies, employment, custom HR attributes for B2B. Schema can&rsquo;t change every time someone wants a new field.</p>
 
 <p><strong>Approach:</strong> three patterns &mdash; (1) JSON column for arbitrary fields, (2) entity-attribute-value (EAV) tables, (3) wide table with reserved custom columns. JSON is the modern default; EAV for tenant-specific schemas; wide table almost never.</p>
@@ -5556,15 +5099,9 @@ CREATE TABLE users_wide (
 </table>
 
 <p><strong>Production polish</strong>: in 2026 the JSON path is the practical winner for most apps &mdash; modern JS/TS tooling (<strong>Zod</strong>, <strong>Valibot</strong>, <strong>io-ts</strong>) and Python (<strong>Pydantic</strong>) validate schemas at the application boundary, and MySQL 8&rsquo;s JSON functions plus generated columns get you indexed reads on hot fields. Migrate to a real column when a JSON field becomes universally used, indexed, and reported on. For SaaS B2B with tenant-defined fields (HRIS, CRM), EAV is unavoidable &mdash; <strong>Salesforce</strong>, <strong>Airtable</strong>, <strong>Notion</strong> all use EAV variants &mdash; but use a serializer/validator layer to fake type safety in the app. Materialize tenant-specific reporting views nightly to avoid EAV pivots at query time. <strong>Postgres</strong> does this better with native <code>jsonb</code> + GIN indexes; consider it if profile flexibility is the core product. Document-databases (<strong>MongoDB</strong>, <strong>Couchbase</strong>) are sometimes a better fit and modern CRMs use them &mdash; but operational MySQL knowledge usually wins. Final caution: GDPR right-to-erase is harder when "I don&rsquo;t know everywhere this user&rsquo;s name lives" &mdash; map sensitive fields explicitly even when they&rsquo;re inside JSON.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q61">
-  <div class="qa__number">Question 61</div>
-  <h3 class="qa__question">How would you implement a search functionality that allows users to filter results by multiple criteria?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[61] = r'''
 <p><strong>Situation:</strong> users want to filter and search results by multiple criteria simultaneously &mdash; e.g., "shoes in size 10, under $80, brand Nike, free shipping, in stock, rated 4+". Each combination of filters needs to be fast across millions of rows.</p>
 
 <p><strong>Approach:</strong> for combinatorial filtering across many independent fields, dedicated search engines (Elasticsearch, Meilisearch, Typesense) outperform SQL dramatically. SQL works for low-cardinality filter sets with carefully designed composite indexes.</p>
@@ -5635,15 +5172,9 @@ WHERE  pa1.attr_key = 'size'  AND pa1.attr_val = '10'
 </table>
 
 <p><strong>Production polish</strong>: in 2026, faceted search is a solved problem &mdash; use the right tool. <strong>Meilisearch</strong> (typo-tolerant, fast facets, generous free tier), <strong>Typesense</strong> (similar), <strong>Algolia</strong> (managed, expensive but excellent UX), <strong>Elasticsearch</strong> / <strong>OpenSearch</strong> (most powerful, heavier ops), <strong>Vespa</strong> (rank-heavy use cases). Sync from MySQL via <strong>Debezium</strong> CDC + transform; or app-side dual-write inside outbox. <strong>Algolia InstantSearch</strong>, <strong>Typesense InstantSearch</strong>, <strong>React Instant Search</strong> ship the React/Vue UI components for facet UI. AI-enhanced search adds semantic similarity: <strong>Algolia Neural Search</strong>, <strong>Vespa</strong>, <strong>Vectara</strong>, or pair search with embedding kNN via <strong>Pinecone</strong> / <strong>Weaviate</strong>. Personalization (different users see different ranks) via <strong>Algolia AI Personalization</strong>, <strong>Coveo</strong>. The biggest mistake: trying to build faceted search in raw SQL on a million-row table &mdash; the optimizer can&rsquo;t handle 10-dimension filtering efficiently no matter the indexes. Index the search engine for filters; use SQL for the canonical store.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q62">
-  <div class="qa__number">Question 62</div>
-  <h3 class="qa__question">Describe how you would design a schema for a restaurant management system with tables, orders, and menus.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[62] = r'''
 <p><strong>Situation:</strong> a restaurant management system needs menus (with dishes, modifiers, prices that change), tables/seating, orders, kitchen tickets, payments, staff, and inventory tied to dishes. Real-time order flow is critical &mdash; kitchen and front-of-house must stay synchronized.</p>
 
 <p><strong>Approach:</strong> normalize menu and dishes; orders are header + line items with modifier sub-rows; price snapshots on order lines (menu price changes shouldn&rsquo;t affect open orders); kitchen state is a column on order_items.</p>
@@ -5762,15 +5293,9 @@ ORDER  BY oi.sent_at;</code></pre>
 </table>
 
 <p><strong>Production polish</strong>: real-time kitchen displays use <strong>WebSocket</strong> &mdash; <strong>Socket.IO</strong>, <strong>Phoenix Channels</strong>, <strong>SignalR</strong>, or managed (<strong>Pusher</strong>, <strong>Ably</strong>); when an item changes status, broadcast to the KDS (kitchen display system). Hardware integration: thermal receipt printers (<strong>Star Micronics</strong>, <strong>Epson TM-series</strong>), card readers (<strong>Square</strong>, <strong>Clover</strong>, <strong>Stripe Terminal</strong>, <strong>SumUp</strong>), KDS displays (<strong>Toast</strong>, <strong>TouchBistro</strong>, <strong>Square for Restaurants</strong>) use ESC/POS or vendor SDKs. Most independent restaurants use vertical SaaS &mdash; <strong>Toast</strong>, <strong>Square</strong>, <strong>Clover</strong>, <strong>TouchBistro</strong>, <strong>Lightspeed Restaurant</strong>; build only when you&rsquo;re a chain or have unique workflows. Online ordering integration: <strong>DoorDash Drive</strong>, <strong>Uber Eats</strong>, <strong>Deliveroo</strong>, <strong>Otter</strong> aggregate orders from multiple platforms. Inventory deduction at item level (recipes table linking dish &rarr; ingredients) so chefs see "out of avocado" before customers. Tip distribution and payroll integration with <strong>Gusto</strong>, <strong>Toast Payroll</strong>. The schema is fine; the value is in hardware integration, real-time UX, and OTA delivery integrations &mdash; that&rsquo;s usually why teams buy rather than build.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q63">
-  <div class="qa__number">Question 63</div>
-  <h3 class="qa__question">How would you handle schema changes and data migrations in a microservices architecture?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[63] = r'''
 <p><strong>Situation:</strong> a microservices system has dozens of services, each owning its own database. Schema changes in one service must not break others; data shared via events, not direct DB access. Coordinated migrations across services are routine.</p>
 
 <p><strong>Approach:</strong> each service owns its DB and publishes domain events on schema-stable contracts; consumer services build their own read models. Schema changes use expand-contract per service; cross-service migrations follow a documented playbook.</p>
@@ -5840,15 +5365,9 @@ CREATE TABLE order_summary (
 </table>
 
 <p><strong>Production polish</strong>: event schemas need governance &mdash; <strong>Confluent Schema Registry</strong>, <strong>Apicurio</strong>, <strong>AWS Glue Schema Registry</strong>, or <strong>Buf</strong> for protobuf; CI fails if a PR breaks compatibility. Common formats: <strong>Avro</strong>, <strong>Protobuf</strong>, <strong>JSON Schema</strong>; CloudEvents as the envelope. Event bus options: <strong>Kafka</strong> / <strong>Confluent</strong>, <strong>Redpanda</strong>, <strong>AWS SNS+SQS</strong>, <strong>EventBridge</strong>, <strong>Google Pub/Sub</strong>, <strong>RabbitMQ</strong>, <strong>NATS</strong>. <strong>Debezium</strong> auto-publishes from MySQL binlog &mdash; one less moving part than the outbox relay (but the outbox provides exactly-once write semantics). Saga orchestration via <strong>Temporal</strong>, <strong>Cadence</strong>, <strong>Zeebe</strong>, <strong>AWS Step Functions</strong>; or choreography via events. <strong>Backstage</strong> (Spotify) catalogs services and their schemas. The cardinal rules: never share databases between services (it&rsquo;s tempting, always wrong long-term); never break event compatibility; document the deployment ordering for dual-running phases. Most micro-services teams underestimate the operational maturity needed &mdash; in 2026, <strong>modular monoliths</strong> with clear module boundaries are increasingly preferred for teams under ~50 engineers; microservices when scale or team boundaries genuinely demand it.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q64">
-  <div class="qa__number">Question 64</div>
-  <h3 class="qa__question">Explain how you would design a schema for a photo-sharing app with users, photos, and comments.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[64] = r'''
 <p><strong>Situation:</strong> a photo-sharing app needs users, photos (with metadata), albums, comments, likes, follows, feeds. Photos themselves live in object storage; the DB tracks references and metadata. The feed query is the hottest path.</p>
 
 <p><strong>Approach:</strong> normalize core entities; store photo binaries in S3-style storage with the DB holding URLs and metadata; precompute follower counts and feeds for performance.</p>
@@ -5945,15 +5464,9 @@ CREATE TABLE feed_items (
 </table>
 
 <p><strong>Production polish</strong>: photos go to <strong>S3</strong> / <strong>Cloud Storage</strong> / <strong>R2</strong>; serve via <strong>CloudFront</strong>, <strong>Cloudflare</strong>, <strong>Bunny CDN</strong>, <strong>Fastly</strong>. Resize on demand with <strong>imgix</strong>, <strong>Cloudinary</strong>, <strong>imgproxy</strong>, <strong>Thumbor</strong>, or <strong>Cloudflare Images</strong> &mdash; pre-generating every size wastes storage. Background processing (resize, EXIF strip, virus scan, content moderation) via <strong>SQS</strong> + <strong>Lambda</strong>, <strong>BullMQ</strong>, <strong>Sidekiq</strong>, <strong>Temporal</strong>. AI moderation: <strong>AWS Rekognition</strong>, <strong>Google Vision Safe Search</strong>, <strong>Hive</strong>, <strong>Sightengine</strong> for NSFW/violence; <strong>Clarifai</strong> / <strong>Roboflow</strong> for custom labels. Auto-alt-text from <strong>OpenAI Vision</strong> / <strong>Anthropic Claude Vision</strong> for accessibility. Feed at scale moves to specialized stores: <strong>Cassandra</strong>, <strong>ScyllaDB</strong>, <strong>Stream</strong> (getstream.io), or graph databases for "people you might know". Push notifications via <strong>FCM</strong> / <strong>APNs</strong>. Search via <strong>Elasticsearch</strong> / <strong>OpenSearch</strong>; visual search ("find similar photos") via <strong>CLIP</strong> embeddings + <strong>Pinecone</strong> / <strong>Weaviate</strong>. The schema scales nicely; the costly path is media pipeline + feed delivery.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q65">
-  <div class="qa__number">Question 65</div>
-  <h3 class="qa__question">How would you implement a caching strategy to reduce database load and improve performance?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[65] = r'''
 <p><strong>Situation:</strong> the database is the bottleneck &mdash; high QPS, long-tail latency, expensive aggregations. Adding cache reduces load but introduces consistency concerns: cached data can go stale, cache misses storm the DB, invalidation is tricky.</p>
 
 <p><strong>Approach:</strong> layered caching &mdash; HTTP/CDN cache for public content, application cache (Redis/Memcached) for query results and computed values, in-process LRU for hot lookups. Each layer has its own TTL and invalidation strategy.</p>
@@ -6030,15 +5543,9 @@ async function getProductsByCategory(catId, page) {
 </table>
 
 <p><strong>Production polish</strong>: <strong>Redis</strong> (or <strong>KeyDB</strong>, <strong>Dragonfly</strong>, <strong>Valkey</strong>) for application cache &mdash; managed via <strong>Elasticache</strong>, <strong>Upstash</strong>, <strong>Redis Cloud</strong>, <strong>Memorystore</strong>. <strong>Memcached</strong> is still a strong choice for pure key-value cache. <strong>CDN</strong> caching for HTML, images, API responses with public/private headers via <strong>CloudFront</strong>, <strong>Cloudflare</strong>, <strong>Fastly</strong>, <strong>Bunny</strong>, <strong>Akamai</strong>; cache-key includes Vary headers. Patterns to watch out for: <strong>thundering herd</strong> (cache miss + 1000 concurrent rebuilds &mdash; use single-flight as above, or <strong>refresh-ahead</strong>), <strong>cache penetration</strong> (queries for non-existent keys hit DB &mdash; cache nulls with short TTL or use a Bloom filter), <strong>cache avalanche</strong> (many keys expire at the same instant &mdash; jitter TTLs). Tag-based invalidation: <strong>Cloudflare Cache Tags</strong>, <strong>Vercel Tags</strong>, <strong>Redis</strong> with manual tag &rarr; key sets, <strong>Varnish</strong> with bans. Edge databases (<strong>Cloudflare D1</strong>, <strong>Turso</strong>, <strong>Neon</strong>, <strong>PlanetScale</strong> regions, <strong>Cloudflare Hyperdrive</strong>) act as a global query cache. Observe: cache hit rate must be tracked &mdash; below 80% the cache is rarely worth its complexity. The right answer often is "tune indexes first" &mdash; cache covers what indexing can&rsquo;t.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q66">
-  <div class="qa__number">Question 66</div>
-  <h3 class="qa__question">Describe how you would design a schema for an inventory management system with products, suppliers, and stock levels.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[66] = r'''
 <p><strong>Situation:</strong> an inventory management system tracks products, suppliers, stock levels, purchase orders, sales (consuming stock), warehouse locations, and reorder points. Multiple users update stock concurrently; numbers must be exact.</p>
 
 <p><strong>Approach:</strong> normalize products / suppliers / locations; track stock per (product, location) with atomic updates; record movements as immutable events for audit; reorder logic via scheduled job.</p>
@@ -6159,15 +5666,9 @@ WHERE  s.available &lt;= p.reorder_point AND p.reorder_point IS NOT NULL;</code>
 </table>
 
 <p><strong>Production polish</strong>: integration is everything &mdash; <strong>Shopify</strong>, <strong>WooCommerce</strong>, <strong>BigCommerce</strong>, <strong>Amazon Seller Central</strong>, <strong>NetSuite</strong>, <strong>QuickBooks</strong>, <strong>Square POS</strong> all need real-time sync to avoid overselling. Vendor solutions: <strong>Zoho Inventory</strong>, <strong>Cin7</strong>, <strong>Katana</strong>, <strong>inFlow</strong>, <strong>Fishbowl</strong>, <strong>Linnworks</strong>, <strong>Brightpearl</strong>, <strong>Trade Gecko</strong> (now QuickBooks Commerce), <strong>Skubana</strong>, <strong>Sellbrite</strong> aggregate channels. Forecasting/demand planning is its own market: <strong>Inventory Planner</strong>, <strong>Streamline</strong>, <strong>Lokad</strong>, increasingly AI-driven (<strong>OpenAI</strong>, custom models on <strong>Databricks</strong>). Barcode/RFID scanning via mobile apps (<strong>Scandit</strong> SDK, <strong>Datalogic</strong>). For warehouse ops: <strong>Fishbowl</strong>, <strong>Manhattan</strong>, <strong>Korber</strong> WMS for big ops; <strong>ShipBob</strong> / <strong>ShipHero</strong> / <strong>Shippo</strong> for 3PL. Cycle counting / spot audits via mobile + RF scanner; track variance trends. The hardest correctness problem: phantom inventory (system says 10, shelf has 7) &mdash; reconcile via periodic counts, not just movement log. Multi-currency &amp; multi-tax via <strong>Avalara</strong> / <strong>TaxJar</strong>. EDI for big-supplier integration via <strong>SPS Commerce</strong>, <strong>TrueCommerce</strong>, or modern alternatives like <strong>Stedi</strong>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q67">
-  <div class="qa__number">Question 67</div>
-  <h3 class="qa__question">How would you handle database monitoring and alerting to detect and resolve performance issues?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[67] = r'''
 <p><strong>Situation:</strong> a production MySQL deployment needs continuous monitoring &mdash; query performance, replication lag, error rates, disk usage, connection counts &mdash; with alerts when something is wrong before users notice.</p>
 
 <p><strong>Approach:</strong> three layers &mdash; (1) MySQL Performance Schema and SHOW STATUS for raw metrics, (2) collector agent (Prometheus exporter, Datadog Agent, etc.) to gather and store, (3) alerting rules with sensible thresholds tied to runbooks.</p>
@@ -6229,15 +5730,9 @@ ORDER  BY trx_started;</code></pre>
 </table>
 
 <p><strong>Production polish</strong>: in 2026 the standard observability stack is <strong>Prometheus</strong> + <strong>mysqld_exporter</strong> + <strong>Grafana</strong> + <strong>Alertmanager</strong> for self-hosted; SaaS options include <strong>Datadog DBM</strong> (database monitoring with query-level visibility), <strong>New Relic Database Monitoring</strong>, <strong>SolarWinds DPA</strong>, <strong>VividCortex</strong> (now SolarWinds), <strong>Percona PMM</strong> (open-source, MySQL-native), <strong>SkySQL</strong> for MariaDB. <strong>pt-query-digest</strong> remains the gold standard for slow log analysis. <strong>Aurora</strong>, <strong>Cloud SQL</strong>, <strong>Azure Database for MySQL</strong> bundle <strong>Performance Insights</strong> / <strong>Query Insights</strong> with their service. Alerting via <strong>PagerDuty</strong>, <strong>Opsgenie</strong>, <strong>Splunk On-Call</strong>, <strong>incident.io</strong>, <strong>Rootly</strong>, <strong>FireHydrant</strong>; route by severity and time of day. The cardinal principle: every alert should be actionable and have a linked runbook. "Buffer pool hit ratio low" without a runbook becomes ignored noise. Track MTTA (acknowledge) and MTTR (resolve) as KPIs &mdash; these reveal whether your alerts are calibrated. Synthetic monitoring (<strong>Checkly</strong>, <strong>Datadog Synthetics</strong>) catches user-visible problems before metrics do. Most outages aren&rsquo;t mysteries; they&rsquo;re the same recurring failures &mdash; the goal is alerting earlier and faster runbooks each cycle.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q68">
-  <div class="qa__number">Question 68</div>
-  <h3 class="qa__question">Explain how you would design a schema for a travel booking platform with flights, hotels, and car rentals.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[68] = r'''
 <p><strong>Situation:</strong> a travel booking platform aggregates flights, hotels, car rentals (and sometimes trains, activities) into a single trip. Inventory comes from external providers via APIs &mdash; GDSes (Amadeus, Sabre), Booking.com, Expedia &mdash; and bookings span multiple suppliers in one transaction.</p>
 
 <p><strong>Approach:</strong> separate searches and bookings; cache search results briefly; track each segment of a trip as a separate booking with a parent trip; payment captures only after all segments confirm.</p>
@@ -6353,15 +5848,9 @@ CREATE TABLE search_results_cache (
 </table>
 
 <p><strong>Production polish</strong>: provider integrations are the real product &mdash; flights via <strong>Amadeus</strong>, <strong>Sabre</strong>, <strong>Travelport</strong> (legacy GDSes), or modern APIs <strong>Duffel</strong>, <strong>Kiwi.com</strong>, <strong>Travelport NDC</strong>; hotels via <strong>Expedia Rapid</strong>, <strong>Booking.com Affiliate</strong>, <strong>Hotelbeds</strong>, <strong>HotelDo</strong>; cars via <strong>CarTrawler</strong>, supplier-direct (<strong>Hertz</strong>, <strong>Avis</strong>, <strong>Enterprise</strong>). Implement saga pattern for multi-segment booking: if hotel confirms but flight fails, automatically void the hotel hold &mdash; <strong>Temporal</strong>, <strong>AWS Step Functions</strong>, <strong>Cadence</strong> orchestrate this. Pricing fluctuation handling: re-validate prices at the moment of payment because providers price-change (this is why "price has changed" pop-ups exist). Trip planning AI &mdash; <strong>Layla</strong>, <strong>Mindtrip</strong>, <strong>Wonderplan</strong>, in-house with <strong>OpenAI</strong> / <strong>Anthropic</strong> &mdash; is the 2026 differentiator. Map APIs (<strong>Google Maps</strong>, <strong>Mapbox</strong>) for itinerary geographic visualization. Currency: store both transaction and display currency; FX via <strong>Wise</strong>, <strong>OpenExchangeRates</strong>. Loyalty integration is hard &mdash; airlines treat third-party booking points-eligibility opaquely. Disruption management (canceled flights, hotel oversells) is what users remember; auto-rebook flows or proactive alerts via <strong>Twilio</strong> SMS / push are major retention drivers. The schema is the infrastructure; the value is supplier coverage and disruption UX.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q69">
-  <div class="qa__number">Question 69</div>
-  <h3 class="qa__question">How would you implement a tagging system that allows users to categorize and search for content?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[69] = r'''
 <p><strong>Situation:</strong> a content platform lets users tag posts/products/photos with arbitrary keywords; visitors filter by tag, see "related by tag" lists, and tag clouds. Tags are user-generated, so they have variable casing, typos, and synonyms.</p>
 
 <p><strong>Approach:</strong> normalize tags to a tags table with canonical names; M2M between content and tags; track popularity for autocomplete; for fuzzy matching and suggestions, use a search engine.</p>
@@ -6440,15 +5929,9 @@ LIMIT  10;</code></pre>
 </table>
 
 <p><strong>Production polish</strong>: tag canonicalization is the hardest part &mdash; "javascript" vs "js" vs "JavaScript" all describe the same thing. Strategies: (1) admin-curated synonyms in a synonym table; (2) auto-suggest existing tags during entry to avoid creating new variants; (3) clustering similar tags with embeddings (<strong>OpenAI</strong>, <strong>Cohere</strong>, <strong>VoyageAI</strong>) and merging near-duplicates. For autocomplete, an in-memory data structure (<strong>Redis</strong> sorted sets or <strong>Trie</strong>) outperforms <code>LIKE 'prefix%'</code> at scale. Search engines do this natively: <strong>Meilisearch</strong>, <strong>Typesense</strong>, <strong>Algolia</strong>, <strong>Elasticsearch</strong> with edge-ngram analyzer. For "related content" beyond tag overlap, semantic similarity via embeddings on titles/bodies plus tag features outperforms naive co-occurrence &mdash; vectors in <strong>pgvector</strong>, <strong>Pinecone</strong>, <strong>Weaviate</strong>. Anti-spam: rate-limit tag creation per user, block profanity (<strong>Sightengine</strong>, <strong>Hive</strong> moderation, profanity dictionaries). Hashtag-style social tagging on Instagram/X uses similar schemas at massively higher scale, with hot tags hitting Redis-style counters and search engines for browse. The principle: tags should be a UX feature first &mdash; hand-typed taxonomies become messy. Suggest existing tags as the default UX, allow free-form, normalize aggressively.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q70">
-  <div class="qa__number">Question 70</div>
-  <h3 class="qa__question">Describe how you would handle data synchronization between an online and offline mode in a mobile app.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[70] = r'''
 <p><strong>Situation:</strong> a mobile app needs to work offline &mdash; users edit data while disconnected, then sync when back online. Conflicts are inevitable: same record edited on phone and server simultaneously, deletes that race against edits.</p>
 
 <p><strong>Approach:</strong> represent every change as an event with a timestamp and source; sync via diff or CRDT; resolve conflicts with last-write-wins per field, vector clocks, or app-specific merge logic. The DB on the server logs all changes; the device replays its log on sync.</p>
@@ -6518,15 +6001,9 @@ UPDATE notes SET deleted_at = ? WHERE id = ? AND deleted_at IS NULL;
 </table>
 
 <p><strong>Production polish</strong>: in 2026, off-the-shelf sync engines have matured significantly &mdash; <strong>Replicache</strong> (now Reflect), <strong>RxDB</strong>, <strong>WatermelonDB</strong>, <strong>PowerSync</strong>, <strong>ElectricSQL</strong>, <strong>Triplit</strong>, <strong>Evolu</strong>, <strong>Zero</strong> (by Rocicorp) provide local-first databases with built-in sync. CRDTs via <strong>Yjs</strong>, <strong>Automerge</strong> for collaborative documents (text editors, whiteboards). On-device storage is <strong>SQLite</strong> (universal), <strong>Realm</strong>, <strong>Core Data</strong> (iOS), <strong>Room</strong> (Android), or <strong>WatermelonDB</strong> for React Native. Sync transports: <strong>WebSocket</strong> with backpressure, <strong>HTTP</strong> long-polling, or push-via-FCM/APNs. The hardest correctness problem is order: client device clocks lie, so use server-stamped <code>applied_at</code> for resolution &mdash; never trust device timestamps for conflict ordering. Watch out for retry-at-network-restore storms: exponential backoff + jitter; deduplication via <code>(device_id, client_seq)</code>. Schema migrations are also harder offline: include a schema_version on the device, and let the server migrate the operation stream. Encryption end-to-end if data is sensitive: <strong>libsignal</strong>, <strong>Tink</strong>, with per-user keys. Test offline rigorously &mdash; airplane mode, partial sync, conflicting edits, app force-quits mid-sync &mdash; these are where bugs live.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q71">
-  <div class="qa__number">Question 71</div>
-  <h3 class="qa__question">How would you design a schema for a content management system with articles, authors, and categories?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[71] = r'''
 <p><strong>Situation:</strong> a content management system needs articles, authors, categories, tags, media, drafts, scheduled publishes, multiple editors with permissions, and version history. Editors expect Word-class authoring; readers expect static-fast page loads.</p>
 
 <p><strong>Approach:</strong> normalize content + metadata; store revisions as separate rows linked to the article; use status + scheduled_at for publish workflow; render to static or cached HTML for read performance.</p>
@@ -6628,15 +6105,9 @@ WHERE  status = 'scheduled' AND scheduled_at &lt;= NOW();</code></pre>
 </table>
 
 <p><strong>Production polish</strong>: in 2026 the headless-CMS / API-first ecosystem is enormous &mdash; <strong>Sanity</strong> (Portable Text, real-time), <strong>Contentful</strong>, <strong>Strapi</strong> (OSS), <strong>Payload</strong> (TS-native), <strong>Directus</strong>, <strong>Prismic</strong>, <strong>Storyblok</strong>, <strong>Hygraph</strong>, <strong>Builder.io</strong>, <strong>WebStudio</strong>, <strong>Webflow CMS</strong>; <strong>WordPress</strong> remains the most popular for traditional CMS. Most teams should buy, not build. Front-end via <strong>Next.js</strong>, <strong>Astro</strong>, <strong>Nuxt</strong>, <strong>Remix</strong> for ISR/SSG &mdash; rendering at request time uses the schema above; static export uses build-time queries. Rich-text editing: <strong>Tiptap</strong>, <strong>Lexical</strong> (Meta), <strong>Slate</strong>, <strong>ProseMirror</strong> &mdash; all output structured JSON / Portable Text rather than HTML, far better for cross-channel rendering. Real-time collab via <strong>Yjs</strong> / <strong>Liveblocks</strong> / <strong>Hocuspocus</strong>. Media via <strong>Cloudinary</strong>, <strong>imgix</strong>, <strong>Mux</strong> (video); <strong>Cloudflare Images</strong>; cover image generation with <strong>OG Image API</strong>. AI integration is now table stakes &mdash; <strong>Claude</strong>, <strong>OpenAI</strong>, <strong>Anthropic</strong> for draft assistance, SEO suggestions, alt-text generation, translation; vector search over content via <strong>pgvector</strong> / <strong>Pinecone</strong>. Comments via <strong>Disqus</strong>, <strong>Hyvor Talk</strong>, <strong>Commento</strong>, or built-in. Workflow / approvals (especially in regulated industries) via custom state machines or platforms like <strong>Sanity Studio</strong>. The schema is mature; the differentiation is in editor UX and AI features.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q72">
-  <div class="qa__number">Question 72</div>
-  <h3 class="qa__question">Explain how you would implement a schema to support user-generated content and moderation.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[72] = r'''
 <p><strong>Situation:</strong> users post content (text, images, videos, comments) that must be moderated &mdash; spam, abuse, copyright, illegal content. Pure pre-moderation kills engagement; pure post-moderation creates harm. A scalable mix involves automation, queues for human review, and a robust appeals process.</p>
 
 <p><strong>Approach:</strong> three layers &mdash; (1) automated checks on submission (rate limits, ML scores, blocklists), (2) human-review queues for ambiguous cases, (3) post-publish reports + takedown. Track every moderation action for transparency and appeals.</p>
@@ -6737,15 +6208,9 @@ LIMIT  50;</code></pre>
 </table>
 
 <p><strong>Production polish</strong>: automated content moderation in 2026 means <strong>OpenAI Moderation</strong> (free, decent), <strong>Hive</strong> (best NSFW + violence), <strong>Perspective API</strong> (Google, toxicity), <strong>Sightengine</strong>, <strong>WebPurify</strong>, <strong>Spectrum Labs</strong>, <strong>ActiveFence</strong>, <strong>TwoHat</strong> (Microsoft), <strong>Bodyguard</strong>; for image/video <strong>AWS Rekognition</strong>, <strong>Google Vision Safe Search</strong>, <strong>Azure Content Safety</strong>. CSAM detection is mandatory for image platforms &mdash; <strong>PhotoDNA</strong>, <strong>Thorn Safer</strong>, <strong>NCMEC</strong> integration, plus <strong>Project Lantern</strong> for cross-platform signals. LLM-based contextual moderation (catching dog-whistles, sarcasm) via <strong>Anthropic</strong> / <strong>OpenAI</strong> with custom rubrics. Human reviewer tools: <strong>Sift</strong>, <strong>Spectrum</strong>, <strong>Trusty</strong>, <strong>Cinder</strong>, <strong>Checkstep</strong>, <strong>Reckon</strong> &mdash; vendors with case management, decision logging, escalation. The hardest non-tech aspect is reviewer welfare: dealing with disturbing content has a real psychological cost &mdash; rotation, mental health support, and outsourcing partners with proper care (<strong>Teleperformance</strong>, <strong>Accenture</strong>, <strong>Concentrix</strong>) are necessary. Regulatory compliance: <strong>EU DSA</strong> (transparency reports, recommender opt-out, illegal content takedown SLAs), <strong>UK Online Safety Act</strong>, <strong>Australian Online Safety Act</strong>; <strong>Section 230</strong> in US offers protection but isn&rsquo;t universal. Appeals are mandatory in many jurisdictions. The schema covers the data; the operational maturity is what matters.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q73">
-  <div class="qa__number">Question 73</div>
-  <h3 class="qa__question">How would you handle data recovery and restoration in case of a database failure?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[73] = r'''
 <p><strong>Situation:</strong> the production database fails &mdash; instance crash, disk corruption, accidental DROP TABLE, ransomware. The team needs to restore data with bounded loss (RPO) and bounded downtime (RTO). Without an established recovery process, this becomes an outage measured in days.</p>
 
 <p><strong>Approach:</strong> three components &mdash; (1) regular backups (logical + physical), (2) binary log archive for point-in-time recovery, (3) tested runbook. Recovery is only as good as the last successful restore drill.</p>
@@ -6803,15 +6268,9 @@ SELECT TABLE_NAME, TABLE_ROWS, CHECKSUM TABLE shop.orders;</code></pre>
 </table>
 
 <p><strong>Production polish</strong>: backups must be (1) automated, (2) off-site, (3) immutable, (4) tested. Managed services solve most of this: <strong>Aurora MySQL</strong> (continuous backup, point-in-time to any second within retention), <strong>RDS</strong> (automated daily + binlog), <strong>Cloud SQL</strong>, <strong>PlanetScale</strong>, <strong>Azure Database for MySQL</strong>. Self-hosted: <strong>Percona XtraBackup</strong> (free, MySQL-aware physical), <strong>Mariabackup</strong>, <strong>MyDumper/MyLoader</strong> (parallel logical), commercial <strong>SQLBackupAndFTP</strong>. Store backups in <strong>S3 with Object Lock</strong> (WORM, ransomware-proof) or <strong>AWS Backup</strong>, <strong>Veeam</strong>, <strong>Rubrik</strong>, <strong>Druva</strong>, <strong>HYCU</strong>; cross-region replication is mandatory for DR. The often-skipped step: <em>test restores quarterly</em> &mdash; a backup that doesn&rsquo;t restore is no backup. Document recovery scenarios: full restore (instance lost), single-table restore (accidental DROP), point-in-time (logical corruption from a bad migration). Encrypt backups (envelope encryption, KMS-managed keys); rotate keys. <strong>3-2-1 rule</strong>: 3 copies, 2 different media, 1 off-site. Watch for "we have backups" &gt;&gt;&gt; "we have <em>tested</em> backups" &mdash; the gap is what causes 5-day outages on the news. Most production failures aren&rsquo;t lost disks &mdash; they&rsquo;re accidental DELETEs without WHERE, runaway migrations, or ransomware on backup targets that weren&rsquo;t actually immutable.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q74">
-  <div class="qa__number">Question 74</div>
-  <h3 class="qa__question">Describe how you would design a schema for a learning management system with courses, quizzes, and certifications.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[74] = r'''
 <p><strong>Situation:</strong> a learning management system (LMS) needs courses, lessons, quizzes, assignments, grading, certifications, prerequisites between courses, and progress tracking aligned with learning paths. Used by schools, corporations for compliance training, and online academies.</p>
 
 <p><strong>Approach:</strong> course/module/lesson hierarchy (similar to Q58); add quiz attempts with detailed scoring; certifications issued on completion criteria; prerequisites enforced at enrollment.</p>
@@ -6920,15 +6379,9 @@ SELECT NOT EXISTS (
 </table>
 
 <p><strong>Production polish</strong>: enterprise compliance LMS dominate this market &mdash; <strong>Cornerstone</strong>, <strong>Docebo</strong>, <strong>Workday Learning</strong>, <strong>SAP SuccessFactors</strong>, <strong>TalentLMS</strong>, <strong>Absorb</strong>, <strong>360Learning</strong>, <strong>iSpring Learn</strong> for businesses; <strong>Canvas</strong>, <strong>Blackboard</strong>, <strong>Moodle</strong>, <strong>Schoology</strong>, <strong>D2L Brightspace</strong> for education. SCORM/xAPI standards for content portability across LMSes &mdash; if you build one, support both. Anti-cheating: shuffle questions, timed sessions, browser lockdown (<strong>Respondus</strong>, <strong>SafeAssign</strong>), proctored exams via <strong>Honorlock</strong>, <strong>ProctorU</strong>, <strong>Examity</strong>, <strong>Proctorio</strong>; AI-based proctoring is controversial &mdash; bias and privacy issues. Adaptive assessments based on response patterns (<strong>IRT</strong> &mdash; item response theory) tune difficulty per learner. Certificate verification: blockchain-anchored on <strong>Ethereum</strong> / <strong>Polygon</strong> for tamper-proof claims (<strong>Accredible</strong>, <strong>Sertifier</strong>, <strong>Credly</strong>); QR codes for instant scan-to-verify. Open badges (<strong>IMS Global Open Badges</strong>) for granular credentialing. AI tutoring is now a major LMS feature &mdash; <strong>Khanmigo</strong> (Khan Academy), <strong>Squirrel AI</strong>, <strong>MathGPT</strong> &mdash; using <strong>OpenAI</strong>/<strong>Anthropic</strong> to explain wrong answers, generate practice. Analytics: track engagement, time-on-task, drop-off points to improve content. Compliance reporting (annual training completion) is the backbone of corporate LMS &mdash; design for "did 95% of staff complete the harassment training" queries.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q75">
-  <div class="qa__number">Question 75</div>
-  <h3 class="qa__question">How would you implement a system to track and manage software licenses and subscriptions?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[75] = r'''
 <p><strong>Situation:</strong> a software product issues licenses (per-seat, per-machine, by feature) and subscriptions (monthly/annual); customers want to track usage, ensure they aren&rsquo;t over-deployed, and renew on time. The vendor wants to enforce usage and prevent piracy.</p>
 
 <p><strong>Approach:</strong> license records track entitlements; activations track devices/users using a license; check-in periodically validates and refreshes the activation; tie to subscriptions for time-bounded license validity.</p>
@@ -7035,15 +6488,9 @@ WHERE  l.status = 'active' AND l.expires_at BETWEEN CURDATE() AND CURDATE() + IN
 </table>
 
 <p><strong>Production polish</strong>: building licensing yourself is more work than it looks &mdash; <strong>Keygen</strong>, <strong>LicenseSpring</strong>, <strong>Cryptlex</strong>, <strong>Reprise</strong>, <strong>10Duke</strong>, <strong>SoftwareKey</strong> are dedicated licensing platforms with SDK + admin portal. <strong>Paddle Billing</strong>, <strong>FastSpring</strong>, <strong>Gumroad</strong>, <strong>Stripe Billing</strong> handle the subscription side; pair with a licensing service. Common pitfalls: clock manipulation (compare to a server timestamp on heartbeat), VM cloning (fingerprint includes hardware UUID, motherboard serial), aggressive revocation breaking customers (always allow grace period). For B2B SaaS, the trend is "no client license at all" &mdash; everything authenticates against the SaaS backend, and licenses are really seats in your billing system. For desktop apps and developer tools, JWT-style signed licenses (<strong>Ed25519</strong> signing) with online refresh are the modern default. Floating licenses (one of N concurrent users) need lease semantics: a session "checks out" a seat for 1 hour, returns automatically. Compliance reporting for license usage in BI tools is its own product feature: <strong>Snowflake</strong>, <strong>Tableau</strong>, <strong>Power BI</strong> all have license tracking dashboards. Anti-piracy: code obfuscation (<strong>JavaScript Obfuscator</strong>, <strong>Confuser .NET</strong>), but determined pirates win &mdash; the goal is friction, not perfection.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q76">
-  <div class="qa__number">Question 76</div>
-  <h3 class="qa__question">Explain how you would design a schema for an event management platform with events, attendees, and tickets.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> An event management platform handles conferences, concerts, and meetups. Organizers create events, attendees register, and the system issues tickets with QR codes. Capacity must never be exceeded, ticket sales spike at launch, and check-in scanners hit the database hard at the venue door.</p>
+ANSWERS[76] = r'''<p><strong>Situation:</strong> An event management platform handles conferences, concerts, and meetups. Organizers create events, attendees register, and the system issues tickets with QR codes. Capacity must never be exceeded, ticket sales spike at launch, and check-in scanners hit the database hard at the venue door.</p>
 <p><strong>Approach:</strong> Core tables are <code>events</code>, <code>ticket_types</code> (GA, VIP, early-bird with capacity and price), <code>tickets</code> (one row per issued seat with a unique code), <code>orders</code>, and <code>order_items</code>. Inventory is enforced atomically:</p>
 <pre><code>CREATE TABLE ticket_types (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -7072,15 +6519,9 @@ VALUES (?, ?, ?, ?);</code></pre>
 <tr><td>Hot ticket launch</td><td>Queue + waiting room</td><td>Smooth 100k requests/sec to DB-friendly rate</td></tr>
 <tr><td>QR scan latency</td><td>Index <code>tickets(code)</code> + Redis cache</td><td>Sub-50ms door scan even on flaky venue Wi-Fi</td></tr>
 </tbody></table>
-<p><strong>Production polish:</strong> Use <strong>Eventbrite</strong>, <strong>Universe</strong>, or <strong>Hopin</strong> if you don&rsquo;t want to build this; for ticketing infrastructure <strong>Tessitura</strong>, <strong>SeatGeek Open</strong>, or <strong>Spektrix</strong> are industry options. Implement waiting rooms with <strong>Cloudflare Waiting Room</strong> or <strong>Queue-it</strong> for high-demand drops. QR codes signed with HMAC prevent forgery. Stream check-ins through <strong>Kafka</strong> or <strong>Redpanda</strong> for live attendance dashboards. For NFT/blockchain tickets see <strong>GET Protocol</strong> or <strong>YellowHeart</strong>. Fraud detection via <strong>Sift</strong> or <strong>Stripe Radar</strong>.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q77">
-  <div class="qa__number">Question 77</div>
-  <h3 class="qa__question">How would you handle data compression and storage optimization in a MySQL database?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> A 10TB MySQL instance is straining storage budgets and backup windows. Most data is historical and rarely read but legally must be retained. The team needs compression and storage optimization without sacrificing query performance on hot data.</p>
+<p><strong>Production polish:</strong> Use <strong>Eventbrite</strong>, <strong>Universe</strong>, or <strong>Hopin</strong> if you don&rsquo;t want to build this; for ticketing infrastructure <strong>Tessitura</strong>, <strong>SeatGeek Open</strong>, or <strong>Spektrix</strong> are industry options. Implement waiting rooms with <strong>Cloudflare Waiting Room</strong> or <strong>Queue-it</strong> for high-demand drops. QR codes signed with HMAC prevent forgery. Stream check-ins through <strong>Kafka</strong> or <strong>Redpanda</strong> for live attendance dashboards. For NFT/blockchain tickets see <strong>GET Protocol</strong> or <strong>YellowHeart</strong>. Fraud detection via <strong>Sift</strong> or <strong>Stripe Radar</strong>.</p>'''
+
+ANSWERS[77] = r'''<p><strong>Situation:</strong> A 10TB MySQL instance is straining storage budgets and backup windows. Most data is historical and rarely read but legally must be retained. The team needs compression and storage optimization without sacrificing query performance on hot data.</p>
 <p><strong>Approach:</strong> Apply layered tactics. First, enable InnoDB page compression on cold tables, which uses zlib or LZ4 at the page level. Second, archive old partitions to compressed storage engines or external object storage. Third, normalize bloated columns and use appropriate types.</p>
 <pre><code>-- Page compression on archive table (MySQL 8 with COMPRESSION attribute)
 ALTER TABLE order_history
@@ -7106,15 +6547,9 @@ ALTER TABLE events DROP PARTITION p_2022;</code></pre>
 <tr><td>Type tightening</td><td>10&ndash;30% rows</td><td>Schema migration risk</td></tr>
 <tr><td>Move to ClickHouse/Druid</td><td>10x for analytics</td><td>Second system to operate</td></tr>
 </tbody></table>
-<p><strong>Production polish:</strong> Consider migrating analytical workloads to <strong>ClickHouse</strong>, <strong>StarRocks</strong>, or <strong>Apache Doris</strong> which offer 10x compression with columnar storage. For tiered storage on transactional data use <strong>TiDB</strong> with TiFlash or <strong>SingleStore</strong>. Backup tools like <strong>Percona XtraBackup</strong> or <strong>mysqldump</strong> with <code>--compress</code>. Cloud-native: <strong>Aurora</strong> auto-scales storage; <strong>PlanetScale</strong> handles compression internally. For archival, <strong>AWS S3 Glacier Deep Archive</strong> or <strong>Cloudflare R2</strong> with Parquet via <strong>Apache Iceberg</strong> or <strong>Delta Lake</strong> is cost-optimal.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q78">
-  <div class="qa__number">Question 78</div>
-  <h3 class="qa__question">Describe how you would design a schema for a recruitment platform with job postings, applications, and interviews.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> A recruitment SaaS tracks job postings, candidate applications, multi-stage interviews, and feedback from interviewers. Hiring managers need a kanban pipeline view, recruiters need to schedule interviews, and the system must support thousands of concurrent companies.</p>
+<p><strong>Production polish:</strong> Consider migrating analytical workloads to <strong>ClickHouse</strong>, <strong>StarRocks</strong>, or <strong>Apache Doris</strong> which offer 10x compression with columnar storage. For tiered storage on transactional data use <strong>TiDB</strong> with TiFlash or <strong>SingleStore</strong>. Backup tools like <strong>Percona XtraBackup</strong> or <strong>mysqldump</strong> with <code>--compress</code>. Cloud-native: <strong>Aurora</strong> auto-scales storage; <strong>PlanetScale</strong> handles compression internally. For archival, <strong>AWS S3 Glacier Deep Archive</strong> or <strong>Cloudflare R2</strong> with Parquet via <strong>Apache Iceberg</strong> or <strong>Delta Lake</strong> is cost-optimal.</p>'''
+
+ANSWERS[78] = r'''<p><strong>Situation:</strong> A recruitment SaaS tracks job postings, candidate applications, multi-stage interviews, and feedback from interviewers. Hiring managers need a kanban pipeline view, recruiters need to schedule interviews, and the system must support thousands of concurrent companies.</p>
 <p><strong>Approach:</strong> Tables: <code>companies</code>, <code>jobs</code>, <code>candidates</code>, <code>applications</code> (linking candidate to job with stage), <code>interviews</code> (scheduled events), <code>interview_feedback</code> (one per interviewer per interview), and <code>pipeline_stages</code> (configurable per company).</p>
 <pre><code>CREATE TABLE applications (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -7153,15 +6588,9 @@ CREATE TABLE interview_feedback (
 <tr><td>Separate interview_feedback table</td><td>Multi-interviewer panels with structured rubrics</td></tr>
 <tr><td>UNIQUE(job_id, candidate_id)</td><td>One application per candidate per job</td></tr>
 </tbody></table>
-<p><strong>Production polish:</strong> Established ATSes are <strong>Greenhouse</strong>, <strong>Lever</strong>, <strong>Ashby</strong>, <strong>Workable</strong>, <strong>SmartRecruiters</strong>, and <strong>Recruitee</strong>. For sourcing: <strong>LinkedIn Recruiter</strong>, <strong>hireEZ</strong>, <strong>Gem</strong>. AI screening: <strong>Paradox Olivia</strong>, <strong>HireVue</strong>, <strong>Metaview</strong>, <strong>Pillar</strong>. Resume parsing: <strong>Affinda</strong>, <strong>Sovren</strong>, <strong>RChilli</strong>. Calendar integration via <strong>Google Calendar API</strong>, <strong>Microsoft Graph</strong>, or <strong>Cal.com</strong>. Video interviews via <strong>Zoom</strong>, <strong>Google Meet</strong>, <strong>CoderPad</strong>, <strong>HackerRank</strong>, or <strong>CodeSignal</strong>. Background checks: <strong>Checkr</strong>, <strong>Certn</strong>, <strong>Sterling</strong>.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q79">
-  <div class="qa__number">Question 79</div>
-  <h3 class="qa__question">How would you implement a system to track user activity and engagement metrics?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> Product wants to know DAU, MAU, retention curves, feature adoption, and funnel conversion. The site emits millions of events daily &mdash; clicks, page views, button presses. Storing every event in MySQL transactional tables would explode the OLTP database.</p>
+<p><strong>Production polish:</strong> Established ATSes are <strong>Greenhouse</strong>, <strong>Lever</strong>, <strong>Ashby</strong>, <strong>Workable</strong>, <strong>SmartRecruiters</strong>, and <strong>Recruitee</strong>. For sourcing: <strong>LinkedIn Recruiter</strong>, <strong>hireEZ</strong>, <strong>Gem</strong>. AI screening: <strong>Paradox Olivia</strong>, <strong>HireVue</strong>, <strong>Metaview</strong>, <strong>Pillar</strong>. Resume parsing: <strong>Affinda</strong>, <strong>Sovren</strong>, <strong>RChilli</strong>. Calendar integration via <strong>Google Calendar API</strong>, <strong>Microsoft Graph</strong>, or <strong>Cal.com</strong>. Video interviews via <strong>Zoom</strong>, <strong>Google Meet</strong>, <strong>CoderPad</strong>, <strong>HackerRank</strong>, or <strong>CodeSignal</strong>. Background checks: <strong>Checkr</strong>, <strong>Certn</strong>, <strong>Sterling</strong>.</p>'''
+
+ANSWERS[79] = r'''<p><strong>Situation:</strong> Product wants to know DAU, MAU, retention curves, feature adoption, and funnel conversion. The site emits millions of events daily &mdash; clicks, page views, button presses. Storing every event in MySQL transactional tables would explode the OLTP database.</p>
 <p><strong>Approach:</strong> Two-tier architecture. Capture raw events in a streaming pipeline; aggregate them into MySQL summary tables for fast dashboard reads. Avoid putting raw events in OLTP MySQL.</p>
 <pre><code>-- MySQL holds aggregates, not raw events
 CREATE TABLE daily_active_users (
@@ -7197,15 +6626,9 @@ fetch('/track', { method: 'POST', body: JSON.stringify({
 <tr><td>MySQL aggregates + warehouse</td><td>Fast dashboards, ad-hoc analysis available</td><td>Two systems</td></tr>
 <tr><td>Pure SaaS (Mixpanel/Amplitude)</td><td>Zero infra</td><td>Cost scales with events, data lock-in</td></tr>
 </tbody></table>
-<p><strong>Production polish:</strong> For event capture and analytics most teams use <strong>Mixpanel</strong>, <strong>Amplitude</strong>, <strong>Heap</strong>, <strong>PostHog</strong> (open source), or <strong>June</strong>. Pipeline tools: <strong>Segment</strong>, <strong>RudderStack</strong>, <strong>Snowplow</strong>, <strong>Jitsu</strong>. Warehouse the raw events in <strong>Snowflake</strong>, <strong>BigQuery</strong>, <strong>Databricks</strong>, or <strong>ClickHouse</strong>. Reverse-ETL with <strong>Hightouch</strong> or <strong>Census</strong> to push aggregates back to MySQL or Salesforce. Real-time product metrics via <strong>Statsig</strong> or <strong>GrowthBook</strong>. For session replay: <strong>FullStory</strong>, <strong>LogRocket</strong>, or <strong>Hotjar</strong>.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q80">
-  <div class="qa__number">Question 80</div>
-  <h3 class="qa__question">Explain how you would design a schema for a real estate platform with properties, agents, and listings.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> A real estate marketplace lists residential and commercial properties from agents and brokerages. Buyers search by location, price, beds/baths, and features. Listings expire, agents update prices, and the platform syncs MLS feeds. Map-based search must be fast.</p>
+<p><strong>Production polish:</strong> For event capture and analytics most teams use <strong>Mixpanel</strong>, <strong>Amplitude</strong>, <strong>Heap</strong>, <strong>PostHog</strong> (open source), or <strong>June</strong>. Pipeline tools: <strong>Segment</strong>, <strong>RudderStack</strong>, <strong>Snowplow</strong>, <strong>Jitsu</strong>. Warehouse the raw events in <strong>Snowflake</strong>, <strong>BigQuery</strong>, <strong>Databricks</strong>, or <strong>ClickHouse</strong>. Reverse-ETL with <strong>Hightouch</strong> or <strong>Census</strong> to push aggregates back to MySQL or Salesforce. Real-time product metrics via <strong>Statsig</strong> or <strong>GrowthBook</strong>. For session replay: <strong>FullStory</strong>, <strong>LogRocket</strong>, or <strong>Hotjar</strong>.</p>'''
+
+ANSWERS[80] = r'''<p><strong>Situation:</strong> A real estate marketplace lists residential and commercial properties from agents and brokerages. Buyers search by location, price, beds/baths, and features. Listings expire, agents update prices, and the platform syncs MLS feeds. Map-based search must be fast.</p>
 <p><strong>Approach:</strong> Tables: <code>properties</code> (the physical asset with address and coordinates), <code>listings</code> (a property may be listed multiple times over years), <code>agents</code>, <code>brokerages</code>, <code>property_features</code> (M2M to a feature dictionary), <code>media</code>, and <code>price_history</code>.</p>
 <pre><code>CREATE TABLE properties (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -7248,15 +6671,9 @@ CREATE TABLE price_history (
 <tr><td>MySQL spatial vs Elasticsearch</td><td>ES handles map+filter+sort at scale better</td></tr>
 <tr><td>price_history table</td><td>Show price drops, calculate market trends</td></tr>
 </tbody></table>
-<p><strong>Production polish:</strong> For search at scale use <strong>Elasticsearch</strong>, <strong>OpenSearch</strong>, <strong>Algolia</strong>, or <strong>Typesense</strong> with geo filters and viewport queries. Map tiles from <strong>Mapbox</strong>, <strong>MapTiler</strong>, or <strong>Google Maps</strong>. MLS data sync via <strong>RESO Web API</strong>, <strong>Spark Platform</strong>, or aggregators like <strong>Bridge Interactive</strong>. AVM (automated valuation): <strong>HouseCanary</strong>, <strong>CoreLogic</strong>, <strong>Zillow Zestimate API</strong>. 3D tours: <strong>Matterport</strong>, <strong>Zillow 3D Home</strong>. Industry players: <strong>Zillow</strong>, <strong>Redfin</strong>, <strong>Compass</strong>, <strong>Realtor.com</strong>, <strong>HomeLight</strong>. CRM for agents: <strong>Follow Up Boss</strong>, <strong>kvCORE</strong>, <strong>Real Geeks</strong>.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q81">
-  <div class="qa__number">Question 81</div>
-  <h3 class="qa__question">How would you handle database schema changes and migrations in a continuous deployment environment?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> A team deploys to production multiple times per day. Schema changes happen weekly &mdash; new columns, new tables, dropped indexes. The system must never have downtime, and rollbacks must be safe. Migrations cannot block long-running transactions.</p>
+<p><strong>Production polish:</strong> For search at scale use <strong>Elasticsearch</strong>, <strong>OpenSearch</strong>, <strong>Algolia</strong>, or <strong>Typesense</strong> with geo filters and viewport queries. Map tiles from <strong>Mapbox</strong>, <strong>MapTiler</strong>, or <strong>Google Maps</strong>. MLS data sync via <strong>RESO Web API</strong>, <strong>Spark Platform</strong>, or aggregators like <strong>Bridge Interactive</strong>. AVM (automated valuation): <strong>HouseCanary</strong>, <strong>CoreLogic</strong>, <strong>Zillow Zestimate API</strong>. 3D tours: <strong>Matterport</strong>, <strong>Zillow 3D Home</strong>. Industry players: <strong>Zillow</strong>, <strong>Redfin</strong>, <strong>Compass</strong>, <strong>Realtor.com</strong>, <strong>HomeLight</strong>. CRM for agents: <strong>Follow Up Boss</strong>, <strong>kvCORE</strong>, <strong>Real Geeks</strong>.</p>'''
+
+ANSWERS[81] = r'''<p><strong>Situation:</strong> A team deploys to production multiple times per day. Schema changes happen weekly &mdash; new columns, new tables, dropped indexes. The system must never have downtime, and rollbacks must be safe. Migrations cannot block long-running transactions.</p>
 <p><strong>Approach:</strong> Use the <strong>expand-contract</strong> (parallel change) pattern with a versioned migration tool, online schema change tools for big tables, and feature flags to coordinate code with schema.</p>
 <pre><code>-- Step 1 (expand): add new column nullable, deploy code that writes to BOTH
 ALTER TABLE users ADD COLUMN email_lower VARCHAR(255);
@@ -7279,15 +6696,9 @@ ALTER TABLE users DROP COLUMN email;</code></pre>
 <tr><td>Expand-contract</td><td>Renames, type changes, splitting columns</td></tr>
 <tr><td>Feature flag + dual write</td><td>Coordinating multi-service rollouts</td></tr>
 </tbody></table>
-<p><strong>Production polish:</strong> Migration tools by stack: <strong>Flyway</strong>, <strong>Liquibase</strong>, <strong>Atlas</strong>, <strong>Bytebase</strong>, <strong>dbmate</strong>, <strong>Sqitch</strong>, <strong>Knex</strong>, <strong>TypeORM migrations</strong>, <strong>Prisma Migrate</strong>, <strong>Alembic</strong>, <strong>Goose</strong>, <strong>Diesel</strong>, <strong>Rails ActiveRecord</strong>, <strong>Django migrations</strong>. Online schema change at scale: <strong>gh-ost</strong> (GitHub), <strong>pt-online-schema-change</strong> (Percona), <strong>Spirit</strong>, <strong>OnlineDDL</strong>. Branch-per-PR schemas via <strong>PlanetScale branching</strong> or <strong>Neon branches</strong>. Schema review and CI: <strong>Skeema</strong>, <strong>Atlas Cloud</strong>, <strong>Bytebase SQL Review</strong>, <strong>Squawk</strong>. Always test rollbacks; many teams forbid destructive migrations in the same release as the code change.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q82">
-  <div class="qa__number">Question 82</div>
-  <h3 class="qa__question">Describe how you would design a schema for a subscription-based news platform with articles, subscribers, and payments.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> A subscription news platform charges monthly or annually for premium articles. Subscribers expect uninterrupted access; failed payments need retries. Articles are metered (5 free per month) for unauthenticated readers and unlimited for subscribers.</p>
+<p><strong>Production polish:</strong> Migration tools by stack: <strong>Flyway</strong>, <strong>Liquibase</strong>, <strong>Atlas</strong>, <strong>Bytebase</strong>, <strong>dbmate</strong>, <strong>Sqitch</strong>, <strong>Knex</strong>, <strong>TypeORM migrations</strong>, <strong>Prisma Migrate</strong>, <strong>Alembic</strong>, <strong>Goose</strong>, <strong>Diesel</strong>, <strong>Rails ActiveRecord</strong>, <strong>Django migrations</strong>. Online schema change at scale: <strong>gh-ost</strong> (GitHub), <strong>pt-online-schema-change</strong> (Percona), <strong>Spirit</strong>, <strong>OnlineDDL</strong>. Branch-per-PR schemas via <strong>PlanetScale branching</strong> or <strong>Neon branches</strong>. Schema review and CI: <strong>Skeema</strong>, <strong>Atlas Cloud</strong>, <strong>Bytebase SQL Review</strong>, <strong>Squawk</strong>. Always test rollbacks; many teams forbid destructive migrations in the same release as the code change.</p>'''
+
+ANSWERS[82] = r'''<p><strong>Situation:</strong> A subscription news platform charges monthly or annually for premium articles. Subscribers expect uninterrupted access; failed payments need retries. Articles are metered (5 free per month) for unauthenticated readers and unlimited for subscribers.</p>
 <p><strong>Approach:</strong> Tables: <code>publications</code>, <code>articles</code>, <code>subscribers</code>, <code>subscription_plans</code>, <code>subscriptions</code> (active subscription per subscriber), <code>invoices</code>, <code>article_views</code> (for metering and analytics).</p>
 <pre><code>CREATE TABLE subscriptions (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -7321,15 +6732,9 @@ WHERE visitor_token = ? AND viewed_at &gt;= DATE_FORMAT(NOW(),'%Y-%m-01');</code
 <tr><td>Period dates on subscription</td><td>Fast access check without joining invoices</td></tr>
 <tr><td>Soft paywall vs hard</td><td>SEO + sampling vs revenue protection</td></tr>
 </tbody></table>
-<p><strong>Production polish:</strong> Subscription billing: <strong>Stripe Billing</strong>, <strong>Chargebee</strong>, <strong>Recurly</strong>, <strong>Maxio</strong>, <strong>Paddle</strong> (Merchant of Record), <strong>Lemon Squeezy</strong>. Tax compliance via <strong>Stripe Tax</strong>, <strong>Avalara</strong>, or <strong>TaxJar</strong>. Newsletter platforms: <strong>Substack</strong>, <strong>Beehiiv</strong>, <strong>Ghost</strong>, <strong>Memberful</strong>, <strong>Pico</strong>. Paywall infra: <strong>Piano</strong>, <strong>Tinypass</strong>, <strong>Poool</strong>, <strong>LaterPay</strong>. Email delivery: <strong>SendGrid</strong>, <strong>Postmark</strong>, <strong>Resend</strong>, <strong>Customer.io</strong>. CDN with paywall edge logic via <strong>Cloudflare Workers</strong> or <strong>Fastly Compute</strong>. Reduce churn with <strong>ProsperStack</strong> or <strong>Churnkey</strong> cancellation flows.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q83">
-  <div class="qa__number">Question 83</div>
-  <h3 class="qa__question">How would you implement a system to manage and track software development projects and tasks?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> An engineering team needs a tool to track sprints, tasks, bugs, releases, and time. Multiple projects, custom workflows, child tasks, and integrations with code (GitHub PRs link to issues). Reports show velocity, cycle time, and burndown.</p>
+<p><strong>Production polish:</strong> Subscription billing: <strong>Stripe Billing</strong>, <strong>Chargebee</strong>, <strong>Recurly</strong>, <strong>Maxio</strong>, <strong>Paddle</strong> (Merchant of Record), <strong>Lemon Squeezy</strong>. Tax compliance via <strong>Stripe Tax</strong>, <strong>Avalara</strong>, or <strong>TaxJar</strong>. Newsletter platforms: <strong>Substack</strong>, <strong>Beehiiv</strong>, <strong>Ghost</strong>, <strong>Memberful</strong>, <strong>Pico</strong>. Paywall infra: <strong>Piano</strong>, <strong>Tinypass</strong>, <strong>Poool</strong>, <strong>LaterPay</strong>. Email delivery: <strong>SendGrid</strong>, <strong>Postmark</strong>, <strong>Resend</strong>, <strong>Customer.io</strong>. CDN with paywall edge logic via <strong>Cloudflare Workers</strong> or <strong>Fastly Compute</strong>. Reduce churn with <strong>ProsperStack</strong> or <strong>Churnkey</strong> cancellation flows.</p>'''
+
+ANSWERS[83] = r'''<p><strong>Situation:</strong> An engineering team needs a tool to track sprints, tasks, bugs, releases, and time. Multiple projects, custom workflows, child tasks, and integrations with code (GitHub PRs link to issues). Reports show velocity, cycle time, and burndown.</p>
 <p><strong>Approach:</strong> Tables: <code>projects</code>, <code>workflows</code> (per-project state machines), <code>states</code>, <code>issues</code>, <code>issue_links</code> (parent/child, blocks, duplicates), <code>sprints</code>, <code>sprint_issues</code>, <code>comments</code>, <code>worklogs</code>, <code>integrations</code>.</p>
 <pre><code>CREATE TABLE issues (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -7371,15 +6776,9 @@ CREATE TABLE worklogs (
 <tr><td>issue_links table</td><td>Parent-child + blocks + duplicates without schema explosion</td></tr>
 <tr><td>Search via Elasticsearch</td><td>MySQL full-text doesn&rsquo;t handle 1M issues with filters well</td></tr>
 </tbody></table>
-<p><strong>Production polish:</strong> Established players: <strong>Jira</strong>, <strong>Linear</strong>, <strong>Asana</strong>, <strong>ClickUp</strong>, <strong>Monday.com</strong>, <strong>Shortcut</strong>, <strong>Height</strong>, <strong>GitHub Projects</strong>, <strong>GitLab Issues</strong>, <strong>Plane</strong> (open source). Linear&rsquo;s data model is widely admired for speed. Code integration via <strong>GitHub webhooks</strong>, <strong>GitLab webhooks</strong>, <strong>Bitbucket Cloud</strong>. Roadmaps: <strong>ProductBoard</strong>, <strong>Aha!</strong>, <strong>Productlane</strong>. Engineering metrics: <strong>LinearB</strong>, <strong>Jellyfish</strong>, <strong>Swarmia</strong>, <strong>Sleuth</strong>. Real-time collaboration via <strong>Yjs</strong>, <strong>Liveblocks</strong>, or <strong>Replicache</strong> for offline-first like Linear.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q84">
-  <div class="qa__number">Question 84</div>
-  <h3 class="qa__question">Explain how you would design a schema for a healthcare platform with patients, doctors, and appointments.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> A telehealth platform manages patients, doctors, appointments, prescriptions, and clinical notes. The system must comply with HIPAA, support insurance billing, and integrate with EHR systems. Doctors&rsquo; calendars must avoid double-booking.</p>
+<p><strong>Production polish:</strong> Established players: <strong>Jira</strong>, <strong>Linear</strong>, <strong>Asana</strong>, <strong>ClickUp</strong>, <strong>Monday.com</strong>, <strong>Shortcut</strong>, <strong>Height</strong>, <strong>GitHub Projects</strong>, <strong>GitLab Issues</strong>, <strong>Plane</strong> (open source). Linear&rsquo;s data model is widely admired for speed. Code integration via <strong>GitHub webhooks</strong>, <strong>GitLab webhooks</strong>, <strong>Bitbucket Cloud</strong>. Roadmaps: <strong>ProductBoard</strong>, <strong>Aha!</strong>, <strong>Productlane</strong>. Engineering metrics: <strong>LinearB</strong>, <strong>Jellyfish</strong>, <strong>Swarmia</strong>, <strong>Sleuth</strong>. Real-time collaboration via <strong>Yjs</strong>, <strong>Liveblocks</strong>, or <strong>Replicache</strong> for offline-first like Linear.</p>'''
+
+ANSWERS[84] = r'''<p><strong>Situation:</strong> A telehealth platform manages patients, doctors, appointments, prescriptions, and clinical notes. The system must comply with HIPAA, support insurance billing, and integrate with EHR systems. Doctors&rsquo; calendars must avoid double-booking.</p>
 <p><strong>Approach:</strong> Tables: <code>patients</code>, <code>doctors</code> (and their <code>specialties</code>), <code>availability_slots</code>, <code>appointments</code>, <code>medical_records</code>, <code>prescriptions</code>, <code>insurance_claims</code>. PHI fields are encrypted at column level.</p>
 <pre><code>CREATE TABLE doctors (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -7422,15 +6821,9 @@ VALUES (?, ?, ?, ?, ...);
 <tr><td>Append-only audit log</td><td>Required for HIPAA access tracking</td></tr>
 <tr><td>NPI as separate identifier</td><td>Industry-standard provider ID</td></tr>
 </tbody></table>
-<p><strong>Production polish:</strong> Telehealth platforms: <strong>Doximity</strong>, <strong>Doxy.me</strong>, <strong>Zoom for Healthcare</strong>, <strong>VSee</strong>. Backend services: <strong>Vital</strong>, <strong>Akute Health</strong>, <strong>Healthie</strong>, <strong>Mednet.io</strong>. EHR integration: <strong>Redox</strong>, <strong>Particle Health</strong>, <strong>Health Gorilla</strong>, <strong>1upHealth</strong>; FHIR-native: <strong>Medplum</strong>, <strong>Aidbox</strong>, <strong>Firely</strong>. ePrescribing: <strong>Surescripts</strong>, <strong>DoseSpot</strong>, <strong>Phreesia</strong>. Insurance verification: <strong>Stedi</strong>, <strong>Eligible</strong>, <strong>Change Healthcare</strong>. Payments: <strong>Stripe</strong> with <strong>Cedar</strong> or <strong>Inbox Health</strong> for patient billing. HIPAA-compliant infra: <strong>AWS BAA</strong>, <strong>Aptible</strong>, <strong>Vanta</strong> for compliance automation.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q85">
-  <div class="qa__number">Question 85</div>
-  <h3 class="qa__question">How would you handle database performance tuning and optimization for high-traffic applications?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> A high-traffic application sees 50k QPS, p99 latency creeping above 200ms, and CPU at 80%. Pages load slowly, especially the dashboard. The team needs a methodical approach to find and fix bottlenecks without over-engineering.</p>
+<p><strong>Production polish:</strong> Telehealth platforms: <strong>Doximity</strong>, <strong>Doxy.me</strong>, <strong>Zoom for Healthcare</strong>, <strong>VSee</strong>. Backend services: <strong>Vital</strong>, <strong>Akute Health</strong>, <strong>Healthie</strong>, <strong>Mednet.io</strong>. EHR integration: <strong>Redox</strong>, <strong>Particle Health</strong>, <strong>Health Gorilla</strong>, <strong>1upHealth</strong>; FHIR-native: <strong>Medplum</strong>, <strong>Aidbox</strong>, <strong>Firely</strong>. ePrescribing: <strong>Surescripts</strong>, <strong>DoseSpot</strong>, <strong>Phreesia</strong>. Insurance verification: <strong>Stedi</strong>, <strong>Eligible</strong>, <strong>Change Healthcare</strong>. Payments: <strong>Stripe</strong> with <strong>Cedar</strong> or <strong>Inbox Health</strong> for patient billing. HIPAA-compliant infra: <strong>AWS BAA</strong>, <strong>Aptible</strong>, <strong>Vanta</strong> for compliance automation.</p>'''
+
+ANSWERS[85] = r'''<p><strong>Situation:</strong> A high-traffic application sees 50k QPS, p99 latency creeping above 200ms, and CPU at 80%. Pages load slowly, especially the dashboard. The team needs a methodical approach to find and fix bottlenecks without over-engineering.</p>
 <p><strong>Approach:</strong> Profile first; optimize second. Use Performance Schema, slow query log, and EXPLAIN to find the actual bottlenecks. Apply fixes layer by layer: query &rarr; index &rarr; schema &rarr; cache &rarr; replication &rarr; infrastructure.</p>
 <pre><code>-- Find slowest queries
 SELECT digest_text, count_star, avg_timer_wait/1e9 AS avg_ms,
@@ -7457,15 +6850,9 @@ SET GLOBAL innodb_buffer_pool_size = 32 * 1024 * 1024 * 1024;</code></pre>
 <tr><td>Materialized views</td><td>Cheap dashboards</td><td>Staleness, refresh cost</td></tr>
 <tr><td>Vertical scaling</td><td>Quick relief</td><td>Cost, eventually hits ceiling</td></tr>
 </tbody></table>
-<p><strong>Production polish:</strong> Profiling: <strong>Performance Schema</strong>, <strong>sys schema</strong>, <strong>pt-query-digest</strong>, <strong>SolarWinds DPA</strong>, <strong>Percona PMM</strong>, <strong>VividCortex</strong> (now SolarWinds). APM that connects DB to app traces: <strong>Datadog APM</strong>, <strong>New Relic</strong>, <strong>Dynatrace</strong>, <strong>Honeycomb</strong>, <strong>Sentry</strong>, <strong>Grafana Cloud</strong>. AI-driven query optimization: <strong>EverSQL</strong>, <strong>Ottertune</strong>. Caching layers: <strong>Redis</strong>, <strong>Dragonfly</strong>, <strong>KeyDB</strong>, <strong>Memcached</strong>, <strong>ElastiCache</strong>. CDN cache for read APIs: <strong>Cloudflare</strong>, <strong>Fastly</strong>. For sustained extreme load consider <strong>PlanetScale</strong>, <strong>Vitess</strong>, <strong>TiDB</strong>, or <strong>SingleStore</strong>.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q86">
-  <div class="qa__number">Question 86</div>
-  <h3 class="qa__question">Describe how you would design a schema for a music streaming platform with users, playlists, and songs.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> A Spotify-like music streaming service stores users, songs, albums, artists, playlists, and listening history. Users build playlists, follow artists, and get personalized mixes. Royalty calculations require accurate per-stream play counts attributed to rights holders.</p>
+<p><strong>Production polish:</strong> Profiling: <strong>Performance Schema</strong>, <strong>sys schema</strong>, <strong>pt-query-digest</strong>, <strong>SolarWinds DPA</strong>, <strong>Percona PMM</strong>, <strong>VividCortex</strong> (now SolarWinds). APM that connects DB to app traces: <strong>Datadog APM</strong>, <strong>New Relic</strong>, <strong>Dynatrace</strong>, <strong>Honeycomb</strong>, <strong>Sentry</strong>, <strong>Grafana Cloud</strong>. AI-driven query optimization: <strong>EverSQL</strong>, <strong>Ottertune</strong>. Caching layers: <strong>Redis</strong>, <strong>Dragonfly</strong>, <strong>KeyDB</strong>, <strong>Memcached</strong>, <strong>ElastiCache</strong>. CDN cache for read APIs: <strong>Cloudflare</strong>, <strong>Fastly</strong>. For sustained extreme load consider <strong>PlanetScale</strong>, <strong>Vitess</strong>, <strong>TiDB</strong>, or <strong>SingleStore</strong>.</p>'''
+
+ANSWERS[86] = r'''<p><strong>Situation:</strong> A Spotify-like music streaming service stores users, songs, albums, artists, playlists, and listening history. Users build playlists, follow artists, and get personalized mixes. Royalty calculations require accurate per-stream play counts attributed to rights holders.</p>
 <p><strong>Approach:</strong> Tables: <code>artists</code>, <code>albums</code>, <code>songs</code>, <code>users</code>, <code>playlists</code>, <code>playlist_songs</code>, <code>follows</code>, <code>plays</code> (every play is a row, append-only), <code>likes</code>, and <code>rights_holders</code>.</p>
 <pre><code>CREATE TABLE songs (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -7515,15 +6902,9 @@ CREATE TABLE plays_daily_summary (
 <tr><td>song_artists with role</td><td>Featured, producer, writer all rep&rsquo;d</td></tr>
 <tr><td>Audio served via HLS/DASH from CDN</td><td>Adaptive bitrate, geo-edge delivery</td></tr>
 </tbody></table>
-<p><strong>Production polish:</strong> Streaming infrastructure: <strong>JW Player</strong>, <strong>BoomBox</strong>, <strong>Mux</strong> (video but adapts), <strong>AWS MediaConvert</strong>. Royalty/rights: <strong>SoundExchange</strong>, <strong>SourceAudio</strong>, <strong>Roex</strong>, <strong>Curve Royalty Systems</strong>, <strong>Vistex</strong>. Aggregators for indie release: <strong>DistroKid</strong>, <strong>TuneCore</strong>, <strong>CD Baby</strong>, <strong>Symphonic</strong>, <strong>Believe</strong>. Recommendations: collaborative filtering with <strong>Spotify Annoy</strong>, two-tower models on <strong>TensorFlow Recommenders</strong>, <strong>Vespa</strong> for retrieval. Audio fingerprinting: <strong>ACRCloud</strong>, <strong>Pex</strong>, <strong>AudibleMagic</strong>. Industry products: <strong>Spotify</strong>, <strong>Apple Music</strong>, <strong>YouTube Music</strong>, <strong>Tidal</strong>, <strong>Amazon Music</strong>, <strong>Deezer</strong>, <strong>SoundCloud</strong>.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q87">
-  <div class="qa__number">Question 87</div>
-  <h3 class="qa__question">How would you implement a system to manage user permissions and access control?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> A multi-tenant SaaS app needs fine-grained access control. Some users are admins of their org, some can edit specific projects, some are read-only. Permissions can be inherited (folder permissions cascade to documents). Performance must remain fast even with millions of authorization checks per minute.</p>
+<p><strong>Production polish:</strong> Streaming infrastructure: <strong>JW Player</strong>, <strong>BoomBox</strong>, <strong>Mux</strong> (video but adapts), <strong>AWS MediaConvert</strong>. Royalty/rights: <strong>SoundExchange</strong>, <strong>SourceAudio</strong>, <strong>Roex</strong>, <strong>Curve Royalty Systems</strong>, <strong>Vistex</strong>. Aggregators for indie release: <strong>DistroKid</strong>, <strong>TuneCore</strong>, <strong>CD Baby</strong>, <strong>Symphonic</strong>, <strong>Believe</strong>. Recommendations: collaborative filtering with <strong>Spotify Annoy</strong>, two-tower models on <strong>TensorFlow Recommenders</strong>, <strong>Vespa</strong> for retrieval. Audio fingerprinting: <strong>ACRCloud</strong>, <strong>Pex</strong>, <strong>AudibleMagic</strong>. Industry products: <strong>Spotify</strong>, <strong>Apple Music</strong>, <strong>YouTube Music</strong>, <strong>Tidal</strong>, <strong>Amazon Music</strong>, <strong>Deezer</strong>, <strong>SoundCloud</strong>.</p>'''
+
+ANSWERS[87] = r'''<p><strong>Situation:</strong> A multi-tenant SaaS app needs fine-grained access control. Some users are admins of their org, some can edit specific projects, some are read-only. Permissions can be inherited (folder permissions cascade to documents). Performance must remain fast even with millions of authorization checks per minute.</p>
 <p><strong>Approach:</strong> Combine RBAC for coarse roles with policy-based or relationship-based authorization for fine-grained checks. Cache decisions aggressively because authz reads dwarf writes.</p>
 <pre><code>CREATE TABLE roles (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -7570,15 +6951,9 @@ WHERE resource_type='doc' AND resource_id=? AND subject_id=? AND relation IN ('o
 <tr><td>ABAC (policy)</td><td>Complex rules over attributes</td><td>Hard to debug</td></tr>
 <tr><td>ReBAC (Zanzibar)</td><td>Doc-sharing, social graphs</td><td>Operational complexity</td></tr>
 </tbody></table>
-<p><strong>Production polish:</strong> Authorization-as-a-service: <strong>SpiceDB</strong> (AuthZed), <strong>OpenFGA</strong> (Auth0), <strong>Permify</strong>, <strong>Oso</strong>, <strong>Cerbos</strong>, <strong>Topaz</strong>, <strong>Aserto</strong>, <strong>Warrant</strong>, <strong>Permit.io</strong>. Library options: <strong>Casbin</strong> (multi-language), <strong>CASL</strong> (JS), <strong>Pundit</strong>/<strong>CanCanCan</strong> (Ruby), <strong>django-guardian</strong>. Identity: <strong>Auth0</strong>, <strong>Okta</strong>, <strong>WorkOS</strong>, <strong>Stytch</strong>, <strong>Clerk</strong>, <strong>Frontegg</strong>, <strong>Kinde</strong> handle SSO/SAML/SCIM. Audit logging via <strong>Tinybird</strong>, <strong>Honeycomb</strong>, or store in append-only <strong>S3 Object Lock</strong>. For session and token caching: <strong>Redis</strong> or in-process LRU.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q88">
-  <div class="qa__number">Question 88</div>
-  <h3 class="qa__question">Explain how you would design a schema for a loyalty program with customers, points, and rewards.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> A retail loyalty program awards points for purchases, lets customers redeem points for rewards, and tiers customers (silver/gold/platinum) based on annual spend. Points expire if unused; reward redemption must be atomic so a customer can&rsquo;t double-redeem.</p>
+<p><strong>Production polish:</strong> Authorization-as-a-service: <strong>SpiceDB</strong> (AuthZed), <strong>OpenFGA</strong> (Auth0), <strong>Permify</strong>, <strong>Oso</strong>, <strong>Cerbos</strong>, <strong>Topaz</strong>, <strong>Aserto</strong>, <strong>Warrant</strong>, <strong>Permit.io</strong>. Library options: <strong>Casbin</strong> (multi-language), <strong>CASL</strong> (JS), <strong>Pundit</strong>/<strong>CanCanCan</strong> (Ruby), <strong>django-guardian</strong>. Identity: <strong>Auth0</strong>, <strong>Okta</strong>, <strong>WorkOS</strong>, <strong>Stytch</strong>, <strong>Clerk</strong>, <strong>Frontegg</strong>, <strong>Kinde</strong> handle SSO/SAML/SCIM. Audit logging via <strong>Tinybird</strong>, <strong>Honeycomb</strong>, or store in append-only <strong>S3 Object Lock</strong>. For session and token caching: <strong>Redis</strong> or in-process LRU.</p>'''
+
+ANSWERS[88] = r'''<p><strong>Situation:</strong> A retail loyalty program awards points for purchases, lets customers redeem points for rewards, and tiers customers (silver/gold/platinum) based on annual spend. Points expire if unused; reward redemption must be atomic so a customer can&rsquo;t double-redeem.</p>
 <p><strong>Approach:</strong> Tables: <code>customers</code>, <code>tiers</code>, <code>point_ledger</code> (every credit/debit, append-only), <code>rewards</code>, <code>redemptions</code>. Balance is always derived by SUM over the ledger; never stored as a single mutable balance.</p>
 <pre><code>CREATE TABLE point_ledger (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -7614,15 +6989,9 @@ COMMIT;</code></pre>
 <tr><td>Cached balance with version</td><td>Fast reads, recompute on miss</td></tr>
 <tr><td>Tier from rolling window</td><td>Customers don&rsquo;t lose status mid-year</td></tr>
 </tbody></table>
-<p><strong>Production polish:</strong> Loyalty platforms: <strong>Smile.io</strong>, <strong>Yotpo</strong>, <strong>Stamped</strong>, <strong>LoyaltyLion</strong>, <strong>Annex Cloud</strong>, <strong>Punchh</strong>, <strong>Open Loyalty</strong> (open source). Enterprise: <strong>Salesforce Loyalty Management</strong>, <strong>Cheetah Digital</strong>, <strong>Comarch</strong>. Card-linked offers: <strong>Fidel API</strong>, <strong>Triple</strong>, <strong>Augeo</strong>. For coalition/cross-merchant programs see <strong>Plenti</strong> patterns or <strong>StellarFi</strong>. Fraud prevention via <strong>Forter</strong> or <strong>Sift</strong>. For point-based payment redemption use <strong>Kard</strong>. Marketing automation tied to tier transitions: <strong>Braze</strong>, <strong>Iterable</strong>, <strong>Customer.io</strong>.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q89">
-  <div class="qa__number">Question 89</div>
-  <h3 class="qa__question">How would you handle data validation and integrity checks in a MySQL database?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> A team has been bitten by orphan rows, mismatched currencies, malformed emails, and silently corrupt data. They want to push validation into the database where possible so bad data can never land, regardless of which app or job writes it.</p>
+<p><strong>Production polish:</strong> Loyalty platforms: <strong>Smile.io</strong>, <strong>Yotpo</strong>, <strong>Stamped</strong>, <strong>LoyaltyLion</strong>, <strong>Annex Cloud</strong>, <strong>Punchh</strong>, <strong>Open Loyalty</strong> (open source). Enterprise: <strong>Salesforce Loyalty Management</strong>, <strong>Cheetah Digital</strong>, <strong>Comarch</strong>. Card-linked offers: <strong>Fidel API</strong>, <strong>Triple</strong>, <strong>Augeo</strong>. For coalition/cross-merchant programs see <strong>Plenti</strong> patterns or <strong>StellarFi</strong>. Fraud prevention via <strong>Forter</strong> or <strong>Sift</strong>. For point-based payment redemption use <strong>Kard</strong>. Marketing automation tied to tier transitions: <strong>Braze</strong>, <strong>Iterable</strong>, <strong>Customer.io</strong>.</p>'''
+
+ANSWERS[89] = r'''<p><strong>Situation:</strong> A team has been bitten by orphan rows, mismatched currencies, malformed emails, and silently corrupt data. They want to push validation into the database where possible so bad data can never land, regardless of which app or job writes it.</p>
 <p><strong>Approach:</strong> Use the strongest constraints the database offers: NOT NULL, FOREIGN KEY, UNIQUE, CHECK constraints (MySQL 8.0.16+), correct data types, and ENUM/lookup tables for restricted values. Backstop with triggers for cross-row invariants and add app-layer validation for UX.</p>
 <pre><code>CREATE TABLE orders (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -7656,15 +7025,9 @@ DELIMITER ;</code></pre>
 <tr><td>Trigger</td><td>Cross-row invariants</td><td>Hidden logic, harder to test</td></tr>
 <tr><td>App-layer validation (Zod/Yup/Pydantic)</td><td>UX errors before DB hit</td><td>Must be duplicated across services</td></tr>
 </tbody></table>
-<p><strong>Production polish:</strong> App-side schema validators: <strong>Zod</strong>, <strong>Yup</strong>, <strong>Joi</strong>, <strong>Valibot</strong>, <strong>ArkType</strong>, <strong>TypeBox</strong> (TS); <strong>Pydantic</strong>, <strong>marshmallow</strong>, <strong>attrs</strong> (Python); <strong>JSON Schema</strong> universally. ORM-level: <strong>Prisma</strong>, <strong>Drizzle</strong>, <strong>TypeORM</strong>, <strong>Sequelize</strong>, <strong>SQLAlchemy</strong>, <strong>Hibernate</strong>. Data quality monitoring: <strong>Great Expectations</strong>, <strong>Soda</strong>, <strong>Monte Carlo</strong>, <strong>Bigeye</strong>, <strong>Datafold</strong>, <strong>Elementary</strong>, <strong>Anomalo</strong>. Schema linting: <strong>Atlas</strong>, <strong>Squawk</strong>, <strong>Skeema</strong>. For generated columns and computed fields, MySQL 8 supports both VIRTUAL and STORED options.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q90">
-  <div class="qa__number">Question 90</div>
-  <h3 class="qa__question">Describe how you would design a schema for a fitness app with workout plans, exercises, and progress tracking.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> A fitness app helps users follow workout plans, log sets and reps, track progress over time, and see graphs of strength gains. Plans have weekly programs; users substitute exercises; the app must compute one-rep max estimates and personal records.</p>
+<p><strong>Production polish:</strong> App-side schema validators: <strong>Zod</strong>, <strong>Yup</strong>, <strong>Joi</strong>, <strong>Valibot</strong>, <strong>ArkType</strong>, <strong>TypeBox</strong> (TS); <strong>Pydantic</strong>, <strong>marshmallow</strong>, <strong>attrs</strong> (Python); <strong>JSON Schema</strong> universally. ORM-level: <strong>Prisma</strong>, <strong>Drizzle</strong>, <strong>TypeORM</strong>, <strong>Sequelize</strong>, <strong>SQLAlchemy</strong>, <strong>Hibernate</strong>. Data quality monitoring: <strong>Great Expectations</strong>, <strong>Soda</strong>, <strong>Monte Carlo</strong>, <strong>Bigeye</strong>, <strong>Datafold</strong>, <strong>Elementary</strong>, <strong>Anomalo</strong>. Schema linting: <strong>Atlas</strong>, <strong>Squawk</strong>, <strong>Skeema</strong>. For generated columns and computed fields, MySQL 8 supports both VIRTUAL and STORED options.</p>'''
+
+ANSWERS[90] = r'''<p><strong>Situation:</strong> A fitness app helps users follow workout plans, log sets and reps, track progress over time, and see graphs of strength gains. Plans have weekly programs; users substitute exercises; the app must compute one-rep max estimates and personal records.</p>
 <p><strong>Approach:</strong> Tables: <code>exercises</code>, <code>workout_plans</code>, <code>plan_workouts</code>, <code>plan_workout_exercises</code>, <code>user_workouts</code> (instances of executing a planned workout), <code>logged_sets</code>, and <code>personal_records</code>.</p>
 <pre><code>CREATE TABLE exercises (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -7709,15 +7072,9 @@ GROUP BY DATE(uw.performed_at) ORDER BY d;</code></pre>
 <tr><td>RPE captured</td><td>Modern training programs need fatigue data</td></tr>
 <tr><td>Substitutions tracked</td><td>Users swap exercises; plan integrity preserved</td></tr>
 </tbody></table>
-<p><strong>Production polish:</strong> Established apps: <strong>Strong</strong>, <strong>Hevy</strong>, <strong>FitNotes</strong>, <strong>Jefit</strong>, <strong>Fitbod</strong>, <strong>Future</strong>, <strong>Caliber</strong>, <strong>Apple Fitness+</strong>. AI-driven coaching: <strong>Fitbod</strong>, <strong>JuggernautAI</strong>, <strong>RP Strength</strong>, <strong>Boostcamp</strong>. Wearable data: <strong>Apple HealthKit</strong>, <strong>Google Health Connect</strong>, <strong>Garmin Connect API</strong>, <strong>Whoop</strong>, <strong>Oura</strong>, <strong>Fitbit Web API</strong>; aggregators: <strong>Terra</strong>, <strong>Vital</strong>, <strong>Spike</strong>, <strong>Rook</strong>. Video form analysis: <strong>Forme</strong>, <strong>Tempo</strong>, <strong>Tonal</strong>. Supplement and macro tracking: <strong>MacroFactor</strong>, <strong>MyFitnessPal</strong>, <strong>Cronometer</strong>. Group community via <strong>Tribe</strong>, <strong>Circle</strong>, or <strong>Discourse</strong>.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q91">
-  <div class="qa__number">Question 91</div>
-  <h3 class="qa__question">How would you implement a system to track and manage customer feedback and reviews?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> A product team needs to collect customer feedback (NPS, CSAT, free-text reviews), track sentiment over time, route negative reviews to support, and publish high-quality reviews on the public site. Spam and fake reviews must be filtered.</p>
+<p><strong>Production polish:</strong> Established apps: <strong>Strong</strong>, <strong>Hevy</strong>, <strong>FitNotes</strong>, <strong>Jefit</strong>, <strong>Fitbod</strong>, <strong>Future</strong>, <strong>Caliber</strong>, <strong>Apple Fitness+</strong>. AI-driven coaching: <strong>Fitbod</strong>, <strong>JuggernautAI</strong>, <strong>RP Strength</strong>, <strong>Boostcamp</strong>. Wearable data: <strong>Apple HealthKit</strong>, <strong>Google Health Connect</strong>, <strong>Garmin Connect API</strong>, <strong>Whoop</strong>, <strong>Oura</strong>, <strong>Fitbit Web API</strong>; aggregators: <strong>Terra</strong>, <strong>Vital</strong>, <strong>Spike</strong>, <strong>Rook</strong>. Video form analysis: <strong>Forme</strong>, <strong>Tempo</strong>, <strong>Tonal</strong>. Supplement and macro tracking: <strong>MacroFactor</strong>, <strong>MyFitnessPal</strong>, <strong>Cronometer</strong>. Group community via <strong>Tribe</strong>, <strong>Circle</strong>, or <strong>Discourse</strong>.</p>'''
+
+ANSWERS[91] = r'''<p><strong>Situation:</strong> A product team needs to collect customer feedback (NPS, CSAT, free-text reviews), track sentiment over time, route negative reviews to support, and publish high-quality reviews on the public site. Spam and fake reviews must be filtered.</p>
 <p><strong>Approach:</strong> Tables: <code>surveys</code>, <code>survey_responses</code>, <code>reviews</code> (product/seller reviews with rating + text), <code>review_media</code>, <code>review_reactions</code> (helpful/not helpful), and <code>moderation_queue</code>.</p>
 <pre><code>CREATE TABLE reviews (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -7758,15 +7115,9 @@ WHERE product_id=? AND status='approved';</code></pre>
 <tr><td>Async sentiment</td><td>LLM calls cost too much for sync write</td></tr>
 <tr><td>Moderation queue</td><td>Human review for borderline / flagged content</td></tr>
 </tbody></table>
-<p><strong>Production polish:</strong> Review platforms: <strong>Yotpo</strong>, <strong>Trustpilot</strong>, <strong>Bazaarvoice</strong>, <strong>PowerReviews</strong>, <strong>Stamped</strong>, <strong>Junip</strong>, <strong>Loox</strong>, <strong>Okendo</strong>, <strong>REVIEWS.io</strong>. NPS/survey: <strong>Delighted</strong>, <strong>SurveyMonkey</strong>, <strong>Typeform</strong>, <strong>Qualtrics</strong>, <strong>AskNicely</strong>, <strong>Chattermill</strong>. AI feedback analysis: <strong>Viable</strong>, <strong>Enterpret</strong>, <strong>Unwrap.ai</strong>, <strong>Thematic</strong>, <strong>Idiomatic</strong>, <strong>SuperKlear</strong>. Spam/fake review detection: <strong>Fakespot</strong> (acquired by Mozilla), <strong>The Transparency Company</strong>, in-house GPT-4/Claude classifier. Support ticket creation via <strong>Zendesk</strong>, <strong>Intercom</strong>, <strong>Freshdesk</strong>, <strong>Linear</strong>, or <strong>Plain</strong>.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q92">
-  <div class="qa__number">Question 92</div>
-  <h3 class="qa__question">Explain how you would design a schema for an online auction platform with items, bids, and users.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> An online auction platform like eBay must handle bid placement under heavy concurrency at the closing minute (sniping), prevent shill bidding, support buy-it-now and reserve prices, and end auctions atomically without leaving inconsistent state.</p>
+<p><strong>Production polish:</strong> Review platforms: <strong>Yotpo</strong>, <strong>Trustpilot</strong>, <strong>Bazaarvoice</strong>, <strong>PowerReviews</strong>, <strong>Stamped</strong>, <strong>Junip</strong>, <strong>Loox</strong>, <strong>Okendo</strong>, <strong>REVIEWS.io</strong>. NPS/survey: <strong>Delighted</strong>, <strong>SurveyMonkey</strong>, <strong>Typeform</strong>, <strong>Qualtrics</strong>, <strong>AskNicely</strong>, <strong>Chattermill</strong>. AI feedback analysis: <strong>Viable</strong>, <strong>Enterpret</strong>, <strong>Unwrap.ai</strong>, <strong>Thematic</strong>, <strong>Idiomatic</strong>, <strong>SuperKlear</strong>. Spam/fake review detection: <strong>Fakespot</strong> (acquired by Mozilla), <strong>The Transparency Company</strong>, in-house GPT-4/Claude classifier. Support ticket creation via <strong>Zendesk</strong>, <strong>Intercom</strong>, <strong>Freshdesk</strong>, <strong>Linear</strong>, or <strong>Plain</strong>.</p>'''
+
+ANSWERS[92] = r'''<p><strong>Situation:</strong> An online auction platform like eBay must handle bid placement under heavy concurrency at the closing minute (sniping), prevent shill bidding, support buy-it-now and reserve prices, and end auctions atomically without leaving inconsistent state.</p>
 <p><strong>Approach:</strong> Tables: <code>users</code>, <code>auctions</code>, <code>bids</code>, <code>watches</code>. Bid acceptance is atomic and uses optimistic concurrency or row-level locks; the highest bid is denormalized on the auction row for fast reads but always derived consistently.</p>
 <pre><code>CREATE TABLE auctions (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -7815,15 +7166,9 @@ COMMIT;</code></pre>
 <tr><td>Proxy bidding column</td><td>System auto-bids up to user&rsquo;s max</td></tr>
 <tr><td>Denorm current bid</td><td>Listing pages don&rsquo;t scan bids table</td></tr>
 </tbody></table>
-<p><strong>Production polish:</strong> Marketplace platforms: <strong>eBay</strong>, <strong>StockX</strong>, <strong>GOAT</strong>, <strong>Whatnot</strong>, <strong>Heritage Auctions</strong>, <strong>Sotheby&rsquo;s</strong>, <strong>Christie&rsquo;s LIVE</strong>, <strong>Catawiki</strong>, <strong>Hibid</strong>. Live-stream auction tech: <strong>Whatnot</strong>, <strong>Bambuser</strong>, <strong>NTWRK</strong>, <strong>ShopShops</strong>. Real-time bid updates via <strong>WebSockets</strong> through <strong>Pusher</strong>, <strong>Ably</strong>, <strong>PartyKit</strong>, or <strong>Soketi</strong>. Fraud and shill detection: <strong>Sift</strong>, <strong>Forter</strong>, <strong>Riskified</strong>. Payment escrow: <strong>Escrow.com</strong>, <strong>Trustap</strong>, <strong>Stripe Connect</strong>. Authentication services for collectibles: <strong>PSA</strong>, <strong>Beckett</strong>, <strong>Authentic First</strong>, <strong>Real Authentication</strong>.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q93">
-  <div class="qa__number">Question 93</div>
-  <h3 class="qa__question">How would you handle database replication and failover to ensure high availability?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> A business-critical MySQL instance must survive hardware failure, AZ outage, and even region outage with minimal data loss. The team has SLAs of 99.99% uptime, RPO under 60 seconds, and RTO under 5 minutes.</p>
+<p><strong>Production polish:</strong> Marketplace platforms: <strong>eBay</strong>, <strong>StockX</strong>, <strong>GOAT</strong>, <strong>Whatnot</strong>, <strong>Heritage Auctions</strong>, <strong>Sotheby&rsquo;s</strong>, <strong>Christie&rsquo;s LIVE</strong>, <strong>Catawiki</strong>, <strong>Hibid</strong>. Live-stream auction tech: <strong>Whatnot</strong>, <strong>Bambuser</strong>, <strong>NTWRK</strong>, <strong>ShopShops</strong>. Real-time bid updates via <strong>WebSockets</strong> through <strong>Pusher</strong>, <strong>Ably</strong>, <strong>PartyKit</strong>, or <strong>Soketi</strong>. Fraud and shill detection: <strong>Sift</strong>, <strong>Forter</strong>, <strong>Riskified</strong>. Payment escrow: <strong>Escrow.com</strong>, <strong>Trustap</strong>, <strong>Stripe Connect</strong>. Authentication services for collectibles: <strong>PSA</strong>, <strong>Beckett</strong>, <strong>Authentic First</strong>, <strong>Real Authentication</strong>.</p>'''
+
+ANSWERS[93] = r'''<p><strong>Situation:</strong> A business-critical MySQL instance must survive hardware failure, AZ outage, and even region outage with minimal data loss. The team has SLAs of 99.99% uptime, RPO under 60 seconds, and RTO under 5 minutes.</p>
 <p><strong>Approach:</strong> Use semi-synchronous replication or Group Replication for high availability within a region; use asynchronous cross-region replicas for DR. Pair with an automated failover orchestrator and regularly tested DR drills.</p>
 <pre><code>-- Primary configuration
 [mysqld]
@@ -7854,15 +7199,9 @@ super_read_only = ON
 <tr><td>Aurora multi-AZ</td><td>Near-zero</td><td>~30 seconds</td><td>Storage replicated 6x across 3 AZs</td></tr>
 <tr><td>Aurora Global / Vitess</td><td>~1s cross-region</td><td>Minutes</td><td>For region-failure DR</td></tr>
 </tbody></table>
-<p><strong>Production polish:</strong> Failover orchestration: <strong>Orchestrator</strong>, <strong>MHA</strong>, <strong>MySQL Router</strong> + InnoDB Cluster, <strong>ProxySQL</strong>, <strong>HAProxy</strong>. Cloud-managed HA: <strong>Amazon Aurora</strong>, <strong>Google Cloud SQL</strong>, <strong>Azure Database for MySQL Flexible Server</strong>, <strong>PlanetScale</strong>, <strong>Vitess</strong>, <strong>TiDB</strong>, <strong>SingleStore</strong>. Backups: <strong>Percona XtraBackup</strong>, <strong>mydumper</strong>, <strong>mysqldump</strong>, <strong>AWS Backup</strong>. PITR + WAL/binlog archiving to S3. Regularly run game-day chaos engineering with <strong>Gremlin</strong>, <strong>ChaosMesh</strong>, or <strong>AWS FIS</strong> to validate runbooks. Status pages and alerting: <strong>Atlassian Statuspage</strong>, <strong>Better Stack</strong>, <strong>Datadog</strong>, <strong>PagerDuty</strong>, <strong>Incident.io</strong>, <strong>FireHydrant</strong>, <strong>Rootly</strong>.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q94">
-  <div class="qa__number">Question 94</div>
-  <h3 class="qa__question">Describe how you would design a schema for a weather monitoring system with sensors, locations, and readings.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> A weather monitoring system collects readings from 100,000 sensors every minute &mdash; temperature, humidity, pressure, wind. Operators need real-time alerts on anomalies, historical analytics, and a public API for forecast services. The naive approach of one row per reading would be 144 million rows per day.</p>
+<p><strong>Production polish:</strong> Failover orchestration: <strong>Orchestrator</strong>, <strong>MHA</strong>, <strong>MySQL Router</strong> + InnoDB Cluster, <strong>ProxySQL</strong>, <strong>HAProxy</strong>. Cloud-managed HA: <strong>Amazon Aurora</strong>, <strong>Google Cloud SQL</strong>, <strong>Azure Database for MySQL Flexible Server</strong>, <strong>PlanetScale</strong>, <strong>Vitess</strong>, <strong>TiDB</strong>, <strong>SingleStore</strong>. Backups: <strong>Percona XtraBackup</strong>, <strong>mydumper</strong>, <strong>mysqldump</strong>, <strong>AWS Backup</strong>. PITR + WAL/binlog archiving to S3. Regularly run game-day chaos engineering with <strong>Gremlin</strong>, <strong>ChaosMesh</strong>, or <strong>AWS FIS</strong> to validate runbooks. Status pages and alerting: <strong>Atlassian Statuspage</strong>, <strong>Better Stack</strong>, <strong>Datadog</strong>, <strong>PagerDuty</strong>, <strong>Incident.io</strong>, <strong>FireHydrant</strong>, <strong>Rootly</strong>.</p>'''
+
+ANSWERS[94] = r'''<p><strong>Situation:</strong> A weather monitoring system collects readings from 100,000 sensors every minute &mdash; temperature, humidity, pressure, wind. Operators need real-time alerts on anomalies, historical analytics, and a public API for forecast services. The naive approach of one row per reading would be 144 million rows per day.</p>
 <p><strong>Approach:</strong> This is a classic time-series workload; MySQL is not the best store for raw points but can manage with aggressive partitioning and aggregates. Better is to send readings to a time-series DB and keep MySQL for metadata and pre-computed aggregates.</p>
 <pre><code>-- Metadata in MySQL
 CREATE TABLE locations (
@@ -7906,15 +7245,9 @@ HAVING ABS(MAX(avg_value) - AVG(avg_value)) &gt; 3*STDDEV(avg_value);</code></pr
 <tr><td>MySQL + TSDB</td><td>Right tool per workload</td><td>Two systems, sync glue</td></tr>
 <tr><td>ClickHouse for everything</td><td>Cheap, fast columnar</td><td>Weaker for OLTP-style writes</td></tr>
 </tbody></table>
-<p><strong>Production polish:</strong> Time-series databases: <strong>TimescaleDB</strong> (Postgres extension), <strong>InfluxDB 3.0</strong>, <strong>QuestDB</strong>, <strong>VictoriaMetrics</strong>, <strong>Prometheus</strong>, <strong>M3</strong>, <strong>Mimir</strong>. Columnar analytics: <strong>ClickHouse</strong>, <strong>StarRocks</strong>, <strong>Apache Druid</strong>, <strong>Apache Pinot</strong>. IoT ingestion: <strong>AWS IoT Core</strong>, <strong>Azure IoT Hub</strong>, <strong>Google Cloud IoT</strong>, <strong>Kafka</strong>, <strong>Redpanda</strong>, <strong>NATS</strong>. Stream processing: <strong>Apache Flink</strong>, <strong>Materialize</strong>, <strong>RisingWave</strong>, <strong>Bytewax</strong>. Visualization: <strong>Grafana</strong>, <strong>Apache Superset</strong>, <strong>Metabase</strong>. Weather APIs to compare against: <strong>OpenWeather</strong>, <strong>Tomorrow.io</strong>, <strong>Weatherbit</strong>, <strong>Visual Crossing</strong>, <strong>NOAA</strong>.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q95">
-  <div class="qa__number">Question 95</div>
-  <h3 class="qa__question">How would you implement a system to track and manage inventory across multiple warehouses?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> An e-commerce retailer ships from 12 warehouses across regions. Inventory must be tracked per warehouse, transfers between warehouses must be auditable, the cart must reserve stock during checkout, and order-routing logic should pick the cheapest warehouse to fulfill from.</p>
+<p><strong>Production polish:</strong> Time-series databases: <strong>TimescaleDB</strong> (Postgres extension), <strong>InfluxDB 3.0</strong>, <strong>QuestDB</strong>, <strong>VictoriaMetrics</strong>, <strong>Prometheus</strong>, <strong>M3</strong>, <strong>Mimir</strong>. Columnar analytics: <strong>ClickHouse</strong>, <strong>StarRocks</strong>, <strong>Apache Druid</strong>, <strong>Apache Pinot</strong>. IoT ingestion: <strong>AWS IoT Core</strong>, <strong>Azure IoT Hub</strong>, <strong>Google Cloud IoT</strong>, <strong>Kafka</strong>, <strong>Redpanda</strong>, <strong>NATS</strong>. Stream processing: <strong>Apache Flink</strong>, <strong>Materialize</strong>, <strong>RisingWave</strong>, <strong>Bytewax</strong>. Visualization: <strong>Grafana</strong>, <strong>Apache Superset</strong>, <strong>Metabase</strong>. Weather APIs to compare against: <strong>OpenWeather</strong>, <strong>Tomorrow.io</strong>, <strong>Weatherbit</strong>, <strong>Visual Crossing</strong>, <strong>NOAA</strong>.</p>'''
+
+ANSWERS[95] = r'''<p><strong>Situation:</strong> An e-commerce retailer ships from 12 warehouses across regions. Inventory must be tracked per warehouse, transfers between warehouses must be auditable, the cart must reserve stock during checkout, and order-routing logic should pick the cheapest warehouse to fulfill from.</p>
 <p><strong>Approach:</strong> Tables: <code>products</code>, <code>warehouses</code>, <code>inventory</code> (qty per product per warehouse), <code>inventory_movements</code> (every change is logged), <code>reservations</code> (cart holds), and <code>transfers</code>.</p>
 <pre><code>CREATE TABLE inventory (
   product_id BIGINT NOT NULL,
@@ -7957,15 +7290,9 @@ ORDER BY w.distance_km ASC, w.priority ASC LIMIT 1;</code></pre>
 <tr><td>Conditional UPDATE for reserve</td><td>Atomic, avoids overselling</td></tr>
 <tr><td>Cart reservation expiry</td><td>Job releases stale holds back to available</td></tr>
 </tbody></table>
-<p><strong>Production polish:</strong> Inventory and OMS platforms: <strong>NetSuite</strong>, <strong>Brightpearl</strong>, <strong>Cin7</strong>, <strong>Zoho Inventory</strong>, <strong>Linnworks</strong>, <strong>Veeqo</strong>, <strong>SkuVault</strong>, <strong>Cogsy</strong>, <strong>Inventory Planner</strong>. Warehouse management: <strong>Manhattan Active</strong>, <strong>SAP EWM</strong>, <strong>Logiwa</strong>, <strong>Nimbus</strong>, <strong>ShipBob OMS</strong>. 3PL services with APIs: <strong>ShipBob</strong>, <strong>ShipMonk</strong>, <strong>Flexport</strong>, <strong>Stord</strong>, <strong>Ware2Go</strong>. Forecasting: <strong>Inventory Planner</strong>, <strong>Cogsy</strong>, <strong>Streamline</strong>, <strong>StockTrim</strong>, in-house with <strong>Prophet</strong>/<strong>NeuralProphet</strong>. Transportation rate-shop: <strong>EasyPost</strong>, <strong>Shippo</strong>, <strong>ShipEngine</strong>. ERP integration via <strong>Codat</strong>, <strong>Rutter</strong>, or <strong>Finch</strong>.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q96">
-  <div class="qa__number">Question 96</div>
-  <h3 class="qa__question">Explain how you would design a schema for a peer-to-peer lending platform with lenders, borrowers, and loans.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> A peer-to-peer lending platform matches borrowers requesting loans with retail or institutional lenders who fund them in fractional pieces. The system must compute amortization schedules, distribute payments to investors pro-rata, and handle delinquency.</p>
+<p><strong>Production polish:</strong> Inventory and OMS platforms: <strong>NetSuite</strong>, <strong>Brightpearl</strong>, <strong>Cin7</strong>, <strong>Zoho Inventory</strong>, <strong>Linnworks</strong>, <strong>Veeqo</strong>, <strong>SkuVault</strong>, <strong>Cogsy</strong>, <strong>Inventory Planner</strong>. Warehouse management: <strong>Manhattan Active</strong>, <strong>SAP EWM</strong>, <strong>Logiwa</strong>, <strong>Nimbus</strong>, <strong>ShipBob OMS</strong>. 3PL services with APIs: <strong>ShipBob</strong>, <strong>ShipMonk</strong>, <strong>Flexport</strong>, <strong>Stord</strong>, <strong>Ware2Go</strong>. Forecasting: <strong>Inventory Planner</strong>, <strong>Cogsy</strong>, <strong>Streamline</strong>, <strong>StockTrim</strong>, in-house with <strong>Prophet</strong>/<strong>NeuralProphet</strong>. Transportation rate-shop: <strong>EasyPost</strong>, <strong>Shippo</strong>, <strong>ShipEngine</strong>. ERP integration via <strong>Codat</strong>, <strong>Rutter</strong>, or <strong>Finch</strong>.</p>'''
+
+ANSWERS[96] = r'''<p><strong>Situation:</strong> A peer-to-peer lending platform matches borrowers requesting loans with retail or institutional lenders who fund them in fractional pieces. The system must compute amortization schedules, distribute payments to investors pro-rata, and handle delinquency.</p>
 <p><strong>Approach:</strong> Tables: <code>borrowers</code>, <code>lenders</code>, <code>loan_listings</code>, <code>investments</code> (fractional commitments to a listing), <code>loans</code> (funded loan), <code>payment_schedule</code> (per-installment), <code>payments</code>, and <code>distributions</code> (lender share of each payment).</p>
 <pre><code>CREATE TABLE loans (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -8011,15 +7338,9 @@ CREATE TABLE distributions (
 <tr><td>Distributions table</td><td>1099 tax forms, lender statements, audit</td></tr>
 <tr><td>Listings vs loans</td><td>Listing may not fully fund; loan starts after</td></tr>
 </tbody></table>
-<p><strong>Production polish:</strong> Lending infrastructure: <strong>LoanPro</strong>, <strong>Peach Finance</strong>, <strong>LendAPI</strong>, <strong>Canopy Servicing</strong>, <strong>Bond</strong> (BaaS), <strong>Unit</strong>, <strong>Treasury Prime</strong>. Banking-as-a-Service rails: <strong>Synapse</strong>, <strong>Galileo</strong>, <strong>Marqeta</strong>. Underwriting: <strong>Plaid</strong> (cash flow), <strong>Argyle</strong>, <strong>Pinwheel</strong> (income), <strong>FactorTrust</strong>, <strong>LexisNexis Risk</strong>. KYC/AML: <strong>Persona</strong>, <strong>Alloy</strong>, <strong>Sumsub</strong>, <strong>Onfido</strong>, <strong>Trulioo</strong>, <strong>Sardine</strong>. ACH/payments: <strong>Modern Treasury</strong>, <strong>Increase</strong>, <strong>Dwolla</strong>. P2P lending platforms: <strong>Prosper</strong>, <strong>LendingClub</strong>, <strong>Funding Circle</strong>, <strong>Upstart</strong>, <strong>Mintos</strong>, <strong>Bondora</strong>. Compliance and regulatory: <strong>ComplyAdvantage</strong>, <strong>Hummingbird</strong>, <strong>Unit21</strong>.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q97">
-  <div class="qa__number">Question 97</div>
-  <h3 class="qa__question">How would you handle data import and export to and from a MySQL database?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> The team needs to import customer-uploaded CSV files (sometimes millions of rows), export query results to clients (CSV, Excel, JSON, Parquet), and synchronize data with external systems via batch files. Imports must validate, dedupe, and report errors clearly.</p>
+<p><strong>Production polish:</strong> Lending infrastructure: <strong>LoanPro</strong>, <strong>Peach Finance</strong>, <strong>LendAPI</strong>, <strong>Canopy Servicing</strong>, <strong>Bond</strong> (BaaS), <strong>Unit</strong>, <strong>Treasury Prime</strong>. Banking-as-a-Service rails: <strong>Synapse</strong>, <strong>Galileo</strong>, <strong>Marqeta</strong>. Underwriting: <strong>Plaid</strong> (cash flow), <strong>Argyle</strong>, <strong>Pinwheel</strong> (income), <strong>FactorTrust</strong>, <strong>LexisNexis Risk</strong>. KYC/AML: <strong>Persona</strong>, <strong>Alloy</strong>, <strong>Sumsub</strong>, <strong>Onfido</strong>, <strong>Trulioo</strong>, <strong>Sardine</strong>. ACH/payments: <strong>Modern Treasury</strong>, <strong>Increase</strong>, <strong>Dwolla</strong>. P2P lending platforms: <strong>Prosper</strong>, <strong>LendingClub</strong>, <strong>Funding Circle</strong>, <strong>Upstart</strong>, <strong>Mintos</strong>, <strong>Bondora</strong>. Compliance and regulatory: <strong>ComplyAdvantage</strong>, <strong>Hummingbird</strong>, <strong>Unit21</strong>.</p>'''
+
+ANSWERS[97] = r'''<p><strong>Situation:</strong> The team needs to import customer-uploaded CSV files (sometimes millions of rows), export query results to clients (CSV, Excel, JSON, Parquet), and synchronize data with external systems via batch files. Imports must validate, dedupe, and report errors clearly.</p>
 <p><strong>Approach:</strong> Use the right tool for each direction: <code>LOAD DATA INFILE</code> or <code>LOAD DATA LOCAL INFILE</code> for high-speed bulk import, <code>SELECT ... INTO OUTFILE</code> for export, with a staging-table pattern that validates and dedupes before merging into production tables.</p>
 <pre><code>-- Bulk import via staging table
 CREATE TABLE customers_import_staging LIKE customers;
@@ -8061,15 +7382,9 @@ LINES TERMINATED BY '\n';</code></pre>
 <tr><td>Streaming via app code</td><td>Custom validation, easier errors</td><td>Slower for bulk</td></tr>
 <tr><td>SELECT INTO OUTFILE</td><td>Server-side, fast</td><td>File on DB host; need to retrieve</td></tr>
 </tbody></table>
-<p><strong>Production polish:</strong> CSV/Excel libraries by stack: <strong>fast-csv</strong>, <strong>papaparse</strong>, <strong>SheetJS</strong>, <strong>ExcelJS</strong> (JS); <strong>pandas</strong>, <strong>polars</strong>, <strong>openpyxl</strong>, <strong>pyarrow</strong> (Python). ETL/ingestion platforms: <strong>Airbyte</strong>, <strong>Fivetran</strong>, <strong>Stitch</strong>, <strong>Hevo</strong>, <strong>Meltano</strong>, <strong>Estuary</strong>. Reverse ETL: <strong>Hightouch</strong>, <strong>Census</strong>, <strong>Polytomic</strong>, <strong>Grouparoo</strong>. Data validation: <strong>Great Expectations</strong>, <strong>Soda</strong>, <strong>Pandera</strong>. CDC for live sync: <strong>Debezium</strong>, <strong>Maxwell</strong>. Customer-facing import builders: <strong>Flatfile</strong>, <strong>OneSchema</strong>, <strong>UploadJoy</strong>, <strong>Dromo</strong>, <strong>CSVBox</strong>. Background job runners: <strong>BullMQ</strong>, <strong>Sidekiq</strong>, <strong>Celery</strong>, <strong>Inngest</strong>, <strong>Trigger.dev</strong>, <strong>Temporal</strong>.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q98">
-  <div class="qa__number">Question 98</div>
-  <h3 class="qa__question">Describe how you would design a schema for a freelance marketplace with freelancers, clients, and projects.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> A freelance marketplace like Upwork connects clients posting projects with freelancers bidding on them. The platform handles proposals, contracts, milestones, escrow, work submissions, hourly tracking, reviews, and dispute resolution.</p>
+<p><strong>Production polish:</strong> CSV/Excel libraries by stack: <strong>fast-csv</strong>, <strong>papaparse</strong>, <strong>SheetJS</strong>, <strong>ExcelJS</strong> (JS); <strong>pandas</strong>, <strong>polars</strong>, <strong>openpyxl</strong>, <strong>pyarrow</strong> (Python). ETL/ingestion platforms: <strong>Airbyte</strong>, <strong>Fivetran</strong>, <strong>Stitch</strong>, <strong>Hevo</strong>, <strong>Meltano</strong>, <strong>Estuary</strong>. Reverse ETL: <strong>Hightouch</strong>, <strong>Census</strong>, <strong>Polytomic</strong>, <strong>Grouparoo</strong>. Data validation: <strong>Great Expectations</strong>, <strong>Soda</strong>, <strong>Pandera</strong>. CDC for live sync: <strong>Debezium</strong>, <strong>Maxwell</strong>. Customer-facing import builders: <strong>Flatfile</strong>, <strong>OneSchema</strong>, <strong>UploadJoy</strong>, <strong>Dromo</strong>, <strong>CSVBox</strong>. Background job runners: <strong>BullMQ</strong>, <strong>Sidekiq</strong>, <strong>Celery</strong>, <strong>Inngest</strong>, <strong>Trigger.dev</strong>, <strong>Temporal</strong>.</p>'''
+
+ANSWERS[98] = r'''<p><strong>Situation:</strong> A freelance marketplace like Upwork connects clients posting projects with freelancers bidding on them. The platform handles proposals, contracts, milestones, escrow, work submissions, hourly tracking, reviews, and dispute resolution.</p>
 <p><strong>Approach:</strong> Tables: <code>users</code> (with role flag), <code>freelancer_profiles</code>, <code>projects</code>, <code>proposals</code>, <code>contracts</code>, <code>milestones</code>, <code>time_logs</code>, <code>messages</code>, <code>reviews</code>, <code>disputes</code>.</p>
 <pre><code>CREATE TABLE projects (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -8122,15 +7437,9 @@ CREATE TABLE time_logs (
 <tr><td>UNIQUE proposal per freelancer</td><td>One bid per project; revisions update</td></tr>
 <tr><td>Two-sided reviews</td><td>Reputation system</td></tr>
 </tbody></table>
-<p><strong>Production polish:</strong> Existing platforms: <strong>Upwork</strong>, <strong>Fiverr</strong>, <strong>Toptal</strong>, <strong>Contra</strong>, <strong>MarketerHire</strong>, <strong>Braintrust</strong>, <strong>Arc.dev</strong>, <strong>Lemon.io</strong>, <strong>Worksome</strong>, <strong>Malt</strong>. Payments and escrow: <strong>Stripe Connect</strong>, <strong>Adyen for Marketplaces</strong>, <strong>Hyperwallet</strong>, <strong>Wise Platform</strong>, <strong>Tipalti</strong>, <strong>Trolley</strong>, <strong>Deel</strong>, <strong>Remote</strong>. Identity/KYC for freelancers: <strong>Persona</strong>, <strong>Stripe Identity</strong>. Time-tracking: <strong>Toggl</strong>, <strong>Harvest</strong>, <strong>Clockify</strong>, <strong>Hubstaff</strong> (with screenshots), <strong>Time Doctor</strong>. Search: <strong>Algolia</strong>, <strong>Typesense</strong>, <strong>Elasticsearch</strong>; AI matching with embeddings on <strong>Pinecone</strong> or <strong>pgvector</strong>. Disputes mediation flow can integrate <strong>Modria</strong> (Tyler ODR) or build in-house.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q99">
-  <div class="qa__number">Question 99</div>
-  <h3 class="qa__question">How would you implement a system to track and manage digital assets and content?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> A digital asset management platform stores images, videos, and documents for marketing teams &mdash; with versioning, tagging, rights management, transformations (resize, crop, transcode), and CDN delivery. Files don&rsquo;t belong in MySQL; the database stores metadata.</p>
+<p><strong>Production polish:</strong> Existing platforms: <strong>Upwork</strong>, <strong>Fiverr</strong>, <strong>Toptal</strong>, <strong>Contra</strong>, <strong>MarketerHire</strong>, <strong>Braintrust</strong>, <strong>Arc.dev</strong>, <strong>Lemon.io</strong>, <strong>Worksome</strong>, <strong>Malt</strong>. Payments and escrow: <strong>Stripe Connect</strong>, <strong>Adyen for Marketplaces</strong>, <strong>Hyperwallet</strong>, <strong>Wise Platform</strong>, <strong>Tipalti</strong>, <strong>Trolley</strong>, <strong>Deel</strong>, <strong>Remote</strong>. Identity/KYC for freelancers: <strong>Persona</strong>, <strong>Stripe Identity</strong>. Time-tracking: <strong>Toggl</strong>, <strong>Harvest</strong>, <strong>Clockify</strong>, <strong>Hubstaff</strong> (with screenshots), <strong>Time Doctor</strong>. Search: <strong>Algolia</strong>, <strong>Typesense</strong>, <strong>Elasticsearch</strong>; AI matching with embeddings on <strong>Pinecone</strong> or <strong>pgvector</strong>. Disputes mediation flow can integrate <strong>Modria</strong> (Tyler ODR) or build in-house.</p>'''
+
+ANSWERS[99] = r'''<p><strong>Situation:</strong> A digital asset management platform stores images, videos, and documents for marketing teams &mdash; with versioning, tagging, rights management, transformations (resize, crop, transcode), and CDN delivery. Files don&rsquo;t belong in MySQL; the database stores metadata.</p>
 <p><strong>Approach:</strong> Files live in object storage (S3, R2, GCS); MySQL holds <code>assets</code>, <code>asset_versions</code>, <code>folders</code>, <code>tags</code>, <code>asset_tags</code>, <code>renditions</code> (pre-computed sizes), <code>rights</code>, and <code>asset_usage</code> (where the asset is used).</p>
 <pre><code>CREATE TABLE assets (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -8181,15 +7490,9 @@ GROUP BY a.id HAVING COUNT(*)=3;</code></pre>
 <tr><td>Version table</td><td>Roll back, audit, compare</td></tr>
 <tr><td>Rights metadata</td><td>Compliance; auto-warn before public usage</td></tr>
 </tbody></table>
-<p><strong>Production polish:</strong> Off-the-shelf DAM: <strong>Bynder</strong>, <strong>Frontify</strong>, <strong>Brandfolder</strong>, <strong>Widen</strong>, <strong>Canto</strong>, <strong>MediaValet</strong>, <strong>Air</strong>, <strong>Pics.io</strong>, <strong>Filerobot</strong>, <strong>Cloudinary Media Library</strong>. Storage: <strong>AWS S3</strong>, <strong>Cloudflare R2</strong>, <strong>Backblaze B2</strong>, <strong>Wasabi</strong>, <strong>GCS</strong>. CDN with image transforms: <strong>Cloudinary</strong>, <strong>imgix</strong>, <strong>Cloudflare Images</strong>, <strong>Bunny</strong>, <strong>Fastly Image Optimizer</strong>, <strong>ImageKit</strong>, <strong>Uploadcare</strong>. Video: <strong>Mux</strong>, <strong>api.video</strong>, <strong>Cloudflare Stream</strong>, <strong>AWS MediaConvert</strong>. AI tagging/auto-metadata: <strong>AWS Rekognition</strong>, <strong>Google Vision</strong>, <strong>Imagga</strong>, <strong>Clarifai</strong>, <strong>OpenAI CLIP</strong>, <strong>SigLIP</strong>. Reverse search via <strong>pgvector</strong> or <strong>Pinecone</strong> on CLIP embeddings.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q100">
-  <div class="qa__number">Question 100</div>
-  <h3 class="qa__question">Explain how you would design a schema for a food delivery platform with restaurants, menus, and orders.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> A food delivery platform like DoorDash links restaurants, customers, and delivery drivers. Customers browse menus, place orders, drivers accept and deliver, and the system handles payments, tipping, real-time tracking, and ratings. Order volume spikes at lunch and dinner.</p>
+<p><strong>Production polish:</strong> Off-the-shelf DAM: <strong>Bynder</strong>, <strong>Frontify</strong>, <strong>Brandfolder</strong>, <strong>Widen</strong>, <strong>Canto</strong>, <strong>MediaValet</strong>, <strong>Air</strong>, <strong>Pics.io</strong>, <strong>Filerobot</strong>, <strong>Cloudinary Media Library</strong>. Storage: <strong>AWS S3</strong>, <strong>Cloudflare R2</strong>, <strong>Backblaze B2</strong>, <strong>Wasabi</strong>, <strong>GCS</strong>. CDN with image transforms: <strong>Cloudinary</strong>, <strong>imgix</strong>, <strong>Cloudflare Images</strong>, <strong>Bunny</strong>, <strong>Fastly Image Optimizer</strong>, <strong>ImageKit</strong>, <strong>Uploadcare</strong>. Video: <strong>Mux</strong>, <strong>api.video</strong>, <strong>Cloudflare Stream</strong>, <strong>AWS MediaConvert</strong>. AI tagging/auto-metadata: <strong>AWS Rekognition</strong>, <strong>Google Vision</strong>, <strong>Imagga</strong>, <strong>Clarifai</strong>, <strong>OpenAI CLIP</strong>, <strong>SigLIP</strong>. Reverse search via <strong>pgvector</strong> or <strong>Pinecone</strong> on CLIP embeddings.</p>'''
+
+ANSWERS[100] = r'''<p><strong>Situation:</strong> A food delivery platform like DoorDash links restaurants, customers, and delivery drivers. Customers browse menus, place orders, drivers accept and deliver, and the system handles payments, tipping, real-time tracking, and ratings. Order volume spikes at lunch and dinner.</p>
 <p><strong>Approach:</strong> Tables: <code>restaurants</code>, <code>menu_items</code>, <code>menu_modifiers</code>, <code>customers</code>, <code>drivers</code>, <code>orders</code>, <code>order_items</code>, <code>order_status_history</code>, <code>delivery_offers</code>, <code>ratings</code>.</p>
 <pre><code>CREATE TABLE restaurants (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -8239,27 +7542,4 @@ CREATE TABLE delivery_offers (
 <tr><td>Delivery offers separate</td><td>Multi-driver bid; first-accept wins</td></tr>
 <tr><td>Tax/fee/tip split columns</td><td>Receipts, accounting, regulatory reporting</td></tr>
 </tbody></table>
-<p><strong>Production polish:</strong> Established platforms: <strong>DoorDash</strong>, <strong>Uber Eats</strong>, <strong>Grubhub</strong>, <strong>Deliveroo</strong>, <strong>Just Eat Takeaway</strong>, <strong>Swiggy</strong>, <strong>Zomato</strong>, <strong>Rappi</strong>, <strong>Wolt</strong>, <strong>iFood</strong>, <strong>Talabat</strong>. POS/menu integrations: <strong>Toast</strong>, <strong>Square for Restaurants</strong>, <strong>Olo</strong>, <strong>ItsaCheckmate</strong>, <strong>Otter</strong>, <strong>Deliverect</strong>. Routing/dispatch: <strong>Onfleet</strong>, <strong>Bringg</strong>, <strong>Routific</strong>, <strong>Onflight</strong>; mapping via <strong>Mapbox</strong>, <strong>Google Maps Platform</strong>, <strong>HERE</strong>. Delivery as a service (DaaS) APIs: <strong>DoorDash Drive</strong>, <strong>Uber Direct</strong>, <strong>Postmates</strong>, <strong>Burq</strong>, <strong>Gophr</strong>. Dynamic pricing/surge models in-house with reinforcement learning, or use <strong>Symphony RetailAI</strong>. Payment splitting (restaurant/driver/platform): <strong>Stripe Connect</strong>, <strong>Adyen for Platforms</strong>. Real-time customer notifications: <strong>OneSignal</strong>, <strong>Braze</strong>, <strong>Firebase Cloud Messaging</strong>, <strong>Knock</strong>.</p>
-    
-  </div>
-</article>
-
-    <nav class="chapter-nav" aria-label="Chapter navigation">
-      <a class="chapter-nav__prev" href="mysql-advanced.html">
-      <span class="chapter-nav__dir">← Previous</span>
-      <span class="chapter-nav__title">MYSQL — Advanced</span>
-    </a>
-      <a class="chapter-nav__next" href="mongodb-basic.html">
-      <span class="chapter-nav__dir">Next →</span>
-      <span class="chapter-nav__title">MongoDB — Basic</span>
-    </a>
-    </nav>
-
-  </section>
-
-</main>
-</div>
-
-<script src="../assets/script.js"></script>
-</body>
-</html>
+<p><strong>Production polish:</strong> Established platforms: <strong>DoorDash</strong>, <strong>Uber Eats</strong>, <strong>Grubhub</strong>, <strong>Deliveroo</strong>, <strong>Just Eat Takeaway</strong>, <strong>Swiggy</strong>, <strong>Zomato</strong>, <strong>Rappi</strong>, <strong>Wolt</strong>, <strong>iFood</strong>, <strong>Talabat</strong>. POS/menu integrations: <strong>Toast</strong>, <strong>Square for Restaurants</strong>, <strong>Olo</strong>, <strong>ItsaCheckmate</strong>, <strong>Otter</strong>, <strong>Deliverect</strong>. Routing/dispatch: <strong>Onfleet</strong>, <strong>Bringg</strong>, <strong>Routific</strong>, <strong>Onflight</strong>; mapping via <strong>Mapbox</strong>, <strong>Google Maps Platform</strong>, <strong>HERE</strong>. Delivery as a service (DaaS) APIs: <strong>DoorDash Drive</strong>, <strong>Uber Direct</strong>, <strong>Postmates</strong>, <strong>Burq</strong>, <strong>Gophr</strong>. Dynamic pricing/surge models in-house with reinforcement learning, or use <strong>Symphony RetailAI</strong>. Payment splitting (restaurant/driver/platform): <strong>Stripe Connect</strong>, <strong>Adyen for Platforms</strong>. Real-time customer notifications: <strong>OneSignal</strong>, <strong>Braze</strong>, <strong>Firebase Cloud Messaging</strong>, <strong>Knock</strong>.</p>'''

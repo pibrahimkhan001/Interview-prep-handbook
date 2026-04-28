@@ -1,118 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MYSQL — Coding · Interview Prep Mastery</title>
-<meta name="description" content="100 coding interview questions on MYSQL, with detailed explanations and examples.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="../assets/styles.css">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%239a6b1d'/%3E%3Ctext x='50' y='68' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold' font-size='48'%3EIP%3C/text%3E%3C/svg%3E">
-</head>
-<body>
-<header class="site-header">
-  <div class="site-header__inner">
-    <button class="menu-toggle" aria-label="Open menu" type="button">☰ Menu</button>
-    <a class="brand" href="../index.html">
-      <span class="brand__mark">IP</span>
-      <span class="brand__text">
-        <span class="brand__title">Interview Prep Mastery</span>
-        <span class="brand__subtitle">Interactive learning guide</span>
-      </span>
-    </a>
-    <nav class="header-nav">
-      <a href="../index.html#roadmap">Roadmap</a>
-      <a href="../index.html#chapters">All chapters</a>
-      <button class="theme-toggle" type="button" aria-label="Toggle color scheme">☾ Dark</button>
-    </nav>
-  </div>
-</header>
-<div class="layout">
-<aside class="sidebar" aria-label="Site navigation">
-  <div class="sidebar__header">Chapter Navigator</div>
-  
-        <div class="nav-part">
-          <div class="nav-part__label">Part 1</div>
-          <div class="nav-part__title">Core Programming Languages</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">JavaScript</li><li><a class="" href="../chapters/javascript-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/javascript-tricky.html"><span class="nav-item__title">Tricky</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-coding.html"><span class="nav-item__title">Advanced Coding</span><span class="nav-item__meta">100 questions · 100 min read</span></a></li><li><a class="" href="../chapters/javascript-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-scenario.html"><span class="nav-item__title">Advanced Scenario Based</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Python</li><li><a class="" href="../chapters/python-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/python-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 2</div>
-          <div class="nav-part__title">Web Fundamentals</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">HTML</li><li><a class="" href="../chapters/html-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/html-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/html-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CSS</li><li><a class="" href="../chapters/css-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">102 questions · 60 min read</span></a></li><li><a class="" href="../chapters/css-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/css-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">101 questions · 90 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 3</div>
-          <div class="nav-part__title">Backend Technologies</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Node.Js</li><li><a class="" href="../chapters/nodejs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/nodejs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ExpressJS</li><li><a class="" href="../chapters/expressjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/expressjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/expressjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">API</li><li><a class="" href="../chapters/api-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/api-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 4</div>
-          <div class="nav-part__title">Frontend Frameworks</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ReactJS</li><li><a class="" href="../chapters/reactjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">101 questions · 60 min read</span></a></li><li><a class="" href="../chapters/reactjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 5</div>
-          <div class="nav-part__title">Databases</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MYSQL</li><li><a class="" href="../chapters/mysql-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="active" href="../chapters/mysql-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MongoDB</li><li><a class="" href="../chapters/mongodb-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mongodb-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 6</div>
-          <div class="nav-part__title">System Design &amp; DevOps</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">System Design MERN Stack</li><li><a class="" href="../chapters/system-design-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Infrastructure MERN Stack</li><li><a class="" href="../chapters/infrastructure-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/infrastructure-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CI/CD Pipeline</li><li><a class="" href="../chapters/cicd-pipeline-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-</aside>
-<main class="main" id="main">
+"""Detailed answers for MySQL Coding interview questions.
 
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="../index.html">Home</a>
-    <span class="breadcrumb__sep">›</span>
-    <a href="../index.html#part-5">Databases</a>
-    <span class="breadcrumb__sep">›</span>
-    <span>MYSQL — Coding</span>
-  </nav>
+Each ANSWERS[n] is an HTML string suitable for embedding inside a chapter page.
+Style: brief lead-in (1-2 sentences), runnable SQL snippet, brief notes.
+"""
 
-  <header class="chapter-header">
-    <div class="chapter-label">MYSQL · Coding</div>
-    <h1 class="chapter-title">Coding MYSQL Interview Questions</h1>
-    <p class="chapter-lede">Practical coding problems with full solutions and line-by-line explanations.</p>
-    <div class="chapter-meta">
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Questions</span><span class="chapter-meta__value">100</span></div>
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Level</span><span class="chapter-meta__value">Coding</span></div>
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Estimated reading</span><span class="chapter-meta__value">90 min read</span></div>
-    </div>
-    
-  </header>
+ANSWERS: dict[int, str] = {}
 
-  <section class="prose">
-
-    <div class="toc" id="toc">
-      <div class="toc__title">All questions in this chapter</div>
-      <ul class="toc__list">
-        <li><a href="#q1"><span class="toc__num">1.</span>Write a query to create a new database named &quot;company&quot;.</a></li><li><a href="#q2"><span class="toc__num">2.</span>Write a query to create a table named &quot;employees&quot; with columns for ID, name, age, and d...</a></li><li><a href="#q3"><span class="toc__num">3.</span>Write a query to insert a new employee into the &quot;employees&quot; table.</a></li><li><a href="#q4"><span class="toc__num">4.</span>Write a query to update the age of an employee with a specific ID in the &quot;employees&quot; ta...</a></li><li><a href="#q5"><span class="toc__num">5.</span>Write a query to delete an employee with a specific ID from the &quot;employees&quot; table.</a></li><li><a href="#q6"><span class="toc__num">6.</span>Write a query to retrieve all employees from the &quot;employees&quot; table.</a></li><li><a href="#q7"><span class="toc__num">7.</span>Write a query to retrieve employees older than 30 from the &quot;employees&quot; table.</a></li><li><a href="#q8"><span class="toc__num">8.</span>Write a query to retrieve the names of all employees from the &quot;employees&quot; table.</a></li><li><a href="#q9"><span class="toc__num">9.</span>Write a query to count the number of employees in the &quot;employees&quot; table.</a></li><li><a href="#q10"><span class="toc__num">10.</span>Write a query to retrieve the average age of employees from the &quot;employees&quot; table.</a></li><li><a href="#q11"><span class="toc__num">11.</span>Write a query to retrieve the youngest employee&#x27;s name from the &quot;employees&quot; table.</a></li><li><a href="#q12"><span class="toc__num">12.</span>Write a query to retrieve the oldest employee&#x27;s name from the &quot;employees&quot; table.</a></li><li><a href="#q13"><span class="toc__num">13.</span>Write a query to find employees whose names start with the letter &#x27;J&#x27;.</a></li><li><a href="#q14"><span class="toc__num">14.</span>Write a query to retrieve all employees sorted by age in descending order.</a></li><li><a href="#q15"><span class="toc__num">15.</span>Write a query to retrieve all employees from the &quot;employees&quot; table who work in the &#x27;HR&#x27;...</a></li><li><a href="#q16"><span class="toc__num">16.</span>Write a query to retrieve employees who are between 25 and 35 years old.</a></li><li><a href="#q17"><span class="toc__num">17.</span>Write a query to find employees whose name contains the substring &#x27;an&#x27;.</a></li><li><a href="#q18"><span class="toc__num">18.</span>Write a query to retrieve all distinct departments from the &quot;employees&quot; table.</a></li><li><a href="#q19"><span class="toc__num">19.</span>Write a query to create a primary key on the ID column in the &quot;employees&quot; table.</a></li><li><a href="#q20"><span class="toc__num">20.</span>Write a query to add a new column &quot;salary&quot; to the &quot;employees&quot; table.</a></li><li><a href="#q21"><span class="toc__num">21.</span>Write a query to drop the &quot;salary&quot; column from the &quot;employees&quot; table.</a></li><li><a href="#q22"><span class="toc__num">22.</span>Write a query to rename the &quot;employees&quot; table to &quot;staff&quot;.</a></li><li><a href="#q23"><span class="toc__num">23.</span>Write a query to find the department with the highest number of employees.</a></li><li><a href="#q24"><span class="toc__num">24.</span>Write a query to retrieve the top 3 highest-paid employees.</a></li><li><a href="#q25"><span class="toc__num">25.</span>Write a query to create a new table named &quot;departments&quot; with columns for department_id ...</a></li><li><a href="#q26"><span class="toc__num">26.</span>Write a query to insert a new department into the &quot;departments&quot; table.</a></li><li><a href="#q27"><span class="toc__num">27.</span>Write a query to update the name of a department with a specific department_id.</a></li><li><a href="#q28"><span class="toc__num">28.</span>Write a query to delete a department with a specific department_id.</a></li><li><a href="#q29"><span class="toc__num">29.</span>Write a query to create a foreign key relationship between the &quot;employees&quot; and &quot;departm...</a></li><li><a href="#q30"><span class="toc__num">30.</span>Write a query to retrieve employees along with their department names using a join.</a></li><li><a href="#q31"><span class="toc__num">31.</span>Write a query to retrieve employees who do not belong to any department.</a></li><li><a href="#q32"><span class="toc__num">32.</span>Write a query to find employees who belong to more than one department.</a></li><li><a href="#q33"><span class="toc__num">33.</span>Write a query to create an index on the name column in the &quot;employees&quot; table.</a></li><li><a href="#q34"><span class="toc__num">34.</span>Write a query to drop an index on the name column in the &quot;employees&quot; table.</a></li><li><a href="#q35"><span class="toc__num">35.</span>Write a query to create a view named &quot;employee_details&quot; that shows employee names and d...</a></li><li><a href="#q36"><span class="toc__num">36.</span>Write a query to retrieve data from the &quot;employee_details&quot; view.</a></li><li><a href="#q37"><span class="toc__num">37.</span>Write a query to create a stored procedure that inserts a new employee.</a></li><li><a href="#q38"><span class="toc__num">38.</span>Write a query to execute the stored procedure created in the previous question.</a></li><li><a href="#q39"><span class="toc__num">39.</span>Write a query to create a trigger that updates an audit table after an employee record ...</a></li><li><a href="#q40"><span class="toc__num">40.</span>Write a query to disable the trigger created in the previous question.</a></li><li><a href="#q41"><span class="toc__num">41.</span>Write a query to find employees who have the same name.</a></li><li><a href="#q42"><span class="toc__num">42.</span>Write a query to find employees who joined the company in the last 6 months.</a></li><li><a href="#q43"><span class="toc__num">43.</span>Write a query to calculate the total salary expense for each department.</a></li><li><a href="#q44"><span class="toc__num">44.</span>Write a query to find employees who have not been assigned a salary.</a></li><li><a href="#q45"><span class="toc__num">45.</span>Write a query to update the department of an employee based on their ID.</a></li><li><a href="#q46"><span class="toc__num">46.</span>Write a query to retrieve employees grouped by department with the count of employees i...</a></li><li><a href="#q47"><span class="toc__num">47.</span>Write a query to calculate the percentage of employees in each department.</a></li><li><a href="#q48"><span class="toc__num">48.</span>Write a query to find departments that do not have any employees.</a></li><li><a href="#q49"><span class="toc__num">49.</span>Write a query to create a composite key on the &quot;employees&quot; table using the ID and depar...</a></li><li><a href="#q50"><span class="toc__num">50.</span>Write a query to find employees who have received a salary increase in the last year.</a></li><li><a href="#q51"><span class="toc__num">51.</span>Write a query to create a table named &quot;salaries&quot; with columns for employee_id, salary, ...</a></li><li><a href="#q52"><span class="toc__num">52.</span>Write a query to insert a salary record for an employee.</a></li><li><a href="#q53"><span class="toc__num">53.</span>Write a query to update the salary of an employee in the &quot;salaries&quot; table.</a></li><li><a href="#q54"><span class="toc__num">54.</span>Write a query to retrieve the salary history of an employee.</a></li><li><a href="#q55"><span class="toc__num">55.</span>Write a query to find employees whose salaries are above the average salary.</a></li><li><a href="#q56"><span class="toc__num">56.</span>Write a query to create a unique constraint on the email column in the &quot;employees&quot; table.</a></li><li><a href="#q57"><span class="toc__num">57.</span>Write a query to find employees who share the same salary.</a></li><li><a href="#q58"><span class="toc__num">58.</span>Write a query to retrieve employees who have been with the company for more than 5 years.</a></li><li><a href="#q59"><span class="toc__num">59.</span>Write a query to calculate the difference in days between the current date and the hire...</a></li><li><a href="#q60"><span class="toc__num">60.</span>Write a query to find employees who were hired in a specific year.</a></li><li><a href="#q61"><span class="toc__num">61.</span>Write a query to create a temporary table named &quot;temp_employees&quot;.</a></li><li><a href="#q62"><span class="toc__num">62.</span>Write a query to insert data into the temporary table created in the previous question.</a></li><li><a href="#q63"><span class="toc__num">63.</span>Write a query to retrieve data from the temporary table created in the previous question.</a></li><li><a href="#q64"><span class="toc__num">64.</span>Write a query to find employees who have the highest salary in their department.</a></li><li><a href="#q65"><span class="toc__num">65.</span>Write a query to create a function that returns the number of employees in a specific d...</a></li><li><a href="#q66"><span class="toc__num">66.</span>Write a query to execute the function created in the previous question.</a></li><li><a href="#q67"><span class="toc__num">67.</span>Write a query to find employees who have received a bonus.</a></li><li><a href="#q68"><span class="toc__num">68.</span>Write a query to calculate the total bonuses paid to employees.</a></li><li><a href="#q69"><span class="toc__num">69.</span>Write a query to find employees whose names are in uppercase.</a></li><li><a href="#q70"><span class="toc__num">70.</span>Write a query to convert the names of all employees to lowercase.</a></li><li><a href="#q71"><span class="toc__num">71.</span>Write a query to find employees who have the same first name.</a></li><li><a href="#q72"><span class="toc__num">72.</span>Write a query to split the full name of an employee into first and last names.</a></li><li><a href="#q73"><span class="toc__num">73.</span>Write a query to find employees who have a specific substring in their email addresses.</a></li><li><a href="#q74"><span class="toc__num">74.</span>Write a query to create a table named &quot;projects&quot; with columns for project_id, project_n...</a></li><li><a href="#q75"><span class="toc__num">75.</span>Write a query to insert a new project into the &quot;projects&quot; table.</a></li><li><a href="#q76"><span class="toc__num">76.</span>Write a query to update the start date of a project with a specific project_id.</a></li><li><a href="#q77"><span class="toc__num">77.</span>Write a query to delete a project with a specific project_id.</a></li><li><a href="#q78"><span class="toc__num">78.</span>Write a query to create a many-to-many relationship between employees and projects.</a></li><li><a href="#q79"><span class="toc__num">79.</span>Write a query to retrieve employees and their associated projects using a join.</a></li><li><a href="#q80"><span class="toc__num">80.</span>Write a query to find employees who are not assigned to any projects.</a></li><li><a href="#q81"><span class="toc__num">81.</span>Write a query to find projects that do not have any assigned employees.</a></li><li><a href="#q82"><span class="toc__num">82.</span>Write a query to retrieve the names of employees who are working on more than one proje...</a></li><li><a href="#q83"><span class="toc__num">83.</span>Write a query to calculate the total number of projects each employee is working on.</a></li><li><a href="#q84"><span class="toc__num">84.</span>Write a query to create a backup of the &quot;employees&quot; table.</a></li><li><a href="#q85"><span class="toc__num">85.</span>Write a query to restore the &quot;employees&quot; table from a backup.</a></li><li><a href="#q86"><span class="toc__num">86.</span>Write a query to retrieve employees who have been assigned to a project for more than 6...</a></li><li><a href="#q87"><span class="toc__num">87.</span>Write a query to find employees who have a specific pattern in their phone numbers.</a></li><li><a href="#q88"><span class="toc__num">88.</span>Write a query to create a table named &quot;departments_history&quot; to store changes in departm...</a></li><li><a href="#q89"><span class="toc__num">89.</span>Write a query to insert a change record into the &quot;departments_history&quot; table.</a></li><li><a href="#q90"><span class="toc__num">90.</span>Write a query to retrieve the change history of a department.</a></li><li><a href="#q91"><span class="toc__num">91.</span>Write a query to create a full-text index on the description column of a &quot;products&quot; tab...</a></li><li><a href="#q92"><span class="toc__num">92.</span>Write a query to perform a full-text search on the &quot;products&quot; table.</a></li><li><a href="#q93"><span class="toc__num">93.</span>Write a query to find employees who have the same hire date.</a></li><li><a href="#q94"><span class="toc__num">94.</span>Write a query to calculate the annual salary of employees.</a></li><li><a href="#q95"><span class="toc__num">95.</span>Write a query to retrieve employees who have been promoted.</a></li><li><a href="#q96"><span class="toc__num">96.</span>Write a query to calculate the average time employees spend in each department.</a></li><li><a href="#q97"><span class="toc__num">97.</span>Write a query to create a recursive CTE to find all subordinates of a manager.</a></li><li><a href="#q98"><span class="toc__num">98.</span>Write a query to create a table named &quot;attendance&quot; with columns for employee_id, date, ...</a></li><li><a href="#q99"><span class="toc__num">99.</span>Write a query to insert an attendance record for an employee.</a></li><li><a href="#q100"><span class="toc__num">100.</span>Write a query to retrieve the attendance record of an employee for the current month.</a></li>
-      </ul>
-    </div>
-
-    
-<article class="qa" id="q1">
-  <div class="qa__number">Question 1</div>
-  <h3 class="qa__question">Write a query to create a new database named &quot;company&quot;.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[1] = r'''
 <pre><code>CREATE DATABASE company;
 
 -- With explicit charset (recommended for new databases)
@@ -135,15 +29,9 @@ CREATE DATABASE IF NOT EXISTS company
   <li>To switch to the new database after creating: <code>USE company;</code></li>
   <li>Requires <code>CREATE</code> privilege globally.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q2">
-  <div class="qa__number">Question 2</div>
-  <h3 class="qa__question">Write a query to create a table named &quot;employees&quot; with columns for ID, name, age, and department.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[2] = r'''
 <pre><code>USE company;
 
 CREATE TABLE employees (
@@ -168,15 +56,9 @@ CREATE TABLE employees (
 </ul>
 
 <p>The <code>USE company;</code> first line ensures the table is created in the right database; alternatively, qualify the table name as <code>company.employees</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q3">
-  <div class="qa__number">Question 3</div>
-  <h3 class="qa__question">Write a query to insert a new employee into the &quot;employees&quot; table.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[3] = r'''
 <pre><code>INSERT INTO employees (name, age, department)
 VALUES ('Alice Johnson', 28, 'Engineering');</code></pre>
 
@@ -212,15 +94,9 @@ await conn.execute(
   'INSERT INTO employees (name, age, department) VALUES (?, ?, ?)',
   [name, age, department]
 );</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q4">
-  <div class="qa__number">Question 4</div>
-  <h3 class="qa__question">Write a query to update the age of an employee with a specific ID in the &quot;employees&quot; table.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[4] = r'''
 <pre><code>UPDATE employees
 SET age = 29
 WHERE id = 5;</code></pre>
@@ -260,15 +136,9 @@ UPDATE employees SET age = 29 WHERE id = 5;
 COMMIT;       -- or ROLLBACK; if the change is wrong</code></pre>
 
 <p>From application code: parameterize every value &mdash; <code>UPDATE employees SET age = ? WHERE id = ?</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q5">
-  <div class="qa__number">Question 5</div>
-  <h3 class="qa__question">Write a query to delete an employee with a specific ID from the &quot;employees&quot; table.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[5] = r'''
 <pre><code>DELETE FROM employees
 WHERE id = 5;</code></pre>
 
@@ -301,15 +171,9 @@ DELETE FROM employees WHERE id = 5;
 COMMIT;       -- or ROLLBACK</code></pre>
 
 <p><strong>To delete the entire table&rsquo;s data quickly</strong> (without dropping the table), use <code>TRUNCATE</code> &mdash; it&rsquo;s faster than <code>DELETE</code> on a large table because it doesn&rsquo;t log each row, but it can&rsquo;t use <code>WHERE</code>: <code>TRUNCATE TABLE employees;</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q6">
-  <div class="qa__number">Question 6</div>
-  <h3 class="qa__question">Write a query to retrieve all employees from the &quot;employees&quot; table.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[6] = r'''
 <pre><code>SELECT * FROM employees;</code></pre>
 
 <p>This returns every row and every column. Fine for ad-hoc inspection, but in production code <strong>list the columns you actually need</strong> &mdash; smaller transfer, more readable, and resilient to schema changes:</p>
@@ -343,15 +207,9 @@ SELECT * FROM employees WHERE created_at &gt;= '2026-01-01' LIMIT 100;</code></p
 const [rows] = await conn.query('SELECT id, name, department FROM employees');</code></pre>
 
 <p>For exploratory work in a SQL console, <code>SELECT *</code> is fine. For application code, name your columns.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q7">
-  <div class="qa__number">Question 7</div>
-  <h3 class="qa__question">Write a query to retrieve employees older than 30 from the &quot;employees&quot; table.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[7] = r'''
 <pre><code>SELECT id, name, age, department
 FROM employees
 WHERE age &gt; 30;</code></pre>
@@ -389,15 +247,9 @@ SELECT * FROM employees WHERE age &lt; 25 OR age &gt; 35;</code></pre>
 
 <pre><code>EXPLAIN SELECT * FROM employees WHERE age &gt; 30;
 -- Look for type=range and key=idx_employees_age in the output</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q8">
-  <div class="qa__number">Question 8</div>
-  <h3 class="qa__question">Write a query to retrieve the names of all employees from the &quot;employees&quot; table.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[8] = r'''
 <pre><code>SELECT name FROM employees;</code></pre>
 
 <p>Returns one row per employee with just the name column. Add <code>DISTINCT</code> if duplicates should collapse:</p>
@@ -436,15 +288,9 @@ FROM employees
 ORDER BY initial, name;</code></pre>
 
 <p><strong>For very large result sets</strong>, paginate (LIMIT/OFFSET) and stream the data &mdash; don&rsquo;t fetch every name into application memory at once.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q9">
-  <div class="qa__number">Question 9</div>
-  <h3 class="qa__question">Write a query to count the number of employees in the &quot;employees&quot; table.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[9] = r'''
 <pre><code>SELECT COUNT(*) AS total_employees FROM employees;</code></pre>
 
 <p><code>COUNT(*)</code> counts every row, including those where every column is NULL. Other variants:</p>
@@ -486,15 +332,9 @@ ORDER BY staff_count DESC;</code></pre>
 FROM information_schema.TABLES
 WHERE TABLE_SCHEMA = 'company' AND TABLE_NAME = 'employees';
 -- Estimate only — can be off by &plusmn;10% for InnoDB</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q10">
-  <div class="qa__number">Question 10</div>
-  <h3 class="qa__question">Write a query to retrieve the average age of employees from the &quot;employees&quot; table.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[10] = r'''
 <pre><code>SELECT AVG(age) AS average_age FROM employees;</code></pre>
 
 <p><code>AVG()</code> ignores NULL values entirely &mdash; both in the sum and in the count of values being averaged. So <code>AVG(age)</code> over 5 rows where 2 ages are NULL averages over the 3 non-NULL values, not 5.</p>
@@ -540,15 +380,9 @@ HAVING AVG(age) &gt; 35;</code></pre>
 FROM employees;</code></pre>
 
 <p>For <strong>median</strong>, MySQL has no built-in function &mdash; use window functions (<code>PERCENT_RANK</code>, <code>ROW_NUMBER</code>) or compute application-side.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q11">
-  <div class="qa__number">Question 11</div>
-  <h3 class="qa__question">Write a query to retrieve the youngest employee&#x27;s name from the &quot;employees&quot; table.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[11] = r'''
 <pre><code>SELECT name, age
 FROM employees
 WHERE age IS NOT NULL
@@ -585,15 +419,9 @@ WHERE age = (
 );</code></pre>
 
 <p>For <code>NULL</code> handling: <code>MIN()</code> ignores NULL values, so the subquery returns the minimum non-NULL age. Both employees explicitly with NULL ages are simply excluded from the result.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q12">
-  <div class="qa__number">Question 12</div>
-  <h3 class="qa__question">Write a query to retrieve the oldest employee&#x27;s name from the &quot;employees&quot; table.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[12] = r'''
 <pre><code>SELECT name, age
 FROM employees
 WHERE age IS NOT NULL
@@ -630,15 +458,9 @@ WHERE rk = 1;</code></pre>
 <p>Using <code>RANK()</code> instead of <code>ROW_NUMBER()</code> includes ties &mdash; if two employees are both the oldest in HR, both are returned with rank 1.</p>
 
 <p><strong>Performance</strong>: an index on <code>age</code> makes both <code>MAX(age)</code> and the <code>ORDER BY age DESC LIMIT 1</code> form essentially instant &mdash; MySQL reads the last entry of the index without scanning rows.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q13">
-  <div class="qa__number">Question 13</div>
-  <h3 class="qa__question">Write a query to find employees whose names start with the letter &#x27;J&#x27;.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[13] = r'''
 <pre><code>SELECT id, name, age
 FROM employees
 WHERE name LIKE 'J%';</code></pre>
@@ -674,15 +496,9 @@ SELECT name FROM employees WHERE name REGEXP '^[JK]';</code></pre>
 <pre><code>CREATE INDEX idx_employees_name ON employees(name);</code></pre>
 
 <p>This makes the lookup fast even on millions of rows. By contrast, <code>LIKE '%j%'</code> or <code>LIKE '%n'</code> cannot use a normal index &mdash; MySQL must scan every row. For substring-anywhere search on large tables, use a <code>FULLTEXT</code> index or a dedicated search engine (Elasticsearch, Meilisearch, Typesense).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q14">
-  <div class="qa__number">Question 14</div>
-  <h3 class="qa__question">Write a query to retrieve all employees sorted by age in descending order.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[14] = r'''
 <pre><code>SELECT id, name, age, department
 FROM employees
 ORDER BY age DESC;</code></pre>
@@ -721,15 +537,9 @@ EXPLAIN SELECT * FROM employees ORDER BY age DESC;
 -- If 'Using index' appears, the sort is free.</code></pre>
 
 <p>For large tables, a manual sort (<em>filesort</em>) of millions of rows is expensive. Always pair <code>ORDER BY</code> with <code>LIMIT</code> for paginated UI &mdash; otherwise you transmit and sort everything just to discard most of it.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q15">
-  <div class="qa__number">Question 15</div>
-  <h3 class="qa__question">Write a query to retrieve all employees from the &quot;employees&quot; table who work in the &#x27;HR&#x27; department.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[15] = r'''
 <pre><code>SELECT id, name, age, department
 FROM employees
 WHERE department = 'HR';</code></pre>
@@ -763,15 +573,9 @@ ORDER BY age DESC;</code></pre>
 <pre><code>CREATE INDEX idx_employees_department ON employees(department);</code></pre>
 
 <p><strong>Better schema</strong>: storing <code>department</code> as a string repeats the value on every row. A normalized schema with a <code>departments</code> table and <code>department_id</code> foreign key is smaller, faster to update (rename a department in one place), and prevents typos. See Q29 for the join.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q16">
-  <div class="qa__number">Question 16</div>
-  <h3 class="qa__question">Write a query to retrieve employees who are between 25 and 35 years old.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[16] = r'''
 <pre><code>SELECT id, name, age
 FROM employees
 WHERE age BETWEEN 25 AND 35;</code></pre>
@@ -808,15 +612,9 @@ WHERE created_at &gt;= '2026-01-01'
 <p><strong>NULL handling</strong>: rows where <code>age IS NULL</code> are excluded by both <code>BETWEEN</code> and <code>NOT BETWEEN</code> &mdash; comparisons with NULL return NULL, which doesn&rsquo;t match in WHERE. To include unknowns: <code>... OR age IS NULL</code>.</p>
 
 <p><strong>Performance</strong>: a B-tree index on <code>age</code> supports range queries efficiently &mdash; the index stores values in sorted order so MySQL reads only the matching range.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q17">
-  <div class="qa__number">Question 17</div>
-  <h3 class="qa__question">Write a query to find employees whose name contains the substring &#x27;an&#x27;.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[17] = r'''
 <pre><code>SELECT id, name, age
 FROM employees
 WHERE name LIKE '%an%';</code></pre>
@@ -853,15 +651,9 @@ WHERE MATCH(name) AGAINST('+brian* -bryan' IN BOOLEAN MODE);</code></pre>
 <p>Fulltext indexes use a different data structure (inverted index of words) and support relevance scoring, stemming, and stopword handling.</p>
 
 <p><strong>Better still for production search</strong>: dedicated engines like Elasticsearch, OpenSearch, Meilisearch, or Typesense &mdash; they handle typos, synonyms, multi-language, faceted search, and high traffic that pure SQL can&rsquo;t match.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q18">
-  <div class="qa__number">Question 18</div>
-  <h3 class="qa__question">Write a query to retrieve all distinct departments from the &quot;employees&quot; table.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[18] = r'''
 <pre><code>SELECT DISTINCT department
 FROM employees
 ORDER BY department;</code></pre>
@@ -903,15 +695,9 @@ EXPLAIN SELECT DISTINCT department FROM employees;
 -- Look for type=index and Extra=Using index in the output</code></pre>
 
 <p><strong>Better schema</strong>: if departments are first-class entities (with their own attributes like budget, location, manager), put them in a separate <code>departments</code> table. Then <code>SELECT name FROM departments</code> &mdash; no DISTINCT needed.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q19">
-  <div class="qa__number">Question 19</div>
-  <h3 class="qa__question">Write a query to create a primary key on the ID column in the &quot;employees&quot; table.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[19] = r'''
 <pre><code>-- During table creation
 CREATE TABLE employees (
   id   INT AUTO_INCREMENT,
@@ -966,15 +752,9 @@ ALTER TABLE employees ADD PRIMARY KEY (employee_uuid);</code></pre>
   <li><code>BINARY(16)</code> with UUID v4 &mdash; for distributed systems where IDs must be globally unique without coordination.</li>
   <li><code>UUID v7 / ULID</code> stored as <code>BINARY(16)</code> &mdash; globally unique <em>and</em> sortable; good modern choice.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q20">
-  <div class="qa__number">Question 20</div>
-  <h3 class="qa__question">Write a query to add a new column &quot;salary&quot; to the &quot;employees&quot; table.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[20] = r'''
 <pre><code>ALTER TABLE employees
 ADD COLUMN salary DECIMAL(12, 2);</code></pre>
 
@@ -1015,15 +795,9 @@ ALGORITHM=INSTANT;</code></pre>
   <li><strong>pt-online-schema-change</strong> (Percona Toolkit).</li>
   <li><strong>gh-ost</strong> (GitHub&rsquo;s tool, uses binlog instead of triggers).</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q21">
-  <div class="qa__number">Question 21</div>
-  <h3 class="qa__question">Write a query to drop the &quot;salary&quot; column from the &quot;employees&quot; table.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[21] = r'''
 <pre><code>ALTER TABLE employees
 DROP COLUMN salary;</code></pre>
 
@@ -1068,15 +842,9 @@ ALGORITHM=INPLACE, LOCK=NONE;</code></pre>
 </ol>
 
 <p>If you drop first and find the column was still in use somewhere, you&rsquo;ve broken production with no quick recovery.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q22">
-  <div class="qa__number">Question 22</div>
-  <h3 class="qa__question">Write a query to rename the &quot;employees&quot; table to &quot;staff&quot;.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[22] = r'''
 <pre><code>RENAME TABLE employees TO staff;
 
 -- Equivalent ALTER syntax
@@ -1119,15 +887,9 @@ CREATE VIEW employees AS SELECT * FROM staff;</code></pre>
 </ul>
 
 <p><strong>Conditional rename</strong> &mdash; <code>RENAME TABLE</code> doesn&rsquo;t support <code>IF EXISTS</code> directly; check first or use a stored procedure if you need idempotency.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q23">
-  <div class="qa__number">Question 23</div>
-  <h3 class="qa__question">Write a query to find the department with the highest number of employees.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[23] = r'''
 <pre><code>SELECT department, COUNT(*) AS staff_count
 FROM employees
 GROUP BY department
@@ -1185,15 +947,9 @@ ORDER BY staff_count DESC
 LIMIT 1;</code></pre>
 
 <p><strong>Performance</strong>: an index on <code>department</code> helps the GROUP BY by letting MySQL avoid a separate sort step.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q24">
-  <div class="qa__number">Question 24</div>
-  <h3 class="qa__question">Write a query to retrieve the top 3 highest-paid employees.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[24] = r'''
 <pre><code>SELECT id, name, salary
 FROM employees
 WHERE salary IS NOT NULL
@@ -1239,15 +995,9 @@ ORDER BY department, salary DESC;</code></pre>
 <p><strong>Performance</strong>: an index on <code>salary</code> makes the basic query fast (the index already stores values sorted, so MySQL reads the last 3 entries directly):</p>
 
 <pre><code>CREATE INDEX idx_employees_salary ON employees(salary);</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q25">
-  <div class="qa__number">Question 25</div>
-  <h3 class="qa__question">Write a query to create a new table named &quot;departments&quot; with columns for department_id and department_name.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[25] = r'''
 <pre><code>CREATE TABLE departments (
   department_id   INT AUTO_INCREMENT PRIMARY KEY,
   department_name VARCHAR(100) NOT NULL UNIQUE,
@@ -1292,15 +1042,9 @@ SET e.department_id = d.department_id;</code></pre>
 </ul>
 
 <p><strong>Naming conventions</strong>: some teams prefer <code>id</code> consistently as the PK column name; others prefer <code>department_id</code> for clarity in joins. Pick one and use it consistently.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q26">
-  <div class="qa__number">Question 26</div>
-  <h3 class="qa__question">Write a query to insert a new department into the &quot;departments&quot; table.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[26] = r'''
 <pre><code>INSERT INTO departments (department_name, budget)
 VALUES ('Engineering', 1500000.00);</code></pre>
 
@@ -1350,15 +1094,9 @@ const [result] = await conn.execute(
   ['Engineering', 1500000]
 );
 console.log('New department_id:', result.insertId);</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q27">
-  <div class="qa__number">Question 27</div>
-  <h3 class="qa__question">Write a query to update the name of a department with a specific department_id.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[27] = r'''
 <pre><code>UPDATE departments
 SET department_name = 'People Operations'
 WHERE department_id = 5;</code></pre>
@@ -1414,15 +1152,9 @@ SET d.department_name = r.new_name;</code></pre>
   'UPDATE departments SET department_name = ? WHERE department_id = ?',
   [newName, deptId]
 );</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q28">
-  <div class="qa__number">Question 28</div>
-  <h3 class="qa__question">Write a query to delete a department with a specific department_id.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[28] = r'''
 <pre><code>DELETE FROM departments
 WHERE department_id = 5;</code></pre>
 
@@ -1481,15 +1213,9 @@ DELETE FROM departments WHERE department_id = 5;
 COMMIT;</code></pre>
 
 <p>Always use a transaction when a delete has multiple steps &mdash; if anything fails partway, <code>ROLLBACK</code> restores the original state.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q29">
-  <div class="qa__number">Question 29</div>
-  <h3 class="qa__question">Write a query to create a foreign key relationship between the &quot;employees&quot; and &quot;departments&quot; tables.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[29] = r'''
 <pre><code>-- 1. Make sure the column exists with a matching type
 ALTER TABLE employees
 ADD COLUMN department_id INT;
@@ -1540,15 +1266,9 @@ ADD CONSTRAINT fk_emp_department
 <p><strong>Drop the FK</strong> if needed:</p>
 
 <pre><code>ALTER TABLE employees DROP FOREIGN KEY fk_emp_department;</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q30">
-  <div class="qa__number">Question 30</div>
-  <h3 class="qa__question">Write a query to retrieve employees along with their department names using a join.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[30] = r'''
 <pre><code>SELECT
   e.id,
   e.name AS employee_name,
@@ -1596,15 +1316,9 @@ JOIN departments d ON d.department_id = e.department_id;
 -- Look for type=ref or type=eq_ref on the joined tables</code></pre>
 
 <p>For a small <code>departments</code> table joined to a large <code>employees</code> table, MySQL typically does a hash join in 8.0+ &mdash; very efficient.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q31">
-  <div class="qa__number">Question 31</div>
-  <h3 class="qa__question">Write a query to retrieve employees who do not belong to any department.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[31] = r'''
 <pre><code>SELECT id, name, department_id
 FROM employees
 WHERE department_id IS NULL;</code></pre>
@@ -1643,15 +1357,9 @@ WHERE NOT EXISTS (
 <p>The <code>NOT IN</code> form fails because <code>x NOT IN (1, 2, NULL)</code> evaluates to NULL (not TRUE), so no rows are returned. <code>NOT EXISTS</code> uses correlated logic that handles NULL correctly.</p>
 
 <p><strong>Performance</strong>: an index on <code>department_id</code> makes this fast. <code>IS NULL</code> can use the index in modern MySQL.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q32">
-  <div class="qa__number">Question 32</div>
-  <h3 class="qa__question">Write a query to find employees who belong to more than one department.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[32] = r'''
 <pre><code>-- Assumes a junction table for many-to-many
 SELECT e.id, e.name, COUNT(*) AS department_count
 FROM employees e
@@ -1701,15 +1409,9 @@ GROUP BY name
 HAVING dept_count &gt; 1;</code></pre>
 
 <p>This pattern signals data quality issues &mdash; either truly duplicate names, or one person mistakenly entered twice with different IDs.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q33">
-  <div class="qa__number">Question 33</div>
-  <h3 class="qa__question">Write a query to create an index on the name column in the &quot;employees&quot; table.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[33] = r'''
 <pre><code>CREATE INDEX idx_employees_name ON employees(name);
 
 -- Equivalent ALTER syntax
@@ -1753,15 +1455,9 @@ ON employees(department, name);</code></pre>
 -- Look for type=ref and key=idx_employees_name in the output</code></pre>
 
 <p>If <code>type=ALL</code>, the query is doing a full scan &mdash; the index isn&rsquo;t helping.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q34">
-  <div class="qa__number">Question 34</div>
-  <h3 class="qa__question">Write a query to drop an index on the name column in the &quot;employees&quot; table.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[34] = r'''
 <pre><code>DROP INDEX idx_employees_name ON employees;
 
 -- Equivalent ALTER syntax
@@ -1813,15 +1509,9 @@ WHERE index_name IS NOT NULL
 <p><strong>Performance impact of dropping</strong>: typically fast on small tables; can take time on huge tables (the data file is rewritten in some cases). For online drops on production, MySQL 8 supports <code>ALGORITHM=INPLACE</code>:</p>
 
 <pre><code>ALTER TABLE huge_table DROP INDEX idx_old, ALGORITHM=INPLACE, LOCK=NONE;</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q35">
-  <div class="qa__number">Question 35</div>
-  <h3 class="qa__question">Write a query to create a view named &quot;employee_details&quot; that shows employee names and department names.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[35] = r'''
 <pre><code>CREATE VIEW employee_details AS
 SELECT
   e.id,
@@ -1871,15 +1561,9 @@ INSERT INTO employee_details_cache SELECT * FROM employee_details;</code></pre>
 <pre><code>CREATE OR REPLACE VIEW employee_details AS
 SELECT ... -- new definition
 ;</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q36">
-  <div class="qa__number">Question 36</div>
-  <h3 class="qa__question">Write a query to retrieve data from the &quot;employee_details&quot; view.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[36] = r'''
 <pre><code>SELECT * FROM employee_details;
 
 -- Or with filtering, just like a normal table
@@ -1928,15 +1612,9 @@ WHERE ed.department_name = 'Engineering';</code></pre>
 </ul>
 
 <p><strong>Permissions</strong>: granting <code>SELECT</code> on the view doesn&rsquo;t require granting <code>SELECT</code> on the base tables &mdash; useful for restricting which columns/rows a user can see.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q37">
-  <div class="qa__number">Question 37</div>
-  <h3 class="qa__question">Write a query to create a stored procedure that inserts a new employee.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[37] = r'''
 <pre><code>DELIMITER //
 
 CREATE PROCEDURE insert_employee(
@@ -2021,15 +1699,9 @@ DELIMITER ;</code></pre>
 </ul>
 
 <p><strong>Modern alternative</strong>: most teams now keep business logic in application code (more testable, version-controlled, easier to debug) and use stored procedures sparingly. ORMs (Prisma, Drizzle, TypeORM) and query builders typically don&rsquo;t use them.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q38">
-  <div class="qa__number">Question 38</div>
-  <h3 class="qa__question">Write a query to execute the stored procedure created in the previous question.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[38] = r'''
 <pre><code>CALL insert_employee('Alice Johnson', 28, 'Engineering');</code></pre>
 
 <p><code>CALL</code> is the standard way to invoke a stored procedure. Procedures with no parameters use empty parentheses: <code>CALL my_proc()</code>.</p>
@@ -2081,15 +1753,9 @@ END;</code></pre>
 
 <pre><code>SHOW PROCEDURE STATUS WHERE Db = 'company';
 SHOW CREATE PROCEDURE insert_employee\G</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q39">
-  <div class="qa__number">Question 39</div>
-  <h3 class="qa__question">Write a query to create a trigger that updates an audit table after an employee record is inserted.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[39] = r'''
 <pre><code>-- First, the audit table
 CREATE TABLE employee_audit (
   audit_id    INT AUTO_INCREMENT PRIMARY KEY,
@@ -2166,15 +1832,9 @@ DELIMITER ;</code></pre>
 </ul>
 
 <p><strong>Modern alternatives</strong>: many teams use application-layer audit (Hibernate/Sequelize hooks), CDC tools (Debezium reading the binlog), or temporal tables to track history. Triggers are still useful for hard requirements that the audit can&rsquo;t be bypassed.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q40">
-  <div class="qa__number">Question 40</div>
-  <h3 class="qa__question">Write a query to disable the trigger created in the previous question.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[40] = r'''
 <pre><code>-- MySQL has no DISABLE TRIGGER syntax.
 -- The standard approach is to drop and recreate when needed.
 DROP TRIGGER IF EXISTS trg_employees_after_insert;</code></pre>
@@ -2253,15 +1913,9 @@ FROM information_schema.TRIGGERS
 WHERE TRIGGER_SCHEMA = 'company';</code></pre>
 
 <p>For complex environments, MariaDB has a <code>DISABLE TRIGGER</code> extension, but it&rsquo;s not in standard MySQL.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q41">
-  <div class="qa__number">Question 41</div>
-  <h3 class="qa__question">Write a query to find employees who have the same name.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[41] = r'''
 <pre><code>SELECT name, COUNT(*) AS occurrences
 FROM employees
 WHERE name IS NOT NULL
@@ -2315,15 +1969,9 @@ HAVING dup_count &gt; 1;</code></pre>
 <p>Useful for a "deduplication" pass: keep the lowest <code>id</code>, delete the rest, after merging any related foreign-key references.</p>
 
 <p><strong>Performance</strong>: an index on <code>name</code> makes the GROUP BY faster &mdash; MySQL can read pre-sorted values from the index.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q42">
-  <div class="qa__number">Question 42</div>
-  <h3 class="qa__question">Write a query to find employees who joined the company in the last 6 months.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[42] = r'''
 <pre><code>SELECT id, name, hire_date
 FROM employees
 WHERE hire_date &gt;= DATE_SUB(CURDATE(), INTERVAL 6 MONTH);</code></pre>
@@ -2373,15 +2021,9 @@ WHERE YEAR(hire_date) = 2026 AND MONTH(hire_date) &gt;= MONTH(CURDATE()) - 6;
 WHERE hire_date &gt;= CURDATE() - INTERVAL 6 MONTH;</code></pre>
 
 <p>Apply functions to the constants on the right side, never to the indexed column on the left side.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q43">
-  <div class="qa__number">Question 43</div>
-  <h3 class="qa__question">Write a query to calculate the total salary expense for each department.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[43] = r'''
 <pre><code>SELECT
   d.department_name,
   COUNT(e.id)             AS staff_count,
@@ -2436,15 +2078,9 @@ GROUP BY department;</code></pre>
 <pre><code>CREATE INDEX idx_emp_dept_salary ON employees(department, salary);</code></pre>
 
 <p>For very large tables, consider a materialized summary table refreshed nightly &mdash; payroll totals rarely need real-time accuracy.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q44">
-  <div class="qa__number">Question 44</div>
-  <h3 class="qa__question">Write a query to find employees who have not been assigned a salary.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[44] = r'''
 <pre><code>SELECT id, name, department
 FROM employees
 WHERE salary IS NULL;</code></pre>
@@ -2493,15 +2129,9 @@ WHERE salary IS NULL;</code></pre>
 <p>(But in practice you&rsquo;d want to know <em>why</em> they&rsquo;re missing a salary, not just hide the problem.)</p>
 
 <p><strong>Performance</strong>: <code>IS NULL</code> can use an index on the column in modern MySQL. For very large tables where most rows have a salary, the index is highly selective and the lookup is fast.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q45">
-  <div class="qa__number">Question 45</div>
-  <h3 class="qa__question">Write a query to update the department of an employee based on their ID.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[45] = r'''
 <pre><code>UPDATE employees
 SET department_id = 5
 WHERE id = 42;</code></pre>
@@ -2560,15 +2190,9 @@ WHERE department_id = 5;  -- old department being absorbed</code></pre>
   'UPDATE employees SET department_id = ? WHERE id = ?',
   [newDeptId, employeeId]
 );</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q46">
-  <div class="qa__number">Question 46</div>
-  <h3 class="qa__question">Write a query to retrieve employees grouped by department with the count of employees in each department.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[46] = r'''
 <pre><code>SELECT department, COUNT(*) AS employee_count
 FROM employees
 GROUP BY department
@@ -2629,15 +2253,9 @@ ORDER BY employee_count DESC;</code></pre>
 
 EXPLAIN SELECT department, COUNT(*) FROM employees GROUP BY department;
 -- Look for &quot;Using index&quot; in the Extra column</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q47">
-  <div class="qa__number">Question 47</div>
-  <h3 class="qa__question">Write a query to calculate the percentage of employees in each department.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[47] = r'''
 <pre><code>SELECT
   department,
   COUNT(*)                                                         AS employee_count,
@@ -2694,15 +2312,9 @@ ORDER BY employee_count DESC;</code></pre>
 FROM employees
 WHERE department IS NOT NULL
 GROUP BY department;</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q48">
-  <div class="qa__number">Question 48</div>
-  <h3 class="qa__question">Write a query to find departments that do not have any employees.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[48] = r'''
 <pre><code>SELECT d.department_id, d.department_name
 FROM departments d
 LEFT JOIN employees e ON e.department_id = d.department_id
@@ -2755,15 +2367,9 @@ HAVING COUNT(e.id) = 0;</code></pre>
 </table>
 
 <p>The MySQL optimizer often translates these into the same execution plan, but <code>NOT EXISTS</code> is the most defensible choice in code review.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q49">
-  <div class="qa__number">Question 49</div>
-  <h3 class="qa__question">Write a query to create a composite key on the &quot;employees&quot; table using the ID and department columns.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[49] = r'''
 <pre><code>-- Approach 1: Define at table creation
 CREATE TABLE employees (
   id         INT,
@@ -2820,15 +2426,9 @@ ADD CONSTRAINT uk_employee_dept UNIQUE (id, department);</code></pre>
 <p>Keep the simple <code>id</code> as the PK; add a UNIQUE constraint for the business rule. Easier to evolve.</p>
 
 <p><strong>Index implications</strong>: in InnoDB, the PK is also the clustered index &mdash; physical row order follows it. Composite PKs make secondary indexes larger (they include the entire PK in each entry).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q50">
-  <div class="qa__number">Question 50</div>
-  <h3 class="qa__question">Write a query to find employees who have received a salary increase in the last year.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[50] = r'''
 <pre><code>-- Assumes a salaries history table:
 -- salaries (employee_id, salary, effective_date, end_date)
 SELECT DISTINCT e.id, e.name
@@ -2892,15 +2492,9 @@ WHERE a.changed_at &gt;= CURDATE() - INTERVAL 1 YEAR
 <p>Without history tracking, "raises" can&rsquo;t be detected from current state alone &mdash; your schema needs to record changes (audit trail or temporal tables) for this kind of query to work.</p>
 
 <p><strong>Performance</strong>: index <code>salaries(employee_id, effective_date)</code> for the self-join and window function partitioning.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q51">
-  <div class="qa__number">Question 51</div>
-  <h3 class="qa__question">Write a query to create a table named &quot;salaries&quot; with columns for employee_id, salary, and effective_date.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[51] = r'''
 <pre><code>CREATE TABLE salaries (
   id              INT AUTO_INCREMENT PRIMARY KEY,
   employee_id     INT NOT NULL,
@@ -2945,15 +2539,9 @@ CREATE TABLE salaries (
 <p>Simpler to write to (just INSERT new rows), but queries that need "salary as of date X" require a window function or correlated subquery.</p>
 
 <p>For audit/compliance use cases, prefer the explicit <code>end_date</code> form &mdash; queries are simpler and the data is self-describing.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q52">
-  <div class="qa__number">Question 52</div>
-  <h3 class="qa__question">Write a query to insert a salary record for an employee.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[52] = r'''
 <pre><code>INSERT INTO salaries (employee_id, salary, effective_date)
 VALUES (101, 75000.00, '2026-04-01');</code></pre>
 
@@ -2999,15 +2587,9 @@ await conn.execute(
 <pre><code>SELECT LAST_INSERT_ID();
 -- Or, in mysql2: result.insertId
 </code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q53">
-  <div class="qa__number">Question 53</div>
-  <h3 class="qa__question">Write a query to update the salary of an employee in the &quot;salaries&quot; table.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[53] = r'''
 <pre><code>UPDATE salaries
 SET salary = 82000.00
 WHERE employee_id = 101 AND end_date IS NULL;</code></pre>
@@ -3051,15 +2633,9 @@ SELECT * FROM salaries WHERE ...;   -- verify
   </li>
   <li>Some teams enable <code>sql_safe_updates</code> to refuse UPDATE without a key or LIMIT.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q54">
-  <div class="qa__number">Question 54</div>
-  <h3 class="qa__question">Write a query to retrieve the salary history of an employee.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[54] = r'''
 <pre><code>SELECT
   s.salary,
   s.effective_date,
@@ -3114,15 +2690,9 @@ WHERE employee_id = 101
 ORDER BY effective_date;</code></pre>
 
 <p><strong>Performance</strong>: the index <code>salaries(employee_id, effective_date)</code> makes both single-employee history queries and as-of-date lookups fast.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q55">
-  <div class="qa__number">Question 55</div>
-  <h3 class="qa__question">Write a query to find employees whose salaries are above the average salary.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[55] = r'''
 <pre><code>SELECT id, name, salary
 FROM employees
 WHERE salary &gt; (SELECT AVG(salary) FROM employees);</code></pre>
@@ -3182,15 +2752,9 @@ JOIN salaries s ON s.employee_id = e.id AND s.end_date IS NULL
 WHERE s.salary &gt; (SELECT AVG(salary) FROM salaries WHERE end_date IS NULL);</code></pre>
 
 <p>Always filter the history table to current rows before averaging.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q56">
-  <div class="qa__number">Question 56</div>
-  <h3 class="qa__question">Write a query to create a unique constraint on the email column in the &quot;employees&quot; table.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[56] = r'''
 <pre><code>ALTER TABLE employees
 ADD CONSTRAINT uk_employees_email UNIQUE (email);</code></pre>
 
@@ -3244,15 +2808,9 @@ DROP INDEX uk_employees_email;
 -- (UNIQUE constraints are stored as indexes; drop by name)</code></pre>
 
 <p><strong>Case sensitivity</strong>: with the default <code>utf8mb4_0900_ai_ci</code> collation, <code>Alice@x.com</code> and <code>alice@x.com</code> are considered duplicates. Use a <code>_bin</code> collation if you need case-sensitive uniqueness.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q57">
-  <div class="qa__number">Question 57</div>
-  <h3 class="qa__question">Write a query to find employees who share the same salary.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[57] = r'''
 <pre><code>SELECT salary, GROUP_CONCAT(name ORDER BY name) AS employees, COUNT(*) AS shared_by
 FROM employees
 GROUP BY salary
@@ -3306,15 +2864,9 @@ ORDER BY frequency DESC, salary DESC
 LIMIT 1;</code></pre>
 
 <p><strong>Performance note</strong>: an index on <code>salary</code> makes the GROUP BY fast. For very large tables, the GROUP BY may use a temp table &mdash; check with <code>EXPLAIN</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q58">
-  <div class="qa__number">Question 58</div>
-  <h3 class="qa__question">Write a query to retrieve employees who have been with the company for more than 5 years.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[58] = r'''
 <pre><code>SELECT id, name, hire_date,
        TIMESTAMPDIFF(YEAR, hire_date, CURDATE()) AS years_with_company
 FROM employees
@@ -3360,15 +2912,9 @@ ORDER BY MIN(hire_date);</code></pre>
 <p><strong>Performance</strong>: the predicate <code>hire_date &lt;= CURDATE() - INTERVAL 5 YEAR</code> can use an index on <code>hire_date</code>. Avoid wrapping the indexed column in functions (<code>YEAR(hire_date)</code> would defeat the index); always operate on the constant side instead.</p>
 
 <p><strong>Departed employees</strong>: if there&rsquo;s a <code>termination_date</code>, exclude them: <code>AND termination_date IS NULL</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q59">
-  <div class="qa__number">Question 59</div>
-  <h3 class="qa__question">Write a query to calculate the difference in days between the current date and the hire date of employees.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[59] = r'''
 <pre><code>SELECT id, name, hire_date,
        DATEDIFF(CURDATE(), hire_date) AS days_employed
 FROM employees
@@ -3422,15 +2968,9 @@ SELECT
 FROM employees;</code></pre>
 
 <p><strong>Time zone</strong>: <code>CURDATE()</code> returns the server&rsquo;s current date. If your application stores dates in UTC and the server runs in a different zone, use <code>UTC_DATE()</code> or set <code>SET time_zone = '+00:00'</code> at the connection level.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q60">
-  <div class="qa__number">Question 60</div>
-  <h3 class="qa__question">Write a query to find employees who were hired in a specific year.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[60] = r'''
 <pre><code>SELECT id, name, hire_date
 FROM employees
 WHERE YEAR(hire_date) = 2023;</code></pre>
@@ -3478,15 +3018,9 @@ WHERE hire_date &gt;= CONCAT(?, '-01-01')
   AND hire_date &lt;  CONCAT(? + 1, '-01-01');</code></pre>
 
 <p>Or compute the date range in the app and pass complete date strings.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q61">
-  <div class="qa__number">Question 61</div>
-  <h3 class="qa__question">Write a query to create a temporary table named &quot;temp_employees&quot;.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[61] = r'''
 <pre><code>CREATE TEMPORARY TABLE temp_employees (
   id          INT,
   name        VARCHAR(100),
@@ -3539,15 +3073,9 @@ SELECT * FROM eng WHERE age &gt; 30;
 <pre><code>DROP TEMPORARY TABLE IF EXISTS temp_employees;</code></pre>
 
 <p>The <code>TEMPORARY</code> keyword in DROP prevents accidentally dropping a same-named permanent table.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q62">
-  <div class="qa__number">Question 62</div>
-  <h3 class="qa__question">Write a query to insert data into the temporary table created in the previous question.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[62] = r'''
 <pre><code>INSERT INTO temp_employees (id, name, age, department) VALUES
   (1, 'Alice',   28, 'Engineering'),
   (2, 'Bob',     35, 'Sales'),
@@ -3597,15 +3125,9 @@ SELECT id, name, age, department
 FROM temp_employees
 WHERE id NOT IN (SELECT id FROM employees);
 -- Or use INSERT ... ON DUPLICATE KEY UPDATE for upserts.</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q63">
-  <div class="qa__number">Question 63</div>
-  <h3 class="qa__question">Write a query to retrieve data from the temporary table created in the previous question.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[63] = r'''
 <pre><code>SELECT * FROM temp_employees;</code></pre>
 
 <p>Querying a temporary table is identical to querying a regular table &mdash; same SELECT, JOIN, WHERE, GROUP BY syntax. The only differences are scope (current connection only) and lifetime (gone when the connection closes).</p>
@@ -3646,15 +3168,9 @@ SHOW CREATE TABLE temp_employees\G</code></pre>
 <p>The <code>information_schema.TABLES</code> doesn&rsquo;t list temporary tables &mdash; they&rsquo;re session-private. To list temps in a session in MySQL 5.7+, query <code>information_schema.INNODB_TEMP_TABLE_INFO</code>.</p>
 
 <p><strong>Storage</strong>: temp tables use the engine specified by <code>internal_tmp_disk_storage_engine</code> (defaults to InnoDB). Small temp tables stay in memory; large ones spill to disk.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q64">
-  <div class="qa__number">Question 64</div>
-  <h3 class="qa__question">Write a query to find employees who have the highest salary in their department.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[64] = r'''
 <pre><code>SELECT department_id, name, salary
 FROM (
   SELECT
@@ -3718,15 +3234,9 @@ ORDER BY d.department_name;</code></pre>
 <pre><code>WHERE rn &lt;= 3       -- top 3 per department</code></pre>
 
 <p><strong>Performance</strong>: index <code>(department_id, salary DESC)</code> helps the optimizer order rows for the window function efficiently.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q65">
-  <div class="qa__number">Question 65</div>
-  <h3 class="qa__question">Write a query to create a function that returns the number of employees in a specific department.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[65] = r'''
 <pre><code>DELIMITER //
 
 CREATE FUNCTION count_employees_in(dept_id INT)
@@ -3778,15 +3288,9 @@ FROM employees;</code></pre>
 -- then re-CREATE with new logic</code></pre>
 
 <p>MySQL has no <code>CREATE OR REPLACE FUNCTION</code> &mdash; you must drop and recreate.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q66">
-  <div class="qa__number">Question 66</div>
-  <h3 class="qa__question">Write a query to execute the function created in the previous question.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[66] = r'''
 <pre><code>SELECT count_employees_in(5);
 -- e.g., 12</code></pre>
 
@@ -3841,15 +3345,9 @@ console.log(row.n);</code></pre>
 SELECT ROUTINE_NAME, ROUTINE_TYPE
 FROM information_schema.ROUTINES
 WHERE ROUTINE_SCHEMA = 'company';</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q67">
-  <div class="qa__number">Question 67</div>
-  <h3 class="qa__question">Write a query to find employees who have received a bonus.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[67] = r'''
 <pre><code>SELECT DISTINCT e.id, e.name
 FROM employees e
 JOIN bonuses b ON b.employee_id = e.id
@@ -3916,15 +3414,9 @@ FROM employees
 WHERE bonus IS NOT NULL AND bonus &gt; 0;</code></pre>
 
 <p>Indexes on <code>bonuses.employee_id</code> make the join efficient.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q68">
-  <div class="qa__number">Question 68</div>
-  <h3 class="qa__question">Write a query to calculate the total bonuses paid to employees.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[68] = r'''
 <pre><code>SELECT SUM(bonus_amount) AS total_bonuses
 FROM bonuses;</code></pre>
 
@@ -3995,15 +3487,9 @@ FROM bonuses
 WHERE awarded_date &gt;= '2026-01-01';</code></pre>
 
 <p><strong>Type considerations</strong>: store bonus amounts in <code>DECIMAL(10, 2)</code>, not <code>FLOAT</code>. <code>SUM</code> on <code>DECIMAL</code> returns a <code>DECIMAL</code> with extended precision &mdash; no rounding errors.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q69">
-  <div class="qa__number">Question 69</div>
-  <h3 class="qa__question">Write a query to find employees whose names are in uppercase.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[69] = r'''
 <pre><code>SELECT id, name
 FROM employees
 WHERE BINARY name = UPPER(name);</code></pre>
@@ -4054,15 +3540,9 @@ WHERE BINARY name = LOWER(name);</code></pre>
 SET name = CONCAT(UPPER(LEFT(name, 1)), LOWER(SUBSTRING(name, 2)))
 WHERE BINARY name = UPPER(name);
 -- Title-cases names that are all uppercase</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q70">
-  <div class="qa__number">Question 70</div>
-  <h3 class="qa__question">Write a query to convert the names of all employees to lowercase.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[70] = r'''
 <pre><code>UPDATE employees
 SET name = LOWER(name);</code></pre>
 
@@ -4110,15 +3590,9 @@ CREATE INDEX idx_name_lower ON employees(name_lower);</code></pre>
 
 <pre><code>SELECT * FROM employees WHERE name = 'alice';
 -- matches 'Alice', 'ALICE', 'alice'</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q71">
-  <div class="qa__number">Question 71</div>
-  <h3 class="qa__question">Write a query to find employees who have the same first name.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[71] = r'''
 <pre><code>SELECT first_name, GROUP_CONCAT(name ORDER BY name) AS people, COUNT(*) AS shared_by
 FROM (
   SELECT id, name, SUBSTRING_INDEX(name, ' ', 1) AS first_name
@@ -4176,15 +3650,9 @@ LIMIT 10;</code></pre>
 ADD COLUMN first_name VARCHAR(50)
 GENERATED ALWAYS AS (SUBSTRING_INDEX(name, ' ', 1)) STORED;
 CREATE INDEX idx_first_name ON employees(first_name);</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q72">
-  <div class="qa__number">Question 72</div>
-  <h3 class="qa__question">Write a query to split the full name of an employee into first and last names.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[72] = r'''
 <pre><code>SELECT
   id,
   name AS full_name,
@@ -4254,15 +3722,9 @@ SET first_name = TRIM(SUBSTRING_INDEX(name, ' ', 1)),
 -- ALTER TABLE employees DROP COLUMN name;</code></pre>
 
 <p><strong>Real-world advice</strong>: name parsing is genuinely hard &mdash; cultural conventions vary widely (some cultures put surname first; some have no concept of "first/last"). Whenever possible, capture name parts at input rather than parsing them out later.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q73">
-  <div class="qa__number">Question 73</div>
-  <h3 class="qa__question">Write a query to find employees who have a specific substring in their email addresses.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[73] = r'''
 <pre><code>SELECT id, name, email
 FROM employees
 WHERE email LIKE '%@example.com';</code></pre>
@@ -4325,15 +3787,9 @@ WHERE email NOT REGEXP '\\.[a-z]{2,}$';
 WHERE LENGTH(email) - LENGTH(REPLACE(email, '@', '')) &gt; 1;</code></pre>
 
 <p>For real email validation, use a regex that matches the relevant standard, or perform validation in application code (libraries handle edge cases better than SQL regex).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q74">
-  <div class="qa__number">Question 74</div>
-  <h3 class="qa__question">Write a query to create a table named &quot;projects&quot; with columns for project_id, project_name, and start_date.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[74] = r'''
 <pre><code>CREATE TABLE projects (
   project_id     INT AUTO_INCREMENT PRIMARY KEY,
   project_name   VARCHAR(200) NOT NULL,
@@ -4391,15 +3847,9 @@ ADD COLUMN tags JSON;
 -- Stored as ['frontend', 'urgent', 'q4']</code></pre>
 
 <p><strong>Why ENUM works for status</strong>: small fixed set of values, very compact storage (1-2 bytes), and MySQL rejects invalid inserts. Trade-off: changing the set requires <code>ALTER TABLE</code>. For larger or more dynamic value sets, prefer a separate <code>statuses</code> lookup table with a foreign key.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q75">
-  <div class="qa__number">Question 75</div>
-  <h3 class="qa__question">Write a query to insert a new project into the &quot;projects&quot; table.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[75] = r'''
 <pre><code>INSERT INTO projects (project_name, start_date)
 VALUES ('Mobile App Redesign', '2026-05-01');</code></pre>
 
@@ -4454,15 +3904,9 @@ ON DUPLICATE KEY UPDATE
 <p>Useful for sync jobs that re-run with the same input data.</p>
 
 <p><strong>From the application side, always parameterize</strong> &mdash; never build the SQL string from user input.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q76">
-  <div class="qa__number">Question 76</div>
-  <h3 class="qa__question">Write a query to update the start date of a project with a specific project_id.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[76] = r'''
 <pre><code>UPDATE projects
 SET start_date = '2026-06-15'
 WHERE project_id = 42;</code></pre>
@@ -4522,15 +3966,9 @@ WHERE status = 'planned';</code></pre>
 <pre><code>SET sql_safe_updates = 1;
 UPDATE projects SET start_date = '2026-06-15';
 -- ERROR 1175 (HY000): You are using safe update mode...</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q77">
-  <div class="qa__number">Question 77</div>
-  <h3 class="qa__question">Write a query to delete a project with a specific project_id.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[77] = r'''
 <pre><code>DELETE FROM projects
 WHERE project_id = 42;</code></pre>
 
@@ -4590,15 +4028,9 @@ WHERE status = 'cancelled'
 LIMIT 1000;</code></pre>
 
 <p><strong>Truncate vs delete</strong>: <code>TRUNCATE TABLE projects</code> empties the table much faster but cannot be filtered by WHERE, can&rsquo;t be rolled back as cleanly, and resets <code>AUTO_INCREMENT</code>. Use only when you genuinely want to wipe everything.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q78">
-  <div class="qa__number">Question 78</div>
-  <h3 class="qa__question">Write a query to create a many-to-many relationship between employees and projects.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[78] = r'''
 <pre><code>CREATE TABLE employee_projects (
   employee_id  INT NOT NULL,
   project_id   INT NOT NULL,
@@ -4654,15 +4086,9 @@ WHERE employee_id = 101 AND project_id = 42;</code></pre>
 </ul>
 
 <p>Junction tables can carry their own attributes &mdash; the relationship itself can have meaningful data, not just IDs.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q79">
-  <div class="qa__number">Question 79</div>
-  <h3 class="qa__question">Write a query to retrieve employees and their associated projects using a join.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[79] = r'''
 <pre><code>SELECT
   e.id   AS employee_id,
   e.name AS employee_name,
@@ -4723,15 +4149,9 @@ WHERE ep.project_id = 42
 ORDER BY ep.role, e.name;</code></pre>
 
 <p><strong>Performance</strong>: indexes on the junction table&rsquo;s columns (PK <code>(employee_id, project_id)</code> + secondary on <code>project_id</code>) make both directions fast. <code>EXPLAIN</code> should show <code>type=ref</code> or <code>type=eq_ref</code> for each join.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q80">
-  <div class="qa__number">Question 80</div>
-  <h3 class="qa__question">Write a query to find employees who are not assigned to any projects.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[80] = r'''
 <pre><code>SELECT id, name
 FROM employees
 WHERE id NOT IN (
@@ -4790,15 +4210,9 @@ WHERE NOT EXISTS (
 );</code></pre>
 
 <p><strong>Performance</strong>: an index on <code>employee_projects.employee_id</code> (which the PK already provides if it&rsquo;s the leading column) makes the lookups fast.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q81">
-  <div class="qa__number">Question 81</div>
-  <h3 class="qa__question">Write a query to find projects that do not have any assigned employees.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[81] = r'''
 <pre><code>SELECT p.project_id, p.project_name, p.status
 FROM projects p
 WHERE NOT EXISTS (
@@ -4867,15 +4281,9 @@ ORDER BY current_team_size, p.start_date;
 -- Projects with 0 team members at the top — these need attention</code></pre>
 
 <p>Aggregates and filters in one trip; useful as the basis for a "staffing report" dashboard.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q82">
-  <div class="qa__number">Question 82</div>
-  <h3 class="qa__question">Write a query to retrieve the names of employees who are working on more than one project.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[82] = r'''
 <pre><code>SELECT e.id, e.name, COUNT(ep.project_id) AS project_count
 FROM employees e
 JOIN employee_projects ep ON ep.employee_id = e.id
@@ -4937,15 +4345,9 @@ LIMIT 10;</code></pre>
 FROM employee_projects ep;</code></pre>
 
 <p>Useful to detect over-allocation: if average is 3+, capacity is probably stretched thin.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q83">
-  <div class="qa__number">Question 83</div>
-  <h3 class="qa__question">Write a query to calculate the total number of projects each employee is working on.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[83] = r'''
 <pre><code>SELECT
   e.id,
   e.name,
@@ -5010,15 +4412,9 @@ ORDER BY avg_assignments_per_person DESC;</code></pre>
 <p><code>NULLIF(x, 0)</code> avoids divide-by-zero for departments with no employees &mdash; division by NULL produces NULL instead of an error.</p>
 
 <p><strong>Use for capacity planning</strong>: an "average assignments" much higher than 2-3 may indicate over-commitment; an average near 0 may indicate under-utilization.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q84">
-  <div class="qa__number">Question 84</div>
-  <h3 class="qa__question">Write a query to create a backup of the &quot;employees&quot; table.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[84] = r'''
 <pre><code># From a shell, not from inside the MySQL client
 mysqldump -u root -p \
   --single-transaction \
@@ -5065,15 +4461,9 @@ DEALLOCATE PREPARE stmt;
 mysql -u root -p test_restore -e "SELECT COUNT(*) FROM employees;"</code></pre>
 
 <p><strong>Production note</strong>: ad-hoc table-level backups via SQL are fine for one-off use. For systematic backup, use <code>mysqldump</code> at the database level, <strong>Percona XtraBackup</strong> for full-server physical backups, or your cloud provider&rsquo;s snapshot feature (RDS, Cloud SQL).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q85">
-  <div class="qa__number">Question 85</div>
-  <h3 class="qa__question">Write a query to restore the &quot;employees&quot; table from a backup.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[85] = r'''
 <pre><code># Restore from a mysqldump output
 mysql -u root -p company &lt; employees_backup.sql</code></pre>
 
@@ -5130,15 +4520,9 @@ CHECK TABLE employees;            -- structural integrity check
 SHOW INDEX FROM employees;        -- expected indexes present?</code></pre>
 
 <p><strong>Caution</strong>: <code>RESTORE</code> overwrites the target. Always take a fresh backup of whatever&rsquo;s currently live before restoring.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q86">
-  <div class="qa__number">Question 86</div>
-  <h3 class="qa__question">Write a query to retrieve employees who have been assigned to a project for more than 6 months.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[86] = r'''
 <pre><code>SELECT
   e.id,
   e.name,
@@ -5211,15 +4595,9 @@ FROM (
 ) t
 GROUP BY bucket
 ORDER BY MIN(months);</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q87">
-  <div class="qa__number">Question 87</div>
-  <h3 class="qa__question">Write a query to find employees who have a specific pattern in their phone numbers.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[87] = r'''
 <pre><code>SELECT id, name, phone
 FROM employees
 WHERE phone REGEXP '^555-';</code></pre>
@@ -5286,15 +4664,9 @@ HAVING shared &gt; 1;</code></pre>
 <p><strong>Real-world advice</strong>: store phones in a normalized E.164 format (<code>+12125551234</code>) at insertion time. Validation and lookup queries become trivial &mdash; the database doesn&rsquo;t need to deal with formatting variation.</p>
 
 <p>For complex phone parsing/validation, use a library like <strong>libphonenumber</strong> in your application code &mdash; SQL is not the right tool for full phone-number validation.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q88">
-  <div class="qa__number">Question 88</div>
-  <h3 class="qa__question">Write a query to create a table named &quot;departments_history&quot; to store changes in department names.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[88] = r'''
 <pre><code>CREATE TABLE departments_history (
   history_id      INT AUTO_INCREMENT PRIMARY KEY,
   department_id   INT NOT NULL,
@@ -5366,15 +4738,9 @@ DELIMITER ;</code></pre>
 </ul>
 
 <p><strong>Modern alternative</strong>: rather than a hand-rolled trigger system, use a CDC (change-data-capture) tool like <strong>Debezium</strong> that streams MySQL binlog changes to Kafka or another store &mdash; cleaner separation, no in-database triggers to maintain.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q89">
-  <div class="qa__number">Question 89</div>
-  <h3 class="qa__question">Write a query to insert a change record into the &quot;departments_history&quot; table.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[89] = r'''
 <pre><code>INSERT INTO departments_history
   (department_id, old_name, new_name, changed_at, change_type)
 VALUES
@@ -5452,15 +4818,9 @@ WHERE NOT EXISTS (
 );</code></pre>
 
 <p>Useful when retrofitting history tracking onto an existing system &mdash; gives every current row at least one history entry.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q90">
-  <div class="qa__number">Question 90</div>
-  <h3 class="qa__question">Write a query to retrieve the change history of a department.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[90] = r'''
 <pre><code>SELECT
   history_id,
   changed_at,
@@ -5536,15 +4896,9 @@ GROUP BY d.department_id, d.department_name
 ORDER BY change_count DESC;</code></pre>
 
 <p><strong>Performance</strong>: the index on <code>(department_id, changed_at)</code> from Q88 makes single-department history queries very fast &mdash; index range scan with no sort needed.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q91">
-  <div class="qa__number">Question 91</div>
-  <h3 class="qa__question">Write a query to create a full-text index on the description column of a &quot;products&quot; table.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[91] = r'''
 <pre><code>ALTER TABLE products
 ADD FULLTEXT INDEX ft_description (description);</code></pre>
 
@@ -5608,15 +4962,9 @@ SELECT * FROM information_schema.INNODB_FT_INDEX_TABLE LIMIT 20;
 </ul>
 
 <p>For most internal product catalogs and CMS-style content under 1M rows, MySQL FULLTEXT is good enough and saves operational complexity.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q92">
-  <div class="qa__number">Question 92</div>
-  <h3 class="qa__question">Write a query to perform a full-text search on the &quot;products&quot; table.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[92] = r'''
 <pre><code>SELECT id, name, description,
        MATCH(description) AGAINST('wireless headphones' IN NATURAL LANGUAGE MODE) AS relevance
 FROM products
@@ -5688,15 +5036,9 @@ LIMIT 20;</code></pre>
   <li>Words shorter than <code>innodb_ft_min_token_size</code> (default 3) are ignored.</li>
   <li>Default tokenization is whitespace + ASCII; for CJK languages use the <code>ngram</code> parser.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q93">
-  <div class="qa__number">Question 93</div>
-  <h3 class="qa__question">Write a query to find employees who have the same hire date.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[93] = r'''
 <pre><code>SELECT hire_date, COUNT(*) AS hires, GROUP_CONCAT(name ORDER BY name) AS people
 FROM employees
 GROUP BY hire_date
@@ -5766,15 +5108,9 @@ WHERE ABS(DATEDIFF(e1.hire_date, e2.hire_date)) &lt;= 7
 ORDER BY days_apart;</code></pre>
 
 <p>Quadratic in the number of employees &mdash; only run on filtered subsets for large tables.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q94">
-  <div class="qa__number">Question 94</div>
-  <h3 class="qa__question">Write a query to calculate the annual salary of employees.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[94] = r'''
 <pre><code>SELECT
   id,
   name,
@@ -5844,15 +5180,9 @@ FROM employees e;</code></pre>
 FROM employees;</code></pre>
 
 <p><strong>Tax brackets</strong> &mdash; if you need taxable income calculations, use a CASE expression to apply progressive rates. Generally, doing tax math in SQL is fragile &mdash; do it in application code with proper tax libraries.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q95">
-  <div class="qa__number">Question 95</div>
-  <h3 class="qa__question">Write a query to retrieve employees who have been promoted.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[95] = r'''
 <pre><code>SELECT DISTINCT e.id, e.name, ph.old_role, ph.new_role, ph.changed_at
 FROM employees e
 JOIN promotions_history ph ON ph.employee_id = e.id
@@ -5943,15 +5273,9 @@ SELECT
 FROM promo p
 JOIN employees e ON e.id = p.employee_id
 WHERE prev_promo IS NOT NULL;</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q96">
-  <div class="qa__number">Question 96</div>
-  <h3 class="qa__question">Write a query to calculate the average time employees spend in each department.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[96] = r'''
 <pre><code>SELECT
   d.department_name,
   ROUND(AVG(DATEDIFF(COALESCE(ah.left_at, CURDATE()), ah.joined_at)), 1) AS avg_days_in_dept
@@ -6031,15 +5355,9 @@ GROUP BY e.id, e.name
 ORDER BY departments_held DESC;</code></pre>
 
 <p>Identifies internal mobility patterns.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q97">
-  <div class="qa__number">Question 97</div>
-  <h3 class="qa__question">Write a query to create a recursive CTE to find all subordinates of a manager.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[97] = r'''
 <pre><code>WITH RECURSIVE subordinates AS (
   -- Anchor: the manager
   SELECT id, name, manager_id, 0 AS depth
@@ -6135,15 +5453,9 @@ SELECT id, name, depth FROM managers ORDER BY depth;</code></pre>
 </ul>
 
 <p><strong>Performance</strong>: index on <code>manager_id</code> makes the recursive join efficient. For very deep or wide trees, consider materializing the closure (a separate table holding all ancestor-descendant pairs).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q98">
-  <div class="qa__number">Question 98</div>
-  <h3 class="qa__question">Write a query to create a table named &quot;attendance&quot; with columns for employee_id, date, and status.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[98] = r'''
 <pre><code>CREATE TABLE attendance (
   id           INT AUTO_INCREMENT PRIMARY KEY,
   employee_id  INT NOT NULL,
@@ -6222,15 +5534,9 @@ ADD COLUMN hours_worked DECIMAL(4, 2)
   ) STORED;</code></pre>
 
 <p>Daily hours worked computed from check-in/check-out automatically.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q99">
-  <div class="qa__number">Question 99</div>
-  <h3 class="qa__question">Write a query to insert an attendance record for an employee.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[99] = r'''
 <pre><code>INSERT INTO attendance (employee_id, date, status, check_in, check_out)
 VALUES (101, CURDATE(), 'present', '09:05:00', '17:30:00');</code></pre>
 
@@ -6295,15 +5601,9 @@ await conn.execute(
 );</code></pre>
 
 <p>Always use prepared statements to prevent SQL injection.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q100">
-  <div class="qa__number">Question 100</div>
-  <h3 class="qa__question">Write a query to retrieve the attendance record of an employee for the current month.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[100] = r'''
 <pre><code>SELECT date, status, check_in, check_out, notes
 FROM attendance
 WHERE employee_id = 101
@@ -6386,27 +5686,4 @@ GROUP BY d.department_id, d.department_name
 ORDER BY attendance_rate_pct DESC;</code></pre>
 
 <p><strong>Calendar-style display</strong> &mdash; one row per day with empty rows for missing dates: typically generated in application code by joining a calendar dimension table.</p>
-
-    
-  </div>
-</article>
-
-    <nav class="chapter-nav" aria-label="Chapter navigation">
-      <a class="chapter-nav__prev" href="mysql-basic.html">
-      <span class="chapter-nav__dir">← Previous</span>
-      <span class="chapter-nav__title">MYSQL — Basic</span>
-    </a>
-      <a class="chapter-nav__next" href="mysql-advanced.html">
-      <span class="chapter-nav__dir">Next →</span>
-      <span class="chapter-nav__title">MYSQL — Advanced</span>
-    </a>
-    </nav>
-
-  </section>
-
-</main>
-</div>
-
-<script src="../assets/script.js"></script>
-</body>
-</html>
+'''

@@ -1,118 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MYSQL — Advanced · Interview Prep Mastery</title>
-<meta name="description" content="100 advanced interview questions on MYSQL, with detailed explanations and examples.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="../assets/styles.css">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%239a6b1d'/%3E%3Ctext x='50' y='68' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold' font-size='48'%3EIP%3C/text%3E%3C/svg%3E">
-</head>
-<body>
-<header class="site-header">
-  <div class="site-header__inner">
-    <button class="menu-toggle" aria-label="Open menu" type="button">☰ Menu</button>
-    <a class="brand" href="../index.html">
-      <span class="brand__mark">IP</span>
-      <span class="brand__text">
-        <span class="brand__title">Interview Prep Mastery</span>
-        <span class="brand__subtitle">Interactive learning guide</span>
-      </span>
-    </a>
-    <nav class="header-nav">
-      <a href="../index.html#roadmap">Roadmap</a>
-      <a href="../index.html#chapters">All chapters</a>
-      <button class="theme-toggle" type="button" aria-label="Toggle color scheme">☾ Dark</button>
-    </nav>
-  </div>
-</header>
-<div class="layout">
-<aside class="sidebar" aria-label="Site navigation">
-  <div class="sidebar__header">Chapter Navigator</div>
-  
-        <div class="nav-part">
-          <div class="nav-part__label">Part 1</div>
-          <div class="nav-part__title">Core Programming Languages</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">JavaScript</li><li><a class="" href="../chapters/javascript-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/javascript-tricky.html"><span class="nav-item__title">Tricky</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-coding.html"><span class="nav-item__title">Advanced Coding</span><span class="nav-item__meta">100 questions · 100 min read</span></a></li><li><a class="" href="../chapters/javascript-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-scenario.html"><span class="nav-item__title">Advanced Scenario Based</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Python</li><li><a class="" href="../chapters/python-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/python-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 2</div>
-          <div class="nav-part__title">Web Fundamentals</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">HTML</li><li><a class="" href="../chapters/html-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/html-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/html-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CSS</li><li><a class="" href="../chapters/css-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">102 questions · 60 min read</span></a></li><li><a class="" href="../chapters/css-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/css-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">101 questions · 90 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 3</div>
-          <div class="nav-part__title">Backend Technologies</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Node.Js</li><li><a class="" href="../chapters/nodejs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/nodejs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ExpressJS</li><li><a class="" href="../chapters/expressjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/expressjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/expressjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">API</li><li><a class="" href="../chapters/api-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/api-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 4</div>
-          <div class="nav-part__title">Frontend Frameworks</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ReactJS</li><li><a class="" href="../chapters/reactjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">101 questions · 60 min read</span></a></li><li><a class="" href="../chapters/reactjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 5</div>
-          <div class="nav-part__title">Databases</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MYSQL</li><li><a class="" href="../chapters/mysql-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mysql-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="active" href="../chapters/mysql-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MongoDB</li><li><a class="" href="../chapters/mongodb-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mongodb-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 6</div>
-          <div class="nav-part__title">System Design &amp; DevOps</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">System Design MERN Stack</li><li><a class="" href="../chapters/system-design-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Infrastructure MERN Stack</li><li><a class="" href="../chapters/infrastructure-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/infrastructure-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CI/CD Pipeline</li><li><a class="" href="../chapters/cicd-pipeline-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-</aside>
-<main class="main" id="main">
+"""MySQL Advanced — 100 detailed answers."""
 
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="../index.html">Home</a>
-    <span class="breadcrumb__sep">›</span>
-    <a href="../index.html#part-5">Databases</a>
-    <span class="breadcrumb__sep">›</span>
-    <span>MYSQL — Advanced</span>
-  </nav>
+ANSWERS: dict[int, str] = {}
 
-  <header class="chapter-header">
-    <div class="chapter-label">MYSQL · Advanced</div>
-    <h1 class="chapter-title">Advanced MYSQL Interview Questions</h1>
-    <p class="chapter-lede">Deep internals, architecture decisions, and questions typical of senior-level interviews.</p>
-    <div class="chapter-meta">
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Questions</span><span class="chapter-meta__value">100</span></div>
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Level</span><span class="chapter-meta__value">Advanced</span></div>
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Estimated reading</span><span class="chapter-meta__value">90 min read</span></div>
-    </div>
-    
-  </header>
-
-  <section class="prose">
-
-    <div class="toc" id="toc">
-      <div class="toc__title">All questions in this chapter</div>
-      <ul class="toc__list">
-        <li><a href="#q1"><span class="toc__num">1.</span>Explain the differences between MyISAM and InnoDB storage engines.</a></li><li><a href="#q2"><span class="toc__num">2.</span>How do you optimize a complex query in MySQL?</a></li><li><a href="#q3"><span class="toc__num">3.</span>What is a query execution plan, and how do you analyze it in MySQL?</a></li><li><a href="#q4"><span class="toc__num">4.</span>Explain the purpose and usage of the EXPLAIN statement in MySQL.</a></li><li><a href="#q5"><span class="toc__num">5.</span>How do you use indexing to improve query performance in MySQL?</a></li><li><a href="#q6"><span class="toc__num">6.</span>What are full-text indexes, and how do you use them in MySQL?</a></li><li><a href="#q7"><span class="toc__num">7.</span>How do you implement and use partitioning in MySQL?</a></li><li><a href="#q8"><span class="toc__num">8.</span>Explain the differences between horizontal and vertical partitioning.</a></li><li><a href="#q9"><span class="toc__num">9.</span>How do you manage and optimize MySQL memory usage?</a></li><li><a href="#q10"><span class="toc__num">10.</span>What is the role of the query cache in MySQL, and how do you manage it?</a></li><li><a href="#q11"><span class="toc__num">11.</span>How do you handle and optimize large databases in MySQL?</a></li><li><a href="#q12"><span class="toc__num">12.</span>What is a covering index, and how does it improve query performance?</a></li><li><a href="#q13"><span class="toc__num">13.</span>How do you detect and fix deadlocks in MySQL?</a></li><li><a href="#q14"><span class="toc__num">14.</span>What are temporary tables, and how do you use them in MySQL?</a></li><li><a href="#q15"><span class="toc__num">15.</span>How do you use the GROUP_CONCAT function in MySQL?</a></li><li><a href="#q16"><span class="toc__num">16.</span>Explain the differences between INNER JOIN, LEFT JOIN, RIGHT JOIN, and FULL JOIN.</a></li><li><a href="#q17"><span class="toc__num">17.</span>How do you create and use stored functions in MySQL?</a></li><li><a href="#q18"><span class="toc__num">18.</span>What are common table expressions (CTEs), and how do you use them in MySQL?</a></li><li><a href="#q19"><span class="toc__num">19.</span>How do you implement recursive queries in MySQL?</a></li><li><a href="#q20"><span class="toc__num">20.</span>What is a materialized view, and how do you simulate it in MySQL?</a></li><li><a href="#q21"><span class="toc__num">21.</span>How do you use window functions in MySQL?</a></li><li><a href="#q22"><span class="toc__num">22.</span>Explain the purpose and usage of the ROW_NUMBER() function.</a></li><li><a href="#q23"><span class="toc__num">23.</span>How do you manage and maintain database schema changes in MySQL?</a></li><li><a href="#q24"><span class="toc__num">24.</span>What are the best practices for database backup and recovery in MySQL?</a></li><li><a href="#q25"><span class="toc__num">25.</span>How do you implement and manage database replication in MySQL?</a></li><li><a href="#q26"><span class="toc__num">26.</span>What is GTID-based replication, and how does it work?</a></li><li><a href="#q27"><span class="toc__num">27.</span>How do you monitor and troubleshoot replication lag in MySQL?</a></li><li><a href="#q28"><span class="toc__num">28.</span>Explain the purpose and usage of the binlog_format setting.</a></li><li><a href="#q29"><span class="toc__num">29.</span>How do you handle circular replication or multi-master replication in MySQL?</a></li><li><a href="#q30"><span class="toc__num">30.</span>What is sharding, and how do you implement it in MySQL?</a></li><li><a href="#q31"><span class="toc__num">31.</span>How do you handle and optimize complex transactions in MySQL?</a></li><li><a href="#q32"><span class="toc__num">32.</span>Explain the different transaction isolation levels in MySQL.</a></li><li><a href="#q33"><span class="toc__num">33.</span>How do you use the SERIALIZABLE isolation level, and what are its implications?</a></li><li><a href="#q34"><span class="toc__num">34.</span>What is the difference between optimistic and pessimistic locking?</a></li><li><a href="#q35"><span class="toc__num">35.</span>How do you implement row-level security in MySQL?</a></li><li><a href="#q36"><span class="toc__num">36.</span>What are user-defined variables, and how do you use them in MySQL?</a></li><li><a href="#q37"><span class="toc__num">37.</span>How do you handle and optimize bulk inserts in MySQL?</a></li><li><a href="#q38"><span class="toc__num">38.</span>Explain the differences between the UNION and UNION ALL operators.</a></li><li><a href="#q39"><span class="toc__num">39.</span>How do you manage and optimize disk I/O in MySQL?</a></li><li><a href="#q40"><span class="toc__num">40.</span>How do you implement and use foreign key constraints in MySQL?</a></li><li><a href="#q41"><span class="toc__num">41.</span>What are the advantages and disadvantages of denormalization?</a></li><li><a href="#q42"><span class="toc__num">42.</span>How do you perform database migration in MySQL with minimal downtime?</a></li><li><a href="#q43"><span class="toc__num">43.</span>How do you use the mysqldump utility for backups and restores?</a></li><li><a href="#q44"><span class="toc__num">44.</span>What are the best practices for securing a MySQL database?</a></li><li><a href="#q45"><span class="toc__num">45.</span>How do you use SSL/TLS to secure MySQL connections?</a></li><li><a href="#q46"><span class="toc__num">46.</span>How do you set up and manage user roles and privileges in MySQL?</a></li><li><a href="#q47"><span class="toc__num">47.</span>What are the differences between stored procedures and prepared statements?</a></li><li><a href="#q48"><span class="toc__num">48.</span>How do you use the PERFORMANCE_SCHEMA for monitoring MySQL performance?</a></li><li><a href="#q49"><span class="toc__num">49.</span>How do you implement audit logging in MySQL?</a></li><li><a href="#q50"><span class="toc__num">50.</span>How do you handle and store hierarchical data in MySQL?</a></li><li><a href="#q51"><span class="toc__num">51.</span>What are JSON data types, and how do you use them in MySQL?</a></li><li><a href="#q52"><span class="toc__num">52.</span>How do you perform JSON parsing and querying in MySQL?</a></li><li><a href="#q53"><span class="toc__num">53.</span>How do you use spatial data types and functions in MySQL?</a></li><li><a href="#q54"><span class="toc__num">54.</span>Explain the purpose and usage of the GEOMETRY data type.</a></li><li><a href="#q55"><span class="toc__num">55.</span>How do you optimize MySQL for high-concurrency workloads?</a></li><li><a href="#q56"><span class="toc__num">56.</span>What are the implications of setting the innodb_buffer_pool_size variable?</a></li><li><a href="#q57"><span class="toc__num">57.</span>How do you use the mysqlslap utility for benchmarking MySQL?</a></li><li><a href="#q58"><span class="toc__num">58.</span>What are the best practices for designing and optimizing indexes?</a></li><li><a href="#q59"><span class="toc__num">59.</span>How do you handle slow queries in MySQL?</a></li><li><a href="#q60"><span class="toc__num">60.</span>How do you implement time-series data storage and querying in MySQL?</a></li><li><a href="#q61"><span class="toc__num">61.</span>What is the purpose of the INFORMATION_SCHEMA in MySQL?</a></li><li><a href="#q62"><span class="toc__num">62.</span>How do you perform database refactoring in MySQL?</a></li><li><a href="#q63"><span class="toc__num">63.</span>How do you implement data archiving strategies in MySQL?</a></li><li><a href="#q64"><span class="toc__num">64.</span>How do you use the MySQL optimizer hints?</a></li><li><a href="#q65"><span class="toc__num">65.</span>How do you handle and optimize read and write-heavy workloads in MySQL?</a></li><li><a href="#q66"><span class="toc__num">66.</span>What are the differences between logical and physical backups?</a></li><li><a href="#q67"><span class="toc__num">67.</span>How do you implement and manage full-text search in MySQL?</a></li><li><a href="#q68"><span class="toc__num">68.</span>How do you use the federated storage engine in MySQL?</a></li><li><a href="#q69"><span class="toc__num">69.</span>How do you implement and use triggers for data validation and auditing?</a></li><li><a href="#q70"><span class="toc__num">70.</span>What are the best practices for indexing foreign keys?</a></li><li><a href="#q71"><span class="toc__num">71.</span>How do you use the mysqlbinlog utility?</a></li><li><a href="#q72"><span class="toc__num">72.</span>How do you perform database cloning and replication in MySQL?</a></li><li><a href="#q73"><span class="toc__num">73.</span>How do you manage and optimize connection pooling in MySQL?</a></li><li><a href="#q74"><span class="toc__num">74.</span>How do you handle data consistency across distributed databases?</a></li><li><a href="#q75"><span class="toc__num">75.</span>How do you implement application-level sharding in MySQL?</a></li><li><a href="#q76"><span class="toc__num">76.</span>How do you optimize MySQL for mixed read and write workloads?</a></li><li><a href="#q77"><span class="toc__num">77.</span>What are the advantages and disadvantages of using ENUM data types?</a></li><li><a href="#q78"><span class="toc__num">78.</span>How do you handle and store large binary objects (BLOBs) in MySQL?</a></li><li><a href="#q79"><span class="toc__num">79.</span>How do you implement rate limiting using MySQL?</a></li><li><a href="#q80"><span class="toc__num">80.</span>How do you design a high-availability architecture using MySQL?</a></li><li><a href="#q81"><span class="toc__num">81.</span>How do you use the optimizer trace feature in MySQL?</a></li><li><a href="#q82"><span class="toc__num">82.</span>How do you manage and monitor MySQL server health and performance?</a></li><li><a href="#q83"><span class="toc__num">83.</span>How do you implement and use user-defined functions (UDFs) in MySQL?</a></li><li><a href="#q84"><span class="toc__num">84.</span>What are the differences between CHAR and VARCHAR data types?</a></li><li><a href="#q85"><span class="toc__num">85.</span>How do you handle data versioning and history tracking in MySQL?</a></li><li><a href="#q86"><span class="toc__num">86.</span>How do you implement real-time analytics and reporting in MySQL?</a></li><li><a href="#q87"><span class="toc__num">87.</span>How do you use MySQL proxy for query routing and load balancing?</a></li><li><a href="#q88"><span class="toc__num">88.</span>How do you handle and store encrypted data in MySQL?</a></li><li><a href="#q89"><span class="toc__num">89.</span>How do you implement geographic information system (GIS) queries in MySQL?</a></li><li><a href="#q90"><span class="toc__num">90.</span>How do you handle and optimize large datasets in MySQL?</a></li><li><a href="#q91"><span class="toc__num">91.</span>How do you implement data retention policies in MySQL?</a></li><li><a href="#q92"><span class="toc__num">92.</span>How do you perform advanced text searching and indexing in MySQL?</a></li><li><a href="#q93"><span class="toc__num">93.</span>How do you use the MySQL event scheduler for automated tasks?</a></li><li><a href="#q94"><span class="toc__num">94.</span>How do you manage and optimize query execution times?</a></li><li><a href="#q95"><span class="toc__num">95.</span>How do you implement and use recursive CTEs in MySQL?</a></li><li><a href="#q96"><span class="toc__num">96.</span>How do you handle data aggregation and analysis in MySQL?</a></li><li><a href="#q97"><span class="toc__num">97.</span>How do you perform parallel query execution in MySQL?</a></li><li><a href="#q98"><span class="toc__num">98.</span>How do you implement session management using MySQL?</a></li><li><a href="#q99"><span class="toc__num">99.</span>How do you manage and monitor disk space usage in MySQL?</a></li><li><a href="#q100"><span class="toc__num">100.</span>How do you use the MySQL sys schema for performance tuning and diagnostics?</a></li>
-      </ul>
-    </div>
-
-    
-<article class="qa" id="q1">
-  <div class="qa__number">Question 1</div>
-  <h3 class="qa__question">Explain the differences between MyISAM and InnoDB storage engines.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[1] = r'''
 <p><strong>InnoDB</strong> is the default and the right choice for essentially all modern workloads. <strong>MyISAM</strong> is a legacy engine that survives mainly in old codebases &mdash; new tables should never use it.</p>
 
 <table>
@@ -129,15 +19,9 @@
 <p><strong>Why InnoDB wins for production</strong>: row-level locking allows real concurrent writes; MVCC lets long reports run without freezing inserts; the redo log makes crashes recoverable in seconds rather than hours of <code>REPAIR</code>. The clustered-index design also makes PK lookups one I/O instead of two.</p>
 
 <p>MyISAM&rsquo;s historical advantages (slightly faster <code>COUNT(*)</code>, smaller files, full-text search) are gone &mdash; InnoDB caches counts well, supports FULLTEXT since 5.6, and modern SSDs erase the storage gap. Convert any remaining MyISAM tables with <code>ALTER TABLE ... ENGINE=InnoDB</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q2">
-  <div class="qa__number">Question 2</div>
-  <h3 class="qa__question">How do you optimize a complex query in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[2] = r'''
 <p>Optimization is iterative measurement, not guesswork. Start by reproducing the slow query in a representative environment, then run <code>EXPLAIN ANALYZE</code> &mdash; this returns the actual execution plan with row counts and timing per step, exposing where time goes.</p>
 
 <p><strong>The systematic levers</strong>:</p>
@@ -150,15 +34,9 @@
 </ul>
 
 <p><strong>Beyond query rewriting</strong>: tune <code>innodb_buffer_pool_size</code> to fit hot data in memory (50-70% of RAM on dedicated servers), <code>ANALYZE TABLE</code> after large data shifts so the optimizer has fresh statistics, partition very large tables by date, and offload long reads to a replica. <strong>pt-query-digest</strong> on the slow log surfaces the queries actually worth your time &mdash; optimizing rare queries is wasted effort.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q3">
-  <div class="qa__number">Question 3</div>
-  <h3 class="qa__question">What is a query execution plan, and how do you analyze it in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[3] = r'''
 <p>A <strong>query execution plan</strong> is the optimizer&rsquo;s chosen strategy for resolving a query: which index to use, the join order, the access method (range vs ref vs ALL), whether sorting or temp tables are needed. MySQL exposes it via <code>EXPLAIN</code>, with the more detailed <code>EXPLAIN ANALYZE</code> running the query and reporting actual timings.</p>
 
 <p><strong>Reading EXPLAIN output</strong> &mdash; the columns that matter most:</p>
@@ -175,15 +53,9 @@
 <p><strong>EXPLAIN ANALYZE</strong> (8.0.18+) gives ground truth: actual rows, actual time per operator, loops. Use it whenever the estimate-based <code>EXPLAIN</code> looks fine but the query is still slow &mdash; statistics drift causes the planner to under-estimate. <strong>EXPLAIN FORMAT=JSON</strong> exposes the optimizer&rsquo;s cost model so you can see why one plan was chosen over another.</p>
 
 <p><strong>Tools for visualization</strong>: MySQL Workbench&rsquo;s visual explain, the <strong>EVERSQL</strong> or <strong>pt-visual-explain</strong> tools render the plan as a tree, making nested loops and join order easier to reason about.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q4">
-  <div class="qa__number">Question 4</div>
-  <h3 class="qa__question">Explain the purpose and usage of the EXPLAIN statement in MySQL.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[4] = r'''
 <p><code>EXPLAIN</code> tells you how the optimizer plans to execute a query &mdash; without actually running it. It&rsquo;s the diagnostic starting point for any optimization work because every other decision (which index to add, whether to rewrite the query) depends on understanding the plan.</p>
 
 <pre><code>EXPLAIN SELECT u.name, COUNT(o.id) AS order_count
@@ -210,15 +82,9 @@ GROUP BY u.id;</code></pre>
 </ul>
 
 <p>Run <code>EXPLAIN</code> first, identify the worst access type or biggest <code>rows</code> estimate, fix that one thing, re-run. Single-step iterative optimization beats trying to fix everything at once.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q5">
-  <div class="qa__number">Question 5</div>
-  <h3 class="qa__question">How do you use indexing to improve query performance in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[5] = r'''
 <p>Indexes are sorted lookup structures that let MySQL find rows without scanning the whole table. The default and dominant type is the <strong>B+tree</strong>, which provides O(log n) lookups, range scans, and ordered traversal.</p>
 
 <p><strong>What a good index looks like</strong>:</p>
@@ -242,15 +108,9 @@ GROUP BY u.id;</code></pre>
 </table>
 
 <p><strong>Cost</strong>: every index slows writes (each INSERT/UPDATE/DELETE updates every index) and consumes disk plus memory. Add indexes deliberately, drop unused ones (<code>sys.schema_unused_indexes</code>), and let <code>EXPLAIN</code> verify they&rsquo;re actually picked.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q6">
-  <div class="qa__number">Question 6</div>
-  <h3 class="qa__question">What are full-text indexes, and how do you use them in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[6] = r'''
 <p>FULLTEXT indexes tokenize text columns into words and build an inverted word→document index, enabling natural-language and Boolean searches that B+tree indexes can&rsquo;t support. InnoDB has supported FULLTEXT since MySQL 5.6.</p>
 
 <pre><code>ALTER TABLE articles
@@ -280,15 +140,9 @@ ORDER BY score DESC LIMIT 20;</code></pre>
 </ul>
 
 <p><strong>When to step outside MySQL</strong>: at tens of millions of rows or when you need stemming, synonyms, fuzzy matching, faceted aggregation, or cross-language analyzers, move to a dedicated search engine &mdash; <strong>Elasticsearch</strong>, <strong>OpenSearch</strong>, <strong>Meilisearch</strong>, or <strong>Typesense</strong>. MySQL FULLTEXT covers internal CMS-scale content but stops being a winning answer at search-product scale.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q7">
-  <div class="qa__number">Question 7</div>
-  <h3 class="qa__question">How do you implement and use partitioning in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[7] = r'''
 <p>Partitioning splits a single logical table into multiple physical files based on a partitioning key. Queries that filter by the key only read relevant partitions (<em>partition pruning</em>); maintenance operations can target individual partitions without scanning the whole table.</p>
 
 <pre><code>CREATE TABLE events (
@@ -315,15 +169,9 @@ ORDER BY score DESC LIMIT 20;</code></pre>
 <p><strong>Important constraints</strong>: every unique key (including the PK) must include the partitioning column. Foreign keys are not supported on partitioned tables. Partition pruning only kicks in when queries filter on the partition key directly &mdash; <code>WHERE YEAR(created_at) = 2026</code> defeats it; <code>WHERE created_at &gt;= '2026-01-01'</code> works.</p>
 
 <p><strong>When it pays off</strong>: very large time-series tables (logs, events, telemetry) with predictable retention, where 90% of queries hit recent data and old data is dropped wholesale. For mid-sized OLTP tables, the operational complexity rarely beats good indexes plus periodic archive scripts.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q8">
-  <div class="qa__number">Question 8</div>
-  <h3 class="qa__question">Explain the differences between horizontal and vertical partitioning.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[8] = r'''
 <p>Both terms describe how to split a large table, but along different axes:</p>
 
 <table>
@@ -357,15 +205,9 @@ ORDER BY score DESC LIMIT 20;</code></pre>
 <p><strong>Sharding</strong> is horizontal partitioning across multiple servers &mdash; rows of a logical "users" table are distributed across N database instances by a shard key. Adds operational complexity and constraints (no cross-shard joins) but is the path to scaling beyond one machine. <strong>Vitess</strong>, <strong>PlanetScale</strong>, and <strong>TiDB</strong> implement this transparently for MySQL-compatible workloads.</p>
 
 <p>In practice: vertical splits live with you forever (just denormalization with extra steps); horizontal partitioning earns its place once a table outgrows what indexes alone can keep fast.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q9">
-  <div class="qa__number">Question 9</div>
-  <h3 class="qa__question">How do you manage and optimize MySQL memory usage?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[9] = r'''
 <p>MySQL&rsquo;s memory hierarchy splits between <em>global</em> buffers (shared across all sessions) and <em>per-thread</em> buffers (allocated per connection). The biggest by far is the InnoDB buffer pool.</p>
 
 <p><strong>Key memory settings</strong>:</p>
@@ -391,15 +233,9 @@ FROM (SELECT
 <p>Hit ratio above 99% is healthy for OLTP; falling below 95% means hot data doesn&rsquo;t fit in memory.</p>
 
 <p><strong>Per-thread caution</strong>: <code>max_connections × (sort_buffer + join_buffer + read_buffer)</code> can dwarf the buffer pool if you over-tune the per-thread values. <strong>ProxySQL</strong> or <strong>connection pools</strong> at the application layer (HikariCP for JVM, mysql2&rsquo;s pool for Node.js) keep <code>max_connections</code> manageable. Watch for OOM-killer activity: <code>journalctl -u mysql</code> showing <code>oom-kill</code> means the math has overflowed.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q10">
-  <div class="qa__number">Question 10</div>
-  <h3 class="qa__question">What is the role of the query cache in MySQL, and how do you manage it?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[10] = r'''
 <p>The <strong>query cache stored full result sets keyed by exact query text</strong>, returning cached results without re-executing. <strong>It was deprecated in MySQL 5.7 and removed entirely in MySQL 8.0</strong> &mdash; if you&rsquo;re on a current MySQL, the cache no longer exists and there&rsquo;s nothing to manage.</p>
 
 <p><strong>Why it was removed</strong>:</p>
@@ -421,15 +257,9 @@ FROM (SELECT
 </ul>
 
 <p>The "MySQL query cache" answer is now historical context. For new deployments, ignore it.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q11">
-  <div class="qa__number">Question 11</div>
-  <h3 class="qa__question">How do you handle and optimize large databases in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[11] = r'''
 <p>"Large" usually means the working set no longer fits in memory or maintenance operations (DDL, backups, deletes) take hours. The solutions divide between making the existing schema more efficient and structurally changing how data is stored.</p>
 
 <p><strong>Within the existing schema</strong>:</p>
@@ -449,15 +279,9 @@ FROM (SELECT
 </ul>
 
 <p><strong>Backups deserve special attention</strong>: <code>mysqldump</code> on multi-TB databases takes too long. Switch to <strong>Percona XtraBackup</strong> for physical backups (snapshot speed, parallelizable), or use cloud-provider snapshots (AWS RDS, Aurora, Cloud SQL) which are storage-level and near-instant. Always test restore times &mdash; a 4-hour backup window means a 4-hour outage when you need to recover.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q12">
-  <div class="qa__number">Question 12</div>
-  <h3 class="qa__question">What is a covering index, and how does it improve query performance?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[12] = r'''
 <p>A <strong>covering index</strong> is one that contains every column the query needs, so MySQL can answer the query from the index alone without reading the row data &mdash; eliminating one I/O per row. <code>EXPLAIN</code> shows <code>Extra: Using index</code> when this happens.</p>
 
 <pre><code>-- Schema
@@ -489,15 +313,9 @@ FROM orders WHERE user_id = 5 AND status = 'completed';
 <p><strong>Designing covering indexes</strong>: include filter columns first (in selectivity order), then sort columns, then the small projection columns the query reads. Don&rsquo;t cover huge TEXT/BLOB columns &mdash; the index bloats. Two indexes specialized for two queries usually beat one wide index trying to cover both.</p>
 
 <p><strong>Limit</strong>: every additional column slows writes (each insert updates the index) and increases RAM usage. Cover specifically the queries that are hot &mdash; not every query.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q13">
-  <div class="qa__number">Question 13</div>
-  <h3 class="qa__question">How do you detect and fix deadlocks in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[13] = r'''
 <p>A <strong>deadlock</strong> occurs when two transactions hold locks the other needs, forming a cycle neither can break. InnoDB detects deadlock cycles via a wait-for graph and aborts the cheaper transaction (the one with fewer rows modified) with error <code>1213 (40001)</code>; the other proceeds.</p>
 
 <p><strong>Inspect the most recent deadlock</strong>:</p>
@@ -528,15 +346,9 @@ SET GLOBAL innodb_print_all_deadlocks = ON;
 </ol>
 
 <p><strong>Don&rsquo;t treat deadlocks as catastrophic</strong>. A few per hour on a busy OLTP system is normal. Spikes (hundreds per minute) point to a hot row or unordered write pattern worth investigating.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q14">
-  <div class="qa__number">Question 14</div>
-  <h3 class="qa__question">What are temporary tables, and how do you use them in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[14] = r'''
 <p>A <strong>temporary table</strong> exists only for the duration of the connection that created it and is invisible to other sessions. MySQL automatically drops it when the connection closes. Useful for staging data during multi-step computations, breaking complex queries into simpler stages, and avoiding repeated subquery evaluation.</p>
 
 <pre><code>CREATE TEMPORARY TABLE recent_high_value AS
@@ -560,15 +372,9 @@ WHERE c.country = 'IN';</code></pre>
 </ul>
 
 <p><strong>CTE alternative</strong>: for one-shot intermediate results within a single query, MySQL 8&rsquo;s <code>WITH</code> clause is cleaner &mdash; no setup, no cleanup, scoped to the query. Use temp tables when the staged data must persist across multiple statements (multi-step ETL, complex reports executed via stored procedures).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q15">
-  <div class="qa__number">Question 15</div>
-  <h3 class="qa__question">How do you use the GROUP_CONCAT function in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[15] = r'''
 <p><code>GROUP_CONCAT</code> aggregates rows from a group into a single delimited string &mdash; the SQL way to flatten one-to-many relationships into a single result column without the application having to stitch them together.</p>
 
 <pre><code>SELECT
@@ -607,15 +413,9 @@ GROUP BY u.id;
 -- Returns ["sql", "react", "kubernetes"] as a real JSON array.</code></pre>
 
 <p>Use <code>JSON_OBJECTAGG</code> for key→value rollups. For new code prefer the JSON aggregates &mdash; they&rsquo;re less fragile than string concatenation.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q16">
-  <div class="qa__number">Question 16</div>
-  <h3 class="qa__question">Explain the differences between INNER JOIN, LEFT JOIN, RIGHT JOIN, and FULL JOIN.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[16] = r'''
 <p>Joins combine rows from multiple tables based on a matching condition. The four standard variants differ only in <em>which non-matching rows are kept</em>.</p>
 
 <table>
@@ -653,15 +453,9 @@ WHERE NOT EXISTS (SELECT 1 FROM orders o WHERE o.user_id = u.id);</code></pre>
   <li>MySQL 8 supports <strong>hash joins</strong> for non-indexed equi-joins on large tables &mdash; previously a nested-loop disaster, now efficient.</li>
   <li>Predicates on the right table of a <code>LEFT JOIN</code> belong in the <code>ON</code> clause, not <code>WHERE</code> &mdash; otherwise the LEFT JOIN collapses to INNER.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q17">
-  <div class="qa__number">Question 17</div>
-  <h3 class="qa__question">How do you create and use stored functions in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[17] = r'''
 <p>Stored functions return a single value and can be embedded inside SQL expressions like a built-in function. They package logic that would otherwise be repeated in many queries or in application code.</p>
 
 <pre><code>DELIMITER //
@@ -701,15 +495,9 @@ SELECT id, fmt_currency(total, 'USD') AS display_total FROM orders;</code></pre>
 </ul>
 
 <p><strong>Functions vs procedures</strong>: functions return a single value usable in expressions; procedures execute via <code>CALL</code>, can return result sets, and may have OUT parameters. Procedures suit multi-statement workflows; functions suit value computation.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q18">
-  <div class="qa__number">Question 18</div>
-  <h3 class="qa__question">What are common table expressions (CTEs), and how do you use them in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[18] = r'''
 <p>A <strong>Common Table Expression</strong> (CTE) is a named, reusable result set defined at the start of a query with the <code>WITH</code> clause. It exists only for the duration of that query &mdash; cleaner than nested subqueries and far cheaper than creating a temporary table for one-off intermediate results. Available in MySQL 8.0+.</p>
 
 <pre><code>WITH high_value_orders AS (
@@ -756,15 +544,9 @@ GROUP BY uc.country;</code></pre>
 <p>In MySQL, CTEs are <strong>not materialized by default</strong> &mdash; the optimizer can merge them into the outer query or evaluate them inline. There&rsquo;s no <code>MATERIALIZED</code> hint as in PostgreSQL, but for performance-sensitive cases a temporary table can force materialization.</p>
 
 <p><strong>Recursive CTEs</strong> open up tree/graph traversal &mdash; org charts, category hierarchies, comment threads, file systems &mdash; in pure SQL. See Q19.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q19">
-  <div class="qa__number">Question 19</div>
-  <h3 class="qa__question">How do you implement recursive queries in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[19] = r'''
 <p>Recursive CTEs handle hierarchical data &mdash; org charts, category trees, comment threads, file systems &mdash; in pure SQL by chaining a query to its own previous output until no new rows are produced.</p>
 
 <pre><code>WITH RECURSIVE org_tree AS (
@@ -809,15 +591,9 @@ SELECT * FROM managers;
 <p><strong>When to materialize a closure table instead</strong>: for write-light, read-heavy hierarchies queried thousands of times per second, pre-compute a <code>(ancestor, descendant, depth)</code> table maintained by triggers. Reads become a single index lookup; the recursive CTE only needs to run when the tree changes.</p>
 
 <p>Other useful applications: generating date ranges (<code>WITH RECURSIVE dates AS (SELECT '2026-01-01' AS d UNION ALL SELECT d + INTERVAL 1 DAY FROM dates WHERE d &lt; '2026-12-31')</code>), running cumulative calculations, traversing graph-like FK chains.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q20">
-  <div class="qa__number">Question 20</div>
-  <h3 class="qa__question">What is a materialized view, and how do you simulate it in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[20] = r'''
 <p>A <strong>materialized view</strong> is a precomputed query result stored as a table and refreshed on a schedule or trigger &mdash; faster reads at the cost of staleness and write overhead. <strong>MySQL doesn&rsquo;t have native materialized views</strong> (PostgreSQL and Oracle do), so you simulate them with regular tables plus a refresh strategy.</p>
 
 <p><strong>Pattern 1 &mdash; full refresh on a schedule</strong>:</p>
@@ -866,15 +642,9 @@ FOR EACH ROW
 </ul>
 
 <p>For a single MySQL instance, the scheduled-event pattern covers most reporting needs; reach for streaming infrastructure once latency requirements drop below a few minutes.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q21">
-  <div class="qa__number">Question 21</div>
-  <h3 class="qa__question">How do you use window functions in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[21] = r'''
 <p>Window functions perform calculations across a <em>set of rows related to the current row</em> without collapsing them into one row like <code>GROUP BY</code> does. Each row keeps its identity but gains a value computed from a "window" of surrounding rows. MySQL 8+ supports the full standard set.</p>
 
 <pre><code>SELECT
@@ -917,15 +687,9 @@ FROM orders;</code></pre>
 FROM daily_summary;</code></pre>
 
 <p><strong>Why they matter</strong>: window functions cleanly replace many self-joins, correlated subqueries, and procedural workarounds. Top-1-per-group, running totals, gap detection, year-over-year comparisons &mdash; one CTE-and-window combination instead of three nested queries. They&rsquo;re the single biggest reason to be on MySQL 8.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q22">
-  <div class="qa__number">Question 22</div>
-  <h3 class="qa__question">Explain the purpose and usage of the ROW_NUMBER() function.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[22] = r'''
 <p><code>ROW_NUMBER()</code> assigns a unique sequential integer to each row within its partition, ordered by the specified columns. Unlike <code>RANK</code> and <code>DENSE_RANK</code>, it never repeats numbers &mdash; ties are broken arbitrarily by the optimizer.</p>
 
 <pre><code>SELECT
@@ -976,15 +740,9 @@ WHERE rn BETWEEN 21 AND 30;
 <p>For huge tables, prefer keyset pagination (<code>WHERE created_at &lt; ? ORDER BY created_at DESC LIMIT 10</code>) &mdash; constant time vs ROW_NUMBER&rsquo;s linear cost in offset.</p>
 
 <p><strong>Other practical uses</strong>: deduplicating rows by keeping the first per group, sequencing events for time-series analysis, generating "first occurrence" flags.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q23">
-  <div class="qa__number">Question 23</div>
-  <h3 class="qa__question">How do you manage and maintain database schema changes in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[23] = r'''
 <p>Schema migrations &mdash; adding columns, changing types, modifying indexes &mdash; are risky on production data because they can lock tables for hours and corrupt state if interrupted. The discipline is to <strong>version migrations as code</strong>, run them through automated tooling, and use online-DDL strategies on large tables.</p>
 
 <p><strong>Migration tools</strong> manage forward and rollback scripts, track which migrations have been applied, and integrate with deploys:</p>
@@ -1016,15 +774,9 @@ WHERE rn BETWEEN 21 AND 30;
 </ul>
 
 <p><strong>Avoid</strong> ad-hoc SQL run by hand on production. Every change goes through the same automated pipeline as code &mdash; reviewed, tested, recoverable.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q24">
-  <div class="qa__number">Question 24</div>
-  <h3 class="qa__question">What are the best practices for database backup and recovery in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[24] = r'''
 <p>Backup strategy is determined by two numbers: <strong>RPO</strong> (Recovery Point Objective &mdash; how much data loss is tolerable, in time) and <strong>RTO</strong> (Recovery Time Objective &mdash; how long restoration is allowed to take). Both should be requirements, not afterthoughts.</p>
 
 <p><strong>Logical vs physical backups</strong>:</p>
@@ -1049,15 +801,9 @@ WHERE rn BETWEEN 21 AND 30;
 </ul>
 
 <p><strong>Modern managed services</strong> &mdash; AWS RDS, Aurora, Cloud SQL, PlanetScale &mdash; handle base backups, transaction logs, retention, and PITR automatically. For self-hosted MySQL, the standard production stack is XtraBackup nightly + binlog continuous backup + offsite replication. <code>mysqldump</code> remains useful for development environments, table-level extracts, and migrations between major versions.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q25">
-  <div class="qa__number">Question 25</div>
-  <h3 class="qa__question">How do you implement and manage database replication in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[25] = r'''
 <p>Replication copies writes from a <strong>source</strong> (primary) server to one or more <strong>replicas</strong> (secondaries). Used for read scaling, high availability, geographic distribution, and offloading backups/reports.</p>
 
 <p><strong>How it works</strong>: every change on the source is recorded in its <em>binary log</em> (binlog). Each replica connects, streams the binlog, writes events to its <em>relay log</em>, and applies them &mdash; eventually consistent with the source.</p>
@@ -1108,15 +854,9 @@ START REPLICA;</code></pre>
 </table>
 
 <p><strong>Operational concerns</strong>: applications must tolerate replica lag (read-your-writes consistency requires routing some reads to source). Modern managed services (Aurora, PlanetScale, Cloud SQL) handle topology, failover, and lag mitigation transparently &mdash; usually the right choice over hand-rolled replication.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q26">
-  <div class="qa__number">Question 26</div>
-  <h3 class="qa__question">What is GTID-based replication, and how does it work?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[26] = r'''
 <p><strong>GTID</strong> (Global Transaction Identifier) tags each transaction with a unique identifier of the form <code>SOURCE_UUID:transaction_number</code>. Replicas track which GTIDs they&rsquo;ve applied; binlog positions become irrelevant. This is the modern replication mechanism &mdash; introduced in MySQL 5.6, mature in 5.7+, the default expectation in 8.x.</p>
 
 <pre><code>-- A transaction&rsquo;s GTID looks like:
@@ -1152,15 +892,9 @@ SELECT @@global.gtid_purged;
 SHOW REPLICA STATUS\G  -- compare Executed_Gtid_Set with source&rsquo;s</code></pre>
 
 <p><strong>The win</strong>: GTID-based replication makes MySQL clusters operationally manageable. Failover, replica reseeding, and topology changes that used to require careful manual coordination become single commands. Combined with <strong>InnoDB Cluster</strong> or <strong>Orchestrator</strong>, GTIDs underpin the automated failover used by managed services and modern self-hosted setups.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q27">
-  <div class="qa__number">Question 27</div>
-  <h3 class="qa__question">How do you monitor and troubleshoot replication lag in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[27] = r'''
 <p><strong>Replication lag</strong> is the time gap between a write committing on the source and being applied on a replica. Some lag is normal; growing or unbounded lag means the replica can&rsquo;t keep up &mdash; replicas eventually serve stale data, and the cluster loses its HA properties.</p>
 
 <p><strong>Measure it</strong>:</p>
@@ -1197,15 +931,9 @@ SELECT NOW() - last_heartbeat AS true_lag_seconds FROM heartbeat.heartbeat;</cod
 </ul>
 
 <p><strong>Monitoring</strong>: alert on lag &gt; threshold (e.g., 60s), and on lag growing rather than absolute value. Sustained growth indicates a structural problem; spikes during batch jobs are usually self-correcting.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q28">
-  <div class="qa__number">Question 28</div>
-  <h3 class="qa__question">Explain the purpose and usage of the binlog_format setting.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[28] = r'''
 <p><code>binlog_format</code> controls how changes are recorded in the binary log. Three values, each with different replication behavior:</p>
 
 <table>
@@ -1242,15 +970,9 @@ binlog_row_image = MINIMAL  -- only changed columns + PK; reduces size</code></p
 -- Shows pseudo-SQL representations of row events</code></pre>
 
 <p><strong>Production answer</strong>: leave it at ROW. The size cost is minor compared to the operational simplicity, and many modern features (CDC pipelines, GTID-based reseeding, backwards-compatible replication) assume or work best with ROW.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q29">
-  <div class="qa__number">Question 29</div>
-  <h3 class="qa__question">How do you handle circular replication or multi-master replication in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[29] = r'''
 <p>Multi-master means multiple servers accept writes; conflicts (two writes to the same row at the same time on different masters) must be detected and resolved. <strong>Classic asynchronous master-master replication is operationally fragile</strong> and largely obsolete in MySQL 8 &mdash; <strong>Group Replication</strong> (the foundation of InnoDB Cluster) is the supported modern answer.</p>
 
 <p><strong>Group Replication</strong> uses a Paxos-style consensus protocol: every transaction is sent to all members, certified to detect conflicts, and applied only after a quorum agrees. Two modes:</p>
@@ -1288,15 +1010,9 @@ group_replication_single_primary_mode = ON</code></pre>
 </ul>
 
 <p>"Multi-master" sounds like a scaling answer; in practice it&rsquo;s usually an availability answer with significant complexity costs.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q30">
-  <div class="qa__number">Question 30</div>
-  <h3 class="qa__question">What is sharding, and how do you implement it in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[30] = r'''
 <p><strong>Sharding</strong> is horizontal partitioning <em>across servers</em> &mdash; rows of one logical table are distributed across multiple physical databases. Used when a single server&rsquo;s I/O, CPU, or storage can&rsquo;t handle the workload, even after vertical scaling and read replicas.</p>
 
 <p><strong>Sharding strategies</strong>:</p>
@@ -1326,15 +1042,9 @@ group_replication_single_primary_mode = ON</code></pre>
 </ul>
 
 <p><strong>Pragmatic advice</strong>: most teams shouldn&rsquo;t shard. Hardware has gotten huge &mdash; a single MySQL instance on modern cloud hardware can serve 100K+ QPS and tens of TB. Push vertical scaling, read replicas, table partitioning, application caching, and archiving as far as possible first. Only when one shard&rsquo;s write throughput genuinely caps the system should you take on sharding&rsquo;s permanent operational tax.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q31">
-  <div class="qa__number">Question 31</div>
-  <h3 class="qa__question">How do you handle and optimize complex transactions in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[31] = r'''
 <p>Complex transactions need to balance three concerns: <strong>correctness</strong> (atomic, isolated), <strong>throughput</strong> (lock contention kills concurrency), and <strong>recoverability</strong> (deadlocks happen and must be retried). The optimization rules are mostly about keeping transactions <em>short and predictable</em>.</p>
 
 <p><strong>Core principles</strong>:</p>
@@ -1375,15 +1085,9 @@ FOR UPDATE SKIP LOCKED;     -- skip rows another transaction has locked</code></
 </ul>
 
 <p>The biggest wins almost always come from <strong>shortening transactions</strong>, not tuning isolation or lock granularity.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q32">
-  <div class="qa__number">Question 32</div>
-  <h3 class="qa__question">Explain the different transaction isolation levels in MySQL.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[32] = r'''
 <p>Isolation levels control what one transaction can see of another&rsquo;s in-flight work. The four standard levels trade strictness against concurrency:</p>
 
 <table>
@@ -1431,15 +1135,9 @@ transaction_isolation = READ-COMMITTED</code></pre>
   <li><strong>SERIALIZABLE</strong> only when you have specific correctness requirements that demand it &mdash; financial transactions, certain compliance scenarios. Throughput drops noticeably.</li>
   <li><strong>READ UNCOMMITTED</strong> is essentially never the right choice in production.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q33">
-  <div class="qa__number">Question 33</div>
-  <h3 class="qa__question">How do you use the SERIALIZABLE isolation level, and what are its implications?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[33] = r'''
 <p><code>SERIALIZABLE</code> is the strictest isolation level &mdash; transactions execute as if they ran one at a time, even though they actually run concurrently. It eliminates every read anomaly: no dirty reads, no non-repeatable reads, no phantoms, no write skew.</p>
 
 <p><strong>How InnoDB implements it</strong>: <code>SERIALIZABLE</code> implicitly converts plain <code>SELECT</code> statements to <code>SELECT ... LOCK IN SHARE MODE</code> &mdash; every read takes a shared lock on the rows it touches, preventing other transactions from modifying them until the reading transaction completes. Combined with <code>REPEATABLE READ</code>&rsquo;s gap locks, the result is genuinely serializable execution.</p>
@@ -1475,15 +1173,9 @@ COMMIT;
 -- Subsequent transactions revert to the session/global default.</code></pre>
 
 <p><strong>Modern alternative</strong>: explicit <code>SELECT ... FOR UPDATE</code> at lower isolation often achieves the same correctness goal with less contention &mdash; you lock only the specific rows that matter, not everything you read.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q34">
-  <div class="qa__number">Question 34</div>
-  <h3 class="qa__question">What is the difference between optimistic and pessimistic locking?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[34] = r'''
 <p>Two strategies for handling concurrent updates to the same data:</p>
 
 <table>
@@ -1537,15 +1229,9 @@ WHERE id = 5 AND version = ?;       -- version from the read
 </ul>
 
 <p>ORMs (Hibernate, JPA, Django, Rails) typically build optimistic locking in via a <code>version</code> column convention. Use it as the default; reach for pessimistic locks only when measurement shows you need to.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q35">
-  <div class="qa__number">Question 35</div>
-  <h3 class="qa__question">How do you implement row-level security in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[35] = r'''
 <p>Row-level security (RLS) restricts which rows a user can see or modify based on their identity, role, or attributes. <strong>MySQL has no native RLS</strong> (PostgreSQL does); the standard implementation patterns are at the schema and application level.</p>
 
 <p><strong>Pattern 1 &mdash; Views with predicate filters</strong>:</p>
@@ -1589,15 +1275,9 @@ END;</code></pre>
 <p>Each tenant gets a separate database (or schema). Permissions are managed at the database level &mdash; tenant A&rsquo;s connection literally cannot see tenant B&rsquo;s data. Strongest isolation; complicates schema migrations (now apply to N databases) and backup strategy. Suits regulated industries; awkward at scale.</p>
 
 <p><strong>Production reality</strong>: most multi-tenant MySQL apps use <strong>tenant_id everywhere with ORM enforcement</strong>, plus database-level access control limiting which app users can connect at all. True row-level security with database enforcement requires either Postgres, custom triggers, or a proxy layer (<strong>ProxySQL</strong> with query rewriting).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q36">
-  <div class="qa__number">Question 36</div>
-  <h3 class="qa__question">What are user-defined variables, and how do you use them in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[36] = r'''
 <p><strong>User-defined variables</strong> are session-scoped variables prefixed with <code>@</code>. They hold values across statements within a single connection &mdash; useful for stashing intermediate results, generating row numbers in pre-window-function MySQL, or passing values between successive queries.</p>
 
 <pre><code>SET @threshold = 1000;
@@ -1651,15 +1331,9 @@ DEALLOCATE PREPARE stmt;</code></pre>
 </ul>
 
 <p>For most modern queries, window functions and CTEs replace the older user-variable hacks. The variables remain useful for parameter passing and scripting.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q37">
-  <div class="qa__number">Question 37</div>
-  <h3 class="qa__question">How do you handle and optimize bulk inserts in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[37] = r'''
 <p>Bulk inserts dominate import performance. The naive approach &mdash; one <code>INSERT</code> per row in a loop &mdash; is 50-100x slower than batched inserts because every statement pays full network round-trip + transaction commit overhead.</p>
 
 <p><strong>Optimization techniques, biggest wins first</strong>:</p>
@@ -1709,15 +1383,9 @@ Only do this when you trust the data; constraint violations now fail at COMMIT, 
 </ul>
 
 <p><strong>Application-level</strong>: connection pooling, prepared statements, parallelism (multiple workers loading disjoint key ranges). Tools: <strong>mysqlimport</strong> CLI, <strong>mysqlsh util.importTable</strong> (parallel chunked load), <strong>Apache Sqoop</strong> for warehouse imports.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q38">
-  <div class="qa__number">Question 38</div>
-  <h3 class="qa__question">Explain the differences between the UNION and UNION ALL operators.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[38] = r'''
 <p>Both <code>UNION</code> and <code>UNION ALL</code> combine the result sets of two or more queries vertically &mdash; same columns, stacked rows. The difference is duplicate handling:</p>
 
 <table>
@@ -1772,15 +1440,9 @@ UNION ALL
 SELECT category, SUM(amount) FROM transactions GROUP BY category;</code></pre>
 
 <p><strong>FULL OUTER JOIN emulation</strong>: MySQL doesn&rsquo;t support <code>FULL OUTER JOIN</code> directly. <code>LEFT JOIN ... UNION ... RIGHT JOIN</code> is the standard workaround.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q39">
-  <div class="qa__number">Question 39</div>
-  <h3 class="qa__question">How do you manage and optimize disk I/O in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[39] = r'''
 <p>Disk I/O is usually the ultimate bottleneck for OLTP workloads. The optimization strategy is fitting the working set in memory (so most reads are RAM hits) and batching writes (so each fsync amortizes over many changes).</p>
 
 <p><strong>Storage layer choices, biggest impact first</strong>:</p>
@@ -1823,15 +1485,9 @@ WHERE EVENT_NAME LIKE '%file/innodb%'
 ORDER BY SUM_TIMER_WAIT DESC LIMIT 10;</code></pre>
 
 <p>If <code>%util</code> on the data disk stays above 80%, the system is I/O bound &mdash; tune the buffer pool, add memory, or move to faster storage.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q40">
-  <div class="qa__number">Question 40</div>
-  <h3 class="qa__question">How do you implement and use foreign key constraints in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[40] = r'''
 <p>Foreign keys enforce referential integrity at the database level: a row in the child table must reference an existing row in the parent table. The DB rejects orphan inserts and (depending on the action) cascades or restricts deletes/updates.</p>
 
 <pre><code>CREATE TABLE orders (
@@ -1883,15 +1539,9 @@ ORDER BY SUM_TIMER_WAIT DESC LIMIT 10;</code></pre>
   <li>FKs prevent dropping referenced tables: drop the FK first or use <code>SET FOREIGN_KEY_CHECKS = 0</code> for migrations.</li>
   <li>Modern frameworks (Prisma, Drizzle, ActiveRecord) generate FKs by default in migrations &mdash; keep them.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q41">
-  <div class="qa__number">Question 41</div>
-  <h3 class="qa__question">What are the advantages and disadvantages of denormalization?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[41] = r'''
 <p><strong>Denormalization</strong> is the deliberate addition of redundant data to a normalized schema to optimize for read patterns. It&rsquo;s a tactical choice, not a starting point.</p>
 
 <p><strong>Advantages</strong>:</p>
@@ -1933,15 +1583,9 @@ ORDER BY SUM_TIMER_WAIT DESC LIMIT 10;</code></pre>
 </ul>
 
 <p><strong>The pragmatic rule</strong>: <em>normalize until it hurts; denormalize until it works</em>. Start fully normalized for clarity and integrity. Identify specific hot read paths via metrics. Denormalize those paths surgically &mdash; not the whole schema. Document each denormalization with a comment explaining the why and the maintenance strategy.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q42">
-  <div class="qa__number">Question 42</div>
-  <h3 class="qa__question">How do you perform database migration in MySQL with minimal downtime?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[42] = r'''
 <p>Zero-or-minimal-downtime migration uses the <strong>expand-contract pattern</strong>: every change is broken into deploys that are individually reversible and coexist with both old and new application code. No single moment requires both DB and application to switch atomically.</p>
 
 <p><strong>The general phases for any column rename, type change, or table restructure</strong>:</p>
@@ -1987,15 +1631,9 @@ ORDER BY SUM_TIMER_WAIT DESC LIMIT 10;</code></pre>
 </ul>
 
 <p>The goal isn&rsquo;t literally zero impact &mdash; it&rsquo;s reducing the irreversible-blast-radius window from hours to seconds.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q43">
-  <div class="qa__number">Question 43</div>
-  <h3 class="qa__question">How do you use the mysqldump utility for backups and restores?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[43] = r'''
 <p><code>mysqldump</code> is the standard logical-backup utility &mdash; produces a SQL script that recreates a database when re-executed. Comes with every MySQL installation; portable across versions and platforms.</p>
 
 <p><strong>Backup essentials</strong>:</p>
@@ -2064,15 +1702,9 @@ EOF</code></pre>
 </ul>
 
 <p><strong>Best practices</strong>: encrypt at rest, store offsite (3-2-1 rule), test restore times quarterly. <strong>An untested backup doesn&rsquo;t exist.</strong></p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q44">
-  <div class="qa__number">Question 44</div>
-  <h3 class="qa__question">What are the best practices for securing a MySQL database?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[44] = r'''
 <p>MySQL security is layered &mdash; network, authentication, authorization, encryption, and auditing each cover a different attack surface. The defense-in-depth principle: assume any one layer might fail.</p>
 
 <p><strong>Network</strong>:</p>
@@ -2128,15 +1760,9 @@ SET DEFAULT ROLE ALL TO 'app_user'@'%';</code></pre>
 </ul>
 
 <p><strong>Application-side</strong>: parameterized queries (always &mdash; never string-concatenated SQL), input validation, ORMs that escape by default, secret management. The OWASP SQL injection cheat sheet is mandatory reading for any team writing SQL-using code.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q45">
-  <div class="qa__number">Question 45</div>
-  <h3 class="qa__question">How do you use SSL/TLS to secure MySQL connections?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[45] = r'''
 <p>TLS protects MySQL connections from eavesdropping and tampering. In modern deployments it&rsquo;s essentially mandatory: any traffic crossing a network boundary should be encrypted, and most security baselines require it.</p>
 
 <p><strong>Server certificate setup</strong> &mdash; MySQL 8 auto-generates self-signed certs on first start, suitable for development:</p>
@@ -2212,15 +1838,9 @@ const conn = mysql.createConnection({
   SOURCE_SSL_VERIFY_SERVER_CERT = 1;</code></pre>
 
 <p><strong>Cloud reality</strong>: AWS RDS / Aurora / Cloud SQL provide managed TLS by default; download the provider&rsquo;s CA bundle and configure clients to verify against it. Letting platforms handle cert rotation is a major operational win.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q46">
-  <div class="qa__number">Question 46</div>
-  <h3 class="qa__question">How do you set up and manage user roles and privileges in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[46] = r'''
 <p>MySQL 8 introduced <strong>roles</strong> &mdash; named bundles of privileges that can be granted to users. Before 8, every user had to be granted privileges individually; managing 100 app servers each with its own user meant 100 separate <code>GRANT</code> statements.</p>
 
 <pre><code>-- Define roles by intent
@@ -2286,15 +1906,9 @@ SELECT * FROM information_schema.applicable_roles; -- what current user can SET<
 </ul>
 
 <p>For new production deployments, prefer ephemeral credentials over long-lived passwords. Roles still apply &mdash; the credential identifies who you are; the role determines what you can do.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q47">
-  <div class="qa__number">Question 47</div>
-  <h3 class="qa__question">What are the differences between stored procedures and prepared statements?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[47] = r'''
 <p>Two distinct mechanisms with overlapping use cases &mdash; both protect against SQL injection and reduce parsing overhead, but at different layers.</p>
 
 <table>
@@ -2359,15 +1973,9 @@ const [rows] = await conn.execute(
 </ul>
 
 <p><strong>Modern stance</strong>: use prepared statements universally for all application queries. Use stored procedures sparingly &mdash; only when business logic genuinely belongs in the database (high network cost, multi-app reuse, security boundary). Putting business logic in stored procedures often complicates testing, version control, and deployment; modern apps overwhelmingly prefer code-side logic with parameterized queries.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q48">
-  <div class="qa__number">Question 48</div>
-  <h3 class="qa__question">How do you use the PERFORMANCE_SCHEMA for monitoring MySQL performance?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[48] = r'''
 <p><strong>Performance Schema</strong> is MySQL&rsquo;s built-in observability subsystem &mdash; structured tables exposing what the server is doing right now and what it has done. Replaces ad-hoc SHOW commands with relational, queryable data.</p>
 
 <p><strong>Setup</strong> &mdash; enabled by default since 5.6. Verify:</p>
@@ -2420,15 +2028,9 @@ SELECT * FROM sys.statement_analysis LIMIT 10;    -- slow query analysis</code><
 <p><strong>Overhead consideration</strong>: Performance Schema isn&rsquo;t free &mdash; full instrumentation costs ~5-10% on busy servers. Default settings are tuned for low overhead; enabling history-long tables (<code>events_statements_history_long</code>) for many event types raises memory use. Inspect <code>performance_schema.setup_consumers</code> and disable consumers you don&rsquo;t use.</p>
 
 <p><strong>External tooling</strong> consumes Performance Schema data: <strong>Percona Monitoring &amp; Management (PMM)</strong>, <strong>Datadog</strong>, <strong>Prometheus + mysqld_exporter</strong>, <strong>New Relic</strong>, <strong>SolarWinds DPA</strong>. They turn raw tables into trends, alerts, and query-level analysis. For self-hosted MySQL in 2026, Prometheus + Grafana is the standard open-source stack.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q49">
-  <div class="qa__number">Question 49</div>
-  <h3 class="qa__question">How do you implement audit logging in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[49] = r'''
 <p>Audit logging captures who did what, when, and from where &mdash; essential for compliance (PCI-DSS, HIPAA, SOC 2, GDPR) and incident investigation. <strong>MySQL has no native audit log</strong>; pick from several mature plugins or external systems.</p>
 
 <p><strong>Plugin options</strong>:</p>
@@ -2485,15 +2087,9 @@ SET PERSIST server_audit_logging = ON;</code></pre>
 </ul>
 
 <p><strong>Retention</strong>: defined by policy (often 1-7 years). Cold-storage compress and offload aged audit logs (S3 Glacier) rather than dropping.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q50">
-  <div class="qa__number">Question 50</div>
-  <h3 class="qa__question">How do you handle and store hierarchical data in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[50] = r'''
 <p>Hierarchical data &mdash; org charts, category trees, comment threads, file systems &mdash; doesn&rsquo;t map cleanly to flat relational tables. Several patterns trade off query simplicity, write cost, and how deep the hierarchy can go.</p>
 
 <table>
@@ -2556,15 +2152,9 @@ SELECT * FROM files WHERE path LIKE '/1/4/%';
 <p><strong>Document/JSON for very dynamic structures</strong> &mdash; nested JSON in a single column. Easy for trees that aren&rsquo;t queried by hierarchy structure (just rendered whole), unwieldy for relational queries.</p>
 
 <p><strong>Practical guidance</strong>: start with adjacency list. The recursive CTE handles 95% of needs. Move to closure table only when reads are demonstrably bottlenecked &mdash; the implementation overhead is real. For deep hierarchies in graph-shape (many-to-many), consider a graph database (<strong>Neo4j</strong>) or PostgreSQL with <code>ltree</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q51">
-  <div class="qa__number">Question 51</div>
-  <h3 class="qa__question">What are JSON data types, and how do you use them in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[51] = r'''
 <p>The native <code>JSON</code> data type (MySQL 5.7+) stores semi-structured data with validation, indexing support, and a rich query API. Internally MySQL parses and stores JSON in a compact binary format, not as raw text &mdash; lookups don&rsquo;t reparse, and individual paths can be extracted efficiently.</p>
 
 <pre><code>CREATE TABLE products (
@@ -2619,15 +2209,9 @@ CHECK (JSON_SCHEMA_VALID(
 ));</code></pre>
 
 <p><strong>When to step outside MySQL</strong>: heavily document-shaped workloads with deep nesting and complex queries are often better served by a document database (MongoDB, DynamoDB, Postgres JSONB). MySQL JSON shines for hybrid: relational where it matters, JSON where it doesn&rsquo;t.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q52">
-  <div class="qa__number">Question 52</div>
-  <h3 class="qa__question">How do you perform JSON parsing and querying in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[52] = r'''
 <p>MySQL provides a rich set of JSON functions for extracting, modifying, and searching JSON values. Path expressions follow the JSONPath syntax: <code>$.field</code> for object members, <code>$[i]</code> for array indices, <code>$.array[*]</code> for wildcards.</p>
 
 <p><strong>Reading values</strong>:</p>
@@ -2697,15 +2281,9 @@ JSON_TABLE(p.attrs-&gt;'$.ports', '$[*]'
 </ul>
 
 <p>For occasional document fields, MySQL JSON is a clean fit. For schemas where most queries are JSON-pathing, the workload may be better served by a database designed for documents.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q53">
-  <div class="qa__number">Question 53</div>
-  <h3 class="qa__question">How do you use spatial data types and functions in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[53] = r'''
 <p>MySQL has had spatial data types and functions since 4.1 and full OpenGIS standard support in 5.6+. The data types represent geometric shapes, and the functions implement standard spatial relationships and computations.</p>
 
 <p><strong>Geometry types</strong> (a hierarchy):</p>
@@ -2769,15 +2347,9 @@ WHERE MBRContains(
 AND ST_Distance_Sphere(pos, @target) &lt;= 5000;</code></pre>
 
 <p><strong>Limitations</strong>: MySQL&rsquo;s spatial implementation is OK for moderate workloads but lacks features and performance of dedicated GIS databases. <strong>PostGIS</strong> on PostgreSQL is the gold standard &mdash; richer functions, faster, more accurate. For mapping at scale, consider <strong>PostGIS</strong> or specialized stores like <strong>Tile38</strong> (real-time geofencing on Redis-protocol).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q54">
-  <div class="qa__number">Question 54</div>
-  <h3 class="qa__question">Explain the purpose and usage of the GEOMETRY data type.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[54] = r'''
 <p><code>GEOMETRY</code> is the generic supertype for all spatial values in MySQL &mdash; a column declared <code>GEOMETRY</code> can hold any of the specific subtypes (POINT, LINESTRING, POLYGON, etc.). Use it when a single column should accept multiple shape kinds; otherwise prefer the specific type for type safety.</p>
 
 <pre><code>CREATE TABLE features (
@@ -2833,15 +2405,9 @@ ST_GeomFromGeoJSON('{"type":"Point","coordinates":[-122.4,37.77]}')
 ST_AsGeoJSON(shape)</code></pre>
 
 <p><strong>Practical advice</strong>: most geospatial applications use POINT for items with a location and POLYGON for regions/zones. The generic GEOMETRY column type is only needed when a single table holds genuinely heterogeneous shapes (CAD files, GIS imports). For simple "store and query nearby" use cases, POINT plus a spatial index handles millions of rows fine.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q55">
-  <div class="qa__number">Question 55</div>
-  <h3 class="qa__question">How do you optimize MySQL for high-concurrency workloads?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[55] = r'''
 <p>High-concurrency workloads (thousands of concurrent connections, hot rows, high QPS) need careful tuning at multiple layers. The bottlenecks are typically lock contention, connection overhead, and CPU saturation rather than raw I/O.</p>
 
 <p><strong>Connection management is usually the first bottleneck</strong>:</p>
@@ -2887,15 +2453,9 @@ FOR UPDATE SKIP LOCKED;</code></pre></li>
 </ul>
 
 <p><strong>Beyond a single instance</strong> &mdash; ProxySQL routing, read replicas, sharding via Vitess/PlanetScale/TiDB. The architecture answer often beats further single-instance tuning past a certain scale.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q56">
-  <div class="qa__number">Question 56</div>
-  <h3 class="qa__question">What are the implications of setting the innodb_buffer_pool_size variable?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[56] = r'''
 <p><code>innodb_buffer_pool_size</code> is the single most important MySQL configuration variable. It controls how much memory InnoDB uses to cache data and indexes; its size determines whether the working set lives in RAM (fast) or hits disk (slow).</p>
 
 <p><strong>Sizing guidance</strong>:</p>
@@ -2946,15 +2506,9 @@ innodb_buffer_pool_load_at_startup  = ON
 innodb_buffer_pool_dump_pct         = 50  -- top 50% most-used pages</code></pre>
 
 <p><strong>Monitor key counters</strong>: <code>Innodb_buffer_pool_pages_dirty</code>, <code>Innodb_buffer_pool_pages_free</code>, <code>Innodb_buffer_pool_wait_free</code>. Free pages dropping to zero or wait_free incrementing means flushing can&rsquo;t keep up with writes &mdash; raise <code>innodb_io_capacity</code> or improve the disk.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q57">
-  <div class="qa__number">Question 57</div>
-  <h3 class="qa__question">How do you use the mysqlslap utility for benchmarking MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[57] = r'''
 <p><code>mysqlslap</code> is a built-in load-testing tool that simulates concurrent client load against a MySQL server. Useful for quick sanity-check benchmarks: comparing config changes, validating that hardware can sustain expected QPS, or measuring relative impact of schema changes.</p>
 
 <pre><code># Generate and run a synthetic workload — 50 concurrent clients, 1000 iterations each
@@ -3022,15 +2576,9 @@ sysbench oltp_read_write [...same args] cleanup</code></pre>
 </ul>
 
 <p><strong>Practical advice</strong>: <code>mysqlslap</code> is fine for quick comparisons (<em>"did changing this setting help?"</em>) but production capacity planning needs realistic mixed workloads driven from the application side. Run benchmarks on hardware and OS configurations identical to production &mdash; the relative numbers transfer; absolute numbers don&rsquo;t.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q58">
-  <div class="qa__number">Question 58</div>
-  <h3 class="qa__question">What are the best practices for designing and optimizing indexes?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[58] = r'''
 <p>Index design is the single biggest lever for query performance. The principles are well-established; the discipline is applying them systematically rather than reactively adding indexes when slow queries appear.</p>
 
 <p><strong>Selectivity first</strong>: an index is useful when the indexed column distinguishes rows. <code>email</code> with millions of distinct values: excellent. <code>gender</code> with two values: useless &mdash; the optimizer scans anyway because reading the index plus row is more work than just scanning.</p>
@@ -3083,15 +2631,9 @@ FROM sys.schema_unused_indexes;
 <p><strong>Verify with EXPLAIN</strong>: <code>type: ref</code> or <code>type: range</code> on the chosen index, low <code>rows</code> estimate, no <code>Using filesort</code> or <code>Using temporary</code> for the predicate&rsquo;s portion. <code>EXPLAIN ANALYZE</code> confirms with actual numbers.</p>
 
 <p><strong>Tools</strong>: <strong>pt-index-usage</strong>, MySQL Workbench&rsquo;s visual explain, <strong>EVERSQL</strong>, <strong>sys.statement_analysis</strong> &mdash; identify queries that would benefit from new indexes or have stale ones.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q59">
-  <div class="qa__number">Question 59</div>
-  <h3 class="qa__question">How do you handle slow queries in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[59] = r'''
 <p>Slow queries are diagnosed and fixed through a tight loop: capture, identify, analyze, fix, verify. The slow query log + <code>pt-query-digest</code> is the standard pipeline.</p>
 
 <p><strong>Step 1 &mdash; capture</strong>:</p>
@@ -3158,15 +2700,9 @@ pt-query-digest /var/log/mysql/slow.log | head -20
 </ul>
 
 <p>The standing principle: <strong>optimize the queries that consume the most cumulative time</strong>, not the most irritating individual ones. Heavy-tailed workloads mean a few queries dominate everything.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q60">
-  <div class="qa__number">Question 60</div>
-  <h3 class="qa__question">How do you implement time-series data storage and querying in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[60] = r'''
 <p>Time-series data &mdash; metrics, events, IoT readings, log entries &mdash; has predictable shape (timestamp + dimensions + values), append-only writes, and queries that filter by time range. MySQL handles moderate-scale time series well with the right schema patterns; high-volume cases warrant a purpose-built database.</p>
 
 <p><strong>Schema basics</strong>:</p>
@@ -3249,15 +2785,9 @@ ON DUPLICATE KEY UPDATE cnt = VALUES(cnt), sum = VALUES(sum), min = LEAST(min, V
 </ul>
 
 <p>Use MySQL for time-series data tightly coupled to relational data (e.g., per-customer event histories where joins matter); use a purpose-built TSDB when the volume is the primary concern.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q61">
-  <div class="qa__number">Question 61</div>
-  <h3 class="qa__question">What is the purpose of the INFORMATION_SCHEMA in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[61] = r'''
 <p><code>INFORMATION_SCHEMA</code> is a set of read-only views exposing metadata about every database, table, column, index, constraint, privilege, and runtime variable on the server. Standardized across many SQL databases (it&rsquo;s an ANSI SQL feature), so the same queries work on PostgreSQL, MariaDB, etc., with minor variations.</p>
 
 <p><strong>Practical examples</strong> &mdash; the queries you actually use:</p>
@@ -3327,15 +2857,9 @@ WHERE grantee LIKE '%app_user%';</code></pre>
 <p><strong>Performance note</strong>: queries against <code>INFORMATION_SCHEMA</code> can be slow on servers with many databases and tables &mdash; the views are built on the fly. For repeated metadata queries, cache results in your application or use Performance Schema variants when available.</p>
 
 <p><strong>Related</strong>: <code>performance_schema</code> for runtime diagnostics, <code>sys</code> schema for friendlier views over Performance Schema. INFORMATION_SCHEMA is for static structure; the others for runtime behavior.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q62">
-  <div class="qa__number">Question 62</div>
-  <h3 class="qa__question">How do you perform database refactoring in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[62] = r'''
 <p>Database refactoring &mdash; renaming columns, splitting tables, changing types, normalizing or denormalizing &mdash; is risky because the existing data and schema must change <em>without breaking running applications</em>. The discipline is breaking each change into reversible deploys using the <strong>expand-contract pattern</strong>.</p>
 
 <p><strong>The rename-column pattern, end to end</strong>:</p>
@@ -3399,15 +2923,9 @@ ALTER TABLE users DROP COLUMN fullname;</code></pre>
   <li><strong>Always have a rollback path</strong> &mdash; "roll forward through the bug" is not a plan.</li>
   <li><strong>Coordinate with deploy schedule</strong> &mdash; the DB migration goes out before the application code that uses it.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q63">
-  <div class="qa__number">Question 63</div>
-  <h3 class="qa__question">How do you implement data archiving strategies in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[63] = r'''
 <p>Archiving moves old data out of the hot table to keep query and maintenance performance bounded. The right strategy depends on access patterns: how often is old data read, and what queries should still work over it.</p>
 
 <p><strong>Pattern 1 &mdash; partition + drop</strong> (best for time-series, append-only workloads):</p>
@@ -3474,15 +2992,9 @@ LIMIT 10000;
   <li><strong>Rebuild / OPTIMIZE TABLE</strong> after large deletes if not partitioned, to reclaim disk space (otherwise space is reused only by future inserts).</li>
   <li><strong>GDPR right-to-erasure</strong> &mdash; archived PII still has compliance obligations; design archives to be searchable for deletion requests.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q64">
-  <div class="qa__number">Question 64</div>
-  <h3 class="qa__question">How do you use the MySQL optimizer hints?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[64] = r'''
 <p>Optimizer hints override the query planner&rsquo;s decisions. Used sparingly &mdash; the optimizer is usually right, and hints can become wrong as data shifts &mdash; but invaluable when the planner picks a clearly bad plan.</p>
 
 <p><strong>The two hint syntaxes</strong>:</p>
@@ -3544,15 +3056,9 @@ FROM orders o JOIN customers c ON c.id = o.customer_id;</code></pre>
 </ul>
 
 <p><strong>Process</strong>: identify the bad plan with <code>EXPLAIN ANALYZE</code>, try a hint, verify it&rsquo;s actually faster, document why the hint exists in a comment. Re-evaluate after major data growth or schema changes.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q65">
-  <div class="qa__number">Question 65</div>
-  <h3 class="qa__question">How do you handle and optimize read and write-heavy workloads in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[65] = r'''
 <p>Read-heavy and write-heavy workloads need different optimizations. Most real systems are mixed; the question is which side dominates and what techniques apply to each.</p>
 
 <p><strong>Read-heavy workloads (analytics, dashboards, content sites)</strong>:</p>
@@ -3590,15 +3096,9 @@ FROM orders o JOIN customers c ON c.id = o.customer_id;</code></pre>
 <p><strong>Capacity at scale</strong>: when a single primary can&rsquo;t handle write throughput &mdash; sharding becomes the answer. <strong>Vitess</strong>, <strong>PlanetScale</strong>, <strong>TiDB</strong> distribute writes across nodes while keeping the MySQL protocol. Sharding has real operational cost; push vertical scaling, replicas, partitioning, and caching first.</p>
 
 <p><strong>Measure before optimizing</strong>: <code>performance_schema.events_statements_summary_by_digest</code> shows whether your top time-consumers are reads or writes. The right answer comes from data, not assumption.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q66">
-  <div class="qa__number">Question 66</div>
-  <h3 class="qa__question">What are the differences between logical and physical backups?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[66] = r'''
 <p>Two fundamentally different backup approaches:</p>
 
 <table>
@@ -3664,15 +3164,9 @@ systemctl start mysql</code></pre>
 </ul>
 
 <p><strong>For cloud-managed databases</strong>: rely on the provider&rsquo;s native backup (RDS automated backups, Aurora continuous backup, Cloud SQL backups). They handle physical-snapshot semantics, retention, and PITR transparently.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q67">
-  <div class="qa__number">Question 67</div>
-  <h3 class="qa__question">How do you implement and manage full-text search in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[67] = r'''
 <p>FULLTEXT search in MySQL handles natural-language and Boolean queries against text columns. Suitable for moderate-scale internal search (CMS content, product catalogs, knowledge bases) when you don&rsquo;t want the operational complexity of a dedicated search engine.</p>
 
 <p><strong>Set up the index</strong>:</p>
@@ -3745,15 +3239,9 @@ LIMIT 10;</code></pre>
 </ul>
 
 <p><strong>Modern alternatives</strong>: <strong>Elasticsearch</strong> / <strong>OpenSearch</strong> (heavyweight, feature-complete), <strong>Meilisearch</strong> (typo-tolerant, easy ops), <strong>Typesense</strong> (real-time, good for product search), <strong>Algolia</strong> (managed). Replicate searchable fields from MySQL via <strong>Debezium</strong> or application dual-write. For internal CMS / product-detail search up to ~5M rows, MySQL FULLTEXT is good enough; beyond that, dedicated search wins.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q68">
-  <div class="qa__number">Question 68</div>
-  <h3 class="qa__question">How do you use the federated storage engine in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[68] = r'''
 <p>The <code>FEDERATED</code> storage engine lets one MySQL server access tables on a <em>remote</em> MySQL server as if they were local. The local table holds no data; every query is forwarded to the remote server. It&rsquo;s a niche feature &mdash; rarely the right answer in modern architectures &mdash; but useful in narrow cases.</p>
 
 <pre><code>-- On the remote server (the data source)
@@ -3812,15 +3300,9 @@ SELECT * FROM federated_orders WHERE customer_id = 5;</code></pre>
 </table>
 
 <p><strong>Summary</strong>: the FEDERATED engine works but has been superseded by better patterns &mdash; replication for data access, ETL or query federation for analytics, service APIs for application coupling. Avoid in new architectures.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q69">
-  <div class="qa__number">Question 69</div>
-  <h3 class="qa__question">How do you implement and use triggers for data validation and auditing?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[69] = r'''
 <p>Triggers execute SQL automatically before or after inserts, updates, or deletes on a table. They run in the same transaction as the triggering statement and have access to the old/new row values via <code>OLD</code> and <code>NEW</code> pseudo-rows.</p>
 
 <p><strong>Validation example</strong>:</p>
@@ -3910,15 +3392,9 @@ DELIMITER ;</code></pre>
 </ul>
 
 <p><strong>Pragmatic stance</strong>: triggers are appropriate for <em>auditing</em> (where missing a write is unacceptable) and tight integrity validations (CHECK constraints often suffice now). For business logic, prefer application code; for change capture at scale, prefer CDC.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q70">
-  <div class="qa__number">Question 70</div>
-  <h3 class="qa__question">What are the best practices for indexing foreign keys?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[70] = r'''
 <p>InnoDB <strong>requires an index on every foreign key column</strong> &mdash; FK creation actually creates one automatically if no suitable index exists. The interesting questions are which index, and how to design it for the queries that use the FK.</p>
 
 <p><strong>Why FK columns must be indexed</strong>:</p>
@@ -3977,15 +3453,9 @@ EXPLAIN SELECT * FROM orders WHERE customer_id = 5;
 -- type should be ref; key should be a FK index.</code></pre>
 
 <p><strong>Cleanup of redundant FK indexes</strong>: don&rsquo;t blindly drop indexes that look duplicate &mdash; verify they&rsquo;re unused via <code>sys.schema_unused_indexes</code> first. An index that <code>EXPLAIN</code> picks may not be the one another query needs.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q71">
-  <div class="qa__number">Question 71</div>
-  <h3 class="qa__question">How do you use the mysqlbinlog utility?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[71] = r'''
 <p><code>mysqlbinlog</code> reads MySQL&rsquo;s binary log files (binlogs) and converts them to readable SQL or row-event output. Essential for point-in-time recovery, auditing what changed, and inspecting replication.</p>
 
 <p><strong>Binary logs record every change</strong> &mdash; each <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>, and DDL statement. Replication uses them; backups need them for PITR; investigations rely on them.</p>
@@ -4062,15 +3532,9 @@ mysqlbinlog \
 <p><strong>For programmatic consumption</strong>: <strong>Debezium</strong>, <strong>Maxwell</strong>, <strong>Canal</strong> read binlogs and produce streaming events to Kafka or other downstream consumers &mdash; the modern way to build CDC pipelines, search-index sync, audit warehouses.</p>
 
 <p><strong>Configuration matters</strong>: binlogs only exist if <code>log_bin = ON</code>. Set <code>binlog_expire_logs_seconds</code> to retain enough history (e.g., 7 days = 604800) to cover backup recovery windows. Cloud-managed databases handle binlog retention via PITR settings.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q72">
-  <div class="qa__number">Question 72</div>
-  <h3 class="qa__question">How do you perform database cloning and replication in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[72] = r'''
 <p>Cloning means producing a working copy of an existing database &mdash; for setting up a replica, refreshing a staging environment, or seeding a new instance. The right method depends on size, downtime tolerance, and whether the source can be paused.</p>
 
 <p><strong>Method 1 &mdash; <code>mysqldump</code> + manual replica setup</strong> (small to medium databases):</p>
@@ -4157,15 +3621,9 @@ CLONE INSTANCE FROM 'cloneuser'@'primary.host':3306
 </ol>
 
 <p><strong>Modern alternative for replica creation</strong>: managed services (RDS read replica, Aurora Replica, Cloud SQL replica) handle all of the above with one click. For self-managed, MySQL 8&rsquo;s CLONE INSTANCE is the cleanest built-in option; XtraBackup remains best for the largest databases.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q73">
-  <div class="qa__number">Question 73</div>
-  <h3 class="qa__question">How do you manage and optimize connection pooling in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[73] = r'''
 <p>Connection pooling solves a fundamental problem: opening a TCP + TLS + auth handshake for every query is expensive, but holding one connection per concurrent request requires far more connections than MySQL can serve. The pool sits between application and DB, recycling a small set of connections across many requests.</p>
 
 <p><strong>The math</strong>: opening a fresh MySQL connection is 10-100ms (TCP, TLS, auth, session setup). Reusing a pooled connection is microseconds. A web app handling 1000 req/sec with 5ms DB queries needs maybe 5 active connections &mdash; not 1000.</p>
@@ -4236,15 +3694,9 @@ VALUES (1, 1, '^SELECT.*FOR UPDATE', 10, 1),    -- to primary
 </ul>
 
 <p><strong>Common pitfalls</strong>: opening a connection per request without pooling (especially in serverless contexts), not setting timeouts (idle connections accumulate), pool too large (RAM waste, contention), forgetting keep-alives across NAT or firewall boundaries (connections silently die).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q74">
-  <div class="qa__number">Question 74</div>
-  <h3 class="qa__question">How do you handle data consistency across distributed databases?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[74] = r'''
 <p>Distributed databases face an impossibility theorem (CAP) and a set of practical trade-offs around <strong>availability vs consistency vs latency</strong>. Single-instance MySQL gives strict ACID; distributing across nodes means choosing what to relax.</p>
 
 <p><strong>Consistency models, from strongest to weakest</strong>:</p>
@@ -4303,15 +3755,9 @@ VALUES (1, 1, '^SELECT.*FOR UPDATE', 10, 1),    -- to primary
   <li>Distributed transactions across services should use sagas, not 2PC.</li>
   <li>Reach for a distributed SQL database only when measurement shows you need it. The operational cost is real.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q75">
-  <div class="qa__number">Question 75</div>
-  <h3 class="qa__question">How do you implement application-level sharding in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[75] = r'''
 <p>Application-level sharding distributes data across multiple MySQL instances, with the application choosing which shard each row lives on. Used when a single primary can&rsquo;t serve write throughput &mdash; vertical scaling, replicas, partitioning, and caching have all been exhausted.</p>
 
 <p><strong>The core decisions</strong>:</p>
@@ -4381,15 +3827,9 @@ async function totalActiveUsers() {
 </ul>
 
 <p><strong>The honest answer</strong>: most teams shouldn&rsquo;t shard. Hardware has gotten enormous &mdash; modern cloud instances handle 100K+ QPS and tens of TB. Push vertical scaling, read replicas, table partitioning, application caching, and archiving as far as possible. Sharding is a permanent operational tax; only take it on when measurement shows you need to.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q76">
-  <div class="qa__number">Question 76</div>
-  <h3 class="qa__question">How do you optimize MySQL for mixed read and write workloads?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[76] = r'''
 <p>Mixed read/write workloads &mdash; typical OLTP &mdash; need a layered approach: route reads and writes differently, optimize each path, and protect them from each other. The patterns combine.</p>
 
 <p><strong>Routing</strong> &mdash; the foundation:</p>
@@ -4426,15 +3866,9 @@ async function totalActiveUsers() {
 </ul>
 
 <p><strong>Modern stack</strong>: cloud OLTP is usually <strong>Aurora MySQL</strong> or <strong>PlanetScale</strong> (auto-managed read replicas + managed proxy + storage that decouples I/O from compute). For self-hosted, <strong>InnoDB Cluster</strong> + <strong>ProxySQL</strong> is the standard mature setup; layer <strong>Redis</strong> in front for the hottest reads.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q77">
-  <div class="qa__number">Question 77</div>
-  <h3 class="qa__question">What are the advantages and disadvantages of using ENUM data types?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[77] = r'''
 <p><strong>ENUM</strong> stores a string column whose value must be one of a fixed list, internally as a small integer index into that list. Compact and self-validating &mdash; but rigid.</p>
 
 <pre><code>CREATE TABLE orders (
@@ -4494,15 +3928,9 @@ ADD COLUMN status_code VARCHAR(20) NOT NULL,
 ADD CONSTRAINT fk_status FOREIGN KEY (status_code) REFERENCES order_statuses(code);</code></pre>
 
 <p><strong>Modern stance</strong>: ENUMs are fine and underused for genuinely-fixed sets. Use them for status fields, mode flags, and similar &mdash; they prevent invalid data with zero overhead. Pick a lookup table when the set is dynamic or carries metadata.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q78">
-  <div class="qa__number">Question 78</div>
-  <h3 class="qa__question">How do you handle and store large binary objects (BLOBs) in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[78] = r'''
 <p><strong>BLOB</strong> (binary) and <strong>TEXT</strong> (text) types store large variable-length data:</p>
 
 <table>
@@ -4569,15 +3997,9 @@ CREATE TABLE product_images (
 -- Queries that don&rsquo;t need the image avoid the I/O cost</code></pre>
 
 <p><strong>InnoDB row formats matter</strong>: <code>DYNAMIC</code> (default) and <code>COMPRESSED</code> store BLOBs entirely off-page; <code>COMPACT</code> and <code>REDUNDANT</code> store the first 768 bytes inline. Stick with <code>DYNAMIC</code> unless storage cost dominates.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q79">
-  <div class="qa__number">Question 79</div>
-  <h3 class="qa__question">How do you implement rate limiting using MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[79] = r'''
 <p><strong>Rate limiting</strong> caps how many requests a client can make per time window. Implementing it in MySQL is possible but rarely the right choice &mdash; <strong>Redis</strong> with its atomic counters is purpose-built for it. Still, a MySQL implementation is useful for small-scale apps or when Redis isn&rsquo;t available.</p>
 
 <p><strong>Token bucket / fixed window in MySQL</strong>:</p>
@@ -4652,15 +4074,9 @@ return 1</code></pre>
 </ul>
 
 <p>For high-traffic public APIs use Redis (or a managed limiter like <strong>Cloudflare</strong>, <strong>AWS API Gateway</strong>, <strong>Kong</strong>) and skip the database layer entirely.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q80">
-  <div class="qa__number">Question 80</div>
-  <h3 class="qa__question">How do you design a high-availability architecture using MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[80] = r'''
 <p><strong>High availability</strong> means the database tolerates failures of any single component without service interruption. The architecture combines redundancy, automated failover, and application-level resilience.</p>
 
 <p><strong>Components of a typical HA MySQL stack</strong>:</p>
@@ -4713,15 +4129,9 @@ JS&gt; cluster.status()
 </ul>
 
 <p><strong>Pragmatic guidance</strong>: most teams should use a managed service. The HA logic is the part where home-rolled solutions go wrong silently, often during the failure they&rsquo;re supposed to handle.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q81">
-  <div class="qa__number">Question 81</div>
-  <h3 class="qa__question">How do you use the optimizer trace feature in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[81] = r'''
 <p><strong>Optimizer trace</strong> shows exactly how MySQL evaluated alternative query plans and which it chose. Use it when <code>EXPLAIN</code> doesn&rsquo;t answer "why this plan and not the obvious one?".</p>
 
 <pre><code>-- Enable for the session
@@ -4770,15 +4180,9 @@ SET optimizer_trace = 'enabled=off';</code></pre>
 <p><strong>When you actually need it</strong>: about 5% of query-tuning sessions. For most queries, EXPLAIN reveals the issue and the fix; for the stubborn ones where the plan looks reasonable but is slow, optimizer trace is decisive.</p>
 
 <p><strong>Limits</strong>: traces are large (often hundreds of KB). The session-scoped buffer keeps only the most recent traces. Don&rsquo;t leave it on in production &mdash; it has overhead and can flood logs.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q82">
-  <div class="qa__number">Question 82</div>
-  <h3 class="qa__question">How do you manage and monitor MySQL server health and performance?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[82] = r'''
 <p>Production MySQL monitoring needs a layered metrics view: server health (CPU, RAM, disk), MySQL internals (QPS, connections, replication, buffer pool), and query-level performance (slow queries, top digests, anomalies).</p>
 
 <p><strong>The metrics that actually matter</strong>:</p>
@@ -4831,15 +4235,9 @@ LIMIT 10;</code></pre>
 <p>Tracked over time, this surfaces both new slow queries (regressions) and gradually-degrading queries (data growth outstripping indexes).</p>
 
 <p><strong>Operational discipline</strong>: a dashboard you actually look at beats one nobody does. Keep one MySQL overview dashboard with 8-12 graphs that fit on a screen, plus drill-down dashboards by topic. Alert only on conditions that need human action; everything else goes on the dashboard.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q83">
-  <div class="qa__number">Question 83</div>
-  <h3 class="qa__question">How do you implement and use user-defined functions (UDFs) in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[83] = r'''
 <p><strong>User-defined functions (UDFs)</strong> are MySQL functions written in C/C++, compiled to a shared library, and loaded at runtime. They run inside the server process &mdash; very fast but with serious operational and security implications.</p>
 
 <p><strong>UDF lifecycle</strong>:</p>
@@ -4890,15 +4288,9 @@ SELECT my_func(123) FROM dual;</code></pre>
 </ul>
 
 <p><strong>Production guidance</strong>: managed services (RDS, Aurora, Cloud SQL) typically don&rsquo;t allow custom UDFs precisely because of the crash and security risks. If you find yourself needing a UDF in 2026, it&rsquo;s worth questioning whether the architecture has a problem better solved elsewhere.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q84">
-  <div class="qa__number">Question 84</div>
-  <h3 class="qa__question">What are the differences between CHAR and VARCHAR data types?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[84] = r'''
 <p><strong>CHAR</strong> and <strong>VARCHAR</strong> both store strings; the difference is fixed vs. variable length and how each handles padding and storage overhead.</p>
 
 <table>
@@ -4945,15 +4337,9 @@ SELECT 'hello' = BINARY 'hello   '; -- 0 (false; binary keeps the spaces)</code>
 <p><strong>The myth that VARCHAR(255) is special</strong>: this used to be the threshold below which length was stored in 1 byte instead of 2. The 1-byte savings is microscopic; modern advice is to size VARCHAR to the actual maximum reasonable length. <code>VARCHAR(40)</code> for emails, <code>VARCHAR(100)</code> for names, <code>VARCHAR(2000)</code> for URLs &mdash; deliberate sizing improves data quality and protects against pathological inputs.</p>
 
 <p><strong>Storage strategy</strong>: with <code>utf8mb4_0900_ai_ci</code> (the modern default), VARCHAR length is in <em>characters</em>, not bytes. <code>VARCHAR(255)</code> can hold up to 255 characters (1020 bytes worst case). InnoDB row format <code>DYNAMIC</code> handles long values cleanly via off-page storage.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q85">
-  <div class="qa__number">Question 85</div>
-  <h3 class="qa__question">How do you handle data versioning and history tracking in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[85] = r'''
 <p><strong>Versioning and history tracking</strong> means preserving previous values whenever a row changes. Useful for audit trails, "what did this look like 30 days ago?", undo functionality, and regulatory compliance. Several patterns; pick based on query needs.</p>
 
 <table>
@@ -5035,15 +4421,9 @@ WHERE customer_id = ?
 <p><strong>What to track</strong>: <code>changed_at</code>, <code>changed_by</code>, the operation, and either full snapshots or diffs. Always index by entity ID + time so "history for entity X" is a fast range scan.</p>
 
 <p><strong>Retention</strong>: history tables grow forever. Partition by date; archive old partitions to cold storage; document retention per regulation (SOX, HIPAA, GDPR) and prune accordingly.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q86">
-  <div class="qa__number">Question 86</div>
-  <h3 class="qa__question">How do you implement real-time analytics and reporting in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[86] = r'''
 <p><strong>Real-time analytics</strong> means dashboards and reports that show data within seconds of changes happening in OLTP. MySQL is built for transactions, not analytics &mdash; making it serve both well requires architectural choices.</p>
 
 <p><strong>The fundamental tension</strong>: OLTP queries are point lookups (1 row out of millions). Analytical queries scan millions of rows for aggregates. The same indexes that make point lookups fast slow down analytical scans, and vice versa.</p>
@@ -5125,15 +4505,9 @@ MySQL (OLTP) → binlog → Debezium → Kafka → consumer → ClickHouse / Big
   <li>Move to ClickHouse/BigQuery/Snowflake when analytical queries become the dominant workload or when answers need to span more data than MySQL can hold conveniently.</li>
   <li>Reach for stream-processing systems when "freshness within seconds" is a hard requirement.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q87">
-  <div class="qa__number">Question 87</div>
-  <h3 class="qa__question">How do you use MySQL proxy for query routing and load balancing?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[87] = r'''
 <p><strong>MySQL proxies</strong> sit between the application and the database, abstracting connection management, routing, and pool reuse. They&rsquo;re a key building block for HA, read/write splitting, and sharding without forcing every change into application code.</p>
 
 <table>
@@ -5190,15 +4564,9 @@ SAVE MYSQL QUERY RULES TO DISK;</code></pre>
 <p><strong>Cloud reality</strong>: AWS RDS Proxy, Aurora&rsquo;s built-in router, and PlanetScale&rsquo;s vtgate provide most of these features as managed offerings. For self-hosted MySQL, ProxySQL is the de facto standard.</p>
 
 <p><strong>Trade-offs</strong>: another component to monitor and patch; an extra hop in the request path (sub-millisecond, usually negligible); subtle bugs around prepared statements and connection state across multiplexing. Production deployments should HA the proxy itself &mdash; multiple ProxySQL instances behind a TCP load balancer or VIP.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q88">
-  <div class="qa__number">Question 88</div>
-  <h3 class="qa__question">How do you handle and store encrypted data in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[88] = r'''
 <p><strong>Encrypted data</strong> in MySQL operates at three layers: at rest (on disk), in transit (network), and in application (column-level). Each protects against different threats.</p>
 
 <table>
@@ -5262,15 +4630,9 @@ const ssn = aesGcmDecrypt(row.ssn, dataKey);</code></pre>
 <p><strong>Practical guidance for PII</strong>: encrypt sensitive columns at the application layer with envelope encryption. Use TDE as a defense-in-depth layer for the rest. Audit access to KMS keys &mdash; that audit trail is the actual defense.</p>
 
 <p><strong>Compliance</strong>: PCI-DSS, HIPAA, GDPR all have specific encryption requirements that map to these patterns. Cloud-managed databases (Aurora, Cloud SQL) typically have compliance certifications that simplify the audit story considerably.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q89">
-  <div class="qa__number">Question 89</div>
-  <h3 class="qa__question">How do you implement geographic information system (GIS) queries in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[89] = r'''
 <p><strong>Geographic information system (GIS)</strong> queries answer questions like "stores within 10 km of this point", "which delivery zone contains this address", and "intersect this route with these regions". MySQL has native spatial support since 5.7+; full OpenGIS standard since 5.7+ with R-tree spatial indexes.</p>
 
 <p><strong>Schema for points of interest</strong>:</p>
@@ -5361,15 +4723,9 @@ WHERE ST_Contains(area, ST_GeomFromText('POINT(-73.9857 40.7484)', 4326));</code
 </ul>
 
 <p>For occasional "nearby" queries on hundreds of thousands of rows, MySQL spatial is plenty. For millions of polygons, complex projection math, or geographic-routing, look at PostGIS.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q90">
-  <div class="qa__number">Question 90</div>
-  <h3 class="qa__question">How do you handle and optimize large datasets in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[90] = r'''
 <p><strong>Large datasets</strong> &mdash; tables in the hundreds of millions or billions of rows &mdash; need a different mindset than the "just add an index" toolkit. The performance issues compound: query times grow, schema changes take hours, and operational tasks (backup, migration, restore) become projects.</p>
 
 <p><strong>The four levers</strong>, in order of effort:</p>
@@ -5435,15 +4791,9 @@ ORDER BY id LIMIT 50000;
 <p><strong>Read-heavy analytics</strong>: stop running them on the OLTP database. Stream changes to <strong>ClickHouse</strong>, <strong>BigQuery</strong>, or <strong>Snowflake</strong> via Debezium + Kafka. The analytical store is purpose-built for the scans; MySQL keeps responding to point lookups.</p>
 
 <p><strong>When MySQL is genuinely outgrown</strong>: tens of TB working set, sustained 100K+ writes/sec, multi-region writes. Look at <strong>Vitess</strong> / <strong>PlanetScale</strong> for sharded MySQL, or <strong>TiDB</strong> / <strong>CockroachDB</strong> / <strong>Spanner</strong> for distributed alternatives. But this threshold is much higher than most teams assume &mdash; Stack Overflow famously ran for years on a single big MySQL instance.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q91">
-  <div class="qa__number">Question 91</div>
-  <h3 class="qa__question">How do you implement data retention policies in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[91] = r'''
 <p><strong>Data retention policies</strong> codify how long different categories of data live in the active database vs. archive vs. deletion. They&rsquo;re a regulatory requirement (GDPR right-to-erasure, SOX retention windows, HIPAA), an operational hygiene practice (smaller working set), and a cost control (storage isn&rsquo;t free).</p>
 
 <p><strong>Three retention dimensions</strong>:</p>
@@ -5538,15 +4888,9 @@ WHERE deleted_at &lt; NOW() - INTERVAL 30 DAY
 </ul>
 
 <p><strong>Document the policy</strong>: a retention policy that lives only in scripts and config is operationally fragile. Write it down: which table, what data, how long, what action (drop / anonymize / archive), regulatory basis. Audit annually.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q92">
-  <div class="qa__number">Question 92</div>
-  <h3 class="qa__question">How do you perform advanced text searching and indexing in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[92] = r'''
 <p><strong>Advanced text searching</strong> goes beyond exact match and <code>LIKE</code> patterns &mdash; relevance ranking, stemming ("running" matches "ran"), synonyms, fuzzy matching ("colour" matches "color"), and multi-language analyzers. MySQL FULLTEXT covers the basics; serious workloads usually move to a dedicated search engine.</p>
 
 <p><strong>What MySQL FULLTEXT does well</strong>:</p>
@@ -5617,15 +4961,9 @@ MySQL (source of truth) → Debezium → Kafka → consumer → Elasticsearch (s
 </ul>
 
 <p><strong>Pragmatic guidance</strong>: if requirements are <em>"users can search products by name and description"</em>, MySQL FULLTEXT is fine for under 1M rows. Once "as you type", "did you mean", or "similar to" enter the requirements, move to a dedicated search engine.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q93">
-  <div class="qa__number">Question 93</div>
-  <h3 class="qa__question">How do you use the MySQL event scheduler for automated tasks?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[93] = r'''
 <p><strong>MySQL Event Scheduler</strong> runs SQL on a schedule inside the database &mdash; like cron, but for MySQL statements. Useful for housekeeping (purges, refreshes, summary updates) that doesn&rsquo;t need an external orchestrator.</p>
 
 <pre><code>-- Enable the scheduler
@@ -5707,15 +5045,9 @@ DROP EVENT IF EXISTS purge_old_sessions;</code></pre>
 </ul>
 
 <p><strong>Pragmatic guidance</strong>: use MySQL events for trivial maintenance (a daily DELETE, a 15-minute summary refresh) where you don&rsquo;t need observability beyond "did it work or not." For anything important &mdash; jobs whose failure matters, jobs that must run on time, jobs with dependencies &mdash; use an external orchestrator that gives you a paging-grade story when something breaks.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q94">
-  <div class="qa__number">Question 94</div>
-  <h3 class="qa__question">How do you manage and optimize query execution times?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[94] = r'''
 <p><strong>Query execution time</strong> management is the daily job of database operations: capture the slow ones, identify root causes, fix the worst offenders, prevent regressions. Performance work is iterative; the goal is a tight loop.</p>
 
 <p><strong>Capture &mdash; the slow query log</strong>:</p>
@@ -5790,15 +5122,9 @@ LIMIT 100;
 </ul>
 
 <p><strong>Tooling stack</strong>: <strong>Percona PMM Query Analytics</strong>, <strong>Datadog DBM</strong>, <strong>SolarWinds DPA</strong>, <strong>Sentry Performance</strong>, <strong>OpenTelemetry</strong> for tracing. The combination of slow query log + performance_schema + a continuous-monitoring tool covers most teams&rsquo; needs.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q95">
-  <div class="qa__number">Question 95</div>
-  <h3 class="qa__question">How do you implement and use recursive CTEs in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[95] = r'''
 <p><strong>Recursive CTEs</strong> (Common Table Expressions, MySQL 8.0+) handle hierarchical and iterative computations &mdash; org charts, comment trees, file system traversal, graph walking, generating sequences. Two parts: an <em>anchor</em> query (the seed) and a <em>recursive</em> query that joins the CTE to itself.</p>
 
 <pre><code>WITH RECURSIVE name(...) AS (
@@ -5893,15 +5219,9 @@ SELECT * FROM traversal WHERE cycle = 1;
   <li>Track a <strong>path</strong> column for ordering tree results, debugging, or detecting cycles.</li>
   <li>Use <code>UNION ALL</code> (not <code>UNION</code>) &mdash; deduplication is rarely needed and adds an expensive sort.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q96">
-  <div class="qa__number">Question 96</div>
-  <h3 class="qa__question">How do you handle data aggregation and analysis in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[96] = r'''
 <p><strong>Aggregation and analysis</strong> is what databases turn raw rows into summaries: sums, counts, averages, percentiles, time-bucketed metrics. MySQL&rsquo;s SQL gives you simple aggregates, GROUP BY, window functions, and JSON aggregations &mdash; enough for most operational analysis.</p>
 
 <table>
@@ -6020,15 +5340,9 @@ LIMIT 1;
 </ul>
 
 <p><strong>Pragmatic guidance</strong>: MySQL handles aggregation up to a couple hundred GB and tens of millions of rows comfortably. Beyond that, the right answer is to ship the data to a columnar store and query there; keep MySQL for transactions.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q97">
-  <div class="qa__number">Question 97</div>
-  <h3 class="qa__question">How do you perform parallel query execution in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[97] = r'''
 <p><strong>Parallel query execution</strong> &mdash; multiple CPU cores working on a single query &mdash; has historically been weak in MySQL. Most queries use one thread regardless of how many cores the server has. MySQL 8.0+ has added parallelism for some operations, but the overall story is "limited compared to dedicated analytical databases."</p>
 
 <p><strong>What MySQL 8 does in parallel</strong>:</p>
@@ -6101,15 +5415,9 @@ worker4: SELECT ... FROM orders WHERE id % 4 = 3</code></pre>
 </table>
 
 <p><strong>Pragmatic guidance</strong>: don&rsquo;t expect MySQL to magically use 32 cores for one query. Either keep query work small enough to be single-thread-bounded, parallelize at the application level for embarrassingly parallel work, or move analytical work to a columnar engine. For OLTP, single-threaded queries are actually a feature &mdash; predictable performance, no resource contention surprises across concurrent users.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q98">
-  <div class="qa__number">Question 98</div>
-  <h3 class="qa__question">How do you implement session management using MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[98] = r'''
 <p><strong>Session management</strong> tracks logged-in users across HTTP requests. The classic approach is server-side sessions stored in a database; modern variants include Redis-backed sessions, signed cookies (JWT), and database-issued tokens. Each has trade-offs.</p>
 
 <p><strong>Schema for database-backed sessions</strong>:</p>
@@ -6205,15 +5513,9 @@ const payload = jwt.verify(token, secret);</code></pre>
 <p>Trade-offs: can&rsquo;t easily revoke a single token without a denylist (which brings the database back); rotation requires careful key management; tokens get larger as you stuff more claims.</p>
 
 <p><strong>Pragmatic guidance</strong>: for most web apps, Redis-backed sessions are the right choice &mdash; fast, automatic expiry, no DB hot table. Database sessions for low-traffic apps or strong-audit requirements; JWTs for stateless API tokens with a short TTL plus a refresh-token database for revocation.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q99">
-  <div class="qa__number">Question 99</div>
-  <h3 class="qa__question">How do you manage and monitor disk space usage in MySQL?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[99] = r'''
 <p><strong>Disk space</strong> is the boring metric that takes systems down hardest &mdash; MySQL halts when InnoDB can&rsquo;t write the redo log, replicas fall over when binlogs accumulate, backups fail mid-flight. Monitoring and forecast capacity are operational fundamentals.</p>
 
 <p><strong>What consumes disk in MySQL</strong>:</p>
@@ -6296,15 +5598,9 @@ du -sh /var/lib/mysql/undo*</code></pre>
 <p><strong>Cloud reality</strong>: managed services usually auto-scale storage (Aurora grows automatically; RDS has GP3 expansion). Self-hosted requires explicit volume expansion &mdash; possible without downtime on most modern Linux setups (LVM, EBS resize), but procedure should be tested before you need it under pressure.</p>
 
 <p><strong>Tooling</strong>: <strong>Prometheus + node_exporter + mysqld_exporter</strong>, <strong>PMM</strong>, <strong>Datadog</strong> all expose disk metrics out of the box. The key is having an alert before you run out, not just a dashboard you check sometimes.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q100">
-  <div class="qa__number">Question 100</div>
-  <h3 class="qa__question">How do you use the MySQL sys schema for performance tuning and diagnostics?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[100] = r'''
 <p><strong>The sys schema</strong> is a set of pre-built views, functions, and procedures over <code>performance_schema</code> &mdash; turning raw instrumentation tables into human-readable diagnostic queries. Bundled with MySQL since 5.7; the standard go-to for self-service tuning and diagnostics.</p>
 
 <p>The raw <code>performance_schema</code> tables have terse column names and need timer-unit math; <code>sys</code> wraps them in views with friendly names, computed columns, and ordered defaults.</p>
@@ -6395,27 +5691,4 @@ CALL sys.ps_setup_show_enabled(TRUE, TRUE);</code></pre>
 </ul>
 
 <p><strong>For external tooling</strong>: <strong>Percona PMM</strong> queries the same underlying performance_schema tables and presents them as time-series dashboards. <strong>Datadog DBM</strong>, <strong>SolarWinds DPA</strong>, and <strong>Prometheus + mysqld_exporter</strong> do similarly. <code>sys</code> is the in-MySQL self-service layer; production deployments wrap it in continuous monitoring infrastructure.</p>
-
-    
-  </div>
-</article>
-
-    <nav class="chapter-nav" aria-label="Chapter navigation">
-      <a class="chapter-nav__prev" href="mysql-coding.html">
-      <span class="chapter-nav__dir">← Previous</span>
-      <span class="chapter-nav__title">MYSQL — Coding</span>
-    </a>
-      <a class="chapter-nav__next" href="mysql-scenario.html">
-      <span class="chapter-nav__dir">Next →</span>
-      <span class="chapter-nav__title">MYSQL — Scenario Based</span>
-    </a>
-    </nav>
-
-  </section>
-
-</main>
-</div>
-
-<script src="../assets/script.js"></script>
-</body>
-</html>
+'''

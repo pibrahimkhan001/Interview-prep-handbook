@@ -1,118 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MongoDB — Basic · Interview Prep Mastery</title>
-<meta name="description" content="100 basic interview questions on MongoDB, with detailed explanations and examples.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="../assets/styles.css">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%239a6b1d'/%3E%3Ctext x='50' y='68' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold' font-size='48'%3EIP%3C/text%3E%3C/svg%3E">
-</head>
-<body>
-<header class="site-header">
-  <div class="site-header__inner">
-    <button class="menu-toggle" aria-label="Open menu" type="button">☰ Menu</button>
-    <a class="brand" href="../index.html">
-      <span class="brand__mark">IP</span>
-      <span class="brand__text">
-        <span class="brand__title">Interview Prep Mastery</span>
-        <span class="brand__subtitle">Interactive learning guide</span>
-      </span>
-    </a>
-    <nav class="header-nav">
-      <a href="../index.html#roadmap">Roadmap</a>
-      <a href="../index.html#chapters">All chapters</a>
-      <button class="theme-toggle" type="button" aria-label="Toggle color scheme">☾ Dark</button>
-    </nav>
-  </div>
-</header>
-<div class="layout">
-<aside class="sidebar" aria-label="Site navigation">
-  <div class="sidebar__header">Chapter Navigator</div>
-  
-        <div class="nav-part">
-          <div class="nav-part__label">Part 1</div>
-          <div class="nav-part__title">Core Programming Languages</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">JavaScript</li><li><a class="" href="../chapters/javascript-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/javascript-tricky.html"><span class="nav-item__title">Tricky</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-coding.html"><span class="nav-item__title">Advanced Coding</span><span class="nav-item__meta">100 questions · 100 min read</span></a></li><li><a class="" href="../chapters/javascript-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-scenario.html"><span class="nav-item__title">Advanced Scenario Based</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Python</li><li><a class="" href="../chapters/python-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/python-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 2</div>
-          <div class="nav-part__title">Web Fundamentals</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">HTML</li><li><a class="" href="../chapters/html-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/html-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/html-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CSS</li><li><a class="" href="../chapters/css-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">102 questions · 60 min read</span></a></li><li><a class="" href="../chapters/css-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/css-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">101 questions · 90 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 3</div>
-          <div class="nav-part__title">Backend Technologies</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Node.Js</li><li><a class="" href="../chapters/nodejs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/nodejs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ExpressJS</li><li><a class="" href="../chapters/expressjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/expressjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/expressjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">API</li><li><a class="" href="../chapters/api-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/api-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 4</div>
-          <div class="nav-part__title">Frontend Frameworks</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ReactJS</li><li><a class="" href="../chapters/reactjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">101 questions · 60 min read</span></a></li><li><a class="" href="../chapters/reactjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 5</div>
-          <div class="nav-part__title">Databases</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MYSQL</li><li><a class="" href="../chapters/mysql-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mysql-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MongoDB</li><li><a class="active" href="../chapters/mongodb-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mongodb-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 6</div>
-          <div class="nav-part__title">System Design &amp; DevOps</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">System Design MERN Stack</li><li><a class="" href="../chapters/system-design-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Infrastructure MERN Stack</li><li><a class="" href="../chapters/infrastructure-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/infrastructure-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CI/CD Pipeline</li><li><a class="" href="../chapters/cicd-pipeline-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-</aside>
-<main class="main" id="main">
+"""MongoDB Basic — Q1-100 detailed answers.
 
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="../index.html">Home</a>
-    <span class="breadcrumb__sep">›</span>
-    <a href="../index.html#part-5">Databases</a>
-    <span class="breadcrumb__sep">›</span>
-    <span>MongoDB — Basic</span>
-  </nav>
+Style: Basic-level conventions. 80-150 word concise prose explanations.
+Simple JS shell / Mongo driver examples. Comparison tables for related concepts.
+Beginner-friendly tone. ~1,500-2,500 chars per answer.
+"""
 
-  <header class="chapter-header">
-    <div class="chapter-label">MongoDB · Basic</div>
-    <h1 class="chapter-title">Basic MongoDB Interview Questions</h1>
-    <p class="chapter-lede">Foundational knowledge — definitions, syntax, and core mechanics every beginner should know.</p>
-    <div class="chapter-meta">
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Questions</span><span class="chapter-meta__value">100</span></div>
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Level</span><span class="chapter-meta__value">Basic</span></div>
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Estimated reading</span><span class="chapter-meta__value">60 min read</span></div>
-    </div>
-    
-  </header>
+ANSWERS: dict[int, str] = {}
 
-  <section class="prose">
 
-    <div class="toc" id="toc">
-      <div class="toc__title">All questions in this chapter</div>
-      <ul class="toc__list">
-        <li><a href="#q1"><span class="toc__num">1.</span>What is MongoDB?</a></li><li><a href="#q2"><span class="toc__num">2.</span>How does MongoDB differ from traditional relational databases?</a></li><li><a href="#q3"><span class="toc__num">3.</span>What is a document in MongoDB?</a></li><li><a href="#q4"><span class="toc__num">4.</span>What is a collection in MongoDB?</a></li><li><a href="#q5"><span class="toc__num">5.</span>How do you create a database in MongoDB?</a></li><li><a href="#q6"><span class="toc__num">6.</span>How do you create a collection in MongoDB?</a></li><li><a href="#q7"><span class="toc__num">7.</span>How do you insert a document into a MongoDB collection?</a></li><li><a href="#q8"><span class="toc__num">8.</span>How do you update a document in a MongoDB collection?</a></li><li><a href="#q9"><span class="toc__num">9.</span>How do you delete a document from a MongoDB collection?</a></li><li><a href="#q10"><span class="toc__num">10.</span>How do you retrieve all documents from a MongoDB collection?</a></li><li><a href="#q11"><span class="toc__num">11.</span>What is the purpose of the ObjectId in MongoDB?</a></li><li><a href="#q12"><span class="toc__num">12.</span>How do you create an index in MongoDB?</a></li><li><a href="#q13"><span class="toc__num">13.</span>How do you delete an index in MongoDB?</a></li><li><a href="#q14"><span class="toc__num">14.</span>What is the purpose of the find() method in MongoDB?</a></li><li><a href="#q15"><span class="toc__num">15.</span>How do you use the find() method to retrieve specific documents based on a condition?</a></li><li><a href="#q16"><span class="toc__num">16.</span>How do you count the number of documents in a MongoDB collection?</a></li><li><a href="#q17"><span class="toc__num">17.</span>What is the purpose of the updateOne() method in MongoDB?</a></li><li><a href="#q18"><span class="toc__num">18.</span>How do you update multiple documents in a MongoDB collection?</a></li><li><a href="#q19"><span class="toc__num">19.</span>How do you delete a single document in MongoDB?</a></li><li><a href="#q20"><span class="toc__num">20.</span>How do you delete multiple documents in MongoDB?</a></li><li><a href="#q21"><span class="toc__num">21.</span>How do you create a unique index in MongoDB?</a></li><li><a href="#q22"><span class="toc__num">22.</span>What is the purpose of the aggregate() method in MongoDB?</a></li><li><a href="#q23"><span class="toc__num">23.</span>How do you use the $match stage in an aggregation pipeline?</a></li><li><a href="#q24"><span class="toc__num">24.</span>How do you use the $group stage in an aggregation pipeline?</a></li><li><a href="#q25"><span class="toc__num">25.</span>How do you use the $project stage in an aggregation pipeline?</a></li><li><a href="#q26"><span class="toc__num">26.</span>What is a replica set in MongoDB?</a></li><li><a href="#q27"><span class="toc__num">27.</span>How do you create a replica set in MongoDB?</a></li><li><a href="#q28"><span class="toc__num">28.</span>What is sharding in MongoDB?</a></li><li><a href="#q29"><span class="toc__num">29.</span>How do you set up sharding in MongoDB?</a></li><li><a href="#q30"><span class="toc__num">30.</span>What is the purpose of the mongod command?</a></li><li><a href="#q31"><span class="toc__num">31.</span>What is the purpose of the mongo shell?</a></li><li><a href="#q32"><span class="toc__num">32.</span>How do you create a user in MongoDB?</a></li><li><a href="#q33"><span class="toc__num">33.</span>How do you grant roles to a user in MongoDB?</a></li><li><a href="#q34"><span class="toc__num">34.</span>What is the purpose of the $in operator in MongoDB?</a></li><li><a href="#q35"><span class="toc__num">35.</span>How do you use the $or operator in a query?</a></li><li><a href="#q36"><span class="toc__num">36.</span>How do you use the $and operator in a query?</a></li><li><a href="#q37"><span class="toc__num">37.</span>What is the purpose of the $set operator in an update operation?</a></li><li><a href="#q38"><span class="toc__num">38.</span>How do you use the $unset operator to remove a field from a document?</a></li><li><a href="#q39"><span class="toc__num">39.</span>How do you use the $push operator to add elements to an array?</a></li><li><a href="#q40"><span class="toc__num">40.</span>How do you use the $pull operator to remove elements from an array?</a></li><li><a href="#q41"><span class="toc__num">41.</span>What is the purpose of the $elemMatch operator?</a></li><li><a href="#q42"><span class="toc__num">42.</span>How do you use the $exists operator in a query?</a></li><li><a href="#q43"><span class="toc__num">43.</span>What is the purpose of the $regex operator in MongoDB?</a></li><li><a href="#q44"><span class="toc__num">44.</span>How do you use the $text operator for text search in MongoDB?</a></li><li><a href="#q45"><span class="toc__num">45.</span>How do you create a text index in MongoDB?</a></li><li><a href="#q46"><span class="toc__num">46.</span>How do you use the $near operator for geospatial queries?</a></li><li><a href="#q47"><span class="toc__num">47.</span>How do you create a geospatial index in MongoDB?</a></li><li><a href="#q48"><span class="toc__num">48.</span>What is the purpose of the $inc operator in an update operation?</a></li><li><a href="#q49"><span class="toc__num">49.</span>How do you use the $max operator in an update operation?</a></li><li><a href="#q50"><span class="toc__num">50.</span>How do you use the $min operator in an update operation?</a></li><li><a href="#q51"><span class="toc__num">51.</span>What is the purpose of the $sum operator in an aggregation pipeline?</a></li><li><a href="#q52"><span class="toc__num">52.</span>How do you use the $avg operator in an aggregation pipeline?</a></li><li><a href="#q53"><span class="toc__num">53.</span>How do you use the $first operator in an aggregation pipeline?</a></li><li><a href="#q54"><span class="toc__num">54.</span>How do you use the $last operator in an aggregation pipeline?</a></li><li><a href="#q55"><span class="toc__num">55.</span>What is the purpose of the $limit stage in an aggregation pipeline?</a></li><li><a href="#q56"><span class="toc__num">56.</span>How do you use the $skip stage in an aggregation pipeline?</a></li><li><a href="#q57"><span class="toc__num">57.</span>How do you use the $sort stage in an aggregation pipeline?</a></li><li><a href="#q58"><span class="toc__num">58.</span>What is the purpose of the $lookup stage in an aggregation pipeline?</a></li><li><a href="#q59"><span class="toc__num">59.</span>How do you use the $unwind stage in an aggregation pipeline?</a></li><li><a href="#q60"><span class="toc__num">60.</span>What is the purpose of the $out stage in an aggregation pipeline?</a></li><li><a href="#q61"><span class="toc__num">61.</span>How do you use the $addFields stage in an aggregation pipeline?</a></li><li><a href="#q62"><span class="toc__num">62.</span>How do you use the $replaceRoot stage in an aggregation pipeline?</a></li><li><a href="#q63"><span class="toc__num">63.</span>What is the purpose of the $merge stage in an aggregation pipeline?</a></li><li><a href="#q64"><span class="toc__num">64.</span>How do you create a compound index in MongoDB?</a></li><li><a href="#q65"><span class="toc__num">65.</span>How do you delete a database in MongoDB?</a></li><li><a href="#q66"><span class="toc__num">66.</span>What is the purpose of the db.collection.stats() method?</a></li><li><a href="#q67"><span class="toc__num">67.</span>How do you retrieve the list of collections in a database?</a></li><li><a href="#q68"><span class="toc__num">68.</span>How do you retrieve the list of databases in MongoDB?</a></li><li><a href="#q69"><span class="toc__num">69.</span>What is the purpose of the db.collection.drop() method?</a></li><li><a href="#q70"><span class="toc__num">70.</span>How do you perform a bulk insert operation in MongoDB?</a></li><li><a href="#q71"><span class="toc__num">71.</span>How do you use the $type operator in a query?</a></li><li><a href="#q72"><span class="toc__num">72.</span>What is the purpose of the $all operator in a query?</a></li><li><a href="#q73"><span class="toc__num">73.</span>How do you use the $size operator in a query?</a></li><li><a href="#q74"><span class="toc__num">74.</span>How do you use the $slice operator in a projection?</a></li><li><a href="#q75"><span class="toc__num">75.</span>What is the purpose of the $mod operator in a query?</a></li><li><a href="#q76"><span class="toc__num">76.</span>How do you use the $ifNull operator in an aggregation pipeline?</a></li><li><a href="#q77"><span class="toc__num">77.</span>How do you use the $dateToString operator in an aggregation pipeline?</a></li><li><a href="#q78"><span class="toc__num">78.</span>What is the purpose of the $cond operator in an aggregation pipeline?</a></li><li><a href="#q79"><span class="toc__num">79.</span>How do you use the $switch operator in an aggregation pipeline?</a></li><li><a href="#q80"><span class="toc__num">80.</span>What is the purpose of the $map operator in an aggregation pipeline?</a></li><li><a href="#q81"><span class="toc__num">81.</span>How do you use the $reduce operator in an aggregation pipeline?</a></li><li><a href="#q82"><span class="toc__num">82.</span>How do you use the $filter operator in an aggregation pipeline?</a></li><li><a href="#q83"><span class="toc__num">83.</span>What is the purpose of the $arrayElemAt operator in an aggregation pipeline?</a></li><li><a href="#q84"><span class="toc__num">84.</span>How do you use the $range operator in an aggregation pipeline?</a></li><li><a href="#q85"><span class="toc__num">85.</span>What is the purpose of the $zip operator in an aggregation pipeline?</a></li><li><a href="#q86"><span class="toc__num">86.</span>How do you use the $literal operator in an aggregation pipeline?</a></li><li><a href="#q87"><span class="toc__num">87.</span>What is the purpose of the $mergeObjects operator in an aggregation pipeline?</a></li><li><a href="#q88"><span class="toc__num">88.</span>How do you use the $mergeArrays operator in an aggregation pipeline?</a></li><li><a href="#q89"><span class="toc__num">89.</span>What is the purpose of the $let operator in an aggregation pipeline?</a></li><li><a href="#q90"><span class="toc__num">90.</span>How do you create a capped collection in MongoDB?</a></li><li><a href="#q91"><span class="toc__num">91.</span>What is the purpose of the db.collection.renameCollection() method?</a></li><li><a href="#q92"><span class="toc__num">92.</span>How do you use the $expr operator in a query?</a></li><li><a href="#q93"><span class="toc__num">93.</span>How do you perform a case-insensitive search in MongoDB?</a></li><li><a href="#q94"><span class="toc__num">94.</span>How do you use the $out operator to export data to a collection?</a></li><li><a href="#q95"><span class="toc__num">95.</span>What is the purpose of the $bucket stage in an aggregation pipeline?</a></li><li><a href="#q96"><span class="toc__num">96.</span>How do you use the $bucketAuto stage in an aggregation pipeline?</a></li><li><a href="#q97"><span class="toc__num">97.</span>What is the purpose of the $facet stage in an aggregation pipeline?</a></li><li><a href="#q98"><span class="toc__num">98.</span>How do you create a hashed index in MongoDB?</a></li><li><a href="#q99"><span class="toc__num">99.</span>How do you perform a map-reduce operation in MongoDB?</a></li><li><a href="#q100"><span class="toc__num">100.</span>What are MongoDB transactions, and how do you use them?</a></li>
-      </ul>
-    </div>
-
-    
-<article class="qa" id="q1">
-  <div class="qa__number">Question 1</div>
-  <h3 class="qa__question">What is MongoDB?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[1] = r'''
 <p><strong>MongoDB</strong> is an open-source <strong>document database</strong> &mdash; instead of storing data in rows and columns like a relational database, it stores it in flexible JSON-like documents grouped into <em>collections</em>. It was first released in 2009 by 10gen (now MongoDB, Inc.) and is the most popular NoSQL database in the world, used by everyone from small startups to huge companies like Adobe, eBay, Cisco, and EA.</p>
 
 <p>A document looks like a JavaScript object:</p>
@@ -134,15 +30,9 @@
 </ul>
 
 <p>MongoDB stores documents as BSON (binary JSON) on disk, which adds extra types like <code>ObjectId</code>, <code>Date</code>, and <code>Decimal128</code> beyond plain JSON.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q2">
-  <div class="qa__number">Question 2</div>
-  <h3 class="qa__question">How does MongoDB differ from traditional relational databases?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[2] = r'''
 <p>MongoDB and traditional relational databases like MySQL or PostgreSQL solve the same problem &mdash; storing and querying application data &mdash; but with very different models.</p>
 
 <table><thead><tr><th>Aspect</th><th>Relational (SQL)</th><th>MongoDB</th></tr></thead><tbody>
@@ -158,15 +48,9 @@
 <p>The big practical difference is the embed-vs-join tradeoff. In SQL you usually normalize (one table per entity, joined at query time). In MongoDB you often <em>embed</em> related data inside the same document, so reading is one fast operation but writes touching that data may be more complex.</p>
 
 <p>Choose MongoDB when your data is naturally hierarchical, schema evolves often, or you need easy horizontal scaling. Choose SQL when relationships are rich and integrity matters above all.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q3">
-  <div class="qa__number">Question 3</div>
-  <h3 class="qa__question">What is a document in MongoDB?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[3] = r'''
 <p>A <strong>document</strong> is the basic unit of data in MongoDB &mdash; a single record, equivalent to a row in a relational table but far more flexible. Documents are stored as <strong>BSON</strong> (Binary JSON), which extends JSON with types like <code>ObjectId</code>, <code>Date</code>, <code>Binary</code>, and <code>Decimal128</code>.</p>
 
 <pre><code>{
@@ -191,15 +75,9 @@
 </ul>
 
 <p>Documents in the same collection can have different fields, but in practice you should keep similar shapes across a collection for sane querying and indexing.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q4">
-  <div class="qa__number">Question 4</div>
-  <h3 class="qa__question">What is a collection in MongoDB?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[4] = r'''
 <p>A <strong>collection</strong> is a group of MongoDB documents &mdash; conceptually similar to a table in a relational database, but without an enforced schema. Collections live inside a database, and each document inside a collection has its own <code>_id</code>.</p>
 
 <pre><code>// Switch to (or create) a database
@@ -218,15 +96,9 @@ show collections</code></pre>
 <p>Although MongoDB doesn&rsquo;t enforce a schema by default, you can attach a <strong>JSON Schema validator</strong> to a collection to enforce structure on inserts and updates &mdash; a useful safety net once your data model is stable.</p>
 
 <p>Naming convention: lowercase, plural names like <code>users</code>, <code>orders</code>, <code>products</code> are common. Avoid spaces and special characters.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q5">
-  <div class="qa__number">Question 5</div>
-  <h3 class="qa__question">How do you create a database in MongoDB?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[5] = r'''
 <p>In MongoDB you don&rsquo;t explicitly &ldquo;create&rdquo; a database &mdash; you simply <code>use</code> the name you want, and the database springs into existence the first time you insert data into a collection inside it.</p>
 
 <pre><code>// Switch to (or auto-create) the database
@@ -245,15 +117,9 @@ show dbs   // bookstore now appears</code></pre>
 <p>If you need to do this from an application, your driver does the same thing implicitly. For example, in Node.js with the official driver, <code>client.db("bookstore")</code> just returns a database handle &mdash; the actual database is created on first write.</p>
 
 <p>To delete a database, switch to it and run <code>db.dropDatabase()</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q6">
-  <div class="qa__number">Question 6</div>
-  <h3 class="qa__question">How do you create a collection in MongoDB?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[6] = r'''
 <p>You usually don&rsquo;t need to create collections explicitly &mdash; MongoDB creates one the first time you insert into it. But you <em>can</em> create one explicitly when you need extra options.</p>
 
 <pre><code>// Implicit creation &mdash; happens automatically
@@ -290,15 +156,9 @@ db.createCollection("users", {
   <li><strong>Time-series collections</strong> (MongoDB 5.0+) for IoT/metrics workloads.</li>
   <li>Custom collation or storage engine options.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q7">
-  <div class="qa__number">Question 7</div>
-  <h3 class="qa__question">How do you insert a document into a MongoDB collection?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[7] = r'''
 <p>You insert documents using <code>insertOne()</code> for a single document or <code>insertMany()</code> for a batch.</p>
 
 <pre><code>// Single document
@@ -325,15 +185,9 @@ db.users.insertMany([
 </ul>
 
 <p>Drivers (Node.js, Python, Java, etc.) expose the same methods via idiomatic APIs, e.g. <code>await users.insertOne({...})</code>. The legacy <code>insert()</code> method still works but is deprecated &mdash; prefer <code>insertOne</code>/<code>insertMany</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q8">
-  <div class="qa__number">Question 8</div>
-  <h3 class="qa__question">How do you update a document in a MongoDB collection?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[8] = r'''
 <p>You update documents using <code>updateOne()</code>, <code>updateMany()</code>, or <code>replaceOne()</code>. The first argument is a filter (which documents to match), and the second is what to change.</p>
 
 <pre><code>// Update one matching document
@@ -371,15 +225,9 @@ db.users.updateOne(
 </ul>
 
 <p>The result includes <code>matchedCount</code> and <code>modifiedCount</code> so you can confirm how many documents the operation affected.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q9">
-  <div class="qa__number">Question 9</div>
-  <h3 class="qa__question">How do you delete a document from a MongoDB collection?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[9] = r'''
 <p>You remove documents using <code>deleteOne()</code> for a single match or <code>deleteMany()</code> for all matches. Both take a filter.</p>
 
 <pre><code>// Delete the first match
@@ -407,15 +255,9 @@ db.users.drop()</code></pre>
 </ul>
 
 <p>If you need both delete and return the deleted document, use <code>findOneAndDelete()</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q10">
-  <div class="qa__number">Question 10</div>
-  <h3 class="qa__question">How do you retrieve all documents from a MongoDB collection?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[10] = r'''
 <p>You retrieve documents with the <code>find()</code> method. With no filter, it returns every document in the collection.</p>
 
 <pre><code>// All documents
@@ -442,15 +284,9 @@ const all = await db.collection("users").find().toArray();</code></pre>
 </ul>
 
 <p>For large collections, never iterate everything in one go &mdash; use pagination via sort + range filter, or use the aggregation pipeline.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q11">
-  <div class="qa__number">Question 11</div>
-  <h3 class="qa__question">What is the purpose of the ObjectId in MongoDB?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[11] = r'''
 <p>The <code>_id</code> field is the unique <strong>primary key</strong> for every document. If you don&rsquo;t provide one on insert, MongoDB generates an <code>ObjectId</code> &mdash; a 12-byte value that&rsquo;s unique across the cluster and roughly time-ordered.</p>
 
 <pre><code>ObjectId("65f1a2b3c4d5e6f7a8b9c0d1")
@@ -474,15 +310,9 @@ const all = await db.collection("users").find().toArray();</code></pre>
 <p>You can also use your own values for <code>_id</code> &mdash; an integer, a UUID, an email, anything &mdash; as long as each value is unique. For modern apps, <strong>UUIDv7</strong> is becoming popular as an alternative because it&rsquo;s standardized, time-ordered, and 16 bytes.</p>
 
 <p>Indexed automatically &mdash; you never need to create an index on <code>_id</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q12">
-  <div class="qa__number">Question 12</div>
-  <h3 class="qa__question">How do you create an index in MongoDB?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[12] = r'''
 <p>Indexes speed up queries by avoiding full collection scans. You create one with <code>createIndex()</code>, supplying the fields and a sort direction (1 ascending, -1 descending).</p>
 
 <pre><code>// Single-field index
@@ -515,15 +345,9 @@ db.articles.createIndex({ title: "text", body: "text" })</code></pre>
 </ul>
 
 <p>The <code>_id</code> index exists automatically &mdash; you never need to create it.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q13">
-  <div class="qa__number">Question 13</div>
-  <h3 class="qa__question">How do you delete an index in MongoDB?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[13] = r'''
 <p>You drop indexes with <code>dropIndex()</code> by name or by spec, or all non-<code>_id</code> indexes at once with <code>dropIndexes()</code>.</p>
 
 <pre><code>// List indexes
@@ -553,15 +377,9 @@ db.users.dropIndexes()</code></pre>
 </ul>
 
 <p>Removing unused indexes is one of the easiest performance wins on a busy MongoDB cluster.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q14">
-  <div class="qa__number">Question 14</div>
-  <h3 class="qa__question">What is the purpose of the find() method in MongoDB?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[14] = r'''
 <p>The <code>find()</code> method retrieves documents from a collection. Its first argument is a <em>query filter</em>; its second is an optional <em>projection</em> that controls which fields come back.</p>
 
 <pre><code>db.collection.find(filter, projection)</code></pre>
@@ -595,15 +413,9 @@ db.users.find({ active: true })
 </ul>
 
 <p>Use <code>findOne()</code> when you only need one document &mdash; it returns the document directly, not a cursor.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q15">
-  <div class="qa__number">Question 15</div>
-  <h3 class="qa__question">How do you use the find() method to retrieve specific documents based on a condition?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[15] = r'''
 <p>You build query filters using field names mapped to values or to query operators. MongoDB expressions are JSON-shaped.</p>
 
 <pre><code>// Equality
@@ -641,15 +453,9 @@ db.users.find({ email: { $regex: /@gmail\.com$/i } })</code></pre>
 </ul>
 
 <p>For best performance, ensure the fields you filter on are indexed.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q16">
-  <div class="qa__number">Question 16</div>
-  <h3 class="qa__question">How do you count the number of documents in a MongoDB collection?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[16] = r'''
 <p>You count documents with <code>countDocuments()</code> or, when you want a fast approximation of the whole collection, <code>estimatedDocumentCount()</code>.</p>
 
 <pre><code>// Exact count, respects filter
@@ -676,15 +482,9 @@ db.users.count({ active: true })   // avoid in new code</code></pre>
 </ul>
 
 <p>Always use the modern methods &mdash; the old <code>count()</code> behaves differently across drivers and is deprecated.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q17">
-  <div class="qa__number">Question 17</div>
-  <h3 class="qa__question">What is the purpose of the updateOne() method in MongoDB?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[17] = r'''
 <p>The <code>updateOne()</code> method updates the <em>first</em> document that matches a filter. If no document matches, nothing changes (unless you also pass <code>{ upsert: true }</code>).</p>
 
 <pre><code>db.users.updateOne(
@@ -712,15 +512,9 @@ db.users.count({ active: true })   // avoid in new code</code></pre>
 <p>For atomic read-then-update workflows, use <code>findOneAndUpdate()</code> &mdash; it returns either the original or the modified document, useful for counters and queues.</p>
 
 <p>Use <code>updateMany</code> when you need to update every match instead of just the first.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q18">
-  <div class="qa__number">Question 18</div>
-  <h3 class="qa__question">How do you update multiple documents in a MongoDB collection?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[18] = r'''
 <p>To update multiple documents at once, use <code>updateMany()</code>. It applies the same update to every document that matches the filter.</p>
 
 <pre><code>// Mark all inactive users as archived
@@ -750,15 +544,9 @@ db.products.updateMany(
 </ul>
 
 <p>Use <code>{ upsert: true }</code> with caution on <code>updateMany</code> &mdash; it inserts <em>at most one</em> document if no matches, not one per filter combination.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q19">
-  <div class="qa__number">Question 19</div>
-  <h3 class="qa__question">How do you delete a single document in MongoDB?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[19] = r'''
 <p>You delete a single document with <code>deleteOne()</code>, which removes the first match for a filter.</p>
 
 <pre><code>// Delete one matching document
@@ -787,15 +575,9 @@ const removed = db.users.findOneAndDelete({ email: "x@y.com" })</code></pre>
 </ul>
 
 <p>The legacy <code>remove({}, { justOne: true })</code> still works but is deprecated &mdash; always use the explicit method.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q20">
-  <div class="qa__number">Question 20</div>
-  <h3 class="qa__question">How do you delete multiple documents in MongoDB?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[20] = r'''
 <p>To delete multiple documents at once, use <code>deleteMany()</code>. It removes every document that matches the filter.</p>
 
 <pre><code>// Delete all soft-archived rows
@@ -821,15 +603,9 @@ db.events.deleteMany({})</code></pre>
 <pre><code>db.sessions.createIndex({ createdAt: 1 }, { expireAfterSeconds: 3600 })</code></pre>
 
 <p>For very large purges, batch by <code>_id</code> range to keep operations short and avoid long-running write locks.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q21">
-  <div class="qa__number">Question 21</div>
-  <h3 class="qa__question">How do you create a unique index in MongoDB?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[21] = r'''
 <p>A <strong>unique index</strong> ensures no two documents share the same value for the indexed field(s). It&rsquo;s how MongoDB enforces uniqueness on fields like email or username.</p>
 
 <pre><code>// Single-field unique index
@@ -860,15 +636,9 @@ db.users.createIndex(
 </ul>
 
 <p>For idempotent writes, combine unique indexes with <code>upsert: true</code> on update.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q22">
-  <div class="qa__number">Question 22</div>
-  <h3 class="qa__question">What is the purpose of the aggregate() method in MongoDB?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[22] = r'''
 <p>The <code>aggregate()</code> method runs documents through a multi-stage <strong>pipeline</strong>. Each stage transforms the input and passes its output to the next stage, like a Unix pipe.</p>
 
 <pre><code>db.orders.aggregate([
@@ -892,15 +662,9 @@ db.users.createIndex(
 </tbody></table>
 
 <p>Aggregation pipelines run on the server, use indexes when possible, and can stream large datasets. They&rsquo;re the standard way to do reporting and analytics inside MongoDB.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q23">
-  <div class="qa__number">Question 23</div>
-  <h3 class="qa__question">How do you use the $match stage in an aggregation pipeline?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[23] = r'''
 <p>The <code>$match</code> stage filters documents in an aggregation pipeline &mdash; it&rsquo;s functionally identical to the filter in <code>find()</code>, written using the same query operators.</p>
 
 <pre><code>db.orders.aggregate([
@@ -933,15 +697,9 @@ db.users.createIndex(
 </ul>
 
 <p>Always run <code>.explain()</code> on the pipeline to verify <code>$match</code> uses an index.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q24">
-  <div class="qa__number">Question 24</div>
-  <h3 class="qa__question">How do you use the $group stage in an aggregation pipeline?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[24] = r'''
 <p>The <code>$group</code> stage groups documents by a key and computes aggregate values for each group &mdash; the heart of analytical queries.</p>
 
 <pre><code>// Total revenue per customer
@@ -975,15 +733,9 @@ db.orders.aggregate([
 </tbody></table>
 
 <p>Pair <code>$group</code> with an upstream <code>$match</code> to keep group sizes small and tap into indexes.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q25">
-  <div class="qa__number">Question 25</div>
-  <h3 class="qa__question">How do you use the $project stage in an aggregation pipeline?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[25] = r'''
 <p>The <code>$project</code> stage <strong>reshapes documents</strong> &mdash; it includes, excludes, renames, or computes new fields, similar to a <code>SELECT</code> in SQL.</p>
 
 <pre><code>// Choose specific fields
@@ -1019,15 +771,9 @@ db.users.aggregate([
 <pre><code>{ $addFields: { fullName: { $concat: ["$first", " ", "$last"] } } }</code></pre>
 
 <p>Place <code>$project</code> late in the pipeline so earlier stages can still use the dropped fields if needed.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q26">
-  <div class="qa__number">Question 26</div>
-  <h3 class="qa__question">What is a replica set in MongoDB?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[26] = r'''
 <p>A <strong>replica set</strong> is a group of <strong>mongod</strong> servers that maintain the same data, providing <strong>high availability</strong> and automatic failover. One member is the <strong>primary</strong> (handles all writes); the others are <strong>secondaries</strong> that replicate the primary&rsquo;s oplog and can serve reads.</p>
 
 <pre><code>// Typical 3-node setup
@@ -1047,15 +793,9 @@ db.users.aggregate([
 </ul>
 
 <p>Production-grade clusters always run a replica set (3 or 5 members, odd numbers for elections). MongoDB Atlas creates one for you automatically. A standalone mongod is fine for local dev only.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q27">
-  <div class="qa__number">Question 27</div>
-  <h3 class="qa__question">How do you create a replica set in MongoDB?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[27] = r'''
 <p>You create a replica set by starting each <code>mongod</code> with a shared <code>replSetName</code> and then running <code>rs.initiate()</code> from the shell on one member. The other members join via configuration.</p>
 
 <pre><code>// Start 3 mongod processes on different ports
@@ -1077,15 +817,9 @@ rs.initiate({
 rs.status();   // verify members PRIMARY/SECONDARY</code></pre>
 
 <p>For production, use <strong>MongoDB Atlas</strong> &mdash; it provisions multi-AZ replica sets, handles failover, and includes monitoring. Self-hosted setups should use TLS, keyfile or x.509 authentication, and place members in different availability zones for true HA. Always use 3 or 5 members so elections always have a majority.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q28">
-  <div class="qa__number">Question 28</div>
-  <h3 class="qa__question">What is sharding in MongoDB?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[28] = r'''
 <p><strong>Sharding</strong> is MongoDB&rsquo;s strategy for <strong>horizontal scaling</strong> &mdash; splitting a large collection across multiple servers (called <em>shards</em>) so each one stores only a portion of the data. It&rsquo;s how you scale beyond what a single machine can hold.</p>
 
 <pre><code>// Conceptually:
@@ -1106,15 +840,9 @@ rs.status();   // verify members PRIMARY/SECONDARY</code></pre>
 </ul>
 
 <p>Sharding is powerful but operationally complex. Use replica sets first; only shard once a single replica set can&rsquo;t hold your data or handle the write rate.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q29">
-  <div class="qa__number">Question 29</div>
-  <h3 class="qa__question">How do you set up sharding in MongoDB?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[29] = r'''
 <p>Setting up sharding involves three components: <strong>config servers</strong> (a replica set storing metadata), <strong>shards</strong> (each one a replica set holding data), and <strong>mongos</strong> routers (clients connect here).</p>
 
 <pre><code>// 1. Start a config server replica set
@@ -1137,15 +865,9 @@ db.products.createIndex({ category: 1, _id: 1 });
 sh.shardCollection("shopdb.products", { category: 1, _id: 1 });</code></pre>
 
 <p>Pick a shard key that <strong>distributes evenly</strong> (avoid monotonically increasing keys like timestamps unless hashed) and <strong>matches your queries</strong> (so they target one shard). Most teams use <strong>MongoDB Atlas</strong> instead of running this themselves &mdash; Atlas handles all of the above and lets you reshard collections online with a click.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q30">
-  <div class="qa__number">Question 30</div>
-  <h3 class="qa__question">What is the purpose of the mongod command?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[30] = r'''
 <p><strong><code>mongod</code></strong> is the <strong>core MongoDB server process</strong> &mdash; it&rsquo;s the daemon that actually stores data, handles queries, manages indexes, and replicates with other members. Every replica set node, every shard server, runs a <code>mongod</code> process.</p>
 
 <pre><code>// Start a basic standalone server
@@ -1169,15 +891,9 @@ mongod --config /etc/mongod.conf</code></pre>
 <p>Default port is <code>27017</code>. The data directory must exist before starting (and shouldn&rsquo;t be shared between processes). Production deployments use a config file with <code>storage.wiredTiger.engineConfig.cacheSizeGB</code>, <code>net.tls</code>, <code>security.authorization</code>, and replication settings.</p>
 
 <p>For local development, just run <code>mongod --dbpath /tmp/db</code>. For anything serious, use systemd, MongoDB Atlas, or a Docker image &mdash; never run untuned <code>mongod</code> on a production box.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q31">
-  <div class="qa__number">Question 31</div>
-  <h3 class="qa__question">What is the purpose of the mongo shell?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[31] = r'''
 <p>The <strong><code>mongo shell</code></strong> &mdash; properly called <strong><code>mongosh</code></strong> in modern versions &mdash; is the interactive command-line client for MongoDB. It connects to a server and lets you run JavaScript-style commands against databases and collections.</p>
 
 <pre><code>// Connect to local server (default port 27017)
@@ -1199,15 +915,9 @@ mongosh script.js</code></pre>
 <p>The shell is full JavaScript &mdash; you can write loops, define functions, store variables (<code>let users = db.users.find().toArray()</code>), and import packages. <code>mongosh</code> replaced the legacy <code>mongo</code> shell starting MongoDB 5.0 and adds modern JavaScript support, syntax highlighting, and better autocomplete.</p>
 
 <p>For GUIs, use <strong>MongoDB Compass</strong> (official) or <strong>Studio 3T</strong> &mdash; both let you query, edit, and visualize data without typing commands.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q32">
-  <div class="qa__number">Question 32</div>
-  <h3 class="qa__question">How do you create a user in MongoDB?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[32] = r'''
 <p>You create a user with <code>db.createUser()</code>, specifying a username, password, and the roles (permissions) the user should have. Users are tied to a specific database &mdash; the one you&rsquo;re connected to when you create them.</p>
 
 <pre><code>// Create an admin user (one-time on a fresh server)
@@ -1237,15 +947,9 @@ db.createUser({
 });</code></pre>
 
 <p>Use <code>passwordPrompt()</code> in <code>mongosh</code> instead of a literal password &mdash; it avoids leaking the password to your shell history. Always start <code>mongod</code> with <code>--auth</code> in production. For automated rotation use <strong>HashiCorp Vault</strong>, <strong>AWS Secrets Manager</strong>, or Atlas Database Users with API-managed credentials.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q33">
-  <div class="qa__number">Question 33</div>
-  <h3 class="qa__question">How do you grant roles to a user in MongoDB?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[33] = r'''
 <p>You grant additional roles to an existing user with <code>db.grantRolesToUser()</code>, and revoke them with <code>db.revokeRolesFromUser()</code>. Roles can be built-in (like <code>read</code>, <code>readWrite</code>, <code>dbAdmin</code>) or custom.</p>
 
 <pre><code>// Grant additional read on the analytics DB to an existing user
@@ -1281,15 +985,9 @@ db.createRole({
 </tbody></table>
 
 <p>Follow least-privilege: app users get <code>readWrite</code> on their database only.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q34">
-  <div class="qa__number">Question 34</div>
-  <h3 class="qa__question">What is the purpose of the $in operator in MongoDB?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[34] = r'''
 <p>The <strong><code>$in</code></strong> operator matches documents where a field&rsquo;s value is in the given <strong>array of values</strong>. It&rsquo;s the equivalent of SQL&rsquo;s <code>IN (...)</code> &mdash; clean and index-friendly.</p>
 
 <pre><code>// Find users in any of these countries
@@ -1315,15 +1013,9 @@ db.users.find({ status: { $nin: ["banned", "deleted"] } });</code></pre>
   <li><strong>Keep the array small</strong> &mdash; very large <code>$in</code> arrays (thousands of values) can perform worse than alternatives like a join via <code>$lookup</code>.</li>
   <li><strong>Type-sensitive</strong> &mdash; <code>{ $in: ["1"] }</code> won&rsquo;t match <code>1</code> (number). Make sure types match.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q35">
-  <div class="qa__number">Question 35</div>
-  <h3 class="qa__question">How do you use the $or operator in a query?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[35] = r'''
 <p>The <strong><code>$or</code></strong> operator matches documents that satisfy <strong>at least one</strong> of the conditions in its array. Each element of the array is a complete query expression.</p>
 
 <pre><code>// Match users who are either admins or have premium plans
@@ -1357,15 +1049,9 @@ db.orders.find({
   <li>If all branches involve the same field, <code>$in</code> is simpler and more efficient: <code>{ status: { $in: ["pending","priority"] } }</code>.</li>
   <li>Use <code>explain("executionStats")</code> to check that each branch picks the right index.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q36">
-  <div class="qa__number">Question 36</div>
-  <h3 class="qa__question">How do you use the $and operator in a query?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[36] = r'''
 <p>The <strong><code>$and</code></strong> operator matches documents that satisfy <strong>all</strong> the conditions in its array. In MongoDB, AND is the <em>default</em> when you list multiple fields in a query &mdash; so explicit <code>$and</code> is only needed when conditions on the <em>same field</em> would otherwise collide.</p>
 
 <pre><code>// Implicit AND (most common form)
@@ -1396,15 +1082,9 @@ db.orders.find({
 </ul>
 
 <p>For the everyday case, just list fields side by side &mdash; <code>$and</code> is implicit and the syntax is cleaner.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q37">
-  <div class="qa__number">Question 37</div>
-  <h3 class="qa__question">What is the purpose of the $set operator in an update operation?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[37] = r'''
 <p>The <strong><code>$set</code></strong> operator <strong>updates fields</strong> in a document &mdash; either changing existing values or adding new ones. It&rsquo;s the workhorse update operator for partial updates.</p>
 
 <pre><code>// Update an existing field
@@ -1439,15 +1119,9 @@ db.orders.updateOne(
 </ul>
 
 <p>Companion: <code>$setOnInsert</code> applies values only on the insert path of an upsert (e.g., <code>created_at</code>).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q38">
-  <div class="qa__number">Question 38</div>
-  <h3 class="qa__question">How do you use the $unset operator to remove a field from a document?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[38] = r'''
 <p>The <strong><code>$unset</code></strong> operator <strong>removes a field</strong> from a document. The value you pass is ignored &mdash; conventionally use <code>""</code> or <code>1</code>. The field is gone after the update; it&rsquo;s not just set to <code>null</code>.</p>
 
 <pre><code>// Remove a single field
@@ -1481,15 +1155,9 @@ db.users.updateMany(
 </ul>
 
 <p><code>$unset</code> is great for schema migrations &mdash; clean up obsolete fields across millions of documents in one <code>updateMany</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q39">
-  <div class="qa__number">Question 39</div>
-  <h3 class="qa__question">How do you use the $push operator to add elements to an array?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[39] = r'''
 <p>The <strong><code>$push</code></strong> operator <strong>appends an element to an array field</strong>. If the field doesn&rsquo;t exist, MongoDB creates it as a new array.</p>
 
 <pre><code>// Append a single element
@@ -1529,15 +1197,9 @@ db.posts.updateOne(
 </ul>
 
 <p>Watch unbounded array growth &mdash; large arrays slow queries and can hit the 16 MB document limit. Use <code>$slice</code> to cap or model as separate documents.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q40">
-  <div class="qa__number">Question 40</div>
-  <h3 class="qa__question">How do you use the $pull operator to remove elements from an array?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[40] = r'''
 <p>The <strong><code>$pull</code></strong> operator <strong>removes all elements from an array</strong> that match a given condition. It&rsquo;s the cleanest way to remove items by value or by an embedded query.</p>
 
 <pre><code>// Remove a specific value
@@ -1572,15 +1234,9 @@ db.users.updateMany(
 </ul>
 
 <p>For arrays of objects, <code>$pull</code> matches on the conditions you specify &mdash; perfect for &ldquo;remove the cart item with productId X&rdquo; or &ldquo;clear all expired sessions.&rdquo;</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q41">
-  <div class="qa__number">Question 41</div>
-  <h3 class="qa__question">What is the purpose of the $elemMatch operator?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[41] = r'''
 <p>The <strong><code>$elemMatch</code></strong> operator matches documents where <strong>at least one element of an array satisfies all the given conditions <em>simultaneously</em></strong>. It&rsquo;s essential when querying arrays of subdocuments.</p>
 
 <pre><code>// Documents:
@@ -1607,15 +1263,9 @@ db.students.find({
 </ul>
 
 <p>Without <code>$elemMatch</code>, separate conditions on the same array field are checked independently &mdash; almost always not what you want for arrays of subdocuments.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q42">
-  <div class="qa__number">Question 42</div>
-  <h3 class="qa__question">How do you use the $exists operator in a query?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[42] = r'''
 <p>The <strong><code>$exists</code></strong> operator matches documents based on whether a field is <strong>present or absent</strong>, regardless of its value. Useful when documents in a collection have varying schemas.</p>
 
 <pre><code>// Documents that have a phone field (any value, even null)
@@ -1640,15 +1290,9 @@ db.users.find({ schema_version: { $exists: false } });</code></pre>
 </tbody></table>
 
 <p>Performance note: <code>$exists: true</code> can usually use an index on the field; <code>$exists: false</code> typically can&rsquo;t (it&rsquo;s the absence of an index entry). For schema-version migrations, prefer adding the field with a default and querying by value.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q43">
-  <div class="qa__number">Question 43</div>
-  <h3 class="qa__question">What is the purpose of the $regex operator in MongoDB?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[43] = r'''
 <p>The <strong><code>$regex</code></strong> operator matches string fields against a <strong>regular expression</strong>. It supports the full PCRE-like regex syntax.</p>
 
 <pre><code>// Names starting with "Ali" (case-insensitive)
@@ -1672,15 +1316,9 @@ db.products.find({ code: /\d{4}/ });
   <li><strong>For full-text search, use <code>$text</code> + a text index</strong> instead &mdash; far faster and supports stemming.</li>
   <li><strong>For complex matching at scale</strong>, integrate with <strong>Atlas Search</strong> (Lucene-based) or a dedicated engine like <strong>Elasticsearch</strong> or <strong>Meilisearch</strong>.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q44">
-  <div class="qa__number">Question 44</div>
-  <h3 class="qa__question">How do you use the $text operator for text search in MongoDB?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[44] = r'''
 <p>The <strong><code>$text</code></strong> operator runs a <strong>full-text search</strong> on a collection that has a <strong>text index</strong>. It tokenizes the query string, applies stemming, removes stop words, and scores results by relevance.</p>
 
 <pre><code>// First, create a text index (one per collection)
@@ -1709,15 +1347,9 @@ db.articles.find({ $text: { $search: "ejecutivos", $language: "spanish" } });</c
   <li>Each collection can have <strong>only one text index</strong>, but it can span multiple fields.</li>
   <li>Built-in text search is good for simple cases; for fuzzy matching, autocomplete, faceting, and multi-language relevance, use <strong>MongoDB Atlas Search</strong> (Lucene-powered) or external engines (<strong>Elasticsearch</strong>, <strong>Meilisearch</strong>, <strong>Typesense</strong>).</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q45">
-  <div class="qa__number">Question 45</div>
-  <h3 class="qa__question">How do you create a text index in MongoDB?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[45] = r'''
 <p>You create a <strong>text index</strong> with <code>createIndex()</code>, specifying <code>"text"</code> as the index type for one or more string fields. Text indexes support the <code>$text</code> query operator with full-text search semantics: tokenization, stemming, stop-word removal, and relevance scoring.</p>
 
 <pre><code>// Index a single field
@@ -1747,15 +1379,9 @@ db.articles.createIndex(
   <li><strong>Heavy on RAM and disk</strong> &mdash; text indexes can be 5-10x larger than the source data.</li>
   <li>For modern search needs (fuzzy, autocomplete, facets, ML relevance), <strong>MongoDB Atlas Search</strong> uses Lucene under the hood and is far more capable. For self-hosted, integrate <strong>Elasticsearch</strong>, <strong>OpenSearch</strong>, <strong>Meilisearch</strong>, or <strong>Typesense</strong>.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q46">
-  <div class="qa__number">Question 46</div>
-  <h3 class="qa__question">How do you use the $near operator for geospatial queries?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[46] = r'''
 <p>The <strong><code>$near</code></strong> operator finds documents whose stored geometry is <strong>nearest to a given point</strong>, sorted by distance. It requires a geospatial index (<code>2dsphere</code> for Earth-like coordinates) and is perfect for &ldquo;find the closest stores&rdquo; queries.</p>
 
 <pre><code>// Each document has a GeoJSON point field
@@ -1786,15 +1412,9 @@ db.places.aggregate([
 ]);</code></pre>
 
 <p>Important: <strong>coordinates are <code>[longitude, latitude]</code></strong>, not lat-lng &mdash; a common bug source. Use <code>$geoNear</code> in aggregation pipelines because it adds a computed distance field; <code>$near</code> only sorts results. For huge geo datasets, look at <strong>PostGIS</strong>, <strong>Tile38</strong>, or <strong>H3</strong> hex-indexing for advanced workloads.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q47">
-  <div class="qa__number">Question 47</div>
-  <h3 class="qa__question">How do you create a geospatial index in MongoDB?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[47] = r'''
 <p>You create a <strong>geospatial index</strong> with <code>createIndex()</code>, specifying <code>"2dsphere"</code> for Earth-like coordinates (the modern default) or <code>"2d"</code> for legacy planar coordinates. The field stores GeoJSON geometry objects.</p>
 
 <pre><code>// Create a 2dsphere index on the location field
@@ -1824,15 +1444,9 @@ db.places.find({
 db.places.createIndex({ location: "2dsphere", category: 1 });</code></pre>
 
 <p>Operators that need a 2dsphere index: <code>$near</code>, <code>$geoNear</code>, <code>$geoWithin</code>, <code>$geoIntersects</code>. Always store coordinates as <code>[longitude, latitude]</code>. For huge geo datasets or advanced queries (isochrones, routing), step out to <strong>PostGIS</strong>, <strong>Tile38</strong>, or libraries like <strong>H3</strong> by Uber.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q48">
-  <div class="qa__number">Question 48</div>
-  <h3 class="qa__question">What is the purpose of the $inc operator in an update operation?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[48] = r'''
 <p>The <strong><code>$inc</code></strong> operator <strong>increments a number field</strong> atomically by the given amount. It&rsquo;s the right tool for counters: page views, like counts, score changes, balance updates.</p>
 
 <pre><code>// Increment by 1
@@ -1868,15 +1482,9 @@ db.posts.updateOne(
 </ul>
 
 <p>For very high write rates on a single counter (a viral post), spread the count across multiple shards (sharded counters) or use Redis for the hot path and persist periodically.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q49">
-  <div class="qa__number">Question 49</div>
-  <h3 class="qa__question">How do you use the $max operator in an update operation?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[49] = r'''
 <p>The <strong><code>$max</code></strong> update operator updates a field <strong>only if the new value is greater than the existing one</strong>. If the field doesn&rsquo;t exist, it&rsquo;s set to the new value. Useful for &ldquo;keep the highest seen&rdquo; semantics: high scores, latest timestamps, max prices.</p>
 
 <pre><code>// Update high score only if greater
@@ -1906,15 +1514,9 @@ db.products.updateMany(
 </ul>
 
 <p>Companion: <strong><code>$min</code></strong> does the opposite &mdash; only updates if the new value is smaller. Both are great for monotonic counters where you only ever want the extreme value to win.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q50">
-  <div class="qa__number">Question 50</div>
-  <h3 class="qa__question">How do you use the $min operator in an update operation?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[50] = r'''
 <p>The <strong><code>$min</code></strong> update operator updates a field <strong>only if the new value is less than the existing one</strong>. It&rsquo;s the mirror of <code>$max</code> &mdash; perfect for &ldquo;keep the lowest seen&rdquo; semantics like personal-best lap times, lowest observed prices, or earliest dates.</p>
 
 <pre><code>// Track lowest price ever offered
@@ -1944,15 +1546,9 @@ db.racers.updateOne(
 </tbody></table>
 
 <p><code>$min</code> and <code>$max</code> together cover monotonic-extreme update needs cleanly and atomically &mdash; no transaction or extra round-trip required. Don&rsquo;t confuse them with the <em>aggregation</em> accumulators of the same names, which compute group-level extremes inside pipelines.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q51">
-  <div class="qa__number">Question 51</div>
-  <h3 class="qa__question">What is the purpose of the $sum operator in an aggregation pipeline?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[51] = r'''
 <p>The <strong><code>$sum</code></strong> aggregation accumulator <strong>sums numeric values</strong> within a group, or counts documents when given <code>1</code>. It&rsquo;s SQL&rsquo;s SUM and COUNT rolled into one operator and is by far the most-used accumulator in pipelines.</p>
 
 <pre><code>// Total revenue and order count per customer
@@ -1991,15 +1587,9 @@ db.orders.aggregate([
   <li>Use <code>$sum: 1</code> for COUNT &mdash; cleaner than counting field presence.</li>
   <li>Combine with <code>$cond</code> for conditional aggregates (filtered counts/sums).</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q52">
-  <div class="qa__number">Question 52</div>
-  <h3 class="qa__question">How do you use the $avg operator in an aggregation pipeline?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[52] = r'''
 <p>The <strong><code>$avg</code></strong> aggregation accumulator computes the <strong>average of numeric values</strong> within a group. Non-numeric values are ignored. It&rsquo;s the equivalent of SQL&rsquo;s AVG().</p>
 
 <pre><code>// Average product rating per category
@@ -2036,15 +1626,9 @@ db.surveys.aggregate([
   <li><strong>For median/percentiles</strong>, MongoDB doesn&rsquo;t have a direct accumulator &mdash; use <code>$percentile</code> (added in 7.0+) or compute from sorted arrays.</li>
   <li><strong>Pre-filter</strong> with <code>$match</code> before <code>$group</code> &mdash; both for index use and to avoid skewing averages with bad data.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q53">
-  <div class="qa__number">Question 53</div>
-  <h3 class="qa__question">How do you use the $first operator in an aggregation pipeline?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[53] = r'''
 <p>The <strong><code>$first</code></strong> aggregation accumulator returns the <strong>first value of a field</strong> within each group, based on the current document order in the pipeline. Pair it with <code>$sort</code> upstream to make the order deterministic &mdash; otherwise &ldquo;first&rdquo; is whatever order the docs flowed in, which is unspecified.</p>
 
 <pre><code>// First (most recent) order per customer
@@ -2077,15 +1661,9 @@ db.events.aggregate([
 </ul>
 
 <p><code>$first</code> is the cleanest way to express &ldquo;the most recent X per Y&rdquo; queries.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q54">
-  <div class="qa__number">Question 54</div>
-  <h3 class="qa__question">How do you use the $last operator in an aggregation pipeline?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[54] = r'''
 <p>The <strong><code>$last</code></strong> aggregation accumulator returns the <strong>last value of a field</strong> within each group, based on document order in the pipeline. Like <code>$first</code>, you should pair it with <code>$sort</code> upstream so &ldquo;last&rdquo; is well-defined.</p>
 
 <pre><code>// First and last login per user
@@ -2117,15 +1695,9 @@ db.events.aggregate([
 </tbody></table>
 
 <p>Use <code>$first/$last</code> with explicit upstream <code>$sort</code>; use <code>$min/$max</code> when you want extremes by value, regardless of insertion order.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q55">
-  <div class="qa__number">Question 55</div>
-  <h3 class="qa__question">What is the purpose of the $limit stage in an aggregation pipeline?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[55] = r'''
 <p>The <strong><code>$limit</code></strong> aggregation stage <strong>caps the number of documents</strong> passing through the pipeline. It&rsquo;s the equivalent of SQL&rsquo;s LIMIT and is essential for top-N queries and pagination.</p>
 
 <pre><code>// Top 10 customers by total revenue
@@ -2157,15 +1729,9 @@ db.events.aggregate([
   <li><strong>Sort + Limit can use indexes</strong> if the sort field is indexed; the optimizer applies a top-K shortcut.</li>
   <li><strong>For deep pagination</strong> (page 1000+), prefer range-based pagination using the last seen <code>_id</code> instead of <code>$skip</code> &mdash; <code>$skip</code> still scans skipped documents.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q56">
-  <div class="qa__number">Question 56</div>
-  <h3 class="qa__question">How do you use the $skip stage in an aggregation pipeline?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[56] = r'''
 <p>The <strong><code>$skip</code></strong> aggregation stage <strong>skips the first N documents</strong> from the pipeline before passing the rest forward. It&rsquo;s typically paired with <code>$sort</code> + <code>$limit</code> to implement classic offset-based pagination.</p>
 
 <pre><code>// Page 4 of products, 25 per page
@@ -2199,15 +1765,9 @@ db.products.find({ active: true, _id: { $lt: lastSeenId } })
            .sort({ _id: -1 }).limit(25);</code></pre>
 
 <p>This scales to any depth without performance loss.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q57">
-  <div class="qa__number">Question 57</div>
-  <h3 class="qa__question">How do you use the $sort stage in an aggregation pipeline?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[57] = r'''
 <p>The <strong><code>$sort</code></strong> aggregation stage <strong>orders documents</strong> by one or more fields. Use <code>1</code> for ascending and <code>-1</code> for descending. It&rsquo;s the equivalent of SQL&rsquo;s ORDER BY and is essential for ranking, top-N queries, and pagination.</p>
 
 <pre><code>// Sort by single field
@@ -2239,15 +1799,9 @@ db.articles.aggregate([
   <li><strong>In-memory sort has a limit</strong> &mdash; 100 MB by default. Larger sorts need <code>{ allowDiskUse: true }</code> on the aggregation.</li>
   <li><strong>Place <code>$match</code> before <code>$sort</code></strong> to filter as much as possible first.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q58">
-  <div class="qa__number">Question 58</div>
-  <h3 class="qa__question">What is the purpose of the $lookup stage in an aggregation pipeline?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[58] = r'''
 <p>The <strong><code>$lookup</code></strong> aggregation stage performs a <strong>left outer join</strong> with another collection. It&rsquo;s MongoDB&rsquo;s answer to SQL&rsquo;s LEFT JOIN &mdash; useful when you can&rsquo;t (or shouldn&rsquo;t) embed related data into a single document.</p>
 
 <pre><code>// Join orders with their customer document
@@ -2285,15 +1839,9 @@ db.orders.aggregate([
 </ul>
 
 <p>For complex many-table joins, a relational database is simply a better fit.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q59">
-  <div class="qa__number">Question 59</div>
-  <h3 class="qa__question">How do you use the $unwind stage in an aggregation pipeline?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[59] = r'''
 <p>The <strong><code>$unwind</code></strong> aggregation stage <strong>flattens an array field</strong>, producing one output document per array element. It&rsquo;s essential when you need to operate on individual items inside an array &mdash; grouping, joining, or projecting them separately.</p>
 
 <pre><code>// Document:
@@ -2325,15 +1873,9 @@ db.orders.aggregate([
 ]);</code></pre>
 
 <p>Watch for the <strong>document-explosion</strong> trap &mdash; an order with a 1,000-item array becomes 1,000 documents in the pipeline. <code>$unwind</code> is powerful but can blow up memory; filter aggressively before unwinding when possible.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q60">
-  <div class="qa__number">Question 60</div>
-  <h3 class="qa__question">What is the purpose of the $out stage in an aggregation pipeline?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[60] = r'''
 <p>The <strong><code>$out</code></strong> aggregation stage writes the <strong>entire pipeline result to a collection</strong>, replacing it. It must be the <strong>last</strong> stage. It&rsquo;s how you materialize the output of an aggregation as a new (or refreshed) collection.</p>
 
 <pre><code>// Daily revenue rollup written to a new collection
@@ -2361,15 +1903,9 @@ db.orders.aggregate([
 </ul>
 
 <p>For incremental rollups, use <strong><code>$merge</code></strong> instead &mdash; it inserts/updates/replaces matching documents based on a key, leaving non-matching documents untouched. <code>$out</code> is for &ldquo;rebuild from scratch&rdquo; jobs; <code>$merge</code> is for &ldquo;keep this collection in sync&rdquo; pipelines.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q61">
-  <div class="qa__number">Question 61</div>
-  <h3 class="qa__question">How do you use the $addFields stage in an aggregation pipeline?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[61] = r'''
 <p>The <strong><code>$addFields</code></strong> aggregation stage <strong>adds new fields</strong> (or overwrites existing ones) to documents flowing through the pipeline, while keeping all other fields intact. It&rsquo;s like <code>$project</code> but <em>additive</em> &mdash; you don&rsquo;t have to list every field you want to keep.</p>
 
 <pre><code>// Add a computed total field with tax
@@ -2409,15 +1945,9 @@ db.orders.aggregate([
 ]);</code></pre>
 
 <p>Use <code>$addFields</code> when you want to enrich documents without dropping anything. Use <code>$project</code> when you want fine-grained control (include/exclude specific fields). Use <code>$set</code> &mdash; an alias for <code>$addFields</code> &mdash; in update aggregations.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q62">
-  <div class="qa__number">Question 62</div>
-  <h3 class="qa__question">How do you use the $replaceRoot stage in an aggregation pipeline?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[62] = r'''
 <p>The <strong><code>$replaceRoot</code></strong> aggregation stage <strong>replaces the entire document with another sub-document</strong> from the current pipeline. It&rsquo;s the cleanest way to promote a nested object to the top level or restructure deeply nested results.</p>
 
 <pre><code>// Document: { _id: 1, name: "Alice", profile: { age: 30, city: "Pune" } }
@@ -2444,15 +1974,9 @@ db.events.aggregate([
 <p>Modern alternative: <strong><code>$replaceWith</code></strong> &mdash; an alias for <code>$replaceRoot</code> with cleaner syntax (<code>{ $replaceWith: "$profile" }</code>). Use whichever you prefer.</p>
 
 <p>Use <code>$replaceRoot</code> when you need a different document shape entirely (e.g., promote a nested doc up). Use <code>$project</code> when you just want to keep/drop specific fields without rearranging the whole structure.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q63">
-  <div class="qa__number">Question 63</div>
-  <h3 class="qa__question">What is the purpose of the $merge stage in an aggregation pipeline?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[63] = r'''
 <p>The <strong><code>$merge</code></strong> aggregation stage <strong>writes pipeline results to a collection</strong>, but unlike <code>$out</code>, it can <strong>insert, update, or replace</strong> matching documents based on a key, leaving non-matching documents untouched. It must be the last stage.</p>
 
 <pre><code>// Daily revenue rollup, merged into existing analytics collection
@@ -2487,15 +2011,9 @@ db.orders.aggregate([
 </tbody></table>
 
 <p><code>$merge</code> turns aggregation pipelines into proper ETL jobs &mdash; ideal for nightly rollups, materialized views, and event-sourced projections.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q64">
-  <div class="qa__number">Question 64</div>
-  <h3 class="qa__question">How do you create a compound index in MongoDB?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[64] = r'''
 <p>A <strong>compound index</strong> covers <strong>multiple fields</strong> in a single index, with a defined order. It speeds up queries that filter, sort, or group on any leading prefix of those fields &mdash; a rule called the <strong>leftmost-prefix rule</strong>.</p>
 
 <pre><code>// Compound index on customer_id + created_at
@@ -2520,15 +2038,9 @@ db.orders.createIndex({ customer_id: 1, status: 1, created_at: -1 });</code></pr
   <li><strong>Direction matters for sort</strong> &mdash; <code>{ a: 1, b: -1 }</code> can serve <code>sort: { a: 1, b: -1 }</code> or <code>{ a: -1, b: 1 }</code> (the inverse), but not <code>{ a: 1, b: 1 }</code>.</li>
   <li><strong>Verify with <code>explain()</code></strong> &mdash; look for <code>IXSCAN</code> stage and zero-or-low <code>nReturned/totalDocsExamined</code> ratio.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q65">
-  <div class="qa__number">Question 65</div>
-  <h3 class="qa__question">How do you delete a database in MongoDB?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[65] = r'''
 <p>You delete a database with <code>db.dropDatabase()</code>. It permanently removes the database, all its collections, and all their indexes &mdash; there&rsquo;s no recycle bin.</p>
 
 <pre><code>// Switch to the database you want to drop
@@ -2553,15 +2065,9 @@ db.getSiblingDB("scratch_db").dropDatabase();</code></pre>
 </ul>
 
 <p>Permission requirement: the user must have the <code>dropDatabase</code> privilege (typically a <code>dbAdmin</code> or above on that database). For production cleanups, prefer scripted deletes with logging or use Atlas&rsquo;s GUI which records the action in audit logs.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q66">
-  <div class="qa__number">Question 66</div>
-  <h3 class="qa__question">What is the purpose of the db.collection.stats() method?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[66] = r'''
 <p>The <strong><code>db.collection.stats()</code></strong> method returns <strong>storage statistics</strong> about a collection &mdash; size on disk, document count, average document size, index sizes, and storage engine details. It&rsquo;s the go-to command for understanding how much space a collection uses.</p>
 
 <pre><code>db.orders.stats();
@@ -2594,15 +2100,9 @@ db.orders.stats({ scale: 1024*1024 });</code></pre>
 </ul>
 
 <p>For deeper analytics, the <strong>MongoDB Atlas</strong> UI surfaces all of this visually plus growth trends.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q67">
-  <div class="qa__number">Question 67</div>
-  <h3 class="qa__question">How do you retrieve the list of collections in a database?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[67] = r'''
 <p>You retrieve the list of collections in the current database with <code>show collections</code> in the shell, or <code>db.getCollectionNames()</code> in scripts/drivers.</p>
 
 <pre><code>use shopdb
@@ -2634,15 +2134,9 @@ console.log(cols.map(c =&gt; c.name));</code></pre>
 </ul>
 
 <p>For migrations or admin scripts, <code>listCollections</code> is the canonical command and includes capped/sharded/option metadata in addition to names.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q68">
-  <div class="qa__number">Question 68</div>
-  <h3 class="qa__question">How do you retrieve the list of databases in MongoDB?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[68] = r'''
 <p>You retrieve the list of databases with <code>show dbs</code> (or <code>show databases</code>) in the shell, or <code>db.adminCommand({ listDatabases: 1 })</code> programmatically.</p>
 
 <pre><code>// Shell shortcut
@@ -2670,15 +2164,9 @@ console.log(result.databases.map(d =&gt; d.name));</code></pre>
 </ul>
 
 <p>For scripting and dashboards, prefer <code>listDatabases</code> with <code>nameOnly: true</code> &mdash; it&rsquo;s lightweight and skips the per-DB stats lookup.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q69">
-  <div class="qa__number">Question 69</div>
-  <h3 class="qa__question">What is the purpose of the db.collection.drop() method?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[69] = r'''
 <p>The <strong><code>db.collection.drop()</code></strong> method <strong>permanently removes a collection</strong> and all of its indexes. It&rsquo;s a metadata operation &mdash; far faster than deleting every document one by one.</p>
 
 <pre><code>// Drop a collection
@@ -2705,15 +2193,9 @@ db.runCommand({ drop: "test_data", writeConcern: { w: "majority" } });</code></p
   <li><strong>Active queries against the collection will error</strong> &mdash; coordinate with running services.</li>
   <li><strong>For temporary cleanup of test/dev data</strong>, <code>drop()</code> is the right tool. For ongoing production data lifecycle, use TTL indexes.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q70">
-  <div class="qa__number">Question 70</div>
-  <h3 class="qa__question">How do you perform a bulk insert operation in MongoDB?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[70] = r'''
 <p>You perform a <strong>bulk insert</strong> with <code>insertMany()</code> for a batch of documents, or <code>bulkWrite()</code> for a mix of inserts, updates, and deletes in a single round trip. Both are far faster than individual <code>insertOne()</code> calls.</p>
 
 <pre><code>// Batch insert
@@ -2742,15 +2224,9 @@ db.products.bulkWrite([
   <li><strong>For very large imports</strong>, the <strong><code>mongoimport</code></strong> CLI tool or <strong>MongoDB Atlas Data API</strong> can be faster.</li>
   <li><strong>Drop and rebuild secondary indexes</strong> for one-shot huge loads to skip per-document index updates.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q71">
-  <div class="qa__number">Question 71</div>
-  <h3 class="qa__question">How do you use the $type operator in a query?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[71] = r'''
 <p>The <strong><code>$type</code></strong> operator matches documents where a field has a specific <strong>BSON type</strong> &mdash; useful when collections have inconsistent data and you need to find or fix mismatched types.</p>
 
 <pre><code>// Find documents where age is stored as a string (data quality issue)
@@ -2777,15 +2253,9 @@ db.users.find({ created_at: { $type: 9 } });        // 9 = date
 </tbody></table>
 
 <p>Use <code>$type</code> for data validation and migrations &mdash; combined with an <code>updateMany</code> using <code>$convert</code> or <code>$toInt</code>, you can fix typed-incorrectly fields in one pass. For new collections, set up <strong>schema validation</strong> at create time to prevent the problem.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q72">
-  <div class="qa__number">Question 72</div>
-  <h3 class="qa__question">What is the purpose of the $all operator in a query?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[72] = r'''
 <p>The <strong><code>$all</code></strong> operator matches arrays that contain <strong>every value in a given list</strong> (in any order). It&rsquo;s the &ldquo;contains all of these tags&rdquo; query and is essential for tag/label filters.</p>
 
 <pre><code>// Posts tagged with BOTH "mongodb" AND "tutorial"
@@ -2815,15 +2285,9 @@ db.posts.find({ tags: { $all: ["mongodb"] } });   // same as { tags: "mongodb" }
 </tbody></table>
 
 <p>For tag-based search at scale, an array index plus <code>$all</code> works well; for fuzzy matching or relevance scoring, prefer <strong>Atlas Search</strong> or an external engine.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q73">
-  <div class="qa__number">Question 73</div>
-  <h3 class="qa__question">How do you use the $size operator in a query?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[73] = r'''
 <p>The <strong><code>$size</code></strong> operator matches documents where an <strong>array has an exact length</strong>. It can&rsquo;t express ranges &mdash; only exact matches.</p>
 
 <pre><code>// Posts with exactly 3 tags
@@ -2853,15 +2317,9 @@ db.posts.updateOne(
 );</code></pre>
 
 <p>Performance: <code>$size</code> can&rsquo;t use a regular array index because the index entries point at individual elements, not array length. For frequent length-based queries, denormalize a <code>tag_count</code> field and index <em>that</em> &mdash; then range queries are fast.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q74">
-  <div class="qa__number">Question 74</div>
-  <h3 class="qa__question">How do you use the $slice operator in a projection?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[74] = r'''
 <p>The <strong><code>$slice</code></strong> projection operator returns a <strong>subset of an array</strong> &mdash; the first N elements, the last N elements, or a range. It&rsquo;s a projection-time tool to avoid pulling huge arrays back.</p>
 
 <pre><code>// Document: { _id: 1, comments: [c1, c2, c3, c4, c5] }
@@ -2894,15 +2352,9 @@ db.users.updateOne(
 );</code></pre>
 
 <p>Common pattern: store a small &ldquo;recent N&rdquo; array on the user document for fast display, while a separate collection holds the full activity log. Use <code>$slice</code> on update to cap the size and on projection to return only what the UI needs.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q75">
-  <div class="qa__number">Question 75</div>
-  <h3 class="qa__question">What is the purpose of the $mod operator in a query?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[75] = r'''
 <p>The <strong><code>$mod</code></strong> operator matches documents where a numeric field, when divided by a divisor, gives a specified remainder. It&rsquo;s niche but useful for sampling or shard-key bucketing.</p>
 
 <pre><code>// Find users whose id % 10 == 0 (every 10th user, deterministic sample)
@@ -2927,15 +2379,9 @@ db.events.aggregate([
 </ul>
 
 <p>For random sampling, prefer <code>$sample</code> in aggregation: <code>{ $sample: { size: 1000 } }</code> &mdash; it&rsquo;s built for the job and uses an efficient algorithm. <code>$mod</code> can&rsquo;t use indexes for this kind of query, so test on a representative dataset before deploying.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q76">
-  <div class="qa__number">Question 76</div>
-  <h3 class="qa__question">How do you use the $ifNull operator in an aggregation pipeline?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[76] = r'''
 <p>The <strong><code>$ifNull</code></strong> aggregation operator returns the <strong>first non-null/non-missing value</strong> from its arguments &mdash; like SQL&rsquo;s COALESCE. Use it to provide defaults for missing fields.</p>
 
 <pre><code>// If display_name is missing or null, fall back to email
@@ -2974,15 +2420,9 @@ db.orders.aggregate([
   <li>Cleaner than <code>$cond</code> with a manual null check.</li>
   <li>Useful in projections to ensure consistent output shape.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q77">
-  <div class="qa__number">Question 77</div>
-  <h3 class="qa__question">How do you use the $dateToString operator in an aggregation pipeline?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[77] = r'''
 <p>The <strong><code>$dateToString</code></strong> aggregation operator <strong>formats a date</strong> as a string using a format spec like <code>%Y-%m-%d</code>. It&rsquo;s essential for grouping by day/week/month or for clean output.</p>
 
 <pre><code>// Group orders by day
@@ -3026,15 +2466,9 @@ db.orders.aggregate([
 </ul>
 
 <p>For pure analytics workloads, push date math into <strong>Atlas Charts</strong> or your warehouse &mdash; MongoDB&rsquo;s date operators are fine for transactional pipelines but limited compared to BigQuery, Snowflake, or ClickHouse.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q78">
-  <div class="qa__number">Question 78</div>
-  <h3 class="qa__question">What is the purpose of the $cond operator in an aggregation pipeline?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[78] = r'''
 <p>The <strong><code>$cond</code></strong> aggregation operator is the <strong>ternary if-then-else</strong>. It evaluates a condition and returns one of two values based on the result. It&rsquo;s the bread-and-butter conditional for projections and computed fields.</p>
 
 <pre><code>// Tag VIP customers based on total spend
@@ -3082,15 +2516,9 @@ db.customers.aggregate([
     ],
     default: default_value
 }}</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q79">
-  <div class="qa__number">Question 79</div>
-  <h3 class="qa__question">How do you use the $switch operator in an aggregation pipeline?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[79] = r'''
 <p>The <strong><code>$switch</code></strong> aggregation operator evaluates a series of <strong>case/branch conditions</strong> and returns the value for the first one that&rsquo;s true. It&rsquo;s the multi-way conditional &mdash; cleaner than nested <code>$cond</code>.</p>
 
 <pre><code>// Categorize products by price band
@@ -3136,15 +2564,9 @@ db.orders.aggregate([
 </ul>
 
 <p>Use <code>$switch</code> for any 3+ branch conditional &mdash; the readability gain over nested <code>$cond</code> is substantial.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q80">
-  <div class="qa__number">Question 80</div>
-  <h3 class="qa__question">What is the purpose of the $map operator in an aggregation pipeline?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[80] = r'''
 <p>The <strong><code>$map</code></strong> aggregation operator <strong>transforms each element of an array</strong>, returning a new array of the same length. It&rsquo;s like JavaScript&rsquo;s <code>Array.map()</code>.</p>
 
 <pre><code>// Document: { _id: 1, prices: [10, 20, 30] }
@@ -3193,15 +2615,9 @@ db.products.aggregate([
 ]);</code></pre>
 
 <p>Note the <code>$$variable</code> syntax for the loop variable &mdash; it&rsquo;s how aggregation expressions reference user-defined variables. Companion operators include <strong><code>$reduce</code></strong> (fold to a single value), <strong><code>$filter</code></strong> (subset), and <strong><code>$arrayElemAt</code></strong> (positional access).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q81">
-  <div class="qa__number">Question 81</div>
-  <h3 class="qa__question">How do you use the $reduce operator in an aggregation pipeline?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[81] = r'''
 <p>The <strong><code>$reduce</code></strong> aggregation operator <strong>folds an array into a single value</strong> by applying an expression repeatedly. It&rsquo;s like JavaScript&rsquo;s <code>Array.reduce()</code> &mdash; useful for sums, concatenations, or building aggregate state.</p>
 
 <pre><code>// Sum an array of numbers (verbose, $sum is simpler &mdash; this is for illustration)
@@ -3250,15 +2666,9 @@ db.surveys.aggregate([
 ]);</code></pre>
 
 <p>Variables: <code>$$value</code> is the running accumulator (starts as <code>initialValue</code>); <code>$$this</code> is the current array element. After the loop, the operator returns the final <code>$$value</code>. Most simple aggregations have built-in operators (<code>$sum</code>, <code>$avg</code>); <code>$reduce</code> shines when you need custom logic that none of those cover.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q82">
-  <div class="qa__number">Question 82</div>
-  <h3 class="qa__question">How do you use the $filter operator in an aggregation pipeline?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[82] = r'''
 <p>The <strong><code>$filter</code></strong> aggregation operator <strong>returns a subset of an array</strong> &mdash; only the elements for which a condition is true. It&rsquo;s like JavaScript&rsquo;s <code>Array.filter()</code>.</p>
 
 <pre><code>// Return only items priced &gt; 50
@@ -3317,15 +2727,9 @@ db.products.aggregate([
 ]);</code></pre>
 
 <p><code>$filter</code> + <code>$map</code> + <code>$reduce</code> is the Lisp-of-MongoDB &mdash; together they handle most array-transformation needs without unwinding (which can multiply documents and balloon memory). Prefer this trio over <code>$unwind + $group</code> when working with arrays inside a single document.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q83">
-  <div class="qa__number">Question 83</div>
-  <h3 class="qa__question">What is the purpose of the $arrayElemAt operator in an aggregation pipeline?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[83] = r'''
 <p>The <strong><code>$arrayElemAt</code></strong> aggregation operator returns the <strong>element at a specific index</strong> in an array. Negative indices count from the end, just like Python.</p>
 
 <pre><code>// Document: { _id: 1, scores: [80, 92, 75, 88, 95] }
@@ -3361,15 +2765,9 @@ db.students.aggregate([
 ]);</code></pre>
 
 <p>Watch for out-of-bounds indices: an index past the array length returns <code>null</code>, not an error. Guard with <code>$ifNull</code> if you need a default. For accessing the <em>nth from end</em> programmatically, use a negative index or compute it with <code>$subtract</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q84">
-  <div class="qa__number">Question 84</div>
-  <h3 class="qa__question">How do you use the $range operator in an aggregation pipeline?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[84] = r'''
 <p>The <strong><code>$range</code></strong> aggregation operator generates an <strong>array of integers</strong> from a start value to (but not including) an end value, with an optional step. It&rsquo;s like Python&rsquo;s <code>range()</code>.</p>
 
 <pre><code>// Generate [0, 1, 2, 3, 4]
@@ -3402,15 +2800,9 @@ db.events.aggregate([
 ]);</code></pre>
 
 <p>Common pairings: <code>$range</code> + <code>$map</code> for generating placeholder structures (e.g., 24 hour-buckets, 7 day-of-week slots, calendar grids). <code>$range</code> + <code>$reduce</code> for iterative computations. For dynamic-length sequences, compute the end value from a field with <code>$size</code> or arithmetic operators.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q85">
-  <div class="qa__number">Question 85</div>
-  <h3 class="qa__question">What is the purpose of the $zip operator in an aggregation pipeline?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[85] = r'''
 <p>The <strong><code>$zip</code></strong> aggregation operator <strong>combines multiple arrays element-wise</strong>, producing an array of tuples. The Nth element of each input becomes part of the Nth output tuple.</p>
 
 <pre><code>// Pair products with their prices
@@ -3456,15 +2848,9 @@ db.dummy.aggregate([
 </ul>
 
 <p>Default behavior (no <code>useLongestLength</code>) truncates to the shortest array length &mdash; like Python&rsquo;s <code>zip()</code>. <code>$zip</code> is rarely needed in modern apps where data is usually structured as arrays of subdocuments instead.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q86">
-  <div class="qa__number">Question 86</div>
-  <h3 class="qa__question">How do you use the $literal operator in an aggregation pipeline?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[86] = r'''
 <p>The <strong><code>$literal</code></strong> aggregation operator returns its argument <strong>without parsing it as an expression</strong>. It&rsquo;s the way to include a literal value (like a string starting with <code>$</code>) that would otherwise be interpreted as a field reference.</p>
 
 <pre><code>// Without $literal, "$name" is treated as a field reference
@@ -3499,15 +2885,9 @@ db.things.aggregate([
 // expressions and likely fail.</code></pre>
 
 <p>Edge case: <code>$literal</code> is the escape hatch for &ldquo;I really mean this string, even though it looks like an expression.&rdquo; Most pipelines never need it &mdash; field references, numbers, and plain strings work as-is. Reach for it when handling user-provided strings that may begin with <code>$</code> or when constructing aggregation expressions programmatically.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q87">
-  <div class="qa__number">Question 87</div>
-  <h3 class="qa__question">What is the purpose of the $mergeObjects operator in an aggregation pipeline?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[87] = r'''
 <p>The <strong><code>$mergeObjects</code></strong> aggregation operator <strong>merges multiple documents</strong> into one, with later documents&rsquo; fields overwriting earlier ones. It&rsquo;s the spread-operator equivalent for documents.</p>
 
 <pre><code>// Merge defaults with overrides
@@ -3554,15 +2934,9 @@ db.user_prefs.aggregate([
 </ul>
 
 <p>Excellent for layering defaults, computed enrichments, or combining lookup results into a single shape.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q88">
-  <div class="qa__number">Question 88</div>
-  <h3 class="qa__question">How do you use the $mergeArrays operator in an aggregation pipeline?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[88] = r'''
 <p>MongoDB doesn&rsquo;t have a <code>$mergeArrays</code> operator. The closest tool is <strong><code>$concatArrays</code></strong>, which <strong>concatenates two or more arrays</strong> into one. (You may have seen <code>$mergeArrays</code> referenced in some tutorials by mistake &mdash; the correct operator is <code>$concatArrays</code>.)</p>
 
 <pre><code>// Concatenate arrays
@@ -3596,15 +2970,9 @@ db.users.aggregate([
 </tbody></table>
 
 <p>Use <code>$concatArrays</code> when order matters and duplicates are expected. Use the set-family operators when arrays represent unordered sets and uniqueness matters.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q89">
-  <div class="qa__number">Question 89</div>
-  <h3 class="qa__question">What is the purpose of the $let operator in an aggregation pipeline?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[89] = r'''
 <p>The <strong><code>$let</code></strong> aggregation operator <strong>defines local variables</strong> for use in a sub-expression. It&rsquo;s how you avoid repeating a complex computation or improve pipeline readability when intermediate values are needed.</p>
 
 <pre><code>// Compute discounted total with named intermediates
@@ -3651,15 +3019,9 @@ db.products.aggregate([
 </ul>
 
 <p><code>$let</code> is essential when a value would otherwise have to be recomputed three or four times in a single expression &mdash; both faster and more readable.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q90">
-  <div class="qa__number">Question 90</div>
-  <h3 class="qa__question">How do you create a capped collection in MongoDB?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[90] = r'''
 <p>A <strong>capped collection</strong> is a <strong>fixed-size, FIFO collection</strong> &mdash; once it reaches its size limit, the oldest documents are automatically overwritten. They&rsquo;re fast for high-volume writes and useful for circular buffers like recent logs, last-N events, or chat history.</p>
 
 <pre><code>// Create a capped collection (10 MB max, optionally 10,000 doc limit)
@@ -3686,15 +3048,9 @@ db.runCommand({ convertToCapped: "logs", size: 100*1024*1024 });
 </tbody></table>
 
 <p>Modern alternatives: for time-series data like IoT readings, MongoDB <strong>time-series collections</strong> (5.0+) are usually a better fit &mdash; auto-bucketed, compressed, and shardable. For ephemeral data like sessions, a <strong>TTL index</strong> on a regular collection is more flexible.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q91">
-  <div class="qa__number">Question 91</div>
-  <h3 class="qa__question">What is the purpose of the db.collection.renameCollection() method?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[91] = r'''
 <p>The <strong><code>renameCollection</code></strong> command renames a collection within the same database (and optionally moves it across databases). It&rsquo;s useful for refactoring, atomic swaps during migrations, or aligning naming conventions.</p>
 
 <pre><code>// Simple rename within the same database
@@ -3724,15 +3080,9 @@ db.users_new.renameCollection("users", true);
 </ul>
 
 <p>Use cases: blue/green migration cutover, normalizing names after acquisition or refactor, archiving (rename old to <code>orders_archive_2024</code> and create a fresh <code>orders</code>).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q92">
-  <div class="qa__number">Question 92</div>
-  <h3 class="qa__question">How do you use the $expr operator in a query?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[92] = r'''
 <p>The <strong><code>$expr</code></strong> operator allows <strong>aggregation expressions inside a query filter</strong>. It&rsquo;s how you compare two fields against each other or use complex computed conditions in <code>find()</code>, <code>updateMany()</code>, or pipeline <code>$match</code>.</p>
 
 <pre><code>// Compare two fields in the same document
@@ -3778,15 +3128,9 @@ db.orders.aggregate([
 </ul>
 
 <p>Without <code>$expr</code>, regular query operators can&rsquo;t reference other fields &mdash; they only compare to literal values.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q93">
-  <div class="qa__number">Question 93</div>
-  <h3 class="qa__question">How do you perform a case-insensitive search in MongoDB?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[93] = r'''
 <p>You perform a case-insensitive search by using <strong>case-insensitive collation</strong> (best, fast) or a <strong>case-insensitive regex</strong> (flexible, slower). Each has trade-offs.</p>
 
 <pre><code>// Case-insensitive regex (anchored regex still uses an index)
@@ -3816,15 +3160,9 @@ db.users.find({ city: "munchen" }).collation({ locale: "de", strength: 1 });</co
 </tbody></table>
 
 <p>For production user-facing search, <strong>MongoDB Atlas Search</strong> (Lucene-powered) is the right answer &mdash; it gives you fuzzy matching, ranking, autocomplete, and language-aware tokenization out of the box.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q94">
-  <div class="qa__number">Question 94</div>
-  <h3 class="qa__question">How do you use the $out operator to export data to a collection?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[94] = r'''
 <p>The <strong><code>$out</code></strong> aggregation stage <strong>writes the pipeline result to a target collection</strong> (replacing it). It&rsquo;s how you export aggregation output as a new dataset for analytics or backups. (See also <code>$merge</code> for incremental writes.)</p>
 
 <pre><code>// Export filtered users to another collection
@@ -3857,15 +3195,9 @@ mongoexport --uri="..." --collection=users_active_in_india \
   <li><strong>For data warehouses</strong>, push to <strong>BigQuery</strong>, <strong>Snowflake</strong>, or <strong>Databricks</strong> via <strong>Airbyte</strong>, <strong>Fivetran</strong>, or the MongoDB Atlas Data Federation.</li>
   <li><strong>For backups</strong>, prefer <code>mongodump</code> &mdash; faster, schema-aware, and reusable with <code>mongorestore</code>.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q95">
-  <div class="qa__number">Question 95</div>
-  <h3 class="qa__question">What is the purpose of the $bucket stage in an aggregation pipeline?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[95] = r'''
 <p>The <strong><code>$bucket</code></strong> aggregation stage groups documents into <strong>predefined buckets based on a numeric field</strong>. Think of it as a histogram with custom bin boundaries. It&rsquo;s perfect for distributions like price ranges, age groups, or time slots.</p>
 
 <pre><code>// Distribute users across age buckets
@@ -3905,15 +3237,9 @@ db.products.aggregate([
   <li><strong><code>default</code> is required if values can fall outside boundaries</strong> &mdash; without it, those documents cause an error.</li>
   <li><strong>Pre-defined boundaries</strong> &mdash; if you don&rsquo;t know your data&rsquo;s range, use <strong><code>$bucketAuto</code></strong> instead, which picks boundaries for you.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q96">
-  <div class="qa__number">Question 96</div>
-  <h3 class="qa__question">How do you use the $bucketAuto stage in an aggregation pipeline?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[96] = r'''
 <p>The <strong><code>$bucketAuto</code></strong> aggregation stage groups documents into a specified <strong>number of equally-distributed buckets</strong> &mdash; you say how many buckets you want, MongoDB figures out the boundaries to balance them. It&rsquo;s the auto-histogram counterpart to <code>$bucket</code>.</p>
 
 <pre><code>// 4 quartiles of users by age
@@ -3949,15 +3275,9 @@ db.products.aggregate([
 </tbody></table>
 
 <p>Use <code>$bucket</code> when you have known meaningful boundaries (e.g., age groups for marketing). Use <code>$bucketAuto</code> for ad-hoc analysis where balanced buckets matter more than specific cut points.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q97">
-  <div class="qa__number">Question 97</div>
-  <h3 class="qa__question">What is the purpose of the $facet stage in an aggregation pipeline?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[97] = r'''
 <p>The <strong><code>$facet</code></strong> aggregation stage runs <strong>multiple sub-pipelines in parallel</strong> on the same input documents, returning their results as named arrays in a single output document. It&rsquo;s the cleanest way to compute multiple summaries in one round trip.</p>
 
 <pre><code>// Dashboard: get count, top categories, and price stats in one query
@@ -3998,15 +3318,9 @@ db.products.aggregate([
 </ul>
 
 <p>Performance: <code>$facet</code> processes the same input documents through each sub-pipeline. Place <code>$match</code> <em>before</em> <code>$facet</code> to filter once and let every facet share the reduced set. For very heavy faceting, consider <strong>Atlas Search</strong>&rsquo;s built-in facets, which are far faster.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q98">
-  <div class="qa__number">Question 98</div>
-  <h3 class="qa__question">How do you create a hashed index in MongoDB?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[98] = r'''
 <p>A <strong>hashed index</strong> stores the <strong>hash of a field&rsquo;s value</strong> instead of the value itself. It&rsquo;s primarily used as a <strong>shard key</strong> to distribute documents evenly across shards &mdash; especially when the original field is monotonically increasing (like timestamps or auto-incrementing IDs).</p>
 
 <pre><code>// Create a hashed index
@@ -4033,15 +3347,9 @@ db.events.createIndex({ user_id: "hashed", created_at: 1 });</code></pre>
 </ul>
 
 <p>For most modern apps, MongoDB Atlas&rsquo;s automatic shard-key suggestions are a good place to start.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q99">
-  <div class="qa__number">Question 99</div>
-  <h3 class="qa__question">How do you perform a map-reduce operation in MongoDB?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[99] = r'''
 <p>The <strong><code>mapReduce</code></strong> command runs a JavaScript map-reduce job over a collection &mdash; a custom function emits key-value pairs (map), and another reduces values per key. It&rsquo;s a legacy feature; modern MongoDB strongly prefers the <strong>aggregation framework</strong>, which is faster and more expressive.</p>
 
 <pre><code>// Legacy mapReduce: total revenue per customer
@@ -4075,15 +3383,9 @@ db.posts.mapReduce(
 </ul>
 
 <p>MongoDB has officially deprecated <code>mapReduce</code> in favor of aggregation. Migrate any existing jobs &mdash; the rewrite is usually clearer too.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q100">
-  <div class="qa__number">Question 100</div>
-  <h3 class="qa__question">What are MongoDB transactions, and how do you use them?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[100] = r'''
 <p>MongoDB <strong>transactions</strong> let you execute <strong>multiple operations atomically</strong> &mdash; either all of them commit or all are rolled back. Available since v4.0 (replica sets) and v4.2 (sharded clusters), they bring familiar ACID semantics for cases that genuinely need cross-document consistency.</p>
 
 <pre><code>// Node.js driver: atomic transfer between two accounts
@@ -4127,27 +3429,4 @@ try {
 </ul>
 
 <p>Modern alternatives for distributed consistency: the <strong>outbox pattern</strong> with CDC (Debezium), event-sourcing, or sagas for cross-service workflows.</p>
-
-    
-  </div>
-</article>
-
-    <nav class="chapter-nav" aria-label="Chapter navigation">
-      <a class="chapter-nav__prev" href="mysql-scenario.html">
-      <span class="chapter-nav__dir">← Previous</span>
-      <span class="chapter-nav__title">MYSQL — Scenario Based</span>
-    </a>
-      <a class="chapter-nav__next" href="mongodb-coding.html">
-      <span class="chapter-nav__dir">Next →</span>
-      <span class="chapter-nav__title">MongoDB — Coding</span>
-    </a>
-    </nav>
-
-  </section>
-
-</main>
-</div>
-
-<script src="../assets/script.js"></script>
-</body>
-</html>
+'''
