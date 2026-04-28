@@ -1,118 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MongoDB — Coding · Interview Prep Mastery</title>
-<meta name="description" content="100 coding interview questions on MongoDB, with detailed explanations and examples.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="../assets/styles.css">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%239a6b1d'/%3E%3Ctext x='50' y='68' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold' font-size='48'%3EIP%3C/text%3E%3C/svg%3E">
-</head>
-<body>
-<header class="site-header">
-  <div class="site-header__inner">
-    <button class="menu-toggle" aria-label="Open menu" type="button">☰ Menu</button>
-    <a class="brand" href="../index.html">
-      <span class="brand__mark">IP</span>
-      <span class="brand__text">
-        <span class="brand__title">Interview Prep Mastery</span>
-        <span class="brand__subtitle">Interactive learning guide</span>
-      </span>
-    </a>
-    <nav class="header-nav">
-      <a href="../index.html#roadmap">Roadmap</a>
-      <a href="../index.html#chapters">All chapters</a>
-      <button class="theme-toggle" type="button" aria-label="Toggle color scheme">☾ Dark</button>
-    </nav>
-  </div>
-</header>
-<div class="layout">
-<aside class="sidebar" aria-label="Site navigation">
-  <div class="sidebar__header">Chapter Navigator</div>
-  
-        <div class="nav-part">
-          <div class="nav-part__label">Part 1</div>
-          <div class="nav-part__title">Core Programming Languages</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">JavaScript</li><li><a class="" href="../chapters/javascript-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/javascript-tricky.html"><span class="nav-item__title">Tricky</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-coding.html"><span class="nav-item__title">Advanced Coding</span><span class="nav-item__meta">100 questions · 100 min read</span></a></li><li><a class="" href="../chapters/javascript-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-scenario.html"><span class="nav-item__title">Advanced Scenario Based</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Python</li><li><a class="" href="../chapters/python-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/python-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 2</div>
-          <div class="nav-part__title">Web Fundamentals</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">HTML</li><li><a class="" href="../chapters/html-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/html-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/html-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CSS</li><li><a class="" href="../chapters/css-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">102 questions · 60 min read</span></a></li><li><a class="" href="../chapters/css-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/css-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">101 questions · 90 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 3</div>
-          <div class="nav-part__title">Backend Technologies</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Node.Js</li><li><a class="" href="../chapters/nodejs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/nodejs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ExpressJS</li><li><a class="" href="../chapters/expressjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/expressjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/expressjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">API</li><li><a class="" href="../chapters/api-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/api-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 4</div>
-          <div class="nav-part__title">Frontend Frameworks</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ReactJS</li><li><a class="" href="../chapters/reactjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">101 questions · 60 min read</span></a></li><li><a class="" href="../chapters/reactjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 5</div>
-          <div class="nav-part__title">Databases</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MYSQL</li><li><a class="" href="../chapters/mysql-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mysql-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MongoDB</li><li><a class="" href="../chapters/mongodb-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="active" href="../chapters/mongodb-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 6</div>
-          <div class="nav-part__title">System Design &amp; DevOps</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">System Design MERN Stack</li><li><a class="" href="../chapters/system-design-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Infrastructure MERN Stack</li><li><a class="" href="../chapters/infrastructure-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/infrastructure-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CI/CD Pipeline</li><li><a class="" href="../chapters/cicd-pipeline-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-</aside>
-<main class="main" id="main">
+"""Detailed answers for MongoDB Coding interview questions.
 
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="../index.html">Home</a>
-    <span class="breadcrumb__sep">›</span>
-    <a href="../index.html#part-5">Databases</a>
-    <span class="breadcrumb__sep">›</span>
-    <span>MongoDB — Coding</span>
-  </nav>
+Each ANSWERS[n] is an HTML string suitable for embedding inside a chapter page.
+Style: runnable mongosh/Node.js snippet, brief lead-in, notes & variants.
+"""
 
-  <header class="chapter-header">
-    <div class="chapter-label">MongoDB · Coding</div>
-    <h1 class="chapter-title">Coding MongoDB Interview Questions</h1>
-    <p class="chapter-lede">Practical coding problems with full solutions and line-by-line explanations.</p>
-    <div class="chapter-meta">
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Questions</span><span class="chapter-meta__value">100</span></div>
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Level</span><span class="chapter-meta__value">Coding</span></div>
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Estimated reading</span><span class="chapter-meta__value">90 min read</span></div>
-    </div>
-    
-  </header>
+ANSWERS: dict[int, str] = {}
 
-  <section class="prose">
 
-    <div class="toc" id="toc">
-      <div class="toc__title">All questions in this chapter</div>
-      <ul class="toc__list">
-        <li><a href="#q1"><span class="toc__num">1.</span>Write a MongoDB query to create a new database named &quot;library&quot;.</a></li><li><a href="#q2"><span class="toc__num">2.</span>Write a query to create a collection named &quot;books&quot; in the &quot;library&quot; database.</a></li><li><a href="#q3"><span class="toc__num">3.</span>Insert a document into the &quot;books&quot; collection with fields &quot;title&quot;, &quot;author&quot;, and &quot;publi...</a></li><li><a href="#q4"><span class="toc__num">4.</span>Update the &quot;published_year&quot; of a specific book in the &quot;books&quot; collection.</a></li><li><a href="#q5"><span class="toc__num">5.</span>Delete a book from the &quot;books&quot; collection by its &quot;title&quot;.</a></li><li><a href="#q6"><span class="toc__num">6.</span>Write a query to retrieve all documents from the &quot;books&quot; collection.</a></li><li><a href="#q7"><span class="toc__num">7.</span>Write a query to find books published after the year 2000.</a></li><li><a href="#q8"><span class="toc__num">8.</span>Write a query to retrieve only the &quot;title&quot; and &quot;author&quot; fields from the &quot;books&quot; collect...</a></li><li><a href="#q9"><span class="toc__num">9.</span>Count the number of books in the &quot;books&quot; collection.</a></li><li><a href="#q10"><span class="toc__num">10.</span>Write a query to sort the books by &quot;published_year&quot; in descending order.</a></li><li><a href="#q11"><span class="toc__num">11.</span>Create an index on the &quot;title&quot; field of the &quot;books&quot; collection.</a></li><li><a href="#q12"><span class="toc__num">12.</span>Write a query to find books where the &quot;author&quot; field matches a specific value.</a></li><li><a href="#q13"><span class="toc__num">13.</span>Write a query to update multiple books in the &quot;books&quot; collection to set a new field &quot;ge...</a></li><li><a href="#q14"><span class="toc__num">14.</span>Delete all books in the &quot;books&quot; collection published before the year 1990.</a></li><li><a href="#q15"><span class="toc__num">15.</span>Write a query to find books where the &quot;title&quot; contains the word &quot;MongoDB&quot;.</a></li><li><a href="#q16"><span class="toc__num">16.</span>Create a text index on the &quot;title&quot; and &quot;author&quot; fields of the &quot;books&quot; collection.</a></li><li><a href="#q17"><span class="toc__num">17.</span>Write a text search query to find books containing the word &quot;Database&quot; in the &quot;books&quot; c...</a></li><li><a href="#q18"><span class="toc__num">18.</span>Write an aggregation pipeline to group books by &quot;author&quot; and count the number of books ...</a></li><li><a href="#q19"><span class="toc__num">19.</span>Write a query to retrieve distinct values of the &quot;author&quot; field from the &quot;books&quot; collec...</a></li><li><a href="#q20"><span class="toc__num">20.</span>Use the $match stage in an aggregation pipeline to filter books published in 2020.</a></li><li><a href="#q21"><span class="toc__num">21.</span>Use the $group stage to calculate the average &quot;published_year&quot; of books grouped by &quot;aut...</a></li><li><a href="#q22"><span class="toc__num">22.</span>Use the $project stage to include only the &quot;title&quot; and &quot;published_year&quot; fields in the o...</a></li><li><a href="#q23"><span class="toc__num">23.</span>Create a compound index on the &quot;author&quot; and &quot;published_year&quot; fields of the &quot;books&quot; coll...</a></li><li><a href="#q24"><span class="toc__num">24.</span>Write a query to find books where the &quot;author&quot; is either &quot;John Doe&quot; or &quot;Jane Doe&quot;.</a></li><li><a href="#q25"><span class="toc__num">25.</span>Write a query to find books where the &quot;title&quot; starts with the letter &#x27;M&#x27;.</a></li><li><a href="#q26"><span class="toc__num">26.</span>Write a query to add a new field &quot;rating&quot; with a default value of 5 to all documents in...</a></li><li><a href="#q27"><span class="toc__num">27.</span>Write a query to remove the &quot;rating&quot; field from all documents in the &quot;books&quot; collection.</a></li><li><a href="#q28"><span class="toc__num">28.</span>Write a query to find books where the &quot;title&quot; field is not null.</a></li><li><a href="#q29"><span class="toc__num">29.</span>Write a query to update a book&#x27;s &quot;title&quot; using its ObjectId.</a></li><li><a href="#q30"><span class="toc__num">30.</span>Write a query to find books where the &quot;author&quot; field exists.</a></li><li><a href="#q31"><span class="toc__num">31.</span>Use the $push operator to add a new genre to the &quot;genres&quot; array field in a book document.</a></li><li><a href="#q32"><span class="toc__num">32.</span>Use the $pull operator to remove a specific genre from the &quot;genres&quot; array field in a bo...</a></li><li><a href="#q33"><span class="toc__num">33.</span>Write a query to find books that have at least one genre in the &quot;genres&quot; array.</a></li><li><a href="#q34"><span class="toc__num">34.</span>Write a query to find books that have all specified genres in the &quot;genres&quot; array.</a></li><li><a href="#q35"><span class="toc__num">35.</span>Write a query to rename the &quot;published_year&quot; field to &quot;year&quot; in the &quot;books&quot; collection.</a></li><li><a href="#q36"><span class="toc__num">36.</span>Write a query to drop the &quot;genres&quot; field from all documents in the &quot;books&quot; collection.</a></li><li><a href="#q37"><span class="toc__num">37.</span>Create a capped collection named &quot;logs&quot; with a size limit of 1MB.</a></li><li><a href="#q38"><span class="toc__num">38.</span>Write a query to insert a log document into the &quot;logs&quot; capped collection.</a></li><li><a href="#q39"><span class="toc__num">39.</span>Write a query to find books published between 1990 and 2000.</a></li><li><a href="#q40"><span class="toc__num">40.</span>Write a query to find books with an &quot;author&quot; field that matches a regular expression.</a></li><li><a href="#q41"><span class="toc__num">41.</span>Use the $inc operator to increment the &quot;copies_sold&quot; field by 10 for a specific book.</a></li><li><a href="#q42"><span class="toc__num">42.</span>Write a query to find books that do not have the &quot;published_year&quot; field.</a></li><li><a href="#q43"><span class="toc__num">43.</span>Write an aggregation pipeline to sort books by &quot;author&quot; and then by &quot;title&quot;.</a></li><li><a href="#q44"><span class="toc__num">44.</span>Use the $sum operator in an aggregation pipeline to calculate the total &quot;copies_sold&quot; f...</a></li><li><a href="#q45"><span class="toc__num">45.</span>Use the $avg operator in an aggregation pipeline to find the average rating of books.</a></li><li><a href="#q46"><span class="toc__num">46.</span>Write a query to find books where the &quot;title&quot; length is greater than 10 characters.</a></li><li><a href="#q47"><span class="toc__num">47.</span>Write a query to perform a full-text search on the &quot;books&quot; collection for the phrase &quot;N...</a></li><li><a href="#q48"><span class="toc__num">48.</span>Use the $elemMatch operator to find books where the &quot;reviews&quot; array has at least one re...</a></li><li><a href="#q49"><span class="toc__num">49.</span>Write a query to find books where the &quot;author&quot; field is not equal to &quot;Unknown&quot;.</a></li><li><a href="#q50"><span class="toc__num">50.</span>Write a query to find books with more than 5 genres in the &quot;genres&quot; array.</a></li><li><a href="#q51"><span class="toc__num">51.</span>Write a query to remove all books from the &quot;books&quot; collection that have no genres.</a></li><li><a href="#q52"><span class="toc__num">52.</span>Use the $max operator to update the &quot;highest_rating&quot; field to the highest value between...</a></li><li><a href="#q53"><span class="toc__num">53.</span>Write a query to find books where the &quot;published_year&quot; is a multiple of 5.</a></li><li><a href="#q54"><span class="toc__num">54.</span>Write an aggregation pipeline to calculate the total number of books published each year.</a></li><li><a href="#q55"><span class="toc__num">55.</span>Write a query to find books where the &quot;title&quot; contains a numeric digit.</a></li><li><a href="#q56"><span class="toc__num">56.</span>Use the $sortByCount stage in an aggregation pipeline to count the number of books per ...</a></li><li><a href="#q57"><span class="toc__num">57.</span>Write a query to find the book with the highest &quot;copies_sold&quot; value.</a></li><li><a href="#q58"><span class="toc__num">58.</span>Write a query to find the book with the lowest &quot;rating&quot; value.</a></li><li><a href="#q59"><span class="toc__num">59.</span>Write a query to retrieve the first 5 books from the &quot;books&quot; collection sorted by &quot;publ...</a></li><li><a href="#q60"><span class="toc__num">60.</span>Write a query to retrieve the last 5 books from the &quot;books&quot; collection sorted by &quot;publi...</a></li><li><a href="#q61"><span class="toc__num">61.</span>Write a query to find books that have an array field &quot;genres&quot; with exactly 3 elements.</a></li><li><a href="#q62"><span class="toc__num">62.</span>Use the $arrayElemAt operator to project the first genre from the &quot;genres&quot; array field.</a></li><li><a href="#q63"><span class="toc__num">63.</span>Write a query to find books where the &quot;title&quot; field is case-insensitively equal to &quot;Mon...</a></li><li><a href="#q64"><span class="toc__num">64.</span>Write a query to find books where the &quot;reviews&quot; array contains at least one subdocument...</a></li><li><a href="#q65"><span class="toc__num">65.</span>Write a query to find books that have more than 10 reviews in the &quot;reviews&quot; array.</a></li><li><a href="#q66"><span class="toc__num">66.</span>Write a query to perform a text search and sort the results by text search score.</a></li><li><a href="#q67"><span class="toc__num">67.</span>Use the $bucket stage in an aggregation pipeline to group books into buckets based on &quot;...</a></li><li><a href="#q68"><span class="toc__num">68.</span>Write a query to find books where the &quot;author&quot; field is an array.</a></li><li><a href="#q69"><span class="toc__num">69.</span>Use the $merge stage to output the results of an aggregation pipeline to a new collecti...</a></li><li><a href="#q70"><span class="toc__num">70.</span>Write a query to find books that have been reviewed by a specific user.</a></li><li><a href="#q71"><span class="toc__num">71.</span>Write a query to find books where the &quot;reviews&quot; array contains exactly 5 subdocuments.</a></li><li><a href="#q72"><span class="toc__num">72.</span>Write an aggregation pipeline to unwind the &quot;genres&quot; array and then group by genre.</a></li><li><a href="#q73"><span class="toc__num">73.</span>Write a query to find books that have a &quot;published_year&quot; field within the last 5 years.</a></li><li><a href="#q74"><span class="toc__num">74.</span>Use the $type operator to find documents in the &quot;books&quot; collection where the &quot;published...</a></li><li><a href="#q75"><span class="toc__num">75.</span>Write a query to add a new subdocument to the &quot;reviews&quot; array field for a specific book.</a></li><li><a href="#q76"><span class="toc__num">76.</span>Write a query to remove all subdocuments from the &quot;reviews&quot; array field where the &quot;rati...</a></li><li><a href="#q77"><span class="toc__num">77.</span>Use the $expr operator to compare fields within the same document in a query.</a></li><li><a href="#q78"><span class="toc__num">78.</span>Write a query to find books where the &quot;title&quot; is either &quot;MongoDB Basics&quot; or &quot;Advanced M...</a></li><li><a href="#q79"><span class="toc__num">79.</span>Write a query to find books where the length of the &quot;title&quot; field is between 5 and 15 c...</a></li><li><a href="#q80"><span class="toc__num">80.</span>Use the $addFields stage to add a new field &quot;year_difference&quot; that calculates the diffe...</a></li><li><a href="#q81"><span class="toc__num">81.</span>Write a query to find books that have at least one genre in a specified list of genres.</a></li><li><a href="#q82"><span class="toc__num">82.</span>Use the $mergeObjects operator to combine fields from two subdocuments in the same docu...</a></li><li><a href="#q83"><span class="toc__num">83.</span>Write a query to perform a case-insensitive search on the &quot;author&quot; field using regular ...</a></li><li><a href="#q84"><span class="toc__num">84.</span>Use the $toUpper operator to convert the &quot;title&quot; field to uppercase in a projection.</a></li><li><a href="#q85"><span class="toc__num">85.</span>Write a query to update the &quot;genres&quot; array field by adding a new genre if it does not a...</a></li><li><a href="#q86"><span class="toc__num">86.</span>Write a query to find books where the &quot;published_year&quot; field is within a specified range.</a></li><li><a href="#q87"><span class="toc__num">87.</span>Use the $size operator to project the number of elements in the &quot;genres&quot; array field.</a></li><li><a href="#q88"><span class="toc__num">88.</span>Write a query to find books where the &quot;reviews&quot; array contains subdocuments with duplic...</a></li><li><a href="#q89"><span class="toc__num">89.</span>Use the $cond operator to project a new field &quot;is_recent&quot; based on the &quot;published_year&quot;...</a></li><li><a href="#q90"><span class="toc__num">90.</span>Write a query to find books that do not have a &quot;rating&quot; field.</a></li><li><a href="#q91"><span class="toc__num">91.</span>Use the $merge stage to update existing documents in the &quot;books_summary&quot; collection wit...</a></li><li><a href="#q92"><span class="toc__num">92.</span>Write a query to find books where the &quot;title&quot; field matches a pattern using the $regex ...</a></li><li><a href="#q93"><span class="toc__num">93.</span>Use the $filter operator to project only the &quot;reviews&quot; array elements with a &quot;rating&quot; g...</a></li><li><a href="#q94"><span class="toc__num">94.</span>Write a query to update all documents in the &quot;books&quot; collection to add a timestamp fiel...</a></li><li><a href="#q95"><span class="toc__num">95.</span>Write a query to find books that have a &quot;genres&quot; array field containing only unique val...</a></li><li><a href="#q96"><span class="toc__num">96.</span>Use the $dateToString operator to format the &quot;published_year&quot; field as a string in the ...</a></li><li><a href="#q97"><span class="toc__num">97.</span>Write a query to find books where the &quot;title&quot; field contains special characters.</a></li><li><a href="#q98"><span class="toc__num">98.</span>Use the $lookup stage to perform a join between the &quot;books&quot; collection and an &quot;authors&quot;...</a></li><li><a href="#q99"><span class="toc__num">99.</span>Write a query to add a new review to a book and ensure the &quot;reviews&quot; array is not null.</a></li><li><a href="#q100"><span class="toc__num">100.</span>Write an aggregation pipeline to calculate the average &quot;rating&quot; for each book and sort ...</a></li>
-      </ul>
-    </div>
-
-    
-<article class="qa" id="q1">
-  <div class="qa__number">Question 1</div>
-  <h3 class="qa__question">Write a MongoDB query to create a new database named &quot;library&quot;.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[1] = r'''
 <pre><code>// MongoDB shell (mongosh) &mdash; databases are created lazily
 use library          // switches to the &ldquo;library&rdquo; database
 
@@ -141,15 +36,9 @@ await db.collection("books").insertOne({ title: "MongoDB Basics" });</code></pre
   <li>In MongoDB Atlas, databases are visible in the cluster UI as soon as the first write lands.</li>
   <li>Naming rules: max 64 characters, no spaces, no <code>/ \ . " * &lt; &gt; : | ? $</code>, and not the empty string.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q2">
-  <div class="qa__number">Question 2</div>
-  <h3 class="qa__question">Write a query to create a collection named &quot;books&quot; in the &quot;library&quot; database.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[2] = r'''
 <pre><code>use library
 
 // Implicit creation (most common): the collection is created on first write
@@ -185,15 +74,9 @@ db.createCollection("books", {
   <li>Schema validation is enforced by the server, not the driver &mdash; bad data is rejected even from <code>mongosh</code>.</li>
   <li>To rename a collection later: <code>db.books.renameCollection("library_books")</code>.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q3">
-  <div class="qa__number">Question 3</div>
-  <h3 class="qa__question">Insert a document into the &quot;books&quot; collection with fields &quot;title&quot;, &quot;author&quot;, and &quot;published_year&quot;.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[3] = r'''
 <pre><code>// Single document
 db.books.insertOne({
   title: "MongoDB Basics",
@@ -227,15 +110,9 @@ await db.collection("books").insertOne({
   <li>Insert duplicates of <code>_id</code> raise a <code>DuplicateKey</code> error (code <code>11000</code>) &mdash; catch it explicitly in app code.</li>
   <li>For 100k+ rows at once, split into batches of ~1000 to keep individual operations under the 16 MB BSON limit and to allow checkpointing.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q4">
-  <div class="qa__number">Question 4</div>
-  <h3 class="qa__question">Update the &quot;published_year&quot; of a specific book in the &quot;books&quot; collection.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[4] = r'''
 <pre><code>// Update one specific book by title
 db.books.updateOne(
   { title: "MongoDB Basics" },
@@ -271,15 +148,9 @@ db.books.updateOne(
   <li>For complex updates, use the <strong>aggregation-pipeline form</strong>: <code>updateOne(filter, [{ $set: {...} }, { $unset: [...] }])</code>.</li>
   <li><code>findOneAndUpdate()</code> is the variant that returns the updated document (or the original) &mdash; useful for read-modify patterns.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q5">
-  <div class="qa__number">Question 5</div>
-  <h3 class="qa__question">Delete a book from the &quot;books&quot; collection by its &quot;title&quot;.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[5] = r'''
 <pre><code>// Delete one matching book
 db.books.deleteOne({ title: "MongoDB Basics" })
 
@@ -309,15 +180,9 @@ db.books.find({ deleted: { $ne: true } })</code></pre>
   <li>For time-based cleanup (e.g. delete logs older than 30 days), use a <strong>TTL index</strong>: <code>db.logs.createIndex({ created_at: 1 }, { expireAfterSeconds: 30*24*3600 })</code>. Background thread auto-deletes &mdash; no app code required.</li>
   <li><code>findOneAndDelete()</code> deletes and returns the deleted document atomically &mdash; useful for queue/work-stealing patterns.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q6">
-  <div class="qa__number">Question 6</div>
-  <h3 class="qa__question">Write a query to retrieve all documents from the &quot;books&quot; collection.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[6] = r'''
 <pre><code>// All documents
 db.books.find()
 
@@ -350,15 +215,9 @@ for await (const doc of cursor) {
   <li>Cursors time out server-side after 10 minutes of inactivity. For long iterations, set <code>{ noCursorTimeout: true }</code> (and remember to close the cursor).</li>
   <li>To count without fetching: <code>db.books.countDocuments({})</code> for an exact count; <code>db.books.estimatedDocumentCount()</code> for the fast metadata-based count.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q7">
-  <div class="qa__number">Question 7</div>
-  <h3 class="qa__question">Write a query to find books published after the year 2000.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[7] = r'''
 <pre><code>// Books published after 2000
 db.books.find({ published_year: { $gt: 2000 } })
 
@@ -388,15 +247,9 @@ db.books.find(
   <li>Watch for null/missing fields: <code>{ published_year: { $gt: 2000 } }</code> won&rsquo;t match documents missing the field. Add <code>{ published_year: { $exists: true, $gt: 2000 } }</code> to be explicit.</li>
   <li>For date comparisons: <code>{ created_at: { $gt: ISODate("2025-01-01") } }</code>. JS <code>new Date("2025-01-01")</code> works too.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q8">
-  <div class="qa__number">Question 8</div>
-  <h3 class="qa__question">Write a query to retrieve only the &quot;title&quot; and &quot;author&quot; fields from the &quot;books&quot; collection.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[8] = r'''
 <pre><code>// Include only title and author (and the default _id)
 db.books.find({}, { title: 1, author: 1 })
 
@@ -427,15 +280,9 @@ db.books.aggregate([
   <li>For arrays, <code>{ tags: { $slice: 5 } }</code> returns only the first 5 elements; <code>{ tags: { $slice: [10, 5] } }</code> skips 10 and returns 5.</li>
   <li><code>$elemMatch</code> in projections returns the first array element matching a sub-condition &mdash; handy for &ldquo;the comment by user X.&rdquo;</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q9">
-  <div class="qa__number">Question 9</div>
-  <h3 class="qa__question">Count the number of books in the &quot;books&quot; collection.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[9] = r'''
 <pre><code>// Exact count matching a filter (default to {} for total)
 db.books.countDocuments()
 db.books.countDocuments({})
@@ -464,15 +311,9 @@ db.books.count()         // avoid; behavior differs across drivers</code></pre>
   <li>For dashboards that show counts per category, use a single aggregation with <code>$group</code> rather than many separate <code>countDocuments</code> calls &mdash; one pipeline, one round trip.</li>
   <li>If you need real-time counts at scale (Twitter-like engagement counters), maintain a denormalized counter field updated with <code>$inc</code> instead of recounting.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q10">
-  <div class="qa__number">Question 10</div>
-  <h3 class="qa__question">Write a query to sort the books by &quot;published_year&quot; in descending order.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[10] = r'''
 <pre><code>// Sort by published_year descending (newest first)
 db.books.find().sort({ published_year: -1 })
 
@@ -503,15 +344,9 @@ db.books.aggregate([
   <li><strong>Sort direction must match the index direction</strong> for the optimizer to use it. The inverse direction (entire reversed compound) also works.</li>
   <li>Use <code>explain("executionStats")</code> and check for <code>SORT</code> stage in the plan &mdash; if present, the sort is in memory.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q11">
-  <div class="qa__number">Question 11</div>
-  <h3 class="qa__question">Create an index on the &quot;title&quot; field of the &quot;books&quot; collection.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[11] = r'''
 <pre><code>// Single-field index on title
 db.books.createIndex({ title: 1 })
 
@@ -544,15 +379,9 @@ db.books.createIndex({ title: 1 }, { background: true })</code></pre>
   <li>Before adding an index in production, check the working set size &mdash; indexes need to fit in RAM for best performance. Use <code>db.books.stats().indexSizes</code> to monitor.</li>
   <li>Use <strong>MongoDB Atlas Performance Advisor</strong> to find missing indexes from real query patterns.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q12">
-  <div class="qa__number">Question 12</div>
-  <h3 class="qa__question">Write a query to find books where the &quot;author&quot; field matches a specific value.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[12] = r'''
 <pre><code>// Exact match on author
 db.books.find({ author: "John Doe" })
 
@@ -583,15 +412,9 @@ db.books.find({ author: { $exists: true, $ne: "" } })</code></pre>
   <li>If <code>author</code> is an array field, <code>{ author: "John Doe" }</code> matches documents where the array <em>contains</em> that value &mdash; powerful for tag-style filtering.</li>
   <li>Use <code>explain("executionStats")</code> to verify the right index is picked. Look for <code>IXSCAN</code> stage and a low <code>totalDocsExamined</code>.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q13">
-  <div class="qa__number">Question 13</div>
-  <h3 class="qa__question">Write a query to update multiple books in the &quot;books&quot; collection to set a new field &quot;genre&quot;.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[13] = r'''
 <pre><code>// Set genre on every book that doesn&rsquo;t have one
 db.books.updateMany(
   { genre: { $exists: false } },
@@ -630,15 +453,9 @@ print(r.matchedCount, r.modifiedCount)</code></pre>
   <li>For incremental updates that compute new values from existing ones, use the <strong>aggregation-pipeline form</strong>: <code>updateMany(filter, [{ $set: { full_title: { $concat: ["$title", " - ", "$author"] } } }])</code>.</li>
   <li>Each individual document update is atomic, but <code>updateMany</code> is <strong>not atomic across documents</strong> &mdash; other clients can see partial progress unless you wrap it in a transaction.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q14">
-  <div class="qa__number">Question 14</div>
-  <h3 class="qa__question">Delete all books in the &quot;books&quot; collection published before the year 1990.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[14] = r'''
 <pre><code>// Delete every book published before 1990
 db.books.deleteMany({ published_year: { $lt: 1990 } })
 
@@ -677,15 +494,9 @@ try {
   <li>For systematic time-based cleanup, set up a <strong>TTL index</strong>: <code>db.books.createIndex({ archived_at: 1 }, { expireAfterSeconds: 90*24*3600 })</code>. Runs in the background, no app code needed.</li>
   <li>To preserve referential integrity with related collections (reviews, ratings), wrap the delete in a transaction.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q15">
-  <div class="qa__number">Question 15</div>
-  <h3 class="qa__question">Write a query to find books where the &quot;title&quot; contains the word &quot;MongoDB&quot;.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[15] = r'''
 <pre><code>// Anchored regex (uses index if title is indexed)
 db.books.find({ title: /MongoDB/ })
 
@@ -715,15 +526,9 @@ db.books.find({ $text: { $search: "MongoDB" } })</code></pre>
   <li>Escape special regex characters in user input. Prefer building the regex programmatically: <code>new RegExp(escaped, "i")</code>.</li>
   <li>For very large datasets with frequent text searches, consider <strong>Elasticsearch</strong>, <strong>Meilisearch</strong>, or <strong>Typesense</strong> &mdash; purpose-built engines outperform regex queries by orders of magnitude.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q16">
-  <div class="qa__number">Question 16</div>
-  <h3 class="qa__question">Create a text index on the &quot;title&quot; and &quot;author&quot; fields of the &quot;books&quot; collection.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[16] = r'''
 <pre><code>// Combined text index across two fields
 db.books.createIndex({ title: "text", author: "text" })
 
@@ -758,15 +563,9 @@ db.books.find({ $text: { $search: "MongoDB" } })</code></pre>
   <li>For multilingual content, <strong>specify language per document</strong>: <code>{ title: "...", language: "es" }</code> overrides the index default for that document.</li>
   <li>For modern, production search needs &mdash; fuzzy matching, autocomplete, faceting, synonyms &mdash; <strong>MongoDB Atlas Search</strong> (Lucene-backed) is the better choice. Self-hosted alternatives: <strong>Elasticsearch</strong>, <strong>OpenSearch</strong>, <strong>Meilisearch</strong>, <strong>Typesense</strong>.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q17">
-  <div class="qa__number">Question 17</div>
-  <h3 class="qa__question">Write a text search query to find books containing the word &quot;Database&quot; in the &quot;books&quot; collection.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[17] = r'''
 <pre><code>// Basic text search
 db.books.find({ $text: { $search: "Database" } })
 
@@ -802,15 +601,9 @@ db.books.aggregate([
   <li>Only <strong>one <code>$text</code> per query</strong>; combine with other filters as needed: <code>{ $text: { $search: "..." }, author: "John Doe" }</code>.</li>
   <li>For better-than-stemming relevance (BM25, fuzzy, autocomplete, faceting), use <strong>Atlas Search</strong> &mdash; same MongoDB query API but a Lucene engine underneath.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q18">
-  <div class="qa__number">Question 18</div>
-  <h3 class="qa__question">Write an aggregation pipeline to group books by &quot;author&quot; and count the number of books for each author.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[18] = r'''
 <pre><code>// Books per author
 db.books.aggregate([
   { $group: {
@@ -849,15 +642,9 @@ db.books.aggregate([
   <li>For accurate counts of unique authors only, use <code>$group: { _id: "$author" }</code> followed by <code>{ $count: "n" }</code>.</li>
   <li>To rename the output: project after grouping &mdash; <code>{ $project: { author: "$_id", total_books: 1, _id: 0 } }</code>.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q19">
-  <div class="qa__number">Question 19</div>
-  <h3 class="qa__question">Write a query to retrieve distinct values of the &quot;author&quot; field from the &quot;books&quot; collection.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[19] = r'''
 <pre><code>// Distinct authors using the dedicated method
 db.books.distinct("author")
 // Returns: [ "John Doe", "Jane Doe", "..." ]
@@ -889,15 +676,9 @@ db.books.distinct("genres")     // automatic flattening</code></pre>
   <li>For a <strong>distinct count</strong> only: <code>db.books.distinct("author").length</code> in the shell, or <code>$group + $count</code> in aggregation for unbounded results.</li>
   <li>The aggregation form is preferred in production code because it&rsquo;s sortable, paginate-able, and handles huge result sets without the 16 MB ceiling.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q20">
-  <div class="qa__number">Question 20</div>
-  <h3 class="qa__question">Use the $match stage in an aggregation pipeline to filter books published in 2020.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[20] = r'''
 <pre><code>// Filter to books published in 2020
 db.books.aggregate([
   { $match: { published_year: 2020 } }
@@ -937,15 +718,9 @@ db.books.aggregate([
   <li>Avoid expressions that prevent index use (e.g. <code>$where</code>, complex <code>$expr</code> over multiple fields) in the first stage when possible.</li>
   <li>To verify the optimizer used your index, run <code>db.books.aggregate([...]).explain("executionStats")</code> and look for <code>IXSCAN</code>.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q21">
-  <div class="qa__number">Question 21</div>
-  <h3 class="qa__question">Use the $group stage to calculate the average &quot;published_year&quot; of books grouped by &quot;author&quot;.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[21] = r'''
 <pre><code>// Average published_year per author
 db.books.aggregate([
   { $group: {
@@ -988,15 +763,9 @@ db.books.aggregate([
   <li>Combine <code>$avg</code> with <code>$min</code>, <code>$max</code>, <code>$count</code> in a single <code>$group</code> &mdash; a single pass through the data.</li>
   <li>For very large datasets where exact accuracy isn&rsquo;t critical, MongoDB doesn&rsquo;t have a streaming mean estimator &mdash; consider an external system like <strong>Druid</strong>, <strong>ClickHouse</strong>, or <strong>StarRocks</strong>.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q22">
-  <div class="qa__number">Question 22</div>
-  <h3 class="qa__question">Use the $project stage to include only the &quot;title&quot; and &quot;published_year&quot; fields in the output.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[22] = r'''
 <pre><code>// Project only title and published_year (drops _id by default? NO &mdash; _id stays unless excluded)
 db.books.aggregate([
   { $project: { title: 1, published_year: 1 } }
@@ -1033,15 +802,9 @@ db.books.aggregate([
   <li>For renaming or restructuring without losing other fields, prefer <strong><code>$addFields</code></strong> (alias <code>$set</code>) and <strong><code>$unset</code></strong>.</li>
   <li>For deeply nested transformations, use <strong><code>$replaceRoot</code></strong> to promote a sub-document to the top level.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q23">
-  <div class="qa__number">Question 23</div>
-  <h3 class="qa__question">Create a compound index on the &quot;author&quot; and &quot;published_year&quot; fields of the &quot;books&quot; collection.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[23] = r'''
 <pre><code>// Compound index on author (asc) and published_year (desc &mdash; newest first)
 db.books.createIndex({ author: 1, published_year: -1 })
 
@@ -1074,15 +837,9 @@ db.books.find({ author: "John Doe" })
   <li>For inverse direction sorts, MongoDB can read the same index backwards &mdash; <code>sort({ author: -1, published_year: 1 })</code> still works.</li>
   <li>Watch for <strong>over-indexing</strong> &mdash; each compound index slows writes and uses RAM. Use Atlas Performance Advisor or the <code>$indexStats</code> collection to find unused ones.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q24">
-  <div class="qa__number">Question 24</div>
-  <h3 class="qa__question">Write a query to find books where the &quot;author&quot; is either &quot;John Doe&quot; or &quot;Jane Doe&quot;.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[24] = r'''
 <pre><code>// Most idiomatic: use $in
 db.books.find({ author: { $in: ["John Doe", "Jane Doe"] } })
 
@@ -1121,15 +878,9 @@ db.books.find({
   <li>The shorthand: <code>{ author: { $in: [...] } }</code> is preferred over manual <code>$or</code> for this case &mdash; less verbose, easier to maintain.</li>
   <li>For <strong>regex matches</strong> on multiple values: <code>{ author: { $in: [/^John/i, /^Jane/i] } }</code> works &mdash; but each regex is independently matched.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q25">
-  <div class="qa__number">Question 25</div>
-  <h3 class="qa__question">Write a query to find books where the &quot;title&quot; starts with the letter &#x27;M&#x27;.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[25] = r'''
 <pre><code>// Anchored regex (uses an index on title if it exists)
 db.books.find({ title: /^M/ })
 
@@ -1164,15 +915,9 @@ db.books.aggregate([
   <li>For autocomplete or typeahead UIs at scale, use <strong>MongoDB Atlas Search</strong>&rsquo;s autocomplete operator &mdash; far more efficient than regex.</li>
   <li>For multi-language case-insensitive search (e.g. Turkish &ldquo;İ&rdquo; vs &ldquo;i&rdquo;), specify the appropriate locale (<code>locale: "tr"</code>) in the collation.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q26">
-  <div class="qa__number">Question 26</div>
-  <h3 class="qa__question">Write a query to add a new field &quot;rating&quot; with a default value of 5 to all documents in the &quot;books&quot; collection.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[26] = r'''
 <pre><code>// Add a default rating to all books
 db.books.updateMany(
   {},
@@ -1210,15 +955,9 @@ db.books.countDocuments({ rating: 5 })</code></pre>
   <li>For application-defined defaults, set them in the driver&rsquo;s ORM/ODM layer (Mongoose <code>default: 5</code>, Prisma defaults, etc.) so newly inserted documents automatically include them.</li>
   <li>Consider the data type: <code>5</code> stores as a Double; for an integer use <code>NumberInt(5)</code> in <code>mongosh</code>.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q27">
-  <div class="qa__number">Question 27</div>
-  <h3 class="qa__question">Write a query to remove the &quot;rating&quot; field from all documents in the &quot;books&quot; collection.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[27] = r'''
 <pre><code>// Remove the rating field from every document
 db.books.updateMany(
   {},
@@ -1253,15 +992,9 @@ db.books.find({ rating: { $exists: true } }).count()    // should be 0</code></p
   <li>For arrays, <code>$unset</code> deletes the entire array. To remove specific elements, use <code>$pull</code> or <code>$pop</code> instead.</li>
   <li>After unsetting on huge collections, run a compaction (<code>db.runCommand({ compact: "books" })</code>) if you need to reclaim disk space immediately &mdash; otherwise WiredTiger reclaims it lazily over time.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q28">
-  <div class="qa__number">Question 28</div>
-  <h3 class="qa__question">Write a query to find books where the &quot;title&quot; field is not null.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[28] = r'''
 <pre><code>// Title is not null and not missing
 db.books.find({ title: { $ne: null } })
 
@@ -1293,15 +1026,9 @@ db.books.aggregate([
   <li>Production validation: use <strong>schema validation</strong> on the collection to reject inserts without required fields. Pair with TypeScript types in the application.</li>
   <li>For data quality dashboards, query for type mismatches: <code>{ title: { $exists: true, $not: { $type: "string" } } }</code>.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q29">
-  <div class="qa__number">Question 29</div>
-  <h3 class="qa__question">Write a query to update a book&#x27;s &quot;title&quot; using its ObjectId.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[29] = r'''
 <pre><code>// Update by ObjectId (most precise)
 db.books.updateOne(
   { _id: ObjectId("66243abf2c1f8e1234567890") },
@@ -1335,15 +1062,9 @@ db.books.findOne({ _id: ObjectId("66243abf2c1f8e1234567890") })</code></pre>
   <li>For <strong>optimistic concurrency control</strong>, include a version field in the filter: <code>{ _id: id, version: 5 }</code> with <code>{ $set: { ...fields }, $inc: { version: 1 } }</code>. If the version has moved on, the update silently misses &mdash; you can detect and retry.</li>
   <li>For frameworks like Mongoose, <code>findByIdAndUpdate(id, { ... })</code> wraps this pattern.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q30">
-  <div class="qa__number">Question 30</div>
-  <h3 class="qa__question">Write a query to find books where the &quot;author&quot; field exists.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[30] = r'''
 <pre><code>// Books that have an author field (any value, including null)
 db.books.find({ author: { $exists: true } })
 
@@ -1372,15 +1093,9 @@ db.books.find({ author: { $exists: false } })
   <li>To find documents with all required fields populated: chain multiple <code>$exists</code> checks, or use <code>$jsonSchema</code> in <code>$match</code>: <code>{ $match: { $jsonSchema: { required: ["title", "author"] } } }</code>.</li>
   <li>For data quality reports, run an aggregation that counts missing fields per document: useful for migration planning.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q31">
-  <div class="qa__number">Question 31</div>
-  <h3 class="qa__question">Use the $push operator to add a new genre to the &quot;genres&quot; array field in a book document.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[31] = r'''
 <pre><code>// Append a single genre to the array
 db.books.updateOne(
   { _id: ObjectId("66243abf...") },
@@ -1423,15 +1138,9 @@ db.books.updateOne(
   <li><strong>Use <code>$position</code></strong> to insert at a specific index instead of appending. <code>0</code> for the start.</li>
   <li>Watch <strong>unbounded array growth</strong> &mdash; arrays become slower to query and update as they grow, and a single document can&rsquo;t exceed the 16 MB BSON limit. Use <code>$slice</code> to cap or model the data as separate documents.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q32">
-  <div class="qa__number">Question 32</div>
-  <h3 class="qa__question">Use the $pull operator to remove a specific genre from the &quot;genres&quot; array field in a book document.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[32] = r'''
 <pre><code>// Remove a single value
 db.books.updateOne(
   { _id: ObjectId("66243abf...") },
@@ -1472,15 +1181,9 @@ db.books.updateOne(
   <li>For <strong>positional removal</strong>, <code>$pop: { genres: 1 }</code> removes the last element, <code>-1</code> removes the first.</li>
   <li>To combine pull and add atomically: use a transaction or do two updates &mdash; MongoDB doesn&rsquo;t have a single &ldquo;replace element&rdquo; operator. Or use a different shape: store as a map keyed by id.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q33">
-  <div class="qa__number">Question 33</div>
-  <h3 class="qa__question">Write a query to find books that have at least one genre in the &quot;genres&quot; array.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[33] = r'''
 <pre><code>// Books with at least one genre (non-empty array)
 db.books.find({ genres: { $exists: true, $ne: [] } })
 
@@ -1513,15 +1216,9 @@ db.books.aggregate([
   <li><strong>Multikey index gotcha</strong>: a multikey index can&rsquo;t cover queries that need both field values from the index alone &mdash; the document must be fetched.</li>
   <li>For complex tag/category queries with relevance ranking (matching N out of M tags), consider <strong>Atlas Search</strong> or an external search engine.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q34">
-  <div class="qa__number">Question 34</div>
-  <h3 class="qa__question">Write a query to find books that have all specified genres in the &quot;genres&quot; array.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[34] = r'''
 <pre><code>// Books with both Fiction AND Mystery in genres
 db.books.find({ genres: { $all: ["Fiction", "Mystery"] } })
 
@@ -1559,15 +1256,9 @@ db.books.aggregate([
   <li>For arrays of subdocuments needing complex matching, the <code>$all</code> + <code>$elemMatch</code> combo expresses &ldquo;there exists an element matching A AND an element matching B&rdquo;.</li>
   <li>For e-commerce faceting (matching multiple filters at once), <code>$all</code> is fine for small filter counts but consider purpose-built faceting systems for production.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q35">
-  <div class="qa__number">Question 35</div>
-  <h3 class="qa__question">Write a query to rename the &quot;published_year&quot; field to &quot;year&quot; in the &quot;books&quot; collection.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[35] = r'''
 <pre><code>// Rename a single field across all documents
 db.books.updateMany(
   {},
@@ -1609,15 +1300,9 @@ db.books.aggregate([
   <li>For huge collections, run the rename in batches by <code>_id</code> ranges to avoid replication lag.</li>
   <li>For schema migrations, prefer the <strong>expand-and-contract</strong> pattern: write to both fields, deploy, migrate readers, then drop the old field. Tools like <strong>Atlas Schema</strong>, <strong>Bytebase</strong>, or <strong>Liquibase</strong> formalize this.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q36">
-  <div class="qa__number">Question 36</div>
-  <h3 class="qa__question">Write a query to drop the &quot;genres&quot; field from all documents in the &quot;books&quot; collection.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[36] = r'''
 <pre><code>// Drop the genres field from every document
 db.books.updateMany(
   {},
@@ -1654,15 +1339,9 @@ db.runCommand({ compact: "books" })</code></pre>
   <li>The <code>compact</code> command reclaims the freed disk space immediately. Without it, WiredTiger reclaims it lazily as new writes happen.</li>
   <li>Before dropping in production: verify no code references the field. Use <code>$indexStats</code> + grep across your codebase, or feature-flag the field-using code first to prove safety.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q37">
-  <div class="qa__number">Question 37</div>
-  <h3 class="qa__question">Create a capped collection named &quot;logs&quot; with a size limit of 1MB.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[37] = r'''
 <pre><code>// Create a capped collection with a 1 MB size limit
 db.createCollection("logs", {
   capped: true,
@@ -1700,15 +1379,9 @@ db.logs.drop()</code></pre>
   <li><strong>Cannot be sharded.</strong> If you outgrow a single replica set, switch to a regular collection with a TTL index for eviction or move to a <strong>time-series collection</strong> (5.0+) for IoT-style data.</li>
   <li>For modern log ingestion, prefer dedicated systems: <strong>Loki</strong>, <strong>OpenSearch</strong>, <strong>ClickHouse</strong>, <strong>Datadog Logs</strong>, or AWS CloudWatch.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q38">
-  <div class="qa__number">Question 38</div>
-  <h3 class="qa__question">Write a query to insert a log document into the &quot;logs&quot; capped collection.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[38] = r'''
 <pre><code>// Insert a log entry &mdash; same syntax as a regular collection
 db.logs.insertOne({
   level:   "info",
@@ -1748,15 +1421,9 @@ for await (const doc of cursor) {
   <li>If updates that grow a document are needed, capped collections aren&rsquo;t the right fit &mdash; they reject those.</li>
   <li>For modern log workflows, also consider <strong>change streams</strong> on a regular collection &mdash; same real-time capability with full update/delete semantics.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q39">
-  <div class="qa__number">Question 39</div>
-  <h3 class="qa__question">Write a query to find books published between 1990 and 2000.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[39] = r'''
 <pre><code>// Inclusive range: 1990 through 2000
 db.books.find({
   published_year: { $gte: 1990, $lte: 2000 }
@@ -1796,15 +1463,9 @@ db.books.find({
   <li>If <code>published_year</code> is sometimes stored as a string (data quality issue), the range filter won&rsquo;t match string values &mdash; check with <code>{ $type: "string" }</code> and migrate.</li>
   <li>For very wide ranges over a billion-row collection, consider <strong>partitioning by year</strong> in a separate analytical store (<strong>ClickHouse</strong>, <strong>StarRocks</strong>, <strong>Druid</strong>, or <strong>BigQuery</strong>).</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q40">
-  <div class="qa__number">Question 40</div>
-  <h3 class="qa__question">Write a query to find books with an &quot;author&quot; field that matches a regular expression.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[40] = r'''
 <pre><code>// Author starting with &ldquo;John&rdquo; (case-sensitive, anchored)
 db.books.find({ author: /^John/ })
 
@@ -1835,15 +1496,9 @@ db.books.find({ author: { $regex: `^${query}`, $options: "i" } })</code></pre>
   <li>For autocomplete/typeahead at scale, <strong>MongoDB Atlas Search</strong>&rsquo;s <code>autocomplete</code> operator outperforms regex by 10-100x.</li>
   <li>For complex multi-field text matching, build a text index or use <strong>Atlas Search</strong>.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q41">
-  <div class="qa__number">Question 41</div>
-  <h3 class="qa__question">Use the $inc operator to increment the &quot;copies_sold&quot; field by 10 for a specific book.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[41] = r'''
 <pre><code>// Increment copies_sold by 10
 db.books.updateOne(
   { _id: ObjectId("66243abf...") },
@@ -1887,15 +1542,9 @@ print(r.copies_sold)</code></pre>
   <li>For <strong>extremely hot counters</strong> (viral content getting millions of inc/sec), MongoDB can become a bottleneck. Use a sharded counter pattern (multiple sub-counters per document) or front it with <strong>Redis</strong> and persist asynchronously.</li>
   <li>For aggregate stats (revenue per day, etc.), use <code>$inc</code> with an upsert: <code>updateOne({ date: today, type: "sale" }, { $inc: { total: 1 } }, { upsert: true })</code>.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q42">
-  <div class="qa__number">Question 42</div>
-  <h3 class="qa__question">Write a query to find books that do not have the &quot;published_year&quot; field.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[42] = r'''
 <pre><code>// Books missing the published_year field
 db.books.find({ published_year: { $exists: false } })
 
@@ -1928,15 +1577,9 @@ db.books.countDocuments({ published_year: { $exists: false } })</code></pre>
   <li>Once you&rsquo;ve added the field everywhere, use <strong>schema validation</strong> with <code>required: ["published_year"]</code> to prevent future inserts from missing it.</li>
   <li>For data quality dashboards, run periodic counts of missing fields and emit metrics &mdash; alerts on regression.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q43">
-  <div class="qa__number">Question 43</div>
-  <h3 class="qa__question">Write an aggregation pipeline to sort books by &quot;author&quot; and then by &quot;title&quot;.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[43] = r'''
 <pre><code>// Sort by author asc, then by title asc within each author
 db.books.aggregate([
   { $sort: { author: 1, title: 1 } }
@@ -1974,15 +1617,9 @@ db.books.aggregate(
   <li>Sort order is BSON ordering &mdash; numbers before strings, deterministic across types.</li>
   <li>For <strong>collation-aware sorts</strong> (e.g. locale-specific alphabet), specify <code>collation</code> on the query: <code>.sort({ title: 1 }).collation({ locale: "fr" })</code>.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q44">
-  <div class="qa__number">Question 44</div>
-  <h3 class="qa__question">Use the $sum operator in an aggregation pipeline to calculate the total &quot;copies_sold&quot; for each author.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[44] = r'''
 <pre><code>// Total copies_sold per author
 db.books.aggregate([
   { $group: {
@@ -2026,15 +1663,9 @@ db.books.aggregate([
   <li>For grand-total (one row), use <code>_id: null</code>: <code>{ $group: { _id: null, total: { $sum: "$copies_sold" } } }</code>.</li>
   <li>For <strong>real-time dashboards</strong> that need the same aggregation often, materialize the result with <code>$merge</code> into a summary collection and refresh periodically.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q45">
-  <div class="qa__number">Question 45</div>
-  <h3 class="qa__question">Use the $avg operator in an aggregation pipeline to find the average rating of books.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[45] = r'''
 <pre><code>// Average rating across all books
 db.books.aggregate([
   { $group: { _id: null, avg_rating: { $avg: "$rating" } } }
@@ -2074,15 +1705,9 @@ db.books.aggregate([
   <li><strong>Always include sample size</strong> in product analytics &mdash; an average without N is misleading.</li>
   <li>For <strong>Bayesian-style smoothing</strong> (down-weighting averages with few samples), apply post-aggregation: <code>(rating_sum + prior_sum) / (n + prior_n)</code>.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q46">
-  <div class="qa__number">Question 46</div>
-  <h3 class="qa__question">Write a query to find books where the &quot;title&quot; length is greater than 10 characters.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[46] = r'''
 <pre><code>// Title length &gt; 10 characters &mdash; use $expr with $strLenCP
 db.books.find({
   $expr: { $gt: [{ $strLenCP: "$title" }, 10] }
@@ -2125,15 +1750,9 @@ db.books.find({
   <li>For <strong>truncation in projection</strong>, use <code>$substrCP</code>: <code>{ short_title: { $substrCP: ["$title", 0, 10] } }</code>.</li>
   <li>To validate title length on insert/update, use <strong>schema validation</strong> with <code>{ minLength: 5, maxLength: 100 }</code>.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q47">
-  <div class="qa__number">Question 47</div>
-  <h3 class="qa__question">Write a query to perform a full-text search on the &quot;books&quot; collection for the phrase &quot;NoSQL databases&quot;.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[47] = r'''
 <pre><code>// Phrase search &mdash; double-quoted within the search string
 db.books.find({ $text: { $search: "\"NoSQL databases\"" } })
 
@@ -2173,15 +1792,9 @@ db.books.aggregate([
   <li>For <strong>better phrase relevance</strong> (proximity scoring, fuzzy matching), <strong>MongoDB Atlas Search</strong> has dedicated <code>phrase</code> and <code>span</code> operators with the <code>slop</code> parameter for fuzziness.</li>
   <li>For self-hosted environments needing top-tier search, integrate with <strong>Elasticsearch</strong>, <strong>OpenSearch</strong>, <strong>Meilisearch</strong>, or <strong>Typesense</strong>.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q48">
-  <div class="qa__number">Question 48</div>
-  <h3 class="qa__question">Use the $elemMatch operator to find books where the &quot;reviews&quot; array has at least one review with a rating of 5.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[48] = r'''
 <pre><code>// Books with at least one review of rating 5
 db.books.find({
   reviews: { $elemMatch: { rating: 5 } }
@@ -2221,15 +1834,9 @@ db.books.aggregate([
   <li>For complex array filters in aggregations, also see <code>$filter</code> &mdash; it returns a filtered array (not just a match).</li>
   <li>For modeling reviews at scale, consider a separate <code>reviews</code> collection with a <code>book_id</code> reference &mdash; arrays in documents have a 16 MB hard limit and grow expensive over time.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q49">
-  <div class="qa__number">Question 49</div>
-  <h3 class="qa__question">Write a query to find books where the &quot;author&quot; field is not equal to &quot;Unknown&quot;.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[49] = r'''
 <pre><code>// Author not equal to "Unknown" (and present)
 db.books.find({ author: { $ne: "Unknown" } })
 
@@ -2266,15 +1873,9 @@ db.books.aggregate([
   <li>If you have a small set of known &ldquo;valid&rdquo; values, prefer the positive query: <code>{ author: { $in: ["John Doe", "Jane Doe"] } }</code> &mdash; index-friendly.</li>
   <li>For data quality monitoring, queries with <code>$nin: ["Unknown", null, ""]</code> identify the &ldquo;clean&rdquo; subset.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q50">
-  <div class="qa__number">Question 50</div>
-  <h3 class="qa__question">Write a query to find books with more than 5 genres in the &quot;genres&quot; array.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[50] = r'''
 <pre><code>// Books with more than 5 genres
 db.books.find({
   $expr: { $gt: [{ $size: "$genres" }, 5] }
@@ -2318,15 +1919,9 @@ db.books.aggregate([
   <li>For <strong>average size analytics</strong>: <code>db.books.aggregate([{ $project: { n: { $size: "$genres" } } }, { $group: { _id: null, avg: { $avg: "$n" } } }])</code>.</li>
   <li>If <code>genres</code> may be missing, use <code>{ $size: { $ifNull: ["$genres", []] } }</code> to default to an empty array (size 0) instead of erroring.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q51">
-  <div class="qa__number">Question 51</div>
-  <h3 class="qa__question">Write a query to remove all books from the &quot;books&quot; collection that have no genres.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[51] = r'''
 <pre><code>// Remove books with empty or missing genres array
 db.books.deleteMany({
   $or: [
@@ -2368,15 +1963,9 @@ db.books.countDocuments({
   <li>Prefer <strong>soft delete</strong> for any user-visible content &mdash; allows undelete, audit, and compliance with retention policies.</li>
   <li>For routine cleanup of empty-array documents, schedule a job that runs daily during low-traffic hours.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q52">
-  <div class="qa__number">Question 52</div>
-  <h3 class="qa__question">Use the $max operator to update the &quot;highest_rating&quot; field to the highest value between its current value and 10.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[52] = r'''
 <pre><code>// Update highest_rating if 10 is greater than current value
 db.books.updateOne(
   { _id: ObjectId("66243abf...") },
@@ -2415,15 +2004,9 @@ db.books.updateMany(
   <li>For comparing to a computed value (e.g. max of two fields), use the <strong>aggregation-pipeline update</strong> form with the <code>$max</code> aggregation operator (different from the update operator).</li>
   <li>Use cases: high-water-mark timestamps (<code>last_seen</code>), monotonic counters that should never decrease, &ldquo;best score so far&rdquo; tracking. <code>$min</code> is the dual for &ldquo;earliest seen&rdquo; or &ldquo;lowest price.&rdquo;</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q53">
-  <div class="qa__number">Question 53</div>
-  <h3 class="qa__question">Write a query to find books where the &quot;published_year&quot; is a multiple of 5.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[53] = r'''
 <pre><code>// Multiples of 5 using $mod &mdash; year % 5 == 0
 db.books.find({
   published_year: { $mod: [5, 0] }
@@ -2458,15 +2041,9 @@ db.books.aggregate([
   <li>For random sampling, prefer <code>$sample</code> in aggregation: <code>{ $sample: { size: 1000 } }</code> &mdash; built for the job and uses a different algorithm.</li>
   <li>For deterministic hashed sampling: <code>{ $expr: { $eq: [{ $mod: [{ $abs: { $hash: "$_id" } }, 100] }, 0] } }</code> &mdash; 1% sample.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q54">
-  <div class="qa__number">Question 54</div>
-  <h3 class="qa__question">Write an aggregation pipeline to calculate the total number of books published each year.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[54] = r'''
 <pre><code>// Total books per published year
 db.books.aggregate([
   { $group: { _id: "$published_year", total: { $sum: 1 } } },
@@ -2508,15 +2085,9 @@ db.books.aggregate([
   <li>For real-time analytics on millions of new events per minute, MongoDB&rsquo;s aggregation framework can struggle &mdash; consider <strong>ClickHouse</strong>, <strong>StarRocks</strong>, <strong>Druid</strong>, or <strong>BigQuery</strong> for that scale.</li>
   <li>Use <strong>MongoDB Atlas Charts</strong> to visualize this aggregation directly without writing UI code.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q55">
-  <div class="qa__number">Question 55</div>
-  <h3 class="qa__question">Write a query to find books where the &quot;title&quot; contains a numeric digit.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[55] = r'''
 <pre><code>// Title contains a numeric digit (regex: any character that is a digit)
 db.books.find({ title: /\d/ })
 
@@ -2547,15 +2118,9 @@ db.books.aggregate([
   <li>For titles that need <strong>structured number extraction</strong>, parse on insert/update and store the number in a separate field.</li>
   <li>Watch for false positives: <code>/\d/</code> matches Unicode digits in some locales. Use <code>[0-9]</code> for strict ASCII.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q56">
-  <div class="qa__number">Question 56</div>
-  <h3 class="qa__question">Use the $sortByCount stage in an aggregation pipeline to count the number of books per genre.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[56] = r'''
 <pre><code>// Count books per genre after unwinding
 db.books.aggregate([
   { $unwind: "$genres" },
@@ -2594,15 +2159,9 @@ db.books.aggregate([
   <li>For <strong>very large collections</strong>, <code>$unwind</code> can blow up memory. Consider precomputing tag counts via <code>$merge</code> into a summary collection refreshed nightly.</li>
   <li><code>$sortByCount</code> is a single-stage shorthand &mdash; for more complex aggregations (multiple computed fields), use <code>$group</code> + <code>$sort</code> directly.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q57">
-  <div class="qa__number">Question 57</div>
-  <h3 class="qa__question">Write a query to find the book with the highest &quot;copies_sold&quot; value.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[57] = r'''
 <pre><code>// Sort by copies_sold desc and take the top 1
 db.books.find().sort({ copies_sold: -1 }).limit(1)
 
@@ -2637,15 +2196,9 @@ db.books.find().sort({ copies_sold: -1 }).limit(3)</code></pre>
   <li><strong><code>$top</code> accumulator</strong> (7.0+) does this in one stage: <code>{ $group: { _id: "$author", top_book: { $top: { sortBy: { copies_sold: -1 }, output: "$$ROOT" } } } }</code>.</li>
   <li>For ties (multiple books with the same max), add a tiebreaker field to the sort: <code>.sort({ copies_sold: -1, _id: 1 })</code>.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q58">
-  <div class="qa__number">Question 58</div>
-  <h3 class="qa__question">Write a query to find the book with the lowest &quot;rating&quot; value.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[58] = r'''
 <pre><code>// Sort by rating ascending (ignoring nulls)
 db.books.find({ rating: { $exists: true, $type: "number" } })
         .sort({ rating: 1 })
@@ -2684,15 +2237,9 @@ db.books.find().sort({ rating: 1 }).limit(1)
   <li><strong><code>$bottom</code> accumulator</strong> (7.0+) finds the bottom-ranked document per group cleanly: <code>{ $group: { _id: "$genres", worst: { $bottom: { sortBy: { rating: 1 }, output: "$$ROOT" } } } }</code>.</li>
   <li>For dashboards that show &ldquo;weakest performers,&rdquo; combine with sample-size threshold &mdash; a 1-rating book with 1 review isn&rsquo;t the same as one with 1,000.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q59">
-  <div class="qa__number">Question 59</div>
-  <h3 class="qa__question">Write a query to retrieve the first 5 books from the &quot;books&quot; collection sorted by &quot;published_year&quot;.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[59] = r'''
 <pre><code>// First 5 books by published_year ascending (oldest first)
 db.books.find().sort({ published_year: 1 }).limit(5)
 
@@ -2725,15 +2272,9 @@ const oldest5 = db.books.find().sort({ published_year: 1 }).limit(5).toArray()</
   <li>For ties (multiple books from the same year), add a tiebreaker: <code>.sort({ published_year: 1, _id: 1 })</code> &mdash; deterministic ordering.</li>
   <li>For <strong>cursor-based pagination</strong>: track the last <code>(year, _id)</code> pair seen and use it as the next page&rsquo;s starting point.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q60">
-  <div class="qa__number">Question 60</div>
-  <h3 class="qa__question">Write a query to retrieve the last 5 books from the &quot;books&quot; collection sorted by &quot;published_year&quot;.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[60] = r'''
 <pre><code>// Last 5 books (newest by published_year, descending)
 db.books.find().sort({ published_year: -1 }).limit(5)
 
@@ -2768,15 +2309,9 @@ db.books.find().sort({ published_year: -1, _id: -1 }).limit(5)</code></pre>
   <li>For real-time &ldquo;newest&rdquo; feeds, a <strong>change stream</strong> is more efficient than polling &mdash; the app subscribes to inserts and pushes them to clients live.</li>
   <li>Watch the index efficiency: <code>{ published_year: -1, _id: -1 }</code> is a separate index from <code>{ published_year: 1, _id: 1 }</code> &mdash; only build the second if you need direction-specific compound sorts.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q61">
-  <div class="qa__number">Question 61</div>
-  <h3 class="qa__question">Write a query to find books that have an array field &quot;genres&quot; with exactly 3 elements.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[61] = r'''
 <pre><code>// Books with exactly 3 genres
 db.books.find({ genres: { $size: 3 } })
 
@@ -2814,15 +2349,9 @@ db.books.find({ genres_count: 3 })   // uses the index</code></pre>
   <li>For analytics on array sizes, use <code>{ $project: { n: { $size: "$genres" } } }</code> + <code>$bucket</code> to histogram the distribution.</li>
   <li>Watch the schema: an empty array (<code>[]</code>) and a missing field have different semantics in MongoDB. Standardize on one in your application.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q62">
-  <div class="qa__number">Question 62</div>
-  <h3 class="qa__question">Use the $arrayElemAt operator to project the first genre from the &quot;genres&quot; array field.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[62] = r'''
 <pre><code>// First genre in the array
 db.books.aggregate([
   { $project: {
@@ -2874,15 +2403,9 @@ db.books.aggregate([
   <li>For accessing a deeply nested array element, chain <code>$arrayElemAt</code> &mdash; or use dot notation in projection: <code>{ "genres.0": 1 }</code>.</li>
   <li>For aggregations that need the &ldquo;first matching element&rdquo; based on a condition, use <code>$filter</code> + <code>$arrayElemAt</code>.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q63">
-  <div class="qa__number">Question 63</div>
-  <h3 class="qa__question">Write a query to find books where the &quot;title&quot; field is case-insensitively equal to &quot;MongoDB Basics&quot;.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[63] = r'''
 <pre><code>// Case-insensitive equality with collation (preferred &mdash; uses index if available)
 db.books.find({ title: "MongoDB Basics" })
         .collation({ locale: "en", strength: 2 })
@@ -2918,15 +2441,9 @@ db.books.aggregate(
   <li>For fuzzy matching (typo tolerance), <strong>collation alone isn&rsquo;t enough</strong> &mdash; use <strong>Atlas Search</strong> with the <code>fuzzy</code> operator.</li>
   <li>For systems with mixed case-sensitive and case-insensitive queries on the same field, build two indexes &mdash; one with collation, one without.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q64">
-  <div class="qa__number">Question 64</div>
-  <h3 class="qa__question">Write a query to find books where the &quot;reviews&quot; array contains at least one subdocument with a &quot;rating&quot; field greater than 4.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[64] = r'''
 <pre><code>// Books with at least one review having rating &gt; 4 &mdash; use $elemMatch
 db.books.find({
   reviews: { $elemMatch: { rating: { $gt: 4 } } }
@@ -2969,15 +2486,9 @@ db.books.aggregate([
   <li>For <strong>filtering arrays in pipelines</strong> (return all matching elements, not just the first), use <code>$filter</code> in <code>$project</code>.</li>
   <li>For high-volume reviews (thousands per book), modeling as a separate <code>reviews</code> collection with <code>book_id</code> reference scales better than embedding.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q65">
-  <div class="qa__number">Question 65</div>
-  <h3 class="qa__question">Write a query to find books that have more than 10 reviews in the &quot;reviews&quot; array.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[65] = r'''
 <pre><code>// Books with more than 10 reviews (using $expr)
 db.books.find({
   $expr: { $gt: [{ $size: { $ifNull: ["$reviews", []] } }, 10] }
@@ -3017,15 +2528,9 @@ db.books.updateOne(
   <li>For <strong>extreme array sizes</strong> (10K+ elements per document), embedding becomes inefficient &mdash; documents become large, every update rewrites the array, indexes balloon. Move to a separate collection with foreign-key style linking.</li>
   <li>For real-time popularity ranking by review count, use a <strong>Redis sorted set</strong> for the hot path and persist counts to MongoDB asynchronously.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q66">
-  <div class="qa__number">Question 66</div>
-  <h3 class="qa__question">Write a query to perform a text search and sort the results by text search score.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[66] = r'''
 <pre><code>// Text search with results sorted by relevance score
 db.books.find(
   { $text: { $search: "MongoDB Database" } },
@@ -3065,15 +2570,10 @@ db.books.aggregate([
   <li>For <strong>BM25-style scoring</strong> (more modern, better calibrated), use <strong>MongoDB Atlas Search</strong> &mdash; same <code>$meta</code> mechanism but powered by Lucene&rsquo;s scoring.</li>
   <li>For <strong>hybrid retrieval</strong> (combine text relevance with other signals like recency, popularity), compute a final score in <code>$addFields</code>: <code>{ final_score: { $add: [{ $multiply: ["$score", 0.7] }, { $multiply: ["$popularity", 0.3] }] } }</code>.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q67">
-  <div class="qa__number">Question 67</div>
-  <h3 class="qa__question">Use the $bucket stage in an aggregation pipeline to group books into buckets based on &quot;published_year&quot;.</h3>
-  <div class="qa__answer">
-    
+
+ANSWERS[67] = r'''
 <pre><code>// $bucket: predefined boundaries
 db.books.aggregate([
   { $bucket: {
@@ -3111,15 +2611,9 @@ db.books.aggregate([
   <li>For <strong>auto-balanced buckets</strong> when you don&rsquo;t know the data distribution, use <strong><code>$bucketAuto</code></strong> instead &mdash; specify number of buckets, MongoDB picks the boundaries.</li>
   <li>Use <code>$bucket</code> for histograms in dashboards (price ranges, age groups, time slots) &mdash; pre-computed buckets render in a single round trip.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q68">
-  <div class="qa__number">Question 68</div>
-  <h3 class="qa__question">Write a query to find books where the &quot;author&quot; field is an array.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[68] = r'''
 <pre><code>// Author stored as an array (multi-author books)
 db.books.find({ author: { $type: "array" } })
 
@@ -3159,15 +2653,9 @@ db.books.updateMany(
   <li>For data quality, set <strong>JSON Schema validation</strong> at the collection level so future inserts conform to a single shape.</li>
   <li>Once migrated, normalize on a single shape (always-array is friendlier &mdash; queries handle 1 or N authors uniformly).</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q69">
-  <div class="qa__number">Question 69</div>
-  <h3 class="qa__question">Use the $merge stage to output the results of an aggregation pipeline to a new collection named &quot;books_summary&quot;.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[69] = r'''
 <pre><code>// Output aggregation result to a new collection
 db.books.aggregate([
   { $group: {
@@ -3219,15 +2707,9 @@ db.books.aggregate([
   <li>The <code>on</code> field must be unique-indexed in the target collection (or <code>_id</code>, which is unique by default).</li>
   <li>Use for incremental ETL: nightly rollups, materialized views, event-sourced projections.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q70">
-  <div class="qa__number">Question 70</div>
-  <h3 class="qa__question">Write a query to find books that have been reviewed by a specific user.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[70] = r'''
 <pre><code>// Reviewed by a specific user (subdocs in reviews array)
 db.books.find({ "reviews.user_id": ObjectId("66...") })
 
@@ -3268,15 +2750,9 @@ db.books.find({
 })</code></pre>
 
 <p><strong>Modeling note</strong>: for high review volumes (thousands per book), a separate <code>reviews</code> collection with a <code>book_id</code> reference scales better &mdash; embedded arrays slow down once they get large because every update rewrites the whole document.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q71">
-  <div class="qa__number">Question 71</div>
-  <h3 class="qa__question">Write a query to find books where the &quot;reviews&quot; array contains exactly 5 subdocuments.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[71] = r'''
 <pre><code>// Exactly 5 reviews
 db.books.find({ reviews: { $size: 5 } })
 
@@ -3310,15 +2786,9 @@ db.books.updateOne(
   <li>For drift correction, run periodic reconciliation in a maintenance window: <code>$set: { reviews_count: { $size: "$reviews" } }</code>.</li>
   <li><code>$size</code> on a missing field errors out &mdash; wrap with <code>$ifNull</code>: <code>{ $size: { $ifNull: ["$reviews", []] } }</code>.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q72">
-  <div class="qa__number">Question 72</div>
-  <h3 class="qa__question">Write an aggregation pipeline to unwind the &quot;genres&quot; array and then group by genre.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[72] = r'''
 <pre><code>// Unwind genres array, then group by genre
 db.books.aggregate([
   { $unwind: "$genres" },
@@ -3356,15 +2826,9 @@ db.books.aggregate([
 </ul>
 
 <p><strong>Modern alternative</strong>: for one-doc array stats (total count, distinct values), use <code>$size</code> + <code>$reduce</code> + <code>$filter</code> &mdash; no document explosion, much faster.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q73">
-  <div class="qa__number">Question 73</div>
-  <h3 class="qa__question">Write a query to find books that have a &quot;published_year&quot; field within the last 5 years.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[73] = r'''
 <pre><code>// Books published in the last 5 years
 const fiveYearsAgo = new Date().getFullYear() - 5
 db.books.find({ published_year: { $gte: fiveYearsAgo } })
@@ -3412,15 +2876,9 @@ db.books.aggregate([
   <li><strong>Index <code>published_year</code></strong> for fast range scans: <code>db.books.createIndex({ published_year: -1 })</code>.</li>
   <li><strong>Modern date math (5.0+)</strong>: <code>$dateAdd</code>, <code>$dateSubtract</code>, <code>$dateDiff</code>, <code>$dateTrunc</code> handle calendar quirks (months of varying lengths, leap years, DST) correctly.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q74">
-  <div class="qa__number">Question 74</div>
-  <h3 class="qa__question">Use the $type operator to find documents in the &quot;books&quot; collection where the &quot;published_year&quot; field is not a number.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[74] = r'''
 <pre><code>// Find docs where published_year is NOT a number
 db.books.find({ published_year: { $not: { $type: "number" } } })
 
@@ -3457,15 +2915,9 @@ db.books.updateMany(
 <p><code>$type: "number"</code> is a convenience that matches any of int/long/double/decimal &mdash; preferred over listing all four.</p>
 
 <p><strong>Best practice</strong>: enable JSON Schema validation on the collection so new inserts must have <code>published_year</code> as <code>"int"</code>. Combined with a one-time migration of legacy data, you eliminate type drift permanently.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q75">
-  <div class="qa__number">Question 75</div>
-  <h3 class="qa__question">Write a query to add a new subdocument to the &quot;reviews&quot; array field for a specific book.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[75] = r'''
 <pre><code>// Push a review subdocument
 db.books.updateOne(
   { _id: bookId },
@@ -3516,15 +2968,9 @@ db.books.updateOne(
   <li><strong><code>$addToSet</code></strong> instead of <code>$push</code> avoids duplicates &mdash; useful for tags or genres.</li>
   <li><strong>Atomic uniqueness</strong>: combine the push with a filter that checks the array doesn&rsquo;t already contain the value (<code>"reviews.user_id": { $ne: userId }</code>).</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q76">
-  <div class="qa__number">Question 76</div>
-  <h3 class="qa__question">Write a query to remove all subdocuments from the &quot;reviews&quot; array field where the &quot;rating&quot; is less than 3.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[76] = r'''
 <pre><code>// Remove all reviews with rating &lt; 3
 db.books.updateOne(
   { _id: bookId },
@@ -3570,15 +3016,9 @@ db.books.updateMany(
   <li><strong><code>$pop</code></strong> removes one element from the start (<code>-1</code>) or end (<code>1</code>) &mdash; not condition-based.</li>
   <li>For <strong>auditing what was removed</strong>, do a <code>find</code> first, log the matching subdocs, then <code>$pull</code>.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q77">
-  <div class="qa__number">Question 77</div>
-  <h3 class="qa__question">Use the $expr operator to compare fields within the same document in a query.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[77] = r'''
 <pre><code>// Compare two fields of the same document &mdash; spent &gt; budget
 db.books.find({ $expr: { $gt: ["$spent", "$budget"] } })
 
@@ -3625,15 +3065,9 @@ db.books.aggregate([
 </ul>
 
 <p><strong>Performance caveat</strong>: <code>$expr</code>-based comparisons usually <em>can&rsquo;t use indexes</em> &mdash; MongoDB has to evaluate the expression for every document. Wrap with a regular indexed filter when possible: <code>{ year: { $gte: 2000 }, $expr: { $gt: ["$spent", "$budget"] } }</code>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q78">
-  <div class="qa__number">Question 78</div>
-  <h3 class="qa__question">Write a query to find books where the &quot;title&quot; is either &quot;MongoDB Basics&quot; or &quot;Advanced MongoDB&quot;.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[78] = r'''
 <pre><code>// Match either of two titles &mdash; $in is the cleanest
 db.books.find({ title: { $in: ["MongoDB Basics", "Advanced MongoDB"] } })
 
@@ -3676,15 +3110,9 @@ db.books.find({ title: { $in: ["MongoDB Basics", "Advanced MongoDB"] } })
   <li>Inverse <code>$nin</code> matches values <em>not</em> in the list &mdash; but typically can&rsquo;t use an index efficiently.</li>
   <li>For very large <code>$in</code> arrays (10K+ values), consider <code>$lookup</code> against a temporary collection &mdash; faster and avoids query-size limits.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q79">
-  <div class="qa__number">Question 79</div>
-  <h3 class="qa__question">Write a query to find books where the length of the &quot;title&quot; field is between 5 and 15 characters.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[79] = r'''
 <pre><code>// Title length between 5 and 15 characters
 db.books.find({
   $expr: {
@@ -3735,15 +3163,9 @@ db.books.find({ title_len: { $gte: 5, $lte: 15 } })</code></pre>
 )</code></pre>
 
 <p>Or simpler: compute it client-side (<code>"new title".length</code>) before sending the update.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q80">
-  <div class="qa__number">Question 80</div>
-  <h3 class="qa__question">Use the $addFields stage to add a new field &quot;year_difference&quot; that calculates the difference between &quot;published_year&quot; and 2021.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[80] = r'''
 <pre><code>// Add year_difference field (2021 - published_year)
 db.books.aggregate([
   { $addFields: {
@@ -3789,15 +3211,9 @@ db.books.aggregate([
 </tbody></table>
 
 <p>Pair <code>$addFields</code> with <code>$match</code> to filter on the computed value &mdash; perfect when the filter condition isn&rsquo;t a literal field but a derivation. For permanent storage of the derived field, use <code>updateMany</code> with a pipeline (or <code>$merge</code> to write to a summary collection).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q81">
-  <div class="qa__number">Question 81</div>
-  <h3 class="qa__question">Write a query to find books that have at least one genre in a specified list of genres.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[81] = r'''
 <pre><code>// Books having ANY genre from a given list
 db.books.find({ genres: { $in: ["Mystery", "Thriller", "Crime"] } })
 
@@ -3843,15 +3259,9 @@ db.books.createIndex({ genres: 1 })   // multikey index</code></pre>
   <li>For tag-cloud or faceted search at scale, <strong>Atlas Search</strong>&rsquo;s <code>compound</code> + <code>facet</code> operators are far more powerful than raw <code>$in</code>.</li>
   <li>For ranking by overlap count, the <code>$setIntersection</code> + <code>$size</code> trick above scales well with multikey indexes filtering first.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q82">
-  <div class="qa__number">Question 82</div>
-  <h3 class="qa__question">Use the $mergeObjects operator to combine fields from two subdocuments in the same document.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[82] = r'''
 <pre><code>// Document: { _id: 1, defaults: { theme: "light", lang: "en" }, custom: { theme: "dark" } }
 db.users.aggregate([
   { $project: {
@@ -3895,15 +3305,9 @@ db.user_prefs.aggregate([
 </ul>
 
 <p>Excellent for layering settings, computed enrichments, or shaping <code>$lookup</code> results into a flat structure.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q83">
-  <div class="qa__number">Question 83</div>
-  <h3 class="qa__question">Write a query to perform a case-insensitive search on the &quot;author&quot; field using regular expressions.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[83] = r'''
 <pre><code>// Case-insensitive regex match on author
 db.books.find({ author: /^john/i })
 
@@ -3949,15 +3353,9 @@ db.books.aggregate([
 </tbody></table>
 
 <p>For full-text user search (typo tolerance, autocomplete, ranking), use <strong>MongoDB Atlas Search</strong> &mdash; it&rsquo;s purpose-built and faster than any regex.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q84">
-  <div class="qa__number">Question 84</div>
-  <h3 class="qa__question">Use the $toUpper operator to convert the &quot;title&quot; field to uppercase in a projection.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[84] = r'''
 <pre><code>// Project title in uppercase
 db.books.aggregate([
   { $project: {
@@ -4001,15 +3399,9 @@ db.books.aggregate([
   <li><strong>For case-insensitive comparison</strong>, prefer collation indexes over uppercasing both sides &mdash; collation can use indexes; <code>$toUpper</code> in queries cannot.</li>
   <li><strong>Storing both cases</strong> (a <code>title</code> and <code>title_lower</code> field) is a common pattern for fast prefix/equality matching on a case-insensitive lookup &mdash; index <code>title_lower</code>.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q85">
-  <div class="qa__number">Question 85</div>
-  <h3 class="qa__question">Write a query to update the &quot;genres&quot; array field by adding a new genre if it does not already exist.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[85] = r'''
 <pre><code>// Add genre only if it&rsquo;s not already in the array
 db.books.updateOne(
   { _id: bookId },
@@ -4055,15 +3447,9 @@ db.books.updateMany(
   <li>Move &ldquo;tags per book&rdquo; into a join collection with a unique compound index.</li>
   <li>Or maintain a separate Redis set for hot-path uniqueness checks.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q86">
-  <div class="qa__number">Question 86</div>
-  <h3 class="qa__question">Write a query to find books where the &quot;published_year&quot; field is within a specified range.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[86] = r'''
 <pre><code>// Inclusive range
 db.books.find({ published_year: { $gte: 2000, $lte: 2020 } })
 
@@ -4100,15 +3486,9 @@ db.books.find({
 </ul>
 
 <p><strong>Date ranges</strong>: prefer <code>Date</code> over integer year if you ever need finer granularity. <code>$gte: ISODate("2020-01-01")</code> + <code>$lt: ISODate("2021-01-01")</code> covers all of 2020 inclusively. Modern (5.0+): <code>$dateTrunc</code> simplifies week/month/quarter range generation in pipelines.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q87">
-  <div class="qa__number">Question 87</div>
-  <h3 class="qa__question">Use the $size operator to project the number of elements in the &quot;genres&quot; array field.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[87] = r'''
 <pre><code>// Project the count of genres
 db.books.aggregate([
   { $project: {
@@ -4151,15 +3531,9 @@ db.books.createIndex({ genres_count: 1 })</code></pre>
 <p><strong>Note</strong>: the <em>query operator</em> <code>$size</code> (used in <code>find()</code>) takes an exact integer and matches arrays of that length. The <em>aggregation operator</em> <code>$size</code> (used in pipelines) returns the length as a value. Same name, different roles.</p>
 
 <p>For frequent length-based queries, denormalize a counter field and update it atomically with array mutations &mdash; far faster than computing on every read.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q88">
-  <div class="qa__number">Question 88</div>
-  <h3 class="qa__question">Write a query to find books where the &quot;reviews&quot; array contains subdocuments with duplicate &quot;user_id&quot; fields.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[88] = r'''
 <pre><code>// Find books with duplicate user_id in reviews array
 db.books.aggregate([
   { $match: { reviews: { $exists: true, $ne: [] } } },
@@ -4210,15 +3584,9 @@ db.books.updateOne(
   <li>For high-cardinality data, model reviews in a separate collection with a unique compound index <code>{ book_id: 1, user_id: 1 }</code> &mdash; the database enforces uniqueness for free.</li>
   <li>Periodic data-quality audits using the aggregation above can identify drift; fix with a one-time deduplication update.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q89">
-  <div class="qa__number">Question 89</div>
-  <h3 class="qa__question">Use the $cond operator to project a new field &quot;is_recent&quot; based on the &quot;published_year&quot; field.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[89] = r'''
 <pre><code>// Project is_recent based on published_year
 db.books.aggregate([
   { $project: {
@@ -4275,15 +3643,9 @@ db.books.aggregate([
 <p><strong>For multi-way conditionals (3+ branches), prefer <code>$switch</code></strong> &mdash; nested <code>$cond</code> becomes unreadable past two levels. <code>$switch</code> evaluates branches in order and returns the first match&rsquo;s value; the <code>default</code> branch is required.</p>
 
 <p>Both work in any stage that accepts expressions &mdash; <code>$project</code>, <code>$addFields</code>, <code>$group</code>, <code>$match</code> (via <code>$expr</code>).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q90">
-  <div class="qa__number">Question 90</div>
-  <h3 class="qa__question">Write a query to find books that do not have a &quot;rating&quot; field.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[90] = r'''
 <pre><code>// Books missing the rating field
 db.books.find({ rating: { $exists: false } })
 
@@ -4322,15 +3684,9 @@ db.books.updateMany(
   <li>For migrations adding a new field with a default, run a one-time <code>updateMany</code> filtered by <code>{ field: { $exists: false } }</code> to backfill.</li>
   <li><strong>Sparse indexes</strong> (<code>{ sparse: true }</code>) only index documents where the field exists &mdash; useful when most documents lack the field but you still want fast queries on the few that do.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q91">
-  <div class="qa__number">Question 91</div>
-  <h3 class="qa__question">Use the $merge stage to update existing documents in the &quot;books_summary&quot; collection with aggregation results.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[91] = r'''
 <pre><code>// Update existing summary docs (or insert if new)
 db.books.aggregate([
   { $group: {
@@ -4386,15 +3742,9 @@ db.books.aggregate([
 </tbody></table>
 
 <p>Use this for nightly rollups, materialized views, or event-sourced projections &mdash; refresh incrementally without rebuilding from scratch.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q92">
-  <div class="qa__number">Question 92</div>
-  <h3 class="qa__question">Write a query to find books where the &quot;title&quot; field matches a pattern using the $regex operator.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[92] = r'''
 <pre><code>// Object-form $regex with explicit options
 db.books.find({ title: { $regex: "Mongo.*Guide", $options: "i" } })
 
@@ -4427,15 +3777,9 @@ db.books.find({ description: { $regex: "Mongo.*$", $options: "ms" } })</code></p
 </tbody></table>
 
 <p><strong>Critical security note</strong>: never pass raw user input into <code>$regex</code> &mdash; sanitize special characters first or you&rsquo;re vulnerable to <strong>ReDoS</strong> (catastrophic backtracking can lock up the server). For production user search, use <strong>Atlas Search</strong>; it&rsquo;s far more efficient and safer.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q93">
-  <div class="qa__number">Question 93</div>
-  <h3 class="qa__question">Use the $filter operator to project only the &quot;reviews&quot; array elements with a &quot;rating&quot; greater than 4.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[93] = r'''
 <pre><code>// Project only reviews with rating &gt; 4
 db.books.aggregate([
   { $project: {
@@ -4499,15 +3843,9 @@ db.books.aggregate([
 </ul>
 
 <p>Pair <code>$filter</code> with <code>$map</code> (transform each element), <code>$reduce</code> (fold to single value), and <code>$arrayElemAt</code> (positional access) to handle most array operations without leaving the document.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q94">
-  <div class="qa__number">Question 94</div>
-  <h3 class="qa__question">Write a query to update all documents in the &quot;books&quot; collection to add a timestamp field &quot;last_modified&quot;.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[94] = r'''
 <pre><code>// Add last_modified to all documents (current time)
 db.books.updateMany(
   {},
@@ -4554,15 +3892,9 @@ db.books.updateOne(
   <li><strong>For audit trails</strong>, store <code>created_at</code> (set once via <code>$setOnInsert</code> in upserts) and <code>last_modified</code> (every write).</li>
   <li><strong>For change-data-capture</strong>, MongoDB&rsquo;s <strong>change streams</strong> are the proper tool &mdash; they emit a stream of every change without needing to read from the documents.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q95">
-  <div class="qa__number">Question 95</div>
-  <h3 class="qa__question">Write a query to find books that have a &quot;genres&quot; array field containing only unique values.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[95] = r'''
 <pre><code>// Books whose genres array has only unique values
 db.books.find({
   $expr: {
@@ -4620,15 +3952,9 @@ db.books.updateOne(
 </tbody></table>
 
 <p><strong>Best practice</strong>: prevent duplicates at write time using <code>$addToSet</code> instead of <code>$push</code>. The detection query above is for migrations and audits; new code should never produce duplicates.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q96">
-  <div class="qa__number">Question 96</div>
-  <h3 class="qa__question">Use the $dateToString operator to format the &quot;published_year&quot; field as a string in the projection.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[96] = r'''
 <pre><code>// published_year is an integer &mdash; build a date first, then format
 db.books.aggregate([
   { $project: {
@@ -4676,15 +4002,9 @@ db.books.aggregate([
 </ul>
 
 <p>For analytics dashboards, push date arithmetic to <strong>Atlas Charts</strong> or your warehouse (BigQuery, Snowflake) &mdash; far richer functions and faster on large data.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q97">
-  <div class="qa__number">Question 97</div>
-  <h3 class="qa__question">Write a query to find books where the &quot;title&quot; field contains special characters.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[97] = r'''
 <pre><code>// Titles containing any non-alphanumeric character (besides space)
 db.books.find({ title: /[^a-zA-Z0-9 ]/ })
 
@@ -4724,15 +4044,9 @@ db.books.find({ title: /[\u{1F300}-\u{1FFFF}]/u })</code></pre>
   { $set: { has_special_chars: { $regexMatch: { input: "$title", regex: /[^\w\s]/ } } } }
 ])
 db.books.createIndex({ has_special_chars: 1 })</code></pre>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q98">
-  <div class="qa__number">Question 98</div>
-  <h3 class="qa__question">Use the $lookup stage to perform a join between the &quot;books&quot; collection and an &quot;authors&quot; collection.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[98] = r'''
 <pre><code>// Join books with authors collection
 db.books.aggregate([
   { $lookup: {
@@ -4789,15 +4103,9 @@ db.authors.createIndex({ _id: 1 })   // already there by default</code></pre>
   <li><code>$match</code> upstream to reduce input volume before joining.</li>
   <li>For frequent joins, consider embedding the looked-up data into the source document &mdash; MongoDB rewards designing for access patterns.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q99">
-  <div class="qa__number">Question 99</div>
-  <h3 class="qa__question">Write a query to add a new review to a book and ensure the &quot;reviews&quot; array is not null.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[99] = r'''
 <pre><code>// Push a review and ensure reviews array exists (using $push)
 db.books.updateOne(
   { _id: bookId },
@@ -4858,15 +4166,9 @@ db.books.updateOne(
 </ul>
 
 <p>For high-volume reviews, model in a separate collection &mdash; embedded arrays with thousands of elements degrade write performance because every update rewrites the whole document.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q100">
-  <div class="qa__number">Question 100</div>
-  <h3 class="qa__question">Write an aggregation pipeline to calculate the average &quot;rating&quot; for each book and sort the results by average rating.</h3>
-  <div class="qa__answer">
-    
+ANSWERS[100] = r'''
 <pre><code>// Average rating per book + sort by it
 db.books.aggregate([
   { $project: {
@@ -4928,27 +4230,4 @@ db.books.aggregate([
   <li><strong>For real-time leaderboards</strong>, maintain Redis sorted sets keyed by book ID, with the average rating as the score. MongoDB stores ground truth; Redis serves hot reads.</li>
   <li><strong>Modern alternative</strong>: <strong>MongoDB Atlas Search</strong>&rsquo;s <code>function</code> scoring lets you blend relevance, recency, and rating into a single search ranking signal.</li>
 </ul>
-
-    
-  </div>
-</article>
-
-    <nav class="chapter-nav" aria-label="Chapter navigation">
-      <a class="chapter-nav__prev" href="mongodb-basic.html">
-      <span class="chapter-nav__dir">← Previous</span>
-      <span class="chapter-nav__title">MongoDB — Basic</span>
-    </a>
-      <a class="chapter-nav__next" href="mongodb-advanced.html">
-      <span class="chapter-nav__dir">Next →</span>
-      <span class="chapter-nav__title">MongoDB — Advanced</span>
-    </a>
-    </nav>
-
-  </section>
-
-</main>
-</div>
-
-<script src="../assets/script.js"></script>
-</body>
-</html>
+'''

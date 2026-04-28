@@ -39,7 +39,9 @@ MySQL and MongoDB parallel each other nicely — many questions are about analog
   - [x] **MySQL Advanced (100 Q)** &mdash; 2026-04-27
   - [x] **MySQL Scenario Based (100 Q)** &mdash; 2026-04-28
   - [x] **MongoDB Basic (100 Q)** &mdash; 2026-04-28
-- MongoDB Coding, Advanced, Scenario Based (300 Q) ← next
+  - [x] **MongoDB Coding (100 Q)** &mdash; 2026-04-28
+  - [x] **MongoDB Advanced (100 Q)** &mdash; 2026-04-28
+- MongoDB Scenario Based (100 Q) ← next
 
 **Total:** 800 answers.
 
