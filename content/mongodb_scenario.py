@@ -2373,3 +2373,7016 @@ db.hotels.find({
 
 <p><strong>Production polish:</strong> for serious hotel inventory, integrate a global distribution system (<strong>Sabre</strong>, <strong>Amadeus</strong>, <strong>Travelport</strong>) or channel manager (<strong>SiteMinder</strong>, <strong>Cloudbeds</strong>) &mdash; never source pricing/availability from your own DB alone; payments via <strong>Stripe</strong> with manual capture (authorize at booking, capture at check-in); fraud detection via <strong>Stripe Radar</strong> or <strong>Sift</strong>; geo search beyond simple radius needs <strong>PostGIS</strong> or <strong>Tile38</strong>; reviews moderated via <strong>Perspective API</strong>; transactional emails (confirmations, reminders) via <strong>Postmark</strong>/<strong>Resend</strong>; analytics on conversion funnels via <strong>Amplitude</strong>; consider <strong>idempotency keys</strong> on booking POST to defeat double-clicks and retries.</p>
 '''
+
+
+ANSWERS[26] = r'''
+<p><strong>Situation:</strong> a production replica set must survive node failure with zero data loss for committed writes and minimal application downtime. Reads should ideally continue during a primary failover.</p>
+
+<p><strong>Approach:</strong> deploy <strong>three data-bearing nodes</strong> across availability zones &mdash; never two-node + arbiter, which is fragile. Configure <code>w: "majority"</code> for writes and a sensible read preference per workload. The driver handles automatic retry on transient errors.</p>
+
+<pre><code>// Replica set initiation
+rs.initiate({
+  _id: "rs0",
+  members: [
+    { _id: 0, host: "mongo-a.prod:27017", priority: 2 },   // preferred primary
+    { _id: 1, host: "mongo-b.prod:27017", priority: 1 },
+    { _id: 2, host: "mongo-c.prod:27017", priority: 1 }
+  ]
+});
+
+// Inspect status
+rs.status();           // members[].stateStr: PRIMARY | SECONDARY | RECOVERING
+rs.printSecondaryReplicationInfo();
+
+// Driver connection string &mdash; list ALL members; driver discovers topology
+const uri = "mongodb://mongo-a.prod,mongo-b.prod,mongo-c.prod/app" +
+            "?replicaSet=rs0&amp;retryWrites=true&amp;w=majority&amp;readConcernLevel=majority";
+
+// Per-operation read preference for stale-tolerant reads
+db.collection("products").find({ active: true })
+  .readPref("secondaryPreferred", [{ region: "us-east" }]);
+
+// Force a manual stepdown for maintenance (60s freeze)
+rs.stepDown(60);</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table>
+<thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead>
+<tbody>
+<tr><td><code>w: "majority"</code></td><td>Write isn&rsquo;t lost on primary failure</td><td><code>w: 1</code> &mdash; faster but loses committed writes on rollback</td></tr>
+<tr><td>Three data nodes (no arbiter)</td><td>Arbiters can&rsquo;t serve reads; can&rsquo;t hold majority alone &mdash; <code>{w: "majority", j: true}</code> may stall</td><td>P-S-A: cheaper but risky; only for prototypes</td></tr>
+<tr><td><code>retryWrites=true</code></td><td>Transient blips during failover are auto-retried</td><td>App retries: more code; easy to miss edge cases</td></tr>
+<tr><td>Cross-AZ deployment</td><td>One AZ outage doesn&rsquo;t take down quorum</td><td>Single AZ &mdash; cheap but a single AZ failure = full outage</td></tr>
+<tr><td>Priority on preferred node</td><td>Predictable post-failover topology</td><td>Equal priority &mdash; election picks arbitrarily</td></tr>
+</tbody>
+</table>
+
+<p><strong>Production polish:</strong> use <strong>MongoDB Atlas</strong> &mdash; replica sets are managed, AZ placement is automatic, point-in-time restore is built in. Monitor replication lag via <strong>Atlas alerts</strong> or <strong>Datadog</strong> / <strong>New Relic</strong>; lag &gt;10s typically signals primary write saturation. Use the <strong>MongoDB Kubernetes Operator</strong> for self-hosted; <strong>Percona PMM</strong> for observability outside Atlas. Test failover regularly with chaos drills (<strong>Gremlin</strong>, <strong>AWS FIS</strong>) &mdash; an untested failover plan is a hope. Application-level circuit breakers (<strong>Resilience4j</strong>, <strong>opossum</strong>) shed load gracefully when MongoDB is unreachable. For multi-region writes, evaluate <strong>Atlas Global Clusters</strong> with zoned sharding rather than cross-region replica sets, which suffer from latency-bound write throughput.</p>
+'''
+
+ANSWERS[27] = r'''
+<p><strong>Situation:</strong> a location-based service (food delivery, ride-sharing, &ldquo;nearby&rdquo; search) needs to find points of interest within a radius, sort them by distance, and stay sub-100ms even at millions of POIs.</p>
+
+<p><strong>Approach:</strong> store coordinates as GeoJSON <code>Point</code> in a dedicated field, build a <strong>2dsphere index</strong>, and use <code>$geoNear</code> (in aggregation, returns distance) or <code>$nearSphere</code> (in <code>find()</code>). 2dsphere uses spherical Earth math &mdash; meters as the natural unit.</p>
+
+<pre><code>// Document shape &mdash; coordinates are [longitude, latitude] (NOT lat, lng)
+db.restaurants.insertOne({
+  _id:    ObjectId(),
+  name:   "Pizza Place",
+  cuisine:"italian",
+  rating: 4.5,
+  location: { type: "Point", coordinates: [-73.9857, 40.7484] },  // Times Square
+  active: true,
+  open_until_minutes: 1380   // 23:00 in minutes from midnight
+});
+
+// Index: 2dsphere + filterable secondary fields
+db.restaurants.createIndex({ location: "2dsphere", cuisine: 1, active: 1 });
+
+// Find restaurants within 1km, sorted by distance, returning the distance
+db.restaurants.aggregate([
+  { $geoNear: {
+      near:          { type: "Point", coordinates: [-73.9857, 40.7484] },
+      distanceField: "distance_meters",
+      maxDistance:   1000,                              // meters
+      spherical:     true,
+      query:         { active: true, cuisine: "italian" }
+  }},
+  { $limit: 20 }
+]);
+
+// "Within polygon" query &mdash; e.g., delivery zone
+db.restaurants.find({
+  location: { $geoWithin: {
+    $geometry: {
+      type: "Polygon",
+      coordinates: [[[-74.0, 40.7], [-73.9, 40.7], [-73.9, 40.8], [-74.0, 40.8], [-74.0, 40.7]]]
+    }
+  }}
+});
+
+// Drivers tracking moving objects: store + update every 10-30s
+db.drivers.updateOne(
+  { _id: driverId },
+  { $set: { location: { type: "Point", coordinates: [lng, lat] }, updated_at: new Date() } }
+);</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table>
+<thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead>
+<tbody>
+<tr><td>2dsphere over 2d</td><td>Spherical Earth math; meters as unit; works at poles/dateline</td><td>2d &mdash; flat-plane only, deprecated for new apps</td></tr>
+<tr><td>$geoNear (pipeline)</td><td>Returns distance, supports complex chained stages</td><td>$nearSphere (find) &mdash; no distance, fewer post-stages</td></tr>
+<tr><td>Filter inside <code>query</code></td><td>2dsphere index narrows by both location AND filter</td><td>Filter after &mdash; index only narrows by location</td></tr>
+<tr><td>GeoJSON point format</td><td>Standard; works with all modern tools</td><td>Legacy <code>[lng, lat]</code> field &mdash; works but less interop</td></tr>
+<tr><td>Coordinates [lng, lat]</td><td>GeoJSON spec mandates this order &mdash; the universal source of bugs</td><td>Don&rsquo;t reorder &mdash; you&rsquo;ll always regret it</td></tr>
+</tbody>
+</table>
+
+<p><strong>Production polish:</strong> for high-update moving fleets (every-second driver location), MongoDB struggles &mdash; use <strong>Tile38</strong> or <strong>Redis with GEO commands</strong> for the hot path and persist snapshots back to MongoDB. For complex polygon ops (intersections, buffers, ST_Union), <strong>PostGIS</strong> on PostgreSQL is far more capable. <strong>H3</strong> (Uber&rsquo;s hexagonal grid) is the modern way to bucket geo data into cells for analytics. Mapping/visualization: <strong>Mapbox</strong>, <strong>MapTiler</strong>, <strong>Google Maps Platform</strong>. <strong>Atlas Search</strong> supports geo too &mdash; combine text + geo queries cleanly. Always set a <code>maxDistance</code> &mdash; without it, the query scans the entire dataset sorted by distance. For ETA calculations, never haversine in JS &mdash; call <strong>Mapbox Directions</strong>, <strong>Google Routes</strong>, <strong>HERE</strong>, or <strong>Valhalla</strong>.</p>
+'''
+
+ANSWERS[28] = r'''
+<p><strong>Situation:</strong> a 200M-document <code>users</code> collection needs a schema change &mdash; renaming a field, splitting an embedded doc out, or normalizing a denormalized array. Direct <code>updateMany</code> would lock the collection for hours and bloat the oplog.</p>
+
+<p><strong>Approach:</strong> apply <strong>backwards-compatible</strong> changes in stages: dual-write to both shapes, lazy-migrate on read, batch-migrate the rest in chunks during off-peak, then remove the old shape. Never a big-bang.</p>
+
+<pre><code>// Stage 0: deploy app code that READS both shapes
+function readUser(doc) {
+  // New shape preferred; fall back to old shape
+  return {
+    name: doc.name ?? `${doc.first_name} ${doc.last_name}`,
+    email: doc.email
+  };
+}
+
+// Stage 1: deploy app code that WRITES both shapes
+db.users.updateOne(
+  { _id: userId },
+  {
+    $set: {
+      name:       newName,
+      first_name: firstFromName(newName),    // backfill old shape
+      last_name:  lastFromName(newName)
+    }
+  }
+);
+
+// Stage 2: backfill in chunks (run in maintenance window)
+const cursor = db.users.find({ name: { $exists: false } }).batchSize(500);
+let count = 0;
+for await (const doc of cursor) {
+  await db.users.updateOne(
+    { _id: doc._id },
+    [
+      { $set: {
+          name: { $concat: ["$first_name", " ", "$last_name"] },
+          schema_version: 2
+      }}
+    ]
+  );
+  if (++count % 500 === 0) await sleep(50);   // pace replication
+}
+
+// Stage 3: deploy app code that READS new shape only
+
+// Stage 4: deploy app code that WRITES new shape only
+
+// Stage 5: cleanup &mdash; remove old fields
+db.users.updateMany(
+  { schema_version: 2 },
+  { $unset: { first_name: "", last_name: "" } }
+);
+db.users.dropIndex("first_name_1");
+db.users.dropIndex("last_name_1");</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table>
+<thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead>
+<tbody>
+<tr><td>Six-stage rollout</td><td>Each step is reversible; no &ldquo;all or nothing&rdquo; risk</td><td>Big-bang &mdash; if it fails halfway you&rsquo;re stuck</td></tr>
+<tr><td>Schema version field</td><td>Identifies migrated docs; idempotent re-runs</td><td>No version &mdash; can&rsquo;t resume after a crash</td></tr>
+<tr><td>Pipeline-form update</td><td>Compute new value from existing fields server-side</td><td>Read-then-write &mdash; race condition between read and update</td></tr>
+<tr><td>Batched chunks</td><td>Avoids lock contention; bounds replication lag</td><td>Single <code>updateMany({})</code> &mdash; oplog floods, secondaries lag minutes</td></tr>
+<tr><td><code>batchSize(500)</code> + sleep</td><td>Caps pressure on the primary</td><td>Unbounded scan &mdash; can starve user traffic</td></tr>
+</tbody>
+</table>
+
+<p><strong>Production polish:</strong> use <strong>Atlas Migration Service</strong> for managed cluster moves; for self-hosted, <strong>mongosync</strong> handles online cluster-to-cluster replication. Track migration progress with a stats collection (<code>{ phase, total, migrated, errors_count }</code>) updated every batch. Run on a <strong>secondary</strong> with <code>readPreference: "secondaryPreferred"</code> if read traffic suffers. Add a kill switch (a config doc the migration script polls) so on-call can stop it instantly. <strong>JSON Schema validation</strong> at the collection level enforces the new shape after stage 5. For trickier transformations, evaluate <strong>Debezium</strong> + <strong>Kafka</strong> to stream changes to a parallel collection while you cut over. Always test the full migration on a <strong>restored production snapshot</strong> first &mdash; staging data never has the same edge cases as prod.</p>
+'''
+
+ANSWERS[29] = r'''
+<p><strong>Situation:</strong> a SaaS dashboard needs to show real-time metrics &mdash; signups, revenue, active users, error rates &mdash; with sub-second response times even as raw event volume hits millions per day.</p>
+
+<p><strong>Approach:</strong> separate <strong>raw events</strong> from <strong>pre-aggregated rollups</strong>. Events flow into a time-series collection. A scheduled <code>$merge</code> aggregation rolls up to per-minute, per-hour, per-day buckets. The dashboard queries the rollup collection &mdash; never the raw stream.</p>
+
+<pre><code>// Raw events &mdash; time-series collection (5.0+) auto-buckets internally
+db.createCollection("events", {
+  timeseries: { timeField: "ts", metaField: "meta", granularity: "seconds" }
+});
+db.events.insertOne({
+  ts: new Date(),
+  meta: { type: "signup", tenant_id: "acme", region: "us-east" },
+  user_id: ObjectId(),
+  metadata: { plan: "pro" }
+});
+
+// Per-minute rollup (run every minute via cron / Atlas Trigger)
+db.events.aggregate([
+  { $match: { ts: { $gte: lastMinuteStart, $lt: thisMinuteStart } } },
+  { $group: {
+      _id: {
+        minute:    { $dateTrunc: { date: "$ts", unit: "minute" } },
+        type:      "$meta.type",
+        tenant_id: "$meta.tenant_id"
+      },
+      count:    { $sum: 1 },
+      revenue:  { $sum: { $ifNull: ["$metadata.amount_cents", 0] } }
+  }},
+  { $merge: {
+      into: "metrics_minute",
+      on:   ["_id"],
+      whenMatched:    "replace",
+      whenNotMatched: "insert"
+  }}
+]);
+
+// Per-hour rollup &mdash; from per-minute (cheap)
+db.metrics_minute.aggregate([
+  { $match: { "_id.minute": { $gte: lastHourStart, $lt: thisHourStart } } },
+  { $group: {
+      _id: {
+        hour:      { $dateTrunc: { date: "$_id.minute", unit: "hour" } },
+        type:      "$_id.type",
+        tenant_id: "$_id.tenant_id"
+      },
+      count:   { $sum: "$count" },
+      revenue: { $sum: "$revenue" }
+  }},
+  { $merge: { into: "metrics_hour", on: ["_id"], whenMatched: "replace", whenNotMatched: "insert" } }
+]);
+
+// Indexes for fast dashboard queries
+db.metrics_minute.createIndex({ "_id.tenant_id": 1, "_id.minute": -1 });
+db.metrics_hour.createIndex({ "_id.tenant_id": 1, "_id.hour": -1 });
+
+// Dashboard query: last 24h hourly revenue
+db.metrics_hour.find({
+  "_id.tenant_id": "acme",
+  "_id.type":      "purchase",
+  "_id.hour":      { $gte: ISODate(new Date() - 24*3600*1000) }
+}).sort({ "_id.hour": 1 });</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table>
+<thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead>
+<tbody>
+<tr><td>Time-series collection</td><td>Auto-buckets, ~5x compression, built-in TTL</td><td>Regular collection &mdash; bigger index, slower scans</td></tr>
+<tr><td>Pre-aggregated tiers</td><td>Dashboard queries hit small collection; sub-100ms</td><td>Live aggregation &mdash; seconds-to-minutes per query</td></tr>
+<tr><td>Rollup-from-rollup</td><td>Hour from minute is cheap; day from hour is cheap</td><td>Each tier from raw &mdash; recomputes everything</td></tr>
+<tr><td>$dateTrunc grouping</td><td>5.0+ feature; handles timezone, DST correctly</td><td>$year/$month/$day chains &mdash; verbose, error-prone</td></tr>
+<tr><td>$merge replace</td><td>Re-runnable; recovers from missed runs cleanly</td><td>$out &mdash; replaces whole collection, loses other tenants&rsquo; data</td></tr>
+</tbody>
+</table>
+
+<p><strong>Production polish:</strong> for sub-second, true-real-time (single-event latency), pair MongoDB with <strong>Redis</strong> counters or <strong>ClickHouse</strong> for OLAP queries that span billions of rows. <strong>MongoDB Atlas Charts</strong> renders the dashboard directly from the rollup collection &mdash; no app server needed. <strong>Atlas Triggers</strong> schedule the rollups; alternatives are <strong>Inngest</strong>, <strong>Trigger.dev</strong>, <strong>Temporal</strong>, or a Kubernetes <strong>CronJob</strong>. Stream raw events through <strong>Apache Kafka</strong> or <strong>AWS Kinesis</strong> for buffering at scale &mdash; MongoDB then becomes the materialized sink. For complex BI dashboards (cohorts, funnels, retention), copy events to a warehouse: <strong>BigQuery</strong>, <strong>Snowflake</strong>, <strong>Databricks</strong>, or <strong>Tinybird</strong> (purpose-built for fast analytics over event streams).</p>
+'''
+
+ANSWERS[30] = r'''
+<p><strong>Situation:</strong> a feed-style or table-style UI lists posts/orders/events from a collection of millions, sorted by recency, with infinite scroll. Naive <code>skip(N).limit(P)</code> degrades linearly &mdash; page 1000 is unusable.</p>
+
+<p><strong>Approach:</strong> use <strong>cursor-based pagination</strong>. The client passes back the last item&rsquo;s sort key; the next query is <code>{ sort_key: { $lt: last_value } }</code>. The query stays O(P) regardless of page depth.</p>
+
+<pre><code>// Schema: posts sorted by created_at desc
+db.posts.createIndex({ created_at: -1, _id: -1 });   // tie-breaker for ties
+
+// Page 1 &mdash; no cursor
+const page1 = await db.posts.find({})
+  .sort({ created_at: -1, _id: -1 })
+  .limit(20)
+  .toArray();
+
+// Send to client + last item&rsquo;s cursor
+const lastItem = page1[page1.length - 1];
+const next_cursor = {
+  created_at: lastItem.created_at,
+  _id:        lastItem._id
+};
+
+// Page 2 &mdash; continue strictly past the last item
+const page2 = await db.posts.find({
+  $or: [
+    { created_at: { $lt: next_cursor.created_at } },
+    { created_at: next_cursor.created_at, _id: { $lt: next_cursor._id } }
+  ]
+})
+.sort({ created_at: -1, _id: -1 })
+.limit(20)
+.toArray();
+
+// Encode cursor for safe URL transport (base64 of JSON)
+const encoded = Buffer.from(JSON.stringify(next_cursor)).toString("base64url");
+// /api/posts?cursor=eyJjcmVhdGVkX2F0IjoiMjAyNi0wNC0yNyJ9
+
+// Filtered + paginated &mdash; index covers everything
+db.posts.createIndex({ author_id: 1, created_at: -1, _id: -1 });
+db.posts.find({
+  author_id: authorId,
+  $or: [
+    { created_at: { $lt: cursor.created_at } },
+    { created_at: cursor.created_at, _id: { $lt: cursor._id } }
+  ]
+}).sort({ created_at: -1, _id: -1 }).limit(20);</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table>
+<thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead>
+<tbody>
+<tr><td>Cursor over skip/limit</td><td>O(page_size); page 1000 is as fast as page 1</td><td>skip(N) &mdash; scans N docs every page; degrades linearly</td></tr>
+<tr><td>Compound (sort_key, _id)</td><td>Resolves ties when multiple docs share the same timestamp</td><td>sort_key alone &mdash; same-timestamp items can be skipped or duplicated</td></tr>
+<tr><td>Index direction matches sort</td><td>No SORT stage; index streams in order</td><td>Mismatch &mdash; in-memory sort, fails over 100MB</td></tr>
+<tr><td>Filter inside index prefix</td><td>ESR: equality first, then sort</td><td>Filter after sort &mdash; can&rsquo;t use index efficiently</td></tr>
+<tr><td>Encode cursor opaquely</td><td>Hides DB shape; lets you change schema later</td><td>Plain JSON in URL &mdash; coupling clients to internals</td></tr>
+</tbody>
+</table>
+
+<p><strong>Production polish:</strong> cursor pagination doesn&rsquo;t support &ldquo;jump to page 47&rdquo; &mdash; that&rsquo;s a UX choice, not a tech limitation. For numbered pagination at moderate depth, hybrid approach: deep pages funnel to search/filter UI. For total-count display, keep an estimated count via <code>estimatedDocumentCount()</code> or a separate counter document &mdash; never <code>countDocuments({})</code> on every page. Backend: implement consistent cursor encoding via <strong>Relay&rsquo;s</strong> spec (forward+backward cursors, <code>hasNextPage</code>, <code>hasPreviousPage</code>) for clean GraphQL APIs. For full-text search results pagination, use <strong>Atlas Search&rsquo;s</strong> <code>searchAfter</code> token &mdash; it understands relevance scoring. <strong>HTTP caching</strong> with <code>Cache-Control: private</code> for first pages of stable feeds. Bots and SEO need <code>rel="next"</code>/<code>rel="prev"</code> link headers; or render a sitemap. Watch for &ldquo;phantom items&rdquo; &mdash; new posts inserted between page loads can cause skips; mitigate with snapshot timestamps in the cursor.</p>
+'''
+
+ANSWERS[31] = r'''
+<p><strong>Situation:</strong> an app needs to attach many tags to many documents (articles, photos, products) &mdash; a classic many-to-many. Filter by tag, find related docs, count usage per tag, suggest popular tags.</p>
+
+<p><strong>Approach:</strong> embed tags as a string array on the document (<em>denormalized</em>) for fast read+filter; maintain a separate <code>tags</code> collection for canonical metadata, usage counts, and autocomplete; multikey index on the array for index-backed lookups.</p>
+
+<pre><code>// Documents embed tag slugs (lowercase, normalized)
+db.articles.insertOne({
+  _id:        ObjectId(),
+  title:      "Why MongoDB is great",
+  body:       "...",
+  author_id:  ObjectId(),
+  tags:       ["mongodb", "databases", "nosql", "tutorial"],
+  created_at: new Date()
+});
+
+// Multikey index over tags &mdash; one entry per tag value per doc
+db.articles.createIndex({ tags: 1, created_at: -1 });
+
+// Canonical tags collection &mdash; metadata, counts, slugs
+db.tags.insertOne({
+  _id:           "mongodb",                    // lowercase slug as _id
+  display_name:  "MongoDB",
+  description:   "NoSQL document database",
+  usage_count:   1247,                         // denormalized for ranking
+  related_tags:  ["nosql", "databases"],
+  created_at:    new Date()
+});
+db.tags.createIndex({ usage_count: -1 });
+db.tags.createIndex({ display_name: "text" });   // for autocomplete
+
+// Find articles with ANY of these tags
+db.articles.find({ tags: { $in: ["mongodb", "redis"] } }).sort({ created_at: -1 });
+
+// Find articles tagged with ALL of these tags
+db.articles.find({ tags: { $all: ["mongodb", "tutorial"] } });
+
+// Atomic add tag (idempotent &mdash; no duplicates)
+async function addTag(articleId, tag) {
+  const session = client.startSession();
+  await session.withTransaction(async () =&gt; {
+    const result = await db.collection("articles").updateOne(
+      { _id: articleId, tags: { $ne: tag } },
+      { $addToSet: { tags: tag } },
+      { session }
+    );
+    if (result.modifiedCount === 1) {
+      await db.collection("tags").updateOne(
+        { _id: tag },
+        {
+          $inc: { usage_count: 1 },
+          $setOnInsert: { display_name: tag, created_at: new Date() }
+        },
+        { upsert: true, session }
+      );
+    }
+  });
+}
+
+// Top 10 tags
+db.tags.find().sort({ usage_count: -1 }).limit(10);
+
+// Tag autocomplete (Atlas Search recommended; here&rsquo;s the basic version)
+db.tags.find({ display_name: /^mong/i }).sort({ usage_count: -1 }).limit(10);
+
+// Drift correction: rebuild usage counts (nightly)
+db.articles.aggregate([
+  { $unwind: "$tags" },
+  { $group:  { _id: "$tags", count: { $sum: 1 } } },
+  { $merge:  { into: "tags", on: "_id", whenMatched: [{ $set: { usage_count: "$$new.count" } }] } }
+]);</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table>
+<thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead>
+<tbody>
+<tr><td>Embed tag slugs in doc</td><td>One read returns doc + tags; index-backed filtering</td><td>Junction collection &mdash; needs $lookup for every read</td></tr>
+<tr><td>Separate <code>tags</code> collection</td><td>Owns metadata, count, related-tag links</td><td>Compute on-the-fly &mdash; expensive for autocomplete</td></tr>
+<tr><td>Slug as <code>_id</code></td><td>Lookups by slug = primary-key lookup</td><td>ObjectId + slug field &mdash; extra index, more memory</td></tr>
+<tr><td>Transactional count update</td><td>Doc tags and tag count stay consistent</td><td>Async &mdash; counts drift; need periodic reconciliation</td></tr>
+<tr><td>$addToSet over $push</td><td>Idempotent; same tag never duplicates</td><td>$push &mdash; duplicates appear after retry</td></tr>
+</tbody>
+</table>
+
+<p><strong>Production polish:</strong> for autocomplete with typo tolerance and ranking, <strong>MongoDB Atlas Search</strong> with <code>autocomplete</code> operator and edge-n-gram analyzers far outperforms regex. Alternatives: <strong>Algolia</strong>, <strong>Meilisearch</strong>, <strong>Typesense</strong>, <strong>Elasticsearch</strong>. For tag suggestions (&ldquo;people who tagged X also tagged Y&rdquo;), compute a co-occurrence matrix nightly via aggregation and store top related tags on each tag doc. Slug normalization should happen on input: lowercase, strip whitespace, replace spaces with <code>-</code>, remove non-ASCII or <strong>slugify</strong> them. Banned/reserved tags (profanity, spam) live in a <code>banned_tags</code> collection checked on creation. For tag clouds and faceted UI, expose a <code>/api/tags?prefix=mong&amp;limit=10</code> endpoint backed by Atlas Search. <strong>Soft-delete</strong> tags (don&rsquo;t hard-delete) so historical articles still render their tag context.</p>
+'''
+
+ANSWERS[32] = r'''
+<p><strong>Situation:</strong> a healthcare app stores patients, doctors, and appointments. PHI must be encrypted; appointments need conflict-free booking; doctors view their schedule; patients view their visit history; HIPAA dictates audit trails on every access.</p>
+
+<p><strong>Approach:</strong> three primary collections with carefully chosen denormalization. Encrypt PHI fields with <strong>Queryable Encryption</strong>. Booking goes through a transaction to prevent double-bookings. Every read/write is logged to an immutable audit collection.</p>
+
+<pre><code>// patients &mdash; PHI encrypted client-side via Queryable Encryption (7.0+)
+db.patients.insertOne({
+  _id:           ObjectId(),
+  external_id:   "PAT-00012",                       // safe to query unencrypted
+  first_name:    encryptedClient.encrypt("Alice"),  // encrypted
+  last_name:     encryptedClient.encrypt("Smith"),  // encrypted
+  dob:           encryptedClient.encrypt(ISODate("1990-05-12")),  // encrypted, range queryable
+  ssn_last4:     encryptedClient.encrypt("1234"),   // encrypted, equality queryable
+  insurance: { provider: "BCBS", member_id: "M123456" },
+  primary_doctor_id: ObjectId(),
+  created_at:    new Date()
+});
+db.patients.createIndex({ external_id: 1 }, { unique: true });
+db.patients.createIndex({ primary_doctor_id: 1 });
+
+// doctors &mdash; npis, specialty, availability
+db.doctors.insertOne({
+  _id:        ObjectId(),
+  npi:        "1234567890",                       // unique national provider id
+  name:       "Dr. Jane Doe",
+  specialty:  "cardiology",
+  active:     true,
+  schedule_template: {                            // weekly recurring availability
+    monday:    [{ start: "09:00", end: "12:00" }, { start: "14:00", end: "17:00" }],
+    tuesday:   [{ start: "09:00", end: "17:00" }]
+  }
+});
+db.doctors.createIndex({ npi: 1 }, { unique: true });
+db.doctors.createIndex({ specialty: 1, active: 1 });
+
+// appointments &mdash; reference both, snapshot key fields
+db.appointments.insertOne({
+  _id:         ObjectId(),
+  patient_id:  ObjectId(),
+  doctor_id:   ObjectId(),
+  start:       ISODate("2026-05-15T14:00:00Z"),
+  end:         ISODate("2026-05-15T14:30:00Z"),
+  status:      "scheduled",  // scheduled | completed | cancelled | no_show
+  reason:      encryptedClient.encrypt("annual physical"),
+  patient_snapshot: { name: "Alice S.", external_id: "PAT-00012" },
+  created_at:  new Date()
+});
+db.appointments.createIndex({ doctor_id: 1, start: 1 }, { unique: true });   // no double-book
+db.appointments.createIndex({ patient_id: 1, start: -1 });
+
+// Booking with transaction &mdash; atomic conflict check
+async function book(patientId, doctorId, start, end) {
+  const session = client.startSession();
+  await session.withTransaction(async () =&gt; {
+    const overlap = await db.collection("appointments").findOne({
+      doctor_id: doctorId,
+      status:    { $ne: "cancelled" },
+      start:     { $lt: end },
+      end:       { $gt: start }
+    }, { session });
+    if (overlap) throw new Error("Doctor unavailable at requested time");
+
+    await db.collection("appointments").insertOne({
+      _id: new ObjectId(),
+      patient_id: patientId, doctor_id: doctorId,
+      start, end, status: "scheduled",
+      created_at: new Date()
+    }, { session });
+
+    await db.collection("audit_log").insertOne({
+      action:     "appointment.create",
+      actor_id:   currentUser._id,
+      patient_id: patientId,
+      doctor_id:  doctorId,
+      ts:         new Date()
+    }, { session });
+  });
+}</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table>
+<thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead>
+<tbody>
+<tr><td>Queryable Encryption</td><td>HIPAA-grade encryption; equality + range still work</td><td>Plaintext &mdash; non-compliant; client-decrypt-and-filter &mdash; slow</td></tr>
+<tr><td>Unique (doctor_id, start)</td><td>DB-enforced no-double-book at the index level</td><td>App-only check &mdash; race condition unless transaction</td></tr>
+<tr><td>Snapshot patient name on appt</td><td>List view doesn&rsquo;t need a $lookup; survives renames</td><td>Live $lookup &mdash; slower, fragile if patient deleted</td></tr>
+<tr><td>Three collections</td><td>Each grows independently; clean access patterns</td><td>Embed appointments inside patients/doctors &mdash; bounded array problem</td></tr>
+<tr><td>Audit log in transaction</td><td>Every PHI access logged atomically</td><td>Async logging &mdash; missed audits on app crash</td></tr>
+</tbody>
+</table>
+
+<p><strong>Production polish:</strong> healthcare requires <strong>HIPAA</strong> compliance: BAAs with <strong>MongoDB Atlas</strong>, <strong>AWS</strong>/<strong>GCP</strong>/<strong>Azure</strong>, end-to-end encryption (CSFLE / Queryable Encryption), audit trails on every PHI access. Authentication via <strong>Auth0</strong>, <strong>Okta</strong>, or <strong>WorkOS</strong> with MFA mandatory. <strong>Drata</strong>/<strong>Vanta</strong>/<strong>Secureframe</strong> automate compliance evidence collection. For real clinical scheduling, integrate with EHRs via <strong>FHIR</strong> APIs (<strong>Redox</strong>, <strong>1up Health</strong>); reminder/notification workflows via <strong>Twilio</strong> SMS, <strong>SendGrid</strong>/<strong>Postmark</strong> email; telehealth via <strong>Twilio Video</strong>, <strong>Daily.co</strong>, or <strong>Zoom Healthcare</strong>. Calendar sync needs <strong>Google Calendar API</strong> / <strong>Microsoft Graph</strong>; consent management via <strong>OneTrust</strong>. Backups: point-in-time restore via <strong>Atlas Backup</strong> with retention matching HIPAA&rsquo;s 6-year minimum.</p>
+'''
+
+ANSWERS[33] = r'''
+<p><strong>Situation:</strong> a single-replica-set deployment hits the wall &mdash; working set exceeds RAM, write throughput saturates the primary, or storage hits cluster limits. The collection needs to be split across multiple shards.</p>
+
+<p><strong>Approach:</strong> pick a shard key that <strong>distributes writes evenly</strong> AND <strong>matches the dominant read patterns</strong>. Pre-split chunks before bulk loads. Plan ahead: a bad shard key is hard to fix and may need <code>reshardCollection</code>.</p>
+
+<pre><code>// Enable sharding for the database
+sh.enableSharding("ecommerce");
+
+// BAD shard keys
+//  - { _id: 1 }              all-new writes hit the highest chunk &mdash; hot shard
+//  - { created_at: 1 }       same; monotonically increasing = single hot shard
+//  - { country: 1 }          low cardinality &mdash; few chunks, can&rsquo;t balance
+
+// GOOD shard keys (5.0+ supports compound hashed)
+sh.shardCollection("ecommerce.orders", { user_id: "hashed" });          // even by user
+sh.shardCollection("ecommerce.events", { tenant_id: 1, ts: 1 });        // co-locate per tenant
+sh.shardCollection("ecommerce.posts",  { author_id: "hashed", _id: 1 });// hashed prefix for distribution
+
+// Pre-split for bulk loads
+sh.splitAt("ecommerce.orders", { user_id: NumberLong("1000000000") });
+sh.splitAt("ecommerce.orders", { user_id: NumberLong("2000000000") });
+
+// Query patterns &mdash; targeted vs scatter-gather
+//   Targeted (uses shard key)
+db.orders.find({ user_id: ObjectId("...") });   // hits 1 shard
+
+//   Scatter-gather (no shard key in filter)
+db.orders.find({ status: "paid" });              // hits ALL shards &mdash; expensive
+
+// Reshard if you picked badly (5.0+) &mdash; runs online
+db.adminCommand({
+  reshardCollection: "ecommerce.orders",
+  key: { user_id: "hashed" }
+});
+// Monitor:
+db.adminCommand({ currentOp: 1, "command.reshardCollection": { $exists: true } });
+
+// Zone sharding (5.0+) &mdash; pin data to regions for compliance
+sh.addShardTag("shard-eu", "EU");
+sh.addShardTag("shard-us", "US");
+sh.updateZoneKeyRange("ecommerce.users",
+  { region: "EU", _id: MinKey }, { region: "EU", _id: MaxKey }, "EU");
+sh.shardCollection("ecommerce.users", { region: 1, _id: 1 });
+
+// Inspect distribution
+db.orders.getShardDistribution();
+sh.status();</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table>
+<thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead>
+<tbody>
+<tr><td>Hashed shard key</td><td>Even distribution even on monotonic IDs</td><td>Range &mdash; intuitive but hot-shards on time-ordered inserts</td></tr>
+<tr><td>Compound (tenant_id, ts)</td><td>Per-tenant queries are targeted to one shard</td><td>Single-field key &mdash; cross-tenant queries scatter-gather</td></tr>
+<tr><td>Pre-split before bulk load</td><td>Avoids initial-load hot-shard while balancer catches up</td><td>Auto-split &mdash; first load floods one shard</td></tr>
+<tr><td>Filter on shard key in queries</td><td>Targeted queries hit one shard; sub-100ms</td><td>No shard key &mdash; scatter-gather; latency multiplied</td></tr>
+<tr><td>Zone sharding for compliance</td><td>GDPR data stays in EU shards physically</td><td>App-level partition &mdash; risk of misrouted writes</td></tr>
+</tbody>
+</table>
+
+<p><strong>Production polish:</strong> sharding is a one-way decision &mdash; un-sharding is hard. Always benchmark first: profile your current bottleneck (storage, RAM, write throughput, network) and confirm sharding solves it. Often the answer is <strong>vertical scaling</strong>, <strong>better indexes</strong>, or <strong>archiving cold data</strong> via <strong>Atlas Online Archive</strong>. Use <strong>MongoDB Atlas</strong> for managed sharded clusters &mdash; balancer tuning, chunk migration, and config-server quorum are all hands-off. Self-hosted: <strong>MongoDB Kubernetes Operator</strong> handles config servers and mongos routing. Watch for <strong>jumbo chunks</strong> (chunks too big to migrate) &mdash; they pin a shard at high storage and require manual splits or shard-key fixes. <strong>Cluster-to-Cluster Sync</strong> migrates data between clusters with shard key changes. <strong>Atlas Performance Advisor</strong> recommends compound shard keys based on observed query patterns.</p>
+'''
+
+ANSWERS[34] = r'''
+<p><strong>Situation:</strong> the app needs to react to changes &mdash; refresh a cache, trigger a workflow, fan out to webhooks, push to a search index, or sync to a warehouse. Polling is wasteful; tailing the oplog directly is fragile.</p>
+
+<p><strong>Approach:</strong> use <strong>change streams</strong> &mdash; the official, replica-set-aware tail of the oplog with resume tokens, schema-friendly events, and pipeline filtering. Persist the resume token after each batch so a restart picks up where it left off.</p>
+
+<pre><code>// Watch a single collection (resumable)
+const stream = db.collection("orders").watch([
+  { $match: { operationType: { $in: ["insert", "update"] } } },
+  { $match: { "fullDocument.status": "paid" } }   // pre/post-image filter
+], {
+  fullDocument:               "updateLookup",        // include current doc
+  fullDocumentBeforeChange:   "whenAvailable",       // include pre-image (6.0+)
+  resumeAfter:                lastSavedToken         // restart from here
+});
+
+for await (const event of stream) {
+  await handleOrderPaid(event.fullDocument);
+  await saveResumeToken(event._id);                   // persist after success
+}
+
+// Configure pre/post-images on the collection (6.0+)
+db.runCommand({
+  collMod: "orders",
+  changeStreamPreAndPostImages: { enabled: true }
+});
+
+// Watch the entire database
+const dbStream = db.watch();
+
+// Watch the entire deployment
+const allStream = client.watch();
+
+// Aggregation in the pipeline &mdash; reshape events
+const stream2 = db.collection("orders").watch([
+  { $match: { operationType: "update" } },
+  { $project: {
+      orderId:  "$documentKey._id",
+      ts:       "$clusterTime",
+      changed:  "$updateDescription.updatedFields"
+  }}
+]);
+
+// Resume token storage pattern
+async function saveResumeToken(token) {
+  await db.collection("change_stream_state").updateOne(
+    { _id: "orders_processor" },
+    { $set: { resume_token: token, updated_at: new Date() } },
+    { upsert: true }
+  );
+}
+async function loadResumeToken() {
+  const state = await db.collection("change_stream_state").findOne({ _id: "orders_processor" });
+  return state?.resume_token;
+}</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table>
+<thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead>
+<tbody>
+<tr><td>Change stream over poll</td><td>Sub-second latency; no extra DB load</td><td>Polling &mdash; misses fast updates; constant index scans</td></tr>
+<tr><td>Persist resume token</td><td>Resume after consumer restart without missing events</td><td>Re-tail from now &mdash; loses events during downtime</td></tr>
+<tr><td><code>fullDocument: "updateLookup"</code></td><td>Get the current doc, not just the diff</td><td>Diff only &mdash; consumer must $lookup itself</td></tr>
+<tr><td>Pre-image with <code>whenAvailable</code></td><td>Compute deltas (e.g., status changed from X to Y)</td><td>No pre-image &mdash; can&rsquo;t detect &ldquo;changed FROM&rdquo; conditions</td></tr>
+<tr><td>Pipeline filter on stream</td><td>Server-side filter cuts wire traffic</td><td>Client-side filter &mdash; consumer wastes CPU on noise</td></tr>
+</tbody>
+</table>
+
+<p><strong>Production polish:</strong> change streams require a <strong>replica set</strong> &mdash; standalone deployments can&rsquo;t emit them. The oplog window must exceed your worst-case consumer downtime &mdash; size <code>oplogSize</code> for a 24-48h buffer at peak write rates. For high-throughput downstream pipelines, use the <strong>Debezium MongoDB connector</strong> to stream into <strong>Kafka</strong>, then fan out to consumers; or <strong>Atlas Triggers</strong> (managed Lambda-style functions). Kafka topics buffer minutes-to-days of events with strong delivery guarantees, eliminating the &ldquo;consumer slow, oplog rolled over&rdquo; risk. For cache invalidation, drive <strong>Redis</strong>/<strong>Dragonfly</strong>/<strong>KeyDB</strong> from the stream. For search index sync, drive <strong>Elasticsearch</strong>/<strong>Atlas Search</strong>/<strong>Meilisearch</strong>. For warehouse sync, route to <strong>BigQuery</strong>/<strong>Snowflake</strong>/<strong>Databricks</strong> via <strong>Fivetran</strong>, <strong>Airbyte</strong>, or <strong>Estuary</strong>. Monitor consumer lag &mdash; if events arrive faster than processing, queue depth grows unbounded; alert on lag &gt;30s.</p>
+'''
+
+ANSWERS[35] = r'''
+<p><strong>Situation:</strong> users upload files (avatars, attachments, exports) and retrieve them later. Files range from 5KB icons to 200MB documents. The system must scale to terabytes, serve uploads/downloads efficiently, and survive node loss.</p>
+
+<p><strong>Approach:</strong> for files &lt;1MB, store in a <code>files</code> collection as <code>BinData</code> (or base64). For files &gt;1MB, use <strong>object storage</strong> (S3/GCS/R2) with metadata in MongoDB. <strong>GridFS</strong> is the MongoDB-native middle ground but rarely the right answer in 2026 &mdash; object storage wins on cost and throughput.</p>
+
+<pre><code>// Pattern A &mdash; small files inline (under ~1MB)
+db.files.insertOne({
+  _id:        ObjectId(),
+  user_id:    ObjectId(),
+  name:       "avatar.png",
+  mime:       "image/png",
+  size_bytes: 12453,
+  data:       BinData(0, base64Bytes),       // BSON BinData
+  uploaded_at: new Date()
+});
+
+// Pattern B (recommended) &mdash; metadata in Mongo, blob in object storage
+db.files.insertOne({
+  _id:         ObjectId(),
+  user_id:     ObjectId(),
+  name:        "report-2026-q1.pdf",
+  mime:        "application/pdf",
+  size_bytes:  5_242_880,
+  storage:     { provider: "s3", bucket: "app-uploads", key: "reports/abc123.pdf" },
+  checksum:    "sha256:abc...",
+  visibility:  "private",
+  uploaded_at: new Date()
+});
+db.files.createIndex({ user_id: 1, uploaded_at: -1 });
+
+// Direct upload via presigned URL &mdash; client-to-S3, no app server bottleneck
+async function getUploadUrl(userId, filename, mime) {
+  const key = `users/${userId}/${crypto.randomUUID()}-${filename}`;
+  const url = await s3.getSignedUrl("putObject", {
+    Bucket: "app-uploads",
+    Key: key,
+    ContentType: mime,
+    Expires: 300                           // 5-minute URL
+  });
+  return { upload_url: url, key };
+}
+
+// After upload, client confirms; app records metadata
+await db.collection("files").insertOne({
+  user_id, name: filename, mime,
+  storage: { provider: "s3", bucket: "app-uploads", key },
+  uploaded_at: new Date()
+});
+
+// Download via presigned URL too &mdash; same approach in reverse
+async function getDownloadUrl(fileId, requestor) {
+  const f = await db.collection("files").findOne({ _id: fileId });
+  if (!canRead(f, requestor)) throw new Error("Forbidden");
+  return s3.getSignedUrl("getObject", {
+    Bucket: f.storage.bucket,
+    Key:    f.storage.key,
+    Expires: 60
+  });
+}
+
+// Pattern C &mdash; GridFS (only when you need DB-only deployment)
+const bucket = new GridFSBucket(db, { bucketName: "files" });
+fs.createReadStream("./report.pdf").pipe(
+  bucket.openUploadStream("report.pdf", { metadata: { user_id } })
+);</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table>
+<thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead>
+<tbody>
+<tr><td>Object storage + Mongo metadata</td><td>Cheap, scales to PB, CDN-friendly</td><td>BinData/GridFS &mdash; bloats DB; slow restores</td></tr>
+<tr><td>Presigned URLs</td><td>App server isn&rsquo;t in the upload/download path</td><td>Stream through app &mdash; bandwidth cap; slower</td></tr>
+<tr><td>Checksum on metadata</td><td>Detects corruption; idempotent re-upload</td><td>Trust storage &mdash; bit rot is rare but real</td></tr>
+<tr><td>Short-lived presigned URLs</td><td>Limits exposure if URL leaks</td><td>Long-lived &mdash; harder to revoke</td></tr>
+<tr><td>GridFS only when single-system</td><td>Avoids extra deps for tiny deployments</td><td>Always GridFS &mdash; more expensive than S3 above ~10GB</td></tr>
+</tbody>
+</table>
+
+<p><strong>Production polish:</strong> use <strong>Cloudflare R2</strong> (no egress fees), <strong>AWS S3</strong>, <strong>GCP Cloud Storage</strong>, or <strong>Backblaze B2</strong> for object storage. Front with <strong>CloudFront</strong>, <strong>Cloudflare CDN</strong>, or <strong>Bunny.net</strong> for global download speed. Image processing on the fly via <strong>Cloudinary</strong>, <strong>imgix</strong>, or <strong>Cloudflare Images</strong>; videos via <strong>Mux</strong>, <strong>Cloudflare Stream</strong>, <strong>Bunny Stream</strong>. Virus scanning before allowing access: <strong>ClamAV</strong>, <strong>VirusTotal</strong>, or <strong>AWS GuardDuty Malware Protection</strong>. EXIF scrubbing for user uploads to protect privacy. Encryption: enable <strong>SSE-S3</strong> (default), or <strong>SSE-KMS</strong> for per-tenant keys. Lifecycle rules archive cold files to <strong>Glacier</strong>/<strong>Coldline</strong>. For HIPAA/PCI workloads, <strong>S3 Object Lock</strong> (WORM) provides immutable audit-grade storage. Direct upload SDKs: <strong>Uppy</strong>, <strong>FilePond</strong>, <strong>tus</strong> for resumable uploads of large files.</p>
+'''
+
+ANSWERS[36] = r'''
+<p><strong>Situation:</strong> a music streaming app needs users, playlists, songs (with artists/albums), and play history. Heavy reads on browse, profile, and playlist pages; writes concentrate on play events and playlist edits.</p>
+
+<p><strong>Approach:</strong> four primary collections with strategic denormalization. Songs reference artists/albums by ID but cache common display fields. Playlists embed song refs (capped at thousands) with snapshot metadata. Play events go to a separate time-series collection.</p>
+
+<pre><code>// Songs &mdash; canonical track metadata
+db.songs.insertOne({
+  _id:           ObjectId(),
+  title:         "Never Gonna Give You Up",
+  artist_id:     ObjectId(),
+  artist_name:   "Rick Astley",                 // denormalized for display
+  album_id:      ObjectId(),
+  album_name:    "Whenever You Need Somebody",  // denormalized
+  duration_sec:  213,
+  isrc:          "GBARL8703001",                // industry standard
+  storage:       { provider: "s3", key: "tracks/abc.flac" },
+  preview_url:   "https://cdn.app/preview/abc.mp3",
+  release_date:  ISODate("1987-07-27"),
+  genres:        ["pop", "synth-pop"],
+  popularity:    87
+});
+db.songs.createIndex({ artist_id: 1, release_date: -1 });
+db.songs.createIndex({ title: "text", artist_name: "text" });
+db.songs.createIndex({ popularity: -1 });
+
+// Artists
+db.artists.insertOne({
+  _id: ObjectId(),
+  name: "Rick Astley",
+  bio: "British singer...",
+  monthly_listeners: 12_000_000,
+  image_url: "https://cdn.app/artists/abc.jpg"
+});
+
+// Playlists &mdash; embed song refs with snapshot
+db.playlists.insertOne({
+  _id:    ObjectId(),
+  user_id: ObjectId(),
+  name:   "Workout Mix",
+  description: "...",
+  visibility: "public",                // public | private | unlisted
+  cover_url:  "https://cdn.app/playlists/abc.jpg",
+  song_count: 42,                      // denormalized count
+  duration_sec: 9_840,                 // denormalized total
+  songs: [
+    {
+      song_id:     ObjectId(),
+      title:       "Never Gonna Give You Up",  // snapshot
+      artist_name: "Rick Astley",              // snapshot
+      duration_sec: 213,
+      added_at:    new Date()
+    }
+  ],
+  follower_count: 0,
+  created_at: new Date(),
+  updated_at: new Date()
+});
+db.playlists.createIndex({ user_id: 1, updated_at: -1 });
+db.playlists.createIndex({ visibility: 1, follower_count: -1 });
+
+// Add song to playlist (atomic)
+db.playlists.updateOne(
+  { _id: playlistId, user_id: userId },
+  {
+    $push: { songs: songSnapshot },
+    $inc:  { song_count: 1, duration_sec: songSnapshot.duration_sec },
+    $set:  { updated_at: new Date() }
+  }
+);
+
+// Play events &mdash; time-series
+db.createCollection("plays", {
+  timeseries: { timeField: "ts", metaField: "user_id", granularity: "minutes" },
+  expireAfterSeconds: 90 * 24 * 3600         // keep 90 days for analytics
+});
+db.plays.insertOne({
+  ts:        new Date(),
+  user_id:   ObjectId(),
+  song_id:   ObjectId(),
+  artist_id: ObjectId(),
+  context:   { type: "playlist", id: ObjectId() },
+  duration_listened_sec: 187,
+  completed: false
+});
+
+// Recently played (use most recent N)
+db.plays.find({ user_id: userId }).sort({ ts: -1 }).limit(50);
+
+// Top songs this week
+db.plays.aggregate([
+  { $match: { ts: { $gte: thisWeekStart } } },
+  { $group: { _id: "$song_id", plays: { $sum: 1 } } },
+  { $sort:  { plays: -1 } },
+  { $limit: 100 }
+]);</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table>
+<thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead>
+<tbody>
+<tr><td>Embed song snapshots in playlist</td><td>Render playlist in one read; survives song deletion</td><td>$lookup on every render &mdash; slow at scale</td></tr>
+<tr><td>Denormalize artist_name on song</td><td>Search/list views skip the artist join</td><td>Always join &mdash; expensive on large feeds</td></tr>
+<tr><td>Time-series for plays</td><td>5x compression; fast time-bucketed analytics</td><td>Regular collection &mdash; bloats, slow scans</td></tr>
+<tr><td>Cap playlist size (e.g., 10k songs)</td><td>Embedded array stays manageable</td><td>Unbounded &mdash; doc-size limit eventually hit</td></tr>
+<tr><td>Drift via periodic resync</td><td>Snapshots stay reasonably fresh on artist rename</td><td>Real-time sync &mdash; expensive, often unnecessary</td></tr>
+</tbody>
+</table>
+
+<p><strong>Production polish:</strong> audio storage in <strong>Cloudflare R2</strong>/<strong>S3</strong>; transcoding via <strong>AWS MediaConvert</strong>, <strong>Mux</strong>, or <strong>Cloudflare Stream</strong>. Adaptive bitrate streaming via <strong>HLS</strong> or <strong>DASH</strong>; DRM via <strong>Widevine</strong>/<strong>FairPlay</strong>/<strong>PlayReady</strong>. CDN essential &mdash; <strong>Cloudflare</strong>, <strong>Fastly</strong>, <strong>BunnyCDN</strong>. Search beyond text: <strong>MongoDB Atlas Search</strong> with synonyms (Beyonc&eacute; ↔ B&eacute;yonc&eacute;), or <strong>Algolia</strong>/<strong>Elasticsearch</strong>. Recommendations: collaborative filtering via <strong>Apache Spark</strong>/<strong>Snowflake ML</strong>; vector embeddings of audio in <strong>Atlas Vector Search</strong>, <strong>Pinecone</strong>, or <strong>Qdrant</strong>. Music identification: <strong>Shazam API</strong>, <strong>ACRCloud</strong>. Royalty tracking: every play event must persist for licensing audits &mdash; archive to <strong>S3 + Athena</strong> or <strong>BigQuery</strong>. Real-time &ldquo;listening together&rdquo; / live-sync features via <strong>Pusher</strong>, <strong>Ably</strong>, or <strong>Liveblocks</strong>. Industry-standard metadata sources: <strong>MusicBrainz</strong>, <strong>Spotify API</strong>, <strong>Apple Music API</strong>.</p>
+'''
+
+ANSWERS[37] = r'''
+<p><strong>Situation:</strong> users edit a shared document simultaneously &mdash; Google-Docs-style. Edits must merge without conflicts, sub-100ms latency, with cursor presence and history.</p>
+
+<p><strong>Approach:</strong> MongoDB stores the <strong>document state and operation history</strong>; the live merge happens in a CRDT/OT layer like <strong>Yjs</strong> or <strong>Automerge</strong>. WebSockets handle the realtime channel. MongoDB persists periodic snapshots and the operation log for replay.</p>
+
+<pre><code>// Documents &mdash; one per editable artifact
+db.docs.insertOne({
+  _id:        ObjectId(),
+  title:      "Q4 Plan",
+  owner_id:   ObjectId(),
+  collaborators: [
+    { user_id: ObjectId(), role: "editor" },
+    { user_id: ObjectId(), role: "viewer" }
+  ],
+  state_blob: BinData(0, yjsStateAsBytes),    // CRDT state snapshot
+  state_vector: BinData(0, yjsVectorAsBytes), // for diff sync
+  version:    142,                             // monotonic
+  updated_at: new Date()
+});
+db.docs.createIndex({ owner_id: 1, updated_at: -1 });
+
+// Operations log &mdash; capped collection or time-series
+db.createCollection("doc_ops", {
+  timeseries: { timeField: "ts", metaField: "doc_id", granularity: "seconds" },
+  expireAfterSeconds: 30 * 24 * 3600
+});
+db.doc_ops.insertOne({
+  ts:      new Date(),
+  doc_id:  ObjectId(),
+  user_id: ObjectId(),
+  op:      BinData(0, yjsUpdateBytes),    // single CRDT update
+  version_after: 143
+});
+
+// Snapshot the CRDT state periodically (every 100 ops or 1 minute)
+async function snapshot(docId) {
+  const ydoc = await loadFromOps(docId);
+  const state = Y.encodeStateAsUpdate(ydoc);
+  await db.collection("docs").updateOne(
+    { _id: docId },
+    { $set: { state_blob: state, version: ydoc.version, updated_at: new Date() } }
+  );
+}
+
+// Presence &mdash; ephemeral; never persist
+// Use Pusher / Ably / Liveblocks / your own WebSocket gateway
+
+// Permission check before applying any op (server-side)
+async function applyOp(docId, userId, opBytes) {
+  const doc = await db.collection("docs").findOne({
+    _id: docId,
+    "collaborators.user_id": userId,
+    "collaborators.role":    { $in: ["editor", "owner"] }
+  });
+  if (!doc) throw new Error("Forbidden");
+
+  await db.collection("doc_ops").insertOne({
+    ts: new Date(), doc_id: docId, user_id: userId,
+    op: opBytes, version_after: doc.version + 1
+  });
+
+  await db.collection("docs").updateOne(
+    { _id: docId, version: doc.version },
+    { $inc: { version: 1 }, $set: { updated_at: new Date() } }
+  );
+  // Broadcast to other connected clients via WebSocket
+}
+
+// Recover doc state on load: snapshot + replay ops since version
+async function loadDoc(docId) {
+  const doc = await db.collection("docs").findOne({ _id: docId });
+  const ydoc = new Y.Doc();
+  Y.applyUpdate(ydoc, doc.state_blob);
+  const opsSince = await db.collection("doc_ops").find({
+    doc_id: docId, version_after: { $gt: doc.version }
+  }).sort({ ts: 1 }).toArray();
+  for (const o of opsSince) Y.applyUpdate(ydoc, o.op);
+  return ydoc;
+}</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table>
+<thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead>
+<tbody>
+<tr><td>CRDT (Yjs/Automerge) for merge</td><td>Mathematically conflict-free; offline-friendly</td><td>OT &mdash; complex server logic; Server-side merge &mdash; not offline-tolerant</td></tr>
+<tr><td>Mongo for state + ops</td><td>Durable storage; query history</td><td>Pure in-memory &mdash; lost on crash; no audit</td></tr>
+<tr><td>Snapshots + op log</td><td>Fast load; full history if needed</td><td>Replay all ops &mdash; slow for long-lived docs</td></tr>
+<tr><td>Time-series doc_ops</td><td>Compressed, auto-bucketed, TTL purge</td><td>Regular collection &mdash; bigger, no built-in retention</td></tr>
+<tr><td>Permission check on every op</td><td>Server enforces access; client can&rsquo;t bypass</td><td>Client-side only &mdash; trivially exploitable</td></tr>
+</tbody>
+</table>
+
+<p><strong>Production polish:</strong> use <strong>Liveblocks</strong>, <strong>Yjs + y-websocket</strong>, <strong>PartyKit</strong>, or <strong>Convex</strong> as the realtime + CRDT layer; MongoDB stores the durable record. <strong>Hocuspocus</strong> is a server framework specifically for Yjs persistence. WebSocket transport via <strong>Pusher</strong>, <strong>Ably</strong>, <strong>Cloudflare Durable Objects</strong>, or <strong>Soketi</strong>. Presence cursors / typing indicators are ephemeral &mdash; don&rsquo;t persist them; use Redis or a memory-only channel. Conflict-free editing implies idempotent application of ops; ensure your op format includes a unique ID for dedup. Version control / branch + merge: <strong>Automerge</strong> shines; <strong>Yjs</strong> is excellent for plain-text and structured docs. Rich-text editors: <strong>TipTap</strong>, <strong>Lexical</strong>, <strong>BlockNote</strong>, <strong>ProseMirror</strong> all integrate with Yjs. AI assistance (suggest edits): stream completions from <strong>Anthropic Claude</strong>, <strong>OpenAI</strong>, or <strong>Mistral</strong> against the current doc state &mdash; never apply directly, always confirm. For 50+ concurrent editors per doc, scale WebSocket gateways horizontally with <strong>Redis Pub/Sub</strong> or <strong>NATS</strong> as the inter-server channel.</p>
+'''
+
+ANSWERS[38] = r'''
+<p><strong>Situation:</strong> a multi-tenant SaaS app needs RBAC &mdash; users belong to organizations with roles (admin, editor, viewer), permissions cascade from role to action, and resources have owners. The check must run on every request in &lt;5ms.</p>
+
+<p><strong>Approach:</strong> store roles as named documents with explicit permission lists. User membership is denormalized onto the user record for fast lookup. Resource ownership is checked separately. The permission check is a single doc lookup &mdash; no joins on the hot path.</p>
+
+<pre><code>// roles &mdash; small, mostly static
+db.roles.insertOne({
+  _id:         "admin",
+  description: "Full org control",
+  permissions: [
+    "user.invite", "user.remove", "user.view",
+    "billing.view", "billing.update",
+    "doc.create", "doc.update", "doc.delete", "doc.view",
+    "settings.update"
+  ]
+});
+db.roles.insertOne({
+  _id: "editor",
+  permissions: ["doc.create", "doc.update", "doc.view", "user.view"]
+});
+db.roles.insertOne({
+  _id: "viewer",
+  permissions: ["doc.view", "user.view"]
+});
+
+// users &mdash; embed memberships for fast permission checks
+db.users.insertOne({
+  _id:         ObjectId(),
+  email:       "alice@example.com",
+  email_verified: true,
+  memberships: [
+    { org_id: ObjectId("o1"), role: "admin",  joined_at: new Date() },
+    { org_id: ObjectId("o2"), role: "editor", joined_at: new Date() }
+  ],
+  created_at:  new Date()
+});
+db.users.createIndex({ email: 1 }, { unique: true });
+db.users.createIndex({ "memberships.org_id": 1 });
+
+// Permission check &mdash; single read of the user&rsquo;s memberships, then role lookup
+async function can(userId, orgId, permission) {
+  const user = await db.collection("users").findOne(
+    { _id: userId, "memberships.org_id": orgId },
+    { projection: { "memberships.$": 1 } }
+  );
+  if (!user || !user.memberships?.[0]) return false;
+  const role = await db.collection("roles").findOne({ _id: user.memberships[0].role });
+  return role?.permissions.includes(permission) ?? false;
+}
+
+// Cache the role permissions in app memory (roles rarely change)
+const ROLE_CACHE = new Map();   // role_id -> Set(permissions)
+async function loadRoles() {
+  const roles = await db.collection("roles").find().toArray();
+  for (const r of roles) ROLE_CACHE.set(r._id, new Set(r.permissions));
+}
+
+// Now the permission check is one DB read + one Set lookup &mdash; sub-1ms
+async function canFast(userId, orgId, permission) {
+  const user = await db.collection("users").findOne(
+    { _id: userId },
+    { projection: { memberships: 1 } }
+  );
+  const m = user?.memberships?.find(x =&gt; x.org_id.equals(orgId));
+  if (!m) return false;
+  return ROLE_CACHE.get(m.role)?.has(permission) ?? false;
+}
+
+// Resource-scoped permission &mdash; resource has explicit ACL
+db.docs.findOne({
+  _id: docId,
+  $or: [
+    { owner_id: userId },
+    { "shared_with.user_id": userId, "shared_with.role": { $in: ["editor", "viewer"] } }
+  ]
+});</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table>
+<thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead>
+<tbody>
+<tr><td>Roles as named docs</td><td>One source of truth; easy to add permissions</td><td>Hardcoded in app &mdash; deployment to change permissions</td></tr>
+<tr><td>Memberships embedded on user</td><td>Single read for permission check</td><td>Separate memberships collection &mdash; extra lookup</td></tr>
+<tr><td>App-level role cache</td><td>Sub-millisecond checks; roles rarely change</td><td>DB read every check &mdash; latency adds up at scale</td></tr>
+<tr><td>Resource ACL alongside RBAC</td><td>Owners and explicit shares without role bloat</td><td>Roles per resource &mdash; explosion of role docs</td></tr>
+<tr><td>Separate from auth</td><td>Identity (who) decoupled from authorization (what)</td><td>Bundled &mdash; harder to swap identity providers</td></tr>
+</tbody>
+</table>
+
+<p><strong>Production polish:</strong> for fine-grained authorization (per-document, per-field, conditional rules), evaluate <strong>SpiceDB</strong> (Google Zanzibar-style), <strong>OpenFGA</strong>, <strong>Cerbos</strong>, or <strong>Permify</strong> &mdash; purpose-built authorization services with sub-millisecond checks and policy languages. They make MongoDB the data store and authorization the separate concern. For identity, use <strong>Auth0</strong>, <strong>Okta</strong>, <strong>WorkOS</strong>, <strong>Clerk</strong>, <strong>Stack Auth</strong>, or <strong>Supabase Auth</strong>; integrate via OIDC/SAML for enterprise SSO. Audit every permission decision: who-checked-what-for-which-resource at-what-time, into a separate immutable collection or stream to <strong>Datadog</strong>/<strong>Splunk</strong>. For B2B SaaS, expose a <strong>SCIM</strong> endpoint for enterprise customer&rsquo;s IdP to provision/deprovision users automatically. Multi-tenancy isolation: ensure every query filters by <code>org_id</code> &mdash; consider middleware that enforces this at the data-access layer (Mongoose hooks, Prisma extensions). Test the permission matrix with property-based tests: for every (role, resource, action) combo, assert allow/deny matches the spec.</p>
+'''
+
+ANSWERS[39] = r'''
+<p><strong>Situation:</strong> a CMS for a publication needs articles, authors, and categories. Editors draft, schedule, publish. Public site reads must be sub-100ms even at thousands of articles per author. Categories nest 3-4 levels deep.</p>
+
+<p><strong>Approach:</strong> three collections. Articles embed author and category snapshots for read-fast rendering. Categories use the array-of-ancestors pattern for cheap subtree queries. Drafts and published versions live in the same collection with a <code>status</code> field.</p>
+
+<pre><code>// Authors
+db.authors.insertOne({
+  _id:        ObjectId(),
+  slug:       "jane-doe",
+  name:       "Jane Doe",
+  bio:        "Senior writer covering...",
+  avatar_url: "https://cdn.app/authors/jane.jpg",
+  social:     { twitter: "@janedoe", linkedin: "..." },
+  created_at: new Date()
+});
+db.authors.createIndex({ slug: 1 }, { unique: true });
+
+// Categories &mdash; tree via ancestors array
+db.categories.insertOne({
+  _id:       "tech",
+  name:      "Tech",
+  slug:      "tech",
+  ancestors: [],
+  parent:    null
+});
+db.categories.insertOne({
+  _id:       "tech-databases",
+  name:      "Databases",
+  slug:      "tech/databases",
+  ancestors: ["tech"],
+  parent:    "tech"
+});
+
+// Articles &mdash; snapshot author & category for fast read
+db.articles.insertOne({
+  _id:    ObjectId(),
+  slug:   "why-mongodb-rocks",
+  title:  "Why MongoDB Rocks in 2026",
+  excerpt: "A practical look at modern MongoDB...",
+  body:   "...full markdown or HTML body...",
+  status: "published",                      // draft | scheduled | published | archived
+  author: { _id: ObjectId(), slug: "jane-doe", name: "Jane Doe" },     // snapshot
+  categories: [
+    { _id: "tech",          slug: "tech",          name: "Tech" },
+    { _id: "tech-databases", slug: "tech/databases", name: "Databases" }
+  ],
+  tags:        ["mongodb", "nosql", "tutorial"],
+  cover_image: { url: "https://cdn.app/covers/x.jpg", alt: "..." },
+  published_at: new Date(),
+  scheduled_at: null,
+  word_count:  1850,
+  reading_time_min: 7,
+  view_count:  0,
+  created_at:  new Date(),
+  updated_at:  new Date()
+});
+
+// Critical indexes for the public site
+db.articles.createIndex({ status: 1, published_at: -1 });
+db.articles.createIndex({ slug: 1 }, { unique: true });
+db.articles.createIndex({ "author._id": 1, published_at: -1 });
+db.articles.createIndex({ "categories._id": 1, published_at: -1 });
+db.articles.createIndex({ tags: 1, published_at: -1 });
+db.articles.createIndex({ title: "text", body: "text", excerpt: "text" });
+
+// Public homepage feed &mdash; latest published articles
+db.articles.find({ status: "published", published_at: { $lte: new Date() } })
+  .sort({ published_at: -1 })
+  .limit(20)
+  .project({ slug:1, title:1, excerpt:1, "author.name":1, "author.slug":1, cover_image:1, published_at:1 });
+
+// Articles in a category subtree (any descendant)
+db.articles.find({
+  status: "published",
+  "categories._id": { $in: ["tech", "tech-databases", "tech-cloud"] }
+}).sort({ published_at: -1 });
+
+// Schedule a publication
+db.articles.updateOne(
+  { _id: articleId, status: "draft" },
+  { $set: { status: "scheduled", scheduled_at: ISODate("2026-05-01T08:00:00Z") } }
+);
+
+// Publish-on-time job (every minute)
+db.articles.updateMany(
+  { status: "scheduled", scheduled_at: { $lte: new Date() } },
+  [ { $set: { status: "published", published_at: "$scheduled_at" } } ]
+);
+
+// View count &mdash; throttle async
+db.articles.updateOne(
+  { _id: articleId },
+  { $inc: { view_count: 1 } },
+  { writeConcern: { w: 0 } }                     // fire-and-forget
+);</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table>
+<thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead>
+<tbody>
+<tr><td>Snapshot author/category in article</td><td>List/feed renders without joins</td><td>$lookup &mdash; slower; fragile if author renamed</td></tr>
+<tr><td>Same collection for drafts/published</td><td>Single source; revision is a status flip</td><td>Separate drafts collection &mdash; double schema, sync bugs</td></tr>
+<tr><td>Ancestors array on categories</td><td>One-shot subtree query</td><td>$graphLookup &mdash; works but slower per request</td></tr>
+<tr><td>Slug as queryable + unique</td><td>Pretty URLs; SEO-friendly</td><td>Use _id in URL &mdash; ugly, opaque</td></tr>
+<tr><td>Periodic snapshot drift correction</td><td>Author name change refreshed via batch job</td><td>Sync on every edit &mdash; high write amplification</td></tr>
+</tbody>
+</table>
+
+<p><strong>Production polish:</strong> for editorial workflows, use a headless CMS shell &mdash; <strong>Strapi</strong>, <strong>Payload CMS</strong>, <strong>Sanity</strong>, <strong>Contentful</strong>, or <strong>Builder.io</strong> &mdash; many can use MongoDB as their backing store. Render publicly via <strong>Next.js</strong> with ISR / SSG and revalidate on publish; or <strong>Astro</strong> for content-heavy sites; deploy to <strong>Vercel</strong>/<strong>Netlify</strong>/<strong>Cloudflare Pages</strong>. Image pipeline: <strong>Cloudinary</strong>/<strong>imgix</strong>/<strong>Cloudflare Images</strong> for responsive variants. Search beyond <code>$text</code>: <strong>Atlas Search</strong> (BM25, fuzzy, autocomplete), <strong>Algolia</strong> for instant search UX. Editor: <strong>TipTap</strong>, <strong>Lexical</strong>, <strong>BlockNote</strong>, <strong>Notion-like</strong> blocks. Comments: <strong>Disqus</strong>, <strong>Hyvor Talk</strong>, <strong>Giscus</strong>. Newsletter: <strong>Buttondown</strong>, <strong>ConvertKit</strong>, <strong>Mailchimp</strong>. Analytics: <strong>Plausible</strong>, <strong>Umami</strong>, <strong>Fathom</strong>; <strong>PostHog</strong> for product analytics. SEO: structured data (JSON-LD <code>Article</code> schema), sitemap, RSS, OpenGraph; <strong>Ahrefs</strong>/<strong>SEMrush</strong> for keyword research.</p>
+'''
+
+ANSWERS[40] = r'''
+<p><strong>Situation:</strong> the app must store and retrieve files from kilobytes (avatars) up to gigabytes (videos, datasets). Throughput, cost, and operational simplicity all matter.</p>
+
+<p><strong>Approach:</strong> the right pattern is rarely &ldquo;all in MongoDB&rdquo;. Tier by file size: tiny inline; small-to-medium in object storage with metadata in MongoDB; only use <strong>GridFS</strong> when the deployment <em>must</em> avoid an external storage dependency.</p>
+
+<pre><code>// Tier 1: tiny files inline (under ~256KB &mdash; e.g., avatars, icons)
+db.assets.insertOne({
+  _id:   ObjectId(),
+  name:  "avatar.png",
+  mime:  "image/png",
+  size:  12453,
+  data:  BinData(0, base64Data)
+});
+
+// Tier 2 (recommended): metadata in Mongo + blob in object storage
+db.files.insertOne({
+  _id:        ObjectId(),
+  user_id:    ObjectId(),
+  name:       "training-dataset.csv",
+  mime:       "text/csv",
+  size_bytes: 3_500_000_000,                     // 3.5 GB
+  storage:    { provider: "s3", bucket: "app-data", key: "datasets/x/train.csv" },
+  checksum:   "sha256:...",
+  uploaded_at: new Date()
+});
+
+// Tier 3: GridFS &mdash; ONLY when external storage isn&rsquo;t available
+const bucket = new GridFSBucket(db, { bucketName: "files", chunkSizeBytes: 1024*1024 });
+
+// Upload via streaming
+fs.createReadStream("./video.mp4").pipe(
+  bucket.openUploadStream("video.mp4", {
+    metadata: { user_id: userId, mime: "video/mp4" }
+  })
+).on("finish", () =&gt; console.log("done"));
+
+// Stream download &mdash; never load whole file into memory
+res.setHeader("Content-Type", "video/mp4");
+bucket.openDownloadStreamByName("video.mp4").pipe(res);
+
+// GridFS uses two collections: files.chunks (the binary) and files.files (metadata)
+db["files.files"].find({ "metadata.user_id": userId });
+db["files.chunks"].count({ files_id: gridFsId });   // chunks per file
+
+// Direct upload pattern with object storage (preferred)
+async function getUploadUrl(userId, name, mime) {
+  const key = `users/${userId}/${randomUUID()}-${name}`;
+  const url = await s3.getSignedUrl("putObject", {
+    Bucket: "app-data", Key: key, ContentType: mime, Expires: 600
+  });
+  return { upload_url: url, key };
+}
+
+// Resumable / chunked uploads via tus protocol (large files)
+// Server: tusd or tus-node-server; client: Uppy
+// On completion, app server records metadata in db.files.
+
+// Multipart upload to S3 directly (built-in, parallel, resumable)
+const multipart = await s3.createMultipartUpload({ Bucket, Key }).promise();
+// upload parts in parallel; complete with their ETags
+
+// CDN URL for serving
+function downloadUrl(file) {
+  if (file.storage.provider === "s3") {
+    return `https://cdn.app.com/${file.storage.key}`;   // CloudFront-fronted
+  }
+}</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table>
+<thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead>
+<tbody>
+<tr><td>Object storage over GridFS</td><td>Cheaper per GB; CDN-friendly; faster restores</td><td>GridFS &mdash; bloats DB; slow backup/restore</td></tr>
+<tr><td>Streaming reads/writes</td><td>Bounded memory; works on huge files</td><td>Read whole file &mdash; OOM on multi-GB</td></tr>
+<tr><td>Direct upload to S3</td><td>App server isn&rsquo;t in the bandwidth path</td><td>Stream through app &mdash; bottleneck; egress cost</td></tr>
+<tr><td>Checksum on metadata</td><td>Detect corruption; idempotent re-upload</td><td>Trust storage &mdash; bit rot real but rare</td></tr>
+<tr><td>Resumable for large files</td><td>3GB upload doesn&rsquo;t restart on flaky network</td><td>Single PUT &mdash; user retries from byte zero</td></tr>
+</tbody>
+</table>
+
+<p><strong>Production polish:</strong> use <strong>Cloudflare R2</strong> (zero egress fees), <strong>AWS S3</strong>, <strong>GCP Cloud Storage</strong>, <strong>Backblaze B2</strong>, or <strong>MinIO</strong> (self-hosted S3-compatible) for blob storage. Front with <strong>CloudFront</strong>, <strong>Cloudflare CDN</strong>, <strong>Fastly</strong>, or <strong>Bunny.net</strong> for global delivery. Image pipelines: <strong>Cloudinary</strong>, <strong>imgix</strong>, <strong>Cloudflare Images</strong> for resize/format/quality on demand. Video: <strong>Mux</strong>, <strong>Cloudflare Stream</strong>, <strong>Bunny Stream</strong>, <strong>Bitmovin</strong> for transcoding + adaptive streaming + DRM. Resumable uploads: <strong>Uppy</strong> + <strong>tus</strong>; or use S3 multipart upload directly. Lifecycle: archive cold files to <strong>S3 Glacier</strong>/<strong>GCP Coldline</strong> after 90 days; <strong>S3 Object Lock</strong> for WORM/compliance retention. Virus scanning: <strong>ClamAV</strong>, <strong>VirusTotal</strong>, <strong>AWS GuardDuty Malware Protection</strong>. EXIF/metadata scrubbing: do it on upload to prevent privacy leaks. Encryption: SSE-S3 by default; SSE-KMS for per-tenant keys; client-side encryption for zero-trust.</p>
+'''
+
+ANSWERS[41] = r'''
+<p><strong>Situation:</strong> a customer support system has tickets, agents, and conversations. SLAs by priority, ownership transfers, customer + agent visibility, full conversation history, attachments. Bursty load when an outage hits.</p>
+
+<p><strong>Approach:</strong> tickets are the parent doc with embedded message thread (capped) plus a separate <code>messages</code> collection for unbounded history. Agents have status (online/offline/busy). Routing assigns tickets via priority + workload. SLA timers are computed from event timestamps.</p>
+
+<pre><code>// Tickets
+db.tickets.insertOne({
+  _id:           ObjectId(),
+  number:        "T-10042",                    // human-readable
+  customer_id:   ObjectId(),
+  customer_snapshot: { email: "alice@example.com", name: "Alice" },
+  subject:       "Cannot log in",
+  description:   "Receives 'invalid credentials' but password is correct...",
+  priority:      "high",                       // low | normal | high | urgent
+  status:        "open",                       // open | pending | resolved | closed
+  category:      "auth",
+  assigned_to:   ObjectId(),                   // agent id, null if unassigned
+  team:          "support-tier-1",
+  tags:          ["login", "saml"],
+  recent_messages: [                           // last ~10 for quick render
+    {
+      _id:       ObjectId(),
+      author:    { type: "customer", id: ObjectId(), name: "Alice" },
+      body:      "Cannot log in...",
+      attachments: [],
+      ts:        new Date()
+    }
+  ],
+  message_count: 1,
+  first_response_at: null,                     // for SLA: time to first response
+  resolved_at:       null,
+  sla:               { first_response_min: 60, resolution_hr: 24 },
+  created_at:        new Date(),
+  updated_at:        new Date()
+});
+
+// Indexes
+db.tickets.createIndex({ assigned_to: 1, status: 1, priority: -1, created_at: 1 });
+db.tickets.createIndex({ customer_id: 1, created_at: -1 });
+db.tickets.createIndex({ status: 1, sla_breach_at: 1 });   // for SLA dashboard
+db.tickets.createIndex({ number: 1 }, { unique: true });
+db.tickets.createIndex({ subject: "text", description: "text" });
+
+// Messages &mdash; full thread, unbounded
+db.messages.insertOne({
+  _id:        ObjectId(),
+  ticket_id:  ObjectId(),
+  author:     { type: "agent", id: ObjectId(), name: "Bob" },
+  body:       "Have you tried resetting your password?",
+  attachments: [{ name: "screenshot.png", url: "..." }],
+  internal:   false,                           // true = agent-only note
+  ts:         new Date()
+});
+db.messages.createIndex({ ticket_id: 1, ts: 1 });
+
+// Agents
+db.agents.insertOne({
+  _id:        ObjectId(),
+  user_id:    ObjectId(),
+  name:       "Bob",
+  email:      "bob@company.com",
+  team:       "support-tier-1",
+  status:     "online",                        // online | busy | away | offline
+  capacity:   10,                              // max active tickets
+  active_count: 4,                             // denormalized
+  skills:     ["saml", "billing", "general"],
+  shift:      "americas",
+  available:  true
+});
+db.agents.createIndex({ team: 1, status: 1, available: 1 });
+
+// Send a customer message: insert + update + maybe SLA timer
+async function customerReply(ticketId, body) {
+  const session = client.startSession();
+  await session.withTransaction(async () =&gt; {
+    const msg = {
+      _id: new ObjectId(), ticket_id: ticketId,
+      author: { type: "customer", id: customerId, name: customerName },
+      body, attachments: [], ts: new Date()
+    };
+    await db.collection("messages").insertOne(msg, { session });
+    await db.collection("tickets").updateOne(
+      { _id: ticketId },
+      {
+        $push: { recent_messages: { $each: [msg], $slice: -10 } },
+        $inc:  { message_count: 1 },
+        $set:  { status: "open", updated_at: new Date() }   // re-open if pending
+      },
+      { session }
+    );
+  });
+}
+
+// Auto-assign on ticket creation (priority + skills + workload)
+async function autoAssign(ticket) {
+  const candidate = await db.collection("agents").findOneAndUpdate(
+    {
+      team:      ticket.team,
+      status:    "online",
+      available: true,
+      $expr:     { $lt: ["$active_count", "$capacity"] },
+      skills:    { $in: [ticket.category] }
+    },
+    { $inc: { active_count: 1 } },
+    { sort: { active_count: 1 }, returnDocument: "after" }
+  );
+  if (candidate) {
+    await db.collection("tickets").updateOne(
+      { _id: ticket._id },
+      { $set: { assigned_to: candidate._id, updated_at: new Date() } }
+    );
+  }
+}
+
+// SLA breach detection (every minute)
+db.tickets.find({
+  status: { $in: ["open", "pending"] },
+  first_response_at: null,
+  created_at: { $lte: new Date(Date.now() - 60*60*1000) }   // older than SLA
+});</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table>
+<thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead>
+<tbody>
+<tr><td>Recent_messages capped at 10</td><td>Detail page renders in one query</td><td>Always join messages &mdash; extra query for every render</td></tr>
+<tr><td>Separate messages collection</td><td>Unbounded thread doesn&rsquo;t bloat ticket doc</td><td>Embed all &mdash; doc-size hit; rewrite cost</td></tr>
+<tr><td>Snapshot customer name on ticket</td><td>List view doesn&rsquo;t need a $lookup</td><td>$lookup &mdash; slow at thousands of tickets per page</td></tr>
+<tr><td>active_count on agent (atomic)</td><td>Routing decision uses indexed counter</td><td>Count tickets per agent on-the-fly &mdash; expensive</td></tr>
+<tr><td>SLA dashboard via index</td><td>Sub-second &ldquo;tickets at risk&rdquo; query</td><td>Scan everything &mdash; minutes-long dashboards</td></tr>
+</tbody>
+</table>
+
+<p><strong>Production polish:</strong> for enterprise support, integrate with platforms: <strong>Zendesk</strong>, <strong>Intercom</strong>, <strong>Freshdesk</strong>, <strong>HubSpot Service Hub</strong>, <strong>Help Scout</strong>, or <strong>Plain</strong>. AI-assisted triage: classify priority and category via <strong>Anthropic Claude</strong>, <strong>OpenAI</strong>, or <strong>Cohere</strong>; suggest replies based on knowledge base. Live chat: <strong>Pusher</strong>/<strong>Ably</strong> for the realtime channel; <strong>Crisp</strong>/<strong>tawk.to</strong> as full-stack alternatives. Knowledge base / docs: <strong>Notion</strong>, <strong>GitBook</strong>, <strong>HelpKit</strong>, <strong>Helpjuice</strong>. Email integration via <strong>Postmark</strong>, <strong>SendGrid</strong>, or <strong>Resend</strong>; parse incoming via <strong>Mailgun</strong>/<strong>Postmark Inbound</strong>. CSAT surveys via <strong>Typeform</strong>, <strong>Delighted</strong>. Phone/voice: <strong>Twilio Flex</strong>, <strong>Aircall</strong>. Status pages: <strong>StatusPage.io</strong>, <strong>BetterStack</strong>. Observability of agent productivity: <strong>Looker</strong>/<strong>Metabase</strong>/<strong>Mode</strong>. SLAs need clearly-defined business hours, holidays, and escalation policies &mdash; encode as separate <code>sla_policies</code> documents.</p>
+'''
+
+ANSWERS[42] = r'''
+<p><strong>Situation:</strong> a financial app stores transactions, accounts, and users. Money-in/money-out must be exactly accurate; double-spend must be impossible; full audit trail required; balances visible in real time.</p>
+
+<p><strong>Approach:</strong> use the <strong>double-entry bookkeeping</strong> pattern &mdash; every money movement is two entries (debit + credit) summing to zero. Store amounts as integer cents (or <code>Decimal128</code>). All multi-account writes go through a transaction. Balances are derived by aggregating entries &mdash; cached but reconciled.</p>
+
+<pre><code>// Users
+db.users.insertOne({
+  _id: ObjectId(),
+  email: "alice@example.com",
+  email_verified: true,
+  kyc_status: "verified",
+  created_at: new Date()
+});
+
+// Accounts &mdash; one user can own many (checking, savings, business...)
+db.accounts.insertOne({
+  _id:          ObjectId(),
+  user_id:      ObjectId(),
+  type:         "checking",                      // checking | savings | merchant
+  currency:     "USD",
+  balance_cents: 250_000,                        // CACHED &mdash; reconciled nightly
+  pending_cents: 0,                              // authorized but not settled
+  status:       "active",                        // active | frozen | closed
+  account_number_last4: "1234",
+  created_at:   new Date()
+});
+db.accounts.createIndex({ user_id: 1 });
+db.accounts.createIndex({ status: 1, type: 1 });
+
+// Entries (immutable, append-only)
+db.entries.insertOne({
+  _id:           ObjectId(),
+  transaction_id: ObjectId(),                    // groups debit + credit
+  account_id:    ObjectId(),
+  direction:     "debit",                        // debit | credit
+  amount_cents:  10_000,
+  currency:      "USD",
+  description:   "Transfer to Bob",
+  ts:            new Date()
+});
+db.entries.createIndex({ account_id: 1, ts: -1 });
+db.entries.createIndex({ transaction_id: 1 });
+
+// Transactions &mdash; metadata about the money movement
+db.transactions.insertOne({
+  _id:        ObjectId(),
+  type:       "transfer",                        // transfer | deposit | withdrawal | payment
+  status:     "completed",                       // pending | completed | reversed
+  from_account_id: ObjectId(),
+  to_account_id:   ObjectId(),
+  amount_cents:    10_000,
+  currency:        "USD",
+  description:     "Transfer to Bob",
+  external_ref:    "stripe_pi_123abc",           // payment processor reference
+  created_at:      new Date()
+});
+
+// Atomic transfer with double-entry &mdash; uses a transaction
+async function transfer(fromId, toId, amountCents, description) {
+  const session = client.startSession();
+  let txnId;
+  await session.withTransaction(async () =&gt; {
+    txnId = new ObjectId();
+
+    // Re-read source balance under transaction snapshot
+    const from = await db.collection("accounts").findOne({ _id: fromId }, { session });
+    if (from.balance_cents - from.pending_cents &lt; amountCents) {
+      throw new Error("Insufficient funds");
+    }
+    if (from.status !== "active") throw new Error("Account not active");
+
+    // Two entries (debit source, credit destination)
+    await db.collection("entries").insertMany([
+      { transaction_id: txnId, account_id: fromId, direction: "debit",
+        amount_cents: amountCents, currency: "USD", description, ts: new Date() },
+      { transaction_id: txnId, account_id: toId,   direction: "credit",
+        amount_cents: amountCents, currency: "USD", description, ts: new Date() }
+    ], { session });
+
+    // Update cached balances atomically
+    await db.collection("accounts").updateOne(
+      { _id: fromId }, { $inc: { balance_cents: -amountCents } }, { session }
+    );
+    await db.collection("accounts").updateOne(
+      { _id: toId },   { $inc: { balance_cents:  amountCents } }, { session }
+    );
+
+    await db.collection("transactions").insertOne({
+      _id: txnId, type: "transfer", status: "completed",
+      from_account_id: fromId, to_account_id: toId,
+      amount_cents: amountCents, currency: "USD",
+      description, created_at: new Date()
+    }, { session });
+  }, { readConcern: { level: "snapshot" }, writeConcern: { w: "majority" } });
+  return txnId;
+}
+
+// Reconcile balance from entries (nightly drift correction)
+db.entries.aggregate([
+  { $match: { account_id: accountId } },
+  { $group: {
+      _id: null,
+      total_cents: {
+        $sum: { $cond: [{ $eq: ["$direction", "credit"] }, "$amount_cents", { $multiply: ["$amount_cents", -1] }] }
+      }
+  }}
+]);
+
+// Statement (transaction history) for an account
+db.entries.find({ account_id: accountId })
+  .sort({ ts: -1 })
+  .limit(50);</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table>
+<thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead>
+<tbody>
+<tr><td>Double-entry ledger</td><td>Inviolable accounting equation; auditable</td><td>Single-entry &mdash; no integrity check; corruption silent</td></tr>
+<tr><td>Integer cents (or Decimal128)</td><td>No floating-point drift; <code>0.1 + 0.2</code> bugs banished</td><td>Float &mdash; precision loss accumulates over time</td></tr>
+<tr><td>Cached balance + ledger truth</td><td>Fast read; entries are source of truth</td><td>Compute from entries on every read &mdash; slow</td></tr>
+<tr><td>Multi-doc transaction</td><td>Atomic balance update + entries + transaction</td><td>Best-effort writes &mdash; partial state on crash</td></tr>
+<tr><td>Append-only entries</td><td>Mutations are new entries (reversals)</td><td>Update entries &mdash; loses audit trail</td></tr>
+</tbody>
+</table>
+
+<p><strong>Production polish:</strong> dedicated ledger systems for serious money: <strong>Tigerbeetle</strong> (purpose-built for high-throughput financial txns), <strong>Modern Treasury</strong>, <strong>Increase</strong>, <strong>Unit</strong>; payment processors via <strong>Stripe</strong>, <strong>Adyen</strong>, <strong>Plaid</strong> (banking + ACH), <strong>Wise</strong> (FX). Compliance: <strong>KYC</strong>/<strong>AML</strong> via <strong>Persona</strong>, <strong>Onfido</strong>, <strong>Sumsub</strong>, <strong>Alloy</strong>; sanctions screening via <strong>ComplyAdvantage</strong>; transaction monitoring via <strong>Hummingbird</strong>, <strong>Sardine</strong>. Fraud detection: <strong>Stripe Radar</strong>, <strong>Sift</strong>, <strong>Forter</strong>. <strong>SOC 2</strong> + <strong>PCI-DSS</strong> required; <strong>Drata</strong>/<strong>Vanta</strong>/<strong>Secureframe</strong> for compliance automation. <strong>Queryable Encryption 7.0+</strong> for sensitive PII (SSN, account numbers). <strong>Atlas Backup</strong> with point-in-time restore for 7+ year regulatory retention. Reporting: <strong>Looker</strong>/<strong>Metabase</strong>/<strong>Cube</strong> over the warehouse copy; daily reconciliation against bank/processor ledgers; alerts on cents-off mismatches via <strong>Datadog</strong>. Idempotency keys on every transfer endpoint to defeat double-clicks and retries.</p>
+'''
+
+ANSWERS[43] = r'''
+<p><strong>Situation:</strong> documents (contracts, articles, configs) need full revision history &mdash; who changed what when, undo to any prior version, audit trail. Edits are frequent; storage cost matters.</p>
+
+<p><strong>Approach:</strong> the document holds the current state; a separate <code>revisions</code> collection holds the history. Each revision stores either a full snapshot (cheap, fast) or a compact diff (cheap storage, slower restore). Hybrid pattern: snapshot every N edits, diffs in between.</p>
+
+<pre><code>// Current state
+db.documents.insertOne({
+  _id:           ObjectId(),
+  title:         "Contract draft",
+  body:          "Lorem ipsum...",
+  fields:        { client: "Acme", value: 50000 },
+  current_version: 7,                            // latest revision number
+  updated_by:    ObjectId(),
+  updated_at:    new Date(),
+  created_at:    new Date()
+});
+
+// Revisions &mdash; one entry per edit
+db.revisions.insertOne({
+  _id:         ObjectId(),
+  document_id: ObjectId(),
+  version:     7,                                // monotonic per doc
+  type:        "snapshot",                       // snapshot | diff
+  // For snapshot:
+  state: {
+    title: "Contract draft",
+    body:  "Lorem ipsum...",
+    fields: { client: "Acme", value: 50000 }
+  },
+  // For diff (alternative form): use JSON Patch or similar
+  // patches: [
+  //   { op: "replace", path: "/fields/value", value: 60000, prev: 50000 },
+  //   { op: "add",     path: "/fields/notes", value: "Updated by client" }
+  // ],
+  changed_by:  ObjectId(),
+  changed_at:  new Date(),
+  reason:      "Client requested price increase"
+});
+db.revisions.createIndex({ document_id: 1, version: -1 });
+
+// Edit + revision in one transaction
+async function editDoc(docId, changes, userId, reason) {
+  const session = client.startSession();
+  await session.withTransaction(async () =&gt; {
+    const doc = await db.collection("documents").findOne({ _id: docId }, { session });
+    const newVersion = doc.current_version + 1;
+
+    // Compute patches (e.g., via fast-json-patch)
+    const patches = jsonPatch.compare(doc, { ...doc, ...changes });
+
+    // Snapshot every 10 versions; diff otherwise
+    const isSnapshot = newVersion % 10 === 0;
+    await db.collection("revisions").insertOne({
+      _id: new ObjectId(),
+      document_id: docId,
+      version:     newVersion,
+      type:        isSnapshot ? "snapshot" : "diff",
+      ...(isSnapshot ? { state: { ...doc, ...changes } } : { patches }),
+      changed_by:  userId,
+      changed_at:  new Date(),
+      reason
+    }, { session });
+
+    await db.collection("documents").updateOne(
+      { _id: docId, current_version: doc.current_version },   // optimistic lock
+      {
+        $set: { ...changes, current_version: newVersion, updated_by: userId, updated_at: new Date() }
+      },
+      { session }
+    );
+  });
+}
+
+// Restore a specific version
+async function getVersion(docId, version) {
+  // Find nearest snapshot at or before requested version
+  const snap = await db.collection("revisions").findOne(
+    { document_id: docId, type: "snapshot", version: { $lte: version } },
+    { sort: { version: -1 } }
+  );
+  let state = snap.state;
+
+  // Apply diffs from snapshot+1 up to version
+  const diffs = await db.collection("revisions").find({
+    document_id: docId, type: "diff",
+    version: { $gt: snap.version, $lte: version }
+  }).sort({ version: 1 }).toArray();
+
+  for (const d of diffs) state = jsonPatch.applyPatch(state, d.patches).newDocument;
+  return state;
+}
+
+// Audit query &mdash; who edited what, when
+db.revisions.find({ document_id: docId })
+  .sort({ version: -1 })
+  .limit(50)
+  .project({ version: 1, changed_by: 1, changed_at: 1, reason: 1, type: 1 });</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table>
+<thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead>
+<tbody>
+<tr><td>Hybrid snapshot+diff</td><td>Bounded restore time + bounded storage</td><td>All snapshots &mdash; storage explosion; All diffs &mdash; slow restore</td></tr>
+<tr><td>Separate revisions collection</td><td>Document doesn&rsquo;t grow unbounded</td><td>Embedded array &mdash; doc-size limit, slow updates</td></tr>
+<tr><td>Optimistic version lock</td><td>Concurrent edits detected (no lost updates)</td><td>No lock &mdash; later edit silently overwrites earlier</td></tr>
+<tr><td>JSON Patch diffs</td><td>Standard format; portable; reversible</td><td>Custom diff &mdash; reinventing the wheel</td></tr>
+<tr><td>Transaction for doc + revision</td><td>Either both saved or neither</td><td>Sequential writes &mdash; partial state on crash</td></tr>
+</tbody>
+</table>
+
+<p><strong>Production polish:</strong> for collaborative real-time editing with history, use <strong>Yjs</strong> or <strong>Automerge</strong> CRDTs &mdash; they preserve operation history natively; persist their state to MongoDB. <strong>Liveblocks</strong>, <strong>Hocuspocus</strong>, <strong>PartyKit</strong>, <strong>Convex</strong> as managed real-time + history providers. Diff visualization: render side-by-side with <strong>diff2html</strong>, <strong>react-diff-viewer</strong>, or <strong>Monaco editor</strong>&rsquo;s diff view. For document-style apps, <strong>TipTap Pro</strong>, <strong>Lexical</strong>, <strong>BlockNote</strong> have history built in. Compliance use cases (legal contracts, SOX): immutable storage via <strong>S3 Object Lock</strong> WORM; signing via <strong>DocuSign</strong>, <strong>Adobe Acrobat Sign</strong>, <strong>Dropbox Sign</strong>. Periodic compaction: every quarter, fold old snapshot+diff sequences into denser snapshots; archive ancient revisions to cold storage. Approval workflows on edits: status transitions (<code>draft</code> → <code>review</code> → <code>approved</code>) tracked via state machine library like <strong>XState</strong>.</p>
+'''
+
+ANSWERS[44] = r'''
+<p><strong>Situation:</strong> reporting needs &mdash; revenue by region by product by month, top customers, cohort retention, funnel conversion. The naive approach (read all docs, compute in app) doesn&rsquo;t scale past tens of thousands.</p>
+
+<p><strong>Approach:</strong> use the aggregation pipeline. Filter early (<code>$match</code>), reshape (<code>$project</code>/<code>$addFields</code>), group (<code>$group</code>), join (<code>$lookup</code>), bucket (<code>$bucket</code>), and either return the cursor or materialize via <code>$merge</code> for fast subsequent reads.</p>
+
+<pre><code>// Revenue by region, product, month &mdash; classic OLAP cube
+db.orders.aggregate([
+  // 1. Filter early &mdash; only completed orders in date window
+  { $match: {
+      status: "completed",
+      placed_at: { $gte: ISODate("2026-01-01"), $lt: ISODate("2026-04-01") }
+  }},
+
+  // 2. Unwind line items &mdash; one row per item
+  { $unwind: "$items" },
+
+  // 3. Project clean shape
+  { $project: {
+      month:    { $dateTrunc: { date: "$placed_at", unit: "month" } },
+      region:   "$shipping_address.region",
+      product_id: "$items.product_id",
+      revenue:  { $multiply: ["$items.price_cents", "$items.quantity"] }
+  }},
+
+  // 4. Group at the cube grain
+  { $group: {
+      _id: { month: "$month", region: "$region", product_id: "$product_id" },
+      revenue_cents: { $sum: "$revenue" },
+      order_count:   { $sum: 1 }
+  }},
+
+  // 5. Enrich with product details
+  { $lookup: {
+      from: "products",
+      localField: "_id.product_id",
+      foreignField: "_id",
+      as: "product"
+  }},
+  { $unwind: "$product" },
+
+  // 6. Final shape for the report
+  { $project: {
+      _id:           0,
+      month:         "$_id.month",
+      region:        "$_id.region",
+      product:       "$product.name",
+      category:      "$product.category",
+      revenue_cents: 1,
+      order_count:   1
+  }},
+
+  // 7. Sort for the dashboard
+  { $sort: { month: 1, region: 1, revenue_cents: -1 } }
+]);
+
+// Materialize the report nightly for fast reads
+db.orders.aggregate([
+  { $match: { status: "completed", placed_at: { $gte: lastNightStart } } },
+  { $unwind: "$items" },
+  // ... same shape ...
+  { $merge: {
+      into: "monthly_revenue_cube",
+      on:   ["_id"],
+      whenMatched:    "replace",
+      whenNotMatched: "insert"
+  }}
+]);
+db.monthly_revenue_cube.createIndex({ "_id.month": -1, "_id.region": 1 });
+
+// $facet &mdash; multiple summaries in one pass
+db.orders.aggregate([
+  { $match: { placed_at: { $gte: lastMonth } } },
+  { $facet: {
+      by_status:  [
+        { $group: { _id: "$status", count: { $sum: 1 } } }
+      ],
+      by_region:  [
+        { $group: { _id: "$shipping_address.region", revenue: { $sum: "$total_cents" } } }
+      ],
+      total: [
+        { $group: { _id: null, count: { $sum: 1 }, revenue: { $sum: "$total_cents" } } }
+      ]
+  }}
+]);
+
+// Funnel: signup → first_order → repeat_order
+db.events.aggregate([
+  { $match: { ts: { $gte: cohortStart, $lt: cohortEnd } } },
+  { $group: {
+      _id: "$user_id",
+      signed_up:    { $max: { $cond: [{ $eq: ["$type", "signup"] }, "$ts", null] } },
+      first_order:  { $min: { $cond: [{ $eq: ["$type", "order"] },  "$ts", null] } },
+      orders:       { $sum: { $cond: [{ $eq: ["$type", "order"] },  1, 0] } }
+  }},
+  { $project: {
+      stage: {
+        $cond: [
+          { $gte: ["$orders", 2] }, "repeat",
+          { $cond: [{ $ne: ["$first_order", null] }, "first_order", "signup_only"] }
+        ]
+      }
+  }},
+  { $group: { _id: "$stage", count: { $sum: 1 } } }
+]);</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table>
+<thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead>
+<tbody>
+<tr><td>$match first</td><td>Uses index; cuts pipeline volume early</td><td>Match late &mdash; processes all docs unnecessarily</td></tr>
+<tr><td>$merge for materialization</td><td>Dashboard hits pre-computed; sub-second</td><td>Live aggregation &mdash; seconds to minutes per query</td></tr>
+<tr><td>$facet for multi-summary</td><td>Single pass; shared $match</td><td>N separate pipelines &mdash; redundant data scans</td></tr>
+<tr><td>$dateTrunc grouping</td><td>Timezone+DST correct; clean group keys</td><td>$year/$month chains &mdash; verbose, error-prone</td></tr>
+<tr><td>Index on time field</td><td>Range $match is targeted</td><td>No index &mdash; full collection scan</td></tr>
+</tbody>
+</table>
+
+<p><strong>Production polish:</strong> for serious analytics over billions of rows, MongoDB&rsquo;s aggregation can hit limits &mdash; copy data to a warehouse: <strong>BigQuery</strong>, <strong>Snowflake</strong>, <strong>Databricks</strong>, <strong>ClickHouse</strong> (open-source, blazingly fast for OLAP). ETL via <strong>Fivetran</strong>, <strong>Airbyte</strong>, <strong>Estuary</strong>, <strong>MongoDB Atlas Data Federation</strong>. Visualization: <strong>Atlas Charts</strong> (lives on top of MongoDB), <strong>Metabase</strong>, <strong>Superset</strong>, <strong>Tableau</strong>, <strong>Looker</strong>, <strong>Mode</strong>, <strong>Hex</strong> (notebook-driven). Semantic layer: <strong>Cube</strong>, <strong>dbt</strong> for shared business metrics. Real-time analytics needs: <strong>ClickHouse</strong>, <strong>Tinybird</strong>, <strong>Apache Pinot</strong>, <strong>Druid</strong>. Time-series specifically: <strong>InfluxDB</strong>, <strong>TimescaleDB</strong>. Always set <code>{ allowDiskUse: true }</code> on heavy pipelines &mdash; bypasses the 100MB per-stage memory cap. Profile via <code>explain("executionStats")</code> for stages dominated by COLLSCAN. Monitor query duration with <strong>Datadog</strong>/<strong>New Relic</strong>; alert on aggregation queries &gt;5s.</p>
+'''
+
+ANSWERS[45] = r'''
+<p><strong>Situation:</strong> an inventory app tracks products across multiple warehouses with reorder triggers, supplier relationships, and stock movements. Concurrent receipts and shipments must not overcount or undercount.</p>
+
+<p><strong>Approach:</strong> three primary collections. Products own metadata. Stock levels live in a separate collection keyed by (product_id, warehouse_id) for atomic per-warehouse updates. Movements are append-only events. Reorders trigger on threshold breach.</p>
+
+<pre><code>// Products
+db.products.insertOne({
+  _id:           ObjectId(),
+  sku:           "WIDGET-001",
+  name:          "Premium Widget",
+  description:   "...",
+  unit_cost_cents: 1500,
+  unit_price_cents: 4900,
+  reorder_point: 50,
+  reorder_quantity: 200,
+  primary_supplier_id: ObjectId(),
+  active: true
+});
+db.products.createIndex({ sku: 1 }, { unique: true });
+db.products.createIndex({ active: 1 });
+
+// Suppliers
+db.suppliers.insertOne({
+  _id: ObjectId(),
+  name: "Acme Manufacturing",
+  contact: { email: "orders@acme.com", phone: "+1..." },
+  lead_time_days: 14,
+  payment_terms: "net_30",
+  status: "active"
+});
+
+// Stock levels &mdash; one doc per (product, warehouse)
+db.stock.insertOne({
+  _id:          { product_id: ObjectId(), warehouse_id: ObjectId() },
+  on_hand:      245,                       // physically present
+  reserved:     12,                         // committed to open orders
+  on_order:     200,                        // expected from supplier
+  available:    233,                        // on_hand - reserved
+  reorder_at:   50,
+  last_counted: new Date()
+});
+db.stock.createIndex({ "_id.warehouse_id": 1, available: 1 });
+db.stock.createIndex({ "_id.product_id": 1 });
+// Note: _id is naturally compound &mdash; no extra index needed for composite key lookups
+
+// Stock movements &mdash; append only (audit trail)
+db.movements.insertOne({
+  _id:          ObjectId(),
+  product_id:   ObjectId(),
+  warehouse_id: ObjectId(),
+  type:         "receive",          // receive | ship | adjust | transfer | count
+  quantity:     200,                // positive for in, negative for out
+  reason:       "PO-12345",
+  reference:    { type: "purchase_order", id: ObjectId() },
+  performed_by: ObjectId(),
+  ts:           new Date()
+});
+db.movements.createIndex({ product_id: 1, warehouse_id: 1, ts: -1 });
+
+// Atomic stock change &mdash; reserve for an order
+async function reserveStock(productId, warehouseId, quantity, orderId) {
+  const result = await db.collection("stock").updateOne(
+    {
+      "_id.product_id":    productId,
+      "_id.warehouse_id":  warehouseId,
+      $expr: { $gte: [{ $subtract: ["$on_hand", "$reserved"] }, quantity] }
+    },
+    [
+      { $set: {
+          reserved:  { $add: ["$reserved", quantity] },
+          available: { $subtract: ["$on_hand", { $add: ["$reserved", quantity] }] }
+      }}
+    ]
+  );
+  if (result.matchedCount === 0) throw new Error("Insufficient stock");
+
+  await db.collection("movements").insertOne({
+    product_id: productId, warehouse_id: warehouseId,
+    type: "reserve", quantity: -quantity,
+    reference: { type: "order", id: orderId },
+    ts: new Date()
+  });
+}
+
+// Receive stock from supplier &mdash; transactional with PO update
+async function receiveStock(poId, productId, warehouseId, quantity) {
+  const session = client.startSession();
+  await session.withTransaction(async () =&gt; {
+    await db.collection("stock").updateOne(
+      { "_id.product_id": productId, "_id.warehouse_id": warehouseId },
+      [
+        { $set: {
+            on_hand:   { $add: ["$on_hand", quantity] },
+            on_order:  { $max: [0, { $subtract: ["$on_order", quantity] }] },
+            available: { $subtract: [{ $add: ["$on_hand", quantity] }, "$reserved"] }
+        }}
+      ],
+      { upsert: true, session }
+    );
+    await db.collection("movements").insertOne({
+      product_id: productId, warehouse_id: warehouseId,
+      type: "receive", quantity,
+      reference: { type: "purchase_order", id: poId }, ts: new Date()
+    }, { session });
+    await db.collection("purchase_orders").updateOne(
+      { _id: poId },
+      { $inc: { received_quantity: quantity }, $set: { last_received_at: new Date() } },
+      { session }
+    );
+  });
+}
+
+// Reorder check &mdash; daily scan
+db.stock.aggregate([
+  { $match: { $expr: { $lte: ["$available", "$reorder_at"] } } },
+  { $lookup: {
+      from: "products",
+      localField: "_id.product_id",
+      foreignField: "_id",
+      as: "product"
+  }},
+  { $unwind: "$product" },
+  { $match: { "product.active": true } }
+]);
+
+// Inventory valuation by warehouse
+db.stock.aggregate([
+  { $lookup: { from: "products", localField: "_id.product_id", foreignField: "_id", as: "p" } },
+  { $unwind: "$p" },
+  { $group: {
+      _id: "$_id.warehouse_id",
+      total_units: { $sum: "$on_hand" },
+      total_value_cents: { $sum: { $multiply: ["$on_hand", "$p.unit_cost_cents"] } }
+  }}
+]);</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table>
+<thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead>
+<tbody>
+<tr><td>Per-(product, warehouse) doc</td><td>Atomic stock updates without contention</td><td>Single product doc with array of stocks &mdash; whole-doc rewrite per change</td></tr>
+<tr><td>Movements as append-only</td><td>Full audit trail; reconcile from source</td><td>Update stock only &mdash; no &ldquo;why did it change?&rdquo;</td></tr>
+<tr><td>Cached available field</td><td>Reorder query indexed on it</td><td>Compute on-the-fly &mdash; can&rsquo;t use index for thresholds</td></tr>
+<tr><td>Conditional update with $expr</td><td>Race-free &ldquo;reserve only if enough&rdquo;</td><td>Read-then-write &mdash; classic concurrency bug</td></tr>
+<tr><td>Movement + stock in transaction</td><td>Movement always reflects actual change</td><td>Out-of-band movement log &mdash; drift inevitable</td></tr>
+</tbody>
+</table>
+
+<p><strong>Production polish:</strong> for retail/B2B at scale, consider purpose-built systems: <strong>NetSuite</strong>, <strong>SAP</strong>, <strong>Microsoft Dynamics 365</strong>, <strong>Cin7</strong>, <strong>Zoho Inventory</strong>. <strong>Shopify</strong> manages e-commerce inventory natively; integrate via API. Demand forecasting / ML reorder predictions: <strong>Snowflake ML</strong>, <strong>BigQuery ML</strong>, <strong>Databricks</strong>, or <strong>Lokad</strong>. Barcode/RFID for warehouse ops: <strong>Square</strong>, <strong>Zebra</strong>, <strong>SOTI</strong>. Shipping integration: <strong>EasyPost</strong>, <strong>Shippo</strong>, <strong>ShipStation</strong>. Supplier EDI: <strong>SPS Commerce</strong>, <strong>TrueCommerce</strong>. Periodic <strong>cycle counts</strong> reconcile cached <code>on_hand</code> against physical reality &mdash; never trust the database alone. Multi-currency requires per-supplier currency fields and FX feeds (<strong>OpenExchangeRates</strong>, <strong>Fixer.io</strong>). For perishables / batch tracking, add a <code>lots</code> collection with expiration dates. <strong>FIFO/LIFO/FEFO</strong> picking strategies depend on product class &mdash; encode as warehouse settings.</p>
+'''
+
+ANSWERS[46] = r'''
+<p><strong>Situation:</strong> an app stores PII (names, emails, SSNs, payment data) and faces GDPR / HIPAA / PCI-DSS / SOC 2 obligations. Encryption at rest, encryption in transit, field-level encryption for sensitive data, audit trails on access, key rotation.</p>
+
+<p><strong>Approach:</strong> defense in depth: TLS for transport, encrypted storage volumes, <strong>Queryable Encryption (7.0+)</strong> for application-level field encryption (still queryable!), strict RBAC, audit logging, and an external KMS for keys.</p>
+
+<pre><code>// Queryable Encryption setup &mdash; client-side encryption with server-side queries (7.0+)
+const clientEncryption = new ClientEncryption(client, {
+  keyVaultNamespace: "encryption.__keyVault",
+  kmsProviders: { aws: { accessKeyId: "...", secretAccessKey: "..." } }
+});
+
+// Define an encrypted schema &mdash; ssn equality, dob range queries supported
+const encryptedFields = {
+  fields: [
+    { keyId: dataKeyId1, path: "ssn",
+      bsonType: "string",
+      queries: [{ queryType: "equality" }] },
+    { keyId: dataKeyId2, path: "dob",
+      bsonType: "date",
+      queries: [{ queryType: "range", min: ISODate("1900-01-01"), max: ISODate("2100-01-01") }] },
+    { keyId: dataKeyId3, path: "salary_cents",
+      bsonType: "long" }   // not queryable; only retrievable
+  ]
+};
+
+// Create the collection with encryption metadata
+await db.createCollection("patients", { encryptedFields });
+
+// Insert &mdash; values are encrypted client-side automatically
+await db.collection("patients").insertOne({
+  external_id: "P-001",       // unencrypted, queryable normally
+  name:        "Alice Smith",
+  ssn:         "123-45-6789", // encrypted, equality-queryable
+  dob:         ISODate("1990-05-12"),  // encrypted, range-queryable
+  salary_cents: 75000_00      // encrypted, retrievable only
+});
+
+// Queries against encrypted fields work like normal
+db.patients.find({ ssn: "123-45-6789" });           // index-backed equality
+db.patients.find({ dob: { $gte: ISODate("1980-01-01"), $lt: ISODate("2000-01-01") } });
+
+// Database user separation &mdash; RBAC
+db.createUser({
+  user: "app_service",
+  pwd:  generatedPassword,
+  roles: [
+    { role: "readWrite", db: "app" }   // no access to admin/local/config
+  ]
+});
+db.createUser({
+  user: "analytics_readonly",
+  pwd:  generatedPassword,
+  roles: [{ role: "read", db: "app" }]   // only read for BI/reporting
+});
+
+// TLS (transport encryption) &mdash; required in production
+// connection string: mongodb+srv://...?tls=true&amp;tlsCAFile=ca.pem
+
+// Audit logging (Enterprise / Atlas)
+//   --setParameter "auditAuthorizationSuccess=true"
+//   --auditDestination=file --auditFormat=BSON --auditPath=/var/log/mongo-audit.bson
+
+// Application-side audit log
+async function logAccess(userId, action, resource, result) {
+  await db.collection("audit_log").insertOne({
+    user_id: userId, action, resource, result,
+    ip: requestIp, user_agent: requestUa, ts: new Date()
+  });
+}
+
+// Key rotation pattern (CSFLE / Queryable Encryption supports it)
+await clientEncryption.rewrapManyDataKey(
+  { keyAltNames: "patient_ssn_key" },
+  { provider: "aws", masterKey: { region: "us-east-1", key: newKmsKeyArn } }
+);</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table>
+<thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead>
+<tbody>
+<tr><td>Queryable Encryption</td><td>Equality + range queries on encrypted fields</td><td>Plaintext &mdash; non-compliant; CSFLE (legacy) &mdash; equality only</td></tr>
+<tr><td>External KMS</td><td>Keys never on DB host; rotation managed</td><td>Local key file &mdash; single point of total compromise</td></tr>
+<tr><td>Per-service DB users</td><td>Compromise of one service doesn&rsquo;t expose others</td><td>One superuser &mdash; total exposure on credential leak</td></tr>
+<tr><td>Audit log (DB + app)</td><td>Compliance evidence; forensics on breach</td><td>No audit &mdash; non-compliant; can&rsquo;t prove access patterns</td></tr>
+<tr><td>TLS in transit</td><td>Network sniffing yields nothing</td><td>Plain &mdash; unacceptable in any production context</td></tr>
+</tbody>
+</table>
+
+<p><strong>Production polish:</strong> use <strong>MongoDB Atlas</strong> &mdash; encryption at rest is automatic, TLS is enforced, KMS integration with <strong>AWS KMS</strong>, <strong>Azure Key Vault</strong>, <strong>GCP Cloud KMS</strong>, or <strong>HashiCorp Vault</strong> is one click. Compliance frameworks need automated evidence: <strong>Drata</strong>, <strong>Vanta</strong>, <strong>Secureframe</strong>, <strong>Sprinto</strong> handle SOC 2/HIPAA/ISO/GDPR continuously. Tokenization of PCI data (don&rsquo;t store raw cards): <strong>Stripe</strong>, <strong>VGS</strong>, <strong>Basis Theory</strong>, <strong>Skyflow</strong>, <strong>CipherStash</strong>. PII discovery / DLP: <strong>BigID</strong>, <strong>Privacera</strong>, <strong>Microsoft Purview</strong>. Secret management: <strong>HashiCorp Vault</strong>, <strong>AWS Secrets Manager</strong>, <strong>Doppler</strong>, <strong>Infisical</strong>. SIEM aggregation: pipe audit logs to <strong>Splunk</strong>, <strong>Datadog</strong>, <strong>Sumo Logic</strong>. Penetration testing annually; <strong>Cobalt</strong>, <strong>Bugcrowd</strong>, <strong>HackerOne</strong> for crowdsourced pentests. Application-side: never log PII (filter via <strong>Pino</strong> redact, <strong>winston</strong> formatters); rotate any leaked secrets immediately via runbook automation.</p>
+'''
+
+ANSWERS[47] = r'''
+<p><strong>Situation:</strong> an e-commerce site needs &ldquo;customers who viewed this also viewed&rdquo; and &ldquo;recommended for you&rdquo;. Real-time enough that browsing history influences the next page; precise enough to drive clicks.</p>
+
+<p><strong>Approach:</strong> compute recommendations <strong>offline</strong> (collaborative filtering) or via <strong>vector embeddings</strong> (content-based). Store the precomputed top-N for each product / user. Serve from MongoDB at request time &mdash; sub-10ms lookup, never on-the-fly model inference for the hot path.</p>
+
+<pre><code>// Browsing history (time-series; powers cohort & individualized recs)
+db.createCollection("page_views", {
+  timeseries: { timeField: "ts", metaField: "user_id", granularity: "minutes" },
+  expireAfterSeconds: 90 * 24 * 3600
+});
+db.page_views.insertOne({
+  ts: new Date(),
+  user_id: ObjectId(),
+  product_id: ObjectId(),
+  session_id: "abc123",
+  device: "mobile"
+});
+
+// Pattern A &mdash; co-view recommendations (item-to-item, collaborative)
+// Compute nightly: for each product, top 10 products viewed in same session
+db.page_views.aggregate([
+  // 1. Pair products viewed in same session (this is simplified)
+  { $sort: { session_id: 1, ts: 1 } },
+  { $group: { _id: "$session_id", products: { $push: "$product_id" } } },
+  { $unwind: "$products" },
+  { $unwind: "$products" },     // every pair (lhs, rhs)
+  // ... (real impl uses self-join via $lookup or precomputed pairs)
+
+  // 2. Count co-occurrence
+  { $group: {
+      _id: { product_a: "$products_a", product_b: "$products_b" },
+      coview_count: { $sum: 1 }
+  }},
+  { $match: { coview_count: { $gte: 5 } } },
+
+  // 3. Pick top 10 co-views per product
+  { $sort:  { "_id.product_a": 1, coview_count: -1 } },
+  { $group: {
+      _id: "$_id.product_a",
+      top: { $push: { product_id: "$_id.product_b", score: "$coview_count" } }
+  }},
+  { $project: { top: { $slice: ["$top", 10] } } },
+
+  // 4. Materialize to a fast-read collection
+  { $merge: {
+      into: "product_recs",
+      on:   "_id",
+      whenMatched: "replace",
+      whenNotMatched: "insert"
+  }}
+]);
+
+db.product_recs.createIndex({ _id: 1 });
+
+// Serve at request time &mdash; one lookup
+db.product_recs.findOne({ _id: productId }, { projection: { top: 1 } });
+// Then $lookup the top product details (or denormalize them at compute time)
+
+// Pattern B &mdash; vector embeddings (Atlas Vector Search) &mdash; modern, content-based
+// Store an embedding per product (from CLIP / OpenAI / Cohere / Voyage)
+db.products.insertOne({
+  _id:        ObjectId(),
+  name:       "Premium Widget",
+  description: "...",
+  embedding:  [0.12, -0.45, 0.78, /* 1536 dims for OpenAI ada-002 */],
+  category:   "widgets",
+  price_cents: 4900
+});
+
+// Atlas Vector Search index
+db.runCommand({
+  createSearchIndexes: "products",
+  indexes: [{
+    name: "vector_index",
+    type: "vectorSearch",
+    definition: {
+      fields: [{
+        type: "vector", path: "embedding",
+        numDimensions: 1536, similarity: "cosine"
+      }, {
+        type: "filter", path: "category"
+      }]
+    }
+  }]
+});
+
+// Find similar products via vector search
+db.products.aggregate([
+  { $vectorSearch: {
+      index:         "vector_index",
+      path:          "embedding",
+      queryVector:   currentProductEmbedding,
+      numCandidates: 200,
+      limit:         10,
+      filter:        { category: "widgets" }   // narrow by metadata
+  }},
+  { $project: { _id: 1, name: 1, score: { $meta: "vectorSearchScore" } } }
+]);
+
+// Personalized recs &mdash; combine user&rsquo;s recent embeddings (avg of viewed)
+async function recommendForUser(userId) {
+  const recent = await db.page_views.find({ user_id: userId })
+    .sort({ ts: -1 }).limit(20).toArray();
+  const products = await db.products.find(
+    { _id: { $in: recent.map(v =&gt; v.product_id) } }
+  ).toArray();
+  const userVec = avgVectors(products.map(p =&gt; p.embedding));
+
+  return db.products.aggregate([
+    { $vectorSearch: {
+        index: "vector_index", path: "embedding",
+        queryVector: userVec, numCandidates: 500, limit: 20
+    }}
+  ]);
+}</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table>
+<thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead>
+<tbody>
+<tr><td>Precompute &amp; cache top-N</td><td>Sub-10ms serving; no hot-path inference</td><td>On-the-fly compute &mdash; CPU cost; high latency</td></tr>
+<tr><td>Co-view + vector hybrid</td><td>Cold-start handled by content; warm by collaborative</td><td>Either alone &mdash; misses cold-start or popular-item drift</td></tr>
+<tr><td>Atlas Vector Search</td><td>One platform; same auth, same cluster</td><td>External vector DB &mdash; another component to operate</td></tr>
+<tr><td>Filter inside $vectorSearch</td><td>Pre-filter by category cuts candidate set</td><td>Filter after &mdash; vector search returns wrong category items</td></tr>
+<tr><td>Time-series for views</td><td>Compressed; auto TTL purge after 90d</td><td>Regular collection &mdash; bigger, slower analytics</td></tr>
+</tbody>
+</table>
+
+<p><strong>Production polish:</strong> generate embeddings via <strong>OpenAI text-embedding-3-large</strong>, <strong>Cohere</strong>, <strong>Voyage AI</strong>, <strong>Anthropic embeddings</strong>, or <strong>open-source via Hugging Face</strong> (BGE, E5, GTE families). Pure vector dbs as alternatives: <strong>Pinecone</strong>, <strong>Weaviate</strong>, <strong>Qdrant</strong>, <strong>Milvus</strong>, <strong>Chroma</strong> &mdash; but Atlas Vector Search keeps everything in one place. ML models for collaborative filtering: <strong>Apache Spark ALS</strong>, <strong>Snowflake ML</strong>, <strong>Databricks</strong>, <strong>Vertex AI</strong>, <strong>Amazon Personalize</strong>. Real-time signals (this session&rsquo;s clicks): combine via <strong>Redis</strong> short-term memory + Mongo precomputed long-term. Diversity / serendipity matters &mdash; otherwise recs collapse to top-sellers; mix in random, exploration items per A/B testing framework like <strong>Statsig</strong>, <strong>LaunchDarkly</strong>, <strong>Eppo</strong>, <strong>GrowthBook</strong>. Track every recommendation impression and click for offline evaluation; eval metrics: CTR, CVR, NDCG. Compliance: respect opt-out preferences (GDPR Article 22 right to no automated decisions); avoid recommending in sensitive categories (medical, legal) without disclaimers.</p>
+'''
+
+ANSWERS[48] = r'''
+<p><strong>Situation:</strong> a job portal connects employers, job listings, and applicants. Employers post jobs; candidates apply; recruiters search/filter applicants. Search is the dominant read pattern.</p>
+
+<p><strong>Approach:</strong> four collections. Jobs reference employer with cached metadata. Applications join candidates and jobs as a separate collection. Users carry searchable profile data. Atlas Search indexes power keyword + filter + autocomplete.</p>
+
+<pre><code>// Employers
+db.employers.insertOne({
+  _id: ObjectId(),
+  name: "Acme Corp",
+  industry: "software",
+  size: "201-500",
+  website: "https://acme.com",
+  logo_url: "https://cdn.app/logos/acme.png",
+  description: "...",
+  verified: true,
+  status: "active",
+  created_at: new Date()
+});
+db.employers.createIndex({ industry: 1, size: 1 });
+
+// Users (both candidates and recruiters; type field distinguishes)
+db.users.insertOne({
+  _id: ObjectId(),
+  email: "alice@example.com",
+  type:  "candidate",                   // candidate | recruiter
+  profile: {
+    name:     "Alice Doe",
+    headline: "Senior Backend Engineer",
+    location: { city: "Berlin", country: "DE" },
+    bio:      "10 years building distributed systems...",
+    skills:   ["mongodb", "kubernetes", "python", "kafka"],
+    experience: [
+      { company: "Prev Co", title: "SWE", from: "2018-01", to: "2022-12" }
+    ],
+    salary_expectation_cents: 110000_00,
+    open_to_work: true
+  },
+  resume: { url: "s3://...", filename: "alice-resume.pdf" },
+  created_at: new Date()
+});
+db.users.createIndex({ email: 1 }, { unique: true });
+db.users.createIndex({ type: 1, "profile.open_to_work": 1, "profile.location.city": 1 });
+
+// Jobs &mdash; snapshot employer for fast list rendering
+db.jobs.insertOne({
+  _id: ObjectId(),
+  employer_id: ObjectId(),
+  employer_snapshot: { name: "Acme Corp", logo_url: "..." },
+  title: "Senior Backend Engineer",
+  description: "...",
+  requirements: ["5+ years", "MongoDB", "Kubernetes"],
+  skills:       ["mongodb", "kubernetes", "python"],
+  location: { city: "Berlin", country: "DE", remote: "hybrid" },
+  salary: { min_cents: 90000_00, max_cents: 130000_00, currency: "EUR" },
+  employment_type: "full_time",
+  status: "open",                       // draft | open | filled | expired
+  applications_count: 0,
+  posted_at: new Date(),
+  expires_at: new Date(Date.now() + 30*24*3600*1000)
+});
+db.jobs.createIndex({ status: 1, posted_at: -1 });
+db.jobs.createIndex({ "location.city": 1, status: 1 });
+db.jobs.createIndex({ employer_id: 1, status: 1 });
+db.jobs.createIndex({ skills: 1, status: 1 });    // multikey
+
+// Atlas Search index for keyword search across multiple fields
+db.runCommand({
+  createSearchIndexes: "jobs",
+  indexes: [{
+    name: "jobs_search",
+    definition: {
+      mappings: {
+        dynamic: false,
+        fields: {
+          title:        { type: "string", analyzer: "lucene.english" },
+          description:  { type: "string", analyzer: "lucene.english" },
+          skills:       { type: "string" },
+          "location.city": { type: "stringFacet" },
+          status:       { type: "stringFacet" }
+        }
+      }
+    }
+  }]
+});
+
+// Applications (candidate ↔ job many-to-many)
+db.applications.insertOne({
+  _id: ObjectId(),
+  job_id:        ObjectId(),
+  candidate_id:  ObjectId(),
+  job_snapshot:       { title: "Senior Backend Engineer", employer_name: "Acme Corp" },
+  candidate_snapshot: { name: "Alice Doe", email: "alice@example.com" },
+  cover_letter: "...",
+  resume_url: "s3://...",
+  stage: "screening",        // applied | screening | interview | offer | hired | rejected
+  status: "active",
+  applied_at: new Date(),
+  notes: []
+});
+db.applications.createIndex({ candidate_id: 1, applied_at: -1 });
+db.applications.createIndex({ job_id: 1, stage: 1 });
+db.applications.createIndex({ job_id: 1, candidate_id: 1 }, { unique: true });   // no double-apply
+
+// Apply &mdash; idempotent + counter
+async function apply(jobId, candidateId, coverLetter) {
+  const session = client.startSession();
+  await session.withTransaction(async () =&gt; {
+    const job = await db.collection("jobs").findOne({ _id: jobId, status: "open" }, { session });
+    if (!job) throw new Error("Job not open");
+
+    await db.collection("applications").insertOne({
+      _id: new ObjectId(), job_id: jobId, candidate_id: candidateId,
+      stage: "applied", status: "active", applied_at: new Date(),
+      cover_letter: coverLetter
+    }, { session });
+    await db.collection("jobs").updateOne(
+      { _id: jobId },
+      { $inc: { applications_count: 1 } },
+      { session }
+    );
+  });
+}
+
+// Search jobs (Atlas Search)
+db.jobs.aggregate([
+  { $search: {
+      index: "jobs_search",
+      compound: {
+        must:   [{ text: { query: "backend engineer", path: ["title", "description", "skills"] } }],
+        filter: [
+          { equals: { path: "status",        value: "open" } },
+          { equals: { path: "location.city", value: "Berlin" } }
+        ]
+      }
+  }},
+  { $limit: 50 }
+]);
+
+// Recruiter view: applicants for a job
+db.applications.find({ job_id: jobId, stage: { $in: ["applied", "screening"] } })
+  .sort({ applied_at: -1 });</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table>
+<thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead>
+<tbody>
+<tr><td>Applications as separate collection</td><td>Many-to-many; unbounded growth tolerable</td><td>Embed in job/user &mdash; arrays explode</td></tr>
+<tr><td>Snapshot job + candidate on apply</td><td>List view doesn&rsquo;t need joins; survives renames</td><td>$lookup &mdash; slower; fragile if profile deleted</td></tr>
+<tr><td>Atlas Search for keyword + facet</td><td>BM25 ranking, fuzzy, autocomplete</td><td>Regex on Mongo &mdash; slow, no relevance scoring</td></tr>
+<tr><td>Unique (job_id, candidate_id)</td><td>DB enforces no double-apply</td><td>App-only check &mdash; race conditions</td></tr>
+<tr><td>Counter on jobs.applications_count</td><td>Indexed sort by popularity</td><td>countDocuments on every render &mdash; expensive</td></tr>
+</tbody>
+</table>
+
+<p><strong>Production polish:</strong> integrate ATS systems: <strong>Greenhouse</strong>, <strong>Lever</strong>, <strong>Ashby</strong>, <strong>Workable</strong>, <strong>Recruitee</strong>, <strong>SmartRecruiters</strong>. Resume parsing via <strong>Affinda</strong>, <strong>Sovren</strong>, <strong>RChilli</strong>, or LLM-based: <strong>Anthropic Claude</strong>/<strong>OpenAI</strong> structured extraction. Background checks: <strong>Checkr</strong>, <strong>Sterling</strong>. Video interview platforms: <strong>HireVue</strong>, <strong>Spark Hire</strong>, <strong>Willo</strong>. Calendar / scheduling: <strong>Cal.com</strong>, <strong>Calendly</strong>, integrate via <strong>Google Calendar API</strong> / <strong>Microsoft Graph</strong>. Vector search for candidate-job matching using profile embeddings &mdash; <strong>Atlas Vector Search</strong> over skills/experience. Email outreach via <strong>Postmark</strong>, <strong>Resend</strong>, <strong>SendGrid</strong>. Compliance: <strong>EEOC</strong> reporting, <strong>GDPR</strong> right-to-be-forgotten implies hard-delete or pseudonymize on candidate request; data retention policies (typical 1-2 year hold post-process). For diversity hiring, <strong>blind review</strong> hides candidate names/photos until later stages. Verification badges (LinkedIn-style) via <strong>Stripe Identity</strong>, <strong>Persona</strong>.</p>
+'''
+
+ANSWERS[49] = r'''
+<p><strong>Situation:</strong> a production app needs schema changes &mdash; rename fields, restructure embedded docs, change types &mdash; without taking the service offline. Customer-facing, no maintenance window allowed.</p>
+
+<p><strong>Approach:</strong> backwards-compatible, multi-stage rollout. App writes both shapes; reads handle both shapes; backfill in batches; eventually drop old shape. Each stage is independently deployable and reversible.</p>
+
+<pre><code>// Initial state: documents have first_name + last_name
+// Goal: single name field
+
+// === Stage 1: Code that READS both shapes ===
+function getName(user) {
+  return user.name ?? `${user.first_name} ${user.last_name}`.trim();
+}
+// Deploy. App tolerant of either shape. No DB writes yet.
+
+// === Stage 2: Code that WRITES both shapes ===
+async function updateUser(id, changes) {
+  if (changes.name) {
+    const [first, ...rest] = changes.name.split(" ");
+    changes.first_name = first;
+    changes.last_name  = rest.join(" ");
+  }
+  await db.users.updateOne({ _id: id }, { $set: changes });
+}
+// Deploy. New writes maintain both fields. Reads can hit either.
+
+// === Stage 3: Backfill old documents ===
+//   Run in chunks to avoid replication lag spikes
+async function backfillNames() {
+  const cursor = db.users.find(
+    { name: { $exists: false }, first_name: { $exists: true } },
+    { batchSize: 500 }
+  );
+  let count = 0;
+  for await (const doc of cursor) {
+    await db.users.updateOne(
+      { _id: doc._id },
+      [
+        { $set: {
+            name: { $concat: [{ $ifNull: ["$first_name", ""] }, " ", { $ifNull: ["$last_name", ""] }] },
+            schema_version: 2
+        }}
+      ]
+    );
+    if (++count % 500 === 0) await sleep(50);   // pace replication
+  }
+  return count;
+}
+
+// === Stage 4: Drop reads of old shape ===
+function getName(user) { return user.name; }
+// Deploy. App now requires the new field on every doc.
+
+// === Stage 5: Drop writes of old shape ===
+async function updateUser(id, changes) {
+  await db.users.updateOne({ _id: id }, { $set: changes });
+}
+// Deploy. No more dual-writes.
+
+// === Stage 6: Cleanup ===
+db.users.updateMany(
+  { schema_version: 2 },
+  { $unset: { first_name: "", last_name: "" } }
+);
+db.users.dropIndex("first_name_1");
+db.users.dropIndex("last_name_1");
+
+// === Pattern: feature flag for safe rollback ===
+async function getName(user) {
+  if (await flags.isEnabled("use_new_name_field")) {
+    return user.name ?? `${user.first_name} ${user.last_name}`;
+  }
+  return `${user.first_name} ${user.last_name}`;
+}
+
+// === Online index builds (4.4+) ===
+//  Hybrid build &mdash; non-blocking
+db.users.createIndex({ name: 1 });   // builds online by default; reads/writes continue
+
+// Watch progress
+db.adminCommand({ currentOp: 1, "command.createIndexes": "users" });
+
+// === Schema validation rolled out gradually ===
+//  Use validationLevel:"moderate" &mdash; validates on inserts and on updates that touch validated fields
+//  Use validationAction:"warn" first &mdash; logs without rejecting
+db.runCommand({
+  collMod: "users",
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["email", "name"],
+      properties: {
+        email: { bsonType: "string" },
+        name:  { bsonType: "string", minLength: 1 }
+      }
+    }
+  },
+  validationLevel:  "moderate",
+  validationAction: "warn"        // change to "error" only after backfill
+});</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table>
+<thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead>
+<tbody>
+<tr><td>Multi-stage rollout</td><td>Each step reversible; no atomic cutover</td><td>Big-bang &mdash; if it fails halfway, you&rsquo;re stuck</td></tr>
+<tr><td>Schema_version field</td><td>Identifies migrated docs; idempotent re-runs</td><td>No version &mdash; can&rsquo;t resume after a crash</td></tr>
+<tr><td>Validate WARN before ERROR</td><td>Catches misses without breaking writes</td><td>ERROR immediately &mdash; production rejection cascade</td></tr>
+<tr><td>Online index builds</td><td>4.4+ doesn&rsquo;t lock the collection</td><td>Foreground build &mdash; brief but real lock</td></tr>
+<tr><td>Pace via batch+sleep</td><td>Replication lag stays bounded</td><td>updateMany({}) &mdash; primary saturated, secondaries fall minutes behind</td></tr>
+</tbody>
+</table>
+
+<p><strong>Production polish:</strong> always test the full migration on a <strong>restored production snapshot</strong> first &mdash; staging never has the same edge cases as prod. Use <strong>feature flags</strong> (<strong>LaunchDarkly</strong>, <strong>Statsig</strong>, <strong>GrowthBook</strong>, <strong>Unleash</strong>) for instant rollback. <strong>blue-green deploys</strong> minimize risk: route a small % of traffic to the new code first. Keep a kill switch (a config doc the migration polls every loop) so on-call can stop without redeploying. Monitor: replication lag, oplog window, primary CPU, write latency. Alert when any cross threshold; halt the migration. Log progress to a stats doc (<code>{ phase, total, processed, errors }</code>) for ops visibility. <strong>Atlas Migration Service</strong>, <strong>mongosync</strong>, <strong>Cluster-to-Cluster Sync</strong> for cluster-level moves. <strong>Debezium</strong> + <strong>Kafka</strong> for streaming-style migration to a new collection while keeping old in service. Schema validation should arrive AFTER backfill, not before.</p>
+'''
+
+ANSWERS[50] = r'''
+<p><strong>Situation:</strong> a production MongoDB deployment grows beyond what hand-managed self-hosted ops can handle &mdash; replication, backups, monitoring, security, compliance, capacity planning all demand attention. The team needs a managed service.</p>
+
+<p><strong>Approach:</strong> use <strong>MongoDB Atlas</strong> for the full lifecycle &mdash; provisioning, scaling, backups, monitoring, security, search, and analytics. Atlas removes 80% of the ops burden while keeping the same MongoDB API.</p>
+
+<pre><code>// Atlas concepts &mdash; managed via UI, Terraform, or Atlas API
+//   Project       &mdash; logical container (think: environment)
+//   Cluster       &mdash; replica set or sharded cluster
+//   Database User &mdash; auth principal
+//   Network access&mdash; IP allowlist or VPC peering / PrivateLink
+
+// Terraform example for a production cluster
+/*
+resource "mongodbatlas_cluster" "prod" {
+  project_id   = mongodbatlas_project.app.id
+  name         = "app-prod"
+  cluster_type = "REPLICASET"
+  provider_name = "AWS"
+  provider_instance_size_name = "M40"
+  provider_region_name = "US_EAST_1"
+  mongo_db_major_version = "7.0"
+  backup_enabled = true
+  cloud_backup   = true
+  auto_scaling_disk_gb_enabled = true
+  auto_scaling_compute_enabled = true
+  replication_specs {
+    num_shards = 1
+    regions_config {
+      region_name     = "US_EAST_1"
+      electable_nodes = 3
+      priority        = 7
+      read_only_nodes = 0
+    }
+  }
+}
+*/
+
+// Connection &mdash; SRV records auto-discover topology
+const uri = "mongodb+srv://user:pass@app-prod.abc12.mongodb.net/app?retryWrites=true&amp;w=majority";
+
+// Built-in features:
+//   * Continuous Cloud Backup with point-in-time restore (PITR)
+//   * Online schema/index changes
+//   * Atlas Search (Lucene)
+//   * Atlas Vector Search
+//   * Atlas Data Federation (query S3, BigQuery, etc. via MongoDB API)
+//   * Atlas Online Archive (auto-tier old data to cold storage)
+//   * Atlas Stream Processing (Kafka-style streams)
+//   * Atlas Triggers (managed Lambda-style functions)
+//   * Performance Advisor (auto-index recommendations)
+//   * Query Insights (slow queries, profiling)
+//   * Charts (built-in visualization)
+//   * Data API (HTTP-based access without driver)
+
+// Monitoring API &mdash; expose metrics to your stack
+// /api/atlas/v2/groups/{groupId}/processes/{host}/measurements
+//   metrics: CPU, memory, disk IOPS, ops/sec, replication lag, cache miss rate
+
+// Alerts API &mdash; integrate with PagerDuty/Slack/email/Datadog
+// metric thresholds + custom logic + escalation policies
+
+// Backup &mdash; PITR
+// /api/atlas/v2/groups/{groupId}/backup/snapshots
+//   restore to any point within retention window
+//   restore to a NEW cluster for testing without touching prod
+
+// Atlas Search index &mdash; defined declaratively
+{
+  "name": "products_search",
+  "definition": {
+    "mappings": {
+      "fields": {
+        "name":     { "type": "string", "analyzer": "lucene.standard" },
+        "category": { "type": "stringFacet" },
+        "price":    { "type": "number" }
+      }
+    }
+  }
+}
+
+// Atlas Online Archive &mdash; auto-archive cold data to cheap storage
+{
+  "criteria": {
+    "type": "DATE",
+    "dateField": "created_at",
+    "expireAfterDays": 365
+  },
+  "collName": "events",
+  "dbName":   "app"
+}
+// Old docs queryable via federation; storage cost ~5% of hot tier</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table>
+<thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead>
+<tbody>
+<tr><td>Atlas (managed)</td><td>Zero ops; instant scaling; built-in security</td><td>Self-host &mdash; full control but heavy ops burden</td></tr>
+<tr><td>Cloud Backup with PITR</td><td>Restore to any second in retention window</td><td>mongodump &mdash; full snapshots only; manual ops</td></tr>
+<tr><td>Auto-scale disk + compute</td><td>Survives sudden traffic spikes</td><td>Static sizing &mdash; outage during unexpected load</td></tr>
+<tr><td>VPC peering / PrivateLink</td><td>Traffic never traverses public internet</td><td>Public + IP allowlist &mdash; works but exposes attack surface</td></tr>
+<tr><td>Atlas Search co-located</td><td>One platform; same auth + cluster</td><td>External Elasticsearch &mdash; another component to manage</td></tr>
+</tbody>
+</table>
+
+<p><strong>Production polish:</strong> manage Atlas as code via <strong>Terraform</strong> (<code>mongodbatlas_*</code> resources) or <strong>Pulumi</strong> &mdash; clusters, users, network rules, search indexes, all version-controlled. Integrate alerts with <strong>PagerDuty</strong>, <strong>Opsgenie</strong>, <strong>Slack</strong>, <strong>Microsoft Teams</strong>, <strong>Datadog</strong>, <strong>New Relic</strong>. Identity: federate database access via <strong>OIDC</strong> with <strong>Auth0</strong>/<strong>Okta</strong>/<strong>WorkOS</strong>/<strong>Azure AD</strong> &mdash; no shared passwords. Compliance: Atlas is <strong>SOC 2</strong>, <strong>HIPAA</strong> (BAA), <strong>PCI-DSS Level 1</strong>, <strong>ISO 27001</strong>, <strong>FedRAMP</strong>; <strong>Drata</strong>/<strong>Vanta</strong>/<strong>Secureframe</strong> consume Atlas evidence automatically. Cost optimization: use <strong>Online Archive</strong> for cold data; <strong>auto-pause</strong> dev clusters; right-size via Performance Advisor recommendations. <strong>Atlas Application Services</strong> (formerly Realm) provide GraphQL/REST endpoints, sync to mobile, and serverless functions &mdash; useful for rapid prototypes. <strong>Atlas Stream Processing</strong> handles Kafka-style ingestion natively. For multi-region failover, <strong>Atlas Global Clusters</strong> enable zone-aware sharding with GDPR-compliant data residency. Self-hosted equivalent for full control: <strong>MongoDB Ops Manager</strong> + <strong>Kubernetes Operator</strong>.</p>
+'''
+
+
+
+
+ANSWERS[51] = r'''
+<p><strong>Situation:</strong> a travel booking platform aggregates flights, hotels, and car rentals. Users search availability with date ranges, locations, and filters; bookings are atomic across multiple line items; inventory updates arrive from external suppliers (GDS, hotel APIs, rental aggregators) in near real time.</p>
+
+<p><strong>Approach:</strong> separate domain collections (<code>flights</code>, <code>hotels</code>, <code>car_rentals</code>) keep schema clarity and indexing patterns clean; <code>bookings</code> snapshot all line items at purchase time so historical records survive supplier price/availability changes. Inventory caches sit in MongoDB but the source of truth is the upstream supplier API; cache TTL keeps drift bounded.</p>
+
+<pre><code>// flights
+db.flights.insertOne({
+  _id: ObjectId(),
+  flight_no: "BA178",
+  carrier: "British Airways",
+  origin: { code: "JFK", city: "New York" },
+  destination: { code: "LHR", city: "London" },
+  departure: ISODate("2026-06-01T18:30:00Z"),
+  arrival:   ISODate("2026-06-02T07:30:00Z"),
+  cabins: [
+    { class: "economy",  fare_cents: 65000, seats_available: 23 },
+    { class: "business", fare_cents: 320000, seats_available: 4 }
+  ],
+  cached_until: ISODate("2026-04-29T16:00:00Z")
+})
+
+// hotels &mdash; rooms embedded with rate plans
+db.hotels.insertOne({
+  _id: ObjectId(),
+  name: "Grand Plaza",
+  location: { type: "Point", coordinates: [-0.127, 51.507] },
+  star_rating: 4,
+  rooms: [
+    { type: "deluxe_king", rate_cents: 28900, available_dates: [/* ... */] }
+  ],
+  cached_until: ISODate("...")
+})
+
+// bookings &mdash; snapshot everything
+db.bookings.insertOne({
+  _id: ObjectId(),
+  user_id: ObjectId("..."),
+  pnr: "ABC123",
+  status: "confirmed",
+  items: [
+    { type: "flight", flight_no: "BA178", origin: "JFK", destination: "LHR",
+      departure: ISODate("..."), passenger: "Alice Smith", seat: "14A",
+      fare_cents: 65000 },
+    { type: "hotel", hotel_name: "Grand Plaza", check_in: ISODate("..."),
+      check_out: ISODate("..."), nights: 3, rate_cents: 28900 },
+    { type: "car",   vendor: "Hertz", pickup: "LHR", days: 3, rate_cents: 4500 }
+  ],
+  totals: { subtotal_cents: 161200, tax_cents: 12880, total_cents: 174080 },
+  payment: { provider: "stripe", intent_id: "pi_..." },
+  created_at: new Date()
+})
+
+// Indexes
+db.flights.createIndex({ "origin.code": 1, "destination.code": 1, departure: 1 })
+db.hotels.createIndex({ location: "2dsphere" })
+db.hotels.createIndex({ "rooms.available_dates": 1 })
+db.bookings.createIndex({ user_id: 1, created_at: -1 })
+db.bookings.createIndex({ pnr: 1 }, { unique: true })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Separate collections per product</td><td>Distinct query patterns, indexes, schemas</td><td>Single <code>products</code> &mdash; sparse indexes, polymorphic mess</td></tr>
+<tr><td>Snapshot all line items in booking</td><td>Survives supplier price/availability changes</td><td>References &mdash; broken when flight updates</td></tr>
+<tr><td>Cached inventory + TTL</td><td>Fast search; drift bounded</td><td>Live supplier calls per search &mdash; rate limits, latency</td></tr>
+<tr><td>2dsphere on hotel location</td><td>&ldquo;Hotels near LHR&rdquo; in milliseconds</td><td>Filter by city string &mdash; misses nearby cities</td></tr>
+<tr><td>Compound flight index (origin + destination + date)</td><td>Most common search pattern is index-covered</td><td>Single-field &mdash; intersect at query time, slow</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> integrate <strong>Amadeus</strong>/<strong>Sabre</strong>/<strong>Travelport</strong> GDS for live flight inventory and <strong>Booking.com</strong>/<strong>Expedia EAN</strong>/<strong>Hotelbeds</strong> for hotel inventory; payments through <strong>Stripe</strong>/<strong>Adyen</strong>; <strong>idempotency keys</strong> on booking POST defeat double-clicks and retries; <strong>Saga pattern</strong> for multi-supplier bookings &mdash; if hotel confirms but flight fails, compensating refund triggers automatically via <strong>Temporal</strong>/<strong>Inngest</strong>; <strong>fraud detection</strong> via <strong>Sift</strong>/<strong>Stripe Radar</strong>; pricing experiments via <strong>Statsig</strong>/<strong>LaunchDarkly</strong>; transactional confirmations via <strong>Postmark</strong>/<strong>Resend</strong>/<strong>SendGrid</strong>; SMS via <strong>Twilio</strong>; <strong>cancellation/refund flows</strong> hit the supplier API and update the booking status &mdash; never delete the original; analytics export to <strong>BigQuery</strong>/<strong>Snowflake</strong> via <strong>Airbyte</strong>; cache hot search routes (NYC&hairsp;&rarr;&hairsp;LON next 30 days) in <strong>Redis</strong> with 60s TTL.</p>
+'''
+
+ANSWERS[52] = r'''
+<p><strong>Situation:</strong> a MongoDB collection contains duplicate records &mdash; same logical entity ingested multiple times due to retries, bad ETL, or relaxed uniqueness constraints in legacy systems. The duplicates must be detected, merged, and prevented going forward.</p>
+
+<p><strong>Approach:</strong> three phases. <strong>Detect</strong> with an aggregation that groups by candidate keys; <strong>merge</strong> with a deterministic strategy (latest wins, oldest wins, field-by-field) inside a transaction or idempotent script; <strong>prevent</strong> with a unique index on the natural key. For fuzzy duplicates (typo variations), use Atlas Search or external tools.</p>
+
+<pre><code>// 1. DETECT &mdash; group by candidate key, find groups with count &gt; 1
+db.users.aggregate([
+  { $group: {
+      _id: { $toLower: "$email" },
+      ids: { $push: "$_id" },
+      count: { $sum: 1 },
+      latest: { $max: "$updated_at" }
+  }},
+  { $match: { count: { $gt: 1 } } },
+  { $merge: "users_duplicates" }   // materialize for review
+])
+
+// 2. MERGE &mdash; for each group, keep the latest, remove others
+db.users_duplicates.find().forEach(group =&gt; {
+  const winner = db.users.find({ _id: { $in: group.ids } })
+                          .sort({ updated_at: -1 }).limit(1).next()
+  const losers = group.ids.filter(id =&gt; !id.equals(winner._id))
+
+  // Reassign foreign keys before deleting
+  db.orders.updateMany({ user_id: { $in: losers } }, { $set: { user_id: winner._id } })
+
+  // Optionally union arrays from losers into winner
+  const merged = mergeFields(winner, losers.map(id =&gt; db.users.findOne({ _id: id })))
+  db.users.updateOne({ _id: winner._id }, { $set: merged })
+
+  db.users.deleteMany({ _id: { $in: losers } })
+})
+
+// 3. PREVENT &mdash; unique index on natural key
+db.users.createIndex({ email: 1 }, { unique: true, collation: { locale: "en", strength: 2 } })
+
+// Handle write conflicts on inserts &mdash; idempotent upsert
+db.users.updateOne(
+  { email: "alice@example.com" },
+  { $setOnInsert: { created_at: new Date() }, $set: { updated_at: new Date() } },
+  { upsert: true }
+)
+
+// Fuzzy duplicate detection (Levenshtein, soundex) via Atlas Search
+db.users.aggregate([
+  { $search: {
+      index: "users_search",
+      moreLikeThis: { like: [{ name: "Alice Smith", email: "alice@example.com" }] }
+  }}
+])</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Aggregation-based detection</td><td>Materializes candidate groups for human review</td><td>Live dedup &mdash; slow, locks during merge</td></tr>
+<tr><td>Latest-wins by <code>updated_at</code></td><td>Deterministic, reproducible, debuggable</td><td>Random pick &mdash; unpredictable, breaks idempotency</td></tr>
+<tr><td>Reassign FKs before delete</td><td>Avoids orphan records</td><td>Cascade delete &mdash; data loss</td></tr>
+<tr><td>Unique index with collation</td><td>Case/accent-insensitive uniqueness</td><td>Plain unique &mdash; <code>Alice@</code> and <code>alice@</code> both inserted</td></tr>
+<tr><td>Idempotent upsert pattern</td><td>Retries don&rsquo;t create duplicates</td><td>Plain insert &mdash; double-spend on network retry</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> for <strong>fuzzy duplicates</strong> (Alice Smith vs. Alyce Smith), use <strong>MongoDB Atlas Search</strong> with the <code>moreLikeThis</code> operator or <strong>Atlas Vector Search</strong> on name embeddings; <strong>identity resolution</strong> at scale &mdash; tools like <strong>Senzing</strong>, <strong>Zingg</strong>, or <strong>AWS Entity Resolution</strong>; for <strong>customer data unification</strong> use <strong>Segment Personas</strong>/<strong>RudderStack</strong>/<strong>Hightouch</strong>; preventive guard rails: <strong>idempotency keys</strong> on every external integration (Stripe, webhooks); <strong>schema validation</strong> with <code>$jsonSchema</code> requiring email/external_id; <strong>data quality monitoring</strong> via <strong>Soda</strong>/<strong>Great Expectations</strong>/<strong>Monte Carlo</strong> with daily duplicate count metrics; <strong>change streams</strong> trigger an immediate dedup check when a write hits a known dupe pattern; for <strong>compliance</strong> (GDPR &ldquo;right to be forgotten&rdquo;), the dedup process becomes part of the data subject deletion workflow; <strong>audit log</strong> every merge with the original IDs, timestamps, and operator for traceability.</p>
+'''
+
+ANSWERS[53] = r'''
+<p><strong>Situation:</strong> a loyalty program tracks customer points earned through purchases, points redeemed for rewards, tiers (bronze/silver/gold), and partner offers. Reads &mdash; current point balance, history &mdash; are frequent; writes happen on every transaction; reconciliation must be auditable for finance.</p>
+
+<p><strong>Approach:</strong> three collections. <code>customers</code> holds profile and a denormalized cached <code>points_balance</code> for O(1) reads; <code>point_events</code> is an append-only ledger of every earn/redeem; <code>rewards</code> defines what can be redeemed. Balance is the source of truth, but reconciled against the ledger nightly.</p>
+
+<pre><code>// customers &mdash; cached balance + tier
+db.customers.insertOne({
+  _id: ObjectId(),
+  email: "alice@example.com",
+  member_since: new Date(),
+  tier: "silver",                    // bronze | silver | gold | platinum
+  tier_valid_until: ISODate("2026-12-31"),
+  points_balance: 4_280,             // cached for O(1) reads
+  lifetime_points: 12_450,
+  preferences: { offers: true }
+})
+
+// point_events &mdash; append-only ledger
+db.point_events.insertOne({
+  _id: ObjectId(),
+  customer_id: ObjectId("..."),
+  type: "earn",                      // earn | redeem | expire | adjust
+  points: 250,                        // signed: +earn, -redeem
+  reason: "purchase",
+  reference: { type: "order", id: ObjectId("...") },
+  expires_at: ISODate("2027-04-29"), // points expire after 1 year
+  ts: new Date()
+})
+
+// rewards catalog
+db.rewards.insertOne({
+  _id: "reward_freeshipping",
+  name: "Free Shipping",
+  cost_points: 500,
+  active: true,
+  inventory: 10_000
+})
+
+// Atomic earn (with cache update + ledger insert)
+const session = client.startSession()
+await session.withTransaction(async () =&gt; {
+  await db.point_events.insertOne({
+    customer_id, type: "earn", points: 250, reason: "purchase",
+    reference: { type: "order", id: orderId },
+    expires_at: addYears(new Date(), 1), ts: new Date()
+  }, { session })
+  await db.customers.updateOne(
+    { _id: customer_id },
+    { $inc: { points_balance: 250, lifetime_points: 250 } },
+    { session }
+  )
+})
+
+// Redeem &mdash; refuse if insufficient
+await db.customers.updateOne(
+  { _id: customer_id, points_balance: { $gte: 500 } },
+  { $inc: { points_balance: -500 } }
+)
+// Conditional update returns matchedCount=0 if balance &lt; 500
+
+// Indexes
+db.point_events.createIndex({ customer_id: 1, ts: -1 })
+db.point_events.createIndex({ expires_at: 1, type: 1 })   // for expiry job
+db.customers.createIndex({ email: 1 }, { unique: true })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Append-only ledger</td><td>Audit trail; finance can reconcile</td><td>Mutate balance only &mdash; no audit, can&rsquo;t debug</td></tr>
+<tr><td>Cached <code>points_balance</code></td><td>O(1) reads on customer page</td><td>Live <code>$sum</code> &mdash; expensive on long histories</td></tr>
+<tr><td>Conditional decrement</td><td>Prevents negative balance race conditions</td><td>Read-then-write &mdash; check-time-of-use bug</td></tr>
+<tr><td>Transaction for earn</td><td>Cache and ledger always in sync</td><td>Two writes &mdash; partial failures cause drift</td></tr>
+<tr><td>Per-event expiry</td><td>FIFO expiration; simple to compute</td><td>Bucket expiry &mdash; complex partial expiries</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> nightly <strong>reconciliation job</strong> recomputes <code>points_balance = sum(point_events)</code> and alerts on any drift &mdash; integrate with <strong>Datadog</strong>/<strong>PagerDuty</strong>; <strong>tier evaluation</strong> runs nightly against the rolling 12-month lifetime points; <strong>expiration job</strong> at month-end emits <code>expire</code> events with reference to the original earn event; <strong>partner offers</strong> (earn 5x at restaurants) tagged on the event for analytics; <strong>fraud detection</strong> via velocity checks (1000 points earned in 5 minutes flags the account); <strong>customer service portal</strong> uses <code>type: "adjust"</code> events with reason codes for goodwill credits; <strong>marketing automation</strong> triggers (you&rsquo;re 200 points from gold!) via <strong>Customer.io</strong>/<strong>Braze</strong>/<strong>Iterable</strong>; export ledger to <strong>Snowflake</strong>/<strong>BigQuery</strong> via <strong>Airbyte</strong> for finance reporting; <strong>blockchain-style verifiability</strong> (chain hashes on events) is overkill for most loyalty programs &mdash; a daily SHA-256 of the day&rsquo;s ledger appended to a tamper-evident log via <strong>AWS QLDB</strong> or <strong>Datomic</strong> is enough.</p>
+'''
+
+ANSWERS[54] = r'''
+<p><strong>Situation:</strong> a sports league with teams, players, matches, schedules, and stats. Players move between teams across seasons; match results update standings in near real time; statistics need historical accuracy (a player&rsquo;s 2024 stats reflect their 2024 team, not their current team).</p>
+
+<p><strong>Approach:</strong> four collections. <code>teams</code> holds canonical team data; <code>players</code> holds player identity; <code>player_seasons</code> records per-season team affiliations and stats (so historical accuracy survives transfers); <code>matches</code> records games with snapshotted lineups. Standings are computed via aggregation.</p>
+
+<pre><code>// teams &mdash; canonical
+db.teams.insertOne({
+  _id: ObjectId(),
+  name: "Manchester United",
+  short: "MUN",
+  league: "premier_league",
+  founded: 1878,
+  stadium: "Old Trafford"
+})
+
+// players &mdash; identity, not affiliation
+db.players.insertOne({
+  _id: ObjectId(),
+  full_name: "Marcus Lee",
+  born: ISODate("2000-03-12"),
+  nationality: "GB",
+  position: "forward"
+})
+
+// player_seasons &mdash; per-season team and stats
+db.player_seasons.insertOne({
+  _id: ObjectId(),
+  player_id: ObjectId("..."),
+  team_id:   ObjectId("..."),
+  season:    "2025-26",
+  jersey_no: 9,
+  stats: {
+    appearances: 0,
+    goals: 0,
+    assists: 0,
+    yellow_cards: 0,
+    minutes_played: 0
+  }
+})
+
+// matches &mdash; with snapshotted lineups
+db.matches.insertOne({
+  _id: ObjectId(),
+  league: "premier_league",
+  season: "2025-26",
+  matchday: 12,
+  kickoff: ISODate("2026-04-29T15:00:00Z"),
+  home: {
+    team_id: ObjectId("..."), team_name: "Manchester United",
+    score: 2,
+    lineup: [
+      { player_id: ObjectId("..."), name: "Marcus Lee", position: "ST", jersey: 9 }
+    ]
+  },
+  away: {
+    team_id: ObjectId("..."), team_name: "Liverpool",
+    score: 1,
+    lineup: [/* ... */]
+  },
+  events: [
+    { minute: 23, type: "goal", team: "home", player_id: ObjectId("...") },
+    { minute: 67, type: "yellow_card", team: "away", player_id: ObjectId("...") }
+  ],
+  status: "completed"     // scheduled | live | completed | postponed
+})
+
+// Standings &mdash; aggregated on demand
+db.matches.aggregate([
+  { $match: { season: "2025-26", league: "premier_league", status: "completed" } },
+  { $facet: {
+      home: [
+        { $project: {
+            team_id: "$home.team_id", points: {
+              $cond: [{ $gt: ["$home.score", "$away.score"] }, 3,
+                { $cond: [{ $eq: ["$home.score", "$away.score"] }, 1, 0] }]
+            },
+            gf: "$home.score", ga: "$away.score"
+        }}
+      ],
+      away: [
+        { $project: {
+            team_id: "$away.team_id", points: {
+              $cond: [{ $gt: ["$away.score", "$home.score"] }, 3,
+                { $cond: [{ $eq: ["$home.score", "$away.score"] }, 1, 0] }]
+            },
+            gf: "$away.score", ga: "$home.score"
+        }}
+      ]
+  }},
+  { $project: { all: { $concatArrays: ["$home", "$away"] } } },
+  { $unwind: "$all" },
+  { $group: {
+      _id: "$all.team_id",
+      points: { $sum: "$all.points" },
+      gf: { $sum: "$all.gf" }, ga: { $sum: "$all.ga" }
+  }},
+  { $set: { gd: { $subtract: ["$gf", "$ga"] } } },
+  { $sort: { points: -1, gd: -1, gf: -1 } },
+  { $merge: "standings_2025_26" }
+])
+
+// Indexes
+db.player_seasons.createIndex({ player_id: 1, season: 1 }, { unique: true })
+db.matches.createIndex({ season: 1, matchday: 1 })
+db.matches.createIndex({ "home.team_id": 1, kickoff: -1 })
+db.matches.createIndex({ "away.team_id": 1, kickoff: -1 })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Per-season player record</td><td>Historical stats unchanged when player transfers</td><td>Single player doc with current team &mdash; rewrites history</td></tr>
+<tr><td>Snapshot lineup in match</td><td>Player numbers, names, positions accurate forever</td><td>Live join &mdash; breaks when player leaves</td></tr>
+<tr><td>Materialized standings</td><td>Standings page loads in O(team count)</td><td>Live aggregate per request &mdash; 380 matches scanned per page load</td></tr>
+<tr><td>Embed events in match</td><td>One read renders the match page</td><td>Separate <code>match_events</code> &mdash; multiple round trips</td></tr>
+<tr><td>Status field driving UI</td><td>Live/completed/postponed &mdash; clear state machine</td><td>Computed from kickoff &mdash; ambiguous (delays, abandons)</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> ingest live match data from <strong>Opta</strong>/<strong>StatsPerform</strong>/<strong>Sportradar</strong>; live updates via <strong>change streams</strong> piped to WebSockets (<strong>Pusher</strong>/<strong>Ably</strong>/<strong>PartyKit</strong>); fantasy points and projections rebuilt nightly to <strong>BigQuery</strong>/<strong>Snowflake</strong>; <strong>player headshots and team logos</strong> via <strong>Cloudinary</strong>; <strong>video highlights</strong> via <strong>Mux</strong>/<strong>Cloudflare Stream</strong>; <strong>predictions and odds</strong> from third-party APIs (<strong>The Odds API</strong>); <strong>fan engagement</strong> push notifications via <strong>OneSignal</strong>/<strong>Firebase Cloud Messaging</strong>; <strong>Atlas Search</strong> powers player and team typeahead; <strong>caching</strong>: hot match pages and standings in <strong>Redis</strong> with TTL invalidation triggered by match-update change streams; <strong>betting integrations</strong> require strict separation and KYC via <strong>Persona</strong>/<strong>Onfido</strong>; export to warehouse via <strong>Airbyte</strong>/<strong>Fivetran</strong> for analytics dashboards in <strong>Metabase</strong>/<strong>Hex</strong>/<strong>Atlas Charts</strong>.</p>
+'''
+
+ANSWERS[55] = r'''
+<p><strong>Situation:</strong> the application sends real-time notifications and alerts &mdash; new message alerts, mentions, payment confirmations, system warnings. Notifications go to web (in-app + browser push), iOS, Android, email, and SMS. Users can mute, snooze, and configure preferences per category.</p>
+
+<p><strong>Approach:</strong> separate <strong>generation</strong> from <strong>delivery</strong>. A <code>notifications</code> collection stores the canonical record (delivered to the in-app inbox). A separate worker reads new notifications via <strong>change streams</strong> and dispatches to channels (push, email, SMS) via specialized providers, respecting per-user preferences and quiet hours.</p>
+
+<pre><code>// notifications &mdash; canonical record
+db.notifications.insertOne({
+  _id: ObjectId(),
+  user_id: ObjectId("..."),
+  category: "mention",            // mention | dm | system | billing | marketing
+  title: "Alice mentioned you",
+  body: "Alice mentioned you in #general",
+  link: "/channels/general?msg=...",
+  data: { actor_id: ObjectId("..."), channel_id: ObjectId("...") },
+  channels: ["inapp", "push", "email"],   // requested fan-out
+  status: "queued",                        // queued | delivered | seen | dismissed
+  created_at: new Date(),
+  delivered_at: null,
+  seen_at: null
+})
+
+// user_notification_preferences
+db.user_notification_preferences.insertOne({
+  user_id: ObjectId("..."),
+  preferences: {
+    mention:   { inapp: true,  push: true,  email: false, sms: false },
+    dm:        { inapp: true,  push: true,  email: false, sms: true  },
+    billing:   { inapp: true,  push: true,  email: true,  sms: false },
+    marketing: { inapp: true,  push: false, email: true,  sms: false }
+  },
+  quiet_hours: { start: "22:00", end: "07:00", tz: "America/New_York" },
+  push_tokens: [
+    { device: "ios",     token: "...", added_at: new Date() },
+    { device: "android", token: "...", added_at: new Date() }
+  ]
+})
+
+// Worker watches new notifications and dispatches
+const stream = db.notifications.watch([
+  { $match: { operationType: "insert" } }
+], { fullDocument: "default" })
+
+for await (const change of stream) {
+  const notif = change.fullDocument
+  const prefs = await db.user_notification_preferences.findOne({ user_id: notif.user_id })
+  if (inQuietHours(prefs.quiet_hours)) {
+    await db.notifications.updateOne({ _id: notif._id }, { $set: { snoozed_until: nextWindow(prefs) } })
+    continue
+  }
+  for (const channel of notif.channels) {
+    if (!prefs.preferences[notif.category]?.[channel]) continue
+    await dispatch(channel, notif, prefs)
+  }
+}
+
+// Mark as seen (user opens inbox)
+db.notifications.updateMany(
+  { user_id, seen_at: null },
+  { $set: { seen_at: new Date(), status: "seen" } }
+)
+
+// Indexes
+db.notifications.createIndex({ user_id: 1, created_at: -1 })
+db.notifications.createIndex({ user_id: 1, seen_at: 1 })   // unread badge
+db.user_notification_preferences.createIndex({ user_id: 1 }, { unique: true })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Canonical inbox + dispatch worker</td><td>Single source of truth; easy to retry/replay</td><td>Per-channel collections &mdash; consistency nightmare</td></tr>
+<tr><td>Change streams for fan-out</td><td>Push-based, low latency, durable</td><td>Polling &mdash; misses, lag, load</td></tr>
+<tr><td>Per-category preferences</td><td>User-level granular muting</td><td>Global on/off &mdash; users disable everything</td></tr>
+<tr><td>Quiet hours snoozing</td><td>Respects user time zone</td><td>Send always &mdash; complaints, opt-outs</td></tr>
+<tr><td>Push tokens in preferences</td><td>Co-located with delivery rules</td><td>Separate <code>devices</code> collection &mdash; extra read</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> use specialized notification platforms &mdash; <strong>Knock</strong>, <strong>Courier</strong>, <strong>Customer.io</strong>, <strong>Braze</strong>, or <strong>OneSignal</strong> &mdash; that handle channel orchestration, batching, throttling, and delivery analytics, so you don&rsquo;t reinvent retries and bounce handling; <strong>push delivery</strong> via <strong>APNs</strong> (iOS), <strong>FCM</strong> (Android), <strong>Web Push API</strong>; <strong>email</strong> via <strong>Postmark</strong>/<strong>Resend</strong>/<strong>SendGrid</strong> with <strong>React Email</strong>/<strong>MJML</strong> templates; <strong>SMS</strong> via <strong>Twilio</strong>/<strong>MessageBird</strong>; <strong>in-app real-time</strong> via WebSockets (<strong>Pusher</strong>/<strong>Ably</strong>/<strong>Liveblocks</strong>); <strong>batching</strong> &mdash; group multiple mentions into a digest after 5 min of inactivity; <strong>frequency capping</strong> &mdash; max 3 marketing pushes per day; <strong>delivery tracking</strong> via webhook callbacks updating notification status; <strong>preferences UI</strong> mounted at <code>/settings/notifications</code> with granular toggles; <strong>soft-bounce/unsubscribe</strong> handling auto-disables channels; <strong>compliance</strong>: GDPR/CCPA opt-out tracked in preferences, audit log of marketing sends.</p>
+'''
+
+ANSWERS[56] = r'''
+<p><strong>Situation:</strong> a MongoDB-backed website needs strong SEO &mdash; fast page loads, server-rendered HTML, structured data, clean URLs, sitemaps, canonical URLs, fresh content, and no duplicate content issues. Google&rsquo;s ranking depends on technical SEO; the database schema must support it.</p>
+
+<p><strong>Approach:</strong> denormalize SEO fields directly into content documents (slug, title, meta_description, og_image), pre-render HTML at publish time (don&rsquo;t parse Markdown on every request), maintain a <code>sitemap_entries</code> view via <code>$merge</code>, and use canonical URL fields to handle duplicates. The application layer (Next.js, Astro, Remix) does SSR/SSG against MongoDB.</p>
+
+<pre><code>// articles &mdash; SEO fields denormalized
+db.articles.insertOne({
+  _id: ObjectId(),
+  slug: "understanding-mongodb-indexes",
+  canonical_url: "https://example.com/blog/understanding-mongodb-indexes",
+  status: "published",
+  seo: {
+    title: "Understanding MongoDB Indexes &ndash; Example Blog",
+    description: "A 2026 guide to compound indexes, ESR, and Atlas Performance Advisor.",
+    keywords: ["mongodb", "indexes", "performance"],
+    og_image: "https://cdn.example.com/og/mongodb-indexes.png",
+    twitter_card: "summary_large_image"
+  },
+  content_html: "...",   // pre-rendered, fast to serve
+  published_at: new Date(),
+  updated_at: new Date(),
+  word_count: 1842,
+  schema_org: {
+    "@type": "BlogPosting",
+    "headline": "Understanding MongoDB Indexes",
+    "datePublished": "2026-04-29T10:00:00Z",
+    "author": { "@type": "Person", "name": "Alice Cole" }
+  }
+})
+
+// Indexes for SEO routes
+db.articles.createIndex({ slug: 1 }, { unique: true })
+db.articles.createIndex({ status: 1, published_at: -1 })   // archive pages
+db.articles.createIndex({ "seo.keywords": 1 })
+
+// Sitemap generation &mdash; materialized via $merge nightly
+db.articles.aggregate([
+  { $match: { status: "published" } },
+  { $project: {
+      _id: 0,
+      url:        { $concat: ["https://example.com/blog/", "$slug"] },
+      lastmod:    "$updated_at",
+      changefreq: "weekly",
+      priority:   0.7
+  }},
+  { $merge: "sitemap_entries" }
+])
+
+// Canonical URLs for syndicated content
+db.articles.updateOne(
+  { _id: syndicatedId },
+  { $set: { canonical_url: "https://original-site.com/post-slug" } }
+)
+
+// 301 redirects for renamed slugs
+db.redirects.insertOne({
+  _id: ObjectId(),
+  from_path: "/blog/old-slug",
+  to_path:   "/blog/new-slug",
+  status_code: 301,
+  created_at: new Date()
+})
+db.redirects.createIndex({ from_path: 1 }, { unique: true })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Pre-rendered HTML</td><td>Fast TTFB; no Markdown parsing per request</td><td>Render-on-read &mdash; CPU per request, slower</td></tr>
+<tr><td>SEO fields on the document</td><td>Single-doc fetch renders the full <code>&lt;head&gt;</code></td><td>Compute at request &mdash; redundant work</td></tr>
+<tr><td>Materialized sitemap</td><td>Generation is offline; serving is O(1) read</td><td>Live aggregate &mdash; minutes to compute on large blogs</td></tr>
+<tr><td>Canonical URL field</td><td>Handles syndication; dedup signals to Google</td><td>None &mdash; duplicate content penalty</td></tr>
+<tr><td>Redirects collection</td><td>301 rewrites preserve link equity on slug changes</td><td>Hard-coded in app &mdash; redeploy for every change</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> SSR/SSG via <strong>Next.js</strong>/<strong>Astro</strong>/<strong>Remix</strong>/<strong>SvelteKit</strong> &mdash; static export to <strong>Vercel</strong>/<strong>Cloudflare Pages</strong>/<strong>Netlify</strong> for instant TTFB; <strong>ISR (incremental static regeneration)</strong> revalidates pages on publish via webhooks from change streams; <strong>image optimization</strong> via <strong>Cloudinary</strong>/<strong>imgix</strong>/<strong>Vercel Image Optimization</strong>/<strong>next/image</strong>; <strong>structured data</strong> validation via <strong>Schema.org</strong> JSON-LD; <strong>Core Web Vitals</strong> monitored via <strong>Vercel Speed Insights</strong>/<strong>Cloudflare Web Analytics</strong>/<strong>WebPageTest</strong>; <strong>internal linking</strong> &mdash; related articles via <strong>Atlas Vector Search</strong> on embeddings; <strong>duplicate detection</strong> across the site via canonical URLs and noindex on faceted navigation; <strong>RSS/Atom</strong> feeds generated from the same query as the sitemap; <strong>robots.txt</strong>, <strong>llms.txt</strong> served from the edge; <strong>analytics</strong> via <strong>Plausible</strong>/<strong>Fathom</strong>/<strong>PostHog</strong> (privacy-preserving); for international SEO, hreflang tags driven by per-locale article documents; <strong>SEO audits</strong> via <strong>Ahrefs</strong>/<strong>Semrush</strong>/<strong>Screaming Frog</strong>.</p>
+'''
+
+ANSWERS[57] = r'''
+<p><strong>Situation:</strong> a crowdfunding platform with campaigns, backers, pledges, and rewards. Campaigns have funding goals and deadlines; pledges may be conditional (only charged if goal met); reward tiers ship physical or digital goods. Reads dominate (campaign pages); pledge writes spike around launches and deadlines.</p>
+
+<p><strong>Approach:</strong> four collections. <code>campaigns</code> holds the canonical campaign with embedded reward tiers; <code>pledges</code> is the ledger of every commitment (pending, charged, refunded); <code>backers</code> is a denormalized roll-up per user per campaign; <code>updates</code> hold creator posts. Funding totals are denormalized for fast reads with a periodic reconcile.</p>
+
+<pre><code>// campaigns &mdash; with embedded reward tiers
+db.campaigns.insertOne({
+  _id: ObjectId(),
+  creator_id: ObjectId("..."),
+  title: "Open-Source Coffee Grinder",
+  slug: "opensource-grinder",
+  category: "design",
+  goal_cents: 5_000_000,                  // $50,000
+  raised_cents: 0,                         // denormalized
+  backer_count: 0,                          // denormalized
+  status: "live",                           // draft | live | succeeded | failed | cancelled
+  starts_at:    ISODate("2026-04-01"),
+  ends_at:      ISODate("2026-05-31"),
+  rewards: [
+    { _id: "tier_early_bird", title: "Early Bird", price_cents: 19900,
+      description: "Get the grinder &mdash; saves $50", limit: 100, claimed: 0,
+      ships: { regions: ["US", "EU"], estimate: ISODate("2026-12-01") } },
+    { _id: "tier_standard",   title: "Standard",   price_cents: 24900,
+      description: "Get the grinder", limit: null, claimed: 0,
+      ships: { regions: ["US", "EU"], estimate: ISODate("2027-01-15") } }
+  ],
+  story_html: "..."
+})
+
+// pledges &mdash; the ledger
+db.pledges.insertOne({
+  _id: ObjectId(),
+  campaign_id: ObjectId("..."),
+  backer_id:   ObjectId("..."),
+  reward_id:   "tier_early_bird",
+  amount_cents: 19900,
+  status: "pending",                       // pending | charged | refunded | failed
+  payment: { provider: "stripe", intent_id: "pi_..." },
+  shipping: { name: "Alice Smith", address: { /* ... */ } },
+  pledged_at: new Date()
+})
+
+// Place a pledge atomically (with limit enforcement)
+const session = client.startSession()
+await session.withTransaction(async () =&gt; {
+  const result = await db.campaigns.updateOne(
+    { _id: campaign_id, "rewards._id": "tier_early_bird",
+      $expr: { $lt: [
+        { $arrayElemAt: ["$rewards.claimed", { $indexOfArray: ["$rewards._id", "tier_early_bird"] }] },
+        { $arrayElemAt: ["$rewards.limit",   { $indexOfArray: ["$rewards._id", "tier_early_bird"] }] }
+      ]}
+    },
+    { $inc: { "rewards.$.claimed": 1, raised_cents: 19900, backer_count: 1 } },
+    { session }
+  )
+  if (result.modifiedCount === 0) throw new Error("reward_sold_out")
+  await db.pledges.insertOne({ /* pledge */ }, { session })
+})
+
+// On campaign deadline: succeed or refund
+db.campaigns.updateOne({ _id, ends_at: { $lt: new Date() }, status: "live",
+  $expr: { $gte: ["$raised_cents", "$goal_cents"] } },
+  { $set: { status: "succeeded" } })
+
+// Indexes
+db.campaigns.createIndex({ status: 1, ends_at: 1 })
+db.campaigns.createIndex({ creator_id: 1 })
+db.pledges.createIndex({ campaign_id: 1, pledged_at: -1 })
+db.pledges.createIndex({ backer_id: 1, pledged_at: -1 })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Embed rewards in campaign</td><td>One read renders campaign page</td><td>Separate <code>rewards</code> &mdash; <code>$lookup</code> per render</td></tr>
+<tr><td>Denormalized totals</td><td>Campaign page loads in O(1)</td><td>Live <code>$sum</code> &mdash; thousands of pledges scanned</td></tr>
+<tr><td>Conditional update with $expr</td><td>Atomic limit enforcement; no oversell</td><td>Read-then-check &mdash; race conditions</td></tr>
+<tr><td>All-or-nothing model (Kickstarter)</td><td>Pledges captured at deadline only if goal met</td><td>Charge immediately &mdash; refund mass on failure</td></tr>
+<tr><td>Pending &rarr; charged status flow</td><td>Reflects payment lifecycle</td><td>Single status &mdash; can&rsquo;t represent &ldquo;intent vs settled&rdquo;</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> payments via <strong>Stripe</strong> (Issue <code>PaymentIntent</code> with <code>capture_method: "manual"</code> for delayed capture at deadline); <strong>fraud scoring</strong> via <strong>Stripe Radar</strong>/<strong>Sift</strong>; <strong>shipping address validation</strong> via <strong>EasyPost</strong>/<strong>Shippo</strong>/<strong>Lob</strong>; <strong>fulfillment</strong> integrations to <strong>ShipStation</strong>/<strong>Pirate Ship</strong>; <strong>creator dashboards</strong> via <strong>Atlas Charts</strong> or custom React; <strong>change streams</strong> trigger fundraising milestone notifications via <strong>Knock</strong>/<strong>Customer.io</strong>; <strong>email/SMS updates</strong> to backers via <strong>Postmark</strong>+<strong>Twilio</strong>; <strong>reconciliation</strong>: nightly job recomputes <code>raised_cents</code> from pledges, alerts on drift; <strong>tax compliance</strong> via <strong>Stripe Tax</strong>/<strong>Avalara</strong>/<strong>TaxJar</strong>; <strong>currency</strong>: store all amounts in cents (<code>Decimal128</code> for multi-currency); <strong>analytics</strong> exported to <strong>BigQuery</strong>/<strong>Snowflake</strong>; <strong>community features</strong> (comments, updates) tied to the campaign; <strong>creator KYC</strong> via <strong>Persona</strong>/<strong>Onfido</strong>/<strong>Stripe Identity</strong>; archived campaigns kept indefinitely for trust signals; <strong>ToS enforcement</strong> via reports queue moderated through <strong>Hive</strong>/<strong>Sift</strong>.</p>
+'''
+
+ANSWERS[58] = r'''
+<p><strong>Situation:</strong> the application supports multiple languages (English, Spanish, French, Japanese...) for UI strings, content (articles, products), and user-generated text. Translations are partial &mdash; English may be ahead of Japanese; users prefer their locale and fall back to defaults; SEO needs language-specific URLs.</p>
+
+<p><strong>Approach:</strong> two patterns based on data type. <strong>UI strings</strong> live in a translations file/service (i18next, FormatJS), not MongoDB. <strong>Content with locale variants</strong> uses <strong>locale-keyed subdocs</strong> on the same parent &mdash; <code>{ title: { en: "...", es: "...", fr: "..." } }</code> &mdash; so one fetch returns all variants and fallback is in-memory.</p>
+
+<pre><code>// products &mdash; locale-keyed fields
+db.products.insertOne({
+  _id: ObjectId(),
+  sku: "WIDGET-001",
+  price_cents: 2999,
+  // Per-locale content
+  name: {
+    en: "Premium Widget",
+    es: "Widget Premium",
+    fr: "Widget Haut de Gamme",
+    ja: "プレミアムウィジェット"
+  },
+  description: {
+    en: "A high-quality widget...",
+    es: "Un widget de alta calidad...",
+    fr: "Un widget de haute qualit&eacute;..."
+    // ja missing &mdash; will fall back to en
+  },
+  default_locale: "en",
+  available_locales: ["en", "es", "fr", "ja"],
+  created_at: new Date()
+})
+
+// Application reads with fallback
+function localized(field, locale, fallback = "en") {
+  return field[locale] ?? field[fallback]
+}
+const product = await db.products.findOne({ sku: "WIDGET-001" })
+const name = localized(product.name, userLocale)
+
+// Aggregation: project the right locale server-side
+db.products.aggregate([
+  { $project: {
+      sku: 1, price_cents: 1,
+      name: { $ifNull: [`$name.${userLocale}`, "$name.en"] },
+      description: { $ifNull: [`$description.${userLocale}`, "$description.en"] }
+  }}
+])
+
+// Slugs per locale for SEO
+db.articles.insertOne({
+  _id: ObjectId(),
+  slugs: {
+    en: "how-to-bake-bread",
+    es: "como-hornear-pan",
+    fr: "comment-cuire-le-pain"
+  },
+  hreflang: ["en", "es", "fr"],   // for &lt;link rel="alternate" hreflang&gt; tags
+  // ...
+})
+db.articles.createIndex({ "slugs.en": 1 }, { unique: true, sparse: true })
+db.articles.createIndex({ "slugs.es": 1 }, { unique: true, sparse: true })
+db.articles.createIndex({ "slugs.fr": 1 }, { unique: true, sparse: true })
+
+// User preference
+db.users.updateOne({ _id: userId }, { $set: { locale: "es", currency: "EUR" } })
+
+// Translation collection (for translator workflow)
+db.translation_jobs.insertOne({
+  _id: ObjectId(),
+  source: { type: "product", id: ObjectId("..."), field: "description", locale: "en" },
+  target_locale: "ja",
+  status: "pending",            // pending | in_progress | review | published
+  assignee: ObjectId("..."),
+  due_at: ISODate("...")
+})</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Locale-keyed subdocs</td><td>One read, no joins; clean fallback logic</td><td>Per-locale collection &mdash; multi-collection consistency</td></tr>
+<tr><td>UI strings outside DB</td><td>Static, deployable, versioned with code</td><td>DB strings &mdash; cache invalidation pain, no compile-time checks</td></tr>
+<tr><td>App-side fallback chain</td><td>Flexible (en &rarr; en-US &rarr; en-GB)</td><td>DB-side <code>$ifNull</code> &mdash; less flexible, slower</td></tr>
+<tr><td>Slugs per locale</td><td>SEO-friendly URLs in each language</td><td>Single English slug &mdash; bad UX, lost local search rank</td></tr>
+<tr><td>Sparse unique indexes per locale slug</td><td>Each slug unique within its locale</td><td>Composite slug+locale &mdash; hard to enforce</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> use <strong>i18next</strong>/<strong>FormatJS</strong>/<strong>next-intl</strong> for UI string management with ICU MessageFormat for plurals and dates; <strong>translation management systems</strong> &mdash; <strong>Lokalise</strong>, <strong>Crowdin</strong>, <strong>Transifex</strong>, <strong>Phrase</strong>, or <strong>POEditor</strong> &mdash; for translator workflows with versioning and review; <strong>machine translation</strong> via <strong>DeepL</strong>/<strong>Google Translate API</strong>/<strong>OpenAI GPT-4</strong> for first drafts; <strong>locale detection</strong> via <code>Accept-Language</code> header with user override; <strong>currency formatting</strong> via <code>Intl.NumberFormat</code>; <strong>date formatting</strong> via <code>Intl.DateTimeFormat</code> with <strong>date-fns-tz</strong>/<strong>luxon</strong> for time zones; <strong>SEO</strong>: <code>&lt;link rel="alternate" hreflang&gt;</code> tags for every translated variant, separate sitemaps per locale, region-specific subdomains/paths (<code>/en/</code>, <code>/es/</code>); <strong>RTL support</strong> (Arabic, Hebrew) requires CSS logical properties; <strong>quality monitoring</strong> &mdash; flag products where translation lags &gt; 7 days; <strong>Atlas Search</strong> with locale-specific analyzers for proper tokenization (Japanese kuromoji, Chinese Smart Chinese).</p>
+'''
+
+ANSWERS[59] = r'''
+<p><strong>Situation:</strong> a food delivery platform with restaurants, menus, and orders. Restaurants update menus and prices throughout the day; orders are time-sensitive (kitchen prep, courier dispatch); availability depends on restaurant open hours and current order load. Search ranks results by location, cuisine, and ETA.</p>
+
+<p><strong>Approach:</strong> four collections. <code>restaurants</code> holds canonical restaurant data with location and hours; <code>menus</code> nests menu sections and items (versioned snapshots so old orders survive menu changes); <code>orders</code> snapshot the items at checkout; a denormalized <code>restaurant_status</code> updates frequently to reflect current load and prep time. Geospatial index on restaurant location.</p>
+
+<pre><code>// restaurants
+db.restaurants.insertOne({
+  _id: ObjectId(),
+  name: "Joe&rsquo;s Pizza",
+  cuisines: ["italian", "pizza"],
+  rating: 4.5,
+  price_level: 2,                  // 1 = $, 2 = $$, 3 = $$$
+  location: { type: "Point", coordinates: [-73.9857, 40.7484] },
+  address: { line1: "...", city: "NYC", zip: "10003" },
+  hours: {
+    mon: [{ open: "11:00", close: "23:00" }],
+    tue: [{ open: "11:00", close: "23:00" }]
+    // ...
+  },
+  delivery: { radius_km: 5, min_order_cents: 1000, fee_cents: 299 },
+  active: true
+})
+
+// menus &mdash; versioned, current pointer
+db.menus.insertOne({
+  _id: ObjectId(),
+  restaurant_id: ObjectId("..."),
+  version: 12,
+  current: true,
+  sections: [
+    { name: "Pizza", items: [
+      { _id: "pep_lg", name: "Pepperoni Pizza", price_cents: 1899,
+        description: "Classic pepperoni", image: "...",
+        options: [
+          { name: "Size", choices: [
+            { name: "Small", price_delta_cents: 0 },
+            { name: "Large", price_delta_cents: 400 }
+          ]}
+        ],
+        available: true
+      }
+    ]}
+  ],
+  effective_at: new Date()
+})
+
+// orders &mdash; snapshot items
+db.orders.insertOne({
+  _id: ObjectId(),
+  user_id: ObjectId("..."),
+  restaurant_id: ObjectId("..."),
+  status: "placed",   // placed | accepted | preparing | out_for_delivery | delivered | cancelled
+  items: [
+    { item_id: "pep_lg", name: "Pepperoni Pizza", price_cents: 1899,
+      options: [{ name: "Size", choice: "Large", price_delta_cents: 400 }],
+      quantity: 1, line_total_cents: 2299 }
+  ],
+  totals: { subtotal_cents: 2299, delivery_fee_cents: 299, tax_cents: 207,
+            tip_cents: 400, total_cents: 3205 },
+  delivery_address: { line1: "...", coords: [-73.99, 40.75] },
+  estimates: { prep_minutes: 15, delivery_minutes: 25, ready_at: ISODate("...") },
+  placed_at: new Date()
+})
+
+// restaurant_status &mdash; high-write, denormalized current state
+db.restaurant_status.updateOne(
+  { _id: restaurantId },
+  { $set: {
+      open: true,
+      orders_in_kitchen: 8,
+      avg_prep_minutes: 18,
+      accepting_orders: true,
+      updated_at: new Date()
+  }}, { upsert: true }
+)
+
+// Search "pizza near me, open now, ETA &lt; 30 min"
+db.restaurants.aggregate([
+  { $geoNear: {
+      near: { type: "Point", coordinates: [userLng, userLat] },
+      distanceField: "distance_meters",
+      maxDistance: 5000,
+      spherical: true,
+      query: { cuisines: "pizza", active: true }
+  }},
+  { $lookup: {
+      from: "restaurant_status",
+      localField: "_id", foreignField: "_id",
+      as: "status"
+  }},
+  { $match: { "status.0.accepting_orders": true } },
+  { $limit: 50 }
+])
+
+// Indexes
+db.restaurants.createIndex({ location: "2dsphere" })
+db.restaurants.createIndex({ cuisines: 1, rating: -1 })
+db.menus.createIndex({ restaurant_id: 1, current: 1 })
+db.orders.createIndex({ restaurant_id: 1, status: 1, placed_at: -1 })
+db.orders.createIndex({ user_id: 1, placed_at: -1 })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Versioned menus + current pointer</td><td>Old orders survive menu changes; rollback is easy</td><td>Single mutable menu &mdash; rewrites history</td></tr>
+<tr><td>Snapshot order items</td><td>Receipts accurate even when prices change</td><td>Reference menu &mdash; broken when item retired</td></tr>
+<tr><td>Separate <code>restaurant_status</code></td><td>Hot updates don&rsquo;t churn the restaurant doc</td><td>Single doc &mdash; write contention, cache thrashing</td></tr>
+<tr><td>2dsphere on restaurant</td><td>Sub-ms &ldquo;near me&rdquo; queries</td><td>City filter only &mdash; misses nearby zones</td></tr>
+<tr><td>Embedded options/sections in menu</td><td>One read renders the menu page</td><td>Separate options collection &mdash; multiple round trips</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> live courier tracking via WebSockets (<strong>Pusher</strong>/<strong>Ably</strong>) + change streams; routing/ETA via <strong>Google Maps Distance Matrix</strong>/<strong>Mapbox Directions</strong>; payments via <strong>Stripe</strong>/<strong>Adyen</strong>; <strong>fraud detection</strong> via <strong>Sift</strong>/<strong>Stripe Radar</strong>; <strong>tipping</strong> integrated; <strong>reviews and ratings</strong> as a separate collection joined via <code>$lookup</code> for restaurant pages; <strong>menu images</strong> via <strong>Cloudinary</strong>/<strong>imgix</strong>; <strong>push notifications</strong> at every status change via <strong>OneSignal</strong>/<strong>Firebase</strong>/<strong>Twilio</strong> SMS; <strong>order assignment</strong> to couriers via a queue (<strong>BullMQ</strong>/<strong>Inngest</strong>) with auction-style routing; <strong>kitchen display systems</strong> integrate via WebSocket subscriptions to restaurant order streams; <strong>analytics</strong>: hourly demand forecasting via <strong>BigQuery</strong>/<strong>Snowflake</strong> &rarr; ML models in <strong>Vertex AI</strong>/<strong>SageMaker</strong>; <strong>surge pricing</strong> when demand spikes; <strong>compliance</strong>: food handling cert tracking, tax (<strong>Stripe Tax</strong>/<strong>Avalara</strong>), allergen labels per item, accessibility (alt text on images); <strong>partner onboarding</strong> via Stripe Connect for direct payouts to restaurants.</p>
+'''
+
+ANSWERS[60] = r'''
+<p><strong>Situation:</strong> a fitness tracking app with users, workouts (cardio, strength, yoga), and goals (steps/day, weight loss, run a 5K). Users log workouts manually or auto-import from Apple Health, Google Fit, Strava, Garmin. Goals track progress over time; charts show trends.</p>
+
+<p><strong>Approach:</strong> three collections. <code>users</code> hold profile and current goals; <code>workouts</code> are time-series-style with rich type-specific subdocs; <code>goal_progress</code> is a daily roll-up materialized via aggregation for fast dashboards. Real-time imports go through change streams to keep dashboards fresh.</p>
+
+<pre><code>// users
+db.users.insertOne({
+  _id: ObjectId(),
+  email: "alice@example.com",
+  profile: { display_name: "Alice", height_cm: 168, weight_kg: 65, dob: ISODate("1990-05-12") },
+  goals: [
+    { _id: "goal_daily_steps", type: "daily_steps", target: 10_000, active: true,
+      started_at: new Date() },
+    { _id: "goal_weight",      type: "weight",      target_kg: 60,    active: true,
+      started_at: new Date() }
+  ],
+  connected_apps: [
+    { provider: "apple_health", connected_at: new Date(), last_sync: new Date() }
+  ]
+})
+
+// workouts &mdash; time-series collection
+db.createCollection("workouts", {
+  timeseries: { timeField: "started_at", metaField: "meta", granularity: "minutes" }
+})
+db.workouts.insertOne({
+  started_at: ISODate("2026-04-29T07:00:00Z"),
+  meta: { user_id: ObjectId("..."), type: "run" },
+  source: "strava",
+  duration_seconds: 1842,
+  distance_meters: 5012,
+  calories: 312,
+  details: {
+    type: "run",
+    pace_seconds_per_km: 367,
+    avg_hr: 152,
+    max_hr: 178,
+    elevation_gain_m: 28,
+    splits: [/* per-km */ ]
+  }
+})
+
+// daily_summaries &mdash; materialized via $merge nightly
+db.workouts.aggregate([
+  { $match: { started_at: { $gte: yesterday, $lt: today } } },
+  { $group: {
+      _id: {
+        user_id: "$meta.user_id",
+        date: { $dateTrunc: { date: "$started_at", unit: "day" } }
+      },
+      total_calories:    { $sum: "$calories" },
+      total_distance_m:  { $sum: "$distance_meters" },
+      total_duration_s:  { $sum: "$duration_seconds" },
+      workout_count:     { $sum: 1 }
+  }},
+  { $merge: {
+      into: "daily_summaries",
+      on: "_id",
+      whenMatched: "replace",
+      whenNotMatched: "insert"
+  }}
+])
+
+// Goal progress query &mdash; today&rsquo;s steps vs target
+const today = await db.daily_summaries.findOne({
+  "_id.user_id": userId,
+  "_id.date": { $eq: startOfToday }
+})
+
+// Indexes
+db.workouts.createIndex({ "meta.user_id": 1, started_at: -1 })
+db.workouts.createIndex({ "meta.user_id": 1, "meta.type": 1, started_at: -1 })
+db.daily_summaries.createIndex({ "_id.user_id": 1, "_id.date": -1 })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Time-series collection</td><td>10x compression on dense workout data</td><td>Regular collection &mdash; storage 10x larger</td></tr>
+<tr><td>Materialized daily summaries</td><td>Dashboard reads in O(1) per day</td><td>Live aggregation per page load &mdash; slow</td></tr>
+<tr><td>Type-specific <code>details</code> subdoc</td><td>Strength sets, run splits, yoga poses each have shape</td><td>Polymorphic columns &mdash; inconsistent</td></tr>
+<tr><td>Embedded goals on user</td><td>One read renders dashboard with goals + progress</td><td>Separate collection &mdash; extra round trip</td></tr>
+<tr><td>Source field on workout</td><td>Provenance (manual/strava/garmin); de-dupe by source</td><td>None &mdash; double-import bugs</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> integrations via <strong>Strava API</strong>, <strong>Apple HealthKit</strong>, <strong>Google Fit / Health Connect</strong>, <strong>Garmin Connect IQ</strong>, <strong>Whoop</strong>, <strong>Oura</strong>, <strong>Fitbit Web API</strong> &mdash; OAuth + webhook subscriptions for real-time sync; <strong>de-duplication</strong> across sources via <code>(provider, external_id)</code> unique index; <strong>charts</strong> via <strong>Atlas Charts</strong>/<strong>Recharts</strong>/<strong>Chart.js</strong>/<strong>D3</strong>; <strong>route maps</strong> rendered with <strong>Mapbox</strong>/<strong>MapTiler</strong> from GPS streams; <strong>activity recognition</strong> (auto-detect run vs bike) via on-device ML or <strong>OpenAI Whisper-style</strong> audio cues; <strong>workout library</strong> with prescribed plans (couch-to-5K) via <strong>Hevy</strong>/<strong>Strong</strong>-style structured workouts; <strong>social features</strong> (kudos, segments) need separate collections with denormalized counts; <strong>push notifications</strong> for goal progress milestones via <strong>OneSignal</strong>/<strong>Firebase</strong>; <strong>calorie estimation</strong> via <strong>MET tables</strong> or per-user models; <strong>health data privacy</strong> &mdash; HIPAA-aware encryption (Queryable Encryption 7.0+) for sensitive metrics; <strong>insights</strong> via weekly digest emails generated from rollups; export raw data as JSON/GPX for user portability (GDPR/HIPAA right to access).</p>
+'''
+
+ANSWERS[61] = r'''
+<p><strong>Situation:</strong> the application emits structured logs &mdash; request logs, business events, errors, audit entries &mdash; that need durable storage, fast time-range search, and retention policies. The volume is high (thousands per second at peak), and the app team wants log queries from MongoDB without standing up a separate observability stack.</p>
+
+<p><strong>Approach:</strong> use a <strong>time-series collection</strong> for raw logs with TTL-based retention; structure log documents with consistent fields (level, ts, service, message, context); index aggressively on the metaField (service, level); offload long-term archival to S3 via Online Archive or scheduled <code>$out</code>. For real-time dashboards, run rollups.</p>
+
+<pre><code>// Time-series log collection with auto-retention
+db.createCollection("logs", {
+  timeseries: {
+    timeField: "ts",
+    metaField: "meta",
+    granularity: "seconds"
+  },
+  expireAfterSeconds: 30 * 86400   // 30-day retention
+})
+
+db.logs.insertOne({
+  ts: new Date(),
+  meta: { service: "checkout", env: "prod", level: "error", host: "checkout-7" },
+  message: "payment_failed",
+  request_id: "req_01HRG...",
+  user_id: ObjectId("..."),
+  context: {
+    order_id: ObjectId("..."),
+    amount_cents: 4999,
+    error_code: "card_declined",
+    stripe_intent: "pi_..."
+  },
+  duration_ms: 1842,
+  http: { method: "POST", path: "/api/checkout", status: 500 }
+})
+
+// Common queries
+// Recent errors for a service
+db.logs.find({
+  "meta.service": "checkout",
+  "meta.level": "error",
+  ts: { $gte: oneHourAgo }
+}).sort({ ts: -1 }).limit(100)
+
+// Trace by request_id
+db.logs.find({ request_id: "req_01HRG..." }).sort({ ts: 1 })
+
+// Error rate by minute (rollup)
+db.logs.aggregate([
+  { $match: { "meta.level": "error", ts: { $gte: oneHourAgo } } },
+  { $group: {
+      _id: {
+        minute:  { $dateTrunc: { date: "$ts", unit: "minute" } },
+        service: "$meta.service"
+      },
+      count: { $sum: 1 }
+  }},
+  { $merge: {
+      into: "log_rollups_minute",
+      on: "_id",
+      whenMatched: "replace",
+      whenNotMatched: "insert"
+  }}
+])
+
+// Indexes &mdash; metaField fields are indexed automatically; add for hot queries
+db.logs.createIndex({ "meta.level": 1, "meta.service": 1, ts: -1 })
+db.logs.createIndex({ request_id: 1 })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Time-series collection</td><td>10x compression, optimized for append</td><td>Regular collection &mdash; 10x storage cost</td></tr>
+<tr><td>TTL retention</td><td>Auto-delete old logs; compliance-safe</td><td>Manual purge &mdash; forgotten data</td></tr>
+<tr><td>Structured log fields</td><td>Indexable; queryable; analyzable</td><td>Free text &mdash; only grep works</td></tr>
+<tr><td>Rollups for dashboards</td><td>Sub-ms metric queries</td><td>Live aggregation &mdash; cluster pain at peak</td></tr>
+<tr><td>MongoDB as logging backend</td><td>One stack to operate; Atlas Search for free-text</td><td>Specialized logging &mdash; better tooling but separate ops</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> at >10K logs/sec, MongoDB&rsquo;s time-series is fine but specialized logging stacks shine &mdash; <strong>Datadog</strong>, <strong>New Relic</strong>, <strong>Grafana Loki</strong>, <strong>Honeycomb</strong>, <strong>Better Stack</strong>, <strong>Axiom</strong>; <strong>structured logging libraries</strong>: <strong>pino</strong>/<strong>winston</strong> (Node), <strong>structlog</strong>/<strong>loguru</strong> (Python), <strong>tracing</strong> (Rust), <strong>logrus</strong>/<strong>zap</strong> (Go) &mdash; emit JSON, never strings; <strong>request_id</strong> generated at ingress and propagated via <strong>OpenTelemetry</strong> headers; <strong>distributed tracing</strong> via <strong>OpenTelemetry</strong> + <strong>Jaeger</strong>/<strong>Tempo</strong>/<strong>Honeycomb</strong> for cross-service correlation &mdash; logs reference <code>trace_id</code>; <strong>log scrubbing</strong>: PII filters at the application layer (passwords, credit cards) before write; <strong>archival</strong> to <strong>Atlas Online Archive</strong> or scheduled <code>$out</code> to <strong>S3</strong> in Parquet format readable by <strong>Athena</strong>/<strong>Snowflake</strong>; <strong>alerting</strong> on error rate spikes via <strong>Datadog Monitors</strong>/<strong>PagerDuty</strong>; <strong>full-text search</strong> via <strong>Atlas Search</strong> for grep-like queries on message text; <strong>cost control</strong>: log sampling for high-volume info logs (1% sampled), full retention for warn/error.</p>
+'''
+
+ANSWERS[62] = r'''
+<p><strong>Situation:</strong> a peer-to-peer lending platform with lenders, borrowers, and loans. Borrowers post loan requests; lenders fund (often fractionally, splitting risk across many loans); repayments arrive monthly and are distributed across lenders. Compliance: KYC/AML, audit trails, regulatory reporting.</p>
+
+<p><strong>Approach:</strong> five collections. <code>users</code> with role flags (lender/borrower); <code>loan_requests</code> are the marketplace listings; <code>loans</code> are funded contracts; <code>investments</code> are per-lender stakes (one loan has many investments); <code>payments</code> are the immutable ledger of inflows/outflows. Money math uses <code>Decimal128</code>; transactions enforce atomicity.</p>
+
+<pre><code>// users (single collection, role flags)
+db.users.insertOne({
+  _id: ObjectId(),
+  email: "alice@example.com",
+  roles: ["lender"],
+  kyc: { status: "verified", provider: "persona", verified_at: new Date() },
+  funding_account: { stripe_customer: "cus_...", balance_cents: 0 }
+})
+
+// loan_requests &mdash; the marketplace
+db.loan_requests.insertOne({
+  _id: ObjectId(),
+  borrower_id: ObjectId("..."),
+  amount_cents: 1_000_000,                      // $10,000
+  term_months: 36,
+  apr_bps: 1199,                                // 11.99%
+  purpose: "debt_consolidation",
+  credit_grade: "B",
+  funded_cents: 0,                               // denormalized
+  status: "open",                                // open | funding | funded | rejected | expired
+  expires_at: ISODate("..."),
+  created_at: new Date()
+})
+
+// loans &mdash; funded contract
+db.loans.insertOne({
+  _id: ObjectId(),
+  request_id: ObjectId("..."),
+  borrower_id: ObjectId("..."),
+  principal_cents: 1_000_000,
+  apr_bps: 1199,
+  term_months: 36,
+  monthly_payment_cents: 33_214,
+  outstanding_principal_cents: 1_000_000,
+  status: "active",                              // active | paid_off | charged_off | default
+  funded_at: new Date(),
+  next_payment_at: ISODate("...")
+})
+
+// investments &mdash; per-lender fractional stakes
+db.investments.insertOne({
+  _id: ObjectId(),
+  lender_id: ObjectId("..."),
+  loan_id:   ObjectId("..."),
+  amount_cents: 25_000,                          // $250 stake
+  fraction_bps: 250,                              // 2.5% of the loan
+  invested_at: new Date()
+})
+
+// payments &mdash; append-only ledger
+db.payments.insertOne({
+  _id: ObjectId(),
+  loan_id: ObjectId("..."),
+  type: "borrower_payment",                       // borrower_payment | lender_distribution | fee
+  amount_cents: 33_214,
+  principal_cents: 27_550,
+  interest_cents:  5_664,
+  ts: new Date(),
+  external_ref: "ach_..."
+})
+
+// Atomic funding (a lender invests $250 in a loan request)
+const session = client.startSession()
+await session.withTransaction(async () =&gt; {
+  const result = await db.loan_requests.updateOne(
+    { _id: requestId, status: "open",
+      $expr: { $lte: [{ $add: ["$funded_cents", 25_000] }, "$amount_cents"] } },
+    { $inc: { funded_cents: 25_000 } },
+    { session }
+  )
+  if (result.modifiedCount === 0) throw new Error("oversubscribed")
+  await db.investments.insertOne({ /* ... */ }, { session })
+  await db.users.updateOne({ _id: lenderId },
+    { $inc: { "funding_account.balance_cents": -25_000 } }, { session })
+})
+
+// Indexes
+db.loan_requests.createIndex({ status: 1, credit_grade: 1, expires_at: 1 })
+db.investments.createIndex({ lender_id: 1, invested_at: -1 })
+db.investments.createIndex({ loan_id: 1 })
+db.payments.createIndex({ loan_id: 1, ts: -1 })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Append-only payment ledger</td><td>Audit trail, regulatory requirement</td><td>Mutable balances &mdash; impossible to reconcile</td></tr>
+<tr><td>Separate <code>loan_requests</code> &amp; <code>loans</code></td><td>Marketplace lifecycle separate from funded contracts</td><td>Single doc with status &mdash; over-broad indexes</td></tr>
+<tr><td>Fractional investments collection</td><td>Many lenders per loan, distributions atomic</td><td>Embed in loan &mdash; doc grows, write contention</td></tr>
+<tr><td>Denormalized <code>funded_cents</code></td><td>Marketplace shows progress in O(1)</td><td>Live <code>$sum</code> &mdash; expensive on hot loans</td></tr>
+<tr><td>Transactions for funding</td><td>No oversubscription; balance and investment in sync</td><td>Eventually consistent &mdash; legally risky</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> KYC/AML via <strong>Persona</strong>/<strong>Onfido</strong>/<strong>Sumsub</strong>/<strong>Alloy</strong> with sanctions screening; payments and ACH via <strong>Stripe</strong>/<strong>Plaid</strong>/<strong>Modern Treasury</strong>/<strong>Increase</strong>; <strong>credit data</strong> from <strong>Experian</strong>/<strong>Equifax</strong>/<strong>TransUnion</strong> via <strong>Plaid</strong>; <strong>regulatory reporting</strong> (Consumer Financial Protection Bureau, SEC, state lending authorities) requires versioned records and 7+ year retention &mdash; never delete; <strong>amortization schedules</strong> generated and stored; <strong>delinquency workflows</strong> auto-charge late fees, escalate to collections via <strong>TrueAccord</strong>/<strong>Phin</strong>; <strong>tax reporting</strong> (1099-INT for interest income) generated annually via warehouse aggregations; <strong>ledger truthfulness</strong>: nightly job recomputes loan outstanding from payments and reconciles, alerts on drift; <strong>distributed-systems-grade money math</strong>: never use floats, always <code>Decimal128</code> for fractional amounts; <strong>fraud detection</strong> via <strong>Sift</strong>/<strong>Sardine</strong>; <strong>change streams</strong> trigger lender notifications on borrower payments; <strong>compliance evidence</strong> via <strong>Drata</strong>/<strong>Vanta</strong>; double-entry accounting using a dedicated ledger like <strong>Tigerbeetle</strong>/<strong>Tinybook</strong> for the strictest financial environments.</p>
+'''
+
+ANSWERS[63] = r'''
+<p><strong>Situation:</strong> a real estate platform with properties, agents, and listings. Buyers search by location, price range, beds/baths, and features; agents manage their listings and leads; listings have rich media (photos, video tours, floor plans). Listings expire and get re-listed; price changes need history.</p>
+
+<p><strong>Approach:</strong> three collections. <code>properties</code> hold canonical property data (address, location, structural details that don&rsquo;t change). <code>listings</code> are time-bound sales/rental events on a property &mdash; one property can have many listings over the years. <code>agents</code> hold agent profiles. Geospatial index on property location; price-history embedded in listings.</p>
+
+<pre><code>// properties &mdash; the building/parcel
+db.properties.insertOne({
+  _id: ObjectId(),
+  address: { line1: "123 Main St", city: "Austin", state: "TX", zip: "78701" },
+  location: { type: "Point", coordinates: [-97.7431, 30.2672] },
+  property_type: "single_family",
+  beds: 4,
+  baths: 2.5,
+  sqft: 2_400,
+  lot_sqft: 8_500,
+  year_built: 2008,
+  features: ["pool", "garage_2car", "fireplace"],
+  apn: "0123456789",                       // assessor parcel number
+  schools: { elementary: "Austin ISD - Hill ES", rating: 8 }
+})
+
+// listings &mdash; transactional events on the property
+db.listings.insertOne({
+  _id: ObjectId(),
+  property_id: ObjectId("..."),
+  agent_id:    ObjectId("..."),
+  type: "sale",                              // sale | rent | lease
+  status: "active",                           // active | pending | sold | expired | withdrawn
+  list_price_cents: 92_500_000,
+  current_price_cents: 89_500_000,            // after a reduction
+  price_history: [
+    { ts: ISODate("2026-04-01"), price_cents: 92_500_000, change: "initial" },
+    { ts: ISODate("2026-04-22"), price_cents: 89_500_000, change: "reduction" }
+  ],
+  description: "Beautifully renovated...",
+  media: {
+    photos: ["s3://...img1.jpg", "..."],
+    virtual_tour_url: "https://...",
+    floor_plans: ["s3://..."]
+  },
+  listed_at: ISODate("2026-04-01"),
+  expires_at: ISODate("2026-10-01"),
+  views: 0,                                  // denormalized
+  saves: 0,
+  showings_scheduled: 0
+})
+
+// agents
+db.agents.insertOne({
+  _id: ObjectId(),
+  user_id: ObjectId("..."),
+  license: { state: "TX", number: "TX12345", expires: ISODate("2027-12-31") },
+  brokerage: "Realty Partners",
+  bio: "...",
+  rating: 4.8,
+  active_listings_count: 0
+})
+
+// Common search: 3+ beds, $500K-$1M, near Austin downtown
+db.listings.aggregate([
+  { $match: { status: "active", type: "sale",
+              current_price_cents: { $gte: 500_000_00, $lte: 1_000_000_00 } } },
+  { $lookup: {
+      from: "properties",
+      localField: "property_id", foreignField: "_id",
+      as: "property"
+  }},
+  { $unwind: "$property" },
+  { $match: { "property.beds": { $gte: 3 } } },
+  { $geoNear: {       // place this earlier ideally
+      near: { type: "Point", coordinates: [-97.74, 30.27] },
+      distanceField: "property.distance",
+      key: "property.location",
+      maxDistance: 10_000,
+      spherical: true
+  }},
+  { $sort: { listed_at: -1 } },
+  { $limit: 50 }
+])
+
+// Indexes
+db.properties.createIndex({ location: "2dsphere" })
+db.properties.createIndex({ "address.zip": 1 })
+db.listings.createIndex({ status: 1, type: 1, current_price_cents: 1 })
+db.listings.createIndex({ property_id: 1, listed_at: -1 })
+db.listings.createIndex({ agent_id: 1, status: 1 })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Property + listing split</td><td>Same house relisted; track sale history per property</td><td>Single doc &mdash; rewrites &ldquo;property&rdquo; on every relist</td></tr>
+<tr><td>Embedded price_history</td><td>Always read with listing; bounded size</td><td>Separate collection &mdash; extra <code>$lookup</code></td></tr>
+<tr><td>2dsphere on property</td><td>Map-based search; &ldquo;near my office&rdquo;</td><td>City filter &mdash; misses suburbs</td></tr>
+<tr><td>Snapshot agent_id at listing time</td><td>Listing survives agent changes</td><td>Reference current agent &mdash; broken on relist</td></tr>
+<tr><td>Status field, no deletes</td><td>Audit trail, MLS compliance</td><td>Hard delete &mdash; lost history</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> ingest MLS data via <strong>Bridge Interactive</strong>/<strong>RESO Web API</strong>/<strong>Trestle</strong>; <strong>Atlas Search</strong> powers fuzzy address search and feature search; <strong>property images</strong> via <strong>Cloudinary</strong>/<strong>imgix</strong> with auto-WebP; <strong>virtual tours</strong> via <strong>Matterport</strong>/<strong>Zillow 3D Home</strong>; <strong>school data</strong> from <strong>GreatSchools API</strong>; <strong>walk scores</strong> from <strong>Walk Score API</strong>; <strong>lead capture</strong> via integrated forms with anti-spam (<strong>hCaptcha</strong>/<strong>Cloudflare Turnstile</strong>); <strong>showing scheduling</strong> integrated with <strong>Calendly</strong>/<strong>ShowingTime</strong>; <strong>document signing</strong> via <strong>DocuSign</strong>/<strong>Dropbox Sign</strong>; <strong>analytics dashboards</strong> for agents (views/saves/leads per listing) via <strong>Atlas Charts</strong>; <strong>sold price history</strong> exposed for comp analysis &mdash; valuable for buyers; <strong>fair-housing compliance</strong> &mdash; certain demographic targeting forbidden, audit trails on filters; <strong>email digests</strong> (new listings matching saved search) via <strong>Customer.io</strong>/<strong>Iterable</strong>; <strong>mortgage pre-qualification</strong> via <strong>Plaid</strong>/<strong>Lendi</strong>; <strong>map tiles</strong> via <strong>Mapbox</strong>/<strong>MapTiler</strong>; <strong>change streams</strong> notify saved-search subscribers when matching listings appear or drop in price.</p>
+'''
+
+ANSWERS[64] = r'''
+<p><strong>Situation:</strong> MongoDB serves the OLTP application but data must be replicated to other systems &mdash; a data warehouse for analytics, a search engine for discovery, a cache for hot reads, a CRM for customer support. Some destinations need near-real-time updates; others tolerate batch refresh.</p>
+
+<p><strong>Approach:</strong> use the right tool per destination. <strong>Change streams</strong> stream individual document changes to message buses (Kafka, Redpanda) and downstream consumers in near real time. <strong>Scheduled batch ETL</strong> via <strong>Airbyte</strong>/<strong>Fivetran</strong>/<strong>Estuary</strong> handles warehouses every 5-60 minutes. Dual-write within a transaction handles same-DB mirrors.</p>
+
+<pre><code>// Pattern 1: Change streams &rarr; Kafka &rarr; many consumers
+const stream = db.collection("orders").watch([], {
+  fullDocument: "updateLookup",
+  fullDocumentBeforeChange: "whenAvailable"
+})
+
+for await (const change of stream) {
+  await kafka.produce({
+    topic: "orders.changes",
+    key: String(change.documentKey._id),
+    value: JSON.stringify({
+      operation: change.operationType,    // insert | update | delete | replace
+      document_id: change.documentKey._id,
+      full_document: change.fullDocument,
+      before: change.fullDocumentBeforeChange,
+      cluster_time: change.clusterTime,
+      resume_token: change._id
+    })
+  })
+  await persistResumeToken(change._id)
+}
+
+// Consumer 1: Update Algolia search index
+async function syncToAlgolia(event) {
+  if (event.operation === "delete") return algolia.deleteObject(event.document_id)
+  return algolia.saveObject({ ...event.full_document, objectID: event.full_document._id })
+}
+
+// Consumer 2: Invalidate Redis cache
+async function invalidateCache(event) {
+  await redis.del(`order:${event.document_id}`)
+}
+
+// Consumer 3: Update CRM (Salesforce / HubSpot)
+async function syncToCRM(event) { /* ... */ }
+
+// Pattern 2: Batch sync to warehouse via Airbyte / Fivetran
+// Configured outside MongoDB &mdash; runs hourly, full-refresh or CDC
+
+// Pattern 3: Two-phase write inside a transaction (DB-to-DB mirror)
+const session = client.startSession()
+await session.withTransaction(async () =&gt; {
+  await primary.collection("users").insertOne(user, { session })
+  await replica.collection("users_audit").insertOne({
+    _id: user._id, action: "create", user, ts: new Date()
+  }, { session })
+})</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Change streams + Kafka</td><td>One CDC source, infinite consumers; replay capability</td><td>Per-consumer change stream &mdash; oplog pressure, no replay</td></tr>
+<tr><td>Resume tokens persisted</td><td>Recover from worker crash without lost events</td><td>Start-from-now &mdash; missed events during downtime</td></tr>
+<tr><td>Batch ETL for warehouse</td><td>Cost-efficient; row-store &rarr; column-store transform</td><td>Real-time CDC into warehouse &mdash; expensive, often unnecessary</td></tr>
+<tr><td>Idempotent consumers</td><td>Safe redelivery after failure</td><td>Non-idempotent &mdash; double-applies on retry</td></tr>
+<tr><td>Transactions for tightly coupled writes</td><td>Strong consistency for audits / mirrors</td><td>Best-effort &mdash; drift, alerts at 3am</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> use <strong>Debezium MongoDB connector</strong> as the CDC bridge to <strong>Kafka</strong>/<strong>Redpanda</strong>/<strong>AWS MSK</strong>/<strong>Confluent Cloud</strong> &mdash; battle-tested, handles schema evolution, exactly-once semantics; <strong>warehouse ETL</strong> via <strong>Fivetran</strong>/<strong>Airbyte</strong>/<strong>Estuary Flow</strong>/<strong>Stitch</strong>/<strong>Hevo</strong> with destinations <strong>BigQuery</strong>/<strong>Snowflake</strong>/<strong>Databricks</strong>/<strong>ClickHouse</strong>/<strong>Tinybird</strong>; <strong>reverse-ETL</strong> (warehouse &rarr; SaaS) via <strong>Hightouch</strong>/<strong>Census</strong> for marketing tools; <strong>search indexes</strong> via <strong>Atlas Search</strong> (built-in, no sync needed), <strong>Elasticsearch</strong>/<strong>OpenSearch</strong>, <strong>Algolia</strong>, <strong>Meilisearch</strong>, <strong>Typesense</strong>; <strong>cache layer</strong> via <strong>Redis</strong>/<strong>Dragonfly</strong>/<strong>KeyDB</strong>; <strong>monitoring</strong>: lag metrics on every consumer (resume token age vs <code>$$NOW</code>) alerting in <strong>Datadog</strong>/<strong>Grafana</strong>; <strong>reconciliation jobs</strong> hourly count source vs destination, alert on drift; <strong>backfill</strong>: when starting a new consumer, snapshot existing data once, then resume from current change stream position; <strong>schema registry</strong> via <strong>Confluent Schema Registry</strong> ensures consumers handle schema evolution; <strong>data quality</strong> checks via <strong>Soda</strong>/<strong>Great Expectations</strong>/<strong>Monte Carlo</strong>.</p>
+'''
+
+ANSWERS[65] = r'''
+<p><strong>Situation:</strong> a freelance marketplace with freelancers, clients, and projects. Freelancers post profiles and bid on projects; clients post projects and review proposals; payment is held in escrow and released on milestones; reviews and reputation drive matchmaking.</p>
+
+<p><strong>Approach:</strong> five collections. <code>users</code> with role flags; <code>projects</code> the marketplace listings; <code>proposals</code> bids on projects; <code>contracts</code> active engagements with milestones; <code>reviews</code> bidirectional ratings. Escrow handled by Stripe Connect or specialized payments; the database tracks state but money lives at the payment provider.</p>
+
+<pre><code>// users (role flags)
+db.users.insertOne({
+  _id: ObjectId(),
+  email: "alice@example.com",
+  roles: ["freelancer"],
+  freelancer: {
+    headline: "Full-stack engineer",
+    skills: ["mongodb", "node", "react"],
+    hourly_rate_cents: 8_500,
+    bio: "...",
+    portfolio: ["https://...", "..."],
+    rating: 4.9,
+    completed_jobs: 47
+  },
+  client: null,
+  stripe_account: { connected: true, account_id: "acct_..." }
+})
+
+// projects &mdash; marketplace listings
+db.projects.insertOne({
+  _id: ObjectId(),
+  client_id: ObjectId("..."),
+  title: "Build MongoDB-backed dashboard",
+  description: "...",
+  category: "web_development",
+  skills_required: ["mongodb", "react", "atlas_charts"],
+  budget: { type: "fixed", amount_cents: 500_000 },   // or { type: "hourly", min: ..., max: ... }
+  duration: "1_to_3_months",
+  status: "open",                                       // open | in_review | awarded | in_progress | completed | cancelled
+  proposal_count: 0,                                    // denormalized
+  created_at: new Date(),
+  expires_at: ISODate("...")
+})
+
+// proposals
+db.proposals.insertOne({
+  _id: ObjectId(),
+  project_id: ObjectId("..."),
+  freelancer_id: ObjectId("..."),
+  cover_letter: "...",
+  bid: { type: "fixed", amount_cents: 480_000 },
+  estimated_duration_days: 45,
+  status: "submitted",        // submitted | shortlisted | rejected | withdrawn | accepted
+  submitted_at: new Date()
+})
+
+// contracts &mdash; with milestones
+db.contracts.insertOne({
+  _id: ObjectId(),
+  project_id:    ObjectId("..."),
+  client_id:     ObjectId("..."),
+  freelancer_id: ObjectId("..."),
+  amount_cents:  480_000,
+  milestones: [
+    { _id: "m1", title: "Setup &amp; auth",       amount_cents: 100_000, status: "released",
+      escrowed_at: ISODate("..."), released_at: ISODate("...") },
+    { _id: "m2", title: "Core features",       amount_cents: 240_000, status: "in_escrow",
+      escrowed_at: ISODate("..."), released_at: null },
+    { _id: "m3", title: "Polish &amp; deployment",  amount_cents: 140_000, status: "pending" }
+  ],
+  status: "active",   // active | completed | cancelled | disputed
+  started_at: new Date()
+})
+
+// reviews
+db.reviews.insertOne({
+  _id: ObjectId(),
+  contract_id: ObjectId("..."),
+  reviewer_id: ObjectId("..."),
+  reviewee_id: ObjectId("..."),
+  reviewer_role: "client",
+  rating: 5,
+  comment: "Outstanding work, communication, and delivery.",
+  created_at: new Date()
+})
+
+// Indexes
+db.projects.createIndex({ status: 1, skills_required: 1, created_at: -1 })
+db.proposals.createIndex({ project_id: 1, status: 1 })
+db.proposals.createIndex({ freelancer_id: 1, submitted_at: -1 })
+db.contracts.createIndex({ freelancer_id: 1, status: 1 })
+db.contracts.createIndex({ client_id: 1, status: 1 })
+db.reviews.createIndex({ reviewee_id: 1, created_at: -1 })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Single users with role flags</td><td>Same person can be both client and freelancer</td><td>Separate collections &mdash; identity duplication</td></tr>
+<tr><td>Embedded milestones in contract</td><td>Always read together; bounded size</td><td>Separate collection &mdash; extra <code>$lookup</code></td></tr>
+<tr><td>Snapshot rates/skills at contract time</td><td>Engagement survives profile changes</td><td>Reference live profile &mdash; rewrites history</td></tr>
+<tr><td>Stripe Connect for escrow</td><td>Compliance offloaded; payouts handled</td><td>Custom escrow &mdash; regulated, capital intensive</td></tr>
+<tr><td>Bidirectional reviews</td><td>Both parties build reputation</td><td>One-way &mdash; clients abuse freelancers</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> escrow and split payouts via <strong>Stripe Connect</strong> (Standard or Express accounts); <strong>tax forms</strong> (1099-NEC for US freelancers, W-8BEN international) via <strong>Stripe Tax</strong>/<strong>Bench</strong>/<strong>Track1099</strong>; <strong>identity verification</strong> via <strong>Persona</strong>/<strong>Onfido</strong>/<strong>Stripe Identity</strong>; <strong>dispute resolution</strong> workflow with mediator role and held funds; <strong>messaging</strong> between client and freelancer via WebSockets (<strong>Stream Chat</strong>/<strong>Sendbird</strong>/<strong>Pusher</strong>); <strong>file sharing</strong> via <strong>S3</strong> with virus scanning (ClamAV); <strong>matching algorithm</strong> uses <strong>Atlas Vector Search</strong> on skill+description embeddings; <strong>fraud detection</strong>: account farms, collusion, fake reviews via <strong>Sift</strong>/<strong>Sardine</strong> + behavioral analytics; <strong>contract templates</strong> with e-signing via <strong>DocuSign</strong>/<strong>Dropbox Sign</strong>; <strong>time tracking</strong> for hourly contracts via <strong>Toggl</strong>/<strong>Harvest</strong> integrations; <strong>review moderation</strong> via <strong>Perspective API</strong>/<strong>Hive</strong> for toxicity; <strong>discovery</strong>: featured/promoted listings via boost field, paid promotions; <strong>change streams</strong> trigger lifecycle events &mdash; new proposals notify clients, accepted proposals create contracts; <strong>analytics</strong> in <strong>Atlas Charts</strong>/<strong>Metabase</strong>.</p>
+'''
+
+ANSWERS[66] = r'''
+<p><strong>Situation:</strong> a conference management system with events, speakers, sessions, and attendees. Events have call-for-papers, ticketed registration, multiple session tracks, scheduled talks. Attendees register, build a personal agenda, and check in on-site. Reads spike massively the week of the conference.</p>
+
+<p><strong>Approach:</strong> five collections. <code>events</code> hold conference metadata. <code>sessions</code> are individual talks scheduled in tracks/rooms. <code>speakers</code> link to user accounts (one person can speak at many events). <code>tickets</code> track registration and check-in. <code>agendas</code> are per-attendee saved schedules. Heavy read caching for the schedule page; transactions only on ticket purchase.</p>
+
+<pre><code>// events
+db.events.insertOne({
+  _id: ObjectId(),
+  name: "MongoDB World 2026",
+  slug: "mongodb-world-2026",
+  starts_at: ISODate("2026-06-20T09:00:00Z"),
+  ends_at:   ISODate("2026-06-22T18:00:00Z"),
+  venue: {
+    name: "Javits Center", city: "NYC",
+    location: { type: "Point", coordinates: [-74.003, 40.756] }
+  },
+  capacity: 5_000,
+  ticket_tiers: [
+    { _id: "early", name: "Early Bird", price_cents: 89900, sold: 0,
+      limit: 1_000, sales_end: ISODate("2026-04-01") },
+    { _id: "regular", name: "Regular", price_cents: 129900, sold: 0,
+      limit: 4_000, sales_end: ISODate("2026-06-15") }
+  ],
+  status: "published"
+})
+
+// sessions
+db.sessions.insertOne({
+  _id: ObjectId(),
+  event_id: ObjectId("..."),
+  title: "Sharding at Petabyte Scale",
+  abstract: "...",
+  speakers: [
+    { user_id: ObjectId("..."), name: "Alice Cole", company: "Acme Corp" }
+  ],
+  starts_at: ISODate("2026-06-20T11:00:00Z"),
+  duration_minutes: 45,
+  track: "Architecture",
+  room: "Hall 4A",
+  capacity: 400,
+  level: "advanced",
+  tags: ["sharding", "scale"],
+  status: "confirmed"
+})
+
+// tickets
+db.tickets.insertOne({
+  _id: ObjectId(),
+  event_id: ObjectId("..."),
+  user_id: ObjectId("..."),
+  tier_id: "early",
+  amount_paid_cents: 89900,
+  qr_code: "TKT-01HRG...",
+  checked_in_at: null,
+  payment: { provider: "stripe", intent_id: "pi_..." },
+  purchased_at: new Date()
+})
+
+// agendas (saved sessions per attendee)
+db.agendas.insertOne({
+  _id: ObjectId(),
+  user_id: ObjectId("..."),
+  event_id: ObjectId("..."),
+  saved_session_ids: [ObjectId("..."), ObjectId("...")],
+  updated_at: new Date()
+})
+
+// Atomic ticket purchase
+const session = client.startSession()
+await session.withTransaction(async () =&gt; {
+  const r = await db.events.updateOne(
+    { _id: eventId, "ticket_tiers._id": "early",
+      $expr: { $lt: [
+        { $arrayElemAt: ["$ticket_tiers.sold", { $indexOfArray: ["$ticket_tiers._id", "early"] }] },
+        { $arrayElemAt: ["$ticket_tiers.limit", { $indexOfArray: ["$ticket_tiers._id", "early"] }] }
+      ]}
+    },
+    { $inc: { "ticket_tiers.$.sold": 1 } },
+    { session }
+  )
+  if (r.modifiedCount === 0) throw new Error("sold_out")
+  await db.tickets.insertOne({ /* ... */ }, { session })
+})
+
+// Check in (on-site, scan QR)
+db.tickets.updateOne(
+  { qr_code, checked_in_at: null },
+  { $set: { checked_in_at: new Date() } }
+)
+
+// Indexes
+db.sessions.createIndex({ event_id: 1, starts_at: 1 })
+db.sessions.createIndex({ event_id: 1, track: 1 })
+db.tickets.createIndex({ qr_code: 1 }, { unique: true })
+db.tickets.createIndex({ user_id: 1, event_id: 1 })
+db.agendas.createIndex({ user_id: 1, event_id: 1 }, { unique: true })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Embedded ticket tiers in event</td><td>Bounded (5-10 tiers); always read with event</td><td>Separate collection &mdash; extra round trip</td></tr>
+<tr><td>Snapshot speaker name/company on session</td><td>Speaker profile changes don&rsquo;t rewrite session</td><td>Live <code>$lookup</code> &mdash; latency on schedule page</td></tr>
+<tr><td>Conditional inc with limit check</td><td>Atomic sell-out enforcement</td><td>Read-then-write &mdash; race conditions on early bird</td></tr>
+<tr><td>Per-user agendas collection</td><td>Saved sessions independent of tickets</td><td>Embed in user &mdash; doc grows unboundedly</td></tr>
+<tr><td>QR codes on tickets</td><td>Fast on-site check-in via mobile scan</td><td>Lookup-by-name &mdash; bottleneck at door</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> ticketing via <strong>Stripe Checkout</strong> with Apple Pay/Google Pay; <strong>schedule rendering</strong> heavily cached &mdash; static export to <strong>Vercel</strong>/<strong>Cloudflare Pages</strong>, ISR-revalidated on session change via change streams; <strong>conflict detection</strong> in agenda &mdash; warn when saved sessions overlap; <strong>session recommendations</strong> via <strong>Atlas Vector Search</strong> on attendee role + interests; <strong>QR code generation</strong> with anti-replay (HMAC-signed payload, single-use); <strong>on-site check-in apps</strong> built with React Native or PWA, offline-first via IndexedDB sync; <strong>live updates</strong> (room changes, cancellations) push to attendee phones via <strong>OneSignal</strong>/<strong>Firebase</strong>; <strong>networking features</strong> (1:1 meeting requests) need a separate <code>meetings</code> collection; <strong>sponsor exhibits</strong> with lead-scan tracking; <strong>swag/perks</strong> redeemable per ticket; <strong>video</strong> for hybrid events via <strong>Mux</strong>/<strong>Vimeo</strong>/<strong>YouTube Live</strong>; <strong>post-event</strong>: session recordings published, attendee certificates, analytics dashboards; <strong>compliance</strong>: GDPR opt-in for marketing, data retention policies, accessibility (alt text, transcripts); <strong>email automation</strong> via <strong>Customer.io</strong>/<strong>Iterable</strong> for pre/during/post-event journeys; <strong>SMS reminders</strong> via <strong>Twilio</strong>.</p>
+'''
+
+ANSWERS[67] = r'''
+<p><strong>Situation:</strong> the product team needs user engagement metrics &mdash; daily active users (DAU/MAU), feature usage, retention curves, funnel completion rates, session duration. Events fire from web, mobile, and backend; the analytics layer must serve dashboards in seconds and never cause OLTP slowdown.</p>
+
+<p><strong>Approach:</strong> emit a <strong>standardized event schema</strong> from the application; capture into a <strong>time-series collection</strong>; aggregate to <strong>materialized rollups</strong> (DAU, MAU, feature counts) via scheduled <code>$merge</code> pipelines; expose dashboards from the rollups, never from raw events. For deep funnels and cohorts, export to a warehouse.</p>
+
+<pre><code>// Time-series events
+db.createCollection("user_events", {
+  timeseries: { timeField: "ts", metaField: "meta", granularity: "seconds" },
+  expireAfterSeconds: 90 * 86400      // 90-day raw retention
+})
+
+db.user_events.insertOne({
+  ts: new Date(),
+  meta: {
+    user_id: ObjectId("..."),
+    event: "feature_used",
+    platform: "ios",
+    app_version: "8.4.1",
+    country: "US"
+  },
+  properties: {
+    feature: "search_v2",
+    duration_ms: 450,
+    result_count: 12
+  },
+  session_id: "sess_01HRG...",
+  device_id: "dev_..."
+})
+
+// Daily Active Users (DAU)
+db.user_events.aggregate([
+  { $match: { ts: { $gte: yesterday, $lt: today } } },
+  { $group: {
+      _id: {
+        date: { $dateTrunc: { date: "$ts", unit: "day" } }
+      },
+      dau:        { $addToSet: "$meta.user_id" }
+  }},
+  { $set: { dau_count: { $size: "$dau" } } },
+  { $unset: "dau" },
+  { $merge: "metrics_daily" }
+])
+
+// Feature usage by minute
+db.user_events.aggregate([
+  { $match: { "meta.event": "feature_used", ts: { $gte: oneHourAgo } } },
+  { $group: {
+      _id: {
+        minute: { $dateTrunc: { date: "$ts", unit: "minute" } },
+        feature: "$properties.feature"
+      },
+      uses: { $sum: 1 },
+      unique_users: { $addToSet: "$meta.user_id" }
+  }},
+  { $set: { unique_users: { $size: "$unique_users" } } },
+  { $merge: "feature_usage_minute" }
+])
+
+// 7-day retention &mdash; users active on day 7 after install
+db.user_events.aggregate([
+  { $match: { "meta.event": "session_start", ts: { $gte: sevenDaysAgo } } },
+  { $group: {
+      _id: "$meta.user_id",
+      first_session: { $min: "$ts" },
+      last_session:  { $max: "$ts" }
+  }},
+  { $match: {
+      first_session: { $gte: cohortStart, $lt: cohortEnd },
+      $expr: { $gte: ["$last_session", { $add: ["$first_session", 7*86400000] }] }
+  }},
+  { $count: "retained" }
+])
+
+// Indexes (metaField fields auto-indexed in time-series collections)
+db.user_events.createIndex({ "meta.event": 1, "meta.user_id": 1, ts: -1 })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Time-series collection</td><td>10x compression on event data</td><td>Regular collection &mdash; storage explodes</td></tr>
+<tr><td>Materialized rollups</td><td>Dashboards load in O(rollup count)</td><td>Live aggregation &mdash; minutes per refresh</td></tr>
+<tr><td>Standardized event schema</td><td>Consistent fields across platforms</td><td>Free-form &mdash; messy, hard to analyze</td></tr>
+<tr><td>90-day raw retention + permanent rollups</td><td>Storage bounded; trends preserved</td><td>Forever raw &mdash; expensive; metrics-only &mdash; can&rsquo;t reanalyze</td></tr>
+<tr><td>Dual-track: rollups + warehouse</td><td>Fast dashboards; deep cohort analysis</td><td>Mongo only &mdash; struggles with complex SQL analytics</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> for serious product analytics use specialized tools &mdash; <strong>Mixpanel</strong>, <strong>Amplitude</strong>, <strong>PostHog</strong>, <strong>Heap</strong>, <strong>June</strong>; they handle funnels, cohorts, retention curves, A/B tests, and feature flags out of the box; if MongoDB is the source of truth, pipe events to <strong>Segment</strong>/<strong>RudderStack</strong> for fan-out to all destinations; <strong>warehouse export</strong> via <strong>Airbyte</strong>/<strong>Fivetran</strong>/<strong>Estuary</strong> to <strong>BigQuery</strong>/<strong>Snowflake</strong>/<strong>Databricks</strong>/<strong>ClickHouse</strong>/<strong>Tinybird</strong>; <strong>real-time dashboards</strong> in <strong>Atlas Charts</strong>, <strong>Metabase</strong>, <strong>Hex</strong>, <strong>Lightdash</strong>, <strong>Cube</strong>; <strong>privacy</strong>: PII fields excluded from events (use <code>user_id</code>, never email); <strong>consent</strong> tracked &mdash; respect GDPR/CCPA opt-outs; <strong>event taxonomy</strong> documented in a single registry (Notion, Tracking Plan); <strong>schema evolution</strong>: validators on event collection prevent drift; <strong>session stitching</strong>: assign <code>session_id</code> on session_start, reuse for ~30 min idle window; <strong>experimentation</strong> via <strong>Statsig</strong>/<strong>LaunchDarkly</strong>/<strong>GrowthBook</strong>/<strong>Eppo</strong>; <strong>alerting</strong> on metric anomalies via <strong>Datadog</strong>/<strong>Anomaly</strong>; <strong>aggregation jobs</strong> orchestrated via <strong>BullMQ</strong>/<strong>Inngest</strong>/<strong>Trigger.dev</strong>/<strong>Temporal</strong>.</p>
+'''
+
+ANSWERS[68] = r'''
+<p><strong>Situation:</strong> a dating app with users, profiles, and matches. Profiles include photos, prompts, preferences (age range, distance, gender). The matching engine surfaces candidate profiles per user; mutual likes create matches; matches enable messaging. Privacy and abuse prevention are first-class concerns.</p>
+
+<p><strong>Approach:</strong> separate <code>users</code> from <code>profiles</code> for security; <code>actions</code> (like/pass) is an append-only ledger; <code>matches</code> is the materialized list of mutual likes; <code>messages</code> belong to a match. Geospatial index on profile location; per-pair uniqueness in actions; transactions for the like-creates-match flow.</p>
+
+<pre><code>// users (auth identity)
+db.users.insertOne({
+  _id: ObjectId(),
+  email: "alice@example.com",
+  phone: "+1-555-0123",
+  email_verified: true,
+  phone_verified: true,
+  account_status: "active",      // active | paused | banned
+  created_at: new Date()
+})
+
+// profiles (public-ish persona)
+db.profiles.insertOne({
+  _id: ObjectId(),
+  user_id: ObjectId("..."),
+  display_name: "Alice",
+  age: 32,                         // computed daily from dob
+  gender: "female",
+  pronouns: ["she", "her"],
+  bio: "Coffee, books, hiking...",
+  photos: [
+    { url: "s3://...", verified: true, primary: true }
+  ],
+  prompts: [
+    { question: "I'm looking for...", answer: "..." }
+  ],
+  location: { type: "Point", coordinates: [-73.985, 40.748] },
+  city: "Brooklyn, NY",
+  preferences: {
+    seeking: ["male"],
+    age_range: [28, 38],
+    max_distance_km: 25
+  },
+  visibility: "public",            // public | hidden | paused
+  last_active: new Date()
+})
+
+// actions &mdash; append-only swipe ledger
+db.actions.insertOne({
+  _id: ObjectId(),
+  actor_id:  ObjectId("..."),
+  target_id: ObjectId("..."),
+  action: "like",                  // like | super_like | pass
+  ts: new Date()
+})
+db.actions.createIndex({ actor_id: 1, target_id: 1 }, { unique: true })
+db.actions.createIndex({ target_id: 1, action: 1, ts: -1 })
+
+// matches &mdash; mutual likes
+db.matches.insertOne({
+  _id: ObjectId(),
+  participants: [ObjectId("..."), ObjectId("...")].sort(),  // sorted for uniqueness
+  created_at: new Date(),
+  unmatched_at: null,
+  last_message_at: null
+})
+db.matches.createIndex({ participants: 1, created_at: -1 })
+db.matches.createIndex({ participants: 1 }, { unique: true })
+
+// Like + match-creation in a transaction
+const session = client.startSession()
+await session.withTransaction(async () =&gt; {
+  await db.actions.insertOne({ actor_id, target_id, action: "like", ts: new Date() }, { session })
+  // Did the target like us first?
+  const reciprocal = await db.actions.findOne(
+    { actor_id: target_id, target_id: actor_id, action: { $in: ["like", "super_like"] } },
+    { session }
+  )
+  if (reciprocal) {
+    await db.matches.insertOne({
+      participants: [actor_id, target_id].sort(),
+      created_at: new Date()
+    }, { session })
+  }
+})
+
+// Discover profiles (filter + geo)
+db.profiles.aggregate([
+  { $geoNear: {
+      near: { type: "Point", coordinates: [myLng, myLat] },
+      distanceField: "distance_km",
+      maxDistance: 25_000,
+      spherical: true,
+      query: {
+        gender: { $in: myPrefs.seeking },
+        age: { $gte: myPrefs.age_range[0], $lte: myPrefs.age_range[1] },
+        visibility: "public",
+        user_id: { $nin: alreadyActedOn }
+      }
+  }},
+  { $limit: 50 }
+])</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Users + profiles split</td><td>Auth fields stay private; profile is shared</td><td>Single doc &mdash; PII leaks risk</td></tr>
+<tr><td>Append-only actions ledger</td><td>Audit, prevent re-swipes, abuse detection</td><td>Mutate state &mdash; lose history</td></tr>
+<tr><td>Materialized matches</td><td>Inbox loads in O(1)</td><td>Live join on every action &mdash; expensive</td></tr>
+<tr><td>Sorted participants array</td><td>Unique pair regardless of order</td><td>Two rows per match &mdash; duplication</td></tr>
+<tr><td>Transaction for like + match</td><td>No race when both swipe simultaneously</td><td>Eventually consistent &mdash; missed matches</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> photo verification (selfie matching profile photo) via <strong>Persona</strong>/<strong>Onfido</strong>/<strong>Microsoft Cognitive Services Face API</strong>; abuse and harassment detection via <strong>Hive</strong>/<strong>Sift</strong>/<strong>Perspective API</strong> for messages and image moderation; <strong>safety features</strong> &mdash; report flow, block list (mutual hide), panic button, location obfuscation (show distance not exact location); <strong>rate limiting</strong> on actions to detect bots; <strong>messaging</strong> via <strong>Stream Chat</strong>/<strong>Sendbird</strong>/<strong>PubNub</strong> with E2E encryption optional; <strong>video calls</strong> via <strong>Daily.co</strong>/<strong>LiveKit</strong>/<strong>Agora</strong>; <strong>matchmaking algorithm</strong>: collaborative filtering (<strong>Atlas Vector Search</strong> on profile embeddings) + recency signals + diversity guards; <strong>premium tiers</strong> (Tinder Gold/Hinge+) via <strong>Stripe Billing</strong>/<strong>RevenueCat</strong> for IAP; <strong>change streams</strong> on matches trigger push notifications via <strong>OneSignal</strong>/<strong>Firebase</strong>; <strong>compliance</strong>: age verification (18+), GDPR/CCPA data export and deletion, retention policies, COPPA absolute floor; <strong>analytics</strong> via <strong>Mixpanel</strong>/<strong>Amplitude</strong> for funnel optimization; <strong>fraud rings</strong> detection via graph patterns (one device, many accounts) &mdash; <strong>Sardine</strong>/<strong>Sift</strong>/<strong>Forter</strong>; trust &amp; safety team workflow on flagged content via <strong>Linear</strong>/<strong>Zendesk</strong>.</p>
+'''
+
+ANSWERS[69] = r'''
+<p><strong>Situation:</strong> a digital library with books, authors, and borrowers. Books may have multiple copies/licenses (concurrent borrowing limits); borrowers check out for finite periods; holds queue when copies are unavailable; reading progress synced across devices. The collection grows but is bounded (catalog size, not infinite events).</p>
+
+<p><strong>Approach:</strong> four collections. <code>books</code> (canonical metadata) <code>authors</code> (people) <code>licenses</code> (ownership records, one row per copy or one row per concurrent-license-pool), <code>loans</code> (active and historical checkouts). <code>holds</code> queues users for unavailable books. <code>reading_progress</code> tracks per-user-per-book position.</p>
+
+<pre><code>// authors
+db.authors.insertOne({
+  _id: ObjectId(),
+  name: "Jane Doe",
+  bio: "...",
+  born: ISODate("1965-03-22"),
+  nationality: "US"
+})
+
+// books &mdash; canonical
+db.books.insertOne({
+  _id: ObjectId(),
+  isbn: "978-0-13-468599-1",
+  title: "MongoDB at Scale",
+  authors: [
+    { author_id: ObjectId("..."), name: "Jane Doe" }       // snapshotted name
+  ],
+  publisher: "Tech Press",
+  publish_date: ISODate("2024-09-15"),
+  language: "en",
+  cover_url: "https://cdn.../cover.jpg",
+  description: "...",
+  categories: ["technology", "databases"],
+  format: "ebook",                                          // ebook | audiobook
+  pages: 412,
+  drm: "adobe_acsm"
+})
+
+// licenses &mdash; concurrent-borrow capacity
+db.licenses.insertOne({
+  _id: ObjectId(),
+  book_id:        ObjectId("..."),
+  total_copies:   25,
+  available_copies: 22,                                     // denormalized
+  publisher_terms: { metered: false, expires: null }
+})
+
+// loans
+db.loans.insertOne({
+  _id: ObjectId(),
+  book_id:    ObjectId("..."),
+  user_id:    ObjectId("..."),
+  checked_out_at: new Date(),
+  due_at:        ISODate("2026-05-13"),                     // 14 days
+  returned_at: null,
+  status: "active"                                          // active | returned | overdue
+})
+
+// holds (queue when unavailable)
+db.holds.insertOne({
+  _id: ObjectId(),
+  book_id: ObjectId("..."),
+  user_id: ObjectId("..."),
+  position: 4,                                              // queue position
+  notified_at: null,
+  expires_at: null
+})
+
+// reading_progress (synced across devices)
+db.reading_progress.updateOne(
+  { user_id: ObjectId("..."), book_id: ObjectId("...") },
+  { $set: {
+      cfi: "epubcfi(/6/14[chap03]!/4/2/14)",                // EPUB CFI position
+      percent: 32,
+      device: "ipad",
+      updated_at: new Date()
+  }}, { upsert: true }
+)
+
+// Atomic checkout
+const session = client.startSession()
+await session.withTransaction(async () =&gt; {
+  const r = await db.licenses.updateOne(
+    { book_id, available_copies: { $gte: 1 } },
+    { $inc: { available_copies: -1 } },
+    { session }
+  )
+  if (r.modifiedCount === 0) throw new Error("no_copies_available")
+  await db.loans.insertOne({ /* ... */ }, { session })
+})
+
+// Return
+const session2 = client.startSession()
+await session2.withTransaction(async () =&gt; {
+  await db.loans.updateOne({ _id: loanId }, { $set: { returned_at: new Date(), status: "returned" } }, { session: session2 })
+  await db.licenses.updateOne({ book_id }, { $inc: { available_copies: 1 } }, { session: session2 })
+})
+
+// Indexes
+db.books.createIndex({ isbn: 1 }, { unique: true })
+db.books.createIndex({ "authors.author_id": 1 })
+db.licenses.createIndex({ book_id: 1 }, { unique: true })
+db.loans.createIndex({ user_id: 1, status: 1 })
+db.loans.createIndex({ book_id: 1, status: 1 })
+db.holds.createIndex({ book_id: 1, position: 1 })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Separate <code>licenses</code> from <code>books</code></td><td>License terms change without rewriting book metadata</td><td>Embed in book &mdash; conflated concerns</td></tr>
+<tr><td>Atomic dec with <code>$gte: 1</code> filter</td><td>No oversell; concurrent checkout safe</td><td>Read-then-write &mdash; classic race</td></tr>
+<tr><td>Holds queue collection</td><td>Fair scheduling, FIFO guarantees</td><td>None &mdash; lost demand for popular books</td></tr>
+<tr><td>Reading progress upsert</td><td>One doc per user-book; cross-device sync</td><td>Per-device records &mdash; complicated merge</td></tr>
+<tr><td>14-day fixed term</td><td>Simple, matches library norms</td><td>Per-book terms &mdash; admin overhead</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> ebook DRM via <strong>Readium LCP</strong>/<strong>Adobe ACSM</strong>/<strong>Apple FairPlay</strong>/<strong>Amazon Kindle DRM</strong>; <strong>audiobook streaming</strong> via <strong>Mux</strong>/<strong>Cloudflare Stream</strong>; ebook reader via <strong>Readium SDK</strong>/<strong>Foliate-js</strong>/<strong>EPUB.js</strong>; <strong>file storage</strong> via <strong>S3</strong>/<strong>R2</strong>/<strong>B2</strong>; OPDS catalog feed for compatible reader apps; <strong>ISBN/metadata enrichment</strong> via <strong>Open Library API</strong>/<strong>Google Books API</strong>; <strong>publisher/aggregator integrations</strong>: <strong>OverDrive</strong>, <strong>Hoopla</strong>, <strong>cloudLibrary</strong>; <strong>auto-return</strong>: scheduled job at <code>due_at</code> sets returned + frees license; <strong>hold notifications</strong>: when copy becomes available, top of queue gets 24h to check out; <strong>recommendations</strong> via <strong>Atlas Vector Search</strong> on book descriptions and reading history; <strong>analytics</strong>: most-borrowed, time-on-page, completion rates exported to <strong>BigQuery</strong>/<strong>Snowflake</strong>; <strong>library card auth</strong> via SIP2/SIP3 protocols for institutional access; <strong>privacy</strong> &mdash; library reading history is sensitive (US: protected by state library privacy laws); <strong>change streams</strong> trigger reading-streak notifications via <strong>Customer.io</strong>; <strong>full-text search</strong> via <strong>Atlas Search</strong> with weighted title/author/description fields and synonyms.</p>
+'''
+
+ANSWERS[70] = r'''
+<p><strong>Situation:</strong> a high-traffic application running on MongoDB shows degraded performance &mdash; slow queries, replica lag spikes, occasional connection errors, working set larger than RAM. The team must improve performance without rewriting the application.</p>
+
+<p><strong>Approach:</strong> systematic performance tuning across six areas: <strong>indexes</strong> (cover the slow queries), <strong>schema</strong> (avoid unbounded growth, match access patterns), <strong>query patterns</strong> (projection, batch, avoid scanned-not-returned), <strong>hardware</strong> (RAM for working set, NVMe disks), <strong>cluster topology</strong> (replica set sizing, sharding when appropriate), <strong>application layer</strong> (connection pooling, caching).</p>
+
+<pre><code>// 1. Identify slow queries
+db.setProfilingLevel(1, { slowms: 100 })       // log queries &gt; 100ms
+db.system.profile.find().sort({ ts: -1 }).limit(20)
+
+// Or use the Atlas Performance Advisor / mongotop / mongostat
+
+// 2. Explain a slow query
+db.orders.find({ user_id, status: "pending" }).sort({ created_at: -1 }).explain("executionStats")
+// Look for: COLLSCAN, IXSCAN, totalDocsExamined vs nReturned, executionTimeMillis, in-memory SORT
+
+// 3. Add covering indexes (ESR rule: Equality, Sort, Range)
+db.orders.createIndex({ user_id: 1, status: 1, created_at: -1 })
+
+// 4. Project only needed fields (cuts network + memory)
+db.orders.find({ user_id }, { _id: 1, total: 1, status: 1, created_at: 1 })
+
+// 5. Use $lookup pipeline form for filtered joins (5.0+)
+db.orders.aggregate([
+  { $match: { user_id } },
+  { $lookup: {
+      from: "products", localField: "items.product_id", foreignField: "_id",
+      as: "products",
+      pipeline: [{ $project: { name: 1, price_cents: 1 } }]   // smaller payload
+  }}
+])
+
+// 6. Bulk operations
+const ops = items.map(item =&gt; ({
+  updateOne: { filter: { _id: item._id }, update: { $set: { ... } } }
+}))
+db.products.bulkWrite(ops, { ordered: false })
+
+// 7. Read preference for analytics-style queries
+db.orders.find({ ... }).readPref("secondaryPreferred", [{ workload: "analytics" }])
+
+// 8. Enable index hints when the planner picks wrong
+db.orders.find(query).hint({ user_id: 1, created_at: -1 })
+
+// 9. Identify and remove unused indexes
+db.orders.aggregate([{ $indexStats: {} }])    // accesses.ops shows usage
+
+// 10. Connection pool tuning (Mongoose / driver level)
+mongoose.connect(uri, { maxPoolSize: 100, minPoolSize: 10, maxIdleTimeMS: 30000 })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Profiler at <code>slowms: 100</code></td><td>Surfaces problems without overhead in prod</td><td>Off &mdash; flying blind; on always &mdash; profile collection grows</td></tr>
+<tr><td>ESR-aligned compound indexes</td><td>Cover query + avoid in-memory sort</td><td>Single-field indexes &mdash; intersection slower</td></tr>
+<tr><td>Projections on hot queries</td><td>Less network, less RAM, less serialization</td><td>Full doc &mdash; CPU and bandwidth wasted</td></tr>
+<tr><td>Bulk writes</td><td>10-100x throughput vs individual writes</td><td>Per-op write &mdash; round-trip latency dominates</td></tr>
+<tr><td>Drop unused indexes</td><td>Each write maintains every index &mdash; smaller surface = faster writes</td><td>Keep them &mdash; write amplification</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> on <strong>MongoDB Atlas</strong>, use <strong>Performance Advisor</strong> &mdash; auto-recommends indexes from your slow query log; <strong>Atlas Query Insights</strong> shows query patterns and outliers; <strong>cluster sizing</strong>: working set must fit in RAM (use <code>db.serverStatus().wiredTiger.cache</code> stats), CPU sized for concurrent operations, IOPS sized for write rate; <strong>storage</strong>: NVMe SSDs with appropriate IOPS provisioning; <strong>caching layer</strong>: <strong>Redis</strong>/<strong>Dragonfly</strong>/<strong>KeyDB</strong> in front of MongoDB for hot reads (cache-aside or write-through); <strong>read scaling</strong>: secondary reads with appropriate staleness via <code>readPreference: secondaryPreferred</code>; <strong>sharding</strong> only when single-replica-set ceiling is hit and a good shard key exists; <strong>connection management</strong>: connection pool per app instance, not per request; <strong>schema patterns</strong>: avoid unbounded arrays (cap at ~hundreds), avoid deeply nested docs (paths require traversal); <strong>monitoring</strong>: <strong>Datadog</strong>/<strong>New Relic</strong>/<strong>Honeycomb</strong>/<strong>Percona PMM</strong> &mdash; alerts on p99 latency, connection saturation, replica lag, oplog window; <strong>load testing</strong>: <strong>k6</strong>/<strong>Artillery</strong>/<strong>locust</strong> with realistic data shapes before production; <strong>capacity planning</strong>: project growth quarterly, scale ahead of demand.</p>
+'''
+
+ANSWERS[71] = r'''
+<p><strong>Situation:</strong> a subscription service (SaaS, streaming, newsletter, fitness app) with plans, subscribers, and recurring payments. Plans have tiers and billing cycles; subscribers upgrade/downgrade/cancel; failed charges enter dunning workflows. Compliance: tax, refunds, proration, audit.</p>
+
+<p><strong>Approach:</strong> never reinvent billing &mdash; let <strong>Stripe Billing</strong>/<strong>Chargebee</strong>/<strong>Recurly</strong> hold the canonical billing state and call your webhooks. MongoDB stores app-side context: plans (linked to provider IDs), subscriber state, entitlements (what features each tier unlocks), and invoice metadata. Webhooks update local state; the app reads local state for fast access checks.</p>
+
+<pre><code>// plans (linked to Stripe price IDs)
+db.plans.insertOne({
+  _id: "plan_pro",
+  name: "Pro",
+  stripe_price_id: "price_pro_monthly",
+  amount_cents: 2900,
+  interval: "month",
+  features: ["unlimited_projects", "priority_support", "team_seats:10"],
+  active: true
+})
+
+// subscribers (synced from Stripe via webhooks)
+db.subscribers.insertOne({
+  _id: ObjectId(),
+  user_id: ObjectId("..."),
+  org_id:  ObjectId("..."),
+  stripe_customer_id: "cus_...",
+  stripe_subscription_id: "sub_...",
+  plan_id: "plan_pro",
+  status: "active",                            // trialing | active | past_due | canceled | incomplete
+  current_period_start: ISODate("2026-04-01"),
+  current_period_end:   ISODate("2026-05-01"),
+  cancel_at_period_end: false,
+  trial_ends_at: null,
+  features_cache: ["unlimited_projects", "priority_support", "team_seats:10"]
+})
+
+// invoices (metadata only; Stripe is the source of truth)
+db.invoices.insertOne({
+  _id: ObjectId(),
+  stripe_invoice_id: "in_...",
+  subscriber_id: ObjectId("..."),
+  amount_due_cents: 2900,
+  amount_paid_cents: 2900,
+  status: "paid",                              // open | paid | void | uncollectible
+  period_start: ISODate("..."),
+  period_end:   ISODate("..."),
+  pdf_url: "https://stripe.com/...",
+  created_at: new Date()
+})
+
+// Webhook handler (Stripe signed)
+async function handleStripeWebhook(event) {
+  switch (event.type) {
+    case "customer.subscription.created":
+    case "customer.subscription.updated":
+      const sub = event.data.object
+      await db.subscribers.updateOne(
+        { stripe_subscription_id: sub.id },
+        { $set: {
+            status: sub.status,
+            plan_id: planIdFromPrice(sub.items.data[0].price.id),
+            current_period_start: new Date(sub.current_period_start * 1000),
+            current_period_end:   new Date(sub.current_period_end * 1000),
+            cancel_at_period_end: sub.cancel_at_period_end,
+            features_cache: featuresForPlan(planIdFromPrice(sub.items.data[0].price.id))
+        }},
+        { upsert: true }
+      )
+      break
+    case "invoice.payment_failed":
+      // dunning workflow: notify, retry, eventually deactivate
+      break
+  }
+}
+
+// Fast access check (no Stripe call)
+async function hasFeature(userId, feature) {
+  const sub = await db.subscribers.findOne({ user_id: userId, status: { $in: ["active", "trialing"] } })
+  return sub?.features_cache.includes(feature) ?? false
+}
+
+// Indexes
+db.subscribers.createIndex({ user_id: 1 })
+db.subscribers.createIndex({ stripe_subscription_id: 1 }, { unique: true })
+db.invoices.createIndex({ subscriber_id: 1, created_at: -1 })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Stripe holds canonical state</td><td>PCI compliance, dunning, tax, proration done</td><td>DIY billing &mdash; legal and engineering quagmire</td></tr>
+<tr><td>Local copy synced via webhooks</td><td>Fast access checks; no API call per request</td><td>Live Stripe API call &mdash; latency, rate limits</td></tr>
+<tr><td>Cached <code>features_cache</code></td><td>O(1) feature gating reads</td><td>Live plan lookup &mdash; extra read</td></tr>
+<tr><td>Webhook-driven updates</td><td>Always reflects payment provider truth</td><td>Polling &mdash; lag, missed events</td></tr>
+<tr><td>Plan IDs linked, not embedded</td><td>Plan tweaks (price change) are central</td><td>Embedded plan &mdash; mass updates needed</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> billing platform &mdash; <strong>Stripe Billing</strong> (best general-purpose), <strong>Chargebee</strong>/<strong>Recurly</strong>/<strong>Paddle</strong> (Paddle is a merchant-of-record for tax simplicity), <strong>Maxio</strong>/<strong>Orb</strong>/<strong>Metronome</strong>/<strong>Lago</strong> for usage-based billing; <strong>tax</strong> via <strong>Stripe Tax</strong>/<strong>Avalara</strong>/<strong>TaxJar</strong>/<strong>Quaderno</strong>; <strong>fraud and chargeback handling</strong> via <strong>Stripe Radar</strong>; <strong>dunning</strong> automated by Stripe (smart retries) or specialized like <strong>Baremetrics Recover</strong>/<strong>Churnkey</strong>; <strong>payment methods</strong>: cards, ACH, SEPA, Apple/Google Pay; <strong>self-serve cancellation</strong> with retention offers via <strong>ProsperStack</strong>/<strong>Churnkey</strong>; <strong>analytics</strong>: MRR, churn, CAC, LTV via <strong>ChartMogul</strong>/<strong>Baremetrics</strong>/<strong>ProfitWell</strong>; <strong>customer portal</strong> via <strong>Stripe Customer Portal</strong> for self-serve plan changes/invoices; <strong>webhook reliability</strong>: idempotency keys on the consumer, replay UI in <strong>Stripe Dashboard</strong>; <strong>change streams</strong> on subscribers trigger feature flag updates via <strong>LaunchDarkly</strong>/<strong>Statsig</strong>; <strong>audit log</strong> all subscription state changes for compliance and support; <strong>failed payment notifications</strong> to users via <strong>Customer.io</strong>/<strong>Postmark</strong>; <strong>finance reporting</strong>: revenue recognition (ASC 606) handled in <strong>Stripe Sigma</strong>/<strong>Stripe Revenue Recognition</strong>.</p>
+'''
+
+ANSWERS[72] = r'''
+<p><strong>Situation:</strong> a learning management system (LMS) with courses, students, and instructors. Courses contain modules, lessons, quizzes, assignments. Students enroll, progress through content, submit assignments, and earn certificates. Instructors author and grade. Reads are heavy (lesson pages); writes are bursty around assignment deadlines.</p>
+
+<p><strong>Approach:</strong> five collections. <code>users</code> with role flags (student/instructor); <code>courses</code> hold structure (modules &gt; lessons) embedded for read speed; <code>enrollments</code> link student to course with progress; <code>submissions</code> hold assignment uploads; <code>quiz_attempts</code> hold per-attempt answers and grades. Per-user progress denormalized for fast dashboards.</p>
+
+<pre><code>// users
+db.users.insertOne({
+  _id: ObjectId(),
+  email: "alice@example.com",
+  display_name: "Alice",
+  roles: ["student"],
+  bio: "..."
+})
+
+// courses (embed structure)
+db.courses.insertOne({
+  _id: ObjectId(),
+  slug: "mongodb-essentials",
+  title: "MongoDB Essentials",
+  description: "...",
+  instructor_id: ObjectId("..."),
+  level: "beginner",
+  language: "en",
+  modules: [
+    { _id: "m1", title: "Introduction",
+      lessons: [
+        { _id: "l1", title: "What is MongoDB", type: "video",
+          video_url: "...", duration_sec: 600 },
+        { _id: "l2", title: "Documents and Collections", type: "reading",
+          content_html: "..." }
+      ]
+    },
+    { _id: "m2", title: "CRUD Operations",
+      lessons: [/* ... */],
+      quiz: { _id: "q2", title: "Module 2 Quiz", question_count: 10, passing_score: 70 }
+    }
+  ],
+  status: "published",
+  enrolled_count: 0,
+  rating: 4.8,
+  created_at: new Date()
+})
+
+// enrollments (per-student-per-course)
+db.enrollments.insertOne({
+  _id: ObjectId(),
+  user_id: ObjectId("..."),
+  course_id: ObjectId("..."),
+  enrolled_at: new Date(),
+  progress: {
+    completed_lessons: ["m1.l1"],
+    current_lesson:    "m1.l2",
+    percent_complete:  10,
+    last_accessed:     new Date()
+  },
+  certificate_issued_at: null
+})
+
+// submissions
+db.submissions.insertOne({
+  _id: ObjectId(),
+  user_id: ObjectId("..."),
+  course_id: ObjectId("..."),
+  assignment_id: "m3.a1",
+  submitted_at: new Date(),
+  files: [{ s3_key: "...", filename: "report.pdf" }],
+  text_response: "...",
+  grade: null,                                       // assigned by instructor
+  feedback: null,
+  graded_at: null
+})
+
+// quiz_attempts
+db.quiz_attempts.insertOne({
+  _id: ObjectId(),
+  user_id: ObjectId("..."),
+  course_id: ObjectId("..."),
+  quiz_id: "m2.q2",
+  attempt_number: 1,
+  answers: [
+    { question_id: "q1", answer: "A", correct: true }
+  ],
+  score: 80,
+  passed: true,
+  submitted_at: new Date()
+})
+
+// Update progress (atomic add lesson + recompute percent)
+db.enrollments.updateOne(
+  { _id: enrollmentId },
+  { $addToSet: { "progress.completed_lessons": lessonId },
+    $set: { "progress.current_lesson": nextLessonId,
+            "progress.last_accessed": new Date() } }
+)
+
+// Indexes
+db.courses.createIndex({ slug: 1 }, { unique: true })
+db.courses.createIndex({ status: 1, level: 1 })
+db.enrollments.createIndex({ user_id: 1, course_id: 1 }, { unique: true })
+db.submissions.createIndex({ course_id: 1, assignment_id: 1, submitted_at: -1 })
+db.quiz_attempts.createIndex({ user_id: 1, course_id: 1, quiz_id: 1 })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Embed modules + lessons in course</td><td>Lesson list one read; bounded structure</td><td>Separate collections &mdash; multiple <code>$lookup</code></td></tr>
+<tr><td>Separate enrollments collection</td><td>Per-student progress isolated; many students per course</td><td>Embed in course &mdash; doc grows unboundedly</td></tr>
+<tr><td>Submissions/quiz_attempts separate</td><td>Append-only ledger; multiple attempts</td><td>Embed &mdash; doc bloat, contention</td></tr>
+<tr><td>Snapshot lesson IDs in completed_lessons</td><td>Course structure changes don&rsquo;t void progress</td><td>Track by lesson title &mdash; brittle</td></tr>
+<tr><td>Denormalized <code>percent_complete</code></td><td>Dashboard renders without scanning lesson list</td><td>Compute per request &mdash; slow on many enrollments</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> video hosting via <strong>Mux</strong>/<strong>Cloudflare Stream</strong>/<strong>Vimeo</strong> with adaptive bitrate; <strong>video DRM</strong> via <strong>Widevine</strong>/<strong>FairPlay</strong> if content is paid; <strong>quiz authoring</strong> via dedicated tools (<strong>H5P</strong>, <strong>Articulate</strong>); <strong>certificates</strong> generated via <strong>Accredible</strong>/<strong>Sertifier</strong> or PDF generation pipeline (<strong>react-pdf</strong>) and stored in S3; <strong>discussion forums</strong> per course in a separate collection or <strong>Discourse</strong>; <strong>plagiarism detection</strong> on submissions via <strong>Turnitin</strong>/<strong>Copyleaks</strong>; <strong>auto-grading</strong> for code submissions via <strong>HackerRank</strong>/<strong>CodeRunner</strong> SDK or sandboxed runners; <strong>SCORM/xAPI</strong> compliance for corporate LMS interoperability; <strong>SSO/LTI</strong> integration for institutional clients (<strong>Auth0</strong>/<strong>Okta</strong>/<strong>WorkOS</strong>); <strong>analytics</strong>: completion rates, drop-off points, time-on-lesson via <strong>Mixpanel</strong>/<strong>Amplitude</strong>; <strong>recommendations</strong> via <strong>Atlas Vector Search</strong> on course descriptions and student history; <strong>change streams</strong> trigger reminder emails for inactive students via <strong>Customer.io</strong>/<strong>Iterable</strong>; <strong>accessibility</strong>: captions, transcripts, alt text mandatory; <strong>multi-language</strong>: per-locale lesson variants; <strong>cohort-based courses</strong> add scheduling and live sessions via <strong>Zoom</strong>/<strong>Daily.co</strong>; <strong>payment</strong> via <strong>Stripe Billing</strong>; <strong>refund window</strong> tracked on enrollment.</p>
+'''
+
+ANSWERS[73] = r'''
+<p><strong>Situation:</strong> the product team needs to track and analyze user behavior &mdash; clicks, page views, feature usage, search queries, conversion events &mdash; to understand patterns, drive personalization, and inform product decisions. Privacy must be preserved; the analytics layer must scale.</p>
+
+<p><strong>Approach:</strong> emit events from web/mobile SDKs into a high-volume <strong>time-series collection</strong> with a consistent schema (<code>user_id</code>, <code>event_name</code>, <code>properties</code>, <code>context</code>); compute behavioral aggregates (per-user feature counts, session counts, last-active) into a <code>user_traits</code> collection refreshed nightly; expose dashboards from the rollups; use <strong>Atlas Vector Search</strong> on user behavior embeddings for similarity (find users like X).</p>
+
+<pre><code>// raw events &mdash; time-series, append-only
+db.createCollection("user_events", {
+  timeseries: { timeField: "ts", metaField: "meta", granularity: "seconds" },
+  expireAfterSeconds: 180 * 86400      // 180-day retention
+})
+
+db.user_events.insertOne({
+  ts: new Date(),
+  meta: {
+    user_id: ObjectId("..."),
+    event_name: "search_executed",
+    platform: "web",
+    app_version: "8.4.1"
+  },
+  properties: {
+    query: "mongodb tutorial",
+    result_count: 12,
+    filter: { difficulty: "beginner" }
+  },
+  context: {
+    session_id: "sess_...",
+    referrer: "https://google.com",
+    page: "/search",
+    user_agent: "...",
+    ip_country: "US"
+  }
+})
+
+// user_traits &mdash; rolling behavior summary
+db.user_traits.insertOne({
+  _id: ObjectId("..."),                // user_id as _id
+  total_events: 1247,
+  last_active_at: new Date(),
+  first_seen_at: ISODate("..."),
+  feature_counts: {
+    search: 142, save: 38, share: 12, follow: 5
+  },
+  preferences: {
+    inferred_topics: ["mongodb", "databases", "scaling"],
+    inferred_skill: "intermediate"
+  },
+  cohort: { signup_week: "2025-W42" }
+})
+
+// Nightly rollup pipeline
+db.user_events.aggregate([
+  { $match: { ts: { $gte: yesterday, $lt: today } } },
+  { $group: {
+      _id: "$meta.user_id",
+      events_today: { $sum: 1 },
+      last_event:   { $max: "$ts" },
+      features_used: { $addToSet: "$meta.event_name" }
+  }},
+  { $merge: {
+      into: "user_traits",
+      on: "_id",
+      whenMatched: [{
+        $set: {
+          total_events: { $add: ["$total_events", "$$new.events_today"] },
+          last_active_at: "$$new.last_event"
+        }
+      }],
+      whenNotMatched: "insert"
+  }}
+])
+
+// Vector embedding of recent behavior for similarity / recommendations
+db.user_traits.updateOne(
+  { _id: userId },
+  { $set: { behavior_embedding: await embed(recentEventDigest) } }
+)
+
+// "Find users like Alice" via Atlas Vector Search
+db.user_traits.aggregate([
+  { $vectorSearch: {
+      index: "behavior_idx",
+      path: "behavior_embedding",
+      queryVector: aliceEmbedding,
+      numCandidates: 200,
+      limit: 50
+  }}
+])
+
+// Indexes (auto on metaField)
+db.user_events.createIndex({ "meta.user_id": 1, ts: -1 })
+db.user_events.createIndex({ "meta.event_name": 1, ts: -1 })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Time-series for raw events</td><td>10x compression; fast time-range scans</td><td>Regular collection &mdash; storage explodes</td></tr>
+<tr><td>Periodic <code>user_traits</code> rollup</td><td>O(1) lookups for personalization</td><td>Live aggregation per request &mdash; slow</td></tr>
+<tr><td>180-day raw retention</td><td>Bounded storage; recent queries fast</td><td>Forever &mdash; expensive; metrics-only &mdash; can&rsquo;t reanalyze</td></tr>
+<tr><td>Embedding-based similarity</td><td>Surfaces &ldquo;users like you&rdquo; for recs</td><td>Hand-coded rules &mdash; brittle, narrow</td></tr>
+<tr><td>Standard event taxonomy</td><td>Consistent across platforms; analyzable</td><td>Free-form &mdash; data team rebuilds shapes</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> for serious behavior analytics use <strong>Mixpanel</strong>/<strong>Amplitude</strong>/<strong>PostHog</strong>/<strong>Heap</strong>/<strong>June</strong>; for the data lake / warehouse pattern use <strong>Segment</strong>/<strong>RudderStack</strong>/<strong>Snowplow</strong> as collection layer + <strong>BigQuery</strong>/<strong>Snowflake</strong>/<strong>Databricks</strong>/<strong>ClickHouse</strong> for analytics + <strong>dbt</strong> for transformations + <strong>Hightouch</strong>/<strong>Census</strong> for reverse-ETL back into product; <strong>privacy</strong>: GDPR/CCPA opt-outs respected end-to-end, PII never in event properties, <strong>cookie consent</strong> via <strong>OneTrust</strong>/<strong>Cookiebot</strong>; <strong>identity stitching</strong>: anonymous &rarr; logged-in user merging via <code>anonymous_id</code> + <code>user_id</code>; <strong>session windowing</strong>: 30-min idle gap defines session boundary; <strong>experiments</strong>: <strong>Statsig</strong>/<strong>LaunchDarkly</strong>/<strong>GrowthBook</strong>/<strong>Eppo</strong> with metrics from same event stream; <strong>personalization</strong>: <strong>Atlas Vector Search</strong> + LLM-generated user summaries (OpenAI, Cohere, Voyage); <strong>compliance</strong>: data subject access requests automated via per-user event export; <strong>feature usage analysis</strong>: stickiness (DAU/MAU), funnel drop-off, retention curves; <strong>anomaly detection</strong> on event volume via <strong>Datadog</strong>/<strong>Anomaly</strong>; <strong>change streams</strong> drive real-time personalization updates.</p>
+'''
+
+ANSWERS[74] = r'''
+<p><strong>Situation:</strong> a review platform with users, products, and reviews. Users post text reviews with ratings (1-5 stars), upload photos, and respond to questions. Products show aggregated rating + review excerpts; reviews are sortable (most helpful, newest); abusive content needs moderation.</p>
+
+<p><strong>Approach:</strong> three collections. <code>products</code> hold canonical product data with denormalized rating aggregates (average, count, histogram). <code>reviews</code> are the canonical posts with text, rating, and metadata. <code>review_votes</code> tracks helpful/unhelpful votes for ranking. Aggregates updated on every review write inside a transaction.</p>
+
+<pre><code>// products
+db.products.insertOne({
+  _id: ObjectId(),
+  name: "Bluetooth Headphones",
+  // Denormalized rating data
+  rating: {
+    average: 0,                              // weighted average
+    count:   0,
+    histogram: { "1": 0, "2": 0, "3": 0, "4": 0, "5": 0 }
+  }
+})
+
+// reviews
+db.reviews.insertOne({
+  _id: ObjectId(),
+  product_id: ObjectId("..."),
+  user_id:    ObjectId("..."),
+  rating: 5,
+  title: "Outstanding sound quality",
+  body: "I&rsquo;ve been using these for 3 weeks...",
+  photos: [{ url: "s3://..." }],
+  verified_purchase: true,
+  helpful_count: 0,
+  not_helpful_count: 0,
+  status: "published",                       // published | hidden | flagged | removed
+  created_at: new Date()
+})
+
+// review_votes (per-user-per-review)
+db.review_votes.insertOne({
+  _id: ObjectId(),
+  review_id: ObjectId("..."),
+  user_id:   ObjectId("..."),
+  vote: "helpful",                           // helpful | not_helpful
+  ts: new Date()
+})
+
+// Atomic post: insert review + update product aggregate
+const session = client.startSession()
+await session.withTransaction(async () =&gt; {
+  await db.reviews.insertOne(review, { session })
+  await db.products.updateOne(
+    { _id: product_id },
+    [{ $set: {
+        "rating.count": { $add: ["$rating.count", 1] },
+        [`rating.histogram.${review.rating}`]: { $add: [`$rating.histogram.${review.rating}`, 1] },
+        "rating.average": { $divide: [
+          { $add: [
+            { $multiply: ["$rating.average", "$rating.count"] },
+            review.rating
+          ]},
+          { $add: ["$rating.count", 1] }
+        ]}
+    }}], { session }
+  )
+})
+
+// Vote helpful (upsert &mdash; switching vote toggles counts)
+const session2 = client.startSession()
+await session2.withTransaction(async () =&gt; {
+  const existing = await db.review_votes.findOne({ review_id, user_id }, { session: session2 })
+  if (existing && existing.vote === newVote) return       // no-op
+  await db.review_votes.updateOne(
+    { review_id, user_id },
+    { $set: { vote: newVote, ts: new Date() } },
+    { upsert: true, session: session2 }
+  )
+  await db.reviews.updateOne(
+    { _id: review_id },
+    { $inc: {
+        [newVote === "helpful" ? "helpful_count" : "not_helpful_count"]: 1,
+        ...(existing ? { [existing.vote === "helpful" ? "helpful_count" : "not_helpful_count"]: -1 } : {})
+    }}, { session: session2 }
+  )
+})
+
+// Sort: most helpful, then newest
+db.reviews.find({ product_id, status: "published" })
+  .sort({ helpful_count: -1, created_at: -1 })
+
+// Indexes
+db.reviews.createIndex({ product_id: 1, status: 1, helpful_count: -1, created_at: -1 })
+db.reviews.createIndex({ user_id: 1, created_at: -1 })
+db.review_votes.createIndex({ review_id: 1, user_id: 1 }, { unique: true })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Denormalized rating histogram</td><td>Product page renders without aggregation</td><td>Live <code>$group</code> on every page load &mdash; expensive</td></tr>
+<tr><td>Transactional aggregate update</td><td>Average and histogram never drift</td><td>Eventual &mdash; nightly reconciliation needed</td></tr>
+<tr><td>Separate <code>review_votes</code></td><td>Per-user uniqueness; vote switching</td><td>Embed votes in review &mdash; doc grows unboundedly</td></tr>
+<tr><td>Verified purchase flag</td><td>Trust signal; weights in ranking</td><td>None &mdash; review fraud goes undetected</td></tr>
+<tr><td>Status field for moderation</td><td>Hide before delete; audit trail</td><td>Hard delete &mdash; lost evidence</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> abuse moderation via <strong>Perspective API</strong>/<strong>Hive</strong>/<strong>Sift</strong> for toxicity scoring + human moderator queue for borderline cases; <strong>spam detection</strong>: account age, IP reputation, content similarity (vector embeddings), purchase verification; <strong>photo moderation</strong> for explicit content via <strong>Hive</strong>/<strong>AWS Rekognition</strong>/<strong>Google SafeSearch</strong>; <strong>review fraud detection</strong>: device fingerprinting, behavioral patterns, sudden spikes flagged via <strong>Sardine</strong>/<strong>Sift</strong>; <strong>helpful ranking</strong>: time decay (recent helpful votes worth more), Bayesian smoothing for low-vote reviews (avoid "1 helpful out of 1" beating "30 of 35"); <strong>response from seller</strong> as a separate field on the review or thread; <strong>reviews on Q&amp;A platforms</strong>: <strong>BazaarVoice</strong>/<strong>Yotpo</strong>/<strong>Stamped</strong>/<strong>Okendo</strong> as managed services that handle moderation, syndication, and rich SERP markup; <strong>Atlas Search</strong> for review keyword search and topic extraction; <strong>summarization</strong> via <strong>OpenAI</strong>/<strong>Claude</strong> for &ldquo;reviewers say...&rdquo; summaries; <strong>analytics</strong>: review velocity, sentiment trends; <strong>structured data</strong> (JSON-LD <code>aggregateRating</code>, <code>Review</code>) for SEO; <strong>change streams</strong> trigger seller notifications and review-request emails; <strong>incentive policies</strong> compliant with FTC Endorsement Guides; <strong>review request emails</strong> via <strong>Customer.io</strong>/<strong>Klaviyo</strong> post-purchase.</p>
+'''
+
+ANSWERS[75] = r'''
+<p><strong>Situation:</strong> a gaming platform with users, games, and scores. Users play games in sessions; scores are recorded with timestamps and metadata; leaderboards show top players globally and per-friend; achievements unlock based on score thresholds. Reads dominate (leaderboard requests); score writes spike during peak gameplay.</p>
+
+<p><strong>Approach:</strong> four collections. <code>users</code> hold profile and stats. <code>games</code> hold game metadata. <code>scores</code> are append-only records of plays. <code>leaderboards</code> is materialized (top-100 per game per period) refreshed every minute. Real-time leaderboards (during a tournament) use <strong>Redis sorted sets</strong> for sub-millisecond updates.</p>
+
+<pre><code>// users
+db.users.insertOne({
+  _id: ObjectId(),
+  username: "alice",
+  display_name: "Alice",
+  avatar_url: "...",
+  total_score: 0,                              // denormalized
+  achievements: [],                              // unlocked
+  friends: [ObjectId("...")],                    // refs
+  joined_at: new Date()
+})
+
+// games
+db.games.insertOne({
+  _id: ObjectId(),
+  slug: "puzzle-quest",
+  title: "Puzzle Quest",
+  scoring: "high_score_wins",                  // high_score_wins | low_time_wins
+  active: true
+})
+
+// scores &mdash; append-only
+db.scores.insertOne({
+  _id: ObjectId(),
+  user_id: ObjectId("..."),
+  game_id: ObjectId("..."),
+  score: 12450,
+  duration_sec: 240,
+  metadata: { level: 12, difficulty: "hard" },
+  client_version: "8.4.1",
+  played_at: new Date()
+})
+
+// leaderboards &mdash; materialized top-N per game per period
+db.leaderboards.insertOne({
+  _id: { game_id: ObjectId("..."), period: "all_time" },
+  top: [
+    { user_id: ObjectId("..."), username: "alice", score: 12450 }
+  ],
+  refreshed_at: new Date()
+})
+
+// Refresh leaderboard (per-minute job for active games)
+db.scores.aggregate([
+  { $match: { game_id, played_at: { $gte: periodStart } } },
+  { $group: {
+      _id: "$user_id",
+      best_score: { $max: "$score" }
+  }},
+  { $sort: { best_score: -1 } },
+  { $limit: 100 },
+  { $lookup: {
+      from: "users", localField: "_id", foreignField: "_id", as: "user",
+      pipeline: [{ $project: { username: 1, display_name: 1, avatar_url: 1 } }]
+  }},
+  { $unwind: "$user" },
+  { $group: { _id: null, top: { $push: { user_id: "$_id", username: "$user.username", score: "$best_score" } } } },
+  { $project: { _id: { game_id: gameId, period: "all_time" }, top: 1, refreshed_at: "$$NOW" } },
+  { $merge: "leaderboards" }
+])
+
+// Friend leaderboard (small, computed on read)
+db.scores.aggregate([
+  { $match: { game_id, user_id: { $in: friendIds } } },
+  { $group: { _id: "$user_id", best_score: { $max: "$score" } } },
+  { $sort: { best_score: -1 } }
+])
+
+// Live leaderboard via Redis sorted set
+// ZADD lb:tournament:42 12450 user_alice
+// ZREVRANGE lb:tournament:42 0 99 WITHSCORES   (top 100)
+
+// Achievement check (after score)
+async function checkAchievements(userId, gameId, score) {
+  if (score &gt;= 10_000) {
+    await db.users.updateOne(
+      { _id: userId, achievements: { $ne: "score_10k" } },
+      { $addToSet: { achievements: "score_10k" } }
+    )
+  }
+}
+
+// Indexes
+db.scores.createIndex({ game_id: 1, score: -1 })
+db.scores.createIndex({ user_id: 1, played_at: -1 })
+db.scores.createIndex({ game_id: 1, played_at: -1 })
+db.users.createIndex({ username: 1 }, { unique: true })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Append-only scores</td><td>Audit, replay, anti-cheat investigation</td><td>Mutate user.high_score &mdash; lose history</td></tr>
+<tr><td>Materialized leaderboards</td><td>Sub-ms reads even with millions of scores</td><td>Live aggregation &mdash; expensive on every request</td></tr>
+<tr><td>Redis sorted sets for live</td><td>Tournaments need ms-level updates and ranks</td><td>Mongo refresh per minute &mdash; too slow for live</td></tr>
+<tr><td>Friend boards computed on read</td><td>Small N (friend list is bounded)</td><td>Materialize per friend pair &mdash; combinatorial</td></tr>
+<tr><td>$max per user when materializing</td><td>Best-score-wins ranking</td><td>Latest score &mdash; rewards luck not skill</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> for live tournaments, <strong>Redis sorted sets</strong> (or <strong>Dragonfly</strong>/<strong>KeyDB</strong>) deliver sub-millisecond rank lookups, with periodic flush back to MongoDB; <strong>anti-cheat</strong>: server-side validation of score plausibility (max score per game time), client signature on score submission, ML-based outlier detection; <strong>device fingerprinting</strong> to detect alt accounts; <strong>matchmaking</strong> by skill (<strong>Glicko-2</strong>/<strong>TrueSkill</strong>) stored as user rating; <strong>achievements/badges</strong> via <strong>Steam-style</strong> rule engine triggered by change streams; <strong>social features</strong>: friends, following, challenges via separate collections; <strong>chat</strong> via <strong>Stream Chat</strong>/<strong>Sendbird</strong>/<strong>PubNub</strong>; <strong>push notifications</strong> on rank changes via <strong>OneSignal</strong>/<strong>Firebase</strong>; <strong>analytics</strong>: retention curves, average sessions, top performers via <strong>Mixpanel</strong>/<strong>Amplitude</strong>; <strong>seasons</strong>: leaderboards reset weekly/monthly with archives kept; <strong>monetization</strong>: cosmetics/IAP via <strong>RevenueCat</strong>/<strong>Stripe</strong>; <strong>rewarded ads</strong> via <strong>AppLovin</strong>/<strong>ironSource</strong>; <strong>esports/tournaments</strong> need real-time spectator views and replays (S3 video); <strong>compliance</strong>: COPPA for under-13, GDPR opt-outs, age-gating for prize tournaments; <strong>fairness</strong>: random seed reproducibility for replay verification.</p>
+'''
+
+
+ANSWERS[76] = r'''
+<p><strong>Situation:</strong> a distributed MongoDB deployment (replica set + sharded cluster, possibly multi-region) must keep data consistent and durable despite node failures, network partitions, and concurrent writes. The team needs to choose write/read concerns, transaction semantics, and reconciliation strategies that fit each workload &mdash; orders need strict consistency; analytics tolerate staleness.</p>
+
+<p><strong>Approach:</strong> tune <strong>write concern</strong> per workload (<code>w:&nbsp;"majority"</code> + <code>journaled:&nbsp;true</code> for orders, <code>w:&nbsp;1</code> for telemetry), use <strong>read concern</strong> <code>"majority"</code> for user-facing reads, <strong>causal consistency</strong> for read-your-writes within a session, and <strong>multi-document transactions</strong> only when invariants span multiple documents. Embrace <strong>idempotency keys</strong> and <strong>optimistic concurrency</strong> so retries never double-apply.</p>
+
+<pre><code>// 1. Durable writes &mdash; survives primary failure without rollback
+db.orders.insertOne(doc, {
+  writeConcern: { w: "majority", j: true, wtimeout: 5000 }
+})
+
+// 2. Linearizable reads &mdash; latest-acknowledged data, slow
+db.accounts.findOne(
+  { _id: id },
+  { readConcern: { level: "linearizable" } }
+)
+
+// 3. Read-your-write within a session (causal consistency)
+const session = client.startSession({ causalConsistency: true })
+await db.users.updateOne({ _id }, { $set: { name: "Alice" } }, { session })
+const u = await db.users.findOne({ _id }, { session })   // sees the update
+
+// 4. Multi-doc transaction &mdash; debit/credit pair
+await session.withTransaction(async () =&gt; {
+  await db.accounts.updateOne(
+    { _id: from, balance_cents: { $gte: amount } },
+    { $inc: { balance_cents: -amount } }, { session }
+  )
+  await db.accounts.updateOne(
+    { _id: to },
+    { $inc: { balance_cents: amount } }, { session }
+  )
+}, { readConcern: "snapshot", writeConcern: { w: "majority" } })
+
+// 5. Idempotent writes via app-supplied key
+db.payments.updateOne(
+  { idempotency_key: "pay_2026_04_29_abc123" },
+  { $setOnInsert: { amount_cents: 4999, status: "captured", created_at: new Date() } },
+  { upsert: true }
+)
+
+// 6. Optimistic concurrency on a versioned document
+db.products.updateOne(
+  { _id: id, version: 7 },
+  { $set: { price_cents: 999 }, $inc: { version: 1 } }
+)
+// matchedCount === 0 =&gt; someone else updated; refetch and retry</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td><code>w: "majority"</code> for critical writes</td><td>No rollback on failover; durable across replica set</td><td><code>w: 1</code> &mdash; faster but rolls back if primary dies</td></tr>
+<tr><td><code>readConcern: "majority"</code> default</td><td>Reads only committed data; consistent with replication</td><td><code>"local"</code> &mdash; can return data that gets rolled back</td></tr>
+<tr><td>Transactions only when needed</td><td>~5x slower than single-doc; locks competing writes</td><td>Embed related data in one doc &mdash; atomic for free</td></tr>
+<tr><td>Idempotency keys</td><td>Safe retries on network errors; no double-charges</td><td>None &mdash; client retries cause duplicate writes</td></tr>
+<tr><td>Optimistic concurrency over locks</td><td>No lock waits; high throughput; well-suited to distributed systems</td><td>Pessimistic locking &mdash; deadlocks, contention</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> for <strong>multi-region deployments</strong>, <strong>MongoDB Atlas Global Clusters</strong> pin shards to regions for data sovereignty (GDPR Article 44, China DLP); <strong>retryable writes</strong> (driver default in 4.2+) automatically retry idempotent writes once on primary stepdown; <strong>change streams</strong> let downstream services react consistently after the write commits; for <strong>cross-database invariants</strong> (Mongo + Postgres + Redis), use <strong>sagas</strong> via <strong>Temporal</strong>/<strong>Inngest</strong>/<strong>Trigger.dev</strong> rather than distributed transactions; <strong>observability</strong>: <strong>Datadog</strong>/<strong>New Relic</strong>/<strong>Honeycomb</strong>/<strong>Percona PMM</strong> alert on replication lag, election storms, and write concern timeouts; <strong>chaos engineering</strong> with <strong>Gremlin</strong>/<strong>LitmusChaos</strong> kills nodes during business hours in staging; for true cross-region linearizability, accept the latency or pick a different system &mdash; <strong>Spanner</strong>/<strong>CockroachDB</strong>/<strong>YugabyteDB</strong> are purpose-built for that.</p>
+'''
+
+ANSWERS[77] = r'''
+<p><strong>Situation:</strong> a news aggregator pulls articles from hundreds of RSS feeds and APIs, classifies them by category, deduplicates near-identical stories, ranks by recency and engagement, and serves personalized feeds to millions of users. New articles arrive thousands per hour; deduplication is hard because the same story appears across outlets with different wording.</p>
+
+<p><strong>Approach:</strong> three collections. <strong>Sources</strong> store feed metadata; <strong>articles</strong> store individual posts with full content + a content hash + a vector embedding for similarity dedup; <strong>categories</strong> reference articles via tags. Ingest workers use <strong>upsert by canonical URL</strong> for exact dedup and <strong>Atlas Vector Search</strong> for near-duplicate clustering. User feeds are computed on read with caching.</p>
+
+<pre><code>// sources &mdash; feed registry
+db.sources.insertOne({
+  _id: ObjectId(),
+  name: "TechCrunch",
+  domain: "techcrunch.com",
+  feed_url: "https://techcrunch.com/feed/",
+  feed_type: "rss",   // rss | atom | api
+  trust_score: 0.85,
+  last_polled: new Date(),
+  poll_interval_minutes: 15,
+  active: true
+})
+
+// articles &mdash; canonical entry; one per story
+db.articles.insertOne({
+  _id: ObjectId(),
+  source_id: ObjectId("..."),
+  source_name: "TechCrunch",   // denormalized for fast list rendering
+  title: "MongoDB launches Atlas Stream Processing GA",
+  url: "https://techcrunch.com/2026/04/29/mongodb-stream-ga/",
+  canonical_url: "techcrunch.com/2026/04/29/mongodb-stream-ga",  // normalized
+  content_hash: "sha256:ab12...",     // SHA-256 of normalized body for exact dedup
+  embedding: [0.12, 0.83, ...],         // 1536-dim from OpenAI text-embedding-3-small
+  cluster_id: ObjectId("..."),          // groups near-duplicates from multiple sources
+  excerpt: "MongoDB today announced...",
+  body_html: "...",
+  image_url: "https://...",
+  categories: ["technology", "databases"],
+  tags: ["mongodb", "streaming", "launch"],
+  language: "en",
+  published_at: ISODate("2026-04-29T13:00:00Z"),
+  ingested_at: new Date(),
+  engagement: { views: 0, shares: 0, comments: 0 }
+})
+
+// Idempotent ingest &mdash; canonical URL is unique
+db.articles.updateOne(
+  { canonical_url: "techcrunch.com/2026/04/29/mongodb-stream-ga" },
+  { $setOnInsert: { ...articleDoc } },
+  { upsert: true }
+)
+
+// Near-duplicate detection via vector search after insert
+const similar = await db.articles.aggregate([
+  { $vectorSearch: {
+      index: "article_vec",
+      path: "embedding",
+      queryVector: newArticle.embedding,
+      numCandidates: 100, limit: 5
+  }},
+  { $match: {
+      published_at: { $gte: oneDayAgo },
+      _id: { $ne: newArticle._id }
+  }}
+]).toArray()
+// If cosine similarity &gt; 0.92, assign to existing cluster_id
+
+// Personalized feed &mdash; precomputed per user, refreshed every 5min
+db.user_feeds.findOne({ user_id })
+  .articles.slice(0, 50)   // ranked, ready to render
+
+// Indexes
+db.articles.createIndex({ canonical_url: 1 }, { unique: true })
+db.articles.createIndex({ categories: 1, published_at: -1 })
+db.articles.createIndex({ cluster_id: 1, published_at: -1 })
+db.articles.createIndex({ source_id: 1, published_at: -1 })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Canonical URL unique index</td><td>Idempotent ingest; same URL never duplicated</td><td>Allow dupes &mdash; same article shows multiple times</td></tr>
+<tr><td>Vector embedding for fuzzy dedup</td><td>Cross-source &ldquo;same story&rdquo; clustering</td><td>Hash-only &mdash; misses paraphrased versions</td></tr>
+<tr><td>Denormalized <code>source_name</code></td><td>Render lists without <code>$lookup</code></td><td>Live join &mdash; latency per render</td></tr>
+<tr><td>Pre-built feed per user</td><td>O(1) read for hot path</td><td>Compute per request &mdash; expensive at scale</td></tr>
+<tr><td>Categories array</td><td>Multi-category articles, faceted filters</td><td>Single category &mdash; rigid taxonomy</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> RSS/Atom polling via <strong>BullMQ</strong>/<strong>Inngest</strong>/<strong>Trigger.dev</strong> repeating jobs with exponential backoff on failure; <strong>JSON Feed</strong> 1.1+ for modern sources; <strong>Mercury Parser</strong>/<strong>Readability</strong>/<strong>Diffbot</strong> for clean content extraction; classification via <strong>OpenAI</strong>/<strong>Cohere</strong> embeddings + <strong>Atlas Vector Search</strong>, or for <strong>large-scale text classification</strong> a fine-tuned <strong>Hugging Face</strong> model on <strong>Modal</strong>/<strong>Replicate</strong>/<strong>Banana</strong>; <strong>recommendation</strong> via two-tower model on user history (BigQuery/Snowflake/Databricks for training, vector index for serving); <strong>real-time fanout</strong> via <strong>Apache Kafka</strong> + <strong>change streams</strong>; mobile/web push via <strong>OneSignal</strong>/<strong>Customer.io</strong>/<strong>Knock</strong>; full-text search via <strong>Atlas Search</strong> with stemming and fuzzy matching; <strong>spam/clickbait detection</strong> via <strong>Perspective API</strong>/<strong>Hive</strong>; <strong>archival</strong>: articles older than 90 days move to <strong>Atlas Online Archive</strong> (queryable cold storage at ~$0.01/GB).</p>
+'''
+
+ANSWERS[78] = r'''
+<p><strong>Situation:</strong> a real-time bidding platform (online auctions, ad exchange) where users place bids on auctions ending soon. Concurrent bidders compete for the same lot; each new bid must be strictly greater than the current high bid; bid acceptance is irreversible; latency must be sub-100ms because last-second bids decide outcomes. Snipping protection extends auction time on late bids.</p>
+
+<p><strong>Approach:</strong> three collections &mdash; <code>auctions</code>, <code>bids</code>, and <code>users</code>. Each auction holds a denormalized <code>current_high_bid</code> for O(1) reads. Bids are accepted via a single conditional <code>findOneAndUpdate</code> that atomically checks &ldquo;new bid &gt; current high&rdquo; and updates both the auction and the bid count. Append-only <code>bids</code> collection records every attempted and accepted bid for audit.</p>
+
+<pre><code>// auctions
+db.auctions.insertOne({
+  _id: ObjectId(),
+  seller_id: ObjectId("..."),
+  title: "Vintage Watch",
+  start_at:    ISODate("2026-04-29T18:00:00Z"),
+  end_at:      ISODate("2026-04-29T20:00:00Z"),
+  reserve_cents: 50000,
+  starting_bid_cents: 10000,
+  current_high: {
+    bid_cents: 10000,
+    bidder_id: null,
+    bid_id: null,
+    placed_at: null
+  },
+  bid_count: 0,
+  status: "active",   // scheduled | active | ended | cancelled
+  version: 0
+})
+
+// bids &mdash; append-only audit trail
+db.bids.insertOne({
+  _id: ObjectId(),
+  auction_id: ObjectId("..."),
+  bidder_id: ObjectId("..."),
+  bid_cents: 12000,
+  proxy_max_cents: 25000,    // user&rsquo;s max for proxy bidding
+  placed_at: new Date(),
+  status: "accepted",        // accepted | rejected_low | rejected_closed | outbid
+  ip: "10.0.0.42"
+})
+
+// Atomic bid placement &mdash; check + write in one operation
+const result = await db.auctions.findOneAndUpdate(
+  {
+    _id: auctionId,
+    status: "active",
+    end_at: { $gt: new Date() },
+    "current_high.bid_cents": { $lt: newBidCents }    // strictly higher
+  },
+  {
+    $set: {
+      current_high: {
+        bid_cents: newBidCents,
+        bidder_id: userId,
+        bid_id: bidId,
+        placed_at: new Date()
+      }
+    },
+    $inc: { bid_count: 1, version: 1 },
+    // Sniping protection &mdash; extend auction by 2min if &lt;2min remaining
+    ...(timeLeft &lt; 120_000 ? {
+      $set: { end_at: new Date(Date.now() + 120_000) }
+    } : {})
+  },
+  { returnDocument: "after" }
+)
+if (!result) throw new Error("bid_too_low_or_auction_closed")
+
+// Indexes
+db.auctions.createIndex({ status: 1, end_at: 1 })
+db.bids.createIndex({ auction_id: 1, placed_at: -1 })
+db.bids.createIndex({ bidder_id: 1, placed_at: -1 })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Conditional <code>findOneAndUpdate</code></td><td>Atomic check-and-set; no race condition on high bid</td><td>Read-then-write &mdash; two clients accept the same bid</td></tr>
+<tr><td>Denormalized <code>current_high</code></td><td>O(1) read of current state</td><td>Live <code>$max</code> over bids &mdash; expensive on hot auctions</td></tr>
+<tr><td>Append-only <code>bids</code></td><td>Audit, leaderboard, fraud detection</td><td>Overwrite latest &mdash; no history, no analytics</td></tr>
+<tr><td>Sniping extension in same update</td><td>Atomic with the bid; no race</td><td>Separate update &mdash; can race with other bidders</td></tr>
+<tr><td>End-time index for closer job</td><td>Fast scan of soon-to-end auctions</td><td>Full collection scan &mdash; too slow at scale</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> for <strong>extreme write throughput</strong> (ad-exchange bidding millions of QPS), MongoDB is not the right tool &mdash; use <strong>Redis sorted sets</strong> as the live high-bid ledger with periodic snapshot to MongoDB, or specialized engines like <strong>Aerospike</strong>/<strong>ScyllaDB</strong>; <strong>WebSocket fanout</strong> of bid updates via <strong>Pusher</strong>/<strong>Ably</strong>/<strong>Soketi</strong>/<strong>Liveblocks</strong>/<strong>PartyKit</strong> &mdash; clients see the new high bid in &lt;200ms; <strong>auction closer</strong> job runs as a <strong>BullMQ</strong> scheduler scanning <code>{ status: "active", end_at: { $lte: now } }</code>; <strong>payment authorization</strong> at bid time via <strong>Stripe</strong> manual capture (place hold, capture if winning); <strong>fraud detection</strong> on bid patterns via <strong>Stripe Radar</strong>/<strong>Sift</strong>/<strong>Castle</strong>; <strong>shill bidding detection</strong> by network analysis &mdash; export to <strong>Neo4j</strong>/<strong>Amazon Neptune</strong>; <strong>rate limiting</strong> per bidder via <strong>Upstash Ratelimit</strong>; KYC for high-value auctions via <strong>Persona</strong>/<strong>Onfido</strong>/<strong>Sumsub</strong>; settlement and escrow via <strong>Stripe Connect</strong>/<strong>Modern Treasury</strong>.</p>
+'''
+
+ANSWERS[79] = r'''
+<p><strong>Situation:</strong> the application authenticates users with sessions and tokens. Sessions track logged-in browsers; access tokens authorize API calls; refresh tokens extend sessions without re-login. Tokens must be revocable (logout, password change, suspicious activity), expirable, and auditable. Stolen tokens are the #1 attack vector; storing them safely is non-negotiable.</p>
+
+<p><strong>Approach:</strong> two collections. <code>sessions</code> tracks server-side session state (long-lived, revocable, auditable); <code>refresh_tokens</code> stores rotated refresh tokens. <strong>Access tokens are JWTs</strong> (stateless, short-lived ~15min); <strong>refresh tokens are opaque random strings hashed in the DB</strong> (long-lived ~30 days, single-use rotation). MongoDB <strong>TTL indexes</strong> auto-expire records.</p>
+
+<pre><code>// sessions
+db.sessions.insertOne({
+  _id: ObjectId(),
+  user_id: ObjectId("..."),
+  device: { user_agent: "...", platform: "iOS", app_version: "1.4.2" },
+  ip: "10.0.0.42",
+  geo: { country: "US", city: "NYC" },
+  created_at: new Date(),
+  last_seen_at: new Date(),
+  expires_at: new Date(Date.now() + 30 * 86400_000),
+  revoked_at: null,
+  revoke_reason: null
+})
+
+// refresh_tokens &mdash; one per session at any time (rotated on use)
+db.refresh_tokens.insertOne({
+  _id: ObjectId(),
+  session_id: ObjectId("..."),
+  user_id: ObjectId("..."),
+  token_hash: sha256(rawToken),    // never store the raw token
+  expires_at: new Date(Date.now() + 30 * 86400_000),
+  created_at: new Date(),
+  used_at: null,                     // set when rotated; second use detects theft
+  family_id: ObjectId("...")        // links rotated tokens for revoke chain
+})
+
+// TTL indexes &mdash; MongoDB auto-purges expired records
+db.sessions.createIndex({ expires_at: 1 }, { expireAfterSeconds: 0 })
+db.refresh_tokens.createIndex({ expires_at: 1 }, { expireAfterSeconds: 0 })
+
+// Verify and rotate refresh token
+async function rotateRefresh(rawToken) {
+  const hash = sha256(rawToken)
+  const session = client.startSession()
+  return await session.withTransaction(async () =&gt; {
+    const token = await db.refresh_tokens.findOneAndUpdate(
+      { token_hash: hash, used_at: null, expires_at: { $gt: new Date() } },
+      { $set: { used_at: new Date() } },
+      { session, returnDocument: "before" }
+    )
+    if (!token) {
+      // Token reuse detected &mdash; revoke entire family (probable theft)
+      const t = await db.refresh_tokens.findOne({ token_hash: hash })
+      if (t) await db.sessions.updateMany(
+        { _id: { $in: await tokensInFamily(t.family_id) } },
+        { $set: { revoked_at: new Date(), revoke_reason: "reuse_detected" } },
+        { session }
+      )
+      throw new Error("invalid_refresh_token")
+    }
+    const newRaw = randomBytes(32).toString("hex")
+    await db.refresh_tokens.insertOne({
+      session_id: token.session_id,
+      user_id: token.user_id,
+      token_hash: sha256(newRaw),
+      expires_at: new Date(Date.now() + 30 * 86400_000),
+      family_id: token.family_id,
+      created_at: new Date()
+    }, { session })
+    return { access_token: signJwt(token.user_id), refresh_token: newRaw }
+  })
+}
+
+// Indexes
+db.sessions.createIndex({ user_id: 1, last_seen_at: -1 })
+db.refresh_tokens.createIndex({ token_hash: 1 }, { unique: true })
+db.refresh_tokens.createIndex({ family_id: 1 })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Short-lived JWT access + opaque refresh</td><td>Stateless API auth + revocable session</td><td>JWT-only &mdash; can&rsquo;t revoke without blocklist</td></tr>
+<tr><td>Refresh token rotation</td><td>Stolen tokens detected on reuse</td><td>Static refresh &mdash; theft goes unnoticed for 30 days</td></tr>
+<tr><td>Token hashes in DB</td><td>DB breach &ne; token theft</td><td>Plaintext tokens &mdash; one breach steals all sessions</td></tr>
+<tr><td>TTL index for expiry</td><td>Automatic cleanup; no cron job</td><td>Manual purge &mdash; bloat</td></tr>
+<tr><td>Family-based revoke chain</td><td>One reuse revokes entire chain</td><td>Per-token revoke &mdash; misses subsequent thefts</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> almost always, <strong>delegate auth entirely</strong> to <strong>Clerk</strong>/<strong>Auth0</strong>/<strong>Okta</strong>/<strong>WorkOS</strong>/<strong>Stack Auth</strong>/<strong>Supabase Auth</strong>/<strong>Stytch</strong>/<strong>Better Auth</strong> &mdash; they ship session/token security correctly out of the box, including passkeys, MFA, OIDC federation, anomaly detection, device fingerprinting, breach password monitoring, social login, magic links, and account takeover protection; building it in-house is a permanent maintenance burden on a team that doesn&rsquo;t specialize in security; <strong>session lookup</strong> on hot paths cached in <strong>Redis</strong> with TTL matching session lifetime; <strong>device list</strong> page lets users see and revoke their own sessions; <strong>anomaly detection</strong> (impossible travel, new geo) via <strong>Castle</strong>/<strong>Sift</strong>; <strong>passwordless</strong> via passkeys/WebAuthn supported natively by Auth0/Clerk/Stytch; for <strong>OAuth/OIDC</strong> federation use <strong>Authlib</strong>/<strong>NextAuth.js</strong>/<strong>Auth.js</strong>; sensitive operations require <strong>step-up auth</strong> (re-MFA before changing email).</p>
+'''
+
+ANSWERS[80] = r'''
+<p><strong>Situation:</strong> a fashion e-commerce site sells products by designers grouped into seasonal collections. Products have many variants (size, color, material) with per-variant inventory; collections are curated; designers have profiles and lookbooks; search must support facets (price, designer, season, color, available-only); the catalog turns over rapidly with new arrivals and sale events.</p>
+
+<p><strong>Approach:</strong> four collections. <code>products</code> embed variants and reference designer/collection IDs; <code>designers</code> hold profile and links; <code>collections</code> hold curated product references; <code>orders</code> reference everything with snapshots. Faceted search lives in <strong>MongoDB Atlas Search</strong> with weighted analyzers per field. Sale prices and seasonal launches use scheduled fields and effective-time logic.</p>
+
+<pre><code>// designers
+db.designers.insertOne({
+  _id: ObjectId(),
+  name: "Maison Lumi&egrave;re",
+  slug: "maison-lumiere",
+  bio: "Parisian luxury since 2010",
+  origin_country: "FR",
+  hero_image: "https://cdn.../lumiere.jpg",
+  social: { instagram: "@maisonlumiere" },
+  active: true
+})
+
+// collections
+db.collections.insertOne({
+  _id: ObjectId(),
+  designer_id: ObjectId("..."),
+  name: "Spring/Summer 2026",
+  slug: "ss26",
+  season: "ss26",
+  release_at: ISODate("2026-03-15T00:00:00Z"),
+  product_ids: [ObjectId("..."), ObjectId("...")],
+  hero_image: "https://cdn.../ss26.jpg",
+  status: "live"   // scheduled | live | archived
+})
+
+// products &mdash; embed variants
+db.products.insertOne({
+  _id: ObjectId(),
+  designer_id:    ObjectId("..."),
+  designer_name:  "Maison Lumi&egrave;re",   // denormalized for fast list rendering
+  collection_ids: [ObjectId("...")],
+  name: "Silk Wrap Dress",
+  slug: "silk-wrap-dress-001",
+  description: "...",
+  category: "dresses",
+  base_price_cents: 84900,
+  sale_price_cents: null,
+  sale_until: null,
+  variants: [
+    { sku: "SLD-XS-BLK", size: "XS", color: "black", inventory: 4, image: "https://..." },
+    { sku: "SLD-S-BLK",  size: "S",  color: "black", inventory: 8, image: "https://..." },
+    { sku: "SLD-M-RED",  size: "M",  color: "red",   inventory: 2, image: "https://..." }
+  ],
+  attributes: { material: "silk", origin: "Italy", care: "dry clean" },
+  images: [ "https://...1.jpg", "https://...2.jpg" ],
+  status: "live",   // draft | scheduled | live | archived
+  released_at: ISODate("2026-03-15T00:00:00Z"),
+  created_at: new Date()
+})
+
+// Atomic variant decrement at checkout (positional)
+db.products.updateOne(
+  { _id: productId, "variants.sku": "SLD-S-BLK", "variants.inventory": { $gte: 1 } },
+  { $inc: { "variants.$.inventory": -1 } }
+)
+
+// Faceted search &mdash; Atlas Search
+db.products.aggregate([
+  { $search: {
+      index: "products_search",
+      compound: {
+        must: [{ text: { query: "silk dress", path: ["name", "description"] } }],
+        filter: [
+          { range: { path: "base_price_cents", lte: 100000 } },
+          { in: { path: "designer_id", value: [ObjectId("...")] } }
+        ]
+      },
+      facets: { designer: { type: "string", path: "designer_name" } }
+  }},
+  { $limit: 24 }
+])
+
+// Indexes
+db.products.createIndex({ slug: 1 }, { unique: true })
+db.products.createIndex({ designer_id: 1, status: 1 })
+db.products.createIndex({ collection_ids: 1, released_at: -1 })
+db.products.createIndex({ "variants.sku": 1 })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Embed variants in product</td><td>One read renders the PDP; atomic inventory updates</td><td>Separate <code>variants</code> collection &mdash; joins, partial atomicity</td></tr>
+<tr><td>Denormalized <code>designer_name</code></td><td>Render listings without <code>$lookup</code></td><td>Live join &mdash; latency per render</td></tr>
+<tr><td>Atlas Search for facets</td><td>Designer/price/color filters in one query</td><td>Multi-field <code>$match</code> &mdash; index permutations explode</td></tr>
+<tr><td>Sale fields with TTL semantics</td><td>App computes effective price from <code>sale_until</code></td><td>Cron job &mdash; race conditions at expiry</td></tr>
+<tr><td>Scheduled status</td><td>Drops at exact release time without manual flip</td><td>Manual publish &mdash; ops mistakes</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> imagery via <strong>Cloudinary</strong>/<strong>imgix</strong>/<strong>Cloudflare Images</strong>/<strong>Imgproxy</strong> for on-the-fly resizing and format negotiation (AVIF/WebP); <strong>Atlas Search</strong> with synonyms (sneaker/trainer, jumper/sweater) and language analyzers per market; <strong>recommendations</strong> via <strong>Atlas Vector Search</strong> on visual embeddings (<strong>CLIP</strong>) plus collaborative filtering exported to <strong>Algolia Recommend</strong>/<strong>Constructor.io</strong>; <strong>SEO</strong>: per-product structured data (Schema.org Product, AggregateOffer); <strong>internationalization</strong> via locale subdocs (see Q58); <strong>checkout</strong> on <strong>Stripe Checkout</strong>/<strong>Shopify Hydrogen</strong>; <strong>fraud</strong> via <strong>Stripe Radar</strong>/<strong>Signifyd</strong>/<strong>Riskified</strong>; <strong>returns</strong> as a separate state machine with reason codes; <strong>analytics</strong>: per-product CTR, view-to-cart, cart-to-purchase to <strong>BigQuery</strong>/<strong>Snowflake</strong>; <strong>email/SMS</strong> drops via <strong>Klaviyo</strong>/<strong>Customer.io</strong>/<strong>Iterable</strong>; <strong>headless commerce</strong> stacks (<strong>Shopify Hydrogen</strong>, <strong>Saleor</strong>, <strong>Medusa</strong>, <strong>commercetools</strong>) save years of build time.</p>
+'''
+
+ANSWERS[81] = r'''
+<p><strong>Situation:</strong> an appointment scheduling system (Calendly-like or doctor/salon booking) where users book time slots with service providers. Concurrent users must not double-book the same slot; providers configure their availability and buffer times; bookings need confirmations, reminders, rescheduling, and cancellations.</p>
+
+<p><strong>Approach:</strong> three collections &mdash; <code>users</code> (both providers and clients), <code>services</code> (what&rsquo;s offered, duration, price), and <code>appointments</code> (the booking). Prevent double-booking via a <strong>unique compound index</strong> on <code>(provider_id, slot_start)</code>; treat the appointment write as the atomic claim. Availability is computed from existing appointments + provider hours, not stored.</p>
+
+<pre><code>// users
+db.users.insertOne({
+  _id: ObjectId(),
+  email: "alice@example.com",
+  name: "Alice",
+  is_provider: true,
+  provider_profile: {
+    bio: "Hair stylist",
+    timezone: "America/New_York",
+    working_hours: [
+      { day: 1, start: "09:00", end: "17:00" },   // Mon
+      { day: 2, start: "09:00", end: "17:00" },   // Tue
+      { day: 6, start: "10:00", end: "14:00" }    // Sat
+    ],
+    buffer_minutes: 15
+  }
+})
+
+// services
+db.services.insertOne({
+  _id: ObjectId(),
+  provider_id: ObjectId("..."),
+  name: "Haircut",
+  duration_minutes: 45,
+  price_cents: 6000,
+  active: true
+})
+
+// appointments &mdash; one per booking
+db.appointments.insertOne({
+  _id: ObjectId(),
+  provider_id: ObjectId("..."),
+  client_id:   ObjectId("..."),
+  service_id:  ObjectId("..."),
+  service_name: "Haircut",       // snapshot
+  service_duration_minutes: 45,   // snapshot
+  service_price_cents: 6000,      // snapshot
+  slot_start: ISODate("2026-05-01T14:00:00Z"),
+  slot_end:   ISODate("2026-05-01T14:45:00Z"),
+  status: "confirmed",   // confirmed | cancelled | completed | no_show
+  notes: "First-time client",
+  created_at: new Date(),
+  cancelled_at: null
+})
+
+// CRITICAL: unique compound index prevents double-booking
+db.appointments.createIndex(
+  { provider_id: 1, slot_start: 1 },
+  { unique: true, partialFilterExpression: { status: "confirmed" } }
+)
+
+// Booking flow &mdash; atomic claim
+async function book(providerId, clientId, serviceId, slotStart) {
+  const service = await db.services.findOne({ _id: serviceId })
+  const slotEnd = new Date(slotStart.getTime() + service.duration_minutes * 60_000)
+
+  // Check overlap (different start time but overlapping range)
+  const overlap = await db.appointments.findOne({
+    provider_id: providerId,
+    status: "confirmed",
+    slot_start: { $lt: slotEnd },
+    slot_end:   { $gt: slotStart }
+  })
+  if (overlap) throw new Error("slot_unavailable")
+
+  try {
+    return await db.appointments.insertOne({
+      provider_id: providerId, client_id: clientId, service_id: serviceId,
+      service_name: service.name, service_duration_minutes: service.duration_minutes,
+      service_price_cents: service.price_cents,
+      slot_start: slotStart, slot_end: slotEnd,
+      status: "confirmed", created_at: new Date()
+    })
+  } catch (e) {
+    if (e.code === 11000) throw new Error("slot_just_taken")
+    throw e
+  }
+}
+
+// Indexes
+db.appointments.createIndex({ provider_id: 1, slot_start: 1, slot_end: 1 })
+db.appointments.createIndex({ client_id: 1, slot_start: -1 })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Unique index on (provider_id, slot_start)</td><td>Database-enforced no-double-book</td><td>App-only check &mdash; race conditions slip through</td></tr>
+<tr><td>Snapshot service fields</td><td>Receipts and history survive service changes</td><td><code>$lookup</code> &mdash; breaks audit when prices change</td></tr>
+<tr><td>Compute availability on read</td><td>Always accurate; no stale slot table</td><td>Pre-build slot grid &mdash; huge collection, sync drift</td></tr>
+<tr><td>Partial unique index (confirmed only)</td><td>Cancelled slots free up automatically</td><td>Strict unique &mdash; cancelled slots block re-book</td></tr>
+<tr><td>Overlap check + atomic insert</td><td>Two-phase: cheap negative + DB-enforced positive</td><td>Insert without check &mdash; many wasted writes</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> for <strong>turnkey scheduling</strong>, <strong>Cal.com</strong> (open source) or <strong>Calendly</strong>/<strong>Acuity</strong>/<strong>SimplyBook.me</strong> save months of edge-case handling (timezones, recurring, group bookings); calendar sync via <strong>Nylas</strong>/<strong>Cronofy</strong>/<strong>Google Calendar API</strong>/<strong>Microsoft Graph</strong>; <strong>reminders</strong> via <strong>BullMQ</strong>/<strong>Inngest</strong>/<strong>Trigger.dev</strong> scheduled jobs at T-24h and T-1h, sent via <strong>Twilio</strong>/<strong>SendGrid</strong>/<strong>Resend</strong>/<strong>Postmark</strong>; <strong>video calls</strong> via <strong>Daily.co</strong>/<strong>Zoom SDK</strong>/<strong>LiveKit</strong>/<strong>Whereby</strong> Embedded; <strong>payments</strong> at booking via <strong>Stripe</strong> with manual capture (charge on completion); <strong>no-show penalties</strong> via Stripe partial-capture; <strong>cancellation policies</strong> as time-window rules (free &gt;24h, 50% &lt;24h, no refund &lt;2h); <strong>group classes</strong> use a separate <code>capacity</code> field with conditional <code>$inc</code>; <strong>recurring appointments</strong> as RRULE strings expanded on read; timezone bugs are #1 pain &mdash; always store UTC and use the IANA tz database via <strong>luxon</strong>/<strong>date-fns-tz</strong>.</p>
+'''
+
+ANSWERS[82] = r'''
+<p><strong>Situation:</strong> the application stores critical data &mdash; financial records, user profiles, configuration. Schema-less freedom is great in early development, but in production, malformed documents cause silent bugs and downstream failures. The team needs MongoDB to enforce invariants &mdash; required fields, types, ranges, enums &mdash; without rolling everything by hand at the application layer.</p>
+
+<p><strong>Approach:</strong> use MongoDB&rsquo;s <code>$jsonSchema</code> validator as the <strong>final defense</strong>. Application-layer validation (<strong>Zod</strong>, <strong>TypeBox</strong>, <strong>Mongoose</strong>, <strong>Prisma</strong>) catches issues at the boundary; <code>$jsonSchema</code> at the collection level prevents bad writes from any client (scripts, manual mongosh, third-party services). Use <code>validationLevel</code> and <code>validationAction</code> to control strictness during rollout.</p>
+
+<pre><code>// Define a strict $jsonSchema validator on creation
+db.createCollection("users", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["email", "name", "created_at"],
+      properties: {
+        email: {
+          bsonType: "string",
+          pattern: "^.+@.+\\..+$",
+          maxLength: 254
+        },
+        name: { bsonType: "string", minLength: 1, maxLength: 100 },
+        age: { bsonType: "int", minimum: 13, maximum: 120 },
+        role: { enum: ["admin", "manager", "member", "guest"] },
+        created_at: { bsonType: "date" },
+        addresses: {
+          bsonType: "array",
+          maxItems: 5,
+          items: {
+            bsonType: "object",
+            required: ["line1", "city", "country"],
+            properties: {
+              line1: { bsonType: "string", maxLength: 200 },
+              city:  { bsonType: "string", maxLength: 100 },
+              country: { bsonType: "string", minLength: 2, maxLength: 2 }
+            },
+            additionalProperties: false
+          }
+        }
+      },
+      additionalProperties: true   // allow new fields without breaking
+    }
+  },
+  validationLevel: "strict",        // moderate | strict | off
+  validationAction: "error"         // error | warn
+})
+
+// Add validator to existing collection
+db.runCommand({
+  collMod: "users",
+  validator: { $jsonSchema: { ... } },
+  validationLevel: "moderate",      // existing docs grandfathered
+  validationAction: "warn"           // log to mongod.log, don&rsquo;t reject
+})
+
+// Application-layer validation (Zod) &mdash; first line of defense
+import { z } from "zod"
+const UserSchema = z.object({
+  email: z.string().email().max(254),
+  name: z.string().min(1).max(100),
+  age: z.number().int().min(13).max(120).optional(),
+  role: z.enum(["admin", "manager", "member", "guest"])
+})
+
+app.post("/api/users", async (req, res) =&gt; {
+  const parsed = UserSchema.safeParse(req.body)
+  if (!parsed.success) return res.status(400).json({ errors: parsed.error.flatten() })
+  await db.users.insertOne({ ...parsed.data, created_at: new Date() })
+})
+
+// Find docs that don&rsquo;t match the validator (audit existing data)
+db.users.find({ $nor: [{ $jsonSchema: { ... } }] })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>App-layer + DB-layer validation</td><td>Defense in depth; useful errors at boundary, hard guarantee at DB</td><td>One layer &mdash; either rough errors or single point of failure</td></tr>
+<tr><td><code>moderate</code> + <code>warn</code> during rollout</td><td>Migrate gradually; log violations without breaking</td><td><code>strict</code> + <code>error</code> immediately &mdash; production breaks</td></tr>
+<tr><td><code>additionalProperties: true</code> default</td><td>Schema evolves without forced sync</td><td><code>false</code> &mdash; deploys fail when adding fields</td></tr>
+<tr><td>Enum for finite states</td><td>Prevents typos like <code>"actve"</code> from reaching production</td><td>Free string &mdash; silent corruption</td></tr>
+<tr><td>Find non-conforming docs first</td><td>Surfaces existing data debt before tightening</td><td>Tighten cold &mdash; surprise outages</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> use <strong>Mongoose</strong>/<strong>Prisma</strong>/<strong>Drizzle</strong>/<strong>Typegoose</strong> for application-layer schemas with TypeScript types; <strong>Zod</strong>/<strong>TypeBox</strong>/<strong>Valibot</strong>/<strong>Yup</strong> at the API boundary; export OpenAPI specs from Zod schemas via <strong>zod-openapi</strong> or <strong>tRPC</strong> for client SDK generation; for <strong>document migrations</strong> tied to schema changes, use <strong>migrate-mongo</strong> or run versioned migration scripts via CI; <strong>monitoring</strong>: in <code>warn</code> mode, alert on non-zero validation warnings via <strong>Datadog</strong>/<strong>Sentry</strong> log forwarders; <strong>contracts</strong> with downstream services use <strong>JSON Schema</strong> or <strong>Avro</strong> registered in <strong>Schema Registry</strong> (Confluent/AWS Glue); for <strong>untrusted writes</strong> from third parties (webhooks), validate aggressively before persisting; <strong>fuzz testing</strong> validators with <strong>fast-check</strong>; <strong>backwards-compatible evolution</strong>: only add optional fields, never remove required ones in a single deploy; <strong>field-level encryption</strong> for PII via <strong>Queryable Encryption</strong> happens at the driver layer and complements (doesn&rsquo;t replace) schema validation.</p>
+'''
+
+ANSWERS[83] = r'''
+<p><strong>Situation:</strong> a travel itinerary planner where users build trips with destinations, activities, hotel stays, and transport. Itineraries are shared, collaboratively edited, and exported as documents. Users add multiple stops in order; days have time-ordered activities; budgets and reservations are tracked.</p>
+
+<p><strong>Approach:</strong> embed the itinerary as nested ordered structures inside a single <code>trips</code> document &mdash; trip &rarr; days &rarr; activities. This matches the read pattern (rendering a trip is one read) and the edit pattern (CRDT-style or last-writer-wins on the whole subtree). Reservations and confirmations live in a separate <code>bookings</code> collection; collaboration uses the patterns from Q37 (Yjs/Liveblocks) for live edits.</p>
+
+<pre><code>// trips
+db.trips.insertOne({
+  _id: ObjectId(),
+  owner_id: ObjectId("..."),
+  collaborators: [
+    { user_id: ObjectId("..."), role: "editor", added_at: new Date() }
+  ],
+  visibility: "private",   // private | unlisted | public
+  title: "Japan 2026",
+  cover_image: "https://...",
+  start_date: ISODate("2026-09-01"),
+  end_date:   ISODate("2026-09-14"),
+  destinations: ["Tokyo", "Kyoto", "Osaka"],
+  budget_cents: 500_000_00,
+  spent_cents: 0,
+  days: [
+    {
+      _id: "day_1",
+      date: ISODate("2026-09-01"),
+      city: "Tokyo",
+      hotel_booking_id: ObjectId("..."),
+      notes: "Arrival day, light schedule",
+      activities: [
+        {
+          _id: "act_1",
+          start_time: "10:00",
+          end_time:   "12:00",
+          title: "Sensoji Temple",
+          location: { name: "Asakusa", coordinates: [139.7967, 35.7148] },
+          cost_cents: 0,
+          tags: ["temple", "sightseeing"],
+          booking_id: null
+        },
+        {
+          _id: "act_2",
+          start_time: "13:00",
+          end_time:   "14:30",
+          title: "Lunch at Asakusa Imahan",
+          cost_cents: 8000,
+          tags: ["food"]
+        }
+      ]
+    }
+  ],
+  version: 12,
+  created_at: new Date(),
+  updated_at: new Date()
+})
+
+// bookings &mdash; reservations referenced from days/activities
+db.bookings.insertOne({
+  _id: ObjectId(),
+  trip_id: ObjectId("..."),
+  type: "hotel",   // hotel | flight | train | car | tour
+  vendor: "Booking.com",
+  reference_code: "BK12345",
+  status: "confirmed",
+  start: ISODate("2026-09-01T15:00:00Z"),
+  end:   ISODate("2026-09-04T11:00:00Z"),
+  cost_cents: 60000_00,
+  details: { hotel_name: "Park Hyatt Tokyo", room: "King Deluxe" },
+  created_at: new Date()
+})
+
+// Add an activity &mdash; ordered insertion
+db.trips.updateOne(
+  { _id: tripId, "days._id": "day_1" },
+  {
+    $push: { "days.$.activities": newActivity },
+    $inc:  { spent_cents: newActivity.cost_cents, version: 1 },
+    $currentDate: { updated_at: true }
+  }
+)
+
+// Reorder activities within a day &mdash; replace the whole array
+db.trips.updateOne(
+  { _id: tripId, "days._id": "day_1", version: currentVersion },
+  { $set: { "days.$.activities": reorderedActivities }, $inc: { version: 1 } }
+)
+
+// Indexes
+db.trips.createIndex({ owner_id: 1, updated_at: -1 })
+db.trips.createIndex({ "collaborators.user_id": 1, updated_at: -1 })
+db.bookings.createIndex({ trip_id: 1, start: 1 })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Nested days&hairsp;&rarr;&hairsp;activities array</td><td>One read renders entire itinerary; matches edit pattern</td><td>Separate collections &mdash; many joins, slower</td></tr>
+<tr><td>Bookings as separate collection</td><td>Vendor APIs, status webhooks, audit trail</td><td>Embed bookings &mdash; reservations are independent entities</td></tr>
+<tr><td>Snapshot booking summary in activity</td><td>Render fast without joins</td><td>Live join &mdash; latency on hot pages</td></tr>
+<tr><td>Optimistic <code>version</code> field</td><td>Detect concurrent edits, prompt to merge</td><td>Last-write-wins &mdash; lost edits</td></tr>
+<tr><td>Reorder via array replace</td><td>Simpler than positional shuffles</td><td>Multiple positional ops &mdash; complex transactions</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> integrate <strong>Google Maps Platform</strong>/<strong>Mapbox</strong>/<strong>MapTiler</strong> for routing and POI lookup; flights via <strong>Amadeus</strong>/<strong>Duffel</strong>/<strong>Skyscanner Travel API</strong>/<strong>Kiwi.com Tequila</strong>; hotels via <strong>Booking.com Affiliate</strong>/<strong>Expedia EAN</strong>/<strong>Hotelbeds</strong>; activities via <strong>GetYourGuide</strong>/<strong>Viator</strong>/<strong>Klook</strong> APIs &mdash; commission on bookings; <strong>collaboration</strong> via the Q37 pattern (Yjs CRDT + Liveblocks/PartyKit); <strong>export</strong> to PDF via <strong>Puppeteer</strong>/<strong>Playwright</strong> server-side render; <strong>calendar sync</strong> via <strong>Cronofy</strong>/<strong>Nylas</strong>/<strong>Google Calendar API</strong>; <strong>weather</strong> via <strong>OpenWeather</strong>/<strong>Tomorrow.io</strong>/<strong>WeatherKit</strong> for date-range forecasts; <strong>currency conversion</strong> via <strong>Wise</strong> or <strong>OpenExchangeRates</strong> for budget tracking; <strong>AI suggestions</strong> via OpenAI/Anthropic for &ldquo;what should I do in Kyoto on a rainy Tuesday?&rdquo; with structured output; <strong>offline mode</strong>: client caches the trip doc in IndexedDB and syncs changes via a CRDT (Automerge); <strong>sharing</strong> via signed link tokens with read-only/edit roles.</p>
+'''
+
+ANSWERS[84] = r'''
+<p><strong>Situation:</strong> a pet adoption platform connects animals at shelters with adopters. Shelters list pets with photos, descriptions, medical history, and adoption fees; adopters search by location, species, age, and traits; applications go through review by shelter staff; adoption status is tracked through to placement. Photos and stories drive engagement; outdated &ldquo;adopted&rdquo; listings frustrate users.</p>
+
+<p><strong>Approach:</strong> three collections &mdash; <code>shelters</code>, <code>pets</code>, and <code>adopters</code>; plus an <code>applications</code> collection. Pets reference their shelter; status (<em>available, pending, adopted</em>) drives visibility; photos go to object storage; geospatial queries find &ldquo;pets near me&rdquo;. Applications form a state machine with audit history.</p>
+
+<pre><code>// shelters
+db.shelters.insertOne({
+  _id: ObjectId(),
+  name: "Happy Tails Rescue",
+  slug: "happy-tails",
+  location: {
+    type: "Point",
+    coordinates: [-73.99, 40.71],
+    address: "123 Main St, NYC, NY",
+    city: "NYC", state: "NY"
+  },
+  contact: { email: "...", phone: "+1-555-0100" },
+  ein: "12-3456789",   // tax ID for nonprofits
+  active: true,
+  verified: true
+})
+
+// pets
+db.pets.insertOne({
+  _id: ObjectId(),
+  shelter_id: ObjectId("..."),
+  shelter_name: "Happy Tails Rescue",   // denormalized
+  name: "Buddy",
+  species: "dog",
+  breed: "Golden Retriever Mix",
+  age_years: 3,
+  age_category: "adult",   // puppy | young | adult | senior
+  sex: "male",
+  size: "large",
+  color: "golden",
+  weight_kg: 28,
+  description: "Friendly, energetic, loves walks and other dogs.",
+  traits: ["friendly", "good_with_kids", "house_trained"],
+  medical: {
+    vaccinated: true,
+    spayed_neutered: true,
+    microchipped: true,
+    special_needs: false,
+    notes: ""
+  },
+  photos: [
+    "https://cdn.../buddy_1.jpg",
+    "https://cdn.../buddy_2.jpg"
+  ],
+  video_url: null,
+  adoption_fee_cents: 25000,
+  status: "available",   // available | pending | adopted | unavailable
+  location: {            // copied from shelter for geosearch
+    type: "Point",
+    coordinates: [-73.99, 40.71]
+  },
+  intake_date: ISODate("2026-03-15"),
+  created_at: new Date()
+})
+
+// adopters
+db.adopters.insertOne({
+  _id: ObjectId(),
+  user_id: ObjectId("..."),
+  household: { size: 3, has_kids: true, has_other_pets: true, home_type: "house_with_yard" },
+  experience: "Owned dogs for 10 years",
+  preferences: { species: ["dog"], size: ["medium", "large"], traits: ["good_with_kids"] }
+})
+
+// applications &mdash; state machine
+db.applications.insertOne({
+  _id: ObjectId(),
+  pet_id: ObjectId("..."),
+  adopter_id: ObjectId("..."),
+  shelter_id: ObjectId("..."),
+  status: "submitted",   // submitted | under_review | approved | declined | adopted | withdrawn
+  status_history: [
+    { status: "submitted", at: new Date(), by: ObjectId("...") }
+  ],
+  application_data: {
+    why: "Looking for a family companion",
+    home_check_consent: true,
+    references: [{ name: "Vet Dr. Smith", phone: "+1-..." }]
+  },
+  submitted_at: new Date()
+})
+
+// Geo search for available pets within 50km
+db.pets.aggregate([
+  { $geoNear: {
+      near: { type: "Point", coordinates: [-73.98, 40.74] },
+      distanceField: "distance_meters",
+      maxDistance: 50000,
+      spherical: true,
+      query: { status: "available", species: "dog" }
+  }},
+  { $limit: 24 }
+])
+
+// Indexes
+db.pets.createIndex({ location: "2dsphere" })
+db.pets.createIndex({ status: 1, species: 1, age_category: 1 })
+db.pets.createIndex({ shelter_id: 1, status: 1 })
+db.applications.createIndex({ pet_id: 1, status: 1 })
+db.applications.createIndex({ adopter_id: 1, submitted_at: -1 })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Reference shelter, denorm name + location</td><td>Fast list rendering and geo search</td><td>Embed full shelter &mdash; updates duplicated</td></tr>
+<tr><td>Status field drives visibility</td><td>Simple to filter; index-friendly</td><td>Soft-delete &mdash; harder to express &ldquo;currently adoptable&rdquo;</td></tr>
+<tr><td>2dsphere on pet location</td><td>&ldquo;Near me&rdquo; queries with distance ranking</td><td>Per-shelter join &mdash; slower, less flexible</td></tr>
+<tr><td>State-history array on applications</td><td>Audit trail of every status change</td><td>Overwrite status &mdash; no audit, lost context</td></tr>
+<tr><td>Photos in object storage, URLs in doc</td><td>CDN delivery, cheap, image processing pipelines</td><td>BSON binary &mdash; bloats working set</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> integrate <strong>Petfinder API</strong>/<strong>Adopt-a-Pet API</strong> for cross-listing on the largest networks; photos via <strong>Cloudinary</strong>/<strong>imgix</strong>/<strong>Cloudflare Images</strong> with auto background removal (<strong>Remove.bg</strong>) for cleaner thumbnails; <strong>matching recommendations</strong> via <strong>Atlas Vector Search</strong> on pet trait embeddings vs adopter preference embeddings; <strong>application workflow</strong> orchestrated via <strong>Temporal</strong>/<strong>Inngest</strong>/<strong>Trigger.dev</strong> with steps (review &rarr; reference check &rarr; home visit &rarr; approval); <strong>messaging</strong> between adopters and shelters via <strong>Stream Chat</strong>/<strong>SendBird</strong> with moderation; <strong>donations</strong> to shelters via <strong>Stripe</strong>/<strong>Donorbox</strong>/<strong>GiveButter</strong> with optional recurring; <strong>email notifications</strong> via <strong>Postmark</strong>/<strong>Resend</strong>/<strong>SendGrid</strong> at status changes; <strong>status sync</strong>: change streams update search indexes (<strong>Atlas Search</strong>/<strong>Algolia</strong>/<strong>Meilisearch</strong>) and remove adopted pets from listings within seconds; <strong>fraud detection</strong> on applications (puppy mills, resellers) via <strong>Sift</strong>/<strong>Castle</strong>; <strong>follow-up surveys</strong> 30/60/90 days post-adoption via scheduled jobs.</p>
+'''
+
+ANSWERS[85] = r'''
+<p><strong>Situation:</strong> a financial application tracks transaction histories &mdash; payments, transfers, refunds, fees &mdash; with strict requirements: every transaction is auditable, immutable once posted, queryable by user/account/date range, and balanceable. Volume can reach billions of transactions over years. Reports must reconstruct any account&rsquo;s state at any point in time.</p>
+
+<p><strong>Approach:</strong> append-only <strong>ledger pattern</strong>. A <code>transactions</code> collection records every event with full context; cached <code>account_balances</code> hold current state for O(1) reads. The ledger is the source of truth; balances are projections. Use <code>Decimal128</code> for money. Partition by date for query performance and archival.</p>
+
+<pre><code>// transactions &mdash; append-only ledger
+db.transactions.insertOne({
+  _id: ObjectId(),
+  type: "transfer",   // payment | transfer | refund | fee | adjustment
+  status: "posted",   // pending | posted | reversed
+  account_id: ObjectId("..."),       // affected account
+  counterparty_account_id: ObjectId("..."),
+  amount: Decimal128("100.00"),       // signed: positive = credit, negative = debit
+  currency: "USD",
+  balance_after: Decimal128("1234.56"),  // running balance snapshot at post time
+  reference: "txn_2026_04_29_abc123",     // idempotency key
+  description: "Transfer to Bob",
+  metadata: { external_ref: "ach_xyz", fee_id: ObjectId("...") },
+  posted_at: new Date(),
+  created_at: new Date(),
+  reversed_by: null    // pointer to reversal txn if any
+})
+
+// account_balances &mdash; cached projection, eventually consistent
+db.account_balances.updateOne(
+  { _id: accountId },
+  {
+    $inc: { balance: Decimal128("100.00") },
+    $set: { last_txn_id: txnId, updated_at: new Date() }
+  }
+)
+
+// Atomic transfer (debit + credit + balance updates)
+const session = client.startSession()
+await session.withTransaction(async () =&gt; {
+  // 1. Debit source (with sufficiency check)
+  const src = await db.account_balances.findOneAndUpdate(
+    { _id: fromId, balance: { $gte: Decimal128("100.00") } },
+    { $inc: { balance: Decimal128("-100.00") } },
+    { session, returnDocument: "after" }
+  )
+  if (!src) throw new Error("insufficient_funds")
+
+  // 2. Credit destination
+  const dst = await db.account_balances.findOneAndUpdate(
+    { _id: toId },
+    { $inc: { balance: Decimal128("100.00") } },
+    { session, returnDocument: "after" }
+  )
+
+  // 3. Write both legs of the ledger
+  await db.transactions.insertMany([
+    { type: "transfer", account_id: fromId, amount: Decimal128("-100.00"),
+      balance_after: src.balance, reference: ref + ":debit", posted_at: new Date(), session },
+    { type: "transfer", account_id: toId, amount: Decimal128("100.00"),
+      balance_after: dst.balance, reference: ref + ":credit", posted_at: new Date(), session }
+  ], { session })
+})
+
+// Reconstruct balance at point in time
+db.transactions.aggregate([
+  { $match: { account_id, posted_at: { $lte: pointInTime } } },
+  { $group: { _id: null, balance: { $sum: "$amount" } } }
+])
+
+// Indexes
+db.transactions.createIndex({ account_id: 1, posted_at: -1 })
+db.transactions.createIndex({ reference: 1 }, { unique: true })   // idempotency
+db.transactions.createIndex({ counterparty_account_id: 1, posted_at: -1 })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Append-only ledger</td><td>Audit, reversibility, point-in-time reconstruction</td><td>Mutable rows &mdash; lose history, useless in court</td></tr>
+<tr><td>Cached balance + ledger source-of-truth</td><td>O(1) reads + auditable writes</td><td>Sum on read &mdash; O(history), too slow at scale</td></tr>
+<tr><td><code>Decimal128</code> for money</td><td>No floating-point drift</td><td>Float &mdash; pennies disappear</td></tr>
+<tr><td>Idempotency key unique index</td><td>Safe retries, no duplicate transfers</td><td>None &mdash; network retries cause double-charges</td></tr>
+<tr><td>Two ledger entries per transfer</td><td>Double-entry accounting; balances always sum to zero</td><td>Single row &mdash; can&rsquo;t reconcile</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> for serious financial systems, use a <strong>purpose-built ledger database</strong> &mdash; <strong>TigerBeetle</strong> (open source, designed for double-entry at extreme throughput), <strong>AWS QLDB</strong> (cryptographically verifiable), or <strong>Modern Treasury</strong>/<strong>Increase</strong>/<strong>Unit</strong> as a service; for retail-scale projects, MongoDB works well; <strong>regulatory compliance</strong>: PCI-DSS for card storage (use <strong>Stripe</strong>/<strong>Adyen</strong>/<strong>Spreedly</strong> tokens, never raw PANs), SOX for audit retention (7+ years), AML/KYC via <strong>Persona</strong>/<strong>Onfido</strong>/<strong>Sumsub</strong>/<strong>Alloy</strong>; <strong>archival</strong>: transactions &gt;1 year old to <strong>Atlas Online Archive</strong> (queryable, ~$0.01/GB) or S3 Glacier with manifest in MongoDB; <strong>reconciliation jobs</strong> nightly compare ledger sum to cached balance; <strong>reports</strong> via aggregation pipelines exported to <strong>BigQuery</strong>/<strong>Snowflake</strong>; <strong>currency conversion</strong> handled by <strong>Wise</strong>/<strong>Currencylayer</strong> at the boundary, not in the ledger; <strong>fraud detection</strong> in real time via <strong>Sift</strong>/<strong>Stripe Radar</strong>; reversals recorded as new transactions with <code>reverses</code> pointer, never deletes.</p>
+'''
+
+ANSWERS[86] = r'''
+<p><strong>Situation:</strong> a community site for hobbyists (knitting, hiking, board games) where users join hobby groups, attend events, and discuss in forums. Each user follows multiple hobbies; events have RSVPs and capacity limits; groups are local-first (geo-based discovery) with online-only fallback; activity feeds show events and posts from followed hobbies.</p>
+
+<p><strong>Approach:</strong> four collections &mdash; <code>users</code> (with embedded hobby preferences), <code>groups</code> (one per hobby+location), <code>events</code> (one per scheduled meetup), and <code>rsvps</code> (separate so capacity caps and waitlists work cleanly). Use 2dsphere for &ldquo;groups near me&rdquo;; conditional inserts for atomic capacity-bounded RSVPs.</p>
+
+<pre><code>// users
+db.users.insertOne({
+  _id: ObjectId(),
+  username: "alice",
+  display_name: "Alice",
+  bio: "Hiker and knitter",
+  hobby_ids: ["hobby_hiking", "hobby_knitting"],
+  home_location: { type: "Point", coordinates: [-73.99, 40.71] },
+  groups_joined: [ObjectId("..."), ObjectId("...")],
+  created_at: new Date()
+})
+
+// groups &mdash; one per hobby + region
+db.groups.insertOne({
+  _id: ObjectId(),
+  hobby_id: "hobby_hiking",
+  name: "NYC Hikers",
+  slug: "nyc-hikers",
+  description: "Day hikes in and around NYC",
+  location: {
+    type: "Point",
+    coordinates: [-73.99, 40.71],
+    city: "NYC"
+  },
+  online_only: false,
+  member_count: 1247,
+  organizer_ids: [ObjectId("...")],
+  created_at: new Date()
+})
+
+// events
+db.events.insertOne({
+  _id: ObjectId(),
+  group_id: ObjectId("..."),
+  group_name: "NYC Hikers",   // denorm
+  hobby_id: "hobby_hiking",
+  title: "Bear Mountain Day Hike",
+  description: "...",
+  cover_image: "https://...",
+  starts_at: ISODate("2026-05-10T13:00:00Z"),
+  ends_at:   ISODate("2026-05-10T19:00:00Z"),
+  location: {
+    type: "Point",
+    coordinates: [-74.01, 41.32],
+    name: "Bear Mountain State Park"
+  },
+  capacity: 30,
+  rsvp_count: 0,
+  waitlist_count: 0,
+  status: "scheduled",   // scheduled | cancelled | completed
+  organizer_id: ObjectId("..."),
+  created_at: new Date()
+})
+
+// rsvps &mdash; separate to enforce capacity atomically
+db.rsvps.insertOne({
+  _id: ObjectId(),
+  event_id: ObjectId("..."),
+  user_id: ObjectId("..."),
+  status: "going",   // going | waitlist | declined | cancelled
+  position: 1,        // for waitlist ordering
+  rsvp_at: new Date()
+})
+
+// Atomic RSVP with capacity check
+async function rsvp(eventId, userId) {
+  const result = await db.events.findOneAndUpdate(
+    { _id: eventId, status: "scheduled", rsvp_count: { $lt: ["$capacity", "$rsvp_count"] === false ? 1e9 : 0 } },
+    {} // dummy, we&rsquo;ll use a proper $expr filter below
+  )
+  // Better: use $expr-based filter
+  const e = await db.events.findOneAndUpdate(
+    {
+      _id: eventId,
+      status: "scheduled",
+      $expr: { $lt: ["$rsvp_count", "$capacity"] }
+    },
+    { $inc: { rsvp_count: 1 } },
+    { returnDocument: "after" }
+  )
+  if (e) {
+    await db.rsvps.insertOne({ event_id: eventId, user_id: userId, status: "going", rsvp_at: new Date() })
+    return { status: "going" }
+  }
+  // Full &mdash; add to waitlist
+  await db.events.updateOne({ _id: eventId }, { $inc: { waitlist_count: 1 } })
+  await db.rsvps.insertOne({ event_id: eventId, user_id: userId, status: "waitlist", rsvp_at: new Date() })
+  return { status: "waitlist" }
+}
+
+// Indexes
+db.groups.createIndex({ location: "2dsphere" })
+db.groups.createIndex({ hobby_id: 1, member_count: -1 })
+db.events.createIndex({ location: "2dsphere" })
+db.events.createIndex({ hobby_id: 1, starts_at: 1, status: 1 })
+db.rsvps.createIndex({ event_id: 1, user_id: 1 }, { unique: true })
+db.rsvps.createIndex({ user_id: 1, rsvp_at: -1 })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Separate <code>rsvps</code> collection</td><td>Per-user uniqueness, capacity enforcement, waitlists</td><td>Embed RSVPs in event &mdash; doc bloat at high attendance</td></tr>
+<tr><td><code>$expr</code> capacity check</td><td>Atomic check-and-increment in one operation</td><td>Read-then-write &mdash; race past capacity</td></tr>
+<tr><td>Denormalized counters</td><td>O(1) reads of attendance</td><td>Live <code>$count</code> on rsvps &mdash; expensive on hot events</td></tr>
+<tr><td>2dsphere geo for groups + events</td><td>&ldquo;Near me&rdquo; discovery</td><td>City strings &mdash; rigid, misses suburban areas</td></tr>
+<tr><td>Hobby IDs reference</td><td>Hobby taxonomy editable in one place</td><td>Embed hobby strings &mdash; rename = mass update</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> for <strong>turnkey community platforms</strong>, <strong>Meetup API</strong>, <strong>Discord</strong>, <strong>Slack</strong>, <strong>Circle.so</strong>, <strong>Discourse</strong> deliver months of features for free; <strong>discussion forums</strong> via embedded <strong>Discourse</strong> or <strong>Discord webhooks</strong>; <strong>chat</strong> via <strong>Stream Chat</strong>/<strong>SendBird</strong>/<strong>TalkJS</strong>; <strong>email digests</strong> via <strong>Customer.io</strong>/<strong>Iterable</strong>/<strong>Klaviyo</strong> with weekly &ldquo;upcoming events near you&rdquo;; <strong>calendar invites</strong> via <strong>iCal</strong>/<strong>Google Calendar API</strong>; <strong>notifications</strong> mobile + web via <strong>OneSignal</strong>/<strong>Knock</strong>/<strong>Courier</strong>; <strong>moderation</strong> via <strong>Perspective API</strong>/<strong>Hive</strong>/<strong>OpenAI Moderation API</strong> on posts; <strong>maps</strong> via <strong>Mapbox</strong>/<strong>Google Maps Platform</strong>; <strong>recommendations</strong> via <strong>Atlas Vector Search</strong> on hobby/interest embeddings; <strong>events ingest</strong> from external sources (Meetup, Eventbrite, Facebook Events) via webhooks; <strong>SEO</strong>: per-group/event pages with structured data (Schema.org Event); <strong>monetization</strong>: paid premium memberships via <strong>Stripe Billing</strong>; <strong>SMS reminders</strong> for RSVPs via <strong>Twilio</strong>.</p>
+'''
+
+ANSWERS[87] = r'''
+<p><strong>Situation:</strong> a meal planning app where users browse recipes, drag them into weekly meal plans, generate shopping lists, and track nutrition. Recipes have ingredients with quantities, allergens, and tags; meal plans are per-user weekly grids; shopping lists aggregate ingredients across multiple recipes with smart deduplication.</p>
+
+<p><strong>Approach:</strong> three collections &mdash; <code>recipes</code>, <code>meal_plans</code>, and <code>shopping_lists</code>. Recipes are canonical, indexed by tags, allergens, and dietary fit. Meal plans embed recipe references per slot (no live join). Shopping lists are materialized from a meal plan via aggregation, with on-the-fly ingredient consolidation.</p>
+
+<pre><code>// recipes
+db.recipes.insertOne({
+  _id: ObjectId(),
+  author_id: ObjectId("..."),
+  title: "Chicken Tikka Masala",
+  slug: "chicken-tikka-masala",
+  description: "Classic Indian curry...",
+  cuisine: "indian",
+  meal_types: ["dinner"],
+  tags: ["spicy", "comfort", "high-protein"],
+  diet_tags: ["gluten-free"],
+  allergens: ["dairy"],
+  servings: 4,
+  prep_minutes: 20,
+  cook_minutes: 40,
+  difficulty: "medium",
+  ingredients: [
+    { name: "chicken thighs", quantity: 700, unit: "g", category: "protein" },
+    { name: "yogurt", quantity: 200, unit: "g", category: "dairy" },
+    { name: "tomato puree", quantity: 400, unit: "ml", category: "pantry" },
+    { name: "garam masala", quantity: 2, unit: "tsp", category: "spice" }
+  ],
+  steps: [
+    { step: 1, text: "Marinate chicken in yogurt and spices for 30 min..." },
+    { step: 2, text: "Sear chicken pieces..." }
+  ],
+  nutrition: {
+    calories: 480, protein_g: 38, carbs_g: 18, fat_g: 28, fiber_g: 3
+  },
+  image_url: "https://cdn.../tikka.jpg",
+  created_at: new Date()
+})
+
+// meal_plans
+db.meal_plans.insertOne({
+  _id: ObjectId(),
+  user_id: ObjectId("..."),
+  week_start: ISODate("2026-04-27"),
+  servings_default: 2,
+  slots: [
+    {
+      day: 1, meal: "dinner",
+      recipe_id: ObjectId("..."),
+      recipe_title: "Chicken Tikka Masala",   // snapshot
+      servings: 2,
+      notes: "Use leftover for tomorrow lunch"
+    }
+  ],
+  generated_shopping_list_id: ObjectId("..."),
+  created_at: new Date()
+})
+
+// shopping_lists &mdash; materialized from a meal plan
+db.shopping_lists.insertOne({
+  _id: ObjectId(),
+  user_id: ObjectId("..."),
+  meal_plan_id: ObjectId("..."),
+  items: [
+    { name: "chicken thighs", quantity: 700, unit: "g", category: "protein", purchased: false, recipes: ["Chicken Tikka Masala"] },
+    { name: "yogurt", quantity: 200, unit: "g", category: "dairy", purchased: false, recipes: ["Chicken Tikka Masala"] }
+  ],
+  generated_at: new Date()
+})
+
+// Build shopping list from a meal plan
+async function buildShoppingList(planId) {
+  const plan = await db.meal_plans.findOne({ _id: planId })
+  const recipes = await db.recipes.find(
+    { _id: { $in: plan.slots.map(s =&gt; s.recipe_id) } }
+  ).toArray()
+  const recipeMap = Object.fromEntries(recipes.map(r =&gt; [r._id.toString(), r]))
+
+  // Consolidate ingredients across all slots
+  const acc = new Map()
+  for (const slot of plan.slots) {
+    const recipe = recipeMap[slot.recipe_id.toString()]
+    const scale = slot.servings / recipe.servings
+    for (const ing of recipe.ingredients) {
+      const key = `${ing.name}::${ing.unit}`
+      const existing = acc.get(key) || { ...ing, quantity: 0, recipes: [] }
+      existing.quantity += ing.quantity * scale
+      existing.recipes.push(recipe.title)
+      acc.set(key, existing)
+    }
+  }
+  return Array.from(acc.values())
+}
+
+// Indexes
+db.recipes.createIndex({ tags: 1 })
+db.recipes.createIndex({ diet_tags: 1, allergens: 1, meal_types: 1 })
+db.recipes.createIndex({ slug: 1 }, { unique: true })
+db.meal_plans.createIndex({ user_id: 1, week_start: -1 })
+db.shopping_lists.createIndex({ user_id: 1, generated_at: -1 })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Embed ingredients in recipe</td><td>One read; matches edit pattern</td><td>Separate collection &mdash; joins, no reason to split</td></tr>
+<tr><td>Reference recipes from meal plans</td><td>Recipe edits propagate to future plans</td><td>Embed full recipe &mdash; mass updates</td></tr>
+<tr><td>Materialize shopping list</td><td>Editable, persisted, marks &ldquo;purchased&rdquo;</td><td>Compute every render &mdash; loses checkmarks</td></tr>
+<tr><td>App-side ingredient consolidation</td><td>Smart unit conversion, recipe attribution</td><td>Aggregation pipeline &mdash; harder to express unit rules</td></tr>
+<tr><td>Snapshot recipe title in plan slot</td><td>Plan still readable if recipe deleted</td><td><code>$lookup</code> on render &mdash; latency, broken on delete</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> nutrition data from <strong>Edamam</strong>/<strong>Spoonacular</strong>/<strong>Nutritionix</strong>/<strong>USDA FoodData Central</strong> APIs &mdash; cached locally; <strong>recipe import</strong> from URLs via <strong>schema.org/Recipe</strong> structured data parsing or <strong>OpenAI</strong>/<strong>Anthropic</strong> with structured output; <strong>image generation</strong> for missing photos via <strong>DALL&middot;E</strong>/<strong>Imagen</strong>/<strong>Stable Diffusion</strong>; <strong>recommendations</strong> via <strong>Atlas Vector Search</strong> on recipe embeddings + dietary preferences; <strong>shopping list export</strong> to <strong>Instacart Affiliate API</strong>/<strong>Amazon Fresh</strong>/<strong>Walmart Open API</strong>/<strong>AnyList</strong>; <strong>barcode scanning</strong> at home (mark &ldquo;already have&rdquo;) via <strong>Open Food Facts</strong>; <strong>meal kit integration</strong> with <strong>HelloFresh</strong>/<strong>Blue Apron</strong> partnerships; <strong>family sharing</strong> via shared meal plan documents (Q37 collaboration patterns); <strong>seasonal/regional adjustment</strong> swaps unavailable produce via Atlas Vector Search; <strong>caloric/macro targets</strong> from user profile drive plan suggestions; <strong>fitness app sync</strong> via <strong>Apple HealthKit</strong>/<strong>Google Fit</strong>; <strong>recipe versioning</strong> tracks user customizations; full-text search via <strong>Atlas Search</strong> with synonyms (e.g., &ldquo;cilantro&rdquo;/&ldquo;coriander&rdquo;).</p>
+'''
+
+ANSWERS[88] = r'''
+<p><strong>Situation:</strong> data lives in MongoDB (transactional, high-write) but the analytics team needs a data warehouse (BigQuery, Snowflake, Databricks) for SQL reports, BI dashboards, and ML training. Live aggregation against MongoDB is too slow and risks impacting production. The pipeline must keep the warehouse fresh (minutes-to-hours lag), handle schema drift, and survive failures.</p>
+
+<p><strong>Approach:</strong> two-track pipeline. <strong>Change Data Capture (CDC)</strong> streams MongoDB writes via <strong>change streams</strong> &rarr; <strong>Debezium MongoDB connector</strong> &rarr; <strong>Kafka</strong> &rarr; warehouse loaders for near-real-time tables. <strong>Batch ETL</strong> periodically (hourly/daily) does full-collection snapshots for backfill, schema fix-ups, and dimensional rebuilds. Tools like <strong>Airbyte</strong>/<strong>Fivetran</strong>/<strong>Estuary</strong>/<strong>Stitch</strong> handle both modes.</p>
+
+<pre><code>// 1. Change Streams &mdash; CDC source
+const stream = db.collection("orders").watch([], {
+  fullDocument: "updateLookup",
+  fullDocumentBeforeChange: "whenAvailable",
+  resumeAfter: lastResumeToken
+})
+
+for await (const change of stream) {
+  await kafkaProducer.send({
+    topic: "mongo.orders.cdc",
+    messages: [{
+      key: change.documentKey._id.toString(),
+      value: JSON.stringify({
+        op: change.operationType,         // insert | update | delete | replace
+        ts: change.clusterTime,
+        ns: change.ns,
+        before: change.fullDocumentBeforeChange,
+        after:  change.fullDocument,
+        change_id: change._id              // resume token
+      })
+    }]
+  })
+  await persistResumeToken(change._id)
+}
+
+// 2. Warehouse loader (BigQuery example)
+//    Append-only landing table; incremental MERGE into dim/fact tables
+//    BigQuery SQL:
+//    MERGE warehouse.dim_orders T
+//    USING staging.orders_cdc S
+//    ON T.order_id = S.after.order_id
+//    WHEN MATCHED AND S.op = "delete" THEN DELETE
+//    WHEN MATCHED THEN UPDATE SET ...
+//    WHEN NOT MATCHED THEN INSERT (...)
+
+// 3. Batch ETL (Airbyte/Fivetran connector config)
+//    Source: MongoDB (full + incremental sync via _id watermark)
+//    Destination: BigQuery / Snowflake / Databricks
+//    Sync schedule: hourly
+//    Schema inference: enabled, with manual overrides
+
+// 4. Schema versioning &mdash; embedded in CDC message
+{
+  "schema_version": 2,
+  "after": { "order_id": "...", "total_cents": 4999, ... }
+}
+
+// 5. Reconciliation &mdash; periodic count check
+//    MongoDB:   db.orders.countDocuments({})
+//    Warehouse: SELECT COUNT(*) FROM warehouse.dim_orders
+//    Alert if drift &gt; 0.1%</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>CDC + batch hybrid</td><td>Near-real-time + reliable backfill</td><td>Batch only &mdash; hours of lag, fragile</td></tr>
+<tr><td>Debezium/Kafka middle layer</td><td>Buffers consumer outages, replays history, scales fanout</td><td>Direct change streams &rarr; warehouse &mdash; tightly coupled, no replay</td></tr>
+<tr><td>Schema versioning in messages</td><td>Consumers handle drift gracefully</td><td>Implicit schema &mdash; breaks on field renames</td></tr>
+<tr><td>MERGE-based loaders (idempotent)</td><td>Safe re-delivery; consumers can replay</td><td>Append-only &mdash; data drift, requires dedupe job</td></tr>
+<tr><td>Reconciliation jobs</td><td>Detect missed events, broken pipelines</td><td>Trust without verify &mdash; silent corruption</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> for most teams, <strong>managed ETL</strong> via <strong>Airbyte Cloud</strong>/<strong>Fivetran</strong>/<strong>Estuary Flow</strong>/<strong>Stitch</strong>/<strong>Hevo</strong> beats hand-rolled &mdash; they handle schema drift, retries, dead-letter queues, monitoring, and 100+ destination integrations; <strong>warehouse choice</strong>: <strong>BigQuery</strong> (separation of storage/compute, serverless), <strong>Snowflake</strong> (multi-cloud, time travel), <strong>Databricks</strong> (ML workloads, Unity Catalog), <strong>ClickHouse</strong>/<strong>Tinybird</strong>/<strong>SingleStore</strong> (real-time OLAP); <strong>transformations</strong> in the warehouse via <strong>dbt</strong> (source of truth for metrics) or <strong>SQLMesh</strong>; <strong>reverse ETL</strong> (warehouse &rarr; ops tools) via <strong>Hightouch</strong>/<strong>Census</strong>/<strong>Polytomic</strong>; <strong>data quality</strong> via <strong>Great Expectations</strong>/<strong>Soda</strong>/<strong>Monte Carlo</strong>; <strong>data catalog</strong> via <strong>Atlan</strong>/<strong>Collibra</strong>/<strong>DataHub</strong>; <strong>BI</strong> via <strong>Looker</strong>/<strong>Tableau</strong>/<strong>Mode</strong>/<strong>Metabase</strong>/<strong>Hex</strong>/<strong>Preset</strong>; <strong>cost monitoring</strong> via <strong>Vantage</strong>/<strong>SELECT.dev</strong>; <strong>PII handling</strong>: tokenize via <strong>Skyflow</strong>/<strong>Basis Theory</strong>/<strong>VGS</strong>/<strong>CipherStash</strong> before warehouse load; <strong>sync from warehouse to operational systems</strong> (lookups in apps) via reverse ETL or feature stores like <strong>Tecton</strong>/<strong>Feast</strong>.</p>
+'''
+
+ANSWERS[89] = r'''
+<p><strong>Situation:</strong> an event ticketing platform sells tickets to concerts, sports, and conferences. Each event has a venue with seats; ticket purchases are concurrent (high-demand &ldquo;drops&rdquo;); seats can&rsquo;t be sold twice; refunds and resales must be tracked; tickets are scanned at entry and must be verifiable. Bot abuse and scalpers are persistent threats.</p>
+
+<p><strong>Approach:</strong> four collections &mdash; <code>events</code>, <code>venues</code>, <code>tickets</code>, and <code>orders</code>. Tickets exist as pre-generated rows (one per seat or one per ticket type with capacity); purchases atomically claim them via conditional updates. Tickets carry signed QR codes that scanners verify offline; payment flows through Stripe with idempotency keys.</p>
+
+<pre><code>// venues
+db.venues.insertOne({
+  _id: ObjectId(),
+  name: "Madison Square Garden",
+  capacity: 20000,
+  layout: { sections: [
+    { name: "Floor", row_count: 30, seats_per_row: 50 },
+    { name: "200 Level", row_count: 20, seats_per_row: 80 }
+  ]}
+})
+
+// events
+db.events.insertOne({
+  _id: ObjectId(),
+  venue_id: ObjectId("..."),
+  venue_name: "Madison Square Garden",   // denorm
+  title: "Artist Tour 2026",
+  starts_at: ISODate("2026-08-15T20:00:00Z"),
+  on_sale_at: ISODate("2026-05-01T16:00:00Z"),
+  status: "scheduled",
+  ticket_types_summary: [
+    { name: "VIP",     price_cents: 50000, total: 100,  remaining: 100 },
+    { name: "Floor",   price_cents: 25000, total: 1500, remaining: 1500 },
+    { name: "200",     price_cents: 8000,  total: 5000, remaining: 5000 }
+  ]
+})
+
+// tickets &mdash; one per seat (general admission uses ticket_type capacity instead)
+db.tickets.insertOne({
+  _id: ObjectId(),
+  event_id: ObjectId("..."),
+  ticket_type: "Floor",
+  seat: { section: "Floor", row: 5, seat: 12 },
+  price_cents: 25000,
+  status: "available",   // available | held | sold | refunded | cancelled
+  hold_expires_at: null,
+  order_id: null,
+  qr_code: null,         // populated on sale
+  scanned_at: null
+})
+
+// orders
+db.orders.insertOne({
+  _id: ObjectId(),
+  user_id: ObjectId("..."),
+  event_id: ObjectId("..."),
+  ticket_ids: [ObjectId("..."), ObjectId("...")],
+  total_cents: 50000,
+  payment: {
+    stripe_intent_id: "pi_...",
+    status: "succeeded",
+    idempotency_key: "ord_2026_05_01_abc123"
+  },
+  created_at: new Date()
+})
+
+// Atomic seat hold (10-minute reservation while user pays)
+const ticket = await db.tickets.findOneAndUpdate(
+  {
+    event_id: eventId,
+    "seat.section": "Floor", "seat.row": 5, "seat.seat": 12,
+    status: "available"
+  },
+  {
+    $set: { status: "held", hold_expires_at: new Date(Date.now() + 600_000), held_by: userId }
+  },
+  { returnDocument: "after" }
+)
+
+// On payment success, finalize the sale
+await db.tickets.updateOne(
+  { _id: ticket._id, status: "held", held_by: userId },
+  { $set: { status: "sold", order_id: orderId, qr_code: signQr(ticket._id), hold_expires_at: null } }
+)
+
+// Cleanup expired holds (cron job)
+db.tickets.updateMany(
+  { status: "held", hold_expires_at: { $lt: new Date() } },
+  { $set: { status: "available", hold_expires_at: null, held_by: null } }
+)
+
+// Indexes
+db.tickets.createIndex({ event_id: 1, status: 1 })
+db.tickets.createIndex({ event_id: 1, "seat.section": 1, "seat.row": 1, "seat.seat": 1 }, { unique: true })
+db.tickets.createIndex({ status: 1, hold_expires_at: 1 })
+db.orders.createIndex({ "payment.idempotency_key": 1 }, { unique: true })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Pre-generated ticket docs</td><td>Atomic claim via single update; no race</td><td>Counter-based &mdash; dual-claim races</td></tr>
+<tr><td>Hold &rarr; sold state machine</td><td>Reserves seat while user pays; cleanup on timeout</td><td>Sell-on-add &mdash; abandoned carts hold seats forever</td></tr>
+<tr><td>Signed QR codes</td><td>Offline scanner verification; tamper-proof</td><td>DB lookup at gate &mdash; outage = no entry</td></tr>
+<tr><td>Idempotency keys on orders</td><td>Stripe retries don&rsquo;t double-charge</td><td>None &mdash; refund nightmares</td></tr>
+<tr><td>Unique seat compound index</td><td>Schema-enforced no-duplicate-seat</td><td>App-only &mdash; missed bugs sneak in</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> for <strong>massive on-sale events</strong> (Taylor Swift, World Cup) MongoDB alone won&rsquo;t cut it &mdash; front with <strong>Redis</strong> for atomic counter-based holds, queue requests via <strong>Cloudflare Waiting Room</strong>/<strong>Queue-it</strong>, then commit settled holds to MongoDB; <strong>bot defense</strong> via <strong>Cloudflare Turnstile</strong>/<strong>hCaptcha</strong>/<strong>Arkose Labs</strong>/<strong>Datadome</strong>; <strong>payments</strong> via <strong>Stripe</strong>/<strong>Adyen</strong> with <strong>3DS2</strong> for chargeback protection; <strong>QR codes</strong> signed with <strong>JWT</strong> or <strong>HMAC</strong>, scanned via <strong>scandit</strong>/<strong>ZXing</strong>; <strong>resale market</strong> via separate listing collection with platform fees through <strong>Stripe Connect</strong>; <strong>fraud detection</strong> via <strong>Sift</strong>/<strong>Riskified</strong>; <strong>customer support tickets</strong> via <strong>Zendesk</strong>/<strong>Intercom</strong>/<strong>Front</strong>; <strong>refunds</strong> handled by Stripe with audit trail; <strong>email/SMS confirmations</strong> via <strong>Postmark</strong>/<strong>Resend</strong>/<strong>Twilio</strong>; <strong>secondary market</strong> compliance varies by jurisdiction (StubHub clones); for full-service alternatives: <strong>Eventbrite</strong>, <strong>Ticketmaster Reseller API</strong>, <strong>Universe</strong>, <strong>Ticket Tailor</strong>.</p>
+'''
+
+ANSWERS[90] = r'''
+<p><strong>Situation:</strong> a vehicle rental service (cars, vans, scooters) where customers book vehicles for date ranges, pick up at locations, and return. Concurrent customers can&rsquo;t book the same vehicle for overlapping windows; pricing varies by date and demand; insurance, deposits, and damages are tracked; fleet utilization and maintenance schedules need visibility.</p>
+
+<p><strong>Approach:</strong> three collections &mdash; <code>vehicles</code>, <code>customers</code>, and <code>rentals</code>. Vehicles hold static metadata; rentals are date-range bookings with overlap checks. Use the same overlap-prevention pattern as Q81 (appointment scheduling) but with date ranges. Pickup/return locations support geo queries. Pricing is computed at booking time from a rate card and stored as snapshot.</p>
+
+<pre><code>// vehicles
+db.vehicles.insertOne({
+  _id: ObjectId(),
+  vin: "1HGCM82633A004352",
+  category: "midsize_sedan",
+  make: "Toyota", model: "Camry", year: 2024,
+  features: ["automatic", "ac", "bluetooth"],
+  current_location: {
+    type: "Point",
+    coordinates: [-73.99, 40.71],
+    branch_id: ObjectId("...")
+  },
+  daily_rate_cents: 6500,
+  status: "available",   // available | rented | maintenance | retired
+  odometer_km: 12450,
+  last_maintenance_at: ISODate("2026-03-15"),
+  next_maintenance_due_km: 15000,
+  insurance_policy: "POL-12345"
+})
+
+// customers
+db.customers.insertOne({
+  _id: ObjectId(),
+  user_id: ObjectId("..."),
+  full_name: "Alice Smith",
+  driver_license: { number: encrypt("D12345678"), state: "NY", expires: ISODate("2030-01-15") },
+  age: 32,
+  payment_method_id: "pm_stripe_xxx",
+  rental_count: 3,
+  flagged: false
+})
+
+// rentals
+db.rentals.insertOne({
+  _id: ObjectId(),
+  vehicle_id: ObjectId("..."),
+  customer_id: ObjectId("..."),
+  pickup: {
+    branch_id: ObjectId("..."),
+    location: { type: "Point", coordinates: [-73.99, 40.71] },
+    scheduled_at: ISODate("2026-05-10T10:00:00Z"),
+    actual_at: null
+  },
+  return: {
+    branch_id: ObjectId("..."),
+    scheduled_at: ISODate("2026-05-15T10:00:00Z"),
+    actual_at: null
+  },
+  daily_rate_cents: 6500,        // snapshot
+  estimated_total_cents: 32500,
+  deposit_cents: 50000,
+  insurance_addon_cents: 1500,
+  status: "confirmed",   // confirmed | active | completed | cancelled | overdue
+  damages: [],
+  payment: { stripe_intent_id: "pi_...", status: "captured" },
+  created_at: new Date()
+})
+
+// Booking with overlap check (similar to Q81)
+async function bookVehicle(vehicleId, customerId, pickupAt, returnAt) {
+  // Check no overlapping confirmed/active rental exists
+  const overlap = await db.rentals.findOne({
+    vehicle_id: vehicleId,
+    status: { $in: ["confirmed", "active"] },
+    "pickup.scheduled_at": { $lt: returnAt },
+    "return.scheduled_at": { $gt: pickupAt }
+  })
+  if (overlap) throw new Error("vehicle_unavailable")
+
+  return await db.rentals.insertOne({
+    vehicle_id: vehicleId, customer_id: customerId,
+    pickup: { scheduled_at: pickupAt },
+    return: { scheduled_at: returnAt },
+    daily_rate_cents: vehicle.daily_rate_cents,
+    status: "confirmed",
+    created_at: new Date()
+  })
+}
+
+// Indexes
+db.vehicles.createIndex({ "current_location": "2dsphere" })
+db.vehicles.createIndex({ category: 1, status: 1 })
+db.rentals.createIndex({ vehicle_id: 1, "pickup.scheduled_at": 1, "return.scheduled_at": 1 })
+db.rentals.createIndex({ customer_id: 1, "pickup.scheduled_at": -1 })
+db.rentals.createIndex({ status: 1, "return.scheduled_at": 1 })   // overdue scan</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Date-range overlap query</td><td>Standard interval-overlap test, indexable</td><td>Slot-based bookings &mdash; rigid, wastes capacity</td></tr>
+<tr><td>Snapshot rate at booking</td><td>Customer paid agreed price even if rate changes</td><td>Live rate &mdash; surprise charges</td></tr>
+<tr><td>Vehicle status field + rental state</td><td>Two views of the same fact; ops dashboard</td><td>Compute status &mdash; expensive on large fleets</td></tr>
+<tr><td>Pickup/return geo</td><td>Branch network optimization</td><td>City strings &mdash; rigid</td></tr>
+<tr><td>Encrypted driver license</td><td>PII protection (CSFLE/Queryable Encryption)</td><td>Plaintext &mdash; PCI/GDPR risk</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> integrate <strong>Stripe</strong> for deposits and final charges (manual capture for the deposit, capture-and-refund-on-return for damages); <strong>fraud screening</strong> via <strong>Sift</strong>/<strong>Stripe Radar</strong>/<strong>Persona</strong> + driver-license OCR/verification; <strong>telematics integration</strong> (mileage, location, harsh braking) via <strong>Geotab</strong>/<strong>Samsara</strong>/<strong>Stem Mobility</strong>/<strong>Smartcar API</strong> &mdash; for connected vehicles, sync via change streams to the rental record; <strong>dynamic pricing</strong> via demand surfaces in <strong>BigQuery</strong>/<strong>Snowflake</strong>; <strong>maintenance scheduling</strong> as separate state machine, blocks the vehicle from being booked when due; <strong>damage reporting</strong> with photos to <strong>S3</strong>/<strong>Cloudinary</strong> + AI-assisted assessment via <strong>Tractable</strong>/<strong>Hyperscience</strong>; <strong>peer-to-peer rentals</strong> (Turo-style): <strong>Stripe Connect</strong>, host KYC via <strong>Persona</strong>/<strong>Onfido</strong>, insurance via <strong>Buckle</strong>/<strong>Slice</strong>; <strong>airport pickups</strong> integrate with <strong>FlightAware</strong>/<strong>FlightStats</strong> for arrival tracking; <strong>route optimization</strong> for fleet rebalancing via <strong>Mapbox Optimization API</strong>/<strong>Google Maps Platform</strong>; <strong>customer support</strong> via <strong>Zendesk</strong>/<strong>Intercom</strong>; <strong>EV-specific</strong>: charge level, charging-station integration via <strong>OCPP</strong>/<strong>EV Connect</strong>/<strong>ChargePoint API</strong>.</p>
+'''
+
+
+ANSWERS[91] = r'''
+<p><strong>Situation:</strong> an inventory system tracks stock across many warehouses (regional fulfillment centers, retail stores, third-party logistics partners). Each SKU has a different on-hand quantity per warehouse; orders are routed to the nearest stocked warehouse; transfers move inventory between locations; counts must remain accurate under concurrent reservations, sales, and receipts.</p>
+
+<p><strong>Approach:</strong> a per-product-per-warehouse stock document is the unit of inventory. <code>products</code> hold catalog metadata; <code>warehouses</code> hold location and capabilities; <code>inventory</code> holds the (product, warehouse) crossing with on-hand, reserved, and incoming counts. <strong>Atomic conditional updates</strong> on the inventory doc handle reservations and prevent oversells. <strong>Transfers</strong> use a transaction across the source and destination inventory docs.</p>
+
+<pre><code>// products &mdash; catalog only
+db.products.insertOne({
+  _id: ObjectId(),
+  sku: "WIDGET-001",
+  name: "Blue Widget",
+  unit_cost_cents: 1200,
+  active: true
+})
+
+// warehouses
+db.warehouses.insertOne({
+  _id: "wh_nyc_01",
+  name: "NYC Fulfillment",
+  type: "fulfillment",     // fulfillment | retail | 3pl | dropship
+  location: { type: "Point", coordinates: [-74.006, 40.712] },
+  active: true
+})
+
+// inventory &mdash; one doc per (product, warehouse)
+db.inventory.insertOne({
+  _id: { product_id: ObjectId("..."), warehouse_id: "wh_nyc_01" },
+  on_hand:    142,        // physically present, sellable
+  reserved:   8,          // allocated to unfilled orders
+  incoming:   50,         // PO in transit
+  reorder_at: 25,         // threshold
+  updated_at: new Date()
+})
+
+// Atomic reservation &mdash; the heart of inventory correctness
+const result = await db.inventory.updateOne(
+  {
+    _id: { product_id: pid, warehouse_id: whId },
+    on_hand: { $gte: qty }     // guard
+  },
+  {
+    $inc: { on_hand: -qty, reserved: qty },
+    $currentDate: { updated_at: true }
+  }
+)
+if (result.modifiedCount === 0) throw new Error("Insufficient stock")
+
+// Order routing: pick nearest warehouse with stock
+const wh = await db.inventory.aggregate([
+  { $match: { "_id.product_id": pid, on_hand: { $gte: qty } } },
+  { $lookup: { from: "warehouses", localField: "_id.warehouse_id", foreignField: "_id", as: "wh" } },
+  { $unwind: "$wh" },
+  { $geoNear: { /* compute distance from customer */ } },
+  { $sort: { distance: 1 } },
+  { $limit: 1 }
+]).next()
+
+// Transfer between warehouses (atomic across two docs)
+const session = client.startSession()
+await session.withTransaction(async () =&gt; {
+  await db.inventory.updateOne(
+    { _id: { product_id: pid, warehouse_id: srcWh }, on_hand: { $gte: qty } },
+    { $inc: { on_hand: -qty } }, { session }
+  )
+  await db.inventory.updateOne(
+    { _id: { product_id: pid, warehouse_id: dstWh } },
+    { $inc: { incoming: qty } }, { session }
+  )
+  await db.transfers.insertOne({
+    product_id: pid, src: srcWh, dst: dstWh, qty,
+    status: "in_transit", created_at: new Date()
+  }, { session })
+})
+
+// Indexes
+db.inventory.createIndex({ "_id.product_id": 1, on_hand: -1 })
+db.inventory.createIndex({ "_id.warehouse_id": 1, on_hand: 1, reorder_at: 1 })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Per (product, warehouse) doc</td><td>One-doc atomic updates, no contention across warehouses</td><td>Embed warehouses array in product &mdash; hot doc, contention</td></tr>
+<tr><td>Compound <code>_id</code></td><td>Natural unique key; idempotent upserts on receipt</td><td>Surrogate <code>_id</code> + unique compound index &mdash; works but extra index</td></tr>
+<tr><td>Conditional <code>$gte</code> guard</td><td>Race-free: oversells impossible</td><td>Read-then-write &mdash; classic race condition</td></tr>
+<tr><td>Reserve / on_hand split</td><td>Mid-flight orders held without committing</td><td>Single available count &mdash; loses intent on cancellation</td></tr>
+<tr><td>Transactions for transfers</td><td>Both legs commit or neither &mdash; no phantom inventory</td><td>Two updates &mdash; netting errors over time</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> integrate with <strong>WMS</strong> (warehouse management) systems via APIs &mdash; <strong>ShipBob</strong>, <strong>ShipStation</strong>, <strong>Shippo</strong>, <strong>Flexport</strong>, <strong>EasyPost</strong> for label generation and tracking; <strong>cycle counts</strong> reconcile physical vs DB counts &mdash; record variance per cycle in an audit collection; <strong>safety stock and reorder logic</strong> via <strong>BullMQ</strong>/<strong>Inngest</strong> daily jobs that file POs when <code>on_hand + incoming &lt; reorder_at</code>; <strong>change streams</strong> on inventory pipe low-stock alerts to <strong>Slack</strong>/<strong>email</strong>; <strong>reverse logistics</strong> (returns) flow back into a separate &ldquo;returns processing&rdquo; bucket before re-shelving; <strong>multi-channel sales</strong> (Shopify, Amazon, retail POS) sync via <strong>Trayio</strong>/<strong>Stedi</strong> EDI; <strong>analytics</strong> on stockouts, turn rate, dead stock via warehouse export to <strong>BigQuery</strong>/<strong>Snowflake</strong>; for <strong>real-time multi-region</strong> consistency, MongoDB <strong>global clusters</strong> with zone sharding by warehouse region; <strong>3PL integrations</strong> (Amazon FBA, ShipBob) call back via webhooks &mdash; idempotent upserts on inventory using PO number.</p>
+'''
+
+ANSWERS[92] = r'''
+<p><strong>Situation:</strong> a photo-sharing app stores user uploads, comments, likes, and a discovery feed. Photos may be public or private; users follow each other; the home feed shows recent photos from followed users. EXIF data must be stripped for privacy; thumbnails generated on the fly; abusive content moderated.</p>
+
+<p><strong>Approach:</strong> images live in object storage (S3/R2/Cloudinary) with metadata in MongoDB. Three core collections: <code>users</code>, <code>photos</code>, <code>comments</code>. Likes are tracked as a denormalized counter on photos plus a separate <code>likes</code> collection for &ldquo;has user X liked photo Y&rdquo; lookups. The follow graph in <code>follows</code> drives feeds via fan-out-on-read for users with normal follower counts and fan-out-on-write for celebrities (already covered for the social platform Q14, applied here).</p>
+
+<pre><code>// users
+db.users.insertOne({
+  _id: ObjectId(),
+  username: "alice",
+  display_name: "Alice",
+  bio: "photographer",
+  avatar_url: "https://cdn.../alice.jpg",
+  followers_count: 0,    // denorm
+  following_count: 0,
+  posts_count: 0,
+  created_at: new Date()
+})
+
+// photos &mdash; metadata only, image in S3
+db.photos.insertOne({
+  _id: ObjectId(),
+  owner_id:    ObjectId("..."),
+  caption:     "Sunset at the bridge",
+  s3_key:      "photos/u123/01HRG.../full.webp",
+  variants:    {                                    // pre-generated sizes
+    thumb_160:  "photos/u123/01HRG.../t160.webp",
+    feed_640:   "photos/u123/01HRG.../f640.webp",
+    full_1920:  "photos/u123/01HRG.../full.webp"
+  },
+  width: 4032, height: 3024,
+  exif_stripped: true,
+  visibility: "public",        // public | followers | private
+  tags: ["sunset", "bridge", "nyc"],
+  location: { type: "Point", coordinates: [-73.96, 40.78] },   // optional
+  likes_count: 0,
+  comments_count: 0,
+  moderation: { status: "approved", scores: { nsfw: 0.01, violence: 0.00 } },
+  created_at: new Date()
+})
+
+// comments &mdash; separate collection
+db.comments.insertOne({
+  _id: ObjectId(),
+  photo_id: ObjectId("..."),
+  user_id:  ObjectId("..."),
+  text: "Beautiful!",
+  created_at: new Date()
+})
+
+// likes &mdash; one doc per (user, photo)
+db.likes.insertOne({
+  _id: { user_id: uid, photo_id: pid },
+  created_at: new Date()
+})
+// Plus increment denorm counter atomically
+db.photos.updateOne({ _id: pid }, { $inc: { likes_count: 1 } })
+
+// Indexes
+db.photos.createIndex({ owner_id: 1, created_at: -1 })
+db.photos.createIndex({ visibility: 1, created_at: -1 })
+db.photos.createIndex({ tags: 1, created_at: -1 })
+db.photos.createIndex({ location: "2dsphere" })
+db.comments.createIndex({ photo_id: 1, created_at: -1 })
+
+// User feed &mdash; fan-out-on-read for non-celebs
+const followingIds = await db.follows.find({ follower_id: meId }).toArray()
+const feed = await db.photos.find({
+  owner_id: { $in: followingIds.map(f =&gt; f.followed_id) },
+  visibility: { $in: ["public", "followers"] }
+}).sort({ created_at: -1 }).limit(20).toArray()</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>S3 + variants + CDN</td><td>Cheap storage, fast global delivery</td><td>BSON blobs &mdash; bloats working set</td></tr>
+<tr><td>EXIF stripping mandatory</td><td>Removes GPS leaks, camera serial numbers</td><td>Keep EXIF &mdash; privacy disaster</td></tr>
+<tr><td>Pre-generate variants</td><td>O(1) feed renders, no on-the-fly resize cost</td><td>Live resize &mdash; CPU per request, latency</td></tr>
+<tr><td>Likes in separate doc + counter</td><td>Per-user uniqueness + fast counts</td><td>Embed user IDs array in photo &mdash; 16MB cap, contention</td></tr>
+<tr><td>Comments separate, not embedded</td><td>Unbounded growth; pagination needed</td><td>Embed &mdash; doc grows, hot writes contend</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> use <strong>Cloudflare Images</strong>/<strong>Cloudinary</strong>/<strong>imgix</strong>/<strong>Imgproxy</strong> for image processing &mdash; auto-format (AVIF/WebP), responsive sizes, blurhash placeholders; <strong>EXIF strip</strong> via <strong>sharp</strong> or <strong>ImageMagick</strong> on upload; <strong>NSFW/violence detection</strong> via <strong>Hive</strong>/<strong>AWS Rekognition</strong>/<strong>Google Cloud Vision</strong>/<strong>Amazon Comprehend</strong> &mdash; flagged content goes to a moderation queue before publish; <strong>perceptual hashing</strong> (pHash) detects duplicates and known illegal content (PhotoDNA-style); <strong>face blurring</strong> for privacy-sensitive contexts via <strong>face-api.js</strong>; <strong>direct upload</strong> via presigned URLs from browser; <strong>resumable</strong> uploads via <strong>tus.io</strong>/<strong>uppy</strong>; <strong>discovery feed</strong> mixes following + recommended via <strong>Atlas Vector Search</strong> on caption + visual embeddings; <strong>trending tags</strong> computed hourly from a time-series collection; <strong>copyright protection</strong> via <strong>watermarking</strong> and DMCA workflows; <strong>analytics</strong> (impressions, engagement) export to <strong>Mixpanel</strong>/<strong>Amplitude</strong>/<strong>PostHog</strong>; <strong>user reporting</strong> with workflows in <strong>Linear</strong>/<strong>Jira</strong>; rate-limit upload abuse via <strong>Upstash Ratelimit</strong>.</p>
+'''
+
+ANSWERS[93] = r'''
+<p><strong>Situation:</strong> an online learning platform offers courses with quizzes and issues certificates upon completion. Students enroll, take quizzes, complete modules, and earn verifiable certificates that employers can validate. The schema must track progress per student per course, store quiz attempts (multiple allowed), and produce tamper-resistant certificates.</p>
+
+<p><strong>Approach:</strong> five collections. <code>users</code>, <code>courses</code> with embedded modules and lessons, <code>enrollments</code> (one per student per course) carrying progress, <code>quiz_attempts</code> (one per attempt; many per student per quiz), and <code>certificates</code> (immutable, signed). Certificate IDs are public; verification via a public endpoint that recomputes the signature.</p>
+
+<pre><code>// courses &mdash; embed modules and lessons; quizzes referenced separately
+db.courses.insertOne({
+  _id: ObjectId(),
+  slug: "intro-to-mongodb",
+  title: "Intro to MongoDB",
+  modules: [
+    {
+      module_id: "m1",
+      title: "Getting Started",
+      lessons: [
+        { lesson_id: "l1", title: "Installation", video_key: "vid/abc.m3u8", duration_min: 6 },
+        { lesson_id: "l2", title: "First query",  video_key: "vid/def.m3u8", duration_min: 8 }
+      ],
+      quiz_id: ObjectId("...")
+    }
+  ],
+  pass_threshold: 0.7,
+  certificate_template: "default_v3",
+  active: true,
+  created_at: new Date()
+})
+
+// quizzes &mdash; separate (large question banks, randomization)
+db.quizzes.insertOne({
+  _id: ObjectId(),
+  course_id: ObjectId("..."),
+  module_id: "m1",
+  questions: [
+    {
+      qid: "q1",
+      stem: "What does MongoDB store?",
+      options: ["BSON documents", "rows", "files"],
+      correct: 0,
+      points: 1
+    }
+  ],
+  randomize: true,
+  time_limit_minutes: 30
+})
+
+// enrollments &mdash; one doc per (student, course) with progress
+db.enrollments.insertOne({
+  _id: { student_id: ObjectId("..."), course_id: ObjectId("...") },
+  status: "active",     // active | completed | dropped
+  progress: {
+    completed_lessons: ["m1.l1"],
+    current: { module_id: "m1", lesson_id: "l2" },
+    percent: 25
+  },
+  enrolled_at: new Date(),
+  completed_at: null
+})
+
+// quiz_attempts &mdash; one per attempt, append-only
+db.quiz_attempts.insertOne({
+  _id: ObjectId(),
+  student_id: ObjectId("..."),
+  quiz_id: ObjectId("..."),
+  answers: [{ qid: "q1", selected: 0 }],
+  score: 0.85,
+  passed: true,
+  started_at: ISODate("..."),
+  submitted_at: ISODate("...")
+})
+
+// certificates &mdash; immutable, signed
+db.certificates.insertOne({
+  _id: "cert_01HRG...",                 // human-shareable
+  student_id: ObjectId("..."),
+  course_id: ObjectId("..."),
+  course_title: "Intro to MongoDB",     // snapshotted
+  student_name:  "Alice Smith",          // snapshotted
+  issued_at: new Date(),
+  signature: "ed25519:abc123...",        // signed by private key
+  verification_url: "https://learn.example.com/verify/cert_01HRG..."
+})
+
+// Indexes
+db.enrollments.createIndex({ "_id.student_id": 1, status: 1 })
+db.quiz_attempts.createIndex({ student_id: 1, quiz_id: 1, submitted_at: -1 })
+db.certificates.createIndex({ student_id: 1, issued_at: -1 })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Embed modules and lessons in course</td><td>One read renders the whole course; bounded count</td><td>Separate collection &mdash; multiple reads per page</td></tr>
+<tr><td>Quizzes separate (large question banks)</td><td>Question randomization; faculty edits decoupled</td><td>Embed &mdash; doc bloats, edit contention</td></tr>
+<tr><td>Compound <code>_id</code> on enrollment</td><td>Natural unique constraint; cheap upserts on enroll</td><td>Random <code>_id</code> + unique index &mdash; works, extra index</td></tr>
+<tr><td>Append-only quiz attempts</td><td>Audit trail, retake history, analytics</td><td>Overwrite latest attempt &mdash; loses history</td></tr>
+<tr><td>Cryptographically signed certificate</td><td>Verifiable without trusting a database lookup</td><td>DB-only check &mdash; can&rsquo;t prove offline</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> for <strong>video delivery</strong> use <strong>Mux</strong>/<strong>Cloudflare Stream</strong>/<strong>Bitmovin</strong> with adaptive bitrate; <strong>DRM</strong> via <strong>Widevine</strong>/<strong>FairPlay</strong>/<strong>PlayReady</strong> for paid content; <strong>certificate verification</strong> via <strong>Accredible</strong>, <strong>Sertifier</strong>, or <strong>Credly</strong> &mdash; or DIY with Ed25519 signatures and public verification endpoint; <strong>plagiarism</strong> on essay assessments via <strong>Turnitin</strong>; <strong>SCORM/xAPI/LTI</strong> standards for enterprise LMS interoperability; <strong>quiz proctoring</strong> via <strong>Honorlock</strong>/<strong>ProctorU</strong>/<strong>Respondus</strong>; <strong>course recommendations</strong> via <strong>Atlas Vector Search</strong> on course descriptions + completion patterns; <strong>discussion forums</strong> via <strong>Stream Chat</strong>/<strong>Discourse</strong>; <strong>calendaring</strong> for cohort-based courses via <strong>Calendly</strong>/<strong>Cal.com</strong>; <strong>payments and subscriptions</strong> via <strong>Stripe Billing</strong>/<strong>Chargebee</strong>; analytics on completion rates, drop-off points via <strong>Mixpanel</strong>/<strong>Amplitude</strong>/<strong>PostHog</strong>; <strong>accessibility</strong>: closed captions via <strong>Rev</strong>/<strong>AssemblyAI</strong>/<strong>Deepgram</strong>; <strong>certificate sharing</strong> with <strong>LinkedIn Add to Profile</strong> deep links; multi-language via <strong>i18next</strong>/<strong>next-intl</strong> + <strong>Lokalise</strong>/<strong>Crowdin</strong>.</p>
+'''
+
+ANSWERS[94] = r'''
+<p><strong>Situation:</strong> the production database holds millions of customer records, financial transactions, and audit logs. A backup strategy must protect against accidental deletes, ransomware, regional outages, schema-corrupting bugs, and operator mistakes &mdash; with bounded RPO (recovery point objective) and RTO (recovery time objective). Compliance may mandate retention for years.</p>
+
+<p><strong>Approach:</strong> three layers. <strong>Continuous backups</strong> with point-in-time restore (oplog tailed continuously) for low RPO. <strong>Periodic snapshots</strong> (daily, weekly, monthly) for medium-term retention. <strong>Cold archives</strong> (Glacier/Archive Storage) for long-term compliance. Combine with <strong>cross-region replication</strong> for AZ/region failure protection. Test restores regularly &mdash; an untested backup is a hope, not a strategy.</p>
+
+<pre><code>// MongoDB Atlas: built-in
+//   - Continuous Cloud Backup (oplog continuously archived to S3)
+//   - Snapshot Schedule (every 6h / daily / weekly / monthly)
+//   - Point-in-time restore to any second within retention window
+//   - Cross-region restore + automatic encryption with KMS
+
+// Self-hosted: mongodump + oplog tail
+// Daily logical backup
+mongodump --uri="$URI" --out=/backup/$(date +%Y%m%d) --gzip --oplog
+
+// Continuous oplog tailing (resumable)
+mongodump --uri="$URI" --db=local --collection=oplog.rs \
+          --query='{ "ts": { "$gt": { "$timestamp": ... } } }'
+
+// Filesystem snapshot (faster, atomic with --fsync &amp; lock)
+db.adminCommand({ fsync: 1, lock: true })
+//   take EBS / LVM snapshot
+db.adminCommand({ fsyncUnlock: 1 })
+
+// Application-level &ldquo;soft delete&rdquo; for accidental drops
+db.collection.updateMany(
+  { _id: { $in: [...] } },
+  { $set: { deleted: true, deleted_at: new Date(), deleted_by: userId } }
+)
+// TTL index reaps after 30 days
+db.collection.createIndex({ deleted_at: 1 }, { expireAfterSeconds: 30 * 86400 })
+
+// Restore a single collection from snapshot
+mongorestore --uri="$URI" --nsInclude="myapp.users" /backup/20260429/
+
+// Verify backup integrity
+mongorestore --uri="$VERIFY_URI" --dryRun /backup/20260429/
+
+// PITR to a specific timestamp (Atlas)
+// Atlas UI: Restore -&gt; Point in Time -&gt; pick exact second within retention</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Continuous + snapshot + archive</td><td>Each layer covers different failure modes</td><td>Single layer &mdash; gaps in coverage</td></tr>
+<tr><td>PITR for low RPO</td><td>Recover from accidental writes within seconds</td><td>Daily snapshot only &mdash; up to 24h data loss</td></tr>
+<tr><td>Cross-region copies</td><td>Survives regional disasters</td><td>Same-region only &mdash; AZ outage = data loss</td></tr>
+<tr><td>Soft delete + TTL</td><td>30-day undo for accidental application deletes</td><td>Restore-from-backup &mdash; slow, disruptive</td></tr>
+<tr><td>Quarterly restore drills</td><td>Verifies the backups actually work</td><td>Untested backups &mdash; discover failures during outages</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> use <strong>MongoDB Atlas Backup</strong> for managed backups &mdash; PITR up to 7 days, snapshot retention up to 75 years, restore to any cluster, automatic encryption, no operator burden; for self-hosted, <strong>Percona Backup for MongoDB (PBM)</strong> is the gold standard &mdash; consistent backups across sharded clusters, oplog continuous backup, point-in-time restore; <strong>3-2-1 rule</strong>: 3 copies, 2 different media, 1 off-site &mdash; e.g., production cluster, daily snapshots in S3, weekly snapshots in S3 Glacier in another region; <strong>encryption</strong>: backups encrypted at rest with customer-managed keys (CMK) via <strong>AWS KMS</strong>/<strong>GCP KMS</strong>/<strong>HashiCorp Vault</strong> &mdash; a leaked S3 bucket without keys is useless; <strong>access control</strong>: backup buckets in a separate AWS account with read-only access from production, write-only from backup runner &mdash; ransomware can&rsquo;t delete backups; <strong>S3 Object Lock / versioning</strong> for immutable backups (compliance, anti-ransomware); <strong>backup monitoring</strong>: alert if no successful backup in 25 hours, alert on RPO drift; <strong>quarterly disaster recovery drills</strong> &mdash; pick a snapshot, restore to a fresh cluster, run smoke tests, time-track RTO; document runbooks in <strong>Notion</strong>/<strong>Confluence</strong>; for <strong>compliance</strong> (SOX, HIPAA, GDPR) match retention to legal requirements; <strong>logical backups for migrations</strong> use <strong>mongodump</strong> + <strong>mongorestore</strong> with <code>--archive</code> for streaming.</p>
+'''
+
+ANSWERS[95] = r'''
+<p><strong>Situation:</strong> a financial analytics platform tracks user portfolios, transactions, and computed analytics (returns, allocations, risk metrics). Users link brokerage accounts, transactions stream in continuously, and the platform must compute time-weighted returns, asset allocation, and tax lots accurately. Money math must never lose precision.</p>
+
+<p><strong>Approach:</strong> four collections. <code>users</code> with linked accounts; <code>accounts</code> per-brokerage account with positions; <code>transactions</code> as an append-only ledger of every buy, sell, dividend, deposit, withdrawal; <code>portfolios</code> as denormalized rollups updated nightly. All money in <code>Decimal128</code>; all dates UTC; all rates from authoritative sources cached daily.</p>
+
+<pre><code>// users
+db.users.insertOne({
+  _id: ObjectId(),
+  email: "alice@example.com",
+  base_currency: "USD",
+  created_at: new Date()
+})
+
+// accounts &mdash; per linked brokerage
+db.accounts.insertOne({
+  _id: ObjectId(),
+  user_id: ObjectId("..."),
+  provider: "plaid",
+  provider_account_id: "acct_xyz",
+  institution: "Vanguard",
+  account_type: "brokerage",   // brokerage | ira | 401k | crypto
+  positions: [
+    { symbol: "VTI", qty: NumberDecimal("142.5832"), avg_cost: NumberDecimal("234.12") }
+  ],
+  cash_balance: NumberDecimal("1834.42"),
+  last_synced_at: new Date()
+})
+
+// transactions &mdash; append-only ledger
+db.transactions.insertOne({
+  _id: ObjectId(),
+  account_id: ObjectId("..."),
+  user_id: ObjectId("..."),
+  date: ISODate("2026-04-29"),
+  type: "buy",                       // buy | sell | dividend | deposit | withdrawal | fee
+  symbol: "VTI",
+  qty: NumberDecimal("10.0000"),
+  price: NumberDecimal("265.42"),
+  amount: NumberDecimal("-2654.20"), // signed
+  fees: NumberDecimal("0.00"),
+  fx_rate: NumberDecimal("1.0000"),
+  source: "plaid",                   // plaid | manual | csv
+  imported_at: new Date()
+})
+
+// portfolios &mdash; nightly rollup
+db.portfolios.insertOne({
+  _id: ObjectId(),
+  user_id: ObjectId("..."),
+  as_of: ISODate("2026-04-29"),
+  total_value:    NumberDecimal("142583.42"),
+  cash:           NumberDecimal("3242.18"),
+  invested:       NumberDecimal("139341.24"),
+  ytd_return:     NumberDecimal("0.0842"),
+  twr_1y:         NumberDecimal("0.1342"),
+  allocation: {
+    equity:      NumberDecimal("0.78"),
+    bond:        NumberDecimal("0.18"),
+    cash:        NumberDecimal("0.04")
+  },
+  computed_at: new Date()
+})
+
+// Time-weighted return (Modified Dietz approximation, daily)
+// Sub-period returns chained &mdash; correct under cash flows
+const subPeriods = await db.transactions.aggregate([
+  { $match: { user_id: uid, date: { $gte: from, $lte: to }, type: { $in: ["deposit", "withdrawal"] } } },
+  { $sort: { date: 1 } },
+  { $group: { _id: "$date", flow: { $sum: "$amount" } } }
+]).toArray()
+
+// Indexes
+db.transactions.createIndex({ user_id: 1, date: -1 })
+db.transactions.createIndex({ account_id: 1, date: -1 })
+db.transactions.createIndex({ user_id: 1, symbol: 1, date: -1 })
+db.portfolios.createIndex({ user_id: 1, as_of: -1 })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Decimal128 throughout</td><td>Exact decimal math; no float drift on cents</td><td>Double &mdash; classic floating-point bugs in money</td></tr>
+<tr><td>Append-only transactions</td><td>Auditable, replayable; reconciliation trivial</td><td>Mutable &mdash; corrections lose history</td></tr>
+<tr><td>Nightly portfolio rollup</td><td>Dashboard reads in O(1); compute heavy work offline</td><td>Live aggregation &mdash; slow, inconsistent under load</td></tr>
+<tr><td>Cached positions on account</td><td>Real-time-ish balance display without scanning ledger</td><td>Recompute every read &mdash; expensive</td></tr>
+<tr><td>FX rates per transaction</td><td>Accurate multi-currency; reproducible historical reports</td><td>Live rate &mdash; non-reproducible analytics</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> integrate brokerages via <strong>Plaid Investments</strong>, <strong>SnapTrade</strong>, <strong>Yodlee</strong>, <strong>MX</strong>, or direct OAuth (Coinbase, Robinhood APIs); <strong>market data</strong> from <strong>Polygon.io</strong>, <strong>IEX Cloud</strong>, <strong>Alpha Vantage</strong>, <strong>Finnhub</strong>, <strong>Tiingo</strong>; <strong>FX rates</strong> from <strong>Open Exchange Rates</strong>/<strong>currencylayer</strong>; <strong>tax lots</strong> tracked per buy with FIFO/LIFO/specific-ID accounting &mdash; produce 8949/1099-B forms via <strong>TaxBit</strong>/<strong>CoinTracker</strong>/<strong>Cointracking</strong>; <strong>risk analytics</strong> (Sharpe, beta, VaR) computed in a Python service using <strong>numpy</strong>/<strong>pandas</strong>/<strong>QuantLib</strong>; <strong>charting</strong> via <strong>TradingView Lightweight Charts</strong>/<strong>Recharts</strong>/<strong>Victory</strong>; <strong>real-time prices</strong> via WebSocket from market data providers, broadcast via <strong>Pusher</strong>/<strong>Ably</strong>/<strong>Pubnub</strong>; <strong>compliance</strong>: SEC, FINRA reporting, KYC via <strong>Persona</strong>/<strong>Onfido</strong>/<strong>Sumsub</strong>; <strong>encryption</strong>: PII via <strong>Skyflow</strong>/<strong>Basis Theory</strong>/<strong>VGS</strong>; for <strong>backtesting</strong>, ETL to <strong>BigQuery</strong>/<strong>Snowflake</strong>/<strong>ClickHouse</strong>; <strong>warehouse-grade analytics</strong> use <strong>dbt</strong> + <strong>Cube.js</strong>; <strong>fraud detection</strong> via <strong>Sift</strong>/<strong>Stripe Radar</strong>; <strong>monitoring</strong>: alert on stale syncs, large unexpected balance changes.</p>
+'''
+
+ANSWERS[96] = r'''
+<p><strong>Situation:</strong> a home automation system manages devices (lights, locks, thermostats, sensors, cameras), users (homeowners and family members), and actions (rules, scenes, schedules). Devices report state continuously over MQTT; users trigger actions from apps; rules fire automatically on conditions (motion + after sunset = turn on porch light).</p>
+
+<p><strong>Approach:</strong> four core collections. <code>users</code> per home owner; <code>homes</code> as the multi-device unit; <code>devices</code> with current state and metadata; <code>actions</code> (rules and triggered events). Telemetry (sensor readings, on/off events) goes to a separate time-series collection. State changes flow through change streams to drive automations.</p>
+
+<pre><code>// homes
+db.homes.insertOne({
+  _id: ObjectId(),
+  owner_id: ObjectId("..."),
+  members: [
+    { user_id: ObjectId("..."), role: "admin",  added_at: new Date() },
+    { user_id: ObjectId("..."), role: "member", added_at: new Date() }
+  ],
+  name: "Main House",
+  timezone: "America/New_York",
+  location: { type: "Point", coordinates: [-73.96, 40.78] },
+  created_at: new Date()
+})
+
+// devices &mdash; current state + metadata
+db.devices.insertOne({
+  _id: "dev_thermo_01",
+  home_id: ObjectId("..."),
+  vendor: "ecobee",
+  model: "SmartThermostat",
+  type: "thermostat",
+  room: "Living Room",
+  state: {
+    current_temp_f: 72.4,
+    target_temp_f:  70.0,
+    mode: "heat",
+    online: true
+  },
+  capabilities: ["temperature", "humidity", "schedule"],
+  firmware_version: "4.7.1",
+  last_seen: new Date(),
+  paired_at: ISODate("2024-12-01")
+})
+
+// telemetry &mdash; time-series, very high volume
+db.createCollection("telemetry", {
+  timeseries: { timeField: "ts", metaField: "meta", granularity: "seconds" },
+  expireAfterSeconds: 90 * 86400    // 90-day retention
+})
+db.telemetry.insertOne({
+  ts: new Date(),
+  meta: { device_id: "dev_thermo_01", home_id: ObjectId("..."), type: "temperature" },
+  value: 72.4,
+  unit: "F"
+})
+
+// actions &mdash; rule definitions
+db.actions.insertOne({
+  _id: ObjectId(),
+  home_id: ObjectId("..."),
+  name: "Porch light at sunset",
+  enabled: true,
+  trigger: { type: "schedule", expr: "sunset" },
+  conditions: [{ field: "weather.is_dark", op: "eq", value: true }],
+  effects: [{ device_id: "dev_porch_light", set: { on: true, brightness: 80 } }],
+  created_at: new Date()
+})
+
+// action runs &mdash; one per execution, auditable
+db.action_runs.insertOne({
+  action_id: ObjectId("..."),
+  home_id: ObjectId("..."),
+  triggered_at: new Date(),
+  trigger_source: "sensor:motion",
+  effects_applied: [{ device_id: "dev_porch_light", outcome: "ok" }],
+  duration_ms: 142
+})
+
+// Atomic state update from MQTT message
+db.devices.updateOne(
+  { _id: "dev_thermo_01" },
+  { $set: { "state.current_temp_f": 72.5, last_seen: new Date() } }
+)
+
+// Indexes
+db.devices.createIndex({ home_id: 1, type: 1 })
+db.devices.createIndex({ home_id: 1, room: 1 })
+db.actions.createIndex({ home_id: 1, enabled: 1 })
+db.action_runs.createIndex({ home_id: 1, triggered_at: -1 })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Time-series for telemetry</td><td>10x compression, optimized append</td><td>Regular collection &mdash; storage explodes</td></tr>
+<tr><td>Current state on device doc</td><td>Fast app reads of &ldquo;is the light on?&rdquo;</td><td>Compute from telemetry &mdash; slow</td></tr>
+<tr><td>TTL on telemetry</td><td>Bounded storage; long-term in warehouse</td><td>Forever &mdash; expensive, pointless</td></tr>
+<tr><td>Action runs as separate audit collection</td><td>Why-did-this-happen forensics</td><td>No log &mdash; mysterious automation behavior</td></tr>
+<tr><td>Home-scoped indexes</td><td>Multi-tenant isolation; one user&rsquo;s data never scanned for another</td><td>Global indexes &mdash; security and performance issues</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> the <strong>MQTT broker</strong> (<strong>EMQX</strong>, <strong>Mosquitto</strong>, <strong>HiveMQ</strong>, <strong>AWS IoT Core</strong>) sits between devices and the app &mdash; persistence to MongoDB happens via a bridge service that batches writes; <strong>device shadow</strong> pattern (AWS IoT) handles intermittent connectivity &mdash; desired vs reported state; <strong>integrations</strong> with <strong>Matter/Thread</strong> (Apple HomeKit, Google Home, Amazon Alexa, Samsung SmartThings); <strong>cloud-to-cloud APIs</strong>: <strong>Ecobee</strong>, <strong>Nest</strong>, <strong>Ring</strong>, <strong>Philips Hue</strong>, <strong>August</strong>, <strong>Tuya</strong>, <strong>Z-Wave/Zigbee</strong> via <strong>Home Assistant</strong>; <strong>edge-side processing</strong> (Home Assistant, openHAB) for local-first automation when internet is down; <strong>video storage</strong> via <strong>Cloudflare Stream</strong>/<strong>Mux</strong>/<strong>Frigate</strong>; <strong>privacy</strong>: cameras process motion detection on-device with <strong>Frigate + Coral TPU</strong> &mdash; only events reach the cloud; <strong>geofencing</strong> via mobile SDKs (<strong>Radar</strong>, <strong>Gimbal</strong>) for arrive/leave triggers; <strong>natural language</strong> automation via <strong>OpenAI</strong> &mdash; &ldquo;turn off all lights when I say good night&rdquo;; <strong>energy management</strong> integration with utility APIs; <strong>scheduled rules</strong> and complex orchestration via <strong>Inngest</strong>/<strong>Temporal</strong>/<strong>Trigger.dev</strong>; <strong>monitoring</strong> via <strong>Datadog</strong>; alert on offline devices, stuck automations.</p>
+'''
+
+ANSWERS[97] = r'''
+<p><strong>Situation:</strong> a service-management platform tracks customer-submitted tickets, internal work orders, technician assignments, parts used, and SLAs. Tickets flow through a workflow (open &rarr; assigned &rarr; in_progress &rarr; awaiting_parts &rarr; resolved &rarr; closed). SLA breaches must trigger escalations; technicians need mobile access; managers need dashboards.</p>
+
+<p><strong>Approach:</strong> four collections. <code>tickets</code> for customer-facing requests; <code>work_orders</code> for technician-facing dispatch (one ticket may spawn multiple WOs); <code>technicians</code> with skills and schedules; <code>parts</code> with inventory references. Status changes are tracked in an embedded history array on the ticket; SLA timers are computed from the ticket and a holiday calendar.</p>
+
+<pre><code>// tickets &mdash; customer-facing
+db.tickets.insertOne({
+  _id: ObjectId(),
+  number: "T-2026-04231",     // human-readable
+  org_id:      ObjectId("..."),
+  customer_id: ObjectId("..."),
+  title: "AC unit not cooling",
+  description: "Started yesterday afternoon...",
+  category: "hvac.repair",
+  priority: "high",                 // low | normal | high | critical
+  status:   "in_progress",          // open | assigned | in_progress | awaiting_parts | resolved | closed
+  sla: {
+    response_due: ISODate("2026-04-29T18:00:00Z"),
+    resolve_due:  ISODate("2026-04-30T17:00:00Z"),
+    response_at:  ISODate("2026-04-29T15:42:00Z"),
+    resolve_at:   null
+  },
+  assigned_to:   ObjectId("..."),    // tech user
+  history: [
+    { ts: ISODate("..."), by: ObjectId("..."), from: "open",       to: "assigned" },
+    { ts: ISODate("..."), by: ObjectId("..."), from: "assigned",   to: "in_progress" }
+  ],
+  attachments: [{ name: "photo.jpg", s3_key: "tickets/.../photo.jpg" }],
+  created_at: new Date()
+})
+
+// work_orders &mdash; technician dispatch
+db.work_orders.insertOne({
+  _id: ObjectId(),
+  ticket_id: ObjectId("..."),
+  technician_id: ObjectId("..."),
+  scheduled_at: ISODate("2026-04-30T09:00:00Z"),
+  duration_minutes: 90,
+  location: { type: "Point", coordinates: [-73.96, 40.78] },
+  parts_planned: [{ part_id: "PRT-001", qty: 1 }],
+  parts_used:    [],
+  status: "scheduled",     // scheduled | en_route | on_site | completed
+  signature_s3_key: null,
+  notes: "",
+  completed_at: null
+})
+
+// technicians
+db.technicians.insertOne({
+  _id: ObjectId(),
+  user_id: ObjectId("..."),
+  name: "Bob Smith",
+  skills: ["hvac", "electrical"],
+  service_area: { type: "Polygon", coordinates: [[[-74,40], [-73,40], [-73,41], [-74,41], [-74,40]]] },
+  van_inventory: [{ part_id: "PRT-001", qty: 5 }],
+  active: true
+})
+
+// SLA breach detection (cron)
+db.tickets.find({
+  status: { $nin: ["resolved", "closed"] },
+  "sla.resolve_due": { $lt: new Date() }
+})
+
+// Atomic status transition with history
+db.tickets.updateOne(
+  { _id: ticketId, status: "in_progress" },     // optimistic
+  {
+    $set:  { status: "resolved", "sla.resolve_at": new Date() },
+    $push: { history: { ts: new Date(), by: userId, from: "in_progress", to: "resolved" } }
+  }
+)
+
+// Indexes
+db.tickets.createIndex({ org_id: 1, status: 1, priority: 1, created_at: -1 })
+db.tickets.createIndex({ assigned_to: 1, status: 1 })
+db.tickets.createIndex({ "sla.resolve_due": 1, status: 1 })  // SLA breach scanner
+db.work_orders.createIndex({ technician_id: 1, scheduled_at: 1 })
+db.work_orders.createIndex({ location: "2dsphere" })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Ticket vs work order split</td><td>Customer view (one ticket) vs ops view (multi-visit)</td><td>One collection &mdash; awkward dual perspective</td></tr>
+<tr><td>Embedded history array</td><td>One read shows full lifecycle; bounded length</td><td>Separate collection &mdash; extra <code>$lookup</code></td></tr>
+<tr><td>Optimistic status transitions</td><td>Prevents stale concurrent updates</td><td>Last-write-wins &mdash; lost transitions</td></tr>
+<tr><td>SLA fields denormalized</td><td>Index-backed breach scan</td><td>Compute on query &mdash; full scan</td></tr>
+<tr><td>2dsphere on work orders</td><td>Route optimization, nearest-tech dispatch</td><td>Linear scan &mdash; slow at scale</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> for <strong>field service management</strong> consider <strong>ServiceNow</strong>, <strong>Jira Service Management</strong>, <strong>Salesforce Field Service</strong>, <strong>FieldEdge</strong>, <strong>ServiceTitan</strong>, or <strong>HouseCallPro</strong> &mdash; massive specialized industry; for in-house, build on the above schema; <strong>route optimization</strong> for daily tech dispatching via <strong>Mapbox Optimization API</strong>, <strong>Google Maps Distance Matrix</strong>, <strong>OptimoRoute</strong>, <strong>Routific</strong>; <strong>technician mobile app</strong> needs offline-first &mdash; <strong>WatermelonDB</strong>/<strong>RxDB</strong>/<strong>SQLite</strong> with sync to MongoDB via background sync; <strong>customer notifications</strong> (en route, arriving in 15min) via <strong>Twilio</strong>/<strong>MessageBird</strong>; <strong>signature capture</strong> on completion stored in S3; <strong>parts inventory</strong> integrates with the warehouse system via change streams; <strong>payments</strong> via <strong>Stripe Terminal</strong> (in-person card readers); <strong>customer portal</strong> for status tracking; <strong>SLA escalations</strong> via <strong>BullMQ</strong>/<strong>Inngest</strong>/<strong>Temporal</strong> repeating jobs that page on-call via <strong>PagerDuty</strong>/<strong>Opsgenie</strong>; <strong>analytics</strong>: first-call resolution rate, mean time to repair, parts utilization via warehouse export; <strong>customer satisfaction</strong> survey via <strong>Delighted</strong>/<strong>Qualtrics</strong>; <strong>chat support</strong> via <strong>Intercom</strong>/<strong>Zendesk</strong>/<strong>Front</strong>; for <strong>predictive maintenance</strong> integrate IoT telemetry with <strong>Atlas Vector Search</strong> on failure patterns.</p>
+'''
+
+ANSWERS[98] = r'''
+<p><strong>Situation:</strong> a health and wellness app tracks user activity (steps, workouts, meals, sleep, mood), goals (weight, fitness, mindfulness), and progress over time. Users sync from wearables (Apple Watch, Fitbit, Garmin); the app shows trends, streaks, and personalized recommendations. Health data is sensitive &mdash; HIPAA awareness needed for medical-adjacent features.</p>
+
+<p><strong>Approach:</strong> four core collections. <code>users</code> with profile, preferences, and consent flags; <code>activities</code> as a time-series collection of events from any source; <code>goals</code> with current progress; <code>summaries</code> as daily/weekly rollups for fast dashboard reads. Wearable data lands via OAuth-authenticated webhook integrations; the schema is source-agnostic so any provider plugs in.</p>
+
+<pre><code>// users &mdash; profile + preferences (PHI-light)
+db.users.insertOne({
+  _id: ObjectId(),
+  email: "alice@example.com",
+  display_name: "Alice",
+  dob:        ISODate("1990-04-12"),       // for age-based zones
+  sex_at_birth: "female",                  // for calorie/HR formulas
+  height_cm:  168,
+  weight_kg:  64.5,
+  units: "metric",
+  timezone: "America/New_York",
+  consent: {
+    health_data: true,
+    research_share: false,
+    marketing: true,
+    consented_at: new Date()
+  },
+  created_at: new Date()
+})
+
+// activities &mdash; time-series, source-agnostic
+db.createCollection("activities", {
+  timeseries: { timeField: "ts", metaField: "meta", granularity: "seconds" }
+})
+db.activities.insertMany([
+  { ts: new Date(), meta: { user_id, type: "steps",   source: "apple_health" }, value: 8421 },
+  { ts: new Date(), meta: { user_id, type: "hr_avg",  source: "fitbit" },       value: 72 },
+  { ts: new Date(), meta: { user_id, type: "sleep",   source: "oura" },         duration_min: 423, stages: { rem: 95, deep: 78 } },
+  { ts: new Date(), meta: { user_id, type: "workout", source: "manual" },       category: "running", duration_min: 32, calories: 312 },
+  { ts: new Date(), meta: { user_id, type: "meal",    source: "manual" },       calories: 412, protein_g: 32, carbs_g: 28, fat_g: 18 },
+  { ts: new Date(), meta: { user_id, type: "mood",    source: "manual" },       score: 7, note: "energetic" }
+])
+
+// goals
+db.goals.insertOne({
+  _id: ObjectId(),
+  user_id: ObjectId("..."),
+  type: "weight",                         // weight | steps_daily | sleep | calories | custom
+  target: NumberDecimal("60.0"),
+  unit: "kg",
+  start_value: NumberDecimal("64.5"),
+  start_date: ISODate("2026-01-01"),
+  target_date: ISODate("2026-06-30"),
+  status: "active",                       // active | achieved | abandoned
+  created_at: new Date()
+})
+
+// summaries &mdash; daily rollup
+db.summaries.insertOne({
+  _id: { user_id: ObjectId("..."), date: ISODate("2026-04-29") },
+  steps: 8421,
+  hr_avg: 72,
+  sleep_min: 423,
+  workouts: 1,
+  workout_minutes: 32,
+  calories_in: 1842,
+  calories_out: 2042,
+  net_calories: -200,
+  mood_avg: 7,
+  computed_at: new Date()
+})
+
+// Daily rollup pipeline (runs nightly per user)
+db.activities.aggregate([
+  { $match: { "meta.user_id": uid, ts: { $gte: dayStart, $lt: dayEnd } } },
+  { $group: { _id: "$meta.type", total: { $sum: "$value" }, count: { $sum: 1 } } },
+  { $merge: { into: "summaries", on: "_id", whenMatched: "merge", whenNotMatched: "insert" } }
+])
+
+// Indexes
+db.goals.createIndex({ user_id: 1, status: 1 })
+db.summaries.createIndex({ "_id.user_id": 1, "_id.date": -1 })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Time-series for activities</td><td>10x compression; optimized for high-volume health data</td><td>Regular collection &mdash; storage explodes</td></tr>
+<tr><td>Source-agnostic activity schema</td><td>Plug-and-play wearables; no per-vendor schemas</td><td>Per-vendor collections &mdash; combinatorial explosion</td></tr>
+<tr><td>Daily summaries materialized</td><td>Fast dashboard reads, streak detection</td><td>Live aggregation &mdash; slow on long histories</td></tr>
+<tr><td>Consent flags first-class</td><td>GDPR/HIPAA compliance; audit trail</td><td>Implicit consent &mdash; legal exposure</td></tr>
+<tr><td>Decimal128 for weight/calories</td><td>Exact display; no float drift</td><td>Float &mdash; weird-looking 0.00001 errors</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> integrate wearables via <strong>Apple HealthKit</strong>, <strong>Google Fit</strong>, <strong>Fitbit Web API</strong>, <strong>Garmin Connect</strong>, <strong>Strava</strong>, <strong>Oura</strong>, <strong>WHOOP</strong>, <strong>Withings</strong>, <strong>Polar</strong> &mdash; or use unified providers like <strong>Terra</strong>, <strong>Vital</strong>, <strong>Fitbit OAuth</strong>, <strong>Spike API</strong>, <strong>Rook</strong> for one integration to rule them all; <strong>nutrition databases</strong> via <strong>Edamam</strong>, <strong>Nutritionix</strong>, <strong>USDA FoodData Central</strong>; <strong>barcode scanning</strong> for meal logging via <strong>Open Food Facts</strong>; <strong>guided workouts</strong> via partnered video providers (<strong>Mux</strong>/<strong>Vimeo</strong>); <strong>meditations</strong> via partnerships or generated audio with <strong>ElevenLabs</strong>; <strong>recommendations</strong>: workout suggestions, meal ideas via <strong>Atlas Vector Search</strong> on user history; <strong>streaks and gamification</strong> via badges, leaderboards (with consent); <strong>HIPAA boundary</strong>: if the app touches medical data (Rx, conditions), enable BAA via Atlas, encrypt PHI with <strong>Queryable Encryption</strong>; <strong>data export</strong> in standard formats (FHIR, GPX, TCX); <strong>privacy</strong>: granular consent, ability to delete all data per GDPR; <strong>research data sharing</strong> only with explicit opt-in, de-identified via <strong>Tonic.ai</strong>/<strong>Gretel</strong>; <strong>analytics</strong> (engagement, retention) export to <strong>Mixpanel</strong>/<strong>Amplitude</strong>/<strong>PostHog</strong> &mdash; never include health values; <strong>safety</strong>: detect concerning patterns (sudden weight loss, low HR variability) and surface gentle nudges to consult a doctor; <strong>chat support</strong> via <strong>Intercom</strong> with mental-health resource integration.</p>
+'''
+
+ANSWERS[99] = r'''
+<p><strong>Situation:</strong> a smart-city platform ingests data from thousands of sensors (traffic counters, air quality monitors, parking occupancy, noise meters, water flow) deployed across a city. Streams arrive at high rates (millions of readings per hour); analytics dashboards show real-time and historical views; alerts trigger on threshold breaches; researchers run ad-hoc queries on years of history.</p>
+
+<p><strong>Approach:</strong> three core collections. <code>sensors</code> describes each deployed device with location, type, calibration. A <strong>time-series</strong> <code>readings</code> collection holds every measurement with TTL for hot data and <strong>Online Archive</strong> tiering older data to cheap storage. <code>alerts</code> is rule-driven and triggered via change streams. Aggregation rollups (per-minute, per-hour, per-day) populate <code>aggregates</code> for fast dashboards.</p>
+
+<pre><code>// sensors &mdash; metadata, slow-changing
+db.sensors.insertOne({
+  _id: "sens_traffic_001",
+  type: "traffic_counter",     // traffic_counter | air_quality | parking | noise | water_flow
+  location: {
+    type: "Point",
+    coordinates: [-73.985, 40.749]
+  },
+  district: "midtown",
+  installed_at: ISODate("2024-06-15"),
+  vendor: "FlowMetrics",
+  model: "FM-3000",
+  calibration: { last_at: ISODate("2025-12-01"), offset: 0.0, scale: 1.0 },
+  status: "online"             // online | offline | maintenance | retired
+})
+
+// readings &mdash; high-volume time-series
+db.createCollection("readings", {
+  timeseries: { timeField: "ts", metaField: "meta", granularity: "seconds" },
+  expireAfterSeconds: 30 * 86400      // hot retention 30 days
+})
+db.readings.insertMany([
+  { ts: new Date(), meta: { sensor_id: "sens_traffic_001", type: "traffic_counter", district: "midtown" }, value: 142, unit: "veh/min" },
+  { ts: new Date(), meta: { sensor_id: "sens_air_042",     type: "air_quality",     district: "midtown" }, pm25: 12.4, pm10: 28.1, no2: 18.2 }
+])
+
+// aggregates &mdash; minute / hour / day rollups via $merge
+db.readings.aggregate([
+  { $match: { ts: { $gte: oneMinuteAgo } } },
+  { $group: {
+      _id: {
+        sensor_id: "$meta.sensor_id",
+        minute:    { $dateTrunc: { date: "$ts", unit: "minute" } }
+      },
+      avg_value:  { $avg: "$value" },
+      max_value:  { $max: "$value" },
+      sample_count: { $sum: 1 }
+  }},
+  { $merge: { into: "aggregates_minute", on: "_id", whenMatched: "replace", whenNotMatched: "insert" } }
+])
+
+// alerts &mdash; rule-driven
+db.alert_rules.insertOne({
+  _id: ObjectId(),
+  sensor_type: "air_quality",
+  field: "pm25",
+  op: "gt",
+  threshold: 35,
+  duration_min: 15,
+  notify: ["dept-health@city.gov"],
+  active: true
+})
+
+db.alerts.insertOne({
+  rule_id: ObjectId("..."),
+  sensor_id: "sens_air_042",
+  triggered_at: new Date(),
+  value: 47.3,
+  acknowledged: false
+})
+
+// 2dsphere for &ldquo;sensors near a location&rdquo; queries
+db.sensors.createIndex({ location: "2dsphere" })
+
+// Geo + threshold dashboard query
+db.readings.aggregate([
+  { $match: { ts: { $gte: oneHourAgo }, "meta.type": "air_quality" } },
+  { $group: { _id: "$meta.sensor_id", avg_pm25: { $avg: "$pm25" } } },
+  { $match: { avg_pm25: { $gt: 35 } } },
+  { $lookup: { from: "sensors", localField: "_id", foreignField: "_id", as: "s" } },
+  { $unwind: "$s" }
+])
+
+// Indexes
+db.readings.createIndex({ "meta.sensor_id": 1, ts: -1 })   // collection-level index on TS
+db.aggregates_minute.createIndex({ "_id.sensor_id": 1, "_id.minute": -1 })
+db.alerts.createIndex({ acknowledged: 1, triggered_at: -1 })</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>Time-series collection</td><td>10x compression, optimized append at city scale</td><td>Regular collection &mdash; cost prohibitive</td></tr>
+<tr><td>TTL + Online Archive</td><td>Hot 30 days in cluster, cold years in S3</td><td>One-tier &mdash; expensive or short retention</td></tr>
+<tr><td>Materialized rollups via <code>$merge</code></td><td>Dashboards in milliseconds, not minutes</td><td>Live aggregation &mdash; impossible at this volume</td></tr>
+<tr><td>Sensors metadata separate</td><td>Slow-changing; <code>$lookup</code> when needed</td><td>Embed metadata per reading &mdash; massive duplication</td></tr>
+<tr><td>Alert rules in DB</td><td>Operators tweak without deploys</td><td>Hard-coded &mdash; deploy for every threshold</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> at city scale, the <strong>ingestion path matters more than the database</strong> &mdash; sensors push to <strong>MQTT</strong> brokers (<strong>EMQX</strong>/<strong>HiveMQ</strong>/<strong>AWS IoT Core</strong>) that batch into <strong>Kafka</strong>; consumers write to MongoDB time-series + downstream warehouse; <strong>specialized OLAP</strong> for ad-hoc analytical queries: <strong>ClickHouse</strong>, <strong>Apache Druid</strong>, <strong>InfluxDB</strong>, <strong>TimescaleDB</strong>, <strong>QuestDB</strong> &mdash; MongoDB time-series is great for moderate scale; for <strong>billions of points/day</strong> consider hybrid; <strong>streaming analytics</strong> via <strong>Apache Flink</strong>/<strong>Materialize</strong>/<strong>Apache Pinot</strong> for windowed aggregations and complex event processing; <strong>geospatial visualization</strong> via <strong>Mapbox GL JS</strong>/<strong>deck.gl</strong>/<strong>Kepler.gl</strong> with <strong>H3</strong> hex binning; <strong>open data publishing</strong> via <strong>CKAN</strong>/<strong>Socrata</strong> &mdash; cities legally open historical data; <strong>data quality</strong> monitoring via <strong>Great Expectations</strong>/<strong>Soda</strong>/<strong>Monte Carlo</strong> &mdash; broken sensors send broken data; <strong>edge processing</strong> on the sensor (anomaly detection, downsampling) reduces upstream load; <strong>ML</strong>: traffic prediction (<strong>Prophet</strong>/<strong>NeuralProphet</strong>), anomaly detection (<strong>Anomalo</strong>/<strong>Datadog Watchdog</strong>); <strong>citizen-facing dashboards</strong> via <strong>Grafana</strong>/<strong>Apache Superset</strong>/<strong>Metabase</strong>; <strong>compliance</strong>: city data may be FOIA-able &mdash; build retention and access policies accordingly; <strong>privacy</strong>: aggregate before publish (no per-vehicle tracks).</p>
+'''
+
+ANSWERS[100] = r'''
+<p><strong>Situation:</strong> a high-frequency trading (HFT) platform ingests market data ticks at extreme rates (hundreds of thousands per second per symbol), runs algorithmic strategies with bounded latency (microseconds to milliseconds), places orders, and reconciles positions. Storage requirements span hot in-memory data, recent durable history, and archival tick data for backtesting.</p>
+
+<p><strong>Approach:</strong> MongoDB is <strong>not the hot path</strong> in HFT. The order-management critical loop runs in C++/Rust on co-located servers using shared memory and kernel-bypass networking (DPDK, Solarflare). MongoDB&rsquo;s role is <strong>persistence and analytics</strong>: store strategy parameters, position states, post-trade transaction logs, and historical tick data for backtesting and TCA (transaction cost analysis). The hot ingestion happens in <strong>Kafka</strong>/<strong>Aeron</strong>/<strong>Chronicle Queue</strong>; persistence to MongoDB happens asynchronously.</p>
+
+<pre><code>// strategies &mdash; parameters and lifecycle
+db.strategies.insertOne({
+  _id: ObjectId(),
+  name: "vwap_reversion_v3",
+  symbols: ["AAPL", "MSFT", "GOOG"],
+  params: {
+    lookback_seconds: 300,
+    z_threshold: 2.5,
+    max_position: NumberDecimal("100000"),
+    risk_limit: NumberDecimal("50000")
+  },
+  enabled: true,
+  pnl_today: NumberDecimal("12482.42"),
+  updated_at: new Date()
+})
+
+// positions &mdash; current state, single doc per (strategy, symbol)
+db.positions.insertOne({
+  _id: { strategy_id: ObjectId("..."), symbol: "AAPL" },
+  qty: NumberDecimal("250"),
+  avg_price: NumberDecimal("182.42"),
+  realized_pnl: NumberDecimal("1284.32"),
+  unrealized_pnl: NumberDecimal("234.18"),
+  updated_at: new Date()
+})
+
+// orders &mdash; append-only audit
+db.orders.insertOne({
+  _id: ObjectId(),
+  strategy_id: ObjectId("..."),
+  symbol: "AAPL",
+  side: "buy",
+  qty: NumberDecimal("100"),
+  type: "limit",
+  limit_price: NumberDecimal("182.40"),
+  venue: "NASDAQ",
+  client_order_id: "co_01HRG...",
+  exchange_order_id: "exch_xyz",
+  status: "filled",          // pending | sent | acked | partial | filled | canceled | rejected
+  fill_qty: NumberDecimal("100"),
+  fill_price: NumberDecimal("182.41"),
+  sent_at:   ISODate("2026-04-29T13:30:42.193456Z"),
+  acked_at:  ISODate("2026-04-29T13:30:42.193512Z"),
+  filled_at: ISODate("2026-04-29T13:30:42.194021Z"),
+  latency_us: 565
+})
+
+// market data ticks &mdash; time-series, very high write rate
+db.createCollection("ticks", {
+  timeseries: { timeField: "ts", metaField: "meta", granularity: "seconds" },
+  expireAfterSeconds: 7 * 86400        // 7-day hot; archive elsewhere
+})
+db.ticks.insertOne({
+  ts: new Date(),
+  meta: { symbol: "AAPL", venue: "NASDAQ", type: "trade" },
+  price: NumberDecimal("182.42"),
+  qty: 100,
+  cond: "@"     // tape conditions
+})
+
+// Indexes
+db.orders.createIndex({ strategy_id: 1, sent_at: -1 })
+db.orders.createIndex({ symbol: 1, sent_at: -1 })
+db.orders.createIndex({ client_order_id: 1 }, { unique: true })
+
+// Periodic position reconciliation (every minute, post-trade)
+db.orders.aggregate([
+  { $match: { status: "filled", filled_at: { $gte: oneMinuteAgo } } },
+  { $group: {
+      _id: { strategy_id: "$strategy_id", symbol: "$symbol" },
+      delta_qty: { $sum: { $multiply: ["$fill_qty", { $cond: [{ $eq: ["$side", "buy"] }, 1, -1] }] } }
+  }},
+  // ... pipe to position update
+])</code></pre>
+
+<p><strong>Trade-offs:</strong></p>
+<table><thead><tr><th>Decision</th><th>Why</th><th>Alternative</th></tr></thead><tbody>
+<tr><td>MongoDB <em>off</em> the hot path</td><td>HFT needs &mu;s; MongoDB is ms</td><td>Try to use Mongo on the hot path &mdash; misses every fill window</td></tr>
+<tr><td>Time-series for ticks</td><td>10x compression, append-optimized for backtesting data</td><td>Regular collection &mdash; storage explodes</td></tr>
+<tr><td>Append-only orders</td><td>Regulatory audit; reconstruction; SEC/FINRA records</td><td>Mutable orders &mdash; can&rsquo;t prove what happened</td></tr>
+<tr><td>Decimal128 for price/qty</td><td>Exact; no float-rounding affecting fills</td><td>Float &mdash; off-by-cent errors that compound</td></tr>
+<tr><td>Position state separate from ledger</td><td>Fast reads of current exposure</td><td>Recompute from orders &mdash; slow under load</td></tr>
+</tbody></table>
+
+<p><strong>Production polish:</strong> the <strong>real critical path</strong> uses kernel-bypass networking (<strong>DPDK</strong>, <strong>Solarflare/Onload</strong>, <strong>Mellanox VMA</strong>), FPGA-accelerated parsers (<strong>Algo-Logic</strong>, <strong>Enyx</strong>), shared-memory IPC (<strong>Aeron</strong>, <strong>Chronicle Queue</strong>, <strong>nanomsg</strong>), and lock-free data structures &mdash; written in C++ or Rust; <strong>co-location</strong> at exchanges (NY4, LD4, TY3) is non-negotiable for serious HFT; <strong>FIX protocol</strong> via <strong>QuickFIX</strong> or vendor APIs (<strong>ITCH</strong>, <strong>OUCH</strong>); MongoDB&rsquo;s role is <strong>persistence and analytics</strong> &mdash; tick storage for backtesting, post-trade transaction cost analysis, strategy parameter tuning, regulatory reporting; <strong>archival tick data</strong> in <strong>Parquet</strong> on <strong>S3</strong> with <strong>DuckDB</strong>/<strong>Polars</strong>/<strong>ClickHouse</strong>/<strong>kdb+</strong>; <strong>backtesting</strong> via <strong>QuantConnect</strong>/<strong>Zipline</strong>/<strong>Backtrader</strong>/<strong>vectorbt</strong>; <strong>real-time risk</strong>: pre-trade risk checks (max position, max loss, fat-finger limits) implemented in the order gateway in microseconds, not in the database; <strong>compliance</strong>: SEC Rule 17a-3/17a-4 retention (6 years), CAT (Consolidated Audit Trail) reporting, MAR/MAD market abuse surveillance; <strong>monitoring</strong>: per-strategy P&amp;L every second, latency histograms, queue depths via <strong>Datadog</strong>/<strong>Grafana</strong>; <strong>kill switches</strong> in hardware and software for emergency stops; for <strong>retail-grade &ldquo;real-time&rdquo;</strong> trading apps (Robinhood-style, ms latency tolerable), MongoDB <em>can</em> sit in the path with care &mdash; cache positions in <strong>Redis</strong>, persist async; integrate execution via <strong>Alpaca</strong>/<strong>Tradier</strong>/<strong>Interactive Brokers</strong>/<strong>Lime Brokerage</strong>.</p>
+'''

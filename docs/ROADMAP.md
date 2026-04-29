@@ -8,32 +8,8 @@ Phase plan for filling in the remaining 21 stub chapters (~2,100 detailed answer
 - **Phase 1: JavaScript** — All 7 levels, 700 detailed answers. ✅
 - **Phase 2: Python** — All 4 levels (Basic, Coding, Advanced, Scenario Based), 400 detailed answers. ✅
 - **Phase 3: Backend Core** — Node.js (4 levels, 400), ExpressJS (3 levels, 300), API (4 levels, 400) = 1,100 detailed answers. ✅
-
-## Current phase
-
-### Phase 4: Frontend (HTML / CSS / React)
-
-Frontend chapters round out the browser-facing half of full-stack interviews. HTML and CSS complete; React next.
-
-- [x] HTML Basic (100 Q, completed 2026-04-20)
-- [x] HTML Coding (100 Q, completed 2026-04-25)
-- [x] HTML Advanced (100 Q, completed 2026-04-26)
-- [x] CSS Basic (102 Q, completed 2026-04-26)
-- [x] CSS Coding (100 Q, completed 2026-04-26)
-- [x] CSS Advanced (101 Q, completed 2026-04-26)
-- [x] **React JS Basic (101 Q)** &mdash; 2026-04-26
-- [x] **React JS Coding (100 Q)** &mdash; 2026-04-27
-- [x] **React JS Advanced (100 Q)** &mdash; 2026-04-27
-- [x] **React JS Scenario Based (100 Q)** &mdash; 2026-04-27 &mdash; **Phase 4 complete (1,004/1,004)**
-
-**Target:** 401 more answers to finish frontend.
-
-## Future phases (in priority order)
-
-### Phase 5: Databases (Part 5)
-MySQL and MongoDB parallel each other nicely — many questions are about analogous concepts in different DB families.
-
-- MYSQL (400 Q):
+- **Phase 4: Frontend** — HTML (3 levels, 300), CSS (3 levels, 303), ReactJS (4 levels, 401) = 1,004 detailed answers. ✅
+- **Phase 5: Databases** — MySQL (4 levels, 400) + MongoDB (4 levels, 400) = 800 detailed answers. ✅
   - [x] **MySQL Basic (100 Q)** &mdash; 2026-04-27
   - [x] **MySQL Coding (100 Q)** &mdash; 2026-04-27
   - [x] **MySQL Advanced (100 Q)** &mdash; 2026-04-27
@@ -41,18 +17,18 @@ MySQL and MongoDB parallel each other nicely — many questions are about analog
   - [x] **MongoDB Basic (100 Q)** &mdash; 2026-04-28
   - [x] **MongoDB Coding (100 Q)** &mdash; 2026-04-28
   - [x] **MongoDB Advanced (100 Q)** &mdash; 2026-04-28
-- MongoDB Scenario Based (100 Q) ← next
+  - [x] **MongoDB Scenario Based (100 Q)** &mdash; 2026-04-29 &mdash; **Phase 5 complete (800/800)**
 
-**Total:** 800 answers.
+## Current phase
 
-### Phase 6: System Design & DevOps (Part 6)
+### Phase 6: System Design & DevOps ← next
 Architectural and infrastructure topics — longest, most essay-like answers.
 
 - System Design MERN Basic, Advanced, Scenario Based (300 Q)
 - Infrastructure MERN Basic, Advanced (200 Q)
 - CI/CD Pipeline Basic, Coding, Advanced, Scenario Based (400 Q)
 
-**Total:** 900 answers.
+**Total:** 900 answers (final phase).
 
 ## Ordering rationale
 
@@ -88,4 +64,4 @@ Every content session should:
 
 ---
 
-**Last updated:** 2026-04-18
+**Last updated:** 2026-04-29
