@@ -17,7 +17,7 @@ No build step, no server, no internet required — it's a fully static site.
 
 ## Progress
 
-**4,004 / 4,904 detailed answers** (~82%) across **40 of 49 chapters**.
+**4,304 / 4,904 detailed answers** (~88%) across **43 of 49 chapters**.
 
 | Part | Topic | Status |
 | --- | --- | --- |
@@ -31,7 +31,8 @@ No build step, no server, no internet required — it's a fully static site.
 | 4 | **ReactJS** (4 levels, 401 Q) | ✅ Complete |
 | 5 | **MySQL** (4 levels, 400 Q) | ✅ Complete |
 | 5 | **MongoDB** (4 levels, 400 Q) | ✅ Complete |
-| 6 | System Design, Infrastructure, CI/CD (9 levels, 900 Q) | 📋 Stubs |
+| 6 | **System Design MERN** (3 levels, 300 Q) | ✅ Complete |
+| 6 | Infrastructure MERN, CI/CD (6 levels, 600 Q) | 📋 Stubs |
 
 Stub chapters show every question with a "detailed answer coming soon" message, but the question list itself is complete and usable as a study checklist.
 
@@ -70,7 +71,10 @@ interview-prep-handbook/
 │   ├── api_*.py                (4 files, 400 answers)
 │   ├── reactjs_*.py            (4 files, 401 answers)
 │   ├── mysql_*.py              (4 files, 400 answers)
-│   └── mongodb_*.py            (4 files, 400 answers)
+│   ├── mongodb_*.py            (4 files, 400 answers)
+│   ├── system_design_mern_basic.py     (1 file, 100 answers)
+│   ├── system_design_mern_advanced.py  (1 file, 100 answers)
+│   └── system_design_mern_scenario.py  (1 file, 100 answers)
 ├── data/
 │   └── questions.json          ← all 4,904 parsed questions
 ├── docs/                       ← project documentation

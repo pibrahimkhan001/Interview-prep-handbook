@@ -1,118 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>System Design MERN Stack — Basic · Interview Prep Mastery</title>
-<meta name="description" content="100 basic interview questions on System Design MERN Stack, with detailed explanations and examples.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="../assets/styles.css">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%239a6b1d'/%3E%3Ctext x='50' y='68' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold' font-size='48'%3EIP%3C/text%3E%3C/svg%3E">
-</head>
-<body>
-<header class="site-header">
-  <div class="site-header__inner">
-    <button class="menu-toggle" aria-label="Open menu" type="button">☰ Menu</button>
-    <a class="brand" href="../index.html">
-      <span class="brand__mark">IP</span>
-      <span class="brand__text">
-        <span class="brand__title">Interview Prep Mastery</span>
-        <span class="brand__subtitle">Interactive learning guide</span>
-      </span>
-    </a>
-    <nav class="header-nav">
-      <a href="../index.html#roadmap">Roadmap</a>
-      <a href="../index.html#chapters">All chapters</a>
-      <button class="theme-toggle" type="button" aria-label="Toggle color scheme">☾ Dark</button>
-    </nav>
-  </div>
-</header>
-<div class="layout">
-<aside class="sidebar" aria-label="Site navigation">
-  <div class="sidebar__header">Chapter Navigator</div>
-  
-        <div class="nav-part">
-          <div class="nav-part__label">Part 1</div>
-          <div class="nav-part__title">Core Programming Languages</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">JavaScript</li><li><a class="" href="../chapters/javascript-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/javascript-tricky.html"><span class="nav-item__title">Tricky</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-coding.html"><span class="nav-item__title">Advanced Coding</span><span class="nav-item__meta">100 questions · 100 min read</span></a></li><li><a class="" href="../chapters/javascript-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-scenario.html"><span class="nav-item__title">Advanced Scenario Based</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Python</li><li><a class="" href="../chapters/python-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/python-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 2</div>
-          <div class="nav-part__title">Web Fundamentals</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">HTML</li><li><a class="" href="../chapters/html-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/html-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/html-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CSS</li><li><a class="" href="../chapters/css-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">102 questions · 60 min read</span></a></li><li><a class="" href="../chapters/css-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/css-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">101 questions · 90 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 3</div>
-          <div class="nav-part__title">Backend Technologies</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Node.Js</li><li><a class="" href="../chapters/nodejs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/nodejs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ExpressJS</li><li><a class="" href="../chapters/expressjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/expressjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/expressjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">API</li><li><a class="" href="../chapters/api-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/api-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 4</div>
-          <div class="nav-part__title">Frontend Frameworks</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ReactJS</li><li><a class="" href="../chapters/reactjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">101 questions · 60 min read</span></a></li><li><a class="" href="../chapters/reactjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 5</div>
-          <div class="nav-part__title">Databases</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MYSQL</li><li><a class="" href="../chapters/mysql-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mysql-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MongoDB</li><li><a class="" href="../chapters/mongodb-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mongodb-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 6</div>
-          <div class="nav-part__title">System Design &amp; DevOps</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">System Design MERN Stack</li><li><a class="active" href="../chapters/system-design-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Infrastructure MERN Stack</li><li><a class="" href="../chapters/infrastructure-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/infrastructure-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CI/CD Pipeline</li><li><a class="" href="../chapters/cicd-pipeline-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-</aside>
-<main class="main" id="main">
+"""Detailed answers for System Design MERN Stack Basic interview questions.
 
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="../index.html">Home</a>
-    <span class="breadcrumb__sep">›</span>
-    <a href="../index.html#part-6">System Design &amp; DevOps</a>
-    <span class="breadcrumb__sep">›</span>
-    <span>System Design MERN Stack — Basic</span>
-  </nav>
+Style: ~80-150 words concise prose with one focused code snippet, ~1,400-1,500 chars.
+Architectural-leaning Basic answers that weave the four MERN technologies together.
+"""
 
-  <header class="chapter-header">
-    <div class="chapter-label">System Design MERN Stack · Basic</div>
-    <h1 class="chapter-title">Basic System Design MERN Stack Interview Questions</h1>
-    <p class="chapter-lede">Foundational knowledge — definitions, syntax, and core mechanics every beginner should know.</p>
-    <div class="chapter-meta">
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Questions</span><span class="chapter-meta__value">100</span></div>
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Level</span><span class="chapter-meta__value">Basic</span></div>
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Estimated reading</span><span class="chapter-meta__value">60 min read</span></div>
-    </div>
-    
-  </header>
+ANSWERS: dict[int, str] = {}
 
-  <section class="prose">
 
-    <div class="toc" id="toc">
-      <div class="toc__title">All questions in this chapter</div>
-      <ul class="toc__list">
-        <li><a href="#q1"><span class="toc__num">1.</span>What is the MERN stack, and what are its components?</a></li><li><a href="#q2"><span class="toc__num">2.</span>How do you set up a basic MERN stack application?</a></li><li><a href="#q3"><span class="toc__num">3.</span>What are the advantages of using the MERN stack for web development?</a></li><li><a href="#q4"><span class="toc__num">4.</span>How do you structure a MERN stack project?</a></li><li><a href="#q5"><span class="toc__num">5.</span>How do you connect a Node.js application to a MongoDB database?</a></li><li><a href="#q6"><span class="toc__num">6.</span>What is the role of Express in the MERN stack?</a></li><li><a href="#q7"><span class="toc__num">7.</span>How do you create RESTful APIs using Express in a MERN stack application?</a></li><li><a href="#q8"><span class="toc__num">8.</span>How do you handle routing in a React application?</a></li><li><a href="#q9"><span class="toc__num">9.</span>How do you manage state in a React application?</a></li><li><a href="#q10"><span class="toc__num">10.</span>What is the role of MongoDB in the MERN stack?</a></li><li><a href="#q11"><span class="toc__num">11.</span>How do you perform CRUD operations in MongoDB using Mongoose?</a></li><li><a href="#q12"><span class="toc__num">12.</span>How do you deploy a MERN stack application to a cloud provider like Heroku?</a></li><li><a href="#q13"><span class="toc__num">13.</span>How do you handle authentication in a MERN stack application?</a></li><li><a href="#q14"><span class="toc__num">14.</span>How do you implement user registration and login in a MERN stack application?</a></li><li><a href="#q15"><span class="toc__num">15.</span>How do you protect routes in a React application?</a></li><li><a href="#q16"><span class="toc__num">16.</span>How do you handle form validation in a MERN stack application?</a></li><li><a href="#q17"><span class="toc__num">17.</span>How do you use Redux for state management in a React application?</a></li><li><a href="#q18"><span class="toc__num">18.</span>How do you integrate third-party APIs in a MERN stack application?</a></li><li><a href="#q19"><span class="toc__num">19.</span>How do you handle file uploads in a MERN stack application?</a></li><li><a href="#q20"><span class="toc__num">20.</span>How do you create a scalable backend using Node.js and Express?</a></li><li><a href="#q21"><span class="toc__num">21.</span>How do you secure a MERN stack application?</a></li><li><a href="#q22"><span class="toc__num">22.</span>How do you handle errors in a MERN stack application?</a></li><li><a href="#q23"><span class="toc__num">23.</span>How do you implement pagination in a MERN stack application?</a></li><li><a href="#q24"><span class="toc__num">24.</span>How do you use environment variables in a MERN stack application?</a></li><li><a href="#q25"><span class="toc__num">25.</span>How do you handle asynchronous operations in Node.js?</a></li><li><a href="#q26"><span class="toc__num">26.</span>How do you use WebSockets in a MERN stack application for real-time updates?</a></li><li><a href="#q27"><span class="toc__num">27.</span>How do you implement server-side rendering in a MERN stack application?</a></li><li><a href="#q28"><span class="toc__num">28.</span>How do you optimize the performance of a MERN stack application?</a></li><li><a href="#q29"><span class="toc__num">29.</span>How do you manage dependencies in a MERN stack application?</a></li><li><a href="#q30"><span class="toc__num">30.</span>How do you handle CORS in a MERN stack application?</a></li><li><a href="#q31"><span class="toc__num">31.</span>How do you use the context API in a React application?</a></li><li><a href="#q32"><span class="toc__num">32.</span>How do you handle state lifting in a React application?</a></li><li><a href="#q33"><span class="toc__num">33.</span>How do you use hooks in a React application?</a></li><li><a href="#q34"><span class="toc__num">34.</span>How do you test a MERN stack application?</a></li><li><a href="#q35"><span class="toc__num">35.</span>How do you handle session management in a MERN stack application?</a></li><li><a href="#q36"><span class="toc__num">36.</span>How do you use JWT for authentication in a MERN stack application?</a></li><li><a href="#q37"><span class="toc__num">37.</span>How do you implement role-based access control in a MERN stack application?</a></li><li><a href="#q38"><span class="toc__num">38.</span>How do you create a RESTful API with Express and MongoDB?</a></li><li><a href="#q39"><span class="toc__num">39.</span>How do you handle database migrations in MongoDB?</a></li><li><a href="#q40"><span class="toc__num">40.</span>How do you use CSS-in-JS libraries like styled-components in a React application?</a></li><li><a href="#q41"><span class="toc__num">41.</span>How do you manage form state in a React application?</a></li><li><a href="#q42"><span class="toc__num">42.</span>How do you handle conditional rendering in React?</a></li><li><a href="#q43"><span class="toc__num">43.</span>How do you implement a search feature in a MERN stack application?</a></li><li><a href="#q44"><span class="toc__num">44.</span>How do you use the fetch API or Axios to make HTTP requests in React?</a></li><li><a href="#q45"><span class="toc__num">45.</span>How do you handle nested routes in a React application?</a></li><li><a href="#q46"><span class="toc__num">46.</span>How do you implement a loading spinner in a React application?</a></li><li><a href="#q47"><span class="toc__num">47.</span>How do you handle scroll events in a React application?</a></li><li><a href="#q48"><span class="toc__num">48.</span>How do you use MongoDB aggregation framework?</a></li><li><a href="#q49"><span class="toc__num">49.</span>How do you create a custom hook in React?</a></li><li><a href="#q50"><span class="toc__num">50.</span>How do you manage component lifecycle in React using hooks?</a></li><li><a href="#q51"><span class="toc__num">51.</span>How do you implement a dark mode toggle in a React application?</a></li><li><a href="#q52"><span class="toc__num">52.</span>How do you handle large data sets in a MERN stack application?</a></li><li><a href="#q53"><span class="toc__num">53.</span>How do you use socket.io for real-time communication in a MERN stack application?</a></li><li><a href="#q54"><span class="toc__num">54.</span>How do you implement a notification system in a MERN stack application?</a></li><li><a href="#q55"><span class="toc__num">55.</span>How do you handle optimistic UI updates in a React application?</a></li><li><a href="#q56"><span class="toc__num">56.</span>How do you use service workers in a MERN stack application?</a></li><li><a href="#q57"><span class="toc__num">57.</span>How do you implement data caching in a MERN stack application?</a></li><li><a href="#q58"><span class="toc__num">58.</span>How do you handle image uploads and storage in a MERN stack application?</a></li><li><a href="#q59"><span class="toc__num">59.</span>How do you create a multi-step form in a React application?</a></li><li><a href="#q60"><span class="toc__num">60.</span>How do you implement a chat application using the MERN stack?</a></li><li><a href="#q61"><span class="toc__num">61.</span>How do you handle long-running tasks in a Node.js application?</a></li><li><a href="#q62"><span class="toc__num">62.</span>How do you implement a rating system in a MERN stack application?</a></li><li><a href="#q63"><span class="toc__num">63.</span>How do you manage file downloads in a MERN stack application?</a></li><li><a href="#q64"><span class="toc__num">64.</span>How do you use GraphQL with the MERN stack?</a></li><li><a href="#q65"><span class="toc__num">65.</span>How do you handle time zones in a MERN stack application?</a></li><li><a href="#q66"><span class="toc__num">66.</span>How do you implement a comment system in a MERN stack application?</a></li><li><a href="#q67"><span class="toc__num">67.</span>How do you create a dashboard with charts and graphs in a MERN stack application?</a></li><li><a href="#q68"><span class="toc__num">68.</span>How do you handle internationalization (i18n) in a MERN stack application?</a></li><li><a href="#q69"><span class="toc__num">69.</span>How do you use React context for theme management?</a></li><li><a href="#q70"><span class="toc__num">70.</span>How do you implement infinite scrolling in a React application?</a></li><li><a href="#q71"><span class="toc__num">71.</span>How do you handle dates and times in a MERN stack application?</a></li><li><a href="#q72"><span class="toc__num">72.</span>How do you create a responsive design in a React application?</a></li><li><a href="#q73"><span class="toc__num">73.</span>How do you manage secrets and configurations in a MERN stack application?</a></li><li><a href="#q74"><span class="toc__num">74.</span>How do you implement social login (OAuth) in a MERN stack application?</a></li><li><a href="#q75"><span class="toc__num">75.</span>How do you handle accessibility in a React application?</a></li><li><a href="#q76"><span class="toc__num">76.</span>How do you implement a tagging system in a MERN stack application?</a></li><li><a href="#q77"><span class="toc__num">77.</span>How do you create a progressive web app (PWA) with the MERN stack?</a></li><li><a href="#q78"><span class="toc__num">78.</span>How do you handle file encryption in a MERN stack application?</a></li><li><a href="#q79"><span class="toc__num">79.</span>How do you implement a wishlist feature in a MERN stack application?</a></li><li><a href="#q80"><span class="toc__num">80.</span>How do you handle data validation in a MERN stack application?</a></li><li><a href="#q81"><span class="toc__num">81.</span>How do you manage user profiles and settings in a MERN stack application?</a></li><li><a href="#q82"><span class="toc__num">82.</span>How do you implement a search engine optimization (SEO) strategy in a MERN stack applic...</a></li><li><a href="#q83"><span class="toc__num">83.</span>How do you handle large file uploads in a MERN stack application?</a></li><li><a href="#q84"><span class="toc__num">84.</span>How do you create a custom middleware in Express?</a></li><li><a href="#q85"><span class="toc__num">85.</span>How do you manage application state in a large React application?</a></li><li><a href="#q86"><span class="toc__num">86.</span>How do you implement a custom error handler in Express?</a></li><li><a href="#q87"><span class="toc__num">87.</span>How do you handle rate limiting in a MERN stack application?</a></li><li><a href="#q88"><span class="toc__num">88.</span>How do you create a custom hook for data fetching in React?</a></li><li><a href="#q89"><span class="toc__num">89.</span>How do you implement two-factor authentication in a MERN stack application?</a></li><li><a href="#q90"><span class="toc__num">90.</span>How do you handle session expiration in a MERN stack application?</a></li><li><a href="#q91"><span class="toc__num">91.</span>How do you create a task scheduler in a Node.js application?</a></li><li><a href="#q92"><span class="toc__num">92.</span>How do you implement data export to CSV or Excel in a MERN stack application?</a></li><li><a href="#q93"><span class="toc__num">93.</span>How do you handle multipart/form-data in a MERN stack application?</a></li><li><a href="#q94"><span class="toc__num">94.</span>How do you create a dynamic form builder in a React application?</a></li><li><a href="#q95"><span class="toc__num">95.</span>How do you handle optimistic concurrency in MongoDB?</a></li><li><a href="#q96"><span class="toc__num">96.</span>How do you implement a recommendation system in a MERN stack application?</a></li><li><a href="#q97"><span class="toc__num">97.</span>How do you manage API versioning in a MERN stack application?</a></li><li><a href="#q98"><span class="toc__num">98.</span>How do you handle client-side routing in a React application?</a></li><li><a href="#q99"><span class="toc__num">99.</span>How do you implement a breadcrumb navigation in a React application?</a></li><li><a href="#q100"><span class="toc__num">100.</span>How do you create a scalable folder structure for a MERN stack project?</a></li>
-      </ul>
-    </div>
-
-    
-<article class="qa" id="q1">
-  <div class="qa__number">Question 1</div>
-  <h3 class="qa__question">What is the MERN stack, and what are its components?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[1] = r'''
 <p>The <strong>MERN stack</strong> is a JavaScript-based set of four technologies used together to build full-stack web applications &mdash; everything from the database to the browser is written in JavaScript, which is the main reason the stack is popular.</p>
 
 <p>The four letters stand for:</p>
@@ -127,15 +22,9 @@
 <p>A typical request flows like this: the React app in the browser calls an HTTP API; Express (running on Node.js) handles the request; Node talks to MongoDB to read or write data; the response goes back to React, which updates the UI.</p>
 
 <p>The big win is one language end-to-end &mdash; the same developer can read all four layers without switching mental contexts. Adjacent stacks include <strong>MEAN</strong> (Angular instead of React) and <strong>MEVN</strong> (Vue instead of React).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q2">
-  <div class="qa__number">Question 2</div>
-  <h3 class="qa__question">How do you set up a basic MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[2] = r'''
 <p>Setting up a basic MERN application is two halves: a backend server and a frontend app, each in its own folder.</p>
 
 <pre><code># Project layout
@@ -169,15 +58,9 @@ cd client &amp;&amp; npm install
 npm run dev    # http://localhost:5173</code></pre>
 
 <p>In development the React app runs on port 5173 and the API on 4000; CORS or a Vite proxy connects them. In production both are deployed together &mdash; either as separate services or with the React build served as static files by Express.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q3">
-  <div class="qa__number">Question 3</div>
-  <h3 class="qa__question">What are the advantages of using the MERN stack for web development?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[3] = r'''
 <p>The MERN stack&rsquo;s big selling points come from being all-JavaScript and using mature, widely-deployed open-source pieces.</p>
 
 <ul>
@@ -191,15 +74,9 @@ npm run dev    # http://localhost:5173</code></pre>
 </ul>
 
 <p>It&rsquo;s not perfect &mdash; SEO needs server-side rendering (Next.js), and CPU-heavy tasks fit Go/Rust better &mdash; but for typical CRUD-style web apps it&rsquo;s a great default.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q4">
-  <div class="qa__number">Question 4</div>
-  <h3 class="qa__question">How do you structure a MERN stack project?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[4] = r'''
 <p>Most teams use a <strong>monorepo with two top-level folders</strong> &mdash; one for the API server, one for the React client &mdash; with a shared <code>package.json</code> at the root if you want one-command dev startup.</p>
 
 <pre><code>my-app/
@@ -228,15 +105,9 @@ npm run dev    # http://localhost:5173</code></pre>
 <p>The key idea is <strong>separation of concerns within each side</strong>: routes only handle HTTP, controllers call services, services call models, models define the schema. On the React side, components stay presentational while hooks own data-fetching logic.</p>
 
 <p>For larger apps, <strong>npm/pnpm/yarn workspaces</strong> turn this into a proper monorepo so client and server can share TypeScript types from <code>shared/</code>. <strong>Turborepo</strong> or <strong>Nx</strong> make builds fast.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q5">
-  <div class="qa__number">Question 5</div>
-  <h3 class="qa__question">How do you connect a Node.js application to a MongoDB database?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[5] = r'''
 <p>Connect Node.js to MongoDB using the official <strong>MongoDB driver</strong> for low-level work, or <strong>Mongoose</strong> (an ODM &mdash; Object Data Modeler) for schema-validated convenience. Mongoose is the default choice in MERN stacks.</p>
 
 <pre><code>// server/src/db.js
@@ -265,15 +136,9 @@ app.listen(4000)</code></pre>
 <p>The <strong>connection string</strong> follows the format <code>mongodb+srv://&lt;user&gt;:&lt;pass&gt;@&lt;host&gt;/&lt;db&gt;</code> for managed Atlas clusters, or <code>mongodb://localhost:27017/myapp</code> for local dev. Always store it in a <code>.env</code> file (loaded with <strong>dotenv</strong>) and add <code>.env</code> to <code>.gitignore</code>.</p>
 
 <p>For production, set up a connection pool (the driver does this automatically; default size is 100), enable <strong>retryWrites</strong>, and listen for connection events to log disconnects.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q6">
-  <div class="qa__number">Question 6</div>
-  <h3 class="qa__question">What is the role of Express in the MERN stack?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[6] = r'''
 <p><strong>Express</strong> is the &ldquo;E&rdquo; in MERN &mdash; a minimalist web framework that runs on Node.js and provides three things: <strong>routing</strong>, <strong>middleware</strong>, and a clean way to build <strong>HTTP APIs</strong>.</p>
 
 <ul>
@@ -298,15 +163,9 @@ app.get("/api/users/:id", async (req, res) =&gt; {
 app.listen(4000)</code></pre>
 
 <p>Express is intentionally unopinionated &mdash; it doesn&rsquo;t pick your database or auth library, leaving those decisions to you. Modern alternatives in the Node ecosystem include <strong>Fastify</strong> (faster), <strong>NestJS</strong> (opinionated, TypeScript-first), <strong>Hono</strong>, and <strong>Elysia</strong>, but Express remains the most common in MERN apps.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q7">
-  <div class="qa__number">Question 7</div>
-  <h3 class="qa__question">How do you create RESTful APIs using Express in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[7] = r'''
 <p>A RESTful API in Express follows the convention that URLs name <strong>resources</strong> (nouns) and HTTP methods name <strong>actions</strong> (verbs). Express <strong>routers</strong> group related routes into modules.</p>
 
 <pre><code>// server/src/routes/users.js
@@ -335,15 +194,9 @@ import usersRouter from "./routes/users.js"
 app.use("/api/users", usersRouter)</code></pre>
 
 <p>Status codes matter: <strong>200</strong> OK, <strong>201</strong> Created, <strong>204</strong> No Content (for deletes), <strong>400</strong> Bad Request, <strong>401</strong> Unauthorized, <strong>404</strong> Not Found, <strong>500</strong> Server Error. Always return JSON with consistent error shapes (<code>{ error: &quot;message&quot; }</code>) so the React client can handle them generically.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q8">
-  <div class="qa__number">Question 8</div>
-  <h3 class="qa__question">How do you handle routing in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[8] = r'''
 <p>Routing in React turns URL paths into rendered components &mdash; what shows on the page when the user visits <code>/about</code> versus <code>/users/42</code>. The standard library is <strong>React Router</strong> (currently v6/v7); newer apps often use <strong>Next.js</strong> or <strong>TanStack Router</strong> instead, but React Router is the MERN default.</p>
 
 <pre><code>// client/src/main.jsx
@@ -371,15 +224,9 @@ import { useParams } from "react-router-dom"
 const { id } = useParams()    // matches :id from the URL</code></pre>
 
 <p>It&rsquo;s <strong>client-side routing</strong>: React intercepts navigation, updates the URL via <code>history.pushState</code>, and swaps components without a full page reload &mdash; that&rsquo;s what makes single-page apps feel instant. For SEO and faster first paint, <strong>Next.js</strong> adds server-side rendering on top of the same idea.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q9">
-  <div class="qa__number">Question 9</div>
-  <h3 class="qa__question">How do you manage state in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[9] = r'''
 <p>State in React is data that, when it changes, causes the UI to re-render. There&rsquo;s a ladder of options &mdash; pick the simplest one that solves your problem.</p>
 
 <ul>
@@ -401,15 +248,9 @@ const { data, isLoading } = useQuery({
 })</code></pre>
 
 <p>The most common mistake is reaching for Redux or Zustand too early. Modern advice: separate <strong>server state</strong> (use TanStack Query) from <strong>client state</strong> (use Zustand or Context); most apps need very little of the latter.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q10">
-  <div class="qa__number">Question 10</div>
-  <h3 class="qa__question">What is the role of MongoDB in the MERN stack?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[10] = r'''
 <p><strong>MongoDB</strong> is the persistent storage layer of the MERN stack &mdash; a document database that stores JSON-like records called <em>documents</em> grouped into <em>collections</em>. Its role is to remember things between requests: users, posts, orders, anything the app needs to outlive a single page load.</p>
 
 <p>It fits the MERN philosophy because documents map naturally to JavaScript objects:</p>
@@ -430,15 +271,9 @@ const { data, isLoading } = useQuery({
 </ul>
 
 <p>For most CRUD apps it&rsquo;s a fine default; relational data with heavy joins still fits SQL better.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q11">
-  <div class="qa__number">Question 11</div>
-  <h3 class="qa__question">How do you perform CRUD operations in MongoDB using Mongoose?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[11] = r'''
 <p><strong>Mongoose</strong> wraps the MongoDB driver with schema validation and ergonomic methods. CRUD becomes four method families on the model: <code>create</code>, <code>find</code>, <code>updateOne</code>/<code>findOneAndUpdate</code>, and <code>deleteOne</code>.</p>
 
 <pre><code>import mongoose from "mongoose"
@@ -468,15 +303,9 @@ await User.deleteOne({ _id: id })
 const removed = await User.findByIdAndDelete(id)</code></pre>
 
 <p>Notes for production: always handle errors with <code>try/catch</code> in async handlers, use <code>{ new: true }</code> on update methods to get the updated document back, and prefer <code>findByIdAndUpdate</code> over <code>findById</code>+<code>save</code> to avoid race conditions. Newer alternatives include <strong>Prisma</strong> with the MongoDB connector and <strong>Drizzle</strong>, but Mongoose is the MERN default.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q12">
-  <div class="qa__number">Question 12</div>
-  <h3 class="qa__question">How do you deploy a MERN stack application to a cloud provider like Heroku?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[12] = r'''
 <p>Heroku used to be the default but is now <strong>more expensive than the alternatives</strong>; modern equivalents include <strong>Render</strong>, <strong>Railway</strong>, <strong>Fly.io</strong>, <strong>Vercel</strong> (best for the React side), and <strong>AWS Elastic Beanstalk</strong>/<strong>App Runner</strong>. The shape of the deploy is the same everywhere.</p>
 
 <p>Steps for a typical platform-as-a-service deploy:</p>
@@ -494,15 +323,9 @@ heroku config:set MONGO_URI=...              # set environment variables
 git push heroku main                          # platform builds and deploys</code></pre>
 
 <p>Set <strong>environment variables</strong> in the platform UI (never commit them); enable <strong>auto-deploy from GitHub</strong> for continuous deployment; add a <strong>health-check endpoint</strong> at <code>/api/health</code> for the platform to monitor.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q13">
-  <div class="qa__number">Question 13</div>
-  <h3 class="qa__question">How do you handle authentication in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[13] = r'''
 <p>Authentication in a MERN app means proving who is making each request. The two common patterns are <strong>JWT (JSON Web Tokens)</strong> for stateless APIs and <strong>session cookies</strong> for traditional apps; modern teams often outsource the whole thing to <strong>Auth0</strong>, <strong>Clerk</strong>, <strong>WorkOS</strong>, <strong>Supabase Auth</strong>, or <strong>Stack Auth</strong>.</p>
 
 <p>The simple JWT flow:</p>
@@ -532,15 +355,9 @@ function auth(req, res, next) {
 app.get("/api/me", auth, (req, res) =&gt; res.json(req.user))</code></pre>
 
 <p>Production essentials: <strong>never store passwords in plain text</strong>, use <strong>bcrypt</strong> or <strong>argon2</strong> with a cost of at least 10, keep tokens short-lived (15min) and pair them with <strong>refresh tokens</strong>, and serve the API over HTTPS only.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q14">
-  <div class="qa__number">Question 14</div>
-  <h3 class="qa__question">How do you implement user registration and login in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[14] = r'''
 <p>Registration creates a user with a securely-hashed password; login verifies credentials and issues a token or session.</p>
 
 <pre><code>// server/src/routes/auth.js
@@ -569,15 +386,9 @@ router.post("/login", async (req, res) =&gt; {
 })</code></pre>
 
 <p>On the React side, store the token (in <strong>memory</strong> or an <strong>httpOnly cookie</strong> &mdash; never <code>localStorage</code>, which is XSS-vulnerable), include it on every request, and redirect to login when a 401 comes back. Validate inputs with <strong>Zod</strong> or <strong>Joi</strong>; rate-limit login attempts with <strong>express-rate-limit</strong> to deter brute-force; consider a hosted solution like <strong>Clerk</strong>/<strong>Auth0</strong> if you don&rsquo;t want to maintain this yourself.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q15">
-  <div class="qa__number">Question 15</div>
-  <h3 class="qa__question">How do you protect routes in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[15] = r'''
 <p>Protecting routes in React means redirecting unauthenticated users away from pages that need a login. The common pattern is a <code>&lt;ProtectedRoute&gt;</code> wrapper component that checks an auth context and either renders the child or redirects.</p>
 
 <pre><code>// client/src/auth/ProtectedRoute.jsx
@@ -604,15 +415,9 @@ export function ProtectedRoute({ children }) {
 <p>For role-based protection, accept a <code>roles</code> prop and check <code>user.role</code> too. After login, use <code>navigate(location.state?.from || &quot;/&quot;)</code> to send the user back to where they tried to go.</p>
 
 <p>Important: <strong>this is a UX guard, not a security boundary</strong>. The real check happens on the server &mdash; the <code>auth</code> middleware on Express must reject any unauthenticated request to <code>/api/*</code>. Hiding a button on the client doesn&rsquo;t stop someone from calling <code>fetch(&quot;/api/admin/delete&quot;)</code> directly.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q16">
-  <div class="qa__number">Question 16</div>
-  <h3 class="qa__question">How do you handle form validation in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[16] = r'''
 <p>Form validation belongs <strong>on both sides</strong>: client-side for instant feedback, server-side for security. Never trust the client &mdash; anyone can <code>curl</code> your API.</p>
 
 <p>On the React side, the modern combo is <strong>React Hook Form</strong> + <strong>Zod</strong>:</p>
@@ -649,15 +454,9 @@ function LoginForm() {
 })</code></pre>
 
 <p>Mongoose schemas add a third layer at the database level. Other popular validators include <strong>Yup</strong>, <strong>Joi</strong>, and <strong>Valibot</strong>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q17">
-  <div class="qa__number">Question 17</div>
-  <h3 class="qa__question">How do you use Redux for state management in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[17] = r'''
 <p><strong>Redux</strong> is a predictable state container &mdash; one big object holds all client state, and you change it only by dispatching <em>actions</em> through pure <em>reducer</em> functions. The modern way to use Redux is <strong>Redux Toolkit (RTK)</strong>, which removes most of the boilerplate.</p>
 
 <pre><code>// store/cartSlice.js
@@ -690,15 +489,9 @@ const dispatch = useDispatch()
 dispatch(add({ id: 1, name: "Book" }))</code></pre>
 
 <p>Redux is great for complex client state with many writers (cart, undo/redo, multi-step forms). For simpler apps, <strong>Zustand</strong> or <strong>Jotai</strong> are lighter alternatives. For server data, use <strong>RTK Query</strong> or <strong>TanStack Query</strong> &mdash; don&rsquo;t reinvent caching in Redux.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q18">
-  <div class="qa__number">Question 18</div>
-  <h3 class="qa__question">How do you integrate third-party APIs in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[18] = r'''
 <p>Third-party APIs (Stripe, Mapbox, OpenAI, SendGrid) are best called from the <strong>server side</strong> when secrets are involved &mdash; the API key never touches the browser &mdash; and from the client when the request is purely public.</p>
 
 <pre><code>// server/src/routes/payment.js &mdash; secret-bearing
@@ -720,15 +513,9 @@ const { url } = await fetch("/api/checkout", { method: "POST", ... }).then(r =&g
 window.location = url</code></pre>
 
 <p>Best practices: keep secrets in environment variables, never in client code or git; <strong>cache responses</strong> when the data is shared across users (Redis, in-memory LRU); handle <strong>rate limits</strong> with retry-with-backoff via <strong>p-retry</strong>; for <strong>webhooks</strong> (Stripe events, GitHub events), verify the signature header before trusting the payload; use <strong>circuit breakers</strong> like <strong>opossum</strong> for resilience when the third-party is down.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q19">
-  <div class="qa__number">Question 19</div>
-  <h3 class="qa__question">How do you handle file uploads in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[19] = r'''
 <p>File uploads in MERN: the browser sends a <code>multipart/form-data</code> request, Express parses it with <strong>multer</strong>, and the file goes either to the local filesystem or to object storage (<strong>S3</strong>, <strong>R2</strong>, <strong>Cloudinary</strong>). For production, always use object storage &mdash; the local disk is ephemeral on most platforms.</p>
 
 <pre><code>// server &mdash; multer + S3 (recommended)
@@ -756,15 +543,9 @@ fd.append("file", fileInput.files[0])
 fetch("/api/upload", { method: "POST", body: fd })</code></pre>
 
 <p>For large files, use <strong>presigned URLs</strong> so the browser uploads directly to S3 (bytes never traverse your server). For images, <strong>Cloudinary</strong> and <strong>imgix</strong> handle resizing, format conversion, and CDN delivery automatically.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q20">
-  <div class="qa__number">Question 20</div>
-  <h3 class="qa__question">How do you create a scalable backend using Node.js and Express?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[20] = r'''
 <p>A scalable Node/Express backend means serving more users without slowing down or falling over. The principles are stateless servers, async I/O, smart caching, and horizontal scaling.</p>
 
 <ul>
@@ -781,15 +562,9 @@ fetch("/api/upload", { method: "POST", body: fd })</code></pre>
 app.get("/health", (req, res) =&gt; res.json({ ok: true, uptime: process.uptime() }))</code></pre>
 
 <p>Finally, prefer modern frameworks (<strong>Fastify</strong>, <strong>NestJS</strong>, <strong>Hono</strong>) for new projects &mdash; they&rsquo;re measurably faster than Express.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q21">
-  <div class="qa__number">Question 21</div>
-  <h3 class="qa__question">How do you secure a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[21] = r'''
 <p>Securing a MERN app is layered &mdash; no single setting makes you safe.</p>
 
 <ul>
@@ -808,15 +583,9 @@ app.get("/health", (req, res) =&gt; res.json({ ok: true, uptime: process.uptime(
 </ul>
 
 <p>Run <strong>OWASP ZAP</strong> or <strong>Snyk</strong> against your app before launch; commission a pentest for anything that handles money or PII.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q22">
-  <div class="qa__number">Question 22</div>
-  <h3 class="qa__question">How do you handle errors in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[22] = r'''
 <p>Error handling in a MERN stack happens at four layers: client UI, server middleware, async operations, and the database.</p>
 
 <pre><code>// server &mdash; central error middleware (last in the chain)
@@ -844,15 +613,9 @@ if (isLoading) return &lt;Spinner /&gt;
 if (error)     return &lt;ErrorMessage error={error} /&gt;</code></pre>
 
 <p>Send unexpected errors to <strong>Sentry</strong>, <strong>Datadog</strong>, or <strong>Honeybadger</strong> so you find out about production issues without waiting for users to report them. Always return JSON error shapes from the API so the client can render them generically.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q23">
-  <div class="qa__number">Question 23</div>
-  <h3 class="qa__question">How do you implement pagination in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[23] = r'''
 <p>Pagination breaks a long list into chunks. Two flavors are common: <strong>offset pagination</strong> (page numbers, simple) and <strong>cursor pagination</strong> (scrolls and feeds, scales).</p>
 
 <pre><code>// Offset (simple, fine for small datasets &amp; admin tables)
@@ -881,15 +644,9 @@ router.get("/posts", async (req, res) =&gt; {
 <p>Skip with a large offset (<code>skip: 50_000</code>) is slow because Mongo has to scan past every skipped doc. Cursor pagination scales because the database uses an index on <code>createdAt</code> directly.</p>
 
 <p>On the React side, <strong>TanStack Query&rsquo;s <code>useInfiniteQuery</code></strong> handles the cursor flow elegantly &mdash; it tracks <code>nextCursor</code>, fetches the next page, and concatenates results.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q24">
-  <div class="qa__number">Question 24</div>
-  <h3 class="qa__question">How do you use environment variables in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[24] = r'''
 <p>Environment variables keep configuration out of source code. Different environments (dev, staging, prod) get different values for the same variable name &mdash; database URLs, API keys, secret signing keys.</p>
 
 <pre><code># .env (in project root, NEVER committed)
@@ -922,15 +679,9 @@ import.meta.env.VITE_API_URL    // OK
 import.meta.env.SECRET           // undefined &mdash; secrets stay server-side</code></pre>
 
 <p>Production tips: validate required env vars at startup with <strong>Zod</strong> or <strong>envalid</strong> so misconfiguration crashes immediately rather than mysteriously failing later. Use <strong>Doppler</strong>, <strong>1Password Secrets</strong>, <strong>AWS Secrets Manager</strong>, or platform-native secret managers (Vercel, Render, Fly.io) for production secrets &mdash; never put real secrets in <code>.env</code> on a server.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q25">
-  <div class="qa__number">Question 25</div>
-  <h3 class="qa__question">How do you handle asynchronous operations in Node.js?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[25] = r'''
 <p>Node.js is single-threaded, so async I/O is the only way to keep the server responsive while waiting for the database or network. Three styles exist; <strong>async/await</strong> is the modern standard.</p>
 
 <pre><code>// 1. Callbacks (legacy)
@@ -964,15 +715,9 @@ const [user, posts] = await Promise.all([
 const results = await Promise.allSettled([fetchA(), fetchB(), fetchC()])</code></pre>
 
 <p>Common pitfalls: forgetting <code>await</code> (the function returns a Promise that nobody handles), unhandled rejections (always have a top-level <code>process.on(&quot;unhandledRejection&quot;, ...)</code> handler), and serial loops where parallel would do (use <code>Promise.all</code> instead of <code>for...await</code>). For CPU-heavy work, offload to <strong>worker_threads</strong>, <strong>Piscina</strong>, or a job queue &mdash; async only helps with I/O.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q26">
-  <div class="qa__number">Question 26</div>
-  <h3 class="qa__question">How do you use WebSockets in a MERN stack application for real-time updates?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[26] = r'''
 <p><strong>WebSockets</strong> open a persistent two-way channel between browser and server &mdash; perfect for live chat, notifications, multiplayer games, dashboards, and collaborative editing. The most popular MERN library is <strong>Socket.IO</strong>; modern alternatives are <strong>ws</strong>, <strong>Pusher</strong>, <strong>Ably</strong>, <strong>Liveblocks</strong>, and <strong>PartyKit</strong>.</p>
 
 <pre><code>// server &mdash; Socket.IO mounted on the same HTTP server
@@ -1002,15 +747,9 @@ socket.emit("chat:send", { roomId: "general", text: "hi" })
 socket.on("chat:new", msg =&gt; setMessages(prev =&gt; [...prev, msg]))</code></pre>
 
 <p>For scale, run multiple Node processes with the <strong>Redis adapter</strong> so events fan out across instances; authenticate sockets in middleware (verify the JWT on connection); use <strong>rooms</strong> for per-channel broadcasts. Plain HTTP <strong>SSE (Server-Sent Events)</strong> works for one-way streams and is simpler if you don&rsquo;t need bidirectional.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q27">
-  <div class="qa__number">Question 27</div>
-  <h3 class="qa__question">How do you implement server-side rendering in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[27] = r'''
 <p><strong>Server-side rendering (SSR)</strong> means the HTML shipped to the browser already contains the rendered UI &mdash; the user sees content faster, search engines index the page properly, and JavaScript &ldquo;hydrates&rdquo; the static markup into an interactive React app once it loads.</p>
 
 <p>You can roll your own with <code>renderToString</code> from <code>react-dom/server</code>, but in 2026 the practical choice is a meta-framework:</p>
@@ -1032,15 +771,9 @@ export default async function UserPage({ params }) {
 }</code></pre>
 
 <p>SSR adds complexity (server runtime, hydration mismatches, longer Time-to-Interactive) so use it only if you need SEO or fast first paint &mdash; for internal dashboards, a normal SPA is fine. Some teams use <strong>SSR + CDN caching</strong> (Vercel, Cloudflare) so popular pages are served from cache.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q28">
-  <div class="qa__number">Question 28</div>
-  <h3 class="qa__question">How do you optimize the performance of a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[28] = r'''
 <p>Performance optimization in MERN spans four layers; tackle each in measured order.</p>
 
 <ul>
@@ -1055,15 +788,9 @@ const Dashboard = React.lazy(() =&gt; import("./Dashboard"))
 &lt;Suspense fallback={&lt;Spinner /&gt;}&gt;&lt;Dashboard /&gt;&lt;/Suspense&gt;</code></pre>
 
 <p>Measure before optimizing &mdash; <strong>Lighthouse</strong> for the frontend, <strong>Datadog APM</strong>/<strong>New Relic</strong> for backend, <strong>MongoDB Atlas Performance Advisor</strong> for queries. Optimizing without numbers is folklore.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q29">
-  <div class="qa__number">Question 29</div>
-  <h3 class="qa__question">How do you manage dependencies in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[29] = r'''
 <p>Dependencies in a MERN app are managed with <strong>npm</strong>, <strong>pnpm</strong>, or <strong>yarn</strong>. The package manager reads <code>package.json</code> (the manifest) and writes <code>package-lock.json</code> / <code>pnpm-lock.yaml</code> / <code>yarn.lock</code> (the exact dependency graph), then downloads everything into <code>node_modules</code>.</p>
 
 <pre><code># Add packages
@@ -1089,15 +816,9 @@ npm audit fix                         # auto-fix where possible
 }</code></pre>
 
 <p>Best practices: <strong>commit lock files</strong> (they pin exact versions for reproducible installs); use <strong>pnpm</strong> for monorepos &mdash; faster, disk-efficient, and works with workspaces; run <code>npm ci</code> in CI and Docker (it&rsquo;s strict about lockfiles); automate updates with <strong>Renovate</strong> or <strong>Dependabot</strong>; keep dependencies small &mdash; every package is a supply-chain risk; review <code>package-lock.json</code> diffs in PRs to spot unexpected sub-dependency changes.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q30">
-  <div class="qa__number">Question 30</div>
-  <h3 class="qa__question">How do you handle CORS in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[30] = r'''
 <p><strong>CORS (Cross-Origin Resource Sharing)</strong> is a browser security mechanism: by default a page on <code>https://app.example.com</code> can&rsquo;t make API calls to <code>https://api.example.com</code> unless that API explicitly allows it. In a MERN stack, the React dev server runs on a different port from the Node API, so you hit CORS immediately.</p>
 
 <pre><code>// server &mdash; cors middleware
@@ -1128,15 +849,9 @@ app.use(cors({
 </ul>
 
 <p>An alternative: in development, set up a <strong>Vite proxy</strong> that forwards <code>/api/*</code> to the Node server &mdash; same origin, no CORS. In production, deploy both behind the same domain (or use a reverse proxy like Nginx or Caddy) for the same effect.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q31">
-  <div class="qa__number">Question 31</div>
-  <h3 class="qa__question">How do you use the context API in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[31] = r'''
 <p><strong>Context API</strong> lets you pass values down the component tree without prop-drilling. It&rsquo;s built into React &mdash; no library &mdash; and is the right fit for app-wide data that rarely changes: theme, current user, locale, feature flags.</p>
 
 <pre><code>// auth/AuthContext.jsx
@@ -1171,15 +886,9 @@ export const useAuth = () =&gt; useContext(AuthContext)
 const { user } = useAuth()</code></pre>
 
 <p>What Context is <strong>not</strong> good for: <strong>frequently changing values</strong> shared across many components &mdash; every consumer re-renders on any change, which kills performance. For that, use <strong>Zustand</strong>, <strong>Jotai</strong>, or <strong>Redux Toolkit</strong>, which let consumers subscribe to slices selectively. Avoid putting form state, scroll positions, or animations in Context.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q32">
-  <div class="qa__number">Question 32</div>
-  <h3 class="qa__question">How do you handle state lifting in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[32] = r'''
 <p><strong>State lifting</strong> means moving state up to the closest common parent of two components that need to share it &mdash; instead of letting each component own a private copy that drifts out of sync.</p>
 
 <pre><code>// Before lifting &mdash; inputs don&rsquo;t coordinate
@@ -1205,15 +914,9 @@ function Fahrenheit({ value, onChange }) { return &lt;input value={value} onChan
 <p>The two components become <strong>controlled</strong> &mdash; they receive their value as a prop and call back when the user edits. The parent is the single source of truth.</p>
 
 <p>When lifting goes too far &mdash; ten levels of prop drilling &mdash; switch to <strong>Context</strong> or a state library. The progression is: local state &rarr; lift to parent &rarr; Context &rarr; Zustand/Jotai. Don&rsquo;t skip steps; most apps need very little global state.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q33">
-  <div class="qa__number">Question 33</div>
-  <h3 class="qa__question">How do you use hooks in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[33] = r'''
 <p><strong>Hooks</strong> let function components manage state, side effects, and lifecycle without classes. They were introduced in React 16.8 and are now the default way to write React. The most-used built-in hooks:</p>
 
 <ul>
@@ -1244,15 +947,9 @@ function Fahrenheit({ value, onChange }) { return &lt;input value={value} onChan
 }</code></pre>
 
 <p>Two rules: <strong>only call hooks at the top level</strong> (never inside loops or conditionals) and <strong>only from React functions</strong>. The <strong>eslint-plugin-react-hooks</strong> plugin catches violations automatically. Custom hooks (functions starting with <code>use</code>) compose existing hooks for reuse.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q34">
-  <div class="qa__number">Question 34</div>
-  <h3 class="qa__question">How do you test a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[34] = r'''
 <p>Testing a MERN app means three layers: <strong>unit</strong> (pure functions, components in isolation), <strong>integration</strong> (a route plus its database), and <strong>end-to-end</strong> (a real browser driving the whole app). The modern stack:</p>
 
 <ul>
@@ -1289,15 +986,9 @@ test("user logs in", async ({ page }) =&gt; {
 })</code></pre>
 
 <p>Run unit and integration tests on every commit in CI; run E2E in a deploy-preview environment. Use a separate <strong>test database</strong> &mdash; <strong>mongodb-memory-server</strong> spins up an in-memory MongoDB for fast, isolated runs.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q35">
-  <div class="qa__number">Question 35</div>
-  <h3 class="qa__question">How do you handle session management in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[35] = r'''
 <p>Session management is how the server remembers <em>who</em> is making each request after they log in. Two approaches dominate in MERN apps: <strong>stateless JWT tokens</strong> and <strong>stateful sessions backed by a store</strong>.</p>
 
 <pre><code>// 1. Stateless: JWT in an httpOnly cookie or Authorization header
@@ -1326,15 +1017,9 @@ req.session.userId = user._id
 const user = await User.findById(req.session.userId)</code></pre>
 
 <p>Trade-offs: JWTs scale horizontally (no shared store) but are hard to revoke before expiry. Sessions revoke instantly (delete from Redis) but need a shared store across server instances. Modern apps often use a hybrid: <strong>short-lived JWT access tokens</strong> + <strong>long-lived refresh tokens</strong> stored server-side. Or outsource the whole concern to <strong>Auth0</strong>, <strong>Clerk</strong>, <strong>WorkOS</strong>, or <strong>Supabase Auth</strong>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q36">
-  <div class="qa__number">Question 36</div>
-  <h3 class="qa__question">How do you use JWT for authentication in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[36] = r'''
 <p>A <strong>JSON Web Token (JWT)</strong> is a signed, base64-encoded string that carries claims about a user. The server signs it on login; the client sends it on every subsequent request; the server verifies the signature and trusts the claims without a database lookup &mdash; that&rsquo;s the &ldquo;stateless&rdquo; part.</p>
 
 <pre><code>// server &mdash; sign and verify
@@ -1371,15 +1056,9 @@ app.get("/api/me", auth, (req, res) =&gt; res.json(req.user))</code></pre>
 <li><strong>httpOnly cookies</strong> beat <code>localStorage</code> &mdash; XSS can&rsquo;t read them.</li>
 <li><strong>Use a library</strong> &mdash; <code>jsonwebtoken</code> or hosted (<strong>Auth0</strong>, <strong>Clerk</strong>); never roll your own crypto.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q37">
-  <div class="qa__number">Question 37</div>
-  <h3 class="qa__question">How do you implement role-based access control in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[37] = r'''
 <p><strong>Role-based access control (RBAC)</strong> assigns each user a role (admin, editor, viewer), and each route checks whether the user&rsquo;s role can perform the requested action. The server is the only authoritative checkpoint &mdash; UI hiding is convenience, not security.</p>
 
 <pre><code>// User model has a role field
@@ -1408,15 +1087,9 @@ const { user } = useAuth()
 {user?.role === "admin" &amp;&amp; &lt;DeleteButton /&gt;}</code></pre>
 
 <p>Beyond roles, sometimes you need <strong>resource ownership</strong> &mdash; &ldquo;can edit only their own posts&rdquo;. Add a check in the handler: <code>if (post.author !== req.user.uid &amp;&amp; req.user.role !== &quot;admin&quot;) return 403</code>. For complex policies (Google Docs-style sharing, GitHub teams), use a dedicated authz service: <strong>SpiceDB</strong>, <strong>OpenFGA</strong>, <strong>Cerbos</strong>, or <strong>AWS Verified Permissions</strong>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q38">
-  <div class="qa__number">Question 38</div>
-  <h3 class="qa__question">How do you create a RESTful API with Express and MongoDB?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[38] = r'''
 <p>A complete RESTful API combines <strong>routes</strong>, <strong>controllers</strong>, and <strong>Mongoose models</strong> in a clean separation of concerns. Each resource gets one router with the five canonical operations.</p>
 
 <pre><code>// models/Post.js
@@ -1465,15 +1138,9 @@ router.delete("/:id", auth,    remove)
 app.use("/api/posts", router)</code></pre>
 
 <p>Always validate request bodies with <strong>Zod</strong>; return consistent error JSON; paginate list endpoints; index fields you query and sort on.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q39">
-  <div class="qa__number">Question 39</div>
-  <h3 class="qa__question">How do you handle database migrations in MongoDB?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[39] = r'''
 <p>MongoDB is schemaless at the database level &mdash; you can add fields to new documents without ceremony. But real apps still need <strong>migrations</strong> to backfill old documents, rename fields, or change indexes safely. Two patterns work in practice.</p>
 
 <p><strong>Pattern 1: Schema versioning + lazy migration.</strong> Tag each document with a <code>schemaVersion</code>. The application reads multiple versions; new writes always use the latest shape; a background job rewrites old documents in batches.</p>
@@ -1506,15 +1173,9 @@ async function migrateBatch() {
 <p><strong>Pattern 2: Migration tools.</strong> Libraries like <strong>migrate-mongo</strong> or <strong>mongock</strong> store applied migrations in a <code>changelog</code> collection &mdash; same idea as Rails or Flyway. Each migration has an <code>up</code> and <code>down</code> function. Run them in CI before deploying the app version that depends on them.</p>
 
 <p>For very large collections, always migrate in <strong>batches with sleep</strong> to avoid replica lag and oplog overflow.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q40">
-  <div class="qa__number">Question 40</div>
-  <h3 class="qa__question">How do you use CSS-in-JS libraries like styled-components in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[40] = r'''
 <p><strong>Styled-components</strong> (and friends like <strong>Emotion</strong>) put your CSS inside JavaScript: every styled component is a regular React component with scoped, prop-aware styles. The styles are generated at runtime, scoped by hashed class names, and injected into a <code>&lt;style&gt;</code> tag.</p>
 
 <pre><code>import styled, { css } from "styled-components"
@@ -1550,15 +1211,9 @@ const Button = styled.button`
 <li><strong>Vanilla Extract</strong> / <strong>StyleX</strong> &mdash; static CSS-in-TS, type-safe, fast.</li>
 <li><strong>Panda CSS</strong> &mdash; build-time CSS-in-JS with zero runtime.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q41">
-  <div class="qa__number">Question 41</div>
-  <h3 class="qa__question">How do you manage form state in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[41] = r'''
 <p>Form state in React means tracking what the user has typed, validation errors, submission status, and dirty/touched flags. The most common approaches range from a few <code>useState</code> hooks to dedicated libraries.</p>
 
 <pre><code>// Hand-rolled with useState (fine for small forms)
@@ -1599,15 +1254,9 @@ const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm(
 &lt;/form&gt;</code></pre>
 
 <p><strong>React Hook Form</strong> is the dominant 2026 choice &mdash; uncontrolled inputs (no re-render on every keystroke), tiny bundle, ergonomic validation via <strong>Zod</strong>/<strong>Yup</strong> resolvers. <strong>Formik</strong> is the older alternative; <strong>TanStack Form</strong> is the newer competitor with even better TypeScript ergonomics.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q42">
-  <div class="qa__number">Question 42</div>
-  <h3 class="qa__question">How do you handle conditional rendering in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[42] = r'''
 <p>Conditional rendering shows different UI based on data &mdash; loading states, errors, auth status, feature flags. JSX has several idioms; pick whichever reads cleanest in context.</p>
 
 <pre><code>// 1. Ternary (when there are exactly two cases)
@@ -1638,15 +1287,9 @@ return states[status]()
 &lt;div className={`alert ${kind === "error" ? "alert-red" : "alert-green"}`} /&gt;</code></pre>
 
 <p>Watch out for two pitfalls. First, <code>{count &amp;&amp; &lt;X /&gt;}</code> renders the literal <code>0</code> when <code>count</code> is zero &mdash; use <code>{count &gt; 0 &amp;&amp; &lt;X /&gt;}</code> instead. Second, deep ternary nesting is hard to read &mdash; refactor to an early return or extract a small component.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q43">
-  <div class="qa__number">Question 43</div>
-  <h3 class="qa__question">How do you implement a search feature in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[43] = r'''
 <p>A search feature in MERN spans three pieces: a debounced React input, a server endpoint that filters MongoDB, and an index that makes the query fast. For non-trivial search, plug in <strong>Atlas Search</strong> or <strong>Meilisearch</strong>/<strong>Typesense</strong>/<strong>Algolia</strong> &mdash; regex queries don&rsquo;t scale.</p>
 
 <pre><code>// MongoDB text index (simple)
@@ -1687,15 +1330,9 @@ function Search() {
 }</code></pre>
 
 <p>For real search needs &mdash; typo tolerance, faceting, ranking, autocomplete &mdash; <strong>Atlas Search</strong> (MongoDB&rsquo;s built-in Lucene) is the best fit in MERN. <strong>Algolia</strong> and <strong>Typesense</strong> are excellent hosted alternatives. <strong>TanStack Query</strong> with <code>keepPreviousData</code> makes the UI feel smoother during typing.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q44">
-  <div class="qa__number">Question 44</div>
-  <h3 class="qa__question">How do you use the fetch API or Axios to make HTTP requests in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[44] = r'''
 <p>Browsers ship with <strong><code>fetch</code></strong>, a Promise-based HTTP client. <strong>Axios</strong> is a popular library that adds interceptors, automatic JSON, and better error handling. Both are common in MERN; in 2026 most teams use either fetch + a tiny wrapper or jump straight to <strong>TanStack Query</strong>.</p>
 
 <pre><code>// fetch &mdash; native, no dependency
@@ -1731,15 +1368,9 @@ const { data, error, isLoading } = useQuery({
 })</code></pre>
 
 <p>Differences: fetch doesn&rsquo;t throw on 4xx/5xx (you check <code>res.ok</code>), needs explicit <code>res.json()</code>, and has manual interceptor logic. Axios reduces boilerplate but adds 13kB. <strong>TanStack Query</strong> is orthogonal &mdash; it wraps either, adding caching, deduplication, refetching, and loading/error states. Modern alternatives include <strong>ky</strong> (fetch wrapper) and <strong>ofetch</strong>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q45">
-  <div class="qa__number">Question 45</div>
-  <h3 class="qa__question">How do you handle nested routes in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[45] = r'''
 <p>Nested routes render child routes inside a parent layout &mdash; perfect for dashboards where a sidebar stays put while the main panel changes. <strong>React Router v6/v7</strong> handles this with the <code>Outlet</code> component.</p>
 
 <pre><code>// client/src/App.jsx
@@ -1774,15 +1405,9 @@ function DashboardLayout() {
 <p>The parent <code>DashboardLayout</code> renders once; children mount and unmount as the URL changes &mdash; no flicker, no re-fetch of shared data. <code>NavLink</code> automatically gets an <code>active</code> class when the URL matches, which is handy for highlighting the current section.</p>
 
 <p>For deeply nested apps, this pattern composes &mdash; a layout&rsquo;s <code>Outlet</code> can host another layout, which has its own <code>Outlet</code>. Modern Next.js, Remix, and TanStack Router formalize the same idea with file-based routes.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q46">
-  <div class="qa__number">Question 46</div>
-  <h3 class="qa__question">How do you implement a loading spinner in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[46] = r'''
 <p>A loading spinner reassures users that something is happening when an async operation is in flight. Show one whenever a fetch, mutation, or navigation takes longer than a heartbeat &mdash; but not for the first 200&ndash;300ms (avoids spinner flash on fast networks).</p>
 
 <pre><code>// Reusable Spinner component
@@ -1819,15 +1444,9 @@ function UserList() {
 &lt;/button&gt;</code></pre>
 
 <p>Better UX patterns when you can: <strong>skeleton screens</strong> (shaded placeholders matching the final layout) feel faster than spinners; <strong>optimistic updates</strong> show the new state instantly and roll back on failure; for navigation, React 18&rsquo;s <code>useTransition</code> keeps the old UI visible while the next page loads. Always include <code>aria-label="Loading"</code> for accessibility.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q47">
-  <div class="qa__number">Question 47</div>
-  <h3 class="qa__question">How do you handle scroll events in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[47] = r'''
 <p>Scroll handling in React is needed for infinite lists, sticky headers, scroll-restoration, and animation triggers. Always <strong>throttle</strong> scroll listeners &mdash; they fire dozens of times per second.</p>
 
 <pre><code>// Basic scroll listener with throttling
@@ -1871,15 +1490,9 @@ function InfiniteList({ items, onLoadMore }) {
 <p>Three rules: use <code>{ passive: true }</code> on scroll listeners so they don&rsquo;t block scrolling; remove the listener in the cleanup function (otherwise memory leaks on unmount); prefer <strong>IntersectionObserver</strong> over scroll events for &ldquo;is this element visible&rdquo; checks &mdash; it&rsquo;s built into the browser, fires only on threshold crossing, and doesn&rsquo;t block the main thread.</p>
 
 <p>For long lists, virtualize with <strong>TanStack Virtual</strong> or <strong>react-window</strong> &mdash; only renders the rows currently in the viewport.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q48">
-  <div class="qa__number">Question 48</div>
-  <h3 class="qa__question">How do you use MongoDB aggregation framework?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[48] = r'''
 <p>The <strong>aggregation framework</strong> is MongoDB&rsquo;s pipeline-based query language for transforming data &mdash; the equivalent of SQL <code>GROUP BY</code>, joins, and CTEs. A pipeline is an array of stages; each stage takes documents in and emits documents out.</p>
 
 <pre><code>// Top 5 authors by post count, with average reactions
@@ -1919,15 +1532,9 @@ const result = await Post.aggregate([
 </ul>
 
 <p>For analytics dashboards, write to a materialized rollup with <code>$merge</code> or <code>$out</code> instead of recomputing each time. <strong>MongoDB Compass</strong> has a visual pipeline builder &mdash; great for prototyping.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q49">
-  <div class="qa__number">Question 49</div>
-  <h3 class="qa__question">How do you create a custom hook in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[49] = r'''
 <p>A <strong>custom hook</strong> is just a function whose name starts with <code>use</code> and that calls other hooks. They let you bundle stateful logic for reuse &mdash; the same way regular functions bundle pure logic.</p>
 
 <pre><code>// useLocalStorage &mdash; sync a piece of state with localStorage
@@ -1976,15 +1583,9 @@ function useMediaQuery(query) {
 }</code></pre>
 
 <p>Custom hooks must follow the <strong>rules of hooks</strong> (only call other hooks at the top level). They&rsquo;re the canonical way to share logic between components in modern React &mdash; replacing the old patterns of HOCs and render props. Many production apps have a <code>hooks/</code> folder full of these utilities.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q50">
-  <div class="qa__number">Question 50</div>
-  <h3 class="qa__question">How do you manage component lifecycle in React using hooks?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[50] = r'''
 <p>In class components, lifecycle was three named methods: <code>componentDidMount</code>, <code>componentDidUpdate</code>, <code>componentWillUnmount</code>. With function components and hooks, lifecycle collapses into one tool: <strong><code>useEffect</code></strong>.</p>
 
 <pre><code>import { useEffect } from "react"
@@ -2024,15 +1625,10 @@ useEffect(() =&gt; {
 </ul>
 
 <p>For data fetching specifically, <strong>don&rsquo;t use <code>useEffect</code></strong> &mdash; use <strong>TanStack Query</strong> or <strong>SWR</strong>, which handle caching, refetching, and race conditions correctly.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q51">
-  <div class="qa__number">Question 51</div>
-  <h3 class="qa__question">How do you implement a dark mode toggle in a React application?</h3>
-  <div class="qa__answer">
-    
+
+ANSWERS[51] = r'''
 <p>A dark mode toggle has three pieces: detecting preference, applying styles, and persisting the choice.</p>
 <pre><code>// useTheme.ts
 import { useEffect, useState } from "react";
@@ -2054,15 +1650,9 @@ export function useTheme() {
   return [theme, setTheme] as const;
 }</code></pre>
 <p>Tailwind CSS reads the <code>.dark</code> class for <code>dark:bg-gray-900</code> styles; CSS-in-JS libraries (<strong>styled-components</strong>, <strong>Emotion</strong>, <strong>vanilla-extract</strong>) read a theme prop. To prevent a <strong>flash of wrong theme</strong> on load, add a small <em>blocking</em> script in <code>index.html</code> that sets the class before React hydrates &mdash; this is what <strong>next-themes</strong> does in Next.js. Honor <code>prefers-color-scheme</code> as the default; let users override and remember the choice. Make sure focus-visible, syntax highlighting, and chart colors all have dark variants &mdash; the &ldquo;just invert colors&rdquo; trap is a common 2026 mistake.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q52">
-  <div class="qa__number">Question 52</div>
-  <h3 class="qa__question">How do you handle large data sets in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[52] = r'''
 <p>Large data sets in MERN are handled by <strong>not loading them all at once</strong>. Strategies stack:</p>
 <ul>
 <li><strong>Pagination</strong> &mdash; cursor-based for feeds, offset for admin tables. Index the sort key.</li>
@@ -2074,15 +1664,9 @@ export function useTheme() {
 <li><strong>Search</strong> &mdash; for text-heavy queries, <strong>Atlas Search</strong> (Lucene) outperforms <code>$regex</code>.</li>
 </ul>
 <p>On the React side: <strong>virtualized lists</strong> via <strong>TanStack Virtual</strong>/<strong>react-window</strong> render only the rows in view; <strong>code splitting</strong> avoids shipping unused JS; <strong>TanStack Query</strong>&rsquo;s <code>useInfiniteQuery</code> handles infinite scroll. For very large data, push computation to a warehouse (<strong>BigQuery</strong>/<strong>ClickHouse</strong>/<strong>Snowflake</strong>) and only show summaries in the app. Profile queries with <code>explain("executionStats")</code>; profile React with the React DevTools Profiler.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q53">
-  <div class="qa__number">Question 53</div>
-  <h3 class="qa__question">How do you use socket.io for real-time communication in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[53] = r'''
 <p><strong>Socket.io</strong> is the most popular WebSocket library for Node. It gracefully falls back to long-polling when WebSockets are blocked and provides rooms, namespaces, and acks on top of raw WS.</p>
 <pre><code>// server
 import { Server } from "socket.io";
@@ -2101,15 +1685,9 @@ const socket = io(import.meta.env.VITE_API_URL, { withCredentials: true });
 socket.emit("join", "room-42");
 socket.on("message", (m) =&gt; addMessage(m));</code></pre>
 <p>Use cases: chat, presence, live cursors, notifications. Beyond a single Node process, you need a <strong>Redis adapter</strong> (<code>@socket.io/redis-adapter</code>) so messages broadcast across instances. Authenticate the connection with the same JWT/session cookie as your REST API. Modern alternatives in 2026: <strong>Pusher</strong>/<strong>Ably</strong>/<strong>PubNub</strong> (managed); <strong>Supabase Realtime</strong>; <strong>PartyKit</strong>/<strong>Liveblocks</strong>/<strong>Convex</strong> (rooms-as-objects); <strong>Cloudflare Durable Objects</strong> (sticky-routed WS); raw <strong>ws</strong>/<strong>uWebSockets.js</strong> for performance. Pick managed unless you have a specific reason &mdash; running WebSockets at scale is operationally painful.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q54">
-  <div class="qa__number">Question 54</div>
-  <h3 class="qa__question">How do you implement a notification system in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[54] = r'''
 <p>A notification system in MERN typically has three parts: <strong>creation</strong>, <strong>delivery</strong>, and <strong>display</strong>.</p>
 <pre><code>// 1. Persist (one notification per user)
 db.notifications.insertOne({
@@ -2127,15 +1705,9 @@ io.to(`user:${userId}`).emit("notification", payload);
 // 3. Persistent fallback &mdash; APN/FCM push, email, SMS
 await knock.notify("post.mentioned", { recipients: [userId], data: { ... } });</code></pre>
 <p>UI side: a bell icon shows the unread count from <code>GET /api/notifications/unread-count</code>; a dropdown lists recent ones; clicking marks read. Use <strong>TanStack Query</strong> with optimistic updates for instant unread-count changes. For multi-channel delivery (in-app + push + email + SMS), use a notification platform: <strong>Knock</strong>, <strong>Courier</strong>, <strong>Customer.io</strong>, <strong>Novu</strong>, <strong>OneSignal</strong>. They handle preferences, quiet hours, digesting, A/B testing, and channel fallback. For just push: <strong>Firebase Cloud Messaging (FCM)</strong> for Android, <strong>APNs</strong> for iOS, <strong>Web Push</strong> for browsers via service worker. Mark notifications read in batches; rate-limit per user; respect quiet hours.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q55">
-  <div class="qa__number">Question 55</div>
-  <h3 class="qa__question">How do you handle optimistic UI updates in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[55] = r'''
 <p><strong>Optimistic UI</strong> updates the React state <em>before</em> the server confirms, then rolls back if the request fails. The result feels instant.</p>
 <pre><code>// TanStack Query mutation with optimistic update
 const mutation = useMutation({
@@ -2159,15 +1731,9 @@ const mutation = useMutation({
   }
 });</code></pre>
 <p>Best for low-risk, idempotent actions: likes, bookmarks, reorders. Avoid for actions where failure has consequences (payments, irreversible deletes) &mdash; use a clear loading state instead. The pattern: snapshot &rarr; apply &rarr; rollback on error &rarr; refetch to confirm. <strong>SWR</strong> has <code>mutate</code> with similar semantics. For multi-step optimistic flows (offline sync), <strong>Yjs</strong>/<strong>Replicache</strong>/<strong>RxDB</strong>/<strong>Automerge</strong> handle it as first-class. Show a small &ldquo;syncing&rdquo; indicator or a toast on rollback so users understand what happened.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q56">
-  <div class="qa__number">Question 56</div>
-  <h3 class="qa__question">How do you use service workers in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[56] = r'''
 <p>A <strong>service worker</strong> is a script the browser runs separately from your page, intercepting network requests. It enables offline mode, custom caching, and push notifications.</p>
 <pre><code>// public/sw.js
 self.addEventListener("install", (e) =&gt; {
@@ -2184,15 +1750,9 @@ if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("/sw.js");
 }</code></pre>
 <p>In 2026 you almost never write this by hand. Use <strong>Workbox</strong> for the strategies (cache-first, network-first, stale-while-revalidate) and <strong>vite-plugin-pwa</strong> or <strong>next-pwa</strong> for the build pipeline. Service workers also enable <strong>Web Push notifications</strong> (subscribe to push, show notification when one arrives even with the tab closed) and <strong>background sync</strong> (queue failed requests, retry when online). Important caveats: service workers run only over HTTPS (localhost exempted); they have a separate cache from the browser; updates require careful versioning to avoid users stuck on stale versions; not all features work on iOS Safari. For most apps, the value comes from making them installable PWAs and gracefully degrading offline rather than building a full offline-first experience.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q57">
-  <div class="qa__number">Question 57</div>
-  <h3 class="qa__question">How do you implement data caching in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[57] = r'''
 <p>Caching in MERN happens at multiple layers; each adds speed and reduces load.</p>
 <ul>
 <li><strong>HTTP cache headers</strong> &mdash; <code>Cache-Control: public, max-age=31536000, immutable</code> on hashed assets; <code>private, no-cache</code> for API responses that mustn&rsquo;t be shared. The browser and CDN do the rest.</li>
@@ -2202,15 +1762,9 @@ if ("serviceWorker" in navigator) {
 <li><strong>MongoDB Working Set</strong> &mdash; the database&rsquo;s own RAM cache.</li>
 </ul>
 <p>Cache <em>invalidation</em> is the hard part. Patterns: short TTL (60s) for &ldquo;eventually fresh&rdquo;; tag-based invalidation (<strong>Vercel Data Cache</strong>, <strong>Next.js</strong> <code>revalidateTag</code>); change-stream-driven (MongoDB change stream &rarr; Redis <code>DEL</code>); content-hashed URLs (assets never go stale). For low-write data, cache aggressively; for high-write, skip caching and rely on indexes. <strong>Dragonfly</strong>/<strong>KeyDB</strong>/<strong>Redis</strong> for the cache; <strong>Upstash</strong> for serverless-friendly Redis.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q58">
-  <div class="qa__number">Question 58</div>
-  <h3 class="qa__question">How do you handle image uploads and storage in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[58] = r'''
 <p>Image uploads in MERN: store in object storage (S3/R2/GCS), keep only metadata in MongoDB, deliver via CDN.</p>
 <pre><code>// Server &mdash; presigned URL
 app.post("/api/uploads/presign", async (req, res) =&gt; {
@@ -2227,15 +1781,9 @@ await fetch(upload_url, { method: "PUT", body: file, headers: { "Content-Type": 
 // Save metadata
 await api.post("/api/images", { key, content_type: file.type, size: file.size });</code></pre>
 <p>Server-side, you don&rsquo;t want bytes flowing through Node &mdash; presigned URLs let the browser PUT directly to S3. For media-heavy apps, <strong>Cloudinary</strong>/<strong>imgix</strong>/<strong>Cloudflare Images</strong>/<strong>Imgproxy</strong> handle resize, crop, format conversion (AVIF/WebP), and responsive variants on the fly &mdash; you store the original, request <code>?w=400&amp;q=80</code> to get a derived version. For previews, <strong>blurhash</strong>/<strong>thumbhash</strong> tiny placeholders avoid layout shift. <strong>EXIF stripping</strong> is essential for privacy (GPS coords leak). Use <strong>uppy</strong> + <strong>tus.io</strong> for resumable uploads. CDN delivery via the same provider or <strong>CloudFront</strong>/<strong>Cloudflare</strong> in front of your bucket. Save SHA-256 checksums; never trust client-reported MIME types &mdash; sniff server-side.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q59">
-  <div class="qa__number">Question 59</div>
-  <h3 class="qa__question">How do you create a multi-step form in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[59] = r'''
 <p>A multi-step form spreads input across screens with progress indication, validation per step, and optional state persistence.</p>
 <pre><code>// React Hook Form + Zod, one schema per step
 const stepSchemas = [accountSchema, profileSchema, paymentSchema];
@@ -2262,15 +1810,9 @@ function Wizard() {
   );
 }</code></pre>
 <p>Patterns: <strong>one form context</strong> across steps so values persist when navigating back; <strong>validate the current step</strong> on Next, <strong>full schema</strong> on submit; show progress (1 of 3, completion bar); store partial state in <code>localStorage</code> or <code>sessionStorage</code> for refresh resilience &mdash; or save drafts to the server every N seconds. For very long forms (insurance, tax, onboarding), use a real form-builder library: <strong>react-jsonschema-form</strong>, <strong>SurveyJS</strong>, <strong>Formily</strong>, or <strong>Tally</strong>/<strong>Typeform</strong>/<strong>Fillout</strong> as embedded vendors. For conditional flows (&ldquo;if married, ask spouse name&rdquo;), keep branching logic declarative.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q60">
-  <div class="qa__number">Question 60</div>
-  <h3 class="qa__question">How do you implement a chat application using the MERN stack?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[60] = r'''
 <p>A MERN chat app combines persistence (MongoDB), realtime delivery (WebSockets), and a React UI.</p>
 <pre><code>// MongoDB
 db.conversations.insertOne({ _id, members: [u1, u2], created_at });
@@ -2293,15 +1835,9 @@ const socket = io(API, { auth: { token } });
 socket.emit("join", conversationId);
 socket.on("message", (m) =&gt; setMessages((prev) =&gt; [...prev, m]));</code></pre>
 <p>Beyond MVP: <strong>typing indicators</strong>, <strong>read receipts</strong> (per-user <code>last_read_ts</code> on conversation), <strong>presence</strong> (online/offline via socket connect/disconnect), <strong>delivery acks</strong>, <strong>message edits/deletes</strong>, <strong>media attachments</strong>, <strong>push notifications</strong> when offline. For multiple Node instances, use the <strong>Redis adapter</strong> for socket.io. For end-to-end encryption (Signal-style), use <strong>libsignal</strong> or <strong>Matrix</strong>; few apps actually need this. <strong>Managed alternatives in 2026</strong>: <strong>Stream Chat</strong>, <strong>Sendbird</strong>, <strong>PubNub</strong>, <strong>CometChat</strong> &mdash; ship in a day, scale automatically. Building chat from scratch is a multi-month investment in edge cases.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q61">
-  <div class="qa__number">Question 61</div>
-  <h3 class="qa__question">How do you handle long-running tasks in a Node.js application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[61] = r'''
 <p>Long-running tasks (sending email, processing video, generating reports) must <strong>not</strong> happen inside an HTTP request &mdash; the request will time out, the user will refresh, and the work will run multiple times. Push them to a background job queue.</p>
 <pre><code>// BullMQ
 import { Queue, Worker } from "bullmq";
@@ -2319,15 +1855,9 @@ new Worker("emails", async (job) =&gt; {
   if (job.name === "welcome") await sendWelcomeEmail(job.data.userId);
 }, { connection: redis });</code></pre>
 <p>The handler returns in milliseconds; the worker does the slow work. Add: retries with exponential backoff; idempotent jobs (a retry must not double-send); dead-letter queues for permanent failures; scheduled jobs (cron, &ldquo;run every 5 minutes&rdquo;). Modern alternatives: <strong>Inngest</strong> (event-driven, durable, no Redis required &mdash; very popular in 2026), <strong>Trigger.dev</strong>, <strong>Temporal</strong> (workflows-as-code, enterprise), <strong>AWS SQS + Lambda</strong>, <strong>Cloudflare Queues</strong>, <strong>Hatchet</strong>, <strong>QStash</strong> from Upstash. For very heavy CPU work (video transcoding) push to a specialized service (<strong>Mux</strong>, <strong>Cloudflare Stream</strong>, <strong>AWS MediaConvert</strong>) instead of running it on your server.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q62">
-  <div class="qa__number">Question 62</div>
-  <h3 class="qa__question">How do you implement a rating system in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[62] = r'''
 <p>A rating system has three operations: submit a rating, compute the average, and display.</p>
 <pre><code>// One rating per (user, product)
 db.ratings.insertOne({
@@ -2349,15 +1879,9 @@ db.products.updateOne(
 // Read &mdash; one document
 db.products.findOne({ _id: pid }, { projection: { ratings_avg: 1, ratings_count: 1 } });</code></pre>
 <p>The compound <code>_id</code> guarantees one rating per user per product, with cheap upserts on update. Denormalize the aggregate on the product so you don&rsquo;t recompute on every read. For more sophisticated reviews, store reviews separately with moderation status, helpful-vote counts, and reply threads &mdash; show only approved ones on the product page. <strong>SEO</strong> benefits from <strong>JSON-LD <code>aggregateRating</code></strong> structured data. Anti-abuse: rate-limit submissions per IP and per user; require purchase for &ldquo;verified&rdquo;; ban brigading. Toxicity detection via <strong>Perspective API</strong>/<strong>Hive Moderation</strong>. For a hosted approach, <strong>BazaarVoice</strong>, <strong>Yotpo</strong>, <strong>Stamped.io</strong>, <strong>Okendo</strong>, <strong>Trustpilot</strong> embed reviews with managed moderation &mdash; popular for ecommerce in 2026.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q63">
-  <div class="qa__number">Question 63</div>
-  <h3 class="qa__question">How do you manage file downloads in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[63] = r'''
 <p>File downloads in MERN come in two shapes: small/dynamic and large/precomputed.</p>
 <pre><code>// Small dynamic (CSV export, generated PDF)
 app.get("/api/orders/export", async (req, res) =&gt; {
@@ -2383,15 +1907,9 @@ app.get("/api/files/:id/download", async (req, res) =&gt; {
   res.redirect(url);
 });</code></pre>
 <p>Stream rather than buffer &mdash; Node will OOM on a 1GB CSV. For S3-hosted files, <strong>never proxy through Node</strong>; redirect to a presigned URL so the bytes go browser&hairsp;&rarr;&hairsp;CDN&hairsp;&rarr;&hairsp;S3 directly. Presigned URLs expire (5 min is typical) so links don&rsquo;t leak. <strong>HTTP Range requests</strong> are honored automatically by S3 + browsers, so resume and partial download work for free. For large reports, generate asynchronously: a job creates the file, uploads to S3, emails the user a link &mdash; or shows it in their downloads page.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q64">
-  <div class="qa__number">Question 64</div>
-  <h3 class="qa__question">How do you use GraphQL with the MERN stack?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[64] = r'''
 <p><strong>GraphQL</strong> exposes a single endpoint where clients ask for exactly the fields they need. In a MERN stack, GraphQL replaces (or supplements) REST.</p>
 <pre><code>// server &mdash; Apollo Server / GraphQL Yoga / Pothos
 import { ApolloServer } from "@apollo/server";
@@ -2408,15 +1926,9 @@ const resolvers = {
 // client &mdash; Apollo Client / urql / TanStack Query + graphql-request
 const { data } = useQuery(USER_QUERY, { variables: { id } });</code></pre>
 <p>Strengths: clients fetch <em>only</em> needed fields (smaller responses); single round trip for nested data; strong types from the schema; introspection-driven tooling. Weaknesses: caching is harder than REST; N+1 queries unless you use <strong>DataLoader</strong>; complex auth; over-fetching is replaced by query complexity attacks. In 2026, momentum has shifted: <strong>tRPC</strong> (typed RPC) covers the &ldquo;typed end-to-end&rdquo; need without GraphQL ceremony for internal MERN apps; <strong>REST + OpenAPI + Zod</strong> stays popular for public APIs; <strong>GraphQL</strong> still shines for federated data and mobile apps with diverse fields. Use <strong>Pothos</strong> for code-first schemas, <strong>GraphQL Yoga</strong> for the server, <strong>Hasura</strong>/<strong>PostGraphile</strong>/<strong>Apollo Federation</strong> for federation.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q65">
-  <div class="qa__number">Question 65</div>
-  <h3 class="qa__question">How do you handle time zones in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[65] = r'''
 <p>Time zones are the source of countless bugs. The discipline:</p>
 <ul>
 <li><strong>Store everything in UTC</strong> in MongoDB. <code>new Date()</code> is UTC under the hood; <code>ISODate</code> is UTC. Never store local times without timezone info.</li>
@@ -2429,15 +1941,9 @@ import { format, toZonedTime } from "date-fns-tz";
 const local = toZonedTime(post.created_at, userTimeZone);
 &lt;time dateTime={post.created_at}&gt;{format(local, "PPp", { timeZone: userTimeZone })}&lt;/time&gt;</code></pre>
 <p>For scheduled events (a meeting at 3pm Tokyo time), store both the UTC instant <em>and</em> the originating timezone &mdash; you need both to display correctly across DST changes. The new <strong>Temporal API</strong> (stage 3 TC39) finally fixes JavaScript&rsquo;s broken Date; <strong>js-temporal</strong> polyfill works today. <strong>date-fns-tz</strong>, <strong>luxon</strong>, <strong>Day.js</strong> remain popular. Server-side, log timestamps in UTC; let log aggregators (<strong>Datadog</strong>, <strong>Honeycomb</strong>) translate per viewer.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q66">
-  <div class="qa__number">Question 66</div>
-  <h3 class="qa__question">How do you implement a comment system in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[66] = r'''
 <p>A comment system has comments tied to a parent (post, video, article), with optional threading and moderation.</p>
 <pre><code>// Flat comments
 db.comments.insertOne({
@@ -2458,15 +1964,9 @@ db.comments.createIndex({ parent_id: 1, created_at: -1 });
   thread_depth: 1
 }</code></pre>
 <p>Render top-level chronologically; replies nested one level (deep threads ruin readability &mdash; Reddit caps at 8). For deep trees, use the <strong>materialized path</strong> pattern (<code>path: "/c1/c2/c3"</code>) to query subtrees with prefix matching. Counters: <code>comments_count</code> denormalized on the post, incremented atomically on submit. Moderation: spam filtering (<strong>Akismet</strong>, <strong>Perspective API</strong>, <strong>Hive Moderation</strong>); profanity word lists; rate limits. <strong>Markdown rendering</strong> via <strong>remark</strong>/<strong>markdown-it</strong> with sanitization (<strong>DOMPurify</strong>, <strong>rehype-sanitize</strong>) &mdash; never trust user HTML. Realtime updates: socket.io to broadcast new comments. Hosted alternatives: <strong>Disqus</strong>, <strong>Commento</strong>, <strong>Giscus</strong> (GitHub-backed), <strong>Hyvor Talk</strong> &mdash; embed in minutes if you don&rsquo;t want to maintain.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q67">
-  <div class="qa__number">Question 67</div>
-  <h3 class="qa__question">How do you create a dashboard with charts and graphs in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[67] = r'''
 <p>A dashboard with charts has three layers: data aggregation, charting library, and dashboard layout.</p>
 <pre><code>// Server &mdash; aggregate via MongoDB pipeline
 db.orders.aggregate([
@@ -2486,15 +1986,9 @@ import { LineChart, Line, XAxis, YAxis, Tooltip } from "recharts";
   &lt;Line dataKey="revenue" stroke="#3b82f6" /&gt;
 &lt;/LineChart&gt;</code></pre>
 <p>2026 charting options: <strong>Recharts</strong> (declarative, React-friendly), <strong>Chart.js</strong> (mature, canvas-based), <strong>Visx</strong> (Airbnb, low-level), <strong>Apache ECharts</strong> (powerful, especially for complex/financial), <strong>Tremor</strong> (dashboards out of the box), <strong>Nivo</strong>, <strong>Highcharts</strong> (commercial). For interactive data exploration, <strong>D3</strong> with <strong>Observable Plot</strong>; for huge datasets, <strong>deck.gl</strong> or <strong>Plotly</strong> with WebGL. Pre-aggregate in MongoDB rather than computing in React; cache the aggregation result in Redis with short TTL. For complete dashboard solutions, <strong>MongoDB Atlas Charts</strong>, <strong>Metabase</strong>, <strong>Grafana</strong>, <strong>Apache Superset</strong>, <strong>Cube.js</strong>, <strong>Hex</strong>, <strong>Retool</strong> let you build dashboards without writing chart code. Add export-to-PNG/CSV, date range pickers, and respect time zones.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q68">
-  <div class="qa__number">Question 68</div>
-  <h3 class="qa__question">How do you handle internationalization (i18n) in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[68] = r'''
 <p>Internationalization (i18n) splits user-facing text from code so it can be translated. The dominant React i18n libraries in 2026: <strong>react-i18next</strong>, <strong>next-intl</strong> (Next.js), <strong>FormatJS</strong>/<strong>react-intl</strong>, <strong>Lingui</strong>.</p>
 <pre><code>// react-i18next
 import { useTranslation } from "react-i18next";
@@ -2509,15 +2003,9 @@ function Greeting({ name }) {
 // locales/ja.json
 { "greeting": "こんにちは、{{name}}さん！", "items_count": "{{count}}個のアイテム" }</code></pre>
 <p>What needs translation goes far beyond strings: <strong>plurals</strong> (English &ldquo;1 item / 2 items&rdquo; vs Polish&rsquo;s three forms) &mdash; use <strong>ICU MessageFormat</strong>; <strong>dates and numbers</strong> via <code>Intl.DateTimeFormat</code> / <code>Intl.NumberFormat</code> / <code>Intl.RelativeTimeFormat</code>; <strong>currencies</strong>; <strong>RTL</strong> layouts (Arabic, Hebrew) handled with CSS logical properties (<code>margin-inline-start</code>); <strong>locale-keyed slugs</strong> in URLs (<code>/en/about</code>, <code>/ja/about</code>) for SEO; <strong>hreflang</strong> tags. Translation management with <strong>Lokalise</strong>, <strong>Crowdin</strong>, <strong>Phrase</strong>, <strong>Tolgee</strong>, <strong>Localizely</strong>. AI-assisted first drafts via <strong>OpenAI</strong>/<strong>DeepL</strong> with human review. On the server, store user content in their language; consider <strong>Atlas Search</strong> with multi-language analyzers.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q69">
-  <div class="qa__number">Question 69</div>
-  <h3 class="qa__question">How do you use React context for theme management?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[69] = r'''
 <p>React Context is a way to pass values down the tree without prop drilling. For theming it&rsquo;s a clean fit because the value (light/dark mode) changes rarely and many components need it.</p>
 <pre><code>// ThemeContext.tsx
 import { createContext, useContext, useState, useEffect } from "react";
@@ -2545,15 +2033,9 @@ export const useTheme = () =&gt; useContext(ThemeContext);
 // In a component
 const { theme, toggle } = useTheme();</code></pre>
 <p>Wrap the app once: <code>&lt;ThemeProvider&gt;&lt;App /&gt;&lt;/ThemeProvider&gt;</code>. Any descendant calls <code>useTheme()</code> &mdash; no prop chains. <strong>Pitfall</strong>: every component using a context re-renders when the value changes. Don&rsquo;t put high-frequency state in context (mouse position, every keystroke). Split contexts &mdash; one for theme, one for auth, one for cart &mdash; so changing one doesn&rsquo;t re-render unrelated trees. For dark mode specifically, <strong>next-themes</strong> in Next.js handles SSR, <code>prefers-color-scheme</code>, and persistence with no flash. CSS variables + a <code>.dark</code> class are simpler than Context for purely visual theming.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q70">
-  <div class="qa__number">Question 70</div>
-  <h3 class="qa__question">How do you implement infinite scrolling in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[70] = r'''
 <p>Infinite scroll loads more items as the user reaches the bottom &mdash; common in feeds, search results, and image grids. Stack:</p>
 <pre><code>// 1. Cursor-paginated API
 GET /api/posts?cursor=eyJ0cyI6...&amp;limit=20
@@ -2584,15 +2066,9 @@ return (
   &lt;/&gt;
 );</code></pre>
 <p>For long feeds (10k+ items), virtualize with <strong>TanStack Virtual</strong> or <strong>react-window</strong> &mdash; render only the rows in view. Use cursor-based (not offset) pagination so new items inserted as the user scrolls don&rsquo;t cause skipped or duplicated rows. <strong>Restoring scroll position</strong> on back-navigation is tricky &mdash; remember <code>data.pages</code> count and scroll offset. Always provide a manual &ldquo;Load more&rdquo; fallback for accessibility (some users can&rsquo;t scroll-trigger). Avoid for content people are expected to find again (no clear &ldquo;page X&rdquo;); offset pagination is friendlier for navigation-heavy content.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q71">
-  <div class="qa__number">Question 71</div>
-  <h3 class="qa__question">How do you handle dates and times in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[71] = r'''
 <p>Date and time handling in MERN follows a few rules:</p>
 <ul>
 <li><strong>Server stores UTC.</strong> MongoDB <code>Date</code>/<code>ISODate</code> is always UTC. Don&rsquo;t store strings.</li>
@@ -2610,15 +2086,9 @@ const tz = Intl.DateTimeFormat().resolvedOptions().timeZone; // user TZ
 // "2 hours ago" relative
 formatDistanceToNow(new Date(iso), { addSuffix: true });</code></pre>
 <p>Library choices: <strong>date-fns</strong> (functional, tree-shakeable &mdash; default in 2026), <strong>Day.js</strong> (Moment-compatible, tiny), <strong>Luxon</strong> (timezone-strong), <strong>js-temporal/polyfill</strong> (the future via TC39 Temporal API). <strong>Avoid Moment.js</strong> &mdash; it&rsquo;s in maintenance mode and is huge. For date pickers, <strong>react-day-picker</strong>, <strong>react-datepicker</strong>, <strong>shadcn/ui</strong> Calendar (built on react-day-picker). For business-day math, <strong>date-fns-business-days</strong>. Always use <code>&lt;time dateTime="ISO"&gt;</code> for accessibility and SEO. Validate dates with Zod (<code>z.coerce.date()</code>); store recurrence rules as <strong>RRULE</strong> strings (RFC 5545) parsed with <strong>rrule.js</strong>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q72">
-  <div class="qa__number">Question 72</div>
-  <h3 class="qa__question">How do you create a responsive design in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[72] = r'''
 <p>Responsive design in React = the same component renders well on phone, tablet, and desktop. The toolkit:</p>
 <ul>
 <li><strong>CSS-driven, mobile-first</strong> &mdash; Tailwind&rsquo;s <code>md:</code>/<code>lg:</code> prefixes or media queries. Start with the smallest screen; add complexity at breakpoints.</li>
@@ -2631,15 +2101,9 @@ formatDistanceToNow(new Date(iso), { addSuffix: true });</code></pre>
   {/* one column on mobile, two on tablet, three on desktop */}
 &lt;/div&gt;</code></pre>
 <p>Test on real devices (or BrowserStack/LambdaTest); don&rsquo;t rely on the resize handle. <strong>Component libraries</strong>: <strong>shadcn/ui</strong>, <strong>Radix Primitives</strong>, <strong>Park UI</strong>, <strong>Mantine</strong>, <strong>Chakra UI</strong>, <strong>NextUI</strong>/<strong>HeroUI</strong>, <strong>Headless UI</strong> &mdash; ship responsive primitives (drawer / sheet that becomes a sidebar above <code>md</code>). For images, <code>srcset</code> and <code>&lt;picture&gt;</code>; in Next.js, the <code>&lt;Image&gt;</code> component handles all of this automatically. Avoid <code>useEffect</code>-based viewport detection &mdash; CSS solves layout faster and survives SSR.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q73">
-  <div class="qa__number">Question 73</div>
-  <h3 class="qa__question">How do you manage secrets and configurations in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[73] = r'''
 <p>Secrets (API keys, DB URIs, signing keys) and configuration (feature flags, URLs) need different handling than regular code:</p>
 <ul>
 <li><strong>Never commit secrets.</strong> Use <code>.gitignore</code>; if a secret leaks, rotate immediately. <strong>git-secrets</strong>, <strong>Gitleaks</strong>, <strong>Trufflehog</strong>, <strong>GitHub Secret Scanning</strong> catch slips.</li>
@@ -2657,15 +2121,9 @@ const env = z.object({
 }).parse(process.env);
 export default env;</code></pre>
 <p>For feature flags, separate from secrets: <strong>LaunchDarkly</strong>, <strong>Statsig</strong>, <strong>PostHog</strong>, <strong>Unleash</strong>, <strong>ConfigCat</strong>, <strong>Flagsmith</strong>. Rotate secrets on schedule; audit who reads them; use <strong>least-privilege IAM</strong> for cloud secrets.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q74">
-  <div class="qa__number">Question 74</div>
-  <h3 class="qa__question">How do you implement social login (OAuth) in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[74] = r'''
 <p>Social login (OAuth / OpenID Connect) lets users sign in with Google, GitHub, Apple, etc. The standard flow:</p>
 <ol>
 <li>User clicks &ldquo;Sign in with Google&rdquo; &rarr; redirected to Google.</li>
@@ -2689,15 +2147,9 @@ export const { handlers, signIn, auth } = NextAuth({
 <li><strong>Hosted</strong>: <strong>Clerk</strong>, <strong>Auth0</strong>, <strong>WorkOS</strong>, <strong>Stack Auth</strong>, <strong>Supabase Auth</strong>, <strong>Stytch</strong>, <strong>FusionAuth</strong>. Drop-in components, generous free tiers, handle MFA + SAML + audit. The default in 2026 production apps.</li>
 </ul>
 <p>Watch for: PKCE for SPAs, <code>state</code> parameter to prevent CSRF, scope minimization (request only what you need), email verification status from the provider. Store the provider <code>sub</code> (subject ID) as a stable user identity, not just email.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q75">
-  <div class="qa__number">Question 75</div>
-  <h3 class="qa__question">How do you handle accessibility in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[75] = r'''
 <p>Web accessibility (a11y) ensures users with disabilities can use the app. The basics every React app must get right:</p>
 <ul>
 <li><strong>Semantic HTML</strong> &mdash; <code>&lt;button&gt;</code>, not <code>&lt;div onClick&gt;</code>; <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;article&gt;</code>; one <code>&lt;h1&gt;</code> per page; <code>&lt;label&gt;</code> for every input.</li>
@@ -2709,15 +2161,10 @@ export const { handlers, signIn, auth } = NextAuth({
 <li><strong>Reduced motion</strong> &mdash; respect <code>prefers-reduced-motion</code>.</li>
 </ul>
 <p>Use <strong>Radix UI</strong>, <strong>React Aria</strong> (Adobe), <strong>Headless UI</strong>, or <strong>Ariakit</strong> for accessible primitives &mdash; they handle keyboard and ARIA correctly. Audit with <strong>axe DevTools</strong>, <strong>Lighthouse</strong>, <strong>WAVE</strong>; lint with <strong>eslint-plugin-jsx-a11y</strong>; run automated checks in CI with <strong>axe-core</strong>. Test with a screen reader (<strong>VoiceOver</strong> on Mac, <strong>NVDA</strong> on Windows). Accessibility is a legal requirement (ADA, EAA in EU 2025+) &mdash; not optional.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q76">
-  <div class="qa__number">Question 76</div>
-  <h3 class="qa__question">How do you implement a tagging system in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+
+ANSWERS[76] = r'''
 <p>A tagging system lets multiple tags be applied to many documents and supports queries like &ldquo;all posts tagged X&rdquo; and &ldquo;tag autocomplete.&rdquo;</p>
 <pre><code>// Simple: array of strings, multikey index
 db.posts.insertOne({
@@ -2741,15 +2188,9 @@ db.posts.aggregate([
 // Adding a tag (no duplicates)
 db.posts.updateOne({ _id: pid }, { $addToSet: { tags: "react" } });</code></pre>
 <p>For richer tag metadata (color, description, follower count) maintain a separate <code>tags</code> collection and reference by <code>tag_id</code> &mdash; that way renaming a tag doesn&rsquo;t require updating millions of posts. Autocomplete: <strong>MongoDB Atlas Search</strong>&rsquo;s <code>autocomplete</code> operator handles fuzzy + edge n-gram matching out of the box. UI side, components like <strong>react-select</strong>, <strong>downshift</strong>, <strong>cmdk</strong>, <strong>shadcn/ui</strong> Combobox handle the typeahead. Show top tags as a tag cloud (count drives size), &ldquo;related tags&rdquo; computed via co-occurrence in a periodic batch job. For SEO, generate <code>/tags/&lt;slug&gt;</code> pages with proper canonical URLs.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q77">
-  <div class="qa__number">Question 77</div>
-  <h3 class="qa__question">How do you create a progressive web app (PWA) with the MERN stack?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[77] = r'''
 <p>A <strong>Progressive Web App (PWA)</strong> is a website that can be installed, run offline, receive push notifications, and behaves like a native app. Three requirements:</p>
 <ul>
 <li><strong>HTTPS</strong> &mdash; mandatory for PWA features.</li>
@@ -2776,15 +2217,9 @@ export default defineConfig({
   ]
 });</code></pre>
 <p>Use <strong>Workbox</strong> (under <strong>vite-plugin-pwa</strong>/<strong>next-pwa</strong>) for caching strategies: cache-first for hashed assets, network-first with fallback for API calls, stale-while-revalidate for moderate-freshness content. Add <strong>Web Push notifications</strong> for re-engagement. Test with <strong>Lighthouse</strong>&rsquo;s PWA audit. Caveats in 2026: iOS Safari has improved PWA support but still trails Android/Chrome &mdash; push notifications work only on iOS 16.4+ via &ldquo;Add to Home Screen.&rdquo; For full app-store-distributed apps, use <strong>Capacitor</strong>/<strong>React Native</strong>/<strong>Expo</strong> &mdash; PWA stops at the OS shell.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q78">
-  <div class="qa__number">Question 78</div>
-  <h3 class="qa__question">How do you handle file encryption in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[78] = r'''
 <p>Encryption in MERN happens at multiple levels. &ldquo;File encryption&rdquo; usually means one of these:</p>
 <ul>
 <li><strong>Encryption at rest</strong> &mdash; provider-level (S3 SSE, MongoDB Atlas encryption at rest with AWS/GCP/Azure KMS). Default-on at most managed services. Protects against disk theft / cold backups.</li>
@@ -2800,15 +2235,9 @@ async function encryptFile(file) {
   return { ciphertext: ct, key, iv };
 }</code></pre>
 <p>For ad-hoc file encryption, <strong>libsodium-wrappers</strong> (sealed boxes) or <strong>WebCrypto</strong> directly. <strong>Key management is the hard part</strong> &mdash; lose the key, lose the file. Use <strong>passphrase-derived keys</strong> (PBKDF2/Argon2) with the user&rsquo;s password, or wrap user keys with a service like <strong>Hashicorp Vault Transit</strong> / <strong>AWS KMS</strong> / <strong>Skyflow</strong> / <strong>Basis Theory</strong> / <strong>CipherStash</strong>. For specific data classes (PII, PHI, payment), use <strong>tokenization vaults</strong> rather than raw encryption. MongoDB&rsquo;s <strong>Queryable Encryption (7.0+)</strong> supports <code>$eq</code> and range queries on encrypted fields server-side without the keys.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q79">
-  <div class="qa__number">Question 79</div>
-  <h3 class="qa__question">How do you implement a wishlist feature in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[79] = r'''
 <p>A wishlist (favorites, saved items) is a many-to-many relation between users and products. Two common shapes:</p>
 <pre><code>// 1. Embed array on user (simple, capped)
 db.users.updateOne(
@@ -2825,15 +2254,9 @@ db.wishlist_items.insertOne({
 });
 db.wishlist_items.find({ "_id.user_id": userId }).sort({ added_at: -1 });</code></pre>
 <p>Embedding works if a wishlist stays small (&lt; a few hundred items); use <code>$addToSet</code> for idempotency. The separate collection scales without limits, supports per-item metadata (note, priority, added date), and pages cleanly. The compound <code>_id</code> guarantees uniqueness and makes upserts efficient. For UI: <strong>TanStack Query</strong> with optimistic updates makes the heart-icon toggle feel instant. Show a count badge in the header. Notify on price drops via change streams + email/push. Common features: shareable wishlist URL (a slug like <code>/u/alice/wishlist</code>), default vs custom-named lists, &ldquo;move to cart&rdquo; in one click, restock alerts. For ecommerce platforms, <strong>Shopify</strong>/<strong>commercetools</strong>/<strong>Medusa</strong> ship wishlist primitives.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q80">
-  <div class="qa__number">Question 80</div>
-  <h3 class="qa__question">How do you handle data validation in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[80] = r'''
 <p>Validation in MERN should run at <strong>three layers</strong>:</p>
 <ul>
 <li><strong>Client</strong> &mdash; instant feedback. <strong>React Hook Form</strong> + <strong>Zod</strong>/<strong>Valibot</strong>.</li>
@@ -2865,15 +2288,9 @@ db.runCommand({
   validationLevel: "moderate"
 });</code></pre>
 <p>The discipline of <strong>one schema, three uses</strong> means validation rules live in one place. Server-side validation cannot be skipped &mdash; a malicious client can call your API with curl. <strong>Sanitize</strong> rich text with <strong>DOMPurify</strong>/<strong>rehype-sanitize</strong> &mdash; never trust raw HTML. For business-rule validation that crosses fields (start date before end date, total = sum of items), use <code>.refine()</code> in Zod. For complex domain rules, validate in service-layer code, not just in the schema.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q81">
-  <div class="qa__number">Question 81</div>
-  <h3 class="qa__question">How do you manage user profiles and settings in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[81] = r'''
 <p>User profiles and settings split into two collections (or two subdocuments) by access pattern:</p>
 <pre><code>// Profile &mdash; public-ish, displayed often
 db.users.insertOne({
@@ -2894,15 +2311,9 @@ db.user_settings.insertOne({
   updated_at: new Date()
 });</code></pre>
 <p>Why split: settings can grow large (notification preferences across many channels) and aren&rsquo;t needed when rendering a profile card. Keep the user doc small for the working set. <strong>Avatar uploads</strong> follow the standard pattern (S3 presigned URL, derived sizes via <strong>Cloudinary</strong>/<strong>imgix</strong>). <strong>Email change</strong> requires a verification step on the new address before commit. <strong>Account deletion</strong>: soft-delete first (<code>deleted_at: new Date()</code>) with grace period, then hard-delete via background job &mdash; comply with GDPR &ldquo;right to be forgotten&rdquo; (30 days is typical). <strong>Audit log</strong> sensitive changes (email, password, MFA). For settings UI use a tabbed/sectioned page: <strong>shadcn/ui</strong> patterns work well; <strong>react-hook-form</strong> with auto-save (<code>watch</code> + debounced PATCH) feels modern.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q82">
-  <div class="qa__number">Question 82</div>
-  <h3 class="qa__question">How do you implement a search engine optimization (SEO) strategy in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[82] = r'''
 <p>SEO for a MERN app starts with <strong>rendering HTML the crawler can read</strong>. A pure SPA returns a near-empty HTML shell &mdash; modern crawlers do execute JS but rendering is slower and ranks less well.</p>
 <ul>
 <li><strong>Server-side rendering</strong> &mdash; <strong>Next.js</strong> (App Router with server components), <strong>Remix</strong>/<strong>React Router v7</strong> framework mode. The de facto MERN-SEO answer in 2026.</li>
@@ -2917,15 +2328,9 @@ export const metadata = {
   alternates: { canonical: "https://example.com/posts/scale-mongo" }
 };</code></pre>
 <p>Beyond rendering: <strong>semantic HTML</strong>, <strong>structured data</strong> (JSON-LD for articles, products, ratings &mdash; Google&rsquo;s <strong>Search Console</strong> validates), <strong>sitemap.xml</strong> + <strong>robots.txt</strong>, <strong>canonical URLs</strong>, fast <strong>Core Web Vitals</strong> (LCP, INP, CLS), <strong>internationalization</strong> with <code>hreflang</code>, accessible markup. Tools: <strong>Google Search Console</strong>, <strong>Bing Webmaster Tools</strong>, <strong>Ahrefs</strong>, <strong>SEMrush</strong>, <strong>Screaming Frog</strong>. For a dynamic React app stuck on SPA mode, <strong>prerender.io</strong>/<strong>Rendertron</strong> serves bot-friendly HTML to crawlers via UA detection &mdash; a workaround, not a solution. The <strong>right answer in 2026 is to use Next.js or Remix</strong> from day one if SEO matters.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q83">
-  <div class="qa__number">Question 83</div>
-  <h3 class="qa__question">How do you handle large file uploads in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[83] = r'''
 <p>Large file uploads (&gt;100MB) need <strong>multipart upload</strong> and ideally <strong>direct-to-storage</strong> &mdash; bytes shouldn&rsquo;t flow through your Node server.</p>
 <pre><code>// 1. Initiate multipart upload (server)
 app.post("/api/uploads/init", async (req, res) =&gt; {
@@ -2951,15 +2356,9 @@ app.post("/api/uploads/complete", async (req, res) =&gt; {
   });
 });</code></pre>
 <p>S3 supports parts of 5MB-5GB; max object size 5TB. Parallel parts upload faster than sequential. <strong>Resumable uploads</strong> via <strong>tus.io</strong> protocol with <strong>uppy</strong> on the client &mdash; survives wifi drops, browser crashes, and 95% laptop battery. Show a progress bar, allow pause/resume. <strong>Validate</strong> client-side first (size limit, MIME type) but <em>also</em> server-side after upload (sniff the actual bytes). Compute <strong>SHA-256</strong> for integrity. For images, <strong>Cloudinary</strong>/<strong>imgix</strong>/<strong>Cloudflare Images</strong>; for video, <strong>Mux</strong>/<strong>Cloudflare Stream</strong>; for everything else, <strong>S3</strong>/<strong>R2</strong>/<strong>GCS</strong> + your CDN.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q84">
-  <div class="qa__number">Question 84</div>
-  <h3 class="qa__question">How do you create a custom middleware in Express?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[84] = r'''
 <p>Express middleware is a function that runs on every request matching its mount path, with access to <code>req</code>, <code>res</code>, and <code>next</code>. Custom middleware lets you add cross-cutting behavior &mdash; logging, auth, rate limiting, request IDs.</p>
 <pre><code>// Request ID middleware
 import { randomUUID } from "node:crypto";
@@ -2988,15 +2387,9 @@ app.use(requestId);
 app.use(pino-http());
 app.use("/api/admin", requireAuth, requireRole("admin"));</code></pre>
 <p>Rules: call <code>next()</code> exactly once (otherwise the response hangs); call <code>next(err)</code> to skip to error middleware; <strong>order matters</strong> &mdash; body parsers before validators, auth before authorization. <strong>Async middleware</strong>: wrap with try/catch and call <code>next(err)</code> &mdash; or use <strong>express-async-errors</strong>. Common reusable middleware to know: <strong>cors</strong>, <strong>helmet</strong>, <strong>express.json</strong>, <strong>cookie-parser</strong>, <strong>compression</strong>, <strong>express-rate-limit</strong>, <strong>pino-http</strong>. For Next.js Route Handlers and Hono/Fastify, the equivalent concept is also called middleware but with slightly different signatures.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q85">
-  <div class="qa__number">Question 85</div>
-  <h3 class="qa__question">How do you manage application state in a large React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[85] = r'''
 <p>Large React apps need a <strong>state ownership strategy</strong>, not just one library. The 2026 sane stack:</p>
 <ul>
 <li><strong>Server state</strong> &mdash; <strong>TanStack Query</strong> (React Query) or <strong>SWR</strong>. Owns everything fetched from the API. Handles caching, deduping, refetch, optimistic updates.</li>
@@ -3018,15 +2411,9 @@ export const useUIStore = create&lt;UIState&gt;((set) =&gt; ({
   toggleSidebar: () =&gt; set((s) =&gt; ({ sidebarOpen: !s.sidebarOpen }))
 }));</code></pre>
 <p>Avoid: putting server data in Zustand/Redux (you reinvent React Query badly); a single mega-store (slice it); putting transient UI state (modal open) in URLs unless deep-linking matters. <strong>Redux Toolkit</strong> still fits when you genuinely need its time-travel debugging or middleware patterns &mdash; but for most apps the smaller libraries win on ergonomics. <strong>XState</strong> for explicit state machines (wizards, payment flows). <strong>nuqs</strong> for typed URL state in Next.js.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q86">
-  <div class="qa__number">Question 86</div>
-  <h3 class="qa__question">How do you implement a custom error handler in Express?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[86] = r'''
 <p>A custom error handler in Express centralizes how errors become responses. It&rsquo;s defined as a 4-argument middleware (<code>err, req, res, next</code>) and goes <em>last</em>.</p>
 <pre><code>// Custom error classes
 class HttpError extends Error {
@@ -3053,15 +2440,9 @@ export function errorHandler(err, req, res, next) {
 
 app.use(errorHandler);  // last middleware</code></pre>
 <p>Pair with <strong>express-async-errors</strong> (or wrap async handlers in a try/catch helper) so thrown errors in async functions reach this middleware. Best practices: <strong>typed errors</strong> (custom classes), <strong>4xx vs 5xx</strong> distinction, <strong>structured logs</strong> (<strong>pino</strong>) including request ID, <strong>error tracking</strong> (<strong>Sentry</strong>/<strong>Honeybadger</strong>/<strong>Bugsnag</strong>) with stack traces and breadcrumbs, <strong>never leak stack traces</strong> in production responses, <strong>request IDs</strong> in error responses for support correlation. For per-route handlers, prefer throwing typed errors over manually returning &mdash; the global handler shapes the response consistently.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q87">
-  <div class="qa__number">Question 87</div>
-  <h3 class="qa__question">How do you handle rate limiting in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[87] = r'''
 <p>Rate limiting protects your API from brute-force attacks, scraping, and accidental thundering herds. Apply different limits per endpoint and per identity (IP / user / API key).</p>
 <pre><code>// express-rate-limit + Redis store (works across instances)
 import rateLimit from "express-rate-limit";
@@ -3082,15 +2463,9 @@ app.post("/api/auth/login", loginLimit, loginHandler);
 const apiLimit = rateLimit({ windowMs: 60_000, max: 120 });
 app.use("/api", apiLimit);</code></pre>
 <p>For serverless / edge, in-memory counters break across instances &mdash; use Redis. Modern alternative: <strong>Upstash Ratelimit</strong> (token bucket / sliding window via Upstash Redis or Cloudflare KV) or <strong>@vercel/firewall</strong>. <strong>Cloudflare</strong>/<strong>AWS WAF</strong>/<strong>Vercel WAF</strong> rate-limit at the edge before requests even reach your app. Strategies: <strong>fixed window</strong> (simple, vulnerable to bursts), <strong>sliding window</strong> (smoother), <strong>token bucket</strong> (burst-friendly), <strong>leaky bucket</strong>. Per-user limits use the user ID; for unauthenticated endpoints, IP &mdash; with care behind proxies (read <code>x-forwarded-for</code>, trust your LB only). Return <code>429 Too Many Requests</code> with <code>Retry-After</code> header. For especially sensitive endpoints (login, password reset), couple rate limit with <strong>CAPTCHA</strong> (<strong>hCaptcha</strong>/<strong>Cloudflare Turnstile</strong>) on suspicion.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q88">
-  <div class="qa__number">Question 88</div>
-  <h3 class="qa__question">How do you create a custom hook for data fetching in React?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[88] = r'''
 <p>A custom data-fetching hook encapsulates request, loading, error, and stale states. In 2026, <strong>don&rsquo;t roll your own from scratch</strong> &mdash; build on top of <strong>TanStack Query</strong> or <strong>SWR</strong>, which already handle caching, deduping, retries, and refetch.</p>
 <pre><code>// Wrapper for consistent API calls
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
@@ -3120,15 +2495,9 @@ export function useUpdateUser() {
 // In a component
 const { data, isLoading, error } = useUser(id);</code></pre>
 <p>This pattern beats hand-rolled <code>useEffect + useState + fetch</code> on every axis: cancellation (via <code>signal</code>), automatic refetch on focus / reconnect, deduped concurrent calls for the same key, optimistic updates, integrated devtools, suspense support. For a typed end-to-end API, <strong>tRPC</strong> generates hooks like <code>trpc.user.byId.useQuery({ id })</code>. For GraphQL, <strong>Apollo Client</strong>/<strong>urql</strong>. Build the wrapper once per resource type; let the libraries do the heavy lifting.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q89">
-  <div class="qa__number">Question 89</div>
-  <h3 class="qa__question">How do you implement two-factor authentication in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[89] = r'''
 <p>Two-factor authentication (2FA / MFA) requires a second factor beyond the password. The standard methods:</p>
 <ul>
 <li><strong>TOTP</strong> &mdash; time-based one-time passwords (Google Authenticator, Authy, 1Password). Most popular; offline; uses <strong>RFC 6238</strong>.</li>
@@ -3155,15 +2524,9 @@ function verify(code: string, secret: string) {
 if (user.totp_enabled &amp;&amp; !verify(req.body.code, user.totp_secret))
   return res.status(401).json({ error: "totp_required" });</code></pre>
 <p>Always provide <strong>backup codes</strong> (one-time use, hashed in DB) for lost devices. Store the TOTP secret encrypted (KMS-wrapped). Hosted auth (<strong>Clerk</strong>, <strong>Auth0</strong>, <strong>Stack Auth</strong>, <strong>Stytch</strong>, <strong>WorkOS</strong>) ships TOTP and Passkeys with one toggle. <strong>Passkeys</strong> via <strong>SimpleWebAuthn</strong> are dominant in 2026 &mdash; phishing-proof, no shared secret, biometric UX. Most apps should offer Passkeys + TOTP; SMS only on the explicit user&rsquo;s preference.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q90">
-  <div class="qa__number">Question 90</div>
-  <h3 class="qa__question">How do you handle session expiration in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[90] = r'''
 <p>Session expiration is the policy for how long a logged-in session stays valid. Two common patterns:</p>
 <pre><code>// 1. Short-lived access token + long-lived refresh token (JWT)
 // access_token: 15 min, in HttpOnly cookie
@@ -3185,15 +2548,9 @@ db.sessions.updateOne(
   { $set: { expires_at: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) } }
 );</code></pre>
 <p>The client experience: on a 401, the React app should automatically attempt refresh once and retry the original request &mdash; <strong>TanStack Query</strong>&rsquo;s <code>retry</code> + an axios interceptor handles this cleanly. If refresh fails, send the user to <code>/login?next=...</code> so they return where they were. <strong>Absolute</strong> vs <strong>idle</strong> expiration: idle sliding (active users stay logged in) plus an absolute cap (force re-auth after 30 days regardless). Sensitive operations (password change, payment) should require <strong>recent re-authentication</strong> regardless of session age. <strong>Revocation</strong>: server-side sessions can be deleted instantly; JWT access tokens can&rsquo;t (until they expire) &mdash; that&rsquo;s why you keep them short. <strong>Hosted auth</strong> handles all of this automatically with sane defaults.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q91">
-  <div class="qa__number">Question 91</div>
-  <h3 class="qa__question">How do you create a task scheduler in a Node.js application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[91] = r'''
 <p>Task scheduling in Node = running code at fixed times or intervals (cleanup jobs, daily reports, reminder emails). For a single instance, <strong>node-cron</strong> works; for production with multiple instances, you need a queue with scheduled jobs to avoid duplicate execution.</p>
 <pre><code>// Single instance &mdash; node-cron
 import cron from "node-cron";
@@ -3222,15 +2579,9 @@ new Worker("scheduled", async (job) =&gt; {
 <li><strong>QStash</strong> from Upstash &mdash; HTTP-triggered scheduled requests.</li>
 </ul>
 <p>Always make scheduled jobs <strong>idempotent</strong> (safe to run twice). Log success/failure; alert on misses (use a dead-man&rsquo;s switch like <strong>Healthchecks.io</strong> &mdash; a pinger that yells if a job didn&rsquo;t run). Don&rsquo;t do long work inside the schedule trigger; enqueue and return.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q92">
-  <div class="qa__number">Question 92</div>
-  <h3 class="qa__question">How do you implement data export to CSV or Excel in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[92] = r'''
 <p>CSV/Excel export has two paths depending on size.</p>
 <pre><code>// Small datasets &mdash; build and stream CSV in the request
 app.get("/api/orders/export.csv", async (req, res) =&gt; {
@@ -3251,15 +2602,9 @@ app.post("/api/orders/export", async (req, res) =&gt; {
   res.status(202).json({ jobId: job.id, status: "queued" });
 });</code></pre>
 <p>Library choices: <strong>csv-stringify</strong> for streaming CSV; <strong>fast-csv</strong> for parsing/streaming; <strong>exceljs</strong> for real <code>.xlsx</code> with formatting and formulas; <strong>SheetJS (xlsx)</strong> for compatibility (CSV/XLSX read+write). For Excel specifically, write XLSX rather than CSV when users need formulas, multiple sheets, or formatting. CSV pitfalls: BOM for UTF-8 (Excel can&rsquo;t detect otherwise), quote escaping, line endings (<code>\r\n</code> for Excel on Windows), comma vs semicolon (locale!). For huge exports (millions of rows), <strong>generate to S3 in a background job</strong> and email a download link &mdash; never block an HTTP request for minutes. <strong>Compression</strong>: gzip CSVs; XLSX is already a zip. <strong>Privacy</strong>: don&rsquo;t export fields the user shouldn&rsquo;t see; audit who exports what.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q93">
-  <div class="qa__number">Question 93</div>
-  <h3 class="qa__question">How do you handle multipart/form-data in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[93] = r'''
 <p><code>multipart/form-data</code> is the HTTP encoding for forms with files. Browsers send it when a form has <code>enctype="multipart/form-data"</code> or you submit a <code>FormData</code> object via <code>fetch</code>.</p>
 <pre><code>// Client
 const fd = new FormData();
@@ -3283,15 +2628,9 @@ app.post("/api/posts", upload.single("cover"), async (req, res) =&gt; {
   // ...save metadata, respond
 });</code></pre>
 <p><strong>Don&rsquo;t parse multipart by hand.</strong> Libraries: <strong>multer</strong> (Express classic), <strong>busboy</strong> (lower level, streaming), <strong>formidable</strong> (handles fields + files). For Next.js Route Handlers, use the native <code>request.formData()</code>. For large files, prefer <strong>presigned URLs</strong> direct to S3 and skip multipart through your server entirely &mdash; bytes through Node is wasteful and risky. Always set <code>limits</code> (file size, count) to prevent abuse; <strong>sniff</strong> the actual MIME type server-side (<strong>file-type</strong>) &mdash; the client-reported type is untrusted. Strip EXIF on uploaded images for privacy.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q94">
-  <div class="qa__number">Question 94</div>
-  <h3 class="qa__question">How do you create a dynamic form builder in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[94] = r'''
 <p>A dynamic form builder lets non-developers configure forms (a survey tool, an admin form designer). Form structure is data, rendered into React.</p>
 <pre><code>// Form schema in MongoDB
 db.forms.insertOne({
@@ -3328,15 +2667,9 @@ function DynamicForm({ schema }) {
   );
 }</code></pre>
 <p>Generate a Zod schema from the form definition for runtime validation server-side too. Libraries: <strong>react-jsonschema-form</strong> (RJSF) renders forms from JSON Schema; <strong>SurveyJS</strong> is feature-rich (skip logic, scoring, exports); <strong>Formily</strong> (Alibaba) for complex configurable forms; <strong>uniforms</strong> bridges schema to React. For visual builders, <strong>FormBricks</strong>, <strong>Tally</strong>, <strong>Typeform</strong>, <strong>Fillout</strong> are SaaS options &mdash; embed instead of build. Hard parts: <strong>conditional fields</strong> (&ldquo;show X only if Y is checked&rdquo;), <strong>repeating sections</strong> (multiple addresses), <strong>versioning</strong> (forms change; existing submissions reference the version they were created against), <strong>i18n</strong> of labels.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q95">
-  <div class="qa__number">Question 95</div>
-  <h3 class="qa__question">How do you handle optimistic concurrency in MongoDB?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[95] = r'''
 <p>Optimistic concurrency in MongoDB means letting writes proceed without locks but failing if the document changed since you read it. The pattern uses a <strong>version field</strong> in the filter.</p>
 <pre><code>// Read
 const doc = await Article.findById(id);
@@ -3356,15 +2689,9 @@ if (result.matchedCount === 0) {
   throw new ConflictError("document_changed");
 }</code></pre>
 <p>Mongoose adds a <code>__v</code> version key automatically and uses it for the same purpose on <code>save()</code>. The pattern fits collaborative editing scenarios where two users may edit the same record concurrently &mdash; the second writer is rejected and retries. Compare to <strong>pessimistic locking</strong> (rare in MongoDB): take a session lock for the duration of an edit. Optimistic is preferred because it scales (no held locks), is non-blocking, and matches eventual UI patterns. For high-frequency counter increments, <strong>atomic operators</strong> (<code>$inc</code>, <code>$addToSet</code>) skip the read-modify-write entirely &mdash; race-free by construction. For multi-document atomicity, MongoDB <strong>transactions</strong> (4.0+) offer ACID with WriteConflict retry. <strong>Application-level conflict resolution</strong>: show the user the diff, let them choose; or auto-merge if fields don&rsquo;t overlap (CRDT territory &mdash; <strong>Yjs</strong>/<strong>Automerge</strong>).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q96">
-  <div class="qa__number">Question 96</div>
-  <h3 class="qa__question">How do you implement a recommendation system in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[96] = r'''
 <p>A recommendation system suggests items based on user behavior or item similarity. Approaches scale from naive to sophisticated:</p>
 <ul>
 <li><strong>Popularity-based</strong> &mdash; &ldquo;most-bought,&rdquo; &ldquo;trending now.&rdquo; Easy. Aggregation pipeline computes nightly.</li>
@@ -3395,15 +2722,9 @@ db.products.aggregate([
   }
 ]);</code></pre>
 <p>In 2026, the practical answer for most MERN apps is <strong>vector search</strong>: embed items (description / tags / images) with <strong>OpenAI</strong>/<strong>Cohere</strong>/<strong>Voyage AI</strong> embeddings, store in <strong>MongoDB Atlas Vector Search</strong>/<strong>Pinecone</strong>/<strong>Weaviate</strong>/<strong>Qdrant</strong>, query by user&rsquo;s history-derived vector. For pre-built recommenders, <strong>Algolia Recommend</strong>, <strong>Klevu</strong>, <strong>Recombee</strong>, <strong>Bloomreach</strong>. For YouTube-/Spotify-scale recommendations, run two-tower models in <strong>TensorFlow Recommenders</strong>/<strong>PyTorch</strong>; export top-K to <strong>Redis</strong>/<strong>MongoDB</strong>; serve in milliseconds. Always A/B test recommendation strategies (<strong>Statsig</strong>/<strong>LaunchDarkly</strong>); measure CTR, conversion, retention.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q97">
-  <div class="qa__number">Question 97</div>
-  <h3 class="qa__question">How do you manage API versioning in a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[97] = r'''
 <p>API versioning lets you evolve your API without breaking existing clients. Three common styles:</p>
 <ul>
 <li><strong>URL path</strong> &mdash; <code>/api/v1/users</code>, <code>/api/v2/users</code>. Most explicit; easy to route. Common in MERN apps.</li>
@@ -3423,15 +2744,9 @@ v2.get("/users/:id", async (req, res) =&gt; {
   res.json(toV2(u));   // new shape
 });</code></pre>
 <p>Strategy: <strong>additive changes never break</strong> (new optional fields, new endpoints) &mdash; do these without bumping the version. <strong>Bump the major version</strong> only on breaking changes (renamed fields, removed fields, changed semantics). Run two versions in parallel during the deprecation window (3-12 months). Communicate via <strong>Sunset</strong> and <strong>Deprecation</strong> HTTP headers (RFC 8594, 9745). Track who&rsquo;s still using v1 (per-API-key analytics) and reach out before turning it off. <strong>Internal APIs</strong> often skip versioning by deploying client + server together &mdash; especially with <strong>tRPC</strong> or <strong>GraphQL</strong> where the schema is shared. For public APIs, <strong>OpenAPI</strong> spec per version, generate client SDKs (<strong>openapi-typescript</strong>, <strong>orval</strong>, <strong>Speakeasy</strong>). For mobile clients you don&rsquo;t control, version-from-day-one &mdash; you can&rsquo;t force-update users.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q98">
-  <div class="qa__number">Question 98</div>
-  <h3 class="qa__question">How do you handle client-side routing in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[98] = r'''
 <p>Client-side routing keeps the user&rsquo;s browser on the same page (no full reload) while the URL changes and the React tree swaps in new components. The 2026 dominant choices:</p>
 <ul>
 <li><strong>React Router v7</strong> &mdash; the merger of v6 + Remix. Both library mode (SPA) and framework mode (with loaders, actions, SSR). Most MERN tutorials.</li>
@@ -3455,15 +2770,9 @@ function Post() {
 
 &lt;RouterProvider router={router} /&gt;</code></pre>
 <p>Key concepts: <strong>browser history API</strong> under the hood; <strong>nested layouts</strong> (parent route persists when child changes &mdash; great for sidebars/tabs); <strong>data loaders</strong> (route-level data fetching, parallelized with route resolution); <strong>actions</strong> (form submissions tied to a route); <strong>error boundaries</strong> per route; <strong>code splitting</strong> via React.lazy + Suspense or framework-built-in. Watch out: <code>&lt;a href&gt;</code> causes a full reload &mdash; always use <code>&lt;Link&gt;</code> for internal links. <strong>Scroll restoration</strong>: React Router has <code>&lt;ScrollRestoration /&gt;</code>; otherwise you reset to top on every navigation. <strong>Auth guards</strong>: wrap protected routes (or use loaders that throw redirect responses). For server-rendered apps, framework mode handles SSR + data loading in one model.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q99">
-  <div class="qa__number">Question 99</div>
-  <h3 class="qa__question">How do you implement a breadcrumb navigation in a React application?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[99] = r'''
 <p>Breadcrumbs show the user&rsquo;s location in the site hierarchy and let them jump back. Three common ways to generate them in React:</p>
 <pre><code>// 1. From route definitions (declarative)
 const routes = [
@@ -3502,15 +2811,9 @@ function Breadcrumbs() {
   { label: "Widget" }
 ]} /&gt;</code></pre>
 <p>Best practices: <strong>semantic markup</strong> &mdash; <code>&lt;nav aria-label="Breadcrumb"&gt;</code> + ordered list; the current page is not a link and carries <code>aria-current="page"</code>; <strong>structured data</strong> (<code>BreadcrumbList</code> JSON-LD) helps SEO &mdash; Google shows breadcrumbs in search results. <strong>Don&rsquo;t replicate the URL</strong> &mdash; if a breadcrumb says &ldquo;Mens / Shirts / Blue&rdquo; but the URL is <code>/products/12345</code>, derive labels from data. <strong>Truncate on mobile</strong> with ellipsis if long. Don&rsquo;t use breadcrumbs for shallow hierarchies (one or two levels); they add clutter without helping.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q100">
-  <div class="qa__number">Question 100</div>
-  <h3 class="qa__question">How do you create a scalable folder structure for a MERN stack project?</h3>
-  <div class="qa__answer">
-    
+ANSWERS[100] = r'''
 <p>A scalable folder structure for MERN follows two principles: <strong>colocate by feature, not by layer</strong>; and <strong>flatten until growth forces nesting</strong>.</p>
 <pre><code>my-app/
 ├── apps/
@@ -3551,27 +2854,4 @@ function Breadcrumbs() {
 ├── turbo.json                         # Turborepo
 └── pnpm-workspace.yaml</code></pre>
 <p>Why this scales: features are self-contained (delete a feature = delete a folder); shared cross-cutting code lives in <code>packages/</code>; <strong>schemas</strong> shared between client and server kill drift; <strong>monorepo tools</strong> (<strong>Turborepo</strong>/<strong>Nx</strong>/<strong>moon</strong>) cache builds and run only changed targets. Use <strong>pnpm</strong>/<strong>Bun</strong> workspaces over npm for performance. <strong>Path aliases</strong> (<code>@/features/auth</code>) keep imports clean. <strong>Avoid</strong>: a top-level <code>components/</code> folder containing 200 unrelated files; deep nesting (more than 3 folders) without reason; mixing <code>controllers/</code>+<code>models/</code>+<code>routes/</code> when feature folders read better. Refactor as the app grows; over-architecting day-one slows you down.</p>
-
-    
-  </div>
-</article>
-
-    <nav class="chapter-nav" aria-label="Chapter navigation">
-      <a class="chapter-nav__prev" href="mongodb-scenario.html">
-      <span class="chapter-nav__dir">← Previous</span>
-      <span class="chapter-nav__title">MongoDB — Scenario Based</span>
-    </a>
-      <a class="chapter-nav__next" href="system-design-mern-advanced.html">
-      <span class="chapter-nav__dir">Next →</span>
-      <span class="chapter-nav__title">System Design MERN Stack — Advanced</span>
-    </a>
-    </nav>
-
-  </section>
-
-</main>
-</div>
-
-<script src="../assets/script.js"></script>
-</body>
-</html>
+'''

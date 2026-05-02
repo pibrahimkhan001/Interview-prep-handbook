@@ -21,14 +21,20 @@ Phase plan for filling in the remaining 21 stub chapters (~2,100 detailed answer
 
 ## Current phase
 
-### Phase 6: System Design & DevOps ← next
+### Phase 6: System Design & DevOps
 Architectural and infrastructure topics — longest, most essay-like answers.
 
-- System Design MERN Basic, Advanced, Scenario Based (300 Q)
-- Infrastructure MERN Basic, Advanced (200 Q)
-- CI/CD Pipeline Basic, Coding, Advanced, Scenario Based (400 Q)
+- [x] **System Design MERN Basic (100 Q)** &mdash; 2026-04-29
+- [x] **System Design MERN Advanced (100 Q)** &mdash; 2026-04-29
+- [x] **System Design MERN Scenario Based (100 Q)** &mdash; 2026-04-29 &mdash; **System Design MERN topic complete**
+- [ ] Infrastructure MERN Basic (100 Q) ← next
+- [ ] Infrastructure MERN Advanced (100 Q)
+- [ ] CI/CD Pipeline Basic (100 Q)
+- [ ] CI/CD Pipeline Coding (100 Q)
+- [ ] CI/CD Pipeline Advanced (100 Q)
+- [ ] CI/CD Pipeline Scenario Based (100 Q)
 
-**Total:** 900 answers (final phase).
+**Total:** 900 answers (final phase). Progress: 300/900 = 33%.
 
 ## Ordering rationale
 
