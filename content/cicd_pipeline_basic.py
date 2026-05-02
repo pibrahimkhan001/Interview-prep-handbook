@@ -1,118 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CI/CD Pipeline — Basic · Interview Prep Mastery</title>
-<meta name="description" content="100 basic interview questions on CI/CD Pipeline, with detailed explanations and examples.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="../assets/styles.css">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%239a6b1d'/%3E%3Ctext x='50' y='68' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold' font-size='48'%3EIP%3C/text%3E%3C/svg%3E">
-</head>
-<body>
-<header class="site-header">
-  <div class="site-header__inner">
-    <button class="menu-toggle" aria-label="Open menu" type="button">☰ Menu</button>
-    <a class="brand" href="../index.html">
-      <span class="brand__mark">IP</span>
-      <span class="brand__text">
-        <span class="brand__title">Interview Prep Mastery</span>
-        <span class="brand__subtitle">Interactive learning guide</span>
-      </span>
-    </a>
-    <nav class="header-nav">
-      <a href="../index.html#roadmap">Roadmap</a>
-      <a href="../index.html#chapters">All chapters</a>
-      <button class="theme-toggle" type="button" aria-label="Toggle color scheme">☾ Dark</button>
-    </nav>
-  </div>
-</header>
-<div class="layout">
-<aside class="sidebar" aria-label="Site navigation">
-  <div class="sidebar__header">Chapter Navigator</div>
-  
-        <div class="nav-part">
-          <div class="nav-part__label">Part 1</div>
-          <div class="nav-part__title">Core Programming Languages</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">JavaScript</li><li><a class="" href="../chapters/javascript-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/javascript-tricky.html"><span class="nav-item__title">Tricky</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-coding.html"><span class="nav-item__title">Advanced Coding</span><span class="nav-item__meta">100 questions · 100 min read</span></a></li><li><a class="" href="../chapters/javascript-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-scenario.html"><span class="nav-item__title">Advanced Scenario Based</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Python</li><li><a class="" href="../chapters/python-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/python-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 2</div>
-          <div class="nav-part__title">Web Fundamentals</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">HTML</li><li><a class="" href="../chapters/html-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/html-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/html-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CSS</li><li><a class="" href="../chapters/css-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">102 questions · 60 min read</span></a></li><li><a class="" href="../chapters/css-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/css-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">101 questions · 90 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 3</div>
-          <div class="nav-part__title">Backend Technologies</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Node.Js</li><li><a class="" href="../chapters/nodejs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/nodejs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ExpressJS</li><li><a class="" href="../chapters/expressjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/expressjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/expressjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">API</li><li><a class="" href="../chapters/api-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/api-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 4</div>
-          <div class="nav-part__title">Frontend Frameworks</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ReactJS</li><li><a class="" href="../chapters/reactjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">101 questions · 60 min read</span></a></li><li><a class="" href="../chapters/reactjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 5</div>
-          <div class="nav-part__title">Databases</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MYSQL</li><li><a class="" href="../chapters/mysql-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mysql-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MongoDB</li><li><a class="" href="../chapters/mongodb-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mongodb-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 6</div>
-          <div class="nav-part__title">System Design &amp; DevOps</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">System Design MERN Stack</li><li><a class="" href="../chapters/system-design-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Infrastructure MERN Stack</li><li><a class="" href="../chapters/infrastructure-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/infrastructure-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CI/CD Pipeline</li><li><a class="active" href="../chapters/cicd-pipeline-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-</aside>
-<main class="main" id="main">
+"""Detailed answers for CI/CD Pipeline &mdash; Basic level.
 
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="../index.html">Home</a>
-    <span class="breadcrumb__sep">›</span>
-    <a href="../index.html#part-6">System Design &amp; DevOps</a>
-    <span class="breadcrumb__sep">›</span>
-    <span>CI/CD Pipeline — Basic</span>
-  </nav>
+Each entry maps a 1-indexed question number to an HTML fragment that the build
+script wraps inside the chapter template. Style: Basic-level &mdash; concise prose
+with explicit bullets/tables, brief code blocks when essential, ~1,500-2,800
+chars per answer. References to 2026-current tooling (GitHub Actions, GitLab
+CI, CircleCI, Argo CD, Tekton, Buildkite, modern alternatives).
+"""
 
-  <header class="chapter-header">
-    <div class="chapter-label">CI/CD Pipeline · Basic</div>
-    <h1 class="chapter-title">Basic CI/CD Pipeline Interview Questions</h1>
-    <p class="chapter-lede">Foundational knowledge — definitions, syntax, and core mechanics every beginner should know.</p>
-    <div class="chapter-meta">
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Questions</span><span class="chapter-meta__value">100</span></div>
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Level</span><span class="chapter-meta__value">Basic</span></div>
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Estimated reading</span><span class="chapter-meta__value">60 min read</span></div>
-    </div>
-    
-  </header>
+ANSWERS: dict[int, str] = {}
 
-  <section class="prose">
-
-    <div class="toc" id="toc">
-      <div class="toc__title">All questions in this chapter</div>
-      <ul class="toc__list">
-        <li><a href="#q1"><span class="toc__num">1.</span>What is a CI/CD pipeline?</a></li><li><a href="#q2"><span class="toc__num">2.</span>Explain the purpose of Continuous Integration (CI).</a></li><li><a href="#q3"><span class="toc__num">3.</span>Explain the purpose of Continuous Deployment/Delivery (CD).</a></li><li><a href="#q4"><span class="toc__num">4.</span>What are the main benefits of using CI/CD?</a></li><li><a href="#q5"><span class="toc__num">5.</span>How does GitHub support CI/CD workflows?</a></li><li><a href="#q6"><span class="toc__num">6.</span>What is Docker and why is it used in CI/CD pipelines?</a></li><li><a href="#q7"><span class="toc__num">7.</span>Explain the purpose of Kubernetes in a CI/CD pipeline.</a></li><li><a href="#q8"><span class="toc__num">8.</span>What is Jenkins and how does it fit into CI/CD pipelines?</a></li><li><a href="#q9"><span class="toc__num">9.</span>How do you create a basic GitHub Action workflow?</a></li><li><a href="#q10"><span class="toc__num">10.</span>What is a Dockerfile?</a></li><li><a href="#q11"><span class="toc__num">11.</span>Explain the concept of containerization.</a></li><li><a href="#q12"><span class="toc__num">12.</span>What are the main components of a Kubernetes cluster?</a></li><li><a href="#q13"><span class="toc__num">13.</span>What are Jenkins pipelines?</a></li><li><a href="#q14"><span class="toc__num">14.</span>How do you trigger a build in Jenkins?</a></li><li><a href="#q15"><span class="toc__num">15.</span>What is the difference between a container and a virtual machine?</a></li><li><a href="#q16"><span class="toc__num">16.</span>How do you install Docker on a Linux machine?</a></li><li><a href="#q17"><span class="toc__num">17.</span>What is a GitHub repository?</a></li><li><a href="#q18"><span class="toc__num">18.</span>What are GitHub Actions?</a></li><li><a href="#q19"><span class="toc__num">19.</span>How do you install Jenkins on a server?</a></li><li><a href="#q20"><span class="toc__num">20.</span>What is the role of a Docker registry?</a></li><li><a href="#q21"><span class="toc__num">21.</span>How do you write a Dockerfile to create an image?</a></li><li><a href="#q22"><span class="toc__num">22.</span>What is a Kubernetes pod?</a></li><li><a href="#q23"><span class="toc__num">23.</span>How do you define a Jenkins pipeline in a Jenkinsfile?</a></li><li><a href="#q24"><span class="toc__num">24.</span>What are the stages in a CI/CD pipeline?</a></li><li><a href="#q25"><span class="toc__num">25.</span>How do you use environment variables in a CI/CD pipeline?</a></li><li><a href="#q26"><span class="toc__num">26.</span>What is a Docker Compose file?</a></li><li><a href="#q27"><span class="toc__num">27.</span>How do you scale applications using Kubernetes?</a></li><li><a href="#q28"><span class="toc__num">28.</span>How do you use secrets in GitHub Actions?</a></li><li><a href="#q29"><span class="toc__num">29.</span>What is the difference between Docker images and Docker containers?</a></li><li><a href="#q30"><span class="toc__num">30.</span>How do you deploy a Docker container using Kubernetes?</a></li><li><a href="#q31"><span class="toc__num">31.</span>How do you configure Jenkins to use GitHub?</a></li><li><a href="#q32"><span class="toc__num">32.</span>What is Helm in Kubernetes?</a></li><li><a href="#q33"><span class="toc__num">33.</span>How do you create a Docker image from a Dockerfile?</a></li><li><a href="#q34"><span class="toc__num">34.</span>How do you set up a GitHub repository?</a></li><li><a href="#q35"><span class="toc__num">35.</span>How do you use a Jenkins plugin?</a></li><li><a href="#q36"><span class="toc__num">36.</span>What are Kubernetes services?</a></li><li><a href="#q37"><span class="toc__num">37.</span>What is the role of a CI/CD pipeline in DevOps?</a></li><li><a href="#q38"><span class="toc__num">38.</span>How do you push a Docker image to Docker Hub?</a></li><li><a href="#q39"><span class="toc__num">39.</span>How do you create a GitHub Action for building a Docker image?</a></li><li><a href="#q40"><span class="toc__num">40.</span>What is a Kubernetes deployment?</a></li><li><a href="#q41"><span class="toc__num">41.</span>How do you secure a Jenkins server?</a></li><li><a href="#q42"><span class="toc__num">42.</span>What is the use of a Docker volume?</a></li><li><a href="#q43"><span class="toc__num">43.</span>How do you use GitHub Actions for CI/CD?</a></li><li><a href="#q44"><span class="toc__num">44.</span>What is a Jenkins agent?</a></li><li><a href="#q45"><span class="toc__num">45.</span>How do you create a Kubernetes namespace?</a></li><li><a href="#q46"><span class="toc__num">46.</span>What are Docker networks?</a></li><li><a href="#q47"><span class="toc__num">47.</span>How do you use GitHub Actions to deploy to Kubernetes?</a></li><li><a href="#q48"><span class="toc__num">48.</span>What is Jenkins Blue Ocean?</a></li><li><a href="#q49"><span class="toc__num">49.</span>How do you create a multi-container application using Docker Compose?</a></li><li><a href="#q50"><span class="toc__num">50.</span>What is the purpose of a Jenkinsfile?</a></li><li><a href="#q51"><span class="toc__num">51.</span>How do you use a Docker Compose file in a CI/CD pipeline?</a></li><li><a href="#q52"><span class="toc__num">52.</span>How do you rollback a deployment in Kubernetes?</a></li><li><a href="#q53"><span class="toc__num">53.</span>How do you set up a webhook in GitHub?</a></li><li><a href="#q54"><span class="toc__num">54.</span>What is a Jenkins node?</a></li><li><a href="#q55"><span class="toc__num">55.</span>How do you use Kubernetes ConfigMaps?</a></li><li><a href="#q56"><span class="toc__num">56.</span>How do you build a Docker image using Jenkins?</a></li><li><a href="#q57"><span class="toc__num">57.</span>What are GitHub secrets?</a></li><li><a href="#q58"><span class="toc__num">58.</span>How do you manage dependencies in Docker?</a></li><li><a href="#q59"><span class="toc__num">59.</span>What is a Kubernetes ingress?</a></li><li><a href="#q60"><span class="toc__num">60.</span>How do you integrate Jenkins with Docker?</a></li><li><a href="#q61"><span class="toc__num">61.</span>What is a Docker container registry?</a></li><li><a href="#q62"><span class="toc__num">62.</span>How do you use GitHub Actions to run tests?</a></li><li><a href="#q63"><span class="toc__num">63.</span>What are Kubernetes persistent volumes?</a></li><li><a href="#q64"><span class="toc__num">64.</span>How do you create a Jenkins pipeline from a Jenkinsfile?</a></li><li><a href="#q65"><span class="toc__num">65.</span>How do you use Docker Swarm?</a></li><li><a href="#q66"><span class="toc__num">66.</span>What is GitHub Actions Marketplace?</a></li><li><a href="#q67"><span class="toc__num">67.</span>How do you deploy a Jenkins server on Kubernetes?</a></li><li><a href="#q68"><span class="toc__num">68.</span>How do you monitor a Kubernetes cluster?</a></li><li><a href="#q69"><span class="toc__num">69.</span>How do you create a Docker network?</a></li><li><a href="#q70"><span class="toc__num">70.</span>How do you use GitHub Actions for automated testing?</a></li><li><a href="#q71"><span class="toc__num">71.</span>What is a Jenkins build step?</a></li><li><a href="#q72"><span class="toc__num">72.</span>How do you use Kubernetes Secrets?</a></li><li><a href="#q73"><span class="toc__num">73.</span>How do you run a Docker container?</a></li><li><a href="#q74"><span class="toc__num">74.</span>How do you use GitHub Actions to build and deploy a Node.js application?</a></li><li><a href="#q75"><span class="toc__num">75.</span>What is Jenkins Job DSL?</a></li><li><a href="#q76"><span class="toc__num">76.</span>How do you manage multiple Kubernetes clusters?</a></li><li><a href="#q77"><span class="toc__num">77.</span>What is Docker Hub?</a></li><li><a href="#q78"><span class="toc__num">78.</span>How do you set up continuous deployment with GitHub Actions?</a></li><li><a href="#q79"><span class="toc__num">79.</span>What is a Jenkins pipeline stage?</a></li><li><a href="#q80"><span class="toc__num">80.</span>How do you use Kubernetes DaemonSets?</a></li><li><a href="#q81"><span class="toc__num">81.</span>How do you tag a Docker image?</a></li><li><a href="#q82"><span class="toc__num">82.</span>How do you set up CI/CD for a Python application using GitHub Actions?</a></li><li><a href="#q83"><span class="toc__num">83.</span>What are Jenkins pipelines as code?</a></li><li><a href="#q84"><span class="toc__num">84.</span>How do you use Kubernetes StatefulSets?</a></li><li><a href="#q85"><span class="toc__num">85.</span>How do you pull a Docker image from Docker Hub?</a></li><li><a href="#q86"><span class="toc__num">86.</span>How do you configure GitHub Actions for a Java project?</a></li><li><a href="#q87"><span class="toc__num">87.</span>How do you schedule jobs in Jenkins?</a></li><li><a href="#q88"><span class="toc__num">88.</span>What are Kubernetes operators?</a></li><li><a href="#q89"><span class="toc__num">89.</span>How do you use a Dockerfile in a CI/CD pipeline?</a></li><li><a href="#q90"><span class="toc__num">90.</span>How do you use GitHub Actions to deploy to AWS?</a></li><li><a href="#q91"><span class="toc__num">91.</span>What is Jenkins Pipeline DSL?</a></li><li><a href="#q92"><span class="toc__num">92.</span>How do you use Helm charts in Kubernetes?</a></li><li><a href="#q93"><span class="toc__num">93.</span>How do you clean up Docker images and containers?</a></li><li><a href="#q94"><span class="toc__num">94.</span>How do you use GitHub Actions for security scanning?</a></li><li><a href="#q95"><span class="toc__num">95.</span>How do you set up a Jenkins master-slave architecture?</a></li><li><a href="#q96"><span class="toc__num">96.</span>How do you create a Kubernetes cluster using Minikube?</a></li><li><a href="#q97"><span class="toc__num">97.</span>What is a multi-stage Dockerfile?</a></li><li><a href="#q98"><span class="toc__num">98.</span>How do you use GitHub Actions for code coverage?</a></li><li><a href="#q99"><span class="toc__num">99.</span>What is a Jenkins declarative pipeline?</a></li><li><a href="#q100"><span class="toc__num">100.</span>How do you use Kubernetes RBAC?</a></li>
-      </ul>
-    </div>
-
-    
-<article class="qa" id="q1">
-  <div class="qa__number">Question 1</div>
-  <h3 class="qa__question">What is a CI/CD pipeline?</h3>
-  <div class="qa__answer">
-    <p>A <strong>CI/CD pipeline</strong> is an automated workflow that takes code from a developer&rsquo;s commit through to running production systems. CI (Continuous Integration) is the &ldquo;build &amp; test&rdquo; half: every push gets compiled, linted, unit-tested, and packaged. CD (Continuous Delivery or Deployment) is the &ldquo;ship&rdquo; half: tested artifacts get promoted through environments &mdash; staging, canary, production &mdash; with deployment, smoke tests, and rollback automation.</p>
+ANSWERS[1] = r'''<p>A <strong>CI/CD pipeline</strong> is an automated workflow that takes code from a developer&rsquo;s commit through to running production systems. CI (Continuous Integration) is the &ldquo;build &amp; test&rdquo; half: every push gets compiled, linted, unit-tested, and packaged. CD (Continuous Delivery or Deployment) is the &ldquo;ship&rdquo; half: tested artifacts get promoted through environments &mdash; staging, canary, production &mdash; with deployment, smoke tests, and rollback automation.</p>
 <p>A typical pipeline runs as YAML or DSL alongside the source code. For a MERN app it might look like this on GitHub Actions:</p>
 <pre><code># .github/workflows/ci.yml
 on: [push, pull_request]
@@ -135,15 +32,9 @@ jobs:
       - run: ./deploy.sh
 </code></pre>
 <p>Pipelines remove the &ldquo;works on my machine&rdquo; problem, catch regressions early, and let teams deploy multiple times per day with confidence. The 2026 default tools are <strong>GitHub Actions</strong> (most popular for OSS and private repos), <strong>GitLab CI/CD</strong> (integrated platform), <strong>CircleCI</strong>, and <strong>Buildkite</strong> for self-hosted agents on cloud control plane. For Kubernetes-native deployments, <strong>Argo CD</strong> and <strong>FluxCD</strong> handle the CD half via GitOps.</p>
-<p>Pipelines typically have stages: source &rarr; build &rarr; test &rarr; security scan &rarr; package &rarr; deploy &rarr; verify &rarr; promote. Each stage has clear pass/fail signals and can fan out into parallel jobs (e.g., test on Node 18/20/22 simultaneously). The contract is: if the pipeline is green, the code is shippable.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q2">
-  <div class="qa__number">Question 2</div>
-  <h3 class="qa__question">Explain the purpose of Continuous Integration (CI).</h3>
-  <div class="qa__answer">
-    <p><strong>Continuous Integration (CI)</strong> is the practice of merging every developer&rsquo;s changes into a shared mainline branch frequently &mdash; ideally multiple times per day &mdash; and validating each merge with an automated build and test suite. The goal is to catch integration problems within minutes instead of days, when the cost to fix is small.</p>
+<p>Pipelines typically have stages: source &rarr; build &rarr; test &rarr; security scan &rarr; package &rarr; deploy &rarr; verify &rarr; promote. Each stage has clear pass/fail signals and can fan out into parallel jobs (e.g., test on Node 18/20/22 simultaneously). The contract is: if the pipeline is green, the code is shippable.</p>'''
+
+ANSWERS[2] = r'''<p><strong>Continuous Integration (CI)</strong> is the practice of merging every developer&rsquo;s changes into a shared mainline branch frequently &mdash; ideally multiple times per day &mdash; and validating each merge with an automated build and test suite. The goal is to catch integration problems within minutes instead of days, when the cost to fix is small.</p>
 <p>Without CI, developers work on long-lived branches that drift apart, then face painful merge conflicts. With CI, every push triggers a pipeline that:</p>
 <ul>
 <li><strong>Compiles or transpiles</strong> the code (TypeScript, Babel, etc.)</li>
@@ -155,15 +46,9 @@ jobs:
 </ul>
 <p>If any step fails, the merge is blocked. This contract &mdash; main is always green &mdash; is what makes CI valuable. Teams using CI well report fewer production incidents, faster feature delivery, and higher confidence when refactoring.</p>
 <p>Modern CI requires <strong>fast feedback</strong>: tests should run in under 10 minutes for the typical PR, and under 30 minutes for the full suite. Achieve this via parallel jobs, test sharding, dependency caching (npm/pnpm/Docker layer cache), and incremental builds via Nx, Turborepo, or Bazel. Slow CI is worse than no CI &mdash; people start ignoring it.</p>
-<p>CI is foundational; CD builds on top. You can&rsquo;t safely automate deployment without first having confidence that what&rsquo;s being deployed actually works.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q3">
-  <div class="qa__number">Question 3</div>
-  <h3 class="qa__question">Explain the purpose of Continuous Deployment/Delivery (CD).</h3>
-  <div class="qa__answer">
-    <p><strong>Continuous Delivery</strong> and <strong>Continuous Deployment</strong> are related but distinct. The shared goal: get tested code into production safely and frequently. The difference is the trigger for the final production push.</p>
+<p>CI is foundational; CD builds on top. You can&rsquo;t safely automate deployment without first having confidence that what&rsquo;s being deployed actually works.</p>'''
+
+ANSWERS[3] = r'''<p><strong>Continuous Delivery</strong> and <strong>Continuous Deployment</strong> are related but distinct. The shared goal: get tested code into production safely and frequently. The difference is the trigger for the final production push.</p>
 <table>
 <thead><tr><th>Term</th><th>Trigger to prod</th><th>Use case</th></tr></thead>
 <tbody>
@@ -187,15 +72,9 @@ jobs:
 <li><strong>Feature flags:</strong> deploy code dark, then flip on for cohorts.</li>
 <li><strong>Database migrations:</strong> expand-then-contract (add nullable column, backfill, switch reads, drop old column) so any version can run against any schema during the rollout.</li>
 </ul>
-<p>The 2026 reality: most SaaS teams do Continuous Deployment with feature flags. Compliance-heavy teams (banks, healthcare) do Continuous Delivery with audit-logged manual approval.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q4">
-  <div class="qa__number">Question 4</div>
-  <h3 class="qa__question">What are the main benefits of using CI/CD?</h3>
-  <div class="qa__answer">
-    <p>The benefits of CI/CD compound over time and are well-documented in the DORA <em>Accelerate</em> research. The four DORA metrics &mdash; deployment frequency, lead time, change failure rate, MTTR &mdash; all improve with mature CI/CD.</p>
+<p>The 2026 reality: most SaaS teams do Continuous Deployment with feature flags. Compliance-heavy teams (banks, healthcare) do Continuous Delivery with audit-logged manual approval.</p>'''
+
+ANSWERS[4] = r'''<p>The benefits of CI/CD compound over time and are well-documented in the DORA <em>Accelerate</em> research. The four DORA metrics &mdash; deployment frequency, lead time, change failure rate, MTTR &mdash; all improve with mature CI/CD.</p>
 <table>
 <thead><tr><th>Benefit</th><th>What it looks like</th></tr></thead>
 <tbody>
@@ -212,15 +91,9 @@ jobs:
 </tbody>
 </table>
 <p>CI/CD also enables <strong>trunk-based development</strong>, where everyone commits to main multiple times per day behind feature flags. This eliminates merge hell from long-lived branches and is the dominant pattern at high-velocity orgs in 2026.</p>
-<p>Indirect benefits: better tests (because they run all the time, flakiness is intolerable), better infrastructure (Docker, IaC, observability are CI/CD prerequisites), better hiring story (engineers want to work somewhere they can ship). The org-level outcome is faster product iteration with fewer outages.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q5">
-  <div class="qa__number">Question 5</div>
-  <h3 class="qa__question">How does GitHub support CI/CD workflows?</h3>
-  <div class="qa__answer">
-    <p>GitHub supports CI/CD primarily through <strong>GitHub Actions</strong>, a native pipeline engine that runs YAML workflows triggered by repository events (push, pull request, issue, schedule, manual dispatch, webhook). Workflows live in <code>.github/workflows/*.yml</code> and are versioned with the code.</p>
+<p>Indirect benefits: better tests (because they run all the time, flakiness is intolerable), better infrastructure (Docker, IaC, observability are CI/CD prerequisites), better hiring story (engineers want to work somewhere they can ship). The org-level outcome is faster product iteration with fewer outages.</p>'''
+
+ANSWERS[5] = r'''<p>GitHub supports CI/CD primarily through <strong>GitHub Actions</strong>, a native pipeline engine that runs YAML workflows triggered by repository events (push, pull request, issue, schedule, manual dispatch, webhook). Workflows live in <code>.github/workflows/*.yml</code> and are versioned with the code.</p>
 <p>Beyond Actions, GitHub provides:</p>
 <ul>
 <li><strong>Branch protection rules</strong> &mdash; require status checks (CI green), required reviewers, signed commits, no force-push to main.</li>
@@ -247,15 +120,9 @@ jobs:
       - run: npm test
 </code></pre>
 <p>The runner ecosystem: GitHub-hosted runners (ubuntu-latest, macos-latest, windows-latest), self-hosted runners (your own infra, often K8s via Actions Runner Controller), and larger runners for heavy workloads. The Marketplace has tens of thousands of pre-built actions (Docker build, AWS deploy, Slack notify), though best practice is to pin actions to a SHA and audit before use to avoid supply-chain attacks.</p>
-<p>GitHub Actions has eclipsed Jenkins for new projects in 2026. CircleCI, Buildkite, and GitLab CI remain strong alternatives.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q6">
-  <div class="qa__number">Question 6</div>
-  <h3 class="qa__question">What is Docker and why is it used in CI/CD pipelines?</h3>
-  <div class="qa__answer">
-    <p><strong>Docker</strong> is a platform for packaging applications and their dependencies into <em>containers</em> &mdash; lightweight, isolated runtime environments built from layered images. A container bundles your code, runtime (Node.js, Python), system libraries, and config into one immutable unit that runs identically anywhere Docker is supported.</p>
+<p>GitHub Actions has eclipsed Jenkins for new projects in 2026. CircleCI, Buildkite, and GitLab CI remain strong alternatives.</p>'''
+
+ANSWERS[6] = r'''<p><strong>Docker</strong> is a platform for packaging applications and their dependencies into <em>containers</em> &mdash; lightweight, isolated runtime environments built from layered images. A container bundles your code, runtime (Node.js, Python), system libraries, and config into one immutable unit that runs identically anywhere Docker is supported.</p>
 <p>Why Docker is central to CI/CD pipelines:</p>
 <ul>
 <li><strong>Reproducibility:</strong> the same image that passes tests in CI runs in staging and production. Eliminates &ldquo;works on my machine&rdquo;.</li>
@@ -286,15 +153,9 @@ COPY --from=build /app/dist ./dist
 USER node
 CMD [&quot;node&quot;, &quot;dist/server.js&quot;]
 </code></pre>
-<p>The 2026 ecosystem: Docker Engine + Docker Desktop are still dominant, but <strong>Podman</strong> (rootless, daemon-less, drop-in replacement), <strong>Buildah</strong> (image building), and <strong>BuildKit</strong> (Docker&rsquo;s newer builder with parallelism and better caching) are common. <strong>Nerdctl</strong> + <strong>containerd</strong> is what Kubernetes actually runs under the hood.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q7">
-  <div class="qa__number">Question 7</div>
-  <h3 class="qa__question">Explain the purpose of Kubernetes in a CI/CD pipeline.</h3>
-  <div class="qa__answer">
-    <p><strong>Kubernetes (K8s)</strong> is the orchestration layer where containers run in production. In a CI/CD pipeline, Kubernetes is the deployment target: the pipeline builds a Docker image, pushes it to a registry, then updates a Kubernetes manifest to roll out the new version with zero downtime.</p>
+<p>The 2026 ecosystem: Docker Engine + Docker Desktop are still dominant, but <strong>Podman</strong> (rootless, daemon-less, drop-in replacement), <strong>Buildah</strong> (image building), and <strong>BuildKit</strong> (Docker&rsquo;s newer builder with parallelism and better caching) are common. <strong>Nerdctl</strong> + <strong>containerd</strong> is what Kubernetes actually runs under the hood.</p>'''
+
+ANSWERS[7] = r'''<p><strong>Kubernetes (K8s)</strong> is the orchestration layer where containers run in production. In a CI/CD pipeline, Kubernetes is the deployment target: the pipeline builds a Docker image, pushes it to a registry, then updates a Kubernetes manifest to roll out the new version with zero downtime.</p>
 <p>Why CI/CD pipelines need Kubernetes:</p>
 <ul>
 <li><strong>Declarative deploys:</strong> you describe the desired state (3 replicas, image v1.2.3, 2 GB memory) and K8s reconciles. No imperative scripts.</li>
@@ -314,15 +175,9 @@ CMD [&quot;node&quot;, &quot;dist/server.js&quot;]
 - run: kubectl rollout status deployment/api --timeout=5m
 </code></pre>
 <p>The 2026 standard is <strong>GitOps</strong>: instead of <code>kubectl set image</code> from CI, the pipeline updates a YAML file in a Git repo, and <strong>Argo CD</strong> or <strong>FluxCD</strong> watches that repo and reconciles the cluster. This gives you audit trail, rollback via git revert, and clean separation between CI (build) and CD (deploy).</p>
-<p>Managed K8s offerings dominate: <strong>EKS</strong> (AWS), <strong>GKE</strong> (Google &mdash; Autopilot is excellent), <strong>AKS</strong> (Azure). For multi-cluster: <strong>Rancher</strong>, <strong>Karmada</strong>, or fleet management via <strong>Cluster API</strong>. For simpler workloads, many teams skip K8s entirely and use Cloud Run, Fargate, or Fly Machines.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q8">
-  <div class="qa__number">Question 8</div>
-  <h3 class="qa__question">What is Jenkins and how does it fit into CI/CD pipelines?</h3>
-  <div class="qa__answer">
-    <p><strong>Jenkins</strong> is the original open-source automation server, dating to 2011 (forked from Hudson). It runs builds, tests, and deployments via plugins and scripts. For two decades it was the dominant CI/CD tool; today it&rsquo;s still widely used but losing ground to YAML-based, cloud-native alternatives.</p>
+<p>Managed K8s offerings dominate: <strong>EKS</strong> (AWS), <strong>GKE</strong> (Google &mdash; Autopilot is excellent), <strong>AKS</strong> (Azure). For multi-cluster: <strong>Rancher</strong>, <strong>Karmada</strong>, or fleet management via <strong>Cluster API</strong>. For simpler workloads, many teams skip K8s entirely and use Cloud Run, Fargate, or Fly Machines.</p>'''
+
+ANSWERS[8] = r'''<p><strong>Jenkins</strong> is the original open-source automation server, dating to 2011 (forked from Hudson). It runs builds, tests, and deployments via plugins and scripts. For two decades it was the dominant CI/CD tool; today it&rsquo;s still widely used but losing ground to YAML-based, cloud-native alternatives.</p>
 <p>Jenkins fits into CI/CD as the orchestration brain: a controller polls SCM (or receives webhooks), schedules jobs onto agent nodes, executes pipelines, and reports results. Pipelines are defined in a <code>Jenkinsfile</code> using Groovy DSL (declarative or scripted) and can be triggered by SCM changes, schedules, manual triggers, or upstream jobs.</p>
 <p>Example declarative Jenkinsfile:</p>
 <pre><code>pipeline {
@@ -352,15 +207,9 @@ CMD [&quot;node&quot;, &quot;dist/server.js&quot;]
 <li>UI feels dated; Blue Ocean helped but is essentially abandoned.</li>
 <li>YAML alternatives (GitHub Actions, GitLab CI, CircleCI) are simpler and cloud-native.</li>
 </ul>
-<p>For new projects in 2026, default to GitHub Actions or GitLab CI. Use Jenkins when you have existing investment, complex pipeline logic, or strict on-prem requirements. <strong>CloudBees</strong> sells managed/enterprise Jenkins. <strong>JenkinsX</strong> is a Kubernetes-native rewrite that didn&rsquo;t catch on; <strong>Tekton</strong> is the spiritual successor for K8s.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q9">
-  <div class="qa__number">Question 9</div>
-  <h3 class="qa__question">How do you create a basic GitHub Action workflow?</h3>
-  <div class="qa__answer">
-    <p>A GitHub Action workflow is a YAML file in <code>.github/workflows/</code> that defines triggers, jobs, and steps. The smallest useful workflow runs tests on every push and pull request:</p>
+<p>For new projects in 2026, default to GitHub Actions or GitLab CI. Use Jenkins when you have existing investment, complex pipeline logic, or strict on-prem requirements. <strong>CloudBees</strong> sells managed/enterprise Jenkins. <strong>JenkinsX</strong> is a Kubernetes-native rewrite that didn&rsquo;t catch on; <strong>Tekton</strong> is the spiritual successor for K8s.</p>'''
+
+ANSWERS[9] = r'''<p>A GitHub Action workflow is a YAML file in <code>.github/workflows/</code> that defines triggers, jobs, and steps. The smallest useful workflow runs tests on every push and pull request:</p>
 <pre><code># .github/workflows/ci.yml
 name: CI
 on:
@@ -405,15 +254,9 @@ jobs:
         env:
           API_KEY: ${{ secrets.PROD_API_KEY }}
 </code></pre>
-<p>Best practices: pin third-party actions to a commit SHA (<code>uses: org/action@a1b2c3d</code>), not a moving tag, to prevent supply-chain attacks. Use the GitHub-managed <code>${{ secrets.* }}</code> for credentials. Set the workflow timeout (<code>timeout-minutes: 30</code>). Add concurrency groups to cancel superseded runs (<code>concurrency: { group: ${{ github.ref }}, cancel-in-progress: true }</code>). For matrix builds across Node versions, use <code>strategy.matrix</code>.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q10">
-  <div class="qa__number">Question 10</div>
-  <h3 class="qa__question">What is a Dockerfile?</h3>
-  <div class="qa__answer">
-    <p>A <strong>Dockerfile</strong> is a plain-text recipe for building a Docker image. Each line is an instruction; together they describe how to layer a runtime environment on top of a base image. Docker reads it, executes the instructions, and produces an immutable image you can ship anywhere.</p>
+<p>Best practices: pin third-party actions to a commit SHA (<code>uses: org/action@a1b2c3d</code>), not a moving tag, to prevent supply-chain attacks. Use the GitHub-managed <code>${{ secrets.* }}</code> for credentials. Set the workflow timeout (<code>timeout-minutes: 30</code>). Add concurrency groups to cancel superseded runs (<code>concurrency: { group: ${{ github.ref }}, cancel-in-progress: true }</code>). For matrix builds across Node versions, use <code>strategy.matrix</code>.</p>'''
+
+ANSWERS[10] = r'''<p>A <strong>Dockerfile</strong> is a plain-text recipe for building a Docker image. Each line is an instruction; together they describe how to layer a runtime environment on top of a base image. Docker reads it, executes the instructions, and produces an immutable image you can ship anywhere.</p>
 <p>A typical Dockerfile for a Node.js application:</p>
 <pre><code># syntax=docker/dockerfile:1.7
 FROM node:20-alpine AS base
@@ -451,15 +294,9 @@ CMD [&quot;node&quot;, &quot;server.js&quot;]
 <li><strong>Pin versions</strong> for reproducibility (<code>node:20.11.1-alpine3.19</code>).</li>
 <li><strong>Run as non-root</strong>.</li>
 <li><strong>Scan images</strong> with Trivy, Grype, or Snyk before pushing to a registry.</li>
-</ul>
-    
-  </div>
-</article>
-<article class="qa" id="q11">
-  <div class="qa__number">Question 11</div>
-  <h3 class="qa__question">Explain the concept of containerization.</h3>
-  <div class="qa__answer">
-    <p><strong>Containerization</strong> is the practice of packaging an application together with its dependencies (libraries, runtime, config) into a self-contained unit &mdash; a <em>container</em> &mdash; that runs identically across environments. The OS kernel is shared with the host, but everything else is isolated via Linux primitives: <strong>namespaces</strong> (process, network, mount, PID, UTS, user) provide isolation, <strong>cgroups</strong> enforce resource limits (CPU, memory, I/O), and <strong>union filesystems</strong> (overlayfs) layer the image.</p>
+</ul>'''
+
+ANSWERS[11] = r'''<p><strong>Containerization</strong> is the practice of packaging an application together with its dependencies (libraries, runtime, config) into a self-contained unit &mdash; a <em>container</em> &mdash; that runs identically across environments. The OS kernel is shared with the host, but everything else is isolated via Linux primitives: <strong>namespaces</strong> (process, network, mount, PID, UTS, user) provide isolation, <strong>cgroups</strong> enforce resource limits (CPU, memory, I/O), and <strong>union filesystems</strong> (overlayfs) layer the image.</p>
 <table>
 <thead><tr><th>Aspect</th><th>VM</th><th>Container</th></tr></thead>
 <tbody>
@@ -481,15 +318,9 @@ CMD [&quot;node&quot;, &quot;server.js&quot;]
 <li>Pairs with orchestrators (Kubernetes, ECS, Nomad) for scheduling, scaling, healing.</li>
 <li>Foundation for modern serverless platforms (Cloud Run, AWS App Runner, Fargate, Fly Machines &mdash; all run OCI containers).</li>
 </ul>
-<p>Containerization is the de-facto deployment unit in 2026. Even &ldquo;serverless&rdquo; functions on Cloud Run, Fly, and modern Lambda are container-based under the hood.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q12">
-  <div class="qa__number">Question 12</div>
-  <h3 class="qa__question">What are the main components of a Kubernetes cluster?</h3>
-  <div class="qa__answer">
-    <p>A Kubernetes cluster has two layers: the <strong>control plane</strong> (the brain) and the <strong>worker nodes</strong> (where your pods run).</p>
+<p>Containerization is the de-facto deployment unit in 2026. Even &ldquo;serverless&rdquo; functions on Cloud Run, Fly, and modern Lambda are container-based under the hood.</p>'''
+
+ANSWERS[12] = r'''<p>A Kubernetes cluster has two layers: the <strong>control plane</strong> (the brain) and the <strong>worker nodes</strong> (where your pods run).</p>
 <table>
 <thead><tr><th>Component</th><th>Layer</th><th>Role</th></tr></thead>
 <tbody>
@@ -514,15 +345,9 @@ CMD [&quot;node&quot;, &quot;server.js&quot;]
 <li><strong>Service</strong> &mdash; stable network endpoint for a set of pods</li>
 <li><strong>Namespace</strong> &mdash; logical grouping for multi-tenancy</li>
 </ul>
-<p>In managed K8s (EKS/GKE/AKS), the cloud provider runs the control plane for you; you only manage worker nodes. <strong>GKE Autopilot</strong> goes further: the cloud manages nodes too. The 2026 trend is &ldquo;managed everything&rdquo; &mdash; very few teams should be running self-hosted K8s control planes.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q13">
-  <div class="qa__number">Question 13</div>
-  <h3 class="qa__question">What are Jenkins pipelines?</h3>
-  <div class="qa__answer">
-    <p><strong>Jenkins pipelines</strong> are the modern way to define CI/CD jobs in Jenkins as code, replacing the older &ldquo;Freestyle Project&rdquo; UI-clicking style. Pipelines are written in Groovy and stored in a <code>Jenkinsfile</code> at the root of your repository, so the pipeline definition is versioned alongside the code it builds.</p>
+<p>In managed K8s (EKS/GKE/AKS), the cloud provider runs the control plane for you; you only manage worker nodes. <strong>GKE Autopilot</strong> goes further: the cloud manages nodes too. The 2026 trend is &ldquo;managed everything&rdquo; &mdash; very few teams should be running self-hosted K8s control planes.</p>'''
+
+ANSWERS[13] = r'''<p><strong>Jenkins pipelines</strong> are the modern way to define CI/CD jobs in Jenkins as code, replacing the older &ldquo;Freestyle Project&rdquo; UI-clicking style. Pipelines are written in Groovy and stored in a <code>Jenkinsfile</code> at the root of your repository, so the pipeline definition is versioned alongside the code it builds.</p>
 <p>Two flavors:</p>
 <ul>
 <li><strong>Declarative</strong> &mdash; structured, opinionated, easier to read. The recommended default.</li>
@@ -568,15 +393,9 @@ CMD [&quot;node&quot;, &quot;server.js&quot;]
 <li><strong>post</strong> &mdash; cleanup, notifications, reporting after success/failure/always.</li>
 </ul>
 <p>Pipelines support <strong>shared libraries</strong> (reusable Groovy code across many Jenkinsfiles), <strong>Multibranch Pipelines</strong> (auto-discover branches and PRs), and <strong>parameterized builds</strong>. The Kubernetes plugin lets each stage spin up an ephemeral pod as the agent, eliminating long-lived agent state.</p>
-<p>Pipelines-as-code is the right way to use Jenkins in 2026 &mdash; the old Freestyle UI configurations are unmaintainable at any scale.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q14">
-  <div class="qa__number">Question 14</div>
-  <h3 class="qa__question">How do you trigger a build in Jenkins?</h3>
-  <div class="qa__answer">
-    <p>Jenkins builds can be triggered in many ways. The four most common, from manual to fully automated:</p>
+<p>Pipelines-as-code is the right way to use Jenkins in 2026 &mdash; the old Freestyle UI configurations are unmaintainable at any scale.</p>'''
+
+ANSWERS[14] = r'''<p>Jenkins builds can be triggered in many ways. The four most common, from manual to fully automated:</p>
 <ol>
 <li><strong>Manual / parameterized:</strong> click <em>Build Now</em> in the UI, optionally entering parameter values. Good for ad-hoc deploys, hotfixes, debugging.</li>
 <li><strong>SCM polling:</strong> Jenkins periodically pulls the repo and triggers if there&rsquo;s a new commit. Configured via cron syntax (<code>H/5 * * * *</code> = every 5 min). Inefficient at scale; prefer webhooks.</li>
@@ -596,15 +415,9 @@ CMD [&quot;node&quot;, &quot;server.js&quot;]
 <li>Test by pushing &mdash; the build should kick off within seconds.</li>
 </ol>
 <p>For Multibranch Pipelines, GitHub Branch Source plugin auto-discovers branches and PRs and creates a separate job per branch &mdash; the standard pattern for trunk-based development. Pull-request builds run on a merge-commit so you test the post-merge state.</p>
-<p>Real-world tip: avoid SCM polling at scale &mdash; it hammers your SCM with millions of LDAP/auth checks per day. Always use webhooks. Pair with a <strong>build queue</strong> and <strong>concurrency limits</strong> per job to prevent stampedes.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q15">
-  <div class="qa__number">Question 15</div>
-  <h3 class="qa__question">What is the difference between a container and a virtual machine?</h3>
-  <div class="qa__answer">
-    <p>Containers and virtual machines both isolate workloads, but at different layers of the stack. The simplest way to think about it: a VM virtualizes <em>hardware</em>, a container virtualizes the <em>process</em>.</p>
+<p>Real-world tip: avoid SCM polling at scale &mdash; it hammers your SCM with millions of LDAP/auth checks per day. Always use webhooks. Pair with a <strong>build queue</strong> and <strong>concurrency limits</strong> per job to prevent stampedes.</p>'''
+
+ANSWERS[15] = r'''<p>Containers and virtual machines both isolate workloads, but at different layers of the stack. The simplest way to think about it: a VM virtualizes <em>hardware</em>, a container virtualizes the <em>process</em>.</p>
 <table>
 <thead><tr><th>Aspect</th><th>Virtual Machine</th><th>Container</th></tr></thead>
 <tbody>
@@ -622,15 +435,9 @@ CMD [&quot;node&quot;, &quot;server.js&quot;]
 </table>
 <p>Practical implication: VMs are heavier but more isolated. If you&rsquo;re running untrusted code from random tenants on the same host, VMs (or VM-like sandboxes such as <strong>Firecracker</strong>, <strong>gVisor</strong>, or <strong>Kata Containers</strong>) are the safer choice. AWS Lambda and Fly Machines run on Firecracker microVMs precisely because container isolation isn&rsquo;t enough for arbitrary tenant code.</p>
 <p>For trusted workloads (your own services), containers are cheaper, faster, and more portable. Hybrid approaches are common: VMs as Kubernetes nodes (cluster autoscaling spins up VMs), then many containers per node. Cloud providers offer per-second billing on both.</p>
-<p>2026 trend: <strong>microVMs</strong> (Firecracker, Cloud Hypervisor) blur the line. They boot in 100ms like containers but provide VM-grade isolation. <strong>WebAssembly (Wasm)</strong> is the next abstraction layer down &mdash; even smaller, even faster, even more portable, but with a smaller ecosystem.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q16">
-  <div class="qa__number">Question 16</div>
-  <h3 class="qa__question">How do you install Docker on a Linux machine?</h3>
-  <div class="qa__answer">
-    <p>Installing Docker on Linux varies by distribution. The official method uses Docker&rsquo;s apt or dnf repositories. For Ubuntu 22.04+ (the most common dev/CI runner OS):</p>
+<p>2026 trend: <strong>microVMs</strong> (Firecracker, Cloud Hypervisor) blur the line. They boot in 100ms like containers but provide VM-grade isolation. <strong>WebAssembly (Wasm)</strong> is the next abstraction layer down &mdash; even smaller, even faster, even more portable, but with a smaller ecosystem.</p>'''
+
+ANSWERS[16] = r'''<p>Installing Docker on Linux varies by distribution. The official method uses Docker&rsquo;s apt or dnf repositories. For Ubuntu 22.04+ (the most common dev/CI runner OS):</p>
 <pre><code># Remove any old Docker packages
 sudo apt remove docker docker-engine docker.io containerd runc
 
@@ -671,15 +478,9 @@ docker run hello-world  # no sudo needed
 <li><strong>nerdctl</strong> &mdash; CLI for containerd, Docker-CLI-compatible. What you&rsquo;d use if you&rsquo;re running containerd directly.</li>
 <li><strong>Docker Desktop</strong> &mdash; for Mac/Windows dev. Now requires a paid license for orgs &gt;250 employees or &gt;$10M revenue. Alternatives: <strong>Colima</strong>, <strong>Rancher Desktop</strong>, <strong>OrbStack</strong> (macOS, very fast), <strong>Podman Desktop</strong>.</li>
 </ul>
-<p>For CI runners, you usually don&rsquo;t install Docker yourself &mdash; GitHub-hosted runners ship with Docker preinstalled. For self-hosted runners on K8s, use <strong>kaniko</strong> or <strong>BuildKit</strong> for rootless image builds without Docker-in-Docker risks.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q17">
-  <div class="qa__number">Question 17</div>
-  <h3 class="qa__question">What is a GitHub repository?</h3>
-  <div class="qa__answer">
-    <p>A <strong>GitHub repository</strong> (&ldquo;repo&rdquo;) is a hosted Git repository on GitHub.com plus a layer of project-management features built around it. At the core: source code, branches, tags, and history. Around it: collaboration tools (pull requests, code review, issues), CI/CD (Actions, Environments), security (Dependabot, secret scanning, CodeQL), packaging (Releases, Packages, Container Registry), documentation (README, Wiki, Pages), and access control (teams, roles, branch protection).</p>
+<p>For CI runners, you usually don&rsquo;t install Docker yourself &mdash; GitHub-hosted runners ship with Docker preinstalled. For self-hosted runners on K8s, use <strong>kaniko</strong> or <strong>BuildKit</strong> for rootless image builds without Docker-in-Docker risks.</p>'''
+
+ANSWERS[17] = r'''<p>A <strong>GitHub repository</strong> (&ldquo;repo&rdquo;) is a hosted Git repository on GitHub.com plus a layer of project-management features built around it. At the core: source code, branches, tags, and history. Around it: collaboration tools (pull requests, code review, issues), CI/CD (Actions, Environments), security (Dependabot, secret scanning, CodeQL), packaging (Releases, Packages, Container Registry), documentation (README, Wiki, Pages), and access control (teams, roles, branch protection).</p>
 <p>Repositories have visibility levels:</p>
 <ul>
 <li><strong>Public</strong> &mdash; anyone can clone and read. Free Actions minutes are larger here.</li>
@@ -707,15 +508,9 @@ docker run hello-world  # no sudo needed
 <li><code>.github/dependabot.yml</code> &mdash; configure auto dependency updates.</li>
 <li><code>SECURITY.md</code> &mdash; vulnerability reporting policy.</li>
 </ul>
-<p>For CI/CD, the repository is the natural unit: workflows, secrets, environments, and branch rules all scope to it. Larger orgs use a mix of repo-level and org-level settings (org secrets, org rulesets, org Actions cache).</p>
-    
-  </div>
-</article>
-<article class="qa" id="q18">
-  <div class="qa__number">Question 18</div>
-  <h3 class="qa__question">What are GitHub Actions?</h3>
-  <div class="qa__answer">
-    <p><strong>GitHub Actions</strong> is GitHub&rsquo;s native CI/CD and automation platform, launched in 2018 and now the most popular CI tool for new projects in 2026. Workflows are YAML files in <code>.github/workflows/</code> triggered by repository events (push, PR, issue, schedule, manual dispatch, webhooks).</p>
+<p>For CI/CD, the repository is the natural unit: workflows, secrets, environments, and branch rules all scope to it. Larger orgs use a mix of repo-level and org-level settings (org secrets, org rulesets, org Actions cache).</p>'''
+
+ANSWERS[18] = r'''<p><strong>GitHub Actions</strong> is GitHub&rsquo;s native CI/CD and automation platform, launched in 2018 and now the most popular CI tool for new projects in 2026. Workflows are YAML files in <code>.github/workflows/</code> triggered by repository events (push, PR, issue, schedule, manual dispatch, webhooks).</p>
 <p>Anatomy:</p>
 <ul>
 <li><strong>Workflow</strong> &mdash; one YAML file. Has triggers, jobs, and global config.</li>
@@ -743,15 +538,9 @@ docker run hello-world  # no sudo needed
 <li><strong>Concurrency control</strong> &mdash; cancel in-progress runs when a newer one starts on the same branch.</li>
 <li><strong>Artifacts and caches</strong> &mdash; share files between jobs; cache <code>node_modules</code> across runs.</li>
 </ul>
-<p>Pricing: free for public repos with high quotas; private repos get a monthly free allowance plus per-minute billing. Self-hosted runners are unlimited (you pay only for the underlying compute). The 2026 trend: most orgs run a mix of GitHub-hosted runners for general work and self-hosted on Kubernetes (via Actions Runner Controller) for heavy or specialized jobs.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q19">
-  <div class="qa__number">Question 19</div>
-  <h3 class="qa__question">How do you install Jenkins on a server?</h3>
-  <div class="qa__answer">
-    <p>Installing Jenkins on a Linux server uses the official package repos. For Ubuntu/Debian:</p>
+<p>Pricing: free for public repos with high quotas; private repos get a monthly free allowance plus per-minute billing. Self-hosted runners are unlimited (you pay only for the underlying compute). The 2026 trend: most orgs run a mix of GitHub-hosted runners for general work and self-hosted on Kubernetes (via Actions Runner Controller) for heavy or specialized jobs.</p>'''
+
+ANSWERS[19] = r'''<p>Installing Jenkins on a Linux server uses the official package repos. For Ubuntu/Debian:</p>
 <pre><code># Install Java (Jenkins LTS needs Java 17 or 21 in 2026)
 sudo apt update
 sudo apt install -y fontconfig openjdk-17-jre
@@ -790,15 +579,9 @@ sudo systemctl status jenkins
 <li><strong>Kubernetes:</strong> install via the Jenkins Helm chart; pair with the Kubernetes plugin so each build runs in an ephemeral pod.</li>
 <li><strong>CloudBees CI</strong> &mdash; commercial, managed-or-self-hosted Jenkins for enterprises with audit, security, and team management features.</li>
 </ul>
-<p>For new projects, ask whether you actually need Jenkins. GitHub Actions, GitLab CI, or CircleCI are simpler choices for most teams in 2026.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q20">
-  <div class="qa__number">Question 20</div>
-  <h3 class="qa__question">What is the role of a Docker registry?</h3>
-  <div class="qa__answer">
-    <p>A <strong>Docker registry</strong> is a server that stores and distributes Docker (OCI) images. Pipelines push images to a registry after building; deployment targets pull from it when starting containers. Registries are the source of truth for &ldquo;which version of which service is available&rdquo;.</p>
+<p>For new projects, ask whether you actually need Jenkins. GitHub Actions, GitLab CI, or CircleCI are simpler choices for most teams in 2026.</p>'''
+
+ANSWERS[20] = r'''<p>A <strong>Docker registry</strong> is a server that stores and distributes Docker (OCI) images. Pipelines push images to a registry after building; deployment targets pull from it when starting containers. Registries are the source of truth for &ldquo;which version of which service is available&rdquo;.</p>
 <p>The role in CI/CD:</p>
 <ul>
 <li><strong>Build &rarr; push:</strong> CI builds an image and pushes it tagged with the git SHA, branch, and/or semver version.</li>
@@ -826,15 +609,9 @@ docker tag myapp:1.0 ghcr.io/me/myapp:1.0
 docker push ghcr.io/me/myapp:1.0
 docker pull ghcr.io/me/myapp:1.0
 </code></pre>
-<p>Best practices: tag images with both <code>:sha-abc1234</code> (immutable, traceable) and <code>:1.2.3</code> (semver) and optionally <code>:latest</code> for convenience. Scan images for CVEs (Trivy, Grype, Snyk) before promoting to prod. Sign images with <strong>Sigstore Cosign</strong> and verify in Kubernetes admission control. Set up retention policies so old images don&rsquo;t bloat the registry indefinitely. Use <strong>image immutability</strong> rules &mdash; once a tag is pushed, it cannot be overwritten &mdash; to prevent supply-chain tampering.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q21">
-  <div class="qa__number">Question 21</div>
-  <h3 class="qa__question">How do you write a Dockerfile to create an image?</h3>
-  <div class="qa__answer">
-    <p>A <strong>Dockerfile</strong> describes how to build an image as a sequence of instructions. Each instruction creates a layer; layers are cached, so well-ordered Dockerfiles rebuild fast. Best practice in 2026 is <strong>multi-stage builds</strong> + <strong>non-root user</strong> + <strong>small base image</strong>.</p>
+<p>Best practices: tag images with both <code>:sha-abc1234</code> (immutable, traceable) and <code>:1.2.3</code> (semver) and optionally <code>:latest</code> for convenience. Scan images for CVEs (Trivy, Grype, Snyk) before promoting to prod. Sign images with <strong>Sigstore Cosign</strong> and verify in Kubernetes admission control. Set up retention policies so old images don&rsquo;t bloat the registry indefinitely. Use <strong>image immutability</strong> rules &mdash; once a tag is pushed, it cannot be overwritten &mdash; to prevent supply-chain tampering.</p>'''
+
+ANSWERS[21] = r'''<p>A <strong>Dockerfile</strong> describes how to build an image as a sequence of instructions. Each instruction creates a layer; layers are cached, so well-ordered Dockerfiles rebuild fast. Best practice in 2026 is <strong>multi-stage builds</strong> + <strong>non-root user</strong> + <strong>small base image</strong>.</p>
 <p>Example for a Node.js + TypeScript API:</p>
 <pre><code># syntax=docker/dockerfile:1.7
 ARG NODE_VERSION=20.11-alpine
@@ -878,15 +655,9 @@ CMD [&quot;node&quot;, &quot;dist/server.js&quot;]
 <li><strong>USER node</strong> drops from root to a non-privileged user (<code>node</code> user is built into the official Node images).</li>
 <li><strong>HEALTHCHECK</strong> lets Docker, ECS, and Kubernetes detect unhealthy containers.</li>
 </ul>
-<p>Add a <code>.dockerignore</code> to exclude <code>node_modules</code>, <code>.git</code>, build outputs, secrets &mdash; the build context is sent to the daemon, so excluding garbage speeds up builds and prevents leaking files. Scan with <code>docker scout</code> or <code>trivy image</code> before pushing. For ultimate slimness, switch the runtime base to <strong>distroless</strong> (<code>gcr.io/distroless/nodejs20-debian12</code>) or <strong>Chainguard</strong> images.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q22">
-  <div class="qa__number">Question 22</div>
-  <h3 class="qa__question">What is a Kubernetes pod?</h3>
-  <div class="qa__answer">
-    <p>A <strong>Pod</strong> is the smallest deployable unit in Kubernetes. It&rsquo;s a wrapper around one or more containers that share network namespace, IPC, and storage volumes. The containers in a pod run on the same node, share <code>localhost</code>, and can mount the same volumes &mdash; they&rsquo;re effectively co-located processes. Most pods have a single primary container, with secondary containers acting as <strong>sidecars</strong> (logging shipper, service mesh proxy, secrets fetcher) or <strong>init containers</strong> (run once before the main containers, e.g., DB migrations).</p>
+<p>Add a <code>.dockerignore</code> to exclude <code>node_modules</code>, <code>.git</code>, build outputs, secrets &mdash; the build context is sent to the daemon, so excluding garbage speeds up builds and prevents leaking files. Scan with <code>docker scout</code> or <code>trivy image</code> before pushing. For ultimate slimness, switch the runtime base to <strong>distroless</strong> (<code>gcr.io/distroless/nodejs20-debian12</code>) or <strong>Chainguard</strong> images.</p>'''
+
+ANSWERS[22] = r'''<p>A <strong>Pod</strong> is the smallest deployable unit in Kubernetes. It&rsquo;s a wrapper around one or more containers that share network namespace, IPC, and storage volumes. The containers in a pod run on the same node, share <code>localhost</code>, and can mount the same volumes &mdash; they&rsquo;re effectively co-located processes. Most pods have a single primary container, with secondary containers acting as <strong>sidecars</strong> (logging shipper, service mesh proxy, secrets fetcher) or <strong>init containers</strong> (run once before the main containers, e.g., DB migrations).</p>
 <p>Example pod manifest:</p>
 <pre><code>apiVersion: v1
 kind: Pod
@@ -928,15 +699,9 @@ spec:
 <li><strong>DaemonSet</strong> &mdash; one pod per node (log shippers, monitoring agents, CNI).</li>
 <li><strong>Job / CronJob</strong> &mdash; run-to-completion tasks.</li>
 </ul>
-<p>The pod is the boundary of co-location and shared lifecycle: scale up, you get more pods, each a fresh copy of the template. The 2026 trend: most teams keep pods to a single container plus a service-mesh sidecar (or use Istio Ambient / Linkerd to eliminate even that).</p>
-    
-  </div>
-</article>
-<article class="qa" id="q23">
-  <div class="qa__number">Question 23</div>
-  <h3 class="qa__question">How do you define a Jenkins pipeline in a Jenkinsfile?</h3>
-  <div class="qa__answer">
-    <p>A <strong>Jenkinsfile</strong> defines a Jenkins pipeline as code, stored at the root of your repository. The two syntaxes &mdash; declarative and scripted &mdash; both produce the same execution. Declarative is the modern default: structured, readable, easier to validate.</p>
+<p>The pod is the boundary of co-location and shared lifecycle: scale up, you get more pods, each a fresh copy of the template. The 2026 trend: most teams keep pods to a single container plus a service-mesh sidecar (or use Istio Ambient / Linkerd to eliminate even that).</p>'''
+
+ANSWERS[23] = r'''<p>A <strong>Jenkinsfile</strong> defines a Jenkins pipeline as code, stored at the root of your repository. The two syntaxes &mdash; declarative and scripted &mdash; both produce the same execution. Declarative is the modern default: structured, readable, easier to validate.</p>
 <p>Minimal declarative Jenkinsfile:</p>
 <pre><code>pipeline {
   agent any
@@ -1000,15 +765,9 @@ spec:
 <li><strong>post</strong> &mdash; hooks: always, success, failure, unstable, changed.</li>
 <li><strong>withCredentials</strong> &mdash; bind Jenkins-stored secrets to env vars without leaking them in logs.</li>
 </ul>
-<p>For Multibranch Pipelines, Jenkins discovers branches and PRs automatically and runs the Jenkinsfile from each branch. Combine with <strong>Shared Libraries</strong> for reusable Groovy across many repos. Validate locally with the <code>jenkins-cli declarative-linter</code> command or VS Code Jenkinsfile extensions.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q24">
-  <div class="qa__number">Question 24</div>
-  <h3 class="qa__question">What are the stages in a CI/CD pipeline?</h3>
-  <div class="qa__answer">
-    <p>A typical CI/CD pipeline progresses through a series of <strong>stages</strong>, each with a clear pass/fail signal. The exact list varies by team, but the canonical stages in 2026:</p>
+<p>For Multibranch Pipelines, Jenkins discovers branches and PRs automatically and runs the Jenkinsfile from each branch. Combine with <strong>Shared Libraries</strong> for reusable Groovy across many repos. Validate locally with the <code>jenkins-cli declarative-linter</code> command or VS Code Jenkinsfile extensions.</p>'''
+
+ANSWERS[24] = r'''<p>A typical CI/CD pipeline progresses through a series of <strong>stages</strong>, each with a clear pass/fail signal. The exact list varies by team, but the canonical stages in 2026:</p>
 <table>
 <thead><tr><th>#</th><th>Stage</th><th>What happens</th></tr></thead>
 <tbody>
@@ -1029,15 +788,9 @@ spec:
 </tbody>
 </table>
 <p>Not every project needs all 14 &mdash; a small library might stop at &ldquo;publish to npm&rdquo;. A regulated bank might add several more stages (compliance attestation, audit log generation, change-advisory-board approval).</p>
-<p>Stages are arranged so that <strong>fast checks fail fast</strong>. Lint and type-check before unit tests; unit tests before integration; everything before any deploy. The earlier a problem is caught, the cheaper to fix. The 2026 best practice is to also run a <strong>preview environment</strong> deploy on every PR (Vercel, Netlify, Render, Coherence, fly.io preview apps) so reviewers can click and try the change.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q25">
-  <div class="qa__number">Question 25</div>
-  <h3 class="qa__question">How do you use environment variables in a CI/CD pipeline?</h3>
-  <div class="qa__answer">
-    <p>Environment variables are the standard way to pass configuration into pipeline jobs &mdash; secrets, environment names, version numbers, feature flags. Every CI system supports them, with three scopes: <strong>workflow / pipeline level</strong>, <strong>job level</strong>, and <strong>step level</strong>.</p>
+<p>Stages are arranged so that <strong>fast checks fail fast</strong>. Lint and type-check before unit tests; unit tests before integration; everything before any deploy. The earlier a problem is caught, the cheaper to fix. The 2026 best practice is to also run a <strong>preview environment</strong> deploy on every PR (Vercel, Netlify, Render, Coherence, fly.io preview apps) so reviewers can click and try the change.</p>'''
+
+ANSWERS[25] = r'''<p>Environment variables are the standard way to pass configuration into pipeline jobs &mdash; secrets, environment names, version numbers, feature flags. Every CI system supports them, with three scopes: <strong>workflow / pipeline level</strong>, <strong>job level</strong>, and <strong>step level</strong>.</p>
 <p>GitHub Actions:</p>
 <pre><code>env:
   GLOBAL_VAR: hello                  # workflow scope
@@ -1087,15 +840,10 @@ stages {
 <li><strong>Use environment-scoped variables</strong> for things that differ between staging and prod (DB URL, feature flags). GitHub Environments, GitLab Environments, Jenkins Environment plugins all support this.</li>
 <li><strong>Document required env vars</strong> in your README and validate at startup so missing config fails fast.</li>
 </ul>
-<p>For complex setups, a config-as-code library like <strong>Doppler</strong> or <strong>Infisical</strong> centralizes secrets across environments and inject them into the pipeline at runtime, eliminating per-CI duplication.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q26">
-  <div class="qa__number">Question 26</div>
-  <h3 class="qa__question">What is a Docker Compose file?</h3>
-  <div class="qa__answer">
-    <p>A <strong>Docker Compose file</strong> (<code>compose.yaml</code> or the older <code>docker-compose.yml</code>) is a YAML manifest that declares a multi-container application as a single unit &mdash; services, networks, volumes, environment, ports, dependencies. <code>docker compose up</code> reads it and starts everything; <code>down</code> stops it. It&rsquo;s the standard tool for local development of multi-service apps and ships built-in with Docker Engine since v20.</p>
+<p>For complex setups, a config-as-code library like <strong>Doppler</strong> or <strong>Infisical</strong> centralizes secrets across environments and inject them into the pipeline at runtime, eliminating per-CI duplication.</p>'''
+
+
+ANSWERS[26] = r'''<p>A <strong>Docker Compose file</strong> (<code>compose.yaml</code> or the older <code>docker-compose.yml</code>) is a YAML manifest that declares a multi-container application as a single unit &mdash; services, networks, volumes, environment, ports, dependencies. <code>docker compose up</code> reads it and starts everything; <code>down</code> stops it. It&rsquo;s the standard tool for local development of multi-service apps and ships built-in with Docker Engine since v20.</p>
 <p>Minimal example for a MERN dev stack:</p>
 <pre><code># compose.yaml
 services:
@@ -1126,15 +874,9 @@ volumes:
 <li><strong>Watch mode</strong> (<code>compose watch</code>) hot-reloads files into the container.</li>
 <li><strong>Multiple Compose files</strong> can be layered: <code>-f compose.yaml -f compose.prod.yaml</code> for env-specific overrides.</li>
 </ul>
-<p>In CI, Compose is useful for spinning up integration test dependencies (Mongo, Redis, MailHog) before running tests. For production at scale, prefer Kubernetes or AWS ECS/Fargate &mdash; Compose is dev-tier orchestration. Docker Swarm reads the same format but Swarm itself is largely deprecated in 2026 in favor of K8s.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q27">
-  <div class="qa__number">Question 27</div>
-  <h3 class="qa__question">How do you scale applications using Kubernetes?</h3>
-  <div class="qa__answer">
-    <p>Kubernetes scales applications along three axes: <strong>horizontal</strong> (more pod replicas), <strong>vertical</strong> (bigger pods), and <strong>cluster-level</strong> (more nodes). The default and most useful is horizontal scaling.</p>
+<p>In CI, Compose is useful for spinning up integration test dependencies (Mongo, Redis, MailHog) before running tests. For production at scale, prefer Kubernetes or AWS ECS/Fargate &mdash; Compose is dev-tier orchestration. Docker Swarm reads the same format but Swarm itself is largely deprecated in 2026 in favor of K8s.</p>'''
+
+ANSWERS[27] = r'''<p>Kubernetes scales applications along three axes: <strong>horizontal</strong> (more pod replicas), <strong>vertical</strong> (bigger pods), and <strong>cluster-level</strong> (more nodes). The default and most useful is horizontal scaling.</p>
 <p><strong>Manual scaling:</strong> <code>kubectl scale deploy/api --replicas=5</code> immediately adjusts replica count.</p>
 <p><strong>Horizontal Pod Autoscaler (HPA)</strong> auto-scales based on metrics:</p>
 <pre><code>apiVersion: autoscaling/v2
@@ -1163,15 +905,9 @@ spec:
 <li><strong>Vertical Pod Autoscaler (VPA)</strong> &mdash; recommends or applies CPU/memory requests based on actual usage. Use in <em>recommend</em> mode in production; <em>auto</em> mode causes restarts.</li>
 <li><strong>Cluster Autoscaler / Karpenter</strong> &mdash; adds/removes nodes when pods can&rsquo;t schedule. Karpenter (AWS, now upstream) is faster and picks better instance types.</li>
 </ul>
-<p>Always pair HPA with <strong>readiness probes</strong>, <strong>PodDisruptionBudgets</strong> (so scale-down doesn&rsquo;t take everything down), and <strong>graceful shutdown</strong> handling SIGTERM. Scale on the metric that actually reflects load &mdash; for queue workers, queue depth beats CPU; for HTTP APIs, RPS or p95 latency beats CPU.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q28">
-  <div class="qa__number">Question 28</div>
-  <h3 class="qa__question">How do you use secrets in GitHub Actions?</h3>
-  <div class="qa__answer">
-    <p>GitHub Actions secrets are encrypted environment variables stored at the <strong>repository</strong>, <strong>environment</strong>, or <strong>organization</strong> level. They&rsquo;re injected into workflows at runtime, masked in logs, and never visible in the UI after creation.</p>
+<p>Always pair HPA with <strong>readiness probes</strong>, <strong>PodDisruptionBudgets</strong> (so scale-down doesn&rsquo;t take everything down), and <strong>graceful shutdown</strong> handling SIGTERM. Scale on the metric that actually reflects load &mdash; for queue workers, queue depth beats CPU; for HTTP APIs, RPS or p95 latency beats CPU.</p>'''
+
+ANSWERS[28] = r'''<p>GitHub Actions secrets are encrypted environment variables stored at the <strong>repository</strong>, <strong>environment</strong>, or <strong>organization</strong> level. They&rsquo;re injected into workflows at runtime, masked in logs, and never visible in the UI after creation.</p>
 <p><strong>Where to store:</strong></p>
 <ul>
 <li><strong>Repository secrets</strong> &mdash; available to all workflows in the repo. Settings &rarr; Secrets and variables &rarr; Actions.</li>
@@ -1203,15 +939,9 @@ jobs:
 <li><strong>Rotate regularly</strong> and use GitHub&rsquo;s push-protection + secret scanning to catch leaks.</li>
 <li><strong>Centralize via Doppler / Infisical / HashiCorp Vault</strong> for cross-system secret sync, so the same secret in a hundred repos rotates from one place.</li>
 </ul>
-<p>Variables (non-secret config) go in the same UI under &ldquo;Variables&rdquo; tab and use <code>${{ vars.MY_VAR }}</code>.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q29">
-  <div class="qa__number">Question 29</div>
-  <h3 class="qa__question">What is the difference between Docker images and Docker containers?</h3>
-  <div class="qa__answer">
-    <p>A <strong>Docker image</strong> is a static, read-only template &mdash; a layered tarball built from a Dockerfile, stored in a registry, identified by a name+tag (<code>node:20-alpine</code>) or digest (<code>sha256:abc&hellip;</code>). It contains the filesystem, dependencies, and metadata needed to run a process.</p>
+<p>Variables (non-secret config) go in the same UI under &ldquo;Variables&rdquo; tab and use <code>${{ vars.MY_VAR }}</code>.</p>'''
+
+ANSWERS[29] = r'''<p>A <strong>Docker image</strong> is a static, read-only template &mdash; a layered tarball built from a Dockerfile, stored in a registry, identified by a name+tag (<code>node:20-alpine</code>) or digest (<code>sha256:abc&hellip;</code>). It contains the filesystem, dependencies, and metadata needed to run a process.</p>
 <p>A <strong>Docker container</strong> is a running (or stopped) instance of an image &mdash; a process in an isolated namespace + cgroup with a writable layer on top of the immutable image layers. You can have many containers from the same image.</p>
 <p>The class/instance analogy holds:</p>
 <table>
@@ -1233,15 +963,9 @@ docker ps                           # list running containers
 docker stop api &amp;&amp; docker rm api   # stop and remove the container
 docker rmi myapp:1.2.3              # remove the image
 </code></pre>
-<p>The writable container layer is ephemeral: when the container is removed, those changes are lost. Persistent data should live in <strong>volumes</strong> (named or bind-mount). For app state in production, never rely on the container filesystem &mdash; use external databases, S3, or volumes mounted into stateful workloads.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q30">
-  <div class="qa__number">Question 30</div>
-  <h3 class="qa__question">How do you deploy a Docker container using Kubernetes?</h3>
-  <div class="qa__answer">
-    <p>Deploying a Docker container to Kubernetes requires three steps: push the image to a registry, write a manifest, and apply it.</p>
+<p>The writable container layer is ephemeral: when the container is removed, those changes are lost. Persistent data should live in <strong>volumes</strong> (named or bind-mount). For app state in production, never rely on the container filesystem &mdash; use external databases, S3, or volumes mounted into stateful workloads.</p>'''
+
+ANSWERS[30] = r'''<p>Deploying a Docker container to Kubernetes requires three steps: push the image to a registry, write a manifest, and apply it.</p>
 <p><strong>1. Push the image:</strong></p>
 <pre><code>docker build -t ghcr.io/acme/api:1.0.0 .
 docker push ghcr.io/acme/api:1.0.0
@@ -1285,15 +1009,9 @@ kubectl rollout status deploy/api
 kubectl get pods -l app=api
 </code></pre>
 <p>For external access, add an Ingress (NGINX Ingress, Traefik) or a LoadBalancer Service. For multiple environments and templating, use <strong>Helm</strong> charts or <strong>Kustomize</strong>. For GitOps deployment from CI, push manifests to Git and let <strong>Argo CD</strong> or <strong>Flux</strong> reconcile &mdash; the CI never gets cluster credentials.</p>
-<p>Always include resource requests/limits, readiness/liveness probes, and a graceful-shutdown handler in your container, otherwise rolling updates and autoscaling misbehave.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q31">
-  <div class="qa__number">Question 31</div>
-  <h3 class="qa__question">How do you configure Jenkins to use GitHub?</h3>
-  <div class="qa__answer">
-    <p>Connecting Jenkins to GitHub combines authentication (so Jenkins can pull and report status) and triggering (so pushes start builds). The 2026 best path is <strong>GitHub App</strong> credentials &mdash; not personal access tokens.</p>
+<p>Always include resource requests/limits, readiness/liveness probes, and a graceful-shutdown handler in your container, otherwise rolling updates and autoscaling misbehave.</p>'''
+
+ANSWERS[31] = r'''<p>Connecting Jenkins to GitHub combines authentication (so Jenkins can pull and report status) and triggering (so pushes start builds). The 2026 best path is <strong>GitHub App</strong> credentials &mdash; not personal access tokens.</p>
 <p><strong>Authentication setup:</strong></p>
 <ul>
 <li>Install the <strong>GitHub Branch Source Plugin</strong> in Jenkins.</li>
@@ -1309,15 +1027,9 @@ kubectl get pods -l app=api
 </ul>
 <p><strong>Reporting back:</strong></p>
 <p>Jenkins posts commit statuses (<em>pending</em> &rarr; <em>success</em> / <em>failure</em>) so PRs show CI checks. Configure under &ldquo;Properties &rarr; GitHub project&rdquo; in the job, and use <code>githubNotify</code> from <code>Jenkinsfile</code> stages for granular checks.</p>
-<p><strong>Honest 2026 take:</strong> Jenkins+GitHub remains common in regulated/on-prem shops, but greenfield teams overwhelmingly default to <strong>GitHub Actions</strong> (zero infra, native integration), <strong>Buildkite</strong> (self-hosted runners + cloud control), or <strong>Tekton/Argo Workflows</strong> on K8s. Pick Jenkins only when policy requires self-managed CI or when a heavy plugin ecosystem (e.g. Blue Ocean dashboards, complex Job DSL) genuinely matters.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q32">
-  <div class="qa__number">Question 32</div>
-  <h3 class="qa__question">What is Helm in Kubernetes?</h3>
-  <div class="qa__answer">
-    <p><strong>Helm</strong> is the de facto package manager for Kubernetes. A <strong>Helm chart</strong> is a versioned bundle of YAML templates plus a values file, parameterized so the same chart deploys to dev/staging/prod with different settings. Helm renders templates with values, applies the result to the cluster, and tracks the release as a versioned history (so you can roll back).</p>
+<p><strong>Honest 2026 take:</strong> Jenkins+GitHub remains common in regulated/on-prem shops, but greenfield teams overwhelmingly default to <strong>GitHub Actions</strong> (zero infra, native integration), <strong>Buildkite</strong> (self-hosted runners + cloud control), or <strong>Tekton/Argo Workflows</strong> on K8s. Pick Jenkins only when policy requires self-managed CI or when a heavy plugin ecosystem (e.g. Blue Ocean dashboards, complex Job DSL) genuinely matters.</p>'''
+
+ANSWERS[32] = r'''<p><strong>Helm</strong> is the de facto package manager for Kubernetes. A <strong>Helm chart</strong> is a versioned bundle of YAML templates plus a values file, parameterized so the same chart deploys to dev/staging/prod with different settings. Helm renders templates with values, applies the result to the cluster, and tracks the release as a versioned history (so you can roll back).</p>
 <p>Chart layout:</p>
 <pre><code>mychart/
 ├── Chart.yaml          # name, version, appVersion
@@ -1344,15 +1056,9 @@ helm template ./mychart               # render to YAML without installing
 <li><strong>Release lifecycle</strong> &mdash; install/upgrade/rollback/uninstall with history.</li>
 <li><strong>Hooks</strong> &mdash; pre-install, post-upgrade lifecycle hooks for migrations and one-time jobs.</li>
 </ul>
-<p><strong>Alternatives in 2026:</strong> <strong>Kustomize</strong> (overlays without templating, good for simpler stacks; built into <code>kubectl</code>), <strong>Argo CD ApplicationSets</strong> (combine Helm or Kustomize with GitOps), <strong>Cdk8s</strong> (TypeScript/Python instead of YAML), <strong>Timoni</strong> (CUE-based, fixes Helm&rsquo;s templating fragility). Most teams settle on <em>Helm for third-party software, Kustomize or raw YAML + Argo CD for their own services</em>.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q33">
-  <div class="qa__number">Question 33</div>
-  <h3 class="qa__question">How do you create a Docker image from a Dockerfile?</h3>
-  <div class="qa__answer">
-    <p>A <strong>Dockerfile</strong> describes how to build an image: a base, copies, commands, and metadata. <code>docker build</code> reads it line by line and produces a layered image you can run.</p>
+<p><strong>Alternatives in 2026:</strong> <strong>Kustomize</strong> (overlays without templating, good for simpler stacks; built into <code>kubectl</code>), <strong>Argo CD ApplicationSets</strong> (combine Helm or Kustomize with GitOps), <strong>Cdk8s</strong> (TypeScript/Python instead of YAML), <strong>Timoni</strong> (CUE-based, fixes Helm&rsquo;s templating fragility). Most teams settle on <em>Helm for third-party software, Kustomize or raw YAML + Argo CD for their own services</em>.</p>'''
+
+ANSWERS[33] = r'''<p>A <strong>Dockerfile</strong> describes how to build an image: a base, copies, commands, and metadata. <code>docker build</code> reads it line by line and produces a layered image you can run.</p>
 <p>Minimal Node.js example:</p>
 <pre><code># Dockerfile
 FROM node:20-alpine
@@ -1403,15 +1109,9 @@ CMD ["node", "dist/server.js"]
 <li><strong>Distroless or Alpine</strong> bases for smaller, lower-CVE surface.</li>
 <li><strong>Sign with cosign</strong> + push SBOM (<code>docker buildx --sbom=true --provenance=true</code>).</li>
 </ul>
-<p>Alternatives like <strong>Buildpacks</strong> (Heroku/CNB) and <strong>Nixpacks</strong> (Railway) skip the Dockerfile entirely &mdash; they detect the language and produce a hardened image automatically.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q34">
-  <div class="qa__number">Question 34</div>
-  <h3 class="qa__question">How do you set up a GitHub repository?</h3>
-  <div class="qa__answer">
-    <p>A GitHub repository (<em>repo</em>) is a Git project hosted on GitHub with extra collaboration features: issues, pull requests, branch protections, Actions, releases, packages. Setup takes a minute via web UI or <code>gh</code> CLI.</p>
+<p>Alternatives like <strong>Buildpacks</strong> (Heroku/CNB) and <strong>Nixpacks</strong> (Railway) skip the Dockerfile entirely &mdash; they detect the language and produce a hardened image automatically.</p>'''
+
+ANSWERS[34] = r'''<p>A GitHub repository (<em>repo</em>) is a Git project hosted on GitHub with extra collaboration features: issues, pull requests, branch protections, Actions, releases, packages. Setup takes a minute via web UI or <code>gh</code> CLI.</p>
 <p><strong>Via the GitHub CLI (recommended for scripting):</strong></p>
 <pre><code>gh auth login
 gh repo create acme/my-app --private --clone --add-readme
@@ -1436,15 +1136,9 @@ gh repo create acme/my-app --private --source=. --push
 <li><strong>License</strong> &mdash; MIT/Apache-2.0/AGPL/proprietary as appropriate.</li>
 <li><strong>Conventional Commits</strong> + <strong>release-please</strong> or <strong>changesets</strong> for automated versioning and changelogs.</li>
 </ul>
-<p><strong>Repo templates and starters:</strong> create your own template repo (<code>--template</code>) so every new service starts with the same lint, test, CI, and Docker scaffolding. Tools like <strong>Backstage</strong> or <strong>Cookiecutter</strong> automate this organization-wide.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q35">
-  <div class="qa__number">Question 35</div>
-  <h3 class="qa__question">How do you use a Jenkins plugin?</h3>
-  <div class="qa__answer">
-    <p>Jenkins plugins extend the core with new build steps, integrations (Git, Docker, Slack, AWS), UI features (Blue Ocean), and pipeline syntax. Jenkins ships a slim core; almost everything useful is a plugin.</p>
+<p><strong>Repo templates and starters:</strong> create your own template repo (<code>--template</code>) so every new service starts with the same lint, test, CI, and Docker scaffolding. Tools like <strong>Backstage</strong> or <strong>Cookiecutter</strong> automate this organization-wide.</p>'''
+
+ANSWERS[35] = r'''<p>Jenkins plugins extend the core with new build steps, integrations (Git, Docker, Slack, AWS), UI features (Blue Ocean), and pipeline syntax. Jenkins ships a slim core; almost everything useful is a plugin.</p>
 <p><strong>Installing plugins:</strong></p>
 <ul>
 <li>Manage Jenkins &rarr; Plugins &rarr; Available plugins. Search, tick, install. Restart if needed.</li>
@@ -1475,15 +1169,9 @@ gh repo create acme/my-app --private --source=. --push
 }
 </code></pre>
 <p><strong>Essential plugins to know:</strong> Pipeline, Git, GitHub Branch Source, Credentials Binding, Docker Pipeline, Kubernetes, Blue Ocean, Configuration as Code (JCasC), Job DSL, Slack Notification, AWS Steps, SonarQube Scanner, Mailer.</p>
-<p><strong>Plugin hygiene:</strong> Jenkins plugins are a major CVE surface. Pin versions in <code>plugins.txt</code>, run the Plugin Health Score check, remove unused plugins, and use Configuration as Code so the entire Jenkins setup is reproducible from Git. The plugin sprawl is the #1 reason teams migrate away from Jenkins to GitHub Actions or Buildkite.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q36">
-  <div class="qa__number">Question 36</div>
-  <h3 class="qa__question">What are Kubernetes services?</h3>
-  <div class="qa__answer">
-    <p>A Kubernetes <strong>Service</strong> is a stable network endpoint for a set of pods. Pods are ephemeral &mdash; they get recreated, rescheduled, IPs change &mdash; so clients can&rsquo;t target pods directly. A Service gives you a fixed DNS name and virtual IP that load-balances to whatever pods match its selector.</p>
+<p><strong>Plugin hygiene:</strong> Jenkins plugins are a major CVE surface. Pin versions in <code>plugins.txt</code>, run the Plugin Health Score check, remove unused plugins, and use Configuration as Code so the entire Jenkins setup is reproducible from Git. The plugin sprawl is the #1 reason teams migrate away from Jenkins to GitHub Actions or Buildkite.</p>'''
+
+ANSWERS[36] = r'''<p>A Kubernetes <strong>Service</strong> is a stable network endpoint for a set of pods. Pods are ephemeral &mdash; they get recreated, rescheduled, IPs change &mdash; so clients can&rsquo;t target pods directly. A Service gives you a fixed DNS name and virtual IP that load-balances to whatever pods match its selector.</p>
 <p>Service types:</p>
 <table>
 <thead><tr><th>Type</th><th>Use case</th></tr></thead>
@@ -1509,15 +1197,9 @@ spec:
 </code></pre>
 <p>From any pod in the cluster: <code>http://api.prod.svc.cluster.local</code> (or just <code>http://api</code> from same namespace).</p>
 <p><strong>For external HTTP traffic</strong>, prefer an <strong>Ingress</strong> (one LoadBalancer fronting many services with hostname/path routing) or the newer <strong>Gateway API</strong> &mdash; the modern, more expressive successor adopted across NGINX, Istio, Cilium, and Envoy gateway implementations.</p>
-<p>Services use <strong>kube-proxy</strong> (iptables, IPVS, or nftables) or <strong>eBPF</strong> (Cilium) to do load balancing. For service mesh features &mdash; mTLS, retries, traffic shifting &mdash; layer Linkerd, Istio Ambient, or Cilium Service Mesh on top.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q37">
-  <div class="qa__number">Question 37</div>
-  <h3 class="qa__question">What is the role of a CI/CD pipeline in DevOps?</h3>
-  <div class="qa__answer">
-    <p>A CI/CD pipeline is the technical backbone of <strong>DevOps</strong>: it&rsquo;s how the cultural goals (small batches, shared ownership, fast feedback, automated quality) become daily reality. DevOps without CI/CD is aspirational; CI/CD without DevOps is busywork.</p>
+<p>Services use <strong>kube-proxy</strong> (iptables, IPVS, or nftables) or <strong>eBPF</strong> (Cilium) to do load balancing. For service mesh features &mdash; mTLS, retries, traffic shifting &mdash; layer Linkerd, Istio Ambient, or Cilium Service Mesh on top.</p>'''
+
+ANSWERS[37] = r'''<p>A CI/CD pipeline is the technical backbone of <strong>DevOps</strong>: it&rsquo;s how the cultural goals (small batches, shared ownership, fast feedback, automated quality) become daily reality. DevOps without CI/CD is aspirational; CI/CD without DevOps is busywork.</p>
 <p><strong>The role it plays:</strong></p>
 <ul>
 <li><strong>Fast feedback</strong> &mdash; every push runs lint/tests/builds in minutes, so defects are caught while context is fresh.</li>
@@ -1537,15 +1219,9 @@ spec:
 <tr><td>Mean time to recovery (MTTR)</td><td>Automated rollback + feature flags</td></tr>
 </tbody>
 </table>
-<p>Modern DevOps adds <strong>GitOps</strong> on top: production state is declared in Git, and Argo CD/Flux reconcile the cluster. <strong>Progressive delivery</strong> (Argo Rollouts, Flagger, LaunchDarkly) replaces blue-green with metric-driven canaries. <strong>Platform engineering</strong> (Backstage, Humanitec, Port) wraps these primitives into self-service developer experiences. The pipeline is no longer just a build server &mdash; it&rsquo;s the operating model.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q38">
-  <div class="qa__number">Question 38</div>
-  <h3 class="qa__question">How do you push a Docker image to Docker Hub?</h3>
-  <div class="qa__answer">
-    <p>Pushing a Docker image to Docker Hub takes three steps: log in, tag the image with your username, push.</p>
+<p>Modern DevOps adds <strong>GitOps</strong> on top: production state is declared in Git, and Argo CD/Flux reconcile the cluster. <strong>Progressive delivery</strong> (Argo Rollouts, Flagger, LaunchDarkly) replaces blue-green with metric-driven canaries. <strong>Platform engineering</strong> (Backstage, Humanitec, Port) wraps these primitives into self-service developer experiences. The pipeline is no longer just a build server &mdash; it&rsquo;s the operating model.</p>'''
+
+ANSWERS[38] = r'''<p>Pushing a Docker image to Docker Hub takes three steps: log in, tag the image with your username, push.</p>
 <pre><code># 1. Log in (uses ~/.docker/config.json)
 docker login                       # interactive
 # Or with a Personal Access Token (recommended over password):
@@ -1586,15 +1262,9 @@ docker push myuser/myapp:latest
     provenance: true
 </code></pre>
 <p><strong>Tagging strategy:</strong> never deploy <code>:latest</code> in production &mdash; it&rsquo;s a moving target. Use immutable tags (semver, git SHA, or build number) plus <code>:latest</code> as a convenience pointer. For supply-chain trust, sign images with <strong>cosign</strong> and verify in Kubernetes with <strong>policy-controller</strong> or <strong>Kyverno</strong>.</p>
-<p><strong>Honest 2026 advice:</strong> Docker Hub is rate-limited for anonymous pulls. For production, push to <strong>GHCR</strong> (free with GitHub), <strong>ECR</strong>, or <strong>Cloudflare Container Registry</strong> &mdash; faster, no rate limits, and tighter cloud integration.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q39">
-  <div class="qa__number">Question 39</div>
-  <h3 class="qa__question">How do you create a GitHub Action for building a Docker image?</h3>
-  <div class="qa__answer">
-    <p>A GitHub Action for building and pushing a Docker image is a few lines of YAML. The official <code>docker/build-push-action</code> handles BuildKit, multi-arch, caching, SBOMs, and provenance attestations.</p>
+<p><strong>Honest 2026 advice:</strong> Docker Hub is rate-limited for anonymous pulls. For production, push to <strong>GHCR</strong> (free with GitHub), <strong>ECR</strong>, or <strong>Cloudflare Container Registry</strong> &mdash; faster, no rate limits, and tighter cloud integration.</p>'''
+
+ANSWERS[39] = r'''<p>A GitHub Action for building and pushing a Docker image is a few lines of YAML. The official <code>docker/build-push-action</code> handles BuildKit, multi-arch, caching, SBOMs, and provenance attestations.</p>
 <pre><code># .github/workflows/docker.yml
 name: Docker Build &amp; Push
 
@@ -1657,15 +1327,9 @@ jobs:
 <li>Generates an SBOM (CycloneDX) and SLSA provenance attestation.</li>
 <li>Signs the image with cosign keyless (uses OIDC, no key management).</li>
 </ul>
-<p><strong>For AWS ECR or Docker Hub</strong>, swap the <code>login-action</code> step for those registries (and use <code>aws-actions/configure-aws-credentials</code> with OIDC for ECR &mdash; no AWS keys in secrets). The rest is identical.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q40">
-  <div class="qa__number">Question 40</div>
-  <h3 class="qa__question">What is a Kubernetes deployment?</h3>
-  <div class="qa__answer">
-    <p>A Kubernetes <strong>Deployment</strong> manages a replicated, stateless app. You declare desired state &mdash; image, replica count, environment, resources &mdash; and the Deployment controller creates/updates a <strong>ReplicaSet</strong>, which in turn creates <strong>Pods</strong>. When you change the spec (e.g. new image), it does a <strong>rolling update</strong> with configurable surge/unavailable, and keeps revision history for rollbacks.</p>
+<p><strong>For AWS ECR or Docker Hub</strong>, swap the <code>login-action</code> step for those registries (and use <code>aws-actions/configure-aws-credentials</code> with OIDC for ECR &mdash; no AWS keys in secrets). The rest is identical.</p>'''
+
+ANSWERS[40] = r'''<p>A Kubernetes <strong>Deployment</strong> manages a replicated, stateless app. You declare desired state &mdash; image, replica count, environment, resources &mdash; and the Deployment controller creates/updates a <strong>ReplicaSet</strong>, which in turn creates <strong>Pods</strong>. When you change the spec (e.g. new image), it does a <strong>rolling update</strong> with configurable surge/unavailable, and keeps revision history for rollbacks.</p>
 <pre><code>apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -1711,15 +1375,9 @@ kubectl scale deploy/api --replicas=5
 <tr><td>Job / CronJob</td><td>Run-to-completion or scheduled batch work</td></tr>
 </tbody>
 </table>
-<p><strong>Pair Deployments with:</strong> a <strong>Service</strong> (network endpoint), <strong>HPA</strong> (autoscale), <strong>PodDisruptionBudget</strong> (don&rsquo;t evict everything at once during node drains), <strong>NetworkPolicy</strong> (default-deny + allowlist), and <strong>readiness/liveness probes</strong> (rolling updates depend on them). For progressive delivery (canary, blue-green with metric analysis), wrap the Deployment with <strong>Argo Rollouts</strong> or <strong>Flagger</strong>.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q41">
-  <div class="qa__number">Question 41</div>
-  <h3 class="qa__question">How do you secure a Jenkins server?</h3>
-  <div class="qa__answer">
-    <p>Securing Jenkins is non-trivial because Jenkins runs arbitrary code (build scripts) by design. The 2026 hardening checklist covers identity, authorization, network, supply chain, and operations.</p>
+<p><strong>Pair Deployments with:</strong> a <strong>Service</strong> (network endpoint), <strong>HPA</strong> (autoscale), <strong>PodDisruptionBudget</strong> (don&rsquo;t evict everything at once during node drains), <strong>NetworkPolicy</strong> (default-deny + allowlist), and <strong>readiness/liveness probes</strong> (rolling updates depend on them). For progressive delivery (canary, blue-green with metric analysis), wrap the Deployment with <strong>Argo Rollouts</strong> or <strong>Flagger</strong>.</p>'''
+
+ANSWERS[41] = r'''<p>Securing Jenkins is non-trivial because Jenkins runs arbitrary code (build scripts) by design. The 2026 hardening checklist covers identity, authorization, network, supply chain, and operations.</p>
 <p><strong>Identity:</strong></p>
 <ul>
 <li><strong>Disable anonymous access</strong> &mdash; Manage Jenkins &rarr; Security &rarr; Authorize: <em>Logged-in users can do anything</em> at minimum.</li>
@@ -1754,15 +1412,9 @@ kubectl scale deploy/api --replicas=5
 <li><strong>Audit logging</strong> via the Audit Trail plugin shipped to a SIEM.</li>
 <li><strong>Secrets in Vault/Doppler</strong> via the HashiCorp Vault plugin, not the built-in credentials store for production secrets.</li>
 </ul>
-<p><strong>Honest take:</strong> if your team is small, the security overhead of running Jenkins safely often exceeds the value &mdash; switch to GitHub Actions / GitLab CI / Buildkite, which inherit your IdP and SSO automatically.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q42">
-  <div class="qa__number">Question 42</div>
-  <h3 class="qa__question">What is the use of a Docker volume?</h3>
-  <div class="qa__answer">
-    <p>A Docker <strong>volume</strong> is persistent storage that lives outside the container&rsquo;s writable layer, so data survives container restarts and removals. There are three storage modes:</p>
+<p><strong>Honest take:</strong> if your team is small, the security overhead of running Jenkins safely often exceeds the value &mdash; switch to GitHub Actions / GitLab CI / Buildkite, which inherit your IdP and SSO automatically.</p>'''
+
+ANSWERS[42] = r'''<p>A Docker <strong>volume</strong> is persistent storage that lives outside the container&rsquo;s writable layer, so data survives container restarts and removals. There are three storage modes:</p>
 <table>
 <thead><tr><th>Type</th><th>Definition</th><th>When to use</th></tr></thead>
 <tbody>
@@ -1803,15 +1455,9 @@ volumes:
 <li><strong>Better performance</strong> than the writable layer or bind mounts (especially on macOS/Windows where bind mounts go through a VM).</li>
 <li><strong>Volume drivers</strong> (NFS, AWS EFS, Azure Files, Cloudflare R2 via FUSE) let volumes back onto network storage.</li>
 </ul>
-<p><strong>Production reality:</strong> in Kubernetes you use <strong>PersistentVolumes</strong> + <strong>PersistentVolumeClaims</strong> backed by a CSI driver (EBS, GCE PD, Azure Disk, Longhorn, Ceph). For most stateful workloads at scale, prefer a managed service (Atlas for Mongo, RDS for Postgres) over self-managed volumes &mdash; backups, replication, and PITR come included.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q43">
-  <div class="qa__number">Question 43</div>
-  <h3 class="qa__question">How do you use GitHub Actions for CI/CD?</h3>
-  <div class="qa__answer">
-    <p>GitHub Actions runs CI/CD workflows defined as YAML in <code>.github/workflows/</code>. Each workflow is a graph of jobs; each job is a sequence of steps; each step is either a shell command or a reusable action. Triggers include pushes, PRs, schedules, manual dispatch, repository events, and webhooks.</p>
+<p><strong>Production reality:</strong> in Kubernetes you use <strong>PersistentVolumes</strong> + <strong>PersistentVolumeClaims</strong> backed by a CSI driver (EBS, GCE PD, Azure Disk, Longhorn, Ceph). For most stateful workloads at scale, prefer a managed service (Atlas for Mongo, RDS for Postgres) over self-managed volumes &mdash; backups, replication, and PITR come included.</p>'''
+
+ANSWERS[43] = r'''<p>GitHub Actions runs CI/CD workflows defined as YAML in <code>.github/workflows/</code>. Each workflow is a graph of jobs; each job is a sequence of steps; each step is either a shell command or a reusable action. Triggers include pushes, PRs, schedules, manual dispatch, repository events, and webhooks.</p>
 <p><strong>Anatomy of a typical pipeline:</strong></p>
 <pre><code># .github/workflows/ci-cd.yml
 name: CI/CD
@@ -1887,15 +1533,9 @@ jobs:
 <li><strong>Environments</strong> with required reviewers + deployment branch policies.</li>
 <li><strong>Artifact attestations</strong> + <strong>cosign signing</strong> built-in for supply-chain integrity.</li>
 </ul>
-<p>For agentic workflows, <strong>Claude Code Action</strong> can run code review or auto-fix on PRs. Pair Actions with <strong>Argo CD</strong> or <strong>Flux</strong> for GitOps so the cluster is the source of truth, not the CI.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q44">
-  <div class="qa__number">Question 44</div>
-  <h3 class="qa__question">What is a Jenkins agent?</h3>
-  <div class="qa__answer">
-    <p>A Jenkins <strong>agent</strong> (formerly &ldquo;slave&rdquo; &mdash; deprecated terminology) is a worker node that executes builds on behalf of the Jenkins controller. The <strong>controller</strong> handles the UI, scheduling, and metadata; agents do the actual work. Almost any production Jenkins runs the controller separately and one or more agents.</p>
+<p>For agentic workflows, <strong>Claude Code Action</strong> can run code review or auto-fix on PRs. Pair Actions with <strong>Argo CD</strong> or <strong>Flux</strong> for GitOps so the cluster is the source of truth, not the CI.</p>'''
+
+ANSWERS[44] = r'''<p>A Jenkins <strong>agent</strong> (formerly &ldquo;slave&rdquo; &mdash; deprecated terminology) is a worker node that executes builds on behalf of the Jenkins controller. The <strong>controller</strong> handles the UI, scheduling, and metadata; agents do the actual work. Almost any production Jenkins runs the controller separately and one or more agents.</p>
 <p><strong>Why agents:</strong></p>
 <ul>
 <li><strong>Isolation</strong> &mdash; untrusted PR builds don&rsquo;t run on the controller.</li>
@@ -1956,15 +1596,9 @@ jobs:
 <li><strong>Pre-built agent images</strong> with required toolchains baked in &mdash; reduces per-build setup time.</li>
 <li><strong>Capacity-based autoscaling</strong> &mdash; the Kubernetes plugin scales Pods on demand; the EC2 plugin scales VMs.</li>
 </ul>
-<p>Among modern alternatives, <strong>GitHub Actions self-hosted runners</strong> via <em>actions-runner-controller</em> on Kubernetes give you the same model with a cleaner UX.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q45">
-  <div class="qa__number">Question 45</div>
-  <h3 class="qa__question">How do you create a Kubernetes namespace?</h3>
-  <div class="qa__answer">
-    <p>A Kubernetes <strong>namespace</strong> is a logical partition of cluster resources &mdash; pods, services, configmaps, secrets are scoped within it. Namespaces give you isolation, quota, and RBAC boundaries without needing separate clusters.</p>
+<p>Among modern alternatives, <strong>GitHub Actions self-hosted runners</strong> via <em>actions-runner-controller</em> on Kubernetes give you the same model with a cleaner UX.</p>'''
+
+ANSWERS[45] = r'''<p>A Kubernetes <strong>namespace</strong> is a logical partition of cluster resources &mdash; pods, services, configmaps, secrets are scoped within it. Namespaces give you isolation, quota, and RBAC boundaries without needing separate clusters.</p>
 <p><strong>Create one:</strong></p>
 <pre><code># Imperative
 kubectl create namespace prod
@@ -2000,15 +1634,9 @@ kubectl apply -f deployment.yaml -n prod
 <li>One namespace per <strong>team</strong> or <strong>service</strong>: <code>checkout</code>, <code>billing</code>, <code>search</code>.</li>
 <li>System workloads in <code>kube-system</code>, observability in <code>monitoring</code>, ingress in <code>ingress-nginx</code>.</li>
 </ul>
-<p><strong>Honest 2026 advice:</strong> namespaces are a soft boundary, not a hard one &mdash; a privileged pod or escape can still affect other namespaces. For real multi-tenancy use <strong>vCluster</strong> (virtual clusters, very popular 2026), <strong>Capsule</strong>, or separate clusters managed via Argo CD ApplicationSets / Cluster API. Don&rsquo;t mix prod and untrusted workloads in one cluster regardless of namespace.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q46">
-  <div class="qa__number">Question 46</div>
-  <h3 class="qa__question">What are Docker networks?</h3>
-  <div class="qa__answer">
-    <p>Docker <strong>networks</strong> connect containers to each other and to the outside world. Every container attaches to one or more networks, and Docker handles IP allocation, DNS-based service discovery, and packet forwarding behind the scenes.</p>
+<p><strong>Honest 2026 advice:</strong> namespaces are a soft boundary, not a hard one &mdash; a privileged pod or escape can still affect other namespaces. For real multi-tenancy use <strong>vCluster</strong> (virtual clusters, very popular 2026), <strong>Capsule</strong>, or separate clusters managed via Argo CD ApplicationSets / Cluster API. Don&rsquo;t mix prod and untrusted workloads in one cluster regardless of namespace.</p>'''
+
+ANSWERS[46] = r'''<p>Docker <strong>networks</strong> connect containers to each other and to the outside world. Every container attaches to one or more networks, and Docker handles IP allocation, DNS-based service discovery, and packet forwarding behind the scenes.</p>
 <p><strong>Network drivers (built-in):</strong></p>
 <table>
 <thead><tr><th>Driver</th><th>Use case</th></tr></thead>
@@ -2046,15 +1674,9 @@ docker network inspect app-net
 <li><strong>Don&rsquo;t expose ports unnecessarily</strong> &mdash; <code>EXPOSE</code> is metadata; <code>-p</code> publishes to the host.</li>
 <li><strong>For multi-host networking, prefer Kubernetes</strong> with a CNI (Cilium, Calico) over Docker Swarm overlays in 2026.</li>
 </ul>
-<p>In Kubernetes, networks are abstracted away &mdash; pods get IPs from the CNI and reach Services by DNS (<code>svc.namespace.svc.cluster.local</code>). For policy enforcement use <strong>NetworkPolicy</strong> + Cilium / Calico for default-deny + explicit allowlists.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q47">
-  <div class="qa__number">Question 47</div>
-  <h3 class="qa__question">How do you use GitHub Actions to deploy to Kubernetes?</h3>
-  <div class="qa__answer">
-    <p>Deploying to Kubernetes from GitHub Actions has two patterns: <strong>direct push</strong> from CI (simple) and <strong>GitOps pull</strong> from the cluster (recommended in 2026).</p>
+<p>In Kubernetes, networks are abstracted away &mdash; pods get IPs from the CNI and reach Services by DNS (<code>svc.namespace.svc.cluster.local</code>). For policy enforcement use <strong>NetworkPolicy</strong> + Cilium / Calico for default-deny + explicit allowlists.</p>'''
+
+ANSWERS[47] = r'''<p>Deploying to Kubernetes from GitHub Actions has two patterns: <strong>direct push</strong> from CI (simple) and <strong>GitOps pull</strong> from the cluster (recommended in 2026).</p>
 <p><strong>Pattern A &mdash; Direct push (smaller teams):</strong></p>
 <pre><code>name: Deploy to K8s
 on:
@@ -2113,15 +1735,9 @@ jobs:
 <li>Multi-cluster fans out via Argo CD ApplicationSets.</li>
 <li>Pairs with <strong>Argo Rollouts</strong> for progressive delivery (canary, blue-green) without changing Deployments.</li>
 </ul>
-<p>For Kustomize-only setups, <strong>Flux</strong> is the lighter alternative. Both Argo and Flux are CNCF graduated and stable.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q48">
-  <div class="qa__number">Question 48</div>
-  <h3 class="qa__question">What is Jenkins Blue Ocean?</h3>
-  <div class="qa__answer">
-    <p><strong>Blue Ocean</strong> is a redesigned UI for Jenkins focused on visualizing pipelines: a graph of stages, parallel branches, real-time logs per step, PR overview, and a guided pipeline editor. It was the &ldquo;modern face&rdquo; of Jenkins introduced around 2017.</p>
+<p>For Kustomize-only setups, <strong>Flux</strong> is the lighter alternative. Both Argo and Flux are CNCF graduated and stable.</p>'''
+
+ANSWERS[48] = r'''<p><strong>Blue Ocean</strong> is a redesigned UI for Jenkins focused on visualizing pipelines: a graph of stages, parallel branches, real-time logs per step, PR overview, and a guided pipeline editor. It was the &ldquo;modern face&rdquo; of Jenkins introduced around 2017.</p>
 <p><strong>What it gives you:</strong></p>
 <ul>
 <li><strong>Pipeline visualization</strong> &mdash; the stages-and-steps graph that you see referenced in screenshots; much easier to read than the classic console log.</li>
@@ -2137,15 +1753,9 @@ jobs:
 <li>Track the new modern Jenkins UI initiative.</li>
 <li>Or, more realistically, evaluate moving the workload to <strong>GitHub Actions</strong> (better visualization out of the box), <strong>Buildkite</strong> (best-in-class pipeline UI), <strong>GitLab CI</strong>, or <strong>CircleCI</strong> &mdash; all of which have polished visual pipelines without a separate plugin.</li>
 </ul>
-<p>Blue Ocean is still a quick UX win for legacy Jenkins shops, but most teams in 2026 use it as a stepping stone before migrating CI/CD to a SaaS or Argo Workflows-style platform.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q49">
-  <div class="qa__number">Question 49</div>
-  <h3 class="qa__question">How do you create a multi-container application using Docker Compose?</h3>
-  <div class="qa__answer">
-    <p>A multi-container app with Docker Compose declares each service in <code>compose.yaml</code> with build context, environment, ports, volumes, and dependencies. <code>docker compose up</code> brings the whole stack up; <code>down</code> tears it down. It&rsquo;s the universal pattern for local development of MERN/Next/microservices apps.</p>
+<p>Blue Ocean is still a quick UX win for legacy Jenkins shops, but most teams in 2026 use it as a stepping stone before migrating CI/CD to a SaaS or Argo Workflows-style platform.</p>'''
+
+ANSWERS[49] = r'''<p>A multi-container app with Docker Compose declares each service in <code>compose.yaml</code> with build context, environment, ports, volumes, and dependencies. <code>docker compose up</code> brings the whole stack up; <code>down</code> tears it down. It&rsquo;s the universal pattern for local development of MERN/Next/microservices apps.</p>
 <p><strong>Full MERN example:</strong></p>
 <pre><code># compose.yaml
 services:
@@ -2214,15 +1824,9 @@ docker compose down -v            # stop + remove volumes (clean slate)
 <li><strong>Healthchecks + <code>depends_on: condition: service_healthy</code></strong> so dependent services only start once their deps are ready.</li>
 <li><strong>Watch mode</strong> (Compose 2.22+) replaces nodemon-mounted volumes &mdash; faster, more reliable.</li>
 </ul>
-<p><strong>For production at scale</strong>, move to Kubernetes (use <code>compose-on-kubernetes</code> or rewrite as Helm charts) or AWS ECS/Fargate (which can ingest a Compose file via <code>docker compose convert</code>).</p>
-    
-  </div>
-</article>
-<article class="qa" id="q50">
-  <div class="qa__number">Question 50</div>
-  <h3 class="qa__question">What is the purpose of a Jenkinsfile?</h3>
-  <div class="qa__answer">
-    <p>A <strong>Jenkinsfile</strong> is a text file (Groovy) checked into a repository that defines the entire build pipeline as code. It&rsquo;s the canonical way to write Jenkins pipelines &mdash; portable, reviewable in PRs, and reproducible.</p>
+<p><strong>For production at scale</strong>, move to Kubernetes (use <code>compose-on-kubernetes</code> or rewrite as Helm charts) or AWS ECS/Fargate (which can ingest a Compose file via <code>docker compose convert</code>).</p>'''
+
+ANSWERS[50] = r'''<p>A <strong>Jenkinsfile</strong> is a text file (Groovy) checked into a repository that defines the entire build pipeline as code. It&rsquo;s the canonical way to write Jenkins pipelines &mdash; portable, reviewable in PRs, and reproducible.</p>
 <p><strong>Why it exists:</strong></p>
 <ul>
 <li><strong>Pipeline as code</strong> &mdash; CI lives next to the source, versioned with it.</li>
@@ -2293,15 +1897,9 @@ pipeline {
 <li><strong>Always set timeouts</strong>; Jenkins jobs that hang chew up agent capacity.</li>
 <li><strong>Use the <code>options</code> block</strong> for build retention, concurrency control, and skip-on-empty.</li>
 </ul>
-<p>Equivalent in modern terms: a <code>.github/workflows/*.yml</code> file in GitHub Actions or <code>.gitlab-ci.yml</code> in GitLab. The <strong>pipeline-as-code</strong> idea is now universal &mdash; the Jenkinsfile was its archetype.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q51">
-  <div class="qa__number">Question 51</div>
-  <h3 class="qa__question">How do you use a Docker Compose file in a CI/CD pipeline?</h3>
-  <div class="qa__answer">
-    <p>A <strong>Docker Compose file</strong> in CI/CD usually plays one of three roles: spinning up service dependencies for tests, building multi-container artifacts, or running end-to-end test stacks. Each maps cleanly to a CI step.</p>
+<p>Equivalent in modern terms: a <code>.github/workflows/*.yml</code> file in GitHub Actions or <code>.gitlab-ci.yml</code> in GitLab. The <strong>pipeline-as-code</strong> idea is now universal &mdash; the Jenkinsfile was its archetype.</p>'''
+
+ANSWERS[51] = r'''<p>A <strong>Docker Compose file</strong> in CI/CD usually plays one of three roles: spinning up service dependencies for tests, building multi-container artifacts, or running end-to-end test stacks. Each maps cleanly to a CI step.</p>
 <p><strong>Pattern 1 &mdash; integration test dependencies:</strong></p>
 <pre><code># .github/workflows/ci.yml
 - run: docker compose -f compose.test.yaml up -d
@@ -2346,15 +1944,9 @@ pipeline {
 <li><strong>Pin image tags</strong> (<code>mongo:7.0.5</code>, not <code>mongo:latest</code>) for reproducibility.</li>
 <li><strong>Cache build layers</strong> via BuildKit + GHA cache for fast rebuilds.</li>
 </ul>
-<p><strong>Honest 2026 advice:</strong> in Kubernetes-native CI (Tekton, Argo Workflows, Dagger), Compose is rare &mdash; sidecars, jobs, and ephemeral pods do the same thing. But for GitHub Actions / GitLab / Jenkins, Compose remains the easiest way to spin up multi-service test fixtures.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q52">
-  <div class="qa__number">Question 52</div>
-  <h3 class="qa__question">How do you rollback a deployment in Kubernetes?</h3>
-  <div class="qa__answer">
-    <p>Kubernetes deployments keep <strong>revision history</strong> for rolling updates, so rolling back is a one-liner.</p>
+<p><strong>Honest 2026 advice:</strong> in Kubernetes-native CI (Tekton, Argo Workflows, Dagger), Compose is rare &mdash; sidecars, jobs, and ephemeral pods do the same thing. But for GitHub Actions / GitLab / Jenkins, Compose remains the easiest way to spin up multi-service test fixtures.</p>'''
+
+ANSWERS[52] = r'''<p>Kubernetes deployments keep <strong>revision history</strong> for rolling updates, so rolling back is a one-liner.</p>
 <pre><code># See history
 kubectl rollout history deploy/api -n prod
 
@@ -2389,15 +1981,9 @@ kubectl rollout status deploy/api -n prod
 <li><strong>StatefulSet rollbacks are tricky</strong> when schemas change &mdash; rollback the app, not the data. Use schema versioning for forward-compatible changes (expand/migrate/contract pattern).</li>
 <li><strong>Database migrations don&rsquo;t auto-revert</strong>. Always design migrations to be backward-compatible so app rollback doesn&rsquo;t leave data orphaned.</li>
 </ul>
-<p><strong>2026 best practice:</strong> use <strong>progressive delivery</strong> with Argo Rollouts or Flagger so a bad release auto-aborts and rolls back based on metrics (error rate, latency) before it reaches 100% of traffic. Combined with <strong>feature flags</strong> (LaunchDarkly, Statsig, GrowthBook), rollback often means flipping a flag in seconds &mdash; without redeploying anything.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q53">
-  <div class="qa__number">Question 53</div>
-  <h3 class="qa__question">How do you set up a webhook in GitHub?</h3>
-  <div class="qa__answer">
-    <p>A <strong>webhook</strong> is an HTTP POST GitHub sends to a URL you provide whenever a configured event happens &mdash; pushes, PRs, releases, comments, deployments. Webhooks are how external CI servers (Jenkins, custom systems) get notified of events without polling.</p>
+<p><strong>2026 best practice:</strong> use <strong>progressive delivery</strong> with Argo Rollouts or Flagger so a bad release auto-aborts and rolls back based on metrics (error rate, latency) before it reaches 100% of traffic. Combined with <strong>feature flags</strong> (LaunchDarkly, Statsig, GrowthBook), rollback often means flipping a flag in seconds &mdash; without redeploying anything.</p>'''
+
+ANSWERS[53] = r'''<p>A <strong>webhook</strong> is an HTTP POST GitHub sends to a URL you provide whenever a configured event happens &mdash; pushes, PRs, releases, comments, deployments. Webhooks are how external CI servers (Jenkins, custom systems) get notified of events without polling.</p>
 <p><strong>Setting one up:</strong></p>
 <ul>
 <li>Repository &rarr; Settings &rarr; Webhooks &rarr; Add webhook.</li>
@@ -2443,15 +2029,9 @@ app.post('/webhook', express.json({
 <li><strong>Replay on failure</strong> &mdash; the webhooks UI lets you redeliver any event manually.</li>
 <li><strong>Use GitHub Apps over PATs</strong> for any webhook flow that involves API callbacks &mdash; better security and rate limits.</li>
 <li><strong>Tunneling for local dev</strong> via <code>ngrok</code>, <code>cloudflared tunnel</code>, or <code>smee.io</code> &mdash; no need to deploy to test webhook handlers.</li>
-</ul>
-    
-  </div>
-</article>
-<article class="qa" id="q54">
-  <div class="qa__number">Question 54</div>
-  <h3 class="qa__question">What is a Jenkins node?</h3>
-  <div class="qa__answer">
-    <p>A Jenkins <strong>node</strong> is a machine that participates in the Jenkins farm. The <strong>controller</strong> is one node (sometimes called the &ldquo;master&rdquo; in older docs &mdash; deprecated terminology); <strong>agents</strong> are the worker nodes. So &ldquo;node&rdquo; is the umbrella term for both.</p>
+</ul>'''
+
+ANSWERS[54] = r'''<p>A Jenkins <strong>node</strong> is a machine that participates in the Jenkins farm. The <strong>controller</strong> is one node (sometimes called the &ldquo;master&rdquo; in older docs &mdash; deprecated terminology); <strong>agents</strong> are the worker nodes. So &ldquo;node&rdquo; is the umbrella term for both.</p>
 <p><strong>Anatomy:</strong></p>
 <table>
 <thead><tr><th>Node type</th><th>Role</th></tr></thead>
@@ -2494,15 +2074,9 @@ podTemplate(label: 'k8s', containers: [
 <li><strong>Pre-built images</strong> with toolchains baked in; per-build Apt/Brew installs are slow and flaky.</li>
 <li><strong>Run agents as non-root</strong> with restricted IAM/RBAC scope.</li>
 </ul>
-<p>Modern equivalent: GitHub Actions runners and runner groups, GitLab runners with tags, Buildkite agents with queues. The terminology differs but the model is identical.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q55">
-  <div class="qa__number">Question 55</div>
-  <h3 class="qa__question">How do you use Kubernetes ConfigMaps?</h3>
-  <div class="qa__answer">
-    <p>A <strong>ConfigMap</strong> stores non-sensitive configuration data &mdash; environment variables, config files, command-line flags &mdash; that pods consume at runtime. ConfigMaps decouple config from container images, so the same image runs in dev/staging/prod with different settings.</p>
+<p>Modern equivalent: GitHub Actions runners and runner groups, GitLab runners with tags, Buildkite agents with queues. The terminology differs but the model is identical.</p>'''
+
+ANSWERS[55] = r'''<p>A <strong>ConfigMap</strong> stores non-sensitive configuration data &mdash; environment variables, config files, command-line flags &mdash; that pods consume at runtime. ConfigMaps decouple config from container images, so the same image runs in dev/staging/prod with different settings.</p>
 <p><strong>Three ways to consume a ConfigMap:</strong></p>
 <p><strong>1. As environment variables:</strong></p>
 <pre><code>apiVersion: v1
@@ -2565,15 +2139,9 @@ spec:
 <li>For real secrets use <strong>Secrets</strong> + <strong>External Secrets Operator</strong> (pulling from AWS Secrets Manager, Vault, Doppler, Infisical) and enable <strong>encryption at rest</strong> in etcd.</li>
 <li>For non-sensitive config: ConfigMap.</li>
 </ul>
-<p><strong>2026 alternatives:</strong> <strong>Argo CD ApplicationSets</strong> + Helm/Kustomize for env-specific values, <strong>Cdk8s</strong> or <strong>Timoni</strong> for typed config in code.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q56">
-  <div class="qa__number">Question 56</div>
-  <h3 class="qa__question">How do you build a Docker image using Jenkins?</h3>
-  <div class="qa__answer">
-    <p>Building a Docker image in Jenkins uses the <strong>Docker Pipeline plugin</strong> (or just shell calls). The pattern: have Docker available on the agent, build, tag, push.</p>
+<p><strong>2026 alternatives:</strong> <strong>Argo CD ApplicationSets</strong> + Helm/Kustomize for env-specific values, <strong>Cdk8s</strong> or <strong>Timoni</strong> for typed config in code.</p>'''
+
+ANSWERS[56] = r'''<p>Building a Docker image in Jenkins uses the <strong>Docker Pipeline plugin</strong> (or just shell calls). The pattern: have Docker available on the agent, build, tag, push.</p>
 <p><strong>Declarative pipeline example:</strong></p>
 <pre><code>pipeline {
   agent any
@@ -2635,15 +2203,9 @@ spec:
 <li><strong>Pin tags by digest</strong> in production manifests; <code>:latest</code> is for convenience only.</li>
 <li><strong>Scan the image</strong> (Trivy, Grype) and fail the build on critical CVEs.</li>
 </ul>
-<p>Note: most teams have moved this exact pipeline shape to <strong>GitHub Actions</strong> using <code>docker/build-push-action</code> &mdash; it&rsquo;s the same pattern, less setup, and OIDC for keyless registry auth.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q57">
-  <div class="qa__number">Question 57</div>
-  <h3 class="qa__question">What are GitHub secrets?</h3>
-  <div class="qa__answer">
-    <p>GitHub Actions <strong>secrets</strong> are encrypted, scoped key/value pairs that workflows reference via <code>${{ secrets.NAME }}</code>. They&rsquo;re injected at runtime, masked in logs, and never visible after creation. Three scopes:</p>
+<p>Note: most teams have moved this exact pipeline shape to <strong>GitHub Actions</strong> using <code>docker/build-push-action</code> &mdash; it&rsquo;s the same pattern, less setup, and OIDC for keyless registry auth.</p>'''
+
+ANSWERS[57] = r'''<p>GitHub Actions <strong>secrets</strong> are encrypted, scoped key/value pairs that workflows reference via <code>${{ secrets.NAME }}</code>. They&rsquo;re injected at runtime, masked in logs, and never visible after creation. Three scopes:</p>
 <table>
 <thead><tr><th>Scope</th><th>Where</th><th>Use</th></tr></thead>
 <tbody>
@@ -2680,15 +2242,9 @@ spec:
 <li><strong>Audit usage</strong> &mdash; GitHub Audit Log shows secret access events.</li>
 <li><strong>Rotate</strong> &mdash; tokens and keys on a schedule. Pair with GitHub Push Protection + Secret Scanning to catch leaks.</li>
 </ul>
-<p>For per-job dynamic secrets, the <strong>HashiCorp Vault GitHub Action</strong> issues short-lived database credentials, AWS roles, etc. on the fly &mdash; no static secrets to rotate.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q58">
-  <div class="qa__number">Question 58</div>
-  <h3 class="qa__question">How do you manage dependencies in Docker?</h3>
-  <div class="qa__answer">
-    <p>Managing dependencies in Docker means controlling what goes into the image: language packages, system libraries, build tools. Done well, layers cache and rebuilds are fast; done poorly, every push reinstalls the world. The pattern that wins for MERN: lockfile-driven, multi-stage, ordered for cache hits.</p>
+<p>For per-job dynamic secrets, the <strong>HashiCorp Vault GitHub Action</strong> issues short-lived database credentials, AWS roles, etc. on the fly &mdash; no static secrets to rotate.</p>'''
+
+ANSWERS[58] = r'''<p>Managing dependencies in Docker means controlling what goes into the image: language packages, system libraries, build tools. Done well, layers cache and rebuilds are fast; done poorly, every push reinstalls the world. The pattern that wins for MERN: lockfile-driven, multi-stage, ordered for cache hits.</p>
 <p><strong>Node.js example:</strong></p>
 <pre><code># Dockerfile
 FROM node:20-alpine AS deps
@@ -2733,15 +2289,9 @@ RUN npm ci --omit=dev
 COPY . .
 </code></pre>
 <p><strong>Vulnerability hygiene:</strong> scan with <strong>Trivy</strong>, <strong>Grype</strong>, <strong>Snyk</strong>, or <strong>Socket.dev</strong> in CI; pin to digests; track CVEs via <strong>Dependabot</strong> + <strong>renovate</strong>; sign images with <strong>cosign</strong>; generate SBOM with BuildKit (<code>--sbom=true</code>).</p>
-<p><strong>Honest 2026 advice:</strong> for a stable, hardened container, consider <strong>Buildpacks</strong> (Heroku/CNB), <strong>Nixpacks</strong> (Railway), or <strong>Chainguard Images</strong> (distroless, signed, low-CVE base images) instead of writing your own Dockerfile from scratch. They handle dep ordering, caching, and security baselines automatically.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q59">
-  <div class="qa__number">Question 59</div>
-  <h3 class="qa__question">What is a Kubernetes ingress?</h3>
-  <div class="qa__answer">
-    <p>An <strong>Ingress</strong> exposes HTTP/HTTPS routes from outside the cluster to Services inside it. Without an Ingress, you&rsquo;d need one cloud LoadBalancer per Service &mdash; expensive and unmanageable. Ingress lets one entry point fan out to many Services based on hostname, path, or headers.</p>
+<p><strong>Honest 2026 advice:</strong> for a stable, hardened container, consider <strong>Buildpacks</strong> (Heroku/CNB), <strong>Nixpacks</strong> (Railway), or <strong>Chainguard Images</strong> (distroless, signed, low-CVE base images) instead of writing your own Dockerfile from scratch. They handle dep ordering, caching, and security baselines automatically.</p>'''
+
+ANSWERS[59] = r'''<p>An <strong>Ingress</strong> exposes HTTP/HTTPS routes from outside the cluster to Services inside it. Without an Ingress, you&rsquo;d need one cloud LoadBalancer per Service &mdash; expensive and unmanageable. Ingress lets one entry point fan out to many Services based on hostname, path, or headers.</p>
 <p><strong>Architecture:</strong></p>
 <table>
 <thead><tr><th>Layer</th><th>Component</th></tr></thead>
@@ -2786,15 +2336,9 @@ spec:
 </ul>
 <p><strong>Gateway API &mdash; the modern successor:</strong></p>
 <p>Ingress&rsquo;s extension model (annotations) doesn&rsquo;t scale. The <strong>Gateway API</strong> (GA in K8s 1.29+) is the official replacement: typed CRDs (<code>Gateway</code>, <code>HTTPRoute</code>, <code>TCPRoute</code>, <code>GRPCRoute</code>), role separation between cluster operators and app teams, and richer routing (header matching, traffic splits, request mirroring without annotations). NGINX, Istio, Cilium, Envoy Gateway, Traefik, and Kong all implement Gateway API in 2026. Greenfield clusters should start with Gateway API.</p>
-<p><strong>TLS and DNS</strong> typically come from <strong>cert-manager</strong> (Let&rsquo;s Encrypt) + <strong>external-dns</strong> (auto-creates Route 53/Cloudflare records from Ingress hosts). For WAF, layer Cloudflare or AWS WAF in front of the cluster LoadBalancer.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q60">
-  <div class="qa__number">Question 60</div>
-  <h3 class="qa__question">How do you integrate Jenkins with Docker?</h3>
-  <div class="qa__answer">
-    <p>Integrating Jenkins with Docker means: agents can build images, registries are accessible, and pipelines can run/test in containers. Three integration points cover most needs.</p>
+<p><strong>TLS and DNS</strong> typically come from <strong>cert-manager</strong> (Let&rsquo;s Encrypt) + <strong>external-dns</strong> (auto-creates Route 53/Cloudflare records from Ingress hosts). For WAF, layer Cloudflare or AWS WAF in front of the cluster LoadBalancer.</p>'''
+
+ANSWERS[60] = r'''<p>Integrating Jenkins with Docker means: agents can build images, registries are accessible, and pipelines can run/test in containers. Three integration points cover most needs.</p>
 <p><strong>1. Run Jenkins itself in Docker</strong>:</p>
 <pre><code>docker run -d --name jenkins \
   -p 8080:8080 -p 50000:50000 \
@@ -2871,15 +2415,9 @@ spec:
 <li><strong>BuildKit cache</strong> via registry (<code>cache-to type=registry,mode=max</code>) for cross-build speed.</li>
 <li><strong>cosign</strong>-sign images and verify in K8s with policy-controller.</li>
 <li><strong>Scan in pipeline</strong> &mdash; Trivy/Grype, fail on critical CVEs.</li>
-</ul>
-    
-  </div>
-</article>
-<article class="qa" id="q61">
-  <div class="qa__number">Question 61</div>
-  <h3 class="qa__question">What is a Docker container registry?</h3>
-  <div class="qa__answer">
-    <p>A <strong>Docker container registry</strong> is a server that stores and distributes Docker images. When you run <code>docker push</code>, the image layers are uploaded to a registry; <code>docker pull</code> retrieves them. Registries make images portable across CI runners, K8s clusters, and developer laptops.</p>
+</ul>'''
+
+ANSWERS[61] = r'''<p>A <strong>Docker container registry</strong> is a server that stores and distributes Docker images. When you run <code>docker push</code>, the image layers are uploaded to a registry; <code>docker pull</code> retrieves them. Registries make images portable across CI runners, K8s clusters, and developer laptops.</p>
 <p>Common registries in 2026:</p>
 <table>
 <tr><th>Registry</th><th>Best for</th><th>Notes</th></tr>
@@ -2896,15 +2434,9 @@ spec:
 docker build -t ghcr.io/acme/api:1.2.3 .
 docker push ghcr.io/acme/api:1.2.3
 </code></pre>
-<p><strong>Best practices:</strong> tag with both <code>:1.2.3</code> (immutable) and <code>:latest</code> (moving), enable vulnerability scanning (Trivy, Snyk, ECR Enhanced Scanning), use OIDC tokens instead of long-lived passwords from CI, and configure retention policies to delete untagged/old images automatically. Sign images with <strong>Sigstore Cosign</strong> and verify signatures at deploy time for supply-chain security.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q62">
-  <div class="qa__number">Question 62</div>
-  <h3 class="qa__question">How do you use GitHub Actions to run tests?</h3>
-  <div class="qa__answer">
-    <p>GitHub Actions runs tests by checking out the code, installing the runtime + dependencies, then executing your test command on every push or pull request. Workflows live in <code>.github/workflows/test.yml</code>.</p>
+<p><strong>Best practices:</strong> tag with both <code>:1.2.3</code> (immutable) and <code>:latest</code> (moving), enable vulnerability scanning (Trivy, Snyk, ECR Enhanced Scanning), use OIDC tokens instead of long-lived passwords from CI, and configure retention policies to delete untagged/old images automatically. Sign images with <strong>Sigstore Cosign</strong> and verify signatures at deploy time for supply-chain security.</p>'''
+
+ANSWERS[62] = r'''<p>GitHub Actions runs tests by checking out the code, installing the runtime + dependencies, then executing your test command on every push or pull request. Workflows live in <code>.github/workflows/test.yml</code>.</p>
 <p><strong>Minimal Node.js example:</strong></p>
 <pre><code>name: Test
 on: [push, pull_request]
@@ -2933,15 +2465,9 @@ jobs:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 </code></pre>
-<p>For monorepos, use <code>paths:</code> filters or tools like <strong>Nx Affected</strong> / <strong>Turbo</strong> to only test packages whose code changed, dramatically cutting CI time.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q63">
-  <div class="qa__number">Question 63</div>
-  <h3 class="qa__question">What are Kubernetes persistent volumes?</h3>
-  <div class="qa__answer">
-    <p>A <strong>Persistent Volume (PV)</strong> is a piece of storage in a Kubernetes cluster, decoupled from any pod&rsquo;s lifecycle. A <strong>PersistentVolumeClaim (PVC)</strong> is a pod&rsquo;s request for storage, matched to a PV by size and access mode.</p>
+<p>For monorepos, use <code>paths:</code> filters or tools like <strong>Nx Affected</strong> / <strong>Turbo</strong> to only test packages whose code changed, dramatically cutting CI time.</p>'''
+
+ANSWERS[63] = r'''<p>A <strong>Persistent Volume (PV)</strong> is a piece of storage in a Kubernetes cluster, decoupled from any pod&rsquo;s lifecycle. A <strong>PersistentVolumeClaim (PVC)</strong> is a pod&rsquo;s request for storage, matched to a PV by size and access mode.</p>
 <p>The provisioning flow:</p>
 <ol>
 <li>Cluster admin creates a <strong>StorageClass</strong> (e.g. <code>gp3</code> on EKS, <code>premium-rwo</code> on GKE).</li>
@@ -2980,15 +2506,9 @@ spec:
 </code></pre>
 <p><strong>Access modes:</strong> <code>ReadWriteOnce</code> (RWO &mdash; one node), <code>ReadOnlyMany</code> (ROX), <code>ReadWriteMany</code> (RWX &mdash; only NFS / EFS / Azure Files / Filestore), <code>ReadWriteOncePod</code> (single pod, K8s 1.27+).</p>
 <p><strong>Reclaim policies:</strong> <code>Delete</code> (default for dynamic) destroys the underlying disk when the PVC is deleted; <code>Retain</code> keeps it for manual cleanup &mdash; safer for production data.</p>
-<p>For databases, prefer <strong>managed services</strong> (Atlas, RDS, Cloud SQL) over self-hosted PVs &mdash; you avoid backup/upgrade/replication operational burden. Use PVs for caches, file uploads, and stateful workloads where managed isn&rsquo;t available.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q64">
-  <div class="qa__number">Question 64</div>
-  <h3 class="qa__question">How do you create a Jenkins pipeline from a Jenkinsfile?</h3>
-  <div class="qa__answer">
-    <p>A <strong>Jenkinsfile</strong> defines a pipeline as code, checked into the repo at the root. When Jenkins detects a Jenkinsfile (via a Multibranch Pipeline or Pipeline job), it executes its stages on each commit.</p>
+<p>For databases, prefer <strong>managed services</strong> (Atlas, RDS, Cloud SQL) over self-hosted PVs &mdash; you avoid backup/upgrade/replication operational burden. Use PVs for caches, file uploads, and stateful workloads where managed isn&rsquo;t available.</p>'''
+
+ANSWERS[64] = r'''<p>A <strong>Jenkinsfile</strong> defines a pipeline as code, checked into the repo at the root. When Jenkins detects a Jenkinsfile (via a Multibranch Pipeline or Pipeline job), it executes its stages on each commit.</p>
 <p><strong>Step 1 &mdash; create the Jenkinsfile</strong> at the repo root:</p>
 <pre><code>// Jenkinsfile (declarative)
 pipeline {
@@ -3037,15 +2557,9 @@ pipeline {
 <li>Configure scan triggers: webhook (best) or periodic.</li>
 </ol>
 <p><strong>Step 3 &mdash; trigger:</strong> push to a branch &rarr; Jenkins detects the change via webhook and runs the pipeline. Open Blue Ocean (or the modern <em>Pipeline Graph</em> view) to watch stages execute.</p>
-<p><strong>Tips:</strong> Keep secrets in Jenkins Credentials (never inline). Use <code>when</code> directives to skip stages on PRs vs main. Prefer <strong>Declarative</strong> over Scripted unless you need full Groovy. For 2026 greenfield projects, evaluate GitHub Actions / GitLab CI / Buildkite first &mdash; Jenkins is typically chosen for legacy continuity or specific plugin needs.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q65">
-  <div class="qa__number">Question 65</div>
-  <h3 class="qa__question">How do you use Docker Swarm?</h3>
-  <div class="qa__answer">
-    <p><strong>Docker Swarm</strong> is Docker&rsquo;s built-in clustering and orchestration mode that turns a group of Docker hosts into a single virtual host. It is simpler than Kubernetes but vastly less capable; in 2026 it sees little new adoption &mdash; Kubernetes (often via managed EKS / GKE / AKS) is the default.</p>
+<p><strong>Tips:</strong> Keep secrets in Jenkins Credentials (never inline). Use <code>when</code> directives to skip stages on PRs vs main. Prefer <strong>Declarative</strong> over Scripted unless you need full Groovy. For 2026 greenfield projects, evaluate GitHub Actions / GitLab CI / Buildkite first &mdash; Jenkins is typically chosen for legacy continuity or specific plugin needs.</p>'''
+
+ANSWERS[65] = r'''<p><strong>Docker Swarm</strong> is Docker&rsquo;s built-in clustering and orchestration mode that turns a group of Docker hosts into a single virtual host. It is simpler than Kubernetes but vastly less capable; in 2026 it sees little new adoption &mdash; Kubernetes (often via managed EKS / GKE / AKS) is the default.</p>
 <p><strong>When you might still meet Swarm:</strong> small teams, edge devices, legacy systems that haven&rsquo;t migrated, or the simplicity of a single <code>docker</code> binary with no separate kubectl/Helm/operators.</p>
 <p><strong>Basic workflow:</strong></p>
 <pre><code># 1. Initialize a swarm on the first node (becomes manager)
@@ -3089,15 +2603,9 @@ docker service update --image ghcr.io/acme/api:2.0.0 myapp_api
 <tr><td>Storage</td><td>Limited</td><td>CSI ecosystem</td></tr>
 <tr><td>Community</td><td>Maintenance only</td><td>CNCF graduated, active</td></tr>
 </table>
-<p><strong>2026 advice:</strong> for new projects, skip Swarm. Use <strong>Docker Compose</strong> for local dev, then <strong>K8s</strong> (managed) or a PaaS (Fly, Railway, Render) for prod.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q66">
-  <div class="qa__number">Question 66</div>
-  <h3 class="qa__question">What is GitHub Actions Marketplace?</h3>
-  <div class="qa__answer">
-    <p>The <strong>GitHub Actions Marketplace</strong> (<code>github.com/marketplace</code>) is a public catalog of reusable, community-contributed actions. Instead of writing shell scripts for common tasks, you reference an action by <code>owner/repo@version</code>.</p>
+<p><strong>2026 advice:</strong> for new projects, skip Swarm. Use <strong>Docker Compose</strong> for local dev, then <strong>K8s</strong> (managed) or a PaaS (Fly, Railway, Render) for prod.</p>'''
+
+ANSWERS[66] = r'''<p>The <strong>GitHub Actions Marketplace</strong> (<code>github.com/marketplace</code>) is a public catalog of reusable, community-contributed actions. Instead of writing shell scripts for common tasks, you reference an action by <code>owner/repo@version</code>.</p>
 <p><strong>Example workflow using marketplace actions:</strong></p>
 <pre><code>jobs:
   deploy:
@@ -3132,15 +2640,9 @@ docker service update --image ghcr.io/acme/api:2.0.0 myapp_api
 <li>Use <code>step-security/harden-runner</code> to audit/block egress and detect malicious behaviour.</li>
 <li>Set least-privilege <code>permissions:</code> at the workflow or job level.</li>
 </ul>
-<p>You can also publish your own actions (JavaScript, Docker, or composite) to the Marketplace for reuse across repos and the community.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q67">
-  <div class="qa__number">Question 67</div>
-  <h3 class="qa__question">How do you deploy a Jenkins server on Kubernetes?</h3>
-  <div class="qa__answer">
-    <p>Deploying Jenkins on Kubernetes lets the master run as a Pod and dynamically spawn agent Pods per build, scaling on demand. The standard approach in 2026 is the official <strong>Jenkins Helm chart</strong>.</p>
+<p>You can also publish your own actions (JavaScript, Docker, or composite) to the Marketplace for reuse across repos and the community.</p>'''
+
+ANSWERS[67] = r'''<p>Deploying Jenkins on Kubernetes lets the master run as a Pod and dynamically spawn agent Pods per build, scaling on demand. The standard approach in 2026 is the official <strong>Jenkins Helm chart</strong>.</p>
 <p><strong>1. Install via Helm:</strong></p>
 <pre><code>helm repo add jenkins https://charts.jenkins.io
 helm repo update
@@ -3197,15 +2699,9 @@ helm upgrade --install jenkins jenkins/jenkins -n ci --create-namespace -f value
 <li><strong>Auth</strong> &mdash; integrate with GitHub OAuth, Okta, or Azure AD via SSO plugins.</li>
 <li><strong>Backups</strong> &mdash; <code>thinBackup</code> plugin or scheduled rsync of <code>/var/jenkins_home</code> to S3.</li>
 </ul>
-<p><strong>2026 alternatives:</strong> for greenfield K8s-native CI, consider <strong>Tekton</strong>, <strong>Argo Workflows</strong>, or <strong>GitHub Actions self-hosted runners</strong> on K8s &mdash; all leaner than Jenkins on K8s.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q68">
-  <div class="qa__number">Question 68</div>
-  <h3 class="qa__question">How do you monitor a Kubernetes cluster?</h3>
-  <div class="qa__answer">
-    <p>Monitoring a Kubernetes cluster needs visibility into three layers: <strong>cluster health</strong> (nodes, control plane), <strong>workloads</strong> (pods, deployments), and <strong>application metrics</strong> (latency, errors, business KPIs). The 2026 standard is <strong>Prometheus + Grafana</strong> for self-hosted, or a managed observability platform.</p>
+<p><strong>2026 alternatives:</strong> for greenfield K8s-native CI, consider <strong>Tekton</strong>, <strong>Argo Workflows</strong>, or <strong>GitHub Actions self-hosted runners</strong> on K8s &mdash; all leaner than Jenkins on K8s.</p>'''
+
+ANSWERS[68] = r'''<p>Monitoring a Kubernetes cluster needs visibility into three layers: <strong>cluster health</strong> (nodes, control plane), <strong>workloads</strong> (pods, deployments), and <strong>application metrics</strong> (latency, errors, business KPIs). The 2026 standard is <strong>Prometheus + Grafana</strong> for self-hosted, or a managed observability platform.</p>
 <p><strong>The kube-prometheus-stack:</strong> the most common bundle, installed via Helm:</p>
 <pre><code>helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm install monitoring prometheus-community/kube-prometheus-stack \
@@ -3236,15 +2732,9 @@ helm install monitoring prometheus-community/kube-prometheus-stack \
 <li><strong>Honeycomb</strong> &mdash; trace-first; great for high-cardinality debugging.</li>
 <li><strong>Cloud-native</strong> &mdash; CloudWatch Container Insights, GKE Cloud Monitoring, Azure Monitor for Containers.</li>
 </ul>
-<p><strong>Alerting</strong>: start with Google&rsquo;s SRE <em>golden signals</em> (latency, traffic, errors, saturation) per service, and alert on symptoms (user-visible failure) rather than causes (CPU 90%) to avoid pager fatigue.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q69">
-  <div class="qa__number">Question 69</div>
-  <h3 class="qa__question">How do you create a Docker network?</h3>
-  <div class="qa__answer">
-    <p>A <strong>Docker network</strong> connects containers and decides who can talk to whom. Docker creates default networks at install time, but you typically create custom networks for application isolation.</p>
+<p><strong>Alerting</strong>: start with Google&rsquo;s SRE <em>golden signals</em> (latency, traffic, errors, saturation) per service, and alert on symptoms (user-visible failure) rather than causes (CPU 90%) to avoid pager fatigue.</p>'''
+
+ANSWERS[69] = r'''<p>A <strong>Docker network</strong> connects containers and decides who can talk to whom. Docker creates default networks at install time, but you typically create custom networks for application isolation.</p>
 <p><strong>Default networks (run <code>docker network ls</code>):</strong></p>
 <table>
 <tr><th>Network</th><th>Driver</th><th>Use</th></tr>
@@ -3288,15 +2778,9 @@ networks:
   front: {}
   back:  {}
 </code></pre>
-<p>This puts <code>db</code> behind <code>api</code> &mdash; <code>web</code> can&rsquo;t reach it directly.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q70">
-  <div class="qa__number">Question 70</div>
-  <h3 class="qa__question">How do you use GitHub Actions for automated testing?</h3>
-  <div class="qa__answer">
-    <p>GitHub Actions automates testing on every push and pull request. The workflow runs in <code>.github/workflows/</code>, executes your test command on a runner, and reports status back to the PR &mdash; required checks block merges if tests fail.</p>
+<p>This puts <code>db</code> behind <code>api</code> &mdash; <code>web</code> can&rsquo;t reach it directly.</p>'''
+
+ANSWERS[70] = r'''<p>GitHub Actions automates testing on every push and pull request. The workflow runs in <code>.github/workflows/</code>, executes your test command on a runner, and reports status back to the PR &mdash; required checks block merges if tests fail.</p>
 <p><strong>Comprehensive Node.js example with lint, type-check, unit, and e2e:</strong></p>
 <pre><code>name: CI
 on:
@@ -3355,15 +2839,9 @@ jobs:
 <li><strong>Concurrency</strong> &mdash; cancel superseded runs on rapid pushes (saves runner minutes).</li>
 <li><strong>Annotations</strong> &mdash; tools like <code>jest-github-actions-reporter</code> or <code>vitest-github-actions-reporter</code> surface failures inline in the PR diff.</li>
 </ul>
-<p><strong>Monorepo tip:</strong> use <strong>Nx Affected</strong>, <strong>Turbo</strong>, or path filters (<code>paths: [packages/api/**]</code>) to run only the tests for changed packages &mdash; keeps CI under a few minutes even at scale.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q71">
-  <div class="qa__number">Question 71</div>
-  <h3 class="qa__question">What is a Jenkins build step?</h3>
-  <div class="qa__answer">
-    <p>A <strong>Jenkins build step</strong> is a single executable unit inside a stage &mdash; it runs a shell command, invokes a plugin, or calls a function. Multiple steps form a stage; multiple stages form a pipeline.</p>
+<p><strong>Monorepo tip:</strong> use <strong>Nx Affected</strong>, <strong>Turbo</strong>, or path filters (<code>paths: [packages/api/**]</code>) to run only the tests for changed packages &mdash; keeps CI under a few minutes even at scale.</p>'''
+
+ANSWERS[71] = r'''<p>A <strong>Jenkins build step</strong> is a single executable unit inside a stage &mdash; it runs a shell command, invokes a plugin, or calls a function. Multiple steps form a stage; multiple stages form a pipeline.</p>
 <p><strong>In a declarative pipeline:</strong></p>
 <pre><code>pipeline {
   agent any
@@ -3397,15 +2875,9 @@ jobs:
 </table>
 <p><strong>Plugin-provided steps:</strong> Docker (<code>docker.build</code>, <code>docker.image('...').inside { }</code>), Kubernetes (<code>kubernetesDeploy</code>), Slack (<code>slackSend</code>), AWS (<code>withAWS</code>), and thousands more on the Plugin Index.</p>
 <p><strong>Freestyle vs Pipeline:</strong> in classic Freestyle jobs, &ldquo;build steps&rdquo; are configured in the UI as discrete blocks (Execute Shell, Invoke Maven, etc.). In Pipeline jobs they are code in <code>steps { }</code>, which is the modern recommendation &mdash; reproducible, reviewable, versioned with the application.</p>
-<p><strong>Best practice:</strong> keep individual steps small and focused; one shell step per logical action so failures pinpoint the cause. Wrap brittle network calls in <code>retry(3) { sh '...' }</code>, and put time-bounded operations under <code>timeout</code>.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q72">
-  <div class="qa__number">Question 72</div>
-  <h3 class="qa__question">How do you use Kubernetes Secrets?</h3>
-  <div class="qa__answer">
-    <p><strong>Kubernetes Secrets</strong> store sensitive data &mdash; passwords, API keys, certificates &mdash; separately from Pod definitions, so manifests can be checked into Git without exposing credentials. Secrets are mounted as files or injected as env vars at Pod start.</p>
+<p><strong>Best practice:</strong> keep individual steps small and focused; one shell step per logical action so failures pinpoint the cause. Wrap brittle network calls in <code>retry(3) { sh '...' }</code>, and put time-bounded operations under <code>timeout</code>.</p>'''
+
+ANSWERS[72] = r'''<p><strong>Kubernetes Secrets</strong> store sensitive data &mdash; passwords, API keys, certificates &mdash; separately from Pod definitions, so manifests can be checked into Git without exposing credentials. Secrets are mounted as files or injected as env vars at Pod start.</p>
 <p><strong>Create a Secret:</strong></p>
 <pre><code># From literal values
 kubectl create secret generic api-secrets \
@@ -3466,15 +2938,9 @@ spec:
 <tr><td><strong>CSI Secrets Store Driver</strong></td><td>Mount secrets directly from a manager into Pod files, no K8s Secret intermediary</td></tr>
 <tr><td><strong>Sealed Secrets</strong></td><td>Encrypt Secret manifests so they can be safely Git-committed</td></tr>
 </table>
-<p>This keeps the source-of-truth in a hardened secret manager with audit logs and rotation, while K8s gets just-in-time copies.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q73">
-  <div class="qa__number">Question 73</div>
-  <h3 class="qa__question">How do you run a Docker container?</h3>
-  <div class="qa__answer">
-    <p>Running a Docker container starts a process from a built image. The basic command is <code>docker run [options] image [command]</code> &mdash; Docker pulls the image if missing, creates a writable layer on top, and starts the entrypoint.</p>
+<p>This keeps the source-of-truth in a hardened secret manager with audit logs and rotation, while K8s gets just-in-time copies.</p>'''
+
+ANSWERS[73] = r'''<p>Running a Docker container starts a process from a built image. The basic command is <code>docker run [options] image [command]</code> &mdash; Docker pulls the image if missing, creates a writable layer on top, and starts the entrypoint.</p>
 <p><strong>Common patterns:</strong></p>
 <pre><code># Foreground, interactive, removed when done
 docker run -it --rm ubuntu:24.04 bash
@@ -3529,15 +2995,9 @@ docker logs -f api     # tail logs
 docker exec -it api sh # shell into a running container
 docker stop api && docker rm api
 </code></pre>
-<p><strong>For dev work,</strong> prefer <code>docker compose up</code> over many ad-hoc <code>docker run</code> commands &mdash; the Compose file is reproducible and version-controlled. For prod, prefer Kubernetes / ECS / Nomad over hand-managed <code>docker run</code> on hosts.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q74">
-  <div class="qa__number">Question 74</div>
-  <h3 class="qa__question">How do you use GitHub Actions to build and deploy a Node.js application?</h3>
-  <div class="qa__answer">
-    <p>Building and deploying a Node.js application via GitHub Actions typically combines: install &rarr; test &rarr; build a Docker image &rarr; push to a registry &rarr; deploy to a target (K8s / ECS / Cloud Run / SSH host).</p>
+<p><strong>For dev work,</strong> prefer <code>docker compose up</code> over many ad-hoc <code>docker run</code> commands &mdash; the Compose file is reproducible and version-controlled. For prod, prefer Kubernetes / ECS / Nomad over hand-managed <code>docker run</code> on hosts.</p>'''
+
+ANSWERS[74] = r'''<p>Building and deploying a Node.js application via GitHub Actions typically combines: install &rarr; test &rarr; build a Docker image &rarr; push to a registry &rarr; deploy to a target (K8s / ECS / Cloud Run / SSH host).</p>
 <p><strong>Full example: build &amp; deploy to a managed K8s cluster:</strong></p>
 <pre><code># .github/workflows/deploy.yml
 name: Build and Deploy
@@ -3629,15 +3089,9 @@ CMD ["node", "dist/server.js"]
 <li><strong>GitHub Environments</strong> with required reviewers gate prod deploys.</li>
 <li><strong>Buildx cache</strong> (<code>type=gha</code>) caches Docker layers in the GitHub cache for 5&times; faster rebuilds.</li>
 <li><strong>Other deploy targets</strong>: Vercel / Render / Fly use a single CLI step; ECS uses <code>aws-actions/amazon-ecs-deploy-task-definition</code>; Cloud Run uses <code>google-github-actions/deploy-cloudrun</code>.</li>
-</ul>
-    
-  </div>
-</article>
-<article class="qa" id="q75">
-  <div class="qa__number">Question 75</div>
-  <h3 class="qa__question">What is Jenkins Job DSL?</h3>
-  <div class="qa__answer">
-    <p>The <strong>Jenkins Job DSL</strong> plugin lets you describe Jenkins jobs in Groovy code instead of clicking through the UI. A &ldquo;seed job&rdquo; runs the DSL script and creates / updates the actual jobs &mdash; classic <em>jobs as code</em>.</p>
+</ul>'''
+
+ANSWERS[75] = r'''<p>The <strong>Jenkins Job DSL</strong> plugin lets you describe Jenkins jobs in Groovy code instead of clicking through the UI. A &ldquo;seed job&rdquo; runs the DSL script and creates / updates the actual jobs &mdash; classic <em>jobs as code</em>.</p>
 <p><strong>Example DSL script (<code>jobs/dsl.groovy</code>):</strong></p>
 <pre><code>// Generate a freestyle job
 job('acme/api-build') {
@@ -3696,15 +3150,9 @@ multibranchPipelineJob('acme/api') {
 <tr><td>Replaces</td><td>Manual &ldquo;New Item&rdquo; clicks</td><td>Freestyle build steps</td></tr>
 </table>
 <p>You typically use both: Job DSL provisions the jobs; each provisioned job runs a Pipeline / Jenkinsfile.</p>
-<p><strong>2026 alternatives:</strong> for fully declarative Jenkins setup, prefer <strong>JCasC</strong> (Jenkins Configuration as Code) for the Jenkins controller config plus <strong>Jenkinsfile</strong> per repo &mdash; many teams skip Job DSL entirely. For greenfield CI, GitHub Actions / GitLab CI / Buildkite have config-as-code as the default with no seed-job ceremony.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q76">
-  <div class="qa__number">Question 76</div>
-  <h3 class="qa__question">How do you manage multiple Kubernetes clusters?</h3>
-  <div class="qa__answer">
-    <p>Real organisations rarely run a single Kubernetes cluster &mdash; they split across environments (dev / staging / prod), regions (us-east / eu-west), or business units. Managing many clusters needs tooling beyond raw <code>kubectl</code>.</p>
+<p><strong>2026 alternatives:</strong> for fully declarative Jenkins setup, prefer <strong>JCasC</strong> (Jenkins Configuration as Code) for the Jenkins controller config plus <strong>Jenkinsfile</strong> per repo &mdash; many teams skip Job DSL entirely. For greenfield CI, GitHub Actions / GitLab CI / Buildkite have config-as-code as the default with no seed-job ceremony.</p>'''
+
+ANSWERS[76] = r'''<p>Real organisations rarely run a single Kubernetes cluster &mdash; they split across environments (dev / staging / prod), regions (us-east / eu-west), or business units. Managing many clusters needs tooling beyond raw <code>kubectl</code>.</p>
 <p><strong>Levels of multi-cluster management:</strong></p>
 <ol>
 <li><strong>Context switching</strong> &mdash; <code>kubectl config use-context prod-us</code>; fine for two or three clusters.</li>
@@ -3749,15 +3197,9 @@ spec:
 </ul>
 <p><strong>Cross-cluster networking and traffic:</strong> <strong>Submariner</strong>, <strong>Cilium Cluster Mesh</strong>, <strong>Istio multi-cluster</strong>, or app-layer multi-cluster ingress (AWS Global Accelerator, GCP Multi-Cluster Ingress) for failover and global routing.</p>
 <p><strong>Observability across clusters:</strong> ship metrics / logs / traces to a single backend &mdash; <strong>Grafana Cloud</strong>, <strong>Datadog</strong>, <strong>Honeycomb</strong>, or self-hosted <strong>Thanos</strong> / <strong>Mimir</strong> for federated Prometheus.</p>
-<p><strong>Best practice:</strong> treat clusters as cattle &mdash; the Git repo, not the cluster, is the source of truth. Provision new clusters via Terraform / Crossplane, bootstrap them with Argo CD / Flux, and let GitOps fill them in. A lost cluster should be replaceable in minutes.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q77">
-  <div class="qa__number">Question 77</div>
-  <h3 class="qa__question">What is Docker Hub?</h3>
-  <div class="qa__answer">
-    <p><strong>Docker Hub</strong> (<code>hub.docker.com</code>) is Docker&rsquo;s original and largest public image registry. It hosts <em>millions</em> of images: official base images (node, python, postgres, nginx), vendor images, and community/personal images.</p>
+<p><strong>Best practice:</strong> treat clusters as cattle &mdash; the Git repo, not the cluster, is the source of truth. Provision new clusters via Terraform / Crossplane, bootstrap them with Argo CD / Flux, and let GitOps fill them in. A lost cluster should be replaceable in minutes.</p>'''
+
+ANSWERS[77] = r'''<p><strong>Docker Hub</strong> (<code>hub.docker.com</code>) is Docker&rsquo;s original and largest public image registry. It hosts <em>millions</em> of images: official base images (node, python, postgres, nginx), vendor images, and community/personal images.</p>
 <p><strong>Three image categories:</strong></p>
 <table>
 <tr><th>Category</th><th>Example</th><th>Notes</th></tr>
@@ -3791,15 +3233,9 @@ docker search prometheus                  # search images
 <li>Scan images on push: Hub&rsquo;s built-in scan, <strong>Trivy</strong>, <strong>Snyk</strong>, <strong>Grype</strong>.</li>
 <li>Sign images with <strong>Sigstore Cosign</strong> and verify at deploy.</li>
 <li>Configure registry mirroring (e.g. AWS ECR pull-through cache) to dodge rate limits and centralise scanning.</li>
-</ul>
-    
-  </div>
-</article>
-<article class="qa" id="q78">
-  <div class="qa__number">Question 78</div>
-  <h3 class="qa__question">How do you set up continuous deployment with GitHub Actions?</h3>
-  <div class="qa__answer">
-    <p>Continuous Deployment with GitHub Actions means: every commit to <code>main</code> that passes CI is <em>automatically</em> released to production with no human click. Continuous <em>Delivery</em> uses the same pipeline but adds a manual approval gate before prod.</p>
+</ul>'''
+
+ANSWERS[78] = r'''<p>Continuous Deployment with GitHub Actions means: every commit to <code>main</code> that passes CI is <em>automatically</em> released to production with no human click. Continuous <em>Delivery</em> uses the same pipeline but adds a manual approval gate before prod.</p>
 <p><strong>Building blocks:</strong></p>
 <ol>
 <li><strong>Branching strategy</strong> &mdash; trunk-based: feature branches &rarr; PR &rarr; squash merge to <code>main</code>.</li>
@@ -3859,15 +3295,9 @@ jobs:
 <li><strong>Smoke tests post-deploy</strong> &mdash; fail the workflow on regression.</li>
 <li><strong>Synthetic checks</strong> &mdash; Datadog Synthetics / Checkly / Grafana k6 verifying end-user paths every minute.</li>
 </ul>
-<p><strong>Dora-metric instrumentation</strong> (deployment frequency, lead time, MTTR, change failure rate) helps the team measure whether CD is actually making things better.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q79">
-  <div class="qa__number">Question 79</div>
-  <h3 class="qa__question">What is a Jenkins pipeline stage?</h3>
-  <div class="qa__answer">
-    <p>A <strong>stage</strong> in a Jenkins pipeline groups related steps under a name &mdash; it&rsquo;s the unit shown as a coloured block in Blue Ocean / Pipeline Graph. Stages give visual structure, parallelism, and conditional execution.</p>
+<p><strong>Dora-metric instrumentation</strong> (deployment frequency, lead time, MTTR, change failure rate) helps the team measure whether CD is actually making things better.</p>'''
+
+ANSWERS[79] = r'''<p>A <strong>stage</strong> in a Jenkins pipeline groups related steps under a name &mdash; it&rsquo;s the unit shown as a coloured block in Blue Ocean / Pipeline Graph. Stages give visual structure, parallelism, and conditional execution.</p>
 <p><strong>Anatomy:</strong></p>
 <pre><code>pipeline {
   agent any
@@ -3924,15 +3354,9 @@ jobs:
 <li><strong><code>agent { }</code></strong> &mdash; override the pipeline-level agent (different label / docker image / kubernetes pod per stage).</li>
 <li><strong><code>post { }</code></strong> &mdash; <code>always</code> / <code>success</code> / <code>failure</code> / <code>changed</code> hooks.</li>
 </ul>
-<p><strong>Best-practice stage layout:</strong> <em>Checkout &rarr; Build &rarr; Test (parallel) &rarr; Package &rarr; Publish &rarr; Deploy &rarr; Smoke</em>. Keep each stage focused on one concern so the timeline shows clearly where time is spent and where failures happen. Use <code>options { timeout(time: 10, unit: 'MINUTES') }</code> on each stage to bound runaway jobs.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q80">
-  <div class="qa__number">Question 80</div>
-  <h3 class="qa__question">How do you use Kubernetes DaemonSets?</h3>
-  <div class="qa__answer">
-    <p>A <strong>DaemonSet</strong> ensures that exactly one copy of a Pod runs on every (or every selected) node in the cluster. It&rsquo;s the right tool for <em>node-level agents</em> &mdash; things that must observe / serve / manage every host.</p>
+<p><strong>Best-practice stage layout:</strong> <em>Checkout &rarr; Build &rarr; Test (parallel) &rarr; Package &rarr; Publish &rarr; Deploy &rarr; Smoke</em>. Keep each stage focused on one concern so the timeline shows clearly where time is spent and where failures happen. Use <code>options { timeout(time: 10, unit: 'MINUTES') }</code> on each stage to bound runaway jobs.</p>'''
+
+ANSWERS[80] = r'''<p>A <strong>DaemonSet</strong> ensures that exactly one copy of a Pod runs on every (or every selected) node in the cluster. It&rsquo;s the right tool for <em>node-level agents</em> &mdash; things that must observe / serve / manage every host.</p>
 <p><strong>Typical uses:</strong></p>
 <ul>
 <li><strong>Log shippers</strong> &mdash; Fluent Bit, Vector, Filebeat tailing <code>/var/log/containers</code> on each node.</li>
@@ -3991,15 +3415,9 @@ spec:
 <tr><td><strong>Job / CronJob</strong></td><td>Run-to-completion</td><td>Batch / scheduled tasks</td></tr>
 </table>
 <p><strong>Update strategy:</strong> DaemonSets default to <code>RollingUpdate</code>, replacing one Pod per node at a time, controlled by <code>maxUnavailable</code>. Use <code>OnDelete</code> for manual control on sensitive node agents (CSI, CNI).</p>
-<p><strong>Operational tips:</strong> set tight resource <code>requests</code>/<code>limits</code> &mdash; a DaemonSet leak burns capacity on every node. Add <code>priorityClassName: system-node-critical</code> for agents that must not be evicted under pressure. Use Pod Disruption Budgets if rolling updates risk losing too many node agents at once.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q81">
-  <div class="qa__number">Question 81</div>
-  <h3 class="qa__question">How do you tag a Docker image?</h3>
-  <div class="qa__answer">
-    <p>Tagging a Docker image gives it a human-friendly name (and a registry path) so it can be pushed, pulled, and referenced. The full reference is <code>registry/namespace/repo:tag</code>; if you omit pieces, Docker fills in defaults (<code>docker.io/library/...:latest</code>).</p>
+<p><strong>Operational tips:</strong> set tight resource <code>requests</code>/<code>limits</code> &mdash; a DaemonSet leak burns capacity on every node. Add <code>priorityClassName: system-node-critical</code> for agents that must not be evicted under pressure. Use Pod Disruption Budgets if rolling updates risk losing too many node agents at once.</p>'''
+
+ANSWERS[81] = r'''<p>Tagging a Docker image gives it a human-friendly name (and a registry path) so it can be pushed, pulled, and referenced. The full reference is <code>registry/namespace/repo:tag</code>; if you omit pieces, Docker fills in defaults (<code>docker.io/library/...:latest</code>).</p>
 <p><strong>Tagging at build time:</strong></p>
 <pre><code># Build and tag in one step
 docker build -t acme/api:1.2.3 .
@@ -4042,15 +3460,9 @@ docker push ghcr.io/acme/api:1.2.3
       type=sha,prefix=
       type=ref,event=branch
 </code></pre>
-<p>This gives you semver tags on releases, SHA tags on every push, and branch tags for previews &mdash; all without hand-rolling tag logic.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q82">
-  <div class="qa__number">Question 82</div>
-  <h3 class="qa__question">How do you set up CI/CD for a Python application using GitHub Actions?</h3>
-  <div class="qa__answer">
-    <p>Setting up CI/CD for Python with GitHub Actions covers: install dependencies (with caching), lint, type-check, test (with coverage), build a wheel or Docker image, and deploy.</p>
+<p>This gives you semver tags on releases, SHA tags on every push, and branch tags for previews &mdash; all without hand-rolling tag logic.</p>'''
+
+ANSWERS[82] = r'''<p>Setting up CI/CD for Python with GitHub Actions covers: install dependencies (with caching), lint, type-check, test (with coverage), build a wheel or Docker image, and deploy.</p>
 <p><strong>Modern Python project (Ruff + uv + pytest + Docker):</strong></p>
 <pre><code># .github/workflows/python.yml
 name: Python CI/CD
@@ -4140,15 +3552,9 @@ CMD ["uv", "run", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "800
 <li><strong>Pytest</strong> + <strong>pytest-asyncio</strong> + <strong>coverage</strong> for tests; <strong>Hypothesis</strong> for property-based.</li>
 <li><strong>mypy</strong> or <strong>pyright</strong>/<strong>ty</strong> for static typing.</li>
 <li><strong>PyPI Trusted Publishing</strong> &mdash; OIDC-based, no API tokens stored in GitHub.</li>
-</ul>
-    
-  </div>
-</article>
-<article class="qa" id="q83">
-  <div class="qa__number">Question 83</div>
-  <h3 class="qa__question">What are Jenkins pipelines as code?</h3>
-  <div class="qa__answer">
-    <p><strong>Pipelines as Code (PaC)</strong> means defining your CI/CD pipeline in a file checked into the repo, instead of clicking through a UI. In Jenkins this means a <strong>Jenkinsfile</strong> at the repo root that declares the pipeline using Groovy DSL.</p>
+</ul>'''
+
+ANSWERS[83] = r'''<p><strong>Pipelines as Code (PaC)</strong> means defining your CI/CD pipeline in a file checked into the repo, instead of clicking through a UI. In Jenkins this means a <strong>Jenkinsfile</strong> at the repo root that declares the pipeline using Groovy DSL.</p>
 <p><strong>Why it matters:</strong></p>
 <ul>
 <li><strong>Versioned</strong> &mdash; the pipeline lives next to the code; old commits build with the pipeline that was current at the time.</li>
@@ -4203,15 +3609,9 @@ def call(Map config) {
 @Library('acme-pipeline') _
 acmePipeline(image: 'acme/api')
 </code></pre>
-<p><strong>2026 reality:</strong> &ldquo;Pipelines as Code&rdquo; is now the universal default &mdash; <strong>GitHub Actions</strong> (<code>.github/workflows/*.yml</code>), <strong>GitLab CI</strong> (<code>.gitlab-ci.yml</code>), <strong>CircleCI</strong> (<code>.circleci/config.yml</code>), <strong>Buildkite</strong>, <strong>Tekton</strong> all follow the same pattern. UI-clicked pipelines are considered legacy.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q84">
-  <div class="qa__number">Question 84</div>
-  <h3 class="qa__question">How do you use Kubernetes StatefulSets?</h3>
-  <div class="qa__answer">
-    <p>A <strong>StatefulSet</strong> manages Pods that need a stable identity, stable storage, and ordered lifecycle &mdash; databases, queues, leader-elected services. Unlike a Deployment, each replica gets a sticky name (<code>db-0</code>, <code>db-1</code>, <code>db-2</code>) and its own PersistentVolumeClaim that survives restarts.</p>
+<p><strong>2026 reality:</strong> &ldquo;Pipelines as Code&rdquo; is now the universal default &mdash; <strong>GitHub Actions</strong> (<code>.github/workflows/*.yml</code>), <strong>GitLab CI</strong> (<code>.gitlab-ci.yml</code>), <strong>CircleCI</strong> (<code>.circleci/config.yml</code>), <strong>Buildkite</strong>, <strong>Tekton</strong> all follow the same pattern. UI-clicked pipelines are considered legacy.</p>'''
+
+ANSWERS[84] = r'''<p>A <strong>StatefulSet</strong> manages Pods that need a stable identity, stable storage, and ordered lifecycle &mdash; databases, queues, leader-elected services. Unlike a Deployment, each replica gets a sticky name (<code>db-0</code>, <code>db-1</code>, <code>db-2</code>) and its own PersistentVolumeClaim that survives restarts.</p>
 <p><strong>Three guarantees a StatefulSet provides:</strong></p>
 <table>
 <tr><th>Guarantee</th><th>Mechanism</th></tr>
@@ -4267,15 +3667,9 @@ spec:
 <tr><td>Scaling</td><td>Parallel</td><td>Ordered</td></tr>
 <tr><td>Use</td><td>Stateless apps</td><td>Databases, message queues, ZK/etcd-like quorum systems</td></tr>
 </table>
-<p><strong>2026 advice:</strong> for production databases, prefer <strong>managed services</strong> (Atlas, RDS, Cloud SQL, ElastiCache) over self-hosted StatefulSets &mdash; you avoid backups, upgrades, replication, and certificate rotation. Reach for StatefulSets when no managed option exists, you have specific compliance / data-sovereignty needs, or you&rsquo;re running a Kafka / Cassandra / Elasticsearch where Operators (Strimzi, K8ssandra, ECK) automate the lifecycle.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q85">
-  <div class="qa__number">Question 85</div>
-  <h3 class="qa__question">How do you pull a Docker image from Docker Hub?</h3>
-  <div class="qa__answer">
-    <p>Pulling an image from Docker Hub downloads its layers to your local Docker daemon&rsquo;s storage. <code>docker run</code> pulls implicitly if the image is missing; <code>docker pull</code> fetches without running.</p>
+<p><strong>2026 advice:</strong> for production databases, prefer <strong>managed services</strong> (Atlas, RDS, Cloud SQL, ElastiCache) over self-hosted StatefulSets &mdash; you avoid backups, upgrades, replication, and certificate rotation. Reach for StatefulSets when no managed option exists, you have specific compliance / data-sovereignty needs, or you&rsquo;re running a Kafka / Cassandra / Elasticsearch where Operators (Strimzi, K8ssandra, ECK) automate the lifecycle.</p>'''
+
+ANSWERS[85] = r'''<p>Pulling an image from Docker Hub downloads its layers to your local Docker daemon&rsquo;s storage. <code>docker run</code> pulls implicitly if the image is missing; <code>docker pull</code> fetches without running.</p>
 <p><strong>Basic syntax:</strong></p>
 <pre><code>docker pull node:20-alpine            # specific tag
 docker pull node                       # implicit :latest &mdash; avoid
@@ -4316,15 +3710,9 @@ spec:
 <li><strong>Mirror official images</strong> in your internal registry.</li>
 <li><strong>Cache layers in CI</strong> &mdash; <code>docker/build-push-action</code> with <code>cache-from: type=gha</code> avoids re-downloading layers across runs.</li>
 </ul>
-<p><strong>Verify what you pulled</strong> with <code>docker inspect IMAGE</code> or <code>docker history IMAGE</code> &mdash; useful for catching unexpected base-image changes when something pinned to <code>:latest</code> goes wrong.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q86">
-  <div class="qa__number">Question 86</div>
-  <h3 class="qa__question">How do you configure GitHub Actions for a Java project?</h3>
-  <div class="qa__answer">
-    <p>Configuring GitHub Actions for a Java project is a matter of: choose a JDK version, run Maven or Gradle, cache dependencies, run tests, optionally build a JAR / container, deploy.</p>
+<p><strong>Verify what you pulled</strong> with <code>docker inspect IMAGE</code> or <code>docker history IMAGE</code> &mdash; useful for catching unexpected base-image changes when something pinned to <code>:latest</code> goes wrong.</p>'''
+
+ANSWERS[86] = r'''<p>Configuring GitHub Actions for a Java project is a matter of: choose a JDK version, run Maven or Gradle, cache dependencies, run tests, optionally build a JAR / container, deploy.</p>
 <p><strong>Maven example:</strong></p>
 <pre><code># .github/workflows/maven.yml
 name: Java CI
@@ -4402,15 +3790,9 @@ CMD ["java", "-XX:MaxRAMPercentage=75", "-jar", "/app/app.jar"]
 <li><strong>Maven publish</strong> &mdash; <code>actions/setup-java</code> can pre-fill <code>~/.m2/settings.xml</code> with creds for Maven Central / GitHub Packages.</li>
 <li><strong>Native image</strong> &mdash; for GraalVM / Spring AOT, use <code>graalvm/setup-graalvm</code> and build native binaries.</li>
 </ul>
-<p><strong>Distribution choice:</strong> <strong>Eclipse Temurin</strong> (default), <strong>Microsoft Build of OpenJDK</strong>, <strong>Amazon Corretto</strong>, <strong>Azul Zulu</strong>, or <strong>GraalVM</strong> for native &mdash; all are free and supported. Avoid Oracle JDK for production unless you have a paid Oracle subscription.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q87">
-  <div class="qa__number">Question 87</div>
-  <h3 class="qa__question">How do you schedule jobs in Jenkins?</h3>
-  <div class="qa__answer">
-    <p>Jenkins schedules jobs using a slightly extended cron syntax. The trigger is configured per-job, in the UI under <em>Build Triggers &rarr; Build periodically</em>, or via Pipeline DSL.</p>
+<p><strong>Distribution choice:</strong> <strong>Eclipse Temurin</strong> (default), <strong>Microsoft Build of OpenJDK</strong>, <strong>Amazon Corretto</strong>, <strong>Azul Zulu</strong>, or <strong>GraalVM</strong> for native &mdash; all are free and supported. Avoid Oracle JDK for production unless you have a paid Oracle subscription.</p>'''
+
+ANSWERS[87] = r'''<p>Jenkins schedules jobs using a slightly extended cron syntax. The trigger is configured per-job, in the UI under <em>Build Triggers &rarr; Build periodically</em>, or via Pipeline DSL.</p>
 <p><strong>Cron syntax</strong>: <code>MIN HOUR DAY-OF-MONTH MONTH DAY-OF-WEEK</code></p>
 <table>
 <tr><th>Expression</th><th>Meaning</th></tr>
@@ -4456,15 +3838,9 @@ CMD ["java", "-XX:MaxRAMPercentage=75", "-jar", "/app/app.jar"]
 <li><strong>Remote API</strong> &mdash; <code>curl -X POST https://jenkins/job/foo/buildWithParameters?token=ABC&amp;BRANCH=main</code>.</li>
 <li><strong>Upstream / downstream</strong> &mdash; chain jobs so a successful library build triggers dependent service builds.</li>
 </ul>
-<p><strong>2026 alternative:</strong> for new scheduling needs, GitHub Actions <code>schedule:</code> trigger or workflow_dispatch is simpler and free; cron-on-cluster patterns now use <strong>Kubernetes CronJob</strong> for batch workloads, with <strong>Argo Workflows</strong> or <strong>Temporal</strong> for richer DAGs.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q88">
-  <div class="qa__number">Question 88</div>
-  <h3 class="qa__question">What are Kubernetes operators?</h3>
-  <div class="qa__answer">
-    <p>A <strong>Kubernetes Operator</strong> is a controller that extends the Kubernetes API to manage a complex application as if it were a built-in resource. The pattern is: define a <em>Custom Resource Definition</em> (CRD), then write a controller that watches custom-resource objects and reconciles real-world state to match the spec.</p>
+<p><strong>2026 alternative:</strong> for new scheduling needs, GitHub Actions <code>schedule:</code> trigger or workflow_dispatch is simpler and free; cron-on-cluster patterns now use <strong>Kubernetes CronJob</strong> for batch workloads, with <strong>Argo Workflows</strong> or <strong>Temporal</strong> for richer DAGs.</p>'''
+
+ANSWERS[88] = r'''<p>A <strong>Kubernetes Operator</strong> is a controller that extends the Kubernetes API to manage a complex application as if it were a built-in resource. The pattern is: define a <em>Custom Resource Definition</em> (CRD), then write a controller that watches custom-resource objects and reconciles real-world state to match the spec.</p>
 <p><strong>Why operators exist:</strong> built-in resources (Deployment, StatefulSet) handle generic Pod orchestration but can&rsquo;t manage application-specific lifecycle &mdash; backups, upgrades, replication, failover. An operator encodes a human SRE&rsquo;s playbook as software.</p>
 <p><strong>Example mental model &mdash; the PostgreSQL Operator:</strong></p>
 <pre><code>apiVersion: postgres-operator.crunchydata.com/v1beta1
@@ -4510,15 +3886,9 @@ spec:
 <li>Auto-pilot (auto-scaling, auto-tuning)</li>
 </ol>
 <p><strong>Building one</strong> usually means using the <strong>Operator SDK</strong>, <strong>Kubebuilder</strong>, or <strong>Metacontroller</strong> to scaffold a Go controller. <strong>OperatorHub.io</strong> is the catalog. <strong>OLM (Operator Lifecycle Manager)</strong> installs/upgrades operators on OpenShift; on vanilla K8s most teams just use Helm.</p>
-<p><strong>2026 advice:</strong> install operators only when the lifecycle complexity justifies them. For greenfield apps, prefer <strong>managed services</strong> (Atlas, RDS, Confluent Cloud, Elastic Cloud) over running an operator yourself &mdash; you skip the upgrade-and-backup ops burden.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q89">
-  <div class="qa__number">Question 89</div>
-  <h3 class="qa__question">How do you use a Dockerfile in a CI/CD pipeline?</h3>
-  <div class="qa__answer">
-    <p>A <strong>Dockerfile</strong> is the recipe that defines how to build an image. In a CI/CD pipeline it&rsquo;s the contract between &ldquo;source code&rdquo; and &ldquo;immutable runtime artifact&rdquo; &mdash; the same Dockerfile produces identical images across dev, CI, staging, and prod.</p>
+<p><strong>2026 advice:</strong> install operators only when the lifecycle complexity justifies them. For greenfield apps, prefer <strong>managed services</strong> (Atlas, RDS, Confluent Cloud, Elastic Cloud) over running an operator yourself &mdash; you skip the upgrade-and-backup ops burden.</p>'''
+
+ANSWERS[89] = r'''<p>A <strong>Dockerfile</strong> is the recipe that defines how to build an image. In a CI/CD pipeline it&rsquo;s the contract between &ldquo;source code&rdquo; and &ldquo;immutable runtime artifact&rdquo; &mdash; the same Dockerfile produces identical images across dev, CI, staging, and prod.</p>
 <p><strong>Pipeline integration in three steps:</strong></p>
 <ol>
 <li><strong>Build</strong> the image from source.</li>
@@ -4597,15 +3967,9 @@ CMD ["dist/server.js"]
 <li><strong>.dockerignore</strong> &mdash; exclude <code>.git</code>, <code>node_modules</code>, <code>__pycache__</code>, build outputs &mdash; keeps the build context tiny.</li>
 <li><strong>Sign &amp; verify</strong> &mdash; Sigstore Cosign in CI and admission policy at deploy.</li>
 <li><strong>Generate SBOM</strong> &mdash; for supply-chain compliance (SLSA, FedRAMP, EU CRA).</li>
-</ul>
-    
-  </div>
-</article>
-<article class="qa" id="q90">
-  <div class="qa__number">Question 90</div>
-  <h3 class="qa__question">How do you use GitHub Actions to deploy to AWS?</h3>
-  <div class="qa__answer">
-    <p>Deploying to AWS from GitHub Actions in 2026 means using <strong>OIDC trust</strong> instead of long-lived access keys. GitHub issues a short-lived OIDC token; AWS exchanges it for IAM role credentials valid for the workflow run. No secrets to rotate, leak-proof.</p>
+</ul>'''
+
+ANSWERS[90] = r'''<p>Deploying to AWS from GitHub Actions in 2026 means using <strong>OIDC trust</strong> instead of long-lived access keys. GitHub issues a short-lived OIDC token; AWS exchanges it for IAM role credentials valid for the workflow run. No secrets to rotate, leak-proof.</p>
 <p><strong>One-time AWS setup:</strong></p>
 <ol>
 <li>Create an IAM <strong>OIDC identity provider</strong> for <code>token.actions.githubusercontent.com</code> (one per AWS account).</li>
@@ -4680,15 +4044,9 @@ jobs:
 <tr><td>SAM / CDK</td><td><code>sam deploy</code> / <code>cdk deploy</code></td></tr>
 <tr><td>App Runner / Beanstalk</td><td>vendor-specific actions</td></tr>
 </table>
-<p><strong>Best practices:</strong> scope the IAM role tightly per repo and per environment (separate <code>gh-deploy-prod</code> vs <code>gh-deploy-staging</code>); pin OIDC subject claims to specific branches or environments; use <strong>GitHub Environments</strong> with required reviewers for prod; emit immutable image tags (Git SHA), not <code>:latest</code>; audit role usage via CloudTrail.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q91">
-  <div class="qa__number">Question 91</div>
-  <h3 class="qa__question">What is Jenkins Pipeline DSL?</h3>
-  <div class="qa__answer">
-    <p><strong>Jenkins Pipeline DSL</strong> is the Groovy-based domain-specific language used inside a <code>Jenkinsfile</code> to define the steps of a pipeline. It comes in two flavours:</p>
+<p><strong>Best practices:</strong> scope the IAM role tightly per repo and per environment (separate <code>gh-deploy-prod</code> vs <code>gh-deploy-staging</code>); pin OIDC subject claims to specific branches or environments; use <strong>GitHub Environments</strong> with required reviewers for prod; emit immutable image tags (Git SHA), not <code>:latest</code>; audit role usage via CloudTrail.</p>'''
+
+ANSWERS[91] = r'''<p><strong>Jenkins Pipeline DSL</strong> is the Groovy-based domain-specific language used inside a <code>Jenkinsfile</code> to define the steps of a pipeline. It comes in two flavours:</p>
 <table>
 <tr><th></th><th>Declarative</th><th>Scripted</th></tr>
 <tr><td>Top-level keyword</td><td><code>pipeline { }</code></td><td><code>node { }</code></td></tr>
@@ -4766,15 +4124,9 @@ jobs:
 <li><strong><code>post</code></strong> &mdash; <code>always / success / failure / changed / fixed</code> handlers.</li>
 </ul>
 <p><strong>Reusable code:</strong> <strong>Shared Libraries</strong> let you publish helper steps to a Git repo and import them with <code>@Library('lib') _</code>. Useful for standardising deploy steps across a fleet of services.</p>
-<p><strong>2026 reality:</strong> for new projects, GitHub Actions / GitLab CI / Buildkite / Tekton offer cleaner config-as-code without the Groovy learning curve. Jenkins Pipeline DSL is the right answer when you have an existing Jenkins fleet, plugin lock-in, or air-gapped on-prem requirements.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q92">
-  <div class="qa__number">Question 92</div>
-  <h3 class="qa__question">How do you use Helm charts in Kubernetes?</h3>
-  <div class="qa__answer">
-    <p><strong>Helm</strong> is the package manager for Kubernetes. A <strong>chart</strong> bundles a set of K8s manifests as templates with values you can override per environment &mdash; the equivalent of an apt/npm package for cluster workloads.</p>
+<p><strong>2026 reality:</strong> for new projects, GitHub Actions / GitLab CI / Buildkite / Tekton offer cleaner config-as-code without the Groovy learning curve. Jenkins Pipeline DSL is the right answer when you have an existing Jenkins fleet, plugin lock-in, or air-gapped on-prem requirements.</p>'''
+
+ANSWERS[92] = r'''<p><strong>Helm</strong> is the package manager for Kubernetes. A <strong>chart</strong> bundles a set of K8s manifests as templates with values you can override per environment &mdash; the equivalent of an apt/npm package for cluster workloads.</p>
 <p><strong>Chart layout:</strong></p>
 <pre><code>my-chart/
 ├── Chart.yaml          # name, version, appVersion, dependencies
@@ -4849,15 +4201,9 @@ helm uninstall api -n prod
 <li><strong>Argo CD / Flux</strong> &mdash; both natively render Helm charts in GitOps workflows; you keep <code>values-*.yaml</code> in Git, the controller installs/upgrades.</li>
 <li><strong>Carvel kapp / ytt</strong> &mdash; alternative composition tools.</li>
 <li><strong>cdk8s</strong> / <strong>Pulumi</strong> &mdash; programmatic K8s manifests in real languages (TS, Python, Go).</li>
-</ul>
-    
-  </div>
-</article>
-<article class="qa" id="q93">
-  <div class="qa__number">Question 93</div>
-  <h3 class="qa__question">How do you clean up Docker images and containers?</h3>
-  <div class="qa__answer">
-    <p>Old Docker images and stopped containers accumulate fast on dev machines and CI runners and quietly fill the disk. Cleanup is a routine maintenance job.</p>
+</ul>'''
+
+ANSWERS[93] = r'''<p>Old Docker images and stopped containers accumulate fast on dev machines and CI runners and quietly fill the disk. Cleanup is a routine maintenance job.</p>
 <p><strong>Targeted removal:</strong></p>
 <pre><code># Stop and remove a single container
 docker stop api
@@ -4922,15 +4268,9 @@ docker ps -a --filter status=exited
 <li><strong>BuildKit cache mounts</strong> (<code>RUN --mount=type=cache,...</code>) are bounded automatically &mdash; safer than uncached layers.</li>
 <li><strong>Tag immutably</strong> (semver / Git SHA) so old releases are easy to identify and prune.</li>
 <li><strong>Monitor disk</strong> with Prometheus node_exporter <code>node_filesystem_avail_bytes</code> &mdash; alert at 80 % full.</li>
-</ul>
-    
-  </div>
-</article>
-<article class="qa" id="q94">
-  <div class="qa__number">Question 94</div>
-  <h3 class="qa__question">How do you use GitHub Actions for security scanning?</h3>
-  <div class="qa__answer">
-    <p>GitHub Actions ships with a rich ecosystem of security-scanning actions covering source code (SAST), dependencies (SCA), container images, infrastructure-as-code, and secret detection. The goal is &ldquo;shift left&rdquo; &mdash; catch issues in PR before they reach <code>main</code>.</p>
+</ul>'''
+
+ANSWERS[94] = r'''<p>GitHub Actions ships with a rich ecosystem of security-scanning actions covering source code (SAST), dependencies (SCA), container images, infrastructure-as-code, and secret detection. The goal is &ldquo;shift left&rdquo; &mdash; catch issues in PR before they reach <code>main</code>.</p>
 <p><strong>Comprehensive security workflow:</strong></p>
 <pre><code>name: Security
 on:
@@ -5014,15 +4354,9 @@ jobs:
 <tr><td>Supply chain</td><td>Sigstore, SLSA, in-toto</td><td>Chainguard, Anchore Enterprise</td></tr>
 </table>
 <p><strong>Built-in GitHub Advanced Security</strong> (free for public repos, paid for private orgs) gives Code Scanning, Secret Scanning + Push Protection, and Dependency Review with native PR-blocking integration.</p>
-<p><strong>Best practices:</strong> upload findings as <strong>SARIF</strong> to surface in the GitHub Security tab; mark security checks as required for merging; use OSV Scanner for transitive vulnerability accuracy; <strong>step-security/harden-runner</strong> blocks unexpected egress to detect malicious actions; sign images with <strong>Cosign</strong> and verify at deploy.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q95">
-  <div class="qa__number">Question 95</div>
-  <h3 class="qa__question">How do you set up a Jenkins master-slave architecture?</h3>
-  <div class="qa__answer">
-    <p>Jenkins runs jobs on <strong>agents</strong> (also called nodes / workers). The <strong>controller</strong> (formerly &ldquo;master&rdquo;) schedules jobs and serves the UI; agents do the actual work. Modern Jenkins terminology drops &ldquo;master/slave&rdquo; in favour of &ldquo;controller/agent&rdquo;.</p>
+<p><strong>Best practices:</strong> upload findings as <strong>SARIF</strong> to surface in the GitHub Security tab; mark security checks as required for merging; use OSV Scanner for transitive vulnerability accuracy; <strong>step-security/harden-runner</strong> blocks unexpected egress to detect malicious actions; sign images with <strong>Cosign</strong> and verify at deploy.</p>'''
+
+ANSWERS[95] = r'''<p>Jenkins runs jobs on <strong>agents</strong> (also called nodes / workers). The <strong>controller</strong> (formerly &ldquo;master&rdquo;) schedules jobs and serves the UI; agents do the actual work. Modern Jenkins terminology drops &ldquo;master/slave&rdquo; in favour of &ldquo;controller/agent&rdquo;.</p>
 <p><strong>Why distribute:</strong></p>
 <ul>
 <li>Run jobs in parallel across many machines.</li>
@@ -5083,15 +4417,9 @@ jobs:
 <li><strong>Persistence</strong> &mdash; build workspaces on agents are ephemeral; use <code>stash</code> / <code>unstash</code> or artifacts for files that need to cross stages.</li>
 <li><strong>Auto-scaling</strong> &mdash; <code>jenkins-kubernetes-operator</code>, <code>EC2 Fleet</code>, or <code>Kubernetes Cloud</code> scales agents on demand &mdash; you only pay when builds run.</li>
 </ul>
-<p><strong>2026 trend:</strong> for new CI installations, GitHub Actions self-hosted runners on K8s (<strong>actions-runner-controller</strong>) or <strong>Buildkite agents</strong> are leaner alternatives to Jenkins controller/agent topology.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q96">
-  <div class="qa__number">Question 96</div>
-  <h3 class="qa__question">How do you create a Kubernetes cluster using Minikube?</h3>
-  <div class="qa__answer">
-    <p><strong>Minikube</strong> runs a single-node Kubernetes cluster on a developer&rsquo;s laptop, perfect for learning, local development, and CI smoke-tests. It supports multiple drivers (Docker, Podman, hyperkit, VirtualBox, KVM2) and can simulate multi-node clusters.</p>
+<p><strong>2026 trend:</strong> for new CI installations, GitHub Actions self-hosted runners on K8s (<strong>actions-runner-controller</strong>) or <strong>Buildkite agents</strong> are leaner alternatives to Jenkins controller/agent topology.</p>'''
+
+ANSWERS[96] = r'''<p><strong>Minikube</strong> runs a single-node Kubernetes cluster on a developer&rsquo;s laptop, perfect for learning, local development, and CI smoke-tests. It supports multiple drivers (Docker, Podman, hyperkit, VirtualBox, KVM2) and can simulate multi-node clusters.</p>
 <p><strong>Install and start:</strong></p>
 <pre><code># macOS / Linux (Homebrew)
 brew install minikube
@@ -5148,15 +4476,9 @@ kubectl get nodes
 <tr><td><strong>OrbStack</strong></td><td>macOS-only; very fast K8s + Docker.</td></tr>
 <tr><td><strong>Colima</strong></td><td>Lima-based; lightweight macOS/Linux.</td></tr>
 </table>
-<p><strong>When to use what:</strong> Minikube for learning and one-off experiments; <strong>Kind</strong> for CI and reproducible testing (<code>actions/setup-k8s</code> integrates cleanly); <strong>k3d</strong> for the smallest footprint; <strong>Docker Desktop K8s</strong> for the easiest GUI experience. For serious workloads use a managed cluster (<strong>EKS / GKE / AKS</strong>).</p>
-    
-  </div>
-</article>
-<article class="qa" id="q97">
-  <div class="qa__number">Question 97</div>
-  <h3 class="qa__question">What is a multi-stage Dockerfile?</h3>
-  <div class="qa__answer">
-    <p>A <strong>multi-stage Dockerfile</strong> uses multiple <code>FROM</code> instructions, each beginning a new build stage. You compile / install in one stage with full toolchains, then copy only the produced artefacts into a slim final stage. Result: a tiny, secure runtime image with no build tools, source code, or dev dependencies.</p>
+<p><strong>When to use what:</strong> Minikube for learning and one-off experiments; <strong>Kind</strong> for CI and reproducible testing (<code>actions/setup-k8s</code> integrates cleanly); <strong>k3d</strong> for the smallest footprint; <strong>Docker Desktop K8s</strong> for the easiest GUI experience. For serious workloads use a managed cluster (<strong>EKS / GKE / AKS</strong>).</p>'''
+
+ANSWERS[97] = r'''<p>A <strong>multi-stage Dockerfile</strong> uses multiple <code>FROM</code> instructions, each beginning a new build stage. You compile / install in one stage with full toolchains, then copy only the produced artefacts into a slim final stage. Result: a tiny, secure runtime image with no build tools, source code, or dev dependencies.</p>
 <p><strong>Why it matters:</strong></p>
 <ul>
 <li><strong>Smaller images</strong> &mdash; 50&ndash;90 % size reduction is typical (e.g. 1.2 GB &rarr; 80 MB).</li>
@@ -5230,15 +4552,9 @@ RUN --mount=type=cache,target=/root/.cache/go-build go build .
 <li>Pin base images by digest for reproducibility.</li>
 <li>Order copies by churn &mdash; <code>package.json</code> / <code>go.sum</code> first, source last, so dependency layers cache.</li>
 <li>Use <code>.dockerignore</code> &mdash; skip <code>.git</code>, <code>node_modules</code>, <code>__pycache__</code>, build outputs.</li>
-</ul>
-    
-  </div>
-</article>
-<article class="qa" id="q98">
-  <div class="qa__number">Question 98</div>
-  <h3 class="qa__question">How do you use GitHub Actions for code coverage?</h3>
-  <div class="qa__answer">
-    <p><strong>Code coverage</strong> measures what fraction of your code is exercised by tests. GitHub Actions integrates with coverage runners (Jest / Vitest / pytest-cov / JaCoCo / go test -cover) and uploaders (Codecov, Coveralls, SonarCloud) to track coverage per commit and PR.</p>
+</ul>'''
+
+ANSWERS[98] = r'''<p><strong>Code coverage</strong> measures what fraction of your code is exercised by tests. GitHub Actions integrates with coverage runners (Jest / Vitest / pytest-cov / JaCoCo / go test -cover) and uploaders (Codecov, Coveralls, SonarCloud) to track coverage per commit and PR.</p>
 <p><strong>Node.js example with Vitest + Codecov:</strong></p>
 <pre><code>name: Coverage
 on: [push, pull_request]
@@ -5312,15 +4628,9 @@ export default defineConfig({
 <li><strong>Differentiate test types</strong> &mdash; track unit / integration / e2e coverage separately; combine via Codecov flags.</li>
 <li><strong>Mutation testing</strong> for higher confidence: <strong>Stryker</strong> (JS), <strong>mutmut</strong> (Python), <strong>PIT</strong> (Java) verify tests actually catch bugs &mdash; coverage alone can be misleading.</li>
 <li><strong>Beware coverage gaming</strong> &mdash; tests that execute lines without asserting anything pass coverage but catch nothing. Code review remains essential.</li>
-</ul>
-    
-  </div>
-</article>
-<article class="qa" id="q99">
-  <div class="qa__number">Question 99</div>
-  <h3 class="qa__question">What is a Jenkins declarative pipeline?</h3>
-  <div class="qa__answer">
-    <p>A <strong>Declarative Pipeline</strong> is the modern, opinionated syntax for Jenkins pipelines. It uses a fixed top-level structure (<code>pipeline { agent { } stages { } post { } }</code>) and a constrained DSL designed for readability and up-front validation. It&rsquo;s the recommended style for almost all new Jenkins pipelines.</p>
+</ul>'''
+
+ANSWERS[99] = r'''<p>A <strong>Declarative Pipeline</strong> is the modern, opinionated syntax for Jenkins pipelines. It uses a fixed top-level structure (<code>pipeline { agent { } stages { } post { } }</code>) and a constrained DSL designed for readability and up-front validation. It&rsquo;s the recommended style for almost all new Jenkins pipelines.</p>
 <p><strong>Mandatory skeleton:</strong></p>
 <pre><code>pipeline {
   agent any                  // required &mdash; where it runs
@@ -5428,15 +4738,9 @@ curl -X POST -F "jenkinsfile=@Jenkinsfile" \
 
 # Or the linter inside Blue Ocean / Pipeline Editor in the UI
 </code></pre>
-<p><strong>Declarative vs Scripted:</strong> use Declarative unless you genuinely need full Groovy control flow inside the pipeline. If you do, you can drop into a <code>script { }</code> block within Declarative steps for the best of both. For repeated logic across many repos, factor it into a <strong>Shared Library</strong> rather than reaching for Scripted.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q100">
-  <div class="qa__number">Question 100</div>
-  <h3 class="qa__question">How do you use Kubernetes RBAC?</h3>
-  <div class="qa__answer">
-    <p><strong>Role-Based Access Control (RBAC)</strong> in Kubernetes governs who can do what to which resources. RBAC is enabled by default in modern clusters and is the primary tool for least-privilege isolation between teams, services, and CI pipelines.</p>
+<p><strong>Declarative vs Scripted:</strong> use Declarative unless you genuinely need full Groovy control flow inside the pipeline. If you do, you can drop into a <code>script { }</code> block within Declarative steps for the best of both. For repeated logic across many repos, factor it into a <strong>Shared Library</strong> rather than reaching for Scripted.</p>'''
+
+ANSWERS[100] = r'''<p><strong>Role-Based Access Control (RBAC)</strong> in Kubernetes governs who can do what to which resources. RBAC is enabled by default in modern clusters and is the primary tool for least-privilege isolation between teams, services, and CI pipelines.</p>
 <p><strong>Four core resources:</strong></p>
 <table>
 <tr><th>Resource</th><th>Scope</th><th>Says</th></tr>
@@ -5516,27 +4820,4 @@ audit2rbac        # generate minimal RBAC from audit logs
 <li><strong>GKE</strong> &mdash; <em>Workload Identity</em> federates GSA &harr; KSA.</li>
 <li><strong>AKS</strong> &mdash; <em>Azure AD Workload Identity</em>.</li>
 </ul>
-<p><strong>Best practices:</strong> default-deny by namespace; create one ServiceAccount per workload (never share <code>default</code>); start with <code>view</code> + add what&rsquo;s needed (don&rsquo;t start with <code>admin</code> + remove); review bindings quarterly; audit <code>cluster-admin</code> bindings carefully; use <strong>OPA Gatekeeper</strong> or <strong>Kyverno</strong> to enforce policies (e.g. &ldquo;no <code>cluster-admin</code> bindings outside the <code>kube-system</code> namespace&rdquo;).</p>
-    
-  </div>
-</article>
-
-    <nav class="chapter-nav" aria-label="Chapter navigation">
-      <a class="chapter-nav__prev" href="infrastructure-mern-advanced.html">
-      <span class="chapter-nav__dir">← Previous</span>
-      <span class="chapter-nav__title">Infrastructure MERN Stack — Advanced</span>
-    </a>
-      <a class="chapter-nav__next" href="cicd-pipeline-coding.html">
-      <span class="chapter-nav__dir">Next →</span>
-      <span class="chapter-nav__title">CI/CD Pipeline — Coding</span>
-    </a>
-    </nav>
-
-  </section>
-
-</main>
-</div>
-
-<script src="../assets/script.js"></script>
-</body>
-</html>
+<p><strong>Best practices:</strong> default-deny by namespace; create one ServiceAccount per workload (never share <code>default</code>); start with <code>view</code> + add what&rsquo;s needed (don&rsquo;t start with <code>admin</code> + remove); review bindings quarterly; audit <code>cluster-admin</code> bindings carefully; use <strong>OPA Gatekeeper</strong> or <strong>Kyverno</strong> to enforce policies (e.g. &ldquo;no <code>cluster-admin</code> bindings outside the <code>kube-system</code> namespace&rdquo;).</p>'''

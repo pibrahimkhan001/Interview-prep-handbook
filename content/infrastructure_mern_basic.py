@@ -1,118 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Infrastructure MERN Stack — Basic · Interview Prep Mastery</title>
-<meta name="description" content="100 basic interview questions on Infrastructure MERN Stack, with detailed explanations and examples.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="../assets/styles.css">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%239a6b1d'/%3E%3Ctext x='50' y='68' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold' font-size='48'%3EIP%3C/text%3E%3C/svg%3E">
-</head>
-<body>
-<header class="site-header">
-  <div class="site-header__inner">
-    <button class="menu-toggle" aria-label="Open menu" type="button">☰ Menu</button>
-    <a class="brand" href="../index.html">
-      <span class="brand__mark">IP</span>
-      <span class="brand__text">
-        <span class="brand__title">Interview Prep Mastery</span>
-        <span class="brand__subtitle">Interactive learning guide</span>
-      </span>
-    </a>
-    <nav class="header-nav">
-      <a href="../index.html#roadmap">Roadmap</a>
-      <a href="../index.html#chapters">All chapters</a>
-      <button class="theme-toggle" type="button" aria-label="Toggle color scheme">☾ Dark</button>
-    </nav>
-  </div>
-</header>
-<div class="layout">
-<aside class="sidebar" aria-label="Site navigation">
-  <div class="sidebar__header">Chapter Navigator</div>
-  
-        <div class="nav-part">
-          <div class="nav-part__label">Part 1</div>
-          <div class="nav-part__title">Core Programming Languages</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">JavaScript</li><li><a class="" href="../chapters/javascript-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/javascript-tricky.html"><span class="nav-item__title">Tricky</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-coding.html"><span class="nav-item__title">Advanced Coding</span><span class="nav-item__meta">100 questions · 100 min read</span></a></li><li><a class="" href="../chapters/javascript-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-scenario.html"><span class="nav-item__title">Advanced Scenario Based</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Python</li><li><a class="" href="../chapters/python-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/python-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 2</div>
-          <div class="nav-part__title">Web Fundamentals</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">HTML</li><li><a class="" href="../chapters/html-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/html-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/html-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CSS</li><li><a class="" href="../chapters/css-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">102 questions · 60 min read</span></a></li><li><a class="" href="../chapters/css-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/css-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">101 questions · 90 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 3</div>
-          <div class="nav-part__title">Backend Technologies</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Node.Js</li><li><a class="" href="../chapters/nodejs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/nodejs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ExpressJS</li><li><a class="" href="../chapters/expressjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/expressjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/expressjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">API</li><li><a class="" href="../chapters/api-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/api-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 4</div>
-          <div class="nav-part__title">Frontend Frameworks</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ReactJS</li><li><a class="" href="../chapters/reactjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">101 questions · 60 min read</span></a></li><li><a class="" href="../chapters/reactjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 5</div>
-          <div class="nav-part__title">Databases</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MYSQL</li><li><a class="" href="../chapters/mysql-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mysql-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MongoDB</li><li><a class="" href="../chapters/mongodb-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mongodb-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 6</div>
-          <div class="nav-part__title">System Design &amp; DevOps</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">System Design MERN Stack</li><li><a class="" href="../chapters/system-design-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Infrastructure MERN Stack</li><li><a class="active" href="../chapters/infrastructure-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/infrastructure-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CI/CD Pipeline</li><li><a class="" href="../chapters/cicd-pipeline-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-</aside>
-<main class="main" id="main">
+"""Detailed answers for Infrastructure MERN Stack Basic interview questions.
 
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="../index.html">Home</a>
-    <span class="breadcrumb__sep">›</span>
-    <a href="../index.html#part-6">System Design &amp; DevOps</a>
-    <span class="breadcrumb__sep">›</span>
-    <span>Infrastructure MERN Stack — Basic</span>
-  </nav>
+Style: ~80-150 words concise prose with one focused code snippet, ~1,400-1,800 chars.
+Operations and tooling angle &mdash; how MERN apps are built, deployed, and run.
+2026-current ecosystem: Vite, pnpm/Bun, Vercel/Fly.io/Railway/Render, Atlas, Docker, K8s.
+"""
 
-  <header class="chapter-header">
-    <div class="chapter-label">Infrastructure MERN Stack · Basic</div>
-    <h1 class="chapter-title">Basic Infrastructure MERN Stack Interview Questions</h1>
-    <p class="chapter-lede">Foundational knowledge — definitions, syntax, and core mechanics every beginner should know.</p>
-    <div class="chapter-meta">
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Questions</span><span class="chapter-meta__value">100</span></div>
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Level</span><span class="chapter-meta__value">Basic</span></div>
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Estimated reading</span><span class="chapter-meta__value">60 min read</span></div>
-    </div>
-    
-  </header>
+ANSWERS: dict[int, str] = {}
 
-  <section class="prose">
 
-    <div class="toc" id="toc">
-      <div class="toc__title">All questions in this chapter</div>
-      <ul class="toc__list">
-        <li><a href="#q1"><span class="toc__num">1.</span>What is the MERN stack, and what are its components?</a></li><li><a href="#q2"><span class="toc__num">2.</span>How do you set up a local development environment for a MERN stack application?</a></li><li><a href="#q3"><span class="toc__num">3.</span>Describe the process of installing Node.js and npm.</a></li><li><a href="#q4"><span class="toc__num">4.</span>How do you create a new Node.js project using npm?</a></li><li><a href="#q5"><span class="toc__num">5.</span>How do you install Express.js in a Node.js project?</a></li><li><a href="#q6"><span class="toc__num">6.</span>What is MongoDB, and how do you install it on your local machine?</a></li><li><a href="#q7"><span class="toc__num">7.</span>How do you start and stop the MongoDB service on your local machine?</a></li><li><a href="#q8"><span class="toc__num">8.</span>What is the purpose of Mongoose in a MERN stack application?</a></li><li><a href="#q9"><span class="toc__num">9.</span>How do you connect a Node.js application to a MongoDB database using Mongoose?</a></li><li><a href="#q10"><span class="toc__num">10.</span>How do you set up a basic Express.js server?</a></li><li><a href="#q11"><span class="toc__num">11.</span>Describe the structure of a typical MERN stack project.</a></li><li><a href="#q12"><span class="toc__num">12.</span>How do you create a new React application using Create React App?</a></li><li><a href="#q13"><span class="toc__num">13.</span>What is the purpose of the package.json file in a Node.js project?</a></li><li><a href="#q14"><span class="toc__num">14.</span>How do you add environment variables to a MERN stack application?</a></li><li><a href="#q15"><span class="toc__num">15.</span>How do you handle configuration settings in a MERN stack application?</a></li><li><a href="#q16"><span class="toc__num">16.</span>What is the purpose of the .env file, and how do you use it in a Node.js project?</a></li><li><a href="#q17"><span class="toc__num">17.</span>How do you set up routing in an Express.js application?</a></li><li><a href="#q18"><span class="toc__num">18.</span>Describe how you would create a basic API endpoint in Express.js.</a></li><li><a href="#q19"><span class="toc__num">19.</span>How do you handle HTTP requests and responses in Express.js?</a></li><li><a href="#q20"><span class="toc__num">20.</span>What is CORS, and how do you enable it in an Express.js application?</a></li><li><a href="#q21"><span class="toc__num">21.</span>How do you handle errors in an Express.js application?</a></li><li><a href="#q22"><span class="toc__num">22.</span>How do you set up a connection to a MongoDB database using the MongoDB Node.js driver?</a></li><li><a href="#q23"><span class="toc__num">23.</span>Describe how you would create a Mongoose schema and model.</a></li><li><a href="#q24"><span class="toc__num">24.</span>How do you perform CRUD operations using Mongoose?</a></li><li><a href="#q25"><span class="toc__num">25.</span>How do you set up authentication in a MERN stack application?</a></li><li><a href="#q26"><span class="toc__num">26.</span>What is JWT, and how do you use it for authentication in a MERN stack application?</a></li><li><a href="#q27"><span class="toc__num">27.</span>How do you protect routes in an Express.js application using middleware?</a></li><li><a href="#q28"><span class="toc__num">28.</span>How do you deploy a MERN stack application to Heroku?</a></li><li><a href="#q29"><span class="toc__num">29.</span>What is the purpose of the Procfile in a Heroku deployment?</a></li><li><a href="#q30"><span class="toc__num">30.</span>How do you configure environment variables in a Heroku deployment?</a></li><li><a href="#q31"><span class="toc__num">31.</span>How do you deploy a MongoDB database to MongoDB Atlas?</a></li><li><a href="#q32"><span class="toc__num">32.</span>What are the advantages of using MongoDB Atlas for your database?</a></li><li><a href="#q33"><span class="toc__num">33.</span>How do you connect a MongoDB Atlas database to a Node.js application?</a></li><li><a href="#q34"><span class="toc__num">34.</span>How do you secure sensitive information such as database credentials in a MERN stack ap...</a></li><li><a href="#q35"><span class="toc__num">35.</span>How do you set up HTTPS for a MERN stack application?</a></li><li><a href="#q36"><span class="toc__num">36.</span>What is SSL/TLS, and why is it important for web applications?</a></li><li><a href="#q37"><span class="toc__num">37.</span>How do you use Let&#x27;s Encrypt to obtain an SSL certificate for your application?</a></li><li><a href="#q38"><span class="toc__num">38.</span>Describe how you would set up a reverse proxy using Nginx for a MERN stack application.</a></li><li><a href="#q39"><span class="toc__num">39.</span>How do you set up and use PM2 to manage a Node.js application in production?</a></li><li><a href="#q40"><span class="toc__num">40.</span>What is load balancing, and how do you implement it for a MERN stack application?</a></li><li><a href="#q41"><span class="toc__num">41.</span>How do you monitor the performance of a MERN stack application?</a></li><li><a href="#q42"><span class="toc__num">42.</span>What tools can you use for logging in a MERN stack application?</a></li><li><a href="#q43"><span class="toc__num">43.</span>How do you set up and use Loggly for centralized logging in a MERN stack application?</a></li><li><a href="#q44"><span class="toc__num">44.</span>How do you set up continuous integration and continuous deployment (CI/CD) for a MERN s...</a></li><li><a href="#q45"><span class="toc__num">45.</span>What is Docker, and how do you use it to containerize a MERN stack application?</a></li><li><a href="#q46"><span class="toc__num">46.</span>How do you write a Dockerfile for a MERN stack application?</a></li><li><a href="#q47"><span class="toc__num">47.</span>How do you set up Docker Compose for a MERN stack application?</a></li><li><a href="#q48"><span class="toc__num">48.</span>What is Kubernetes, and how do you use it to orchestrate a MERN stack application?</a></li><li><a href="#q49"><span class="toc__num">49.</span>How do you write a Kubernetes deployment file for a MERN stack application?</a></li><li><a href="#q50"><span class="toc__num">50.</span>How do you use Helm to manage Kubernetes deployments for a MERN stack application?</a></li><li><a href="#q51"><span class="toc__num">51.</span>What is a CDN, and how do you use it to improve the performance of a MERN stack applica...</a></li><li><a href="#q52"><span class="toc__num">52.</span>How do you deploy static assets for a React application to a CDN?</a></li><li><a href="#q53"><span class="toc__num">53.</span>How do you set up a Redis cache for a MERN stack application?</a></li><li><a href="#q54"><span class="toc__num">54.</span>What is the purpose of caching, and how does it improve application performance?</a></li><li><a href="#q55"><span class="toc__num">55.</span>How do you implement server-side rendering (SSR) for a React application?</a></li><li><a href="#q56"><span class="toc__num">56.</span>How do you use Next.js for server-side rendering in a MERN stack application?</a></li><li><a href="#q57"><span class="toc__num">57.</span>What is GraphQL, and how do you use it in a MERN stack application?</a></li><li><a href="#q58"><span class="toc__num">58.</span>How do you set up Apollo Server with Express.js for a GraphQL API?</a></li><li><a href="#q59"><span class="toc__num">59.</span>How do you set up Apollo Client in a React application?</a></li><li><a href="#q60"><span class="toc__num">60.</span>What is Redux, and how do you use it for state management in a React application?</a></li><li><a href="#q61"><span class="toc__num">61.</span>How do you set up and use Redux in a React application?</a></li><li><a href="#q62"><span class="toc__num">62.</span>What are middleware in Redux, and how do you use them?</a></li><li><a href="#q63"><span class="toc__num">63.</span>How do you set up Redux Thunk for asynchronous actions in a React application?</a></li><li><a href="#q64"><span class="toc__num">64.</span>How do you use React Router for client-side routing in a React application?</a></li><li><a href="#q65"><span class="toc__num">65.</span>How do you protect routes in a React application using React Router?</a></li><li><a href="#q66"><span class="toc__num">66.</span>How do you handle form validation in a React application?</a></li><li><a href="#q67"><span class="toc__num">67.</span>How do you use libraries such as Formik and Yup for form validation in a React applicat...</a></li><li><a href="#q68"><span class="toc__num">68.</span>How do you set up a development server using Webpack and Babel for a React application?</a></li><li><a href="#q69"><span class="toc__num">69.</span>What is hot module replacement (HMR), and how do you enable it in a React application?</a></li><li><a href="#q70"><span class="toc__num">70.</span>How do you set up and use ESLint for code linting in a MERN stack application?</a></li><li><a href="#q71"><span class="toc__num">71.</span>What is Prettier, and how do you use it for code formatting in a MERN stack application?</a></li><li><a href="#q72"><span class="toc__num">72.</span>How do you set up and use Husky for pre-commit hooks in a MERN stack application?</a></li><li><a href="#q73"><span class="toc__num">73.</span>How do you write unit tests for a Node.js application using Jest?</a></li><li><a href="#q74"><span class="toc__num">74.</span>How do you write integration tests for an Express.js API using Supertest?</a></li><li><a href="#q75"><span class="toc__num">75.</span>How do you write unit tests for a React application using React Testing Library?</a></li><li><a href="#q76"><span class="toc__num">76.</span>How do you write end-to-end tests for a MERN stack application using Cypress?</a></li><li><a href="#q77"><span class="toc__num">77.</span>How do you set up and use Git for version control in a MERN stack project?</a></li><li><a href="#q78"><span class="toc__num">78.</span>How do you set up and use GitHub Actions for CI/CD in a MERN stack project?</a></li><li><a href="#q79"><span class="toc__num">79.</span>How do you use the MongoDB aggregation framework for complex queries?</a></li><li><a href="#q80"><span class="toc__num">80.</span>How do you create and use MongoDB indexes to improve query performance?</a></li><li><a href="#q81"><span class="toc__num">81.</span>How do you handle database migrations in a MongoDB database?</a></li><li><a href="#q82"><span class="toc__num">82.</span>What are database seeds, and how do you use them in a MongoDB database?</a></li><li><a href="#q83"><span class="toc__num">83.</span>How do you set up and use MongoDB transactions for multi-document operations?</a></li><li><a href="#q84"><span class="toc__num">84.</span>How do you use Mongoose virtuals to create computed properties in MongoDB documents?</a></li><li><a href="#q85"><span class="toc__num">85.</span>How do you set up and use WebSockets for real-time communication in a MERN stack applic...</a></li><li><a href="#q86"><span class="toc__num">86.</span>How do you use Socket.IO with Express.js for real-time communication?</a></li><li><a href="#q87"><span class="toc__num">87.</span>How do you set up and use Passport.js for authentication in an Express.js application?</a></li><li><a href="#q88"><span class="toc__num">88.</span>How do you implement OAuth authentication using Passport.js in a MERN stack application?</a></li><li><a href="#q89"><span class="toc__num">89.</span>How do you handle file uploads in an Express.js application?</a></li><li><a href="#q90"><span class="toc__num">90.</span>How do you use Multer for handling multipart/form-data in an Express.js application?</a></li><li><a href="#q91"><span class="toc__num">91.</span>How do you deploy a React application to Netlify?</a></li><li><a href="#q92"><span class="toc__num">92.</span>How do you deploy a React application to Vercel?</a></li><li><a href="#q93"><span class="toc__num">93.</span>How do you configure environment variables in a Vercel deployment?</a></li><li><a href="#q94"><span class="toc__num">94.</span>How do you set up and use Cloudflare for DNS management and CDN services?</a></li><li><a href="#q95"><span class="toc__num">95.</span>How do you use AWS S3 for storing and serving static assets in a MERN stack application?</a></li><li><a href="#q96"><span class="toc__num">96.</span>How do you set up and use AWS Lambda for serverless functions in a MERN stack applicati...</a></li><li><a href="#q97"><span class="toc__num">97.</span>How do you use AWS API Gateway to manage APIs for a MERN stack application?</a></li><li><a href="#q98"><span class="toc__num">98.</span>How do you monitor and optimize database performance in MongoDB Atlas?</a></li><li><a href="#q99"><span class="toc__num">99.</span>How do you set up and use DataDog for monitoring a MERN stack application?</a></li><li><a href="#q100"><span class="toc__num">100.</span>How do you implement and manage security best practices for a MERN stack application?</a></li>
-      </ul>
-    </div>
-
-    
-<article class="qa" id="q1">
-  <div class="qa__number">Question 1</div>
-  <h3 class="qa__question">What is the MERN stack, and what are its components?</h3>
-  <div class="qa__answer">
-    <p>The <strong>MERN stack</strong> is a JavaScript&ndash;everywhere full&ndash;stack &mdash; one language from database access through server logic to the browser UI. The four components:</p>
+ANSWERS[1] = r'''<p>The <strong>MERN stack</strong> is a JavaScript&ndash;everywhere full&ndash;stack &mdash; one language from database access through server logic to the browser UI. The four components:</p>
 
 <ul>
 <li><strong>M &mdash; MongoDB</strong>: a document database storing flexible JSON&ndash;like records (BSON under the hood). Almost always run as managed MongoDB Atlas in production.</li>
@@ -121,15 +17,10 @@
 <li><strong>N &mdash; Node.js</strong>: the JavaScript runtime on the server. <strong>Bun</strong> and <strong>Deno</strong> are credible alternatives but Node remains the default for MERN.</li>
 </ul>
 
-<p>From an infrastructure angle, MERN is appealing because every layer ships as plain text (JS/JSON), all four pieces have first&ndash;class managed offerings (Atlas, Vercel, Fly.io, Railway, Render), and a single team can own the full request path without context&ndash;switching between languages.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q2">
-  <div class="qa__number">Question 2</div>
-  <h3 class="qa__question">How do you set up a local development environment for a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p>A modern MERN local setup needs four moving pieces installed once, then a project repo on top.</p>
+<p>From an infrastructure angle, MERN is appealing because every layer ships as plain text (JS/JSON), all four pieces have first&ndash;class managed offerings (Atlas, Vercel, Fly.io, Railway, Render), and a single team can own the full request path without context&ndash;switching between languages.</p>'''
+
+
+ANSWERS[2] = r'''<p>A modern MERN local setup needs four moving pieces installed once, then a project repo on top.</p>
 
 <pre><code># 1. Node.js (LTS) via the official installer or a version manager
 nvm install --lts            # or: fnm install --lts
@@ -147,15 +38,10 @@ brew install mongodb-community     # macOS
 
 <p>Then scaffold the repo: a <strong>monorepo</strong> with <code>apps/web</code> (Vite + React or Next.js) and <code>apps/api</code> (Express/Hono) is the 2026 norm. Tools like <strong>Turborepo</strong> or <strong>pnpm workspaces</strong> handle the orchestration. Add <code>.env</code> for local secrets, a <code>docker-compose.yml</code> if you want Mongo + Redis containerized, and you&rsquo;re running with <code>pnpm dev</code> end&ndash;to&ndash;end.</p>
 
-<p>Avoid Create React App &mdash; it&rsquo;s officially deprecated. Use <strong>Vite</strong> for SPAs or <strong>Next.js</strong> for SSR.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q3">
-  <div class="qa__number">Question 3</div>
-  <h3 class="qa__question">Describe the process of installing Node.js and npm.</h3>
-  <div class="qa__answer">
-    <p>In 2026 don&rsquo;t install Node from the OS package manager &mdash; use a version manager so you can switch between Node versions per project.</p>
+<p>Avoid Create React App &mdash; it&rsquo;s officially deprecated. Use <strong>Vite</strong> for SPAs or <strong>Next.js</strong> for SSR.</p>'''
+
+
+ANSWERS[3] = r'''<p>In 2026 don&rsquo;t install Node from the OS package manager &mdash; use a version manager so you can switch between Node versions per project.</p>
 
 <pre><code># macOS / Linux &mdash; nvm or fnm (fnm is faster, written in Rust)
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
@@ -173,15 +59,10 @@ npm --version                # 10.x.x (ships with Node)</code></pre>
 
 <p><strong>npm</strong> ships with Node, so installing Node automatically gives you npm. Many teams then upgrade to <strong>pnpm</strong> (faster, disk&ndash;efficient via content&ndash;addressed store) or <strong>Bun</strong> (extremely fast, includes a runtime + bundler + test runner).</p>
 
-<p>Pin the Node version in your repo with a <code>.nvmrc</code> or <code>.node-version</code> file containing just <code>22</code> &mdash; CI tools and version managers read this and switch automatically. For Windows, install via <strong>winget</strong> (<code>winget install OpenJS.NodeJS.LTS</code>) or <strong>fnm</strong>; avoid the bundled Chocolatey package which lags releases.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q4">
-  <div class="qa__number">Question 4</div>
-  <h3 class="qa__question">How do you create a new Node.js project using npm?</h3>
-  <div class="qa__answer">
-    <p>A new Node project starts with <code>npm init</code> (or <code>pnpm init</code> / <code>bun init</code>), which creates the <code>package.json</code> manifest.</p>
+<p>Pin the Node version in your repo with a <code>.nvmrc</code> or <code>.node-version</code> file containing just <code>22</code> &mdash; CI tools and version managers read this and switch automatically. For Windows, install via <strong>winget</strong> (<code>winget install OpenJS.NodeJS.LTS</code>) or <strong>fnm</strong>; avoid the bundled Chocolatey package which lags releases.</p>'''
+
+
+ANSWERS[4] = r'''<p>A new Node project starts with <code>npm init</code> (or <code>pnpm init</code> / <code>bun init</code>), which creates the <code>package.json</code> manifest.</p>
 
 <pre><code>mkdir my-api &amp;&amp; cd my-api
 pnpm init                   # interactive: name, version, license, etc.
@@ -209,15 +90,10 @@ pnpm tsc --init</code></pre>
   &quot;lint&quot;: &quot;eslint .&quot;
 }</code></pre>
 
-<p>Use <code>&quot;type&quot;: &quot;module&quot;</code> in <code>package.json</code> to write modern ESM <code>import</code>/<code>export</code> syntax instead of CommonJS <code>require</code>.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q5">
-  <div class="qa__number">Question 5</div>
-  <h3 class="qa__question">How do you install Express.js in a Node.js project?</h3>
-  <div class="qa__answer">
-    <p>Express installs from npm like any other package and is wired up in three lines.</p>
+<p>Use <code>&quot;type&quot;: &quot;module&quot;</code> in <code>package.json</code> to write modern ESM <code>import</code>/<code>export</code> syntax instead of CommonJS <code>require</code>.</p>'''
+
+
+ANSWERS[5] = r'''<p>Express installs from npm like any other package and is wired up in three lines.</p>
 
 <pre><code>pnpm add express
 pnpm add -D @types/express   # if using TypeScript</code></pre>
@@ -237,15 +113,10 @@ app.listen(PORT, () =&gt; console.log(`API on :${PORT}`));</code></pre>
 
 <p>Run with <code>pnpm dev</code> (using <strong>tsx watch</strong> or <strong>nodemon</strong> for hot reload) and hit <code>http://localhost:4000/health</code> to confirm.</p>
 
-<p>In 2026 many teams ship new APIs with <strong>Hono</strong> instead &mdash; faster, smaller, and works on any runtime (Node, Bun, Deno, Cloudflare Workers, Vercel Edge). The Express API is largely unchanged from 2014 and is missing modern features like async error handling without middleware, Web Standard Request/Response, and edge deployment. Both Express and Hono are valid; Express remains the default in MERN tutorials and legacy code, Hono is what greenfield 2026 projects pick.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q6">
-  <div class="qa__number">Question 6</div>
-  <h3 class="qa__question">What is MongoDB, and how do you install it on your local machine?</h3>
-  <div class="qa__answer">
-    <p><strong>MongoDB</strong> is a document database that stores data as JSON&ndash;like documents (BSON: Binary JSON) inside collections, which sit inside databases. There&rsquo;s no rigid table schema &mdash; documents in the same collection can have different shapes, though Mongoose enforces a schema in your application code.</p>
+<p>In 2026 many teams ship new APIs with <strong>Hono</strong> instead &mdash; faster, smaller, and works on any runtime (Node, Bun, Deno, Cloudflare Workers, Vercel Edge). The Express API is largely unchanged from 2014 and is missing modern features like async error handling without middleware, Web Standard Request/Response, and edge deployment. Both Express and Hono are valid; Express remains the default in MERN tutorials and legacy code, Hono is what greenfield 2026 projects pick.</p>'''
+
+
+ANSWERS[6] = r'''<p><strong>MongoDB</strong> is a document database that stores data as JSON&ndash;like documents (BSON: Binary JSON) inside collections, which sit inside databases. There&rsquo;s no rigid table schema &mdash; documents in the same collection can have different shapes, though Mongoose enforces a schema in your application code.</p>
 
 <p>You almost never run MongoDB on a developer laptop in 2026 &mdash; just use the free <strong>Atlas</strong> M0 cluster. But if you really need it locally:</p>
 
@@ -263,15 +134,10 @@ docker run -d --name mongo -p 27017:27017 mongo:7</code></pre>
 
 <p>Verify with <code>mongosh</code>: <code>mongosh &quot;mongodb://localhost:27017&quot;</code> opens an interactive shell where you can run <code>show dbs</code>, <code>use myapp</code>, <code>db.users.insertOne({ name: &quot;Ada&quot; })</code>, etc.</p>
 
-<p>For GUI inspection use <strong>MongoDB Compass</strong> (official) or the <strong>MongoDB for VS Code</strong> extension &mdash; both connect to local Mongo or Atlas with a connection string.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q7">
-  <div class="qa__number">Question 7</div>
-  <h3 class="qa__question">How do you start and stop the MongoDB service on your local machine?</h3>
-  <div class="qa__answer">
-    <p>How you start and stop Mongo depends on how you installed it.</p>
+<p>For GUI inspection use <strong>MongoDB Compass</strong> (official) or the <strong>MongoDB for VS Code</strong> extension &mdash; both connect to local Mongo or Atlas with a connection string.</p>'''
+
+
+ANSWERS[7] = r'''<p>How you start and stop Mongo depends on how you installed it.</p>
 
 <pre><code># macOS Homebrew &mdash; managed as a brew service
 brew services start mongodb-community@7.0
@@ -297,15 +163,10 @@ docker logs -f mongo                     # follow logs</code></pre>
 
 <p>Once started, <code>mongod</code> listens on <code>localhost:27017</code> by default. Connect from another terminal with <code>mongosh</code> to verify.</p>
 
-<p>If <code>mongod</code> won&rsquo;t start, the most common causes are: stale lock file (<code>/usr/local/var/mongodb/mongod.lock</code> on macOS), permission errors on the data directory, or the port being in use (kill the offender with <code>lsof -i :27017</code>). Logs live at <code>/usr/local/var/log/mongodb/mongo.log</code> on macOS, <code>/var/log/mongodb/mongod.log</code> on Linux. For 95% of MERN dev work you should skip all this and use Atlas.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q8">
-  <div class="qa__number">Question 8</div>
-  <h3 class="qa__question">What is the purpose of Mongoose in a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p><strong>Mongoose</strong> is an <em>Object Data Modeler</em> (ODM) for MongoDB &mdash; the conceptual cousin of an ORM but for documents instead of tables. It sits between your Node code and the raw MongoDB driver and adds:</p>
+<p>If <code>mongod</code> won&rsquo;t start, the most common causes are: stale lock file (<code>/usr/local/var/mongodb/mongod.lock</code> on macOS), permission errors on the data directory, or the port being in use (kill the offender with <code>lsof -i :27017</code>). Logs live at <code>/usr/local/var/log/mongodb/mongo.log</code> on macOS, <code>/var/log/mongodb/mongod.log</code> on Linux. For 95% of MERN dev work you should skip all this and use Atlas.</p>'''
+
+
+ANSWERS[8] = r'''<p><strong>Mongoose</strong> is an <em>Object Data Modeler</em> (ODM) for MongoDB &mdash; the conceptual cousin of an ORM but for documents instead of tables. It sits between your Node code and the raw MongoDB driver and adds:</p>
 
 <ul>
 <li><strong>Schemas + validation</strong> &mdash; you declare what a document looks like, and Mongoose rejects writes that don&rsquo;t match (required fields, types, custom validators, enums).</li>
@@ -316,15 +177,10 @@ docker logs -f mongo                     # follow logs</code></pre>
 <li><strong>Query helpers + chainable APIs</strong> &mdash; nicer than the raw driver for most app code.</li>
 </ul>
 
-<p>The trade&ndash;off is overhead and an extra layer of magic. Many teams skip Mongoose for new code in 2026 and use the official driver directly, paired with <strong>Zod</strong> for validation, because Zod gives end&ndash;to&ndash;end TypeScript inference. Either choice is valid; Mongoose remains the default in MERN tutorials and is fine for most projects. <strong>Prisma</strong> also supports MongoDB now and is the typed&ndash;ORM option if you want strict generated types.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q9">
-  <div class="qa__number">Question 9</div>
-  <h3 class="qa__question">How do you connect a Node.js application to a MongoDB database using Mongoose?</h3>
-  <div class="qa__answer">
-    <p>Connecting Mongoose to MongoDB takes one async call at app startup.</p>
+<p>The trade&ndash;off is overhead and an extra layer of magic. Many teams skip Mongoose for new code in 2026 and use the official driver directly, paired with <strong>Zod</strong> for validation, because Zod gives end&ndash;to&ndash;end TypeScript inference. Either choice is valid; Mongoose remains the default in MERN tutorials and is fine for most projects. <strong>Prisma</strong> also supports MongoDB now and is the typed&ndash;ORM option if you want strict generated types.</p>'''
+
+
+ANSWERS[9] = r'''<p>Connecting Mongoose to MongoDB takes one async call at app startup.</p>
 
 <pre><code>// src/db.ts
 import mongoose from &quot;mongoose&quot;;
@@ -352,15 +208,10 @@ app.listen(4000);</code></pre>
 
 <p>The connection string format is <code>mongodb+srv://&lt;user&gt;:&lt;pass&gt;@cluster0.xxxxx.mongodb.net/myapp?retryWrites=true&amp;w=majority</code> for Atlas, or <code>mongodb://localhost:27017/myapp</code> for local. Always store it in <code>.env</code> and load via <code>dotenv</code> (or the built&ndash;in <code>node --env-file=.env</code>).</p>
 
-<p>Mongoose maintains a connection pool internally (default size 100) and reuses connections across requests &mdash; you connect <em>once</em> at startup, never per request. Listen for <code>disconnected</code>/<code>reconnected</code> events to log lifecycle and feed your monitoring (Datadog, Sentry).</p>
-    
-  </div>
-</article>
-<article class="qa" id="q10">
-  <div class="qa__number">Question 10</div>
-  <h3 class="qa__question">How do you set up a basic Express.js server?</h3>
-  <div class="qa__answer">
-    <p>A minimal Express server is about ten lines plus a couple of imports.</p>
+<p>Mongoose maintains a connection pool internally (default size 100) and reuses connections across requests &mdash; you connect <em>once</em> at startup, never per request. Listen for <code>disconnected</code>/<code>reconnected</code> events to log lifecycle and feed your monitoring (Datadog, Sentry).</p>'''
+
+
+ANSWERS[10] = r'''<p>A minimal Express server is about ten lines plus a couple of imports.</p>
 
 <pre><code>// src/app.ts
 import express from &quot;express&quot;;
@@ -391,15 +242,10 @@ export default app;</code></pre>
 
 <p>The four building blocks are <strong>middleware</strong> (functions running on every request), <strong>routes</strong> (handlers for specific URLs), the <strong>request</strong>/<strong>response</strong> objects, and the global <strong>error handler</strong> (a middleware with four parameters &mdash; Express recognizes the signature). Mount routers with <code>app.use(&quot;/prefix&quot;, router)</code> to keep the file structure clean.</p>
 
-<p>Run with <code>tsx watch src/index.ts</code> (or <code>nodemon</code>) for hot reload during development.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q11">
-  <div class="qa__number">Question 11</div>
-  <h3 class="qa__question">Describe the structure of a typical MERN stack project.</h3>
-  <div class="qa__answer">
-    <p>A 2026 MERN project usually lives as a <strong>monorepo</strong> with separate frontend and backend workspaces, managed by pnpm or Bun.</p>
+<p>Run with <code>tsx watch src/index.ts</code> (or <code>nodemon</code>) for hot reload during development.</p>'''
+
+
+ANSWERS[11] = r'''<p>A 2026 MERN project usually lives as a <strong>monorepo</strong> with separate frontend and backend workspaces, managed by pnpm or Bun.</p>
 
 <pre><code>my-app/
 ├── apps/
@@ -431,15 +277,10 @@ export default app;</code></pre>
 ├── package.json                # root workspace
 └── README.md</code></pre>
 
-<p>The win of this layout is sharing types end&ndash;to&ndash;end &mdash; the API exports a Zod schema or tRPC router that the React app consumes with full TypeScript inference. Older MERN tutorials separate <code>client/</code> and <code>server/</code> as siblings without a workspace; functionally similar but you lose easy code sharing.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q12">
-  <div class="qa__number">Question 12</div>
-  <h3 class="qa__question">How do you create a new React application using Create React App?</h3>
-  <div class="qa__answer">
-    <p><strong>Don&rsquo;t use Create React App in 2026</strong> &mdash; it was officially deprecated by the React team. Use <strong>Vite</strong> for SPAs or <strong>Next.js</strong> for SSR/full&ndash;stack React.</p>
+<p>The win of this layout is sharing types end&ndash;to&ndash;end &mdash; the API exports a Zod schema or tRPC router that the React app consumes with full TypeScript inference. Older MERN tutorials separate <code>client/</code> and <code>server/</code> as siblings without a workspace; functionally similar but you lose easy code sharing.</p>'''
+
+
+ANSWERS[12] = r'''<p><strong>Don&rsquo;t use Create React App in 2026</strong> &mdash; it was officially deprecated by the React team. Use <strong>Vite</strong> for SPAs or <strong>Next.js</strong> for SSR/full&ndash;stack React.</p>
 
 <pre><code># Vite (recommended for SPAs)
 pnpm create vite@latest my-app
@@ -460,15 +301,10 @@ pnpm create -- @tanstack/start@latest   # TanStack Start</code></pre>
 
 <p>Vite gives you near&ndash;instant dev server startup, hot module replacement, and a Rollup&ndash;based production build &mdash; CRA was Webpack&ndash;based and noticeably slower on cold starts. Next.js adds server&ndash;side rendering, static generation, file&ndash;system routing, image optimization, and edge runtime support. <strong>Remix</strong> and <strong>TanStack Start</strong> are valid full&ndash;stack alternatives if Next feels too opinionated.</p>
 
-<p>If you genuinely need to support a legacy CRA project, you can run it but plan a migration to Vite (<code>npx @vitejs/cra-to-vite</code> automates most of it).</p>
-    
-  </div>
-</article>
-<article class="qa" id="q13">
-  <div class="qa__number">Question 13</div>
-  <h3 class="qa__question">What is the purpose of the package.json file in a Node.js project?</h3>
-  <div class="qa__answer">
-    <p><code>package.json</code> is the manifest at the root of every Node project. It declares metadata, dependencies, and scripts, and is what npm/pnpm/Bun read to install + run things.</p>
+<p>If you genuinely need to support a legacy CRA project, you can run it but plan a migration to Vite (<code>npx @vitejs/cra-to-vite</code> automates most of it).</p>'''
+
+
+ANSWERS[13] = r'''<p><code>package.json</code> is the manifest at the root of every Node project. It declares metadata, dependencies, and scripts, and is what npm/pnpm/Bun read to install + run things.</p>
 
 <pre><code>{
   &quot;name&quot;: &quot;my-api&quot;,
@@ -498,15 +334,10 @@ pnpm create -- @tanstack/start@latest   # TanStack Start</code></pre>
 
 <p>Key fields: <strong>name</strong>/<strong>version</strong> identify the package, <strong>type</strong> picks ESM (<code>module</code>) vs CommonJS, <strong>scripts</strong> are runnable via <code>pnpm &lt;name&gt;</code>, <strong>dependencies</strong> ship with your app (production), <strong>devDependencies</strong> are for tooling (build, test, lint), <strong>engines</strong> documents the required Node version, and <strong>packageManager</strong> pins the package manager (Corepack reads this to use the right version automatically).</p>
 
-<p>Always commit the lockfile (<code>pnpm-lock.yaml</code>) so installs are reproducible across machines and CI.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q14">
-  <div class="qa__number">Question 14</div>
-  <h3 class="qa__question">How do you add environment variables to a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p>Environment variables let you change config (database URLs, API keys, feature flags) without changing code. The convention is a <code>.env</code> file in development and platform&ndash;managed env vars in production.</p>
+<p>Always commit the lockfile (<code>pnpm-lock.yaml</code>) so installs are reproducible across machines and CI.</p>'''
+
+
+ANSWERS[14] = r'''<p>Environment variables let you change config (database URLs, API keys, feature flags) without changing code. The convention is a <code>.env</code> file in development and platform&ndash;managed env vars in production.</p>
 
 <pre><code># .env (gitignored)
 PORT=4000
@@ -535,15 +366,10 @@ const port = process.env.PORT ?? 4000;</code></pre>
   PORT: z.coerce.number().default(4000)
 }).parse(process.env);</code></pre>
 
-<p>For React (Vite), env vars must be prefixed with <code>VITE_</code> to be exposed to the browser; for Next.js use <code>NEXT_PUBLIC_</code>. Anything not prefixed stays server&ndash;only. <strong>Never</strong> put secrets in client&ndash;side env vars &mdash; they ship in the bundle.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q15">
-  <div class="qa__number">Question 15</div>
-  <h3 class="qa__question">How do you handle configuration settings in a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p>Configuration in a MERN app spans three concerns: <strong>environment</strong> (URLs, secrets &mdash; always env vars), <strong>feature flags</strong> (toggles you change at runtime), and <strong>static config</strong> (constants compiled in).</p>
+<p>For React (Vite), env vars must be prefixed with <code>VITE_</code> to be exposed to the browser; for Next.js use <code>NEXT_PUBLIC_</code>. Anything not prefixed stays server&ndash;only. <strong>Never</strong> put secrets in client&ndash;side env vars &mdash; they ship in the bundle.</p>'''
+
+
+ANSWERS[15] = r'''<p>Configuration in a MERN app spans three concerns: <strong>environment</strong> (URLs, secrets &mdash; always env vars), <strong>feature flags</strong> (toggles you change at runtime), and <strong>static config</strong> (constants compiled in).</p>
 
 <pre><code>// config.ts &mdash; one validated source of truth
 import { z } from &quot;zod&quot;;
@@ -569,15 +395,10 @@ export const isProd = config.NODE_ENV === &quot;production&quot;;</code></pre>
 <li><strong>Secrets in a manager</strong> &mdash; for production, store in <strong>Doppler</strong>, <strong>Infisical</strong>, <strong>AWS Secrets Manager</strong>, <strong>HashiCorp Vault</strong>, or platform secret stores (Vercel/Fly env, GitHub Actions secrets). Never commit <code>.env</code> files.</li>
 <li><strong>Feature flags</strong> &mdash; use <strong>Statsig</strong>, <strong>GrowthBook</strong>, <strong>LaunchDarkly</strong>, or <strong>PostHog</strong> for runtime toggles you can flip without redeploying.</li>
 <li><strong>Per&ndash;environment files</strong> &mdash; <code>.env.development</code>, <code>.env.test</code>, <code>.env.production</code> as needed, but production values come from the secret manager.</li>
-</ul>
-    
-  </div>
-</article>
-<article class="qa" id="q16">
-  <div class="qa__number">Question 16</div>
-  <h3 class="qa__question">What is the purpose of the .env file, and how do you use it in a Node.js project?</h3>
-  <div class="qa__answer">
-    <p>The <code>.env</code> file is a plain text file with <code>KEY=VALUE</code> pairs that holds local configuration &mdash; database URLs, API keys, feature flags &mdash; outside your source code. Each line becomes <code>process.env.KEY</code> at runtime.</p>
+</ul>'''
+
+
+ANSWERS[16] = r'''<p>The <code>.env</code> file is a plain text file with <code>KEY=VALUE</code> pairs that holds local configuration &mdash; database URLs, API keys, feature flags &mdash; outside your source code. Each line becomes <code>process.env.KEY</code> at runtime.</p>
 
 <pre><code># .env (NEVER commit this)
 MONGO_URI=mongodb+srv://user:pass@cluster0.mongodb.net/myapp
@@ -610,15 +431,10 @@ console.log(process.env.MONGO_URI);</code></pre>
 <li><strong>Commit a <code>.env.example</code></strong> with empty values so teammates know what they need to set.</li>
 <li><strong>Validate at boot</strong> with Zod (see prior answer).</li>
 <li><strong>Production reads from the platform</strong> &mdash; Vercel/Fly/Render/Railway dashboards, AWS Secrets Manager, etc., not from a <code>.env</code> file on disk.</li>
-</ul>
-    
-  </div>
-</article>
-<article class="qa" id="q17">
-  <div class="qa__number">Question 17</div>
-  <h3 class="qa__question">How do you set up routing in an Express.js application?</h3>
-  <div class="qa__answer">
-    <p>Express routing maps HTTP methods + paths to handler functions. The two patterns are inline routes on the app object and a separate <strong>Router</strong> module for grouping.</p>
+</ul>'''
+
+
+ANSWERS[17] = r'''<p>Express routing maps HTTP methods + paths to handler functions. The two patterns are inline routes on the app object and a separate <strong>Router</strong> module for grouping.</p>
 
 <pre><code>// src/routes/users.ts
 import { Router } from &quot;express&quot;;
@@ -650,15 +466,10 @@ app.use(&quot;/users&quot;, users);            // mount at /users</code></pre>
 
 <p>Routes match in registration order &mdash; the first matching route wins. Use route parameters (<code>:id</code>) for dynamic segments and access them via <code>req.params</code>. Query string lives at <code>req.query</code>, JSON body at <code>req.body</code> (after <code>express.json()</code> middleware).</p>
 
-<p>For nested routes mount routers within routers. For really large APIs, consider migrating to <strong>Hono</strong> or <strong>Fastify</strong> &mdash; both have cleaner async error handling and better TypeScript inference than Express, which still requires a <code>next(err)</code> dance for thrown errors in older versions.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q18">
-  <div class="qa__number">Question 18</div>
-  <h3 class="qa__question">Describe how you would create a basic API endpoint in Express.js.</h3>
-  <div class="qa__answer">
-    <p>A typical REST endpoint is one route handler that validates input, talks to the database, and returns JSON.</p>
+<p>For nested routes mount routers within routers. For really large APIs, consider migrating to <strong>Hono</strong> or <strong>Fastify</strong> &mdash; both have cleaner async error handling and better TypeScript inference than Express, which still requires a <code>next(err)</code> dance for thrown errors in older versions.</p>'''
+
+
+ANSWERS[18] = r'''<p>A typical REST endpoint is one route handler that validates input, talks to the database, and returns JSON.</p>
 
 <pre><code>// src/routes/posts.ts
 import { Router } from &quot;express&quot;;
@@ -698,15 +509,10 @@ export default router;</code></pre>
 <li><strong>Async handler with try/catch</strong> &mdash; in Express 4 thrown errors don&rsquo;t auto&ndash;forward; pass them to <code>next(err)</code>. Express 5 fixes this.</li>
 <li><strong>Return correct status codes</strong> &mdash; 201 Created on POST success, 400 for bad input, 401/403 for auth, 404 for not found, 500 for server errors.</li>
 <li><strong>Don&rsquo;t leak internals</strong> &mdash; never return raw stack traces to clients.</li>
-</ul>
-    
-  </div>
-</article>
-<article class="qa" id="q19">
-  <div class="qa__number">Question 19</div>
-  <h3 class="qa__question">How do you handle HTTP requests and responses in Express.js?</h3>
-  <div class="qa__answer">
-    <p>Express models the request/response lifecycle as plain Node HTTP objects with extra helpers. <code>req</code> is what came in; <code>res</code> is what you send back; both pass through middleware in registration order until a handler ends the cycle by calling <code>res.send</code>/<code>res.json</code>/<code>res.end</code>.</p>
+</ul>'''
+
+
+ANSWERS[19] = r'''<p>Express models the request/response lifecycle as plain Node HTTP objects with extra helpers. <code>req</code> is what came in; <code>res</code> is what you send back; both pass through middleware in registration order until a handler ends the cycle by calling <code>res.send</code>/<code>res.json</code>/<code>res.end</code>.</p>
 
 <pre><code>app.post(&quot;/orders&quot;, async (req, res) =&gt; {
   // Read input
@@ -727,15 +533,10 @@ export default router;</code></pre>
 
 <p>Common <code>req</code> fields: <code>req.params</code> (URL params), <code>req.query</code> (query string), <code>req.body</code> (JSON/form data after middleware), <code>req.headers</code> (raw), <code>req.get(&quot;X&quot;)</code> (case&ndash;insensitive header), <code>req.cookies</code> (after cookie&ndash;parser).</p>
 
-<p>Common <code>res</code> methods: <code>res.status(n)</code> (chainable), <code>res.json(obj)</code> (sets <code>Content-Type</code>), <code>res.send(text)</code>, <code>res.redirect(url)</code>, <code>res.cookie(name, value, opts)</code>. Each request must call exactly one terminal method &mdash; calling two throws &ldquo;Cannot set headers after they are sent&rdquo;, the most classic Express bug.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q20">
-  <div class="qa__number">Question 20</div>
-  <h3 class="qa__question">What is CORS, and how do you enable it in an Express.js application?</h3>
-  <div class="qa__answer">
-    <p><strong>CORS</strong> (Cross&ndash;Origin Resource Sharing) is the browser security model that blocks JavaScript on <code>https://app.example.com</code> from calling <code>https://api.example.com</code> unless the API explicitly opts in via response headers. Same&ndash;origin requests are unrestricted; cross&ndash;origin require the server to send <code>Access-Control-Allow-Origin</code> and friends.</p>
+<p>Common <code>res</code> methods: <code>res.status(n)</code> (chainable), <code>res.json(obj)</code> (sets <code>Content-Type</code>), <code>res.send(text)</code>, <code>res.redirect(url)</code>, <code>res.cookie(name, value, opts)</code>. Each request must call exactly one terminal method &mdash; calling two throws &ldquo;Cannot set headers after they are sent&rdquo;, the most classic Express bug.</p>'''
+
+
+ANSWERS[20] = r'''<p><strong>CORS</strong> (Cross&ndash;Origin Resource Sharing) is the browser security model that blocks JavaScript on <code>https://app.example.com</code> from calling <code>https://api.example.com</code> unless the API explicitly opts in via response headers. Same&ndash;origin requests are unrestricted; cross&ndash;origin require the server to send <code>Access-Control-Allow-Origin</code> and friends.</p>
 
 <pre><code>pnpm add cors @types/cors</code></pre>
 
@@ -765,15 +566,10 @@ app.use(cors({
 <li><strong>Preflight requests</strong> (<code>OPTIONS</code>) happen automatically for &ldquo;non&ndash;simple&rdquo; methods like <code>PUT</code>/<code>DELETE</code> or custom headers. The <code>cors</code> package handles them.</li>
 <li><strong>If you serve frontend + API from the same domain</strong> (e.g. via Next.js API routes or a reverse proxy at <code>/api</code>), CORS doesn&rsquo;t apply at all &mdash; same origin.</li>
 <li><strong>Cookies need <code>credentials: &quot;include&quot;</code> on the fetch</strong> + <code>credentials: true</code> on the server + <code>SameSite=None; Secure</code> on the cookie.</li>
-</ul>
-    
-  </div>
-</article>
-<article class="qa" id="q21">
-  <div class="qa__number">Question 21</div>
-  <h3 class="qa__question">How do you handle errors in an Express.js application?</h3>
-  <div class="qa__answer">
-    <p>Express error handling has one trick: any middleware with <strong>four parameters</strong> <code>(err, req, res, next)</code> is recognized as the global error handler. Errors flow to it via thrown async errors in Express 5, or via <code>next(err)</code> in Express 4.</p>
+</ul>'''
+
+
+ANSWERS[21] = r'''<p>Express error handling has one trick: any middleware with <strong>four parameters</strong> <code>(err, req, res, next)</code> is recognized as the global error handler. Errors flow to it via thrown async errors in Express 5, or via <code>next(err)</code> in Express 4.</p>
 
 <pre><code>// src/middleware/errors.ts
 export class HttpError extends Error {
@@ -806,15 +602,10 @@ export function errorHandler(err, req, res, next) {
 app.use(notFound);
 app.use(errorHandler);</code></pre>
 
-<p>Best practices: define a <strong>typed <code>HttpError</code></strong> class so handlers throw <code>throw new HttpError(404, &quot;User not found&quot;)</code> rather than building the response inline; in Express 4 wrap async handlers with <code>express-async-handler</code> or upgrade to Express 5 which awaits async handlers automatically; <strong>never leak stack traces</strong> in production responses; pipe errors to <strong>Sentry</strong>, <strong>Honeybadger</strong>, or <strong>Datadog APM</strong> for tracking + alerting.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q22">
-  <div class="qa__number">Question 22</div>
-  <h3 class="qa__question">How do you set up a connection to a MongoDB database using the MongoDB Node.js driver?</h3>
-  <div class="qa__answer">
-    <p>The official <strong>MongoDB Node.js driver</strong> is the lower&ndash;level alternative to Mongoose &mdash; you skip the ODM and talk directly to MongoDB using its native API. It returns plain JS objects, which gives you full control + slightly better performance, with no schema enforcement.</p>
+<p>Best practices: define a <strong>typed <code>HttpError</code></strong> class so handlers throw <code>throw new HttpError(404, &quot;User not found&quot;)</code> rather than building the response inline; in Express 4 wrap async handlers with <code>express-async-handler</code> or upgrade to Express 5 which awaits async handlers automatically; <strong>never leak stack traces</strong> in production responses; pipe errors to <strong>Sentry</strong>, <strong>Honeybadger</strong>, or <strong>Datadog APM</strong> for tracking + alerting.</p>'''
+
+
+ANSWERS[22] = r'''<p>The official <strong>MongoDB Node.js driver</strong> is the lower&ndash;level alternative to Mongoose &mdash; you skip the ODM and talk directly to MongoDB using its native API. It returns plain JS objects, which gives you full control + slightly better performance, with no schema enforcement.</p>
 
 <pre><code>pnpm add mongodb</code></pre>
 
@@ -845,15 +636,10 @@ const all = await users.find({ active: true }).limit(50).toArray();</code></pre>
 
 <p>The driver maintains a pool internally; you connect <em>once</em> at boot and reuse the client across requests. The 2026 modern setup pairs the raw driver with <strong>Zod</strong> for application&ndash;level validation and TypeScript types &mdash; same end&ndash;result as Mongoose schemas but typed end&ndash;to&ndash;end without runtime overhead.</p>
 
-<p>If you want a typed ORM&ndash;ish layer with code generation, <strong>Prisma</strong> now supports MongoDB and gives you generated TS types from a schema file. Otherwise the raw driver + Zod is the leanest, fastest combo.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q23">
-  <div class="qa__number">Question 23</div>
-  <h3 class="qa__question">Describe how you would create a Mongoose schema and model.</h3>
-  <div class="qa__answer">
-    <p>A Mongoose <strong>schema</strong> describes the shape of documents in a collection, and a <strong>model</strong> is the runtime object you actually call (<code>find</code>, <code>create</code>, etc.) &mdash; one model per collection.</p>
+<p>If you want a typed ORM&ndash;ish layer with code generation, <strong>Prisma</strong> now supports MongoDB and gives you generated TS types from a schema file. Otherwise the raw driver + Zod is the leanest, fastest combo.</p>'''
+
+
+ANSWERS[23] = r'''<p>A Mongoose <strong>schema</strong> describes the shape of documents in a collection, and a <strong>model</strong> is the runtime object you actually call (<code>find</code>, <code>create</code>, etc.) &mdash; one model per collection.</p>
 
 <pre><code>// src/models/User.ts
 import mongoose, { Schema, model, InferSchemaType } from &quot;mongoose&quot;;
@@ -883,15 +669,10 @@ export const User = model&lt;IUser&gt;(&quot;User&quot;, userSchema);</code></pr
 
 <p>Schema features worth knowing: required + default + enum validators, <code>unique</code> creates a unique index in Mongo, <code>timestamps: true</code> auto&ndash;populates <code>createdAt</code>/<code>updatedAt</code>, nested objects + arrays of subdocuments are first&ndash;class, instance methods + static methods + virtuals + middleware (<code>pre</code>/<code>post</code> hooks) hang off the schema.</p>
 
-<p>The model name (<code>&quot;User&quot;</code>) becomes the lowercase plural collection name (<code>users</code>) automatically. Use <code>InferSchemaType</code> to derive TypeScript types so your handlers get autocomplete without duplicating the schema.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q24">
-  <div class="qa__number">Question 24</div>
-  <h3 class="qa__question">How do you perform CRUD operations using Mongoose?</h3>
-  <div class="qa__answer">
-    <p>CRUD operations &mdash; <strong>C</strong>reate, <strong>R</strong>ead, <strong>U</strong>pdate, <strong>D</strong>elete &mdash; are one&ndash;line method calls on the Mongoose model.</p>
+<p>The model name (<code>&quot;User&quot;</code>) becomes the lowercase plural collection name (<code>users</code>) automatically. Use <code>InferSchemaType</code> to derive TypeScript types so your handlers get autocomplete without duplicating the schema.</p>'''
+
+
+ANSWERS[24] = r'''<p>CRUD operations &mdash; <strong>C</strong>reate, <strong>R</strong>ead, <strong>U</strong>pdate, <strong>D</strong>elete &mdash; are one&ndash;line method calls on the Mongoose model.</p>
 
 <pre><code>import { User } from &quot;../models/User.js&quot;;
 
@@ -923,15 +704,10 @@ await User.deleteOne({ _id: id });
 await User.findByIdAndDelete(id);
 await User.deleteMany({ active: false });</code></pre>
 
-<p>Tips: use <strong><code>.lean()</code></strong> for read&ndash;heavy queries to skip Mongoose hydration (faster, returns plain objects, no methods); <strong>always pass <code>{ runValidators: true }</code></strong> on updates or schema validators silently skip; <strong>use update operators</strong> (<code>$set</code>, <code>$inc</code>, <code>$push</code>, <code>$pull</code>) instead of replacing the whole document; <strong>avoid <code>findOneAndUpdate</code> race conditions</strong> by relying on atomic operators rather than read&ndash;modify&ndash;write loops.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q25">
-  <div class="qa__number">Question 25</div>
-  <h3 class="qa__question">How do you set up authentication in a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p>Authentication in MERN is &ldquo;who is the user?&rdquo;; authorization is &ldquo;what can they do?&rdquo;. The 2026 default is to <strong>not roll your own</strong> &mdash; use a managed provider unless you have a specific reason.</p>
+<p>Tips: use <strong><code>.lean()</code></strong> for read&ndash;heavy queries to skip Mongoose hydration (faster, returns plain objects, no methods); <strong>always pass <code>{ runValidators: true }</code></strong> on updates or schema validators silently skip; <strong>use update operators</strong> (<code>$set</code>, <code>$inc</code>, <code>$push</code>, <code>$pull</code>) instead of replacing the whole document; <strong>avoid <code>findOneAndUpdate</code> race conditions</strong> by relying on atomic operators rather than read&ndash;modify&ndash;write loops.</p>'''
+
+
+ANSWERS[25] = r'''<p>Authentication in MERN is &ldquo;who is the user?&rdquo;; authorization is &ldquo;what can they do?&rdquo;. The 2026 default is to <strong>not roll your own</strong> &mdash; use a managed provider unless you have a specific reason.</p>
 
 <p><strong>Hosted (recommended for new apps):</strong></p>
 <ul>
@@ -957,15 +733,10 @@ if (!user || !await argon2.verify(user.hash, plaintext)) {
 const token = jwt.sign({ sub: user._id }, JWT_SECRET, { expiresIn: &quot;15m&quot; });
 res.cookie(&quot;token&quot;, token, { httpOnly: true, secure: true, sameSite: &quot;lax&quot; });</code></pre>
 
-<p>Critical rules: hash with <strong>argon2id</strong> (or bcrypt with cost ≥12 if argon2 isn&rsquo;t available); short&ndash;lived access tokens + refresh token rotation with reuse detection; store tokens in <strong>httpOnly cookies</strong> (not localStorage &mdash; XSS&ndash;readable); add MFA + Passkeys via <strong>SimpleWebAuthn</strong>; rate&ndash;limit auth endpoints aggressively. Most teams should pick a hosted provider.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q26">
-  <div class="qa__number">Question 26</div>
-  <h3 class="qa__question">What is JWT, and how do you use it for authentication in a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p><strong>JWT</strong> (JSON Web Token) is a compact signed token format &mdash; three base64url chunks (<code>header.payload.signature</code>) separated by dots. The signature lets the server verify the token wasn&rsquo;t tampered with, without storing session state in a database. The payload is <em>encoded</em>, not encrypted &mdash; anyone can decode it &mdash; so never put secrets in there.</p>
+<p>Critical rules: hash with <strong>argon2id</strong> (or bcrypt with cost ≥12 if argon2 isn&rsquo;t available); short&ndash;lived access tokens + refresh token rotation with reuse detection; store tokens in <strong>httpOnly cookies</strong> (not localStorage &mdash; XSS&ndash;readable); add MFA + Passkeys via <strong>SimpleWebAuthn</strong>; rate&ndash;limit auth endpoints aggressively. Most teams should pick a hosted provider.</p>'''
+
+
+ANSWERS[26] = r'''<p><strong>JWT</strong> (JSON Web Token) is a compact signed token format &mdash; three base64url chunks (<code>header.payload.signature</code>) separated by dots. The signature lets the server verify the token wasn&rsquo;t tampered with, without storing session state in a database. The payload is <em>encoded</em>, not encrypted &mdash; anyone can decode it &mdash; so never put secrets in there.</p>
 
 <pre><code>pnpm add jsonwebtoken @types/jsonwebtoken</code></pre>
 
@@ -995,15 +766,10 @@ try {
 <li><strong>Use a strong secret</strong> (32+ random bytes from <code>crypto.randomBytes(32).toString(&quot;base64url&quot;)</code>); rotate periodically.</li>
 <li><strong>Prefer hosted auth</strong> &mdash; Clerk, Auth0, WorkOS, Better Auth do all of this correctly with a few lines of code. Rolling your own JWT auth is a famous footgun.</li>
 <li><strong>For revocation</strong> you need a denylist or short TTL &mdash; pure JWT can&rsquo;t be invalidated server&ndash;side.</li>
-</ul>
-    
-  </div>
-</article>
-<article class="qa" id="q27">
-  <div class="qa__number">Question 27</div>
-  <h3 class="qa__question">How do you protect routes in an Express.js application using middleware?</h3>
-  <div class="qa__answer">
-    <p>Protect routes with <strong>middleware</strong> &mdash; a function that runs before the route handler, sets <code>req.userId</code> from the token, and calls <code>next()</code> if valid or returns 401 if not.</p>
+</ul>'''
+
+
+ANSWERS[27] = r'''<p>Protect routes with <strong>middleware</strong> &mdash; a function that runs before the route handler, sets <code>req.userId</code> from the token, and calls <code>next()</code> if valid or returns 401 if not.</p>
 
 <pre><code>// src/middleware/auth.ts
 import { Request, Response, NextFunction } from &quot;express&quot;;
@@ -1041,15 +807,10 @@ export function requireRole(...allowed: string[]) {
 router.get(&quot;/me&quot;,    requireAuth,                async (req, res) =&gt; { ... });
 router.delete(&quot;/users/:id&quot;, requireAuth, requireRole(&quot;admin&quot;), handler);</code></pre>
 
-<p>Apply middleware at three granularities: <strong>per app</strong> (<code>app.use(requireAuth)</code> for fully&ndash;authenticated APIs), <strong>per router</strong> (<code>router.use(requireAuth)</code>), or <strong>per route</strong> (third arg to <code>router.get</code>). For complex authorization (per&ndash;resource ownership, roles + relations), pair this with a policy engine like <strong>Cerbos</strong>, <strong>SpiceDB</strong>, or <strong>OpenFGA</strong> rather than scattering <code>if</code>s.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q28">
-  <div class="qa__number">Question 28</div>
-  <h3 class="qa__question">How do you deploy a MERN stack application to Heroku?</h3>
-  <div class="qa__answer">
-    <p><strong>Heroku</strong> was the original PaaS for MERN apps, but it became paid&ndash;only in 2022 and is much less popular in 2026. Modern equivalents are <strong>Render</strong>, <strong>Railway</strong>, <strong>Fly.io</strong>, <strong>Vercel</strong> (frontend + serverless), <strong>Cloud Run</strong>, and <strong>Northflank</strong>. The deploy story is similar across all of them: connect a Git repo, set env vars, push.</p>
+<p>Apply middleware at three granularities: <strong>per app</strong> (<code>app.use(requireAuth)</code> for fully&ndash;authenticated APIs), <strong>per router</strong> (<code>router.use(requireAuth)</code>), or <strong>per route</strong> (third arg to <code>router.get</code>). For complex authorization (per&ndash;resource ownership, roles + relations), pair this with a policy engine like <strong>Cerbos</strong>, <strong>SpiceDB</strong>, or <strong>OpenFGA</strong> rather than scattering <code>if</code>s.</p>'''
+
+
+ANSWERS[28] = r'''<p><strong>Heroku</strong> was the original PaaS for MERN apps, but it became paid&ndash;only in 2022 and is much less popular in 2026. Modern equivalents are <strong>Render</strong>, <strong>Railway</strong>, <strong>Fly.io</strong>, <strong>Vercel</strong> (frontend + serverless), <strong>Cloud Run</strong>, and <strong>Northflank</strong>. The deploy story is similar across all of them: connect a Git repo, set env vars, push.</p>
 
 <pre><code># If you genuinely must use Heroku:
 heroku login
@@ -1079,15 +840,10 @@ heroku logs --tail
 <li><strong>Config vars</strong> &mdash; the env var dashboard.</li>
 </ul>
 
-<p>For React: deploy the static build to <strong>Vercel</strong>, <strong>Netlify</strong>, or <strong>Cloudflare Pages</strong> (free tiers + global CDN). Deploy the API to <strong>Render</strong>/<strong>Railway</strong>/<strong>Fly.io</strong> with managed Mongo via <strong>Atlas</strong>. This split is the modern MERN deployment pattern.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q29">
-  <div class="qa__number">Question 29</div>
-  <h3 class="qa__question">What is the purpose of the Procfile in a Heroku deployment?</h3>
-  <div class="qa__answer">
-    <p>The <strong>Procfile</strong> is a Heroku&ndash;invented text file at the root of a project that declares process types and the command to start each. Render, Fly.io, and Northflank also recognize it.</p>
+<p>For React: deploy the static build to <strong>Vercel</strong>, <strong>Netlify</strong>, or <strong>Cloudflare Pages</strong> (free tiers + global CDN). Deploy the API to <strong>Render</strong>/<strong>Railway</strong>/<strong>Fly.io</strong> with managed Mongo via <strong>Atlas</strong>. This split is the modern MERN deployment pattern.</p>'''
+
+
+ANSWERS[29] = r'''<p>The <strong>Procfile</strong> is a Heroku&ndash;invented text file at the root of a project that declares process types and the command to start each. Render, Fly.io, and Northflank also recognize it.</p>
 
 <pre><code># Procfile
 web: node dist/index.js
@@ -1108,15 +864,10 @@ release: node dist/migrate.js</code></pre>
 web: node dist/index.js
 release: node dist/scripts/migrate.js</code></pre>
 
-<p>If you don&rsquo;t supply a Procfile, Heroku looks at <code>package.json</code> &ldquo;start&rdquo; script and runs <code>npm start</code> as the web process &mdash; usually fine for simple apps. Modern alternatives have moved past Procfile syntax: <strong>Render</strong> uses a dashboard or <code>render.yaml</code>; <strong>Fly.io</strong> uses <code>fly.toml</code> + a Dockerfile; <strong>Vercel</strong> auto&ndash;detects framework. The same conceptual pieces (start command, release hooks, worker processes) exist everywhere; the syntax differs.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q30">
-  <div class="qa__number">Question 30</div>
-  <h3 class="qa__question">How do you configure environment variables in a Heroku deployment?</h3>
-  <div class="qa__answer">
-    <p>Environment variables on Heroku (and equivalent platforms) are configured in the dashboard or via CLI &mdash; never committed to git.</p>
+<p>If you don&rsquo;t supply a Procfile, Heroku looks at <code>package.json</code> &ldquo;start&rdquo; script and runs <code>npm start</code> as the web process &mdash; usually fine for simple apps. Modern alternatives have moved past Procfile syntax: <strong>Render</strong> uses a dashboard or <code>render.yaml</code>; <strong>Fly.io</strong> uses <code>fly.toml</code> + a Dockerfile; <strong>Vercel</strong> auto&ndash;detects framework. The same conceptual pieces (start command, release hooks, worker processes) exist everywhere; the syntax differs.</p>'''
+
+
+ANSWERS[30] = r'''<p>Environment variables on Heroku (and equivalent platforms) are configured in the dashboard or via CLI &mdash; never committed to git.</p>
 
 <pre><code># Heroku CLI
 heroku config:set MONGO_URI=&quot;mongodb+srv://...&quot; -a my-api
@@ -1144,15 +895,10 @@ vercel env add MONGO_URI production
 <li><strong>Rotate periodically</strong> and immediately when a developer leaves the team.</li>
 </ul>
 
-<p>Heroku will restart your dynos automatically when config vars change &mdash; same for Render, Railway, and Fly.io with secrets.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q31">
-  <div class="qa__number">Question 31</div>
-  <h3 class="qa__question">How do you deploy a MongoDB database to MongoDB Atlas?</h3>
-  <div class="qa__answer">
-    <p><strong>MongoDB Atlas</strong> is MongoDB&rsquo;s managed cloud service &mdash; click&ndash;to&ndash;deploy clusters across AWS, GCP, and Azure with backup, monitoring, scaling, and security baked in. It&rsquo;s how essentially every MERN team in 2026 runs production MongoDB.</p>
+<p>Heroku will restart your dynos automatically when config vars change &mdash; same for Render, Railway, and Fly.io with secrets.</p>'''
+
+
+ANSWERS[31] = r'''<p><strong>MongoDB Atlas</strong> is MongoDB&rsquo;s managed cloud service &mdash; click&ndash;to&ndash;deploy clusters across AWS, GCP, and Azure with backup, monitoring, scaling, and security baked in. It&rsquo;s how essentially every MERN team in 2026 runs production MongoDB.</p>
 
 <p>Step&ndash;by&ndash;step deployment:</p>
 
@@ -1170,15 +916,10 @@ MONGO_URI=mongodb+srv://api-user:S3cret@cluster0.abcde.mongodb.net/myapp?retryWr
 
 # Production &mdash; set in Vercel/Render/Fly secret store</code></pre>
 
-<p>Atlas runs continuous backups (point&ndash;in&ndash;time restore on M10+), exposes Performance Advisor (suggests indexes), Query Profiler, and Atlas Search (full&ndash;text + vector). For most MERN teams, Atlas removes the need to ever run <code>mongod</code> yourself.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q32">
-  <div class="qa__number">Question 32</div>
-  <h3 class="qa__question">What are the advantages of using MongoDB Atlas for your database?</h3>
-  <div class="qa__answer">
-    <p>Atlas is the path of least resistance for production MongoDB. Concrete advantages over self&ndash;hosting:</p>
+<p>Atlas runs continuous backups (point&ndash;in&ndash;time restore on M10+), exposes Performance Advisor (suggests indexes), Query Profiler, and Atlas Search (full&ndash;text + vector). For most MERN teams, Atlas removes the need to ever run <code>mongod</code> yourself.</p>'''
+
+
+ANSWERS[32] = r'''<p>Atlas is the path of least resistance for production MongoDB. Concrete advantages over self&ndash;hosting:</p>
 
 <ul>
 <li><strong>Zero ops</strong> &mdash; MongoDB handles upgrades, patches, OS hardening, and storage scaling. No DBA needed for typical MERN scale.</li>
@@ -1194,15 +935,10 @@ MONGO_URI=mongodb+srv://api-user:S3cret@cluster0.abcde.mongodb.net/myapp?retryWr
 <li><strong>Free tier</strong> &mdash; M0 covers most dev + small projects without cost.</li>
 </ul>
 
-<p>The trade&ndash;off is cost at scale and lock&ndash;in to Atlas&rsquo;s feature set. For most MERN apps both are easy to absorb; the alternative is hiring an SRE.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q33">
-  <div class="qa__number">Question 33</div>
-  <h3 class="qa__question">How do you connect a MongoDB Atlas database to a Node.js application?</h3>
-  <div class="qa__answer">
-    <p>Connecting Node.js to Atlas is identical to local Mongo &mdash; just swap the connection string. Mongoose or the native driver both work unchanged.</p>
+<p>The trade&ndash;off is cost at scale and lock&ndash;in to Atlas&rsquo;s feature set. For most MERN apps both are easy to absorb; the alternative is hiring an SRE.</p>'''
+
+
+ANSWERS[33] = r'''<p>Connecting Node.js to Atlas is identical to local Mongo &mdash; just swap the connection string. Mongoose or the native driver both work unchanged.</p>
 
 <pre><code># 1. Get the connection string from Atlas:
 #    Clusters &rarr; Connect &rarr; Drivers &rarr; copy URI
@@ -1239,15 +975,10 @@ const db = client.db();           // db name comes from URI</code></pre>
 <li><strong>TLS is on by default</strong> with Atlas (<code>mongodb+srv://</code> implies SRV + TLS); no extra config needed.</li>
 <li><strong>Connection pooling</strong> is automatic; one client/Mongoose connection at process boot, reused across requests.</li>
 <li><strong>For serverless</strong> (Vercel Functions, AWS Lambda) cache the connection across invocations so cold starts are rare. Use Atlas <strong>Data API</strong> or <strong>MongoDB Driver with cached client</strong>.</li>
-</ul>
-    
-  </div>
-</article>
-<article class="qa" id="q34">
-  <div class="qa__number">Question 34</div>
-  <h3 class="qa__question">How do you secure sensitive information such as database credentials in a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p>Sensitive config &mdash; database credentials, API keys, signing secrets &mdash; never lives in code or in committed config files. The hierarchy of safety:</p>
+</ul>'''
+
+
+ANSWERS[34] = r'''<p>Sensitive config &mdash; database credentials, API keys, signing secrets &mdash; never lives in code or in committed config files. The hierarchy of safety:</p>
 
 <ol>
 <li><strong>Local dev:</strong> <code>.env</code> file (gitignored), <code>.env.example</code> committed for documentation.</li>
@@ -1276,15 +1007,10 @@ if (!MONGO_URI) throw new Error(&quot;MONGO_URI not set&quot;);
 <li><strong>Use prefixed key formats</strong> (e.g., <code>sk_live_</code>) so leaked keys are recognizable + scannable by GitHub automatically.</li>
 <li><strong>Rotate secrets</strong> periodically, immediately on any breach, and when a developer leaves.</li>
 <li><strong>Short&ndash;lived OIDC credentials</strong> for CI &rarr; cloud (<strong>GitHub OIDC</strong> &rarr; AWS) eliminate long&ndash;lived AWS keys entirely.</li>
-</ul>
-    
-  </div>
-</article>
-<article class="qa" id="q35">
-  <div class="qa__number">Question 35</div>
-  <h3 class="qa__question">How do you set up HTTPS for a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p>HTTPS is non&ndash;negotiable in 2026 &mdash; browsers warn aggressively on plain HTTP, and many web APIs (geolocation, service workers, WebAuthn/Passkeys) require it. The good news: you almost never configure TLS yourself.</p>
+</ul>'''
+
+
+ANSWERS[35] = r'''<p>HTTPS is non&ndash;negotiable in 2026 &mdash; browsers warn aggressively on plain HTTP, and many web APIs (geolocation, service workers, WebAuthn/Passkeys) require it. The good news: you almost never configure TLS yourself.</p>
 
 <p><strong>Recommended approach &mdash; let the platform handle it:</strong></p>
 
@@ -1319,15 +1045,10 @@ server {           # redirect HTTP &rarr; HTTPS
   return 301 https://$host$request_uri;
 }</code></pre>
 
-<p>Always set the <strong>HSTS header</strong> (<code>Strict-Transport-Security: max-age=63072000; includeSubDomains; preload</code>) so browsers refuse to downgrade. Use <strong>helmet</strong> middleware in Express to add HSTS + a sensible CSP automatically.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q36">
-  <div class="qa__number">Question 36</div>
-  <h3 class="qa__question">What is SSL/TLS, and why is it important for web applications?</h3>
-  <div class="qa__answer">
-    <p><strong>SSL/TLS</strong> &mdash; Transport Layer Security; SSL is the deprecated predecessor name still in casual use &mdash; is the protocol that wraps HTTP into HTTPS. It does three things:</p>
+<p>Always set the <strong>HSTS header</strong> (<code>Strict-Transport-Security: max-age=63072000; includeSubDomains; preload</code>) so browsers refuse to downgrade. Use <strong>helmet</strong> middleware in Express to add HSTS + a sensible CSP automatically.</p>'''
+
+
+ANSWERS[36] = r'''<p><strong>SSL/TLS</strong> &mdash; Transport Layer Security; SSL is the deprecated predecessor name still in casual use &mdash; is the protocol that wraps HTTP into HTTPS. It does three things:</p>
 
 <ul>
 <li><strong>Encryption</strong> &mdash; nobody on the wire (coffee shop wifi, ISPs, intermediate routers) can read the request body, headers, cookies, or response.</li>
@@ -1345,15 +1066,10 @@ server {           # redirect HTTP &rarr; HTTPS
 <li><strong>Compliance</strong> &mdash; PCI&ndash;DSS, HIPAA, SOC 2, GDPR all require encryption in transit.</li>
 </ul>
 
-<p>In 2026 the modern protocol is <strong>TLS 1.3</strong> (faster handshake, smaller cipher list, forward secrecy by default). Older TLS 1.0/1.1 are deprecated and disabled in modern browsers and platforms. Pair TLS with <strong>HSTS preload</strong> (<code>Strict-Transport-Security: max-age=63072000; includeSubDomains; preload</code> + submit to <code>hstspreload.org</code>) so browsers refuse plain&ndash;HTTP downgrade attacks even on the very first visit.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q37">
-  <div class="qa__number">Question 37</div>
-  <h3 class="qa__question">How do you use Let&#x27;s Encrypt to obtain an SSL certificate for your application?</h3>
-  <div class="qa__answer">
-    <p><strong>Let&rsquo;s Encrypt</strong> is a free, automated, browser&ndash;trusted Certificate Authority. It issues 90&ndash;day TLS certificates via the <strong>ACME</strong> protocol &mdash; you prove you control a domain, you get a cert, repeat every &lt;90 days. Most platforms automate the entire loop.</p>
+<p>In 2026 the modern protocol is <strong>TLS 1.3</strong> (faster handshake, smaller cipher list, forward secrecy by default). Older TLS 1.0/1.1 are deprecated and disabled in modern browsers and platforms. Pair TLS with <strong>HSTS preload</strong> (<code>Strict-Transport-Security: max-age=63072000; includeSubDomains; preload</code> + submit to <code>hstspreload.org</code>) so browsers refuse plain&ndash;HTTP downgrade attacks even on the very first visit.</p>'''
+
+
+ANSWERS[37] = r'''<p><strong>Let&rsquo;s Encrypt</strong> is a free, automated, browser&ndash;trusted Certificate Authority. It issues 90&ndash;day TLS certificates via the <strong>ACME</strong> protocol &mdash; you prove you control a domain, you get a cert, repeat every &lt;90 days. Most platforms automate the entire loop.</p>
 
 <p><strong>Easiest path &mdash; use a platform that handles it for you:</strong></p>
 
@@ -1385,15 +1101,10 @@ api.example.com {
 
 <p><strong>Traefik</strong> handles ACME similarly for Docker/Kubernetes setups. For Kubernetes specifically, <strong>cert&ndash;manager</strong> is the standard operator that requests + renews Let&rsquo;s Encrypt certs into Secrets that Ingress controllers consume.</p>
 
-<p>Renewal failures are the #1 production TLS outage cause &mdash; monitor cert expiry with <strong>Better Uptime</strong>, <strong>Checkly</strong>, or a self&ndash;hosted check; alert &gt;2 weeks before expiry.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q38">
-  <div class="qa__number">Question 38</div>
-  <h3 class="qa__question">Describe how you would set up a reverse proxy using Nginx for a MERN stack application.</h3>
-  <div class="qa__answer">
-    <p>A <strong>reverse proxy</strong> sits between the internet and your Node app, terminating TLS, serving static files, load&ndash;balancing across multiple Node processes, and adding security headers. Nginx is the classic choice; <strong>Caddy</strong> and <strong>Traefik</strong> are simpler 2026 alternatives that handle Let&rsquo;s Encrypt automatically.</p>
+<p>Renewal failures are the #1 production TLS outage cause &mdash; monitor cert expiry with <strong>Better Uptime</strong>, <strong>Checkly</strong>, or a self&ndash;hosted check; alert &gt;2 weeks before expiry.</p>'''
+
+
+ANSWERS[38] = r'''<p>A <strong>reverse proxy</strong> sits between the internet and your Node app, terminating TLS, serving static files, load&ndash;balancing across multiple Node processes, and adding security headers. Nginx is the classic choice; <strong>Caddy</strong> and <strong>Traefik</strong> are simpler 2026 alternatives that handle Let&rsquo;s Encrypt automatically.</p>
 
 <pre><code># /etc/nginx/sites-available/api.example.com
 server {
@@ -1439,15 +1150,10 @@ server {
   reverse_proxy /api/* localhost:4000
   root * /var/www/web/dist
   file_server
-}</code></pre>
-    
-  </div>
-</article>
-<article class="qa" id="q39">
-  <div class="qa__number">Question 39</div>
-  <h3 class="qa__question">How do you set up and use PM2 to manage a Node.js application in production?</h3>
-  <div class="qa__answer">
-    <p><strong>PM2</strong> is a process manager for Node.js that keeps your app running in production &mdash; it restarts on crash, runs multiple instances behind a load balancer, log&ndash;rotates, and offers zero&ndash;downtime reloads. Most managed platforms (Render, Fly.io, Vercel) make PM2 unnecessary, but it&rsquo;s standard on bare VMs or VPS deployments.</p>
+}</code></pre>'''
+
+
+ANSWERS[39] = r'''<p><strong>PM2</strong> is a process manager for Node.js that keeps your app running in production &mdash; it restarts on crash, runs multiple instances behind a load balancer, log&ndash;rotates, and offers zero&ndash;downtime reloads. Most managed platforms (Render, Fly.io, Vercel) make PM2 unnecessary, but it&rsquo;s standard on bare VMs or VPS deployments.</p>
 
 <pre><code>pnpm add -g pm2
 
@@ -1486,15 +1192,10 @@ module.exports = {
 };
 // pm2 start ecosystem.config.js --env production</code></pre>
 
-<p>2026 alternatives: in containers + Kubernetes you typically run <em>one</em> Node process per container and let the orchestrator handle restarts and scaling &mdash; no PM2 needed. <strong>systemd</strong> directly is also valid for simple VPS deployments. PM2 shines on traditional VMs where you want clustering + log mgmt without containers.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q40">
-  <div class="qa__number">Question 40</div>
-  <h3 class="qa__question">What is load balancing, and how do you implement it for a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p><strong>Load balancing</strong> spreads incoming requests across multiple instances of your app so no single server is overwhelmed and a single failure doesn&rsquo;t take down the service. Three layers exist:</p>
+<p>2026 alternatives: in containers + Kubernetes you typically run <em>one</em> Node process per container and let the orchestrator handle restarts and scaling &mdash; no PM2 needed. <strong>systemd</strong> directly is also valid for simple VPS deployments. PM2 shines on traditional VMs where you want clustering + log mgmt without containers.</p>'''
+
+
+ANSWERS[40] = r'''<p><strong>Load balancing</strong> spreads incoming requests across multiple instances of your app so no single server is overwhelmed and a single failure doesn&rsquo;t take down the service. Three layers exist:</p>
 
 <ul>
 <li><strong>DNS / global</strong> &mdash; Cloudflare, Route 53, NS1 route users to the nearest healthy region.</li>
@@ -1524,15 +1225,10 @@ server {
   }
 }</code></pre>
 
-<p>Critical for stateful concerns: WebSocket connections must use <strong>sticky sessions</strong> or a Redis pub/sub adapter (Socket.IO Redis adapter) so messages reach all servers. Use <strong>health check endpoints</strong> (<code>/healthz</code>) so the LB removes failing nodes automatically. Make Node apps <strong>stateless</strong> &mdash; sessions in Redis, files in S3 &mdash; so any instance can serve any request.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q41">
-  <div class="qa__number">Question 41</div>
-  <h3 class="qa__question">How do you monitor the performance of a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p>Performance monitoring for MERN means watching three layers: <strong>frontend Real User Metrics</strong> (what real users experience), <strong>backend APM</strong> (request latency, error rate, traces), and <strong>database</strong> (slow queries, index health, replication lag).</p>
+<p>Critical for stateful concerns: WebSocket connections must use <strong>sticky sessions</strong> or a Redis pub/sub adapter (Socket.IO Redis adapter) so messages reach all servers. Use <strong>health check endpoints</strong> (<code>/healthz</code>) so the LB removes failing nodes automatically. Make Node apps <strong>stateless</strong> &mdash; sessions in Redis, files in S3 &mdash; so any instance can serve any request.</p>'''
+
+
+ANSWERS[41] = r'''<p>Performance monitoring for MERN means watching three layers: <strong>frontend Real User Metrics</strong> (what real users experience), <strong>backend APM</strong> (request latency, error rate, traces), and <strong>database</strong> (slow queries, index health, replication lag).</p>
 
 <p><strong>Frontend RUM &mdash; Core Web Vitals + custom events:</strong></p>
 <ul>
@@ -1562,15 +1258,10 @@ new NodeSDK({
 <li>Set up alerts for replication lag, oplog window, connection saturation.</li>
 </ul>
 
-<p>Track the four <strong>RED</strong> metrics (Rate, Errors, Duration) per service. Define <strong>SLOs</strong> (e.g., 99.9% of requests &lt;500ms) and use burn&ndash;rate alerts via Datadog or Grafana.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q42">
-  <div class="qa__number">Question 42</div>
-  <h3 class="qa__question">What tools can you use for logging in a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p>MERN apps emit logs at every layer; pick a structured logger and ship to a central platform.</p>
+<p>Track the four <strong>RED</strong> metrics (Rate, Errors, Duration) per service. Define <strong>SLOs</strong> (e.g., 99.9% of requests &lt;500ms) and use burn&ndash;rate alerts via Datadog or Grafana.</p>'''
+
+
+ANSWERS[42] = r'''<p>MERN apps emit logs at every layer; pick a structured logger and ship to a central platform.</p>
 
 <p><strong>Logger &mdash; pino is the 2026 default for Node.js:</strong> fast, JSON output, ecosystem of plugins. Winston is the older alternative, still common.</p>
 
@@ -1600,15 +1291,10 @@ log.info({ userId, sku }, &quot;order created&quot;);</code></pre>
 <li><strong>Loggly</strong> / <strong>Papertrail</strong> &mdash; older but still used.</li>
 </ul>
 
-<p>Best practices: <strong>structured JSON</strong> always (no string concat); <strong>request IDs</strong> propagated across services for tracing; <strong>redact secrets and PII</strong> at the logger level (<code>redact</code> option above); <strong>log levels</strong> &mdash; <code>error</code> always, <code>warn</code> for unusual but recoverable, <code>info</code> for major events, <code>debug</code> off in production. Pair logs with <strong>OpenTelemetry traces</strong> via the same request ID for full visibility.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q43">
-  <div class="qa__number">Question 43</div>
-  <h3 class="qa__question">How do you set up and use Loggly for centralized logging in a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p><strong>Loggly</strong> (now part of SolarWinds) is a hosted log management service &mdash; you ship logs to it, search and alert on them via a web UI. It&rsquo;s an older option in 2026; modern teams usually pick <strong>Better Stack</strong>, <strong>Axiom</strong>, <strong>Datadog Logs</strong>, or <strong>Grafana Cloud Logs</strong>. The setup pattern is similar across all of them.</p>
+<p>Best practices: <strong>structured JSON</strong> always (no string concat); <strong>request IDs</strong> propagated across services for tracing; <strong>redact secrets and PII</strong> at the logger level (<code>redact</code> option above); <strong>log levels</strong> &mdash; <code>error</code> always, <code>warn</code> for unusual but recoverable, <code>info</code> for major events, <code>debug</code> off in production. Pair logs with <strong>OpenTelemetry traces</strong> via the same request ID for full visibility.</p>'''
+
+
+ANSWERS[43] = r'''<p><strong>Loggly</strong> (now part of SolarWinds) is a hosted log management service &mdash; you ship logs to it, search and alert on them via a web UI. It&rsquo;s an older option in 2026; modern teams usually pick <strong>Better Stack</strong>, <strong>Axiom</strong>, <strong>Datadog Logs</strong>, or <strong>Grafana Cloud Logs</strong>. The setup pattern is similar across all of them.</p>
 
 <pre><code>pnpm add winston winston-loggly-bulk
 # or with pino + a transport</code></pre>
@@ -1644,15 +1330,10 @@ pnpm add @logtail/pino
 # Most platforms (Vercel, Fly, Render) capture stdout/stderr automatically
 # and forward to their integrated log viewer or to Datadog/Axiom/etc.</code></pre>
 
-<p>Whatever you pick, the rules are the same: <strong>structured JSON</strong>, <strong>redact secrets</strong>, <strong>request IDs</strong> for cross&ndash;service tracing, <strong>retention &gt;14 days</strong> for incident investigation, <strong>alerts</strong> on error rates rather than individual log lines. Loggly itself is fine but feels dated; for a new project pick a 2026&ndash;native tool.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q44">
-  <div class="qa__number">Question 44</div>
-  <h3 class="qa__question">How do you set up continuous integration and continuous deployment (CI/CD) for a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p>CI/CD = <strong>Continuous Integration</strong> (run tests on every commit) + <strong>Continuous Deployment</strong> (auto&ndash;deploy passing builds). The 2026 default is <strong>GitHub Actions</strong> for both; <strong>GitLab CI</strong>, <strong>CircleCI</strong>, and <strong>Buildkite</strong> are alternatives.</p>
+<p>Whatever you pick, the rules are the same: <strong>structured JSON</strong>, <strong>redact secrets</strong>, <strong>request IDs</strong> for cross&ndash;service tracing, <strong>retention &gt;14 days</strong> for incident investigation, <strong>alerts</strong> on error rates rather than individual log lines. Loggly itself is fine but feels dated; for a new project pick a 2026&ndash;native tool.</p>'''
+
+
+ANSWERS[44] = r'''<p>CI/CD = <strong>Continuous Integration</strong> (run tests on every commit) + <strong>Continuous Deployment</strong> (auto&ndash;deploy passing builds). The 2026 default is <strong>GitHub Actions</strong> for both; <strong>GitLab CI</strong>, <strong>CircleCI</strong>, and <strong>Buildkite</strong> are alternatives.</p>
 
 <pre><code># .github/workflows/ci.yml
 name: CI
@@ -1693,15 +1374,10 @@ jobs:
 <li><strong>Database</strong> &rarr; <strong>MongoDB Atlas</strong> &mdash; usually unchanged across deploys; migrations run as a CI step.</li>
 </ul>
 
-<p>Modern best practices: <strong>preview deploys</strong> per PR (Vercel does this automatically), <strong>trunk&ndash;based development</strong> with feature flags via <strong>Statsig</strong>/<strong>GrowthBook</strong>/<strong>LaunchDarkly</strong>, <strong>required status checks</strong> on the main branch, <strong>signed builds</strong> via <strong>Sigstore</strong>/<strong>cosign</strong>, and tracking <strong>DORA metrics</strong> (deploy frequency, lead time, MTTR, change failure rate).</p>
-    
-  </div>
-</article>
-<article class="qa" id="q45">
-  <div class="qa__number">Question 45</div>
-  <h3 class="qa__question">What is Docker, and how do you use it to containerize a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p><strong>Docker</strong> packages your app + its dependencies + a slice of OS into an immutable image, then runs that image as a container. The big wins: identical artifact across dev/staging/prod, easy horizontal scale, no &ldquo;works on my machine&rdquo;, and a single deployable unit each platform (Kubernetes, Cloud Run, ECS) consumes.</p>
+<p>Modern best practices: <strong>preview deploys</strong> per PR (Vercel does this automatically), <strong>trunk&ndash;based development</strong> with feature flags via <strong>Statsig</strong>/<strong>GrowthBook</strong>/<strong>LaunchDarkly</strong>, <strong>required status checks</strong> on the main branch, <strong>signed builds</strong> via <strong>Sigstore</strong>/<strong>cosign</strong>, and tracking <strong>DORA metrics</strong> (deploy frequency, lead time, MTTR, change failure rate).</p>'''
+
+
+ANSWERS[45] = r'''<p><strong>Docker</strong> packages your app + its dependencies + a slice of OS into an immutable image, then runs that image as a container. The big wins: identical artifact across dev/staging/prod, easy horizontal scale, no &ldquo;works on my machine&rdquo;, and a single deployable unit each platform (Kubernetes, Cloud Run, ECS) consumes.</p>
 
 <p>For a MERN app you usually have three containers in dev (Mongo, API, Web) and two deployed (API; the React build is static + on a CDN).</p>
 
@@ -1740,15 +1416,10 @@ docker run --rm -p 4000:4000 --env-file .env my-api:latest</code></pre>
 <li><strong>Tooling alignment</strong> &mdash; OpenTelemetry collectors, Prometheus, log shippers all standardize on container metadata.</li>
 </ul>
 
-<p>2026 alternatives: many teams skip Docker for greenfield projects and use <strong>Buildpacks</strong> (Cloud Native Buildpacks, Paketo), <strong>Nixpacks</strong> (Railway), or platform&ndash;native builders (Render, Fly.io detect Node automatically). For most simple MERN APIs you don&rsquo;t need to write a Dockerfile yourself.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q46">
-  <div class="qa__number">Question 46</div>
-  <h3 class="qa__question">How do you write a Dockerfile for a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p>A good Dockerfile for a Node API is a <strong>multi&ndash;stage build</strong>: separate stages for installing deps, building TS, and the slim runtime. This keeps the production image small (typically &lt;200MB) and excludes dev dependencies + source maps + build tools.</p>
+<p>2026 alternatives: many teams skip Docker for greenfield projects and use <strong>Buildpacks</strong> (Cloud Native Buildpacks, Paketo), <strong>Nixpacks</strong> (Railway), or platform&ndash;native builders (Render, Fly.io detect Node automatically). For most simple MERN APIs you don&rsquo;t need to write a Dockerfile yourself.</p>'''
+
+
+ANSWERS[46] = r'''<p>A good Dockerfile for a Node API is a <strong>multi&ndash;stage build</strong>: separate stages for installing deps, building TS, and the slim runtime. This keeps the production image small (typically &lt;200MB) and excludes dev dependencies + source maps + build tools.</p>
 
 <pre><code># syntax=docker/dockerfile:1.7
 FROM node:22-alpine AS base
@@ -1790,15 +1461,10 @@ dist
 coverage
 .DS_Store</code></pre>
 
-<p>Best practices: <strong>specific base image tag</strong> (<code>node:22-alpine</code>, never <code>node:latest</code>); <strong>distroless or alpine</strong> for small attack surface (<strong>chainguard images</strong> for serious security); <strong>non&ndash;root user</strong> (<code>USER node</code>); <strong>BuildKit cache mounts</strong> for fast rebuilds; <strong>layer order</strong> &mdash; copy lockfile and run install <em>before</em> copying app code so dep changes don&rsquo;t bust the cache; <strong>multi&ndash;arch builds</strong> via <code>docker buildx build --platform linux/amd64,linux/arm64</code> for Apple Silicon + Linux servers.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q47">
-  <div class="qa__number">Question 47</div>
-  <h3 class="qa__question">How do you set up Docker Compose for a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p><strong>Docker Compose</strong> orchestrates multi&ndash;container stacks for local development &mdash; one YAML file describes your whole MERN environment (Mongo + API + Web + Redis), and <code>docker compose up</code> brings it all up with a shared network.</p>
+<p>Best practices: <strong>specific base image tag</strong> (<code>node:22-alpine</code>, never <code>node:latest</code>); <strong>distroless or alpine</strong> for small attack surface (<strong>chainguard images</strong> for serious security); <strong>non&ndash;root user</strong> (<code>USER node</code>); <strong>BuildKit cache mounts</strong> for fast rebuilds; <strong>layer order</strong> &mdash; copy lockfile and run install <em>before</em> copying app code so dep changes don&rsquo;t bust the cache; <strong>multi&ndash;arch builds</strong> via <code>docker buildx build --platform linux/amd64,linux/arm64</code> for Apple Silicon + Linux servers.</p>'''
+
+
+ANSWERS[47] = r'''<p><strong>Docker Compose</strong> orchestrates multi&ndash;container stacks for local development &mdash; one YAML file describes your whole MERN environment (Mongo + API + Web + Redis), and <code>docker compose up</code> brings it all up with a shared network.</p>
 
 <pre><code># docker-compose.yml
 services:
@@ -1847,15 +1513,10 @@ docker compose down -v            # also wipe volumes (Mongo data!)</code></pre>
 
 <p>Why it&rsquo;s great for MERN dev: a new teammate clones the repo, runs <code>docker compose up</code>, and has the entire stack running in minutes &mdash; no need to install Mongo or Redis natively. The shared Docker network lets containers talk via service name (<code>mongo:27017</code>, <code>redis:6379</code>).</p>
 
-<p>For production, Compose can run on a single VM via <strong>Docker Swarm</strong> or <strong>Compose v2</strong> on a Linux host, but most teams move to <strong>Kubernetes</strong>, <strong>Cloud Run</strong>, <strong>ECS</strong>, or <strong>Fly.io</strong> at scale &mdash; Compose is primarily a local&ndash;dev tool.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q48">
-  <div class="qa__number">Question 48</div>
-  <h3 class="qa__question">What is Kubernetes, and how do you use it to orchestrate a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p><strong>Kubernetes</strong> (K8s) is the open&ndash;source orchestrator for containerized applications &mdash; it runs containers across a cluster of machines, schedules them, restarts failed ones, scales horizontally, rolls out new versions safely, and exposes them to the network. Originally from Google, now CNCF&ndash;governed and the de&ndash;facto standard for large&ndash;scale container deployment.</p>
+<p>For production, Compose can run on a single VM via <strong>Docker Swarm</strong> or <strong>Compose v2</strong> on a Linux host, but most teams move to <strong>Kubernetes</strong>, <strong>Cloud Run</strong>, <strong>ECS</strong>, or <strong>Fly.io</strong> at scale &mdash; Compose is primarily a local&ndash;dev tool.</p>'''
+
+
+ANSWERS[48] = r'''<p><strong>Kubernetes</strong> (K8s) is the open&ndash;source orchestrator for containerized applications &mdash; it runs containers across a cluster of machines, schedules them, restarts failed ones, scales horizontally, rolls out new versions safely, and exposes them to the network. Originally from Google, now CNCF&ndash;governed and the de&ndash;facto standard for large&ndash;scale container deployment.</p>
 
 <p>For MERN apps, <strong>most teams should not start with Kubernetes</strong> &mdash; it&rsquo;s a lot of operational complexity. Use <strong>Cloud Run</strong>, <strong>Fly.io</strong>, <strong>Render</strong>, <strong>Railway</strong>, <strong>App Runner</strong>, or <strong>Heroku</strong> first; reach for K8s when you genuinely need its features (multi&ndash;region multi&ndash;cloud, complex traffic routing, GPU pools, multi&ndash;tenant platform).</p>
 
@@ -1873,15 +1534,10 @@ docker compose down -v            # also wipe volumes (Mongo data!)</code></pre>
 
 <p>Managed control planes: <strong>EKS</strong> (AWS), <strong>GKE</strong> (Google), <strong>AKS</strong> (Azure), <strong>DigitalOcean Kubernetes</strong>, <strong>Linode LKE</strong>, <strong>Civo</strong>. They handle the masters; you manage the worker nodes (or use Fargate / GKE Autopilot for serverless nodes too).</p>
 
-<p>Deploy via <strong>kubectl apply</strong>, <strong>Helm</strong> charts, <strong>Kustomize</strong>, or GitOps with <strong>ArgoCD</strong>/<strong>Flux</strong>. Pair with <strong>Prometheus</strong> + <strong>Grafana</strong> for metrics, <strong>Loki</strong>/<strong>Datadog</strong> for logs, <strong>Istio</strong>/<strong>Linkerd</strong> for service mesh.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q49">
-  <div class="qa__number">Question 49</div>
-  <h3 class="qa__question">How do you write a Kubernetes deployment file for a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p>A Kubernetes <strong>Deployment</strong> manifest declares a desired state (image, replicas, env, resources). The control plane converges actual state to match.</p>
+<p>Deploy via <strong>kubectl apply</strong>, <strong>Helm</strong> charts, <strong>Kustomize</strong>, or GitOps with <strong>ArgoCD</strong>/<strong>Flux</strong>. Pair with <strong>Prometheus</strong> + <strong>Grafana</strong> for metrics, <strong>Loki</strong>/<strong>Datadog</strong> for logs, <strong>Istio</strong>/<strong>Linkerd</strong> for service mesh.</p>'''
+
+
+ANSWERS[49] = r'''<p>A Kubernetes <strong>Deployment</strong> manifest declares a desired state (image, replicas, env, resources). The control plane converges actual state to match.</p>
 
 <pre><code># k8s/api-deployment.yaml
 apiVersion: apps/v1
@@ -1945,15 +1601,10 @@ kubectl get pods,svc,ingress
 kubectl logs -f deploy/api
 kubectl rollout status deploy/api</code></pre>
 
-<p>Always set <strong>resource requests/limits</strong>, <strong>liveness + readiness probes</strong>, and pair with a <strong>HorizontalPodAutoscaler</strong> for auto&ndash;scaling. Manage the YAML with <strong>Helm</strong>, <strong>Kustomize</strong>, or <strong>ArgoCD</strong> for real projects.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q50">
-  <div class="qa__number">Question 50</div>
-  <h3 class="qa__question">How do you use Helm to manage Kubernetes deployments for a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p><strong>Helm</strong> is the package manager for Kubernetes &mdash; the equivalent of <code>npm</code> but for K8s manifests. A <strong>chart</strong> is a templated bundle of YAML; you install it with values overrides for your environment.</p>
+<p>Always set <strong>resource requests/limits</strong>, <strong>liveness + readiness probes</strong>, and pair with a <strong>HorizontalPodAutoscaler</strong> for auto&ndash;scaling. Manage the YAML with <strong>Helm</strong>, <strong>Kustomize</strong>, or <strong>ArgoCD</strong> for real projects.</p>'''
+
+
+ANSWERS[50] = r'''<p><strong>Helm</strong> is the package manager for Kubernetes &mdash; the equivalent of <code>npm</code> but for K8s manifests. A <strong>chart</strong> is a templated bundle of YAML; you install it with values overrides for your environment.</p>
 
 <pre><code># Install the Helm CLI
 brew install helm                # macOS
@@ -1997,15 +1648,9 @@ helm upgrade api ./my-api --set image.tag=1.4.2 -f values.production.yaml</code>
 <li><strong>Distribution</strong> &mdash; ship your app as a chart for users to install on their own clusters.</li>
 </ul>
 
-<p>2026 alternatives: <strong>Kustomize</strong> (no templating &mdash; pure YAML overlays, simpler) is built into kubectl; <strong>cdk8s</strong> generates K8s manifests from TypeScript/Python; <strong>Pulumi</strong> manages K8s + clouds with real code. Most teams use Helm for community charts and Kustomize for in&ndash;house apps.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q51">
-  <div class="qa__number">Question 51</div>
-  <h3 class="qa__question">What is a CDN, and how do you use it to improve the performance of a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p>A <strong>CDN (Content Delivery Network)</strong> is a globally distributed network of edge servers that cache your static assets &mdash; HTML, JS bundles, CSS, images, fonts, video &mdash; close to users so requests don&rsquo;t round&ndash;trip to your origin. The result: faster loads, lower bandwidth bills, and origin protection against traffic spikes.</p>
+<p>2026 alternatives: <strong>Kustomize</strong> (no templating &mdash; pure YAML overlays, simpler) is built into kubectl; <strong>cdk8s</strong> generates K8s manifests from TypeScript/Python; <strong>Pulumi</strong> manages K8s + clouds with real code. Most teams use Helm for community charts and Kustomize for in&ndash;house apps.</p>'''
+
+ANSWERS[51] = r'''<p>A <strong>CDN (Content Delivery Network)</strong> is a globally distributed network of edge servers that cache your static assets &mdash; HTML, JS bundles, CSS, images, fonts, video &mdash; close to users so requests don&rsquo;t round&ndash;trip to your origin. The result: faster loads, lower bandwidth bills, and origin protection against traffic spikes.</p>
 
 <p>For a MERN app the typical split:</p>
 
@@ -2024,15 +1669,10 @@ res.setHeader(&quot;Cache-Control&quot;, &quot;public, max-age=31536000, immutab
 res.setHeader(&quot;Cache-Control&quot;, &quot;public, max-age=0, s-maxage=60, stale-while-revalidate=300&quot;);
 // HTML &mdash; revalidate on every request, but CDN serves stale for 5 min while refreshing</code></pre>
 
-<p>Key features to use: <strong>cache tags</strong> for surgical invalidation, <strong>image optimization</strong> at the edge (Cloudflare Images, Vercel/Next Image), <strong>edge functions</strong> (Cloudflare Workers, Vercel Edge) for personalization without losing cacheability, <strong>HTTP/3 + Brotli/Zstd compression</strong>, <strong>WAF + DDoS protection</strong>. Done well, a CDN turns a global app from 800ms TTFB into 50ms TTFB &mdash; the single biggest perf win you can ship.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q52">
-  <div class="qa__number">Question 52</div>
-  <h3 class="qa__question">How do you deploy static assets for a React application to a CDN?</h3>
-  <div class="qa__answer">
-    <p>To deploy React static assets to a CDN, build the production bundle then upload the output directory to a CDN&ndash;backed origin. Modern hosts (<strong>Vercel, Netlify, Cloudflare Pages</strong>) automate this end&ndash;to&ndash;end &mdash; you push to git, they build, they fan out to their global edge.</p>
+<p>Key features to use: <strong>cache tags</strong> for surgical invalidation, <strong>image optimization</strong> at the edge (Cloudflare Images, Vercel/Next Image), <strong>edge functions</strong> (Cloudflare Workers, Vercel Edge) for personalization without losing cacheability, <strong>HTTP/3 + Brotli/Zstd compression</strong>, <strong>WAF + DDoS protection</strong>. Done well, a CDN turns a global app from 800ms TTFB into 50ms TTFB &mdash; the single biggest perf win you can ship.</p>'''
+
+
+ANSWERS[52] = r'''<p>To deploy React static assets to a CDN, build the production bundle then upload the output directory to a CDN&ndash;backed origin. Modern hosts (<strong>Vercel, Netlify, Cloudflare Pages</strong>) automate this end&ndash;to&ndash;end &mdash; you push to git, they build, they fan out to their global edge.</p>
 
 <pre><code># Vite / Create React App / Next.js static export
 npm run build       # outputs to dist/ or build/ or out/
@@ -2061,15 +1701,10 @@ aws cloudfront create-invalidation --distribution-id E123 --paths &quot;/*&quot;
 
 <p>Things to verify after first deploy: HTTPS via Let&rsquo;s Encrypt or the host&rsquo;s cert, automatic Brotli/Zstd compression, HTTP/3, image optimization (Vercel Image, Cloudflare Images, Netlify Image CDN), preview deploys per pull request, custom domain DNS via CNAME or Cloudflare proxy.</p>
 
-<p>For Next.js specifically, <strong>Vercel</strong> handles SSR/RSC/ISR + static at the edge transparently; <strong>Cloudflare Pages + @cloudflare/next-on-pages</strong> or <strong>OpenNext</strong> achieve similar on Cloudflare; <strong>Netlify</strong> ships an official Next.js runtime. Pick whichever your team already uses for git &mdash; the friction matters more than the marginal feature differences.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q53">
-  <div class="qa__number">Question 53</div>
-  <h3 class="qa__question">How do you set up a Redis cache for a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p><strong>Redis</strong> is an in&ndash;memory key/value store you put in front of your database for caching, sessions, rate&ndash;limit counters, and pub/sub. Setting it up for a MERN app in 2026:</p>
+<p>For Next.js specifically, <strong>Vercel</strong> handles SSR/RSC/ISR + static at the edge transparently; <strong>Cloudflare Pages + @cloudflare/next-on-pages</strong> or <strong>OpenNext</strong> achieve similar on Cloudflare; <strong>Netlify</strong> ships an official Next.js runtime. Pick whichever your team already uses for git &mdash; the friction matters more than the marginal feature differences.</p>'''
+
+
+ANSWERS[53] = r'''<p><strong>Redis</strong> is an in&ndash;memory key/value store you put in front of your database for caching, sessions, rate&ndash;limit counters, and pub/sub. Setting it up for a MERN app in 2026:</p>
 
 <pre><code># Local development &mdash; Docker
 docker run -d --name redis -p 6379:6379 redis:7-alpine
@@ -2108,15 +1743,10 @@ async function updateUser(id: string, patch: any) {
 
 <p>Use Redis for: query result caching, sessions, rate&ndash;limit counters (with Lua scripts or <strong>Upstash Ratelimit</strong>), real&ndash;time presence, BullMQ job queues, Socket.io adapter (multi&ndash;pod fanout), pub/sub for cache invalidation across nodes. Avoid putting hot, sharded, or sensitive&ndash;at&ndash;rest data in Redis without <code>requirepass</code> + TLS.</p>
 
-<p>For 2026 serverless apps <strong>Upstash Redis</strong> is the default &mdash; HTTP&ndash;based REST API works from edge functions (Cloudflare Workers, Vercel Edge) where TCP connections aren&rsquo;t allowed.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q54">
-  <div class="qa__number">Question 54</div>
-  <h3 class="qa__question">What is the purpose of caching, and how does it improve application performance?</h3>
-  <div class="qa__answer">
-    <p><strong>Caching</strong> stores the result of an expensive computation or fetch so subsequent requests return instantly. The performance win comes from skipping the slow path: a Mongo query that takes 80ms drops to 1ms when served from Redis; an API response cached at the CDN drops from 200ms to 30ms; a React component memoized doesn&rsquo;t re&ndash;render on every parent change.</p>
+<p>For 2026 serverless apps <strong>Upstash Redis</strong> is the default &mdash; HTTP&ndash;based REST API works from edge functions (Cloudflare Workers, Vercel Edge) where TCP connections aren&rsquo;t allowed.</p>'''
+
+
+ANSWERS[54] = r'''<p><strong>Caching</strong> stores the result of an expensive computation or fetch so subsequent requests return instantly. The performance win comes from skipping the slow path: a Mongo query that takes 80ms drops to 1ms when served from Redis; an API response cached at the CDN drops from 200ms to 30ms; a React component memoized doesn&rsquo;t re&ndash;render on every parent change.</p>
 
 <p>Caches exist at <strong>multiple layers</strong> in a typical MERN stack &mdash; each one cuts work for the layer below it:</p>
 
@@ -2138,15 +1768,10 @@ async function updateUser(id: string, patch: any) {
 <li><strong>Tag&ndash;based</strong> &mdash; group keys under tags (Cloudflare Cache Tags, Next.js <code>revalidateTag</code>) and purge by tag.</li>
 </ul>
 
-<p>Cache the slow stuff first: aggregate dashboards, list endpoints with sorting, fan&ndash;out queries. Don&rsquo;t cache user&ndash;specific writes, real&ndash;time prices, anything legally sensitive without thought. Always measure: a cache that returns stale or wrong data is worse than no cache.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q55">
-  <div class="qa__number">Question 55</div>
-  <h3 class="qa__question">How do you implement server-side rendering (SSR) for a React application?</h3>
-  <div class="qa__answer">
-    <p><strong>Server&ndash;side rendering (SSR)</strong> generates HTML on the server for each request, then hydrates with JavaScript on the client. The trade against client&ndash;side rendering: faster first paint, real SEO content for crawlers (including AI agents like OAI&ndash;SearchBot, PerplexityBot, ClaudeBot), better social link previews, and a usable page even before JS loads.</p>
+<p>Cache the slow stuff first: aggregate dashboards, list endpoints with sorting, fan&ndash;out queries. Don&rsquo;t cache user&ndash;specific writes, real&ndash;time prices, anything legally sensitive without thought. Always measure: a cache that returns stale or wrong data is worse than no cache.</p>'''
+
+
+ANSWERS[55] = r'''<p><strong>Server&ndash;side rendering (SSR)</strong> generates HTML on the server for each request, then hydrates with JavaScript on the client. The trade against client&ndash;side rendering: faster first paint, real SEO content for crawlers (including AI agents like OAI&ndash;SearchBot, PerplexityBot, ClaudeBot), better social link previews, and a usable page even before JS loads.</p>
 
 <p>The dominant 2026 choice for SSR React is <strong>Next.js 15 with the App Router and React Server Components</strong>:</p>
 
@@ -2168,15 +1793,10 @@ export default function Loading() { return &lt;Skeleton /&gt;; }</code></pre>
 
 <p>Other SSR options: <strong>Remix</strong> (now React Router 7) with nested routes + loaders, <strong>Astro</strong> for content&ndash;heavy sites with island hydration, <strong>TanStack Start</strong> (newer, framework&ndash;agnostic), <strong>Nuxt</strong> for Vue. For pure React without a framework, <code>renderToPipeableStream</code> wires up streaming SSR but you&rsquo;ll rebuild routing + data fetching yourself &mdash; rarely worth it.</p>
 
-<p>Watch out for: <strong>hydration mismatches</strong> (server HTML must match what the client first renders), <strong>environment leaks</strong> (don&rsquo;t reference <code>window</code> in server code), <strong>cache headers</strong> (cache the HTML at the CDN with stale&ndash;while&ndash;revalidate), and <strong>data fetching</strong> (use <code>fetch</code> on the server, not a client library that assumes a browser). For mostly&ndash;static content, prefer <strong>SSG/ISR</strong> (build once, revalidate periodically) over per&ndash;request SSR &mdash; it&rsquo;s strictly cheaper and faster.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q56">
-  <div class="qa__number">Question 56</div>
-  <h3 class="qa__question">How do you use Next.js for server-side rendering in a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p><strong>Next.js 15</strong> is the de&ndash;facto SSR framework for React. The App Router (default since v13) supports a mix of static, dynamic, and streaming routes side by side, with <strong>React Server Components</strong> as the foundation.</p>
+<p>Watch out for: <strong>hydration mismatches</strong> (server HTML must match what the client first renders), <strong>environment leaks</strong> (don&rsquo;t reference <code>window</code> in server code), <strong>cache headers</strong> (cache the HTML at the CDN with stale&ndash;while&ndash;revalidate), and <strong>data fetching</strong> (use <code>fetch</code> on the server, not a client library that assumes a browser). For mostly&ndash;static content, prefer <strong>SSG/ISR</strong> (build once, revalidate periodically) over per&ndash;request SSR &mdash; it&rsquo;s strictly cheaper and faster.</p>'''
+
+
+ANSWERS[56] = r'''<p><strong>Next.js 15</strong> is the de&ndash;facto SSR framework for React. The App Router (default since v13) supports a mix of static, dynamic, and streaming routes side by side, with <strong>React Server Components</strong> as the foundation.</p>
 
 <pre><code># Create + run
 npx create-next-app@latest my-app --ts --tailwind --app --eslint
@@ -2216,15 +1836,10 @@ export default async function P({ params }) {
 <li><strong>Dynamic SSR</strong> &mdash; whenever you read cookies, headers, or call a non&ndash;cached <code>fetch</code>, the route renders per request.</li>
 </ul>
 
-<p>Deploy to <strong>Vercel</strong> (zero config, native), <strong>Cloudflare Pages</strong> via <code>@cloudflare/next-on-pages</code> or <strong>OpenNext</strong>, <strong>Netlify</strong>, <strong>AWS Amplify</strong>, or self&ndash;host as a Node server (<code>next start</code>) behind nginx/Caddy. AI&ndash;crawler SEO and the &ldquo;works without JS&rdquo; guarantee come for free with the App Router &mdash; that&rsquo;s the main reason most new MERN projects start with Next.js in 2026.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q57">
-  <div class="qa__number">Question 57</div>
-  <h3 class="qa__question">What is GraphQL, and how do you use it in a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p><strong>GraphQL</strong> is a query language + runtime for APIs where the client describes exactly which fields it wants and the server returns just that. Instead of multiple REST endpoints (<code>/users/:id</code>, <code>/users/:id/posts</code>, <code>/posts/:id/comments</code>), you expose a single typed schema and the client composes requests:</p>
+<p>Deploy to <strong>Vercel</strong> (zero config, native), <strong>Cloudflare Pages</strong> via <code>@cloudflare/next-on-pages</code> or <strong>OpenNext</strong>, <strong>Netlify</strong>, <strong>AWS Amplify</strong>, or self&ndash;host as a Node server (<code>next start</code>) behind nginx/Caddy. AI&ndash;crawler SEO and the &ldquo;works without JS&rdquo; guarantee come for free with the App Router &mdash; that&rsquo;s the main reason most new MERN projects start with Next.js in 2026.</p>'''
+
+
+ANSWERS[57] = r'''<p><strong>GraphQL</strong> is a query language + runtime for APIs where the client describes exactly which fields it wants and the server returns just that. Instead of multiple REST endpoints (<code>/users/:id</code>, <code>/users/:id/posts</code>, <code>/posts/:id/comments</code>), you expose a single typed schema and the client composes requests:</p>
 
 <pre><code># Schema (server defines what&apos;s available)
 type User { id: ID!  name: String!  posts: [Post!]! }
@@ -2251,15 +1866,10 @@ query {
 
 <p>Trade&ndash;offs: caching is harder than REST (no URL identity), N+1 query problems are real (mitigate with <strong>DataLoader</strong>), arbitrary queries can be expensive (use <strong>persisted queries</strong> + complexity limits), and small teams often find REST/tRPC simpler.</p>
 
-<p>2026 servers: <strong>Apollo Server</strong>, <strong>GraphQL Yoga</strong> (lightweight), <strong>Pothos</strong> (code&ndash;first TS schema). Clients: <strong>Apollo Client</strong>, <strong>urql</strong>, <strong>GraphQL Request</strong>, <strong>Relay</strong>. For purely TS&ndash;to&ndash;TS APIs <strong>tRPC</strong> often beats GraphQL with less ceremony.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q58">
-  <div class="qa__number">Question 58</div>
-  <h3 class="qa__question">How do you set up Apollo Server with Express.js for a GraphQL API?</h3>
-  <div class="qa__answer">
-    <p><strong>Apollo Server</strong> wraps your resolvers and schema, exposes them at an HTTP endpoint, and integrates cleanly with Express. Setup in a MERN app:</p>
+<p>2026 servers: <strong>Apollo Server</strong>, <strong>GraphQL Yoga</strong> (lightweight), <strong>Pothos</strong> (code&ndash;first TS schema). Clients: <strong>Apollo Client</strong>, <strong>urql</strong>, <strong>GraphQL Request</strong>, <strong>Relay</strong>. For purely TS&ndash;to&ndash;TS APIs <strong>tRPC</strong> often beats GraphQL with less ceremony.</p>'''
+
+
+ANSWERS[58] = r'''<p><strong>Apollo Server</strong> wraps your resolvers and schema, exposes them at an HTTP endpoint, and integrates cleanly with Express. Setup in a MERN app:</p>
 
 <pre><code>npm i @apollo/server @apollo/server/express4 graphql graphql-tag
         @as-integrations/express5 cors body-parser</code></pre>
@@ -2309,15 +1919,10 @@ await new Promise(r =&gt; httpServer.listen({ port: 4000 }, r));</code></pre>
 
 <p>The <strong>context</strong> function runs per request &mdash; that&rsquo;s where you authenticate, attach the current user, and instantiate per&ndash;request DataLoaders to avoid N+1 queries. Apollo Sandbox at <code>http://localhost:4000/graphql</code> gives you a built&ndash;in IDE during development.</p>
 
-<p>For production wire <strong>Apollo Studio</strong> or self&ndash;host with <strong>GraphQL Hive</strong> for schema registry, query analytics, and breaking&ndash;change detection. Add <strong>persisted queries</strong> + complexity/depth limits to prevent abusive clients. Standalone Yoga is a lighter alternative when you don&rsquo;t need Apollo&rsquo;s ecosystem.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q59">
-  <div class="qa__number">Question 59</div>
-  <h3 class="qa__question">How do you set up Apollo Client in a React application?</h3>
-  <div class="qa__answer">
-    <p><strong>Apollo Client</strong> manages GraphQL queries in React: cache, request dedup, optimistic updates, subscriptions, and SSR. Setup in a Vite or Next.js app:</p>
+<p>For production wire <strong>Apollo Studio</strong> or self&ndash;host with <strong>GraphQL Hive</strong> for schema registry, query analytics, and breaking&ndash;change detection. Add <strong>persisted queries</strong> + complexity/depth limits to prevent abusive clients. Standalone Yoga is a lighter alternative when you don&rsquo;t need Apollo&rsquo;s ecosystem.</p>'''
+
+
+ANSWERS[59] = r'''<p><strong>Apollo Client</strong> manages GraphQL queries in React: cache, request dedup, optimistic updates, subscriptions, and SSR. Setup in a Vite or Next.js app:</p>
 
 <pre><code>npm i @apollo/client graphql</code></pre>
 
@@ -2365,15 +1970,10 @@ function Profile({ id }: { id: string }) {
 
 <p>Powerful features to use: <strong>optimistic responses</strong> for instant UI on mutations, <strong>cache redirects</strong> to avoid extra fetches, <strong>fragments</strong> for component&ndash;level field requirements, <strong>subscriptions</strong> over WebSocket for live data. For type safety run <strong>GraphQL Code Generator</strong> to produce <code>useQuery</code>/<code>useMutation</code> hooks typed from your schema.</p>
 
-<p>Lighter 2026 alternatives: <strong>urql</strong> (smaller, GraphCache), <strong>graphql&ndash;request</strong> (just fetch + types) paired with TanStack Query, or <strong>Relay</strong> (Meta&rsquo;s heavy&ndash;duty client with compile&ndash;time guarantees).</p>
-    
-  </div>
-</article>
-<article class="qa" id="q60">
-  <div class="qa__number">Question 60</div>
-  <h3 class="qa__question">What is Redux, and how do you use it for state management in a React application?</h3>
-  <div class="qa__answer">
-    <p><strong>Redux</strong> is a predictable state container. State lives in a single store, components read it via selectors, and updates happen only through dispatched <strong>actions</strong> handled by pure <strong>reducer</strong> functions. The shape is intentional: every state change is traceable, debuggable in time&ndash;travel devtools, and serializable for tests.</p>
+<p>Lighter 2026 alternatives: <strong>urql</strong> (smaller, GraphCache), <strong>graphql&ndash;request</strong> (just fetch + types) paired with TanStack Query, or <strong>Relay</strong> (Meta&rsquo;s heavy&ndash;duty client with compile&ndash;time guarantees).</p>'''
+
+
+ANSWERS[60] = r'''<p><strong>Redux</strong> is a predictable state container. State lives in a single store, components read it via selectors, and updates happen only through dispatched <strong>actions</strong> handled by pure <strong>reducer</strong> functions. The shape is intentional: every state change is traceable, debuggable in time&ndash;travel devtools, and serializable for tests.</p>
 
 <p>The modern (2026) way is <strong>Redux Toolkit (RTK)</strong> &mdash; it removes boilerplate and is the official recommendation:</p>
 
@@ -2404,15 +2004,10 @@ export default cartSlice.reducer;</code></pre>
 
 <p>RTK gives you: <strong>createSlice</strong> for reducer + actions, <strong>configureStore</strong> with sensible defaults, <strong>RTK Query</strong> for server state (replaces hand&ndash;written thunks for most apps), and <strong>Immer</strong> baked in so you can &ldquo;mutate&rdquo; state in reducers safely.</p>
 
-<p>When to actually use Redux in 2026: complex client&ndash;state interactions, undo/redo, cross&ndash;component coordination that doesn&rsquo;t map to URL or server state. For most apps the better default split is <strong>TanStack Query</strong> for server state + <strong>Zustand</strong>/<strong>Jotai</strong> for client state &mdash; less ceremony, smaller bundles. Redux still wins on tooling, time&ndash;travel debugging, and large&ndash;team predictability, especially with RTK Query for caching APIs.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q61">
-  <div class="qa__number">Question 61</div>
-  <h3 class="qa__question">How do you set up and use Redux in a React application?</h3>
-  <div class="qa__answer">
-    <p>Setup with <strong>Redux Toolkit</strong> + <strong>React-Redux</strong> takes about five minutes:</p>
+<p>When to actually use Redux in 2026: complex client&ndash;state interactions, undo/redo, cross&ndash;component coordination that doesn&rsquo;t map to URL or server state. For most apps the better default split is <strong>TanStack Query</strong> for server state + <strong>Zustand</strong>/<strong>Jotai</strong> for client state &mdash; less ceremony, smaller bundles. Redux still wins on tooling, time&ndash;travel debugging, and large&ndash;team predictability, especially with RTK Query for caching APIs.</p>'''
+
+
+ANSWERS[61] = r'''<p>Setup with <strong>Redux Toolkit</strong> + <strong>React-Redux</strong> takes about five minutes:</p>
 
 <pre><code>npm i @reduxjs/toolkit react-redux</code></pre>
 
@@ -2452,15 +2047,10 @@ function CartButton({ id }: { id: string }) {
   );
 }</code></pre>
 
-<p>Patterns to follow: keep <strong>selectors small and memoized</strong> (use <code>createSelector</code> from RTK for derived data), <strong>colocate slices with features</strong> (<code>features/cart/cartSlice.ts</code>), use <strong>RTK Query</strong> for server data instead of hand&ndash;writing fetch thunks, and avoid storing derived/computable state in Redux. Add <strong>Redux DevTools Extension</strong> in the browser for time&ndash;travel debugging &mdash; it works automatically with RTK&rsquo;s configureStore.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q62">
-  <div class="qa__number">Question 62</div>
-  <h3 class="qa__question">What are middleware in Redux, and how do you use them?</h3>
-  <div class="qa__answer">
-    <p><strong>Middleware</strong> in Redux sits between dispatching an action and the reducer running. It can log, transform, delay, or short&ndash;circuit actions &mdash; the same chain&ndash;of&ndash;responsibility pattern Express uses for HTTP.</p>
+<p>Patterns to follow: keep <strong>selectors small and memoized</strong> (use <code>createSelector</code> from RTK for derived data), <strong>colocate slices with features</strong> (<code>features/cart/cartSlice.ts</code>), use <strong>RTK Query</strong> for server data instead of hand&ndash;writing fetch thunks, and avoid storing derived/computable state in Redux. Add <strong>Redux DevTools Extension</strong> in the browser for time&ndash;travel debugging &mdash; it works automatically with RTK&rsquo;s configureStore.</p>'''
+
+
+ANSWERS[62] = r'''<p><strong>Middleware</strong> in Redux sits between dispatching an action and the reducer running. It can log, transform, delay, or short&ndash;circuit actions &mdash; the same chain&ndash;of&ndash;responsibility pattern Express uses for HTTP.</p>
 
 <pre><code>// Custom middleware: log every action
 const logger = store =&gt; next =&gt; action =&gt; {
@@ -2499,15 +2089,10 @@ export const store = configureStore({
 <li><strong>immutable&ndash;state checker</strong> &mdash; warns if you mutate state outside Immer.</li>
 </ul>
 
-<p>Common third&ndash;party middlewares: <strong>redux&ndash;saga</strong> (generator&ndash;based async, complex but powerful), <strong>redux&ndash;observable</strong> (RxJS), <strong>RTK Query</strong> (built&ndash;in API caching layer that&rsquo;s really middleware + reducer + hooks). For most apps in 2026, <strong>thunk + RTK Query</strong> covers async needs without dragging in saga or observable. Reach for sagas only when you have complex cancellation/race&ndash;condition workflows that benefit from generator semantics.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q63">
-  <div class="qa__number">Question 63</div>
-  <h3 class="qa__question">How do you set up Redux Thunk for asynchronous actions in a React application?</h3>
-  <div class="qa__answer">
-    <p><strong>Redux Thunk</strong> lets action creators return a <em>function</em> instead of a plain action. The function gets <code>dispatch</code> + <code>getState</code> as args, so you can do async work (fetch, delays, conditional dispatch) before dispatching the actual action. RTK includes thunk by default; you don&rsquo;t need to install it.</p>
+<p>Common third&ndash;party middlewares: <strong>redux&ndash;saga</strong> (generator&ndash;based async, complex but powerful), <strong>redux&ndash;observable</strong> (RxJS), <strong>RTK Query</strong> (built&ndash;in API caching layer that&rsquo;s really middleware + reducer + hooks). For most apps in 2026, <strong>thunk + RTK Query</strong> covers async needs without dragging in saga or observable. Reach for sagas only when you have complex cancellation/race&ndash;condition workflows that benefit from generator semantics.</p>'''
+
+
+ANSWERS[63] = r'''<p><strong>Redux Thunk</strong> lets action creators return a <em>function</em> instead of a plain action. The function gets <code>dispatch</code> + <code>getState</code> as args, so you can do async work (fetch, delays, conditional dispatch) before dispatching the actual action. RTK includes thunk by default; you don&rsquo;t need to install it.</p>
 
 <pre><code>// Plain thunk
 export const fetchUser = (id: string) =&gt; async (dispatch, getState) =&gt; {
@@ -2550,15 +2135,10 @@ const userSlice = createSlice({
 const dispatch = useAppDispatch();
 useEffect(() =&gt; { dispatch(fetchUser(id)); }, [id]);</code></pre>
 
-<p>For most 2026 apps you should reach for <strong>RTK Query</strong> instead of writing thunks for API calls &mdash; it gives you caching, dedup, refetch&ndash;on&ndash;focus, and auto&ndash;generated React hooks for free. Thunks remain useful for non&ndash;HTTP async work: timers, IndexedDB, multi&ndash;step orchestration that doesn&rsquo;t map onto a single endpoint.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q64">
-  <div class="qa__number">Question 64</div>
-  <h3 class="qa__question">How do you use React Router for client-side routing in a React application?</h3>
-  <div class="qa__answer">
-    <p><strong>React Router</strong> is the standard client&ndash;side routing library. The 2026 version is <strong>React Router 7</strong> (the merged successor of Remix), and you can use it as a library (SPA) or as a framework (with SSR/loaders). Basic SPA setup:</p>
+<p>For most 2026 apps you should reach for <strong>RTK Query</strong> instead of writing thunks for API calls &mdash; it gives you caching, dedup, refetch&ndash;on&ndash;focus, and auto&ndash;generated React hooks for free. Thunks remain useful for non&ndash;HTTP async work: timers, IndexedDB, multi&ndash;step orchestration that doesn&rsquo;t map onto a single endpoint.</p>'''
+
+
+ANSWERS[64] = r'''<p><strong>React Router</strong> is the standard client&ndash;side routing library. The 2026 version is <strong>React Router 7</strong> (the merged successor of Remix), and you can use it as a library (SPA) or as a framework (with SSR/loaders). Basic SPA setup:</p>
 
 <pre><code>npm i react-router-dom</code></pre>
 
@@ -2603,15 +2183,10 @@ export default function App() {
 <li><strong>Lazy routes</strong> &mdash; <code>lazy: () =&gt; import(&quot;./pages/Heavy&quot;)</code> code&ndash;splits per route.</li>
 </ul>
 
-<p>For SSR/SEO needs, switch to React Router 7&rsquo;s <strong>framework mode</strong> with loaders/actions, or use <strong>Next.js App Router</strong>, <strong>TanStack Router</strong> (best&ndash;in&ndash;class type safety), or <strong>Astro</strong> for content&ndash;heavy sites. Pure SPAs with React Router still work great for internal dashboards and admin panels where SEO doesn&rsquo;t matter.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q65">
-  <div class="qa__number">Question 65</div>
-  <h3 class="qa__question">How do you protect routes in a React application using React Router?</h3>
-  <div class="qa__answer">
-    <p>To <strong>protect routes</strong> in React Router, wrap them with a guard component that reads auth state and either renders the route or redirects to <code>/login</code>:</p>
+<p>For SSR/SEO needs, switch to React Router 7&rsquo;s <strong>framework mode</strong> with loaders/actions, or use <strong>Next.js App Router</strong>, <strong>TanStack Router</strong> (best&ndash;in&ndash;class type safety), or <strong>Astro</strong> for content&ndash;heavy sites. Pure SPAs with React Router still work great for internal dashboards and admin panels where SEO doesn&rsquo;t matter.</p>'''
+
+
+ANSWERS[65] = r'''<p>To <strong>protect routes</strong> in React Router, wrap them with a guard component that reads auth state and either renders the route or redirects to <code>/login</code>:</p>
 
 <pre><code>// auth/RequireAuth.tsx
 import { Navigate, useLocation, Outlet } from &quot;react-router-dom&quot;;
@@ -2656,15 +2231,9 @@ async function onSubmit(creds) {
   nav(state?.from?.pathname ?? &quot;/dashboard&quot;, { replace: true });
 }</code></pre>
 
-<p>Critical reminder: <strong>client&ndash;side route guards are UX, not security</strong>. The user can edit JS in devtools to render any component. Real authorization happens on the server &mdash; every API endpoint must verify the JWT/session and check permissions independently. Use <strong>Clerk</strong>, <strong>Auth0</strong>, <strong>WorkOS</strong>, or <strong>Better Auth</strong> hooks for the auth state in 2026; they expose ready&ndash;made <code>SignedIn</code>/<code>SignedOut</code> components and protect API routes server&ndash;side too.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q66">
-  <div class="qa__number">Question 66</div>
-  <h3 class="qa__question">How do you handle form validation in a React application?</h3>
-  <div class="qa__answer">
-    <p>Form validation in React means showing errors when input is wrong &mdash; before sending to the server &mdash; and preventing invalid submissions. The 2026 default approach is <strong>React Hook Form (RHF)</strong> + <strong>Zod</strong> (or Valibot/Yup) for schema, plugged together via <code>@hookform/resolvers/zod</code>:</p>
+<p>Critical reminder: <strong>client&ndash;side route guards are UX, not security</strong>. The user can edit JS in devtools to render any component. Real authorization happens on the server &mdash; every API endpoint must verify the JWT/session and check permissions independently. Use <strong>Clerk</strong>, <strong>Auth0</strong>, <strong>WorkOS</strong>, or <strong>Better Auth</strong> hooks for the auth state in 2026; they expose ready&ndash;made <code>SignedIn</code>/<code>SignedOut</code> components and protect API routes server&ndash;side too.</p>'''
+
+ANSWERS[66] = r'''<p>Form validation in React means showing errors when input is wrong &mdash; before sending to the server &mdash; and preventing invalid submissions. The 2026 default approach is <strong>React Hook Form (RHF)</strong> + <strong>Zod</strong> (or Valibot/Yup) for schema, plugged together via <code>@hookform/resolvers/zod</code>:</p>
 
 <pre><code>npm i react-hook-form zod @hookform/resolvers</code></pre>
 
@@ -2703,15 +2272,10 @@ export function SignupForm() {
 
 <p>Useful bits: <code>mode: &quot;onBlur&quot;</code> validates when fields lose focus (good UX), <code>watch</code> for cross&ndash;field rules, <code>Controller</code> for non&ndash;native inputs (Radix, headless UI components), <code>setError</code> to surface API&ndash;side errors back into form state.</p>
 
-<p>Alternatives: <strong>TanStack Form</strong> (rising star with framework agnostic + first&ndash;class TS), <strong>Conform</strong> (server&ndash;first for Remix/Next), <strong>Valibot</strong> (smaller bundle than Zod). Avoid Formik for new projects in 2026 &mdash; RHF is faster, better typed, and more actively developed.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q67">
-  <div class="qa__number">Question 67</div>
-  <h3 class="qa__question">How do you use libraries such as Formik and Yup for form validation in a React application?</h3>
-  <div class="qa__answer">
-    <p><strong>Formik</strong> + <strong>Yup</strong> is the older but still common combo for React form validation. Formik manages form state and lifecycle; Yup provides the schema. Setup:</p>
+<p>Alternatives: <strong>TanStack Form</strong> (rising star with framework agnostic + first&ndash;class TS), <strong>Conform</strong> (server&ndash;first for Remix/Next), <strong>Valibot</strong> (smaller bundle than Zod). Avoid Formik for new projects in 2026 &mdash; RHF is faster, better typed, and more actively developed.</p>'''
+
+
+ANSWERS[67] = r'''<p><strong>Formik</strong> + <strong>Yup</strong> is the older but still common combo for React form validation. Formik manages form state and lifecycle; Yup provides the schema. Setup:</p>
 
 <pre><code>npm i formik yup</code></pre>
 
@@ -2755,15 +2319,10 @@ export function Signup() {
 
 <p>What Formik does well: built&ndash;in <code>&lt;Field&gt;</code>/<code>&lt;ErrorMessage&gt;</code>/<code>&lt;Form&gt;</code> components reduce wiring, <code>setErrors</code> from <code>onSubmit</code> integrates server&ndash;side errors, validation runs declaratively from the Yup schema. Yup itself has a clean fluent API for nested schemas and conditional rules (<code>Yup.when</code>).</p>
 
-<p><strong>Honest 2026 advice:</strong> for new projects pick <strong>React Hook Form + Zod</strong> instead. Formik renders the entire form on every keystroke (slow on big forms), the maintainership has slowed, and Zod&rsquo;s TypeScript inference beats Yup&rsquo;s. RHF + Zod is also smaller (~25KB vs ~50KB), works the same with Radix/Headless UI, and shares the same Zod schema with your API for end&ndash;to&ndash;end type safety. Formik remains fine for legacy codebases &mdash; don&rsquo;t rewrite working forms just to switch.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q68">
-  <div class="qa__number">Question 68</div>
-  <h3 class="qa__question">How do you set up a development server using Webpack and Babel for a React application?</h3>
-  <div class="qa__answer">
-    <p>For new React apps in 2026 you should reach for <strong>Vite</strong>, not raw Webpack/Babel &mdash; it&rsquo;s 10&ndash;100x faster on dev startup and HMR. But understanding the underlying setup is still useful.</p>
+<p><strong>Honest 2026 advice:</strong> for new projects pick <strong>React Hook Form + Zod</strong> instead. Formik renders the entire form on every keystroke (slow on big forms), the maintainership has slowed, and Zod&rsquo;s TypeScript inference beats Yup&rsquo;s. RHF + Zod is also smaller (~25KB vs ~50KB), works the same with Radix/Headless UI, and shares the same Zod schema with your API for end&ndash;to&ndash;end type safety. Formik remains fine for legacy codebases &mdash; don&rsquo;t rewrite working forms just to switch.</p>'''
+
+
+ANSWERS[68] = r'''<p>For new React apps in 2026 you should reach for <strong>Vite</strong>, not raw Webpack/Babel &mdash; it&rsquo;s 10&ndash;100x faster on dev startup and HMR. But understanding the underlying setup is still useful.</p>
 
 <pre><code># The modern Vite path (recommended)
 npm create vite@latest my-app -- --template react-ts
@@ -2809,15 +2368,10 @@ module.exports = {
   &quot;build&quot;: &quot;NODE_ENV=production webpack&quot;
 }</code></pre>
 
-<p>2026 reality check: <strong>Vite</strong> uses esbuild for transforms (Go&ndash;based, parallelized) and native ES modules for dev. Webpack 5 + SWC is faster than Babel but still slow vs Vite. Other modern bundlers: <strong>Turbopack</strong> (Vercel, Next.js default), <strong>Rspack</strong> (ByteDance, Webpack&ndash;compatible Rust port), <strong>Bun</strong>. Pick Webpack only when you need its plugin ecosystem (custom builds, micro&ndash;frontends with Module Federation).</p>
-    
-  </div>
-</article>
-<article class="qa" id="q69">
-  <div class="qa__number">Question 69</div>
-  <h3 class="qa__question">What is hot module replacement (HMR), and how do you enable it in a React application?</h3>
-  <div class="qa__answer">
-    <p><strong>Hot Module Replacement (HMR)</strong> swaps changed modules into a running app without losing state. You edit <code>Counter.tsx</code>, save, and the new component renders instantly while the count it was holding stays at 7. Compared to a full page reload, HMR keeps your scroll position, form input, modal state, and Redux store intact &mdash; saving hundreds of micro&ndash;reloads per day.</p>
+<p>2026 reality check: <strong>Vite</strong> uses esbuild for transforms (Go&ndash;based, parallelized) and native ES modules for dev. Webpack 5 + SWC is faster than Babel but still slow vs Vite. Other modern bundlers: <strong>Turbopack</strong> (Vercel, Next.js default), <strong>Rspack</strong> (ByteDance, Webpack&ndash;compatible Rust port), <strong>Bun</strong>. Pick Webpack only when you need its plugin ecosystem (custom builds, micro&ndash;frontends with Module Federation).</p>'''
+
+
+ANSWERS[69] = r'''<p><strong>Hot Module Replacement (HMR)</strong> swaps changed modules into a running app without losing state. You edit <code>Counter.tsx</code>, save, and the new component renders instantly while the count it was holding stays at 7. Compared to a full page reload, HMR keeps your scroll position, form input, modal state, and Redux store intact &mdash; saving hundreds of micro&ndash;reloads per day.</p>
 
 <p>In <strong>Vite</strong> (default for new React projects in 2026), HMR is on out of the box:</p>
 
@@ -2846,15 +2400,10 @@ plugins: [new ReactRefreshWebpackPlugin()]
 
 <p>For <strong>Next.js 15</strong>, HMR works automatically &mdash; no config required &mdash; via Turbopack/SWC + React Refresh.</p>
 
-<p>HMR limits: side effects in module top&ndash;level code don&rsquo;t re&ndash;run cleanly (you&rsquo;ll see warnings), state in non&ndash;React stores survives but components reading it might not, and very large dependency graphs can fall back to full reload. Use <code>// @refresh reset</code> at the top of a file to force&ndash;reset state on save when needed.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q70">
-  <div class="qa__number">Question 70</div>
-  <h3 class="qa__question">How do you set up and use ESLint for code linting in a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p><strong>ESLint</strong> finds bugs, enforces consistent code patterns, and catches subtle issues (unused imports, accidental globals, unsafe comparisons). For a MERN stack with TypeScript:</p>
+<p>HMR limits: side effects in module top&ndash;level code don&rsquo;t re&ndash;run cleanly (you&rsquo;ll see warnings), state in non&ndash;React stores survives but components reading it might not, and very large dependency graphs can fall back to full reload. Use <code>// @refresh reset</code> at the top of a file to force&ndash;reset state on save when needed.</p>'''
+
+
+ANSWERS[70] = r'''<p><strong>ESLint</strong> finds bugs, enforces consistent code patterns, and catches subtle issues (unused imports, accidental globals, unsafe comparisons). For a MERN stack with TypeScript:</p>
 
 <pre><code>npm i -D eslint typescript-eslint eslint-plugin-react-hooks eslint-plugin-react-refresh
 
@@ -2899,15 +2448,10 @@ export default tseslint.config(
 
 <p>Useful additional configs/plugins: <strong>eslint&ndash;config&ndash;prettier</strong> (turns off rules that conflict with Prettier), <strong>eslint&ndash;plugin&ndash;import</strong> (import order), <strong>eslint&ndash;plugin&ndash;jsx&ndash;a11y</strong> (accessibility checks), <strong>eslint&ndash;plugin&ndash;security</strong> (Node.js security rules).</p>
 
-<p>Faster alternative emerging in 2026: <strong>Biome</strong> (Rust&ndash;based, ~25x faster than ESLint, includes formatter). Drop in if you want a single tool for lint + format and don&rsquo;t need ESLint&rsquo;s plugin ecosystem yet.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q71">
-  <div class="qa__number">Question 71</div>
-  <h3 class="qa__question">What is Prettier, and how do you use it for code formatting in a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p><strong>Prettier</strong> is an opinionated code formatter &mdash; it rewrites your code in a single canonical style so debates about commas, indentation, and line length end. Unlike ESLint (which checks logic + style), Prettier <em>only</em> formats. The two work together.</p>
+<p>Faster alternative emerging in 2026: <strong>Biome</strong> (Rust&ndash;based, ~25x faster than ESLint, includes formatter). Drop in if you want a single tool for lint + format and don&rsquo;t need ESLint&rsquo;s plugin ecosystem yet.</p>'''
+
+
+ANSWERS[71] = r'''<p><strong>Prettier</strong> is an opinionated code formatter &mdash; it rewrites your code in a single canonical style so debates about commas, indentation, and line length end. Unlike ESLint (which checks logic + style), Prettier <em>only</em> formats. The two work together.</p>
 
 <pre><code>npm i -D prettier eslint-config-prettier</code></pre>
 
@@ -2956,15 +2500,10 @@ export default [
 
 <p>Prettier handles JS/TS/JSX/TSX, JSON, CSS/SCSS, HTML, Markdown, YAML, and GraphQL out of the box. Plugins extend it to PHP, Java, Solidity, etc.</p>
 
-<p>2026 alternative: <strong>Biome</strong> ships its own formatter (Prettier&ndash;compatible style) plus linter in a single Rust binary &mdash; ~35x faster on large repos. Worth evaluating for new projects, though Prettier&rsquo;s plugin ecosystem and community recognition still make it the default.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q72">
-  <div class="qa__number">Question 72</div>
-  <h3 class="qa__question">How do you set up and use Husky for pre-commit hooks in a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p><strong>Husky</strong> manages git hooks &mdash; scripts that run automatically on commit, push, etc. The most common use: run <code>lint + format + tests</code> on staged files before each commit, blocking bad code from entering the repo.</p>
+<p>2026 alternative: <strong>Biome</strong> ships its own formatter (Prettier&ndash;compatible style) plus linter in a single Rust binary &mdash; ~35x faster on large repos. Worth evaluating for new projects, though Prettier&rsquo;s plugin ecosystem and community recognition still make it the default.</p>'''
+
+
+ANSWERS[72] = r'''<p><strong>Husky</strong> manages git hooks &mdash; scripts that run automatically on commit, push, etc. The most common use: run <code>lint + format + tests</code> on staged files before each commit, blocking bad code from entering the repo.</p>
 
 <pre><code>npm i -D husky lint-staged
 npx husky init    # creates .husky/ with a pre-commit script</code></pre>
@@ -2995,15 +2534,10 @@ echo &quot;export default { extends: [&apos;@commitlint/config-conventional&apos
 
 <p>Why bother: pre&ndash;commit is the cheapest place to catch bugs. Style + lint problems caught locally never reach CI, never trigger code review nits, and never end up in PR comments. Commit message format makes <strong>changesets</strong> + automatic changelog generation easy.</p>
 
-<p>2026 alternatives: <strong>simple-git-hooks</strong> (zero deps, much smaller than Husky), <strong>lefthook</strong> (Go binary, parallel hook execution &mdash; faster on big repos), or git&rsquo;s native hooks if you don&rsquo;t need cross&ndash;platform install. Husky is still the most common and easiest to onboard new contributors to.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q73">
-  <div class="qa__number">Question 73</div>
-  <h3 class="qa__question">How do you write unit tests for a Node.js application using Jest?</h3>
-  <div class="qa__answer">
-    <p><strong>Jest</strong> is the most common Node.js testing framework &mdash; it bundles a test runner, assertions, mocking, and coverage reporting. Setup for a Node API:</p>
+<p>2026 alternatives: <strong>simple-git-hooks</strong> (zero deps, much smaller than Husky), <strong>lefthook</strong> (Go binary, parallel hook execution &mdash; faster on big repos), or git&rsquo;s native hooks if you don&rsquo;t need cross&ndash;platform install. Husky is still the most common and easiest to onboard new contributors to.</p>'''
+
+
+ANSWERS[73] = r'''<p><strong>Jest</strong> is the most common Node.js testing framework &mdash; it bundles a test runner, assertions, mocking, and coverage reporting. Setup for a Node API:</p>
 
 <pre><code>npm i -D jest @types/jest ts-jest
 
@@ -3052,15 +2586,10 @@ npx jest --coverage         # coverage report</code></pre>
 
 <p>For database tests use <strong>mongodb-memory-server</strong> to spin up a real MongoDB in&ndash;memory per test run; for HTTP, use <strong>Supertest</strong> against your Express app instance.</p>
 
-<p>2026 reality: <strong>Vitest</strong> is now the more popular choice &mdash; same API as Jest, faster, native ESM support, much better TypeScript story, integrates with Vite. New projects should default to Vitest unless they&rsquo;re already in a Jest ecosystem. <strong>Bun test</strong> is another fast option if your runtime is Bun.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q74">
-  <div class="qa__number">Question 74</div>
-  <h3 class="qa__question">How do you write integration tests for an Express.js API using Supertest?</h3>
-  <div class="qa__answer">
-    <p><strong>Supertest</strong> wraps an Express app instance to let you assert against real HTTP responses without binding to a port. It pairs naturally with Jest or Vitest for integration tests.</p>
+<p>2026 reality: <strong>Vitest</strong> is now the more popular choice &mdash; same API as Jest, faster, native ESM support, much better TypeScript story, integrates with Vite. New projects should default to Vitest unless they&rsquo;re already in a Jest ecosystem. <strong>Bun test</strong> is another fast option if your runtime is Bun.</p>'''
+
+
+ANSWERS[74] = r'''<p><strong>Supertest</strong> wraps an Express app instance to let you assert against real HTTP responses without binding to a port. It pairs naturally with Jest or Vitest for integration tests.</p>
 
 <pre><code>npm i -D supertest @types/supertest
 npm i -D mongodb-memory-server   # spin up MongoDB in-memory for the test run</code></pre>
@@ -3109,15 +2638,10 @@ describe(&quot;POST /users&quot;, () =&gt; {
 
 <p>For authenticated routes attach a header: <code>request(app).get(&quot;/me&quot;).set(&quot;Authorization&quot;, &quot;Bearer test-token&quot;)</code> and either issue a real test token or stub the auth middleware in test mode.</p>
 
-<p>For 2026 stacks using <strong>Hono</strong> or <strong>Fastify</strong>, both ship their own injection helpers (<code>app.request()</code>, <code>fastify.inject()</code>) that work the same way without Supertest. The pattern of &ldquo;in&ndash;memory HTTP + in&ndash;memory DB + reset between tests&rdquo; is universal &mdash; it&rsquo;s the right unit of testing for backend logic above unit tests but below E2E.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q75">
-  <div class="qa__number">Question 75</div>
-  <h3 class="qa__question">How do you write unit tests for a React application using React Testing Library?</h3>
-  <div class="qa__answer">
-    <p><strong>React Testing Library (RTL)</strong> tests components from the user&rsquo;s perspective &mdash; query by accessible roles and visible text, not by implementation details like class names. Pair it with <strong>Vitest</strong> (or Jest) and <strong>jsdom</strong>:</p>
+<p>For 2026 stacks using <strong>Hono</strong> or <strong>Fastify</strong>, both ship their own injection helpers (<code>app.request()</code>, <code>fastify.inject()</code>) that work the same way without Supertest. The pattern of &ldquo;in&ndash;memory HTTP + in&ndash;memory DB + reset between tests&rdquo; is universal &mdash; it&rsquo;s the right unit of testing for backend logic above unit tests but below E2E.</p>'''
+
+
+ANSWERS[75] = r'''<p><strong>React Testing Library (RTL)</strong> tests components from the user&rsquo;s perspective &mdash; query by accessible roles and visible text, not by implementation details like class names. Pair it with <strong>Vitest</strong> (or Jest) and <strong>jsdom</strong>:</p>
 
 <pre><code>npm i -D vitest @testing-library/react @testing-library/user-event @testing-library/jest-dom jsdom</code></pre>
 
@@ -3170,15 +2694,10 @@ test(&quot;increments on click&quot;, async () =&gt; {
 <li>Wait for async UI with <strong>findBy*</strong> queries (returns a Promise that retries until the element appears).</li>
 </ul>
 
-<p>For API mocking inside component tests use <strong>MSW (Mock Service Worker)</strong> &mdash; intercepts fetch/XHR at the network layer so your component code stays unchanged. Pair RTL with <strong>Storybook</strong> + <strong>Chromatic</strong> for visual regression and you cover unit + visual + interaction testing without Cypress/Playwright (those still belong in true E2E).</p>
-    
-  </div>
-</article>
-<article class="qa" id="q76">
-  <div class="qa__number">Question 76</div>
-  <h3 class="qa__question">How do you write end-to-end tests for a MERN stack application using Cypress?</h3>
-  <div class="qa__answer">
-    <p><strong>Cypress</strong> drives a real browser against your running MERN app to test full user journeys end to end &mdash; signing up, adding to cart, checking out. Setup:</p>
+<p>For API mocking inside component tests use <strong>MSW (Mock Service Worker)</strong> &mdash; intercepts fetch/XHR at the network layer so your component code stays unchanged. Pair RTL with <strong>Storybook</strong> + <strong>Chromatic</strong> for visual regression and you cover unit + visual + interaction testing without Cypress/Playwright (those still belong in true E2E).</p>'''
+
+
+ANSWERS[76] = r'''<p><strong>Cypress</strong> drives a real browser against your running MERN app to test full user journeys end to end &mdash; signing up, adding to cart, checking out. Setup:</p>
 
 <pre><code>npm i -D cypress
 npx cypress open    # interactive runner
@@ -3225,15 +2744,10 @@ describe(&quot;Checkout flow&quot;, () =&gt; {
 <li><strong>Run E2E in CI</strong> &mdash; spin up the app, run Cypress in headless mode, upload videos/screenshots on failure.</li>
 </ul>
 
-<p>2026 alternative gaining ground: <strong>Playwright</strong> &mdash; faster, multi&ndash;browser (Chromium/Firefox/WebKit), better trace viewer, stronger TS support. Most new MERN projects pick Playwright over Cypress; existing teams stay with Cypress for stability and tooling familiarity. Either way, keep E2E tests few but meaningful (5&ndash;20 critical journeys), not exhaustive &mdash; unit + integration cover detail, E2E covers shape.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q77">
-  <div class="qa__number">Question 77</div>
-  <h3 class="qa__question">How do you set up and use Git for version control in a MERN stack project?</h3>
-  <div class="qa__answer">
-    <p><strong>Git</strong> is a distributed version control system; it&rsquo;s table stakes for any MERN project. Setup the first time:</p>
+<p>2026 alternative gaining ground: <strong>Playwright</strong> &mdash; faster, multi&ndash;browser (Chromium/Firefox/WebKit), better trace viewer, stronger TS support. Most new MERN projects pick Playwright over Cypress; existing teams stay with Cypress for stability and tooling familiarity. Either way, keep E2E tests few but meaningful (5&ndash;20 critical journeys), not exhaustive &mdash; unit + integration cover detail, E2E covers shape.</p>'''
+
+
+ANSWERS[77] = r'''<p><strong>Git</strong> is a distributed version control system; it&rsquo;s table stakes for any MERN project. Setup the first time:</p>
 
 <pre><code># Identity (one time, globally)
 git config --global user.name &quot;Ada Lovelace&quot;
@@ -3273,15 +2787,10 @@ gh pr create --fill                            # open PR via GitHub CLI</code></
 <li><strong>Trunk&ndash;based development</strong> &mdash; short&ndash;lived feature branches (1&ndash;3 days), squash&ndash;merge to main, deploy from main. Avoid long&ndash;lived develop/release branches.</li>
 </ul>
 
-<p>For 2026 teams using AI coding agents (Claude Code, Cursor, GitHub Copilot Workspace), git becomes even more critical &mdash; small commits with clear messages let agents reconstruct intent and catch regressions. Treat the commit log as documentation: each commit should be reviewable on its own.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q78">
-  <div class="qa__number">Question 78</div>
-  <h3 class="qa__question">How do you set up and use GitHub Actions for CI/CD in a MERN stack project?</h3>
-  <div class="qa__answer">
-    <p><strong>GitHub Actions</strong> is GitHub&rsquo;s built&ndash;in CI/CD &mdash; YAML workflows that run on push, PR, schedule, or manual trigger. For a MERN project a baseline pipeline runs lint + tests + build, and on the main branch deploys to production.</p>
+<p>For 2026 teams using AI coding agents (Claude Code, Cursor, GitHub Copilot Workspace), git becomes even more critical &mdash; small commits with clear messages let agents reconstruct intent and catch regressions. Treat the commit log as documentation: each commit should be reviewable on its own.</p>'''
+
+
+ANSWERS[78] = r'''<p><strong>GitHub Actions</strong> is GitHub&rsquo;s built&ndash;in CI/CD &mdash; YAML workflows that run on push, PR, schedule, or manual trigger. For a MERN project a baseline pipeline runs lint + tests + build, and on the main branch deploys to production.</p>
 
 <pre><code># .github/workflows/ci.yml
 name: CI
@@ -3340,15 +2849,10 @@ steps:
 <li><strong>OIDC for cloud auth</strong> &mdash; instead of long&ndash;lived AWS/GCP keys, use OIDC short&ndash;lived tokens via <code>aws-actions/configure-aws-credentials</code> / <code>google-github-actions/auth</code>.</li>
 </ul>
 
-<p>For services like Vercel/Netlify/Render, GitHub Actions is rarely needed &mdash; they auto&ndash;deploy on push. Use Actions when you need: container image builds, custom test matrices, multiple deploy targets, supply&ndash;chain attestations (Sigstore + cosign), or scheduled jobs. Free for public repos and 2,000 min/month on private; cheap to scale beyond that.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q79">
-  <div class="qa__number">Question 79</div>
-  <h3 class="qa__question">How do you use the MongoDB aggregation framework for complex queries?</h3>
-  <div class="qa__answer">
-    <p>The <strong>MongoDB aggregation framework</strong> processes documents through a pipeline of stages &mdash; <code>$match</code>, <code>$group</code>, <code>$lookup</code>, <code>$project</code>, etc. &mdash; each transforming the docs flowing through. It&rsquo;s how you compute analytics, joins, and complex transformations without pulling everything to the application layer.</p>
+<p>For services like Vercel/Netlify/Render, GitHub Actions is rarely needed &mdash; they auto&ndash;deploy on push. Use Actions when you need: container image builds, custom test matrices, multiple deploy targets, supply&ndash;chain attestations (Sigstore + cosign), or scheduled jobs. Free for public repos and 2,000 min/month on private; cheap to scale beyond that.</p>'''
+
+
+ANSWERS[79] = r'''<p>The <strong>MongoDB aggregation framework</strong> processes documents through a pipeline of stages &mdash; <code>$match</code>, <code>$group</code>, <code>$lookup</code>, <code>$project</code>, etc. &mdash; each transforming the docs flowing through. It&rsquo;s how you compute analytics, joins, and complex transformations without pulling everything to the application layer.</p>
 
 <pre><code>// Find the top 5 customers by total spend in 2026
 db.orders.aggregate([
@@ -3395,15 +2899,10 @@ db.orders.aggregate([
 
 <p>Performance rules: put <code>$match</code> + <code>$sort</code> first so the planner can use indexes; <code>$lookup</code> needs an index on the foreign field; check with <code>.explain(&quot;executionStats&quot;)</code>; use Atlas <strong>Performance Advisor</strong> to spot slow pipelines. For repeated heavy queries, materialize via <code>$merge</code> on a schedule (Atlas Triggers) so dashboards read pre&ndash;computed rollups in milliseconds.</p>
 
-<p>For full&ndash;text use <strong>Atlas Search</strong> (<code>$search</code> stage); for vector similarity use <strong>Atlas Vector Search</strong> (<code>$vectorSearch</code>). Both compose into the same pipeline syntax.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q80">
-  <div class="qa__number">Question 80</div>
-  <h3 class="qa__question">How do you create and use MongoDB indexes to improve query performance?</h3>
-  <div class="qa__answer">
-    <p><strong>Indexes</strong> in MongoDB are B&ndash;tree (or specialized) data structures that let queries skip full collection scans. Without an index, finding a user by email scans every doc; with an index, it&rsquo;s an <em>O(log n)</em> tree walk &mdash; milliseconds vs seconds at scale.</p>
+<p>For full&ndash;text use <strong>Atlas Search</strong> (<code>$search</code> stage); for vector similarity use <strong>Atlas Vector Search</strong> (<code>$vectorSearch</code>). Both compose into the same pipeline syntax.</p>'''
+
+
+ANSWERS[80] = r'''<p><strong>Indexes</strong> in MongoDB are B&ndash;tree (or specialized) data structures that let queries skip full collection scans. Without an index, finding a user by email scans every doc; with an index, it&rsquo;s an <em>O(log n)</em> tree walk &mdash; milliseconds vs seconds at scale.</p>
 
 <pre><code>// Create indexes via the shell or driver (idempotent)
 db.users.createIndex({ email: 1 }, { unique: true });
@@ -3447,15 +2946,9 @@ userSchema.index({ tenantId: 1, createdAt: -1 }); // compound</code></pre>
 <li><strong>Atlas Vector Search</strong> &mdash; ANN search on embedding vectors.</li>
 </ul>
 
-<p>Cost: indexes consume RAM + slow writes (every insert/update updates every relevant index). Atlas <strong>Performance Advisor</strong> recommends missing indexes; <strong>Query Insights</strong> shows slow ops. Drop indexes that <code>db.collection.aggregate([{ $indexStats: {} }])</code> shows are unused.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q81">
-  <div class="qa__number">Question 81</div>
-  <h3 class="qa__question">How do you handle database migrations in a MongoDB database?</h3>
-  <div class="qa__answer">
-    <p><strong>MongoDB migrations</strong> change document shape across deploys &mdash; rename a field, split a column into two, backfill missing data. Mongo&rsquo;s flexible schema means you can deploy code that handles both shapes and migrate lazily, but you still need a tool to track which migrations have run.</p>
+<p>Cost: indexes consume RAM + slow writes (every insert/update updates every relevant index). Atlas <strong>Performance Advisor</strong> recommends missing indexes; <strong>Query Insights</strong> shows slow ops. Drop indexes that <code>db.collection.aggregate([{ $indexStats: {} }])</code> shows are unused.</p>'''
+
+ANSWERS[81] = r'''<p><strong>MongoDB migrations</strong> change document shape across deploys &mdash; rename a field, split a column into two, backfill missing data. Mongo&rsquo;s flexible schema means you can deploy code that handles both shapes and migrate lazily, but you still need a tool to track which migrations have run.</p>
 
 <p>The 2026 standard is <strong>migrate-mongo</strong> &mdash; simple, schema&ndash;less, runs JS files in order:</p>
 
@@ -3507,15 +3000,10 @@ npx migrate-mongo down          # rollback the last one</code></pre>
 <li><strong>Long backfills</strong> on big collections should chunk + add indexes first; otherwise they hold cluster CPU and stall traffic.</li>
 </ul>
 
-<p>Alternatives: <strong>mongoose-migrate-2</strong> (Mongoose&ndash;native), <strong>typegoose-migrate</strong> for TS&ndash;heavy stacks, hand&ndash;rolled scripts via Atlas Triggers for scheduled work. The principle &mdash; &ldquo;every shape change is recorded, ordered, and reversible&rdquo; &mdash; matters more than the tool.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q82">
-  <div class="qa__number">Question 82</div>
-  <h3 class="qa__question">What are database seeds, and how do you use them in a MongoDB database?</h3>
-  <div class="qa__answer">
-    <p><strong>Database seeds</strong> are scripts that populate a database with realistic starter data: dev fixtures, test data, demo accounts, default config rows. They make onboarding new developers a one&ndash;command experience and let CI tests start from a known baseline.</p>
+<p>Alternatives: <strong>mongoose-migrate-2</strong> (Mongoose&ndash;native), <strong>typegoose-migrate</strong> for TS&ndash;heavy stacks, hand&ndash;rolled scripts via Atlas Triggers for scheduled work. The principle &mdash; &ldquo;every shape change is recorded, ordered, and reversible&rdquo; &mdash; matters more than the tool.</p>'''
+
+
+ANSWERS[82] = r'''<p><strong>Database seeds</strong> are scripts that populate a database with realistic starter data: dev fixtures, test data, demo accounts, default config rows. They make onboarding new developers a one&ndash;command experience and let CI tests start from a known baseline.</p>
 
 <p>Common patterns:</p>
 
@@ -3574,15 +3062,10 @@ seed().catch((e) =&gt; { console.error(e); process.exit(1); });</code></pre>
 
 <p>Critical safety rule: <strong>seeds must never run against production</strong>. Gate on <code>NODE_ENV !== &quot;production&quot;</code>, use a different connection string, ideally use a local Mongo instance entirely. For test isolation, prefer <code>mongodb-memory-server</code> + reset between tests over a shared seeded DB.</p>
 
-<p>For more structured seeding consider <strong>fishery</strong> (factory&ndash;style builders), <strong>fixtures-for-mongoose</strong>, or your own factory functions. Idempotent seed scripts (<code>upsert</code> instead of <code>insert</code>) are useful for environments where you want to top up data without wiping.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q83">
-  <div class="qa__number">Question 83</div>
-  <h3 class="qa__question">How do you set up and use MongoDB transactions for multi-document operations?</h3>
-  <div class="qa__answer">
-    <p><strong>MongoDB transactions</strong> let multiple document writes succeed or fail atomically across collections. Available since 4.0 on replica sets, 4.2 on sharded clusters &mdash; in practice always available on Atlas. Use them when business logic spans multiple documents (transfer money: debit one account, credit another, write a log entry).</p>
+<p>For more structured seeding consider <strong>fishery</strong> (factory&ndash;style builders), <strong>fixtures-for-mongoose</strong>, or your own factory functions. Idempotent seed scripts (<code>upsert</code> instead of <code>insert</code>) are useful for environments where you want to top up data without wiping.</p>'''
+
+
+ANSWERS[83] = r'''<p><strong>MongoDB transactions</strong> let multiple document writes succeed or fail atomically across collections. Available since 4.0 on replica sets, 4.2 on sharded clusters &mdash; in practice always available on Atlas. Use them when business logic spans multiple documents (transfer money: debit one account, credit another, write a log entry).</p>
 
 <pre><code>import mongoose from &quot;mongoose&quot;;
 
@@ -3635,15 +3118,10 @@ session.endSession();</code></pre>
 <li>Performance cost is real &mdash; transactions take longer than single&ndash;document writes. Don&rsquo;t use them where atomic single&ndash;doc updates (<code>$inc</code>, <code>findOneAndUpdate</code>) suffice.</li>
 </ul>
 
-<p>For long&ndash;running, multi&ndash;service workflows, transactions don&rsquo;t fit &mdash; reach for the <strong>outbox pattern</strong> (write the change + an event in one transaction, then publish the event reliably) or a <strong>saga</strong> orchestrated via <strong>Temporal</strong>, <strong>Inngest</strong>, <strong>Trigger.dev</strong>, <strong>Restate</strong>, or <strong>Hatchet</strong>. Cross&ndash;service consistency is hard; transactions only solve the within&ndash;single&ndash;DB part.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q84">
-  <div class="qa__number">Question 84</div>
-  <h3 class="qa__question">How do you use Mongoose virtuals to create computed properties in MongoDB documents?</h3>
-  <div class="qa__answer">
-    <p><strong>Mongoose virtuals</strong> are computed properties that aren&rsquo;t stored in MongoDB but appear on documents in your application code &mdash; useful for derived values like <code>fullName</code> from <code>firstName + lastName</code>, or computed URLs.</p>
+<p>For long&ndash;running, multi&ndash;service workflows, transactions don&rsquo;t fit &mdash; reach for the <strong>outbox pattern</strong> (write the change + an event in one transaction, then publish the event reliably) or a <strong>saga</strong> orchestrated via <strong>Temporal</strong>, <strong>Inngest</strong>, <strong>Trigger.dev</strong>, <strong>Restate</strong>, or <strong>Hatchet</strong>. Cross&ndash;service consistency is hard; transactions only solve the within&ndash;single&ndash;DB part.</p>'''
+
+
+ANSWERS[84] = r'''<p><strong>Mongoose virtuals</strong> are computed properties that aren&rsquo;t stored in MongoDB but appear on documents in your application code &mdash; useful for derived values like <code>fullName</code> from <code>firstName + lastName</code>, or computed URLs.</p>
 
 <pre><code>import mongoose from &quot;mongoose&quot;;
 
@@ -3696,15 +3174,10 @@ userSchema.virtual(&quot;posts&quot;, {
 const user = await User.findById(id).populate(&quot;posts&quot;);
 console.log(user.posts);    // array of joined Post documents</code></pre>
 
-<p>Caveats: virtuals <strong>can&rsquo;t be queried</strong> (<code>User.find({ fullName: &quot;Ada Lovelace&quot; })</code> returns nothing &mdash; the field doesn&rsquo;t exist in Mongo). For queryable derived data, store it as a real field maintained via a <code>pre(&quot;save&quot;)</code> hook, or compute it server&ndash;side at write time. Virtuals are fine for view&ndash;layer convenience, the wrong tool for filterable indexed fields.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q85">
-  <div class="qa__number">Question 85</div>
-  <h3 class="qa__question">How do you set up and use WebSockets for real-time communication in a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p><strong>WebSockets</strong> open a persistent two&ndash;way TCP connection between client and server, letting either side push messages instantly &mdash; ideal for chat, presence, live dashboards, collaborative editing, and order updates. Compare to HTTP polling: WebSockets cut latency from seconds to milliseconds with much less server load.</p>
+<p>Caveats: virtuals <strong>can&rsquo;t be queried</strong> (<code>User.find({ fullName: &quot;Ada Lovelace&quot; })</code> returns nothing &mdash; the field doesn&rsquo;t exist in Mongo). For queryable derived data, store it as a real field maintained via a <code>pre(&quot;save&quot;)</code> hook, or compute it server&ndash;side at write time. Virtuals are fine for view&ndash;layer convenience, the wrong tool for filterable indexed fields.</p>'''
+
+
+ANSWERS[85] = r'''<p><strong>WebSockets</strong> open a persistent two&ndash;way TCP connection between client and server, letting either side push messages instantly &mdash; ideal for chat, presence, live dashboards, collaborative editing, and order updates. Compare to HTTP polling: WebSockets cut latency from seconds to milliseconds with much less server load.</p>
 
 <p>Browser API is built in:</p>
 
@@ -3742,15 +3215,10 @@ wss.on(&quot;connection&quot;, (socket) =&gt; {
 <li><strong>Resume after disconnect</strong> &mdash; track a last&ndash;event&ndash;ID so reconnects fetch what they missed; pair WebSocket with a REST resync endpoint.</li>
 </ul>
 
-<p>Default 2026 picks: <strong>Socket.IO + Redis adapter</strong> for self&ndash;host MERN; <strong>Ably/Pusher/PartyKit/Cloudflare Durable Objects</strong> when you want zero ops. For doc collab, layer <strong>Yjs</strong> on top of any WebSocket transport.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q86">
-  <div class="qa__number">Question 86</div>
-  <h3 class="qa__question">How do you use Socket.IO with Express.js for real-time communication?</h3>
-  <div class="qa__answer">
-    <p><strong>Socket.IO</strong> is a library on top of WebSockets adding rooms, namespaces, automatic reconnection, fallback transports, and a friendly event&ndash;based API. It&rsquo;s the most common way to add real&ndash;time to an Express app.</p>
+<p>Default 2026 picks: <strong>Socket.IO + Redis adapter</strong> for self&ndash;host MERN; <strong>Ably/Pusher/PartyKit/Cloudflare Durable Objects</strong> when you want zero ops. For doc collab, layer <strong>Yjs</strong> on top of any WebSocket transport.</p>'''
+
+
+ANSWERS[86] = r'''<p><strong>Socket.IO</strong> is a library on top of WebSockets adding rooms, namespaces, automatic reconnection, fallback transports, and a friendly event&ndash;based API. It&rsquo;s the most common way to add real&ndash;time to an Express app.</p>
 
 <pre><code>npm i socket.io           # server
 npm i socket.io-client    # client (or @reduxjs/toolkit&apos;s socket helpers)</code></pre>
@@ -3820,15 +3288,10 @@ const subClient = pubClient.duplicate();
 await Promise.all([pubClient.connect(), subClient.connect()]);
 io.adapter(createAdapter(pubClient, subClient));</code></pre>
 
-<p>2026 alternatives gaining traction: <strong>PartyKit</strong>, <strong>Ably</strong>, <strong>Pusher</strong>, <strong>Cloudflare Durable Objects</strong> &mdash; managed real&ndash;time so you skip Redis adapter setup and global fanout. Socket.IO remains the right pick when you want to self&ndash;host with familiar tooling.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q87">
-  <div class="qa__number">Question 87</div>
-  <h3 class="qa__question">How do you set up and use Passport.js for authentication in an Express.js application?</h3>
-  <div class="qa__answer">
-    <p><strong>Passport.js</strong> is an authentication middleware for Express &mdash; pluggable &ldquo;strategies&rdquo; for local username/password, OAuth (Google, GitHub, Facebook), JWT, and dozens more. You configure strategies once, then call <code>passport.authenticate(&quot;name&quot;)</code> on routes that need auth.</p>
+<p>2026 alternatives gaining traction: <strong>PartyKit</strong>, <strong>Ably</strong>, <strong>Pusher</strong>, <strong>Cloudflare Durable Objects</strong> &mdash; managed real&ndash;time so you skip Redis adapter setup and global fanout. Socket.IO remains the right pick when you want to self&ndash;host with familiar tooling.</p>'''
+
+
+ANSWERS[87] = r'''<p><strong>Passport.js</strong> is an authentication middleware for Express &mdash; pluggable &ldquo;strategies&rdquo; for local username/password, OAuth (Google, GitHub, Facebook), JWT, and dozens more. You configure strategies once, then call <code>passport.authenticate(&quot;name&quot;)</code> on routes that need auth.</p>
 
 <pre><code>npm i passport passport-local passport-jwt express-session bcryptjs</code></pre>
 
@@ -3890,15 +3353,10 @@ app.get(&quot;/me&quot;,
 
 <p>Patterns and pitfalls: hash passwords with <strong>argon2id</strong> (or bcrypt with cost 12+) &mdash; never plain SHA. Issue <strong>short&ndash;lived access tokens</strong> (15 min) + <strong>refresh tokens</strong> with rotation; never put raw JWTs in localStorage long&ndash;term. Track failed login attempts and rate&ndash;limit per IP/email.</p>
 
-<p>Honest 2026 advice: most teams skip Passport entirely and use a managed auth service &mdash; <strong>Clerk</strong>, <strong>Auth0</strong>, <strong>WorkOS</strong>, <strong>Stytch</strong>, <strong>Supabase Auth</strong>, or <strong>Better Auth</strong> (open source). They handle MFA, Passkeys, SSO, anomaly detection, and SCIM provisioning out of the box. Roll&ndash;your&ndash;own with Passport only if compliance forces it or you have a very specific niche.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q88">
-  <div class="qa__number">Question 88</div>
-  <h3 class="qa__question">How do you implement OAuth authentication using Passport.js in a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p>OAuth via Passport adds a strategy per provider and a callback URL. Example with Google &mdash; same pattern works for GitHub, Facebook, Microsoft, Apple, Twitter, LinkedIn:</p>
+<p>Honest 2026 advice: most teams skip Passport entirely and use a managed auth service &mdash; <strong>Clerk</strong>, <strong>Auth0</strong>, <strong>WorkOS</strong>, <strong>Stytch</strong>, <strong>Supabase Auth</strong>, or <strong>Better Auth</strong> (open source). They handle MFA, Passkeys, SSO, anomaly detection, and SCIM provisioning out of the box. Roll&ndash;your&ndash;own with Passport only if compliance forces it or you have a very specific niche.</p>'''
+
+
+ANSWERS[88] = r'''<p>OAuth via Passport adds a strategy per provider and a callback URL. Example with Google &mdash; same pattern works for GitHub, Facebook, Microsoft, Apple, Twitter, LinkedIn:</p>
 
 <pre><code>npm i passport-google-oauth20</code></pre>
 
@@ -3957,15 +3415,10 @@ app.get(&quot;/auth/google/callback&quot;,
 <li>On account linking, use <strong>email&ndash;based identity</strong> so a user signing in via Google reaches the same account as their previous email/password login.</li>
 </ul>
 
-<p>2026 reality: managed auth services (<strong>Clerk</strong>, <strong>Auth0</strong>, <strong>WorkOS</strong>, <strong>Stytch</strong>, <strong>Supabase Auth</strong>, <strong>Better Auth</strong>) implement OAuth + Passkeys + MFA + SCIM with a fraction of the code. Passport OAuth is fine for hobby projects or when you have unusual requirements (e.g. on&ndash;prem only); for production SaaS, the managed services are usually the better engineering trade.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q89">
-  <div class="qa__number">Question 89</div>
-  <h3 class="qa__question">How do you handle file uploads in an Express.js application?</h3>
-  <div class="qa__answer">
-    <p>Express handles file uploads via <strong>multipart/form-data</strong>. The body parser doesn&rsquo;t handle this format &mdash; you need a streaming multipart parser. The standard choice is <strong>Multer</strong>:</p>
+<p>2026 reality: managed auth services (<strong>Clerk</strong>, <strong>Auth0</strong>, <strong>WorkOS</strong>, <strong>Stytch</strong>, <strong>Supabase Auth</strong>, <strong>Better Auth</strong>) implement OAuth + Passkeys + MFA + SCIM with a fraction of the code. Passport OAuth is fine for hobby projects or when you have unusual requirements (e.g. on&ndash;prem only); for production SaaS, the managed services are usually the better engineering trade.</p>'''
+
+
+ANSWERS[89] = r'''<p>Express handles file uploads via <strong>multipart/form-data</strong>. The body parser doesn&rsquo;t handle this format &mdash; you need a streaming multipart parser. The standard choice is <strong>Multer</strong>:</p>
 
 <pre><code>npm i multer</code></pre>
 
@@ -4015,15 +3468,10 @@ app.post(&quot;/upload-many&quot;, upload.array(&quot;files&quot;, 5), (req, res
 <li><strong>Image / video transforms</strong> &mdash; <strong>Cloudflare Images</strong>, <strong>imgix</strong>, <strong>Cloudinary</strong>, <strong>Mux</strong> handle on&ndash;the&ndash;fly resize/format conversion.</li>
 </ul>
 
-<p>Always: validate file size + MIME + actual content; strip EXIF from images; run uploads through a virus scanner (<strong>ClamAV</strong>); serve with signed download URLs that expire; never put user&ndash;controlled filenames into a path without sanitizing.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q90">
-  <div class="qa__number">Question 90</div>
-  <h3 class="qa__question">How do you use Multer for handling multipart/form-data in an Express.js application?</h3>
-  <div class="qa__answer">
-    <p><strong>Multer</strong> is the standard middleware for parsing <code>multipart/form-data</code> in Express &mdash; the format browsers use for <code>&lt;input type=&quot;file&quot;&gt;</code> uploads. It streams the request body, writes files to disk or memory, and exposes parsed fields on <code>req.body</code> + uploaded files on <code>req.file</code>/<code>req.files</code>.</p>
+<p>Always: validate file size + MIME + actual content; strip EXIF from images; run uploads through a virus scanner (<strong>ClamAV</strong>); serve with signed download URLs that expire; never put user&ndash;controlled filenames into a path without sanitizing.</p>'''
+
+
+ANSWERS[90] = r'''<p><strong>Multer</strong> is the standard middleware for parsing <code>multipart/form-data</code> in Express &mdash; the format browsers use for <code>&lt;input type=&quot;file&quot;&gt;</code> uploads. It streams the request body, writes files to disk or memory, and exposes parsed fields on <code>req.body</code> + uploaded files on <code>req.file</code>/<code>req.files</code>.</p>
 
 <pre><code>npm i multer @types/multer
 
@@ -4085,15 +3533,10 @@ app.post(&quot;/upload&quot;, memUpload.single(&quot;file&quot;), async (req, re
   res.json({ key });
 });</code></pre>
 
-<p>Limits + safety: always set <code>limits.fileSize</code> (Multer rejects oversized uploads early), validate <code>fileFilter</code> on MIME, sniff actual content with <code>file-type</code> after upload, scan with ClamAV, and never trust filenames. For big files (&gt;100MB) prefer <strong>presigned direct&ndash;to&ndash;S3 uploads</strong> or <strong>tus.io resumable</strong> &mdash; Multer is best for small/medium files where a single HTTP POST suffices.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q91">
-  <div class="qa__number">Question 91</div>
-  <h3 class="qa__question">How do you deploy a React application to Netlify?</h3>
-  <div class="qa__answer">
-    <p><strong>Netlify</strong> deploys static + Jamstack apps with a git&ndash;driven workflow: push to a branch, Netlify builds, deploys, and gives you a preview URL per PR. Setup takes minutes for a React app:</p>
+<p>Limits + safety: always set <code>limits.fileSize</code> (Multer rejects oversized uploads early), validate <code>fileFilter</code> on MIME, sniff actual content with <code>file-type</code> after upload, scan with ClamAV, and never trust filenames. For big files (&gt;100MB) prefer <strong>presigned direct&ndash;to&ndash;S3 uploads</strong> or <strong>tus.io resumable</strong> &mdash; Multer is best for small/medium files where a single HTTP POST suffices.</p>'''
+
+
+ANSWERS[91] = r'''<p><strong>Netlify</strong> deploys static + Jamstack apps with a git&ndash;driven workflow: push to a branch, Netlify builds, deploys, and gives you a preview URL per PR. Setup takes minutes for a React app:</p>
 
 <pre><code># Option A: CLI (interactive setup)
 npm i -g netlify-cli
@@ -4139,15 +3582,10 @@ netlify deploy --prod
 
 <p>For a MERN app, Netlify hosts the React frontend; the Express API runs elsewhere (Render, Fly.io, Railway, AWS) and the React app calls it via CORS. Or convert the API to <strong>Netlify Functions</strong> for a single&ndash;platform deploy &mdash; works for low&ndash;traffic apps, but watch cold starts and the 10s execution limit.</p>
 
-<p>Direct competitors in 2026: <strong>Vercel</strong> (Next.js&ndash;native), <strong>Cloudflare Pages</strong> (cheapest at scale, integrated Workers), <strong>AWS Amplify Hosting</strong>. Netlify remains the simplest for non&ndash;Next stacks (Vite, Astro, Hugo, Eleventy).</p>
-    
-  </div>
-</article>
-<article class="qa" id="q92">
-  <div class="qa__number">Question 92</div>
-  <h3 class="qa__question">How do you deploy a React application to Vercel?</h3>
-  <div class="qa__answer">
-    <p><strong>Vercel</strong> is the company behind Next.js and the most polished platform for deploying React/Next apps. Setup takes literally one command:</p>
+<p>Direct competitors in 2026: <strong>Vercel</strong> (Next.js&ndash;native), <strong>Cloudflare Pages</strong> (cheapest at scale, integrated Workers), <strong>AWS Amplify Hosting</strong>. Netlify remains the simplest for non&ndash;Next stacks (Vite, Astro, Hugo, Eleventy).</p>'''
+
+
+ANSWERS[92] = r'''<p><strong>Vercel</strong> is the company behind Next.js and the most polished platform for deploying React/Next apps. Setup takes literally one command:</p>
 
 <pre><code># CLI
 npm i -g vercel
@@ -4191,15 +3629,10 @@ vercel --prod       # deploy to production
 
 <p>For Next.js apps Vercel is the path of least resistance &mdash; it understands SSR, ISR, RSC, streaming, middleware, and edge functions natively. For other React stacks (Vite, CRA, Astro) it works just as well as a static host.</p>
 
-<p>2026 alternatives worth knowing: <strong>Cloudflare Pages</strong> (similar feature set, cheaper at scale, integrated Workers + R2 + D1), <strong>Netlify</strong>, <strong>AWS Amplify</strong>, <strong>Render</strong>, self&ndash;hosted via <strong>Coolify</strong>/<strong>Dokploy</strong>/<strong>Sliplane</strong>. Vercel pricing scales with bandwidth and function invocations &mdash; great until you&rsquo;re very large.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q93">
-  <div class="qa__number">Question 93</div>
-  <h3 class="qa__question">How do you configure environment variables in a Vercel deployment?</h3>
-  <div class="qa__answer">
-    <p><strong>Vercel environment variables</strong> are configured per&ndash;environment (Production, Preview, Development) and exposed to your build + runtime. Set them in three ways:</p>
+<p>2026 alternatives worth knowing: <strong>Cloudflare Pages</strong> (similar feature set, cheaper at scale, integrated Workers + R2 + D1), <strong>Netlify</strong>, <strong>AWS Amplify</strong>, <strong>Render</strong>, self&ndash;hosted via <strong>Coolify</strong>/<strong>Dokploy</strong>/<strong>Sliplane</strong>. Vercel pricing scales with bandwidth and function invocations &mdash; great until you&rsquo;re very large.</p>'''
+
+
+ANSWERS[93] = r'''<p><strong>Vercel environment variables</strong> are configured per&ndash;environment (Production, Preview, Development) and exposed to your build + runtime. Set them in three ways:</p>
 
 <pre><code># 1) Vercel CLI
 vercel env add DATABASE_URL production
@@ -4249,15 +3682,10 @@ console.log(process.env.NEXT_PUBLIC_ANALYTICS_ID);</code></pre>
 <li>For OIDC&ndash;based cloud auth, use Vercel&rsquo;s <strong>OIDC tokens</strong> &mdash; short&ndash;lived credentials to AWS/GCP without storing static keys.</li>
 </ul>
 
-<p>Common gotcha: the same variable name with different values in Production vs Preview means a PR preview can behave differently than expected. Add visible indicators (banner, console log) showing the environment so reviewers know where they are.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q94">
-  <div class="qa__number">Question 94</div>
-  <h3 class="qa__question">How do you set up and use Cloudflare for DNS management and CDN services?</h3>
-  <div class="qa__answer">
-    <p><strong>Cloudflare</strong> is a global edge network providing DNS, CDN, WAF, DDoS protection, and a developer platform (Workers, Pages, R2, D1, KV, Durable Objects). For DNS + CDN setup:</p>
+<p>Common gotcha: the same variable name with different values in Production vs Preview means a PR preview can behave differently than expected. Add visible indicators (banner, console log) showing the environment so reviewers know where they are.</p>'''
+
+
+ANSWERS[94] = r'''<p><strong>Cloudflare</strong> is a global edge network providing DNS, CDN, WAF, DDoS protection, and a developer platform (Workers, Pages, R2, D1, KV, Durable Objects). For DNS + CDN setup:</p>
 
 <pre><code># 1. Sign up at cloudflare.com, add your domain
 # 2. Cloudflare scans your existing DNS records, imports them
@@ -4300,15 +3728,10 @@ Then: Cache eligibility = Bypass cache</code></pre>
 <li><strong>Workers</strong> for edge logic; <strong>Pages</strong> for static hosting; <strong>R2</strong> for object storage with no egress fees.</li>
 </ul>
 
-<p>For a MERN app the typical setup: Cloudflare DNS + proxy in front of <strong>Vercel/Netlify</strong> for the React app, and a separate subdomain (<code>api.example.com</code>) routing to the Express API on <strong>Fly.io/Render/Railway</strong> &mdash; all behind Cloudflare&rsquo;s edge.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q95">
-  <div class="qa__number">Question 95</div>
-  <h3 class="qa__question">How do you use AWS S3 for storing and serving static assets in a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p><strong>AWS S3</strong> stores objects (files) in buckets &mdash; durable, cheap, infinitely scalable. For a MERN app, S3 is the standard place to keep user uploads, generated reports, and static assets that aren&rsquo;t in your bundle.</p>
+<p>For a MERN app the typical setup: Cloudflare DNS + proxy in front of <strong>Vercel/Netlify</strong> for the React app, and a separate subdomain (<code>api.example.com</code>) routing to the Express API on <strong>Fly.io/Render/Railway</strong> &mdash; all behind Cloudflare&rsquo;s edge.</p>'''
+
+
+ANSWERS[95] = r'''<p><strong>AWS S3</strong> stores objects (files) in buckets &mdash; durable, cheap, infinitely scalable. For a MERN app, S3 is the standard place to keep user uploads, generated reports, and static assets that aren&rsquo;t in your bundle.</p>
 
 <pre><code>npm i @aws-sdk/client-s3 @aws-sdk/s3-request-presigner</code></pre>
 
@@ -4368,15 +3791,10 @@ await fetch(url, { method: &quot;PUT&quot;, body: file });
 <li><strong>Vercel Blob</strong>, <strong>Supabase Storage</strong>, <strong>Cloudinary</strong> &mdash; managed convenience layers on top of object storage.</li>
 </ul>
 
-<p>Whichever you pick, the patterns are the same: presigned upload URLs, direct&ndash;to&ndash;cloud uploads, signed download URLs with expiration, content&ndash;type sniffing on receipt, virus scan via ClamAV worker, EXIF strip on images.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q96">
-  <div class="qa__number">Question 96</div>
-  <h3 class="qa__question">How do you set up and use AWS Lambda for serverless functions in a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p><strong>AWS Lambda</strong> runs your code without provisioning servers &mdash; you upload a function, AWS spins up containers on demand, scales to thousands of concurrent invocations, and bills per request + execution duration. Common uses in a MERN app: image processing, scheduled jobs, webhook receivers, and entire APIs via API Gateway or Lambda Function URLs.</p>
+<p>Whichever you pick, the patterns are the same: presigned upload URLs, direct&ndash;to&ndash;cloud uploads, signed download URLs with expiration, content&ndash;type sniffing on receipt, virus scan via ClamAV worker, EXIF strip on images.</p>'''
+
+
+ANSWERS[96] = r'''<p><strong>AWS Lambda</strong> runs your code without provisioning servers &mdash; you upload a function, AWS spins up containers on demand, scales to thousands of concurrent invocations, and bills per request + execution duration. Common uses in a MERN app: image processing, scheduled jobs, webhook receivers, and entire APIs via API Gateway or Lambda Function URLs.</p>
 
 <pre><code># Easiest path: Serverless Framework or AWS SAM CLI
 npm i -D serverless serverless-offline
@@ -4436,15 +3854,10 @@ export const main: APIGatewayProxyHandlerV2 = async (event) =&gt; {
 <li><strong>Fly Machines</strong>, <strong>Cloud Run</strong>, <strong>Railway</strong> &mdash; container&ndash;per&ndash;request with autoscale to zero.</li>
 </ul>
 
-<p>For a typical MERN backend, prefer a long&ndash;running container (Render/Fly/Railway) over Lambda &mdash; persistent Mongo connections are simpler and cold starts disappear. Reserve Lambda for image/video pipelines, S3 triggers, scheduled cron, and webhook receivers where its scale&ndash;to&ndash;zero economics shine.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q97">
-  <div class="qa__number">Question 97</div>
-  <h3 class="qa__question">How do you use AWS API Gateway to manage APIs for a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p><strong>AWS API Gateway</strong> sits in front of your backend (Lambda, ECS, EC2) providing routing, authentication, throttling, request validation, and HTTP-to-event translation. There are two flavors: <strong>HTTP API</strong> (newer, ~70% cheaper, simpler) and <strong>REST API</strong> (older, more features). For most MERN apps you want HTTP API.</p>
+<p>For a typical MERN backend, prefer a long&ndash;running container (Render/Fly/Railway) over Lambda &mdash; persistent Mongo connections are simpler and cold starts disappear. Reserve Lambda for image/video pipelines, S3 triggers, scheduled cron, and webhook receivers where its scale&ndash;to&ndash;zero economics shine.</p>'''
+
+
+ANSWERS[97] = r'''<p><strong>AWS API Gateway</strong> sits in front of your backend (Lambda, ECS, EC2) providing routing, authentication, throttling, request validation, and HTTP-to-event translation. There are two flavors: <strong>HTTP API</strong> (newer, ~70% cheaper, simpler) and <strong>REST API</strong> (older, more features). For most MERN apps you want HTTP API.</p>
 
 <pre><code># Serverless Framework example tying API Gateway HTTP API to Lambdas
 service: my-api
@@ -4509,15 +3922,10 @@ export const list: APIGatewayProxyHandlerV2 = async (event) =&gt; {
 <li><strong>Lambda Function URLs</strong> &mdash; direct HTTPS endpoint per Lambda; no API Gateway needed for simple cases.</li>
 </ul>
 
-<p>API Gateway shines when you want a managed front door across many backend services, fine&ndash;grained throttling per consumer, or AWS&ndash;native auth (Cognito). For pure simplicity in a MERN stack you can usually skip it.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q98">
-  <div class="qa__number">Question 98</div>
-  <h3 class="qa__question">How do you monitor and optimize database performance in MongoDB Atlas?</h3>
-  <div class="qa__answer">
-    <p><strong>MongoDB Atlas</strong> includes built&ndash;in performance tooling that turns &ldquo;why is this query slow&rdquo; from guesswork into a checklist:</p>
+<p>API Gateway shines when you want a managed front door across many backend services, fine&ndash;grained throttling per consumer, or AWS&ndash;native auth (Cognito). For pure simplicity in a MERN stack you can usually skip it.</p>'''
+
+
+ANSWERS[98] = r'''<p><strong>MongoDB Atlas</strong> includes built&ndash;in performance tooling that turns &ldquo;why is this query slow&rdquo; from guesswork into a checklist:</p>
 
 <ul>
 <li><strong>Performance Advisor</strong> &mdash; recommends missing indexes by analyzing real query patterns. Gives you the exact <code>createIndex</code> command and an estimate of impact. Free on M10+.</li>
@@ -4553,15 +3961,10 @@ db.orders.find({ tenantId: &quot;t1&quot; })
 
 <p>Capacity planning: target <strong>cache hit ratio &gt;95%</strong>, <strong>working set size &lt;~80% of RAM</strong>, <strong>oplog window &gt;24h</strong>, <strong>replication lag &lt;10s</strong>. If any of these slip, scale up before users notice. Atlas Auto&ndash;Tier scales storage automatically; Atlas Auto&ndash;Scaling can adjust compute on a schedule.</p>
 
-<p>For workloads that have outgrown OLTP Mongo &mdash; high&ndash;concurrency analytics, full&ndash;table scans, joins across many collections &mdash; replicate to a columnar warehouse (<strong>ClickHouse</strong>, <strong>Tinybird</strong>, <strong>BigQuery</strong>, <strong>Snowflake</strong>) via Atlas Stream Processing or Debezium CDC. Mongo is excellent for operational queries; the wrong tool for ad&ndash;hoc OLAP at scale.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q99">
-  <div class="qa__number">Question 99</div>
-  <h3 class="qa__question">How do you set up and use DataDog for monitoring a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p><strong>Datadog</strong> is a unified observability platform &mdash; metrics, logs, traces, RUM (real user monitoring), profiles, security &mdash; in one UI. It&rsquo;s powerful, expensive, and the most&ndash;deployed APM in production today.</p>
+<p>For workloads that have outgrown OLTP Mongo &mdash; high&ndash;concurrency analytics, full&ndash;table scans, joins across many collections &mdash; replicate to a columnar warehouse (<strong>ClickHouse</strong>, <strong>Tinybird</strong>, <strong>BigQuery</strong>, <strong>Snowflake</strong>) via Atlas Stream Processing or Debezium CDC. Mongo is excellent for operational queries; the wrong tool for ad&ndash;hoc OLAP at scale.</p>'''
+
+
+ANSWERS[99] = r'''<p><strong>Datadog</strong> is a unified observability platform &mdash; metrics, logs, traces, RUM (real user monitoring), profiles, security &mdash; in one UI. It&rsquo;s powerful, expensive, and the most&ndash;deployed APM in production today.</p>
 
 <p>Setup for a Node + Express MERN app:</p>
 
@@ -4618,15 +4021,10 @@ datadogRum.init({
   trackUserInteractions: true, trackResources: true, trackLongTasks: true
 });</code></pre>
 
-<p>2026 alternatives at meaningful cost savings: <strong>Grafana Cloud / Tempo / Loki / Mimir</strong>, <strong>Honeycomb</strong> (best traces), <strong>New Relic</strong>, <strong>Sentry</strong> (errors + tracing), <strong>Axiom</strong> (logs + analytics, cheap), <strong>Better Stack</strong> (uptime + logs), <strong>SigNoz</strong> / <strong>HyperDX</strong> (open source). All build on <strong>OpenTelemetry</strong> &mdash; instrumenting with the OTel SDK keeps you portable across vendors. Datadog wins on completeness; Honeycomb on trace UX; the OSS options on cost.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q100">
-  <div class="qa__number">Question 100</div>
-  <h3 class="qa__question">How do you implement and manage security best practices for a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p>Security best practices for a MERN stack are layered defense &mdash; no single mitigation suffices. The 2026 baseline:</p>
+<p>2026 alternatives at meaningful cost savings: <strong>Grafana Cloud / Tempo / Loki / Mimir</strong>, <strong>Honeycomb</strong> (best traces), <strong>New Relic</strong>, <strong>Sentry</strong> (errors + tracing), <strong>Axiom</strong> (logs + analytics, cheap), <strong>Better Stack</strong> (uptime + logs), <strong>SigNoz</strong> / <strong>HyperDX</strong> (open source). All build on <strong>OpenTelemetry</strong> &mdash; instrumenting with the OTel SDK keeps you portable across vendors. Datadog wins on completeness; Honeycomb on trace UX; the OSS options on cost.</p>'''
+
+
+ANSWERS[100] = r'''<p>Security best practices for a MERN stack are layered defense &mdash; no single mitigation suffices. The 2026 baseline:</p>
 
 <table>
 <tr><th>Layer</th><th>What to do</th><th>Tools</th></tr>
@@ -4678,27 +4076,4 @@ app.get(&quot;/orders/:id&quot;, requireAuth, async (req, res) =&gt; {
 <li><strong>Regular dependency audits</strong> &mdash; <code>pnpm audit</code> + Renovate/Dependabot keep things current.</li>
 </ul>
 
-<p>Security is not a checkbox &mdash; it&rsquo;s a continuous program. The single biggest leverage point in 2026 is <strong>never run your own auth or payments</strong>: managed services (Clerk/Auth0/Stripe) handle 95% of compliance work and have far better security teams than yours. Spend your effort on tenant scoping, audit logging, and threat modeling the parts of your app that are uniquely yours.</p>
-    
-  </div>
-</article>
-
-    <nav class="chapter-nav" aria-label="Chapter navigation">
-      <a class="chapter-nav__prev" href="system-design-mern-scenario.html">
-      <span class="chapter-nav__dir">← Previous</span>
-      <span class="chapter-nav__title">System Design MERN Stack — Scenario Based</span>
-    </a>
-      <a class="chapter-nav__next" href="infrastructure-mern-advanced.html">
-      <span class="chapter-nav__dir">Next →</span>
-      <span class="chapter-nav__title">Infrastructure MERN Stack — Advanced</span>
-    </a>
-    </nav>
-
-  </section>
-
-</main>
-</div>
-
-<script src="../assets/script.js"></script>
-</body>
-</html>
+<p>Security is not a checkbox &mdash; it&rsquo;s a continuous program. The single biggest leverage point in 2026 is <strong>never run your own auth or payments</strong>: managed services (Clerk/Auth0/Stripe) handle 95% of compliance work and have far better security teams than yours. Spend your effort on tenant scoping, audit logging, and threat modeling the parts of your app that are uniquely yours.</p>'''

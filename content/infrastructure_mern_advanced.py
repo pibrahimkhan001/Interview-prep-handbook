@@ -1,118 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Infrastructure MERN Stack — Advanced · Interview Prep Mastery</title>
-<meta name="description" content="100 advanced interview questions on Infrastructure MERN Stack, with detailed explanations and examples.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="../assets/styles.css">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%239a6b1d'/%3E%3Ctext x='50' y='68' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold' font-size='48'%3EIP%3C/text%3E%3C/svg%3E">
-</head>
-<body>
-<header class="site-header">
-  <div class="site-header__inner">
-    <button class="menu-toggle" aria-label="Open menu" type="button">☰ Menu</button>
-    <a class="brand" href="../index.html">
-      <span class="brand__mark">IP</span>
-      <span class="brand__text">
-        <span class="brand__title">Interview Prep Mastery</span>
-        <span class="brand__subtitle">Interactive learning guide</span>
-      </span>
-    </a>
-    <nav class="header-nav">
-      <a href="../index.html#roadmap">Roadmap</a>
-      <a href="../index.html#chapters">All chapters</a>
-      <button class="theme-toggle" type="button" aria-label="Toggle color scheme">☾ Dark</button>
-    </nav>
-  </div>
-</header>
-<div class="layout">
-<aside class="sidebar" aria-label="Site navigation">
-  <div class="sidebar__header">Chapter Navigator</div>
-  
-        <div class="nav-part">
-          <div class="nav-part__label">Part 1</div>
-          <div class="nav-part__title">Core Programming Languages</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">JavaScript</li><li><a class="" href="../chapters/javascript-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/javascript-tricky.html"><span class="nav-item__title">Tricky</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-coding.html"><span class="nav-item__title">Advanced Coding</span><span class="nav-item__meta">100 questions · 100 min read</span></a></li><li><a class="" href="../chapters/javascript-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-scenario.html"><span class="nav-item__title">Advanced Scenario Based</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Python</li><li><a class="" href="../chapters/python-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/python-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 2</div>
-          <div class="nav-part__title">Web Fundamentals</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">HTML</li><li><a class="" href="../chapters/html-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/html-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/html-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CSS</li><li><a class="" href="../chapters/css-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">102 questions · 60 min read</span></a></li><li><a class="" href="../chapters/css-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/css-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">101 questions · 90 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 3</div>
-          <div class="nav-part__title">Backend Technologies</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Node.Js</li><li><a class="" href="../chapters/nodejs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/nodejs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ExpressJS</li><li><a class="" href="../chapters/expressjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/expressjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/expressjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">API</li><li><a class="" href="../chapters/api-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/api-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 4</div>
-          <div class="nav-part__title">Frontend Frameworks</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ReactJS</li><li><a class="" href="../chapters/reactjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">101 questions · 60 min read</span></a></li><li><a class="" href="../chapters/reactjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 5</div>
-          <div class="nav-part__title">Databases</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MYSQL</li><li><a class="" href="../chapters/mysql-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mysql-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MongoDB</li><li><a class="" href="../chapters/mongodb-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mongodb-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 6</div>
-          <div class="nav-part__title">System Design &amp; DevOps</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">System Design MERN Stack</li><li><a class="" href="../chapters/system-design-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Infrastructure MERN Stack</li><li><a class="" href="../chapters/infrastructure-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="active" href="../chapters/infrastructure-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CI/CD Pipeline</li><li><a class="" href="../chapters/cicd-pipeline-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-</aside>
-<main class="main" id="main">
+# Infrastructure MERN Stack — Advanced
+# Mechanism-focused prose, internals + trade-off tables, 2026-current libraries.
 
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="../index.html">Home</a>
-    <span class="breadcrumb__sep">›</span>
-    <a href="../index.html#part-6">System Design &amp; DevOps</a>
-    <span class="breadcrumb__sep">›</span>
-    <span>Infrastructure MERN Stack — Advanced</span>
-  </nav>
+ANSWERS: dict[int, str] = {}
 
-  <header class="chapter-header">
-    <div class="chapter-label">Infrastructure MERN Stack · Advanced</div>
-    <h1 class="chapter-title">Advanced Infrastructure MERN Stack Interview Questions</h1>
-    <p class="chapter-lede">Deep internals, architecture decisions, and questions typical of senior-level interviews.</p>
-    <div class="chapter-meta">
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Questions</span><span class="chapter-meta__value">100</span></div>
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Level</span><span class="chapter-meta__value">Advanced</span></div>
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Estimated reading</span><span class="chapter-meta__value">90 min read</span></div>
-    </div>
-    
-  </header>
 
-  <section class="prose">
-
-    <div class="toc" id="toc">
-      <div class="toc__title">All questions in this chapter</div>
-      <ul class="toc__list">
-        <li><a href="#q1"><span class="toc__num">1.</span>How do you implement a highly available and scalable MERN stack application on AWS?</a></li><li><a href="#q2"><span class="toc__num">2.</span>Explain how you would set up a CI/CD pipeline for a MERN stack application using Jenkins.</a></li><li><a href="#q3"><span class="toc__num">3.</span>How do you manage secrets and sensitive configuration in a MERN stack application?</a></li><li><a href="#q4"><span class="toc__num">4.</span>Describe the steps to set up autoscaling for a Node.js server on AWS EC2.</a></li><li><a href="#q5"><span class="toc__num">5.</span>How do you implement role-based access control (RBAC) in a MERN stack application?</a></li><li><a href="#q6"><span class="toc__num">6.</span>Explain how you would set up and configure Kubernetes for a MERN stack application.</a></li><li><a href="#q7"><span class="toc__num">7.</span>How do you handle database migrations and schema changes in MongoDB for a production en...</a></li><li><a href="#q8"><span class="toc__num">8.</span>Describe the process to set up a reverse proxy with Nginx for a MERN stack application.</a></li><li><a href="#q9"><span class="toc__num">9.</span>How do you ensure data consistency and reliability in a sharded MongoDB cluster?</a></li><li><a href="#q10"><span class="toc__num">10.</span>Explain how you would monitor and optimize the performance of a MERN stack application.</a></li><li><a href="#q11"><span class="toc__num">11.</span>How do you implement caching strategies for a MERN stack application using Redis?</a></li><li><a href="#q12"><span class="toc__num">12.</span>Describe how you would set up and manage a multi-region deployment for a MERN stack app...</a></li><li><a href="#q13"><span class="toc__num">13.</span>How do you implement secure authentication using OAuth2 in a MERN stack application?</a></li><li><a href="#q14"><span class="toc__num">14.</span>Explain the steps to configure and use AWS CloudFront as a CDN for a MERN stack applica...</a></li><li><a href="#q15"><span class="toc__num">15.</span>How do you handle session management in a distributed MERN stack application?</a></li><li><a href="#q16"><span class="toc__num">16.</span>Describe how to implement WebSocket communication for real-time features in a MERN stac...</a></li><li><a href="#q17"><span class="toc__num">17.</span>How do you deploy a MERN stack application using Docker and Docker Compose?</a></li><li><a href="#q18"><span class="toc__num">18.</span>Explain how you would set up logging and monitoring using the ELK stack (Elasticsearch,...</a></li><li><a href="#q19"><span class="toc__num">19.</span>How do you handle error handling and logging in a distributed MERN stack application?</a></li><li><a href="#q20"><span class="toc__num">20.</span>Describe the process to configure and use AWS RDS for MongoDB in a MERN stack applicati...</a></li><li><a href="#q21"><span class="toc__num">21.</span>How do you implement data encryption at rest and in transit for a MERN stack application?</a></li><li><a href="#q22"><span class="toc__num">22.</span>Explain how you would set up and manage a microservices architecture using the MERN sta...</a></li><li><a href="#q23"><span class="toc__num">23.</span>How do you implement GraphQL with Apollo Server in a MERN stack application?</a></li><li><a href="#q24"><span class="toc__num">24.</span>Describe the steps to use Terraform for managing infrastructure as code for a MERN stac...</a></li><li><a href="#q25"><span class="toc__num">25.</span>How do you set up and manage horizontal scaling for a Node.js server?</a></li><li><a href="#q26"><span class="toc__num">26.</span>Explain how to implement security best practices for a MERN stack application.</a></li><li><a href="#q27"><span class="toc__num">27.</span>How do you use AWS Lambda and API Gateway to create serverless functions for a MERN sta...</a></li><li><a href="#q28"><span class="toc__num">28.</span>Describe how to implement a continuous delivery pipeline using GitHub Actions for a MER...</a></li><li><a href="#q29"><span class="toc__num">29.</span>How do you handle and manage API rate limiting and throttling in a MERN stack applicati...</a></li><li><a href="#q30"><span class="toc__num">30.</span>Explain how you would set up and use AWS Elastic Beanstalk for deploying a MERN stack a...</a></li><li><a href="#q31"><span class="toc__num">31.</span>How do you implement and manage feature flags in a MERN stack application?</a></li><li><a href="#q32"><span class="toc__num">32.</span>Describe the process to set up application performance monitoring using New Relic or Da...</a></li><li><a href="#q33"><span class="toc__num">33.</span>How do you implement a distributed tracing system for a MERN stack application?</a></li><li><a href="#q34"><span class="toc__num">34.</span>Explain how you would handle database backup and restore strategies for MongoDB in prod...</a></li><li><a href="#q35"><span class="toc__num">35.</span>How do you use AWS S3 and CloudFront to serve static assets for a React application?</a></li><li><a href="#q36"><span class="toc__num">36.</span>Describe the steps to implement Infrastructure as Code (IaC) using AWS CloudFormation f...</a></li><li><a href="#q37"><span class="toc__num">37.</span>How do you set up and use a message broker like RabbitMQ or Kafka in a MERN stack appli...</a></li><li><a href="#q38"><span class="toc__num">38.</span>Explain how you would manage state in a large-scale React application using Redux or Mo...</a></li><li><a href="#q39"><span class="toc__num">39.</span>How do you implement a multi-tenant architecture using the MERN stack?</a></li><li><a href="#q40"><span class="toc__num">40.</span>Describe the process to set up an end-to-end testing pipeline using Cypress for a MERN ...</a></li><li><a href="#q41"><span class="toc__num">41.</span>How do you handle schema validation and enforcement in MongoDB?</a></li><li><a href="#q42"><span class="toc__num">42.</span>Explain the steps to set up and manage a managed MongoDB instance using MongoDB Atlas.</a></li><li><a href="#q43"><span class="toc__num">43.</span>How do you implement real-time analytics and dashboards in a MERN stack application?</a></li><li><a href="#q44"><span class="toc__num">44.</span>Describe how you would set up and manage database replication in MongoDB.</a></li><li><a href="#q45"><span class="toc__num">45.</span>How do you handle concurrency and parallel processing in a Node.js application?</a></li><li><a href="#q46"><span class="toc__num">46.</span>Explain the process to implement server-side rendering (SSR) for a React application us...</a></li><li><a href="#q47"><span class="toc__num">47.</span>How do you set up and use AWS Secrets Manager to store and retrieve sensitive configura...</a></li><li><a href="#q48"><span class="toc__num">48.</span>Describe the steps to implement a robust CI/CD pipeline using CircleCI for a MERN stack...</a></li><li><a href="#q49"><span class="toc__num">49.</span>How do you optimize query performance and indexing in a MongoDB database?</a></li><li><a href="#q50"><span class="toc__num">50.</span>Explain how you would set up and use Azure DevOps for deploying a MERN stack application.</a></li><li><a href="#q51"><span class="toc__num">51.</span>How do you handle application and infrastructure monitoring using Prometheus and Grafana?</a></li><li><a href="#q52"><span class="toc__num">52.</span>Describe the process to configure and use AWS Elastic Load Balancer (ELB) for a MERN st...</a></li><li><a href="#q53"><span class="toc__num">53.</span>How do you implement and manage automated testing for a MERN stack application?</a></li><li><a href="#q54"><span class="toc__num">54.</span>Explain how to use Firebase for authentication and real-time database features in a MER...</a></li><li><a href="#q55"><span class="toc__num">55.</span>How do you set up and manage a CI/CD pipeline using Jenkins for a MERN stack application?</a></li><li><a href="#q56"><span class="toc__num">56.</span>Describe the steps to use AWS CloudWatch for monitoring and alerting in a MERN stack ap...</a></li><li><a href="#q57"><span class="toc__num">57.</span>How do you implement service discovery and load balancing in a microservices architectu...</a></li><li><a href="#q58"><span class="toc__num">58.</span>Explain how you would use Docker Swarm for container orchestration in a MERN stack appl...</a></li><li><a href="#q59"><span class="toc__num">59.</span>How do you handle and manage data migration between different versions of a MongoDB sch...</a></li><li><a href="#q60"><span class="toc__num">60.</span>Describe the process to implement API versioning and backward compatibility in a MERN s...</a></li><li><a href="#q61"><span class="toc__num">61.</span>How do you set up and use Azure Kubernetes Service (AKS) for deploying a MERN stack app...</a></li><li><a href="#q62"><span class="toc__num">62.</span>Explain how you would implement a real-time notification system using WebSockets in a M...</a></li><li><a href="#q63"><span class="toc__num">63.</span>How do you manage and monitor serverless functions using AWS Lambda and AWS CloudWatch?</a></li><li><a href="#q64"><span class="toc__num">64.</span>Describe the steps to configure and use AWS CodePipeline for a MERN stack application.</a></li><li><a href="#q65"><span class="toc__num">65.</span>How do you handle and optimize memory management in a Node.js application?</a></li><li><a href="#q66"><span class="toc__num">66.</span>Explain the process to implement a secure API gateway using AWS API Gateway or Kong.</a></li><li><a href="#q67"><span class="toc__num">67.</span>How do you set up and use Google Cloud Platform (GCP) for deploying a MERN stack applic...</a></li><li><a href="#q68"><span class="toc__num">68.</span>Describe how to implement a disaster recovery plan for a MERN stack application.</a></li><li><a href="#q69"><span class="toc__num">69.</span>How do you handle and manage database transactions in MongoDB?</a></li><li><a href="#q70"><span class="toc__num">70.</span>Explain how you would set up and manage a Kubernetes cluster using Google Kubernetes En...</a></li><li><a href="#q71"><span class="toc__num">71.</span>How do you implement a service mesh using Istio or Linkerd in a MERN stack application?</a></li><li><a href="#q72"><span class="toc__num">72.</span>Describe the process to implement automated backups and restore strategies for MongoDB.</a></li><li><a href="#q73"><span class="toc__num">73.</span>How do you use AWS Fargate for running containers without managing servers in a MERN st...</a></li><li><a href="#q74"><span class="toc__num">74.</span>Explain how to implement a robust error handling and logging system in a MERN stack app...</a></li><li><a href="#q75"><span class="toc__num">75.</span>How do you set up and use HashiCorp Vault for secret management in a MERN stack applica...</a></li><li><a href="#q76"><span class="toc__num">76.</span>Describe the steps to implement serverless deployment using AWS SAM or Serverless Frame...</a></li><li><a href="#q77"><span class="toc__num">77.</span>How do you handle and manage rate limiting and API throttling using Nginx or AWS API Ga...</a></li><li><a href="#q78"><span class="toc__num">78.</span>Explain the process to implement application security best practices for a MERN stack a...</a></li><li><a href="#q79"><span class="toc__num">79.</span>How do you set up and manage automated scaling using Kubernetes Horizontal Pod Autoscal...</a></li><li><a href="#q80"><span class="toc__num">80.</span>Describe how to implement and manage cross-origin resource sharing (CORS) in a MERN sta...</a></li><li><a href="#q81"><span class="toc__num">81.</span>How do you handle and optimize disk I/O performance in a MongoDB deployment?</a></li><li><a href="#q82"><span class="toc__num">82.</span>Explain how to set up and use AWS CodeBuild for continuous integration in a MERN stack ...</a></li><li><a href="#q83"><span class="toc__num">83.</span>How do you manage and monitor application performance using AppDynamics or Dynatrace?</a></li><li><a href="#q84"><span class="toc__num">84.</span>Describe the process to implement centralized logging using Fluentd or Logstash for a M...</a></li><li><a href="#q85"><span class="toc__num">85.</span>How do you set up and use AWS Step Functions to orchestrate serverless workflows in a M...</a></li><li><a href="#q86"><span class="toc__num">86.</span>Explain how to implement and manage a blue-green deployment strategy for a MERN stack a...</a></li><li><a href="#q87"><span class="toc__num">87.</span>How do you handle and manage service dependencies and configuration using Spring Cloud ...</a></li><li><a href="#q88"><span class="toc__num">88.</span>Describe the steps to implement Infrastructure as Code (IaC) using Ansible for a MERN s...</a></li><li><a href="#q89"><span class="toc__num">89.</span>How do you optimize network performance and latency for a MERN stack application?</a></li><li><a href="#q90"><span class="toc__num">90.</span>Explain how to set up and use AWS CodeDeploy for automated deployments in a MERN stack ...</a></li><li><a href="#q91"><span class="toc__num">91.</span>How do you manage and monitor database performance using MongoDB Atlas Performance Advi...</a></li><li><a href="#q92"><span class="toc__num">92.</span>Describe the process to implement security policies and access control using AWS Identi...</a></li><li><a href="#q93"><span class="toc__num">93.</span>How do you handle and manage application state using Redux or MobX in a large-scale Rea...</a></li><li><a href="#q94"><span class="toc__num">94.</span>Explain how to set up and use AWS CloudFormation for infrastructure management in a MER...</a></li><li><a href="#q95"><span class="toc__num">95.</span>How do you manage and monitor Kubernetes clusters using Rancher or OpenShift?</a></li><li><a href="#q96"><span class="toc__num">96.</span>Describe the steps to implement a canary deployment strategy for a MERN stack applicati...</a></li><li><a href="#q97"><span class="toc__num">97.</span>How do you handle and manage service orchestration and coordination using Apache Kafka ...</a></li><li><a href="#q98"><span class="toc__num">98.</span>Explain how to implement and manage API documentation using Swagger or OpenAPI in a MER...</a></li><li><a href="#q99"><span class="toc__num">99.</span>How do you set up and manage distributed caching using Redis or Memcached in a MERN sta...</a></li><li><a href="#q100"><span class="toc__num">100.</span>Describe the process to implement end-to-end encryption for data in transit and at rest...</a></li>
-      </ul>
-    </div>
-
-    
-<article class="qa" id="q1">
-  <div class="qa__number">Question 1</div>
-  <h3 class="qa__question">How do you implement a highly available and scalable MERN stack application on AWS?</h3>
-  <div class="qa__answer">
-    <p>HA + scalable MERN on AWS is a layered architecture where every tier scales independently and any single failure is recoverable.</p>
+ANSWERS[1] = r'''<p>HA + scalable MERN on AWS is a layered architecture where every tier scales independently and any single failure is recoverable.</p>
 <table>
 <thead><tr><th>Layer</th><th>Mechanism</th><th>AWS service</th></tr></thead>
 <tbody>
@@ -134,15 +26,10 @@
 <li><strong>Mongo Atlas</strong> over self&ndash;managed &mdash; Atlas handles replica&ndash;set elections, backups, point&ndash;in&ndash;time restore, and BI integration. Place the cluster in a VPC peered with your app VPC; never expose to the public internet.</li>
 <li><strong>Multi&ndash;region for true HA</strong> &mdash; active&ndash;active for reads via Atlas Global Clusters + CloudFront origin failover; active&ndash;passive for writes (most teams). Cross&ndash;region RPO &lt;30s, RTO &lt;5min.</li>
 </ul>
-<p>Trade&ndash;offs: ECS Fargate is simpler than EKS but locks you to AWS; EKS gives portability + Helm ecosystem at the cost of control&ndash;plane complexity. For 2026 most MERN teams pick <strong>ECS Fargate or App Runner</strong> until traffic justifies EKS, or skip AWS entirely for <strong>Fly.io / Cloud Run / Render / Railway</strong> + <strong>Cloudflare</strong> at the edge.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q2">
-  <div class="qa__number">Question 2</div>
-  <h3 class="qa__question">Explain how you would set up a CI/CD pipeline for a MERN stack application using Jenkins.</h3>
-  <div class="qa__answer">
-    <p>A Jenkins CI/CD pipeline for MERN runs as code in a <code>Jenkinsfile</code> committed alongside the project. Multi&ndash;branch pipelines pick up branches automatically; webhook from GitHub triggers builds on push.</p>
+<p>Trade&ndash;offs: ECS Fargate is simpler than EKS but locks you to AWS; EKS gives portability + Helm ecosystem at the cost of control&ndash;plane complexity. For 2026 most MERN teams pick <strong>ECS Fargate or App Runner</strong> until traffic justifies EKS, or skip AWS entirely for <strong>Fly.io / Cloud Run / Render / Railway</strong> + <strong>Cloudflare</strong> at the edge.</p>'''
+
+
+ANSWERS[2] = r'''<p>A Jenkins CI/CD pipeline for MERN runs as code in a <code>Jenkinsfile</code> committed alongside the project. Multi&ndash;branch pipelines pick up branches automatically; webhook from GitHub triggers builds on push.</p>
 
 <pre><code>// Jenkinsfile (declarative)
 pipeline {
@@ -188,15 +75,10 @@ pipeline {
 <li><strong>Manual approval gate</strong> for prod via <code>input</code>; or auto&ndash;deploy with progressive delivery (Argo Rollouts, Flagger).</li>
 </ul>
 
-<p><strong>Honest 2026 advice:</strong> Jenkins is heavy &mdash; you maintain controllers, plugins, agents, and security patches. New projects should default to <strong>GitHub Actions</strong>, <strong>GitLab CI</strong>, or <strong>CircleCI</strong> &mdash; same capabilities, zero infrastructure. Jenkins still wins for self&ndash;hosted compliance environments, complex matrix builds across hardware, or shops with deep existing investment.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q3">
-  <div class="qa__number">Question 3</div>
-  <h3 class="qa__question">How do you manage secrets and sensitive configuration in a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p>Secrets management has three jobs: keep secrets out of code, deliver them to the right service at the right time, and rotate them without redeploys. Mechanism choices in 2026:</p>
+<p><strong>Honest 2026 advice:</strong> Jenkins is heavy &mdash; you maintain controllers, plugins, agents, and security patches. New projects should default to <strong>GitHub Actions</strong>, <strong>GitLab CI</strong>, or <strong>CircleCI</strong> &mdash; same capabilities, zero infrastructure. Jenkins still wins for self&ndash;hosted compliance environments, complex matrix builds across hardware, or shops with deep existing investment.</p>'''
+
+
+ANSWERS[3] = r'''<p>Secrets management has three jobs: keep secrets out of code, deliver them to the right service at the right time, and rotate them without redeploys. Mechanism choices in 2026:</p>
 
 <table>
 <thead><tr><th>Tool</th><th>Strengths</th><th>Trade&ndash;off</th></tr></thead>
@@ -219,15 +101,10 @@ pipeline {
 <li><strong>Rotation policies</strong> &mdash; DB passwords every 90 days; API keys to third parties on schedule + on suspicion of compromise; signing keys yearly with overlap window.</li>
 </ul>
 
-<p>Code pattern: load once at startup into a typed config object (<strong>zod-config</strong>, <strong>convict</strong>, <strong>znv</strong>); fail fast if any required value is missing; never log a secret&rsquo;s value, only its key name. For the React side, never put server secrets into <code>VITE_</code>/<code>NEXT_PUBLIC_</code> &mdash; those are public; client&ndash;side &ldquo;keys&rdquo; mean the secret can be inverted from the bundle. Move privileged calls to a server route that holds the secret.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q4">
-  <div class="qa__number">Question 4</div>
-  <h3 class="qa__question">Describe the steps to set up autoscaling for a Node.js server on AWS EC2.</h3>
-  <div class="qa__answer">
-    <p>Autoscaling for Node.js on EC2 means an Auto Scaling Group (ASG) launching/terminating instances behind a load balancer based on metrics. Steps:</p>
+<p>Code pattern: load once at startup into a typed config object (<strong>zod-config</strong>, <strong>convict</strong>, <strong>znv</strong>); fail fast if any required value is missing; never log a secret&rsquo;s value, only its key name. For the React side, never put server secrets into <code>VITE_</code>/<code>NEXT_PUBLIC_</code> &mdash; those are public; client&ndash;side &ldquo;keys&rdquo; mean the secret can be inverted from the bundle. Move privileged calls to a server route that holds the secret.</p>'''
+
+
+ANSWERS[4] = r'''<p>Autoscaling for Node.js on EC2 means an Auto Scaling Group (ASG) launching/terminating instances behind a load balancer based on metrics. Steps:</p>
 
 <ol>
 <li><strong>Bake an AMI</strong> with Node + your app via Packer, or use a base AMI + user&ndash;data script that pulls the latest container/code. Container approach is more common in 2026.</li>
@@ -271,15 +148,10 @@ resource &quot;aws_autoscaling_policy&quot; &quot;rps&quot; {
   }
 }</code></pre>
 
-<p>Critical Node specifics: respect <code>SIGTERM</code> for graceful shutdown (<strong>terminus</strong>, <strong>graceful-shutdown</strong>) so in&ndash;flight requests finish during scale&ndash;in. Set ALB <code>deregistration_delay</code> to your slowest request budget (e.g. 30s). Cluster Node across cores via PM2/Node <code>cluster</code> module or run one process per small instance and let the ASG scale instances. For 2026, prefer <strong>ECS/Fargate</strong> or <strong>App Runner</strong> over raw EC2 ASGs &mdash; identical autoscaling without managing AMIs.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q5">
-  <div class="qa__number">Question 5</div>
-  <h3 class="qa__question">How do you implement role-based access control (RBAC) in a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p>RBAC has three pieces: <strong>roles</strong> (named permission bundles), <strong>assignments</strong> (user &harr; role), and <strong>checks</strong> (route/handler enforcement). Implementation in MERN:</p>
+<p>Critical Node specifics: respect <code>SIGTERM</code> for graceful shutdown (<strong>terminus</strong>, <strong>graceful-shutdown</strong>) so in&ndash;flight requests finish during scale&ndash;in. Set ALB <code>deregistration_delay</code> to your slowest request budget (e.g. 30s). Cluster Node across cores via PM2/Node <code>cluster</code> module or run one process per small instance and let the ASG scale instances. For 2026, prefer <strong>ECS/Fargate</strong> or <strong>App Runner</strong> over raw EC2 ASGs &mdash; identical autoscaling without managing AMIs.</p>'''
+
+
+ANSWERS[5] = r'''<p>RBAC has three pieces: <strong>roles</strong> (named permission bundles), <strong>assignments</strong> (user &harr; role), and <strong>checks</strong> (route/handler enforcement). Implementation in MERN:</p>
 
 <pre><code>// 1) Schema &mdash; roles + permissions; users hold roles
 const userSchema = new Schema({
@@ -329,15 +201,10 @@ app.delete(&quot;/products/:id&quot;,
 <li><strong>Front&ndash;end</strong> uses the same role/permission claims to hide UI; backend remains the only source of truth.</li>
 </ul>
 
-<p>When RBAC isn&rsquo;t enough &mdash; hierarchical orgs, sharing rules, &ldquo;everyone in this folder can edit&rdquo; &mdash; reach for <strong>ReBAC</strong> systems: <strong>SpiceDB</strong>, <strong>OpenFGA</strong>, <strong>Cerbos</strong>, <strong>Permify</strong>, <strong>Oso Cloud</strong>. They model authz as a graph (Zanzibar paper) and answer &ldquo;can user X do Y on resource Z?&rdquo; in a single call. Managed identity providers (<strong>Clerk</strong> Organizations, <strong>WorkOS</strong>, <strong>Stytch B2B</strong>) include RBAC + SCIM provisioning out of the box.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q6">
-  <div class="qa__number">Question 6</div>
-  <h3 class="qa__question">Explain how you would set up and configure Kubernetes for a MERN stack application.</h3>
-  <div class="qa__answer">
-    <p>Kubernetes for MERN has a fixed shape: each tier is a Deployment + Service, ingress routes external traffic, persistent state lives outside the cluster (Mongo Atlas, ElastiCache).</p>
+<p>When RBAC isn&rsquo;t enough &mdash; hierarchical orgs, sharing rules, &ldquo;everyone in this folder can edit&rdquo; &mdash; reach for <strong>ReBAC</strong> systems: <strong>SpiceDB</strong>, <strong>OpenFGA</strong>, <strong>Cerbos</strong>, <strong>Permify</strong>, <strong>Oso Cloud</strong>. They model authz as a graph (Zanzibar paper) and answer &ldquo;can user X do Y on resource Z?&rdquo; in a single call. Managed identity providers (<strong>Clerk</strong> Organizations, <strong>WorkOS</strong>, <strong>Stytch B2B</strong>) include RBAC + SCIM provisioning out of the box.</p>'''
+
+
+ANSWERS[6] = r'''<p>Kubernetes for MERN has a fixed shape: each tier is a Deployment + Service, ingress routes external traffic, persistent state lives outside the cluster (Mongo Atlas, ElastiCache).</p>
 
 <table>
 <thead><tr><th>Workload</th><th>K8s primitives</th></tr></thead>
@@ -391,15 +258,10 @@ spec:
 <li><strong>GitOps</strong> &mdash; Argo CD or Flux reconciles cluster state from a Git repo. Helm charts or Kustomize for templating.</li>
 </ul>
 
-<p>Honest 2026 advice: K8s is overkill for small MERN apps. Use <strong>ECS Fargate</strong>, <strong>Cloud Run</strong>, <strong>Fly Machines</strong>, <strong>Render</strong>, or <strong>Railway</strong> until you genuinely need Kubernetes&rsquo; multi&ndash;workload sophistication. When you do, prefer managed control planes (<strong>EKS Auto Mode</strong>, <strong>GKE Autopilot</strong>, <strong>AKS</strong>) over self&ndash;managed.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q7">
-  <div class="qa__number">Question 7</div>
-  <h3 class="qa__question">How do you handle database migrations and schema changes in MongoDB for a production environment?</h3>
-  <div class="qa__answer">
-    <p>Production Mongo schema changes use <strong>expand&ndash;and&ndash;contract</strong>: deploy code that handles both old + new shape, backfill data online, then remove the legacy path. This avoids any window where the deployed app and the on&ndash;disk schema disagree.</p>
+<p>Honest 2026 advice: K8s is overkill for small MERN apps. Use <strong>ECS Fargate</strong>, <strong>Cloud Run</strong>, <strong>Fly Machines</strong>, <strong>Render</strong>, or <strong>Railway</strong> until you genuinely need Kubernetes&rsquo; multi&ndash;workload sophistication. When you do, prefer managed control planes (<strong>EKS Auto Mode</strong>, <strong>GKE Autopilot</strong>, <strong>AKS</strong>) over self&ndash;managed.</p>'''
+
+
+ANSWERS[7] = r'''<p>Production Mongo schema changes use <strong>expand&ndash;and&ndash;contract</strong>: deploy code that handles both old + new shape, backfill data online, then remove the legacy path. This avoids any window where the deployed app and the on&ndash;disk schema disagree.</p>
 
 <pre><code>// Phase 1 (EXPAND): code reads both, writes new
 function getName(user) {
@@ -441,15 +303,10 @@ module.exports = {
 <li><strong>Reversible</strong> &mdash; always implement <code>down</code>. Even if you never run it, writing it forces design clarity.</li>
 </ul>
 
-<p>For shape changes that can&rsquo;t expand&ndash;contract (changing a primary identifier, splitting a collection), schedule a maintenance window or use <strong>change streams</strong> to dual&ndash;write into the new shape while live traffic continues on the old shape, then flip readers atomically. Atlas <strong>Online Archive</strong> moves cold data to cheap storage transparently &mdash; useful when &ldquo;migration&rdquo; really means &ldquo;tier this data down.&rdquo;</p>
-    
-  </div>
-</article>
-<article class="qa" id="q8">
-  <div class="qa__number">Question 8</div>
-  <h3 class="qa__question">Describe the process to set up a reverse proxy with Nginx for a MERN stack application.</h3>
-  <div class="qa__answer">
-    <p>Nginx as a reverse proxy in front of MERN handles TLS termination, static file serving, request routing, gzip/brotli compression, basic rate limiting, and health checks &mdash; all the things you don&rsquo;t want Node doing in production.</p>
+<p>For shape changes that can&rsquo;t expand&ndash;contract (changing a primary identifier, splitting a collection), schedule a maintenance window or use <strong>change streams</strong> to dual&ndash;write into the new shape while live traffic continues on the old shape, then flip readers atomically. Atlas <strong>Online Archive</strong> moves cold data to cheap storage transparently &mdash; useful when &ldquo;migration&rdquo; really means &ldquo;tier this data down.&rdquo;</p>'''
+
+
+ANSWERS[8] = r'''<p>Nginx as a reverse proxy in front of MERN handles TLS termination, static file serving, request routing, gzip/brotli compression, basic rate limiting, and health checks &mdash; all the things you don&rsquo;t want Node doing in production.</p>
 
 <pre><code># /etc/nginx/sites-available/mern.conf
 upstream api_backend {
@@ -516,15 +373,10 @@ server { listen 80; server_name api.example.com; return 301 https://$host$reques
 <li><strong>HTTP/2 + HTTP/3</strong> &mdash; HTTP/2 multiplexes; HTTP/3 (QUIC) needs nginx 1.25+ with the <code>quic</code> module. Cloudflare in front gets HTTP/3 for free.</li>
 </ul>
 
-<p>2026 alternatives: <strong>Caddy</strong> (auto&ndash;TLS via Let&rsquo;s Encrypt out of the box, simpler config), <strong>Traefik</strong> (Docker/K8s native, dynamic discovery), <strong>Envoy</strong> (programmable, the foundation of Istio + many service meshes). Putting <strong>Cloudflare</strong> or <strong>CloudFront</strong> in front and using nginx purely as an internal proxy is the most common modern setup.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q9">
-  <div class="qa__number">Question 9</div>
-  <h3 class="qa__question">How do you ensure data consistency and reliability in a sharded MongoDB cluster?</h3>
-  <div class="qa__answer">
-    <p>A sharded Mongo cluster splits a collection across multiple replica sets (shards) by a <strong>shard key</strong>, with <code>mongos</code> routing queries. Consistency + reliability rest on three mechanisms: write concern, read concern, and shard key design.</p>
+<p>2026 alternatives: <strong>Caddy</strong> (auto&ndash;TLS via Let&rsquo;s Encrypt out of the box, simpler config), <strong>Traefik</strong> (Docker/K8s native, dynamic discovery), <strong>Envoy</strong> (programmable, the foundation of Istio + many service meshes). Putting <strong>Cloudflare</strong> or <strong>CloudFront</strong> in front and using nginx purely as an internal proxy is the most common modern setup.</p>'''
+
+
+ANSWERS[9] = r'''<p>A sharded Mongo cluster splits a collection across multiple replica sets (shards) by a <strong>shard key</strong>, with <code>mongos</code> routing queries. Consistency + reliability rest on three mechanisms: write concern, read concern, and shard key design.</p>
 
 <table>
 <thead><tr><th>Concern</th><th>Setting</th><th>Effect</th></tr></thead>
@@ -562,15 +414,10 @@ await session.withTransaction(async () =&gt; {
 <li>Monitor <strong>oplog window</strong> (&gt;24h target), <strong>replication lag</strong> (&lt;10s), <strong>chunk balancer</strong> activity, <strong>jumbo chunks</strong> count.</li>
 </ul>
 
-<p>For multi&ndash;region active&ndash;active, <strong>Atlas Global Clusters</strong> shard by zone (<code>countryISO</code>) so each region owns its data primary, with majority reads/writes local. Cross&ndash;region requests fall back to the owning shard transparently.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q10">
-  <div class="qa__number">Question 10</div>
-  <h3 class="qa__question">Explain how you would monitor and optimize the performance of a MERN stack application.</h3>
-  <div class="qa__answer">
-    <p>Performance work is loop&ndash;driven: instrument, find the slowest layer, fix, measure, repeat. The MERN stack has predictable hot spots and a standard set of mechanisms for each.</p>
+<p>For multi&ndash;region active&ndash;active, <strong>Atlas Global Clusters</strong> shard by zone (<code>countryISO</code>) so each region owns its data primary, with majority reads/writes local. Cross&ndash;region requests fall back to the owning shard transparently.</p>'''
+
+
+ANSWERS[10] = r'''<p>Performance work is loop&ndash;driven: instrument, find the slowest layer, fix, measure, repeat. The MERN stack has predictable hot spots and a standard set of mechanisms for each.</p>
 
 <table>
 <thead><tr><th>Layer</th><th>Symptom</th><th>Mechanism</th></tr></thead>
@@ -606,15 +453,10 @@ try {
 <li><strong>Database first</strong> &mdash; Mongo queries that hit indexes return in &lt;5ms; queries that don&rsquo;t are 100&ndash;1000x slower. The single highest&ndash;leverage area.</li>
 <li><strong>Frontend bundles</strong> &mdash; ship &lt;200KB JS for first paint; use <code>import()</code> for heavy components; React Compiler (React 19) auto&ndash;memoizes.</li>
 <li><strong>Synthetic + real user</strong> &mdash; Datadog Synthetics or Checkly for canary tests from global locations; RUM for ground truth.</li>
-</ul>
-    
-  </div>
-</article>
-<article class="qa" id="q11">
-  <div class="qa__number">Question 11</div>
-  <h3 class="qa__question">How do you implement caching strategies for a MERN stack application using Redis?</h3>
-  <div class="qa__answer">
-    <p>Caching strategies trade staleness for latency. Pick the strategy per data shape; a single MERN app uses several at once.</p>
+</ul>'''
+
+
+ANSWERS[11] = r'''<p>Caching strategies trade staleness for latency. Pick the strategy per data shape; a single MERN app uses several at once.</p>
 
 <table>
 <thead><tr><th>Strategy</th><th>Pattern</th><th>Best for</th></tr></thead>
@@ -672,15 +514,10 @@ async function updateProduct(id, patch) {
 <li><strong>Hot keys</strong> &mdash; one key with 100K req/sec saturates a Redis shard. Replicate read replicas, or shard the key (<code>product:123:slot:N</code>).</li>
 </ul>
 
-<p>For TanStack/SWR on the React side, treat their caches as another layer with their own dedup + invalidation. <strong>Upstash Redis</strong> for serverless (HTTP, no TCP); <strong>Dragonfly</strong> for higher throughput than Redis on a single node; <strong>Hazelcast</strong>/<strong>Apache Ignite</strong> for very large near&ndash;cache deployments.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q12">
-  <div class="qa__number">Question 12</div>
-  <h3 class="qa__question">Describe how you would set up and manage a multi-region deployment for a MERN stack application.</h3>
-  <div class="qa__answer">
-    <p>Multi&ndash;region brings two questions: where does the data live, and where do users hit. Patterns:</p>
+<p>For TanStack/SWR on the React side, treat their caches as another layer with their own dedup + invalidation. <strong>Upstash Redis</strong> for serverless (HTTP, no TCP); <strong>Dragonfly</strong> for higher throughput than Redis on a single node; <strong>Hazelcast</strong>/<strong>Apache Ignite</strong> for very large near&ndash;cache deployments.</p>'''
+
+
+ANSWERS[12] = r'''<p>Multi&ndash;region brings two questions: where does the data live, and where do users hit. Patterns:</p>
 
 <table>
 <thead><tr><th>Pattern</th><th>Reads</th><th>Writes</th><th>Best for</th></tr></thead>
@@ -714,15 +551,10 @@ async function updateProduct(id, patch) {
 <li><strong>Cost</strong> &mdash; cross&ndash;region data transfer dominates AWS bills at scale; cache aggressively at edge.</li>
 </ul>
 
-<p>For 2026 simpler stacks: <strong>Cloudflare</strong> (Workers + R2 + D1 + Durable Objects) puts compute + storage at 300+ POPs natively; <strong>Fly.io</strong> deploys regions automatically based on user proximity; <strong>Vercel Edge Functions + Edge Config</strong> co&ndash;locate data with code. These platforms make multi&ndash;region the default with much less ops overhead than rolling your own AWS multi&ndash;region.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q13">
-  <div class="qa__number">Question 13</div>
-  <h3 class="qa__question">How do you implement secure authentication using OAuth2 in a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p>OAuth 2.1 / OpenID Connect (OIDC) delegates authentication to an Identity Provider (IdP). The mechanism: redirect user to IdP &rarr; user consents &rarr; IdP redirects back with a code &rarr; backend exchanges code for tokens. Use <strong>Authorization Code with PKCE</strong> for SPAs and native apps; never the implicit flow (deprecated).</p>
+<p>For 2026 simpler stacks: <strong>Cloudflare</strong> (Workers + R2 + D1 + Durable Objects) puts compute + storage at 300+ POPs natively; <strong>Fly.io</strong> deploys regions automatically based on user proximity; <strong>Vercel Edge Functions + Edge Config</strong> co&ndash;locate data with code. These platforms make multi&ndash;region the default with much less ops overhead than rolling your own AWS multi&ndash;region.</p>'''
+
+
+ANSWERS[13] = r'''<p>OAuth 2.1 / OpenID Connect (OIDC) delegates authentication to an Identity Provider (IdP). The mechanism: redirect user to IdP &rarr; user consents &rarr; IdP redirects back with a code &rarr; backend exchanges code for tokens. Use <strong>Authorization Code with PKCE</strong> for SPAs and native apps; never the implicit flow (deprecated).</p>
 
 <pre><code>// 1. Frontend kicks off &mdash; build authorization URL
 const codeVerifier  = base64url(crypto.randomBytes(32));
@@ -774,15 +606,10 @@ app.get(&quot;/auth/callback&quot;, async (req, res) =&gt; {
 <li><strong>Scopes + audiences</strong> &mdash; least privilege; one access token per resource server.</li>
 </ul>
 
-<p>2026 reality: <strong>build this once and never again.</strong> Use <strong>Auth.js (NextAuth)</strong> for Next.js, <strong>Clerk</strong>, <strong>Auth0</strong>, <strong>WorkOS</strong>, <strong>Stytch</strong>, <strong>Better Auth</strong>, or <strong>Supabase Auth</strong>. They handle the protocol details, MFA, social providers, account linking, refresh rotation, and SCIM for B2B. Roll your own only when compliance prohibits SaaS or you have very specific needs.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q14">
-  <div class="qa__number">Question 14</div>
-  <h3 class="qa__question">Explain the steps to configure and use AWS CloudFront as a CDN for a MERN stack application.</h3>
-  <div class="qa__answer">
-    <p>CloudFront sits in front of your origin (S3 + ALB + Lambda Function URL + custom HTTP), terminates TLS, and caches at 600+ edge locations. Setup steps:</p>
+<p>2026 reality: <strong>build this once and never again.</strong> Use <strong>Auth.js (NextAuth)</strong> for Next.js, <strong>Clerk</strong>, <strong>Auth0</strong>, <strong>WorkOS</strong>, <strong>Stytch</strong>, <strong>Better Auth</strong>, or <strong>Supabase Auth</strong>. They handle the protocol details, MFA, social providers, account linking, refresh rotation, and SCIM for B2B. Roll your own only when compliance prohibits SaaS or you have very specific needs.</p>'''
+
+
+ANSWERS[14] = r'''<p>CloudFront sits in front of your origin (S3 + ALB + Lambda Function URL + custom HTTP), terminates TLS, and caches at 600+ edge locations. Setup steps:</p>
 
 <ol>
 <li><strong>ACM cert</strong> in <code>us-east-1</code> for your domain (CloudFront only uses certs from that region).</li>
@@ -839,15 +666,10 @@ resource &quot;aws_cloudfront_distribution&quot; &quot;web&quot; {
 
 <p>Patterns: cache hashed/fingerprinted asset filenames forever (<code>app.a1b2c3.js</code>); short TTL + <code>stale-while-revalidate</code> on HTML so deploys propagate fast; use <strong>CloudFront Functions</strong> (lightweight, ~1ms) for redirects + header munging at the edge, <strong>Lambda@Edge</strong> for richer logic; invalidate by path on critical updates (<code>aws cloudfront create-invalidation</code>) but design your filenames to make invalidation rare.</p>
 
-<p>2026 alternative: <strong>Cloudflare</strong> often beats CloudFront on price (no egress fees with R2), simplicity (Workers KV + Durable Objects), and DX. Pick CloudFront when you&rsquo;re deeply on AWS and want native IAM/VPC integration.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q15">
-  <div class="qa__number">Question 15</div>
-  <h3 class="qa__question">How do you handle session management in a distributed MERN stack application?</h3>
-  <div class="qa__answer">
-    <p>In a distributed MERN app, &ldquo;session&rdquo; means: which user is making this request, plus any per&ndash;request context. Two architectures dominate:</p>
+<p>2026 alternative: <strong>Cloudflare</strong> often beats CloudFront on price (no egress fees with R2), simplicity (Workers KV + Durable Objects), and DX. Pick CloudFront when you&rsquo;re deeply on AWS and want native IAM/VPC integration.</p>'''
+
+
+ANSWERS[15] = r'''<p>In a distributed MERN app, &ldquo;session&rdquo; means: which user is making this request, plus any per&ndash;request context. Two architectures dominate:</p>
 
 <table>
 <thead><tr><th>Approach</th><th>Mechanism</th><th>Trade&ndash;off</th></tr></thead>
@@ -901,15 +723,9 @@ app.post(&quot;/auth/logout&quot;, (req, res) =&gt; req.session.destroy(() =&gt;
 <li><strong>Session fixation</strong> &mdash; regenerate session ID on privilege escalation (<code>req.session.regenerate</code>).</li>
 </ul>
 
-<p>For 2026 the pragmatic choice for new MERN apps: <strong>managed auth</strong> (Clerk, Auth0, WorkOS, Better Auth, Stytch, Supabase Auth) provides session + MFA + Passkeys + revocation + audit + SCIM all out of the box, with a single hook on the server. Self&ndash;managed sessions still make sense for compliance environments or apps with very specific session semantics.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q16">
-  <div class="qa__number">Question 16</div>
-  <h3 class="qa__question">Describe how to implement WebSocket communication for real-time features in a MERN stack application.</h3>
-  <div class="qa__answer">
-    <p>WebSocket real&ndash;time in distributed MERN has four mechanism layers: transport, fanout, authentication, and resume. Get any one wrong and the system falls apart at scale.</p>
+<p>For 2026 the pragmatic choice for new MERN apps: <strong>managed auth</strong> (Clerk, Auth0, WorkOS, Better Auth, Stytch, Supabase Auth) provides session + MFA + Passkeys + revocation + audit + SCIM all out of the box, with a single hook on the server. Self&ndash;managed sessions still make sense for compliance environments or apps with very specific session semantics.</p>'''
+
+ANSWERS[16] = r'''<p>WebSocket real&ndash;time in distributed MERN has four mechanism layers: transport, fanout, authentication, and resume. Get any one wrong and the system falls apart at scale.</p>
 
 <table>
 <thead><tr><th>Layer</th><th>Mechanism</th><th>Tools</th></tr></thead>
@@ -963,15 +779,10 @@ io.to(`room:${roomId}`).emit(&quot;new-message&quot;, msg);</code></pre>
 <li><strong>Scale limits</strong> &mdash; ~10K concurrent connections per Node pod; shard by room hash beyond that.</li>
 </ul>
 
-<p>Hosted alternatives that remove most of this work in 2026: <strong>Ably</strong>, <strong>Pusher</strong>, <strong>PartyKit</strong> (Cloudflare Durable Objects), <strong>Soketi</strong>, <strong>Cloudflare Workers + Durable Objects</strong>, <strong>Supabase Realtime</strong>. They handle global fanout, presence, persistence, and reconnect; you pay per connection or message. Pick self&ndash;hosted Socket.IO when ops + cost favor you running infra; pick managed when time&ndash;to&ndash;market is the priority.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q17">
-  <div class="qa__number">Question 17</div>
-  <h3 class="qa__question">How do you deploy a MERN stack application using Docker and Docker Compose?</h3>
-  <div class="qa__answer">
-    <p>Docker + Compose for MERN packages the app as a multi&ndash;service stack you can boot with one command. <code>Dockerfile</code> per service builds the image; <code>docker-compose.yml</code> wires them together for local dev or single&ndash;host prod.</p>
+<p>Hosted alternatives that remove most of this work in 2026: <strong>Ably</strong>, <strong>Pusher</strong>, <strong>PartyKit</strong> (Cloudflare Durable Objects), <strong>Soketi</strong>, <strong>Cloudflare Workers + Durable Objects</strong>, <strong>Supabase Realtime</strong>. They handle global fanout, presence, persistence, and reconnect; you pay per connection or message. Pick self&ndash;hosted Socket.IO when ops + cost favor you running infra; pick managed when time&ndash;to&ndash;market is the priority.</p>'''
+
+
+ANSWERS[17] = r'''<p>Docker + Compose for MERN packages the app as a multi&ndash;service stack you can boot with one command. <code>Dockerfile</code> per service builds the image; <code>docker-compose.yml</code> wires them together for local dev or single&ndash;host prod.</p>
 
 <pre><code># api/Dockerfile &mdash; multi-stage, smaller production image
 FROM node:22-alpine AS deps
@@ -1046,15 +857,10 @@ volumes:
 <li><strong>SBOM</strong> &mdash; <code>docker buildx</code> with <code>--sbom=true</code> generates supply&ndash;chain manifest.</li>
 </ul>
 
-<p>For real production, Compose alone is fine on a single VPS but doesn&rsquo;t orchestrate across hosts. Step up to <strong>Docker Swarm</strong>, <strong>ECS</strong>, <strong>Cloud Run</strong>, <strong>Fly Machines</strong>, <strong>Kamal</strong>, or <strong>Kubernetes</strong> for multi&ndash;host. The Dockerfiles you wrote work unchanged; only the orchestration layer differs.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q18">
-  <div class="qa__number">Question 18</div>
-  <h3 class="qa__question">Explain how you would set up logging and monitoring using the ELK stack (Elasticsearch, Logstash, Kibana).</h3>
-  <div class="qa__answer">
-    <p>The <strong>ELK</strong> stack &mdash; Elasticsearch (search/store) + Logstash (ingest/transform) + Kibana (visualize) &mdash; centralizes logs from every MERN service. Plus <strong>Beats</strong> (Filebeat shipping logs from each node) you get the full pipeline.</p>
+<p>For real production, Compose alone is fine on a single VPS but doesn&rsquo;t orchestrate across hosts. Step up to <strong>Docker Swarm</strong>, <strong>ECS</strong>, <strong>Cloud Run</strong>, <strong>Fly Machines</strong>, <strong>Kamal</strong>, or <strong>Kubernetes</strong> for multi&ndash;host. The Dockerfiles you wrote work unchanged; only the orchestration layer differs.</p>'''
+
+
+ANSWERS[18] = r'''<p>The <strong>ELK</strong> stack &mdash; Elasticsearch (search/store) + Logstash (ingest/transform) + Kibana (visualize) &mdash; centralizes logs from every MERN service. Plus <strong>Beats</strong> (Filebeat shipping logs from each node) you get the full pipeline.</p>
 
 <pre><code># docker-compose.yml &mdash; minimal ELK
 services:
@@ -1119,15 +925,10 @@ log.info({ userId, route: &quot;/orders&quot;, duration: 142 }, &quot;order plac
 </ul>
 
 <p><strong>Honest 2026 advice:</strong> ELK is heavy to operate yourself. Most teams now use one of:
-<strong>OpenSearch</strong> (Apache&ndash;licensed Elasticsearch fork, AWS&ndash;native managed offering), <strong>Grafana Loki</strong> (cheaper, log&ndash;label model fits Prom mental model), <strong>Datadog Logs</strong> (best UX, expensive), <strong>Axiom</strong> (cheap, fast, Cloudflare/Vercel native), <strong>Better Stack</strong>, <strong>Honeycomb</strong> (events&ndash;over&ndash;logs philosophy). For a MERN team without a dedicated platform engineer, hosted is almost always the right call.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q19">
-  <div class="qa__number">Question 19</div>
-  <h3 class="qa__question">How do you handle error handling and logging in a distributed MERN stack application?</h3>
-  <div class="qa__answer">
-    <p>Distributed error handling has two halves: <strong>boundaries</strong> (catch + categorize errors at the edge of each service) and <strong>observability</strong> (correlate errors across services so you can debug cause from effect).</p>
+<strong>OpenSearch</strong> (Apache&ndash;licensed Elasticsearch fork, AWS&ndash;native managed offering), <strong>Grafana Loki</strong> (cheaper, log&ndash;label model fits Prom mental model), <strong>Datadog Logs</strong> (best UX, expensive), <strong>Axiom</strong> (cheap, fast, Cloudflare/Vercel native), <strong>Better Stack</strong>, <strong>Honeycomb</strong> (events&ndash;over&ndash;logs philosophy). For a MERN team without a dedicated platform engineer, hosted is almost always the right call.</p>'''
+
+
+ANSWERS[19] = r'''<p>Distributed error handling has two halves: <strong>boundaries</strong> (catch + categorize errors at the edge of each service) and <strong>observability</strong> (correlate errors across services so you can debug cause from effect).</p>
 
 <pre><code>// 1) Typed error class hierarchy &mdash; carries HTTP status + retry hint
 export class AppError extends Error {
@@ -1181,15 +982,10 @@ const result = await retry(() =&gt; breaker.fire(id), {
 <li><strong>Async error capture</strong> &mdash; <code>process.on(&quot;uncaughtException&quot;)</code> + <code>unhandledRejection</code> log + exit; orchestrator restarts.</li>
 </ul>
 
-<p>Tools to plug it together: <strong>Sentry</strong> or <strong>Honeybadger</strong> for error grouping + alerts; <strong>Datadog Error Tracking</strong>; <strong>OpenTelemetry</strong> for traces feeding any of those. Build dashboards by error <code>code</code> not message; alert on <em>error rate per route</em> not raw count. The discipline is: every error has a class, a code, a trace, and a runbook entry.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q20">
-  <div class="qa__number">Question 20</div>
-  <h3 class="qa__question">Describe the process to configure and use AWS RDS for MongoDB in a MERN stack application.</h3>
-  <div class="qa__answer">
-    <p>This question is often phrased badly &mdash; <strong>AWS RDS does not support MongoDB</strong>. RDS is for relational engines (PostgreSQL, MySQL, MariaDB, Oracle, SQL Server, Aurora). For Mongo on AWS the choices are:</p>
+<p>Tools to plug it together: <strong>Sentry</strong> or <strong>Honeybadger</strong> for error grouping + alerts; <strong>Datadog Error Tracking</strong>; <strong>OpenTelemetry</strong> for traces feeding any of those. Build dashboards by error <code>code</code> not message; alert on <em>error rate per route</em> not raw count. The discipline is: every error has a class, a code, a trace, and a runbook entry.</p>'''
+
+
+ANSWERS[20] = r'''<p>This question is often phrased badly &mdash; <strong>AWS RDS does not support MongoDB</strong>. RDS is for relational engines (PostgreSQL, MySQL, MariaDB, Oracle, SQL Server, Aurora). For Mongo on AWS the choices are:</p>
 
 <table>
 <thead><tr><th>Option</th><th>Mechanism</th><th>Trade&ndash;off</th></tr></thead>
@@ -1224,15 +1020,10 @@ await mongoose.connect(process.env.MONGODB_URI, {
   serverSelectionTimeoutMS: 5000
 });</code></pre>
 
-<p>If you absolutely need to stay AWS&ndash;native, <strong>DocumentDB</strong> is the fallback &mdash; useful for compliance shops that require a single AWS contract, but be aware of feature gaps: no Atlas Search/Vector, transaction limits, change stream subset. For most MERN teams, <strong>Atlas on AWS</strong> is the right call &mdash; same AWS region, billed via AWS Marketplace if needed, full Mongo feature set, and the team that builds Mongo runs it for you.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q21">
-  <div class="qa__number">Question 21</div>
-  <h3 class="qa__question">How do you implement data encryption at rest and in transit for a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p>Encryption has two scopes: <strong>at rest</strong> (data on disk) and <strong>in transit</strong> (data on the wire). Production MERN needs both, with key management as the third leg.</p>
+<p>If you absolutely need to stay AWS&ndash;native, <strong>DocumentDB</strong> is the fallback &mdash; useful for compliance shops that require a single AWS contract, but be aware of feature gaps: no Atlas Search/Vector, transaction limits, change stream subset. For most MERN teams, <strong>Atlas on AWS</strong> is the right call &mdash; same AWS region, billed via AWS Marketplace if needed, full Mongo feature set, and the team that builds Mongo runs it for you.</p>'''
+
+
+ANSWERS[21] = r'''<p>Encryption has two scopes: <strong>at rest</strong> (data on disk) and <strong>in transit</strong> (data on the wire). Production MERN needs both, with key management as the third leg.</p>
 
 <table>
 <thead><tr><th>Scope</th><th>Mechanism</th><th>Implementation</th></tr></thead>
@@ -1277,15 +1068,10 @@ const client = new MongoClient(URI, {
 <li><strong>Tokenization for cards/SSNs</strong> &mdash; the data never enters your DB; you store opaque tokens. Massive PCI/HIPAA scope reduction.</li>
 </ul>
 
-<p>For 2026 the &ldquo;default secure&rdquo; stack: <strong>Cloudflare in front</strong> (TLS 1.3, HSTS, automatic), <strong>Atlas at&ndash;rest + Queryable Encryption for PII</strong>, <strong>S3 SSE&ndash;KMS</strong> for objects, <strong>Vault or AWS Secrets Manager</strong> for secrets, <strong>Skyflow/Basis Theory</strong> for cards. Everything else &mdash; encryption&ndash;in&ndash;transit between services &mdash; comes free with mTLS in a service mesh.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q22">
-  <div class="qa__number">Question 22</div>
-  <h3 class="qa__question">Explain how you would set up and manage a microservices architecture using the MERN stack.</h3>
-  <div class="qa__answer">
-    <p>Microservices in MERN means decomposing one Express app into independently&ndash;deployable services that own their data + lifecycle. The mechanism trade&ndash;offs are well&ndash;known &mdash; you trade local function calls for network calls and gain independent scaling + deploys.</p>
+<p>For 2026 the &ldquo;default secure&rdquo; stack: <strong>Cloudflare in front</strong> (TLS 1.3, HSTS, automatic), <strong>Atlas at&ndash;rest + Queryable Encryption for PII</strong>, <strong>S3 SSE&ndash;KMS</strong> for objects, <strong>Vault or AWS Secrets Manager</strong> for secrets, <strong>Skyflow/Basis Theory</strong> for cards. Everything else &mdash; encryption&ndash;in&ndash;transit between services &mdash; comes free with mTLS in a service mesh.</p>'''
+
+
+ANSWERS[22] = r'''<p>Microservices in MERN means decomposing one Express app into independently&ndash;deployable services that own their data + lifecycle. The mechanism trade&ndash;offs are well&ndash;known &mdash; you trade local function calls for network calls and gain independent scaling + deploys.</p>
 
 <table>
 <thead><tr><th>Concern</th><th>Mechanism</th><th>Tools</th></tr></thead>
@@ -1321,15 +1107,10 @@ const client = new MongoClient(URI, {
 <li><strong>Observability is non&ndash;negotiable</strong> &mdash; without distributed tracing you can&rsquo;t debug; without per&ndash;service SLOs you can&rsquo;t prioritize; without correlation IDs you can&rsquo;t reconstruct a flow.</li>
 </ul>
 
-<p><strong>Honest 2026 advice:</strong> don&rsquo;t go microservices until you have to. A modular monolith (clear module boundaries inside one Express app + one Mongo cluster) gets 80% of the benefits without the ops cost. Split out services when team boundaries demand it (Conway&rsquo;s Law) or when scaling profiles diverge sharply (image processing vs API). Most MERN startups should remain a monolith for years.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q23">
-  <div class="qa__number">Question 23</div>
-  <h3 class="qa__question">How do you implement GraphQL with Apollo Server in a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p>Apollo Server with Express in MERN is a single GraphQL endpoint backed by typed resolvers + a schema. The mechanism: client sends query &rarr; Apollo parses + validates against schema &rarr; resolver functions fetch data &rarr; response shaped to the query.</p>
+<p><strong>Honest 2026 advice:</strong> don&rsquo;t go microservices until you have to. A modular monolith (clear module boundaries inside one Express app + one Mongo cluster) gets 80% of the benefits without the ops cost. Split out services when team boundaries demand it (Conway&rsquo;s Law) or when scaling profiles diverge sharply (image processing vs API). Most MERN startups should remain a monolith for years.</p>'''
+
+
+ANSWERS[23] = r'''<p>Apollo Server with Express in MERN is a single GraphQL endpoint backed by typed resolvers + a schema. The mechanism: client sends query &rarr; Apollo parses + validates against schema &rarr; resolver functions fetch data &rarr; response shaped to the query.</p>
 
 <pre><code>npm i @apollo/server @as-integrations/express5 graphql @graphql-tools/schema
         graphql-shield dataloader graphql-depth-limit
@@ -1408,15 +1189,10 @@ httpServer.listen(4000);</code></pre>
 <li><strong>Caching</strong> &mdash; per&ndash;field <code>@cacheControl</code> directives + Apollo&rsquo;s response cache; CDN can cache GET requests with persisted queries.</li>
 </ul>
 
-<p>2026 alternatives: <strong>GraphQL Yoga</strong> (lighter), <strong>Pothos</strong> (code&ndash;first TS schema), <strong>tRPC</strong> (no GraphQL, end&ndash;to&ndash;end TS types), <strong>Hono RPC</strong>, <strong>ts-rest</strong>. Pick GraphQL when multiple clients with diverging needs query the same backend; pick tRPC when you control both ends and want zero schema overhead.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q24">
-  <div class="qa__number">Question 24</div>
-  <h3 class="qa__question">Describe the steps to use Terraform for managing infrastructure as code for a MERN stack application.</h3>
-  <div class="qa__answer">
-    <p>Terraform manages cloud infrastructure as code: declarative <code>.tf</code> files describe the desired state, the CLI plans + applies the diff. For a MERN stack on AWS this typically covers VPC, ALB, ECS/EKS, ECR, RDS/Atlas peering, Route 53, CloudFront, ACM, S3, IAM, Secrets Manager.</p>
+<p>2026 alternatives: <strong>GraphQL Yoga</strong> (lighter), <strong>Pothos</strong> (code&ndash;first TS schema), <strong>tRPC</strong> (no GraphQL, end&ndash;to&ndash;end TS types), <strong>Hono RPC</strong>, <strong>ts-rest</strong>. Pick GraphQL when multiple clients with diverging needs query the same backend; pick tRPC when you control both ends and want zero schema overhead.</p>'''
+
+
+ANSWERS[24] = r'''<p>Terraform manages cloud infrastructure as code: declarative <code>.tf</code> files describe the desired state, the CLI plans + applies the diff. For a MERN stack on AWS this typically covers VPC, ALB, ECS/EKS, ECR, RDS/Atlas peering, Route 53, CloudFront, ACM, S3, IAM, Secrets Manager.</p>
 
 <pre><code># project layout
 terraform/
@@ -1487,15 +1263,10 @@ module &quot;api&quot; {
 <li><strong>Crossplane</strong> &mdash; manage cloud resources from Kubernetes manifests.</li>
 </ul>
 
-<p>Terraform/OpenTofu remain the right default for multi&ndash;cloud or non&ndash;trivial AWS topologies; Pulumi when your team prefers programming&ndash;language ergonomics; SST when the workload is mostly serverless TypeScript.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q25">
-  <div class="qa__number">Question 25</div>
-  <h3 class="qa__question">How do you set up and manage horizontal scaling for a Node.js server?</h3>
-  <div class="qa__answer">
-    <p>Horizontal scaling Node.js: run multiple stateless processes/instances behind a load balancer; the LB spreads traffic. The mechanism details depend on what runs underneath (single VM, multi&ndash;VM, containers, Lambda).</p>
+<p>Terraform/OpenTofu remain the right default for multi&ndash;cloud or non&ndash;trivial AWS topologies; Pulumi when your team prefers programming&ndash;language ergonomics; SST when the workload is mostly serverless TypeScript.</p>'''
+
+
+ANSWERS[25] = r'''<p>Horizontal scaling Node.js: run multiple stateless processes/instances behind a load balancer; the LB spreads traffic. The mechanism details depend on what runs underneath (single VM, multi&ndash;VM, containers, Lambda).</p>
 
 <table>
 <thead><tr><th>Layer</th><th>Mechanism</th><th>When to use</th></tr></thead>
@@ -1552,15 +1323,10 @@ spec:
 <li><strong>PodDisruptionBudget</strong> &mdash; in K8s, ensure at least N replicas survive node drains.</li>
 </ul>
 
-<p>Diminishing returns: at some point Node single&ndash;process performance dominates &mdash; profile with <strong>Datadog Continuous Profiler</strong> or <strong>0x</strong> before throwing more replicas at the problem. <strong>Bun</strong> often gives 1.5&ndash;3x throughput per core over Node for HTTP&ndash;heavy workloads. <strong>Hono</strong> + <strong>Fastify</strong> outperform Express; rarely the bottleneck though.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q26">
-  <div class="qa__number">Question 26</div>
-  <h3 class="qa__question">Explain how to implement security best practices for a MERN stack application.</h3>
-  <div class="qa__answer">
-    <p>Security best practices for MERN are layered defense &mdash; no single control is sufficient. The categories matter as much as the specifics:</p>
+<p>Diminishing returns: at some point Node single&ndash;process performance dominates &mdash; profile with <strong>Datadog Continuous Profiler</strong> or <strong>0x</strong> before throwing more replicas at the problem. <strong>Bun</strong> often gives 1.5&ndash;3x throughput per core over Node for HTTP&ndash;heavy workloads. <strong>Hono</strong> + <strong>Fastify</strong> outperform Express; rarely the bottleneck though.</p>'''
+
+
+ANSWERS[26] = r'''<p>Security best practices for MERN are layered defense &mdash; no single control is sufficient. The categories matter as much as the specifics:</p>
 
 <table>
 <thead><tr><th>Layer</th><th>Mechanism</th><th>Tools</th></tr></thead>
@@ -1617,15 +1383,10 @@ app.get(&quot;/api/orders/:id&quot;, requireAuth, async (req, res) =&gt; {
 <li><strong>IR runbooks</strong> + tabletop exercises; document RTO/RPO.</li>
 <li><strong>24h CVE patch SLA</strong> for high&ndash;severity advisories.</li>
 <li><strong>Don&rsquo;t roll your own auth or payments</strong> &mdash; managed services (Clerk/Auth0/Stripe) have far better security teams than you do.</li>
-</ul>
-    
-  </div>
-</article>
-<article class="qa" id="q27">
-  <div class="qa__number">Question 27</div>
-  <h3 class="qa__question">How do you use AWS Lambda and API Gateway to create serverless functions for a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p>Lambda + API Gateway is the canonical AWS serverless stack: API Gateway terminates HTTPS, validates auth, and invokes a Lambda function per request. The Lambda runs your Node code and returns a response. Mechanism:</p>
+</ul>'''
+
+
+ANSWERS[27] = r'''<p>Lambda + API Gateway is the canonical AWS serverless stack: API Gateway terminates HTTPS, validates auth, and invokes a Lambda function per request. The Lambda runs your Node code and returns a response. Mechanism:</p>
 
 <pre><code># serverless.yml &mdash; stack as code with Serverless Framework
 service: my-api
@@ -1707,15 +1468,10 @@ export const create = async (event) =&gt; {
 <li><strong>Fly Machines</strong> &mdash; container snapshots boot in &lt;500ms; persistent connections possible.</li>
 </ul>
 
-<p>Pick Lambda + API Gateway when you&rsquo;re deeply on AWS or need its specific integrations (Cognito, Step Functions, EventBridge). For a fresh MERN backend, a long&ndash;running container on Cloud Run / Fly / Render usually wins on cost + simplicity.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q28">
-  <div class="qa__number">Question 28</div>
-  <h3 class="qa__question">Describe how to implement a continuous delivery pipeline using GitHub Actions for a MERN stack application.</h3>
-  <div class="qa__answer">
-    <p>Continuous delivery via GitHub Actions: workflow YAML committed to <code>.github/workflows/</code>; PRs run lint + test + build; merges to <code>main</code> trigger deploy. The mechanism is event&ndash;driven and fully encapsulated in the repo.</p>
+<p>Pick Lambda + API Gateway when you&rsquo;re deeply on AWS or need its specific integrations (Cognito, Step Functions, EventBridge). For a fresh MERN backend, a long&ndash;running container on Cloud Run / Fly / Render usually wins on cost + simplicity.</p>'''
+
+
+ANSWERS[28] = r'''<p>Continuous delivery via GitHub Actions: workflow YAML committed to <code>.github/workflows/</code>; PRs run lint + test + build; merges to <code>main</code> trigger deploy. The mechanism is event&ndash;driven and fully encapsulated in the repo.</p>
 
 <pre><code># .github/workflows/cd.yml
 name: CD
@@ -1809,15 +1565,10 @@ jobs:
 <li><strong>Feature flags</strong> &mdash; <strong>Statsig</strong>, <strong>LaunchDarkly</strong>, <strong>GrowthBook</strong>, <strong>PostHog</strong> decouple deploy from release; canary at the user level.</li>
 </ul>
 
-<p>For Vercel/Netlify projects, GitHub Actions usually isn&rsquo;t needed for deploy &mdash; the platform handles preview + prod on push. Use Actions for tests + supply&ndash;chain attestations + non&ndash;deploy automation. For self&ndash;hosted backends, Actions + ECS/EKS/Cloud Run is the 2026 default.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q29">
-  <div class="qa__number">Question 29</div>
-  <h3 class="qa__question">How do you handle and manage API rate limiting and throttling in a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p>Rate limiting in MERN is a multi&ndash;layer defense: not one limiter but a chain, each tightening different threats. Mechanisms:</p>
+<p>For Vercel/Netlify projects, GitHub Actions usually isn&rsquo;t needed for deploy &mdash; the platform handles preview + prod on push. Use Actions for tests + supply&ndash;chain attestations + non&ndash;deploy automation. For self&ndash;hosted backends, Actions + ECS/EKS/Cloud Run is the 2026 default.</p>'''
+
+
+ANSWERS[29] = r'''<p>Rate limiting in MERN is a multi&ndash;layer defense: not one limiter but a chain, each tightening different threats. Mechanisms:</p>
 
 <table>
 <thead><tr><th>Layer</th><th>Algorithm</th><th>Purpose</th></tr></thead>
@@ -1885,15 +1636,10 @@ app.post(&quot;/auth/login&quot;, rateLimit(loginLimit, (req) =&gt; req.ip), log
 <li><strong>Bypass for trusted clients</strong> &mdash; service accounts get higher limits via authenticated key.</li>
 </ul>
 
-<p>For 2026, <strong>Cloudflare Rate Limiting Rules</strong> + per&ndash;route app limits via Upstash Ratelimit + WAF managed rules covers the majority of small/medium MERN apps with minimal code.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q30">
-  <div class="qa__number">Question 30</div>
-  <h3 class="qa__question">Explain how you would set up and use AWS Elastic Beanstalk for deploying a MERN stack application.</h3>
-  <div class="qa__answer">
-    <p>Elastic Beanstalk (EB) is AWS&rsquo;s &ldquo;PaaS&ndash;on&ndash;AWS&rdquo;: you upload a zip or Docker image, EB provisions EC2/ALB/ASG/CloudWatch + handles deploys + scaling. It&rsquo;s the &ldquo;easiest path to AWS&rdquo; option but mostly legacy in 2026.</p>
+<p>For 2026, <strong>Cloudflare Rate Limiting Rules</strong> + per&ndash;route app limits via Upstash Ratelimit + WAF managed rules covers the majority of small/medium MERN apps with minimal code.</p>'''
+
+
+ANSWERS[30] = r'''<p>Elastic Beanstalk (EB) is AWS&rsquo;s &ldquo;PaaS&ndash;on&ndash;AWS&rdquo;: you upload a zip or Docker image, EB provisions EC2/ALB/ASG/CloudWatch + handles deploys + scaling. It&rsquo;s the &ldquo;easiest path to AWS&rdquo; option but mostly legacy in 2026.</p>
 
 <pre><code># Initialize an EB app
 eb init my-mern --platform &quot;Docker running on 64bit Amazon Linux 2023&quot; --region us-east-1
@@ -1945,15 +1691,9 @@ option_settings:
 <li><strong>Outside AWS:</strong> <strong>Fly.io</strong>, <strong>Render</strong>, <strong>Railway</strong>, <strong>Cloud Run</strong>, <strong>Vercel</strong>, <strong>Netlify</strong> &mdash; all easier than EB for MERN; cheaper for small to medium.</li>
 </ul>
 
-<p>Use EB only if you have an existing investment in it or if your org mandates the EB&ndash;style abstraction with full AWS resource visibility. For everything else, App Runner or ECS Fargate beats it on every axis (price, simplicity, modern feature set) in 2026.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q31">
-  <div class="qa__number">Question 31</div>
-  <h3 class="qa__question">How do you implement and manage feature flags in a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p>Feature flags decouple deploy from release: ship code dark, then turn it on for a percentage, a cohort, or a tenant. The mechanism is a flag service consulted on every relevant code path with low latency and graceful fallback.</p>
+<p>Use EB only if you have an existing investment in it or if your org mandates the EB&ndash;style abstraction with full AWS resource visibility. For everything else, App Runner or ECS Fargate beats it on every axis (price, simplicity, modern feature set) in 2026.</p>'''
+
+ANSWERS[31] = r'''<p>Feature flags decouple deploy from release: ship code dark, then turn it on for a percentage, a cohort, or a tenant. The mechanism is a flag service consulted on every relevant code path with low latency and graceful fallback.</p>
 <table>
 <thead><tr><th>Concern</th><th>Mechanism</th></tr></thead>
 <tbody>
@@ -1981,15 +1721,10 @@ function CheckoutButton() {
   return newFlow ? &lt;NewButton /&gt; : &lt;LegacyButton /&gt;;
 }</code></pre>
 <p>Use cases worth wiring: <strong>kill switches</strong> (flip off broken feature in seconds without rollback), <strong>gradual rollouts</strong> (1% &rarr; 10% &rarr; 100% over hours, watching error rate), <strong>A/B tests</strong> (variant assignment + analytics), <strong>per&ndash;tenant pilot</strong> (enable for design&ndash;partner customer first), <strong>canary deploys</strong> (route 5% of pods to new version via Istio + flag).</p>
-<p>Trade&ndash;offs: every flag adds a code branch &mdash; flag debt compounds. Discipline: max two&ndash;way doors (full release or remove), 60&ndash;day sunset SLA, owner per flag, lint stale flags in CI. Avoid flags for permanent config (use config service) or compliance gates (use real authz).</p>
-    
-  </div>
-</article>
-<article class="qa" id="q32">
-  <div class="qa__number">Question 32</div>
-  <h3 class="qa__question">Describe the process to set up application performance monitoring using New Relic or Datadog.</h3>
-  <div class="qa__answer">
-    <p>APM (Datadog or New Relic) gives you traces + logs + metrics + RUM + profiles in one pane. The setup is identical in shape: tracer SDK in the app, agent collecting telemetry, dashboards/alarms in the cloud product.</p>
+<p>Trade&ndash;offs: every flag adds a code branch &mdash; flag debt compounds. Discipline: max two&ndash;way doors (full release or remove), 60&ndash;day sunset SLA, owner per flag, lint stale flags in CI. Avoid flags for permanent config (use config service) or compliance gates (use real authz).</p>'''
+
+
+ANSWERS[32] = r'''<p>APM (Datadog or New Relic) gives you traces + logs + metrics + RUM + profiles in one pane. The setup is identical in shape: tracer SDK in the app, agent collecting telemetry, dashboards/alarms in the cloud product.</p>
 <table>
 <thead><tr><th>Telemetry</th><th>Mechanism</th></tr></thead>
 <tbody>
@@ -2026,15 +1761,10 @@ async function refund(orderId) {
   });
 }</code></pre>
 <p>Production setup: <strong>agent</strong> as DaemonSet (K8s) or sidecar (ECS); <strong>secrets</strong> (DD_API_KEY) via Vault/Secrets Manager; <strong>tags</strong> consistent across services (service, env, version, region) so cross&ndash;service queries work; <strong>SLO</strong> definitions tied to service tags; <strong>error budgets</strong> visible to engineering. Cost control: sample low&ndash;value traces, retain only error/slow ones at full fidelity, archive logs to S3 after 7 days.</p>
-<p>2026 alternatives at significant cost savings: <strong>Honeycomb</strong> (best trace UX, BubbleUp), <strong>Grafana Cloud</strong> (Tempo/Loki/Mimir), <strong>Sentry Performance</strong> (errors&ndash;first), <strong>Axiom</strong> (cheap logs), <strong>SigNoz</strong>/<strong>HyperDX</strong> (open source, OTel&ndash;native), <strong>Better Stack</strong>. Ship via <strong>OpenTelemetry SDK</strong> for vendor portability.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q33">
-  <div class="qa__number">Question 33</div>
-  <h3 class="qa__question">How do you implement a distributed tracing system for a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p>Distributed tracing reconstructs a request&rsquo;s full journey across services. The mechanism: each request gets a <strong>trace ID</strong> + per&ndash;hop <strong>span IDs</strong>; spans propagate via W3C Trace Context (<code>traceparent</code> header); the collector assembles the tree.</p>
+<p>2026 alternatives at significant cost savings: <strong>Honeycomb</strong> (best trace UX, BubbleUp), <strong>Grafana Cloud</strong> (Tempo/Loki/Mimir), <strong>Sentry Performance</strong> (errors&ndash;first), <strong>Axiom</strong> (cheap logs), <strong>SigNoz</strong>/<strong>HyperDX</strong> (open source, OTel&ndash;native), <strong>Better Stack</strong>. Ship via <strong>OpenTelemetry SDK</strong> for vendor portability.</p>'''
+
+
+ANSWERS[33] = r'''<p>Distributed tracing reconstructs a request&rsquo;s full journey across services. The mechanism: each request gets a <strong>trace ID</strong> + per&ndash;hop <strong>span IDs</strong>; spans propagate via W3C Trace Context (<code>traceparent</code> header); the collector assembles the tree.</p>
 <table>
 <thead><tr><th>Concern</th><th>Mechanism</th></tr></thead>
 <tbody>
@@ -2076,15 +1806,10 @@ OTEL_EXPORTER_OTLP_HEADERS=x-honeycomb-team=$HONEYCOMB_KEY
 OTEL_SERVICE_NAME=my-api
 OTEL_RESOURCE_ATTRIBUTES=deployment.environment=production,service.version=1.4.2</code></pre>
 <p>What to instrument first: <strong>HTTP routes</strong> (auto), <strong>DB calls</strong> (auto, but verify), <strong>external HTTP/SDK calls</strong>, <strong>queue producers/consumers</strong> (manual context propagation), <strong>cache reads</strong>. Tag spans with business context (tenantId, userId, orderId) so you can filter to a specific failed transaction.</p>
-<p>Sampling pragmatics: in prod, head&ndash;sample 1&ndash;10% of healthy traffic + 100% of errors; tail&ndash;sample if you can afford the buffer (Honeycomb Refinery, OTel Tail Sampler). Trace storage cost grows quickly &mdash; keep error/slow traces at full fidelity, decimate the rest.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q34">
-  <div class="qa__number">Question 34</div>
-  <h3 class="qa__question">Explain how you would handle database backup and restore strategies for MongoDB in production.</h3>
-  <div class="qa__answer">
-    <p>Production Mongo backups need three strategies layered: continuous point&ndash;in&ndash;time recovery, periodic full snapshots, and tested restore.</p>
+<p>Sampling pragmatics: in prod, head&ndash;sample 1&ndash;10% of healthy traffic + 100% of errors; tail&ndash;sample if you can afford the buffer (Honeycomb Refinery, OTel Tail Sampler). Trace storage cost grows quickly &mdash; keep error/slow traces at full fidelity, decimate the rest.</p>'''
+
+
+ANSWERS[34] = r'''<p>Production Mongo backups need three strategies layered: continuous point&ndash;in&ndash;time recovery, periodic full snapshots, and tested restore.</p>
 <table>
 <thead><tr><th>Mechanism</th><th>Coverage</th><th>Trade</th></tr></thead>
 <tbody>
@@ -2108,15 +1833,10 @@ resource &quot;mongodbatlas_cloud_backup_schedule&quot; &quot;default&quot; {
 # mongodump for migration / one-off
 mongodump --uri &quot;$MONGODB_URI&quot; --gzip --archive=- | aws s3 cp - s3://backups/$(date +%F).archive.gz</code></pre>
 <p>Restore strategy is the <em>actual</em> backup &mdash; an untested backup is a hope, not a plan. <strong>Quarterly DR drills</strong>: restore latest snapshot to a test cluster, run smoke tests, document time&ndash;to&ndash;recovery. Define <strong>RTO</strong> (how fast back up: 30 min for AZ, 4h for region) and <strong>RPO</strong> (how much data lost: ~5s with continuous PITR) per service tier.</p>
-<p>Anti&ndash;ransomware: <strong>S3 Object Lock</strong> (write once, can&rsquo;t be deleted) on backup bucket; separate AWS account for backups with cross&ndash;account replication; alarms on unusual delete patterns. The 2026 threat actors target backups first &mdash; if your backups are deletable from the same account as production, they&rsquo;re not really backups.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q35">
-  <div class="qa__number">Question 35</div>
-  <h3 class="qa__question">How do you use AWS S3 and CloudFront to serve static assets for a React application?</h3>
-  <div class="qa__answer">
-    <p>Static asset delivery via S3 + CloudFront: build the React app, upload hashed assets to a private S3 bucket, point CloudFront at it via Origin Access Control, set per&ndash;path cache rules. The result: globally distributed, signed, immutable static delivery.</p>
+<p>Anti&ndash;ransomware: <strong>S3 Object Lock</strong> (write once, can&rsquo;t be deleted) on backup bucket; separate AWS account for backups with cross&ndash;account replication; alarms on unusual delete patterns. The 2026 threat actors target backups first &mdash; if your backups are deletable from the same account as production, they&rsquo;re not really backups.</p>'''
+
+
+ANSWERS[35] = r'''<p>Static asset delivery via S3 + CloudFront: build the React app, upload hashed assets to a private S3 bucket, point CloudFront at it via Origin Access Control, set per&ndash;path cache rules. The result: globally distributed, signed, immutable static delivery.</p>
 <table>
 <thead><tr><th>Concern</th><th>Mechanism</th></tr></thead>
 <tbody>
@@ -2148,15 +1868,10 @@ function handler(event) {
   return req;
 }</code></pre>
 <p>Operational add&ndash;ons: <strong>WAF</strong> with managed rules + bot control; <strong>HTTP/3</strong> + TLS 1.3; <strong>real&ndash;time logs</strong> to OpenSearch for traffic analysis; <strong>Lambda@Edge</strong> for A/B testing or geo redirects; <strong>response headers policy</strong> for HSTS/CSP/COOP/COEP centrally. For PR previews, generate per&ndash;branch S3 prefixes + CloudFront behaviors.</p>
-<p>2026 alternatives often simpler + cheaper: <strong>Vercel</strong>, <strong>Cloudflare Pages + R2</strong> (zero egress fees), <strong>Netlify</strong>, <strong>Fastly</strong>. Pure AWS shines when you&rsquo;re already deeply on AWS or compliance forces a single&ndash;cloud posture.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q36">
-  <div class="qa__number">Question 36</div>
-  <h3 class="qa__question">Describe the steps to implement Infrastructure as Code (IaC) using AWS CloudFormation for a MERN stack application.</h3>
-  <div class="qa__answer">
-    <p>CloudFormation declares AWS resources as YAML/JSON templates; the service provisions/updates the live stack to match. Native AWS, deeply integrated with all services, but verbose &mdash; most teams use <strong>AWS CDK</strong> or <strong>SAM</strong> on top to generate the templates from code.</p>
+<p>2026 alternatives often simpler + cheaper: <strong>Vercel</strong>, <strong>Cloudflare Pages + R2</strong> (zero egress fees), <strong>Netlify</strong>, <strong>Fastly</strong>. Pure AWS shines when you&rsquo;re already deeply on AWS or compliance forces a single&ndash;cloud posture.</p>'''
+
+
+ANSWERS[36] = r'''<p>CloudFormation declares AWS resources as YAML/JSON templates; the service provisions/updates the live stack to match. Native AWS, deeply integrated with all services, but verbose &mdash; most teams use <strong>AWS CDK</strong> or <strong>SAM</strong> on top to generate the templates from code.</p>
 <table>
 <thead><tr><th>Mechanism</th><th>Notes</th></tr></thead>
 <tbody>
@@ -2205,15 +1920,10 @@ Resources:
       NetworkConfiguration:
         AwsvpcConfiguration: { Subnets: !Ref PrivateSubnets, SecurityGroups: [!Ref SG] }</code></pre>
 <p>Operational discipline: <strong>review change sets</strong> before apply; <strong>parameterize</strong> via SSM Parameter Store / Secrets Manager; <strong>tag everything</strong> for cost allocation; <strong>termination protection</strong> on prod stacks; <strong>StackSets</strong> for org&ndash;wide guardrails (logging, security baselines).</p>
-<p>2026 reality: <strong>AWS CDK</strong> beats raw CFN for typed code + reuse; <strong>Terraform</strong> beats CFN for multi&ndash;cloud + ecosystem maturity (modules, Sentinel/OPA policy, Atlantis/Spacelift); <strong>Pulumi</strong> for code&ndash;first IaC. CFN remains right when your org mandates AWS&ndash;native, you&rsquo;re heavy on Service Catalog/Control Tower, or you need StackSets for compliance.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q37">
-  <div class="qa__number">Question 37</div>
-  <h3 class="qa__question">How do you set up and use a message broker like RabbitMQ or Kafka in a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p>Message brokers decouple producers from consumers, smooth bursts, and enable async work. Two dominant choices in MERN: <strong>RabbitMQ</strong> (smart broker, AMQP, complex routing) vs <strong>Kafka</strong> (dumb broker, log&ndash;based, replay).</p>
+<p>2026 reality: <strong>AWS CDK</strong> beats raw CFN for typed code + reuse; <strong>Terraform</strong> beats CFN for multi&ndash;cloud + ecosystem maturity (modules, Sentinel/OPA policy, Atlantis/Spacelift); <strong>Pulumi</strong> for code&ndash;first IaC. CFN remains right when your org mandates AWS&ndash;native, you&rsquo;re heavy on Service Catalog/Control Tower, or you need StackSets for compliance.</p>'''
+
+
+ANSWERS[37] = r'''<p>Message brokers decouple producers from consumers, smooth bursts, and enable async work. Two dominant choices in MERN: <strong>RabbitMQ</strong> (smart broker, AMQP, complex routing) vs <strong>Kafka</strong> (dumb broker, log&ndash;based, replay).</p>
 <table>
 <thead><tr><th></th><th>RabbitMQ</th><th>Kafka</th></tr></thead>
 <tbody>
@@ -2256,15 +1966,10 @@ const producer = kafka.producer({ idempotent: true });
 await producer.connect();
 await producer.send({ topic: &quot;orders.placed&quot;, messages: [{ key: orderId, value: JSON.stringify(order) }] });</code></pre>
 <p>Patterns: <strong>idempotent consumers</strong> (every retry safe; dedupe by messageId), <strong>DLQ</strong> for poison messages with alarm, <strong>outbox pattern</strong> (write event in same DB transaction as state, publish from outbox &mdash; no lost events), <strong>backpressure</strong> via prefetch + lag alarms, <strong>schema registry</strong> (Confluent/Apicurio) for Kafka contract versioning.</p>
-<p>2026 picks for MERN: BullMQ + Redis for simple jobs (image resize, email); Inngest/Trigger.dev/Hatchet for durable workflows with retries + observability; Kafka/Redpanda when you need replay, multi&ndash;consumer fanout, or millions msg/s; <strong>NATS JetStream</strong> as a lighter Kafka alternative.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q38">
-  <div class="qa__number">Question 38</div>
-  <h3 class="qa__question">Explain how you would manage state in a large-scale React application using Redux or MobX.</h3>
-  <div class="qa__answer">
-    <p>Large React state splits into three orthogonal concerns &mdash; <strong>server state</strong>, <strong>URL state</strong>, and <strong>client state</strong> &mdash; each with its own tool. Cramming everything into Redux is a 2018 anti&ndash;pattern.</p>
+<p>2026 picks for MERN: BullMQ + Redis for simple jobs (image resize, email); Inngest/Trigger.dev/Hatchet for durable workflows with retries + observability; Kafka/Redpanda when you need replay, multi&ndash;consumer fanout, or millions msg/s; <strong>NATS JetStream</strong> as a lighter Kafka alternative.</p>'''
+
+
+ANSWERS[38] = r'''<p>Large React state splits into three orthogonal concerns &mdash; <strong>server state</strong>, <strong>URL state</strong>, and <strong>client state</strong> &mdash; each with its own tool. Cramming everything into Redux is a 2018 anti&ndash;pattern.</p>
 <table>
 <thead><tr><th>Kind</th><th>Tool</th><th>Why</th></tr></thead>
 <tbody>
@@ -2305,15 +2010,10 @@ function ThemeToggle() {
   return &lt;button onClick={() =&gt; setTheme(theme === &quot;light&quot; ? &quot;dark&quot; : &quot;light&quot;)}&gt;{theme}&lt;/button&gt;;
 }</code></pre>
 <p>When Redux still wins: very large team needing strict patterns + time&ndash;travel debugging; complex undo/redo; existing codebase. Otherwise default <strong>TanStack Query + Zustand</strong> &mdash; less boilerplate, smaller bundle, easier onboarding.</p>
-<p>Performance discipline: never store derived state (compute via selectors / <code>useMemo</code>); split atoms/slices to avoid re&ndash;rendering everyone; use <strong>React 19 Compiler</strong> for auto&ndash;memoization; for huge lists use <strong>TanStack Virtual</strong>; for high&ndash;frequency updates (cursors, presence) use refs not state.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q39">
-  <div class="qa__number">Question 39</div>
-  <h3 class="qa__question">How do you implement a multi-tenant architecture using the MERN stack?</h3>
-  <div class="qa__answer">
-    <p>Multi&ndash;tenancy in MERN means many customers share the same code + infrastructure with strict data + compute isolation. Three patterns by isolation strength + cost:</p>
+<p>Performance discipline: never store derived state (compute via selectors / <code>useMemo</code>); split atoms/slices to avoid re&ndash;rendering everyone; use <strong>React 19 Compiler</strong> for auto&ndash;memoization; for huge lists use <strong>TanStack Virtual</strong>; for high&ndash;frequency updates (cursors, presence) use refs not state.</p>'''
+
+
+ANSWERS[39] = r'''<p>Multi&ndash;tenancy in MERN means many customers share the same code + infrastructure with strict data + compute isolation. Three patterns by isolation strength + cost:</p>
 <table>
 <thead><tr><th>Pattern</th><th>Isolation</th><th>Best for</th></tr></thead>
 <tbody>
@@ -2354,15 +2054,10 @@ function tenantPlugin(schema) {
 // Compound index: tenant first
 schema.index({ tenantId: 1, createdAt: -1 });</code></pre>
 <p>Cell architecture for scale: shard tenants into cells (Cell A: tenants 1&ndash;1000, Cell B: 1001&ndash;2000) so one cell&rsquo;s outage affects only that subset. Frees you to scale, deploy, and fail independently per cell. Used by Slack, Stripe, Salesforce.</p>
-<p>2026 building blocks: <strong>Clerk Organizations</strong>, <strong>WorkOS</strong>, <strong>Stytch B2B</strong>, <strong>Stack Auth</strong> for tenant&ndash;aware identity + SSO + SCIM; <strong>Linear&rsquo;s</strong> open&ndash;source patterns; <strong>Outerbase</strong> / <strong>Nile</strong> for tenant&ndash;aware databases.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q40">
-  <div class="qa__number">Question 40</div>
-  <h3 class="qa__question">Describe the process to set up an end-to-end testing pipeline using Cypress for a MERN stack application.</h3>
-  <div class="qa__answer">
-    <p>End&ndash;to&ndash;end pipeline with Cypress runs the full MERN stack against itself: spin up frontend + API + Mongo, seed data, drive a real browser through critical user journeys, capture artifacts on failure, integrate with CI to gate merges.</p>
+<p>2026 building blocks: <strong>Clerk Organizations</strong>, <strong>WorkOS</strong>, <strong>Stytch B2B</strong>, <strong>Stack Auth</strong> for tenant&ndash;aware identity + SSO + SCIM; <strong>Linear&rsquo;s</strong> open&ndash;source patterns; <strong>Outerbase</strong> / <strong>Nile</strong> for tenant&ndash;aware databases.</p>'''
+
+
+ANSWERS[40] = r'''<p>End&ndash;to&ndash;end pipeline with Cypress runs the full MERN stack against itself: spin up frontend + API + Mongo, seed data, drive a real browser through critical user journeys, capture artifacts on failure, integrate with CI to gate merges.</p>
 <table>
 <thead><tr><th>Stage</th><th>Mechanism</th></tr></thead>
 <tbody>
@@ -2423,15 +2118,10 @@ it(&quot;completes checkout&quot;, () =&gt; {
   cy.contains(&quot;Checkout&quot;).click();
   cy.contains(&quot;Order confirmed&quot;).should(&quot;be.visible&quot;);
 });</code></pre>
-<p>E2E discipline: keep the suite small (10&ndash;30 critical journeys), fast (under 5 min), deterministic (no <code>cy.wait(ms)</code>; use <code>cy.intercept()</code> + auto&ndash;retrying assertions). Unit + integration cover detail; E2E covers shape. <strong>Playwright</strong> is the rising 2026 alternative &mdash; faster, multi&ndash;browser, better trace viewer.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q41">
-  <div class="qa__number">Question 41</div>
-  <h3 class="qa__question">How do you handle schema validation and enforcement in MongoDB?</h3>
-  <div class="qa__answer">
-    <p>Mongo schema validation runs at the database layer via <strong>$jsonSchema</strong> validators on collections &mdash; the last line of defense after app&ndash;layer Zod/Valibot. Belt&ndash;and&ndash;braces: every write should have application validation <em>and</em> a DB validator that rejects malformed docs even from buggy code or stale clients.</p>
+<p>E2E discipline: keep the suite small (10&ndash;30 critical journeys), fast (under 5 min), deterministic (no <code>cy.wait(ms)</code>; use <code>cy.intercept()</code> + auto&ndash;retrying assertions). Unit + integration cover detail; E2E covers shape. <strong>Playwright</strong> is the rising 2026 alternative &mdash; faster, multi&ndash;browser, better trace viewer.</p>'''
+
+
+ANSWERS[41] = r'''<p>Mongo schema validation runs at the database layer via <strong>$jsonSchema</strong> validators on collections &mdash; the last line of defense after app&ndash;layer Zod/Valibot. Belt&ndash;and&ndash;braces: every write should have application validation <em>and</em> a DB validator that rejects malformed docs even from buggy code or stale clients.</p>
 <table>
 <thead><tr><th>Layer</th><th>Mechanism</th></tr></thead>
 <tbody>
@@ -2485,15 +2175,10 @@ const orderSchema = new mongoose.Schema({
 orderSchema.index({ tenantId: 1, status: 1, createdAt: -1 });
 </code></pre>
 <p>Migration playbook for evolving validators: <strong>relaxed mode first</strong> (warn, don&rsquo;t block) so existing docs still write; <strong>backfill</strong> non&ndash;conforming docs; <strong>flip to strict</strong> only after 100% conform. <code>db.runCommand({ collMod: &quot;orders&quot;, validator: ..., validationLevel: &quot;strict&quot; })</code> changes online.</p>
-<p>2026 reality: the canonical pattern is <strong>Zod schema as source of truth</strong>. Generate Mongoose types via tools like <strong>typegoose</strong> + <strong>zod-mongoose</strong>, generate $jsonSchema via tools like <strong>zod-to-mongo-schema</strong>. One declaration enforces at all layers; drift becomes impossible.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q42">
-  <div class="qa__number">Question 42</div>
-  <h3 class="qa__question">Explain the steps to set up and manage a managed MongoDB instance using MongoDB Atlas.</h3>
-  <div class="qa__answer">
-    <p>Atlas is MongoDB&rsquo;s managed service: clusters, backups, monitoring, search, vector, triggers, charts, all behind one console + API. The 2026 default for MERN production unless compliance forces self&ndash;host.</p>
+<p>2026 reality: the canonical pattern is <strong>Zod schema as source of truth</strong>. Generate Mongoose types via tools like <strong>typegoose</strong> + <strong>zod-mongoose</strong>, generate $jsonSchema via tools like <strong>zod-to-mongo-schema</strong>. One declaration enforces at all layers; drift becomes impossible.</p>'''
+
+
+ANSWERS[42] = r'''<p>Atlas is MongoDB&rsquo;s managed service: clusters, backups, monitoring, search, vector, triggers, charts, all behind one console + API. The 2026 default for MERN production unless compliance forces self&ndash;host.</p>
 <table>
 <thead><tr><th>Concern</th><th>Mechanism</th></tr></thead>
 <tbody>
@@ -2532,15 +2217,10 @@ resource &quot;mongodbatlas_advanced_cluster&quot; &quot;app&quot; {
 # Connect via the SRV string (Mongoose)
 const url = `mongodb+srv://${user}:${pwd}@${host}/${db}?retryWrites=true&amp;w=majority`;</code></pre>
 <p>Operational must&ndash;dos: <strong>private networking</strong> (VPC peering or PrivateLink &mdash; never public IP allowlist in prod); <strong>per&ndash;service users</strong> with least&ndash;privilege roles; <strong>connection pool tuning</strong> (<code>maxPoolSize</code> sized to API replicas &times; concurrency / cluster connection limit); <strong>continuous backup</strong> on; <strong>quarterly DR drill</strong> via test restore; <strong>alerts</strong> on oplog window &lt; 24h, replication lag &gt; 10s, primary failover, IOPS saturation.</p>
-<p>For very small projects: Atlas free tier (M0, 512MB) is genuinely free + permanent. For very large: consider <strong>Atlas Global Clusters</strong> for multi&ndash;region zone sharding without operational pain.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q43">
-  <div class="qa__number">Question 43</div>
-  <h3 class="qa__question">How do you implement real-time analytics and dashboards in a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p>Real&ndash;time analytics dashboards mean &lt;1s end&ndash;to&ndash;end: events arrive, get aggregated, surface in the UI. The architecture is two pipelines (ingestion + serving) optimized for very different access patterns.</p>
+<p>For very small projects: Atlas free tier (M0, 512MB) is genuinely free + permanent. For very large: consider <strong>Atlas Global Clusters</strong> for multi&ndash;region zone sharding without operational pain.</p>'''
+
+
+ANSWERS[43] = r'''<p>Real&ndash;time analytics dashboards mean &lt;1s end&ndash;to&ndash;end: events arrive, get aggregated, surface in the UI. The architecture is two pipelines (ingestion + serving) optimized for very different access patterns.</p>
 <table>
 <thead><tr><th>Layer</th><th>Mechanism</th></tr></thead>
 <tbody>
@@ -2580,15 +2260,10 @@ app.get(&quot;/api/metrics/revenue&quot;, requireAuth, async (req, res) =&gt; {
   res.set(&quot;Cache-Control&quot;, &quot;public, s-maxage=10, stale-while-revalidate=30&quot;).json(await r.json());
 });</code></pre>
 <p>Trade&ndash;offs: real&ndash;time stores are expensive per row vs Postgres; pre&ndash;aggregate to materialized views/tables to keep latency down. Cardinality kills &mdash; budget your dimensions. For pure Mongo apps, <strong>Atlas Stream Processing</strong> + <strong>$merge</strong> can serve modest dashboards before you reach for a separate columnar store.</p>
-<p>2026 starter stack for &lt;1M events/day: Tinybird Events + Pipes + Tremor &mdash; turnkey. Bigger: Kafka + Materialize/RisingWave + ClickHouse + Cube.dev semantic layer. <strong>Avoid building this from scratch</strong> &mdash; the long tail (schema evolution, late events, exactly&ndash;once, multi&ndash;tenancy) is the iceberg.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q44">
-  <div class="qa__number">Question 44</div>
-  <h3 class="qa__question">Describe how you would set up and manage database replication in MongoDB.</h3>
-  <div class="qa__answer">
-    <p>Mongo replication is built around <strong>replica sets</strong>: a primary takes writes; secondaries asynchronously apply the oplog; on primary failure a 5&ndash;15s election picks a new primary. The mechanism guarantees durability + availability, with read scaling as a bonus.</p>
+<p>2026 starter stack for &lt;1M events/day: Tinybird Events + Pipes + Tremor &mdash; turnkey. Bigger: Kafka + Materialize/RisingWave + ClickHouse + Cube.dev semantic layer. <strong>Avoid building this from scratch</strong> &mdash; the long tail (schema evolution, late events, exactly&ndash;once, multi&ndash;tenancy) is the iceberg.</p>'''
+
+
+ANSWERS[44] = r'''<p>Mongo replication is built around <strong>replica sets</strong>: a primary takes writes; secondaries asynchronously apply the oplog; on primary failure a 5&ndash;15s election picks a new primary. The mechanism guarantees durability + availability, with read scaling as a bonus.</p>
 <table>
 <thead><tr><th>Concept</th><th>Mechanism</th></tr></thead>
 <tbody>
@@ -2620,15 +2295,10 @@ await Order.create([{ ... }], { writeConcern: { w: &quot;majority&quot;, j: true
 db.getMongo().setReadPref(&quot;secondary&quot;, [{ region: &quot;eu-west&quot; }]);   // tag-based</code></pre>
 <p>Atlas does this transparently: 3&ndash;node replica set across 3 AZs by default, optionally 5 or 7 nodes, optionally region&ndash;extended via <strong>Global Clusters</strong>. You pick the topology + tier; Atlas handles failover, recovery, oplog sizing.</p>
 <p>Health rules to alarm on: <strong>replication lag</strong> (&gt; 10s = red), <strong>oplog window</strong> (&lt; 24h = red &mdash; if a secondary catches up slower than oplog cycles, you must resync from snapshot), <strong>primary churn</strong> (frequent elections = network or load problem), <strong>failed elections</strong>. Test failover quarterly: kill the primary deliberately, time the takeover, verify writes resume.</p>
-<p>Multi&ndash;region: <strong>Atlas Global Clusters</strong> with zone sharding (EU users hit EU shards; data stays in EU). Active&ndash;active writes + GDPR&ndash;compliant residency without app code changes.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q45">
-  <div class="qa__number">Question 45</div>
-  <h3 class="qa__question">How do you handle concurrency and parallel processing in a Node.js application?</h3>
-  <div class="qa__answer">
-    <p>Node is single&ndash;threaded for JS, but the libuv thread pool + <strong>Worker Threads</strong> + <strong>cluster</strong> + <strong>process forks</strong> let you exploit cores. The right tool depends on workload shape.</p>
+<p>Multi&ndash;region: <strong>Atlas Global Clusters</strong> with zone sharding (EU users hit EU shards; data stays in EU). Active&ndash;active writes + GDPR&ndash;compliant residency without app code changes.</p>'''
+
+
+ANSWERS[45] = r'''<p>Node is single&ndash;threaded for JS, but the libuv thread pool + <strong>Worker Threads</strong> + <strong>cluster</strong> + <strong>process forks</strong> let you exploit cores. The right tool depends on workload shape.</p>
 <table>
 <thead><tr><th>Need</th><th>Mechanism</th></tr></thead>
 <tbody>
@@ -2672,15 +2342,10 @@ await q.add(&quot;send&quot;, { to, subject, body }, { attempts: 5, backoff: { t
 
 new Worker(&quot;email&quot;, async (job) =&gt; { await sendEmail(job.data); }, { connection: redis, concurrency: 20 });</code></pre>
 <p>Patterns that misbehave: <strong>blocking the event loop</strong> with sync crypto / large JSON.parse / regex catastrophic backtracking &mdash; offload to workers; <strong>shared mutable state</strong> across forks &mdash; use Redis; <strong>memory leaks in workers</strong> &mdash; rotate workers periodically. Watch <code>event_loop_lag</code> as a key metric; consistent &gt; 50ms means CPU starvation.</p>
-<p>2026 reality: most MERN scaling comes from <strong>horizontal pods in K8s/Cloud Run/Fly</strong> + a job queue (BullMQ/Inngest/Trigger.dev/Hatchet) for CPU work, not in&ndash;process workers. Workers shine for tight latency (sync image resize per request) or huge per&ndash;request CPU (PDF generation, ML inference).</p>
-    
-  </div>
-</article>
-<article class="qa" id="q46">
-  <div class="qa__number">Question 46</div>
-  <h3 class="qa__question">Explain the process to implement server-side rendering (SSR) for a React application using Next.js.</h3>
-  <div class="qa__answer">
-    <p>Next.js 15 SSR mechanics: requests hit a Node.js (or edge) runtime that renders React Server Components on the server, streams HTML to the browser, and selectively hydrates client components.</p>
+<p>2026 reality: most MERN scaling comes from <strong>horizontal pods in K8s/Cloud Run/Fly</strong> + a job queue (BullMQ/Inngest/Trigger.dev/Hatchet) for CPU work, not in&ndash;process workers. Workers shine for tight latency (sync image resize per request) or huge per&ndash;request CPU (PDF generation, ML inference).</p>'''
+
+
+ANSWERS[46] = r'''<p>Next.js 15 SSR mechanics: requests hit a Node.js (or edge) runtime that renders React Server Components on the server, streams HTML to the browser, and selectively hydrates client components.</p>
 <table>
 <thead><tr><th>Mode</th><th>Mechanism</th><th>When</th></tr></thead>
 <tbody>
@@ -2724,15 +2389,10 @@ async function updateProduct(id: string, patch) {
 }</code></pre>
 <p>Production mechanics: <strong>edge middleware</strong> for auth/redirects pre&ndash;render; <strong>route handlers</strong> for API; <strong>server actions</strong> for mutations from client (no API route boilerplate); <strong>generateMetadata</strong> for per&ndash;request SEO + AI&ndash;crawler tags (OAI-SearchBot, PerplexityBot, ClaudeBot expect SSR HTML).</p>
 <p>Pitfalls: <strong>hydration mismatches</strong> (server HTML must equal client&rsquo;s first render); <strong>environment leaks</strong> (no <code>window</code> in server code); <strong>request waterfalls</strong> (parallelize <code>fetch</code> with <code>Promise.all</code> or move to data layer); <strong>over&ndash;fetching</strong> in Server Components (RSC pulls more data than HTML reveals &mdash; budget it).</p>
-<p>Deploy: <strong>Vercel</strong> (zero config), <strong>Cloudflare Pages + @cloudflare/next-on-pages</strong> or <strong>OpenNext</strong>, <strong>Netlify</strong>, <strong>self&ndash;host</strong> via <code>next start</code> behind nginx. Vercel is the path of least resistance for full Next features.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q47">
-  <div class="qa__number">Question 47</div>
-  <h3 class="qa__question">How do you set up and use AWS Secrets Manager to store and retrieve sensitive configuration data?</h3>
-  <div class="qa__answer">
-    <p>AWS Secrets Manager stores credentials encrypted with KMS, retrieves them via IAM&ndash;authenticated API calls, and rotates them on schedule. Compared to environment variables or Parameter Store, it adds rotation, fine&ndash;grained IAM, automatic versioning, and cross&ndash;region replication.</p>
+<p>Deploy: <strong>Vercel</strong> (zero config), <strong>Cloudflare Pages + @cloudflare/next-on-pages</strong> or <strong>OpenNext</strong>, <strong>Netlify</strong>, <strong>self&ndash;host</strong> via <code>next start</code> behind nginx. Vercel is the path of least resistance for full Next features.</p>'''
+
+
+ANSWERS[47] = r'''<p>AWS Secrets Manager stores credentials encrypted with KMS, retrieves them via IAM&ndash;authenticated API calls, and rotates them on schedule. Compared to environment variables or Parameter Store, it adds rotation, fine&ndash;grained IAM, automatic versioning, and cross&ndash;region replication.</p>
 <table>
 <thead><tr><th>Concern</th><th>Mechanism</th></tr></thead>
 <tbody>
@@ -2781,15 +2441,10 @@ spec:
     - secretKey: MONGODB_URI
       remoteRef: { key: prod/api/mongodb }</code></pre>
 <p>Operational rules: <strong>scope IAM by ARN pattern</strong> (<code>prod/api/*</code>); <strong>rotate on schedule</strong> (30&ndash;90 days); <strong>rotate on incident</strong> (suspected leak &rarr; immediately); <strong>monitor for unusual access</strong> (alarm if a previously&ndash;unused IAM role calls GetSecretValue); <strong>per&ndash;environment</strong> secrets (no shared dev/staging/prod).</p>
-<p>Cost: $0.40/secret/month + $0.05 per 10K API calls &mdash; cache aggressively. For non&ndash;rotating config, <strong>Parameter Store</strong> is free up to 10K standard params. 2026 alternatives: <strong>HashiCorp Vault</strong> (multi&ndash;cloud, dynamic creds), <strong>Doppler</strong> (developer&ndash;friendly), <strong>Infisical</strong> (open source), <strong>1Password Connect</strong>.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q48">
-  <div class="qa__number">Question 48</div>
-  <h3 class="qa__question">Describe the steps to implement a robust CI/CD pipeline using CircleCI for a MERN stack application.</h3>
-  <div class="qa__answer">
-    <p>CircleCI runs CI/CD on managed cloud or self&ndash;hosted runners with a YAML config in <code>.circleci/config.yml</code>. The MERN pipeline shape: install &rarr; lint &rarr; test (matrix) &rarr; build image &rarr; push to registry &rarr; deploy &rarr; smoke test.</p>
+<p>Cost: $0.40/secret/month + $0.05 per 10K API calls &mdash; cache aggressively. For non&ndash;rotating config, <strong>Parameter Store</strong> is free up to 10K standard params. 2026 alternatives: <strong>HashiCorp Vault</strong> (multi&ndash;cloud, dynamic creds), <strong>Doppler</strong> (developer&ndash;friendly), <strong>Infisical</strong> (open source), <strong>1Password Connect</strong>.</p>'''
+
+
+ANSWERS[48] = r'''<p>CircleCI runs CI/CD on managed cloud or self&ndash;hosted runners with a YAML config in <code>.circleci/config.yml</code>. The MERN pipeline shape: install &rarr; lint &rarr; test (matrix) &rarr; build image &rarr; push to registry &rarr; deploy &rarr; smoke test.</p>
 <table>
 <thead><tr><th>Concept</th><th>Mechanism</th></tr></thead>
 <tbody>
@@ -2857,15 +2512,10 @@ workflows:
           cluster-name: prod
           container-image-name-updates: container=api,tag=${CIRCLE_SHA1}</code></pre>
 <p>2026 best practices: <strong>OIDC for AWS</strong> via CircleCI&rsquo;s OIDC token (no static keys); <strong>caching</strong> pnpm + Docker layers (10x build speedup); <strong>parallel test splitting</strong> by timings; <strong>required checks</strong> on PR via GitHub branch protection; <strong>manual approval</strong> before prod with audit trail; <strong>Datadog CI Visibility</strong> orb for flaky test detection.</p>
-<p>Alternatives often simpler: <strong>GitHub Actions</strong> (free for OSS, native GitHub integration), <strong>GitLab CI</strong> (built into GitLab), <strong>Buildkite</strong> (best for hybrid self&ndash;hosted), <strong>Dagger</strong> (CI as code in TS/Python/Go). Pure CircleCI shines for orgs with deep orb investment, advanced parallelism needs, or self&ndash;hosted hybrid.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q49">
-  <div class="qa__number">Question 49</div>
-  <h3 class="qa__question">How do you optimize query performance and indexing in a MongoDB database?</h3>
-  <div class="qa__answer">
-    <p>Mongo query optimization is a tight loop: identify slow ops, understand the plan, fix the index/query, verify. Atlas tooling makes the inputs cheap to gather; the engineering judgement is yours.</p>
+<p>Alternatives often simpler: <strong>GitHub Actions</strong> (free for OSS, native GitHub integration), <strong>GitLab CI</strong> (built into GitLab), <strong>Buildkite</strong> (best for hybrid self&ndash;hosted), <strong>Dagger</strong> (CI as code in TS/Python/Go). Pure CircleCI shines for orgs with deep orb investment, advanced parallelism needs, or self&ndash;hosted hybrid.</p>'''
+
+
+ANSWERS[49] = r'''<p>Mongo query optimization is a tight loop: identify slow ops, understand the plan, fix the index/query, verify. Atlas tooling makes the inputs cheap to gather; the engineering judgement is yours.</p>
 <table>
 <thead><tr><th>Tool</th><th>What it shows</th></tr></thead>
 <tbody>
@@ -2911,15 +2561,10 @@ db.orders.aggregate([
   { $merge: { into: &quot;daily_revenue&quot;, on: [&quot;_id&quot;, &quot;date&quot;], whenMatched: &quot;merge&quot; } }
 ]);</code></pre>
 <p>Capacity rules: target <strong>cache hit ratio &gt; 95%</strong>, <strong>working set &lt; 80% of RAM</strong>, <strong>oplog window &gt; 24h</strong>. If the working set spills to disk you&rsquo;ll see latency cliffs &mdash; scale tier or shard. <strong>Drop unused indexes</strong> &mdash; each one costs RAM + write speed.</p>
-<p>When Mongo is the wrong tool: heavy ad&ndash;hoc analytics + huge joins. Replicate via <strong>Atlas Stream Processing</strong> or Debezium CDC to <strong>ClickHouse</strong> / <strong>Tinybird</strong> / <strong>BigQuery</strong> / <strong>Snowflake</strong>; Mongo handles operational, the warehouse handles analytical.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q50">
-  <div class="qa__number">Question 50</div>
-  <h3 class="qa__question">Explain how you would set up and use Azure DevOps for deploying a MERN stack application.</h3>
-  <div class="qa__answer">
-    <p>Azure DevOps offers Pipelines (CI/CD), Repos (Git), Boards (Kanban), Artifacts (registry), Test Plans. For MERN, Pipelines + Repos + Artifacts are the relevant trio. Pipelines are YAML in&ndash;repo or classic UI; YAML is the way.</p>
+<p>When Mongo is the wrong tool: heavy ad&ndash;hoc analytics + huge joins. Replicate via <strong>Atlas Stream Processing</strong> or Debezium CDC to <strong>ClickHouse</strong> / <strong>Tinybird</strong> / <strong>BigQuery</strong> / <strong>Snowflake</strong>; Mongo handles operational, the warehouse handles analytical.</p>'''
+
+
+ANSWERS[50] = r'''<p>Azure DevOps offers Pipelines (CI/CD), Repos (Git), Boards (Kanban), Artifacts (registry), Test Plans. For MERN, Pipelines + Repos + Artifacts are the relevant trio. Pipelines are YAML in&ndash;repo or classic UI; YAML is the way.</p>
 <table>
 <thead><tr><th>Concept</th><th>Mechanism</th></tr></thead>
 <tbody>
@@ -3001,15 +2646,9 @@ stages:
         increments: [10, 50, 100]
         deploy: { steps: [...] }</code></pre>
 <p>Best practices: <strong>workload identity / OIDC</strong> instead of service principal secrets; <strong>variable groups linked to Key Vault</strong> for centralized secret management; <strong>environments with approvals</strong> on prod; <strong>self&ndash;hosted agents</strong> in the VPC for private network deploys; <strong>marketplace tasks</strong> for SonarQube, Datadog, Snyk, Slack notify.</p>
-<p>2026 reality: GitHub Actions has eclipsed Azure DevOps for OSS + cloud&ndash;native; Azure DevOps still strong in regulated/Microsoft&ndash;heavy enterprises with deep AD/AAD/Boards/Test Plans integration. The pipelines themselves are very similar in shape &mdash; the value is the surrounding ecosystem.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q51">
-  <div class="qa__number">Question 51</div>
-  <h3 class="qa__question">How do you handle application and infrastructure monitoring using Prometheus and Grafana?</h3>
-  <div class="qa__answer">
-    
+<p>2026 reality: GitHub Actions has eclipsed Azure DevOps for OSS + cloud&ndash;native; Azure DevOps still strong in regulated/Microsoft&ndash;heavy enterprises with deep AD/AAD/Boards/Test Plans integration. The pipelines themselves are very similar in shape &mdash; the value is the surrounding ecosystem.</p>'''
+
+ANSWERS[51] = r'''
 <p>Prometheus + Grafana is the open-source monitoring stack: Prometheus scrapes metrics from targets, stores them as time-series in its TSDB, evaluates alert rules; Grafana queries Prometheus (and other sources) for dashboards; Alertmanager handles routing, deduplication, silencing.</p>
 <table>
 <thead><tr><th>Component</th><th>Role</th><th>Key choice</th></tr></thead>
@@ -3062,15 +2701,10 @@ app.get(&quot;/metrics&quot;, async (_req, res) =&gt; {
     summary: &quot;Error rate &gt; 5% for 10m on {{ $labels.service }}&quot;</code></pre>
 <p>Best practices: instrument the <strong>RED</strong> trio (Rate, Errors, Duration) per service, <strong>USE</strong> trio (Utilization, Saturation, Errors) per resource, use <strong>histograms</strong> not <strong>summaries</strong> for percentiles you can aggregate, label <strong>cardinality discipline</strong> (no userId in labels &mdash; that explodes the TSDB), alert on <strong>burn rate</strong> for SLO violations, not raw thresholds.</p>
 <p>2026 alternatives: <strong>Grafana Cloud</strong> bundles Prometheus + Loki + Tempo + Alloy as a managed service; <strong>VictoriaMetrics</strong> is a faster Prometheus-compatible TSDB; <strong>SigNoz</strong> + <strong>HyperDX</strong> ship OSS observability with OpenTelemetry-native ingestion; <strong>Datadog</strong>, <strong>Honeycomb</strong>, <strong>Axiom</strong>, <strong>Better Stack</strong> are managed. OpenTelemetry instrumentation keeps you portable across any backend.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q52">
-  <div class="qa__number">Question 52</div>
-  <h3 class="qa__question">Describe the process to configure and use AWS Elastic Load Balancer (ELB) for a MERN stack application.</h3>
-  <div class="qa__answer">
-    
+
+ANSWERS[52] = r'''
 <p>AWS Elastic Load Balancer (ELB) sits in front of your MERN backend distributing traffic across healthy targets. Three flavors: <strong>ALB</strong> (Layer 7, HTTP/HTTPS, the default for web apps), <strong>NLB</strong> (Layer 4, TCP/TLS, ultra-low latency, static IPs), <strong>GWLB</strong> (Layer 3, for inserting firewalls/IDS).</p>
 <table>
 <thead><tr><th>Decision</th><th>ALB</th><th>NLB</th></tr></thead>
@@ -3142,15 +2776,10 @@ resource &quot;aws_lb_listener&quot; &quot;http&quot; {
 }</code></pre>
 <p>Routing patterns: <strong>host-based</strong> for multi-tenant (tenant.example.com), <strong>path-based</strong> for monorepo backends (/api/* &rarr; api-tg, /admin/* &rarr; admin-tg), <strong>weighted</strong> target groups for canary releases (95% blue / 5% green). Always set <strong>idle_timeout</strong> longer than upstream keep-alive to avoid 502s. Use <strong>access logs to S3</strong> + Athena for ad-hoc traffic analysis.</p>
 <p>2026 alternatives: <strong>CloudFront</strong> + Lambda@Edge in front of ALB for global edge cache + WAF; <strong>API Gateway</strong> for managed throttling + JWT auth; <strong>Cloudflare Load Balancing</strong> across multi-cloud; for K8s, the <strong>AWS Load Balancer Controller</strong> provisions ALBs from Ingress / TargetGroupBinding resources automatically.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q53">
-  <div class="qa__number">Question 53</div>
-  <h3 class="qa__question">How do you implement and manage automated testing for a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+
+ANSWERS[53] = r'''
 <p>Automated testing for a MERN stack uses a layered pyramid: many fast unit tests, fewer integration tests, even fewer E2E tests. Each layer covers a different failure mode and runs at a different point in the dev loop.</p>
 <table>
 <thead><tr><th>Layer</th><th>Scope</th><th>Tools (2026)</th><th>Speed / count</th></tr></thead>
@@ -3209,15 +2838,10 @@ jobs:
         with: { filename: tests/load/checkout.js }</code></pre>
 <p>Patterns: <strong>test pyramid</strong> not <strong>ice-cream cone</strong> &mdash; if you have more E2E than unit, your suite is slow and flaky; <strong>parallelization</strong> via Vitest threads + Playwright shards; <strong>data per test</strong> via factory functions (fishery, @mswjs/data) not shared fixtures; <strong>reset between tests</strong> via DB drop or mongodb-memory-server reset; <strong>avoid mocking what you own</strong> &mdash; mock only third-party network calls (MSW) and clocks (vi.useFakeTimers).</p>
 <p>2026 reality: <strong>Vitest</strong> has eclipsed Jest as default unit runner; <strong>Playwright</strong> has eclipsed Cypress for E2E; <strong>property-based testing</strong> via <strong>fast-check</strong> catches edge cases random tests miss; <strong>mutation testing</strong> via <strong>Stryker</strong> validates the suite itself; <strong>AI-generated tests</strong> via <strong>Codium</strong> / <strong>QA Wolf</strong> / <strong>Meticulous</strong> are starting to add value but still need human review.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q54">
-  <div class="qa__number">Question 54</div>
-  <h3 class="qa__question">Explain how to use Firebase for authentication and real-time database features in a MERN stack application.</h3>
-  <div class="qa__answer">
-    
+
+ANSWERS[54] = r'''
 <p>Firebase plugs into a MERN app two ways: as a <strong>BaaS for auth + realtime</strong> (Firebase Auth + Firestore/Realtime DB), or as just <strong>Firebase Auth</strong> while keeping MongoDB for primary data. The latter is more common in MERN since you already have Mongo.</p>
 <table>
 <thead><tr><th>Service</th><th>Mechanism</th><th>MERN role</th></tr></thead>
@@ -3272,15 +2896,10 @@ await addDoc(collection(db, `rooms/${roomId}/messages`), {
 });</code></pre>
 <p>Trade-offs: Firebase Auth saves you from running your own auth (Passkeys, MFA, social, anomaly detection are built-in), but vendor-locks identity. Firestore is fantastic for realtime but expensive at scale and has limitations on aggregations / joins / transactions across many docs. Custom claims on the ID token avoid extra DB lookups for roles. <strong>Security rules</strong> must be authored carefully &mdash; this is where Firestore deployments get pwned (allow read, write: if true is the default sin).</p>
 <p>2026 alternatives: <strong>Clerk</strong> + <strong>Supabase Auth</strong> + <strong>Better Auth</strong> + <strong>Stytch</strong> + <strong>WorkOS</strong> compete with Firebase Auth and often have better DX; <strong>Convex</strong> + <strong>InstantDB</strong> + <strong>Triplit</strong> + <strong>Replicache</strong> + <strong>ElectricSQL</strong> compete with Firestore for realtime/local-first; <strong>Pusher</strong> + <strong>Ably</strong> + <strong>PartyKit</strong> + <strong>Cloudflare Durable Objects</strong> for pure realtime fan-out without a DB.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q55">
-  <div class="qa__number">Question 55</div>
-  <h3 class="qa__question">How do you set up and manage a CI/CD pipeline using Jenkins for a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+
+ANSWERS[55] = r"""
 <p>Jenkins is the elder statesman of CI &mdash; powerful, plugin-rich, self-hosted, and operationally heavy. For MERN you author pipelines in <strong>Jenkinsfile</strong> (declarative or scripted Groovy), execute on master + agents (Linux containers via Kubernetes plugin in 2026 setups).</p>
 <table>
 <thead><tr><th>Concept</th><th>Mechanism</th></tr></thead>
@@ -3367,15 +2986,10 @@ pipeline {
 }</code></pre>
 <p>Operational realities: Jenkins controllers need babysitting (plugin updates, JVM tuning, backups of $JENKINS_HOME); use <strong>Configuration as Code (JCasC)</strong> + <strong>Job DSL</strong> to keep state reproducible; run controllers in <strong>HA mode</strong> via active/passive on shared storage or Jenkins Operations Center; pin plugin versions; isolate jobs in ephemeral K8s agents to avoid cross-job leakage.</p>
 <p>2026 reality: most teams have migrated to <strong>GitHub Actions</strong>, <strong>GitLab CI</strong>, <strong>CircleCI</strong>, <strong>Buildkite</strong>, <strong>Dagger</strong>, or <strong>Earthly</strong>. Jenkins remains in regulated/on-prem shops with deep plugin investments. New MERN projects rarely pick Jenkins; the operational tax beats the flexibility win.</p>
+"""
 
-    
-  </div>
-</article>
-<article class="qa" id="q56">
-  <div class="qa__number">Question 56</div>
-  <h3 class="qa__question">Describe the steps to use AWS CloudWatch for monitoring and alerting in a MERN stack application.</h3>
-  <div class="qa__answer">
-    
+
+ANSWERS[56] = r'''
 <p>AWS CloudWatch is the native AWS observability service: metrics, logs, alarms, dashboards, anomaly detection, and Logs Insights queries. For a MERN app on AWS you typically pipe everything through CloudWatch and forward to Datadog / Honeycomb only if needed.</p>
 <table>
 <thead><tr><th>Concept</th><th>Mechanism</th></tr></thead>
@@ -3453,15 +3067,10 @@ resource &quot;aws_cloudwatch_metric_alarm&quot; &quot;api_5xx&quot; {
 }</code></pre>
 <p>Patterns: <strong>EMF</strong> for metrics-from-logs (single write call, lower cost than PutMetricData), <strong>composite alarms</strong> for multi-signal pages (5xx AND latency AND deploy-just-happened), <strong>cross-account observability</strong> via the new CloudWatch Observability Access Manager so a central account sees all envs, <strong>log retention tiering</strong> &mdash; keep 7 days hot, archive to S3 + Athena for cheaper long-term.</p>
 <p>2026 reality: <strong>OpenTelemetry &rarr; AWS Distro for OTel (ADOT)</strong> &rarr; CloudWatch keeps you portable; <strong>Datadog</strong>, <strong>Honeycomb</strong>, <strong>Grafana Cloud</strong>, <strong>Axiom</strong> compete on UX/cost; for K8s, <strong>Container Insights</strong> + <strong>Application Signals</strong> auto-instrument most services. CloudWatch wins on AWS-native simplicity; specialized vendors win on trace UX and cost.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q57">
-  <div class="qa__number">Question 57</div>
-  <h3 class="qa__question">How do you implement service discovery and load balancing in a microservices architecture using Consul or Eureka?</h3>
-  <div class="qa__answer">
-    
+
+ANSWERS[57] = r'''
 <p>Service discovery + load balancing in microservices: services register at startup, clients discover via name resolution, balance across healthy instances. <strong>Consul</strong> (HashiCorp) and <strong>Eureka</strong> (Netflix, Java) are two classic options &mdash; though most 2026 K8s deployments rely on built-in DNS + EndpointSlices instead.</p>
 <table>
 <thead><tr><th>Concept</th><th>Consul</th><th>Eureka</th></tr></thead>
@@ -3514,15 +3123,10 @@ consul intention create -allow web api
 consul intention create -deny &quot;*&quot; api</code></pre>
 <p>Patterns: <strong>health-check-driven removal</strong> (deregister after N failures), <strong>tag-based routing</strong> for canary (api?tag=canary), <strong>prepared queries</strong> to encode failover logic (try local DC first, fall back to neighbor), <strong>watches</strong> to react to topology changes (re-render config, reload connections). For load balancing: client-side via DNS / Ribbon-style picker, or <strong>service mesh sidecar</strong> (Envoy via Connect) for L7 features.</p>
 <p>2026 reality: in K8s you rarely need Consul/Eureka &mdash; Kubernetes <strong>Service</strong> + <strong>kube-proxy</strong> + <strong>CoreDNS</strong> + <strong>EndpointSlices</strong> handle discovery and L4 balancing natively. Layer <strong>Istio</strong>, <strong>Linkerd</strong>, <strong>Cilium Service Mesh</strong>, or <strong>Consul Connect</strong> on top for mTLS, retries, traffic shifting, and observability. Outside K8s, Consul still earns its keep on multi-cloud / on-prem with non-K8s VMs.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q58">
-  <div class="qa__number">Question 58</div>
-  <h3 class="qa__question">Explain how you would use Docker Swarm for container orchestration in a MERN stack application.</h3>
-  <div class="qa__answer">
-    
+
+ANSWERS[58] = r'''
 <p>Docker Swarm is Docker&apos;s built-in orchestrator: simpler than Kubernetes, multi-node, declarative service model, integrated overlay network and secrets. It earned its keep ~2017-2019 then K8s became the default; in 2026 it&apos;s a niche pick for small/medium teams that want clustering without K8s complexity.</p>
 <table>
 <thead><tr><th>Concept</th><th>Mechanism</th></tr></thead>
@@ -3601,15 +3205,10 @@ docker service rollback mern_api</code></pre>
 <li>Swarm has minimal autoscaling, no per-pod resource limits parity with K8s, weaker RBAC, near-frozen development.</li>
 </ul>
 <p>2026 reality: most teams run K8s (managed: EKS / GKE / AKS / Linode LKE / DOKS) or skip orchestration entirely (Fly Machines, Railway, Render, Cloud Run, Fargate). Swarm survives in homelabs and small ops-light teams who want clustering without K8s ceremony &mdash; but it&apos;s the wrong long-term bet for new production deployments.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q59">
-  <div class="qa__number">Question 59</div>
-  <h3 class="qa__question">How do you handle and manage data migration between different versions of a MongoDB schema?</h3>
-  <div class="qa__answer">
-    
+
+ANSWERS[59] = r'''
 <p>Mongo data migrations across schema versions follow the <strong>expand &rarr; migrate &rarr; contract</strong> pattern: deploy code that handles both shapes, backfill old docs, then deploy code that drops support for the old shape. Done correctly: zero downtime, reversible at every step.</p>
 <table>
 <thead><tr><th>Phase</th><th>Goal</th><th>Mechanism</th></tr></thead>
@@ -3672,15 +3271,10 @@ function getDisplayName(user) {
 <p>Production patterns: run migrations <strong>from CI before the new app version goes live</strong> (pre-deploy hook in Helm / GitHub Actions); <strong>backfill in chunks</strong> with throttling so you don&apos;t hammer the cluster (especially on Atlas tiers); <strong>add an index covering the migration query</strong> first if the filter isn&apos;t indexed; <strong>run on a secondary tag</strong> for expensive backfills via readPreference: nearest + writes still go to primary; <strong>$jsonSchema validator</strong> with validationLevel: moderate enforces shape on new writes without rejecting historic docs.</p>
 <p>For very large collections (100M+ docs), consider <strong>change streams + replay</strong> via a compute job (AWS Batch / Cloud Run Jobs) that reads the oplog from a snapshot and writes the new shape in parallel; or use <strong>Atlas Triggers</strong> to migrate per-doc on access (lazy migration), pairing with a periodic sweep to finish the long tail.</p>
 <p>Anti-patterns: <strong>renaming a field with $rename in one go</strong> on a hot collection (locks pages, slows reads); <strong>removing the old field before code is fully promoted</strong> (rollback breaks); <strong>migrations that aren&apos;t idempotent</strong> (re-runs corrupt data); <strong>untested down migrations</strong> (you only learn they&apos;re broken at 3am during a rollback).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q60">
-  <div class="qa__number">Question 60</div>
-  <h3 class="qa__question">Describe the process to implement API versioning and backward compatibility in a MERN stack application.</h3>
-  <div class="qa__answer">
-    
+
+ANSWERS[60] = r'''
 <p>API versioning strategies: pick one explicitly and stick with it. <strong>Additive evolution by default</strong>; reserve a version bump for breaking changes only.</p>
 <table>
 <thead><tr><th>Strategy</th><th>Where</th><th>Pros</th><th>Cons</th></tr></thead>
@@ -3732,15 +3326,10 @@ type User {
 <li><strong>OpenAPI / AsyncAPI as source of truth</strong>: server, docs, SDKs, and tests all derive from one spec; validate requests + responses against it.</li>
 </ul>
 <p>2026 reality: most successful APIs use <strong>URL major version + per-field deprecation</strong> (e.g. /v1 for years; bump to /v2 only for genuine breaking changes), or <strong>date-based versioning</strong> Stripe-style for very evolving APIs. Avoid header-only versioning &mdash; CDN cache keys and browser debugging suffer. For internal services, <strong>gRPC + Protobuf</strong> + buf breaking-change linter gives compile-time guarantees and is the simplest version story.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q61">
-  <div class="qa__number">Question 61</div>
-  <h3 class="qa__question">How do you set up and use Azure Kubernetes Service (AKS) for deploying a MERN stack application?</h3>
-  <div class="qa__answer">
-    
+
+ANSWERS[61] = r'''
 <p>AKS (Azure Kubernetes Service) is Microsoft&apos;s managed K8s &mdash; you get a managed control plane (free) and pay for worker node VMs. Setup for a MERN deployment integrates with the broader Azure ecosystem: Container Registry (ACR), Key Vault, Application Gateway, Monitor.</p>
 <table>
 <thead><tr><th>Component</th><th>Mechanism</th></tr></thead>
@@ -3806,15 +3395,10 @@ spec:
           envFrom: [{ secretRef: { name: api-secrets } }]   # KV CSI mount</code></pre>
 <p>Best practices: <strong>workload identity over secrets</strong> (no static credentials in cluster); <strong>system + user node pools</strong> (system runs CoreDNS / metrics-server, user runs your apps); <strong>availability zones</strong> for multi-zone resilience; <strong>private cluster</strong> with API server endpoint inside VNet; <strong>Azure RBAC for K8s</strong> ties Entra ID groups to cluster roles; <strong>Defender for Containers</strong> for runtime security and CIS benchmarks; <strong>Azure Monitor managed Prometheus + Grafana</strong> instead of self-hosting; <strong>Azure Policy add-on</strong> enforces guardrails (no privileged pods, registries allowlist).</p>
 <p>2026 alternatives: <strong>EKS</strong> (AWS), <strong>GKE Autopilot</strong> (Google, fully managed nodes), <strong>OKE</strong> (Oracle), <strong>Linode LKE</strong> / <strong>DOKS</strong> for cheaper. AKS shines when you&apos;re already on Azure for AAD/Entra integration, devops boards, and mixed Windows/Linux workloads. For pure dev experience GKE Autopilot is the easiest; for cost flexibility EKS with Karpenter wins.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q62">
-  <div class="qa__number">Question 62</div>
-  <h3 class="qa__question">Explain how you would implement a real-time notification system using WebSockets in a MERN stack application.</h3>
-  <div class="qa__answer">
-    
+
+ANSWERS[62] = r'''
 <p>Real-time notifications via WebSocket cover three flows: <strong>fan-out</strong> from server to subscribed clients, <strong>presence</strong> tracking, and <strong>delivery guarantees</strong> across reconnects. The architecture must handle multi-pod fan-out, auth, and reconnect resync.</p>
 <table>
 <thead><tr><th>Concern</th><th>Approach</th></tr></thead>
@@ -3895,15 +3479,10 @@ socket.on(&quot;notifications:replay&quot;, (list) =&gt; {
 });</code></pre>
 <p>Operational realities: deploy with <strong>graceful drain</strong> (server emits disconnect-soon, clients reconnect to a healthy pod), <strong>sticky-less routing</strong> via the Redis adapter (any pod can publish to any user&apos;s room), <strong>per-pod connection cap</strong> (8-25k concurrent on a 4 vCPU node depending on traffic), <strong>scale via more pods</strong> not bigger pods (Node is single-threaded), <strong>monitor</strong> active sockets / event lag / dropped events / reconnect rate; alert when reconnect rate spikes.</p>
 <p>2026 alternatives: <strong>Ably</strong>, <strong>Pusher</strong>, <strong>PartyKit</strong>, <strong>Cloudflare Durable Objects</strong>, <strong>LiveKit</strong>, <strong>Soketi</strong> (open-source Pusher), <strong>Knock</strong> (cross-channel notifications), <strong>OneSignal</strong>, <strong>Novu</strong> &mdash; managed services skip the multi-pod fan-out problem entirely. For high-fanout (millions of subscribers per channel), use a managed service or Cloudflare Durable Objects; for hundreds-to-thousands per user, Socket.IO + Redis is fine.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q63">
-  <div class="qa__number">Question 63</div>
-  <h3 class="qa__question">How do you manage and monitor serverless functions using AWS Lambda and AWS CloudWatch?</h3>
-  <div class="qa__answer">
-    
+
+ANSWERS[63] = r'''
 <p>Lambda + CloudWatch is AWS&apos;s native pairing for serverless observability. Lambda emits invocations, errors, durations, throttles, concurrent executions, and init duration as metrics; logs go to CloudWatch Logs automatically; X-Ray adds distributed traces.</p>
 <table>
 <thead><tr><th>Signal</th><th>Source</th><th>Use</th></tr></thead>
@@ -3986,15 +3565,10 @@ fields @timestamp, requestId, err.message, err.stack
 | limit 20</code></pre>
 <p>Patterns: <strong>structured JSON logs</strong> (CloudWatch parses); <strong>correlation IDs</strong> (X-Amzn-Trace-Id, awsRequestId) propagated to downstream calls; <strong>EMF for custom metrics</strong> (one log line, parsed into metrics, lower cost than PutMetricData); <strong>DLQ + maximum-retry policies</strong> for async invocations; <strong>reserved concurrency</strong> on noisy functions to protect downstream Mongo from connection storms; <strong>Powertools for AWS Lambda (TypeScript)</strong> for ergonomic logging/tracing/metrics.</p>
 <p>2026 alternatives: <strong>OpenTelemetry &rarr; ADOT &rarr; CloudWatch + your APM</strong> keeps you portable to Datadog / Honeycomb / Grafana Cloud / Axiom; <strong>Application Signals</strong> auto-detects SLO violations without manual alarm authoring; <strong>Datadog Serverless</strong> integration adds rich UX on top of CloudWatch streams. For Cloudflare Workers, the equivalents are Workers Analytics Engine + Tail Workers + Logpush to your store of choice.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q64">
-  <div class="qa__number">Question 64</div>
-  <h3 class="qa__question">Describe the steps to configure and use AWS CodePipeline for a MERN stack application.</h3>
-  <div class="qa__answer">
-    
+
+ANSWERS[64] = r'''
 <p>AWS CodePipeline is AWS&apos;s native CD orchestrator: stages with actions (source, build, test, deploy, approval) wired together, triggered by source changes. It&apos;s less feature-rich than GitHub Actions or GitLab CI but integrates tightly with CodeBuild, CodeDeploy, ECR, ECS, Lambda, CloudFormation.</p>
 <table>
 <thead><tr><th>Concept</th><th>Mechanism</th></tr></thead>
@@ -4112,15 +3686,10 @@ resource &quot;aws_codepipeline&quot; &quot;mern&quot; {
 }</code></pre>
 <p>Patterns: <strong>OIDC via CodeStar Connections</strong> for GitHub auth (no PATs); <strong>parallel actions in a stage</strong> (V2) for lint+test+build concurrently; <strong>artifact-based handoff</strong> between stages via S3; <strong>imagedefinitions.json</strong> from CodeBuild ties image tag to ECS task definition; <strong>CodeDeploy blue/green</strong> for ECS gives traffic-shifting + automatic rollback on alarm; <strong>EventBridge + SNS</strong> for Slack/PagerDuty notifications; <strong>cross-account deploys</strong> via assumed roles.</p>
 <p>2026 reality: most teams pick <strong>GitHub Actions</strong> for breadth + community Actions, deploy to AWS via OIDC + Terraform/Pulumi. CodePipeline shines when you want everything inside AWS for compliance / IAM-only access patterns, or for triggering from S3/ECR events that GitHub Actions can&apos;t see natively. <strong>Spacelift</strong>, <strong>env0</strong>, <strong>Atlantis</strong>, <strong>Terraform Cloud</strong> often pair with GHA for IaC orchestration.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q65">
-  <div class="qa__number">Question 65</div>
-  <h3 class="qa__question">How do you handle and optimize memory management in a Node.js application?</h3>
-  <div class="qa__answer">
-    
+
+ANSWERS[65] = r'''
 <p>Memory management in Node hinges on the V8 heap (young generation, old generation, large object space) plus off-heap buffers (Buffer, ArrayBuffer, native modules, libuv). Most production memory issues are leaks from retained references, not GC tuning.</p>
 <table>
 <thead><tr><th>Symptom</th><th>Likely cause</th><th>Tool</th></tr></thead>
@@ -4181,15 +3750,9 @@ async function processCsv(stream) {
 }</code></pre>
 <p>Production patterns: <strong>set --max-old-space-size</strong> below the container limit (V8 doesn&apos;t see cgroup limits unless you tell it); <strong>heap snapshots on near-OOM</strong> via the flag above; <strong>compare two snapshots</strong> in Chrome DevTools (Memory tab) to find growing retainers; <strong>WeakRef / FinalizationRegistry</strong> for caches that must not pin objects; <strong>worker threads</strong> for CPU-bound work to avoid blocking the event loop; <strong>cluster mode + load balancer</strong> for multi-core utilization (or just N pods in K8s); <strong>process.report</strong> on signal SIGUSR2 for crash post-mortem.</p>
 <p>2026 tooling: <strong>clinic.js</strong> (Doctor, Heap Profiler, Flame), <strong>0x</strong> (flame graphs), <strong>Datadog Continuous Profiler</strong> / <strong>Pyroscope</strong> / <strong>Grafana Pyroscope</strong> for production CPU + memory profiles, <strong>node --inspect</strong> for one-off debugging. <strong>OpenTelemetry runtime metrics</strong> exports the same gauges to any backend. For very large heaps consider <strong>Bun</strong> (smaller GC overhead) or splitting hot paths into <strong>Rust via napi-rs</strong>.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q66">
-  <div class="qa__number">Question 66</div>
-  <h3 class="qa__question">Explain the process to implement a secure API gateway using AWS API Gateway or Kong.</h3>
-  <div class="qa__answer">
-    <p>A secure API gateway sits between callers and your services, centralizing concerns that don&rsquo;t belong in business code: <strong>authentication</strong>, <strong>authorization</strong>, <strong>rate limiting</strong>, <strong>quota</strong>, <strong>request validation</strong>, <strong>WAF</strong>, <strong>caching</strong>, <strong>request transformation</strong>, and <strong>observability</strong>.</p>
+ANSWERS[66] = r'''<p>A secure API gateway sits between callers and your services, centralizing concerns that don&rsquo;t belong in business code: <strong>authentication</strong>, <strong>authorization</strong>, <strong>rate limiting</strong>, <strong>quota</strong>, <strong>request validation</strong>, <strong>WAF</strong>, <strong>caching</strong>, <strong>request transformation</strong>, and <strong>observability</strong>.</p>
 
 <table>
 <tr><th>Tool</th><th>Best for</th><th>Notes</th></tr>
@@ -4255,15 +3818,10 @@ functions:
 <li><strong>Versioning</strong> &mdash; <code>/v1/</code> in path or <code>API-Version</code> header; sunset old versions with explicit deprecation timelines.</li>
 </ul>
 
-<p>For most 2026 MERN apps the choice is simple: Lambda&ndash;based &rarr; <strong>API Gateway HTTP API</strong>; container&ndash;based &rarr; <strong>Kong on Fargate/EKS</strong> or <strong>Cloudflare API Gateway</strong> at the edge; serverless edge &rarr; <strong>Hono on Workers</strong> with auth middleware (no separate gateway product needed).</p>
-    
-  </div>
-</article>
-<article class="qa" id="q67">
-  <div class="qa__number">Question 67</div>
-  <h3 class="qa__question">How do you set up and use Google Cloud Platform (GCP) for deploying a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p>GCP for MERN follows the same shape as AWS but with simpler primitives. The 2026 reference architecture: <strong>Cloud Run</strong> for the API, <strong>Firebase Hosting / Cloud Storage + Cloud CDN</strong> for the React app, <strong>MongoDB Atlas on GCP</strong> for the database, and <strong>Cloud Build</strong> + <strong>Artifact Registry</strong> for CI/CD.</p>
+<p>For most 2026 MERN apps the choice is simple: Lambda&ndash;based &rarr; <strong>API Gateway HTTP API</strong>; container&ndash;based &rarr; <strong>Kong on Fargate/EKS</strong> or <strong>Cloudflare API Gateway</strong> at the edge; serverless edge &rarr; <strong>Hono on Workers</strong> with auth middleware (no separate gateway product needed).</p>'''
+
+
+ANSWERS[67] = r'''<p>GCP for MERN follows the same shape as AWS but with simpler primitives. The 2026 reference architecture: <strong>Cloud Run</strong> for the API, <strong>Firebase Hosting / Cloud Storage + Cloud CDN</strong> for the React app, <strong>MongoDB Atlas on GCP</strong> for the database, and <strong>Cloud Build</strong> + <strong>Artifact Registry</strong> for CI/CD.</p>
 
 <table>
 <tr><th>AWS</th><th>GCP equivalent</th><th>Notes</th></tr>
@@ -4318,15 +3876,10 @@ gcloud run domain-mappings create --service api --domain api.example.com</code><
 <li><strong>Cloud Monitoring + Cloud Trace</strong> via OpenTelemetry; alerts via PagerDuty/Slack integrations.</li>
 </ol>
 
-<p>For a small MERN team, GCP often beats AWS on simplicity (Cloud Run vs ECS+ALB+ASG) and cost on bursty workloads. AWS still wins on breadth of services, marketplace, and existing-team familiarity. Use whichever cloud your team already runs &mdash; the marginal capability gap rarely justifies a migration.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q68">
-  <div class="qa__number">Question 68</div>
-  <h3 class="qa__question">Describe how to implement a disaster recovery plan for a MERN stack application.</h3>
-  <div class="qa__answer">
-    <p>A disaster recovery plan answers two questions ahead of time: <strong>RTO</strong> (how fast can we be operational) and <strong>RPO</strong> (how much data can we afford to lose). Targets drive the architecture &mdash; a 30s RTO costs 10x more than a 4h RTO, so don&rsquo;t over&ndash;engineer.</p>
+<p>For a small MERN team, GCP often beats AWS on simplicity (Cloud Run vs ECS+ALB+ASG) and cost on bursty workloads. AWS still wins on breadth of services, marketplace, and existing-team familiarity. Use whichever cloud your team already runs &mdash; the marginal capability gap rarely justifies a migration.</p>'''
+
+
+ANSWERS[68] = r'''<p>A disaster recovery plan answers two questions ahead of time: <strong>RTO</strong> (how fast can we be operational) and <strong>RPO</strong> (how much data can we afford to lose). Targets drive the architecture &mdash; a 30s RTO costs 10x more than a 4h RTO, so don&rsquo;t over&ndash;engineer.</p>
 
 <table>
 <tr><th>Tier</th><th>RTO</th><th>RPO</th><th>Pattern</th><th>Cost</th></tr>
@@ -4382,15 +3935,10 @@ gcloud run domain-mappings create --service api --domain api.example.com</code><
 <li><strong>Annually</strong> &mdash; tabletop exercise with engineering, support, legal; document gaps; update runbooks.</li>
 </ul>
 
-<p>Adjacent investments that pay off: <strong>immutable backups</strong> (S3 Object Lock, Atlas snapshot retention) defend against ransomware that deletes your backups; <strong>config drift detection</strong> (Terraform state + ArgoCD reconcile) ensures DR region matches primary; <strong>chaos engineering</strong> (Chaos Monkey, Gremlin, Litmus) builds confidence by breaking things on purpose. Real RTO is the time from <em>incident detection</em> to recovery &mdash; observability and on&ndash;call quality dominate the equation.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q69">
-  <div class="qa__number">Question 69</div>
-  <h3 class="qa__question">How do you handle and manage database transactions in MongoDB?</h3>
-  <div class="qa__answer">
-    <p>MongoDB transactions allow multi&ndash;document atomic writes across collections within a replica set or sharded cluster &mdash; available since 4.0 / 4.2 respectively. They use <strong>snapshot isolation</strong>: reads inside the transaction see a consistent point&ndash;in&ndash;time snapshot; writes are applied atomically on commit or discarded on abort.</p>
+<p>Adjacent investments that pay off: <strong>immutable backups</strong> (S3 Object Lock, Atlas snapshot retention) defend against ransomware that deletes your backups; <strong>config drift detection</strong> (Terraform state + ArgoCD reconcile) ensures DR region matches primary; <strong>chaos engineering</strong> (Chaos Monkey, Gremlin, Litmus) builds confidence by breaking things on purpose. Real RTO is the time from <em>incident detection</em> to recovery &mdash; observability and on&ndash;call quality dominate the equation.</p>'''
+
+
+ANSWERS[69] = r'''<p>MongoDB transactions allow multi&ndash;document atomic writes across collections within a replica set or sharded cluster &mdash; available since 4.0 / 4.2 respectively. They use <strong>snapshot isolation</strong>: reads inside the transaction see a consistent point&ndash;in&ndash;time snapshot; writes are applied atomically on commit or discarded on abort.</p>
 
 <p>The mechanism: a transaction acquires a <strong>logical session</strong>, reads + writes through that session, and commits via <code>commitTransaction()</code> with an associated write concern. Internally, Mongo holds writes in a temporary location, validates against concurrent writers (write conflict detection), and applies them atomically to the oplog when committing.</p>
 
@@ -4448,15 +3996,10 @@ await session.withTransaction(async () =&gt; {
 // Separate worker reads OutboxEvent where publishedAt is null,
 // publishes to Kafka, sets publishedAt. Idempotent.</code></pre>
 
-<p>For genuinely distributed workflows (cross&ndash;service consistency), don&rsquo;t use Mongo transactions &mdash; use a <strong>saga</strong> orchestrated via <strong>Temporal</strong>, <strong>Inngest</strong>, <strong>Trigger.dev</strong>, <strong>Restate</strong>, or <strong>Hatchet</strong>. They handle compensations, retries, timeouts, and durable state. Within a single Mongo cluster though, a <code>withTransaction</code> block is the right tool when atomicity matters &mdash; just don&rsquo;t reach for it when an atomic single&ndash;doc operation suffices.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q70">
-  <div class="qa__number">Question 70</div>
-  <h3 class="qa__question">Explain how you would set up and manage a Kubernetes cluster using Google Kubernetes Engine (GKE) for a MERN stack application.</h3>
-  <div class="qa__answer">
-    <p>GKE manages Kubernetes control plane for you &mdash; in 2026 the default is <strong>GKE Autopilot</strong>, which also manages nodes (you only specify Pod resources, Google handles bin&ndash;packing + node lifecycle). Standard GKE remains for teams that need DaemonSets, custom node taints, GPU/TPU instances, or specific network plugins.</p>
+<p>For genuinely distributed workflows (cross&ndash;service consistency), don&rsquo;t use Mongo transactions &mdash; use a <strong>saga</strong> orchestrated via <strong>Temporal</strong>, <strong>Inngest</strong>, <strong>Trigger.dev</strong>, <strong>Restate</strong>, or <strong>Hatchet</strong>. They handle compensations, retries, timeouts, and durable state. Within a single Mongo cluster though, a <code>withTransaction</code> block is the right tool when atomicity matters &mdash; just don&rsquo;t reach for it when an atomic single&ndash;doc operation suffices.</p>'''
+
+
+ANSWERS[70] = r'''<p>GKE manages Kubernetes control plane for you &mdash; in 2026 the default is <strong>GKE Autopilot</strong>, which also manages nodes (you only specify Pod resources, Google handles bin&ndash;packing + node lifecycle). Standard GKE remains for teams that need DaemonSets, custom node taints, GPU/TPU instances, or specific network plugins.</p>
 
 <pre><code># Create a regional Autopilot cluster (multi-AZ control plane + nodes)
 gcloud container clusters create-auto mern-prod \
@@ -4521,15 +4064,10 @@ spec:
 <li><strong>Pod Security Standards: restricted</strong> &mdash; non&ndash;root, readOnlyRootFilesystem, dropped capabilities, seccomp RuntimeDefault.</li>
 </ul>
 
-<p>For most MERN teams, <strong>GKE Autopilot</strong> + ArgoCD + External Secrets + Atlas + Memorystore Redis is a sustainable platform that matches AWS EKS feature&ndash;for&ndash;feature with notably less operational burden. Choose between AWS EKS and GKE on where the team already operates &mdash; both are mature; the differences are in dev experience, not capability.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q71">
-  <div class="qa__number">Question 71</div>
-  <h3 class="qa__question">How do you implement a service mesh using Istio or Linkerd in a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p>A service mesh moves cross&ndash;cutting concerns &mdash; mTLS, retries, traffic shifting, observability, authz &mdash; out of application code into a sidecar proxy or eBPF&ndash;based agent. Apps make plain HTTP/gRPC calls; the mesh secures and routes them. The two dominant options in 2026:</p>
+<p>For most MERN teams, <strong>GKE Autopilot</strong> + ArgoCD + External Secrets + Atlas + Memorystore Redis is a sustainable platform that matches AWS EKS feature&ndash;for&ndash;feature with notably less operational burden. Choose between AWS EKS and GKE on where the team already operates &mdash; both are mature; the differences are in dev experience, not capability.</p>'''
+
+
+ANSWERS[71] = r'''<p>A service mesh moves cross&ndash;cutting concerns &mdash; mTLS, retries, traffic shifting, observability, authz &mdash; out of application code into a sidecar proxy or eBPF&ndash;based agent. Apps make plain HTTP/gRPC calls; the mesh secures and routes them. The two dominant options in 2026:</p>
 
 <table>
 <tr><th>Aspect</th><th>Istio</th><th>Linkerd</th><th>Cilium Service Mesh</th></tr>
@@ -4612,15 +4150,10 @@ spec:
 <li><strong>Debug surface area</strong> &mdash; an extra hop where things can fail; on&ndash;call needs to read Envoy logs + xDS dumps.</li>
 </ul>
 
-<p>For a typical MERN deployment, you probably <strong>don&rsquo;t need a service mesh</strong>. mTLS for the 5&ndash;10 services in a small product is overkill; basic K8s NetworkPolicy + cert&ndash;manager + decent observability cover 90% of the value. Reach for Linkerd (simplest) when you&rsquo;ve got 20+ services, regulatory mTLS requirements, or genuine traffic shifting needs. Pick Istio (or Cilium Mesh) for big platform teams that need every feature.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q72">
-  <div class="qa__number">Question 72</div>
-  <h3 class="qa__question">Describe the process to implement automated backups and restore strategies for MongoDB.</h3>
-  <div class="qa__answer">
-    <p>Automated MongoDB backups need three guarantees: <strong>regular schedule</strong>, <strong>tested restore</strong>, and <strong>off&ndash;site retention</strong> with immutability. The 2026 baseline for any production cluster is <strong>continuous backup with point&ndash;in&ndash;time recovery (PITR)</strong>, not periodic snapshots.</p>
+<p>For a typical MERN deployment, you probably <strong>don&rsquo;t need a service mesh</strong>. mTLS for the 5&ndash;10 services in a small product is overkill; basic K8s NetworkPolicy + cert&ndash;manager + decent observability cover 90% of the value. Reach for Linkerd (simplest) when you&rsquo;ve got 20+ services, regulatory mTLS requirements, or genuine traffic shifting needs. Pick Istio (or Cilium Mesh) for big platform teams that need every feature.</p>'''
+
+
+ANSWERS[72] = r'''<p>Automated MongoDB backups need three guarantees: <strong>regular schedule</strong>, <strong>tested restore</strong>, and <strong>off&ndash;site retention</strong> with immutability. The 2026 baseline for any production cluster is <strong>continuous backup with point&ndash;in&ndash;time recovery (PITR)</strong>, not periodic snapshots.</p>
 
 <p>For Atlas (recommended for everything except very specific compliance):</p>
 
@@ -4677,15 +4210,10 @@ pbm restore 2026-05-02T10:30:00Z        # PITR restore</code></pre>
 <li><strong>Automate the runbook</strong> &mdash; one&ndash;click restore script that handles cluster provisioning + connection string update + validation.</li>
 </ul>
 
-<p>For 2026 most MERN teams use <strong>Atlas continuous backup with PITR + cross&ndash;region snapshot copy + quarterly restore drills</strong> &mdash; ~$0.50 per GB/month, set&ndash;and&ndash;forget reliability. Self&ndash;managed only when compliance forces (gov clouds, on&ndash;prem, air&ndash;gapped); use <strong>Percona Backup for MongoDB</strong> + S3 + Object Lock as the OSS equivalent.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q73">
-  <div class="qa__number">Question 73</div>
-  <h3 class="qa__question">How do you use AWS Fargate for running containers without managing servers in a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p>AWS Fargate runs containers without managing EC2 instances &mdash; you submit a task definition + service, AWS handles the host. It&rsquo;s the simpler half of ECS / EKS; you keep ECS&rsquo;s scheduling and load balancing without the operational burden of nodes.</p>
+<p>For 2026 most MERN teams use <strong>Atlas continuous backup with PITR + cross&ndash;region snapshot copy + quarterly restore drills</strong> &mdash; ~$0.50 per GB/month, set&ndash;and&ndash;forget reliability. Self&ndash;managed only when compliance forces (gov clouds, on&ndash;prem, air&ndash;gapped); use <strong>Percona Backup for MongoDB</strong> + S3 + Object Lock as the OSS equivalent.</p>'''
+
+
+ANSWERS[73] = r'''<p>AWS Fargate runs containers without managing EC2 instances &mdash; you submit a task definition + service, AWS handles the host. It&rsquo;s the simpler half of ECS / EKS; you keep ECS&rsquo;s scheduling and load balancing without the operational burden of nodes.</p>
 
 <table>
 <tr><th>Concern</th><th>EC2 launch type</th><th>Fargate launch type</th></tr>
@@ -4765,15 +4293,10 @@ aws application-autoscaling put-scaling-policy \
 <li><strong>Read&ndash;only root filesystem</strong> + non&ndash;root user in the image; drop all Linux capabilities.</li>
 </ul>
 
-<p>For 2026 MERN simplicity: <strong>Fargate Spot for dev + staging, Fargate on&ndash;demand for prod</strong>, service auto&ndash;scaling on RequestCountPerTarget, ALB in front. App Runner is a simpler alternative if you don&rsquo;t need full ECS features. EKS Fargate (Kubernetes profile on Fargate) is the K8s flavor of the same idea but loses some Fargate&ndash;native features.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q74">
-  <div class="qa__number">Question 74</div>
-  <h3 class="qa__question">Explain how to implement a robust error handling and logging system in a MERN stack application.</h3>
-  <div class="qa__answer">
-    <p>Robust error handling has four levels: <strong>capture</strong> (every error is recorded), <strong>classify</strong> (operational vs programmer, retryable vs not), <strong>contextualize</strong> (request ID, user, trace ID, env), and <strong>respond</strong> (graceful UX + safe API responses + alerting).</p>
+<p>For 2026 MERN simplicity: <strong>Fargate Spot for dev + staging, Fargate on&ndash;demand for prod</strong>, service auto&ndash;scaling on RequestCountPerTarget, ALB in front. App Runner is a simpler alternative if you don&rsquo;t need full ECS features. EKS Fargate (Kubernetes profile on Fargate) is the K8s flavor of the same idea but loses some Fargate&ndash;native features.</p>'''
+
+
+ANSWERS[74] = r'''<p>Robust error handling has four levels: <strong>capture</strong> (every error is recorded), <strong>classify</strong> (operational vs programmer, retryable vs not), <strong>contextualize</strong> (request ID, user, trace ID, env), and <strong>respond</strong> (graceful UX + safe API responses + alerting).</p>
 
 <pre><code>// 1. A typed error class hierarchy
 abstract class AppError extends Error {
@@ -4861,15 +4384,10 @@ process.on(&quot;uncaughtException&quot;,  (err)    =&gt; { logger.fatal({ err }
 <li><strong>Graceful shutdown</strong> &mdash; on SIGTERM, drain connections, finish in&ndash;flight requests, close DB pools, exit. Otherwise rolling deploys cause 502s.</li>
 </ul>
 
-<p>For 2026 MERN: <strong>pino + OpenTelemetry + Sentry + Datadog/Honeycomb/Axiom</strong> covers app, frontend, infra, and traces. Wire Sentry to your release pipeline so source maps + commit SHAs link errors to deploys; the &ldquo;deploy that broke prod&rdquo; becomes obvious in seconds.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q75">
-  <div class="qa__number">Question 75</div>
-  <h3 class="qa__question">How do you set up and use HashiCorp Vault for secret management in a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p>HashiCorp Vault is the canonical secrets engine for multi&ndash;cloud + dynamic credentials. Where AWS Secrets Manager / GCP Secret Manager are storage, Vault is also a <em>generation</em> engine &mdash; it can mint short&ndash;lived database credentials, AWS IAM credentials, PKI certificates, and encrypt&ndash;as&ndash;a&ndash;service responses on demand.</p>
+<p>For 2026 MERN: <strong>pino + OpenTelemetry + Sentry + Datadog/Honeycomb/Axiom</strong> covers app, frontend, infra, and traces. Wire Sentry to your release pipeline so source maps + commit SHAs link errors to deploys; the &ldquo;deploy that broke prod&rdquo; becomes obvious in seconds.</p>'''
+
+
+ANSWERS[75] = r'''<p>HashiCorp Vault is the canonical secrets engine for multi&ndash;cloud + dynamic credentials. Where AWS Secrets Manager / GCP Secret Manager are storage, Vault is also a <em>generation</em> engine &mdash; it can mint short&ndash;lived database credentials, AWS IAM credentials, PKI certificates, and encrypt&ndash;as&ndash;a&ndash;service responses on demand.</p>
 
 <table>
 <tr><th>Engine</th><th>Use case</th></tr>
@@ -4947,15 +4465,10 @@ async function getMongoCreds() {
 <li><strong>Quotas + lease limits</strong> &mdash; cap blast radius if a service is compromised.</li>
 </ul>
 
-<p>For 2026 the calculation: <strong>cloud&ndash;native (Secrets Manager / Secret Manager) + External Secrets Operator</strong> covers 80% of MERN needs at lower complexity. Reach for Vault when you need: dynamic DB credentials, multi&ndash;cloud, on&ndash;prem, transit encryption, internal PKI, or strict compliance (FedRAMP, PCI). <strong>Doppler</strong>, <strong>Infisical</strong>, <strong>Akeyless</strong> are SaaS alternatives that ease ops vs Vault self&ndash;host while keeping similar feature coverage.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q76">
-  <div class="qa__number">Question 76</div>
-  <h3 class="qa__question">Describe the steps to implement serverless deployment using AWS SAM or Serverless Framework for a MERN stack application.</h3>
-  <div class="qa__answer">
-    <p>Serverless deployment for MERN means packaging Lambda functions + API Gateway + IAM roles + event sources as code, with deterministic deploys via AWS SAM, Serverless Framework, AWS CDK, or SST. Each one&rsquo;s a different abstraction over CloudFormation; the choice is taste + ecosystem fit.</p>
+<p>For 2026 the calculation: <strong>cloud&ndash;native (Secrets Manager / Secret Manager) + External Secrets Operator</strong> covers 80% of MERN needs at lower complexity. Reach for Vault when you need: dynamic DB credentials, multi&ndash;cloud, on&ndash;prem, transit encryption, internal PKI, or strict compliance (FedRAMP, PCI). <strong>Doppler</strong>, <strong>Infisical</strong>, <strong>Akeyless</strong> are SaaS alternatives that ease ops vs Vault self&ndash;host while keeping similar feature coverage.</p>'''
+
+
+ANSWERS[76] = r'''<p>Serverless deployment for MERN means packaging Lambda functions + API Gateway + IAM roles + event sources as code, with deterministic deploys via AWS SAM, Serverless Framework, AWS CDK, or SST. Each one&rsquo;s a different abstraction over CloudFormation; the choice is taste + ecosystem fit.</p>
 
 <table>
 <tr><th>Tool</th><th>Format</th><th>Notes</th></tr>
@@ -5063,15 +4576,10 @@ serverless invoke -f createOrder --data &apos;{...}&apos;</code></pre>
 <li><strong>X&ndash;Ray / OpenTelemetry</strong> traces stitched across Lambda + API Gateway + downstream calls.</li>
 </ul>
 
-<p>For 2026 simplicity, <strong>SST</strong> is a strong pick for full&ndash;stack MERN&ndash;on&ndash;serverless: deploys Next.js + Lambda APIs + databases + queues with one TypeScript file, ships with Live Lambda (deploy once, hot&ndash;reload locally with cloud event sources). For non&ndash;AWS, <strong>Cloudflare Workers + Wrangler</strong> beats Lambda on cold start (~5ms vs ~100ms+) and price for many MERN APIs.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q77">
-  <div class="qa__number">Question 77</div>
-  <h3 class="qa__question">How do you handle and manage rate limiting and API throttling using Nginx or AWS API Gateway?</h3>
-  <div class="qa__answer">
-    <p>Rate limiting protects three things: <strong>backend capacity</strong> (DB connection pool, CPU), <strong>per&ndash;customer fairness</strong> (one tenant can&rsquo;t starve others), and <strong>abuse defense</strong> (brute force, scrapers, denial of wallet on metered services). Different layers enforce different limits; combine for defense in depth.</p>
+<p>For 2026 simplicity, <strong>SST</strong> is a strong pick for full&ndash;stack MERN&ndash;on&ndash;serverless: deploys Next.js + Lambda APIs + databases + queues with one TypeScript file, ships with Live Lambda (deploy once, hot&ndash;reload locally with cloud event sources). For non&ndash;AWS, <strong>Cloudflare Workers + Wrangler</strong> beats Lambda on cold start (~5ms vs ~100ms+) and price for many MERN APIs.</p>'''
+
+
+ANSWERS[77] = r'''<p>Rate limiting protects three things: <strong>backend capacity</strong> (DB connection pool, CPU), <strong>per&ndash;customer fairness</strong> (one tenant can&rsquo;t starve others), and <strong>abuse defense</strong> (brute force, scrapers, denial of wallet on metered services). Different layers enforce different limits; combine for defense in depth.</p>
 
 <table>
 <tr><th>Layer</th><th>Tool</th><th>What it limits</th></tr>
@@ -5170,15 +4678,10 @@ app.post(&quot;/api/auth/login&quot;, loginLimiter, login);</code></pre>
 <li><strong>Anti&ndash;DDoS</strong> &mdash; Cloudflare/CloudFront/AWS Shield in front for L3/L4; bot management for sophisticated abuse.</li>
 </ul>
 
-<p>For 2026 MERN: edge rate limiting via <strong>Cloudflare Rate Limiting Rules</strong> + app&ndash;layer via <strong>express-rate-limit + Redis</strong> (or <strong>Upstash Ratelimit</strong> at the edge for serverless). Reserve API Gateway throttling for protecting Lambda concurrency limits and Nginx <code>limit_req</code> for self&ndash;host without a CDN.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q78">
-  <div class="qa__number">Question 78</div>
-  <h3 class="qa__question">Explain the process to implement application security best practices for a MERN stack application.</h3>
-  <div class="qa__answer">
-    <p>App security is layered &mdash; no single mitigation suffices. The 2026 baseline for MERN, expressed as &ldquo;what to wire in by default before shipping&rdquo;:</p>
+<p>For 2026 MERN: edge rate limiting via <strong>Cloudflare Rate Limiting Rules</strong> + app&ndash;layer via <strong>express-rate-limit + Redis</strong> (or <strong>Upstash Ratelimit</strong> at the edge for serverless). Reserve API Gateway throttling for protecting Lambda concurrency limits and Nginx <code>limit_req</code> for self&ndash;host without a CDN.</p>'''
+
+
+ANSWERS[78] = r'''<p>App security is layered &mdash; no single mitigation suffices. The 2026 baseline for MERN, expressed as &ldquo;what to wire in by default before shipping&rdquo;:</p>
 
 <table>
 <tr><th>Layer</th><th>Defense</th><th>Tools</th></tr>
@@ -5259,15 +4762,10 @@ app.post(&quot;/api/orders&quot;, requireAuth, async (req, res) =&gt; {
 <li><strong>Zero&ndash;trust networking</strong> &mdash; mTLS east&ndash;west; never &ldquo;everything inside the VPC is safe.&rdquo;</li>
 </ul>
 
-<p>Highest&ndash;leverage choice in 2026: <strong>don&rsquo;t roll your own auth, payments, or PII storage</strong>. Clerk/Auth0/WorkOS handle 95% of compliance for identity; Stripe handles PCI; Skyflow/Basis Theory tokenize sensitive PII so it never enters your DB. Spend security budget on tenant scoping, audit logging, and threat modeling the parts of the app that are uniquely yours &mdash; that&rsquo;s where novel vulnerabilities live.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q79">
-  <div class="qa__number">Question 79</div>
-  <h3 class="qa__question">How do you set up and manage automated scaling using Kubernetes Horizontal Pod Autoscaler (HPA)?</h3>
-  <div class="qa__answer">
-    <p>The Kubernetes Horizontal Pod Autoscaler (HPA) controller polls metrics and adjusts a Deployment&rsquo;s replica count to keep the chosen metric near a target. The control loop runs every 15s by default; HPA scales up aggressively, scales down conservatively (5 min stabilization window) to avoid flapping.</p>
+<p>Highest&ndash;leverage choice in 2026: <strong>don&rsquo;t roll your own auth, payments, or PII storage</strong>. Clerk/Auth0/WorkOS handle 95% of compliance for identity; Stripe handles PCI; Skyflow/Basis Theory tokenize sensitive PII so it never enters your DB. Spend security budget on tenant scoping, audit logging, and threat modeling the parts of the app that are uniquely yours &mdash; that&rsquo;s where novel vulnerabilities live.</p>'''
+
+
+ANSWERS[79] = r'''<p>The Kubernetes Horizontal Pod Autoscaler (HPA) controller polls metrics and adjusts a Deployment&rsquo;s replica count to keep the chosen metric near a target. The control loop runs every 15s by default; HPA scales up aggressively, scales down conservatively (5 min stabilization window) to avoid flapping.</p>
 
 <pre><code>apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
@@ -5367,15 +4865,10 @@ spec:
 <li><strong>Observability</strong> &mdash; Datadog dashboards: <code>kube_horizontalpodautoscaler_status_current_replicas</code>, <code>kube_horizontalpodautoscaler_status_desired_replicas</code>, scale&ndash;up/scale&ndash;down events.</li>
 </ul>
 
-<p>For 2026 MERN: <strong>HPA on requests/sec via prometheus-adapter for the API tier</strong>, <strong>KEDA scale&ndash;to&ndash;zero for batch workers</strong>, <strong>Karpenter for node provisioning</strong>. GKE Autopilot abstracts most of this away if you&rsquo;re on GCP.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q80">
-  <div class="qa__number">Question 80</div>
-  <h3 class="qa__question">Describe how to implement and manage cross-origin resource sharing (CORS) in a MERN stack application.</h3>
-  <div class="qa__answer">
-    <p>CORS (Cross&ndash;Origin Resource Sharing) is the browser&rsquo;s gate for cross&ndash;origin API calls. The browser preflights requests via <code>OPTIONS</code> when they include credentials, custom headers, or non&ndash;simple methods; the server replies with <code>Access-Control-Allow-*</code> headers indicating what&rsquo;s allowed. Misconfigure it and you either break legit clients or open a CSRF&ndash;adjacent vulnerability.</p>
+<p>For 2026 MERN: <strong>HPA on requests/sec via prometheus-adapter for the API tier</strong>, <strong>KEDA scale&ndash;to&ndash;zero for batch workers</strong>, <strong>Karpenter for node provisioning</strong>. GKE Autopilot abstracts most of this away if you&rsquo;re on GCP.</p>'''
+
+
+ANSWERS[80] = r'''<p>CORS (Cross&ndash;Origin Resource Sharing) is the browser&rsquo;s gate for cross&ndash;origin API calls. The browser preflights requests via <code>OPTIONS</code> when they include credentials, custom headers, or non&ndash;simple methods; the server replies with <code>Access-Control-Allow-*</code> headers indicating what&rsquo;s allowed. Misconfigure it and you either break legit clients or open a CSRF&ndash;adjacent vulnerability.</p>
 
 <pre><code>// Express + cors middleware
 import express from &quot;express&quot;;
@@ -5436,15 +4929,9 @@ app.get(&quot;/widget&quot;, cors({ origin: &quot;*&quot; }), publicWidget);</co
 <li><strong>Cookies</strong> &mdash; cross&ndash;site cookies need <code>SameSite=None; Secure</code>; legit but more vulnerable to CSRF, so pair with double&ndash;submit token or origin/referer checks.</li>
 </ul>
 
-<p>For public APIs (no credentials, share with anyone): <code>Access-Control-Allow-Origin: *</code> is fine; pair with strict rate limits + API keys for abuse defense. CORS is browser&ndash;only &mdash; doesn&rsquo;t protect against direct curl/python clients; assume any endpoint is publicly callable and design backend AuthZ accordingly.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q81">
-  <div class="qa__number">Question 81</div>
-  <h3 class="qa__question">How do you handle and optimize disk I/O performance in a MongoDB deployment?</h3>
-  <div class="qa__answer">
-    <p>Disk I/O is usually the binding constraint on Mongo at scale &mdash; queries that miss the working set hit storage at 10&ndash;100x the latency of cache. Optimization happens in three layers: <strong>storage hardware</strong>, <strong>WiredTiger configuration</strong>, and <strong>query/schema design</strong> that keeps the working set in RAM.</p>
+<p>For public APIs (no credentials, share with anyone): <code>Access-Control-Allow-Origin: *</code> is fine; pair with strict rate limits + API keys for abuse defense. CORS is browser&ndash;only &mdash; doesn&rsquo;t protect against direct curl/python clients; assume any endpoint is publicly callable and design backend AuthZ accordingly.</p>'''
+
+ANSWERS[81] = r'''<p>Disk I/O is usually the binding constraint on Mongo at scale &mdash; queries that miss the working set hit storage at 10&ndash;100x the latency of cache. Optimization happens in three layers: <strong>storage hardware</strong>, <strong>WiredTiger configuration</strong>, and <strong>query/schema design</strong> that keeps the working set in RAM.</p>
 
 <table>
 <tr><th>Layer</th><th>Knob</th><th>Effect</th></tr>
@@ -5495,15 +4982,10 @@ sudo iotop -aP           # which process is doing I/O</code></pre>
 <li><strong>Time&ndash;series collections</strong> (Mongo 5.0+) for IoT/log&ndash;like data &mdash; ~70% storage savings + query speed.</li>
 </ul>
 
-<p>For 2026 the simplest path: <strong>Atlas M40+ with NVMe + Performance Advisor</strong>. The Performance Advisor will tell you which indexes to add, which to drop, and which queries are slow. Combined with proper index design + projection, most apps never hit I/O ceilings until tens of millions of users.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q82">
-  <div class="qa__number">Question 82</div>
-  <h3 class="qa__question">Explain how to set up and use AWS CodeBuild for continuous integration in a MERN stack application.</h3>
-  <div class="qa__answer">
-    <p>AWS CodeBuild is a managed build service: you point it at a source (GitHub, CodeCommit, S3) and provide a <code>buildspec.yml</code> describing the build, test, and artifact phases. CodeBuild spins up a Docker container, runs your spec, and uploads artifacts. It&rsquo;s a building block CodePipeline orchestrates &mdash; rarely used standalone in 2026.</p>
+<p>For 2026 the simplest path: <strong>Atlas M40+ with NVMe + Performance Advisor</strong>. The Performance Advisor will tell you which indexes to add, which to drop, and which queries are slow. Combined with proper index design + projection, most apps never hit I/O ceilings until tens of millions of users.</p>'''
+
+
+ANSWERS[82] = r'''<p>AWS CodeBuild is a managed build service: you point it at a source (GitHub, CodeCommit, S3) and provide a <code>buildspec.yml</code> describing the build, test, and artifact phases. CodeBuild spins up a Docker container, runs your spec, and uploads artifacts. It&rsquo;s a building block CodePipeline orchestrates &mdash; rarely used standalone in 2026.</p>
 
 <pre><code># buildspec.yml &mdash; build, test, push image, run integration tests
 version: 0.2
@@ -5607,15 +5089,10 @@ artifacts:
 <li><strong>Batch builds</strong> &mdash; matrix builds across multiple Node versions or platforms.</li>
 </ul>
 
-<p>Honest 2026 take: most teams have moved to <strong>GitHub Actions</strong> (deeper GitHub integration, free for public repos, marketplace ecosystem), <strong>GitLab CI</strong>, <strong>CircleCI</strong>, or <strong>Buildkite</strong>. CodeBuild remains where you&rsquo;re committed to AWS&ndash;native pipelines (CodeBuild + CodePipeline + CodeDeploy) or need VPC&ndash;private builds, build minutes within AWS billing, or no third&ndash;party CI dependency. <strong>Dagger</strong> and <strong>Earthly</strong> are 2026 options for portable, locally&ndash;reproducible builds that run on any CI runner including CodeBuild.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q83">
-  <div class="qa__number">Question 83</div>
-  <h3 class="qa__question">How do you manage and monitor application performance using AppDynamics or Dynatrace?</h3>
-  <div class="qa__answer">
-    <p>AppDynamics and Dynatrace are commercial APM platforms in the same league as Datadog, New Relic, and Splunk Observability. They focus on <strong>full&ndash;stack performance monitoring</strong>: from browser RUM through API tier through database and infrastructure, with auto&ndash;discovery and AI&ndash;based anomaly detection. The 2026 picture is &ldquo;Datadog won mind share, but Dynatrace remains strong in big enterprise; AppDynamics is in slow decline.&rdquo;</p>
+<p>Honest 2026 take: most teams have moved to <strong>GitHub Actions</strong> (deeper GitHub integration, free for public repos, marketplace ecosystem), <strong>GitLab CI</strong>, <strong>CircleCI</strong>, or <strong>Buildkite</strong>. CodeBuild remains where you&rsquo;re committed to AWS&ndash;native pipelines (CodeBuild + CodePipeline + CodeDeploy) or need VPC&ndash;private builds, build minutes within AWS billing, or no third&ndash;party CI dependency. <strong>Dagger</strong> and <strong>Earthly</strong> are 2026 options for portable, locally&ndash;reproducible builds that run on any CI runner including CodeBuild.</p>'''
+
+
+ANSWERS[83] = r'''<p>AppDynamics and Dynatrace are commercial APM platforms in the same league as Datadog, New Relic, and Splunk Observability. They focus on <strong>full&ndash;stack performance monitoring</strong>: from browser RUM through API tier through database and infrastructure, with auto&ndash;discovery and AI&ndash;based anomaly detection. The 2026 picture is &ldquo;Datadog won mind share, but Dynatrace remains strong in big enterprise; AppDynamics is in slow decline.&rdquo;</p>
 
 <table>
 <tr><th>Tool</th><th>Strengths</th><th>Weaknesses</th></tr>
@@ -5667,15 +5144,10 @@ require(&quot;appdynamics&quot;).profile({
 <li><strong>Code&ndash;level visibility</strong> &mdash; sampled CPU profiles, GC pauses, memory leaks.</li>
 </ul>
 
-<p>2026 honest take: For a typical MERN team, <strong>Datadog</strong> remains the easiest commercial APM to onboard, with the broadest integrations. <strong>Dynatrace</strong> wins for big enterprise with on&ndash;prem and complex topology requirements; their Davis AI is genuinely useful for root cause. <strong>AppDynamics</strong> rarely the right pick for a new project unless your enterprise already runs it. <strong>OpenTelemetry</strong> + Honeycomb / Grafana Cloud is the cheapest, most portable stack and the 2026 default for new projects that want vendor independence.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q84">
-  <div class="qa__number">Question 84</div>
-  <h3 class="qa__question">Describe the process to implement centralized logging using Fluentd or Logstash for a MERN stack application.</h3>
-  <div class="qa__answer">
-    <p>Centralized logging captures stdout/stderr from all containers, parses + tags, ships to a backend, and exposes search/alerting. The architecture is a collector (per&ndash;node or sidecar) + transport + storage + query layer. The 2026 lineup:</p>
+<p>2026 honest take: For a typical MERN team, <strong>Datadog</strong> remains the easiest commercial APM to onboard, with the broadest integrations. <strong>Dynatrace</strong> wins for big enterprise with on&ndash;prem and complex topology requirements; their Davis AI is genuinely useful for root cause. <strong>AppDynamics</strong> rarely the right pick for a new project unless your enterprise already runs it. <strong>OpenTelemetry</strong> + Honeycomb / Grafana Cloud is the cheapest, most portable stack and the 2026 default for new projects that want vendor independence.</p>'''
+
+
+ANSWERS[84] = r'''<p>Centralized logging captures stdout/stderr from all containers, parses + tags, ships to a backend, and exposes search/alerting. The architecture is a collector (per&ndash;node or sidecar) + transport + storage + query layer. The 2026 lineup:</p>
 
 <table>
 <tr><th>Component</th><th>Options</th><th>Notes</th></tr>
@@ -5771,15 +5243,10 @@ require(&quot;appdynamics&quot;).profile({
 <li><strong>Quota / rate limit</strong> &mdash; bound the cost of a chatty service; alert when a service&rsquo;s log volume jumps 5x.</li>
 </ul>
 
-<p>For 2026 MERN apps: <strong>Fluent Bit DaemonSet + Loki + Grafana</strong> for cost&ndash;sensitive teams (~$0.10/GB), or <strong>OpenTelemetry Collector + Datadog/Honeycomb/Axiom</strong> for fully managed. Skip Logstash unless you&rsquo;ve already invested heavily in it. Treat the OTel Collector as the &ldquo;always correct&rdquo; default &mdash; vendor&ndash;agnostic, swap backends without touching apps.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q85">
-  <div class="qa__number">Question 85</div>
-  <h3 class="qa__question">How do you set up and use AWS Step Functions to orchestrate serverless workflows in a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p>AWS Step Functions is a managed orchestrator for stateful workflows &mdash; you describe a state machine in JSON/YAML (Amazon States Language), and Step Functions calls Lambda/ECS/SNS/SQS/etc. while tracking state, retries, errors, and parallelism. It replaces hand&ndash;rolled chained Lambdas for multi&ndash;step business logic.</p>
+<p>For 2026 MERN apps: <strong>Fluent Bit DaemonSet + Loki + Grafana</strong> for cost&ndash;sensitive teams (~$0.10/GB), or <strong>OpenTelemetry Collector + Datadog/Honeycomb/Axiom</strong> for fully managed. Skip Logstash unless you&rsquo;ve already invested heavily in it. Treat the OTel Collector as the &ldquo;always correct&rdquo; default &mdash; vendor&ndash;agnostic, swap backends without touching apps.</p>'''
+
+
+ANSWERS[85] = r'''<p>AWS Step Functions is a managed orchestrator for stateful workflows &mdash; you describe a state machine in JSON/YAML (Amazon States Language), and Step Functions calls Lambda/ECS/SNS/SQS/etc. while tracking state, retries, errors, and parallelism. It replaces hand&ndash;rolled chained Lambdas for multi&ndash;step business logic.</p>
 
 <table>
 <tr><th>Workflow type</th><th>Use case</th><th>Cost / limits</th></tr>
@@ -5884,15 +5351,10 @@ States:
 <li><strong>Cloudflare Workflows</strong> &mdash; durable workflows on Workers; tightest integration if you&rsquo;re on Cloudflare.</li>
 </ul>
 
-<p>For 2026 MERN apps: <strong>Inngest or Trigger.dev</strong> for typical workflows (signups, payments, retried jobs); Step Functions remains the right pick when you&rsquo;re deeply on AWS or need direct SDK integrations across many AWS services. <strong>Temporal</strong> when you&rsquo;ve got serious distributed workflow needs (saga patterns across many services, polyglot teams).</p>
-    
-  </div>
-</article>
-<article class="qa" id="q86">
-  <div class="qa__number">Question 86</div>
-  <h3 class="qa__question">Explain how to implement and manage a blue-green deployment strategy for a MERN stack application.</h3>
-  <div class="qa__answer">
-    <p>Blue/green deployment maintains two production environments &mdash; <strong>blue</strong> (current) and <strong>green</strong> (new). You deploy to green, test it in isolation, and atomically switch traffic from blue to green by flipping a load balancer / DNS / target group. Rollback is instant: flip back. The trade&ndash;off is double the infrastructure cost during the deploy window.</p>
+<p>For 2026 MERN apps: <strong>Inngest or Trigger.dev</strong> for typical workflows (signups, payments, retried jobs); Step Functions remains the right pick when you&rsquo;re deeply on AWS or need direct SDK integrations across many AWS services. <strong>Temporal</strong> when you&rsquo;ve got serious distributed workflow needs (saga patterns across many services, polyglot teams).</p>'''
+
+
+ANSWERS[86] = r'''<p>Blue/green deployment maintains two production environments &mdash; <strong>blue</strong> (current) and <strong>green</strong> (new). You deploy to green, test it in isolation, and atomically switch traffic from blue to green by flipping a load balancer / DNS / target group. Rollback is instant: flip back. The trade&ndash;off is double the infrastructure cost during the deploy window.</p>
 
 <table>
 <tr><th>Approach</th><th>How traffic shifts</th><th>Rollback</th><th>Cost</th></tr>
@@ -5981,15 +5443,10 @@ spec:
 <li><strong>External dependencies</strong> &mdash; payment processors, queues, CDNs see traffic from both versions; ensure idempotency.</li>
 </ul>
 
-<p>For 2026 MERN: blue/green is overkill for stateless microservices &mdash; <strong>canary via Argo Rollouts + Flagger</strong> gives smoother, automated traffic shifting with the same instant rollback. Reserve full blue/green for stateful workflows or major changes (framework upgrades, infrastructure overhauls). Feature flags via LaunchDarkly/Statsig/PostHog handle most product&ndash;level rollouts at zero infra cost.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q87">
-  <div class="qa__number">Question 87</div>
-  <h3 class="qa__question">How do you handle and manage service dependencies and configuration using Spring Cloud Config or Consul?</h3>
-  <div class="qa__answer">
-    <p>Service config + dependencies span four needs: <strong>static configuration</strong> (env), <strong>dynamic feature flags</strong> (toggleable at runtime), <strong>service discovery</strong> (where is service X?), and <strong>secrets</strong>. Each has different tools.</p>
+<p>For 2026 MERN: blue/green is overkill for stateless microservices &mdash; <strong>canary via Argo Rollouts + Flagger</strong> gives smoother, automated traffic shifting with the same instant rollback. Reserve full blue/green for stateful workflows or major changes (framework upgrades, infrastructure overhauls). Feature flags via LaunchDarkly/Statsig/PostHog handle most product&ndash;level rollouts at zero infra cost.</p>'''
+
+
+ANSWERS[87] = r'''<p>Service config + dependencies span four needs: <strong>static configuration</strong> (env), <strong>dynamic feature flags</strong> (toggleable at runtime), <strong>service discovery</strong> (where is service X?), and <strong>secrets</strong>. Each has different tools.</p>
 
 <table>
 <tr><th>Need</th><th>Tool</th><th>Notes</th></tr>
@@ -6061,15 +5518,10 @@ watch.on(&quot;change&quot;, (entries) =&gt; {
 <li><strong>Secrets</strong> &mdash; Secrets Manager / Vault depending on cloud strategy.</li>
 </ol>
 
-<p>Skip Spring Cloud Config (Java&ndash;centric, polls git, brittle for non&ndash;JVM); skip Eureka (Netflix OSS retired). Consul still works well for hybrid VM + container fleets but is overkill for pure K8s deployments.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q88">
-  <div class="qa__number">Question 88</div>
-  <h3 class="qa__question">Describe the steps to implement Infrastructure as Code (IaC) using Ansible for a MERN stack application.</h3>
-  <div class="qa__answer">
-    <p>Ansible is a configuration&ndash;management tool that uses SSH (or WinRM) to apply state to existing hosts. The unit of automation is a <strong>playbook</strong>: a YAML list of tasks executed on inventory groups. Idempotent: running a playbook twice is safe; unchanged tasks report &ldquo;ok&rdquo;.</p>
+<p>Skip Spring Cloud Config (Java&ndash;centric, polls git, brittle for non&ndash;JVM); skip Eureka (Netflix OSS retired). Consul still works well for hybrid VM + container fleets but is overkill for pure K8s deployments.</p>'''
+
+
+ANSWERS[88] = r'''<p>Ansible is a configuration&ndash;management tool that uses SSH (or WinRM) to apply state to existing hosts. The unit of automation is a <strong>playbook</strong>: a YAML list of tasks executed on inventory groups. Idempotent: running a playbook twice is safe; unchanged tasks report &ldquo;ok&rdquo;.</p>
 
 <p>Where Ansible fits in 2026: <strong>configuring VMs</strong>, <strong>installing software on bare metal/edge devices</strong>, <strong>orchestrating one&ndash;off operations</strong> (database upgrades, certificate rotations, audit collection). For pure cloud&ndash;native MERN deployments, Ansible has been displaced by Terraform/Pulumi (infra) + container images (app config). It still excels in hybrid/on&ndash;prem and in regulated environments.</p>
 
@@ -6168,15 +5620,10 @@ ansible-playbook ... (no --check)  # apply</code></pre>
 <li><strong>Don&rsquo;t use Ansible to ship app code if you have containers</strong> &mdash; use <code>docker run</code> or K8s. Ansible to install Docker/K8s + bootstrap, containers for the app.</li>
 </ul>
 
-<p>For 2026 MERN: <strong>Terraform + immutable container images + ArgoCD</strong> for deploys; <strong>Ansible</strong> only for VM bootstrap, on&ndash;prem clusters, or one&ndash;off ops. Combining Terraform (cloud infra) + Ansible (post&ndash;provisioning host config) + Packer (golden images) is the classic IaC stack for hybrid/on&ndash;prem; pure cloud teams skip Ansible entirely.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q89">
-  <div class="qa__number">Question 89</div>
-  <h3 class="qa__question">How do you optimize network performance and latency for a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p>Network performance for MERN spans <strong>protocol layer</strong> (HTTP/2 vs HTTP/3, TLS, keep&ndash;alive), <strong>compression</strong>, <strong>routing</strong> (CDN, anycast, smart routing), <strong>connection pooling</strong>, and <strong>topology</strong> (region selection, edge vs origin). Each shaves a few ms; together they halve user&ndash;perceived latency.</p>
+<p>For 2026 MERN: <strong>Terraform + immutable container images + ArgoCD</strong> for deploys; <strong>Ansible</strong> only for VM bootstrap, on&ndash;prem clusters, or one&ndash;off ops. Combining Terraform (cloud infra) + Ansible (post&ndash;provisioning host config) + Packer (golden images) is the classic IaC stack for hybrid/on&ndash;prem; pure cloud teams skip Ansible entirely.</p>'''
+
+
+ANSWERS[89] = r'''<p>Network performance for MERN spans <strong>protocol layer</strong> (HTTP/2 vs HTTP/3, TLS, keep&ndash;alive), <strong>compression</strong>, <strong>routing</strong> (CDN, anycast, smart routing), <strong>connection pooling</strong>, and <strong>topology</strong> (region selection, edge vs origin). Each shaves a few ms; together they halve user&ndash;perceived latency.</p>
 
 <table>
 <tr><th>Layer</th><th>Optimization</th><th>Impact</th></tr>
@@ -6263,15 +5710,10 @@ await mongoose.connect(uri, {
 <li><strong>Bandwidth budget</strong> &mdash; CI gates total page weight (<code>bundlewatch</code>, <code>size-limit</code>); shaves wasteful payload before regressions ship.</li>
 </ul>
 
-<p>For 2026 MERN: <strong>Cloudflare in front (free CDN + HTTP/3 + Brotli + DDoS), Cloudflare Argo Smart Routing for paid tier, edge functions for sub&ndash;100ms API, Mongo Atlas in same region with snappy compression</strong>. Most teams overinvest in app&ndash;layer perf and underinvest in network &mdash; the 200ms on the wire matters more than the 5ms in your handler.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q90">
-  <div class="qa__number">Question 90</div>
-  <h3 class="qa__question">Explain how to set up and use AWS CodeDeploy for automated deployments in a MERN stack application.</h3>
-  <div class="qa__answer">
-    <p>AWS CodeDeploy automates deployments to EC2, ECS, Lambda, and on&ndash;prem. The unit of work is a <strong>deployment group</strong>: a target (ECS service, ASG, Lambda alias) plus a deployment configuration (rolling, blue/green, canary). CodeDeploy reads <code>appspec.yml</code> to know what to deploy and runs lifecycle hooks (Lambdas) for validation.</p>
+<p>For 2026 MERN: <strong>Cloudflare in front (free CDN + HTTP/3 + Brotli + DDoS), Cloudflare Argo Smart Routing for paid tier, edge functions for sub&ndash;100ms API, Mongo Atlas in same region with snappy compression</strong>. Most teams overinvest in app&ndash;layer perf and underinvest in network &mdash; the 200ms on the wire matters more than the 5ms in your handler.</p>'''
+
+
+ANSWERS[90] = r'''<p>AWS CodeDeploy automates deployments to EC2, ECS, Lambda, and on&ndash;prem. The unit of work is a <strong>deployment group</strong>: a target (ECS service, ASG, Lambda alias) plus a deployment configuration (rolling, blue/green, canary). CodeDeploy reads <code>appspec.yml</code> to know what to deploy and runs lifecycle hooks (Lambdas) for validation.</p>
 
 <table>
 <tr><th>Compute</th><th>Strategies CodeDeploy supports</th></tr>
@@ -6356,15 +5798,10 @@ Hooks:
 <li><strong>OIDC for cross&ndash;account</strong> &mdash; CodeBuild/CodePipeline assume roles in target accounts via OIDC; centralized tooling, distributed deploys.</li>
 </ul>
 
-<p>Honest 2026 take: CodeDeploy is unmatched for AWS&ndash;native deploy patterns (Lambda canary, ECS blue/green) but feels heavy for K8s. Most K8s shops use <strong>Argo Rollouts</strong> + <strong>Flagger</strong> for canary/blue&ndash;green with deeper analysis (Prometheus metric checks, automated rollback on SLO breach). For Lambda, <strong>SAM/Serverless Framework</strong> often handle deploys themselves without invoking CodeDeploy. Where it shines: ECS blue/green with smoke tests, Lambda canary with CloudWatch&ndash;driven rollback, hybrid EC2 + on&ndash;prem.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q91">
-  <div class="qa__number">Question 91</div>
-  <h3 class="qa__question">How do you manage and monitor database performance using MongoDB Atlas Performance Advisor?</h3>
-  <div class="qa__answer">
-    <p>MongoDB Atlas Performance Advisor automatically analyzes query patterns from your cluster and surfaces three things: <strong>slow query alerts</strong> (queries above a threshold), <strong>index suggestions</strong> (indexes that would help observed slow queries), and <strong>schema anti&ndash;pattern alerts</strong> (e.g., unbounded arrays, case&ndash;insensitive regex without index, multikey indexes on frequently updated arrays).</p>
+<p>Honest 2026 take: CodeDeploy is unmatched for AWS&ndash;native deploy patterns (Lambda canary, ECS blue/green) but feels heavy for K8s. Most K8s shops use <strong>Argo Rollouts</strong> + <strong>Flagger</strong> for canary/blue&ndash;green with deeper analysis (Prometheus metric checks, automated rollback on SLO breach). For Lambda, <strong>SAM/Serverless Framework</strong> often handle deploys themselves without invoking CodeDeploy. Where it shines: ECS blue/green with smoke tests, Lambda canary with CloudWatch&ndash;driven rollback, hybrid EC2 + on&ndash;prem.</p>'''
+
+
+ANSWERS[91] = r'''<p>MongoDB Atlas Performance Advisor automatically analyzes query patterns from your cluster and surfaces three things: <strong>slow query alerts</strong> (queries above a threshold), <strong>index suggestions</strong> (indexes that would help observed slow queries), and <strong>schema anti&ndash;pattern alerts</strong> (e.g., unbounded arrays, case&ndash;insensitive regex without index, multikey indexes on frequently updated arrays).</p>
 
 <p>It samples queries using the <code>$indexStats</code> + system profile + slow query log internally; you don&rsquo;t configure it. The advisor runs continuously on M10+ clusters; suggestions appear in the Atlas UI and can be pulled via API for CI/CD inspection.</p>
 
@@ -6438,15 +5875,10 @@ db.orders.createIndex(
 <li>No documents larger than 1MB in normal flow</li>
 </ul>
 
-<p>For 2026 MERN: <strong>act on every Performance Advisor recommendation</strong> within a sprint; don&rsquo;t let suggestions pile up. Pair with Datadog Mongo integration for SLO dashboards and PagerDuty for alerts. When suggestions stop coming and slow query list is empty, your cluster is healthy &mdash; capacity plan from there.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q92">
-  <div class="qa__number">Question 92</div>
-  <h3 class="qa__question">Describe the process to implement security policies and access control using AWS Identity and Access Management (IAM).</h3>
-  <div class="qa__answer">
-    <p>AWS IAM is the policy engine for everything in AWS &mdash; users, roles, services, resources. The fundamentals: <strong>identity</strong> (who is calling), <strong>resource</strong> (what they&rsquo;re acting on), <strong>action</strong> (what they want to do), <strong>condition</strong> (under what circumstance). Policies (JSON) declare allow/deny on combinations of these.</p>
+<p>For 2026 MERN: <strong>act on every Performance Advisor recommendation</strong> within a sprint; don&rsquo;t let suggestions pile up. Pair with Datadog Mongo integration for SLO dashboards and PagerDuty for alerts. When suggestions stop coming and slow query list is empty, your cluster is healthy &mdash; capacity plan from there.</p>'''
+
+
+ANSWERS[92] = r'''<p>AWS IAM is the policy engine for everything in AWS &mdash; users, roles, services, resources. The fundamentals: <strong>identity</strong> (who is calling), <strong>resource</strong> (what they&rsquo;re acting on), <strong>action</strong> (what they want to do), <strong>condition</strong> (under what circumstance). Policies (JSON) declare allow/deny on combinations of these.</p>
 
 <table>
 <tr><th>Concept</th><th>Description</th></tr>
@@ -6534,15 +5966,10 @@ db.orders.createIndex(
 <li><strong>Quarterly access reviews</strong> &mdash; for SOC 2/ISO 27001; tools like Vanta, Drata, SecureFrame automate evidence.</li>
 </ul>
 
-<p>For 2026 the highest&ndash;leverage IAM moves: <strong>IAM Identity Center for human access</strong> (replaces IAM users with SSO + Permission Sets), <strong>OIDC for CI/CD</strong>, <strong>roles+ABAC for app access</strong>, <strong>Access Analyzer in CI</strong> to lint policies. Every IAM user with a long&ndash;lived access key is an audit finding waiting to happen; the goal is zero of them.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q93">
-  <div class="qa__number">Question 93</div>
-  <h3 class="qa__question">How do you handle and manage application state using Redux or MobX in a large-scale React application?</h3>
-  <div class="qa__answer">
-    <p>State management at scale means picking the right tool per kind of state. The 2026 mental model breaks state into <strong>server state</strong> (data fetched from APIs), <strong>UI state</strong> (modal open?), <strong>form state</strong>, <strong>URL state</strong>, and <strong>real&ndash;time/collaborative state</strong>. Each has the right tool; one&ndash;tool&ndash;fits&ndash;all (e.g., everything in Redux) is the legacy approach.</p>
+<p>For 2026 the highest&ndash;leverage IAM moves: <strong>IAM Identity Center for human access</strong> (replaces IAM users with SSO + Permission Sets), <strong>OIDC for CI/CD</strong>, <strong>roles+ABAC for app access</strong>, <strong>Access Analyzer in CI</strong> to lint policies. Every IAM user with a long&ndash;lived access key is an audit finding waiting to happen; the goal is zero of them.</p>'''
+
+
+ANSWERS[93] = r'''<p>State management at scale means picking the right tool per kind of state. The 2026 mental model breaks state into <strong>server state</strong> (data fetched from APIs), <strong>UI state</strong> (modal open?), <strong>form state</strong>, <strong>URL state</strong>, and <strong>real&ndash;time/collaborative state</strong>. Each has the right tool; one&ndash;tool&ndash;fits&ndash;all (e.g., everything in Redux) is the legacy approach.</p>
 
 <table>
 <tr><th>State kind</th><th>Tool</th><th>Why</th></tr>
@@ -6663,15 +6090,10 @@ function Cart() {
 <li><strong>Code splitting</strong> &mdash; large reducers/stores tree&ndash;shake; load per&ndash;route.</li>
 </ul>
 
-<p>If you&rsquo;re starting a new MERN frontend in 2026: <strong>TanStack Query + Zustand + RHF + Zod + nuqs</strong>. Reach for Redux Toolkit only when you have a large team that already knows it or genuinely complex client&ndash;side workflows. MobX is the right pick if you&rsquo;ve got a team coming from OO backgrounds (Java, C#) and want transparent reactivity.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q94">
-  <div class="qa__number">Question 94</div>
-  <h3 class="qa__question">Explain how to set up and use AWS CloudFormation for infrastructure management in a MERN stack application.</h3>
-  <div class="qa__answer">
-    <p>AWS CloudFormation declaratively manages AWS resources: you write a YAML/JSON template describing infrastructure, CFN figures out what to create/update/delete to match. It&rsquo;s the foundation under SAM, CDK, Serverless Framework, and Amplify &mdash; all of them compile to CFN.</p>
+<p>If you&rsquo;re starting a new MERN frontend in 2026: <strong>TanStack Query + Zustand + RHF + Zod + nuqs</strong>. Reach for Redux Toolkit only when you have a large team that already knows it or genuinely complex client&ndash;side workflows. MobX is the right pick if you&rsquo;ve got a team coming from OO backgrounds (Java, C#) and want transparent reactivity.</p>'''
+
+
+ANSWERS[94] = r'''<p>AWS CloudFormation declaratively manages AWS resources: you write a YAML/JSON template describing infrastructure, CFN figures out what to create/update/delete to match. It&rsquo;s the foundation under SAM, CDK, Serverless Framework, and Amplify &mdash; all of them compile to CFN.</p>
 
 <table>
 <tr><th>Tool</th><th>What you write</th><th>Notes</th></tr>
@@ -6809,15 +6231,10 @@ aws cloudformation execute-change-set ...</code></pre>
 <li><strong>Raw CloudFormation</strong> only when no other tool is feasible (templates the org already has, simple SAM apps).</li>
 </ol>
 
-<p>Whatever the tool: <strong>state in version control</strong>, <strong>preview/changeset before apply</strong>, <strong>CI applies prod (not laptops)</strong>, <strong>OIDC for credentials</strong>, <strong>policy as code in CI</strong>. Hand&ndash;clicked infra is a 2010s anti&ndash;pattern.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q95">
-  <div class="qa__number">Question 95</div>
-  <h3 class="qa__question">How do you manage and monitor Kubernetes clusters using Rancher or OpenShift?</h3>
-  <div class="qa__answer">
-    <p>Rancher and OpenShift are platforms built <strong>on top of Kubernetes</strong>. They add UI, multi&ndash;cluster management, RBAC integration, batteries&ndash;included observability, and (especially OpenShift) opinionated app lifecycle abstractions. Where vanilla EKS/GKE/AKS are &ldquo;here&rsquo;s a cluster, do the rest yourself,&rdquo; these are &ldquo;here&rsquo;s a complete platform.&rdquo;</p>
+<p>Whatever the tool: <strong>state in version control</strong>, <strong>preview/changeset before apply</strong>, <strong>CI applies prod (not laptops)</strong>, <strong>OIDC for credentials</strong>, <strong>policy as code in CI</strong>. Hand&ndash;clicked infra is a 2010s anti&ndash;pattern.</p>'''
+
+
+ANSWERS[95] = r'''<p>Rancher and OpenShift are platforms built <strong>on top of Kubernetes</strong>. They add UI, multi&ndash;cluster management, RBAC integration, batteries&ndash;included observability, and (especially OpenShift) opinionated app lifecycle abstractions. Where vanilla EKS/GKE/AKS are &ldquo;here&rsquo;s a cluster, do the rest yourself,&rdquo; these are &ldquo;here&rsquo;s a complete platform.&rdquo;</p>
 
 <table>
 <tr><th>Aspect</th><th>Rancher (SUSE)</th><th>OpenShift (Red Hat)</th></tr>
@@ -6876,15 +6293,10 @@ targets:
 
 <p>For a typical 2026 MERN team: <strong>EKS / GKE Autopilot / AKS + ArgoCD + Prometheus + Grafana + External Secrets Operator + Cert Manager + Kyverno</strong> is sufficient and avoids the platform lock&ndash;in. Reach for <strong>Rancher</strong> if you&rsquo;re managing K8s across 3+ clouds or have an on&ndash;prem footprint. Reach for <strong>OpenShift</strong> if you&rsquo;re a regulated enterprise (gov, healthcare, finance) where Red Hat&rsquo;s support contracts and compliance posture earn their cost.</p>
 
-<p>Honest 2026 take: outside enterprise, <strong>most MERN teams don&rsquo;t need K8s at all</strong>. Render, Fly.io, Railway, Cloud Run, App Runner, Vercel + Hono on Workers ship the same outcome with vastly less operational burden. K8s pays off at platform scale; Rancher/OpenShift pay off at multi&ndash;cluster scale.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q96">
-  <div class="qa__number">Question 96</div>
-  <h3 class="qa__question">Describe the steps to implement a canary deployment strategy for a MERN stack application.</h3>
-  <div class="qa__answer">
-    <p>Canary deployment ships the new version to a small fraction of users (typically 5%) and gradually increases the share if metrics stay healthy. It&rsquo;s safer than blue/green for stateless services because problems affect &lt;5% of traffic before automated rollback. The 2026 K8s default is <strong>Argo Rollouts</strong> or <strong>Flagger</strong>, both of which can also drive blue/green and analysis&ndash;based promotion.</p>
+<p>Honest 2026 take: outside enterprise, <strong>most MERN teams don&rsquo;t need K8s at all</strong>. Render, Fly.io, Railway, Cloud Run, App Runner, Vercel + Hono on Workers ship the same outcome with vastly less operational burden. K8s pays off at platform scale; Rancher/OpenShift pay off at multi&ndash;cluster scale.</p>'''
+
+
+ANSWERS[96] = r'''<p>Canary deployment ships the new version to a small fraction of users (typically 5%) and gradually increases the share if metrics stay healthy. It&rsquo;s safer than blue/green for stateless services because problems affect &lt;5% of traffic before automated rollback. The 2026 K8s default is <strong>Argo Rollouts</strong> or <strong>Flagger</strong>, both of which can also drive blue/green and analysis&ndash;based promotion.</p>
 
 <table>
 <tr><th>Tool</th><th>Approach</th></tr>
@@ -6988,15 +6400,10 @@ spec:
 <li><strong>Observability hooks</strong> &mdash; tag spans with deploy SHA + canary/stable so dashboards filter cleanly; Datadog Deployment Tracking surfaces version diff.</li>
 </ul>
 
-<p>For 2026 MERN: <strong>Argo Rollouts on K8s + Prometheus AnalysisTemplates + LaunchDarkly/Statsig flags</strong> is the gold standard. For ECS, <strong>CodeDeploy with linear traffic shifting</strong>. For Lambda, <strong>SAM canary deployment configurations</strong>. Whatever the tool, the rule: <strong>automated metric&ndash;based promotion + rollback</strong> &mdash; no human watching dashboards at 2am.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q97">
-  <div class="qa__number">Question 97</div>
-  <h3 class="qa__question">How do you handle and manage service orchestration and coordination using Apache Kafka or RabbitMQ?</h3>
-  <div class="qa__answer">
-    <p>Apache Kafka and RabbitMQ both move messages between services but solve different problems. Kafka is a distributed <strong>append&ndash;only log</strong> &mdash; high throughput, durable storage, replay, multiple consumers. RabbitMQ is a traditional <strong>message broker</strong> &mdash; queues, exchanges, RPC, smart broker / dumb consumer. Pick by access pattern, not popularity.</p>
+<p>For 2026 MERN: <strong>Argo Rollouts on K8s + Prometheus AnalysisTemplates + LaunchDarkly/Statsig flags</strong> is the gold standard. For ECS, <strong>CodeDeploy with linear traffic shifting</strong>. For Lambda, <strong>SAM canary deployment configurations</strong>. Whatever the tool, the rule: <strong>automated metric&ndash;based promotion + rollback</strong> &mdash; no human watching dashboards at 2am.</p>'''
+
+
+ANSWERS[97] = r'''<p>Apache Kafka and RabbitMQ both move messages between services but solve different problems. Kafka is a distributed <strong>append&ndash;only log</strong> &mdash; high throughput, durable storage, replay, multiple consumers. RabbitMQ is a traditional <strong>message broker</strong> &mdash; queues, exchanges, RPC, smart broker / dumb consumer. Pick by access pattern, not popularity.</p>
 
 <table>
 <tr><th>Aspect</th><th>Kafka</th><th>RabbitMQ</th></tr>
@@ -7095,15 +6502,10 @@ ch.consume(&quot;billing.orders.created&quot;, async (msg) =&gt; {
 <li><strong>Inngest / Trigger.dev / Hatchet</strong> &mdash; durable execution layered on top of queues; replace hand&ndash;rolled retry logic.</li>
 </ul>
 
-<p>For 2026 MERN: <strong>Kafka (or Redpanda) for events</strong> (event sourcing, analytics, CDC); <strong>SQS or BullMQ on Redis for task queues</strong> (background jobs, retries); <strong>Inngest/Trigger.dev for durable workflows</strong>. RabbitMQ remains a solid pick for established teams with operational expertise; new projects rarely start there.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q98">
-  <div class="qa__number">Question 98</div>
-  <h3 class="qa__question">Explain how to implement and manage API documentation using Swagger or OpenAPI in a MERN stack application.</h3>
-  <div class="qa__answer">
-    <p>OpenAPI (formerly Swagger) is the standard for describing REST APIs &mdash; a YAML/JSON file that lists endpoints, request/response schemas, auth, and examples. From it you generate <strong>SDKs</strong>, <strong>mock servers</strong>, <strong>interactive docs</strong>, <strong>test suites</strong>, and <strong>API gateway configurations</strong>. The 2026 spec is <strong>OpenAPI 3.1</strong>, fully aligned with JSON Schema 2020&ndash;12.</p>
+<p>For 2026 MERN: <strong>Kafka (or Redpanda) for events</strong> (event sourcing, analytics, CDC); <strong>SQS or BullMQ on Redis for task queues</strong> (background jobs, retries); <strong>Inngest/Trigger.dev for durable workflows</strong>. RabbitMQ remains a solid pick for established teams with operational expertise; new projects rarely start there.</p>'''
+
+
+ANSWERS[98] = r'''<p>OpenAPI (formerly Swagger) is the standard for describing REST APIs &mdash; a YAML/JSON file that lists endpoints, request/response schemas, auth, and examples. From it you generate <strong>SDKs</strong>, <strong>mock servers</strong>, <strong>interactive docs</strong>, <strong>test suites</strong>, and <strong>API gateway configurations</strong>. The 2026 spec is <strong>OpenAPI 3.1</strong>, fully aligned with JSON Schema 2020&ndash;12.</p>
 
 <table>
 <tr><th>Approach</th><th>Workflow</th><th>Tools</th></tr>
@@ -7196,15 +6598,10 @@ npx @stoplight/prism-cli mock openapi.yaml --port 4010</code></pre>
 <li><strong>tRPC</strong> &mdash; for tightly coupled TS apps, skips OpenAPI entirely; types flow client-server natively.</li>
 </ul>
 
-<p>For 2026 MERN: <strong>OpenAPI 3.1 + zod&ndash;openapi (or NestJS Swagger) + Spectral lint in CI + Scalar/Mintlify for docs + Speakeasy/Stainless for SDKs</strong>. If your API is internal&ndash;only and TS&ndash;only, <strong>tRPC</strong> eliminates the spec problem entirely. For public APIs serving many language ecosystems, OpenAPI remains the lingua franca.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q99">
-  <div class="qa__number">Question 99</div>
-  <h3 class="qa__question">How do you set up and manage distributed caching using Redis or Memcached in a MERN stack application?</h3>
-  <div class="qa__answer">
-    <p>Distributed caching means a cache shared by multiple application servers, typically Redis or Memcached. The choice between them is mostly Redis (richer features) vs Memcached (simpler) &mdash; but in 2026 the bigger discussion is which Redis flavor and managed offering.</p>
+<p>For 2026 MERN: <strong>OpenAPI 3.1 + zod&ndash;openapi (or NestJS Swagger) + Spectral lint in CI + Scalar/Mintlify for docs + Speakeasy/Stainless for SDKs</strong>. If your API is internal&ndash;only and TS&ndash;only, <strong>tRPC</strong> eliminates the spec problem entirely. For public APIs serving many language ecosystems, OpenAPI remains the lingua franca.</p>'''
+
+
+ANSWERS[99] = r'''<p>Distributed caching means a cache shared by multiple application servers, typically Redis or Memcached. The choice between them is mostly Redis (richer features) vs Memcached (simpler) &mdash; but in 2026 the bigger discussion is which Redis flavor and managed offering.</p>
 
 <table>
 <tr><th>Aspect</th><th>Redis</th><th>Memcached</th></tr>
@@ -7297,15 +6694,10 @@ if (!value) {
 <li><strong>Memcached</strong> only if you specifically need a multi&ndash;threaded simple K/V cache and don&rsquo;t need data structures, persistence, pub/sub, or scripting (rare).</li>
 </ol>
 
-<p>Default to Redis (or Valkey post&ndash;BSL); the extra features (rate limiting, pub/sub, sorted sets for leaderboards, streams for queues) are too useful to skip.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q100">
-  <div class="qa__number">Question 100</div>
-  <h3 class="qa__question">Describe the process to implement end-to-end encryption for data in transit and at rest in a MERN stack application.</h3>
-  <div class="qa__answer">
-    <p>End&ndash;to&ndash;end encryption (E2EE) means data is encrypted at every stage: at the client, in transit, at rest, and ideally even from the database operator. The 2026 standard has multiple layers, each addressing a different threat model.</p>
+<p>Default to Redis (or Valkey post&ndash;BSL); the extra features (rate limiting, pub/sub, sorted sets for leaderboards, streams for queues) are too useful to skip.</p>'''
+
+
+ANSWERS[100] = r'''<p>End&ndash;to&ndash;end encryption (E2EE) means data is encrypted at every stage: at the client, in transit, at rest, and ideally even from the database operator. The 2026 standard has multiple layers, each addressing a different threat model.</p>
 
 <table>
 <tr><th>Layer</th><th>Mechanism</th><th>Threat addressed</th></tr>
@@ -7421,27 +6813,4 @@ await fetch(&quot;/api/notes&quot;, {
 <li><strong>OpenSSL / BoringSSL audited libraries only</strong> &mdash; never roll your own crypto.</li>
 </ol>
 
-<p>The honest 2026 take: <strong>don&rsquo;t roll your own crypto</strong>. Use audited libraries (libsodium, Tink, WebCrypto), managed KMS for keys, and tokenization services for the highest&ndash;sensitivity data so you minimize compliance scope. Most data breaches happen because of misconfigured access (S3 buckets public, IAM too broad, unencrypted backups, leaked credentials), not broken encryption &mdash; spend security budget on auth, secrets management, audit logs, and threat modeling first.</p>
-    
-  </div>
-</article>
-
-    <nav class="chapter-nav" aria-label="Chapter navigation">
-      <a class="chapter-nav__prev" href="infrastructure-mern-basic.html">
-      <span class="chapter-nav__dir">← Previous</span>
-      <span class="chapter-nav__title">Infrastructure MERN Stack — Basic</span>
-    </a>
-      <a class="chapter-nav__next" href="cicd-pipeline-basic.html">
-      <span class="chapter-nav__dir">Next →</span>
-      <span class="chapter-nav__title">CI/CD Pipeline — Basic</span>
-    </a>
-    </nav>
-
-  </section>
-
-</main>
-</div>
-
-<script src="../assets/script.js"></script>
-</body>
-</html>
+<p>The honest 2026 take: <strong>don&rsquo;t roll your own crypto</strong>. Use audited libraries (libsodium, Tink, WebCrypto), managed KMS for keys, and tokenization services for the highest&ndash;sensitivity data so you minimize compliance scope. Most data breaches happen because of misconfigured access (S3 buckets public, IAM too broad, unencrypted backups, leaked credentials), not broken encryption &mdash; spend security budget on auth, secrets management, audit logs, and threat modeling first.</p>'''
