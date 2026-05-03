@@ -30,9 +30,9 @@ Architectural and infrastructure topics — longest, most essay-like answers.
 - [x] **Infrastructure MERN Basic (100 Q)** &mdash; 2026-05-02
 - [x] **Infrastructure MERN Advanced (100 Q)** &mdash; 2026-05-02 &mdash; **Infrastructure MERN topic complete**
 - [x] **CI/CD Pipeline Basic (100 Q)** &mdash; 2026-05-02
-- [ ] CI/CD Pipeline Coding (100 Q) ← next
-- [ ] CI/CD Pipeline Advanced (100 Q)
-- [ ] CI/CD Pipeline Scenario Based (100 Q)
+- [x] **CI/CD Pipeline Coding (100 Q)** &mdash; 2026-05-03
+- [x] **CI/CD Pipeline Advanced (100 Q)** &mdash; 2026-05-03
+- [ ] CI/CD Pipeline Scenario Based (100 Q) ← next
 
 **Total:** 900 answers (final phase). Progress: 500/900 = 56%.
 

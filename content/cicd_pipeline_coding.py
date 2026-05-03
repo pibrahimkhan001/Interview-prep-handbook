@@ -1,118 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CI/CD Pipeline — Coding · Interview Prep Mastery</title>
-<meta name="description" content="100 coding interview questions on CI/CD Pipeline, with detailed explanations and examples.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="../assets/styles.css">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%239a6b1d'/%3E%3Ctext x='50' y='68' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold' font-size='48'%3EIP%3C/text%3E%3C/svg%3E">
-</head>
-<body>
-<header class="site-header">
-  <div class="site-header__inner">
-    <button class="menu-toggle" aria-label="Open menu" type="button">☰ Menu</button>
-    <a class="brand" href="../index.html">
-      <span class="brand__mark">IP</span>
-      <span class="brand__text">
-        <span class="brand__title">Interview Prep Mastery</span>
-        <span class="brand__subtitle">Interactive learning guide</span>
-      </span>
-    </a>
-    <nav class="header-nav">
-      <a href="../index.html#roadmap">Roadmap</a>
-      <a href="../index.html#chapters">All chapters</a>
-      <button class="theme-toggle" type="button" aria-label="Toggle color scheme">☾ Dark</button>
-    </nav>
-  </div>
-</header>
-<div class="layout">
-<aside class="sidebar" aria-label="Site navigation">
-  <div class="sidebar__header">Chapter Navigator</div>
-  
-        <div class="nav-part">
-          <div class="nav-part__label">Part 1</div>
-          <div class="nav-part__title">Core Programming Languages</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">JavaScript</li><li><a class="" href="../chapters/javascript-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/javascript-tricky.html"><span class="nav-item__title">Tricky</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-coding.html"><span class="nav-item__title">Advanced Coding</span><span class="nav-item__meta">100 questions · 100 min read</span></a></li><li><a class="" href="../chapters/javascript-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-scenario.html"><span class="nav-item__title">Advanced Scenario Based</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Python</li><li><a class="" href="../chapters/python-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/python-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 2</div>
-          <div class="nav-part__title">Web Fundamentals</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">HTML</li><li><a class="" href="../chapters/html-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/html-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/html-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CSS</li><li><a class="" href="../chapters/css-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">102 questions · 60 min read</span></a></li><li><a class="" href="../chapters/css-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/css-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">101 questions · 90 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 3</div>
-          <div class="nav-part__title">Backend Technologies</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Node.Js</li><li><a class="" href="../chapters/nodejs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/nodejs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ExpressJS</li><li><a class="" href="../chapters/expressjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/expressjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/expressjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">API</li><li><a class="" href="../chapters/api-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/api-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 4</div>
-          <div class="nav-part__title">Frontend Frameworks</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ReactJS</li><li><a class="" href="../chapters/reactjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">101 questions · 60 min read</span></a></li><li><a class="" href="../chapters/reactjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 5</div>
-          <div class="nav-part__title">Databases</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MYSQL</li><li><a class="" href="../chapters/mysql-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mysql-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MongoDB</li><li><a class="" href="../chapters/mongodb-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mongodb-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 6</div>
-          <div class="nav-part__title">System Design &amp; DevOps</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">System Design MERN Stack</li><li><a class="" href="../chapters/system-design-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Infrastructure MERN Stack</li><li><a class="" href="../chapters/infrastructure-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/infrastructure-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CI/CD Pipeline</li><li><a class="" href="../chapters/cicd-pipeline-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="active" href="../chapters/cicd-pipeline-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-</aside>
-<main class="main" id="main">
+"""Detailed answers for CI/CD Pipeline — Coding (100 Q)
 
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="../index.html">Home</a>
-    <span class="breadcrumb__sep">›</span>
-    <a href="../index.html#part-6">System Design &amp; DevOps</a>
-    <span class="breadcrumb__sep">›</span>
-    <span>CI/CD Pipeline — Coding</span>
-  </nav>
+Style: code-first + brief explanation + variants/alternatives + perf notes,
+~1,800-2,200 chars per answer with 2026-current ecosystem references.
+"""
 
-  <header class="chapter-header">
-    <div class="chapter-label">CI/CD Pipeline · Coding</div>
-    <h1 class="chapter-title">Coding CI/CD Pipeline Interview Questions</h1>
-    <p class="chapter-lede">Practical coding problems with full solutions and line-by-line explanations.</p>
-    <div class="chapter-meta">
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Questions</span><span class="chapter-meta__value">100</span></div>
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Level</span><span class="chapter-meta__value">Coding</span></div>
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Estimated reading</span><span class="chapter-meta__value">90 min read</span></div>
-    </div>
-    
-  </header>
+ANSWERS: dict[int, str] = {}
 
-  <section class="prose">
-
-    <div class="toc" id="toc">
-      <div class="toc__title">All questions in this chapter</div>
-      <ul class="toc__list">
-        <li><a href="#q1"><span class="toc__num">1.</span>Write a GitHub Action workflow to build and test a Node.js application.</a></li><li><a href="#q2"><span class="toc__num">2.</span>Create a Jenkins pipeline script to build and deploy a Docker image.</a></li><li><a href="#q3"><span class="toc__num">3.</span>Write a Dockerfile to containerize a simple Flask application.</a></li><li><a href="#q4"><span class="toc__num">4.</span>Write a Kubernetes deployment YAML file for a Node.js application.</a></li><li><a href="#q5"><span class="toc__num">5.</span>Create a GitHub Action workflow to deploy a React application to GitHub Pages.</a></li><li><a href="#q6"><span class="toc__num">6.</span>Write a Jenkinsfile to build a Maven project and deploy it to an AWS EC2 instance.</a></li><li><a href="#q7"><span class="toc__num">7.</span>Create a Docker Compose file for a multi-container application with a web server and a ...</a></li><li><a href="#q8"><span class="toc__num">8.</span>Write a Kubernetes service YAML file to expose a deployment externally.</a></li><li><a href="#q9"><span class="toc__num">9.</span>Create a GitHub Action workflow to run unit tests and generate a coverage report.</a></li><li><a href="#q10"><span class="toc__num">10.</span>Write a script to automate the setup of a Jenkins server using Docker.</a></li><li><a href="#q11"><span class="toc__num">11.</span>Create a Kubernetes ConfigMap to manage configuration for a Node.js application.</a></li><li><a href="#q12"><span class="toc__num">12.</span>Write a GitHub Action to build and push a Docker image to Docker Hub.</a></li><li><a href="#q13"><span class="toc__num">13.</span>Create a Jenkins pipeline to deploy a Python application to AWS Lambda.</a></li><li><a href="#q14"><span class="toc__num">14.</span>Write a Kubernetes ingress resource to route traffic to different services.</a></li><li><a href="#q15"><span class="toc__num">15.</span>Create a GitHub Action workflow to deploy a Docker container to AWS ECS.</a></li><li><a href="#q16"><span class="toc__num">16.</span>Write a Dockerfile for a Java application using a multi-stage build.</a></li><li><a href="#q17"><span class="toc__num">17.</span>Create a Jenkinsfile to run security scans on a Docker image.</a></li><li><a href="#q18"><span class="toc__num">18.</span>Write a Kubernetes StatefulSet YAML file for a MySQL database.</a></li><li><a href="#q19"><span class="toc__num">19.</span>Create a GitHub Action to run integration tests on a Docker container.</a></li><li><a href="#q20"><span class="toc__num">20.</span>Write a script to backup and restore Jenkins configurations.</a></li><li><a href="#q21"><span class="toc__num">21.</span>Create a Dockerfile to containerize a Django application.</a></li><li><a href="#q22"><span class="toc__num">22.</span>Write a Kubernetes job YAML file to run a one-time task.</a></li><li><a href="#q23"><span class="toc__num">23.</span>Create a GitHub Action workflow to deploy a Node.js application to Heroku.</a></li><li><a href="#q24"><span class="toc__num">24.</span>Write a Jenkins pipeline to build and deploy a .NET Core application.</a></li><li><a href="#q25"><span class="toc__num">25.</span>Create a Kubernetes secret to store sensitive information for a deployment.</a></li><li><a href="#q26"><span class="toc__num">26.</span>Write a GitHub Action to trigger a build on code push to a specific branch.</a></li><li><a href="#q27"><span class="toc__num">27.</span>Create a Docker Compose file to set up a local development environment with multiple se...</a></li><li><a href="#q28"><span class="toc__num">28.</span>Write a Kubernetes Horizontal Pod Autoscaler (HPA) YAML file.</a></li><li><a href="#q29"><span class="toc__num">29.</span>Create a GitHub Action workflow to deploy a Flask application to AWS Lambda.</a></li><li><a href="#q30"><span class="toc__num">30.</span>Write a Jenkinsfile to build, test, and deploy a Ruby on Rails application.</a></li><li><a href="#q31"><span class="toc__num">31.</span>Create a Kubernetes PersistentVolume and PersistentVolumeClaim YAML file.</a></li><li><a href="#q32"><span class="toc__num">32.</span>Write a Dockerfile to containerize a Golang application.</a></li><li><a href="#q33"><span class="toc__num">33.</span>Create a GitHub Action to run code linting and formatting checks.</a></li><li><a href="#q34"><span class="toc__num">34.</span>Write a script to set up a Jenkins slave node using Docker.</a></li><li><a href="#q35"><span class="toc__num">35.</span>Create a Kubernetes DaemonSet YAML file for deploying a logging agent.</a></li><li><a href="#q36"><span class="toc__num">36.</span>Write a GitHub Action workflow to deploy a static site to Netlify.</a></li><li><a href="#q37"><span class="toc__num">37.</span>Create a Jenkins pipeline to deploy a Spring Boot application to Google Cloud Run.</a></li><li><a href="#q38"><span class="toc__num">38.</span>Write a Kubernetes NetworkPolicy YAML file to restrict traffic between pods.</a></li><li><a href="#q39"><span class="toc__num">39.</span>Create a Docker Compose file to run a local instance of Jenkins.</a></li><li><a href="#q40"><span class="toc__num">40.</span>Write a script to automate the installation and setup of Kubernetes using kubeadm.</a></li><li><a href="#q41"><span class="toc__num">41.</span>Create a GitHub Action to build and deploy a Vue.js application.</a></li><li><a href="#q42"><span class="toc__num">42.</span>Write a Jenkinsfile to build and deploy a PHP application to an Azure Web App.</a></li><li><a href="#q43"><span class="toc__num">43.</span>Create a Kubernetes custom resource definition (CRD) YAML file.</a></li><li><a href="#q44"><span class="toc__num">44.</span>Write a Dockerfile to containerize a React application.</a></li><li><a href="#q45"><span class="toc__num">45.</span>Create a GitHub Action to run automated browser tests using Selenium.</a></li><li><a href="#q46"><span class="toc__num">46.</span>Write a script to automate the backup of Docker volumes.</a></li><li><a href="#q47"><span class="toc__num">47.</span>Create a Kubernetes PodDisruptionBudget YAML file to ensure high availability.</a></li><li><a href="#q48"><span class="toc__num">48.</span>Write a GitHub Action workflow to deploy a Node.js application to DigitalOcean.</a></li><li><a href="#q49"><span class="toc__num">49.</span>Create a Jenkins pipeline to deploy a Laravel application to a Kubernetes cluster.</a></li><li><a href="#q50"><span class="toc__num">50.</span>Write a Kubernetes Secret to store database credentials for a deployment.</a></li><li><a href="#q51"><span class="toc__num">51.</span>Create a Docker Compose file to run a local instance of a PostgreSQL database.</a></li><li><a href="#q52"><span class="toc__num">52.</span>Write a GitHub Action to deploy a Python application to Google Cloud Functions.</a></li><li><a href="#q53"><span class="toc__num">53.</span>Create a Jenkinsfile to run load tests on a web application.</a></li><li><a href="#q54"><span class="toc__num">54.</span>Write a Kubernetes ConfigMap to manage environment variables for a deployment.</a></li><li><a href="#q55"><span class="toc__num">55.</span>Create a Dockerfile to containerize an Angular application.</a></li><li><a href="#q56"><span class="toc__num">56.</span>Write a GitHub Action workflow to build and deploy a Rust application.</a></li><li><a href="#q57"><span class="toc__num">57.</span>Create a script to automate the scaling of a Kubernetes deployment.</a></li><li><a href="#q58"><span class="toc__num">58.</span>Write a Jenkins pipeline to deploy a C# application to AWS Elastic Beanstalk.</a></li><li><a href="#q59"><span class="toc__num">59.</span>Create a Kubernetes ServiceAccount and RoleBinding YAML file.</a></li><li><a href="#q60"><span class="toc__num">60.</span>Write a Docker Compose file to run a local instance of MongoDB.</a></li><li><a href="#q61"><span class="toc__num">61.</span>Create a GitHub Action to deploy a Ruby application to Heroku.</a></li><li><a href="#q62"><span class="toc__num">62.</span>Write a Kubernetes PodPreset YAML file to inject environment variables into pods.</a></li><li><a href="#q63"><span class="toc__num">63.</span>Create a Jenkinsfile to build and deploy a Scala application to Google App Engine.</a></li><li><a href="#q64"><span class="toc__num">64.</span>Write a Dockerfile to containerize a Next.js application.</a></li><li><a href="#q65"><span class="toc__num">65.</span>Create a GitHub Action workflow to run static code analysis.</a></li><li><a href="#q66"><span class="toc__num">66.</span>Write a script to automate the cleanup of old Docker images and containers.</a></li><li><a href="#q67"><span class="toc__num">67.</span>Create a Kubernetes CustomResource YAML file to define a custom resource.</a></li><li><a href="#q68"><span class="toc__num">68.</span>Write a GitHub Action to deploy a Go application to Azure Functions.</a></li><li><a href="#q69"><span class="toc__num">69.</span>Create a Jenkins pipeline to deploy a React Native application to App Store and Google ...</a></li><li><a href="#q70"><span class="toc__num">70.</span>Write a Kubernetes LimitRange YAML file to set default resource limits.</a></li><li><a href="#q71"><span class="toc__num">71.</span>Create a Docker Compose file to run a local instance of Redis.</a></li><li><a href="#q72"><span class="toc__num">72.</span>Write a GitHub Action workflow to deploy a TypeScript application to AWS Amplify.</a></li><li><a href="#q73"><span class="toc__num">73.</span>Create a Jenkinsfile to build and deploy a Haskell application.</a></li><li><a href="#q74"><span class="toc__num">74.</span>Write a Kubernetes PriorityClass YAML file to assign priority to pods.</a></li><li><a href="#q75"><span class="toc__num">75.</span>Create a Dockerfile to containerize a Svelte application.</a></li><li><a href="#q76"><span class="toc__num">76.</span>Write a GitHub Action to deploy a Kotlin application to Google Cloud Run.</a></li><li><a href="#q77"><span class="toc__num">77.</span>Create a script to monitor and restart failed Kubernetes pods.</a></li><li><a href="#q78"><span class="toc__num">78.</span>Write a Jenkins pipeline to deploy an Elixir application to Heroku.</a></li><li><a href="#q79"><span class="toc__num">79.</span>Create a Kubernetes ResourceQuota YAML file to limit resource usage.</a></li><li><a href="#q80"><span class="toc__num">80.</span>Write a Docker Compose file to run a local instance of RabbitMQ.</a></li><li><a href="#q81"><span class="toc__num">81.</span>Create a GitHub Action workflow to deploy a C++ application to AWS EC2.</a></li><li><a href="#q82"><span class="toc__num">82.</span>Write a Kubernetes MutatingWebhookConfiguration YAML file to modify incoming requests.</a></li><li><a href="#q83"><span class="toc__num">83.</span>Create a Jenkinsfile to build and deploy a Rust application to AWS Lambda.</a></li><li><a href="#q84"><span class="toc__num">84.</span>Write a Dockerfile to containerize a Phoenix application.</a></li><li><a href="#q85"><span class="toc__num">85.</span>Create a GitHub Action to run performance tests on a web application.</a></li><li><a href="#q86"><span class="toc__num">86.</span>Write a script to automate the setup of a Kubernetes cluster using kops.</a></li><li><a href="#q87"><span class="toc__num">87.</span>Create a Kubernetes VerticalPodAutoscaler YAML file to automatically adjust resource li...</a></li><li><a href="#q88"><span class="toc__num">88.</span>Write a GitHub Action workflow to deploy a Java application to Azure App Service.</a></li><li><a href="#q89"><span class="toc__num">89.</span>Create a Jenkins pipeline to deploy a Node.js application to IBM Cloud.</a></li><li><a href="#q90"><span class="toc__num">90.</span>Write a Kubernetes PodSecurityPolicy YAML file to enforce security policies.</a></li><li><a href="#q91"><span class="toc__num">91.</span>Create a Docker Compose file to run a local instance of Elasticsearch.</a></li><li><a href="#q92"><span class="toc__num">92.</span>Write a GitHub Action to deploy a Dart application to Google Cloud Run.</a></li><li><a href="#q93"><span class="toc__num">93.</span>Create a Jenkinsfile to build and deploy a Swift application to AWS Lambda.</a></li><li><a href="#q94"><span class="toc__num">94.</span>Write a Kubernetes HorizontalPodAutoscaler YAML file to scale pods based on CPU usage.</a></li><li><a href="#q95"><span class="toc__num">95.</span>Create a Dockerfile to containerize an ASP.NET Core application.</a></li><li><a href="#q96"><span class="toc__num">96.</span>Write a GitHub Action workflow to deploy a C# application to Heroku.</a></li><li><a href="#q97"><span class="toc__num">97.</span>Create a script to automate the scaling of a Kubernetes cluster using Cluster Autoscaler.</a></li><li><a href="#q98"><span class="toc__num">98.</span>Write a Jenkins pipeline to deploy a Perl application to Google Cloud Functions.</a></li><li><a href="#q99"><span class="toc__num">99.</span>Create a Kubernetes PodDisruptionBudget YAML file to ensure application availability.</a></li><li><a href="#q100"><span class="toc__num">100.</span>Write a Docker Compose file to run a local instance of MySQL.</a></li>
-      </ul>
-    </div>
-
-    
-<article class="qa" id="q1">
-  <div class="qa__number">Question 1</div>
-  <h3 class="qa__question">Write a GitHub Action workflow to build and test a Node.js application.</h3>
-  <div class="qa__answer">
-    <pre><code># .github/workflows/ci.yml
+ANSWERS[1] = r'''<pre><code># .github/workflows/ci.yml
 name: CI
 on:
   push: { branches: [main] }
@@ -153,15 +47,9 @@ jobs:
 <li><strong>pnpm / yarn</strong>: switch <code>cache: pnpm</code> + add <code>pnpm/action-setup@v4</code>.</li>
 <li><strong>Codecov upload</strong>: <code>uses: codecov/codecov-action@v4</code> with <code>files: coverage/lcov.info</code>.</li>
 </ul>
-<p><strong>Performance notes:</strong> <code>concurrency.cancel-in-progress</code> stops superseded runs on rapid pushes &mdash; saves runner minutes. <code>setup-node</code>&rsquo;s built-in cache is faster than a manual <code>actions/cache</code>. Mark <em>test</em> as a required check in branch protection so red PRs can&rsquo;t merge.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q2">
-  <div class="qa__number">Question 2</div>
-  <h3 class="qa__question">Create a Jenkins pipeline script to build and deploy a Docker image.</h3>
-  <div class="qa__answer">
-    <pre><code>// Jenkinsfile
+<p><strong>Performance notes:</strong> <code>concurrency.cancel-in-progress</code> stops superseded runs on rapid pushes &mdash; saves runner minutes. <code>setup-node</code>&rsquo;s built-in cache is faster than a manual <code>actions/cache</code>. Mark <em>test</em> as a required check in branch protection so red PRs can&rsquo;t merge.</p>'''
+
+ANSWERS[2] = r'''<pre><code>// Jenkinsfile
 pipeline {
   agent { label 'docker' }
   options {
@@ -217,15 +105,9 @@ pipeline {
 </code></pre>
 <p><strong>Flow:</strong> tags the image with the short Git SHA (immutable) and <code>:latest</code> (moving), runs tests inside the built image so the prod artefact is what was tested, pushes to GHCR only on <code>main</code>, then rolls the deployment forward and waits for readiness.</p>
 <p><strong>Variants:</strong> for ECR use <code>aws ecr get-login-password | docker login</code>; for Buildx multi-arch builds prepend a <code>docker buildx create --use</code> stage; replace <code>kubectl set image</code> with <code>helm upgrade --install</code> for Helm-managed apps.</p>
-<p><strong>Performance:</strong> add a buildkit cache mount (<code>RUN --mount=type=cache,...</code>) in the Dockerfile and enable <code>DOCKER_BUILDKIT=1</code> on the agent for layer-level caching across builds.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q3">
-  <div class="qa__number">Question 3</div>
-  <h3 class="qa__question">Write a Dockerfile to containerize a simple Flask application.</h3>
-  <div class="qa__answer">
-    <pre><code># Dockerfile
+<p><strong>Performance:</strong> add a buildkit cache mount (<code>RUN --mount=type=cache,...</code>) in the Dockerfile and enable <code>DOCKER_BUILDKIT=1</code> on the agent for layer-level caching across builds.</p>'''
+
+ANSWERS[3] = r'''<pre><code># Dockerfile
 FROM python:3.13-slim AS base
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
@@ -272,15 +154,9 @@ def home():
 <pre><code>docker build -t flask-app .
 docker run -p 8000:8000 flask-app
 </code></pre>
-<p><strong>Don&rsquo;t forget</strong> a <code>.dockerignore</code> with <code>__pycache__/ .venv/ .git/ .pytest_cache/</code> &mdash; cuts build context size dramatically and avoids leaking local state into the image.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q4">
-  <div class="qa__number">Question 4</div>
-  <h3 class="qa__question">Write a Kubernetes deployment YAML file for a Node.js application.</h3>
-  <div class="qa__answer">
-    <pre><code># deployment.yaml
+<p><strong>Don&rsquo;t forget</strong> a <code>.dockerignore</code> with <code>__pycache__/ .venv/ .git/ .pytest_cache/</code> &mdash; cuts build context size dramatically and avoids leaking local state into the image.</p>'''
+
+ANSWERS[4] = r'''<pre><code># deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -345,15 +221,9 @@ kubectl get pods -n prod -l app=api
 <li><strong>Hardened <code>securityContext</code></strong> &mdash; non-root, read-only FS, no caps &mdash; passes most Pod Security Standards (restricted) checks.</li>
 <li><strong>Secrets via <code>secretKeyRef</code></strong> &mdash; never hard-code; pair with External Secrets Operator for managed-vault sync.</li>
 </ul>
-<p><strong>Pair with</strong>: a <code>Service</code> (ClusterIP for internal), an <code>HPA</code> for auto-scaling, and a <code>PodDisruptionBudget</code> with <code>minAvailable: 2</code> so node drains don&rsquo;t take you below 2 replicas.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q5">
-  <div class="qa__number">Question 5</div>
-  <h3 class="qa__question">Create a GitHub Action workflow to deploy a React application to GitHub Pages.</h3>
-  <div class="qa__answer">
-    <pre><code># .github/workflows/deploy-pages.yml
+<p><strong>Pair with</strong>: a <code>Service</code> (ClusterIP for internal), an <code>HPA</code> for auto-scaling, and a <code>PodDisruptionBudget</code> with <code>minAvailable: 2</code> so node drains don&rsquo;t take you below 2 replicas.</p>'''
+
+ANSWERS[5] = r'''<pre><code># .github/workflows/deploy-pages.yml
 name: Deploy to GitHub Pages
 on:
   push: { branches: [main] }
@@ -403,15 +273,9 @@ jobs:
 <li><strong>Next.js</strong> &mdash; <code>next build && next export</code> (or use <code>output: 'export'</code> in <code>next.config.js</code>); upload <code>./out</code>.</li>
 <li><strong>Vue / Svelte / Astro</strong> &mdash; same pattern, different output dir (<code>dist</code> for Vite-based).</li>
 </ul>
-<p><strong>Performance:</strong> the <code>actions/deploy-pages</code> action uses OIDC and atomic deploys &mdash; no API tokens, instant rollback to previous artefact in Pages UI. Concurrency group ensures only one deploy runs at a time, avoiding races.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q6">
-  <div class="qa__number">Question 6</div>
-  <h3 class="qa__question">Write a Jenkinsfile to build a Maven project and deploy it to an AWS EC2 instance.</h3>
-  <div class="qa__answer">
-    <pre><code>// Jenkinsfile
+<p><strong>Performance:</strong> the <code>actions/deploy-pages</code> action uses OIDC and atomic deploys &mdash; no API tokens, instant rollback to previous artefact in Pages UI. Concurrency group ensures only one deploy runs at a time, avoiding races.</p>'''
+
+ANSWERS[6] = r'''<pre><code>// Jenkinsfile
 pipeline {
   agent any
   tools { jdk 'jdk-21'; maven 'maven-3.9' }
@@ -474,15 +338,9 @@ pipeline {
 <li><strong>AWS SSM Run Command</strong> &mdash; deploy without opening SSH; better audit trail.</li>
 <li><strong>Auto Scaling Group + AMI</strong> &mdash; bake a new AMI with Packer, update the launch template, instance refresh.</li>
 </ul>
-<p><strong>Performance:</strong> add <code>options { skipDefaultCheckout() }</code> + <code>parallel</code> stages for unit / integration tests on multi-module Maven projects; cache <code>~/.m2/repository</code> on the agent or use a <em>Maven repository manager</em> (Nexus, Artifactory) to avoid re-downloading on every build.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q7">
-  <div class="qa__number">Question 7</div>
-  <h3 class="qa__question">Create a Docker Compose file for a multi-container application with a web server and a database.</h3>
-  <div class="qa__answer">
-    <pre><code># docker-compose.yml
+<p><strong>Performance:</strong> add <code>options { skipDefaultCheckout() }</code> + <code>parallel</code> stages for unit / integration tests on multi-module Maven projects; cache <code>~/.m2/repository</code> on the agent or use a <em>Maven repository manager</em> (Nexus, Artifactory) to avoid re-downloading on every build.</p>'''
+
+ANSWERS[7] = r'''<pre><code># docker-compose.yml
 services:
   web:
     build: ./web
@@ -537,15 +395,9 @@ docker compose down -v          # stop + remove volumes
 <li><strong>Compose Watch</strong> &mdash; sync source files into the container without rebuilding; rebuild only when <code>package.json</code> changes.</li>
 </ul>
 <p><strong>Variants:</strong> add a <code>networks:</code> section for segmentation (front/back); add <code>restart: unless-stopped</code> for prod-like behaviour; use <code>profiles:</code> to opt-in extra services (mailhog, adminer, monitoring).</p>
-<p><strong>Performance:</strong> for tests, use <code>tmpfs</code> for the Postgres data dir &mdash; massively faster: <code>tmpfs: /var/lib/postgresql/data</code>. For prod, do <em>not</em> use Compose at scale &mdash; reach for Kubernetes or a PaaS.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q8">
-  <div class="qa__number">Question 8</div>
-  <h3 class="qa__question">Write a Kubernetes service YAML file to expose a deployment externally.</h3>
-  <div class="qa__answer">
-    <pre><code># service.yaml — three common ways to expose a Deployment
+<p><strong>Performance:</strong> for tests, use <code>tmpfs</code> for the Postgres data dir &mdash; massively faster: <code>tmpfs: /var/lib/postgresql/data</code>. For prod, do <em>not</em> use Compose at scale &mdash; reach for Kubernetes or a PaaS.</p>'''
+
+ANSWERS[8] = r'''<pre><code># service.yaml — three common ways to expose a Deployment
 ---
 apiVersion: v1
 kind: Service                  # 1) ClusterIP — internal only (default)
@@ -620,15 +472,9 @@ kubectl get svc -n prod
 kubectl describe ingress api -n prod
 kubectl port-forward svc/api 8080:80 -n prod   # quick local test
 </code></pre>
-<p><strong>Performance / ops tips:</strong> for LoadBalancer, choose <strong>NLB</strong> (TCP) for low latency, <strong>ALB</strong> (HTTP) for L7 features; on GKE/AKS the equivalents are Network LB and Application LB. With Ingress, set <code>externalTrafficPolicy: Local</code> on the LB to preserve client IPs and skip extra hops.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q9">
-  <div class="qa__number">Question 9</div>
-  <h3 class="qa__question">Create a GitHub Action workflow to run unit tests and generate a coverage report.</h3>
-  <div class="qa__answer">
-    <pre><code># .github/workflows/coverage.yml
+<p><strong>Performance / ops tips:</strong> for LoadBalancer, choose <strong>NLB</strong> (TCP) for low latency, <strong>ALB</strong> (HTTP) for L7 features; on GKE/AKS the equivalents are Network LB and Application LB. With Ingress, set <code>externalTrafficPolicy: Local</code> on the LB to preserve client IPs and skip extra hops.</p>'''
+
+ANSWERS[9] = r'''<pre><code># .github/workflows/coverage.yml
 name: Tests + Coverage
 on: [push, pull_request]
 
@@ -683,15 +529,9 @@ export default defineConfig({
 <li><strong>Java + JaCoCo</strong> &mdash; <code>mvn verify</code> generates <code>target/site/jacoco/jacoco.xml</code>.</li>
 <li><strong>Go</strong> &mdash; <code>go test -coverprofile=coverage.out ./... && go tool cover -func=coverage.out</code>.</li>
 </ul>
-<p><strong>Performance:</strong> per-PR <em>diff coverage</em> matters more than absolute coverage. Codecov&rsquo;s <code>codecov.yml</code> can require new code to be 80%+ covered without forcing 100% on the whole codebase. For the highest-confidence tests, layer mutation testing with <strong>Stryker</strong> on critical modules.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q10">
-  <div class="qa__number">Question 10</div>
-  <h3 class="qa__question">Write a script to automate the setup of a Jenkins server using Docker.</h3>
-  <div class="qa__answer">
-    <pre><code>#!/usr/bin/env bash
+<p><strong>Performance:</strong> per-PR <em>diff coverage</em> matters more than absolute coverage. Codecov&rsquo;s <code>codecov.yml</code> can require new code to be 80%+ covered without forcing 100% on the whole codebase. For the highest-confidence tests, layer mutation testing with <strong>Stryker</strong> on critical modules.</p>'''
+
+ANSWERS[10] = r'''<pre><code>#!/usr/bin/env bash
 # setup-jenkins.sh — provision a Jenkins controller with persistent state
 set -euo pipefail
 
@@ -752,15 +592,9 @@ volumes:
 <li><strong>Helm chart on Kubernetes</strong> &mdash; <code>helm install jenkins jenkins/jenkins</code>; dynamic agents as Pods.</li>
 <li><strong>For new projects in 2026</strong>, evaluate GitHub Actions / GitLab CI / Buildkite first &mdash; less infra to operate.</li>
 </ul>
-<p><strong>Backup:</strong> <code>tar -C $JENKINS_HOME -czf jenkins-$(date +%F).tgz .</code> nightly; or use the <em>thinBackup</em> plugin / Velero for K8s-resident installations.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q11">
-  <div class="qa__number">Question 11</div>
-  <h3 class="qa__question">Create a Kubernetes ConfigMap to manage configuration for a Node.js application.</h3>
-  <div class="qa__answer">
-    <pre><code># configmap.yaml — non-secret config for an app
+<p><strong>Backup:</strong> <code>tar -C $JENKINS_HOME -czf jenkins-$(date +%F).tgz .</code> nightly; or use the <em>thinBackup</em> plugin / Velero for K8s-resident installations.</p>'''
+
+ANSWERS[11] = r'''<pre><code># configmap.yaml — non-secret config for an app
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -824,15 +658,9 @@ kubectl create cm api-config --from-env-file=.env --dry-run=client -o yaml
 <li><strong>1 MB size limit</strong> per ConfigMap &mdash; chunk large config or use a real config service.</li>
 <li><strong>Never put secrets here</strong> &mdash; use <code>Secret</code> or External Secrets Operator.</li>
 </ul>
-<p><strong>Variants:</strong> use <strong>Kustomize <code>configMapGenerator</code></strong> to auto-hash configmap names so a config change forces a rolling restart automatically; or <strong>Reloader</strong> (stakater/Reloader) to watch ConfigMaps and trigger restarts.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q12">
-  <div class="qa__number">Question 12</div>
-  <h3 class="qa__question">Write a GitHub Action to build and push a Docker image to Docker Hub.</h3>
-  <div class="qa__answer">
-    <pre><code># .github/workflows/docker.yml
+<p><strong>Variants:</strong> use <strong>Kustomize <code>configMapGenerator</code></strong> to auto-hash configmap names so a config change forces a rolling restart automatically; or <strong>Reloader</strong> (stakater/Reloader) to watch ConfigMaps and trigger restarts.</p>'''
+
+ANSWERS[12] = r'''<pre><code># .github/workflows/docker.yml
 name: Build & Push Docker
 on:
   push:
@@ -893,15 +721,9 @@ jobs:
 <li><strong><code>provenance: true</code></strong> + <strong><code>sbom: true</code></strong> &mdash; SLSA build provenance and Software Bill of Materials attached as image manifests; required for many supply-chain compliance regimes.</li>
 </ul>
 <p><strong>Variants:</strong> swap to <strong>GHCR</strong> for ecosystem alignment (use <code>${{ secrets.GITHUB_TOKEN }}</code>, no extra creds). Add <code>aquasecurity/trivy-action</code> after build to fail on HIGH/CRITICAL CVEs. Sign the digest with <strong>Sigstore Cosign</strong> for verifiable images.</p>
-<p><strong>Performance:</strong> avoid Docker Hub anonymous pull rate limits in <code>FROM</code> by switching to <code>FROM public.ecr.aws/docker/library/...</code> or pre-pulling via a registry mirror.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q13">
-  <div class="qa__number">Question 13</div>
-  <h3 class="qa__question">Create a Jenkins pipeline to deploy a Python application to AWS Lambda.</h3>
-  <div class="qa__answer">
-    <pre><code>// Jenkinsfile — deploy a Python app to AWS Lambda (zip package)
+<p><strong>Performance:</strong> avoid Docker Hub anonymous pull rate limits in <code>FROM</code> by switching to <code>FROM public.ecr.aws/docker/library/...</code> or pre-pulling via a registry mirror.</p>'''
+
+ANSWERS[13] = r'''<pre><code>// Jenkinsfile — deploy a Python app to AWS Lambda (zip package)
 pipeline {
   agent any
   options { timeout(time: 20, unit: 'MINUTES') }
@@ -974,15 +796,9 @@ def handler(event, context):
 <li><strong>Lambda Layers</strong> &mdash; share libraries across functions instead of bundling per-function.</li>
 <li><strong>Function URLs</strong> or API Gateway &mdash; for HTTP-triggered functions.</li>
 </ul>
-<p><strong>Performance:</strong> use <strong>provisioned concurrency</strong> for cold-start-sensitive endpoints; pin Python to <strong>3.13</strong> for newer runtime perf; tune memory upward for CPU (Lambda CPU scales linearly with memory).</p>
-    
-  </div>
-</article>
-<article class="qa" id="q14">
-  <div class="qa__number">Question 14</div>
-  <h3 class="qa__question">Write a Kubernetes ingress resource to route traffic to different services.</h3>
-  <div class="qa__answer">
-    <pre><code># ingress.yaml — host- and path-based routing to multiple services
+<p><strong>Performance:</strong> use <strong>provisioned concurrency</strong> for cold-start-sensitive endpoints; pin Python to <strong>3.13</strong> for newer runtime perf; tune memory upward for CPU (Lambda CPU scales linearly with memory).</p>'''
+
+ANSWERS[14] = r'''<pre><code># ingress.yaml — host- and path-based routing to multiple services
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -1042,15 +858,9 @@ curl -I https://api.acme.com/v1/health
 <li><code>ImplementationSpecific</code> &mdash; controller-specific (regex on NGINX).</li>
 </ul>
 <p><strong>2026 alternative &mdash; Gateway API:</strong> the next-generation successor to Ingress with cleaner separation of roles, multi-protocol support (HTTP, gRPC, TCP), and better split traffic / canary primitives. Major implementations (Cilium, Istio, NGINX, Envoy Gateway) all ship Gateway API; prefer it for greenfield. Ingress remains supported but is no longer evolving.</p>
-<p><strong>Performance / ops:</strong> set <code>proxy-body-size</code>, <code>proxy-read-timeout</code> via annotations; enable HTTP/2; for blue/green or canary use Argo Rollouts or NGINX&rsquo;s <code>canary-weight</code> annotation.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q15">
-  <div class="qa__number">Question 15</div>
-  <h3 class="qa__question">Create a GitHub Action workflow to deploy a Docker container to AWS ECS.</h3>
-  <div class="qa__answer">
-    <pre><code># .github/workflows/ecs-deploy.yml
+<p><strong>Performance / ops:</strong> set <code>proxy-body-size</code>, <code>proxy-read-timeout</code> via annotations; enable HTTP/2; for blue/green or canary use Argo Rollouts or NGINX&rsquo;s <code>canary-weight</code> annotation.</p>'''
+
+ANSWERS[15] = r'''<pre><code># .github/workflows/ecs-deploy.yml
 name: Deploy to ECS
 on:
   push: { branches: [main] }
@@ -1114,15 +924,9 @@ jobs:
 <li><strong>EKS instead</strong> &mdash; add <code>aws eks update-kubeconfig</code> + <code>kubectl set image</code> + <code>kubectl rollout status</code>.</li>
 <li><strong>App Runner / Copilot</strong> &mdash; for dev teams who want zero infra: <code>copilot deploy</code>.</li>
 </ul>
-<p><strong>Performance:</strong> use <code>cache-from/to: type=gha</code> on Buildx steps; pin task definition revision for instant rollback (<code>aws ecs update-service --task-definition api:42</code>); enable ECS Container Insights for built-in metrics.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q16">
-  <div class="qa__number">Question 16</div>
-  <h3 class="qa__question">Write a Dockerfile for a Java application using a multi-stage build.</h3>
-  <div class="qa__answer">
-    <pre><code># Dockerfile — multi-stage build for a Spring Boot / Maven app
+<p><strong>Performance:</strong> use <code>cache-from/to: type=gha</code> on Buildx steps; pin task definition revision for instant rollback (<code>aws ecs update-service --task-definition api:42</code>); enable ECS Container Insights for built-in metrics.</p>'''
+
+ANSWERS[16] = r'''<pre><code># Dockerfile — multi-stage build for a Spring Boot / Maven app
 # --- Stage 1: build the jar
 FROM maven:3.9-eclipse-temurin-21 AS build
 WORKDIR /src
@@ -1168,15 +972,9 @@ docker images acme/api          # ~180 MB, vs ~600 MB single-stage
 <li><strong>Layered jar</strong> (Spring Boot): use <code>RUN java -Djarmode=layertools -jar app.jar extract</code> to split deps into separate layers, so app code rebuilds don&rsquo;t bust the deps layer.</li>
 <li><strong>GraalVM native image</strong>: massive cold-start improvement (50ms vs 5s) at cost of slower builds; <code>FROM ghcr.io/graalvm/native-image-community:21</code> + <code>native-image</code>.</li>
 </ul>
-<p><strong>Performance:</strong> add a <code>.dockerignore</code> with <code>target/ .git/ .idea/ *.log</code> &mdash; cuts context size dramatically. Use BuildKit cache mount for Maven: <code>RUN --mount=type=cache,target=/root/.m2 mvn package</code>.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q17">
-  <div class="qa__number">Question 17</div>
-  <h3 class="qa__question">Create a Jenkinsfile to run security scans on a Docker image.</h3>
-  <div class="qa__answer">
-    <pre><code>// Jenkinsfile — security scan a Docker image
+<p><strong>Performance:</strong> add a <code>.dockerignore</code> with <code>target/ .git/ .idea/ *.log</code> &mdash; cuts context size dramatically. Use BuildKit cache mount for Maven: <code>RUN --mount=type=cache,target=/root/.m2 mvn package</code>.</p>'''
+
+ANSWERS[17] = r'''<pre><code>// Jenkinsfile — security scan a Docker image
 pipeline {
   agent any
   options { timeout(time: 30, unit: 'MINUTES') }
@@ -1259,15 +1057,9 @@ pipeline {
 <li><strong>Cosign keyless signing</strong> &mdash; via Sigstore Fulcio; verifiable provenance without managing keys.</li>
 </ul>
 <p><strong>Variants:</strong> swap Trivy for <strong>Grype</strong> + <strong>Anchore</strong>; commercial: <strong>Snyk</strong>, <strong>Wiz</strong>, <strong>Sysdig Secure</strong>, <strong>Chainguard Enforce</strong>. For regulated workloads, integrate <strong>OPA Gatekeeper</strong> or <strong>Kyverno</strong> at the cluster admission layer to enforce &ldquo;only signed images allowed&rdquo;.</p>
-<p><strong>Performance:</strong> cache the Trivy DB on the agent (<code>--cache-dir</code>) to avoid re-downloading vulnerability data each run; run scans in parallel <code>parallel { }</code> stages to overlap CPU and I/O.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q18">
-  <div class="qa__number">Question 18</div>
-  <h3 class="qa__question">Write a Kubernetes StatefulSet YAML file for a MySQL database.</h3>
-  <div class="qa__answer">
-    <pre><code># mysql-statefulset.yaml — single primary, simple StatefulSet
+<p><strong>Performance:</strong> cache the Trivy DB on the agent (<code>--cache-dir</code>) to avoid re-downloading vulnerability data each run; run scans in parallel <code>parallel { }</code> stages to overlap CPU and I/O.</p>'''
+
+ANSWERS[18] = r'''<pre><code># mysql-statefulset.yaml — single primary, simple StatefulSet
 apiVersion: v1
 kind: Service
 metadata:
@@ -1343,15 +1135,9 @@ kubectl exec -it mysql-0 -n db -- mysql -uapp -p
 <li><strong>Percona Operator</strong> &mdash; battle-tested HA + backup automation.</li>
 <li><strong>MariaDB Operator</strong> &mdash; alternative engine.</li>
 </ul>
-<p><strong>2026 advice:</strong> for production prefer a <strong>managed service</strong> (Amazon RDS, Aurora, Cloud SQL, Azure Database for MySQL) over self-hosting &mdash; you skip backup, point-in-time recovery, replication, version upgrades, and security patching. Self-host StatefulSets only when compliance / cost / data sovereignty demands.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q19">
-  <div class="qa__number">Question 19</div>
-  <h3 class="qa__question">Create a GitHub Action to run integration tests on a Docker container.</h3>
-  <div class="qa__answer">
-    <pre><code># .github/workflows/integration.yml
+<p><strong>2026 advice:</strong> for production prefer a <strong>managed service</strong> (Amazon RDS, Aurora, Cloud SQL, Azure Database for MySQL) over self-hosting &mdash; you skip backup, point-in-time recovery, replication, version upgrades, and security patching. Self-host StatefulSets only when compliance / cost / data sovereignty demands.</p>'''
+
+ANSWERS[19] = r'''<pre><code># .github/workflows/integration.yml
 name: Integration Tests
 on: [push, pull_request]
 
@@ -1411,15 +1197,9 @@ jobs:
 <li><strong>Testcontainers</strong> &mdash; let test code itself spin up Docker dependencies (Postgres, Kafka, Selenium); supported in Java, Node, Python, Go. Most ergonomic option for IT in 2026.</li>
 <li><strong>Ephemeral environments</strong> &mdash; for full e2e on real cloud, use <strong>Vercel Preview</strong>, <strong>Render PR Previews</strong>, or <strong>Argo CD ApplicationSet</strong> + ephemeral namespaces, then run e2e against the URL.</li>
 </ul>
-<p><strong>Performance:</strong> health-check options on services prevent flaky &ldquo;DB not ready&rdquo; failures. Use <code>npm ci --prefer-offline</code> with the <code>setup-node</code> cache. For long suites, shard with <code>matrix: { shard: [1, 2, 3, 4] }</code> + <code>--shard=${{ matrix.shard }}/4</code>.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q20">
-  <div class="qa__number">Question 20</div>
-  <h3 class="qa__question">Write a script to backup and restore Jenkins configurations.</h3>
-  <div class="qa__answer">
-    <pre><code>#!/usr/bin/env bash
+<p><strong>Performance:</strong> health-check options on services prevent flaky &ldquo;DB not ready&rdquo; failures. Use <code>npm ci --prefer-offline</code> with the <code>setup-node</code> cache. For long suites, shard with <code>matrix: { shard: [1, 2, 3, 4] }</code> + <code>--shard=${{ matrix.shard }}/4</code>.</p>'''
+
+ANSWERS[20] = r'''<pre><code>#!/usr/bin/env bash
 # jenkins-backup.sh — backup or restore Jenkins config + jobs
 set -euo pipefail
 
@@ -1492,15 +1272,9 @@ esac
 <li><strong>Velero</strong> &mdash; for Helm-installed Jenkins on Kubernetes, snapshot the PVC + manifests in one command.</li>
 <li><strong>Job DSL</strong> &mdash; declare jobs as code; restore = re-run seed job.</li>
 </ul>
-<p><strong>Critical:</strong> <em>test restore quarterly</em>. Untested backups are guesses. Encrypt archives at rest (S3 SSE-KMS) since they contain credentials.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q21">
-  <div class="qa__number">Question 21</div>
-  <h3 class="qa__question">Create a Dockerfile to containerize a Django application.</h3>
-  <div class="qa__answer">
-    <pre><code># Dockerfile — Django app with gunicorn + multi-stage
+<p><strong>Critical:</strong> <em>test restore quarterly</em>. Untested backups are guesses. Encrypt archives at rest (S3 SSE-KMS) since they contain credentials.</p>'''
+
+ANSWERS[21] = r'''<pre><code># Dockerfile — Django app with gunicorn + multi-stage
 # --- builder
 FROM python:3.13-slim AS builder
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PIP_NO_CACHE_DIR=1
@@ -1555,15 +1329,9 @@ docker run -p 8000:8000 \
 <li><strong>uv</strong> instead of pip &mdash; 10&times; faster installs.</li>
 <li><strong>Add Celery worker</strong> as a sibling service in Compose / K8s for background tasks; share the same image.</li>
 </ul>
-<p><strong>Performance:</strong> use <code>--mount=type=cache,target=/root/.cache/pip</code> in the builder stage for cached pip downloads. <code>collectstatic --noinput</code> can be slow with huge static dirs &mdash; bake static files into a separate image at build time and serve via nginx.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q22">
-  <div class="qa__number">Question 22</div>
-  <h3 class="qa__question">Write a Kubernetes job YAML file to run a one-time task.</h3>
-  <div class="qa__answer">
-    <pre><code># job.yaml — one-time data migration job
+<p><strong>Performance:</strong> use <code>--mount=type=cache,target=/root/.cache/pip</code> in the builder stage for cached pip downloads. <code>collectstatic --noinput</code> can be slow with huge static dirs &mdash; bake static files into a separate image at build time and serve via nginx.</p>'''
+
+ANSWERS[22] = r'''<pre><code># job.yaml — one-time data migration job
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -1631,15 +1399,9 @@ kubectl wait --for=condition=complete job/db-migrate-2026-05-02 -n prod --timeou
 <li><strong>Argo Workflows</strong> / <strong>Tekton</strong> / <strong>Volcano</strong> &mdash; for DAGs of jobs (data pipelines, ML training); built on top of Pods with rich features (parameters, artifacts, retries, parallel branches).</li>
 <li><strong>Temporal</strong> &mdash; durable workflow orchestration if you need long-running stateful business processes.</li>
 </ul>
-<p><strong>Performance:</strong> set <code>resources.requests</code> &mdash; the scheduler reserves capacity. For huge fan-outs, set <code>parallelism</code> based on cluster capacity / external rate limits to avoid thundering herds.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q23">
-  <div class="qa__number">Question 23</div>
-  <h3 class="qa__question">Create a GitHub Action workflow to deploy a Node.js application to Heroku.</h3>
-  <div class="qa__answer">
-    <pre><code># .github/workflows/heroku-deploy.yml
+<p><strong>Performance:</strong> set <code>resources.requests</code> &mdash; the scheduler reserves capacity. For huge fan-outs, set <code>parallelism</code> based on cluster capacity / external rate limits to avoid thundering herds.</p>'''
+
+ANSWERS[23] = r'''<pre><code># .github/workflows/heroku-deploy.yml
 name: Deploy to Heroku
 on:
   push: { branches: [main] }
@@ -1711,15 +1473,9 @@ CMD ["sh", "-c", "node server.js"]
     heroku_email: ${{ secrets.HEROKU_EMAIL }}
 </code></pre>
 <p><strong>2026 reality:</strong> Heroku still works but is no longer the obvious default. Strong alternatives have emerged: <strong>Render</strong>, <strong>Fly.io</strong>, <strong>Railway</strong>, <strong>Vercel</strong>, <strong>Cloud Run</strong>, <strong>App Runner</strong>, <strong>DigitalOcean App Platform</strong> &mdash; all offer container-or-buildpack deploys with similar UX, often at lower cost. For new projects, evaluate before committing.</p>
-<p><strong>Performance / ops:</strong> use a <strong>Heroku Pipeline</strong> (review apps + staging + production) for safer deploys; combine with <strong>Heroku Postgres</strong> for managed DB; enable <strong>Preboot</strong> for zero-downtime restarts.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q24">
-  <div class="qa__number">Question 24</div>
-  <h3 class="qa__question">Write a Jenkins pipeline to build and deploy a .NET Core application.</h3>
-  <div class="qa__answer">
-    <pre><code>// Jenkinsfile &mdash; .NET Core build &amp; deploy to Azure App Service
+<p><strong>Performance / ops:</strong> use a <strong>Heroku Pipeline</strong> (review apps + staging + production) for safer deploys; combine with <strong>Heroku Postgres</strong> for managed DB; enable <strong>Preboot</strong> for zero-downtime restarts.</p>'''
+
+ANSWERS[24] = r'''<pre><code>// Jenkinsfile &mdash; .NET Core build &amp; deploy to Azure App Service
 pipeline {
   agent any
   options { timeout(time: 30, unit: 'MINUTES') }
@@ -1813,15 +1569,9 @@ pipeline {
 <li><strong>GitHub Actions</strong> equivalent uses <code>azure/login</code> + <code>azure/webapps-deploy</code> &mdash; usually less friction than Jenkins for greenfield.</li>
 <li><strong>OIDC federation</strong> &mdash; on GitHub Actions you can drop the SP secret entirely; on Jenkins, still need stored creds.</li>
 </ul>
-<p><strong>Performance:</strong> cache <code>~/.nuget/packages</code> on the agent; build with <code>--no-restore --no-build</code> in later stages to avoid duplicate work; use <code>dotnet publish -p:PublishReadyToRun=true</code> for faster cold starts.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q25">
-  <div class="qa__number">Question 25</div>
-  <h3 class="qa__question">Create a Kubernetes secret to store sensitive information for a deployment.</h3>
-  <div class="qa__answer">
-    <pre><code># secret.yaml &mdash; three creation methods + consumption pattern
+<p><strong>Performance:</strong> cache <code>~/.nuget/packages</code> on the agent; build with <code>--no-restore --no-build</code> in later stages to avoid duplicate work; use <code>dotnet publish -p:PublishReadyToRun=true</code> for faster cold starts.</p>'''
+
+ANSWERS[25] = r'''<pre><code># secret.yaml &mdash; three creation methods + consumption pattern
 ---
 # Method 1: declarative YAML with stringData (auto-encoded)
 apiVersion: v1
@@ -1902,15 +1652,9 @@ kubectl create secret docker-registry ghcr-pull \
 <tr><td><strong>Sealed Secrets</strong></td><td>Encrypt Secret manifests so they&rsquo;re safe to Git-commit; controller decrypts</td></tr>
 <tr><td><strong>Vault Agent Injector</strong></td><td>Sidecar fetches and writes secrets into a shared volume</td></tr>
 </table>
-<p>Source-of-truth lives in a hardened secret manager with audit + rotation; Kubernetes gets just-in-time copies. This pattern eliminates the &ldquo;don&rsquo;t commit secrets&rdquo; problem entirely.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q26">
-  <div class="qa__number">Question 26</div>
-  <h3 class="qa__question">Write a GitHub Action to trigger a build on code push to a specific branch.</h3>
-  <div class="qa__answer">
-    <pre><code># .github/workflows/branch-build.yml
+<p>Source-of-truth lives in a hardened secret manager with audit + rotation; Kubernetes gets just-in-time copies. This pattern eliminates the &ldquo;don&rsquo;t commit secrets&rdquo; problem entirely.</p>'''
+
+ANSWERS[26] = r'''<pre><code># .github/workflows/branch-build.yml
 name: Branch CI
 on:
   push:
@@ -1979,15 +1723,9 @@ jobs:
 <li><strong>Draft-aware</strong>: <code>if: github.event.pull_request.draft == false</code> skips draft PRs to save runners.</li>
 <li><strong>Fork-safe</strong>: use <code>pull_request_target</code> only when needed (it gets repo secrets &mdash; potentially dangerous with untrusted PRs).</li>
 </ul>
-<p><strong>Performance:</strong> <code>concurrency.cancel-in-progress: true</code> kills superseded runs on rapid pushes; <code>paths</code> filters cut spurious runs in monorepos by 50&ndash;90%; for very large monorepos use <strong>Nx Affected</strong> or <strong>Turbo</strong> change-detection inside the job.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q27">
-  <div class="qa__number">Question 27</div>
-  <h3 class="qa__question">Create a Docker Compose file to set up a local development environment with multiple services.</h3>
-  <div class="qa__answer">
-    <pre><code># docker-compose.yml &mdash; full local dev stack
+<p><strong>Performance:</strong> <code>concurrency.cancel-in-progress: true</code> kills superseded runs on rapid pushes; <code>paths</code> filters cut spurious runs in monorepos by 50&ndash;90%; for very large monorepos use <strong>Nx Affected</strong> or <strong>Turbo</strong> change-detection inside the job.</p>'''
+
+ANSWERS[27] = r'''<pre><code># docker-compose.yml &mdash; full local dev stack
 name: acme-dev
 
 services:
@@ -2076,15 +1814,9 @@ docker compose down -v                # stop and remove volumes (full reset)
 <li><strong>Profiles</strong> &mdash; <code>profiles: [tools]</code> means MailHog and pgAdmin only start when explicitly requested, keeping the default boot fast.</li>
 </ul>
 <p><strong>Variants:</strong> for offline-friendly dev, mount node_modules as a named volume so it persists across rebuilds. For team-wide consistency, commit a <code>.env.example</code>; use <code>docker compose --env-file .env.local</code>.</p>
-<p><strong>Don&rsquo;t use Compose for prod at scale</strong> &mdash; reach for Kubernetes / ECS / a PaaS. Compose excels at local dev and CI integration testing.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q28">
-  <div class="qa__number">Question 28</div>
-  <h3 class="qa__question">Write a Kubernetes Horizontal Pod Autoscaler (HPA) YAML file.</h3>
-  <div class="qa__answer">
-    <pre><code># hpa.yaml &mdash; autoscaler driven by CPU + memory + custom metric
+<p><strong>Don&rsquo;t use Compose for prod at scale</strong> &mdash; reach for Kubernetes / ECS / a PaaS. Compose excels at local dev and CI integration testing.</p>'''
+
+ANSWERS[28] = r'''<pre><code># hpa.yaml &mdash; autoscaler driven by CPU + memory + custom metric
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
@@ -2151,15 +1883,9 @@ kubectl top pods -n prod -l app=api
 <li><strong>VerticalPodAutoscaler (VPA)</strong> &mdash; adjusts <em>requests</em> rather than replica count; useful for right-sizing batch workloads.</li>
 <li><strong>Cluster Autoscaler / Karpenter</strong> &mdash; complementary; HPA adds Pods, these add nodes when the cluster runs out of capacity. Karpenter is the modern AWS choice (faster, smarter bin-packing).</li>
 </ul>
-<p><strong>Performance / ops:</strong> for traffic-driven services, drive HPA off latency or RPS-per-pod, not CPU; CPU lags behind real load. The <code>behavior</code> block is the antidote to <em>flapping</em>: scale up aggressively (avoid SLO breach), scale down slowly (avoid yo-yo). Always combine HPA with a <strong>PodDisruptionBudget</strong> so cluster operations don&rsquo;t take you below <code>minReplicas</code>.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q29">
-  <div class="qa__number">Question 29</div>
-  <h3 class="qa__question">Create a GitHub Action workflow to deploy a Flask application to AWS Lambda.</h3>
-  <div class="qa__answer">
-    <pre><code># .github/workflows/lambda-flask.yml
+<p><strong>Performance / ops:</strong> for traffic-driven services, drive HPA off latency or RPS-per-pod, not CPU; CPU lags behind real load. The <code>behavior</code> block is the antidote to <em>flapping</em>: scale up aggressively (avoid SLO breach), scale down slowly (avoid yo-yo). Always combine HPA with a <strong>PodDisruptionBudget</strong> so cluster operations don&rsquo;t take you below <code>minReplicas</code>.</p>'''
+
+ANSWERS[29] = r'''<pre><code># .github/workflows/lambda-flask.yml
 name: Deploy Flask to Lambda
 on:
   push: { branches: [main] }
@@ -2227,15 +1953,9 @@ CMD ["gunicorn", "-w", "1", "-b", "0.0.0.0:8000", "app:app"]
 <li><strong>SST / Serverless Framework</strong> &mdash; higher-level frameworks for serverless deployments.</li>
 <li><strong>Function URL</strong> &mdash; built-in HTTPS endpoint without API Gateway; fastest cold path.</li>
 </ul>
-<p><strong>Performance:</strong> use <strong>provisioned concurrency</strong> for cold-start-sensitive endpoints; <strong>Lambda SnapStart</strong> for Java; bump memory for CPU (it scales linearly). For sustained traffic, evaluate <strong>App Runner</strong> or <strong>Cloud Run</strong> &mdash; they&rsquo;re often cheaper and simpler than Lambda at high RPS.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q30">
-  <div class="qa__number">Question 30</div>
-  <h3 class="qa__question">Write a Jenkinsfile to build, test, and deploy a Ruby on Rails application.</h3>
-  <div class="qa__answer">
-    <pre><code>// Jenkinsfile &mdash; Ruby on Rails: build, test, deploy
+<p><strong>Performance:</strong> use <strong>provisioned concurrency</strong> for cold-start-sensitive endpoints; <strong>Lambda SnapStart</strong> for Java; bump memory for CPU (it scales linearly). For sustained traffic, evaluate <strong>App Runner</strong> or <strong>Cloud Run</strong> &mdash; they&rsquo;re often cheaper and simpler than Lambda at high RPS.</p>'''
+
+ANSWERS[30] = r'''<pre><code>// Jenkinsfile &mdash; Ruby on Rails: build, test, deploy
 pipeline {
   agent any
   tools {
@@ -2348,15 +2068,9 @@ CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
 <li><strong>Heroku / Render / Fly.io</strong> &mdash; PaaS options if you want to skip K8s.</li>
 <li><strong>Sidekiq workers</strong> as a sibling Deployment; share the image, override the entrypoint.</li>
 </ul>
-<p><strong>Performance:</strong> <strong>Bootsnap</strong> + <strong>jemalloc</strong> shave 30&ndash;50% off boot/memory. For database migrations, run them <em>once</em> via a Job, not on every Pod start.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q31">
-  <div class="qa__number">Question 31</div>
-  <h3 class="qa__question">Create a Kubernetes PersistentVolume and PersistentVolumeClaim YAML file.</h3>
-  <div class="qa__answer">
-    <pre><code># pv-pvc.yaml
+<p><strong>Performance:</strong> <strong>Bootsnap</strong> + <strong>jemalloc</strong> shave 30&ndash;50% off boot/memory. For database migrations, run them <em>once</em> via a Job, not on every Pod start.</p>'''
+
+ANSWERS[31] = r'''<pre><code># pv-pvc.yaml
 ---
 # Static PV (NFS-backed; pre-provisioned by an admin)
 apiVersion: v1
@@ -2449,15 +2163,9 @@ kubectl describe pvc postgres-data -n prod
 <li><strong>EFS</strong> on EKS, <strong>Filestore</strong> on GKE, <strong>Azure Files</strong> on AKS &mdash; RWX without NFS-server ops.</li>
 <li><strong>Longhorn</strong> / <strong>Rook-Ceph</strong> / <strong>OpenEBS</strong> &mdash; OSS distributed storage on-prem.</li>
 </ul>
-<p><strong>2026 advice:</strong> for databases, prefer <strong>managed services</strong> (RDS, Cloud SQL, Atlas) &mdash; you skip backup, snapshots, and cross-AZ replication operationally. PVs are right for caches, file uploads, ML datasets, and stateful workloads where managed isn&rsquo;t available.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q32">
-  <div class="qa__number">Question 32</div>
-  <h3 class="qa__question">Write a Dockerfile to containerize a Golang application.</h3>
-  <div class="qa__answer">
-    <pre><code># Dockerfile &mdash; Go app, multi-stage, distroless final
+<p><strong>2026 advice:</strong> for databases, prefer <strong>managed services</strong> (RDS, Cloud SQL, Atlas) &mdash; you skip backup, snapshots, and cross-AZ replication operationally. PVs are right for caches, file uploads, ML datasets, and stateful workloads where managed isn&rsquo;t available.</p>'''
+
+ANSWERS[32] = r'''<pre><code># Dockerfile &mdash; Go app, multi-stage, distroless final
 # --- builder
 FROM golang:1.23-alpine AS build
 WORKDIR /src
@@ -2510,15 +2218,9 @@ Then build with <code>docker buildx build --platform linux/amd64,linux/arm64 .</
 </li>
 <li><strong>Chainguard / Wolfi</strong> as final stage for compliance-friendly daily-rebuilt base images.</li>
 </ul>
-<p><strong>Performance:</strong> use <code>GOMAXPROCS</code> and <code>GOMEMLIMIT</code> env vars to make Go honour container CPU/memory limits (Go 1.19+ for memlimit). For massive projects, build with <code>-trimpath -buildvcs=false</code> in CI to keep builds reproducible.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q33">
-  <div class="qa__number">Question 33</div>
-  <h3 class="qa__question">Create a GitHub Action to run code linting and formatting checks.</h3>
-  <div class="qa__answer">
-    <pre><code># .github/workflows/lint.yml
+<p><strong>Performance:</strong> use <code>GOMAXPROCS</code> and <code>GOMEMLIMIT</code> env vars to make Go honour container CPU/memory limits (Go 1.19+ for memlimit). For massive projects, build with <code>-trimpath -buildvcs=false</code> in CI to keep builds reproducible.</p>'''
+
+ANSWERS[33] = r'''<pre><code># .github/workflows/lint.yml
 name: Lint &amp; Format
 on: [push, pull_request]
 
@@ -2584,15 +2286,9 @@ jobs:
 <tr><td>Shell</td><td>ShellCheck</td><td>shfmt</td><td>&mdash;</td></tr>
 </table>
 <p><strong>Required checks:</strong> in branch protection, mark the lint job <em>required</em> &mdash; PRs can&rsquo;t merge with style violations. <strong>pre-commit hooks</strong> (Husky / lint-staged for JS, pre-commit for Python) catch issues client-side so CI is the safety net, not the first line of defence.</p>
-<p><strong>Performance:</strong> Ruff and Biome are typically 10&ndash;100&times; faster than the legacy tools they replace; CI lint stages drop from minutes to seconds. <strong>reviewdog</strong> turns linter output into inline PR review comments &mdash; far more useful than a red X.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q34">
-  <div class="qa__number">Question 34</div>
-  <h3 class="qa__question">Write a script to set up a Jenkins slave node using Docker.</h3>
-  <div class="qa__answer">
-    <pre><code>#!/usr/bin/env bash
+<p><strong>Performance:</strong> Ruff and Biome are typically 10&ndash;100&times; faster than the legacy tools they replace; CI lint stages drop from minutes to seconds. <strong>reviewdog</strong> turns linter output into inline PR review comments &mdash; far more useful than a red X.</p>'''
+
+ANSWERS[34] = r'''<pre><code>#!/usr/bin/env bash
 # setup-jenkins-agent.sh &mdash; provision a Jenkins agent (Docker-based)
 set -euo pipefail
 
@@ -2645,15 +2341,9 @@ echo "Agent $AGENT_NAME started; check Jenkins UI &rarr; Manage Nodes."
 <li><strong>SSH-based agents</strong> &mdash; controller SSHes into a known host and launches the agent; suitable for static specialised hardware (macOS for iOS, Windows for .NET).</li>
 </ul>
 <p><strong>Security caveats:</strong> mounting <code>/var/run/docker.sock</code> grants root-equivalent host access. For hardened setups, use <strong>Docker-in-Docker (DinD)</strong> sidecar, <strong>Buildkit rootless</strong>, or <strong>Kaniko</strong>. Run agents with the <em>Authorize Project</em> plugin so untrusted jobs can&rsquo;t escalate privileges.</p>
-<p><strong>Performance:</strong> for bursty workloads, prefer K8s-spawned ephemeral agents over static fleets &mdash; you only pay when builds run, and starting a fresh Pod is cleaner than reusing a workspace. For monorepos, static agents with persistent caches can be faster than ephemeral ones.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q35">
-  <div class="qa__number">Question 35</div>
-  <h3 class="qa__question">Create a Kubernetes DaemonSet YAML file for deploying a logging agent.</h3>
-  <div class="qa__answer">
-    <pre><code># daemonset-fluent-bit.yaml &mdash; one log forwarder per node
+<p><strong>Performance:</strong> for bursty workloads, prefer K8s-spawned ephemeral agents over static fleets &mdash; you only pay when builds run, and starting a fresh Pod is cleaner than reusing a workspace. For monorepos, static agents with persistent caches can be faster than ephemeral ones.</p>'''
+
+ANSWERS[35] = r'''<pre><code># daemonset-fluent-bit.yaml &mdash; one log forwarder per node
 apiVersion: v1
 kind: ConfigMap
 metadata: { name: fluent-bit-config, namespace: logging }
@@ -2763,15 +2453,9 @@ kubectl logs -l app=fluent-bit -n logging
 <li><strong>Datadog Agent</strong>, <strong>New Relic Infra</strong>, <strong>Elastic Filebeat</strong> &mdash; managed observability stacks.</li>
 <li><strong>OpenTelemetry Collector</strong> &mdash; unified logs + metrics + traces in one DaemonSet; the converging 2026 standard.</li>
 </ul>
-<p><strong>Performance:</strong> tune <code>Mem_Buf_Limit</code> in Fluent Bit to bound memory; use <code>refresh_interval</code> over file polling for high-churn nodes; ship to a regional aggregator (Vector / OTel Collector StatefulSet) before egress to reduce per-node CPU.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q36">
-  <div class="qa__number">Question 36</div>
-  <h3 class="qa__question">Write a GitHub Action workflow to deploy a static site to Netlify.</h3>
-  <div class="qa__answer">
-    <pre><code># .github/workflows/netlify.yml
+<p><strong>Performance:</strong> tune <code>Mem_Buf_Limit</code> in Fluent Bit to bound memory; use <code>refresh_interval</code> over file polling for high-churn nodes; ship to a regional aggregator (Vector / OTel Collector StatefulSet) before egress to reduce per-node CPU.</p>'''
+
+ANSWERS[36] = r'''<pre><code># .github/workflows/netlify.yml
 name: Deploy to Netlify
 on:
   push: { branches: [main] }
@@ -2845,15 +2529,9 @@ jobs:
 <li><strong>Form handling, identity, A/B split</strong> &mdash; Netlify-managed, no extra infra.</li>
 </ul>
 <p><strong>2026 alternatives:</strong> <strong>Vercel</strong>, <strong>Cloudflare Pages</strong>, <strong>GitHub Pages</strong>, <strong>AWS Amplify</strong>, <strong>Fly.io</strong> &mdash; all offer similar DX with different trade-offs (Vercel for Next.js best-in-class, Cloudflare Pages for cheap edge, AWS for tight cloud integration).</p>
-<p><strong>Performance:</strong> Netlify caches build outputs across runs &mdash; no extra config needed. For very large sites, use <code>incremental: true</code> to only rebuild changed pages.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q37">
-  <div class="qa__number">Question 37</div>
-  <h3 class="qa__question">Create a Jenkins pipeline to deploy a Spring Boot application to Google Cloud Run.</h3>
-  <div class="qa__answer">
-    <pre><code>// Jenkinsfile &mdash; Spring Boot &rarr; Cloud Run
+<p><strong>Performance:</strong> Netlify caches build outputs across runs &mdash; no extra config needed. For very large sites, use <code>incremental: true</code> to only rebuild changed pages.</p>'''
+
+ANSWERS[37] = r'''<pre><code>// Jenkinsfile &mdash; Spring Boot &rarr; Cloud Run
 pipeline {
   agent any
   options { timeout(time: 25, unit: 'MINUTES') }
@@ -2934,15 +2612,9 @@ pipeline {
 <li><strong>Cloud Run Jobs</strong> &mdash; for batch tasks (migrations, ETL); same image, different deploy target.</li>
 <li><strong>Multi-region</strong> &mdash; deploy to several regions and front with Cloud Load Balancer + traffic split.</li>
 </ul>
-<p><strong>Performance:</strong> set <code>--min-instances=1</code> for sub-second responses (no cold starts); tune <code>--concurrency</code> based on per-request memory; use <strong>second-generation Cloud Run</strong> execution environment for better startup + filesystem perf.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q38">
-  <div class="qa__number">Question 38</div>
-  <h3 class="qa__question">Write a Kubernetes NetworkPolicy YAML file to restrict traffic between pods.</h3>
-  <div class="qa__answer">
-    <pre><code># networkpolicy.yaml &mdash; default-deny + explicit allow rules
+<p><strong>Performance:</strong> set <code>--min-instances=1</code> for sub-second responses (no cold starts); tune <code>--concurrency</code> based on per-request memory; use <strong>second-generation Cloud Run</strong> execution environment for better startup + filesystem perf.</p>'''
+
+ANSWERS[38] = r'''<pre><code># networkpolicy.yaml &mdash; default-deny + explicit allow rules
 ---
 # 1) Default-deny ALL ingress + egress in the namespace
 apiVersion: networking.k8s.io/v1
@@ -3023,15 +2695,9 @@ kubectl run debug --image=curlimages/curl -n prod --rm -it -- \
 <li><strong>Hubble</strong> &mdash; visualise flows in real time; identify what&rsquo;s being denied.</li>
 <li><strong>Service Mesh</strong> (Istio, Linkerd) layers mTLS + L7 authz on top.</li>
 </ul>
-<p><strong>Performance:</strong> rule evaluation happens in-kernel (iptables / eBPF) &mdash; effectively free at runtime. Start with default-deny per namespace, add minimum allow rules; keep policies close to workloads (one per app, not one giant policy).</p>
-    
-  </div>
-</article>
-<article class="qa" id="q39">
-  <div class="qa__number">Question 39</div>
-  <h3 class="qa__question">Create a Docker Compose file to run a local instance of Jenkins.</h3>
-  <div class="qa__answer">
-    <pre><code># docker-compose.yml &mdash; local Jenkins + DinD agent + reverse proxy
+<p><strong>Performance:</strong> rule evaluation happens in-kernel (iptables / eBPF) &mdash; effectively free at runtime. Start with default-deny per namespace, add minimum allow rules; keep policies close to workloads (one per app, not one giant policy).</p>'''
+
+ANSWERS[39] = r'''<pre><code># docker-compose.yml &mdash; local Jenkins + DinD agent + reverse proxy
 name: jenkins-local
 
 services:
@@ -3117,15 +2783,9 @@ docker exec jenkins-local-jenkins-1 cat /var/jenkins_home/secrets/initialAdminPa
 <li><strong>Helm chart on Kind / k3d</strong> &mdash; for local dev that mirrors prod K8s setup.</li>
 <li><strong>Use Jenkins LTS</strong>, not <code>latest</code> &mdash; LTS is patched without breaking changes.</li>
 </ul>
-<p><strong>2026 alternative:</strong> for CI experiments, <strong>act</strong> runs GitHub Actions workflows locally in containers &mdash; often a faster feedback loop than spinning up Jenkins. <strong>Tekton</strong> on Kind is the cloud-native equivalent if you&rsquo;re evaluating beyond Jenkins.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q40">
-  <div class="qa__number">Question 40</div>
-  <h3 class="qa__question">Write a script to automate the installation and setup of Kubernetes using kubeadm.</h3>
-  <div class="qa__answer">
-    <pre><code>#!/usr/bin/env bash
+<p><strong>2026 alternative:</strong> for CI experiments, <strong>act</strong> runs GitHub Actions workflows locally in containers &mdash; often a faster feedback loop than spinning up Jenkins. <strong>Tekton</strong> on Kind is the cloud-native equivalent if you&rsquo;re evaluating beyond Jenkins.</p>'''
+
+ANSWERS[40] = r'''<pre><code>#!/usr/bin/env bash
 # install-k8s-kubeadm.sh &mdash; bootstrap a basic K8s cluster on Ubuntu 24.04
 set -euxo pipefail
 
@@ -3213,15 +2873,9 @@ kubectl wait --for=condition=Ready node --all --timeout=5m
 <li>For cloud, use <strong>EKS / GKE / AKS</strong>; the operational burden of self-managed K8s rarely pays off below a 100-node fleet.</li>
 <li><strong>Kind</strong> / <strong>k3d</strong> for laptop dev; <strong>Talos Linux</strong> for hardened immutable clusters; <strong>OpenShift</strong> for enterprise platform-as-a-service.</li>
 </ul>
-<p><strong>Don&rsquo;t forget:</strong> upgrade plan, etcd backups (<code>etcdctl snapshot save</code>), monitoring stack, and a CNI choice <em>before</em> putting workloads on it.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q41">
-  <div class="qa__number">Question 41</div>
-  <h3 class="qa__question">Create a GitHub Action to build and deploy a Vue.js application.</h3>
-  <div class="qa__answer">
-    <pre><code># .github/workflows/vue-deploy.yml
+<p><strong>Don&rsquo;t forget:</strong> upgrade plan, etcd backups (<code>etcdctl snapshot save</code>), monitoring stack, and a CNI choice <em>before</em> putting workloads on it.</p>'''
+
+ANSWERS[41] = r'''<pre><code># .github/workflows/vue-deploy.yml
 name: Build &amp; Deploy Vue.js
 on:
   push: { branches: [main] }
@@ -3280,15 +2934,9 @@ jobs:
 <li><strong>SSR</strong> &mdash; deploy <code>node .output/server</code> to Cloud Run / App Runner / Render; set up health checks.</li>
 <li><strong>Component library</strong> &mdash; build to <code>dist/</code> and <code>npm publish</code> on release tag.</li>
 </ul>
-<p><strong>Performance:</strong> caching <code>node_modules</code> via <code>cache: npm</code> in <code>setup-node</code> typically halves install time. <code>concurrency.cancel-in-progress</code> kills outdated runs on rapid pushes. For large monorepos, gate jobs by <code>paths: [apps/web/**, packages/ui/**]</code>.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q42">
-  <div class="qa__number">Question 42</div>
-  <h3 class="qa__question">Write a Jenkinsfile to build and deploy a PHP application to an Azure Web App.</h3>
-  <div class="qa__answer">
-    <pre><code>// Jenkinsfile &mdash; PHP app to Azure Web App
+<p><strong>Performance:</strong> caching <code>node_modules</code> via <code>cache: npm</code> in <code>setup-node</code> typically halves install time. <code>concurrency.cancel-in-progress</code> kills outdated runs on rapid pushes. For large monorepos, gate jobs by <code>paths: [apps/web/**, packages/ui/**]</code>.</p>'''
+
+ANSWERS[42] = r'''<pre><code>// Jenkinsfile &mdash; PHP app to Azure Web App
 pipeline {
   agent any
   options { timeout(time: 25, unit: 'MINUTES') }
@@ -3372,15 +3020,9 @@ pipeline {
 <li><strong>Laravel/Symfony specific</strong> &mdash; add stages for <code>php artisan migrate --force</code>, <code>php artisan config:cache</code>, <code>php artisan route:cache</code>, <code>php artisan view:cache</code>; ensure <code>storage/</code> is writable on the App Service plan.</li>
 <li><strong>Deployment slots</strong> &mdash; deploy to <em>staging</em>, smoke-test, then <code>az webapp deployment slot swap</code> for zero-downtime cutover.</li>
 </ul>
-<p><strong>Performance:</strong> <strong><code>WEBSITES_ENABLE_APP_SERVICE_STORAGE=false</code></strong> + <code>WEBSITE_RUN_FROM_PACKAGE=1</code> serves files directly from the deployed zip &mdash; faster cold starts, immutable deployments. Enable OPcache via app settings (<code>PHP_OPCACHE_ENABLE=1</code>) for production-grade PHP performance.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q43">
-  <div class="qa__number">Question 43</div>
-  <h3 class="qa__question">Create a Kubernetes custom resource definition (CRD) YAML file.</h3>
-  <div class="qa__answer">
-    <pre><code># crd.yaml &mdash; define a custom resource type
+<p><strong>Performance:</strong> <strong><code>WEBSITES_ENABLE_APP_SERVICE_STORAGE=false</code></strong> + <code>WEBSITE_RUN_FROM_PACKAGE=1</code> serves files directly from the deployed zip &mdash; faster cold starts, immutable deployments. Enable OPcache via app settings (<code>PHP_OPCACHE_ENABLE=1</code>) for production-grade PHP performance.</p>'''
+
+ANSWERS[43] = r'''<pre><code># crd.yaml &mdash; define a custom resource type
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
@@ -3474,15 +3116,9 @@ kubectl get bk -n prod                    # shortName works too
 <li><strong>Metacontroller</strong> &mdash; declarative composition for simple cases.</li>
 <li><strong>Crossplane</strong> &mdash; CRDs + composition for cloud resources (the &ldquo;K8s API for everything&rdquo;).</li>
 </ul>
-<p><strong>Performance / ops:</strong> set <code>preserveUnknownFields: false</code> (default in v1) so unknown fields error early. Use <code>conversion</code> + multiple <code>versions</code> for backwards-compatible schema migrations. Bump the version (<code>v1beta1 &rarr; v1</code>) when making breaking changes.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q44">
-  <div class="qa__number">Question 44</div>
-  <h3 class="qa__question">Write a Dockerfile to containerize a React application.</h3>
-  <div class="qa__answer">
-    <pre><code># Dockerfile &mdash; React app served via nginx (multi-stage)
+<p><strong>Performance / ops:</strong> set <code>preserveUnknownFields: false</code> (default in v1) so unknown fields error early. Use <code>conversion</code> + multiple <code>versions</code> for backwards-compatible schema migrations. Bump the version (<code>v1beta1 &rarr; v1</code>) when making breaking changes.</p>'''
+
+ANSWERS[44] = r'''<pre><code># Dockerfile &mdash; React app served via nginx (multi-stage)
 # --- builder
 FROM node:20-alpine AS build
 WORKDIR /app
@@ -3564,15 +3200,9 @@ docker run -p 8080:8080 acme/web:1.0.0
 <li><strong>SSR</strong> (Next.js / Remix) &mdash; final stage is <code>FROM node:20-alpine</code> running <code>node server.js</code>; not nginx.</li>
 <li><strong>Runtime env injection</strong> &mdash; for env vars after build, replace placeholders via <code>envsubst</code> in the entrypoint, or read from a <code>/config.js</code> served by nginx.</li>
 </ul>
-<p><strong>Performance:</strong> <code>.dockerignore</code> with <code>node_modules .git build dist coverage</code> dramatically cuts context size. For multi-platform builds, use Buildx + GHA cache. Static sites are usually better hosted on <strong>Vercel / Netlify / CloudFront / Pages</strong> than from a self-managed container &mdash; better edge caching, free TLS, no infra.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q45">
-  <div class="qa__number">Question 45</div>
-  <h3 class="qa__question">Create a GitHub Action to run automated browser tests using Selenium.</h3>
-  <div class="qa__answer">
-    <pre><code># .github/workflows/e2e-selenium.yml
+<p><strong>Performance:</strong> <code>.dockerignore</code> with <code>node_modules .git build dist coverage</code> dramatically cuts context size. For multi-platform builds, use Buildx + GHA cache. Static sites are usually better hosted on <strong>Vercel / Netlify / CloudFront / Pages</strong> than from a self-managed container &mdash; better edge caching, free TLS, no infra.</p>'''
+
+ANSWERS[45] = r'''<pre><code># .github/workflows/e2e-selenium.yml
 name: Selenium E2E
 on: [push, pull_request]
 
@@ -3666,15 +3296,9 @@ describe('Login flow', () =&gt; {
 <li><strong>WebdriverIO</strong> &mdash; modern wrapper around Selenium with sync-style API.</li>
 <li><strong>BrowserStack / Sauce Labs / LambdaTest</strong> &mdash; managed grid; matrix on real iOS / Safari / IE if you must.</li>
 </ul>
-<p><strong>Performance:</strong> shard tests across runners (<code>matrix: { shard: [1,2,3,4] }</code> + <code>--shard=$SHARD/4</code>); use <strong>headless</strong> mode for speed; tag tests <code>@smoke</code> and run only those on PRs, full suite on nightly.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q46">
-  <div class="qa__number">Question 46</div>
-  <h3 class="qa__question">Write a script to automate the backup of Docker volumes.</h3>
-  <div class="qa__answer">
-    <pre><code>#!/usr/bin/env bash
+<p><strong>Performance:</strong> shard tests across runners (<code>matrix: { shard: [1,2,3,4] }</code> + <code>--shard=$SHARD/4</code>); use <strong>headless</strong> mode for speed; tag tests <code>@smoke</code> and run only those on PRs, full suite on nightly.</p>'''
+
+ANSWERS[46] = r'''<pre><code>#!/usr/bin/env bash
 # backup-docker-volumes.sh &mdash; safely back up named Docker volumes to S3
 set -euo pipefail
 
@@ -3751,15 +3375,9 @@ docker run --rm \
 <li><strong>Migrate to K8s + Velero</strong> &mdash; volume snapshots + backup of K8s manifests in one tool.</li>
 <li><strong>Use managed services</strong> &mdash; RDS / Atlas / Cloud SQL handle PITR automatically.</li>
 </ul>
-<p><strong>Test restores quarterly.</strong> An untested backup is a guess. Encrypt archives at rest (S3 SSE-KMS) since they may contain credentials.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q47">
-  <div class="qa__number">Question 47</div>
-  <h3 class="qa__question">Create a Kubernetes PodDisruptionBudget YAML file to ensure high availability.</h3>
-  <div class="qa__answer">
-    <pre><code># pdb.yaml &mdash; protect availability during voluntary disruptions
+<p><strong>Test restores quarterly.</strong> An untested backup is a guess. Encrypt archives at rest (S3 SSE-KMS) since they may contain credentials.</p>'''
+
+ANSWERS[47] = r'''<pre><code># pdb.yaml &mdash; protect availability during voluntary disruptions
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
@@ -3828,15 +3446,9 @@ spec:
 <tr><td>HPA-scaled</td><td>Percentage form so it adapts</td></tr>
 </table>
 <p><strong>Ops gotcha:</strong> a PDB set to <code>minAvailable: replicas</code> blocks drains entirely. Cluster operators need wiggle room. Aim for &ldquo;minimum acceptable&rdquo; rather than &ldquo;always all replicas&rdquo;.</p>
-<p><strong><code>unhealthyPodEvictionPolicy: AlwaysAllow</code></strong> (K8s 1.27+) lets the cluster evict crash-looping Pods even if it would breach the PDB &mdash; otherwise stuck nodes can&rsquo;t drain, blocking the upgrade entirely. Critical for unblocking node maintenance.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q48">
-  <div class="qa__number">Question 48</div>
-  <h3 class="qa__question">Write a GitHub Action workflow to deploy a Node.js application to DigitalOcean.</h3>
-  <div class="qa__answer">
-    <pre><code># .github/workflows/digitalocean.yml
+<p><strong><code>unhealthyPodEvictionPolicy: AlwaysAllow</code></strong> (K8s 1.27+) lets the cluster evict crash-looping Pods even if it would breach the PDB &mdash; otherwise stuck nodes can&rsquo;t drain, blocking the upgrade entirely. Critical for unblocking node maintenance.</p>'''
+
+ANSWERS[48] = r'''<pre><code># .github/workflows/digitalocean.yml
 name: Deploy to DigitalOcean
 on:
   push: { branches: [main] }
@@ -3928,15 +3540,9 @@ jobs:
 <li>For Droplets: generate an SSH keypair, add the public key to the Droplet&rsquo;s authorized_keys, save the private key as <code>DROPLET_SSH_KEY</code> secret.</li>
 <li>Create a DOCR registry: <code>doctl registry create acme</code>.</li>
 </ol>
-<p><strong>Performance:</strong> Buildx GHA cache makes incremental builds 5-10&times; faster. For multi-region or high-availability, prefer DOKS over single Droplet. Use App Platform&rsquo;s built-in zero-downtime deploys instead of <code>docker stop / run</code> swaps.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q49">
-  <div class="qa__number">Question 49</div>
-  <h3 class="qa__question">Create a Jenkins pipeline to deploy a Laravel application to a Kubernetes cluster.</h3>
-  <div class="qa__answer">
-    <pre><code>// Jenkinsfile &mdash; Laravel app to a Kubernetes cluster
+<p><strong>Performance:</strong> Buildx GHA cache makes incremental builds 5-10&times; faster. For multi-region or high-availability, prefer DOKS over single Droplet. Use App Platform&rsquo;s built-in zero-downtime deploys instead of <code>docker stop / run</code> swaps.</p>'''
+
+ANSWERS[49] = r'''<pre><code>// Jenkinsfile &mdash; Laravel app to a Kubernetes cluster
 pipeline {
   agent any
   options { timeout(time: 30, unit: 'MINUTES') }
@@ -4041,15 +3647,9 @@ CMD ["/usr/bin/supervisord", "-n"]
 <li><strong>Octane</strong> &mdash; for high RPS, swap PHP-FPM for Laravel Octane (Swoole/RoadRunner); 5-10&times; throughput.</li>
 <li><strong>Sidecar architecture</strong> &mdash; nginx + PHP-FPM in <em>two</em> containers in one Pod sharing an <code>emptyDir</code> volume; cleaner separation than supervisord.</li>
 </ul>
-<p><strong>Performance:</strong> opcache + JIT (<code>php.ini: opcache.jit=tracing</code>) noticeably accelerates Laravel; preload via <code>opcache.preload</code>. Use <strong>Redis</strong> for session/cache/queue. Run migrations once via Job &mdash; never put <code>php artisan migrate</code> in container CMD.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q50">
-  <div class="qa__number">Question 50</div>
-  <h3 class="qa__question">Write a Kubernetes Secret to store database credentials for a deployment.</h3>
-  <div class="qa__answer">
-    <pre><code># db-secret.yaml &mdash; database credentials for an app
+<p><strong>Performance:</strong> opcache + JIT (<code>php.ini: opcache.jit=tracing</code>) noticeably accelerates Laravel; preload via <code>opcache.preload</code>. Use <strong>Redis</strong> for session/cache/queue. Run migrations once via Job &mdash; never put <code>php artisan migrate</code> in container CMD.</p>'''
+
+ANSWERS[50] = r'''<pre><code># db-secret.yaml &mdash; database credentials for an app
 ---
 apiVersion: v1
 kind: Secret
@@ -4132,15 +3732,9 @@ spec:
 <tr><td><strong>CSI Secrets Store</strong></td><td>Vault, mounted at runtime</td><td>No K8s Secret object at all</td></tr>
 <tr><td><strong>Vault Agent Injector</strong></td><td>Sidecar fetches; writes to volume</td><td>Per-Pod credentials, dynamic DB creds</td></tr>
 </table>
-<p><strong>Best of all:</strong> use <strong>dynamic database credentials</strong> via Vault &mdash; each Pod gets a unique short-lived username/password; no static secret to leak.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q51">
-  <div class="qa__number">Question 51</div>
-  <h3 class="qa__question">Create a Docker Compose file to run a local instance of a PostgreSQL database.</h3>
-  <div class="qa__answer">
-    <pre><code># docker-compose.yml &mdash; PostgreSQL for local dev
+<p><strong>Best of all:</strong> use <strong>dynamic database credentials</strong> via Vault &mdash; each Pod gets a unique short-lived username/password; no static secret to leak.</p>'''
+
+ANSWERS[51] = r'''<pre><code># docker-compose.yml &mdash; PostgreSQL for local dev
 name: postgres-local
 
 services:
@@ -4215,15 +3809,9 @@ psql -U app -d app -c "INSERT INTO users (email) VALUES ('alice@local');"
 <li><strong>postgres + extensions</strong> &mdash; use <code>pgvector/pgvector:pg16</code> for vector search, <code>postgis/postgis:16-3.4</code> for geospatial, <code>timescale/timescaledb:latest-pg16</code> for time-series.</li>
 <li><strong>Replicas</strong> &mdash; add a <code>db-replica</code> service with <code>command: standby_mode</code>; not perfect mirror of managed services, OK for local replication testing.</li>
 </ul>
-<p><strong>2026 advice for production:</strong> <em>do not</em> ship Postgres-in-Compose to prod. Use <strong>RDS / Cloud SQL / Atlas / Neon / Supabase</strong> &mdash; they handle backup, PITR, replication, version upgrades, and patching far better than self-hosting. Compose is for laptop dev and CI integration tests.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q52">
-  <div class="qa__number">Question 52</div>
-  <h3 class="qa__question">Write a GitHub Action to deploy a Python application to Google Cloud Functions.</h3>
-  <div class="qa__answer">
-    <pre><code># .github/workflows/cloud-functions.yml
+<p><strong>2026 advice for production:</strong> <em>do not</em> ship Postgres-in-Compose to prod. Use <strong>RDS / Cloud SQL / Atlas / Neon / Supabase</strong> &mdash; they handle backup, PITR, replication, version upgrades, and patching far better than self-hosting. Compose is for laptop dev and CI integration tests.</p>'''
+
+ANSWERS[52] = r'''<pre><code># .github/workflows/cloud-functions.yml
 name: Deploy to Cloud Functions
 on:
   push: { branches: [main] }
@@ -4318,15 +3906,9 @@ gcloud iam service-accounts add-iam-policy-binding \
 <li><strong>Cloud Storage trigger</strong>: <code>--trigger-event-filters="type=google.cloud.storage.object.v1.finalized"</code>.</li>
 <li><strong>Scheduled</strong>: pair with Cloud Scheduler hitting the function URL.</li>
 </ul>
-<p><strong>Performance:</strong> set <code>--min-instances=1</code> for sub-second responses; tune <code>--cpu</code> + <code>--memory</code> together (CPU scales with memory). For heavy Python startup, consider Lambda-style packaging in a container image instead.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q53">
-  <div class="qa__number">Question 53</div>
-  <h3 class="qa__question">Create a Jenkinsfile to run load tests on a web application.</h3>
-  <div class="qa__answer">
-    <pre><code>// Jenkinsfile &mdash; load test a web app via k6
+<p><strong>Performance:</strong> set <code>--min-instances=1</code> for sub-second responses; tune <code>--cpu</code> + <code>--memory</code> together (CPU scales with memory). For heavy Python startup, consider Lambda-style packaging in a container image instead.</p>'''
+
+ANSWERS[53] = r'''<pre><code>// Jenkinsfile &mdash; load test a web app via k6
 pipeline {
   agent any
   options { timeout(time: 30, unit: 'MINUTES') }
@@ -4429,15 +4011,9 @@ export default function () {
 <li><strong>Artillery</strong> &mdash; Node-based, simple YAML scenarios.</li>
 <li><strong>k6 Cloud / Grafana k6</strong> &mdash; managed at scale; multi-region load.</li>
 </ul>
-<p><strong>Performance gotchas:</strong> never load-test against production. Run from <em>multiple regions</em> for realism. Watch <em>both ends</em> &mdash; client metrics (RPS, latency, errors) plus server-side observability (CPU, memory, DB connections, GC pauses). Set <code>thresholds</code> in the script so failures fail the pipeline automatically.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q54">
-  <div class="qa__number">Question 54</div>
-  <h3 class="qa__question">Write a Kubernetes ConfigMap to manage environment variables for a deployment.</h3>
-  <div class="qa__answer">
-    <pre><code># env-configmap.yaml &mdash; non-secret env config
+<p><strong>Performance gotchas:</strong> never load-test against production. Run from <em>multiple regions</em> for realism. Watch <em>both ends</em> &mdash; client metrics (RPS, latency, errors) plus server-side observability (CPU, memory, DB connections, GC pauses). Set <code>thresholds</code> in the script so failures fail the pipeline automatically.</p>'''
+
+ANSWERS[54] = r'''<pre><code># env-configmap.yaml &mdash; non-secret env config
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -4510,15 +4086,9 @@ configMapGenerator:
 <tr><td>Feature flags / live</td><td><strong>LaunchDarkly / Unleash / OpenFeature</strong> &mdash; not ConfigMaps</td></tr>
 <tr><td>1+ MB</td><td>Object store; ConfigMaps capped at 1 MiB</td></tr>
 </table>
-<p><strong>Critical:</strong> <em>never put secrets in ConfigMaps</em>. Use <code>Secret</code> + External Secrets Operator. ConfigMaps are world-readable to anyone with namespace get rights; Secrets at least require explicit <code>get secrets</code> RBAC.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q55">
-  <div class="qa__number">Question 55</div>
-  <h3 class="qa__question">Create a Dockerfile to containerize an Angular application.</h3>
-  <div class="qa__answer">
-    <pre><code># Dockerfile &mdash; Angular app, multi-stage, served by nginx
+<p><strong>Critical:</strong> <em>never put secrets in ConfigMaps</em>. Use <code>Secret</code> + External Secrets Operator. ConfigMaps are world-readable to anyone with namespace get rights; Secrets at least require explicit <code>get secrets</code> RBAC.</p>'''
+
+ANSWERS[55] = r'''<pre><code># Dockerfile &mdash; Angular app, multi-stage, served by nginx
 # --- builder
 FROM node:20-alpine AS build
 WORKDIR /app
@@ -4601,15 +4171,9 @@ docker run -p 8080:8080 acme/angular-web:1.0.0
 <li><strong>Runtime env</strong> &mdash; Angular bakes env at build time; for runtime injection, replace placeholders in a <code>config.js</code> via <code>envsubst</code> in the entrypoint.</li>
 <li><strong>Multi-arch</strong> &mdash; build with Buildx for amd64 + arm64 to support Graviton + Apple Silicon.</li>
 </ul>
-<p><strong>Performance:</strong> <code>.dockerignore</code> with <code>node_modules .git dist .angular coverage e2e</code> dramatically cuts context size. For very large apps, consider <strong>Nx</strong> with affected-only builds in CI. Static SPAs are usually best hosted on <strong>Vercel / Netlify / CloudFront / Cloudflare Pages</strong> &mdash; better edge caching, automatic HTTPS, no infra.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q56">
-  <div class="qa__number">Question 56</div>
-  <h3 class="qa__question">Write a GitHub Action workflow to build and deploy a Rust application.</h3>
-  <div class="qa__answer">
-    <pre><code># .github/workflows/rust.yml
+<p><strong>Performance:</strong> <code>.dockerignore</code> with <code>node_modules .git dist .angular coverage e2e</code> dramatically cuts context size. For very large apps, consider <strong>Nx</strong> with affected-only builds in CI. Static SPAs are usually best hosted on <strong>Vercel / Netlify / CloudFront / Cloudflare Pages</strong> &mdash; better edge caching, automatic HTTPS, no infra.</p>'''
+
+ANSWERS[56] = r'''<pre><code># .github/workflows/rust.yml
 name: Rust CI &amp; Deploy
 on:
   push: { branches: [main] }
@@ -4705,15 +4269,9 @@ ENTRYPOINT ["/api"]
 <li><strong>Audit</strong> &mdash; <code>cargo audit</code> (RustSec advisories) and <code>cargo deny check</code> (license + duplicate-version + bans).</li>
 <li><strong>Release with cargo-dist</strong> &mdash; opinionated GitHub Release pipeline with checksums + installers.</li>
 </ul>
-<p><strong>Performance:</strong> use <strong>sccache</strong> with the GHA backend for incremental compile cache across runs &mdash; cuts cold-cache times further. For very large workspaces, <code>--profile dev</code> tests first then <code>--release</code> only on main. Consider <code>RUSTFLAGS=-C strip=symbols</code> to shrink the final binary.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q57">
-  <div class="qa__number">Question 57</div>
-  <h3 class="qa__question">Create a script to automate the scaling of a Kubernetes deployment.</h3>
-  <div class="qa__answer">
-    <pre><code>#!/usr/bin/env bash
+<p><strong>Performance:</strong> use <strong>sccache</strong> with the GHA backend for incremental compile cache across runs &mdash; cuts cold-cache times further. For very large workspaces, <code>--profile dev</code> tests first then <code>--release</code> only on main. Consider <code>RUSTFLAGS=-C strip=symbols</code> to shrink the final binary.</p>'''
+
+ANSWERS[57] = r'''<pre><code>#!/usr/bin/env bash
 # scale-deployment.sh &mdash; safely scale a Kubernetes Deployment up or down
 set -euo pipefail
 
@@ -4791,15 +4349,9 @@ spec:
 <tr><td>Cost-aware bin-packing</td><td><strong>Karpenter</strong> (AWS), <strong>GKE Autopilot</strong></td></tr>
 </table>
 <p><strong>Critical:</strong> always pair scaling with a <strong>PodDisruptionBudget</strong> so the autoscaler can&rsquo;t drain you below your safety floor; set <code>resources.requests</code> on every container so the scheduler can place new Pods accurately.</p>
-<p><strong>Gotchas:</strong> manual <code>kubectl scale</code> is <em>overridden</em> by HPA &mdash; if both exist, HPA wins. Use <code>kubectl autoscale</code>, not both. To pause HPA without deleting it: <code>kubectl scale hpa api --replicas=0</code> doesn&rsquo;t work; instead patch <code>spec.maxReplicas</code> down or remove the HPA temporarily.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q58">
-  <div class="qa__number">Question 58</div>
-  <h3 class="qa__question">Write a Jenkins pipeline to deploy a C# application to AWS Elastic Beanstalk.</h3>
-  <div class="qa__answer">
-    <pre><code>// Jenkinsfile &mdash; .NET to AWS Elastic Beanstalk
+<p><strong>Gotchas:</strong> manual <code>kubectl scale</code> is <em>overridden</em> by HPA &mdash; if both exist, HPA wins. Use <code>kubectl autoscale</code>, not both. To pause HPA without deleting it: <code>kubectl scale hpa api --replicas=0</code> doesn&rsquo;t work; instead patch <code>spec.maxReplicas</code> down or remove the HPA temporarily.</p>'''
+
+ANSWERS[58] = r'''<pre><code>// Jenkinsfile &mdash; .NET to AWS Elastic Beanstalk
 pipeline {
   agent any
   options { timeout(time: 30, unit: 'MINUTES') }
@@ -4916,15 +4468,9 @@ pipeline {
 <li><strong>Beanstalk</strong> remains a solid choice for legacy .NET Framework on Windows, but for .NET Core/8+ on Linux, ECS Fargate is usually the better path now.</li>
 <li><strong>OIDC federation</strong> on GitHub Actions removes the stored AWS credentials entirely; on Jenkins you&rsquo;re still on stored creds.</li>
 </ul>
-<p><strong>Performance / safety:</strong> use <em>Rolling with additional batch</em> deployment policy to avoid downtime; <em>Immutable</em> deploys for safer rollback (new instances, then switch); set <code>HealthCheckURL</code> to <code>/health</code> in the EB config so failed deploys auto-rollback.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q59">
-  <div class="qa__number">Question 59</div>
-  <h3 class="qa__question">Create a Kubernetes ServiceAccount and RoleBinding YAML file.</h3>
-  <div class="qa__answer">
-    <pre><code># sa-rbac.yaml &mdash; ServiceAccount with namespace-scoped permissions
+<p><strong>Performance / safety:</strong> use <em>Rolling with additional batch</em> deployment policy to avoid downtime; <em>Immutable</em> deploys for safer rollback (new instances, then switch); set <code>HealthCheckURL</code> to <code>/health</code> in the EB config so failed deploys auto-rollback.</p>'''
+
+ANSWERS[59] = r'''<pre><code># sa-rbac.yaml &mdash; ServiceAccount with namespace-scoped permissions
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -5030,15 +4576,9 @@ kubectl auth can-i delete deployments \
 <li><strong>Audit</strong> &mdash; <code>kubectl auth can-i --list --as=system:serviceaccount:NS:NAME</code> shows everything an SA can do.</li>
 <li><strong>Workload Identity / IRSA</strong> &mdash; map K8s SAs to cloud IAM roles via OIDC instead of mounting cloud creds; on EKS use IRSA, on GKE use Workload Identity, on AKS use Workload Identity Federation.</li>
 </ul>
-<p><strong>Tools:</strong> <strong>RBAC Manager</strong> (FairwindsOps), <strong>kubectl-who-can</strong>, <strong>krane</strong> for visualisation/audit. <strong>OPA Gatekeeper</strong> / <strong>Kyverno</strong> enforce policy on top of RBAC (e.g. &ldquo;no Pod may use the default SA&rdquo;).</p>
-    
-  </div>
-</article>
-<article class="qa" id="q60">
-  <div class="qa__number">Question 60</div>
-  <h3 class="qa__question">Write a Docker Compose file to run a local instance of MongoDB.</h3>
-  <div class="qa__answer">
-    <pre><code># job-cleanup.yaml &mdash; one-time cleanup task as a K8s Job
+<p><strong>Tools:</strong> <strong>RBAC Manager</strong> (FairwindsOps), <strong>kubectl-who-can</strong>, <strong>krane</strong> for visualisation/audit. <strong>OPA Gatekeeper</strong> / <strong>Kyverno</strong> enforce policy on top of RBAC (e.g. &ldquo;no Pod may use the default SA&rdquo;).</p>'''
+
+ANSWERS[60] = r'''<pre><code># job-cleanup.yaml &mdash; one-time cleanup task as a K8s Job
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -5126,15 +4666,9 @@ kubectl create job --from=cronjob/cleanup-uploads-nightly \
 <tr><td>Long-running stateful workflow</td><td><strong>Temporal</strong></td></tr>
 <tr><td>Event-driven</td><td><strong>KEDA ScaledJob</strong> &mdash; Job per event</td></tr>
 </table>
-<p><strong>Performance / ops:</strong> set <code>resources.requests</code> so the scheduler can place the Pod accurately; for huge fan-outs, throttle <code>parallelism</code> based on cluster capacity / external rate limits to avoid thundering herds. Capture logs by uploading to S3 / Loki at the end of the job &mdash; Pod logs disappear with TTL.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q61">
-  <div class="qa__number">Question 61</div>
-  <h3 class="qa__question">Create a GitHub Action to deploy a Ruby application to Heroku.</h3>
-  <div class="qa__answer">
-    <pre><code># docker-compose.yml &mdash; MongoDB for local dev (with admin UI)
+<p><strong>Performance / ops:</strong> set <code>resources.requests</code> so the scheduler can place the Pod accurately; for huge fan-outs, throttle <code>parallelism</code> based on cluster capacity / external rate limits to avoid thundering herds. Capture logs by uploading to S3 / Loki at the end of the job &mdash; Pod logs disappear with TTL.</p>'''
+
+ANSWERS[61] = r'''<pre><code># docker-compose.yml &mdash; MongoDB for local dev (with admin UI)
 name: mongo-local
 
 services:
@@ -5226,15 +4760,9 @@ db.users.createIndex({ email: 1 }, { unique: true });
 <li><strong>Multi-node replica set</strong> &mdash; three <code>mongo</code> services with <code>--replSet rs0</code>; cleaner mirror of prod cluster behaviour.</li>
 <li><strong>Vector / search</strong> &mdash; use <code>mongo:7-enterprise</code> for Atlas Search-compatible features locally.</li>
 </ul>
-<p><strong>2026 advice for production:</strong> run on <strong>MongoDB Atlas</strong>, <strong>DocumentDB</strong>, or <strong>Cosmos DB Mongo API</strong>; you skip backup, replica-set ops, version upgrades, and TLS cert management. Compose-Mongo is for laptop dev and CI integration tests &mdash; never production.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q62">
-  <div class="qa__number">Question 62</div>
-  <h3 class="qa__question">Write a Kubernetes PodPreset YAML file to inject environment variables into pods.</h3>
-  <div class="qa__answer">
-    <pre><code># .github/workflows/ruby-heroku.yml
+<p><strong>2026 advice for production:</strong> run on <strong>MongoDB Atlas</strong>, <strong>DocumentDB</strong>, or <strong>Cosmos DB Mongo API</strong>; you skip backup, replica-set ops, version upgrades, and TLS cert management. Compose-Mongo is for laptop dev and CI integration tests &mdash; never production.</p>'''
+
+ANSWERS[62] = r'''<pre><code># .github/workflows/ruby-heroku.yml
 name: Deploy Ruby to Heroku
 on:
   push: { branches: [main] }
@@ -5332,15 +4860,9 @@ CMD ["sh", "-c", "bundle exec puma -p $PORT -C config/puma.rb"]
 <li>Set runtime env: <code>heroku config:set RAILS_MASTER_KEY=$(cat config/master.key) -a my-app</code>.</li>
 </ol>
 <p><strong>2026 reality:</strong> Heroku still works but is no longer the obvious default. Strong alternatives: <strong>Render</strong>, <strong>Fly.io</strong>, <strong>Railway</strong>, <strong>Cloud Run</strong>, <strong>App Runner</strong>, <strong>DigitalOcean App Platform</strong>. For Rails specifically, the Rails team itself now ships <strong>Kamal</strong> for SSH-based container deploys to your own VMs &mdash; significantly cheaper at scale than Heroku, with comparable ergonomics.</p>
-<p><strong>Performance:</strong> use <strong>Heroku Pipelines</strong> (review apps + staging + production) for safer flows; enable <strong>Preboot</strong> for zero-downtime restarts on Performance dynos; jemalloc + bootsnap shave 30&ndash;50% memory + boot time.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q63">
-  <div class="qa__number">Question 63</div>
-  <h3 class="qa__question">Create a Jenkinsfile to build and deploy a Scala application to Google App Engine.</h3>
-  <div class="qa__answer">
-    <pre><code># NOTE: PodPreset was REMOVED in Kubernetes 1.20.
+<p><strong>Performance:</strong> use <strong>Heroku Pipelines</strong> (review apps + staging + production) for safer flows; enable <strong>Preboot</strong> for zero-downtime restarts on Performance dynos; jemalloc + bootsnap shave 30&ndash;50% memory + boot time.</p>'''
+
+ANSWERS[63] = r'''<pre><code># NOTE: PodPreset was REMOVED in Kubernetes 1.20.
 # This question reflects an older API. The 2026 alternatives are below.
 
 # &mdash;&mdash; Method 1: ConfigMap envFrom + Pod patcher (Kustomize)
@@ -5424,15 +4946,9 @@ spec:
 <tr><td><strong>OPA Gatekeeper</strong> mutation</td><td>Same league as Kyverno; Rego-based</td></tr>
 <tr><td>Custom mutating webhook</td><td>Complex injection logic; service mesh / observability vendors</td></tr>
 </table>
-<p><strong>2026 advice:</strong> reach for <strong>Kyverno</strong> or <strong>Gatekeeper</strong> first. They&rsquo;re mature, audited, and don&rsquo;t require building/operating a webhook service. Reserve custom webhooks for vendor-style platforms (Istio, Datadog, OTel) where the injection logic is genuinely complex.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q64">
-  <div class="qa__number">Question 64</div>
-  <h3 class="qa__question">Write a Dockerfile to containerize a Next.js application.</h3>
-  <div class="qa__answer">
-    <pre><code>// Jenkinsfile &mdash; Scala (sbt) deploy to Google App Engine
+<p><strong>2026 advice:</strong> reach for <strong>Kyverno</strong> or <strong>Gatekeeper</strong> first. They&rsquo;re mature, audited, and don&rsquo;t require building/operating a webhook service. Reserve custom webhooks for vendor-style platforms (Istio, Datadog, OTel) where the injection logic is genuinely complex.</p>'''
+
+ANSWERS[64] = r'''<pre><code>// Jenkinsfile &mdash; Scala (sbt) deploy to Google App Engine
 pipeline {
   agent any
   tools { jdk 'jdk-21' }
@@ -5551,15 +5067,9 @@ ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /app.jar"]
 <li><strong>GKE</strong> &mdash; if you want full Kubernetes ops.</li>
 <li><strong>OIDC / Workload Identity Federation</strong> on GitHub Actions removes the SA key entirely. On Jenkins you&rsquo;re typically still on stored credentials.</li>
 </ul>
-<p><strong>Performance:</strong> <code>min_num_instances: 1</code> avoids cold starts; <code>--stop-previous-version=false</code> keeps a rollback target around. For Scala specifically, set <code>JAVA_OPTS</code> for container-aware heap sizing; consider <strong>GraalVM native-image</strong> for &lt; 100 ms cold starts (sbt-native-packager + native-image).</p>
-    
-  </div>
-</article>
-<article class="qa" id="q65">
-  <div class="qa__number">Question 65</div>
-  <h3 class="qa__question">Create a GitHub Action workflow to run static code analysis.</h3>
-  <div class="qa__answer">
-    <pre><code># Dockerfile &mdash; Next.js multi-stage with standalone output
+<p><strong>Performance:</strong> <code>min_num_instances: 1</code> avoids cold starts; <code>--stop-previous-version=false</code> keeps a rollback target around. For Scala specifically, set <code>JAVA_OPTS</code> for container-aware heap sizing; consider <strong>GraalVM native-image</strong> for &lt; 100 ms cold starts (sbt-native-packager + native-image).</p>'''
+
+ANSWERS[65] = r'''<pre><code># Dockerfile &mdash; Next.js multi-stage with standalone output
 # --- 1) Install deps separately for caching
 FROM node:20-alpine AS deps
 WORKDIR /app
@@ -5635,15 +5145,9 @@ docker images acme/web   # ~150-200 MB (vs ~1 GB without standalone)
 <tr><td><strong>K8s</strong></td><td>If you already operate K8s</td></tr>
 <tr><td><strong>Cloudflare Pages</strong> + <strong>OpenNext</strong></td><td>Global edge, cheap</td></tr>
 </table>
-<p><strong>Performance:</strong> a <code>.dockerignore</code> with <code>node_modules .next .git .vscode .DS_Store coverage</code> dramatically cuts context size. Use Buildx GHA cache for incremental CI builds.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q66">
-  <div class="qa__number">Question 66</div>
-  <h3 class="qa__question">Write a script to automate the cleanup of old Docker images and containers.</h3>
-  <div class="qa__answer">
-    <pre><code># .github/workflows/sast.yml
+<p><strong>Performance:</strong> a <code>.dockerignore</code> with <code>node_modules .next .git .vscode .DS_Store coverage</code> dramatically cuts context size. Use Buildx GHA cache for incremental CI builds.</p>'''
+
+ANSWERS[66] = r'''<pre><code># .github/workflows/sast.yml
 name: Static Analysis
 on:
   push: { branches: [main] }
@@ -5725,15 +5229,9 @@ jobs:
     # CodeQL + SonarCloud + Semgrep (slow)
 </code></pre>
 <p><strong>Required vs informational:</strong> mark only the <em>fastest, lowest-false-positive</em> jobs as <em>required</em> in branch protection (Trivy, Gitleaks). Treat CodeQL findings as informational at first &mdash; a noisy required check is worse than no check, because teams start ignoring them.</p>
-<p><strong>Auto-remediation:</strong> use <strong>Dependabot</strong> for dependency CVEs (it opens PRs); <strong>OSSF Scorecard</strong> for repo health; <strong>OpenSSF Allstar</strong> for org-wide policy enforcement. <strong>reviewdog</strong> can convert any tool&rsquo;s output into inline PR review comments.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q67">
-  <div class="qa__number">Question 67</div>
-  <h3 class="qa__question">Create a Kubernetes CustomResource YAML file to define a custom resource.</h3>
-  <div class="qa__answer">
-    <pre><code>#!/usr/bin/env bash
+<p><strong>Auto-remediation:</strong> use <strong>Dependabot</strong> for dependency CVEs (it opens PRs); <strong>OSSF Scorecard</strong> for repo health; <strong>OpenSSF Allstar</strong> for org-wide policy enforcement. <strong>reviewdog</strong> can convert any tool&rsquo;s output into inline PR review comments.</p>'''
+
+ANSWERS[67] = r'''<pre><code>#!/usr/bin/env bash
 # docker-cleanup.sh &mdash; reclaim disk used by Docker artefacts
 set -euo pipefail
 
@@ -5832,15 +5330,9 @@ docker image prune -af --filter "until=168h"
 <li><strong>K8s</strong>: kubelet&rsquo;s built-in GC handles images automatically (<code>--image-gc-high-threshold</code>); rarely need a manual script.</li>
 <li><strong>Container registry retention policies</strong> &mdash; ECR / GHCR / GCR all support &ldquo;keep N most recent + tagged + young&rdquo; rules; clean up registry-side, not just locally.</li>
 <li><strong>Buildx with <code>--cache-to=type=registry</code></strong> moves cache into the registry, not local disk.</li>
-</ul>
-    
-  </div>
-</article>
-<article class="qa" id="q68">
-  <div class="qa__number">Question 68</div>
-  <h3 class="qa__question">Write a GitHub Action to deploy a Go application to Azure Functions.</h3>
-  <div class="qa__answer">
-    <pre><code># custom-resource.yaml &mdash; instance of a CRD-defined type
+</ul>'''
+
+ANSWERS[68] = r'''<pre><code># custom-resource.yaml &mdash; instance of a CRD-defined type
 # Assumes the &ldquo;Backup&rdquo; CRD from the previous answer is already applied.
 
 apiVersion: platform.acme.com/v1
@@ -5918,15 +5410,9 @@ spec:
 <tr><td><strong>Crossplane</strong></td><td>Compose <strong>cloud resources</strong> as CRDs (the &ldquo;K8s API for everything&rdquo;)</td></tr>
 </table>
 <p><strong>GitOps integration:</strong> commit Custom Resources to git and let <strong>Argo CD</strong> or <strong>Flux</strong> reconcile them onto the cluster &mdash; same pattern as for native K8s resources. Operators + GitOps is the modern platform-engineering pattern.</p>
-<p><strong>Performance:</strong> CRDs add a small API-server overhead per kind; design for cardinality (don&rsquo;t create one CR per ephemeral request &mdash; use a Job for that). Set <code>preserveUnknownFields: false</code> (default in <code>v1</code>) so unknown fields error early.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q69">
-  <div class="qa__number">Question 69</div>
-  <h3 class="qa__question">Create a Jenkins pipeline to deploy a React Native application to App Store and Google Play.</h3>
-  <div class="qa__answer">
-    <pre><code># .github/workflows/azure-functions-go.yml
+<p><strong>Performance:</strong> CRDs add a small API-server overhead per kind; design for cardinality (don&rsquo;t create one CR per ephemeral request &mdash; use a Job for that). Set <code>preserveUnknownFields: false</code> (default in <code>v1</code>) so unknown fields error early.</p>'''
+
+ANSWERS[69] = r'''<pre><code># .github/workflows/azure-functions-go.yml
 name: Deploy Go to Azure Functions
 on:
   push: { branches: [main] }
@@ -6043,15 +5529,9 @@ az role assignment create --role contributor \
 <li><strong>Azure Container Apps</strong> &mdash; for non-bursty Go services, often a better fit than Functions.</li>
 <li><strong>Function URL via Cloud Run / Lambda Function URL</strong> &mdash; if you&rsquo;re multi-cloud, evaluate before locking in.</li>
 </ul>
-<p><strong>Performance:</strong> static Go binaries cold-start in &lt; 200 ms even on Consumption; <code>-ldflags="-s -w" -trimpath</code> shrinks the binary; pre-load runtime via <strong>Always Ready Instances</strong> on Premium for sub-50ms responses. For event-heavy workloads, prefer Azure Container Apps + KEDA over Functions in 2026.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q70">
-  <div class="qa__number">Question 70</div>
-  <h3 class="qa__question">Write a Kubernetes LimitRange YAML file to set default resource limits.</h3>
-  <div class="qa__answer">
-    <pre><code>// Jenkinsfile &mdash; React Native: build &amp; ship to App Store + Play
+<p><strong>Performance:</strong> static Go binaries cold-start in &lt; 200 ms even on Consumption; <code>-ldflags="-s -w" -trimpath</code> shrinks the binary; pre-load runtime via <strong>Always Ready Instances</strong> on Premium for sub-50ms responses. For event-heavy workloads, prefer Azure Container Apps + KEDA over Functions in 2026.</p>'''
+
+ANSWERS[70] = r'''<pre><code>// Jenkinsfile &mdash; React Native: build &amp; ship to App Store + Play
 pipeline {
   agent { label 'macos' }                 // iOS builds REQUIRE a Mac
   options { timeout(time: 60, unit: 'MINUTES') }
@@ -6180,15 +5660,9 @@ end
 <li><strong>Detox</strong> / <strong>Maestro</strong> &mdash; E2E testing on real devices.</li>
 <li><strong>Sentry / Crashlytics</strong> &mdash; auto-upload dSYMs on every build for symbolicated stack traces.</li>
 </ul>
-<p><strong>Performance:</strong> cache <code>~/.gradle</code>, <code>node_modules</code>, and Pods between builds; iOS build time goes from 12&rarr;3 minutes. Use <strong>Hermes</strong> for the Android JS engine and <strong>R8</strong> with <code>shrinkResources</code> for smaller APKs.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q71">
-  <div class="qa__number">Question 71</div>
-  <h3 class="qa__question">Create a Docker Compose file to run a local instance of Redis.</h3>
-  <div class="qa__answer">
-    <pre><code># docker-compose.yml &mdash; Redis 7 with persistence + RedisInsight UI
+<p><strong>Performance:</strong> cache <code>~/.gradle</code>, <code>node_modules</code>, and Pods between builds; iOS build time goes from 12&rarr;3 minutes. Use <strong>Hermes</strong> for the Android JS engine and <strong>R8</strong> with <code>shrinkResources</code> for smaller APKs.</p>'''
+
+ANSWERS[71] = r'''<pre><code># docker-compose.yml &mdash; Redis 7 with persistence + RedisInsight UI
 services:
   redis:
     image: redis:7.4-alpine
@@ -6232,15 +5706,9 @@ volumes:
 <li><strong>TLS</strong> &mdash; mount certs and add <code>--tls-port 6380 --port 0 --tls-cert-file ... --tls-key-file ... --tls-ca-cert-file ...</code> to match production setups.</li>
 </ul>
 <p><strong>2026 ops notes:</strong> for production, prefer managed (Upstash for serverless / per-request billing, ElastiCache + MemoryDB for AWS-native, Redis Cloud for multi-AZ). Compose Redis is for local dev and integration tests &mdash; pair it with <strong>Testcontainers</strong> (<code>GenericContainer("redis:7.4-alpine")</code>) so each test run gets an isolated instance without polluting the shared dev container.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q72">
-  <div class="qa__number">Question 72</div>
-  <h3 class="qa__question">Write a GitHub Action workflow to deploy a TypeScript application to AWS Amplify.</h3>
-  <div class="qa__answer">
-    <pre><code># .github/workflows/amplify-deploy.yml
+ANSWERS[72] = r'''<pre><code># .github/workflows/amplify-deploy.yml
 # Deploys a TypeScript (Vite/Next/CRA) app to AWS Amplify Hosting via the Amplify CLI / API.
 name: Deploy to AWS Amplify
 on:
@@ -6296,15 +5764,9 @@ jobs:
 <li><strong>SST / OpenNext</strong> &mdash; for Next.js with full SSR/ISR on Lambda+CloudFront, more control than Amplify.</li>
 </ul>
 <p><strong>2026 advice:</strong> if the app is purely static, S3+CloudFront beats Amplify on price/control. If you want preview URLs per PR, Amplify Gen 2 / Vercel / Cloudflare Pages / Netlify are all easier than rolling it yourself.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q73">
-  <div class="qa__number">Question 73</div>
-  <h3 class="qa__question">Create a Jenkinsfile to build and deploy a Haskell application.</h3>
-  <div class="qa__answer">
-    <pre><code>// Jenkinsfile &mdash; Haskell (Stack) build &amp; deploy
+ANSWERS[73] = r'''<pre><code>// Jenkinsfile &mdash; Haskell (Stack) build &amp; deploy
 pipeline {
   agent { docker { image 'haskell:9.8'; args '-v /root/.stack:/root/.stack' } }
   options { timestamps(); timeout(time: 30, unit: 'MINUTES') }
@@ -6373,15 +5835,9 @@ EOF
 <li><strong>Lambda</strong> &mdash; build with the Lambda Runtime Interface; ship as a container image since Haskell is not a native runtime.</li>
 </ul>
 <p><strong>2026 notes:</strong> use <strong>GHC 9.8+</strong> (modern record dot syntax, OrPatterns), <strong>Stackage LTS-22+</strong>, and prefer GitHub Actions over Jenkins unless you already run Jenkins for the rest of the org. Cache <code>~/.stack</code> aggressively &mdash; cold Stack builds can take 30+ minutes.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q74">
-  <div class="qa__number">Question 74</div>
-  <h3 class="qa__question">Write a Kubernetes PriorityClass YAML file to assign priority to pods.</h3>
-  <div class="qa__answer">
-    <pre><code># priorityclass.yaml &mdash; tier hierarchy for a multi-tenant cluster
+ANSWERS[74] = r'''<pre><code># priorityclass.yaml &mdash; tier hierarchy for a multi-tenant cluster
 apiVersion: scheduling.k8s.io/v1
 kind: PriorityClass
 metadata:
@@ -6425,15 +5881,9 @@ spec:
 <li><strong>Karpenter / Cluster Autoscaler</strong> &mdash; both honour priority when deciding which pending pods to provision capacity for.</li>
 </ul>
 <p><strong>2026 advice:</strong> keep the number of priority classes small (3-5 max). Many teams over-engineer this with 10+ tiers and then nothing ever gets preempted because the math doesn&rsquo;t favour it. A simple <em>critical / standard / batch</em> split covers 90% of real needs. For GPU/spot workloads, look at <strong>Kueue</strong> for queue-based scheduling rather than relying on raw priority.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q75">
-  <div class="qa__number">Question 75</div>
-  <h3 class="qa__question">Create a Dockerfile to containerize a Svelte application.</h3>
-  <div class="qa__answer">
-    <pre><code># Dockerfile &mdash; SvelteKit (Node adapter) production image
+ANSWERS[75] = r'''<pre><code># Dockerfile &mdash; SvelteKit (Node adapter) production image
 # ---------- Stage 1: build ----------
 FROM node:20-alpine AS build
 WORKDIR /app
@@ -6479,15 +5929,9 @@ CMD ["node", "build/index.js"]
 </ul>
 <p><strong>build.sh:</strong> <code>docker buildx build --platform linux/amd64,linux/arm64 -t ghcr.io/acme/svelte-app:1.0.0 --push .</code></p>
 <p><strong>2026 polish:</strong> add <code>--mount=type=cache,target=/app/.svelte-kit</code> to cache the build output between runs in CI; pin Node to a digest for supply-chain hardening (<code>FROM node:20-alpine@sha256:&hellip;</code>); generate an SBOM with <code>syft</code> and sign with <code>cosign sign --yes</code>. For SSR-heavy apps consider <strong>distroless/nodejs20-debian12:nonroot</strong> for the runtime &mdash; ~50 MB and no shell, smaller attack surface.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q76">
-  <div class="qa__number">Question 76</div>
-  <h3 class="qa__question">Write a GitHub Action to deploy a Kotlin application to Google Cloud Run.</h3>
-  <div class="qa__answer">
-    <pre><code># .github/workflows/cloud-run-kotlin.yml
+ANSWERS[76] = r'''<pre><code># .github/workflows/cloud-run-kotlin.yml
 name: Deploy Kotlin to Cloud Run
 on:
   push: { branches: [main] }
@@ -6552,15 +5996,9 @@ jobs:
 <li><strong>Cloud Build trigger</strong> &mdash; let GCP build/push instead of GitHub runners (<code>gcloud builds submit</code>); useful if you don&rsquo;t want to ship images out of the GCP perimeter.</li>
 </ul>
 <p><strong>2026 ops notes:</strong> always use <strong>WIF</strong> over JSON keys (which are deprecated for new projects in many orgs). Pair with <strong>Cloud Run jobs</strong> for migrations and <strong>Cloud Run sidecars</strong> for OTel collectors. Use <code>--service-account</code> with least-privilege roles, not the default Compute SA. Set <code>min-instances=1</code> only on latency-sensitive endpoints &mdash; otherwise you&rsquo;re paying for idle.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q77">
-  <div class="qa__number">Question 77</div>
-  <h3 class="qa__question">Create a script to monitor and restart failed Kubernetes pods.</h3>
-  <div class="qa__answer">
-    <pre><code>#!/usr/bin/env bash
+ANSWERS[77] = r'''<pre><code>#!/usr/bin/env bash
 # pod-watchdog.sh &mdash; monitor &amp; restart unhealthy pods
 # Usage: pod-watchdog.sh &lt;namespace&gt; [restart_threshold] [age_minutes]
 # Example: pod-watchdog.sh prod 5 30
@@ -6638,15 +6076,9 @@ spec:
             envFrom: [{ secretRef: { name: slack-webhook } }]
 </code></pre>
 <p><strong>2026 advice:</strong> in most cases this is a smell &mdash; if pods CrashLoop, fix probes / OOM limits / config rather than reaping. Use it as a safety net, not a feature. Better tools: <strong>Karpenter consolidation</strong> for capacity issues, <strong>kured</strong> for node reboots, <strong>kube-monkey / chaos-mesh</strong> for chaos testing, and <strong>Kured / Robusta</strong> for proper alerting and self-healing playbooks. For Argo CD users, <strong>Argo Rollouts</strong> auto-rollbacks on metric regressions which is far better than blind pod-reaping.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q78">
-  <div class="qa__number">Question 78</div>
-  <h3 class="qa__question">Write a Jenkins pipeline to deploy an Elixir application to Heroku.</h3>
-  <div class="qa__answer">
-    <pre><code>// Jenkinsfile &mdash; Elixir/Phoenix to Heroku via container registry
+ANSWERS[78] = r'''<pre><code>// Jenkinsfile &mdash; Elixir/Phoenix to Heroku via container registry
 pipeline {
   agent { docker { image 'hexpm/elixir:1.17.3-erlang-27.1-alpine-3.20' } }
   options { timestamps(); timeout(time: 25, unit: 'MINUTES') }
@@ -6740,15 +6172,9 @@ CMD ["bin/acme_phoenix", "start"]
 </code></pre>
 <p><strong>Why these choices:</strong> Heroku&rsquo;s container registry is the cleanest path for Elixir &mdash; the buildpack works but is slow and fragile around OTP/asset pipelines. <code>mix release</code> produces a self-contained ERTS bundle. The post-deploy <code>heroku run</code> runs Ecto migrations safely after the new image is live (runs on a one-off dyno).</p>
 <p><strong>2026 advice:</strong> consider <strong>Fly.io</strong> as a near drop-in for Phoenix &mdash; it has first-class clustering support (libcluster + DNSCluster), better LiveView latency thanks to edge regions, and is generally cheaper than Heroku at scale. <code>fly deploy</code> replaces the entire registry/release dance. <strong>Render</strong> and <strong>Gigalixir</strong> are also strong Phoenix-friendly options.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q79">
-  <div class="qa__number">Question 79</div>
-  <h3 class="qa__question">Create a Kubernetes ResourceQuota YAML file to limit resource usage.</h3>
-  <div class="qa__answer">
-    <pre><code># quota-and-limits.yaml &mdash; namespace-scoped resource governance
+ANSWERS[79] = r'''<pre><code># quota-and-limits.yaml &mdash; namespace-scoped resource governance
 apiVersion: v1
 kind: ResourceQuota
 metadata:
@@ -6815,15 +6241,9 @@ kubectl describe resourcequota team-alpha-quota -n team-alpha   # shows used / h
 <li><code>CrossNamespacePodAffinity</code> &mdash; cap usage of cross-namespace topology constraints (1.24+).</li>
 </ul>
 <p><strong>2026 advice:</strong> pair ResourceQuota with <strong>VerticalPodAutoscaler</strong> (recommendation mode) so devs get suggested requests, and <strong>kube-resource-report / Goldilocks</strong> dashboards to spot under/over-provisioned namespaces. For multi-tenant cost allocation, <strong>OpenCost</strong> reads quota usage and produces per-team chargeback. If you&rsquo;re running shared GPU clusters, <strong>Kueue</strong> sits above ResourceQuota and gives proper queue-based fairness rather than first-come-first-serve.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q80">
-  <div class="qa__number">Question 80</div>
-  <h3 class="qa__question">Write a Docker Compose file to run a local instance of RabbitMQ.</h3>
-  <div class="qa__answer">
-    <pre><code># docker-compose.yml &mdash; RabbitMQ 4 with management UI, definitions, healthcheck
+ANSWERS[80] = r'''<pre><code># docker-compose.yml &mdash; RabbitMQ 4 with management UI, definitions, healthcheck
 services:
   rabbitmq:
     image: rabbitmq:4.0-management-alpine
@@ -6873,15 +6293,9 @@ disk_free_limit.relative = 1.5
 <p><strong>How it works:</strong> the <code>:management</code> tag pulls in the web UI on <code>:15672</code> (login admin / devpass) and exposes the HTTP API. The Prometheus plugin (built-in since 3.8) is enabled by adding the port. <code>definitions.json</code> auto-creates users, queues, exchanges and bindings on first boot &mdash; idempotent and version-controllable. Quorum queues replace classic mirrored queues (deprecated in 3.x, removed in 4.0).</p>
 <p><strong>Scaling locally:</strong> for a 3-node test cluster, copy the service three times with shared <code>RABBITMQ_ERLANG_COOKIE</code>, <code>cluster_formation.peer_discovery_backend = classic_config</code> and <code>cluster_formation.classic_config.nodes.1 = rabbit@rabbit-1</code> etc. Easier alternative: the <strong>Bitnami RabbitMQ Cluster Helm chart</strong>.</p>
 <p><strong>2026 advice:</strong> for greenfield event systems consider <strong>NATS JetStream</strong> (lighter, faster, simpler ops), <strong>Apache Kafka / Redpanda</strong> (log-based, replayable streams), or managed (<strong>CloudAMQP</strong> for hosted RabbitMQ, <strong>AWS MQ for RabbitMQ</strong>). RabbitMQ still shines for classic work-queue patterns with low latency and rich routing semantics &mdash; just use <strong>quorum queues</strong> and <strong>streams</strong> (the new log-style queue type), not the legacy classic/mirrored ones.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q81">
-  <div class="qa__number">Question 81</div>
-  <h3 class="qa__question">Create a GitHub Action workflow to deploy a C++ application to AWS EC2.</h3>
-  <div class="qa__answer">
-    <pre><code># .github/workflows/cpp-ec2.yml &mdash; build C++ binary &amp; deploy to AWS EC2
+ANSWERS[81] = r'''<pre><code># .github/workflows/cpp-ec2.yml &mdash; build C++ binary &amp; deploy to AWS EC2
 name: Deploy C++ to EC2
 on:
   push: { branches: [main] }
@@ -6979,15 +6393,9 @@ hooks:
 <li><strong>SSM RunCommand</strong> &mdash; if you don&rsquo;t need lifecycle hooks, push the binary and run a one-shot SSM document.</li>
 </ul>
 <p><strong>2026 advice:</strong> <strong>raw EC2 + CodeDeploy is becoming legacy</strong> &mdash; for new C++ services consider <strong>ECS Fargate</strong> (no AMI baking, no SSH, scale-to-zero), or <strong>Karpenter on EKS</strong> if you have a polyglot fleet. Keep CodeDeploy for stateful single-tenant workloads where AMI immutability matters. Add <strong>Cosign-signed artefacts</strong> + <strong>SLSA provenance</strong> to harden the supply chain.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q82">
-  <div class="qa__number">Question 82</div>
-  <h3 class="qa__question">Write a Kubernetes MutatingWebhookConfiguration YAML file to modify incoming requests.</h3>
-  <div class="qa__answer">
-    <pre><code># mutating-webhook.yaml &mdash; inject a sidecar &amp; default labels into pods
+ANSWERS[82] = r'''<pre><code># mutating-webhook.yaml &mdash; inject a sidecar &amp; default labels into pods
 apiVersion: admissionregistration.k8s.io/v1
 kind: MutatingWebhookConfiguration
 metadata:
@@ -7053,15 +6461,9 @@ func mutate(w http.ResponseWriter, r *http.Request) {
 <li><strong>Exclude kube-system</strong> &mdash; never mutate cluster-critical components (use <code>namespaceSelector.matchExpressions</code> with <code>NotIn</code>).</li>
 </ul>
 <p><strong>2026 alternatives:</strong> for most policy/mutation needs, prefer <strong>Kyverno</strong> or <strong>OPA Gatekeeper</strong> &mdash; they declare mutations in YAML/Rego, generate the webhook config for you, and ship with audit/dry-run, exemptions, and policy reports. Roll your own webhook only for highly custom logic (e.g.&nbsp;bespoke sidecar injection).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q83">
-  <div class="qa__number">Question 83</div>
-  <h3 class="qa__question">Create a Jenkinsfile to build and deploy a Rust application to AWS Lambda.</h3>
-  <div class="qa__answer">
-    <pre><code>// Jenkinsfile &mdash; Rust to AWS Lambda (zip + AWS SAM optional)
+ANSWERS[83] = r'''<pre><code>// Jenkinsfile &mdash; Rust to AWS Lambda (zip + AWS SAM optional)
 pipeline {
   agent any
   options { timestamps(); timeout(time: 20, unit: 'MINUTES') }
@@ -7148,15 +6550,9 @@ pipeline {
 <li><strong>Lambda Function URLs / API Gateway / ALB</strong> &mdash; pick the trigger; FunctionURLs are simplest for public HTTPS endpoints.</li>
 </ul>
 <p><strong>2026 polish:</strong> add <strong>X-Ray tracing</strong> + <strong>Lambda Powertools for Rust</strong> for structured logs/metrics, gate the alias flip behind <strong>CodeDeploy <em>LambdaCanary10Percent5Minutes</em></strong> for safe rollouts, and pin the runtime to a specific provided runtime version (e.g.&nbsp;<code>provided.al2023</code>). Sign artefacts with <strong>AWS Signer</strong> + verify in the function&rsquo;s code-signing config to harden supply chain.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q84">
-  <div class="qa__number">Question 84</div>
-  <h3 class="qa__question">Write a Dockerfile to containerize a Phoenix application.</h3>
-  <div class="qa__answer">
-    <pre><code># Dockerfile &mdash; Phoenix (Elixir 1.17 / OTP 27) production image
+ANSWERS[84] = r'''<pre><code># Dockerfile &mdash; Phoenix (Elixir 1.17 / OTP 27) production image
 ARG ELIXIR_VERSION=1.17.3
 ARG OTP_VERSION=27.1
 ARG ALPINE_VERSION=3.20
@@ -7224,15 +6620,9 @@ end
 <li><strong>OpenTelemetry</strong> via <code>opentelemetry_phoenix</code> + <code>opentelemetry_ecto</code>; ship to Honeycomb, Datadog, or any OTel collector.</li>
 <li><strong>Fly.io</strong> remains the easiest host for Phoenix &mdash; <code>fly launch</code> generates this Dockerfile and a <code>fly.toml</code> with healthchecks pre-configured.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q85">
-  <div class="qa__number">Question 85</div>
-  <h3 class="qa__question">Create a GitHub Action to run performance tests on a web application.</h3>
-  <div class="qa__answer">
-    <pre><code># .github/workflows/perf.yml &mdash; performance regression gate
+ANSWERS[85] = r'''<pre><code># .github/workflows/perf.yml &mdash; performance regression gate
 name: Performance Tests
 on:
   pull_request:
@@ -7329,15 +6719,9 @@ export default function () {
 <li><strong>WebPageTest API</strong> &mdash; richer real-device measurements than Lighthouse for frontend.</li>
 </ul>
 <p><strong>2026 advice:</strong> run perf tests <em>only on labelled PRs</em> (<code>if: contains(github.event.pull_request.labels.*.name, 'perf')</code>) &mdash; they&rsquo;re slow and noisy; gating every PR creates a culture of bypassing the check. Keep an always-on nightly run that posts to a dashboard (Grafana + Prometheus or k6 Cloud). Compare results in <em>relative</em> terms (% delta vs the parent commit baseline), not absolute numbers, because GitHub runner perf varies by ~20%.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q86">
-  <div class="qa__number">Question 86</div>
-  <h3 class="qa__question">Write a script to automate the setup of a Kubernetes cluster using kops.</h3>
-  <div class="qa__answer">
-    <pre><code>#!/usr/bin/env bash
+ANSWERS[86] = r'''<pre><code>#!/usr/bin/env bash
 # kops-bootstrap.sh &mdash; create a production-ready K8s cluster on AWS with kops
 # Usage: NAME=foo.k8s.local ZONES=us-east-1a,us-east-1b,us-east-1c ./kops-bootstrap.sh
 set -euo pipefail
@@ -7422,15 +6806,9 @@ echo "==&gt; Done. kubectl context: $(kubectl config current-context)"
 <li><strong>k3s / Talos Linux / kubeadm</strong> &mdash; for self-hosted needs. Talos in particular is popular for production self-managed clusters.</li>
 </ul>
 <p>Use kops only if you need self-managed control plane on AWS without going to CAPI, or are maintaining an existing kops fleet.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q87">
-  <div class="qa__number">Question 87</div>
-  <h3 class="qa__question">Create a Kubernetes VerticalPodAutoscaler YAML file to automatically adjust resource limits.</h3>
-  <div class="qa__answer">
-    <pre><code># vpa.yaml &mdash; right-size pod requests automatically
+ANSWERS[87] = r'''<pre><code># vpa.yaml &mdash; right-size pod requests automatically
 # Prereqs: install Vertical Pod Autoscaler operator (autoscaler/vertical-pod-autoscaler)
 apiVersion: autoscaling.k8s.io/v1
 kind: VerticalPodAutoscaler
@@ -7487,15 +6865,9 @@ spec:
 <li><strong>Karpenter</strong> &mdash; complementary; VPA right-sizes pods, Karpenter right-sizes nodes.</li>
 <li><strong>Datadog / Robusta KRR</strong> &mdash; historical, multi-week recommendation engines that often beat the in-cluster recommender.</li>
 </ul>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q88">
-  <div class="qa__number">Question 88</div>
-  <h3 class="qa__question">Write a GitHub Action workflow to deploy a Java application to Azure App Service.</h3>
-  <div class="qa__answer">
-    <pre><code># .github/workflows/azure-app-service-java.yml
+ANSWERS[88] = r'''<pre><code># .github/workflows/azure-app-service-java.yml
 name: Deploy Java to Azure App Service
 on:
   push: { branches: [main] }
@@ -7593,15 +6965,9 @@ jobs:
 <li><strong>AKS + ArgoCD</strong> &mdash; if you&rsquo;ve outgrown PaaS deployments.</li>
 </ul>
 <p><strong>2026 advice:</strong> always use <strong>OIDC</strong> for <code>azure/login</code> (no <code>creds:</code> with a JSON service principal). Pair slot swap with <strong>auto-swap rules</strong> only for low-risk apps; for anything stateful keep manual approval. <strong>App Service Premium V3</strong> SKUs give zone-redundancy on by default in 2026 &mdash; flip it on if you weren&rsquo;t already getting it.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q89">
-  <div class="qa__number">Question 89</div>
-  <h3 class="qa__question">Create a Jenkins pipeline to deploy a Node.js application to IBM Cloud.</h3>
-  <div class="qa__answer">
-    <pre><code>// Jenkinsfile &mdash; Node.js to IBM Cloud Code Engine (container) with Cloud Foundry fallback
+ANSWERS[89] = r'''<pre><code>// Jenkinsfile &mdash; Node.js to IBM Cloud Code Engine (container) with Cloud Foundry fallback
 pipeline {
   agent any
   options { timestamps(); timeout(time: 25, unit: 'MINUTES') }
@@ -7698,15 +7064,9 @@ ibmcloud cf push acme-node-app -m 256M -i 2 -b nodejs_buildpack
 <li><strong>Function</strong> &mdash; if it&rsquo;s a single HTTP handler, <code>ibmcloud ce fn create</code> instead of an app (Knative Functions).</li>
 </ul>
 <p><strong>2026 advice:</strong> use <strong>IBM Cloud OIDC + service-id API keys</strong> stored in Jenkins credentials &mdash; rotate via Vault. For multi-cloud orgs, consider <strong>Code Engine + Backstage</strong> for self-service developer experience.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q90">
-  <div class="qa__number">Question 90</div>
-  <h3 class="qa__question">Write a Kubernetes PodSecurityPolicy YAML file to enforce security policies.</h3>
-  <div class="qa__answer">
-    <pre><code># NOTE: PodSecurityPolicy was REMOVED in Kubernetes 1.25 (April 2022).
+ANSWERS[90] = r'''<pre><code># NOTE: PodSecurityPolicy was REMOVED in Kubernetes 1.25 (April 2022).
 # This answer shows the modern replacement: Pod Security Admission + a
 # concrete Kyverno policy that gives equivalent fine-grained control.
 
@@ -7795,15 +7155,9 @@ spec:
 <li><strong>Validating Admission Policy (CEL)</strong> &mdash; native, no operator needed (1.30+ GA). Good for simple invariants.</li>
 </ul>
 <p>Pair with <strong>Falco</strong> for runtime detection of policy bypasses (kernel-syscall level), <strong>Trivy/Cosign</strong> for image-supply-chain hardening.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q91">
-  <div class="qa__number">Question 91</div>
-  <h3 class="qa__question">Create a Docker Compose file to run a local instance of Elasticsearch.</h3>
-  <div class="qa__answer">
-    <pre><code># docker-compose.yml &mdash; Elasticsearch 8 single-node + Kibana, secured
+ANSWERS[91] = r'''<pre><code># docker-compose.yml &mdash; Elasticsearch 8 single-node + Kibana, secured
 services:
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.15.3
@@ -7866,15 +7220,9 @@ open http://localhost:5601                          # login: elastic / changeme
 <li><strong>TLS</strong> &mdash; generate certs with <code>elasticsearch-certutil</code>, mount under <code>/usr/share/elasticsearch/config/certs</code>, enable <code>xpack.security.http.ssl.*</code>.</li>
 </ul>
 <p><strong>2026 alternatives:</strong> <strong>OpenSearch</strong> (Apache 2.0 fork) is now the default in many shops &mdash; same Compose recipe, image is <code>opensearchproject/opensearch:2.x</code>. For new search workloads, look at <strong>Meilisearch</strong> (typo-tolerant, instant), <strong>Typesense</strong> (light, fast), or <strong>Vespa</strong> for vector + lexical hybrid search at scale. Use Compose ES only for local dev / integration tests; production should be <strong>Elastic Cloud</strong>, <strong>OpenSearch Service</strong>, or a managed Elasticsearch operator (ECK on K8s).</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q92">
-  <div class="qa__number">Question 92</div>
-  <h3 class="qa__question">Write a GitHub Action to deploy a Dart application to Google Cloud Run.</h3>
-  <div class="qa__answer">
-    <pre><code># .github/workflows/dart-cloud-run.yml
+ANSWERS[92] = r'''<pre><code># .github/workflows/dart-cloud-run.yml
 # Build a Dart server (or a Flutter web release) and ship to Cloud Run.
 name: Deploy Dart to Cloud Run
 on:
@@ -7974,15 +7322,9 @@ void main() async {
 <li><strong>Distroless static</strong> base &mdash; if you statically link, drop to <code>gcr.io/distroless/static-debian12:nonroot</code> for ~10 MB.</li>
 </ul>
 <p><strong>2026 polish:</strong> always use <strong>Workload Identity Federation</strong> (the OIDC step) instead of long-lived JSON keys. Add <strong>Cloud Trace</strong> via <code>package:opentelemetry</code>, and gate prod deploys behind a GitHub Environment with required reviewers. For Flutter mobile, separate workflow &mdash; <code>fastlane</code> + Apple/Play store credentials are still the cleanest path.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q93">
-  <div class="qa__number">Question 93</div>
-  <h3 class="qa__question">Create a Jenkinsfile to build and deploy a Swift application to AWS Lambda.</h3>
-  <div class="qa__answer">
-    <pre><code>// Jenkinsfile &mdash; Swift on Linux to AWS Lambda (custom runtime)
+ANSWERS[93] = r'''<pre><code>// Jenkinsfile &mdash; Swift on Linux to AWS Lambda (custom runtime)
 pipeline {
   agent { label 'linux' }
   options { timestamps(); timeout(time: 30, unit: 'MINUTES') }
@@ -8084,15 +7426,9 @@ struct AcmeLambda: SimpleLambdaHandler {
 <li><strong>SAM</strong> &mdash; <code>sam build --beta-features --use-container</code> handles the Linux build automatically.</li>
 </ul>
 <p><strong>2026 advice:</strong> Swift on Lambda has matured but the ecosystem is still small. Use it when the rest of the org runs Swift (Apple-platform apps with shared models). For <strong>API Gateway + Lambda</strong>, prefer Lambda Function URLs unless you need API Gateway features (auth, throttling, custom domains via API Gateway). Cold starts hover at ~200&ndash;400 ms even with <code>--static-swift-stdlib</code>; provisioned concurrency or SnapStart-equivalent (not yet on Swift) is the only way to flatten that.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q94">
-  <div class="qa__number">Question 94</div>
-  <h3 class="qa__question">Write a Kubernetes HorizontalPodAutoscaler YAML file to scale pods based on CPU usage.</h3>
-  <div class="qa__answer">
-    <pre><code># hpa-cpu.yaml &mdash; classic CPU-based horizontal autoscaling
+ANSWERS[94] = r'''<pre><code># hpa-cpu.yaml &mdash; classic CPU-based horizontal autoscaling
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
@@ -8158,15 +7494,9 @@ kubectl top pods -n prod -l app=api    # confirms metrics-server installed
 <li><strong>KEDA</strong> &mdash; event-driven autoscaling (Kafka lag, SQS depth, cron, &gt; 70 sources). Generates a managed HPA underneath. Use for event-driven workloads.</li>
 </ul>
 <p><strong>2026 advice:</strong> CPU-based HPA is the right starter, but most production teams move to <strong>RPS-per-pod</strong> or <strong>queue-depth</strong> autoscaling once they outgrow it &mdash; CPU correlates poorly with real demand for I/O-bound services. Pair HPA with <strong>VPA off-mode</strong> (recommendations) so you continuously right-size requests, and <strong>Karpenter</strong> at the node level so HPA-driven new pods don&rsquo;t pend waiting for capacity.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q95">
-  <div class="qa__number">Question 95</div>
-  <h3 class="qa__question">Create a Dockerfile to containerize an ASP.NET Core application.</h3>
-  <div class="qa__answer">
-    <pre><code># Dockerfile &mdash; ASP.NET Core 9 production image
+ANSWERS[95] = r'''<pre><code># Dockerfile &mdash; ASP.NET Core 9 production image
 # ------- Stage 1: build -------
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
@@ -8236,15 +7566,9 @@ app.Run();
 <li><strong>Trimmed deployment</strong> &mdash; <code>PublishTrimmed=true</code> drops unused IL; combine with AOT.</li>
 </ul>
 <p><strong>2026 polish:</strong> sign with <code>cosign sign --yes</code>, attach an SBOM (<code>syft</code>), enable <strong>OpenTelemetry .NET</strong> (<code>OpenTelemetry.Extensions.Hosting</code>), and use <strong>YARP</strong> if you need a reverse-proxy front end. For deployment platforms, <strong>Azure Container Apps</strong>, <strong>AWS App Runner</strong>, and <strong>Cloud Run</strong> are all great fits for ASP.NET Core containers &mdash; serverless container UX with managed scaling.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q96">
-  <div class="qa__number">Question 96</div>
-  <h3 class="qa__question">Write a GitHub Action workflow to deploy a C# application to Heroku.</h3>
-  <div class="qa__answer">
-    <pre><code># .github/workflows/heroku-csharp.yml &mdash; ship a C#/ASP.NET Core app to Heroku
+ANSWERS[96] = r'''<pre><code># .github/workflows/heroku-csharp.yml &mdash; ship a C#/ASP.NET Core app to Heroku
 name: Deploy C# to Heroku
 on:
   push: { branches: [main] }
@@ -8335,15 +7659,9 @@ jobs:
 <li><strong>Railway</strong> &mdash; simplest UX of all of these; per-second pricing.</li>
 </ul>
 <p>If you&rsquo;re only on Heroku because of inertia, container deploys make migration trivial &mdash; the same image runs unchanged on any of the platforms above.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q97">
-  <div class="qa__number">Question 97</div>
-  <h3 class="qa__question">Create a script to automate the scaling of a Kubernetes cluster using Cluster Autoscaler.</h3>
-  <div class="qa__answer">
-    <pre><code>#!/usr/bin/env bash
+ANSWERS[97] = r'''<pre><code>#!/usr/bin/env bash
 # cluster-autoscaler-bootstrap.sh &mdash; install + configure CA on EKS
 # (For non-EKS clusters: section at the bottom shows the canonical Kubernetes Autoscaler manifests.)
 set -euo pipefail
@@ -8422,15 +7740,9 @@ echo "    kubectl delete deploy ca-test"
 <li><strong>Pod priority + safe-to-evict annotation</strong> (<code>cluster-autoscaler.kubernetes.io/safe-to-evict</code>) controls which pods block scale-down.</li>
 </ul>
 <p><strong>2026 advice:</strong> <strong>Karpenter is the modern replacement on AWS</strong> &mdash; it doesn&rsquo;t use ASGs, picks instance types per workload (instead of pre-shaped node groups), reacts in seconds rather than minutes, and consolidates aggressively. CA is still the right answer on GKE/AKS where Karpenter equivalents are less mature, or for clusters with regulatory constraints requiring fixed instance types per ASG. On Azure, look at <strong>Karpenter Azure provider</strong> (now GA) and <strong>NAP</strong> (Node Auto Provisioning) for a similar model.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q98">
-  <div class="qa__number">Question 98</div>
-  <h3 class="qa__question">Write a Jenkins pipeline to deploy a Perl application to Google Cloud Functions.</h3>
-  <div class="qa__answer">
-    <pre><code>// Jenkinsfile &mdash; Perl app to Google Cloud Functions (2nd gen, Cloud Run-backed)
+ANSWERS[98] = r'''<pre><code>// Jenkinsfile &mdash; Perl app to Google Cloud Functions (2nd gen, Cloud Run-backed)
 // Cloud Functions doesn&rsquo;t have a native Perl runtime, so we use a custom container.
 pipeline {
   agent any
@@ -8563,15 +7875,9 @@ builder { enable 'AccessLog'; $app; };
 <li><strong>App Engine flexible</strong> &mdash; supports custom runtimes too, slightly different scaling model.</li>
 </ul>
 <p><strong>2026 advice:</strong> use <strong>Workload Identity Federation</strong> instead of a downloaded SA key file (<code>--key-file</code> is officially deprecated). Pin Perl to a specific Docker digest for reproducibility, sign with <code>cosign</code>, and add <strong>Cloud Trace</strong> via OpenTelemetry. Honestly: in 2026, fresh greenfield work on Perl + Cloud Functions is rare &mdash; you&rsquo;re usually keeping a legacy CGI/Catalyst/Mojolicious app alive. If that&rsquo;s the case, Cloud Run gives you a cheap, scale-to-zero home for it without a rewrite.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q99">
-  <div class="qa__number">Question 99</div>
-  <h3 class="qa__question">Create a Kubernetes PodDisruptionBudget YAML file to ensure application availability.</h3>
-  <div class="qa__answer">
-    <pre><code># pdb.yaml &mdash; protect critical workloads from voluntary disruptions
+ANSWERS[99] = r'''<pre><code># pdb.yaml &mdash; protect critical workloads from voluntary disruptions
 # (PDBs only constrain VOLUNTARY evictions: drains, autoscaler scale-down, deployment
 #  rolling updates that go through the eviction API. A node crash bypasses PDB.)
 
@@ -8656,15 +7962,9 @@ kubectl describe pdb api-pdb -n prod
 <li><strong>Singletons</strong>: don&rsquo;t set a PDB at all (anything tighter than the existing replica count blocks drains).</li>
 </ul>
 <p><strong>2026 polish:</strong> pair PDBs with <strong>PriorityClasses</strong> so high-priority pods preempt without breaching the budget; use <strong>Karpenter consolidation</strong> which natively respects PDBs; alert on <code>kube_poddisruptionbudget_status_current_healthy &lt; kube_poddisruptionbudget_status_desired_healthy</code> in Prometheus &mdash; this is your early signal that drains are stalling.</p>
+'''
 
-    
-  </div>
-</article>
-<article class="qa" id="q100">
-  <div class="qa__number">Question 100</div>
-  <h3 class="qa__question">Write a Docker Compose file to run a local instance of MySQL.</h3>
-  <div class="qa__answer">
-    <pre><code># docker-compose.yml &mdash; MySQL 8.4 LTS for local dev with persistence + admin UI
+ANSWERS[100] = r'''<pre><code># docker-compose.yml &mdash; MySQL 8.4 LTS for local dev with persistence + admin UI
 services:
   mysql:
     image: mysql:8.4
@@ -8733,27 +8033,4 @@ docker compose exec mysql mysql -uapp -papppass app -e "SELECT VERSION();"
 <li><strong>Testcontainers</strong> &mdash; <code>MySQLContainer("mysql:8.4")</code> per integration test for true isolation.</li>
 </ul>
 <p><strong>2026 advice:</strong> for production you almost certainly want <strong>RDS / Aurora MySQL / Cloud SQL / Azure Database for MySQL / PlanetScale</strong> &mdash; managed backups, point-in-time recovery, automated minor upgrades, parameter groups, and (for Aurora/PlanetScale) horizontal scale. Compose MySQL is for local dev and integration tests <em>only</em>; never run it for production. For local dev with a strict perf parity to RDS, pin the same engine version (<code>8.4.x</code>) and copy parameter group settings into <code>./db/conf.d/my.cnf</code>.</p>
-
-    
-  </div>
-</article>
-
-    <nav class="chapter-nav" aria-label="Chapter navigation">
-      <a class="chapter-nav__prev" href="cicd-pipeline-basic.html">
-      <span class="chapter-nav__dir">← Previous</span>
-      <span class="chapter-nav__title">CI/CD Pipeline — Basic</span>
-    </a>
-      <a class="chapter-nav__next" href="cicd-pipeline-advanced.html">
-      <span class="chapter-nav__dir">Next →</span>
-      <span class="chapter-nav__title">CI/CD Pipeline — Advanced</span>
-    </a>
-    </nav>
-
-  </section>
-
-</main>
-</div>
-
-<script src="../assets/script.js"></script>
-</body>
-</html>
+'''

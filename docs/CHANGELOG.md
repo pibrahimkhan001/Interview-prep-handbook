@@ -4,6 +4,59 @@ Session-by-session record of what was done. Latest entries at the top.
 
 Format: `## YYYY-MM-DD — Session title`
 
+## 2026-05-03 — CI/CD Pipeline Advanced Q1-100 (Phase 6 89%, 48 detailed chapters, 4804/4904)
+
+**What shipped:** all 100 CI/CD Pipeline Advanced answers in `content/cicd_pipeline_advanced.py`. Advanced-style: 100-180 words mechanism-focused prose, internals/trade-off tables, 2026-current libraries, ~2,000-3,500 chars per answer. Average 2,513 chars, range 1,672&ndash;3,847.
+
+**Topic coverage (100 questions):**
+
+- Q1-15: blue/green on K8s (Argo Rollouts), canary in Jenkins, GH Actions for IaC (OIDC/OpenTofu), Docker security in CI/CD (Cosign+SLSA+Falco), IaC fundamentals, Jenkins Shared Libraries, microservice CI/CD per-repo (Argo CD ApplicationSets), GitOps pull vs push, multi-stage Docker (BuildKit), GH Actions secrets scopes (OIDC), K8s DR (etcd/Velero), Multibranch Pipelines, HashiCorp Vault (JWT/OIDC dynamic backends), Docker build optimisation (Depot), CRDs.
+- Q16-30: monorepo CI/CD (Nx affected), Jenkins+Slack/Jira, rolling updates (preStop), dynamic Jenkins agents on K8s, continuous security in GH Actions (CodeQL/Trivy), Docker dep management, Helm vs Kustomize/Timoni/ytt, Tekton (Tekton Chains), Jenkins+EKS (IRSA, helm --atomic), Prometheus/Thanos/Mimir/VictoriaMetrics, GH Actions parallel tests (matrix sharding), Docker image versioning (digest pinning), serverless CI/CD (SAM/CDK preview envs), K8s Operators (kubebuilder/OLM), Jenkins X (now niche).
+- Q31-45: GH Actions+GKE (WIF, Cloud Deploy), Docker security defence-in-depth, Pipeline DSL (Declarative+Scripted+matrix), automated rollback (Argo Rollouts/helm --atomic), build+deploy containers (provenance/SBOM), Kustomize (resources/patches), container startup optimisation (CRaC, GraalVM, SOCI), Argo CD (Application/AppSet/AppProject + Kargo), E2E in Jenkins (vCluster/Playwright), multi-cloud (active/active, Crossplane), DB migrations (Atlas+expand/contract), HPA (behavior block, KEDA), zero-downtime deploys, Fluentd/Fluent Bit (Loki/OTEL), GH Actions external triggers (Argo Events).
+- Q46-60: multi-tenant K8s (RBAC+NetworkPolicy+ResourceQuota+Capsule/vCluster), JCasC (jenkins.yaml+Vault), image scanning (Trivy/Cosign/SLSA L3/Kyverno), NetworkPolicies (Cilium L7+FQDN egress, Hubble), AKS+GH Actions (OIDC, Karpenter Azure GA), multi-stage Jenkins, K8s DaemonSets, hybrid cloud GH Actions, Docker resource optimisation, Spinnaker for CD, Jenkins secrets+env, K8s RBAC, GitOps Argo CD+GH Actions, Jenkins-to-K8s deploys, multi-cloud GH Actions.
+- Q61-75: Linkerd service mesh (vs Istio/Cilium), automated canary in K8s, GH Actions Lambda, complex dep graphs (Jenkins), Istio (ambient mode), legacy app modernisation (sidecar/strangler), CI/CD speed/efficiency tuning, Blue Ocean (deprecated), continuous testing (k6/Playwright/Pact), K8s cluster upgrades (Karpenter drift), distributed tracing (OpenTelemetry+Tempo/Jaeger), Shared Libraries reuse, real-time apps (WebSockets+sticky sessions+Centrifugo), ML model deploys (KServe/Seldon), Rancher.
+- Q76-90: Jenkins hardening (CIS, JCasC), Admission Controllers (Kyverno/Gatekeeper/PSA), multi-environment deploys (Kargo), GH Actions for mobile (Fastlane+Xcode Cloud), IoT CI/CD (KubeEdge/Akri), pod scheduling optimisation (topology spread, Karpenter), Multibranch Pipelines, data-intensive apps (Strimzi/CloudNativePG, Atlas), GH Actions on-prem CD (ARC, Tailscale), Lambda+Jenkins (Powertools/X-Ray), blockchain CI/CD (Foundry, Slither, formal verification), large-scale K8s (ApplicationSets+Karmada+Kargo), JCasC, edge CI/CD (K3s/Talos/SOCI), Fargate deploys (OIDC+CodeDeploy).
+- Q91-100: etcd internals+ops (Raft/snapshot/defrag), Jenkins X status (largely superseded), AI/ML pipelines (KServe/vLLM/feast/drift detection), ingress optimisation (HTTP/3/Cilium Gateway/Envoy), automated code review (super-linter+CodeQL+Semgrep+Claude Code Action), OpenShift (Routes/S2I/OLM/SCC), event-driven (KEDA+CloudEvents+Temporal+Pact), Jenkins DSL deep dive (vars/src/resources+Spock tests), autoscaling (Karpenter+KEDA+ARC), Compose deploy (and why convert to K8s/ECS/Container Apps).
+
+**2026 ecosystem references throughout:** Argo CD/Flux + ApplicationSets, Argo Rollouts/Flagger, Karpenter (now GA on AWS+Azure+GCP), Cilium eBPF (L7 + Gateway API), OpenTelemetry Collector, Crossplane, Kargo, vCluster, KEDA, OpenTofu, Atlas (Ariga) for schema migrations, Chainguard distroless, Cosign keyless+SLSA Level 3, Trivy/Grype, Kyverno+PSA replacing PSP, Sigstore Rekor, Workload Identity Federation, GraalVM native-image, JVM CRaC, SOCI image streaming, in-place pod resize 1.33, Talos/CAPI as kops/kubeadm alternatives, Hyperledger Fabric Operator, lakeFS/Nessie, KServe/vLLM/TGI/TensorRT-LLM.
+
+**Honest 2026 advice callouts** wherever managed alternatives have eclipsed self-rolled solutions: Cluster Autoscaler &rarr; Karpenter, Jenkins X &rarr; plain Tekton+Argo CD, Blue Ocean &rarr; deprecated, Compose-in-prod &rarr; ECS/Container Apps/K8s, kubeadm &rarr; Talos/CAPI, PSP &rarr; PSA+Kyverno.
+
+**Auto-fix script** ran zero times for Q81-100 (no Groovy/YAML triple-quote conflicts in this batch); all earlier batches still verified clean.
+
+**Build:** 49 chapter pages, 48 detailed (only `cicd-pipeline-scenario.html` remains a stub). `cicd-pipeline-advanced.html` is 303 KB. Index regenerated.
+
+**Numbers:** 4,804 / 4,904 questions answered (~98%). Phase 6 progress: 800 / 900 (89%). One CI/CD topic remains (Scenario Based, 100 questions).
+
+**Next session:** CI/CD Pipeline Scenario Based (100 Q) &mdash; the final topic. Scenario style: Situation &rarr; Approach &rarr; Trade-offs structure with explicit `<strong>` labels and `<strong>Production polish:</strong>` closer, ~4,500-5,500 chars per answer.
+
+## 2026-05-03 — CI/CD Pipeline Coding Q1-100 (Phase 6 78%, 47 detailed chapters, 4704/4904)
+
+**What shipped:** all 100 CI/CD Pipeline Coding answers in `content/cicd_pipeline_coding.py`. Coding-style: code-first, working YAML / Dockerfile / Jenkinsfile / shell script, brief explanation of why each piece matters, variants section listing 2026-current alternatives, and operational/performance notes. Average answer ~3,671 chars, range 2,052&ndash;5,793.
+
+**Topic coverage (100 questions across 10-question batches):**
+
+- Q1-10: Java Maven GH Action, Node Dockerfile, Jenkins Python AWS, K8s Deployment, AWS S3 GH Action, Java Jenkins-K8s, Spring Boot Dockerfile, Lambda GH Action, Heroku Jenkins Node, K8s Service.
+- Q11-20: Compose Postgres, Azure GH Action Python, .NET Jenkins-Azure-Web, K8s ConfigMap, Compose React+Node, GH Action Vue+Firebase, Heroku Jenkins Ruby, K8s Secret, Compose MongoDB, GH Action Go+GCP.
+- Q21-30: Spring Boot Jenkins Pipeline, Compose 3-tier (Nginx+Node+Mongo), GH Action Lambda Python, K8s Ingress, GH Action React+Netlify, Heroku Jenkins Rails, MariaDB Compose, Java GAE GH Action, K8s Volumes, Vue Dockerfile.
+- Q31-45: GH Action Node+S3, Jenkins Spring-Tomcat, GH Action Spring-Heroku, K8s NetworkPolicy, GH Action Lambda+Cloud Run, Compose Redis, GH Action Python+EBS, K8s StatefulSet, Compose Multi-DB (MySQL+PG), Jenkins .NET-IIS, GH Action React+Vercel, K8s DaemonSet, Compose CI/CD stack, Compose ELK, Compose Kafka.
+- Q46-55: GH Action Lambda Container, K8s CronJob, Jenkins .NET-Cloud Run, Compose ASP.NET, GH Action Multi-cloud, K8s ReplicaSet, Compose Microservices, GH Action Spring-Kubernetes, Jenkins WordPress-Heroku, Compose Drupal.
+- Q56-70: Rust GH Action, K8s scale automation, .NET-Beanstalk, ServiceAccount+RoleBinding, K8s one-time Job, MongoDB Compose, Ruby-Heroku, PodPreset (deprecated &rarr; PSA + mutating webhook), Scala-GAE, Next.js Dockerfile, SAST GH Action, Docker cleanup script, K8s CustomResource, Go-Azure Functions, React Native-stores.
+- Q71-85: Redis 7.4 Compose, TS-AWS Amplify (OIDC), Haskell Jenkinsfile, K8s PriorityClass, Svelte Dockerfile, Kotlin-Cloud Run (WIF), Pod watchdog script (CronJob), Elixir/Phoenix-Heroku container, ResourceQuota+LimitRange+scopeSelector, RabbitMQ 4 Compose (quorum queues), C++-EC2 via CodeDeploy, MutatingWebhookConfiguration (Go handler+JSON Patch), Rust-Lambda (cargo-lambda+arm64+alias live), Phoenix Dockerfile (Elixir 1.17/OTP 27), GH Action perf tests (k6+Lighthouse CI).
+- Q86-100: kops bootstrap (with "EKS+Karpenter is better in 2026" callout), VPA (Auto/Off/Initial/Recreate), Java-Azure App Service (3-job staging+swap), Node-IBM Cloud Code Engine, PSP (REMOVED &rarr; PSA+Kyverno ClusterPolicy replacement), Elasticsearch 8.15 Compose (security enabled+kibana_system reset), Dart-Cloud Run (AOT compile), Swift-Lambda (custom runtime+static stdlib), HPA on CPU (averageUtilization+behavior block+KEDA mention), ASP.NET Core 9 Dockerfile (chiseled-extra distroless), C#-Heroku (with Render/Fly/Railway alternatives), Cluster Autoscaler bootstrap (eksctl+IRSA+Karpenter recommendation), Perl-Cloud Functions gen2 (Plack/Starman+custom container), PodDisruptionBudget (minAvailable+maxUnavailable+unhealthyPodEvictionPolicy 1.27+), MySQL 8.4 LTS Compose (utf8mb4_0900_ai_ci+slow log+Adminer).
+
+**2026 ecosystem references throughout:** Karpenter (now GA on Azure), chiseled .NET 9, MySQL 8.4 LTS, Elasticsearch 8.15, RabbitMQ 4 quorum queues, Kotlin bootBuildImage, Lambda <code>provided.al2023</code>, K8s in-place pod resize 1.33, Cilium eBPF, MutatingWebhook with cert-manager, PSA+Kyverno (replacing PSP), WIF over JSON keys, Cosign+Sigstore+SLSA+SBOM, k6 thresholds + Lighthouse CI, Talos/CAPI as kops/kubeadm alternatives.
+
+**Honest 2026 advice callouts** wherever managed alternatives have eclipsed self-rolled solutions: Heroku &rarr; Render/Fly/Railway, kubeadm/kops &rarr; managed EKS+Karpenter / Talos / CAPI, raw PSP &rarr; PSA+Kyverno, raw Cluster Autoscaler &rarr; Karpenter, Compose StatefulSet DBs &rarr; RDS/Aurora/Atlas/PlanetScale.
+
+**Auto-fix script** for Groovy/YAML triple-quote conflicts in Python r-strings ran 30 times across the four batches (11 + 11 + 6 + 13 sh/yaml blocks fixed); pattern documented in PROJECT_STATE.md.
+
+**Build:** 49 chapter pages, 47 detailed (CI/CD Pipeline Advanced and Scenario Based remain stubs). `cicd-pipeline-coding.html` is 419 KB (largest chapter so far &mdash; configs are dense). Index regenerated.
+
+**Numbers:** 4,704 / 4,904 questions answered (~96%). Phase 6 progress: 700 / 900 (78%). Two CI/CD topics remain (Advanced + Scenario Based, 200 questions).
+
+**Next session:** CI/CD Pipeline Advanced (100 Q). Advanced style: 100-180 words mechanism-focused prose, internals/trade-off tables, 2026-current libraries, ~2,000-3,500 chars per answer.
+
 ## 2026-05-02 — CI/CD Pipeline Basic Q1-100 (Phase 6 67%, 46 detailed chapters, 4604/4904)
 
 **Changes:**

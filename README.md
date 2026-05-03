@@ -17,7 +17,7 @@ No build step, no server, no internet required — it's a fully static site.
 
 ## Progress
 
-**4,604 / 4,904 detailed answers** (~94%) across **46 of 49 chapters**.
+**4,804 / 4,904 detailed answers** (~98%) across **48 of 49 chapters**.
 
 | Part | Topic | Status |
 | --- | --- | --- |
@@ -33,7 +33,7 @@ No build step, no server, no internet required — it's a fully static site.
 | 5 | **MongoDB** (4 levels, 400 Q) | ✅ Complete |
 | 6 | **System Design MERN** (3 levels, 300 Q) | ✅ Complete |
 | 6 | **Infrastructure MERN** (2 levels, 200 Q) | ✅ Complete |
-| 6 | CI/CD Pipeline (4 levels, 400 Q) | 🔄 1/4 levels (Basic ✅) |
+| 6 | CI/CD Pipeline (4 levels, 400 Q) | 🔄 3/4 levels (Basic ✅, Coding ✅, Advanced ✅) |
 
 Stub chapters show every question with a "detailed answer coming soon" message, but the question list itself is complete and usable as a study checklist.
 
@@ -79,6 +79,8 @@ interview-prep-handbook/
 │   ├── infrastructure_mern_basic.py    (1 file, 100 answers)
 │   ├── infrastructure_mern_advanced.py (1 file, 100 answers)
 │   └── cicd_pipeline_basic.py          (1 file, 100 answers)
+│   └── cicd_pipeline_coding.py         (1 file, 100 answers)
+│   └── cicd_pipeline_advanced.py       (1 file, 100 answers)
 ├── data/
 │   └── questions.json          ← all 4,904 parsed questions
 ├── docs/                       ← project documentation
