@@ -4,6 +4,45 @@ Session-by-session record of what was done. Latest entries at the top.
 
 Format: `## YYYY-MM-DD — Session title`
 
+## 2026-05-13 — CI/CD Pipeline Scenario Based Q91-100 (🎉 PROJECT 100% COMPLETE: 49/49 chapters, 4904/4904 answers, all 6 phases done)
+
+**Milestone:** Final 10 scenario-based answers shipped, taking the project to **100% completion**. Every chapter is now fully detailed.
+
+**What shipped today (Q91-100):**
+
+- **Q91:** C# / ASP.NET Core 9 on Heroku &mdash; xUnit + Testcontainers, chiseled distroless, Heroku Container Registry, Pipeline Promotion, Review Apps, with the 2026 caveat that Render/Fly/Railway are the natural migration path.
+- **Q92:** Dart CI with dependency caching &mdash; pub-cache + .dart_tool caching keyed on pubspec.lock, melos for monorepos, Flutter integration_test on Firebase Test Lab, OSV-Scanner.
+- **Q93:** Docker container security in Jenkins &mdash; shared library wrapping hadolint, BuildKit provenance/SBOM, Trivy+Grype, Cosign keyless, SPDX attestation, Kyverno+Falco+Tetragon on cluster.
+- **Q94:** Kubernetes compliance checks &mdash; kube-linter, Kyverno CLI, Checkov (CIS/PCI/NIST), kubescape NSA+MITRE framework, SARIF to Code Scanning, Trivy Operator+kube-bench continuous compliance, gitsign for SOC 2 audit trails.
+- **Q95:** Swift on AWS Lambda &mdash; swift:5.10-jammy container build, provided.al2023 custom runtime, arm64 Graviton, -static-stdlib, SAM Canary10Percent5Minutes auto-rollback, X-Ray tracing.
+- **Q96:** Real-time app rollbacks in K8s/Jenkins &mdash; Argo Rollouts with WebSocket-aware AnalysisTemplate (ws_messages_failed_total / ws_messages_total), Jenkins as orchestrator (not decision-maker), Chaos Mesh validation of rollback path.
+- **Q97:** Go API + Netlify frontend &mdash; parallel two-track pipeline, go-chi/fiber backend to Fly.io, Vite/pnpm frontend to Netlify Deploy Previews, k6 post-deploy smoke, govulncheck, contract testing with Pact/Schemathesis.
+- **Q98:** ML models to GKE via GH Actions &mdash; MLflow/Vertex AI registry, WIF auth, evaluation gate, KServe InferenceService with canary, Karpenter GPU NodePool, Evidently AI drift detection, vLLM for LLMs, Cosign-signed model artefacts for EU AI Act.
+- **Q99:** Multi-tenant SaaS on K8s &mdash; namespace-per-tenant vs vCluster vs cluster-per-tenant trade-off table, ApplicationSets with git directory generator, per-tenant ResourceQuota/LimitRange/NetworkPolicy/PSA, Capsule for self-service tenant onboarding, OpenCost for per-tenant COGS, Cilium L7 + Hubble.
+- **Q100:** Code quality + security for ML/AI &mdash; Ruff+mypy, Great Expectations data validation, CodeQL+Semgrep with p/ml-security, OSV-Scanner for PyTorch/transformers, picklescan for malicious serialised models, GPU-backed eval with fairness checks, Promptfoo prompt regression, model cards + dataset SBOMs for EU AI Act compliance.
+
+**Style consistency:** every answer follows Situation &rarr; Approach &rarr; code block &rarr; Trade-offs table &rarr; Production polish. Average 4,321 chars across all 100, range 3,413&ndash;5,247.
+
+**Build:** all 49 chapter pages now fully detailed. `cicd-pipeline-scenario.html` is 492 KB (largest chapter so far). Final stub eliminated.
+
+**Final tally:**
+
+| Phase | Topics | Q&A | Status |
+| --- | --- | --- | --- |
+| 1 | JavaScript (7 levels) | 700 | ✅ |
+| 2 | Python (4 levels) | 400 | ✅ |
+| 3 | Node.js + ExpressJS | 700 | ✅ |
+| 4 | API + HTML + CSS + ReactJS | 1,705 | ✅ |
+| 5 | MySQL + MongoDB | 800 | ✅ |
+| 6 | System Design MERN + Infrastructure MERN + CI/CD Pipeline | 900 | ✅ |
+| **Total** | **13 topics, 49 chapters** | **4,904** | **100% ✅** |
+
+**2026 ecosystem touchstones woven throughout this final session:** Chainguard distroless, BuildKit provenance + SBOM attestation, Cosign keyless signing, SLSA Level 3, Kyverno + PSA replacing PSP, Workload Identity Federation, KServe + vLLM for ML serving, Evidently AI + NannyML for drift detection, EU AI Act model-card discipline, picklescan for ML supply chain, Karpenter GA on all three major clouds, Cilium L7 + Hubble + Tetragon, vCluster + Capsule for multi-tenancy, Heroku &rarr; Render/Fly/Railway migration narrative, Fly.io + Netlify as the modern static+API pairing.
+
+**Project deliverables:** static HTML site (49 chapters, homepage index, search-friendly), Python content modules (one per topic/level, importable for verification), build scripts (chapter HTML generator, index generator, JSON extractor), full docs (PROJECT_STATE.md, ROADMAP.md, ARCHITECTURE.md, CONTENT_STYLE_GUIDE.md, DEPLOYMENT.md, README.md, CHANGELOG.md), and the source questions.json mapped from the original Excel.
+
+**No remaining content work.** Future sessions, if any, would be: deploy to GitHub Pages, polish styling, build a client-side search index (Lunr/Pagefind), add dark mode, or maintain freshness as the 2026 ecosystem keeps moving.
+
 ## 2026-05-03 — CI/CD Pipeline Advanced Q1-100 (Phase 6 89%, 48 detailed chapters, 4804/4904)
 
 **What shipped:** all 100 CI/CD Pipeline Advanced answers in `content/cicd_pipeline_advanced.py`. Advanced-style: 100-180 words mechanism-focused prose, internals/trade-off tables, 2026-current libraries, ~2,000-3,500 chars per answer. Average 2,513 chars, range 1,672&ndash;3,847.

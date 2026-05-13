@@ -1,118 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CI/CD Pipeline — Scenario Based · Interview Prep Mastery</title>
-<meta name="description" content="100 scenario based interview questions on CI/CD Pipeline, with detailed explanations and examples.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="../assets/styles.css">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%239a6b1d'/%3E%3Ctext x='50' y='68' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold' font-size='48'%3EIP%3C/text%3E%3C/svg%3E">
-</head>
-<body>
-<header class="site-header">
-  <div class="site-header__inner">
-    <button class="menu-toggle" aria-label="Open menu" type="button">☰ Menu</button>
-    <a class="brand" href="../index.html">
-      <span class="brand__mark">IP</span>
-      <span class="brand__text">
-        <span class="brand__title">Interview Prep Mastery</span>
-        <span class="brand__subtitle">Interactive learning guide</span>
-      </span>
-    </a>
-    <nav class="header-nav">
-      <a href="../index.html#roadmap">Roadmap</a>
-      <a href="../index.html#chapters">All chapters</a>
-      <button class="theme-toggle" type="button" aria-label="Toggle color scheme">☾ Dark</button>
-    </nav>
-  </div>
-</header>
-<div class="layout">
-<aside class="sidebar" aria-label="Site navigation">
-  <div class="sidebar__header">Chapter Navigator</div>
-  
-        <div class="nav-part">
-          <div class="nav-part__label">Part 1</div>
-          <div class="nav-part__title">Core Programming Languages</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">JavaScript</li><li><a class="" href="../chapters/javascript-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/javascript-tricky.html"><span class="nav-item__title">Tricky</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-coding.html"><span class="nav-item__title">Advanced Coding</span><span class="nav-item__meta">100 questions · 100 min read</span></a></li><li><a class="" href="../chapters/javascript-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li><a class="" href="../chapters/javascript-advanced-scenario.html"><span class="nav-item__title">Advanced Scenario Based</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Python</li><li><a class="" href="../chapters/python-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/python-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/python-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 2</div>
-          <div class="nav-part__title">Web Fundamentals</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">HTML</li><li><a class="" href="../chapters/html-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/html-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/html-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CSS</li><li><a class="" href="../chapters/css-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">102 questions · 60 min read</span></a></li><li><a class="" href="../chapters/css-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/css-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">101 questions · 90 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 3</div>
-          <div class="nav-part__title">Backend Technologies</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Node.Js</li><li><a class="" href="../chapters/nodejs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/nodejs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/nodejs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ExpressJS</li><li><a class="" href="../chapters/expressjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/expressjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/expressjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">API</li><li><a class="" href="../chapters/api-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/api-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/api-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 4</div>
-          <div class="nav-part__title">Frontend Frameworks</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">ReactJS</li><li><a class="" href="../chapters/reactjs-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">101 questions · 60 min read</span></a></li><li><a class="" href="../chapters/reactjs-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/reactjs-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 5</div>
-          <div class="nav-part__title">Databases</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MYSQL</li><li><a class="" href="../chapters/mysql-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mysql-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mysql-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">MongoDB</li><li><a class="" href="../chapters/mongodb-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/mongodb-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/mongodb-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-        <div class="nav-part">
-          <div class="nav-part__label">Part 6</div>
-          <div class="nav-part__title">System Design &amp; DevOps</div>
-          <ul class="nav-part__list">
-            <li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">System Design MERN Stack</li><li><a class="" href="../chapters/system-design-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/system-design-mern-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">Infrastructure MERN Stack</li><li><a class="" href="../chapters/infrastructure-mern-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/infrastructure-mern-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li style="padding: 0.5rem 0.8rem; color: var(--text); font-weight: 600; font-size: 0.82rem; margin-top: 0.3rem;">CI/CD Pipeline</li><li><a class="" href="../chapters/cicd-pipeline-basic.html"><span class="nav-item__title">Basic</span><span class="nav-item__meta">100 questions · 60 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-coding.html"><span class="nav-item__title">Coding</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="" href="../chapters/cicd-pipeline-advanced.html"><span class="nav-item__title">Advanced</span><span class="nav-item__meta">100 questions · 90 min read</span></a></li><li><a class="active" href="../chapters/cicd-pipeline-scenario.html"><span class="nav-item__title">Scenario Based</span><span class="nav-item__meta">100 questions · 75 min read</span></a></li>
-          </ul>
-        </div>
-</aside>
-<main class="main" id="main">
+"""Detailed answers for CI/CD Pipeline Scenario Based interview questions.
 
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="../index.html">Home</a>
-    <span class="breadcrumb__sep">›</span>
-    <a href="../index.html#part-6">System Design &amp; DevOps</a>
-    <span class="breadcrumb__sep">›</span>
-    <span>CI/CD Pipeline — Scenario Based</span>
-  </nav>
+Each ANSWERS[n] is an HTML string suitable for embedding inside a chapter page.
+Style: Situation / Approach / code block / Trade-offs table / Production polish,
+with substantial code blocks and 2026-current vendor references throughout.
+~4,500-5,500 chars per answer.
+"""
 
-  <header class="chapter-header">
-    <div class="chapter-label">CI/CD Pipeline · Scenario Based</div>
-    <h1 class="chapter-title">Scenario Based CI/CD Pipeline Interview Questions</h1>
-    <p class="chapter-lede">Real-world situational questions — how you&#x27;d approach a concrete design or debugging problem.</p>
-    <div class="chapter-meta">
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Questions</span><span class="chapter-meta__value">100</span></div>
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Level</span><span class="chapter-meta__value">Scenario Based</span></div>
-      <div class="chapter-meta__item"><span class="chapter-meta__label">Estimated reading</span><span class="chapter-meta__value">75 min read</span></div>
-    </div>
-    
-  </header>
+ANSWERS: dict[int, str] = {}
 
-  <section class="prose">
 
-    <div class="toc" id="toc">
-      <div class="toc__title">All questions in this chapter</div>
-      <ul class="toc__list">
-        <li><a href="#q1"><span class="toc__num">1.</span>You need to set up a CI/CD pipeline for a Node.js application hosted on GitHub. Describ...</a></li><li><a href="#q2"><span class="toc__num">2.</span>Your team wants to migrate from a monolithic architecture to microservices using Docker...</a></li><li><a href="#q3"><span class="toc__num">3.</span>You need to implement blue-green deployment using Jenkins and Kubernetes. Explain the s...</a></li><li><a href="#q4"><span class="toc__num">4.</span>Your organization wants to enforce security best practices in the CI/CD pipeline. How w...</a></li><li><a href="#q5"><span class="toc__num">5.</span>You are asked to implement a disaster recovery plan for your Kubernetes cluster. Descri...</a></li><li><a href="#q6"><span class="toc__num">6.</span>Your team wants to use GitOps for managing Kubernetes deployments. How would you set th...</a></li><li><a href="#q7"><span class="toc__num">7.</span>You need to set up a CI/CD pipeline for a Python application with unit tests, integrati...</a></li><li><a href="#q8"><span class="toc__num">8.</span>Your team wants to implement canary deployments using Kubernetes. How would you configu...</a></li><li><a href="#q9"><span class="toc__num">9.</span>You need to automate the backup of your Jenkins server configurations. Explain your app...</a></li><li><a href="#q10"><span class="toc__num">10.</span>Your organization is moving to a multi-cloud strategy. How would you set up CI/CD pipel...</a></li><li><a href="#q11"><span class="toc__num">11.</span>You are tasked with optimizing Docker image build times in the CI/CD pipeline. Describe...</a></li><li><a href="#q12"><span class="toc__num">12.</span>Your team wants to set up continuous delivery for a React application using GitHub Acti...</a></li><li><a href="#q13"><span class="toc__num">13.</span>You need to implement rolling updates for your Kubernetes deployments. How would you co...</a></li><li><a href="#q14"><span class="toc__num">14.</span>Your organization requires that all secrets be managed securely in the CI/CD pipeline. ...</a></li><li><a href="#q15"><span class="toc__num">15.</span>You need to set up a CI/CD pipeline for a Java application that includes static code an...</a></li><li><a href="#q16"><span class="toc__num">16.</span>Your team wants to implement automated rollbacks in case of deployment failures. How wo...</a></li><li><a href="#q17"><span class="toc__num">17.</span>You need to create a CI/CD pipeline for a multi-service application using Docker Compos...</a></li><li><a href="#q18"><span class="toc__num">18.</span>Your team is experiencing slow builds in Jenkins. How would you diagnose and resolve th...</a></li><li><a href="#q19"><span class="toc__num">19.</span>You are asked to set up a CI/CD pipeline for a serverless application using GitHub Acti...</a></li><li><a href="#q20"><span class="toc__num">20.</span>Your organization wants to use Kubernetes Operators to manage complex applications. How...</a></li><li><a href="#q21"><span class="toc__num">21.</span>You need to implement continuous integration for a Node.js application with dependency ...</a></li><li><a href="#q22"><span class="toc__num">22.</span>Your team wants to enforce code quality checks in the CI/CD pipeline. How would you int...</a></li><li><a href="#q23"><span class="toc__num">23.</span>You are asked to set up a CI/CD pipeline for a Go application with automated tests and ...</a></li><li><a href="#q24"><span class="toc__num">24.</span>Your team wants to implement monitoring and alerting for Kubernetes deployments. How wo...</a></li><li><a href="#q25"><span class="toc__num">25.</span>You need to automate the deployment of a multi-tenant application using Kubernetes. Exp...</a></li><li><a href="#q26"><span class="toc__num">26.</span>Your organization wants to use GitHub Actions for multi-cloud deployments. Describe how...</a></li><li><a href="#q27"><span class="toc__num">27.</span>You are asked to set up a CI/CD pipeline for a machine learning model with training, te...</a></li><li><a href="#q28"><span class="toc__num">28.</span>Your team wants to implement security scanning for Docker images in the CI/CD pipeline....</a></li><li><a href="#q29"><span class="toc__num">29.</span>You need to manage and monitor Kubernetes clusters using Rancher. Describe how you woul...</a></li><li><a href="#q30"><span class="toc__num">30.</span>Your organization wants to implement a GitOps workflow for managing Kubernetes resource...</a></li><li><a href="#q31"><span class="toc__num">31.</span>You are asked to create a CI/CD pipeline for a mobile application with automated testin...</a></li><li><a href="#q32"><span class="toc__num">32.</span>Your team wants to use Kubernetes Custom Resource Definitions (CRDs) to manage applicat...</a></li><li><a href="#q33"><span class="toc__num">33.</span>You need to set up a CI/CD pipeline for a Ruby on Rails application with unit tests, in...</a></li><li><a href="#q34"><span class="toc__num">34.</span>Your organization wants to implement end-to-end encryption for data in transit and at r...</a></li><li><a href="#q35"><span class="toc__num">35.</span>You are asked to set up a CI/CD pipeline for a blockchain application with automated te...</a></li><li><a href="#q36"><span class="toc__num">36.</span>Your team wants to implement continuous testing in the CI/CD pipeline. How would you se...</a></li><li><a href="#q37"><span class="toc__num">37.</span>You need to automate the scaling of a Kubernetes deployment based on custom metrics. Ex...</a></li><li><a href="#q38"><span class="toc__num">38.</span>Your organization wants to use GitHub Actions for continuous delivery to on-premise env...</a></li><li><a href="#q39"><span class="toc__num">39.</span>You are asked to set up a CI/CD pipeline for an event-driven application using Docker a...</a></li><li><a href="#q40"><span class="toc__num">40.</span>Your team wants to implement automated canary releases in Kubernetes. How would you con...</a></li><li><a href="#q41"><span class="toc__num">41.</span>You need to set up a CI/CD pipeline for a PHP application with unit tests, integration ...</a></li><li><a href="#q42"><span class="toc__num">42.</span>Your organization wants to use GitHub Actions for deploying serverless applications to ...</a></li><li><a href="#q43"><span class="toc__num">43.</span>You are asked to implement CI/CD for a data-intensive application using Kubernetes. Des...</a></li><li><a href="#q44"><span class="toc__num">44.</span>Your team wants to set up continuous integration for a Rust application with dependency...</a></li><li><a href="#q45"><span class="toc__num">45.</span>You need to implement zero-downtime deployments in your CI/CD pipeline. Explain how you...</a></li><li><a href="#q46"><span class="toc__num">46.</span>Your organization wants to enforce compliance checks in the CI/CD pipeline. How would y...</a></li><li><a href="#q47"><span class="toc__num">47.</span>You are asked to set up a CI/CD pipeline for a C++ application with automated tests and...</a></li><li><a href="#q48"><span class="toc__num">48.</span>Your team wants to implement automated rollbacks for failed deployments in Kubernetes. ...</a></li><li><a href="#q49"><span class="toc__num">49.</span>You need to set up a CI/CD pipeline for a Dart application with unit tests, integration...</a></li><li><a href="#q50"><span class="toc__num">50.</span>Your organization wants to use GitHub Actions for continuous delivery to AWS Fargate. D...</a></li><li><a href="#q51"><span class="toc__num">51.</span>You are asked to implement CI/CD for a real-time application using WebSockets and Kuber...</a></li><li><a href="#q52"><span class="toc__num">52.</span>Your team wants to enforce code quality and security checks in the CI/CD pipeline. How ...</a></li><li><a href="#q53"><span class="toc__num">53.</span>You need to set up a CI/CD pipeline for a Swift application with automated tests and de...</a></li><li><a href="#q54"><span class="toc__num">54.</span>Your organization wants to use GitHub Actions for deploying applications to Azure Kuber...</a></li><li><a href="#q55"><span class="toc__num">55.</span>You are asked to set up a CI/CD pipeline for a Haskell application with unit tests, int...</a></li><li><a href="#q56"><span class="toc__num">56.</span>Your team wants to implement continuous integration for a Kotlin application with depen...</a></li><li><a href="#q57"><span class="toc__num">57.</span>You need to implement security best practices for Jenkins servers. Explain how you woul...</a></li><li><a href="#q58"><span class="toc__num">58.</span>Your organization wants to enforce compliance checks for Docker images in the CI/CD pip...</a></li><li><a href="#q59"><span class="toc__num">59.</span>You are asked to set up a CI/CD pipeline for a Svelte application with automated tests ...</a></li><li><a href="#q60"><span class="toc__num">60.</span>Your team wants to implement automated canary releases for a multi-service application ...</a></li><li><a href="#q61"><span class="toc__num">61.</span>You need to set up a CI/CD pipeline for a TypeScript application with unit tests, integ...</a></li><li><a href="#q62"><span class="toc__num">62.</span>Your organization wants to use GitHub Actions for deploying machine learning models to ...</a></li><li><a href="#q63"><span class="toc__num">63.</span>You are asked to implement CI/CD for a multi-cloud architecture using Docker and Kubern...</a></li><li><a href="#q64"><span class="toc__num">64.</span>Your team wants to enforce security and compliance checks for serverless applications i...</a></li><li><a href="#q65"><span class="toc__num">65.</span>You need to set up a CI/CD pipeline for a Scala application with automated tests and de...</a></li><li><a href="#q66"><span class="toc__num">66.</span>Your organization wants to use GitHub Actions for continuous delivery to Google Kuberne...</a></li><li><a href="#q67"><span class="toc__num">67.</span>You are asked to set up a CI/CD pipeline for an Elixir application with unit tests, int...</a></li><li><a href="#q68"><span class="toc__num">68.</span>Your team wants to implement continuous integration for a Golang application with depen...</a></li><li><a href="#q69"><span class="toc__num">69.</span>You need to implement security best practices for Docker images in the CI/CD pipeline. ...</a></li><li><a href="#q70"><span class="toc__num">70.</span>Your organization wants to enforce compliance checks for Kubernetes deployments in the ...</a></li><li><a href="#q71"><span class="toc__num">71.</span>You are asked to set up a CI/CD pipeline for a Phoenix application with automated tests...</a></li><li><a href="#q72"><span class="toc__num">72.</span>Your team wants to implement automated rollbacks for failed deployments in a multi-serv...</a></li><li><a href="#q73"><span class="toc__num">73.</span>You need to set up a CI/CD pipeline for a Vue.js application with unit tests, integrati...</a></li><li><a href="#q74"><span class="toc__num">74.</span>Your organization wants to use GitHub Actions for deploying blockchain applications to ...</a></li><li><a href="#q75"><span class="toc__num">75.</span>You are asked to implement CI/CD for an IoT application using Docker and Kubernetes. Ex...</a></li><li><a href="#q76"><span class="toc__num">76.</span>Your team wants to enforce code quality and security checks for mobile applications in ...</a></li><li><a href="#q77"><span class="toc__num">77.</span>You need to set up a CI/CD pipeline for an Angular application with automated tests and...</a></li><li><a href="#q78"><span class="toc__num">78.</span>Your organization wants to use GitHub Actions for deploying AI/ML models to Azure Kuber...</a></li><li><a href="#q79"><span class="toc__num">79.</span>You are asked to set up a CI/CD pipeline for a Perl application with unit tests, integr...</a></li><li><a href="#q80"><span class="toc__num">80.</span>Your team wants to implement continuous integration for a Dart application with depende...</a></li><li><a href="#q81"><span class="toc__num">81.</span>You need to implement security best practices for Kubernetes clusters in the CI/CD pipe...</a></li><li><a href="#q82"><span class="toc__num">82.</span>Your organization wants to enforce compliance checks for serverless deployments in the ...</a></li><li><a href="#q83"><span class="toc__num">83.</span>You are asked to set up a CI/CD pipeline for a Rust application with automated tests an...</a></li><li><a href="#q84"><span class="toc__num">84.</span>Your team wants to implement automated canary releases for a real-time application usin...</a></li><li><a href="#q85"><span class="toc__num">85.</span>You need to set up a CI/CD pipeline for a Next.js application with unit tests, integrat...</a></li><li><a href="#q86"><span class="toc__num">86.</span>Your organization wants to use GitHub Actions for deploying IoT applications to AWS. De...</a></li><li><a href="#q87"><span class="toc__num">87.</span>You are asked to implement CI/CD for a hybrid cloud environment using Docker and Kubern...</a></li><li><a href="#q88"><span class="toc__num">88.</span>Your team wants to enforce security and compliance checks for blockchain applications i...</a></li><li><a href="#q89"><span class="toc__num">89.</span>You need to set up a CI/CD pipeline for a Haskell application with automated tests and ...</a></li><li><a href="#q90"><span class="toc__num">90.</span>Your organization wants to use GitHub Actions for continuous delivery to Google Cloud R...</a></li><li><a href="#q91"><span class="toc__num">91.</span>You are asked to set up a CI/CD pipeline for a C# application with unit tests, integrat...</a></li><li><a href="#q92"><span class="toc__num">92.</span>Your team wants to implement continuous integration for a Dart application with depende...</a></li><li><a href="#q93"><span class="toc__num">93.</span>You need to implement security best practices for Docker containers in the CI/CD pipeli...</a></li><li><a href="#q94"><span class="toc__num">94.</span>Your organization wants to enforce compliance checks for Kubernetes deployments in the ...</a></li><li><a href="#q95"><span class="toc__num">95.</span>You are asked to set up a CI/CD pipeline for a Swift application with automated tests a...</a></li><li><a href="#q96"><span class="toc__num">96.</span>Your team wants to implement automated rollbacks for failed deployments in a real-time ...</a></li><li><a href="#q97"><span class="toc__num">97.</span>You need to set up a CI/CD pipeline for a Golang application with unit tests, integrati...</a></li><li><a href="#q98"><span class="toc__num">98.</span>Your organization wants to use GitHub Actions for deploying AI/ML models to Google Kube...</a></li><li><a href="#q99"><span class="toc__num">99.</span>You are asked to implement CI/CD for a multi-tenant application using Docker and Kubern...</a></li><li><a href="#q100"><span class="toc__num">100.</span>Your team wants to enforce code quality and security checks for AI/ML models in the CI/...</a></li>
-      </ul>
-    </div>
-
-    
-<article class="qa" id="q1">
-  <div class="qa__number">Question 1</div>
-  <h3 class="qa__question">You need to set up a CI/CD pipeline for a Node.js application hosted on GitHub. Describe your approach.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a small team has a Node.js API on GitHub and needs a <strong>full CI/CD pipeline</strong> that runs tests on every PR, builds a container, deploys to staging on merge to <code>main</code>, and promotes to production via tag &mdash; without operating a self-hosted CI server.</p>
+ANSWERS[1] = r'''<p><strong>Situation:</strong> a small team has a Node.js API on GitHub and needs a <strong>full CI/CD pipeline</strong> that runs tests on every PR, builds a container, deploys to staging on merge to <code>main</code>, and promotes to production via tag &mdash; without operating a self-hosted CI server.</p>
 
 <p><strong>Approach:</strong> use <strong>GitHub Actions</strong> as the CI engine, push images to <strong>GitHub Container Registry (GHCR)</strong>, deploy to <strong>Fly.io</strong>/<strong>Render</strong>/<strong>Railway</strong> (or <strong>AWS App Runner</strong>/<strong>ECS Fargate</strong> for AWS shops). Authenticate with <strong>OIDC</strong> for cloud providers &mdash; no static keys. Run unit and integration tests with <strong>Vitest</strong>, lint with <strong>Biome</strong>, scan with <strong>Trivy</strong> and <strong>CodeQL</strong>, then sign images with <strong>Cosign</strong> and attach an SBOM via <strong>Syft</strong>.</p>
 
@@ -173,15 +70,10 @@ jobs:
 <tr><td>Rollback</td><td>Re-deploy previous image digest from GHCR</td><td>flyctl, gh CLI</td></tr>
 </tbody></table>
 
-<p><strong>Production polish:</strong> protect <code>main</code> with required reviews and status checks; use <strong>environments</strong> with required reviewers for production; pin image tags to <strong>digests</strong> in deployment manifests, not floating tags; turn on <strong>Dependabot</strong> + <strong>Renovate</strong> with auto-merge for minor/patch; use <strong>step-security/harden-runner</strong> in audit mode first then enforce egress allow-list; emit traces with <strong>OpenTelemetry</strong> to <strong>Honeycomb</strong>/<strong>Datadog</strong>/<strong>Grafana Cloud</strong>; track DORA metrics (deployment frequency, lead time, MTTR, change-failure rate) automatically via <strong>OpenDORA</strong>/<strong>Sleuth</strong>/<strong>LinearB</strong>; for preview environments per PR use <strong>Fly Machines</strong>/<strong>Render Preview</strong>/<strong>Vercel Preview</strong>; if scale grows beyond a few services consider moving to <strong>Argo CD + GitHub Actions</strong> with <strong>Kustomize</strong> for envs; on AWS prefer <strong>OIDC + IAM Identity Center</strong> + <strong>aws-actions/configure-aws-credentials</strong> for short-lived STS sessions.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q2">
-  <div class="qa__number">Question 2</div>
-  <h3 class="qa__question">Your team wants to migrate from a monolithic architecture to microservices using Docker and Kubernetes. How would you set up the CI/CD pipeline?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a team running a single Node.js monolith wants to migrate to <strong>microservices</strong> on Kubernetes &mdash; gradually, without big-bang outages. The CI/CD must handle many repos, fast feedback per service, GitOps-style deploys, and progressive delivery.</p>
+<p><strong>Production polish:</strong> protect <code>main</code> with required reviews and status checks; use <strong>environments</strong> with required reviewers for production; pin image tags to <strong>digests</strong> in deployment manifests, not floating tags; turn on <strong>Dependabot</strong> + <strong>Renovate</strong> with auto-merge for minor/patch; use <strong>step-security/harden-runner</strong> in audit mode first then enforce egress allow-list; emit traces with <strong>OpenTelemetry</strong> to <strong>Honeycomb</strong>/<strong>Datadog</strong>/<strong>Grafana Cloud</strong>; track DORA metrics (deployment frequency, lead time, MTTR, change-failure rate) automatically via <strong>OpenDORA</strong>/<strong>Sleuth</strong>/<strong>LinearB</strong>; for preview environments per PR use <strong>Fly Machines</strong>/<strong>Render Preview</strong>/<strong>Vercel Preview</strong>; if scale grows beyond a few services consider moving to <strong>Argo CD + GitHub Actions</strong> with <strong>Kustomize</strong> for envs; on AWS prefer <strong>OIDC + IAM Identity Center</strong> + <strong>aws-actions/configure-aws-credentials</strong> for short-lived STS sessions.</p>'''
+
+
+ANSWERS[2] = r'''<p><strong>Situation:</strong> a team running a single Node.js monolith wants to migrate to <strong>microservices</strong> on Kubernetes &mdash; gradually, without big-bang outages. The CI/CD must handle many repos, fast feedback per service, GitOps-style deploys, and progressive delivery.</p>
 
 <p><strong>Approach:</strong> adopt the <strong>strangler fig pattern</strong>: extract one bounded context at a time behind a routing layer (Envoy, Istio Gateway, or the original monolith reverse-proxying). Each new service gets its own repo with a <strong>GitHub Actions</strong> CI that builds and pushes to <strong>ECR</strong>/<strong>GHCR</strong>/<strong>Artifact Registry</strong>, plus a <strong>config repo</strong> watched by <strong>Argo CD</strong> with <strong>ApplicationSets</strong> for fan-out across environments. Promotion across stages is owned by <strong>Kargo</strong>; canaries by <strong>Argo Rollouts</strong> or <strong>Flagger</strong>. Service discovery and routing via <strong>Istio</strong> or <strong>Linkerd</strong>; observability via <strong>OpenTelemetry</strong> + <strong>Tempo</strong>/<strong>Jaeger</strong>.</p>
 
@@ -226,15 +118,10 @@ spec:
 <tr><td>Observability</td><td>Distributed traces required from day one</td><td>OpenTelemetry, Tempo, Honeycomb</td></tr>
 </tbody></table>
 
-<p><strong>Production polish:</strong> stand up a <strong>developer portal</strong> (<strong>Backstage</strong>/<strong>Port</strong>/<strong>Cortex</strong>) so service owners discover templates, dashboards, and SLOs in one place; enforce architecture rules (deps, ports, auth) via <strong>OPA</strong>/<strong>Kyverno</strong> + <strong>Conftest</strong>; rate-limit at the edge via <strong>Cloudflare</strong>/<strong>Kong</strong>/<strong>Tyk</strong>; instrument the strangler boundary with <strong>OpenTelemetry baggage</strong> so you can trace a request across the legacy monolith and new services; use <strong>contract tests</strong> (<strong>Pact</strong>, <strong>Microcks</strong>) to catch breaking schema changes pre-merge; pair every extraction with a <strong>data ownership doc</strong> and CDC-based dual-read until the new service is canonical; budget for <strong>SLO error budgets</strong> per service so teams own reliability; for K8s itself, <strong>Karpenter</strong> + <strong>KEDA</strong> + <strong>Cilium</strong> are the 2026 baseline; add <strong>Kargo</strong>/<strong>Argo Workflows</strong> for cross-service promotion gates that wait on synthetics or business metrics.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q3">
-  <div class="qa__number">Question 3</div>
-  <h3 class="qa__question">You need to implement blue-green deployment using Jenkins and Kubernetes. Explain the steps you would take.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a regulated workload runs on Kubernetes; deploys must be <strong>blue-green</strong> with instant rollback, controlled by Jenkins. The team wants the &ldquo;old&rdquo; and &ldquo;new&rdquo; pools running simultaneously, traffic flipped atomically once the new side is verified.</p>
+<p><strong>Production polish:</strong> stand up a <strong>developer portal</strong> (<strong>Backstage</strong>/<strong>Port</strong>/<strong>Cortex</strong>) so service owners discover templates, dashboards, and SLOs in one place; enforce architecture rules (deps, ports, auth) via <strong>OPA</strong>/<strong>Kyverno</strong> + <strong>Conftest</strong>; rate-limit at the edge via <strong>Cloudflare</strong>/<strong>Kong</strong>/<strong>Tyk</strong>; instrument the strangler boundary with <strong>OpenTelemetry baggage</strong> so you can trace a request across the legacy monolith and new services; use <strong>contract tests</strong> (<strong>Pact</strong>, <strong>Microcks</strong>) to catch breaking schema changes pre-merge; pair every extraction with a <strong>data ownership doc</strong> and CDC-based dual-read until the new service is canonical; budget for <strong>SLO error budgets</strong> per service so teams own reliability; for K8s itself, <strong>Karpenter</strong> + <strong>KEDA</strong> + <strong>Cilium</strong> are the 2026 baseline; add <strong>Kargo</strong>/<strong>Argo Workflows</strong> for cross-service promotion gates that wait on synthetics or business metrics.</p>'''
+
+
+ANSWERS[3] = r'''<p><strong>Situation:</strong> a regulated workload runs on Kubernetes; deploys must be <strong>blue-green</strong> with instant rollback, controlled by Jenkins. The team wants the &ldquo;old&rdquo; and &ldquo;new&rdquo; pools running simultaneously, traffic flipped atomically once the new side is verified.</p>
 
 <p><strong>Approach:</strong> the cleanest 2026 implementation is <strong>Argo Rollouts</strong> with <code>strategy.blueGreen</code> rather than rolling your own Service-selector swap. Jenkins remains the orchestrator that builds, tests, signs, and updates the Rollout&rsquo;s image; Argo Rollouts owns the active/preview Services, the analysis runs, the cutover, and the rollback window. If Argo Rollouts isn&rsquo;t available, Jenkins can swap the <code>spec.selector</code> on the production Service between two Deployments labelled <code>color: blue</code> and <code>color: green</code> &mdash; functional but you lose automated analysis and post-promotion scaledown timing.</p>
 
@@ -276,15 +163,10 @@ pipeline {
 <tr><td>Cost</td><td>2x compute during overlap; budget &amp; alert</td><td>Kubecost, OpenCost</td></tr>
 </tbody></table>
 
-<p><strong>Production polish:</strong> wire <strong>AnalysisTemplate</strong> queries against Prometheus to auto-abort if p99 latency, error rate, or saturation breach SLO during the verification window; use <strong>experiment</strong> CRD if you want to mirror traffic to preview before flipping; never schema-migrate in the same release as a code change &mdash; do <strong>expand</strong> (additive migration) one release ahead, then <strong>contract</strong> (drop old columns) one release behind, so blue and green can both run against the live schema; pair the Rollout with a <strong>PodDisruptionBudget</strong> and <strong>topologySpreadConstraints</strong> for AZ resilience; export Rollout events to <strong>Datadog</strong>/<strong>Honeycomb</strong> as deployment markers; if you can&rsquo;t afford 2x compute, use <strong>canary</strong> with weighted routing instead of pure blue-green &mdash; Argo Rollouts supports both with the same primitives, and <strong>Flagger</strong> is the closest alternative if you&rsquo;re on a Flux/Linkerd stack.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q4">
-  <div class="qa__number">Question 4</div>
-  <h3 class="qa__question">Your organization wants to enforce security best practices in the CI/CD pipeline. How would you integrate security checks using GitHub Actions?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> the security team needs <strong>shift-left</strong> security on every PR &mdash; SAST, secret scanning, dependency scanning, container scanning, IaC checks, and signed releases &mdash; without making CI miserably slow. Implementation must use GitHub Actions and integrate with the existing GitHub Advanced Security tier.</p>
+<p><strong>Production polish:</strong> wire <strong>AnalysisTemplate</strong> queries against Prometheus to auto-abort if p99 latency, error rate, or saturation breach SLO during the verification window; use <strong>experiment</strong> CRD if you want to mirror traffic to preview before flipping; never schema-migrate in the same release as a code change &mdash; do <strong>expand</strong> (additive migration) one release ahead, then <strong>contract</strong> (drop old columns) one release behind, so blue and green can both run against the live schema; pair the Rollout with a <strong>PodDisruptionBudget</strong> and <strong>topologySpreadConstraints</strong> for AZ resilience; export Rollout events to <strong>Datadog</strong>/<strong>Honeycomb</strong> as deployment markers; if you can&rsquo;t afford 2x compute, use <strong>canary</strong> with weighted routing instead of pure blue-green &mdash; Argo Rollouts supports both with the same primitives, and <strong>Flagger</strong> is the closest alternative if you&rsquo;re on a Flux/Linkerd stack.</p>'''
+
+
+ANSWERS[4] = r'''<p><strong>Situation:</strong> the security team needs <strong>shift-left</strong> security on every PR &mdash; SAST, secret scanning, dependency scanning, container scanning, IaC checks, and signed releases &mdash; without making CI miserably slow. Implementation must use GitHub Actions and integrate with the existing GitHub Advanced Security tier.</p>
 
 <p><strong>Approach:</strong> stack <strong>CodeQL</strong> for SAST, <strong>Dependabot</strong> + <strong>OSV-Scanner</strong> for SCA, <strong>gitleaks</strong>/<strong>trufflehog</strong> for secrets, <strong>Trivy</strong>/<strong>Grype</strong> for containers, <strong>Checkov</strong>/<strong>tfsec</strong> for IaC, <strong>Semgrep</strong> for custom rules, and <strong>Cosign</strong>+<strong>SLSA</strong> generators for release attestation. Run cheap fast checks (lint, secrets) in PR jobs; offload heavyweight scans (CodeQL full analysis) to scheduled or push-only events; gate merges via required status checks.</p>
 
@@ -351,15 +233,10 @@ jobs:
 <tr><td>Runtime</td><td>Falco, Tetragon (post-deploy)</td><td>Continuous</td></tr>
 </tbody></table>
 
-<p><strong>Production polish:</strong> require <strong>SARIF upload</strong> for every scanner so findings consolidate in <strong>GitHub Code Scanning</strong> with one triage UI; use <strong>severity-based gating</strong> (block CRITICAL/HIGH only) to avoid scanner fatigue; turn on <strong>step-security/harden-runner</strong> with an egress allow-list so a compromised dependency can&rsquo;t exfiltrate; sign every release with <strong>Cosign keyless</strong> (Sigstore Fulcio + Rekor) and produce <strong>SLSA Level 3</strong> provenance via <strong>slsa-github-generator</strong>; verify signatures at admission with <strong>Kyverno</strong> or <strong>Sigstore Policy Controller</strong>; pair with <strong>Falco</strong> or <strong>Tetragon</strong> for runtime threat detection; track findings in <strong>GitHub Security Center</strong> or <strong>DefectDojo</strong>; for compliance evidence, automate ATO/SOC2 controls via <strong>Vanta</strong>/<strong>Drata</strong>/<strong>Secureframe</strong>/<strong>Anecdotes</strong>; budget security checks against build time &mdash; if scans dominate, parallelise jobs and use scheduled deeper analyses rather than blocking every PR with the full battery.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q5">
-  <div class="qa__number">Question 5</div>
-  <h3 class="qa__question">You are asked to implement a disaster recovery plan for your Kubernetes cluster. Describe your approach.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a Kubernetes cluster hosts production workloads in one region; leadership wants a documented <strong>disaster recovery</strong> plan that covers cluster loss, AZ failure, accidental deletion, and data corruption, with explicit RTO/RPO targets.</p>
+<p><strong>Production polish:</strong> require <strong>SARIF upload</strong> for every scanner so findings consolidate in <strong>GitHub Code Scanning</strong> with one triage UI; use <strong>severity-based gating</strong> (block CRITICAL/HIGH only) to avoid scanner fatigue; turn on <strong>step-security/harden-runner</strong> with an egress allow-list so a compromised dependency can&rsquo;t exfiltrate; sign every release with <strong>Cosign keyless</strong> (Sigstore Fulcio + Rekor) and produce <strong>SLSA Level 3</strong> provenance via <strong>slsa-github-generator</strong>; verify signatures at admission with <strong>Kyverno</strong> or <strong>Sigstore Policy Controller</strong>; pair with <strong>Falco</strong> or <strong>Tetragon</strong> for runtime threat detection; track findings in <strong>GitHub Security Center</strong> or <strong>DefectDojo</strong>; for compliance evidence, automate ATO/SOC2 controls via <strong>Vanta</strong>/<strong>Drata</strong>/<strong>Secureframe</strong>/<strong>Anecdotes</strong>; budget security checks against build time &mdash; if scans dominate, parallelise jobs and use scheduled deeper analyses rather than blocking every PR with the full battery.</p>'''
+
+
+ANSWERS[5] = r'''<p><strong>Situation:</strong> a Kubernetes cluster hosts production workloads in one region; leadership wants a documented <strong>disaster recovery</strong> plan that covers cluster loss, AZ failure, accidental deletion, and data corruption, with explicit RTO/RPO targets.</p>
 
 <p><strong>Approach:</strong> DR for K8s splits into three layers &mdash; <strong>cluster state</strong> (etcd), <strong>workload manifests</strong> (Git, the source of truth via GitOps), and <strong>persistent data</strong> (PVs and external databases). Use <strong>GitOps</strong> with <strong>Argo CD</strong>/<strong>Flux</strong> so re-creating workloads in a new cluster is a single bootstrap; back up volumes with <strong>Velero</strong> + <strong>CSI snapshots</strong>; managed cloud DBs (<strong>RDS Aurora</strong>, <strong>CloudSQL</strong>, <strong>Atlas</strong>) handle their own PITR. Run <strong>Cluster API (CAPI)</strong> to spin up replacement clusters declaratively, or pre-provision a warm standby in a second region.</p>
 
@@ -398,15 +275,10 @@ spec:
 <tr><td>Ransomware</td><td>24 hr</td><td>varies</td><td>Immutable backups (Object Lock); air-gapped copy</td></tr>
 </tbody></table>
 
-<p><strong>Production polish:</strong> never test DR by reading the runbook &mdash; schedule a quarterly <strong>Game Day</strong> where you destroy a staging cluster and rebuild it from Git + Velero; track <strong>actual</strong> RTO/RPO from those drills, not aspirational targets; use <strong>S3 Object Lock</strong>/<strong>GCS retention policies</strong>/<strong>Azure immutable blob</strong> on the backup bucket so ransomware can&rsquo;t encrypt your backups; keep <strong>Argo CD</strong>&rsquo;s own state in a separate cluster (or use the <strong>Argo CD Autopilot</strong> bootstrap pattern) so you can rebuild it without bootstrapping itself; managed databases get cross-region replicas (<strong>Aurora Global</strong>, <strong>Atlas Global Clusters</strong>, <strong>Spanner multi-region</strong>) &mdash; fail over with <strong>Route 53</strong>/<strong>Cloudflare</strong> health checks; for stateful K8s workloads consider <strong>Stash</strong> or <strong>Kasten K10</strong> (Veeam) which add application-aware backups; document the bootstrap order (cluster &rarr; storage classes &rarr; cert-manager &rarr; ingress &rarr; Argo CD &rarr; apps) and automate it with a single <strong>argocd-autopilot</strong> repo so a fresh region rebuild is one command, not a heroic effort.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q6">
-  <div class="qa__number">Question 6</div>
-  <h3 class="qa__question">Your team wants to use GitOps for managing Kubernetes deployments. How would you set this up using GitHub Actions?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a platform team wants <strong>GitOps</strong> for Kubernetes &mdash; manifests live in Git, a controller in the cluster reconciles state &mdash; with GitHub Actions handling CI (build/test/scan) and image bumps. The goal is auditability, easy rollback, and zero direct <code>kubectl apply</code> in production.</p>
+<p><strong>Production polish:</strong> never test DR by reading the runbook &mdash; schedule a quarterly <strong>Game Day</strong> where you destroy a staging cluster and rebuild it from Git + Velero; track <strong>actual</strong> RTO/RPO from those drills, not aspirational targets; use <strong>S3 Object Lock</strong>/<strong>GCS retention policies</strong>/<strong>Azure immutable blob</strong> on the backup bucket so ransomware can&rsquo;t encrypt your backups; keep <strong>Argo CD</strong>&rsquo;s own state in a separate cluster (or use the <strong>Argo CD Autopilot</strong> bootstrap pattern) so you can rebuild it without bootstrapping itself; managed databases get cross-region replicas (<strong>Aurora Global</strong>, <strong>Atlas Global Clusters</strong>, <strong>Spanner multi-region</strong>) &mdash; fail over with <strong>Route 53</strong>/<strong>Cloudflare</strong> health checks; for stateful K8s workloads consider <strong>Stash</strong> or <strong>Kasten K10</strong> (Veeam) which add application-aware backups; document the bootstrap order (cluster &rarr; storage classes &rarr; cert-manager &rarr; ingress &rarr; Argo CD &rarr; apps) and automate it with a single <strong>argocd-autopilot</strong> repo so a fresh region rebuild is one command, not a heroic effort.</p>'''
+
+
+ANSWERS[6] = r'''<p><strong>Situation:</strong> a platform team wants <strong>GitOps</strong> for Kubernetes &mdash; manifests live in Git, a controller in the cluster reconciles state &mdash; with GitHub Actions handling CI (build/test/scan) and image bumps. The goal is auditability, easy rollback, and zero direct <code>kubectl apply</code> in production.</p>
 
 <p><strong>Approach:</strong> use <strong>Argo CD</strong> as the in-cluster reconciler watching a dedicated <strong>config repo</strong> (separate from app source for blast-radius reasons). Application repos run <strong>GitHub Actions</strong> that build/test/scan/sign images and then open a PR (or auto-commit) to bump the image tag in the config repo. <strong>Argo CD ApplicationSets</strong> generate the per-environment Applications; <strong>Kargo</strong> handles promotion across stages with verification gates.</p>
 
@@ -449,15 +321,10 @@ jobs:
 <tr><td>Auth</td><td>SSO + RBAC; GitHub teams &rarr; AppProject roles</td><td>Argo CD AppProjects, Dex</td></tr>
 </tbody></table>
 
-<p><strong>Production polish:</strong> always reference images by <strong>digest</strong> (<code>image@sha256:...</code>) not tag &mdash; tags are mutable, digests are not; sign images with <strong>Cosign</strong> and verify at admission via <strong>Kyverno</strong> or <strong>Sigstore Policy Controller</strong>; use <strong>External Secrets Operator</strong> with <strong>Vault</strong>/<strong>AWS Secrets Manager</strong>/<strong>GCP Secret Manager</strong> rather than committing encrypted blobs (Sealed Secrets is acceptable for small teams); use <strong>Argo CD ApplicationSets</strong> with cluster generators for fleet management; install <strong>argocd-image-updater</strong> if you prefer pull-based image bumps; for compliance, enable Argo CD&rsquo;s <strong>resource history</strong> and ship audit logs to <strong>Loki</strong>/<strong>OpenSearch</strong>; pair with <strong>Kargo</strong> for stage-aware promotion that validates synthetics before opening the next PR; for very large teams shard Argo CD with multiple <strong>application-controller</strong> replicas (one per ~100 apps) and a Redis cache, and use <strong>repo-server</strong> manifest caching aggressively.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q7">
-  <div class="qa__number">Question 7</div>
-  <h3 class="qa__question">You need to set up a CI/CD pipeline for a Python application with unit tests, integration tests, and deployment to AWS Lambda. Describe the steps.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a Python web service needs CI/CD with three test stages (unit, integration with Postgres+Redis, contract) and deployment to <strong>AWS Lambda</strong> via API Gateway. The team wants per-PR preview environments and automatic rollback on errors.</p>
+<p><strong>Production polish:</strong> always reference images by <strong>digest</strong> (<code>image@sha256:...</code>) not tag &mdash; tags are mutable, digests are not; sign images with <strong>Cosign</strong> and verify at admission via <strong>Kyverno</strong> or <strong>Sigstore Policy Controller</strong>; use <strong>External Secrets Operator</strong> with <strong>Vault</strong>/<strong>AWS Secrets Manager</strong>/<strong>GCP Secret Manager</strong> rather than committing encrypted blobs (Sealed Secrets is acceptable for small teams); use <strong>Argo CD ApplicationSets</strong> with cluster generators for fleet management; install <strong>argocd-image-updater</strong> if you prefer pull-based image bumps; for compliance, enable Argo CD&rsquo;s <strong>resource history</strong> and ship audit logs to <strong>Loki</strong>/<strong>OpenSearch</strong>; pair with <strong>Kargo</strong> for stage-aware promotion that validates synthetics before opening the next PR; for very large teams shard Argo CD with multiple <strong>application-controller</strong> replicas (one per ~100 apps) and a Redis cache, and use <strong>repo-server</strong> manifest caching aggressively.</p>'''
+
+
+ANSWERS[7] = r'''<p><strong>Situation:</strong> a Python web service needs CI/CD with three test stages (unit, integration with Postgres+Redis, contract) and deployment to <strong>AWS Lambda</strong> via API Gateway. The team wants per-PR preview environments and automatic rollback on errors.</p>
 
 <p><strong>Approach:</strong> use <strong>GitHub Actions</strong> with services containers for integration tests, package the Lambda with <strong>AWS SAM</strong> or <strong>AWS CDK</strong>, and rely on <strong>OIDC</strong> for cloud auth. Use <strong>Powertools for AWS Lambda (Python)</strong> for tracing/logging/idempotency, deploy to a stage alias, then use <strong>CodeDeploy</strong> with linear or canary traffic shifting and <strong>CloudWatch alarms</strong> as automated rollback triggers.</p>
 
@@ -509,15 +376,10 @@ jobs:
 <tr><td>Preview env</td><td>Per-PR stack with cleanup on close</td><td>GH Environments, sam delete</td></tr>
 </tbody></table>
 
-<p><strong>Production polish:</strong> use <strong>Powertools for AWS Lambda</strong> for structured logs (Logger), distributed tracing (Tracer with X-Ray or OTEL), and <strong>idempotency</strong> &mdash; the last is critical for SQS/Kinesis triggers; turn on <strong>SnapStart</strong> for Java/.NET/Python (3.13+) to slash cold-start latency; ship logs and metrics to <strong>Datadog</strong>/<strong>New Relic</strong>/<strong>Grafana Cloud</strong> via the <strong>OpenTelemetry Lambda layer</strong> or a forwarder Lambda; instrument <strong>Lambda Insights</strong> for runtime metrics; use <strong>Provisioned Concurrency</strong> only for latency-critical paths (cost trade-off); for preview environments tear them down on PR close via a <code>workflow: closed</code> job calling <code>sam delete</code>; for schema-driven contract tests <strong>schemathesis</strong> auto-generates property-based tests from OpenAPI; pin Python deps via <code>uv pip compile</code> with hashes; use <strong>aws-actions/configure-aws-credentials</strong> with role-session tagging so you can audit which workflow assumed which role.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q8">
-  <div class="qa__number">Question 8</div>
-  <h3 class="qa__question">Your team wants to implement canary deployments using Kubernetes. How would you configure Jenkins to achieve this?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a team wants <strong>canary deployments</strong> on Kubernetes &mdash; route a small percentage of traffic to the new version, watch metrics, increase the percentage if healthy, abort if not. Jenkins is the existing CI/CD orchestrator.</p>
+<p><strong>Production polish:</strong> use <strong>Powertools for AWS Lambda</strong> for structured logs (Logger), distributed tracing (Tracer with X-Ray or OTEL), and <strong>idempotency</strong> &mdash; the last is critical for SQS/Kinesis triggers; turn on <strong>SnapStart</strong> for Java/.NET/Python (3.13+) to slash cold-start latency; ship logs and metrics to <strong>Datadog</strong>/<strong>New Relic</strong>/<strong>Grafana Cloud</strong> via the <strong>OpenTelemetry Lambda layer</strong> or a forwarder Lambda; instrument <strong>Lambda Insights</strong> for runtime metrics; use <strong>Provisioned Concurrency</strong> only for latency-critical paths (cost trade-off); for preview environments tear them down on PR close via a <code>workflow: closed</code> job calling <code>sam delete</code>; for schema-driven contract tests <strong>schemathesis</strong> auto-generates property-based tests from OpenAPI; pin Python deps via <code>uv pip compile</code> with hashes; use <strong>aws-actions/configure-aws-credentials</strong> with role-session tagging so you can audit which workflow assumed which role.</p>'''
+
+
+ANSWERS[8] = r'''<p><strong>Situation:</strong> a team wants <strong>canary deployments</strong> on Kubernetes &mdash; route a small percentage of traffic to the new version, watch metrics, increase the percentage if healthy, abort if not. Jenkins is the existing CI/CD orchestrator.</p>
 
 <p><strong>Approach:</strong> the right primitive is <strong>Argo Rollouts</strong> with <code>strategy.canary</code> &mdash; Jenkins drives the build and image push, Argo Rollouts owns the traffic-shifting state machine. For traffic management, Argo Rollouts integrates with <strong>Istio</strong>, <strong>Linkerd</strong>, <strong>Traefik</strong>, <strong>Nginx</strong>, <strong>SMI</strong>, <strong>AWS ALB</strong>, and <strong>Gateway API</strong>; pick whichever matches your existing mesh/ingress. Add <strong>AnalysisTemplate</strong> queries against <strong>Prometheus</strong>, <strong>Datadog</strong>, or <strong>New Relic</strong> for automated promotion/abort.</p>
 
@@ -572,15 +434,10 @@ spec:
 <tr><td>Notifications</td><td>Argo Rollouts &rarr; Slack</td><td>argo-rollouts-notifications</td></tr>
 </tbody></table>
 
-<p><strong>Production polish:</strong> tie analysis templates to the metrics you actually pay attention to in incidents &mdash; success rate, p99 latency, saturation &mdash; and set <code>failureLimit</code> so a single transient blip doesn&rsquo;t abort; use <strong>experiment</strong> CRD to mirror a small percentage of traffic to the canary without user impact, useful for read-only request validation; for stateful concerns (cookies, sessions) configure <strong>session affinity</strong> on the canary VirtualService so a user doesn&rsquo;t bounce between versions; pair with <strong>SLO error budgets</strong> &mdash; if you&rsquo;re burning budget, slow promotion automatically; <strong>Flagger</strong> is the Flux-stack equivalent and ties into <strong>Linkerd</strong>/<strong>Istio</strong>/<strong>App Mesh</strong>; for non-mesh setups <strong>Argo Rollouts</strong> can manipulate <strong>Nginx</strong> ingress weights directly via the <code>nginx</code> trafficRouting; emit <strong>OpenTelemetry</strong> deployment markers so traces are filterable by canary vs stable; document the abort runbook &mdash; <code>kubectl argo rollouts abort api</code> reverts traffic in seconds, but humans need to know the command exists at 3am.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q9">
-  <div class="qa__number">Question 9</div>
-  <h3 class="qa__question">You need to automate the backup of your Jenkins server configurations. Explain your approach.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a Jenkins controller has accumulated years of plugin configs, credentials, jobs, and shared library bindings. A disk failure or accidental config wipe would be catastrophic; backups must be automated, tested, and version-controlled.</p>
+<p><strong>Production polish:</strong> tie analysis templates to the metrics you actually pay attention to in incidents &mdash; success rate, p99 latency, saturation &mdash; and set <code>failureLimit</code> so a single transient blip doesn&rsquo;t abort; use <strong>experiment</strong> CRD to mirror a small percentage of traffic to the canary without user impact, useful for read-only request validation; for stateful concerns (cookies, sessions) configure <strong>session affinity</strong> on the canary VirtualService so a user doesn&rsquo;t bounce between versions; pair with <strong>SLO error budgets</strong> &mdash; if you&rsquo;re burning budget, slow promotion automatically; <strong>Flagger</strong> is the Flux-stack equivalent and ties into <strong>Linkerd</strong>/<strong>Istio</strong>/<strong>App Mesh</strong>; for non-mesh setups <strong>Argo Rollouts</strong> can manipulate <strong>Nginx</strong> ingress weights directly via the <code>nginx</code> trafficRouting; emit <strong>OpenTelemetry</strong> deployment markers so traces are filterable by canary vs stable; document the abort runbook &mdash; <code>kubectl argo rollouts abort api</code> reverts traffic in seconds, but humans need to know the command exists at 3am.</p>'''
+
+
+ANSWERS[9] = r'''<p><strong>Situation:</strong> a Jenkins controller has accumulated years of plugin configs, credentials, jobs, and shared library bindings. A disk failure or accidental config wipe would be catastrophic; backups must be automated, tested, and version-controlled.</p>
 
 <p><strong>Approach:</strong> the right answer in 2026 is <strong>Configuration as Code (JCasC)</strong> + Git, not file-system snapshots. Convert the Jenkins controller config to a <code>jenkins.yaml</code> committed to a config repo; manage plugins via <code>plugins.txt</code> with the <strong>jenkins-plugin-cli</strong>; manage jobs via the <strong>job-dsl</strong> plugin or in JCasC itself. Run Jenkins in a container (or via the <strong>Jenkins Operator</strong> on K8s) so the controller is reproducible from Git in minutes. For job history, build artefacts, and credentials, periodic file-system backups still matter &mdash; use <strong>thinBackup</strong> or a sidecar that snapshots <code>$JENKINS_HOME</code> to S3 with versioning + Object Lock.</p>
 
@@ -628,15 +485,10 @@ spec:
 <tr><td>Restore drill</td><td>Quarterly Game Day</td><td>Provision blank, restore, verify</td></tr>
 </tbody></table>
 
-<p><strong>Production polish:</strong> stop storing credentials in <code>$JENKINS_HOME</code> &mdash; use <strong>HashiCorp Vault</strong>, <strong>AWS Secrets Manager</strong>, <strong>GCP Secret Manager</strong>, or <strong>Doppler</strong> via the appropriate Jenkins credential provider; pin every plugin to a tested version (snapshot the BOM in Git); use the <strong>Jenkins Operator</strong> on Kubernetes &mdash; it owns the controller via CRDs and reconciles drift, so re-creating is one <code>kubectl apply</code>; on AWS use <strong>S3 Versioning</strong> + <strong>Object Lock</strong> + cross-region replication so a ransomware event can&rsquo;t encrypt your backups; verify backups by running a quarterly restore drill into a staging cluster (test what you actually rely on); export controller logs to <strong>Loki</strong>/<strong>OpenSearch</strong>/<strong>Datadog</strong> rather than relying on local files; on the migration question &mdash; many teams in 2026 use this Jenkins refresh as a moment to evaluate <strong>GitHub Actions</strong>, <strong>Buildkite</strong>, <strong>CircleCI</strong>, or <strong>Tekton</strong>; if you stay on Jenkins, <strong>JCasC</strong> + <strong>Operator</strong> is the only sustainable shape.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q10">
-  <div class="qa__number">Question 10</div>
-  <h3 class="qa__question">Your organization is moving to a multi-cloud strategy. How would you set up CI/CD pipelines to deploy to both AWS and Azure?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> the company is going <strong>multi-cloud</strong> &mdash; AWS for some workloads, Azure for others, with a longer-term plan to deploy critical services in both for vendor independence. The CI/CD pipeline must build once and ship the same artefacts to either cloud.</p>
+<p><strong>Production polish:</strong> stop storing credentials in <code>$JENKINS_HOME</code> &mdash; use <strong>HashiCorp Vault</strong>, <strong>AWS Secrets Manager</strong>, <strong>GCP Secret Manager</strong>, or <strong>Doppler</strong> via the appropriate Jenkins credential provider; pin every plugin to a tested version (snapshot the BOM in Git); use the <strong>Jenkins Operator</strong> on Kubernetes &mdash; it owns the controller via CRDs and reconciles drift, so re-creating is one <code>kubectl apply</code>; on AWS use <strong>S3 Versioning</strong> + <strong>Object Lock</strong> + cross-region replication so a ransomware event can&rsquo;t encrypt your backups; verify backups by running a quarterly restore drill into a staging cluster (test what you actually rely on); export controller logs to <strong>Loki</strong>/<strong>OpenSearch</strong>/<strong>Datadog</strong> rather than relying on local files; on the migration question &mdash; many teams in 2026 use this Jenkins refresh as a moment to evaluate <strong>GitHub Actions</strong>, <strong>Buildkite</strong>, <strong>CircleCI</strong>, or <strong>Tekton</strong>; if you stay on Jenkins, <strong>JCasC</strong> + <strong>Operator</strong> is the only sustainable shape.</p>'''
+
+
+ANSWERS[10] = r'''<p><strong>Situation:</strong> the company is going <strong>multi-cloud</strong> &mdash; AWS for some workloads, Azure for others, with a longer-term plan to deploy critical services in both for vendor independence. The CI/CD pipeline must build once and ship the same artefacts to either cloud.</p>
 
 <p><strong>Approach:</strong> use cloud-neutral primitives wherever possible &mdash; <strong>OCI containers</strong> as the universal artefact, <strong>Kubernetes</strong> as the universal runtime (EKS on AWS, AKS on Azure), <strong>Crossplane</strong> or <strong>Terraform/OpenTofu</strong> for IaC across clouds, and <strong>Argo CD ApplicationSets</strong> for fleet GitOps. Build once in <strong>GitHub Actions</strong>, push to a registry replicated across clouds (<strong>Harbor</strong> with replication, or push to both <strong>ECR</strong> and <strong>ACR</strong>), and use <strong>OIDC</strong> against each cloud&rsquo;s IAM.</p>
 
@@ -696,15 +548,9 @@ jobs:
 <tr><td>Observability</td><td>OpenTelemetry &rarr; Datadog/Grafana Cloud</td><td>Avoid CloudWatch/Azure Monitor lock-in</td></tr>
 </tbody></table>
 
-<p><strong>Production polish:</strong> be honest with yourself about <em>why</em> you&rsquo;re multi-cloud &mdash; vendor independence costs real money in egress, dual-stack expertise, and complexity; the answer is rarely &ldquo;active-active across both at all times&rdquo; but more often &ldquo;active in one, ready to fail over to the other in a regional disaster&rdquo;; that operationally simpler shape (<strong>active/passive</strong>) avoids most cross-cloud data plane pain; for IaC, <strong>OpenTofu</strong> with cloud-specific modules + <strong>Atlantis</strong>/<strong>Spacelift</strong>/<strong>Terraform Cloud</strong>/<strong>env0</strong> for orchestration; for K8s standardise <strong>Cilium</strong> as CNI for consistent NetworkPolicy and Hubble observability; <strong>Karpenter</strong> is now GA on both AWS and Azure so node provisioning is the same primitive; for the registry, <strong>Harbor</strong> with replication or <strong>ORAS</strong>-based sync between ECR and ACR via <strong>regclient</strong>/<strong>crane</strong>; document the data residency story per workload &mdash; some workloads must live in one cloud only for regulatory reasons.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q11">
-  <div class="qa__number">Question 11</div>
-  <h3 class="qa__question">You are tasked with optimizing Docker image build times in the CI/CD pipeline. Describe the techniques you would use.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> Docker image builds are taking 15&ndash;20 minutes in CI &mdash; node_modules and pip caches reinstall from scratch every run, layers don&rsquo;t cache, and the resulting image is 1.5 GB. The team needs builds under 3 minutes and images under 200 MB without changing the application.</p>
+<p><strong>Production polish:</strong> be honest with yourself about <em>why</em> you&rsquo;re multi-cloud &mdash; vendor independence costs real money in egress, dual-stack expertise, and complexity; the answer is rarely &ldquo;active-active across both at all times&rdquo; but more often &ldquo;active in one, ready to fail over to the other in a regional disaster&rdquo;; that operationally simpler shape (<strong>active/passive</strong>) avoids most cross-cloud data plane pain; for IaC, <strong>OpenTofu</strong> with cloud-specific modules + <strong>Atlantis</strong>/<strong>Spacelift</strong>/<strong>Terraform Cloud</strong>/<strong>env0</strong> for orchestration; for K8s standardise <strong>Cilium</strong> as CNI for consistent NetworkPolicy and Hubble observability; <strong>Karpenter</strong> is now GA on both AWS and Azure so node provisioning is the same primitive; for the registry, <strong>Harbor</strong> with replication or <strong>ORAS</strong>-based sync between ECR and ACR via <strong>regclient</strong>/<strong>crane</strong>; document the data residency story per workload &mdash; some workloads must live in one cloud only for regulatory reasons.</p>'''
+
+ANSWERS[11] = r'''<p><strong>Situation:</strong> Docker image builds are taking 15&ndash;20 minutes in CI &mdash; node_modules and pip caches reinstall from scratch every run, layers don&rsquo;t cache, and the resulting image is 1.5 GB. The team needs builds under 3 minutes and images under 200 MB without changing the application.</p>
 
 <p><strong>Approach:</strong> the wins stack across four levers &mdash; <strong>BuildKit</strong> features (cache mounts, parallel stages), <strong>multi-stage</strong> builds with a slim final image, <strong>layer ordering</strong> so dep installs cache properly, and <strong>distributed cache</strong> via GHA cache, registry cache, or a managed builder like <strong>Depot</strong>/<strong>Namespace</strong>/<strong>Blacksmith</strong>. Switch the base image to <strong>Chainguard</strong> or <strong>distroless</strong> for the final stage. For monorepos, <strong>Bake</strong> with parallel targets unblocks otherwise-serial work.</p>
 
@@ -751,15 +597,10 @@ ENTRYPOINT ["node", "dist/server.js"]
 <tr><td>Bake parallelism</td><td>Multi-target builds in parallel</td><td>2&ndash;3x for monorepos</td></tr>
 </tbody></table>
 
-<p><strong>Production polish:</strong> always use <code>--mount=type=cache</code> for package managers (npm, pip, apt, go mod, cargo); switch the final stage to <strong>Chainguard</strong>/<strong>Wolfi</strong>/<strong>distroless</strong> images &mdash; smaller, fewer CVEs, fewer scanners screaming; use the <strong>build-push-action</strong> with <code>provenance: true</code> and <code>sbom: true</code> for free supply-chain hygiene; on monorepos use <strong>Docker Bake</strong> + a <code>docker-bake.hcl</code> with shared <code>contexts</code> so common base images build once; for heavy CI use <strong>Depot</strong> or <strong>Namespace</strong> &mdash; persistent BuildKit volumes blow GHA cache out of the water and pay for themselves quickly; consider <strong>buildah</strong> or <strong>kaniko</strong> only if you need rootless builds inside Kubernetes; profile slow builds with <code>BUILDKIT_PROGRESS=plain</code> and <code>--push</code> output to find which step actually dominates &mdash; the answer is often a single <code>RUN apt-get update</code> that invalidates everything below it.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q12">
-  <div class="qa__number">Question 12</div>
-  <h3 class="qa__question">Your team wants to set up continuous delivery for a React application using GitHub Actions. Explain the workflow you would create.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a React SPA needs a CD workflow on GitHub Actions &mdash; lint and test on every PR, build and deploy to <strong>Vercel</strong>/<strong>Netlify</strong>/<strong>Cloudflare Pages</strong>/<strong>S3+CloudFront</strong> on merge to main, with preview environments per PR, atomic deploys, and instant rollback.</p>
+<p><strong>Production polish:</strong> always use <code>--mount=type=cache</code> for package managers (npm, pip, apt, go mod, cargo); switch the final stage to <strong>Chainguard</strong>/<strong>Wolfi</strong>/<strong>distroless</strong> images &mdash; smaller, fewer CVEs, fewer scanners screaming; use the <strong>build-push-action</strong> with <code>provenance: true</code> and <code>sbom: true</code> for free supply-chain hygiene; on monorepos use <strong>Docker Bake</strong> + a <code>docker-bake.hcl</code> with shared <code>contexts</code> so common base images build once; for heavy CI use <strong>Depot</strong> or <strong>Namespace</strong> &mdash; persistent BuildKit volumes blow GHA cache out of the water and pay for themselves quickly; consider <strong>buildah</strong> or <strong>kaniko</strong> only if you need rootless builds inside Kubernetes; profile slow builds with <code>BUILDKIT_PROGRESS=plain</code> and <code>--push</code> output to find which step actually dominates &mdash; the answer is often a single <code>RUN apt-get update</code> that invalidates everything below it.</p>'''
+
+
+ANSWERS[12] = r'''<p><strong>Situation:</strong> a React SPA needs a CD workflow on GitHub Actions &mdash; lint and test on every PR, build and deploy to <strong>Vercel</strong>/<strong>Netlify</strong>/<strong>Cloudflare Pages</strong>/<strong>S3+CloudFront</strong> on merge to main, with preview environments per PR, atomic deploys, and instant rollback.</p>
 
 <p><strong>Approach:</strong> static SPAs love edge platforms because they handle preview deploys, atomic rollouts, and rollback as first-class features &mdash; the GH Actions workflow becomes a thin glue layer. For a Vite + React app, build once, run unit tests with <strong>Vitest</strong>, run E2E with <strong>Playwright</strong>, then deploy via the platform&rsquo;s official action. Use <strong>Cloudflare Pages</strong> if you want global edge by default, <strong>Vercel</strong> if you want best-in-class DX with framework-specific optimisations, or <strong>S3 + CloudFront + OAC</strong> if you must stay in AWS.</p>
 
@@ -823,15 +664,10 @@ jobs:
 <tr><td>Cache busting</td><td>Hashed filenames + long Cache-Control</td><td>Vite/Webpack default</td></tr>
 </tbody></table>
 
-<p><strong>Production polish:</strong> set <strong>Content Security Policy</strong> headers via the platform&rsquo;s response headers config (Vercel <code>headers</code>, Cloudflare Pages <code>_headers</code>) &mdash; reflects supply-chain best practice; instrument <strong>Real User Monitoring</strong> with <strong>Vercel Analytics</strong>, <strong>Cloudflare Web Analytics</strong>, <strong>SpeedCurve</strong>, or <strong>Datadog RUM</strong> &mdash; track <strong>INP</strong>, <strong>LCP</strong>, <strong>CLS</strong> directly because they correlate with conversion; run <strong>Lighthouse CI</strong> in the workflow with budgets so PRs that regress performance fail the check; turn on <strong>Renovate</strong>/<strong>Dependabot</strong> for npm; for E2E split tests into shards across the matrix to keep wall-clock under 5 minutes; for non-Cloudflare options, <strong>Vercel</strong> integrates the deepest with Next.js, <strong>Netlify</strong> and <strong>Cloudflare Pages</strong> are platform-agnostic; if you must self-host, <strong>S3 + CloudFront + OAC</strong> with <strong>cloudfront invalidation</strong> on deploy is fine but you give up preview environments unless you wire them yourself; use <strong>Sentry</strong>/<strong>Honeybadger</strong>/<strong>Highlight</strong> for client-side error tracking and source maps.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q13">
-  <div class="qa__number">Question 13</div>
-  <h3 class="qa__question">You need to implement rolling updates for your Kubernetes deployments. How would you configure this in Jenkins?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a Jenkins-driven team running Kubernetes Deployments wants <strong>rolling updates</strong> with bounded surge, controlled disruption, and good signals into pipeline status &mdash; without adopting Argo Rollouts or Flagger.</p>
+<p><strong>Production polish:</strong> set <strong>Content Security Policy</strong> headers via the platform&rsquo;s response headers config (Vercel <code>headers</code>, Cloudflare Pages <code>_headers</code>) &mdash; reflects supply-chain best practice; instrument <strong>Real User Monitoring</strong> with <strong>Vercel Analytics</strong>, <strong>Cloudflare Web Analytics</strong>, <strong>SpeedCurve</strong>, or <strong>Datadog RUM</strong> &mdash; track <strong>INP</strong>, <strong>LCP</strong>, <strong>CLS</strong> directly because they correlate with conversion; run <strong>Lighthouse CI</strong> in the workflow with budgets so PRs that regress performance fail the check; turn on <strong>Renovate</strong>/<strong>Dependabot</strong> for npm; for E2E split tests into shards across the matrix to keep wall-clock under 5 minutes; for non-Cloudflare options, <strong>Vercel</strong> integrates the deepest with Next.js, <strong>Netlify</strong> and <strong>Cloudflare Pages</strong> are platform-agnostic; if you must self-host, <strong>S3 + CloudFront + OAC</strong> with <strong>cloudfront invalidation</strong> on deploy is fine but you give up preview environments unless you wire them yourself; use <strong>Sentry</strong>/<strong>Honeybadger</strong>/<strong>Highlight</strong> for client-side error tracking and source maps.</p>'''
+
+
+ANSWERS[13] = r'''<p><strong>Situation:</strong> a Jenkins-driven team running Kubernetes Deployments wants <strong>rolling updates</strong> with bounded surge, controlled disruption, and good signals into pipeline status &mdash; without adopting Argo Rollouts or Flagger.</p>
 
 <p><strong>Approach:</strong> the native <code>RollingUpdate</code> strategy is sufficient when paired with <strong>readiness probes</strong>, <strong>preStop hooks</strong>, <strong>PodDisruptionBudgets</strong>, and <strong>topologySpreadConstraints</strong>. Jenkins triggers the rollout via <code>kubectl set image</code> or <code>helm upgrade --atomic</code>, then watches with <code>kubectl rollout status</code> for completion or auto-rollback on failure. Tune <code>maxSurge</code> and <code>maxUnavailable</code> for your throughput vs availability trade-off.</p>
 
@@ -904,15 +740,10 @@ pipeline {
 <tr><td>Spread</td><td>topologySpreadConstraints</td><td>AZ resilience during rollout</td></tr>
 </tbody></table>
 
-<p><strong>Production polish:</strong> the most common rolling-update failure isn&rsquo;t the rollout itself &mdash; it&rsquo;s a missing <code>preStop sleep</code>, so the kube-proxy iptables rules still send traffic to a terminating pod that&rsquo;s closed its listener; the <code>preStop sleep 10</code> + matching <code>terminationGracePeriodSeconds</code> fixes that across nginx/Envoy/Node/Java; couple <code>kubectl rollout status</code> with explicit timeouts so a hung rollout fails the pipeline; use <code>helm upgrade --atomic --wait --timeout 10m</code> if you&rsquo;re on Helm &mdash; it auto-rolls back on failure; for Argo CD-managed workloads use <strong>sync waves</strong> and <strong>health checks</strong> instead; for canary semantics on top of native rolling updates, <strong>Argo Rollouts</strong> or <strong>Flagger</strong> remain the better path; ship rollout events to <strong>Datadog</strong>/<strong>Honeycomb</strong> as deployment markers; consider <strong>HorizontalPodAutoscaler</strong> with <code>behavior</code> tuned so a scale-down doesn&rsquo;t race the rollout; on Kubernetes 1.33+, <strong>in-place pod resize</strong> can update CPU/memory without recreating pods, which is occasionally useful when paired with VPA recommendations.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q14">
-  <div class="qa__number">Question 14</div>
-  <h3 class="qa__question">Your organization requires that all secrets be managed securely in the CI/CD pipeline. How would you achieve this using GitHub Actions?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> the security team requires that <em>no</em> long-lived cloud credentials live in GitHub Actions; build secrets, deploy credentials, and runtime config must use short-lived tokens, with secret rotation, audit logs, and least-privilege scoping per workflow.</p>
+<p><strong>Production polish:</strong> the most common rolling-update failure isn&rsquo;t the rollout itself &mdash; it&rsquo;s a missing <code>preStop sleep</code>, so the kube-proxy iptables rules still send traffic to a terminating pod that&rsquo;s closed its listener; the <code>preStop sleep 10</code> + matching <code>terminationGracePeriodSeconds</code> fixes that across nginx/Envoy/Node/Java; couple <code>kubectl rollout status</code> with explicit timeouts so a hung rollout fails the pipeline; use <code>helm upgrade --atomic --wait --timeout 10m</code> if you&rsquo;re on Helm &mdash; it auto-rolls back on failure; for Argo CD-managed workloads use <strong>sync waves</strong> and <strong>health checks</strong> instead; for canary semantics on top of native rolling updates, <strong>Argo Rollouts</strong> or <strong>Flagger</strong> remain the better path; ship rollout events to <strong>Datadog</strong>/<strong>Honeycomb</strong> as deployment markers; consider <strong>HorizontalPodAutoscaler</strong> with <code>behavior</code> tuned so a scale-down doesn&rsquo;t race the rollout; on Kubernetes 1.33+, <strong>in-place pod resize</strong> can update CPU/memory without recreating pods, which is occasionally useful when paired with VPA recommendations.</p>'''
+
+
+ANSWERS[14] = r'''<p><strong>Situation:</strong> the security team requires that <em>no</em> long-lived cloud credentials live in GitHub Actions; build secrets, deploy credentials, and runtime config must use short-lived tokens, with secret rotation, audit logs, and least-privilege scoping per workflow.</p>
 
 <p><strong>Approach:</strong> use <strong>OIDC federation</strong> for cloud auth (AWS, GCP, Azure all accept GitHub&rsquo;s OIDC tokens); use <strong>Environments</strong> to scope deploy secrets to specific branches with required reviewers; pull runtime secrets from <strong>HashiCorp Vault</strong>, <strong>AWS Secrets Manager</strong>, <strong>Doppler</strong>, or <strong>1Password</strong> at deploy time, never store them in GitHub; lock down the <code>GITHUB_TOKEN</code> with explicit <code>permissions:</code>; pin actions to commit SHAs and use <strong>step-security/harden-runner</strong> with an egress allow-list.</p>
 
@@ -969,15 +800,10 @@ jobs:
 <tr><td>Rotation</td><td>Vault dynamic creds (DB, AWS)</td><td>Manual rotation, often skipped</td></tr>
 </tbody></table>
 
-<p><strong>Production polish:</strong> the highest-leverage controls are <strong>OIDC</strong> + <strong>harden-runner</strong> &mdash; the first eliminates the long-lived-key class of incidents, the second blocks exfiltration if a malicious dependency lands; pin actions to commit SHA (<code>uses: actions/checkout@b4ffde6...</code>) so a tag move can&rsquo;t silently swap behaviour, then use <strong>Renovate</strong> or <strong>Dependabot</strong> to PR updates; for runtime secrets prefer <strong>dynamic credentials</strong> &mdash; Vault DB engine issues a per-deploy DB user, AWS STS issues a 15-minute role; use <strong>environments</strong> with required reviewers and <em>branch policy</em> for production so a PR can&rsquo;t self-deploy; emit <strong>SLSA Level 3 provenance</strong> via <strong>slsa-github-generator</strong> and verify at admission with <strong>Kyverno</strong>/<strong>Sigstore Policy Controller</strong>; for cross-org secrets share via <strong>External Secrets Operator</strong> in K8s rather than copying values across repos; rotate periodically with <strong>secret scanning push protection</strong> as a safety net &mdash; GitHub will reject pushes containing known secret formats; for advanced setups <strong>Doppler</strong>, <strong>1Password Secrets Automation</strong>, and <strong>Akeyless</strong> bring policy and rotation as managed services.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q15">
-  <div class="qa__number">Question 15</div>
-  <h3 class="qa__question">You need to set up a CI/CD pipeline for a Java application that includes static code analysis, unit tests, and deployment to Google Cloud Run. Describe your approach.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a Java service (Spring Boot, Maven) needs CI/CD with <strong>static analysis</strong> (SpotBugs, SonarCloud), unit + integration tests, container build, and deployment to <strong>Google Cloud Run</strong>. The team uses GitHub Actions and wants OIDC-based auth to GCP.</p>
+<p><strong>Production polish:</strong> the highest-leverage controls are <strong>OIDC</strong> + <strong>harden-runner</strong> &mdash; the first eliminates the long-lived-key class of incidents, the second blocks exfiltration if a malicious dependency lands; pin actions to commit SHA (<code>uses: actions/checkout@b4ffde6...</code>) so a tag move can&rsquo;t silently swap behaviour, then use <strong>Renovate</strong> or <strong>Dependabot</strong> to PR updates; for runtime secrets prefer <strong>dynamic credentials</strong> &mdash; Vault DB engine issues a per-deploy DB user, AWS STS issues a 15-minute role; use <strong>environments</strong> with required reviewers and <em>branch policy</em> for production so a PR can&rsquo;t self-deploy; emit <strong>SLSA Level 3 provenance</strong> via <strong>slsa-github-generator</strong> and verify at admission with <strong>Kyverno</strong>/<strong>Sigstore Policy Controller</strong>; for cross-org secrets share via <strong>External Secrets Operator</strong> in K8s rather than copying values across repos; rotate periodically with <strong>secret scanning push protection</strong> as a safety net &mdash; GitHub will reject pushes containing known secret formats; for advanced setups <strong>Doppler</strong>, <strong>1Password Secrets Automation</strong>, and <strong>Akeyless</strong> bring policy and rotation as managed services.</p>'''
+
+
+ANSWERS[15] = r'''<p><strong>Situation:</strong> a Java service (Spring Boot, Maven) needs CI/CD with <strong>static analysis</strong> (SpotBugs, SonarCloud), unit + integration tests, container build, and deployment to <strong>Google Cloud Run</strong>. The team uses GitHub Actions and wants OIDC-based auth to GCP.</p>
 
 <p><strong>Approach:</strong> use <strong>actions/setup-java</strong> with Maven cache, run tests with <strong>JUnit 5</strong> and <strong>Testcontainers</strong> for integration, run <strong>SpotBugs</strong>/<strong>PMD</strong> via Maven plugins, push results to <strong>SonarCloud</strong>, build the image with <strong>Spring Boot Buildpacks</strong> (no Dockerfile required) or <strong>Jib</strong>, push to <strong>Artifact Registry</strong>, and deploy with <strong>google-github-actions/deploy-cloudrun</strong> using <strong>Workload Identity Federation</strong>.</p>
 
@@ -1031,15 +857,10 @@ jobs:
 <tr><td>Deploy</td><td>Cloud Run</td><td>Revision-based, traffic split, instant rollback</td></tr>
 </tbody></table>
 
-<p><strong>Production polish:</strong> Cloud Run revisions are first-class deploy units &mdash; every deploy creates a new revision; route traffic with <code>--no-traffic</code> + a manual <code>gcloud run services update-traffic</code> for canaries; rollback is <code>gcloud run services update-traffic --to-revisions=PREV=100</code>; for cold start mitigation use <code>--min-instances=1</code> and consider <strong>Spring Boot CRaC</strong> with Java 21 or <strong>GraalVM native-image</strong> via <code>spring-boot:build-image -Pnative</code> &mdash; sub-100ms startup for typical APIs; trace via <strong>OpenTelemetry</strong> Java agent and forward to <strong>Cloud Trace</strong>/<strong>Datadog</strong>/<strong>Honeycomb</strong>; for richer pipelines, replace SonarCloud with <strong>Snyk</strong>/<strong>Semgrep</strong>/<strong>CodeQL</strong> and add <strong>Dependency-Check</strong>/<strong>Maven Versions Plugin</strong>; use <strong>Renovate</strong> with auto-merge for patch updates; <strong>Cloud Run Jobs</strong> handles scheduled work without spinning up Cloud Scheduler + GKE; for IaC of the whole project, <strong>Terraform</strong>/<strong>OpenTofu</strong> with the Google provider or <strong>Pulumi</strong>; if budget allows, add <strong>Cloud Deploy</strong> as a managed promotion layer over Cloud Run.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q16">
-  <div class="qa__number">Question 16</div>
-  <h3 class="qa__question">Your team wants to implement automated rollbacks in case of deployment failures. How would you set this up in Kubernetes?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a deployment occasionally introduces a regression that only manifests under real traffic. The team needs <strong>automated rollback</strong> when health degrades &mdash; no human paging required &mdash; with the rollback decision tied to real metrics, not just pod readiness.</p>
+<p><strong>Production polish:</strong> Cloud Run revisions are first-class deploy units &mdash; every deploy creates a new revision; route traffic with <code>--no-traffic</code> + a manual <code>gcloud run services update-traffic</code> for canaries; rollback is <code>gcloud run services update-traffic --to-revisions=PREV=100</code>; for cold start mitigation use <code>--min-instances=1</code> and consider <strong>Spring Boot CRaC</strong> with Java 21 or <strong>GraalVM native-image</strong> via <code>spring-boot:build-image -Pnative</code> &mdash; sub-100ms startup for typical APIs; trace via <strong>OpenTelemetry</strong> Java agent and forward to <strong>Cloud Trace</strong>/<strong>Datadog</strong>/<strong>Honeycomb</strong>; for richer pipelines, replace SonarCloud with <strong>Snyk</strong>/<strong>Semgrep</strong>/<strong>CodeQL</strong> and add <strong>Dependency-Check</strong>/<strong>Maven Versions Plugin</strong>; use <strong>Renovate</strong> with auto-merge for patch updates; <strong>Cloud Run Jobs</strong> handles scheduled work without spinning up Cloud Scheduler + GKE; for IaC of the whole project, <strong>Terraform</strong>/<strong>OpenTofu</strong> with the Google provider or <strong>Pulumi</strong>; if budget allows, add <strong>Cloud Deploy</strong> as a managed promotion layer over Cloud Run.</p>'''
+
+
+ANSWERS[16] = r'''<p><strong>Situation:</strong> a deployment occasionally introduces a regression that only manifests under real traffic. The team needs <strong>automated rollback</strong> when health degrades &mdash; no human paging required &mdash; with the rollback decision tied to real metrics, not just pod readiness.</p>
 
 <p><strong>Approach:</strong> the cleanest implementation in 2026 is <strong>Argo Rollouts</strong> with <strong>AnalysisTemplate</strong> queries against Prometheus/Datadog/New Relic during the canary phase &mdash; if a metric breaches threshold, Rollouts automatically aborts and traffic returns to the stable replica set. For Helm-based deploys without Argo Rollouts, <code>helm upgrade --atomic --wait --timeout</code> rolls back on any pod-level failure, but doesn&rsquo;t see business metrics. For richer signals add <strong>Prometheus Alertmanager</strong> webhooks or <strong>Keptn</strong>/<strong>Flagger</strong>.</p>
 
@@ -1099,15 +920,10 @@ spec:
 <tr><td>Schema</td><td>Expand/contract; never destructive same release</td><td>Atlas, Flyway, Liquibase</td></tr>
 </tbody></table>
 
-<p><strong>Production polish:</strong> the trick to robust auto-rollback is <strong>realistic thresholds</strong> &mdash; set them just outside normal noise; too tight and every minor blip aborts, too loose and you ship genuine regressions; use <code>failureLimit</code> &gt; 1 so a single transient sample doesn&rsquo;t flip the verdict; pair with <strong>SLO error budgets</strong> &mdash; if you&rsquo;re burning budget, slow promotion automatically by adding longer <code>pause</code> steps; rollback should never be the only safety mechanism &mdash; <strong>feature flags</strong> (LaunchDarkly, ConfigCat, Statsig, OpenFeature, Unleash) let you disable code paths without re-deploying, often the faster fix; for stateful concerns, schema migrations must use <strong>expand/contract</strong> so rollback doesn&rsquo;t encounter a dropped column; instrument deploys as <strong>OpenTelemetry events</strong> in Datadog/Honeycomb so on-call sees deployment markers on dashboards; for blast-radius limitation, deploy region-by-region with explicit gates rather than worldwide-at-once; <strong>Flagger</strong> on Flux+Linkerd is the closest alternative if you&rsquo;re not on Argo CD; <strong>Keptn</strong> adds quality gates on top of either.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q17">
-  <div class="qa__number">Question 17</div>
-  <h3 class="qa__question">You need to create a CI/CD pipeline for a multi-service application using Docker Compose. Explain the steps you would take.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a small team has a multi-service application defined in <strong>Docker Compose</strong> &mdash; web, API, worker, Postgres, Redis &mdash; and wants to ship from a single repo with automated tests, image builds, and deployment to a single VPS or Container service. They are not yet on Kubernetes.</p>
+<p><strong>Production polish:</strong> the trick to robust auto-rollback is <strong>realistic thresholds</strong> &mdash; set them just outside normal noise; too tight and every minor blip aborts, too loose and you ship genuine regressions; use <code>failureLimit</code> &gt; 1 so a single transient sample doesn&rsquo;t flip the verdict; pair with <strong>SLO error budgets</strong> &mdash; if you&rsquo;re burning budget, slow promotion automatically by adding longer <code>pause</code> steps; rollback should never be the only safety mechanism &mdash; <strong>feature flags</strong> (LaunchDarkly, ConfigCat, Statsig, OpenFeature, Unleash) let you disable code paths without re-deploying, often the faster fix; for stateful concerns, schema migrations must use <strong>expand/contract</strong> so rollback doesn&rsquo;t encounter a dropped column; instrument deploys as <strong>OpenTelemetry events</strong> in Datadog/Honeycomb so on-call sees deployment markers on dashboards; for blast-radius limitation, deploy region-by-region with explicit gates rather than worldwide-at-once; <strong>Flagger</strong> on Flux+Linkerd is the closest alternative if you&rsquo;re not on Argo CD; <strong>Keptn</strong> adds quality gates on top of either.</p>'''
+
+
+ANSWERS[17] = r'''<p><strong>Situation:</strong> a small team has a multi-service application defined in <strong>Docker Compose</strong> &mdash; web, API, worker, Postgres, Redis &mdash; and wants to ship from a single repo with automated tests, image builds, and deployment to a single VPS or Container service. They are not yet on Kubernetes.</p>
 
 <p><strong>Approach:</strong> use <strong>GitHub Actions</strong> to build all images with <code>docker compose build</code> + <strong>BuildKit</strong>, run integration tests against the full Compose stack inside CI, push to <strong>GHCR</strong>/<strong>ECR</strong>/<strong>ACR</strong>, then deploy by SSHing to the host and running <code>docker compose pull &amp;&amp; docker compose up -d</code>. For a more managed alternative, use <strong>AWS ECS Compose-X</strong> or <strong>Azure Container Apps</strong>&rsquo; native Compose support so you don&rsquo;t SSH into a VM. Treat Compose-on-VM as a viable shape for low-traffic services and a stepping stone to K8s.</p>
 
@@ -1180,15 +996,10 @@ jobs:
 <tr><td>Migration to K8s</td><td>kompose convert / Compose Bridge</td><td>One-shot port; expect cleanup</td></tr>
 </tbody></table>
 
-<p><strong>Production polish:</strong> Compose-on-VM is a fine deployment shape until you outgrow it &mdash; the moment you need horizontal scaling, blue/green, multi-host, or anything but single-instance failover, move to K8s or a managed container service; before then, the operational essentials are <strong>watchtower</strong> or systemd-based image pulls (avoid SSH if possible), <strong>healthchecks</strong> in compose so a broken container restarts, <strong>logs</strong> shipped to <strong>Loki</strong>/<strong>OpenSearch</strong>/<strong>Datadog</strong> via <strong>Vector</strong>/<strong>Fluent Bit</strong>, and <strong>backups</strong> of the DB volume to S3 with <strong>restic</strong>/<strong>borg</strong>/<strong>pgBackRest</strong>; switch the Postgres container for a <strong>managed DB</strong> (RDS, Cloud SQL, Atlas) the moment data matters &mdash; Compose volumes on a single VM are the easiest way to lose customer data; for production-grade Compose orchestration, <strong>Docker Swarm</strong> works but its momentum is gone; <strong>ECS Compose-X</strong> converts Compose to ECS task defs cleanly; <strong>Azure Container Apps</strong> ingests Compose files directly via <code>az containerapp compose</code>; <strong>Fly.io</strong> and <strong>Railway</strong> deploy Compose-shaped apps with sensible defaults if you want to skip infra entirely.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q18">
-  <div class="qa__number">Question 18</div>
-  <h3 class="qa__question">Your team is experiencing slow builds in Jenkins. How would you diagnose and resolve this issue?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> Jenkins builds have crept from 3 minutes to 25 minutes over a year as the codebase grew, agents got busier, and plugins accumulated. Developers are losing flow waiting on PR feedback. Diagnose and fix.</p>
+<p><strong>Production polish:</strong> Compose-on-VM is a fine deployment shape until you outgrow it &mdash; the moment you need horizontal scaling, blue/green, multi-host, or anything but single-instance failover, move to K8s or a managed container service; before then, the operational essentials are <strong>watchtower</strong> or systemd-based image pulls (avoid SSH if possible), <strong>healthchecks</strong> in compose so a broken container restarts, <strong>logs</strong> shipped to <strong>Loki</strong>/<strong>OpenSearch</strong>/<strong>Datadog</strong> via <strong>Vector</strong>/<strong>Fluent Bit</strong>, and <strong>backups</strong> of the DB volume to S3 with <strong>restic</strong>/<strong>borg</strong>/<strong>pgBackRest</strong>; switch the Postgres container for a <strong>managed DB</strong> (RDS, Cloud SQL, Atlas) the moment data matters &mdash; Compose volumes on a single VM are the easiest way to lose customer data; for production-grade Compose orchestration, <strong>Docker Swarm</strong> works but its momentum is gone; <strong>ECS Compose-X</strong> converts Compose to ECS task defs cleanly; <strong>Azure Container Apps</strong> ingests Compose files directly via <code>az containerapp compose</code>; <strong>Fly.io</strong> and <strong>Railway</strong> deploy Compose-shaped apps with sensible defaults if you want to skip infra entirely.</p>'''
+
+
+ANSWERS[18] = r'''<p><strong>Situation:</strong> Jenkins builds have crept from 3 minutes to 25 minutes over a year as the codebase grew, agents got busier, and plugins accumulated. Developers are losing flow waiting on PR feedback. Diagnose and fix.</p>
 
 <p><strong>Approach:</strong> profile before optimising. Enable the <strong>Pipeline Stage View</strong> and <strong>Blue Ocean</strong> visualisation, and add <code>timestamps()</code> to capture per-step duration. Look at five common culprits: agent provisioning latency, dependency download time, test execution, Docker layer cache misses, and serial-when-parallel-possible stages. Also check controller load (CPU, IO, plugin count) &mdash; a slow controller starves all jobs.</p>
 
@@ -1235,15 +1046,10 @@ pipeline {
 <tr><td>Plugin overhead</td><td>Long startup, GC pauses</td><td>Audit plugins.txt; remove unused</td></tr>
 </tbody></table>
 
-<p><strong>Production polish:</strong> the highest-leverage win is almost always <strong>parallelism</strong> &mdash; lint, unit tests, and image build are independent and should run side-by-side, not sequentially; for tests beyond a few minutes, shard them &mdash; <code>jest --shard=$INDEX/$TOTAL</code>, <code>vitest --shard</code>, <code>pytest-xdist</code>, <strong>knapsack-pro</strong> for time-balanced sharding; for image builds, use <strong>BuildKit cache mounts</strong> (<code>--mount=type=cache</code>), GHA-style registry cache, or <strong>Depot</strong>/<strong>Namespace</strong>/<strong>Blacksmith</strong> persistent BuildKit volumes &mdash; the speedup is usually 3&ndash;5x on dep-heavy projects; for agent provisioning use the <strong>Kubernetes plugin</strong>&rsquo;s pod templates with a <strong>warmedNumber</strong> of pre-built agents waiting; for the controller itself, prune unused plugins (each adds startup time), give it 4&ndash;8 GB heap minimum, store <code>$JENKINS_HOME</code> on fast SSD, and offload heavy logs to S3; if Jenkins itself is the bottleneck and migration is feasible, <strong>GitHub Actions</strong>, <strong>Buildkite</strong>, and <strong>CircleCI</strong> all run rings around a poorly-tuned Jenkins on similar workloads &mdash; sometimes the best fix is exit.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q19">
-  <div class="qa__number">Question 19</div>
-  <h3 class="qa__question">You are asked to set up a CI/CD pipeline for a serverless application using GitHub Actions. Describe your approach.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a serverless application (AWS Lambda + API Gateway + DynamoDB + EventBridge) needs CI/CD via GitHub Actions, with environment-per-PR for previews, staged production releases with traffic shifting, and observability that catches errors before they reach users.</p>
+<p><strong>Production polish:</strong> the highest-leverage win is almost always <strong>parallelism</strong> &mdash; lint, unit tests, and image build are independent and should run side-by-side, not sequentially; for tests beyond a few minutes, shard them &mdash; <code>jest --shard=$INDEX/$TOTAL</code>, <code>vitest --shard</code>, <code>pytest-xdist</code>, <strong>knapsack-pro</strong> for time-balanced sharding; for image builds, use <strong>BuildKit cache mounts</strong> (<code>--mount=type=cache</code>), GHA-style registry cache, or <strong>Depot</strong>/<strong>Namespace</strong>/<strong>Blacksmith</strong> persistent BuildKit volumes &mdash; the speedup is usually 3&ndash;5x on dep-heavy projects; for agent provisioning use the <strong>Kubernetes plugin</strong>&rsquo;s pod templates with a <strong>warmedNumber</strong> of pre-built agents waiting; for the controller itself, prune unused plugins (each adds startup time), give it 4&ndash;8 GB heap minimum, store <code>$JENKINS_HOME</code> on fast SSD, and offload heavy logs to S3; if Jenkins itself is the bottleneck and migration is feasible, <strong>GitHub Actions</strong>, <strong>Buildkite</strong>, and <strong>CircleCI</strong> all run rings around a poorly-tuned Jenkins on similar workloads &mdash; sometimes the best fix is exit.</p>'''
+
+
+ANSWERS[19] = r'''<p><strong>Situation:</strong> a serverless application (AWS Lambda + API Gateway + DynamoDB + EventBridge) needs CI/CD via GitHub Actions, with environment-per-PR for previews, staged production releases with traffic shifting, and observability that catches errors before they reach users.</p>
 
 <p><strong>Approach:</strong> use <strong>AWS SAM</strong> or <strong>SST v3</strong> as the IaC layer, <strong>GitHub Actions</strong> with OIDC for AWS auth, <strong>CodeDeploy</strong> for traffic shifting between Lambda alias versions, and <strong>CloudWatch alarms</strong> as auto-rollback triggers. Each PR gets its own stack (<code>api-pr-123</code>) deployed automatically and torn down on close. Production deploys promote the version through linear traffic shifting (<code>Linear10PercentEvery1Minute</code>).</p>
 
@@ -1300,15 +1106,10 @@ Resources:
 <tr><td>Observability</td><td>Powertools + X-Ray + OTEL layer</td><td>Datadog, Honeycomb, NR</td></tr>
 </tbody></table>
 
-<p><strong>Production polish:</strong> use <strong>Powertools for AWS Lambda</strong> for structured logs, X-Ray traces, idempotency, and feature flags &mdash; the idempotency module is essential for SQS/Kinesis triggers where retries are guaranteed; turn on <strong>SnapStart</strong> for Java/.NET/Python (3.13+) to slash cold-start latency; for shared dependencies use <strong>Lambda Layers</strong> or container image deploys; <strong>arm64</strong> (Graviton) saves ~30% versus x86 with no migration cost for most languages; ship logs and metrics to your platform via the <strong>OpenTelemetry Lambda Layer</strong> or <strong>ADOT</strong> (AWS Distro for OpenTelemetry); for higher-level orchestration <strong>EventBridge Pipes</strong> + <strong>Step Functions</strong> simplify multi-step flows; for queueing <strong>SQS</strong> with batching is more reliable than direct invocations; <strong>SST v3</strong> gives the best developer experience if you want hot-reload deploys; <strong>API Gateway</strong> alternatives include <strong>Function URLs</strong> with CloudFront for HTTP-only, <strong>AppSync</strong> for GraphQL, <strong>Lambda integrated with ALB</strong> for stateful HTTP; track <strong>cold-start percentages</strong> as a top-level SLO &mdash; provisioned concurrency or SnapStart only if it&rsquo;s breaching.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q20">
-  <div class="qa__number">Question 20</div>
-  <h3 class="qa__question">Your organization wants to use Kubernetes Operators to manage complex applications. How would you integrate this into your CI/CD pipeline?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> the platform team manages complex stateful applications (Postgres clusters, Kafka, Elastic) and wants to use <strong>Kubernetes Operators</strong> to encode operational knowledge declaratively. Operators must be lifecycle-managed via CI/CD, not installed by hand.</p>
+<p><strong>Production polish:</strong> use <strong>Powertools for AWS Lambda</strong> for structured logs, X-Ray traces, idempotency, and feature flags &mdash; the idempotency module is essential for SQS/Kinesis triggers where retries are guaranteed; turn on <strong>SnapStart</strong> for Java/.NET/Python (3.13+) to slash cold-start latency; for shared dependencies use <strong>Lambda Layers</strong> or container image deploys; <strong>arm64</strong> (Graviton) saves ~30% versus x86 with no migration cost for most languages; ship logs and metrics to your platform via the <strong>OpenTelemetry Lambda Layer</strong> or <strong>ADOT</strong> (AWS Distro for OpenTelemetry); for higher-level orchestration <strong>EventBridge Pipes</strong> + <strong>Step Functions</strong> simplify multi-step flows; for queueing <strong>SQS</strong> with batching is more reliable than direct invocations; <strong>SST v3</strong> gives the best developer experience if you want hot-reload deploys; <strong>API Gateway</strong> alternatives include <strong>Function URLs</strong> with CloudFront for HTTP-only, <strong>AppSync</strong> for GraphQL, <strong>Lambda integrated with ALB</strong> for stateful HTTP; track <strong>cold-start percentages</strong> as a top-level SLO &mdash; provisioned concurrency or SnapStart only if it&rsquo;s breaching.</p>'''
+
+
+ANSWERS[20] = r'''<p><strong>Situation:</strong> the platform team manages complex stateful applications (Postgres clusters, Kafka, Elastic) and wants to use <strong>Kubernetes Operators</strong> to encode operational knowledge declaratively. Operators must be lifecycle-managed via CI/CD, not installed by hand.</p>
 
 <p><strong>Approach:</strong> install operators via <strong>Operator Lifecycle Manager (OLM)</strong> or via Helm charts pinned in Git; manage Custom Resources via the same GitOps pipeline as application workloads (Argo CD ApplicationSets reading from a config repo). Pick mature operators rather than building your own &mdash; <strong>CloudNativePG</strong> for Postgres, <strong>Strimzi</strong> for Kafka, <strong>ECK</strong> for Elastic, <strong>RabbitMQ Cluster Operator</strong>, <strong>Prometheus Operator</strong>, <strong>cert-manager</strong> for TLS. For custom domains, scaffold with <strong>kubebuilder</strong>, write a controller, ship as a containerised manifest, and follow the operator <em>capability levels</em> (basic install &rarr; auto upgrade &rarr; full lifecycle).</p>
 
@@ -1352,15 +1153,9 @@ spec:
 <tr><td>RBAC</td><td>Least-privilege ServiceAccount</td><td>Controller-only access to its CRDs</td></tr>
 </tbody></table>
 
-<p><strong>Production polish:</strong> the highest-impact decision is <em>which</em> operators to adopt &mdash; pick projects in the <strong>CNCF</strong> Sandbox/Incubating/Graduated stages with active maintainers; <strong>CloudNativePG</strong>, <strong>Strimzi</strong>, <strong>ECK</strong>, <strong>cert-manager</strong>, <strong>External Secrets Operator</strong>, <strong>Crossplane</strong>, and <strong>kube-prometheus-stack</strong> are the 2026 baseline; check capability levels per <strong>OperatorHub</strong> &mdash; you want <em>auto-pilot</em> (level 4) or <em>seamless upgrades</em> (level 5), not just <em>basic install</em>; treat the operator&rsquo;s own version as part of the platform release train &mdash; pin to a specific chart version, test upgrades in staging first, and document the rollback procedure (operator downgrades can leave CRs orphaned); for custom operators write tests with <strong>envtest</strong> (kubebuilder&rsquo;s in-process etcd+API server) and end-to-end with <strong>kuttl</strong>; emit <strong>OpenTelemetry</strong> traces from controller reconciliation; ship operator logs structured to <strong>Loki</strong>/<strong>OpenSearch</strong>; for cluster-wide policy on what CRs are valid, <strong>Kyverno</strong> or <strong>Gatekeeper</strong> enforce constraints (e.g., every Cluster must have a <code>backup</code> stanza); avoid building a custom operator unless you genuinely have novel logic &mdash; most use cases are better served by an existing one + a thin wrapper Helm chart.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q21">
-  <div class="qa__number">Question 21</div>
-  <h3 class="qa__question">You need to implement continuous integration for a Node.js application with dependency caching. Explain how you would set this up in GitHub Actions.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a Node.js service has long install times because <code>npm ci</code> downloads the full registry on every CI run. The team wants <strong>continuous integration</strong> in GitHub Actions with effective dependency caching that survives across branches and PR runs while staying secure against cache poisoning.</p>
+<p><strong>Production polish:</strong> the highest-impact decision is <em>which</em> operators to adopt &mdash; pick projects in the <strong>CNCF</strong> Sandbox/Incubating/Graduated stages with active maintainers; <strong>CloudNativePG</strong>, <strong>Strimzi</strong>, <strong>ECK</strong>, <strong>cert-manager</strong>, <strong>External Secrets Operator</strong>, <strong>Crossplane</strong>, and <strong>kube-prometheus-stack</strong> are the 2026 baseline; check capability levels per <strong>OperatorHub</strong> &mdash; you want <em>auto-pilot</em> (level 4) or <em>seamless upgrades</em> (level 5), not just <em>basic install</em>; treat the operator&rsquo;s own version as part of the platform release train &mdash; pin to a specific chart version, test upgrades in staging first, and document the rollback procedure (operator downgrades can leave CRs orphaned); for custom operators write tests with <strong>envtest</strong> (kubebuilder&rsquo;s in-process etcd+API server) and end-to-end with <strong>kuttl</strong>; emit <strong>OpenTelemetry</strong> traces from controller reconciliation; ship operator logs structured to <strong>Loki</strong>/<strong>OpenSearch</strong>; for cluster-wide policy on what CRs are valid, <strong>Kyverno</strong> or <strong>Gatekeeper</strong> enforce constraints (e.g., every Cluster must have a <code>backup</code> stanza); avoid building a custom operator unless you genuinely have novel logic &mdash; most use cases are better served by an existing one + a thin wrapper Helm chart.</p>'''
+
+ANSWERS[21] = r'''<p><strong>Situation:</strong> a Node.js service has long install times because <code>npm ci</code> downloads the full registry on every CI run. The team wants <strong>continuous integration</strong> in GitHub Actions with effective dependency caching that survives across branches and PR runs while staying secure against cache poisoning.</p>
 
 <p><strong>Approach:</strong> use the official <code>actions/setup-node@v4</code> with <code>cache: &#39;npm&#39;</code> to wire <strong>actions/cache</strong> automatically, keyed on <code>package-lock.json</code> hash. Pin Node by version in <code>.nvmrc</code> so the matrix and the cache key align. For monorepos with <strong>pnpm</strong> or <strong>yarn</strong> the same pattern applies (<code>cache: &#39;pnpm&#39;</code>, <code>cache: &#39;yarn&#39;</code>); use <strong>Turborepo Remote Cache</strong> or <strong>Nx Cloud</strong> for build artefacts on top of the dependency cache. Run <strong>npm audit</strong>, <strong>Snyk</strong>, or <strong>Socket.dev</strong> in parallel with tests so a vulnerable dependency fails the PR.</p>
 
@@ -1407,15 +1202,9 @@ jobs:
 <tr><td>Turborepo / Nx remote cache</td><td>Skips work entirely on cache hit; needs trust boundary &mdash; never restore in PR builds from forks</td></tr>
 </table>
 
-<p><strong>Production polish:</strong> always run <code>npm ci</code> not <code>npm install</code> &mdash; <code>ci</code> respects the lockfile exactly, fails on drift, and clears <code>node_modules</code> first so a poisoned local copy can&rsquo;t survive; pass <code>--prefer-offline</code> so cached tarballs are reused without metadata refresh; add <code>--no-audit</code> on the install step (audit runs as a separate job so a registry stall doesn&rsquo;t fail the build); set <code>permissions: { contents: read }</code> at workflow level so a leaked GITHUB_TOKEN can&rsquo;t push code; for forks, use <code>pull_request_target</code> only with extreme care &mdash; restrict it to label-based gates and never check out fork code in that workflow; restrict the cache scope (the GHA cache is per-repo+branch with read access from any base branch &mdash; treat it as untrusted for security-sensitive steps); pin actions by SHA (<code>actions/checkout@b4ffde65...</code>) not by tag for supply-chain protection; use <strong>Dependabot</strong> or <strong>Renovate</strong> with <strong>group: { major }</strong> rules to bundle updates and reduce PR noise; run <strong>OSV-Scanner</strong> alongside Snyk &mdash; OSV catches things commercial scanners miss because it pulls from the OSV.dev database directly.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q22">
-  <div class="qa__number">Question 22</div>
-  <h3 class="qa__question">Your team wants to enforce code quality checks in the CI/CD pipeline. How would you integrate tools like ESLint and Prettier in GitHub Actions?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> the team merges fast and wants the pipeline to enforce <strong>code quality</strong> &mdash; consistent formatting via <strong>Prettier</strong>, lint rules via <strong>ESLint</strong>, type-checking via TypeScript, and security scans &mdash; without slowing PRs to a crawl. Reviewers should focus on logic, not whitespace.</p>
+<p><strong>Production polish:</strong> always run <code>npm ci</code> not <code>npm install</code> &mdash; <code>ci</code> respects the lockfile exactly, fails on drift, and clears <code>node_modules</code> first so a poisoned local copy can&rsquo;t survive; pass <code>--prefer-offline</code> so cached tarballs are reused without metadata refresh; add <code>--no-audit</code> on the install step (audit runs as a separate job so a registry stall doesn&rsquo;t fail the build); set <code>permissions: { contents: read }</code> at workflow level so a leaked GITHUB_TOKEN can&rsquo;t push code; for forks, use <code>pull_request_target</code> only with extreme care &mdash; restrict it to label-based gates and never check out fork code in that workflow; restrict the cache scope (the GHA cache is per-repo+branch with read access from any base branch &mdash; treat it as untrusted for security-sensitive steps); pin actions by SHA (<code>actions/checkout@b4ffde65...</code>) not by tag for supply-chain protection; use <strong>Dependabot</strong> or <strong>Renovate</strong> with <strong>group: { major }</strong> rules to bundle updates and reduce PR noise; run <strong>OSV-Scanner</strong> alongside Snyk &mdash; OSV catches things commercial scanners miss because it pulls from the OSV.dev database directly.</p>'''
+
+ANSWERS[22] = r'''<p><strong>Situation:</strong> the team merges fast and wants the pipeline to enforce <strong>code quality</strong> &mdash; consistent formatting via <strong>Prettier</strong>, lint rules via <strong>ESLint</strong>, type-checking via TypeScript, and security scans &mdash; without slowing PRs to a crawl. Reviewers should focus on logic, not whitespace.</p>
 
 <p><strong>Approach:</strong> push checks left to <strong>pre-commit hooks</strong> (lefthook, husky+lint-staged) so devs catch failures locally, then re-run the same checks in CI for trust. Use <strong>Biome</strong> as a single fast tool replacing ESLint+Prettier where the team agrees; otherwise run ESLint with <code>--cache</code> and <code>--max-warnings=0</code> alongside <code>prettier --check</code>. Wire branch protection so <strong>required checks</strong> include lint, type-check, and tests. For PR-only runs, use <code>actions/cache</code> on <code>.eslintcache</code> and <code>tsc --incremental</code> output to keep CI under 60 seconds.</p>
 
@@ -1464,15 +1253,9 @@ jobs:
 <tr><td>SonarCloud / CodeRabbit</td><td>Bigger picture (cyclomatic complexity, AI review)</td></tr>
 </table>
 
-<p><strong>Production polish:</strong> use <strong>concurrency cancellation</strong> (above) so a new push cancels the in-flight job &mdash; saves runner minutes on rapid-fire commits; output <strong>SARIF</strong> from ESLint and upload via <code>github/codeql-action/upload-sarif</code> so findings appear in the GitHub Security tab and code-scanning alerts; treat the lint config (<code>.eslintrc</code>, <code>biome.json</code>, <code>prettier.config.js</code>) as code in a shared package the org publishes (e.g., <code>@org/eslint-config</code>) so all repos stay aligned; enforce via <strong>tsconfig.json</strong> with <code>strict: true</code>, <code>noUncheckedIndexedAccess</code>, and <code>noImplicitOverride</code> &mdash; type-checking catches more real bugs than any linter; run <strong>knip</strong> or <strong>dpdm</strong> to find unused exports/dependencies; gate merges on the GitHub <em>Required Checks</em> rule plus <em>Require branches to be up to date</em> so stale PRs don&rsquo;t merge with broken main; pin the lint rule version with <code>--no-cache</code> in the security-critical job to prevent cache abuse; add a <strong>commitlint</strong> + <strong>conventional commits</strong> hook so changelogs and semantic-release work cleanly downstream.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q23">
-  <div class="qa__number">Question 23</div>
-  <h3 class="qa__question">You are asked to set up a CI/CD pipeline for a Go application with automated tests and deployment to AWS ECS. Describe your approach.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a Go service must ship to <strong>AWS ECS Fargate</strong> with an opinionated CI/CD pipeline: race-detector tests, integration tests against a real Postgres, vulnerability scans, multi-arch container images, and zero-downtime rolling deploys. No static IAM keys.</p>
+<p><strong>Production polish:</strong> use <strong>concurrency cancellation</strong> (above) so a new push cancels the in-flight job &mdash; saves runner minutes on rapid-fire commits; output <strong>SARIF</strong> from ESLint and upload via <code>github/codeql-action/upload-sarif</code> so findings appear in the GitHub Security tab and code-scanning alerts; treat the lint config (<code>.eslintrc</code>, <code>biome.json</code>, <code>prettier.config.js</code>) as code in a shared package the org publishes (e.g., <code>@org/eslint-config</code>) so all repos stay aligned; enforce via <strong>tsconfig.json</strong> with <code>strict: true</code>, <code>noUncheckedIndexedAccess</code>, and <code>noImplicitOverride</code> &mdash; type-checking catches more real bugs than any linter; run <strong>knip</strong> or <strong>dpdm</strong> to find unused exports/dependencies; gate merges on the GitHub <em>Required Checks</em> rule plus <em>Require branches to be up to date</em> so stale PRs don&rsquo;t merge with broken main; pin the lint rule version with <code>--no-cache</code> in the security-critical job to prevent cache abuse; add a <strong>commitlint</strong> + <strong>conventional commits</strong> hook so changelogs and semantic-release work cleanly downstream.</p>'''
+
+ANSWERS[23] = r'''<p><strong>Situation:</strong> a Go service must ship to <strong>AWS ECS Fargate</strong> with an opinionated CI/CD pipeline: race-detector tests, integration tests against a real Postgres, vulnerability scans, multi-arch container images, and zero-downtime rolling deploys. No static IAM keys.</p>
 
 <p><strong>Approach:</strong> standard layered pipeline &mdash; lint+test in one job, build+push image in another, deploy via the official ECS deploy action. Use <strong>OIDC</strong> federation to a least-privilege IAM role for AWS auth. Use <strong>buildx</strong> with QEMU for arm64+amd64 multi-arch (Graviton saves ~30% on Fargate). Run <strong>govulncheck</strong> and <strong>Trivy</strong> on every PR; gate on high-severity findings. Render the ECS task definition from a template, register a new revision, and let ECS handle the rolling update with health-check based replacement.</p>
 
@@ -1551,15 +1334,9 @@ jobs:
 <tr><td>App Runner</td><td>Even simpler than ECS; less control over networking</td></tr>
 </table>
 
-<p><strong>Production polish:</strong> tag images with both <code>:sha</code> and <code>:semver</code> (immutable identity vs human-readable); enable <strong>ECR scan-on-push</strong> with <strong>Inspector v2</strong> for continuous CVE scanning &mdash; PRs get pre-merge feedback, prod gets continuous; ship <strong>SLSA provenance</strong> via <code>provenance: true</code> in buildx so consumers can verify the build path; sign images with <strong>Cosign keyless</strong> (Sigstore Fulcio) using the same OIDC token; gate ECS service updates with <strong>CodeDeploy</strong> for canary 10/30/60/100 traffic shift and tie CloudWatch alarms (5xx, p99 latency) to auto-rollback; configure <strong>ECS Exec</strong> for SSM-based shell access in incidents; set <strong>HealthCheckGracePeriod</strong> on the service so slow-starting tasks don&rsquo;t flap; use <strong>X-Ray</strong> with the X-Amzn-Trace-Id header propagation for end-to-end tracing; for secrets, use <strong>SSM Parameter Store</strong> or <strong>Secrets Manager</strong> referenced from the task definition &mdash; never bake secrets into the image.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q24">
-  <div class="qa__number">Question 24</div>
-  <h3 class="qa__question">Your team wants to implement monitoring and alerting for Kubernetes deployments. How would you set this up using Prometheus and Grafana?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a Kubernetes platform team needs end-to-end <strong>monitoring and alerting</strong> for clusters and the apps on them. Requirements: cluster + workload metrics, customised dashboards, multi-tenant access, long retention, and PagerDuty/Slack alerting. Must scale to 10+ clusters without operator burnout.</p>
+<p><strong>Production polish:</strong> tag images with both <code>:sha</code> and <code>:semver</code> (immutable identity vs human-readable); enable <strong>ECR scan-on-push</strong> with <strong>Inspector v2</strong> for continuous CVE scanning &mdash; PRs get pre-merge feedback, prod gets continuous; ship <strong>SLSA provenance</strong> via <code>provenance: true</code> in buildx so consumers can verify the build path; sign images with <strong>Cosign keyless</strong> (Sigstore Fulcio) using the same OIDC token; gate ECS service updates with <strong>CodeDeploy</strong> for canary 10/30/60/100 traffic shift and tie CloudWatch alarms (5xx, p99 latency) to auto-rollback; configure <strong>ECS Exec</strong> for SSM-based shell access in incidents; set <strong>HealthCheckGracePeriod</strong> on the service so slow-starting tasks don&rsquo;t flap; use <strong>X-Ray</strong> with the X-Amzn-Trace-Id header propagation for end-to-end tracing; for secrets, use <strong>SSM Parameter Store</strong> or <strong>Secrets Manager</strong> referenced from the task definition &mdash; never bake secrets into the image.</p>'''
+
+ANSWERS[24] = r'''<p><strong>Situation:</strong> a Kubernetes platform team needs end-to-end <strong>monitoring and alerting</strong> for clusters and the apps on them. Requirements: cluster + workload metrics, customised dashboards, multi-tenant access, long retention, and PagerDuty/Slack alerting. Must scale to 10+ clusters without operator burnout.</p>
 
 <p><strong>Approach:</strong> install <strong>kube-prometheus-stack</strong> (the Helm chart that bundles Prometheus, Alertmanager, Grafana, kube-state-metrics, and node-exporter) per cluster via Argo CD, and federate to a central tier &mdash; <strong>Thanos</strong>, <strong>Grafana Mimir</strong>, or <strong>VictoriaMetrics Cluster</strong> &mdash; for global query, long retention (years), and HA. Use <strong>Prometheus Operator CRDs</strong> (<code>ServiceMonitor</code>, <code>PodMonitor</code>, <code>PrometheusRule</code>) so app teams declare their own scrape targets and alerts in their own namespaces. Centralise dashboards in <strong>Grafana</strong> with per-tenant data sources via <strong>Grafana Cloud</strong> or self-hosted with <strong>Grafana Mimir Multi-tenant</strong>.</p>
 
@@ -1629,15 +1406,9 @@ spec:
 <tr><td>SLOs</td><td>Sloth or Pyrra to generate SLI/SLO PrometheusRules</td></tr>
 </table>
 
-<p><strong>Production polish:</strong> design alerts around <strong>SLOs</strong> (error budget burn rate) using <strong>Sloth</strong> or <strong>Pyrra</strong> &mdash; multi-window multi-burn-rate alerts page only on real customer impact, not symptom noise; route <strong>severity: critical</strong> to PagerDuty and <strong>warning</strong> to Slack so on-call is awakened only for real incidents; ensure Alertmanager is HA across at least 2 replicas and use <strong>cluster.peer</strong> with proper service discovery; deduplicate per-cluster alerts at the federation tier; send everything to <strong>OpenTelemetry Collector</strong> first so logs/metrics/traces share resource attributes; consume Mimir/Tempo/Loki via Grafana with <strong>Exemplars</strong> wired so a metric spike one-clicks into the trace; back up Prometheus WAL nightly and verify restore drills; keep alert <strong>runbook URLs</strong> in the annotation field so the on-call gets a link to remediation; for cost control, use <strong>Mimir&rsquo;s</strong> per-tenant retention policies and <strong>downsampling</strong> (5m and 1h aggregations) so historical queries are fast and cheap.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q25">
-  <div class="qa__number">Question 25</div>
-  <h3 class="qa__question">You need to automate the deployment of a multi-tenant application using Kubernetes. Explain the CI/CD pipeline you would create.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a SaaS product needs to deploy a <strong>multi-tenant application</strong> on Kubernetes &mdash; some tenants share infrastructure (cost), some demand isolation (compliance). The CI/CD pipeline must support both shapes, onboard new tenants without operator intervention, and prevent any one tenant from impacting another.</p>
+<p><strong>Production polish:</strong> design alerts around <strong>SLOs</strong> (error budget burn rate) using <strong>Sloth</strong> or <strong>Pyrra</strong> &mdash; multi-window multi-burn-rate alerts page only on real customer impact, not symptom noise; route <strong>severity: critical</strong> to PagerDuty and <strong>warning</strong> to Slack so on-call is awakened only for real incidents; ensure Alertmanager is HA across at least 2 replicas and use <strong>cluster.peer</strong> with proper service discovery; deduplicate per-cluster alerts at the federation tier; send everything to <strong>OpenTelemetry Collector</strong> first so logs/metrics/traces share resource attributes; consume Mimir/Tempo/Loki via Grafana with <strong>Exemplars</strong> wired so a metric spike one-clicks into the trace; back up Prometheus WAL nightly and verify restore drills; keep alert <strong>runbook URLs</strong> in the annotation field so the on-call gets a link to remediation; for cost control, use <strong>Mimir&rsquo;s</strong> per-tenant retention policies and <strong>downsampling</strong> (5m and 1h aggregations) so historical queries are fast and cheap.</p>'''
+
+ANSWERS[25] = r'''<p><strong>Situation:</strong> a SaaS product needs to deploy a <strong>multi-tenant application</strong> on Kubernetes &mdash; some tenants share infrastructure (cost), some demand isolation (compliance). The CI/CD pipeline must support both shapes, onboard new tenants without operator intervention, and prevent any one tenant from impacting another.</p>
 
 <p><strong>Approach:</strong> three deployment shapes &mdash; <em>silo</em> (one cluster per tenant), <em>pool</em> (shared cluster, shared namespace, tenant-id discriminator), and <em>bridge</em> (shared cluster, dedicated namespace). The pipeline picks the shape from a tenant manifest in Git; <strong>Argo CD ApplicationSet</strong> with the list/git generator creates the right Application(s). For pool and bridge, use <strong>Capsule</strong> or <strong>vCluster</strong> to enforce tenant isolation; for silo, manage clusters via <strong>Cluster API</strong>. Wire <strong>RBAC + NetworkPolicy + ResourceQuota + LimitRange + PodSecurity</strong> consistently regardless of shape.</p>
 
@@ -1708,15 +1479,9 @@ spec:
 <tr><td>vCluster</td><td>Medium-low</td><td>Cluster-API illusion in shared physical</td><td>Tenants needing CRD-level isolation cheaply</td></tr>
 </table>
 
-<p><strong>Production polish:</strong> enforce isolation in depth &mdash; <strong>NetworkPolicy</strong> default-deny per namespace plus <strong>Cilium L7 + FQDN egress rules</strong>, <strong>ResourceQuota</strong> + <strong>LimitRange</strong> to prevent noisy neighbours, <strong>PodSecurity Admission</strong> at <em>restricted</em>, and <strong>Kyverno</strong> policies that mandate every tenant pod has the correct labels and runs as non-root; for storage, use per-tenant <strong>StorageClasses</strong> with separate encryption keys (KMS); for egress, separate <strong>NAT gateways</strong> or <strong>Cilium Egress Gateway</strong> per tenant so source IPs are tenant-scoped; meter usage via <strong>OpenCost</strong> labelled by tenant for accurate billing; isolate observability per tenant via <strong>Mimir</strong> tenant headers, <strong>Loki</strong> X-Scope-OrgID, and Grafana org-per-tenant; tenant onboarding becomes a single PR adding to <code>tenants.yaml</code> &mdash; the ApplicationSet picks it up, Capsule provisions, and Argo CD reconciles in minutes; document tenant offboarding (delete from tenants.yaml &rarr; Argo CD prunes &rarr; final backup snapshot) clearly so customer departures aren&rsquo;t scary.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q26">
-  <div class="qa__number">Question 26</div>
-  <h3 class="qa__question">Your organization wants to use GitHub Actions for multi-cloud deployments. Describe how you would configure the workflow.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> the platform must deploy the same application to <strong>AWS, Azure, and GCP</strong> for resilience and customer-region requirements. Build once, deploy many. Single source of truth for manifests, no per-cloud forks, but allow cloud-specific overrides where genuinely different.</p>
+<p><strong>Production polish:</strong> enforce isolation in depth &mdash; <strong>NetworkPolicy</strong> default-deny per namespace plus <strong>Cilium L7 + FQDN egress rules</strong>, <strong>ResourceQuota</strong> + <strong>LimitRange</strong> to prevent noisy neighbours, <strong>PodSecurity Admission</strong> at <em>restricted</em>, and <strong>Kyverno</strong> policies that mandate every tenant pod has the correct labels and runs as non-root; for storage, use per-tenant <strong>StorageClasses</strong> with separate encryption keys (KMS); for egress, separate <strong>NAT gateways</strong> or <strong>Cilium Egress Gateway</strong> per tenant so source IPs are tenant-scoped; meter usage via <strong>OpenCost</strong> labelled by tenant for accurate billing; isolate observability per tenant via <strong>Mimir</strong> tenant headers, <strong>Loki</strong> X-Scope-OrgID, and Grafana org-per-tenant; tenant onboarding becomes a single PR adding to <code>tenants.yaml</code> &mdash; the ApplicationSet picks it up, Capsule provisions, and Argo CD reconciles in minutes; document tenant offboarding (delete from tenants.yaml &rarr; Argo CD prunes &rarr; final backup snapshot) clearly so customer departures aren&rsquo;t scary.</p>'''
+
+ANSWERS[26] = r'''<p><strong>Situation:</strong> the platform must deploy the same application to <strong>AWS, Azure, and GCP</strong> for resilience and customer-region requirements. Build once, deploy many. Single source of truth for manifests, no per-cloud forks, but allow cloud-specific overrides where genuinely different.</p>
 
 <p><strong>Approach:</strong> use <strong>OIDC federation</strong> for each cloud (no static keys), build a single multi-arch image and push to a primary registry replicated to ECR/ACR/GAR, and deploy via cloud-agnostic abstractions where possible (<strong>Crossplane</strong> for cloud infra, <strong>Argo CD</strong> for K8s workloads). Tag the workflow matrix with the cloud and let Argo CD ApplicationSets handle the per-cluster differences. For DNS-level traffic distribution, use <strong>NS1</strong>, <strong>Cloudflare Load Balancing</strong>, or <strong>AWS Route 53 ARC</strong>.</p>
 
@@ -1780,15 +1545,9 @@ jobs:
 <tr><td>Cost monitoring</td><td>OpenCost (per-cluster), Vantage / Cloudability (cross-cloud)</td></tr>
 </table>
 
-<p><strong>Production polish:</strong> use <strong>Active/Active</strong> only when state syncing is solved (CRDB, Spanner, DynamoDB Global Tables, CosmosDB multi-region) &mdash; otherwise default to <strong>Active/Passive</strong> with documented failover; egress costs eat budgets quickly &mdash; pin database reads to the local region and route only writes cross-cloud via a single primary; SLAs differ across clouds &mdash; track per-cloud availability separately and alert on the worst-performing region; for GitOps, run <strong>Argo CD</strong> in each cluster (no shared central control plane that becomes a multi-cloud SPOF); replicate registries with <strong>Harbor replication</strong> or native registry-to-registry mirroring; sign images once and verify everywhere with <strong>Cosign</strong> + <strong>Sigstore policy-controller</strong>; for failover testing, run <strong>chaos drills</strong> quarterly using <strong>Chaos Mesh</strong> or <strong>Litmus</strong>; keep cloud-specific code minimal &mdash; if you find yourself with three different deployment YAML trees, consolidate via Crossplane Compositions or accept that you have three separate products.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q27">
-  <div class="qa__number">Question 27</div>
-  <h3 class="qa__question">You are asked to set up a CI/CD pipeline for a machine learning model with training, testing, and deployment steps. Explain your approach.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a data science team needs <strong>CI/CD for an ML model</strong> &mdash; train on a versioned dataset, evaluate against a baseline, register the artefact, deploy to staging+prod with traffic shadowing, and monitor for drift. Reproducibility is non-negotiable; rollback must be a label change, not a re-train.</p>
+<p><strong>Production polish:</strong> use <strong>Active/Active</strong> only when state syncing is solved (CRDB, Spanner, DynamoDB Global Tables, CosmosDB multi-region) &mdash; otherwise default to <strong>Active/Passive</strong> with documented failover; egress costs eat budgets quickly &mdash; pin database reads to the local region and route only writes cross-cloud via a single primary; SLAs differ across clouds &mdash; track per-cloud availability separately and alert on the worst-performing region; for GitOps, run <strong>Argo CD</strong> in each cluster (no shared central control plane that becomes a multi-cloud SPOF); replicate registries with <strong>Harbor replication</strong> or native registry-to-registry mirroring; sign images once and verify everywhere with <strong>Cosign</strong> + <strong>Sigstore policy-controller</strong>; for failover testing, run <strong>chaos drills</strong> quarterly using <strong>Chaos Mesh</strong> or <strong>Litmus</strong>; keep cloud-specific code minimal &mdash; if you find yourself with three different deployment YAML trees, consolidate via Crossplane Compositions or accept that you have three separate products.</p>'''
+
+ANSWERS[27] = r'''<p><strong>Situation:</strong> a data science team needs <strong>CI/CD for an ML model</strong> &mdash; train on a versioned dataset, evaluate against a baseline, register the artefact, deploy to staging+prod with traffic shadowing, and monitor for drift. Reproducibility is non-negotiable; rollback must be a label change, not a re-train.</p>
 
 <p><strong>Approach:</strong> separate the <em>model pipeline</em> from the <em>application pipeline</em>. The model pipeline runs in <strong>Kubeflow Pipelines</strong>, <strong>Argo Workflows</strong>, <strong>Flyte</strong>, or <strong>Metaflow</strong>: ingest dataset (versioned via <strong>DVC</strong>, <strong>lakeFS</strong>, or <strong>Pachyderm</strong>), preprocess, train (with GPUs scheduled by <strong>NVIDIA GPU Operator</strong>), evaluate against a champion model, and register the new candidate in <strong>MLflow</strong> or the <strong>Hugging Face Hub</strong>. The serving pipeline deploys via <strong>KServe</strong>, <strong>Seldon Core</strong>, <strong>BentoML</strong>, or <strong>Ray Serve</strong>, with canary rollout and shadow traffic via <strong>Istio</strong> or <strong>Knative</strong>.</p>
 
@@ -1840,15 +1599,9 @@ spec:
 <tr><td>Drift / monitoring</td><td>Evidently AI, NannyML, Arize, WhyLabs</td></tr>
 </table>
 
-<p><strong>Production polish:</strong> reproducibility comes from pinning dataset hash + code commit + container digest + hyperparameters &mdash; record all four in MLflow per run; promote with explicit <strong>quality gates</strong> (accuracy, F1, fairness metrics, latency on representative inputs) &mdash; never auto-promote on accuracy alone; use <strong>shadow deploys</strong> first &mdash; route 5&ndash;10% of production traffic to the new model with results discarded, compare distributions, then graduate to canary; monitor <strong>data drift</strong> (input feature distributions) and <strong>concept drift</strong> (prediction quality vs labels when feedback arrives) using Evidently or NannyML; for LLMs, run <strong>regression evals</strong> with <strong>promptfoo</strong>, <strong>DeepEval</strong>, or <strong>Ragas</strong> on a fixed test set per release; maintain a <strong>rollback pointer</strong> in the registry so demoting a model is a label change, not a retrain; capture <strong>SHAP/LIME</strong> explanations for regulated domains; for very large models, use <strong>SOCI</strong> image streaming and pre-warmed pods so cold-start doesn&rsquo;t blow the SLO budget; handle PII in datasets via masking + access controls in lakeFS; document the model card alongside the model artefact for auditability.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q28">
-  <div class="qa__number">Question 28</div>
-  <h3 class="qa__question">Your team wants to implement security scanning for Docker images in the CI/CD pipeline. How would you set this up using Jenkins?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> security insists every Docker image entering production goes through <strong>vulnerability scanning</strong> in CI/CD. Currently nothing scans &mdash; CVEs land in production unnoticed. The fix must integrate with Jenkins, gate merges/deploys, and produce auditable evidence (SBOM, scan reports) without grinding pipeline times into oblivion.</p>
+<p><strong>Production polish:</strong> reproducibility comes from pinning dataset hash + code commit + container digest + hyperparameters &mdash; record all four in MLflow per run; promote with explicit <strong>quality gates</strong> (accuracy, F1, fairness metrics, latency on representative inputs) &mdash; never auto-promote on accuracy alone; use <strong>shadow deploys</strong> first &mdash; route 5&ndash;10% of production traffic to the new model with results discarded, compare distributions, then graduate to canary; monitor <strong>data drift</strong> (input feature distributions) and <strong>concept drift</strong> (prediction quality vs labels when feedback arrives) using Evidently or NannyML; for LLMs, run <strong>regression evals</strong> with <strong>promptfoo</strong>, <strong>DeepEval</strong>, or <strong>Ragas</strong> on a fixed test set per release; maintain a <strong>rollback pointer</strong> in the registry so demoting a model is a label change, not a retrain; capture <strong>SHAP/LIME</strong> explanations for regulated domains; for very large models, use <strong>SOCI</strong> image streaming and pre-warmed pods so cold-start doesn&rsquo;t blow the SLO budget; handle PII in datasets via masking + access controls in lakeFS; document the model card alongside the model artefact for auditability.</p>'''
+
+ANSWERS[28] = r'''<p><strong>Situation:</strong> security insists every Docker image entering production goes through <strong>vulnerability scanning</strong> in CI/CD. Currently nothing scans &mdash; CVEs land in production unnoticed. The fix must integrate with Jenkins, gate merges/deploys, and produce auditable evidence (SBOM, scan reports) without grinding pipeline times into oblivion.</p>
 
 <p><strong>Approach:</strong> shift left with <strong>Trivy</strong> or <strong>Grype</strong> on every build, gate on <strong>HIGH/CRITICAL</strong> findings, generate an <strong>SBOM</strong> with <strong>Syft</strong> in <strong>SPDX</strong> or <strong>CycloneDX</strong> format, sign the image with <strong>Cosign keyless</strong> via Sigstore, and publish results to the central security platform (<strong>Defect Dojo</strong>, <strong>Dependency-Track</strong>, or <strong>Wiz</strong>). Add an admission-time check with <strong>Kyverno</strong> or <strong>Connaisseur</strong> so the cluster refuses unsigned/un-scanned images. Run continuous post-deploy scans with <strong>Trivy Operator</strong> so newly-disclosed CVEs are caught even after the image was built clean.</p>
 
@@ -1906,15 +1659,9 @@ spec:
 <tr><td>Triage</td><td>Defect Dojo, Dependency-Track</td></tr>
 </table>
 
-<p><strong>Production polish:</strong> use <strong>distroless</strong> or <strong>Chainguard images</strong> as base &mdash; they ship with near-zero CVEs by construction; pass <code>--ignore-unfixed</code> to Trivy so the gate only fails on actionable CVEs (someone has a fix available); maintain a <code>.trivyignore</code> with explicit expiry dates and ticket links for every accepted risk; layer scans &mdash; <strong>SCA</strong> in dependency files, <strong>SAST</strong> via CodeQL/Semgrep, <strong>image scan</strong> at build, <strong>continuous</strong> scan via Trivy Operator, <strong>runtime</strong> via Falco or Tetragon; gate Argo CD syncs on <strong>Cosign verified attestations</strong> via the policy-controller webhook so an unsigned image cannot deploy; rotate the Sigstore Rekor entries into your own append-only log if you need legal evidentiary value; for compliance-heavy environments, ship CIS Docker Benchmark reports and CIS K8s reports via <strong>kube-bench</strong> on a schedule; train teams to read SARIF in the GitHub Security tab rather than log scraping; and treat the SBOM as a release artefact &mdash; future CVE disclosures can be matched against your historical SBOMs to find affected deployments quickly.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q29">
-  <div class="qa__number">Question 29</div>
-  <h3 class="qa__question">You need to manage and monitor Kubernetes clusters using Rancher. Describe how you would integrate this with your CI/CD pipeline.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> the operations team manages clusters across on-prem, AWS EKS, Azure AKS, and edge sites, and wants a single pane of glass for cluster lifecycle, RBAC, observability, and app deployment via <strong>Rancher</strong>. CI/CD pipelines (GitHub Actions, Jenkins) need to interoperate with Rancher cleanly &mdash; not bypass it.</p>
+<p><strong>Production polish:</strong> use <strong>distroless</strong> or <strong>Chainguard images</strong> as base &mdash; they ship with near-zero CVEs by construction; pass <code>--ignore-unfixed</code> to Trivy so the gate only fails on actionable CVEs (someone has a fix available); maintain a <code>.trivyignore</code> with explicit expiry dates and ticket links for every accepted risk; layer scans &mdash; <strong>SCA</strong> in dependency files, <strong>SAST</strong> via CodeQL/Semgrep, <strong>image scan</strong> at build, <strong>continuous</strong> scan via Trivy Operator, <strong>runtime</strong> via Falco or Tetragon; gate Argo CD syncs on <strong>Cosign verified attestations</strong> via the policy-controller webhook so an unsigned image cannot deploy; rotate the Sigstore Rekor entries into your own append-only log if you need legal evidentiary value; for compliance-heavy environments, ship CIS Docker Benchmark reports and CIS K8s reports via <strong>kube-bench</strong> on a schedule; train teams to read SARIF in the GitHub Security tab rather than log scraping; and treat the SBOM as a release artefact &mdash; future CVE disclosures can be matched against your historical SBOMs to find affected deployments quickly.</p>'''
+
+ANSWERS[29] = r'''<p><strong>Situation:</strong> the operations team manages clusters across on-prem, AWS EKS, Azure AKS, and edge sites, and wants a single pane of glass for cluster lifecycle, RBAC, observability, and app deployment via <strong>Rancher</strong>. CI/CD pipelines (GitHub Actions, Jenkins) need to interoperate with Rancher cleanly &mdash; not bypass it.</p>
 
 <p><strong>Approach:</strong> install <strong>Rancher</strong> on a dedicated management cluster and import existing clusters via the Rancher agent. Use <strong>Rancher Fleet</strong> for GitOps across the fleet (it&rsquo;s the upstream Argo-CD-like controller built into Rancher). CI/CD pipelines push manifest changes to a config repo; Fleet reconciles; Rancher provides audit, RBAC, and the UI. For cluster lifecycle, use <strong>Rancher Provisioning v2</strong> with Cluster API providers (<strong>RKE2</strong>, <strong>K3s</strong>, or downstream EKS/AKS via cloud APIs).</p>
 
@@ -1964,15 +1711,9 @@ spec:
 <tr><td>Hardened RKE2 / K3s</td><td>Edge-friendly K8s distros, FIPS-validatable</td></tr>
 </table>
 
-<p><strong>Production polish:</strong> run Rancher itself with HA across 3 control-plane nodes &mdash; the management cluster is now critical infrastructure; back up the management cluster via Velero with off-region snapshots and test the restore quarterly; use <strong>Rancher SSO</strong> with your IdP (Okta, Azure AD, Keycloak) and map IdP groups to Rancher project roles &mdash; never rely on local users in prod; pin <strong>Rancher version</strong> across the fleet via the upgrade controller and follow the SUSE-recommended upgrade order (Rancher &rarr; downstream clusters); enable <strong>audit logging</strong> on Rancher to capture every API action and ship to your SIEM; for edge, prefer <strong>K3s</strong> + <strong>Fleet</strong> and design for offline operation &mdash; Fleet syncs idempotently; secret management routes through <strong>Rancher External Secrets</strong> or directly via <strong>External Secrets Operator</strong> with Vault/AWS SM/Azure KV; for compliance, the <strong>CIS scan</strong> built into Rancher generates per-cluster reports &mdash; schedule them; finally, when you outgrow Rancher (multi-tenant SaaS scale), the migration path is Argo CD ApplicationSets + Crossplane &mdash; plan it early rather than late.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q30">
-  <div class="qa__number">Question 30</div>
-  <h3 class="qa__question">Your organization wants to implement a GitOps workflow for managing Kubernetes resources. How would you set this up using Argo CD and GitHub Actions?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> the org wants a clean <strong>GitOps workflow</strong> for Kubernetes resources &mdash; CI builds and tests; CD reconciles from Git declaratively. The chosen stack is <strong>Argo CD</strong> for sync and <strong>GitHub Actions</strong> for build, with strict separation of concerns: the app repo never has cluster credentials, the config repo never has source code.</p>
+<p><strong>Production polish:</strong> run Rancher itself with HA across 3 control-plane nodes &mdash; the management cluster is now critical infrastructure; back up the management cluster via Velero with off-region snapshots and test the restore quarterly; use <strong>Rancher SSO</strong> with your IdP (Okta, Azure AD, Keycloak) and map IdP groups to Rancher project roles &mdash; never rely on local users in prod; pin <strong>Rancher version</strong> across the fleet via the upgrade controller and follow the SUSE-recommended upgrade order (Rancher &rarr; downstream clusters); enable <strong>audit logging</strong> on Rancher to capture every API action and ship to your SIEM; for edge, prefer <strong>K3s</strong> + <strong>Fleet</strong> and design for offline operation &mdash; Fleet syncs idempotently; secret management routes through <strong>Rancher External Secrets</strong> or directly via <strong>External Secrets Operator</strong> with Vault/AWS SM/Azure KV; for compliance, the <strong>CIS scan</strong> built into Rancher generates per-cluster reports &mdash; schedule them; finally, when you outgrow Rancher (multi-tenant SaaS scale), the migration path is Argo CD ApplicationSets + Crossplane &mdash; plan it early rather than late.</p>'''
+
+ANSWERS[30] = r'''<p><strong>Situation:</strong> the org wants a clean <strong>GitOps workflow</strong> for Kubernetes resources &mdash; CI builds and tests; CD reconciles from Git declaratively. The chosen stack is <strong>Argo CD</strong> for sync and <strong>GitHub Actions</strong> for build, with strict separation of concerns: the app repo never has cluster credentials, the config repo never has source code.</p>
 
 <p><strong>Approach:</strong> two repos &mdash; <em>app</em> (source code, Dockerfile, unit tests, GH Actions for build/push) and <em>config</em> (Kustomize/Helm manifests, Argo CD Applications). CI in app repo builds the image, signs it (Cosign), and writes a single PR to the config repo bumping the image tag. Config repo PRs are reviewed (or auto-merged for non-prod), Argo CD watches the config repo, and reconciles to clusters. For multi-cluster, use <strong>ApplicationSet</strong>; for promotion across stages, use <strong>Kargo</strong>.</p>
 
@@ -2042,15 +1783,9 @@ spec:
 <tr><td>Drift backstop</td><td>Argo CD selfHeal + Kyverno admission policies</td></tr>
 </table>
 
-<p><strong>Production polish:</strong> the app repo never has cluster credentials &mdash; the only privilege it needs is a fine-scoped PAT to the config repo (or, better, a <strong>GitHub App</strong> token with contents: write only on that repo); review the bump PR for prod (auto-merge for staging) so a human is in the loop on production change; use <strong>Argo CD&rsquo;s</strong> <em>sync waves</em> and <em>health checks</em> to order CRDs &rarr; namespaces &rarr; controllers &rarr; apps &rarr; jobs; combine with <strong>Argo Rollouts</strong> for canary semantics; configure <strong>Argo CD diff customisations</strong> for fields managed by autoscalers (HPA replicas, VPA resources) so they don&rsquo;t flap; lock down the config repo with <strong>CODEOWNERS</strong> and <strong>required reviews</strong>; for promotion across dev &rarr; staging &rarr; prod use <strong>Kargo Stages</strong> with verification queries (Prometheus/Datadog) so promotion happens only when canary metrics are clean; pin the Argo CD version per cluster, run <strong>argocd-image-updater</strong> only in non-prod, and enforce signed images at admission via <strong>Kyverno verifyImages</strong> or <strong>Connaisseur</strong>; for secrets, use <strong>External Secrets Operator</strong> &mdash; never put plaintext secrets in the config repo; finally, run drift detection alerts (Argo CD <em>OutOfSync</em> webhook to Slack) so manual cluster edits are visible immediately.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q31">
-  <div class="qa__number">Question 31</div>
-  <h3 class="qa__question">You are asked to create a CI/CD pipeline for a mobile application with automated testing and deployment to App Store and Google Play. Describe your approach.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a mobile app (React Native or Flutter) needs CI/CD that builds iOS+Android, runs unit and instrumented tests, signs builds, and uploads to <strong>App Store Connect</strong> and <strong>Google Play</strong>. The team wants automated TestFlight/Internal-track uploads on every merge and gated production rollouts.</p>
+<p><strong>Production polish:</strong> the app repo never has cluster credentials &mdash; the only privilege it needs is a fine-scoped PAT to the config repo (or, better, a <strong>GitHub App</strong> token with contents: write only on that repo); review the bump PR for prod (auto-merge for staging) so a human is in the loop on production change; use <strong>Argo CD&rsquo;s</strong> <em>sync waves</em> and <em>health checks</em> to order CRDs &rarr; namespaces &rarr; controllers &rarr; apps &rarr; jobs; combine with <strong>Argo Rollouts</strong> for canary semantics; configure <strong>Argo CD diff customisations</strong> for fields managed by autoscalers (HPA replicas, VPA resources) so they don&rsquo;t flap; lock down the config repo with <strong>CODEOWNERS</strong> and <strong>required reviews</strong>; for promotion across dev &rarr; staging &rarr; prod use <strong>Kargo Stages</strong> with verification queries (Prometheus/Datadog) so promotion happens only when canary metrics are clean; pin the Argo CD version per cluster, run <strong>argocd-image-updater</strong> only in non-prod, and enforce signed images at admission via <strong>Kyverno verifyImages</strong> or <strong>Connaisseur</strong>; for secrets, use <strong>External Secrets Operator</strong> &mdash; never put plaintext secrets in the config repo; finally, run drift detection alerts (Argo CD <em>OutOfSync</em> webhook to Slack) so manual cluster edits are visible immediately.</p>'''
+
+ANSWERS[31] = r'''<p><strong>Situation:</strong> a mobile app (React Native or Flutter) needs CI/CD that builds iOS+Android, runs unit and instrumented tests, signs builds, and uploads to <strong>App Store Connect</strong> and <strong>Google Play</strong>. The team wants automated TestFlight/Internal-track uploads on every merge and gated production rollouts.</p>
 
 <p><strong>Approach:</strong> use <strong>Fastlane</strong> as the orchestrator (industry standard, both stores), <strong>EAS Build</strong> (Expo) or <strong>Xcode Cloud</strong> for managed iOS, and run on <strong>macOS runners</strong> in GitHub Actions for iOS, <strong>ubuntu-24.04</strong> for Android. Sign with <strong>fastlane match</strong> (encrypted Git repo of certificates) for iOS and a Play-managed signing key for Android. Test on real devices via <strong>BrowserStack App Live</strong>, <strong>AWS Device Farm</strong>, or <strong>Firebase Test Lab</strong>. Track crashes via <strong>Sentry</strong> or <strong>Firebase Crashlytics</strong>.</p>
 
@@ -2106,15 +1841,9 @@ jobs:
 <tr><td>Sentry / Crashlytics</td><td>Crash reporting + symbolication</td></tr>
 </table>
 
-<p><strong>Production polish:</strong> use <strong>App Store Connect API key</strong> (not Apple ID + 2FA) for non-interactive uploads &mdash; rotate the key annually; with <strong>fastlane match</strong>, store the cert repo separately from app code with a different read group; encrypt build artefacts and upload to GitHub Releases for forensic recovery; for Android, prefer <strong>Play App Signing</strong> with an upload key in CI &mdash; lose the upload key, you can recover; lose the signing key, your app is dead; use <strong>staged rollouts</strong> on both stores (5%, 20%, 50%, 100%) and watch crash-free sessions via Sentry/Crashlytics &mdash; halt rollout if &lt;99.5%; for code-push style hotfixes (RN/Flutter only) use <strong>Expo Updates</strong> or <strong>App Center CodePush</strong> for JS-only changes &mdash; never abuse it for binary changes; gate iOS releases on TestFlight for at least 24 hours of internal testing; redact secrets in logs (Fastlane has a sensitive-output filter); finally, version your binary deterministically &mdash; use the <code>github.run_number</code> as the build number on Android and <code>increment_build_number</code> on iOS, with the semver tag as the human-readable version.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q32">
-  <div class="qa__number">Question 32</div>
-  <h3 class="qa__question">Your team wants to use Kubernetes Custom Resource Definitions (CRDs) to manage application configurations. How would you integrate this into your CI/CD pipeline?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> the platform team uses <strong>Custom Resource Definitions (CRDs)</strong> to model app config (e.g., a <code>Microservice</code> CRD that bundles Deployment + Service + HPA + ServiceMonitor). CI/CD must lint, version, and roll out CRDs cleanly without breaking existing custom resources.</p>
+<p><strong>Production polish:</strong> use <strong>App Store Connect API key</strong> (not Apple ID + 2FA) for non-interactive uploads &mdash; rotate the key annually; with <strong>fastlane match</strong>, store the cert repo separately from app code with a different read group; encrypt build artefacts and upload to GitHub Releases for forensic recovery; for Android, prefer <strong>Play App Signing</strong> with an upload key in CI &mdash; lose the upload key, you can recover; lose the signing key, your app is dead; use <strong>staged rollouts</strong> on both stores (5%, 20%, 50%, 100%) and watch crash-free sessions via Sentry/Crashlytics &mdash; halt rollout if &lt;99.5%; for code-push style hotfixes (RN/Flutter only) use <strong>Expo Updates</strong> or <strong>App Center CodePush</strong> for JS-only changes &mdash; never abuse it for binary changes; gate iOS releases on TestFlight for at least 24 hours of internal testing; redact secrets in logs (Fastlane has a sensitive-output filter); finally, version your binary deterministically &mdash; use the <code>github.run_number</code> as the build number on Android and <code>increment_build_number</code> on iOS, with the semver tag as the human-readable version.</p>'''
+
+ANSWERS[32] = r'''<p><strong>Situation:</strong> the platform team uses <strong>Custom Resource Definitions (CRDs)</strong> to model app config (e.g., a <code>Microservice</code> CRD that bundles Deployment + Service + HPA + ServiceMonitor). CI/CD must lint, version, and roll out CRDs cleanly without breaking existing custom resources.</p>
 
 <p><strong>Approach:</strong> treat CRDs as a contract: schema-first design, semver, conversion webhooks for migration, and admission policies (Kyverno/Gatekeeper) to enforce required fields. Build CRDs with <strong>kubebuilder</strong> or <strong>operator-sdk</strong>; lint with <strong>kubeconform</strong> + <strong>kube-linter</strong>; render canonical YAML with <strong>controller-gen</strong>; ship the operator (controller binary + CRDs) as a Helm chart pinned per cluster via Argo CD. Use the <strong>v1alpha1 &rarr; v1beta1 &rarr; v1</strong> ladder for breaking changes with conversion webhooks.</p>
 
@@ -2172,15 +1901,9 @@ jobs:
 <tr><td>Policy</td><td>Kyverno ClusterPolicy validating CRs at admission</td></tr>
 </table>
 
-<p><strong>Production polish:</strong> never reuse a field name with a different type across versions &mdash; if you need to change a field, deprecate, add the new one, write the conversion, then remove in a later major; CRD upgrades are global cluster mutations &mdash; test conversion webhooks with realistic stored objects via <strong>kuttl</strong> or <strong>chainsaw</strong>; emit Kubernetes Events from your controller for every state transition so users can <code>kubectl describe</code> and see what happened; expose Prometheus metrics from the controller-runtime metrics endpoint and create a default <strong>ServiceMonitor</strong>; ship a default <strong>PrometheusRule</strong> alerting on reconciliation failures and queue length; document the &ldquo;what happens if you delete the CR&rdquo; semantics &mdash; finalisers must be idempotent and bounded (don&rsquo;t block deletion forever on a transient external API); for security, the controller&rsquo;s ServiceAccount needs least-privilege RBAC limited to its own namespaces; use <strong>controller-runtime field selectors</strong> to scope watches; ship the operator at <strong>capability level 4 (Auto Pilot)</strong> per OperatorHub criteria where feasible; finally, when shipping breaking changes, communicate via <code>kubectl get crd &lt;name&gt; -o yaml</code> deprecation warnings and a release note checklist for cluster operators.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q33">
-  <div class="qa__number">Question 33</div>
-  <h3 class="qa__question">You need to set up a CI/CD pipeline for a Ruby on Rails application with unit tests, integration tests, and deployment to Heroku. Explain your approach.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a <strong>Ruby on Rails</strong> monolith needs a CI/CD pipeline that runs RSpec unit + Capybara feature tests, lints with RuboCop, scans with Brakeman, and deploys to <strong>Heroku</strong> on green main &mdash; with database migrations executed safely.</p>
+<p><strong>Production polish:</strong> never reuse a field name with a different type across versions &mdash; if you need to change a field, deprecate, add the new one, write the conversion, then remove in a later major; CRD upgrades are global cluster mutations &mdash; test conversion webhooks with realistic stored objects via <strong>kuttl</strong> or <strong>chainsaw</strong>; emit Kubernetes Events from your controller for every state transition so users can <code>kubectl describe</code> and see what happened; expose Prometheus metrics from the controller-runtime metrics endpoint and create a default <strong>ServiceMonitor</strong>; ship a default <strong>PrometheusRule</strong> alerting on reconciliation failures and queue length; document the &ldquo;what happens if you delete the CR&rdquo; semantics &mdash; finalisers must be idempotent and bounded (don&rsquo;t block deletion forever on a transient external API); for security, the controller&rsquo;s ServiceAccount needs least-privilege RBAC limited to its own namespaces; use <strong>controller-runtime field selectors</strong> to scope watches; ship the operator at <strong>capability level 4 (Auto Pilot)</strong> per OperatorHub criteria where feasible; finally, when shipping breaking changes, communicate via <code>kubectl get crd &lt;name&gt; -o yaml</code> deprecation warnings and a release note checklist for cluster operators.</p>'''
+
+ANSWERS[33] = r'''<p><strong>Situation:</strong> a <strong>Ruby on Rails</strong> monolith needs a CI/CD pipeline that runs RSpec unit + Capybara feature tests, lints with RuboCop, scans with Brakeman, and deploys to <strong>Heroku</strong> on green main &mdash; with database migrations executed safely.</p>
 
 <p><strong>Approach:</strong> use GitHub Actions with <strong>service containers</strong> for Postgres + Redis, Ruby cache via <code>ruby/setup-ruby</code>, Selenium on a Chromium service container for system tests, parallelism via the official <code>parallel_tests</code> gem or Knapsack Pro for time-balanced sharding. For deploy, use Heroku&rsquo;s Container Registry (deprecating buildpacks for new apps) with a slim Dockerfile, and run migrations via a <code>release</code> phase command before traffic shifts.</p>
 
@@ -2237,15 +1960,9 @@ jobs:
 <tr><td>Render / Fly.io / Railway</td><td>2026 Heroku replacements; cheaper, modern feature set</td></tr>
 </table>
 
-<p><strong>Production polish:</strong> Heroku is past its peak &mdash; for new Rails apps in 2026 evaluate <strong>Render</strong>, <strong>Fly.io</strong>, or <strong>Railway</strong> first (cheaper, faster region availability, modern feature flags); but for existing Heroku apps the workflow is solid; set the Heroku <strong>release phase</strong> command to <code>bundle exec rails db:migrate</code> in <code>Procfile</code> &mdash; release runs <em>before</em> dynos restart, so migrations finish before traffic flips; use <strong>strong_migrations</strong> gem to fail CI on dangerous patterns (e.g., adding a NOT NULL column without default on a large table); for zero-downtime, use the <strong>expand/contract</strong> pattern &mdash; deploy compatible code, run migration in a separate release, then deploy code that uses the new schema; cache <strong>node_modules</strong> + <strong>vendor/bundle</strong> via <code>bundler-cache: true</code> + <code>cache: 'yarn'</code>; run <strong>system tests</strong> in headless Chrome via <code>selenium-webdriver</code>; ship the asset pipeline (<code>esbuild</code> or Vite + jsbundling-rails) inside the Docker image to avoid Heroku&rsquo;s slow asset compile; use <strong>Sentry</strong> for errors and the <strong>Heroku Postgres metrics dashboard</strong> for DB health; configure <strong>Heroku review apps</strong> for PR previews so QA happens on real infrastructure; finally, version your slug with <code>HEROKU_SLUG_COMMIT</code> echoed at app boot so production logs always know which commit is running.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q34">
-  <div class="qa__number">Question 34</div>
-  <h3 class="qa__question">Your organization wants to implement end-to-end encryption for data in transit and at rest. How would you configure this in your CI/CD pipeline?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> the security team mandates <strong>end-to-end encryption</strong> for data at rest and in transit across all environments. CI/CD must enforce TLS for every service, encrypt persistent volumes with customer-managed keys, manage secrets via a vault, and prove (auditably) that no plaintext data ever crosses an untrusted boundary.</p>
+<p><strong>Production polish:</strong> Heroku is past its peak &mdash; for new Rails apps in 2026 evaluate <strong>Render</strong>, <strong>Fly.io</strong>, or <strong>Railway</strong> first (cheaper, faster region availability, modern feature flags); but for existing Heroku apps the workflow is solid; set the Heroku <strong>release phase</strong> command to <code>bundle exec rails db:migrate</code> in <code>Procfile</code> &mdash; release runs <em>before</em> dynos restart, so migrations finish before traffic flips; use <strong>strong_migrations</strong> gem to fail CI on dangerous patterns (e.g., adding a NOT NULL column without default on a large table); for zero-downtime, use the <strong>expand/contract</strong> pattern &mdash; deploy compatible code, run migration in a separate release, then deploy code that uses the new schema; cache <strong>node_modules</strong> + <strong>vendor/bundle</strong> via <code>bundler-cache: true</code> + <code>cache: 'yarn'</code>; run <strong>system tests</strong> in headless Chrome via <code>selenium-webdriver</code>; ship the asset pipeline (<code>esbuild</code> or Vite + jsbundling-rails) inside the Docker image to avoid Heroku&rsquo;s slow asset compile; use <strong>Sentry</strong> for errors and the <strong>Heroku Postgres metrics dashboard</strong> for DB health; configure <strong>Heroku review apps</strong> for PR previews so QA happens on real infrastructure; finally, version your slug with <code>HEROKU_SLUG_COMMIT</code> echoed at app boot so production logs always know which commit is running.</p>'''
+
+ANSWERS[34] = r'''<p><strong>Situation:</strong> the security team mandates <strong>end-to-end encryption</strong> for data at rest and in transit across all environments. CI/CD must enforce TLS for every service, encrypt persistent volumes with customer-managed keys, manage secrets via a vault, and prove (auditably) that no plaintext data ever crosses an untrusted boundary.</p>
 
 <p><strong>Approach:</strong> use <strong>cert-manager</strong> + a private CA (Vault PKI, AWS Private CA, smallstep) to issue certificates for every Service; enable <strong>mTLS by default</strong> via a service mesh (<strong>Istio ambient mode</strong>, <strong>Linkerd</strong>, or <strong>Cilium Service Mesh</strong>). Encrypt at rest via <strong>EBS/Disk encryption with KMS CMKs</strong>, K8s <strong>Secrets encryption-at-rest with KMS v2</strong>, and database TDE. Manage secrets via <strong>HashiCorp Vault</strong>, <strong>AWS Secrets Manager</strong>, or <strong>External Secrets Operator</strong>; never let plaintext secrets touch Git or container images.</p>
 
@@ -2300,15 +2017,9 @@ spec:
 <tr><td>Key rotation</td><td>Vault transit, KMS automatic rotation, cert-manager renewBefore</td></tr>
 </table>
 
-<p><strong>Production polish:</strong> default to <strong>STRICT mTLS</strong> in the mesh and explicitly allow plaintext only at well-documented boundaries (legacy services); rotate certificates with short TTL (24h&ndash;72h) so a compromise window is small; rotate KMS CMKs annually with automatic key rotation enabled; never let CI logs print plaintext &mdash; use <code>::add-mask::</code> in GH Actions and Jenkins <code>maskPasswords</code>; gate on <strong>kube-bench</strong>, <strong>kubescape</strong>, and CIS scans in CI to verify cluster encryption settings remain on; export <strong>access logs from the cloud LB</strong> and audit logs from the K8s API server, ship to immutable storage (S3 Object Lock); enforce TLS 1.3 minimum and disable old ciphers via Envoy/NGINX tuning; for FIPS-required workloads, use FIPS-validated builds (Red Hat OpenShift, Bottlerocket FIPS, Talos FIPS); run <strong>tlsx</strong> or <strong>testssl.sh</strong> in CI against staging endpoints to verify configuration; for client/server cert chain debugging, ship a <strong>certificate inventory dashboard</strong> from <strong>cert-manager metrics</strong> showing issuer, expiry, owner; finally, add a <strong>Kyverno policy</strong> that rejects any Service without a TLS-terminating annotation and any PVC without a KMS-backed StorageClass &mdash; the easiest way to prevent regression.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q35">
-  <div class="qa__number">Question 35</div>
-  <h3 class="qa__question">You are asked to set up a CI/CD pipeline for a blockchain application with automated testing and deployment to AWS. Describe your approach.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a blockchain product (smart contracts plus indexer + frontend) needs CI/CD that compiles Solidity, runs forge tests with fuzzing, performs static analysis, deploys contracts via signed transactions, and ships supporting services to AWS. Bugs in deployed contracts cost real money, so the bar is materially higher than typical web CI.</p>
+<p><strong>Production polish:</strong> default to <strong>STRICT mTLS</strong> in the mesh and explicitly allow plaintext only at well-documented boundaries (legacy services); rotate certificates with short TTL (24h&ndash;72h) so a compromise window is small; rotate KMS CMKs annually with automatic key rotation enabled; never let CI logs print plaintext &mdash; use <code>::add-mask::</code> in GH Actions and Jenkins <code>maskPasswords</code>; gate on <strong>kube-bench</strong>, <strong>kubescape</strong>, and CIS scans in CI to verify cluster encryption settings remain on; export <strong>access logs from the cloud LB</strong> and audit logs from the K8s API server, ship to immutable storage (S3 Object Lock); enforce TLS 1.3 minimum and disable old ciphers via Envoy/NGINX tuning; for FIPS-required workloads, use FIPS-validated builds (Red Hat OpenShift, Bottlerocket FIPS, Talos FIPS); run <strong>tlsx</strong> or <strong>testssl.sh</strong> in CI against staging endpoints to verify configuration; for client/server cert chain debugging, ship a <strong>certificate inventory dashboard</strong> from <strong>cert-manager metrics</strong> showing issuer, expiry, owner; finally, add a <strong>Kyverno policy</strong> that rejects any Service without a TLS-terminating annotation and any PVC without a KMS-backed StorageClass &mdash; the easiest way to prevent regression.</p>'''
+
+ANSWERS[35] = r'''<p><strong>Situation:</strong> a blockchain product (smart contracts plus indexer + frontend) needs CI/CD that compiles Solidity, runs forge tests with fuzzing, performs static analysis, deploys contracts via signed transactions, and ships supporting services to AWS. Bugs in deployed contracts cost real money, so the bar is materially higher than typical web CI.</p>
 
 <p><strong>Approach:</strong> use <strong>Foundry</strong> as the toolchain &mdash; <code>forge build</code>, <code>forge test</code> with invariant + fuzz testing, <code>forge coverage</code>, <strong>Slither</strong> + <strong>Mythril</strong> for static analysis, optionally <strong>Halmos</strong> or <strong>Certora</strong> for formal verification of critical paths. Run a <strong>mainnet fork</strong> in CI to catch integration regressions. Deploy contracts via <strong>OpenZeppelin Defender</strong> or <strong>Foundry scripts</strong> using a hardware-wallet-backed key (Frame, Ledger, or AWS KMS via <code>cast wallet</code>). Off-chain services (indexer, frontend, oracle relayer) ship as containers to ECS/EKS via the standard pattern.</p>
 
@@ -2372,15 +2083,9 @@ jobs:
 <tr><td>Monitoring</td><td>OpenZeppelin Defender Sentinels, Tenderly Alerts</td></tr>
 </table>
 
-<p><strong>Production polish:</strong> deployments are immutable &mdash; require multi-sig (Safe / Gnosis Safe) for mainnet writes, never a single-key deployment role; use <strong>timelocks</strong> (24&ndash;48h) for upgradeable contracts so the community can audit pending changes; pin every dep by hash including Solc compiler version (<code>solc-bin</code> attestations); audit every external call with <strong>checks-effects-interactions</strong> and reentrancy guards; run <strong>Echidna</strong> in addition to Foundry fuzzing for adversarial property testing; produce a <strong>deployment plan document</strong> auto-generated by the script with target addresses, constructor args, and verifier links &mdash; humans review before mainnet broadcast; use <strong>Etherscan/Sourcify verification</strong> in CI so the source code is immediately visible after deploy; emit events generously &mdash; indexers depend on them; for upgrades, prefer the <strong>UUPS proxy</strong> pattern with a state-migration script; for the supporting services, the off-chain CI/CD is conventional &mdash; Docker image, ECS deploy, OIDC auth &mdash; but ensure the relayer&rsquo;s signing keys live in <strong>KMS</strong> with strict access control and the indexer can recover from chain reorgs (idempotent processing keyed on tx hash + log index).</p>
-    
-  </div>
-</article>
-<article class="qa" id="q36">
-  <div class="qa__number">Question 36</div>
-  <h3 class="qa__question">Your team wants to implement continuous testing in the CI/CD pipeline. How would you set this up using Jenkins and Selenium?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> the QA team wants <strong>continuous testing</strong> in the CI/CD pipeline &mdash; unit, integration, contract, and full E2E browser tests &mdash; orchestrated by Jenkins with <strong>Selenium</strong> for cross-browser checks. The current setup runs E2E only nightly, missing regressions until release day.</p>
+<p><strong>Production polish:</strong> deployments are immutable &mdash; require multi-sig (Safe / Gnosis Safe) for mainnet writes, never a single-key deployment role; use <strong>timelocks</strong> (24&ndash;48h) for upgradeable contracts so the community can audit pending changes; pin every dep by hash including Solc compiler version (<code>solc-bin</code> attestations); audit every external call with <strong>checks-effects-interactions</strong> and reentrancy guards; run <strong>Echidna</strong> in addition to Foundry fuzzing for adversarial property testing; produce a <strong>deployment plan document</strong> auto-generated by the script with target addresses, constructor args, and verifier links &mdash; humans review before mainnet broadcast; use <strong>Etherscan/Sourcify verification</strong> in CI so the source code is immediately visible after deploy; emit events generously &mdash; indexers depend on them; for upgrades, prefer the <strong>UUPS proxy</strong> pattern with a state-migration script; for the supporting services, the off-chain CI/CD is conventional &mdash; Docker image, ECS deploy, OIDC auth &mdash; but ensure the relayer&rsquo;s signing keys live in <strong>KMS</strong> with strict access control and the indexer can recover from chain reorgs (idempotent processing keyed on tx hash + log index).</p>'''
+
+ANSWERS[36] = r'''<p><strong>Situation:</strong> the QA team wants <strong>continuous testing</strong> in the CI/CD pipeline &mdash; unit, integration, contract, and full E2E browser tests &mdash; orchestrated by Jenkins with <strong>Selenium</strong> for cross-browser checks. The current setup runs E2E only nightly, missing regressions until release day.</p>
 
 <p><strong>Approach:</strong> shift the test pyramid into the pipeline: unit on every commit (seconds), integration on PR (minutes), E2E in parallel on PR + post-deploy smoke (minutes via a Selenium Grid). Run the Selenium Grid on Kubernetes via the <strong>Zalando Selenium Operator</strong> or the official <strong>Aerokube Selenoid/Moon</strong> stack, dynamically scaling browser pods. Modern alternatives &mdash; <strong>Playwright</strong>, <strong>Cypress</strong>, <strong>WebdriverIO</strong> &mdash; are usually preferable to raw Selenium for new projects; this answer covers Selenium because it&rsquo;s the named tool.</p>
 
@@ -2447,15 +2152,9 @@ firefox: { replicas: 0, autoscaling: { minReplicas: 0, maxReplicas: 20 } }
 <tr><td>Smoke (post-deploy)</td><td>Health checks + critical user journeys, &lt; 2 min</td></tr>
 </table>
 
-<p><strong>Production polish:</strong> use <strong>preview environments</strong> per PR (vCluster, ephemeral namespace, or Kustomize overlay) so each E2E run gets a clean stack &mdash; flaky tests caused by shared state evaporate; report Selenium failures with a <strong>screenshot + video + page source</strong> archived to S3 for forensic analysis (Selenium 4 records natively, Aerokube Moon makes it easy); split E2E by tag (<code>@smoke</code>, <code>@regression</code>, <code>@nightly</code>) so PRs run smoke and regression while heavy suites run nightly; flake quarantine &mdash; auto-detect tests that fail intermittently and tag them, run separately with retries, and require fixing within a SLA (otherwise prune); use <strong>retry-on-failure once</strong> for E2E (cope with browser flakiness) but never for unit tests (mask real bugs); shift visual regression via <strong>Percy</strong> or <strong>Applitools</strong> &mdash; far stronger than DOM assertions; ship Lighthouse CI results to monitor performance budgets; for new projects in 2026, prefer <strong>Playwright</strong> over Selenium &mdash; faster, native auto-wait, tracing built in; finally, treat E2E failures as production-impacting incidents &mdash; investigate within 24 hours, never just retry until green.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q37">
-  <div class="qa__number">Question 37</div>
-  <h3 class="qa__question">You need to automate the scaling of a Kubernetes deployment based on custom metrics. Explain how you would configure this in the CI/CD pipeline.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a workload&rsquo;s scaling driver is not CPU but a <strong>custom metric</strong> &mdash; queue depth, in-flight requests, GPU utilisation, or a SaaS provider&rsquo;s rate limit budget. CI/CD must deploy autoscaling rules that react fast and accurately, including scale-to-zero for cost.</p>
+<p><strong>Production polish:</strong> use <strong>preview environments</strong> per PR (vCluster, ephemeral namespace, or Kustomize overlay) so each E2E run gets a clean stack &mdash; flaky tests caused by shared state evaporate; report Selenium failures with a <strong>screenshot + video + page source</strong> archived to S3 for forensic analysis (Selenium 4 records natively, Aerokube Moon makes it easy); split E2E by tag (<code>@smoke</code>, <code>@regression</code>, <code>@nightly</code>) so PRs run smoke and regression while heavy suites run nightly; flake quarantine &mdash; auto-detect tests that fail intermittently and tag them, run separately with retries, and require fixing within a SLA (otherwise prune); use <strong>retry-on-failure once</strong> for E2E (cope with browser flakiness) but never for unit tests (mask real bugs); shift visual regression via <strong>Percy</strong> or <strong>Applitools</strong> &mdash; far stronger than DOM assertions; ship Lighthouse CI results to monitor performance budgets; for new projects in 2026, prefer <strong>Playwright</strong> over Selenium &mdash; faster, native auto-wait, tracing built in; finally, treat E2E failures as production-impacting incidents &mdash; investigate within 24 hours, never just retry until green.</p>'''
+
+ANSWERS[37] = r'''<p><strong>Situation:</strong> a workload&rsquo;s scaling driver is not CPU but a <strong>custom metric</strong> &mdash; queue depth, in-flight requests, GPU utilisation, or a SaaS provider&rsquo;s rate limit budget. CI/CD must deploy autoscaling rules that react fast and accurately, including scale-to-zero for cost.</p>
 
 <p><strong>Approach:</strong> use <strong>KEDA</strong> (Kubernetes Event-Driven Autoscaler) &mdash; it has 60+ scalers in 2026 (Kafka, RabbitMQ, NATS, SQS, Redis, Prometheus, Datadog, Cron, GitHub Actions, etc.) and can scale Deployments down to zero. For metrics that aren&rsquo;t in a built-in scaler, use the <strong>Prometheus scaler</strong> with a query that returns the desired signal. Wire <strong>HPA</strong> or <strong>ScaledJob</strong> via KEDA&rsquo;s <code>ScaledObject</code> CRD; ship the YAML through GitOps. Pair with <strong>Karpenter</strong> for just-in-time node provisioning so pod scale-up doesn&rsquo;t starve.</p>
 
@@ -2513,15 +2212,9 @@ spec:
 <tr><td>Karpenter NodePool</td><td>Provisions matching nodes when KEDA scales pods up</td></tr>
 </table>
 
-<p><strong>Production polish:</strong> always pair KEDA with <strong>HPA-aware</strong> handling of <em>graceful shutdown</em> &mdash; consumers must drain their batch within <code>terminationGracePeriodSeconds</code> on scale-down, otherwise messages double-process; for queue workloads, configure <strong>idempotency keys</strong> on the consumer so retries are safe; size <strong>maxReplicaCount</strong> to match the broker&rsquo;s partition count (Kafka) or queue concurrency limit (SQS) &mdash; provisioning more pods than partitions wastes resources; observe the <strong>desired/current</strong> replica gauges from KEDA in Grafana to tune behavior parameters; for ScaledJobs, set <code>maxReplicaCount</code> sensibly to avoid runaway parallelism; for Prometheus-driven scaling, write a recording rule for the metric so the scaler queries a fast, pre-computed series; combine with <strong>Pod Disruption Budgets</strong> so cluster-autoscaler can&rsquo;t evict the entire fleet during scale-down; use <strong>VPA in recommend mode</strong> (Off, then read recommendations) to right-size pod CPU/memory requests so HPA decisions reflect real headroom; finally, surface scaling decisions as Kubernetes Events and ship to Slack so on-call sees auto-scaling in real time &mdash; mystery scale events erode trust quickly.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q38">
-  <div class="qa__number">Question 38</div>
-  <h3 class="qa__question">Your organization wants to use GitHub Actions for continuous delivery to on-premise environments. Describe how you would configure the workflow.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> the team needs CI/CD that delivers to <strong>on-premise environments</strong> from GitHub Actions &mdash; air-gapped, behind firewalls, no inbound access to the cluster API. The deploy must be auditable and survive temporary network outages.</p>
+<p><strong>Production polish:</strong> always pair KEDA with <strong>HPA-aware</strong> handling of <em>graceful shutdown</em> &mdash; consumers must drain their batch within <code>terminationGracePeriodSeconds</code> on scale-down, otherwise messages double-process; for queue workloads, configure <strong>idempotency keys</strong> on the consumer so retries are safe; size <strong>maxReplicaCount</strong> to match the broker&rsquo;s partition count (Kafka) or queue concurrency limit (SQS) &mdash; provisioning more pods than partitions wastes resources; observe the <strong>desired/current</strong> replica gauges from KEDA in Grafana to tune behavior parameters; for ScaledJobs, set <code>maxReplicaCount</code> sensibly to avoid runaway parallelism; for Prometheus-driven scaling, write a recording rule for the metric so the scaler queries a fast, pre-computed series; combine with <strong>Pod Disruption Budgets</strong> so cluster-autoscaler can&rsquo;t evict the entire fleet during scale-down; use <strong>VPA in recommend mode</strong> (Off, then read recommendations) to right-size pod CPU/memory requests so HPA decisions reflect real headroom; finally, surface scaling decisions as Kubernetes Events and ship to Slack so on-call sees auto-scaling in real time &mdash; mystery scale events erode trust quickly.</p>'''
+
+ANSWERS[38] = r'''<p><strong>Situation:</strong> the team needs CI/CD that delivers to <strong>on-premise environments</strong> from GitHub Actions &mdash; air-gapped, behind firewalls, no inbound access to the cluster API. The deploy must be auditable and survive temporary network outages.</p>
 
 <p><strong>Approach:</strong> default to <strong>pull-based GitOps</strong> &mdash; CI builds and pushes images to an on-prem registry (Harbor, JFrog, or a registry mirror), then writes a manifest tag bump to a config repo. <strong>Argo CD</strong> or <strong>Flux</strong> running inside the on-prem cluster watches the config repo and reconciles. CI never touches the cluster API directly. For air-gapped, mirror images via <strong>Harbor replication</strong> over a one-way diode or via signed bundles with <strong>oras</strong>.</p>
 
@@ -2581,15 +2274,9 @@ spec:
 <tr><td>Internal Git mirror</td><td>Argo CD reads from on-prem GitLab/Gitea, not GitHub directly</td></tr>
 </table>
 
-<p><strong>Production polish:</strong> air-gapped environments have multiple regulatory drivers &mdash; document explicitly which controls (FedRAMP, ITAR, GDPR data residency) apply and design accordingly; for one-way diode networks, mirror images and config bundles via <strong>oras</strong>, sign every artefact with <strong>Cosign keyless</strong> in cloud and verify with <strong>Sigstore policy-controller</strong> on the on-prem side; Argo CD running on-prem must point at an <strong>on-prem Git</strong> mirror (GitLab CE, Gitea, or an internal GitHub Enterprise) &mdash; mirrored from the cloud Git via a controlled sync job; secrets land via <strong>Vault</strong> (on-prem instance) accessed by External Secrets Operator &mdash; never copy plaintext secrets across the boundary; for runner connectivity (when push is unavoidable), use <strong>step-security/harden-runner</strong> with strict egress allow-lists, ephemeral runners, and rotate the runner image weekly; audit every cross-boundary action via the on-prem SIEM; for high-security environments, consider <strong>Talos Linux</strong> (no SSH, KubeAPI-only management) as the K8s distribution; finally, run <strong>chaos drills</strong> simulating WAN outage &mdash; the cluster should keep serving traffic and reconcile when connectivity returns; if reconciliation re-orders things badly, fix the manifests.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q39">
-  <div class="qa__number">Question 39</div>
-  <h3 class="qa__question">You are asked to set up a CI/CD pipeline for an event-driven application using Docker and Kubernetes. Explain your approach.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> an event-driven application using Kafka topics and gRPC services on Kubernetes needs a CI/CD pipeline that handles schema compatibility, autoscales consumers off lag, and supports independent deployment of producers and consumers without dropping events.</p>
+<p><strong>Production polish:</strong> air-gapped environments have multiple regulatory drivers &mdash; document explicitly which controls (FedRAMP, ITAR, GDPR data residency) apply and design accordingly; for one-way diode networks, mirror images and config bundles via <strong>oras</strong>, sign every artefact with <strong>Cosign keyless</strong> in cloud and verify with <strong>Sigstore policy-controller</strong> on the on-prem side; Argo CD running on-prem must point at an <strong>on-prem Git</strong> mirror (GitLab CE, Gitea, or an internal GitHub Enterprise) &mdash; mirrored from the cloud Git via a controlled sync job; secrets land via <strong>Vault</strong> (on-prem instance) accessed by External Secrets Operator &mdash; never copy plaintext secrets across the boundary; for runner connectivity (when push is unavoidable), use <strong>step-security/harden-runner</strong> with strict egress allow-lists, ephemeral runners, and rotate the runner image weekly; audit every cross-boundary action via the on-prem SIEM; for high-security environments, consider <strong>Talos Linux</strong> (no SSH, KubeAPI-only management) as the K8s distribution; finally, run <strong>chaos drills</strong> simulating WAN outage &mdash; the cluster should keep serving traffic and reconcile when connectivity returns; if reconciliation re-orders things badly, fix the manifests.</p>'''
+
+ANSWERS[39] = r'''<p><strong>Situation:</strong> an event-driven application using Kafka topics and gRPC services on Kubernetes needs a CI/CD pipeline that handles schema compatibility, autoscales consumers off lag, and supports independent deployment of producers and consumers without dropping events.</p>
 
 <p><strong>Approach:</strong> separate <em>schema</em>, <em>producer</em>, <em>consumer</em>, and <em>broker</em> lifecycles. Schemas live in a <strong>Schema Registry</strong> (Confluent, Apicurio, AWS Glue) with backward+forward compatibility enforced in CI. Producers/consumers ship as containers via standard GitOps. Brokers run on K8s via <strong>Strimzi</strong> (Kafka), <strong>NATS Operator</strong>, or <strong>RabbitMQ Cluster Operator</strong>. Use <strong>KEDA</strong> for consumer autoscaling driven by lag/queue depth. For workflow orchestration above raw events, use <strong>Temporal</strong>, <strong>Knative Eventing</strong>, or <strong>Argo Events</strong>.</p>
 
@@ -2651,15 +2338,9 @@ spec:
 <tr><td>Tracing</td><td>OpenTelemetry context propagation in headers</td></tr>
 </table>
 
-<p><strong>Production polish:</strong> use a <strong>schema registry</strong> with strict <strong>BACKWARD_TRANSITIVE</strong> compatibility &mdash; new producer schemas must be readable by all currently deployed consumers; add a CI step that diffs the new schema vs the registered one and fails on incompatible changes; for major version bumps that <em>are</em> incompatible, dual-publish (old+new versions on different topics) until consumers migrate; design every consumer to be <strong>idempotent</strong> on (event ID + offset) keys &mdash; redeploys, restarts, and partition rebalances cause replays; never use <em>at-most-once</em> for business events &mdash; <em>at-least-once</em> + idempotency is correct; instrument <strong>OpenTelemetry</strong> with W3C trace context propagated through Kafka headers (<code>traceparent</code>, <code>tracestate</code>) so distributed traces span async boundaries; alert on consumer lag SLOs &mdash; not raw lag (which spikes are normal) but the burn rate of the lag SLO; for <strong>Sagas</strong> (multi-step workflows), use <strong>Temporal</strong> for durable execution rather than rolling your own state machine; partition assignment changes during deploy &mdash; use the cooperative-sticky assignor in modern Kafka clients to avoid stop-the-world rebalances; finally, exercise broker upgrades quarterly via the Strimzi upgrade procedure with a real test workload &mdash; major version bumps occasionally surface protocol issues that quiet topics never reveal.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q40">
-  <div class="qa__number">Question 40</div>
-  <h3 class="qa__question">Your team wants to implement automated canary releases in Kubernetes. How would you configure this in Jenkins?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> the team wants <strong>automated canary releases</strong> on Kubernetes orchestrated by Jenkins &mdash; ship a small percentage of traffic to the new version, observe metrics, and roll back automatically if SLOs degrade. No more 3am pager events from bad deploys.</p>
+<p><strong>Production polish:</strong> use a <strong>schema registry</strong> with strict <strong>BACKWARD_TRANSITIVE</strong> compatibility &mdash; new producer schemas must be readable by all currently deployed consumers; add a CI step that diffs the new schema vs the registered one and fails on incompatible changes; for major version bumps that <em>are</em> incompatible, dual-publish (old+new versions on different topics) until consumers migrate; design every consumer to be <strong>idempotent</strong> on (event ID + offset) keys &mdash; redeploys, restarts, and partition rebalances cause replays; never use <em>at-most-once</em> for business events &mdash; <em>at-least-once</em> + idempotency is correct; instrument <strong>OpenTelemetry</strong> with W3C trace context propagated through Kafka headers (<code>traceparent</code>, <code>tracestate</code>) so distributed traces span async boundaries; alert on consumer lag SLOs &mdash; not raw lag (which spikes are normal) but the burn rate of the lag SLO; for <strong>Sagas</strong> (multi-step workflows), use <strong>Temporal</strong> for durable execution rather than rolling your own state machine; partition assignment changes during deploy &mdash; use the cooperative-sticky assignor in modern Kafka clients to avoid stop-the-world rebalances; finally, exercise broker upgrades quarterly via the Strimzi upgrade procedure with a real test workload &mdash; major version bumps occasionally surface protocol issues that quiet topics never reveal.</p>'''
+
+ANSWERS[40] = r'''<p><strong>Situation:</strong> the team wants <strong>automated canary releases</strong> on Kubernetes orchestrated by Jenkins &mdash; ship a small percentage of traffic to the new version, observe metrics, and roll back automatically if SLOs degrade. No more 3am pager events from bad deploys.</p>
 
 <p><strong>Approach:</strong> install <strong>Argo Rollouts</strong> or <strong>Flagger</strong> in-cluster &mdash; both replace the Deployment controller with a progressive-delivery controller that integrates with the service mesh or ingress for traffic shifting and queries Prometheus/Datadog for analysis. Jenkins triggers the deploy by updating the Rollout image; Argo Rollouts owns the canary lifecycle. Avoid implementing canary in Jenkins itself &mdash; mesh+controller is far more reliable than imperative kubectl loops.</p>
 
@@ -2731,15 +2412,9 @@ spec:
 <tr><td>analysis on Prometheus</td><td>Default; pluggable to Datadog, NewRelic, CloudWatch</td></tr>
 </table>
 
-<p><strong>Production polish:</strong> always run <strong>analysis steps</strong> with both a success metric (error rate &lt; 1%, e.g.) and a latency metric (p99 &lt; baseline + N%) &mdash; either failing aborts the rollout; set <code>failureLimit: 1</code> so a single bad measurement halts before damage spreads; choose the <strong>weight steps</strong> conservatively for sensitive workloads (1%, 5%, 25%, 50%, 100%) and aggressively for low-stakes (10%, 50%, 100%); pair canary with <strong>preStop hooks</strong> + <code>terminationGracePeriodSeconds</code> so old pods drain cleanly; use <strong>experimental analysis runs</strong> (kayenta-style) on baseline vs canary &mdash; same load split between identical hardware to control for noise; for stateful workloads, canary with care &mdash; database schema changes use expand/contract, not canary; emit Kubernetes Events on every Rollout phase and ship to Slack so the team sees the rollout progressing live; for instant rollback, <code>kubectl argo rollouts abort</code> aborts and shifts 100% back to stable in seconds; finally, keep a <strong>post-deploy verification dashboard</strong> with a 24-hour lookback &mdash; sometimes regressions only surface under daily traffic patterns and you want explicit confirmation that the deploy is healthy.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q41">
-  <div class="qa__number">Question 41</div>
-  <h3 class="qa__question">You need to set up a CI/CD pipeline for a PHP application with unit tests, integration tests, and deployment to Azure Web App. Describe your approach.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a PHP application (Laravel or Symfony) needs a CI/CD pipeline with PHPUnit unit + integration tests, PHPStan static analysis, code style via PHP-CS-Fixer, and deployment to <strong>Azure Web App for Containers</strong>. Migrations must run pre-traffic-flip; secrets via Azure Key Vault.</p>
+<p><strong>Production polish:</strong> always run <strong>analysis steps</strong> with both a success metric (error rate &lt; 1%, e.g.) and a latency metric (p99 &lt; baseline + N%) &mdash; either failing aborts the rollout; set <code>failureLimit: 1</code> so a single bad measurement halts before damage spreads; choose the <strong>weight steps</strong> conservatively for sensitive workloads (1%, 5%, 25%, 50%, 100%) and aggressively for low-stakes (10%, 50%, 100%); pair canary with <strong>preStop hooks</strong> + <code>terminationGracePeriodSeconds</code> so old pods drain cleanly; use <strong>experimental analysis runs</strong> (kayenta-style) on baseline vs canary &mdash; same load split between identical hardware to control for noise; for stateful workloads, canary with care &mdash; database schema changes use expand/contract, not canary; emit Kubernetes Events on every Rollout phase and ship to Slack so the team sees the rollout progressing live; for instant rollback, <code>kubectl argo rollouts abort</code> aborts and shifts 100% back to stable in seconds; finally, keep a <strong>post-deploy verification dashboard</strong> with a 24-hour lookback &mdash; sometimes regressions only surface under daily traffic patterns and you want explicit confirmation that the deploy is healthy.</p>'''
+
+ANSWERS[41] = r'''<p><strong>Situation:</strong> a PHP application (Laravel or Symfony) needs a CI/CD pipeline with PHPUnit unit + integration tests, PHPStan static analysis, code style via PHP-CS-Fixer, and deployment to <strong>Azure Web App for Containers</strong>. Migrations must run pre-traffic-flip; secrets via Azure Key Vault.</p>
 
 <p><strong>Approach:</strong> use GitHub Actions with the <strong>shivammathur/setup-php</strong> action for fast PHP installs, <strong>service containers</strong> for Postgres/Redis, <strong>Composer</strong> caching keyed on <code>composer.lock</code>. Build a slim multi-stage Docker image with <code>php:8.3-fpm-alpine</code> + <strong>Caddy</strong> or <strong>Nginx Unit</strong>. Push to <strong>Azure Container Registry</strong>; deploy via <strong>azure/webapps-deploy@v3</strong> using <strong>OIDC</strong> federation. Run migrations in a deployment slot before swapping into production.</p>
 
@@ -2799,15 +2474,9 @@ jobs:
 <tr><td>Azure Key Vault refs in app settings</td><td>Secrets injected at runtime; never in image</td></tr>
 </table>
 
-<p><strong>Production polish:</strong> use Azure <strong>Deployment Slots</strong> with a warmup probe (Web App setting <code>WEBSITE_WARMUP_PATH=/health</code>) so the slot serves a few synthetic requests before the swap &mdash; eliminates cold-start failures on the critical first request; reference Key Vault secrets via <code>@Microsoft.KeyVault(SecretUri=...)</code> app settings instead of raw values; opcache + <strong>JIT</strong> on PHP 8.3 dramatically improves CPU-bound endpoints &mdash; ship <code>opcache.preload</code> for framework files; pin <strong>php-fpm</strong> worker counts based on memory + p99 latency observations, never default; for migrations use <code>--force</code> in production but require <em>strong_migrations</em>-style guards in CI to fail dangerous patterns (NOT NULL on a large table without default); enable <strong>Application Insights</strong> for distributed tracing &mdash; PHP SDK ships with it; set <strong>ALWAYS_ON</strong> on the App Service plan to prevent cold starts; for cost, consider <strong>Azure Container Apps</strong> as an alternative &mdash; per-second billing, scale-to-zero, KEDA-driven; and for high-traffic, <strong>AKS + Karpenter</strong> beats Web Apps on price/perf at scale; finally, run <strong>Composer audit</strong> in CI and gate on high-severity vulnerabilities; ship CSP headers and <strong>Roadrunner</strong> for long-running PHP processes if you have heavy WebSocket or SSE traffic.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q42">
-  <div class="qa__number">Question 42</div>
-  <h3 class="qa__question">Your organization wants to use GitHub Actions for deploying serverless applications to Google Cloud Functions. Explain the workflow you would create.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> the team writes serverless functions in Node.js/Python and wants GitHub Actions to deploy them to <strong>Google Cloud Functions</strong> (gen 2) on every merge to main, with environment promotion (dev &rarr; staging &rarr; prod) and traffic-split rollback support.</p>
+<p><strong>Production polish:</strong> use Azure <strong>Deployment Slots</strong> with a warmup probe (Web App setting <code>WEBSITE_WARMUP_PATH=/health</code>) so the slot serves a few synthetic requests before the swap &mdash; eliminates cold-start failures on the critical first request; reference Key Vault secrets via <code>@Microsoft.KeyVault(SecretUri=...)</code> app settings instead of raw values; opcache + <strong>JIT</strong> on PHP 8.3 dramatically improves CPU-bound endpoints &mdash; ship <code>opcache.preload</code> for framework files; pin <strong>php-fpm</strong> worker counts based on memory + p99 latency observations, never default; for migrations use <code>--force</code> in production but require <em>strong_migrations</em>-style guards in CI to fail dangerous patterns (NOT NULL on a large table without default); enable <strong>Application Insights</strong> for distributed tracing &mdash; PHP SDK ships with it; set <strong>ALWAYS_ON</strong> on the App Service plan to prevent cold starts; for cost, consider <strong>Azure Container Apps</strong> as an alternative &mdash; per-second billing, scale-to-zero, KEDA-driven; and for high-traffic, <strong>AKS + Karpenter</strong> beats Web Apps on price/perf at scale; finally, run <strong>Composer audit</strong> in CI and gate on high-severity vulnerabilities; ship CSP headers and <strong>Roadrunner</strong> for long-running PHP processes if you have heavy WebSocket or SSE traffic.</p>'''
+
+ANSWERS[42] = r'''<p><strong>Situation:</strong> the team writes serverless functions in Node.js/Python and wants GitHub Actions to deploy them to <strong>Google Cloud Functions</strong> (gen 2) on every merge to main, with environment promotion (dev &rarr; staging &rarr; prod) and traffic-split rollback support.</p>
 
 <p><strong>Approach:</strong> use <strong>Cloud Functions gen 2</strong> &mdash; effectively Cloud Run under the hood, with HTTP and event triggers. Authenticate via <strong>Workload Identity Federation</strong> (no JSON keys), package source as a zip uploaded to GCS, then call <code>gcloud functions deploy --gen2</code>. Pin runtime versions, set min/max instances, and use traffic-split for canary on Cloud Run revisions.</p>
 
@@ -2873,15 +2542,9 @@ jobs:
 <tr><td>Triggers</td><td>HTTP, Eventarc (Pub/Sub, GCS, Firestore, Audit logs)</td></tr>
 </table>
 
-<p><strong>Production polish:</strong> Cloud Functions gen 2 is just Cloud Run with extra packaging &mdash; you can drop down to <code>gcloud run deploy</code> directly for more control (custom Dockerfile, sidecars); use <strong>Eventarc</strong> for event triggers, not direct Pub/Sub subscriptions &mdash; cleaner abstractions and at-least-once guarantees; gate prod with <strong>GitHub Environments</strong> + required reviewers so deploys pause until human approval; pre-warm with <code>min-instances</code> matched to baseline traffic &mdash; cold starts on Node 22 are ~150&ndash;400ms but compound with chained calls; structured logs go to <strong>Cloud Logging</strong> automatically when output as JSON to stdout; trace via <strong>OpenTelemetry</strong> with the GCP exporter; for cost control, set explicit <code>--max-instances</code> &mdash; runaway autoscaling on Pub/Sub spikes can be painful; pin <strong>VPC Connector</strong> if functions need private network access (Cloud SQL, Memorystore); stage deploys in a dedicated <em>staging</em> project, not the same project, to isolate IAM and quotas; ship the SLOs as <strong>Cloud Monitoring SLO</strong> resources alongside the function for end-to-end visibility; finally, treat traffic-split rollback as primary &mdash; one <code>gcloud run services update-traffic --to-revisions=&lt;previous&gt;=100</code> reverts in seconds.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q43">
-  <div class="qa__number">Question 43</div>
-  <h3 class="qa__question">You are asked to implement CI/CD for a data-intensive application using Kubernetes. Describe your approach.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a data-intensive application (high-volume Kafka pipeline, Postgres + ClickHouse, Spark batch jobs) needs CI/CD on Kubernetes that respects state, runs schema migrations safely, and deploys streaming jobs without dropping events.</p>
+<p><strong>Production polish:</strong> Cloud Functions gen 2 is just Cloud Run with extra packaging &mdash; you can drop down to <code>gcloud run deploy</code> directly for more control (custom Dockerfile, sidecars); use <strong>Eventarc</strong> for event triggers, not direct Pub/Sub subscriptions &mdash; cleaner abstractions and at-least-once guarantees; gate prod with <strong>GitHub Environments</strong> + required reviewers so deploys pause until human approval; pre-warm with <code>min-instances</code> matched to baseline traffic &mdash; cold starts on Node 22 are ~150&ndash;400ms but compound with chained calls; structured logs go to <strong>Cloud Logging</strong> automatically when output as JSON to stdout; trace via <strong>OpenTelemetry</strong> with the GCP exporter; for cost control, set explicit <code>--max-instances</code> &mdash; runaway autoscaling on Pub/Sub spikes can be painful; pin <strong>VPC Connector</strong> if functions need private network access (Cloud SQL, Memorystore); stage deploys in a dedicated <em>staging</em> project, not the same project, to isolate IAM and quotas; ship the SLOs as <strong>Cloud Monitoring SLO</strong> resources alongside the function for end-to-end visibility; finally, treat traffic-split rollback as primary &mdash; one <code>gcloud run services update-traffic --to-revisions=&lt;previous&gt;=100</code> reverts in seconds.</p>'''
+
+ANSWERS[43] = r'''<p><strong>Situation:</strong> a data-intensive application (high-volume Kafka pipeline, Postgres + ClickHouse, Spark batch jobs) needs CI/CD on Kubernetes that respects state, runs schema migrations safely, and deploys streaming jobs without dropping events.</p>
 
 <p><strong>Approach:</strong> separate <em>data plane</em> (Strimzi Kafka, CloudNativePG, ClickHouse Operator, Spark Operator, Apache Flink Operator) from <em>application logic</em> (consumers, transformers, dashboards). Schemas evolve through expand/contract; data jobs deploy as Argo Workflows or Flink Jobs via <strong>Flink Kubernetes Operator</strong>; lakehouse tables version via <strong>Iceberg</strong>, <strong>Delta Lake</strong>, or <strong>Hudi</strong>; Argo CD reconciles all CRDs from a config repo. For dataset versioning use <strong>lakeFS</strong> or <strong>Nessie</strong>.</p>
 
@@ -2940,15 +2603,9 @@ spec:
 <tr><td>Backup</td><td>Velero + CSI snapshots, Barman, Stash</td></tr>
 </table>
 
-<p><strong>Production polish:</strong> for streaming jobs, always upgrade via <strong>savepoint &rarr; restore</strong> &mdash; the Flink Operator&rsquo;s <code>upgradeMode: savepoint</code> handles this automatically; never just delete-and-recreate (loses state); for Kafka, configure <strong>Cruise Control</strong> via Strimzi to rebalance partitions and detect anomalies; back up Kafka topic configs (KafkaTopic CRDs in Git) and offset commits separately; for OLTP, run Postgres failover drills monthly using CloudNativePG&rsquo;s <code>cnpg-controller failover</code>; for OLAP, partition tables aggressively (by day or hour) so old partitions can be archived to object storage cheaply; size <strong>PodDisruptionBudgets</strong> with <code>maxUnavailable: 0</code> for primary databases &mdash; one node drain is one too many; use <strong>topology spread constraints</strong> + <strong>anti-affinity</strong> to avoid co-locating replicas; expose <strong>OpenTelemetry</strong> tracing through the pipeline so a slow query in ClickHouse traces back to the originating Kafka event; for cost, separate <em>hot</em> from <em>cold</em> data &mdash; recent days in fast storage, history in S3 Glacier or GCS Nearline; finally, run <strong>data quality</strong> checks (Great Expectations, Soda) in the pipeline so corrupt input is caught before it propagates downstream &mdash; debugging analytical errors weeks later is far worse than failing fast at ingestion.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q44">
-  <div class="qa__number">Question 44</div>
-  <h3 class="qa__question">Your team wants to set up continuous integration for a Rust application with dependency caching. How would you configure this in GitHub Actions?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a Rust application with a long crate compile graph needs <strong>continuous integration</strong> in GitHub Actions, with effective dependency caching so iterative PR builds finish in 1&ndash;2 minutes rather than 15. Targets include cross-compilation to musl and ARM.</p>
+<p><strong>Production polish:</strong> for streaming jobs, always upgrade via <strong>savepoint &rarr; restore</strong> &mdash; the Flink Operator&rsquo;s <code>upgradeMode: savepoint</code> handles this automatically; never just delete-and-recreate (loses state); for Kafka, configure <strong>Cruise Control</strong> via Strimzi to rebalance partitions and detect anomalies; back up Kafka topic configs (KafkaTopic CRDs in Git) and offset commits separately; for OLTP, run Postgres failover drills monthly using CloudNativePG&rsquo;s <code>cnpg-controller failover</code>; for OLAP, partition tables aggressively (by day or hour) so old partitions can be archived to object storage cheaply; size <strong>PodDisruptionBudgets</strong> with <code>maxUnavailable: 0</code> for primary databases &mdash; one node drain is one too many; use <strong>topology spread constraints</strong> + <strong>anti-affinity</strong> to avoid co-locating replicas; expose <strong>OpenTelemetry</strong> tracing through the pipeline so a slow query in ClickHouse traces back to the originating Kafka event; for cost, separate <em>hot</em> from <em>cold</em> data &mdash; recent days in fast storage, history in S3 Glacier or GCS Nearline; finally, run <strong>data quality</strong> checks (Great Expectations, Soda) in the pipeline so corrupt input is caught before it propagates downstream &mdash; debugging analytical errors weeks later is far worse than failing fast at ingestion.</p>'''
+
+ANSWERS[44] = r'''<p><strong>Situation:</strong> a Rust application with a long crate compile graph needs <strong>continuous integration</strong> in GitHub Actions, with effective dependency caching so iterative PR builds finish in 1&ndash;2 minutes rather than 15. Targets include cross-compilation to musl and ARM.</p>
 
 <p><strong>Approach:</strong> use <strong>Swatinem/rust-cache</strong> &mdash; the standard cache action that handles <code>~/.cargo</code>, <code>target/</code>, and selective key derivation from <code>Cargo.lock</code>. Pair with <strong>cargo-chef</strong> for Docker builds (separates dependency build from app build). For ARM/musl, use <strong>cross</strong> or <strong>cargo-zigbuild</strong>. Run <strong>clippy</strong>, <strong>cargo-deny</strong>, <strong>cargo-audit</strong>, and <strong>cargo-llvm-cov</strong> in parallel.</p>
 
@@ -3010,15 +2667,9 @@ jobs:
 <tr><td>cranelift backend</td><td>~30% faster debug builds (nightly only)</td></tr>
 </table>
 
-<p><strong>Production polish:</strong> use <strong>cargo-chef</strong> in the production Dockerfile &mdash; the <em>plan</em> &rarr; <em>cook</em> &rarr; <em>build</em> sequence means dependencies recompile only when <code>Cargo.lock</code> changes, which is the dominant cost saving; for very large workspaces, install <strong>sccache</strong> with the GitHub Actions cache backend &mdash; saves more than rust-cache alone but needs a custom env setup; pin the toolchain via <code>rust-toolchain.toml</code> so all CI/dev/prod use the same compiler; run <strong>cargo-deny</strong> with a curated <code>deny.toml</code> to block unwanted licences (GPL into proprietary), known-bad versions, and duplicate dependencies; <strong>cargo-audit</strong> hits the RustSec advisory DB; for FFI-heavy crates, cache <code>~/.cargo/registry/cache</code> and Apple framework caches; ship binaries as static musl + UPX-compressed for tiny container images (single-binary <code>FROM scratch</code> at &lt;5MB); for release pipelines use <strong>cargo-release</strong> + <strong>release-please</strong> for changelog automation; gate merges on <strong>required checks</strong> = test + audit + clippy; finally, profile real CI runs &mdash; the <a href="https://github.com/EmbarkStudios/rust-build-helper">embark</a> blog series has good writeups on what actually moves Rust CI times, and the answer is almost always &ldquo;cache the right things, parallelise the rest&rdquo;.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q45">
-  <div class="qa__number">Question 45</div>
-  <h3 class="qa__question">You need to implement zero-downtime deployments in your CI/CD pipeline. Explain how you would configure this using Kubernetes.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> the platform owner has been burned by deploys that drop in-flight requests &mdash; users see 502s during rolling updates. The mandate is <strong>zero-downtime deployments</strong> on Kubernetes for every workload, with provable connection draining and schema-compatible migrations.</p>
+<p><strong>Production polish:</strong> use <strong>cargo-chef</strong> in the production Dockerfile &mdash; the <em>plan</em> &rarr; <em>cook</em> &rarr; <em>build</em> sequence means dependencies recompile only when <code>Cargo.lock</code> changes, which is the dominant cost saving; for very large workspaces, install <strong>sccache</strong> with the GitHub Actions cache backend &mdash; saves more than rust-cache alone but needs a custom env setup; pin the toolchain via <code>rust-toolchain.toml</code> so all CI/dev/prod use the same compiler; run <strong>cargo-deny</strong> with a curated <code>deny.toml</code> to block unwanted licences (GPL into proprietary), known-bad versions, and duplicate dependencies; <strong>cargo-audit</strong> hits the RustSec advisory DB; for FFI-heavy crates, cache <code>~/.cargo/registry/cache</code> and Apple framework caches; ship binaries as static musl + UPX-compressed for tiny container images (single-binary <code>FROM scratch</code> at &lt;5MB); for release pipelines use <strong>cargo-release</strong> + <strong>release-please</strong> for changelog automation; gate merges on <strong>required checks</strong> = test + audit + clippy; finally, profile real CI runs &mdash; the <a href="https://github.com/EmbarkStudios/rust-build-helper">embark</a> blog series has good writeups on what actually moves Rust CI times, and the answer is almost always &ldquo;cache the right things, parallelise the rest&rdquo;.</p>'''
+
+ANSWERS[45] = r'''<p><strong>Situation:</strong> the platform owner has been burned by deploys that drop in-flight requests &mdash; users see 502s during rolling updates. The mandate is <strong>zero-downtime deployments</strong> on Kubernetes for every workload, with provable connection draining and schema-compatible migrations.</p>
 
 <p><strong>Approach:</strong> seven parts &mdash; (1) readiness probes that gate traffic, (2) <code>preStop</code> hook with <code>sleep</code> to absorb in-flight requests after pod removal from Endpoints, (3) <code>terminationGracePeriodSeconds</code> long enough for graceful shutdown, (4) <code>maxUnavailable: 0</code> on rolling updates, (5) Pod Disruption Budgets to protect against simultaneous evictions during node drain, (6) schema migrations using <em>expand/contract</em>, never destructive, (7) progressive delivery via Argo Rollouts or Flagger so traffic shifts only when SLOs are clean.</p>
 
@@ -3076,15 +2727,9 @@ spec:
 <tr><td>expand/contract migrations</td><td>Schema change incompatible with previous code</td></tr>
 </table>
 
-<p><strong>Production polish:</strong> the <strong>preStop sleep</strong> exists because Kubernetes&rsquo; pod removal from the Service Endpoints is eventually consistent &mdash; some kube-proxy/Cilium agents will keep sending traffic for a few seconds after a pod enters Terminating; sleep 10&ndash;20s, then SIGTERM, drains in-flight cleanly; ensure the application <strong>handles SIGTERM</strong> &mdash; close listening sockets, finish in-flight requests with a deadline, then exit; for HTTP/2 with long-lived streams, send <code>GOAWAY</code> first; for gRPC, drain via the official graceful stop; for WebSockets, signal connection migration to clients; <strong>schema migrations</strong> must always be backward compatible with the previous code version &mdash; add columns nullable, deploy new code that uses them, then remove the old code, then drop old columns in a separate release; <strong>Argo Rollouts</strong> with metric analysis (Prometheus error rate &lt; 1%) is the safety net &mdash; canaries catch what unit tests can&rsquo;t; spread replicas across at least 3 zones via <code>topologySpreadConstraints</code> with <code>whenUnsatisfiable: DoNotSchedule</code>; finally, exercise the actual rollout regularly under realistic load using <strong>k6</strong> or <strong>locust</strong> &mdash; you only know the rollout is zero-downtime when a real load test sees zero failed requests during a real deploy.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q46">
-  <div class="qa__number">Question 46</div>
-  <h3 class="qa__question">Your organization wants to enforce compliance checks in the CI/CD pipeline. How would you integrate tools like OpenSCAP or Chef InSpec in GitHub Actions?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> the security team has tagged compliance gaps that map to NIST 800-53, CIS Benchmarks, and (depending on industry) PCI-DSS, HIPAA, or FedRAMP. Manual audits aren&rsquo;t cutting it &mdash; controls drift between audits. The mandate is to <strong>shift compliance left</strong> so every PR runs the same checks an external auditor would, with evidence stored for the next audit window.</p>
+<p><strong>Production polish:</strong> the <strong>preStop sleep</strong> exists because Kubernetes&rsquo; pod removal from the Service Endpoints is eventually consistent &mdash; some kube-proxy/Cilium agents will keep sending traffic for a few seconds after a pod enters Terminating; sleep 10&ndash;20s, then SIGTERM, drains in-flight cleanly; ensure the application <strong>handles SIGTERM</strong> &mdash; close listening sockets, finish in-flight requests with a deadline, then exit; for HTTP/2 with long-lived streams, send <code>GOAWAY</code> first; for gRPC, drain via the official graceful stop; for WebSockets, signal connection migration to clients; <strong>schema migrations</strong> must always be backward compatible with the previous code version &mdash; add columns nullable, deploy new code that uses them, then remove the old code, then drop old columns in a separate release; <strong>Argo Rollouts</strong> with metric analysis (Prometheus error rate &lt; 1%) is the safety net &mdash; canaries catch what unit tests can&rsquo;t; spread replicas across at least 3 zones via <code>topologySpreadConstraints</code> with <code>whenUnsatisfiable: DoNotSchedule</code>; finally, exercise the actual rollout regularly under realistic load using <strong>k6</strong> or <strong>locust</strong> &mdash; you only know the rollout is zero-downtime when a real load test sees zero failed requests during a real deploy.</p>'''
+
+ANSWERS[46] = r'''<p><strong>Situation:</strong> the security team has tagged compliance gaps that map to NIST 800-53, CIS Benchmarks, and (depending on industry) PCI-DSS, HIPAA, or FedRAMP. Manual audits aren&rsquo;t cutting it &mdash; controls drift between audits. The mandate is to <strong>shift compliance left</strong> so every PR runs the same checks an external auditor would, with evidence stored for the next audit window.</p>
 
 <p><strong>Approach:</strong> compliance breaks into four layers in the pipeline &mdash; (1) <strong>OS / image hardening</strong> via OpenSCAP scanning Dockerfiles and base images against DISA STIG and CIS profiles, (2) <strong>config and infrastructure</strong> via Chef InSpec or Open Policy Agent (OPA) profiles tested against deployed clusters, (3) <strong>policy-as-code</strong> via Kyverno or Gatekeeper running both in CI (kyverno test) and at admission, (4) <strong>evidence collection</strong> via SBOMs (Syft), provenance (SLSA, in-toto), and signed audit trails (Sigstore Rekor).</p>
 
@@ -3152,15 +2797,9 @@ jobs:
 
 <p><strong>Trade-offs:</strong> compliance scans add 5&ndash;15 minutes to PR pipelines &mdash; mitigate with caching profiles and parallel jobs. False positives are routine on InSpec/OpenSCAP &mdash; commit a per-repo waiver file with expiry dates. Kyverno&rsquo;s admission rules can break legitimate deploys; run in <code>audit</code> mode for two weeks before flipping to <code>enforce</code>.</p>
 
-<p><strong>Production polish:</strong> wire SARIF upload to GitHub Advanced Security so violations show in the Security tab; export evidence (SBOMs, scan results, attestations) to a tamper-evident store (Rekor + S3 with Object Lock); generate a quarterly compliance report from pipeline metadata via a scheduled workflow that hits the GitHub API. Auditors love a clean audit trail derived automatically from CI.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q47">
-  <div class="qa__number">Question 47</div>
-  <h3 class="qa__question">You are asked to set up a CI/CD pipeline for a C++ application with automated tests and deployment to AWS EC2. Describe your approach.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a numerical-heavy C++ service (think trading systems, scientific compute, game backends) needs CI/CD with cross-platform builds, automated GoogleTest/Catch2 runs, address/thread sanitiser passes, and deployment to AWS EC2. The team values reproducible binaries and reasonable build times despite C++ compile cost.</p>
+<p><strong>Production polish:</strong> wire SARIF upload to GitHub Advanced Security so violations show in the Security tab; export evidence (SBOMs, scan results, attestations) to a tamper-evident store (Rekor + S3 with Object Lock); generate a quarterly compliance report from pipeline metadata via a scheduled workflow that hits the GitHub API. Auditors love a clean audit trail derived automatically from CI.</p>'''
+
+ANSWERS[47] = r'''<p><strong>Situation:</strong> a numerical-heavy C++ service (think trading systems, scientific compute, game backends) needs CI/CD with cross-platform builds, automated GoogleTest/Catch2 runs, address/thread sanitiser passes, and deployment to AWS EC2. The team values reproducible binaries and reasonable build times despite C++ compile cost.</p>
 
 <p><strong>Approach:</strong> CMake + Ninja for build, vcpkg or Conan for deps, ccache or sccache for compile caching, GitHub Actions matrix for compiler/OS combinations, and CodeDeploy with a hosted EC2 deployment group for prod rollout. Sanitisers run on a separate non-blocking job because they&rsquo;re slow but invaluable.</p>
 
@@ -3243,15 +2882,9 @@ jobs:
 
 <p><strong>Trade-offs:</strong> matrix builds multiply minute consumption &mdash; trim to the platforms you actually ship to. Sanitiser builds 2&ndash;5x slower than release, so run nightly rather than per-PR if budget is tight. CodeDeploy has a learning curve; if you can move to ECS or App Runner with a static binary, the operational story is simpler.</p>
 
-<p><strong>Production polish:</strong> ship a stripped binary with separate debug info uploaded to a symbol server (Sentry, Crashpad, Backtrace.io) so production crashes resolve to source. Use <code>aws ssm send-command</code> in the deploy hooks to run smoke tests on each instance after install. Sign release binaries with Cosign so tampering is detectable. Build ARM64 (Graviton3) variants &mdash; for compute-bound C++ the price/performance gain is substantial.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q48">
-  <div class="qa__number">Question 48</div>
-  <h3 class="qa__question">Your team wants to implement automated rollbacks for failed deployments in Kubernetes. How would you configure this in Jenkins?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a multi-service application on Kubernetes occasionally degrades after deploys &mdash; a bad image, a wrong env var, or a schema mismatch causes elevated 5xx or latency that humans only notice minutes later. The team wants <strong>automated rollbacks</strong> wired into Jenkins so a failed deploy reverses without paging anyone.</p>
+<p><strong>Production polish:</strong> ship a stripped binary with separate debug info uploaded to a symbol server (Sentry, Crashpad, Backtrace.io) so production crashes resolve to source. Use <code>aws ssm send-command</code> in the deploy hooks to run smoke tests on each instance after install. Sign release binaries with Cosign so tampering is detectable. Build ARM64 (Graviton3) variants &mdash; for compute-bound C++ the price/performance gain is substantial.</p>'''
+
+ANSWERS[48] = r'''<p><strong>Situation:</strong> a multi-service application on Kubernetes occasionally degrades after deploys &mdash; a bad image, a wrong env var, or a schema mismatch causes elevated 5xx or latency that humans only notice minutes later. The team wants <strong>automated rollbacks</strong> wired into Jenkins so a failed deploy reverses without paging anyone.</p>
 
 <p><strong>Approach:</strong> use Argo Rollouts (or Flagger) for the actual rollback mechanics &mdash; Jenkins should not be in the data path of canary analysis, it just kicks off the Rollout and waits. The Rollout&rsquo;s analysis template queries Prometheus / Datadog for SLO breaches; on failure it auto-aborts and traffic stays on the stable revision. Jenkins polls the Rollout status and reports back.</p>
 
@@ -3326,15 +2959,9 @@ pipeline {
 
 <p><strong>Trade-offs:</strong> Argo Rollouts adds a CRD and one controller pod, but the trade-off is well worth it &mdash; rolling back a plain Deployment via Jenkins &lsquo;rollout undo&rsquo; is racy when you&rsquo;re mid-rollout. Don&rsquo;t couple Jenkins too tightly to rollback decisions; the controller is closer to traffic and reacts in seconds.</p>
 
-<p><strong>Production polish:</strong> separate <em>code</em> rollback (image revert) from <em>schema</em> rollback (DB migration revert) &mdash; the second one is rarely safe, so use expand/contract migrations so the previous app version still works against the new schema. Page humans only after auto-rollback completes; the alarm is that something broke, not that rollback failed. Annotate the Rollout with the Jenkins build URL so on-call traces directly back to the failed pipeline.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q49">
-  <div class="qa__number">Question 49</div>
-  <h3 class="qa__question">You need to set up a CI/CD pipeline for a Dart application with unit tests, integration tests, and deployment to Google Cloud Run. Explain your approach.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a Dart / Flutter team has a backend service written in Dart (Shelf, Conduit, Serverpod, or Dart Frog), and wants a CI/CD pipeline that runs unit tests, integration tests, and deploys to Google Cloud Run. They want fast cold starts (Dart AOT compiles to native) and reproducible container builds.</p>
+<p><strong>Production polish:</strong> separate <em>code</em> rollback (image revert) from <em>schema</em> rollback (DB migration revert) &mdash; the second one is rarely safe, so use expand/contract migrations so the previous app version still works against the new schema. Page humans only after auto-rollback completes; the alarm is that something broke, not that rollback failed. Annotate the Rollout with the Jenkins build URL so on-call traces directly back to the failed pipeline.</p>'''
+
+ANSWERS[49] = r'''<p><strong>Situation:</strong> a Dart / Flutter team has a backend service written in Dart (Shelf, Conduit, Serverpod, or Dart Frog), and wants a CI/CD pipeline that runs unit tests, integration tests, and deploys to Google Cloud Run. They want fast cold starts (Dart AOT compiles to native) and reproducible container builds.</p>
 
 <p><strong>Approach:</strong> compile Dart with <code>dart compile exe</code> to a static-ish native binary, then ship in a distroless container; Cloud Run reads the artefact registry image and deploys via <code>gcloud run deploy</code>. CI uses GitHub Actions with a Dart toolchain action, runs <code>dart test</code> for units, spins up a Postgres service container for integration, and authenticates to GCP via Workload Identity Federation.</p>
 
@@ -3422,15 +3049,9 @@ jobs:
 
 <p><strong>Trade-offs:</strong> Dart on the server is niche &mdash; smaller talent pool, fewer libraries, but excellent for Flutter shops sharing models. AOT binaries are tied to the build platform&rsquo;s glibc &mdash; build inside the same base image you ship. <code>min-instances 1</code> incurs idle cost; for genuinely bursty workloads accept cold starts and stay at 0.</p>
 
-<p><strong>Production polish:</strong> add OpenTelemetry instrumentation via <code>package:opentelemetry</code> and export to Cloud Trace; structure logs with <code>package:logging</code> + a JSON formatter so Cloud Logging parses fields cleanly. Use Cloud Run <em>revisions</em> with traffic splitting (10/90 then 50/50 then 100/0) for canaries; <code>gcloud run services update-traffic</code> shifts traffic without redeploy.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q50">
-  <div class="qa__number">Question 50</div>
-  <h3 class="qa__question">Your organization wants to use GitHub Actions for continuous delivery to AWS Fargate. Describe how you would configure the workflow.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> the team is moving a containerised service from EC2/ECS-on-EC2 to AWS Fargate &mdash; serverless containers, no EC2 to manage, billed per second of vCPU and memory. They want GitHub Actions to handle build, push to ECR, register a new task definition, and deploy with health-check-aware traffic shifting.</p>
+<p><strong>Production polish:</strong> add OpenTelemetry instrumentation via <code>package:opentelemetry</code> and export to Cloud Trace; structure logs with <code>package:logging</code> + a JSON formatter so Cloud Logging parses fields cleanly. Use Cloud Run <em>revisions</em> with traffic splitting (10/90 then 50/50 then 100/0) for canaries; <code>gcloud run services update-traffic</code> shifts traffic without redeploy.</p>'''
+
+ANSWERS[50] = r'''<p><strong>Situation:</strong> the team is moving a containerised service from EC2/ECS-on-EC2 to AWS Fargate &mdash; serverless containers, no EC2 to manage, billed per second of vCPU and memory. They want GitHub Actions to handle build, push to ECR, register a new task definition, and deploy with health-check-aware traffic shifting.</p>
 
 <p><strong>Approach:</strong> the canonical four-stage flow is OIDC auth &rarr; ECR push &rarr; render task definition &rarr; deploy ECS service. For zero-downtime swaps add CodeDeploy with an ALB in front, two target groups, and a deployment group set to <code>CodeDeployDefault.ECSCanary10Percent5Minutes</code> &mdash; this shifts 10% traffic, waits, then promotes if CloudWatch alarms stay green.</p>
 
@@ -3501,15 +3122,9 @@ Hooks:
 
 <p><strong>Trade-offs:</strong> Fargate is more expensive per vCPU than spot EC2, but the ops simplicity is a real saving. Cold starts on first task are ~30&ndash;60s including image pull; mitigate with <em>minimum healthy percent</em> 100 and ECS Service Connect / Cloud Map for warm DNS. CodeDeploy adds complexity; for non-critical services <code>aws-actions/amazon-ecs-deploy-task-definition</code> alone (no CodeDeploy) is fine.</p>
 
-<p><strong>Production polish:</strong> attach CloudWatch alarms on ALB 5xx rate and target latency to the deployment group so canary auto-rolls back. Use ECS Exec for incident debugging and gate it via SSM session manager. Right-size task definitions with <code>aws ecs describe-tasks</code> historical data &mdash; oversized tasks dominate Fargate costs. App Runner is a simpler alternative for HTTP-only services if you don&rsquo;t need ECS-specific features.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q51">
-  <div class="qa__number">Question 51</div>
-  <h3 class="qa__question">You are asked to implement CI/CD for a real-time application using WebSockets and Kubernetes. Describe your approach.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a real-time application (chat, collaboration, multiplayer game, trading dashboard) uses WebSockets for bidirectional comms and runs on Kubernetes. Standard rolling deploys break sessions &mdash; sticky connections die when their pod terminates, and reconnect storms hammer the new pods. The team needs a CI/CD pipeline that respects WebSocket lifecycle.</p>
+<p><strong>Production polish:</strong> attach CloudWatch alarms on ALB 5xx rate and target latency to the deployment group so canary auto-rolls back. Use ECS Exec for incident debugging and gate it via SSM session manager. Right-size task definitions with <code>aws ecs describe-tasks</code> historical data &mdash; oversized tasks dominate Fargate costs. App Runner is a simpler alternative for HTTP-only services if you don&rsquo;t need ECS-specific features.</p>'''
+
+ANSWERS[51] = r'''<p><strong>Situation:</strong> a real-time application (chat, collaboration, multiplayer game, trading dashboard) uses WebSockets for bidirectional comms and runs on Kubernetes. Standard rolling deploys break sessions &mdash; sticky connections die when their pod terminates, and reconnect storms hammer the new pods. The team needs a CI/CD pipeline that respects WebSocket lifecycle.</p>
 
 <p><strong>Approach:</strong> three pillars &mdash; (1) <strong>graceful drain</strong> via long <code>preStop</code> hook that signals the app to stop accepting new WebSocket upgrades, then waits for existing sessions to migrate or expire, (2) <strong>session migration</strong> via a coordinator (Redis pub/sub, NATS JetStream, or a managed service like Pusher/Ably/Centrifugo) so clients can reconnect to a different pod and resume state, (3) <strong>progressive rollout</strong> with very low <code>maxSurge</code>/<code>maxUnavailable</code> and a long <code>terminationGracePeriodSeconds</code>.</p>
 
@@ -3568,15 +3183,9 @@ spec:
 
 <p><strong>Trade-offs:</strong> long drain windows mean rolling updates take much longer (10+ minutes), so feature deploys feel slow &mdash; teams sometimes use blue/green at the namespace level instead. Sticky sessions plus autoscaling don&rsquo;t mix well; HPA scaling decisions can&rsquo;t evict drained pods quickly. Managed services (Ably, Pusher) externalise the problem entirely &mdash; expensive at scale but operationally trivial.</p>
 
-<p><strong>Production polish:</strong> emit a Prometheus gauge for active WebSocket count and use it in the Argo Rollouts AnalysisTemplate to gate promotion (only promote if connection growth on new revision matches old). Implement client-side exponential backoff on reconnect with jitter to prevent thundering herd. Use HTTP/2 Server Push or, better, WebTransport (HTTP/3) for new builds &mdash; QUIC&rsquo;s connection migration is genuinely useful for mobile clients on flaky networks.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q52">
-  <div class="qa__number">Question 52</div>
-  <h3 class="qa__question">Your team wants to enforce code quality and security checks in the CI/CD pipeline. How would you integrate tools like SonarQube and Snyk in GitHub Actions?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> the security and engineering teams have agreed to enforce code quality and security gates on every PR &mdash; SonarQube for quality and coverage, Snyk for SCA and container scanning. The mandate is hard fails for new high/critical issues, soft warnings for existing debt.</p>
+<p><strong>Production polish:</strong> emit a Prometheus gauge for active WebSocket count and use it in the Argo Rollouts AnalysisTemplate to gate promotion (only promote if connection growth on new revision matches old). Implement client-side exponential backoff on reconnect with jitter to prevent thundering herd. Use HTTP/2 Server Push or, better, WebTransport (HTTP/3) for new builds &mdash; QUIC&rsquo;s connection migration is genuinely useful for mobile clients on flaky networks.</p>'''
+
+ANSWERS[52] = r'''<p><strong>Situation:</strong> the security and engineering teams have agreed to enforce code quality and security gates on every PR &mdash; SonarQube for quality and coverage, Snyk for SCA and container scanning. The mandate is hard fails for new high/critical issues, soft warnings for existing debt.</p>
 
 <p><strong>Approach:</strong> SonarQube runs as a hosted instance (SonarCloud or self-hosted) with the GitHub App installed for PR decoration; Snyk runs via its GitHub Action with separate jobs for code (snyk code), open source (snyk test), container (snyk container), and IaC (snyk iac). Both tools support <em>quality gates</em> based on new code, which is what the pipeline enforces.</p>
 
@@ -3657,15 +3266,9 @@ jobs:
 
 <p><strong>Trade-offs:</strong> Snyk is excellent but commercial; OSS alternatives are Trivy (containers + IaC + SCA), grype (containers), and Semgrep (SAST). SonarCloud is fast to set up but expensive at scale; self-hosted Sonar requires babysitting. Quality gates on the entire codebase are too noisy &mdash; always set them on <em>new code</em> only.</p>
 
-<p><strong>Production polish:</strong> upload SARIF to GitHub Advanced Security for unified security findings; require both Sonar and Snyk PR checks in branch protection; add a weekly scheduled scan of the default branch so you catch newly disclosed CVEs without waiting for a PR. Tune Sonar profiles per language &mdash; defaults flag too much for established codebases. Add Renovate for automated dependency upgrades that close Snyk findings.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q53">
-  <div class="qa__number">Question 53</div>
-  <h3 class="qa__question">You need to set up a CI/CD pipeline for a Swift application with automated tests and deployment to AWS Lambda. Explain your approach.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a Swift backend (Vapor or Hummingbird framework) needs CI/CD with unit/integration tests and deployment to AWS Lambda. Swift on Lambda runs via the AWS Lambda Runtime for Swift, packaged as a custom runtime layer or as a container image &mdash; the latter is easier to ship from CI.</p>
+<p><strong>Production polish:</strong> upload SARIF to GitHub Advanced Security for unified security findings; require both Sonar and Snyk PR checks in branch protection; add a weekly scheduled scan of the default branch so you catch newly disclosed CVEs without waiting for a PR. Tune Sonar profiles per language &mdash; defaults flag too much for established codebases. Add Renovate for automated dependency upgrades that close Snyk findings.</p>'''
+
+ANSWERS[53] = r'''<p><strong>Situation:</strong> a Swift backend (Vapor or Hummingbird framework) needs CI/CD with unit/integration tests and deployment to AWS Lambda. Swift on Lambda runs via the AWS Lambda Runtime for Swift, packaged as a custom runtime layer or as a container image &mdash; the latter is easier to ship from CI.</p>
 
 <p><strong>Approach:</strong> use the Swift AWS Lambda Runtime, build inside the official Swift toolchain image (<code>swift:5.10-amazonlinux2</code>) so the binary is statically linkable to AL2&rsquo;s glibc, package as a container image targeting <code>linux/arm64</code> for Graviton, push to ECR, and update the function via <code>aws lambda update-function-code</code>. CI runs <code>swift test</code> for both unit and integration suites with a Postgres service for integration.</p>
 
@@ -3746,15 +3349,9 @@ jobs:
 
 <p><strong>Trade-offs:</strong> Swift on Lambda is niche &mdash; the runtime works well but is less battle-tested than Node/Python. Cold starts are good (~150ms for arm64 native) but Provisioned Concurrency is what eliminates them on critical paths. Vapor is heavier than the bare Lambda runtime; Hummingbird is the lighter option designed with Lambda in mind.</p>
 
-<p><strong>Production polish:</strong> push CloudWatch Logs to a centralised log platform via subscription filter; add X-Ray tracing through <code>swift-aws-lambda-events</code> middleware. Use the alias weighted-routing pattern for canaries so a bad deploy only impacts 10% of traffic for the first 5 minutes. Sign images with Cosign keyless OIDC so Lambda&rsquo;s container scanner attests provenance.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q54">
-  <div class="qa__number">Question 54</div>
-  <h3 class="qa__question">Your organization wants to use GitHub Actions for deploying applications to Azure Kubernetes Service (AKS). Describe the workflow you would create.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> the org runs production workloads on Azure Kubernetes Service (AKS) and wants GitHub Actions to handle build, push, and deploy with no static credentials in the repo. The pipeline must support staging and prod, run smoke tests, and roll back on failure.</p>
+<p><strong>Production polish:</strong> push CloudWatch Logs to a centralised log platform via subscription filter; add X-Ray tracing through <code>swift-aws-lambda-events</code> middleware. Use the alias weighted-routing pattern for canaries so a bad deploy only impacts 10% of traffic for the first 5 minutes. Sign images with Cosign keyless OIDC so Lambda&rsquo;s container scanner attests provenance.</p>'''
+
+ANSWERS[54] = r'''<p><strong>Situation:</strong> the org runs production workloads on Azure Kubernetes Service (AKS) and wants GitHub Actions to handle build, push, and deploy with no static credentials in the repo. The pipeline must support staging and prod, run smoke tests, and roll back on failure.</p>
 
 <p><strong>Approach:</strong> federated identity via Workload Identity Federation between GitHub OIDC and Azure AD (no client secrets), Azure Container Registry (ACR) for image storage, Helm or Kustomize for manifests, and either <code>azure/k8s-deploy</code> or Argo CD for the actual rollout. For prod use Argo Rollouts on the cluster so canary analysis happens locally and the workflow just bumps a tag.</p>
 
@@ -3836,15 +3433,9 @@ jobs:
 
 <p><strong>Trade-offs:</strong> running Argo Rollouts adds a CRD and controller; if the workload is small a plain Helm <code>--atomic</code> upgrade might suffice. AKS-managed Karpenter (NAP &mdash; Node Auto Provisioning) is simpler than self-installed Karpenter but newer; pin to a stable AKS version before relying on it.</p>
 
-<p><strong>Production polish:</strong> use GitHub Environments to gate prod with required reviewers and a deployment branch policy (main only). Wire AKS Container Insights to a central Log Analytics workspace. Use Azure Policy for AKS to enforce baselines (no privileged pods, image signature required). Push a SLSA provenance attestation alongside the image so admission controllers can verify build origin.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q55">
-  <div class="qa__number">Question 55</div>
-  <h3 class="qa__question">You are asked to set up a CI/CD pipeline for a Haskell application with unit tests, integration tests, and deployment to Google Cloud Functions. Explain your approach.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a Haskell backend (Servant, IHP, or Yesod) needs CI/CD with thorough testing &mdash; Haskell&rsquo;s strong type system catches a lot at compile time, but unit and integration tests still matter &mdash; and deployment to Google Cloud Functions (now via Cloud Run for second-gen functions, since Cloud Functions gen2 runs on Cloud Run under the hood). The team values reproducible builds and fast cold starts.</p>
+<p><strong>Production polish:</strong> use GitHub Environments to gate prod with required reviewers and a deployment branch policy (main only). Wire AKS Container Insights to a central Log Analytics workspace. Use Azure Policy for AKS to enforce baselines (no privileged pods, image signature required). Push a SLSA provenance attestation alongside the image so admission controllers can verify build origin.</p>'''
+
+ANSWERS[55] = r'''<p><strong>Situation:</strong> a Haskell backend (Servant, IHP, or Yesod) needs CI/CD with thorough testing &mdash; Haskell&rsquo;s strong type system catches a lot at compile time, but unit and integration tests still matter &mdash; and deployment to Google Cloud Functions (now via Cloud Run for second-gen functions, since Cloud Functions gen2 runs on Cloud Run under the hood). The team values reproducible builds and fast cold starts.</p>
 
 <p><strong>Approach:</strong> use Stack or Cabal for the build, build inside <code>haskell:9.6</code> with caching of <code>~/.stack</code> and <code>.stack-work</code>, run <code>stack test</code> for HSpec / Tasty suites, package as a static binary in a distroless image (Haskell binaries link a lot of native libs &mdash; static linking via <code>--ghc-options=-static -optl-static</code> simplifies the runtime), and deploy to Cloud Run via <code>gcloud run deploy</code>.</p>
 
@@ -3923,15 +3514,9 @@ jobs:
 
 <p><strong>Trade-offs:</strong> Haskell builds are slow without caching (5&ndash;10 min from cold) &mdash; cache <code>.stack</code> and <code>.stack-work</code> aggressively. Static binaries are large (50&ndash;100 MB); accept the size for ops simplicity. Cloud Functions gen1 has limited Haskell support; using gen2 (Cloud Run) sidesteps the limitation.</p>
 
-<p><strong>Production polish:</strong> use <code>weeder</code> to detect unused exports, <code>hlint</code> for style, and <code>stan</code> for static analysis &mdash; all run in CI. Profile production with GHC eventlog and ship traces to a tracing backend. Set <code>min-instances 1</code> on Cloud Run for latency-sensitive endpoints; Haskell cold starts are 200&ndash;500ms which is fine for batch but noticeable on user-facing APIs.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q56">
-  <div class="qa__number">Question 56</div>
-  <h3 class="qa__question">Your team wants to implement continuous integration for a Kotlin application with dependency caching. How would you configure this in GitHub Actions?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a Kotlin team (Spring Boot, Ktor, or Micronaut) wants fast PR feedback &mdash; Kotlin/JVM compiles slowly without caching, and the gradle dependency graph is large. The mandate is sub-5-minute CI for typical PRs by aggressive caching of Gradle wrapper, dependencies, and build outputs.</p>
+<p><strong>Production polish:</strong> use <code>weeder</code> to detect unused exports, <code>hlint</code> for style, and <code>stan</code> for static analysis &mdash; all run in CI. Profile production with GHC eventlog and ship traces to a tracing backend. Set <code>min-instances 1</code> on Cloud Run for latency-sensitive endpoints; Haskell cold starts are 200&ndash;500ms which is fine for batch but noticeable on user-facing APIs.</p>'''
+
+ANSWERS[56] = r'''<p><strong>Situation:</strong> a Kotlin team (Spring Boot, Ktor, or Micronaut) wants fast PR feedback &mdash; Kotlin/JVM compiles slowly without caching, and the gradle dependency graph is large. The mandate is sub-5-minute CI for typical PRs by aggressive caching of Gradle wrapper, dependencies, and build outputs.</p>
 
 <p><strong>Approach:</strong> three layers of caching &mdash; (1) <strong>Gradle build cache</strong> (local and remote) for compiled task outputs, (2) <strong>dependency cache</strong> for resolved jars in <code>~/.gradle/caches</code>, and (3) <strong>Gradle daemon reuse</strong> via the gradle/actions setup. Use <code>gradle/actions/setup-gradle@v4</code> which handles all three automatically and writes a build scan link to the PR.</p>
 
@@ -3986,15 +3571,9 @@ jobs:
 
 <p><strong>Trade-offs:</strong> read-only cache on PRs prevents poisoning from forks but means PRs always read the main branch&rsquo;s cache. A remote build cache (Develocity, GCS, S3) is the single largest speedup for monorepos &mdash; small repos see less benefit. The Gradle dependency-graph submission feeds Dependabot but adds a small overhead.</p>
 
-<p><strong>Production polish:</strong> generate a build scan (<code>--scan</code>) and post the URL on PRs for slow-build investigation. Use Kotlin compiler&rsquo;s <em>-Xuse-fir-lt</em> compiler when stable for faster compilation. Build native images with GraalVM <code>native-image</code> for production releases &mdash; cold start drops from seconds to milliseconds, which matters when paired with Cloud Run / Lambda. Run <code>./gradlew bootBuildImage</code> to produce CNB images that include CDS for faster JVM startup if you stay on the JVM.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q57">
-  <div class="qa__number">Question 57</div>
-  <h3 class="qa__question">You need to implement security best practices for Jenkins servers. Explain how you would configure this in your CI/CD pipeline.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> the security team is reviewing the Jenkins controller and finds the usual suspects &mdash; admin-equivalent &ldquo;build&rdquo; users, plugins last updated in 2019, build agents running as root, secrets in build logs, no audit trail for config changes. The mandate is to <strong>harden the Jenkins server</strong> end-to-end without breaking productivity.</p>
+<p><strong>Production polish:</strong> generate a build scan (<code>--scan</code>) and post the URL on PRs for slow-build investigation. Use Kotlin compiler&rsquo;s <em>-Xuse-fir-lt</em> compiler when stable for faster compilation. Build native images with GraalVM <code>native-image</code> for production releases &mdash; cold start drops from seconds to milliseconds, which matters when paired with Cloud Run / Lambda. Run <code>./gradlew bootBuildImage</code> to produce CNB images that include CDS for faster JVM startup if you stay on the JVM.</p>'''
+
+ANSWERS[57] = r'''<p><strong>Situation:</strong> the security team is reviewing the Jenkins controller and finds the usual suspects &mdash; admin-equivalent &ldquo;build&rdquo; users, plugins last updated in 2019, build agents running as root, secrets in build logs, no audit trail for config changes. The mandate is to <strong>harden the Jenkins server</strong> end-to-end without breaking productivity.</p>
 
 <p><strong>Approach:</strong> seven hardening layers &mdash; (1) <strong>identity</strong> via SSO (SAML/OIDC) only, no local accounts, (2) <strong>authorisation</strong> via Matrix Authorisation or Role Strategy with least-privilege folders, (3) <strong>agent isolation</strong> via Kubernetes pod templates running non-root with seccomp, (4) <strong>secrets</strong> via HashiCorp Vault or external secrets only, never master.key, (5) <strong>plugin governance</strong> via JCasC + plugins.txt with a quarterly update cadence, (6) <strong>audit log</strong> via the Audit Trail plugin shipped to a SIEM, (7) <strong>script approval</strong> tightly governed; sandbox enabled.</p>
 
@@ -4058,15 +3637,9 @@ credentials:
 
 <p><strong>Trade-offs:</strong> tight script approval slows down advanced pipelines &mdash; balance with shared libraries that are pre-approved. Locking down agents to non-root breaks builds that need root (Docker daemon, package installs); use rootless Buildah/Kaniko/BuildKit instead. SSO-only excludes break-glass admin access; keep one well-protected emergency local account in a sealed envelope.</p>
 
-<p><strong>Production polish:</strong> run Jenkins on the Jenkins Operator on Kubernetes &mdash; the operator enforces JCasC continuously and treats drift as policy violation. Schedule monthly CIS Jenkins benchmark scans via <code>jenkins-cli</code> and a custom evaluator. Migrate to GitHub Actions or Tekton for new workloads; Jenkins makes most sense as a long-tail legacy CI rather than greenfield.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q58">
-  <div class="qa__number">Question 58</div>
-  <h3 class="qa__question">Your organization wants to enforce compliance checks for Docker images in the CI/CD pipeline. How would you set this up using Jenkins?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> the org has compliance obligations (PCI-DSS, HIPAA, SOC 2, FedRAMP) that require Docker images shipped to production to meet specific baselines &mdash; no high-severity CVEs, no root user, signed by a trusted key, with an SBOM and provenance attestation. The Jenkins pipeline has to enforce these checks before any image reaches a production registry.</p>
+<p><strong>Production polish:</strong> run Jenkins on the Jenkins Operator on Kubernetes &mdash; the operator enforces JCasC continuously and treats drift as policy violation. Schedule monthly CIS Jenkins benchmark scans via <code>jenkins-cli</code> and a custom evaluator. Migrate to GitHub Actions or Tekton for new workloads; Jenkins makes most sense as a long-tail legacy CI rather than greenfield.</p>'''
+
+ANSWERS[58] = r'''<p><strong>Situation:</strong> the org has compliance obligations (PCI-DSS, HIPAA, SOC 2, FedRAMP) that require Docker images shipped to production to meet specific baselines &mdash; no high-severity CVEs, no root user, signed by a trusted key, with an SBOM and provenance attestation. The Jenkins pipeline has to enforce these checks before any image reaches a production registry.</p>
 
 <p><strong>Approach:</strong> four pipeline gates &mdash; (1) <strong>vulnerability scan</strong> via Trivy or Grype with severity threshold, (2) <strong>policy scan</strong> via Conftest/OPA against Dockerfile (no <code>USER root</code>, no <code>:latest</code> base, etc.), (3) <strong>SBOM + signing</strong> via Syft and Cosign keyless OIDC, (4) <strong>admission backstop</strong> via Kyverno requiring signature on production cluster.</p>
 
@@ -4148,15 +3721,9 @@ pipeline {
 
 <p><strong>Trade-offs:</strong> CVE noise is a real problem &mdash; ignore-unfixed and waiver files with expiry dates are essential. Cosign keyless requires an OIDC identity provider; in air-gapped environments use cosign with KMS keys instead. Kyverno admission can break legitimate deploys during the rollout; run audit-mode for two weeks before enforce.</p>
 
-<p><strong>Production polish:</strong> push SBOMs to Dependency-Track for continuous monitoring &mdash; Trivy at build time only catches what was known then, but Dependency-Track watches for newly disclosed CVEs in already-shipped artefacts. Move to Chainguard or Wolfi base images: most distroless-equivalent images ship with zero CVEs, dramatically reducing scan noise. Push a SLSA Level 3 provenance and verify in admission &mdash; this is the supply-chain assurance auditors really care about now.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q59">
-  <div class="qa__number">Question 59</div>
-  <h3 class="qa__question">You are asked to set up a CI/CD pipeline for a Svelte application with automated tests and deployment to AWS Amplify. Describe your approach.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a Svelte / SvelteKit frontend team wants automated tests, accessibility checks, and deployment to AWS Amplify (which handles SSR, custom domains, and previews on PR branches). The pipeline must support both PR previews and production deploys with PR comments showing the preview URL.</p>
+<p><strong>Production polish:</strong> push SBOMs to Dependency-Track for continuous monitoring &mdash; Trivy at build time only catches what was known then, but Dependency-Track watches for newly disclosed CVEs in already-shipped artefacts. Move to Chainguard or Wolfi base images: most distroless-equivalent images ship with zero CVEs, dramatically reducing scan noise. Push a SLSA Level 3 provenance and verify in admission &mdash; this is the supply-chain assurance auditors really care about now.</p>'''
+
+ANSWERS[59] = r'''<p><strong>Situation:</strong> a Svelte / SvelteKit frontend team wants automated tests, accessibility checks, and deployment to AWS Amplify (which handles SSR, custom domains, and previews on PR branches). The pipeline must support both PR previews and production deploys with PR comments showing the preview URL.</p>
 
 <p><strong>Approach:</strong> Amplify itself handles deployment from a Git push if connected, but a GitHub Actions pipeline gives more control &mdash; run unit tests with Vitest, e2e with Playwright, accessibility with axe, then trigger Amplify via the AWS API for explicit deploys. PR previews use Amplify&rsquo;s built-in branch deployments.</p>
 
@@ -4244,15 +3811,9 @@ jobs:
 
 <p><strong>Trade-offs:</strong> Amplify adds AWS lock-in and a layer of magic over a vanilla S3+CloudFront+Lambda@Edge stack. For pure static SvelteKit, S3+CloudFront is cheaper and faster to deploy. Vercel and Cloudflare Pages handle SvelteKit very well too &mdash; Amplify makes most sense if you&rsquo;re already deep in AWS.</p>
 
-<p><strong>Production polish:</strong> run Lighthouse CI in the pipeline against the preview URL; fail PR if performance budget regresses. Set the Amplify build cache to include <code>node_modules</code> and <code>.svelte-kit</code>. For real-world performance, enable Brotli compression on CloudFront, set immutable cache headers on hashed assets, and use Amplify&rsquo;s custom rewrites to handle SPA fallback. Monitor Core Web Vitals via SpeedCurve or PageSpeed Insights API.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q60">
-  <div class="qa__number">Question 60</div>
-  <h3 class="qa__question">Your team wants to implement automated canary releases for a multi-service application using Kubernetes. How would you configure this in Jenkins?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a microservices stack (10+ services) on Kubernetes wants automated <strong>canary releases</strong> for the whole stack &mdash; a new feature might span 3 services, and the team wants to canary all three together with a single pipeline trigger and unified analysis. Jenkins orchestrates the canary; Argo Rollouts handles per-service traffic shifting.</p>
+<p><strong>Production polish:</strong> run Lighthouse CI in the pipeline against the preview URL; fail PR if performance budget regresses. Set the Amplify build cache to include <code>node_modules</code> and <code>.svelte-kit</code>. For real-world performance, enable Brotli compression on CloudFront, set immutable cache headers on hashed assets, and use Amplify&rsquo;s custom rewrites to handle SPA fallback. Monitor Core Web Vitals via SpeedCurve or PageSpeed Insights API.</p>'''
+
+ANSWERS[60] = r'''<p><strong>Situation:</strong> a microservices stack (10+ services) on Kubernetes wants automated <strong>canary releases</strong> for the whole stack &mdash; a new feature might span 3 services, and the team wants to canary all three together with a single pipeline trigger and unified analysis. Jenkins orchestrates the canary; Argo Rollouts handles per-service traffic shifting.</p>
 
 <p><strong>Approach:</strong> model each service as an independent Argo Rollout, but tag the canary cohort with a shared label (e.g., <code>release: 2026.05.0</code>) so analysis queries can correlate failures across services. Jenkins kicks off all three Rollouts in parallel, polls their status, and uses a shared AnalysisRun that checks aggregated SLOs. If any service&rsquo;s analysis fails, all three roll back together.</p>
 
@@ -4344,15 +3905,9 @@ spec:
 
 <p><strong>Trade-offs:</strong> coordinating Rollouts across services is conceptually clean but operationally complex &mdash; one slow Rollout blocks the whole release. Many teams opt for feature flags instead: deploy code dark to all services simultaneously, then flip the flag on for a small user cohort. The flag approach decouples deploy from release and is far easier to roll back.</p>
 
-<p><strong>Production polish:</strong> add a <em>release readiness</em> dashboard showing all Rollouts on one screen with their current canary weight and analysis status. Annotate every Rollout with the Jenkins build URL and Slack channel. For services that share a database, pre-deploy schema migrations using expand/contract so both old and new versions work concurrently. Consider Kargo for promoting releases through stages with manual gates.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q61">
-  <div class="qa__number">Question 61</div>
-  <h3 class="qa__question">You need to set up a CI/CD pipeline for a TypeScript application with unit tests, integration tests, and deployment to Heroku. Explain your approach.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a TypeScript application (Node.js backend, NestJS or Fastify) needs CI/CD with strict type checking, unit and integration tests, and deployment to Heroku. The team values fast PR feedback and reproducible builds; Heroku is the chosen platform for ops simplicity even though container alternatives exist.</p>
+<p><strong>Production polish:</strong> add a <em>release readiness</em> dashboard showing all Rollouts on one screen with their current canary weight and analysis status. Annotate every Rollout with the Jenkins build URL and Slack channel. For services that share a database, pre-deploy schema migrations using expand/contract so both old and new versions work concurrently. Consider Kargo for promoting releases through stages with manual gates.</p>'''
+
+ANSWERS[61] = r'''<p><strong>Situation:</strong> a TypeScript application (Node.js backend, NestJS or Fastify) needs CI/CD with strict type checking, unit and integration tests, and deployment to Heroku. The team values fast PR feedback and reproducible builds; Heroku is the chosen platform for ops simplicity even though container alternatives exist.</p>
 
 <p><strong>Approach:</strong> a standard Node.js GitHub Actions pipeline with caching, plus deployment via the official <code>akhileshns/heroku-deploy</code> action or by using Heroku Container Registry (which supports Docker-based deploys, allowing fully reproducible builds). For 2026, container-based Heroku deploys are the recommended path &mdash; you build the image once and Heroku just runs it.</p>
 
@@ -4436,15 +3991,9 @@ jobs:
 
 <p><strong>Trade-offs:</strong> Heroku in 2026 is a niche choice &mdash; pricing has risen, free tier is gone, dyno performance lags Fly/Render/Railway. For new apps, those alternatives are cheaper and faster. Heroku still wins on add-on ecosystem (Heroku Postgres, Redis, Scheduler) and is hands-off operationally. If the team prioritises ops simplicity over cost, Heroku remains rational.</p>
 
-<p><strong>Production polish:</strong> use Heroku review apps so each PR gets a temporary instance for QA. Configure release phase commands for migrations (<code>release: npx prisma migrate deploy</code>). Push logs to Papertrail or Logtail; metrics to Heroku Metrics or Datadog. Consider migrating to Render or Fly when growth makes Heroku&rsquo;s Performance dyno costs uncomfortable.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q62">
-  <div class="qa__number">Question 62</div>
-  <h3 class="qa__question">Your organization wants to use GitHub Actions for deploying machine learning models to Kubernetes. Describe the workflow you would create.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> the data science team has stable training pipelines and now wants to ship models reliably to Kubernetes &mdash; with versioned model artefacts, GPU-aware deployment, canary rollouts, and continuous performance monitoring. Models live in MLflow Model Registry; serving uses KServe; CI/CD uses GitHub Actions.</p>
+<p><strong>Production polish:</strong> use Heroku review apps so each PR gets a temporary instance for QA. Configure release phase commands for migrations (<code>release: npx prisma migrate deploy</code>). Push logs to Papertrail or Logtail; metrics to Heroku Metrics or Datadog. Consider migrating to Render or Fly when growth makes Heroku&rsquo;s Performance dyno costs uncomfortable.</p>'''
+
+ANSWERS[62] = r'''<p><strong>Situation:</strong> the data science team has stable training pipelines and now wants to ship models reliably to Kubernetes &mdash; with versioned model artefacts, GPU-aware deployment, canary rollouts, and continuous performance monitoring. Models live in MLflow Model Registry; serving uses KServe; CI/CD uses GitHub Actions.</p>
 
 <p><strong>Approach:</strong> separate <strong>code</strong> (training scripts, serving image) from <strong>artefacts</strong> (model weights). When a new model is registered in MLflow with the &ldquo;Production&rdquo; alias, a webhook triggers a GitHub Actions workflow that updates the KServe InferenceService manifest in the GitOps repo, which Argo CD picks up and deploys with traffic split for canary.</p>
 
@@ -4519,15 +4068,9 @@ spec:
 
 <p><strong>Trade-offs:</strong> KServe handles autoscaling and canary natively; rolling your own with raw Deployments quickly turns into a custom platform. GPU costs dominate at scale &mdash; consider quantisation (int8/int4), batching, and CPU fallback for low-throughput models. For LLMs specifically, vLLM&rsquo;s continuous batching and PagedAttention deliver order-of-magnitude throughput improvements.</p>
 
-<p><strong>Production polish:</strong> add post-deploy drift monitoring &mdash; data drift (input distribution change) and prediction drift (output distribution change) catch silent regressions that accuracy on holdout doesn&rsquo;t. Use shadow deploys to compare new model predictions against current model on real traffic without serving them. Sign model artefacts with Cosign and verify in admission so a tampered model can&rsquo;t be loaded.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q63">
-  <div class="qa__number">Question 63</div>
-  <h3 class="qa__question">You are asked to implement CI/CD for a multi-cloud architecture using Docker and Kubernetes. Explain your approach.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> the org has chosen multi-cloud for resilience and to avoid lock-in &mdash; production runs on both AWS (EKS) and GCP (GKE) with active-active or active-passive routing. CI/CD pipelines must deploy the same containerised workloads to both, with consistent IaC, policies, and observability.</p>
+<p><strong>Production polish:</strong> add post-deploy drift monitoring &mdash; data drift (input distribution change) and prediction drift (output distribution change) catch silent regressions that accuracy on holdout doesn&rsquo;t. Use shadow deploys to compare new model predictions against current model on real traffic without serving them. Sign model artefacts with Cosign and verify in admission so a tampered model can&rsquo;t be loaded.</p>'''
+
+ANSWERS[63] = r'''<p><strong>Situation:</strong> the org has chosen multi-cloud for resilience and to avoid lock-in &mdash; production runs on both AWS (EKS) and GCP (GKE) with active-active or active-passive routing. CI/CD pipelines must deploy the same containerised workloads to both, with consistent IaC, policies, and observability.</p>
 
 <p><strong>Approach:</strong> Crossplane or OpenTofu for cloud-agnostic IaC, a single container registry mirrored across clouds (or a federated registry like Harbor with replication), Argo CD ApplicationSets generating one Application per (cluster &times; environment), and a global service mesh (Istio multi-cluster, Cilium ClusterMesh, or Linkerd multi-cluster) for cross-cluster service discovery.</p>
 
@@ -4630,15 +4173,9 @@ jobs:
 
 <p><strong>Trade-offs:</strong> multi-cloud&rsquo;s biggest cost isn&rsquo;t infrastructure but cognitive load &mdash; engineers must learn two everything (IAM, networking, service catalogues). For most orgs, single-cloud with a clear DR runbook is cheaper than true multi-cloud. Pursue multi-cloud only when regulatory, customer, or vendor-leverage requirements compel it.</p>
 
-<p><strong>Production polish:</strong> use SLSA Level 3 provenance signing so admission controllers can verify images regardless of which cloud they pulled from. For data plane, plan for cross-cloud egress costs (terabytes/month is brutal) &mdash; prefer regional locality and async replication. Run chaos engineering exercises that fail over from one cloud to the other quarterly; failover paths that are never exercised never work.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q64">
-  <div class="qa__number">Question 64</div>
-  <h3 class="qa__question">Your team wants to enforce security and compliance checks for serverless applications in the CI/CD pipeline. How would you set this up using GitHub Actions?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a serverless application (Lambda + API Gateway + DynamoDB, or Cloud Functions + Firestore) needs the same security and compliance bar as the rest of the org &mdash; SAST, SCA, IaC scanning, and runtime policy. Serverless removes some attack surface (no OS, no patching) but introduces new ones: function permissions, event injection, dependency-laden zips.</p>
+<p><strong>Production polish:</strong> use SLSA Level 3 provenance signing so admission controllers can verify images regardless of which cloud they pulled from. For data plane, plan for cross-cloud egress costs (terabytes/month is brutal) &mdash; prefer regional locality and async replication. Run chaos engineering exercises that fail over from one cloud to the other quarterly; failover paths that are never exercised never work.</p>'''
+
+ANSWERS[64] = r'''<p><strong>Situation:</strong> a serverless application (Lambda + API Gateway + DynamoDB, or Cloud Functions + Firestore) needs the same security and compliance bar as the rest of the org &mdash; SAST, SCA, IaC scanning, and runtime policy. Serverless removes some attack surface (no OS, no patching) but introduces new ones: function permissions, event injection, dependency-laden zips.</p>
 
 <p><strong>Approach:</strong> shift-left with five gates &mdash; (1) <strong>SAST</strong> via Semgrep with serverless rules, (2) <strong>SCA</strong> via Snyk or OSV-Scanner on dependency manifest, (3) <strong>IaC scanning</strong> via Checkov on SAM/Terraform/CDK templates, (4) <strong>function permissions linting</strong> via cfn-lint or AWS Config rules to flag wildcards, (5) <strong>secret scanning</strong> via gitleaks. Add runtime policy via AWS Lambda Powertools idempotency and AWS WAF on API Gateway.</p>
 
@@ -4714,15 +4251,9 @@ jobs:
 
 <p><strong>Trade-offs:</strong> serverless security tools are noisier than traditional ones because IaC frameworks generate boilerplate that triggers warnings. Maintain per-repo waiver files with expiry. Snyk + Checkov is paid; OSV-Scanner + Trivy + Conftest is the OSS-only stack and works well.</p>
 
-<p><strong>Production polish:</strong> wire AWS GuardDuty Lambda Protection (or its equivalent on GCP) for runtime detection of malicious behaviour. Use AWS WAF in front of API Gateway with managed rule groups (Common, Known Bad Inputs, Linux OS, SQLi). Enable Lambda Function URL signing or rely on API Gateway authorisers; never accept unauthenticated Lambda invocations except through a signed gateway. SLSA-attest deployment artefacts and verify in OPA before <code>aws lambda update-function-code</code> runs.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q65">
-  <div class="qa__number">Question 65</div>
-  <h3 class="qa__question">You need to set up a CI/CD pipeline for a Scala application with automated tests and deployment to AWS Lambda. Explain your approach.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a Scala backend (Akka HTTP, Play, http4s, or ZIO HTTP) needs CI/CD with automated tests and deployment to AWS Lambda. Scala on Lambda is feasible via two paths: GraalVM native-image for fast cold starts, or the JVM with SnapStart for warm-pool optimisation. The team picks GraalVM for predictable sub-second cold starts.</p>
+<p><strong>Production polish:</strong> wire AWS GuardDuty Lambda Protection (or its equivalent on GCP) for runtime detection of malicious behaviour. Use AWS WAF in front of API Gateway with managed rule groups (Common, Known Bad Inputs, Linux OS, SQLi). Enable Lambda Function URL signing or rely on API Gateway authorisers; never accept unauthenticated Lambda invocations except through a signed gateway. SLSA-attest deployment artefacts and verify in OPA before <code>aws lambda update-function-code</code> runs.</p>'''
+
+ANSWERS[65] = r'''<p><strong>Situation:</strong> a Scala backend (Akka HTTP, Play, http4s, or ZIO HTTP) needs CI/CD with automated tests and deployment to AWS Lambda. Scala on Lambda is feasible via two paths: GraalVM native-image for fast cold starts, or the JVM with SnapStart for warm-pool optimisation. The team picks GraalVM for predictable sub-second cold starts.</p>
 
 <p><strong>Approach:</strong> use sbt with sbt-native-packager and sbt-native-image, build a static-ish Linux binary with GraalVM, package as a Lambda container image, and deploy to Lambda&rsquo;s arm64 (Graviton) runtime. The CI runs <code>sbt test</code>, builds the native image, and ships via <code>aws lambda update-function-code</code>.</p>
 
@@ -4802,15 +4333,9 @@ jobs:
 
 <p><strong>Trade-offs:</strong> native-image build is slow (5&ndash;15 min) and memory-hungry &mdash; cache aggressively. Reflection-heavy libraries (Jackson default config, Scala macros) require explicit native-image config; reachability metadata helps but isn&rsquo;t bulletproof. Akka HTTP and Play are reflection-heavy and harder to native-compile than http4s; pick the framework with this in mind.</p>
 
-<p><strong>Production polish:</strong> SnapStart is now an option for non-native JVM deploys with sub-second cold starts &mdash; consider that path if native-image proves problematic. Use Lambda function aliases with weighted routing for canary deploys. Push CloudWatch Logs to a centralised analytics platform via subscription filter, and instrument with OpenTelemetry for traces. Build an arm64-native runner (<code>ubuntu-24.04-arm</code>) for fastest builds.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q66">
-  <div class="qa__number">Question 66</div>
-  <h3 class="qa__question">Your organization wants to use GitHub Actions for continuous delivery to Google Kubernetes Engine (GKE). Describe the workflow you would create.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> the team wants GitHub Actions to deliver to Google Kubernetes Engine continuously &mdash; build a container, push to Artifact Registry, and roll out to a GKE Autopilot or Standard cluster across staging and production with proper auth and progressive delivery.</p>
+<p><strong>Production polish:</strong> SnapStart is now an option for non-native JVM deploys with sub-second cold starts &mdash; consider that path if native-image proves problematic. Use Lambda function aliases with weighted routing for canary deploys. Push CloudWatch Logs to a centralised analytics platform via subscription filter, and instrument with OpenTelemetry for traces. Build an arm64-native runner (<code>ubuntu-24.04-arm</code>) for fastest builds.</p>'''
+
+ANSWERS[66] = r'''<p><strong>Situation:</strong> the team wants GitHub Actions to deliver to Google Kubernetes Engine continuously &mdash; build a container, push to Artifact Registry, and roll out to a GKE Autopilot or Standard cluster across staging and production with proper auth and progressive delivery.</p>
 
 <p><strong>Approach:</strong> use Workload Identity Federation (WIF) so the workflow assumes a Google service account without static keys; build with Buildx targeting <code>linux/amd64,linux/arm64</code> and push to Artifact Registry; render Kustomize manifests with the new image digest; promote via Argo CD or use the official <code>google-github-actions/get-gke-credentials</code> + <code>kubectl apply</code> for simpler shops. Cloud Deploy is the GCP-native progressive delivery option for canary/blue-green across targets.</p>
 
@@ -4858,15 +4383,9 @@ jobs:
 
 <p><strong>Trade-offs:</strong> direct <code>kubectl apply</code> is simpler but loses GitOps drift detection &mdash; Argo CD adds operational overhead but pays off the first time someone hand-edits a Deployment. Cloud Deploy is GCP-locked but integrates with Cloud Build and audit logs cleanly. Autopilot prices per pod-second and removes node management; Standard wins for spot pools, GPU, and aggressive bin-packing.</p>
 
-<p><strong>Production polish:</strong> require Cosign signatures and verify with Binary Authorization &mdash; unsigned images don&rsquo;t deploy. Enable GKE Backup for cluster restore and Config Sync for fleet-wide policy. Push pod logs to Cloud Logging via the Logging agent, and set Cloud Trace via OpenTelemetry. Run Kyverno or Gatekeeper for policy at admission, complementing Binary Authorization at image pull. Tag images with both the SHA and a semver tag so rollback by version is one Argo CD parameter change.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q67">
-  <div class="qa__number">Question 67</div>
-  <h3 class="qa__question">You are asked to set up a CI/CD pipeline for an Elixir application with unit tests, integration tests, and deployment to Heroku. Explain your approach.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> an Elixir/Phoenix application needs CI/CD with unit and integration tests plus deployment to Heroku. Elixir compiles to BEAM bytecode, runs with hot upgrades natively, and benefits from a release-based packaging approach (<code>mix release</code>) rather than running <code>mix phx.server</code> in production.</p>
+<p><strong>Production polish:</strong> require Cosign signatures and verify with Binary Authorization &mdash; unsigned images don&rsquo;t deploy. Enable GKE Backup for cluster restore and Config Sync for fleet-wide policy. Push pod logs to Cloud Logging via the Logging agent, and set Cloud Trace via OpenTelemetry. Run Kyverno or Gatekeeper for policy at admission, complementing Binary Authorization at image pull. Tag images with both the SHA and a semver tag so rollback by version is one Argo CD parameter change.</p>'''
+
+ANSWERS[67] = r'''<p><strong>Situation:</strong> an Elixir/Phoenix application needs CI/CD with unit and integration tests plus deployment to Heroku. Elixir compiles to BEAM bytecode, runs with hot upgrades natively, and benefits from a release-based packaging approach (<code>mix release</code>) rather than running <code>mix phx.server</code> in production.</p>
 
 <p><strong>Approach:</strong> use GitHub Actions with a matrix on Elixir/OTP versions, cache <code>deps</code> and <code>_build</code> directories, run <code>mix format --check-formatted</code>, Credo for static analysis, Dialyzer for typing, ExUnit for tests, and Wallaby or Hound for browser-based integration tests. For Heroku, use the official Elixir buildpack or container deploys via the Container Registry &mdash; the latter gives you full control of the runtime image.</p>
 
@@ -4927,15 +4446,9 @@ jobs:
 
 <p><strong>Trade-offs:</strong> Heroku is on the decline in 2026 &mdash; Render, Fly.io, and Railway are cheaper and more developer-friendly. Fly.io in particular maps almost 1:1 to Phoenix releases (LiveView WebSocket-friendly, multi-region). Hot upgrades via <code>:appup</code> files are powerful but rarely worth the complexity; rolling restarts via <code>heroku ps:restart</code> are simpler.</p>
 
-<p><strong>Production polish:</strong> use Phoenix LiveDashboard for runtime introspection, AppSignal or New Relic for APM, and Logflare for log aggregation. Configure <code>:libcluster</code> for distributed Erlang in multi-dyno setups (Fly.io DNS topology works out of the box; Heroku requires manual node names). Cache compiled assets across builds with <code>mix assets.deploy</code>. Strongly consider migrating to Fly.io: Phoenix performs noticeably better there, and per-region deploys are trivial.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q68">
-  <div class="qa__number">Question 68</div>
-  <h3 class="qa__question">Your team wants to implement continuous integration for a Golang application with dependency caching. How would you configure this in GitHub Actions?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a Go service has slow CI because <code>go mod download</code> and the build run from scratch each push. Go module caching plus build caching can cut a 5-minute job to under a minute on incremental changes.</p>
+<p><strong>Production polish:</strong> use Phoenix LiveDashboard for runtime introspection, AppSignal or New Relic for APM, and Logflare for log aggregation. Configure <code>:libcluster</code> for distributed Erlang in multi-dyno setups (Fly.io DNS topology works out of the box; Heroku requires manual node names). Cache compiled assets across builds with <code>mix assets.deploy</code>. Strongly consider migrating to Fly.io: Phoenix performs noticeably better there, and per-region deploys are trivial.</p>'''
+
+ANSWERS[68] = r'''<p><strong>Situation:</strong> a Go service has slow CI because <code>go mod download</code> and the build run from scratch each push. Go module caching plus build caching can cut a 5-minute job to under a minute on incremental changes.</p>
 
 <p><strong>Approach:</strong> Go has two cache directories &mdash; <code>$GOPATH/pkg/mod</code> for downloaded modules (keyed by go.sum) and <code>$GOCACHE</code> for compiled object files (keyed by source content). The <code>actions/setup-go</code> action handles both automatically when you set <code>cache: true</code>; for finer control use <code>actions/cache</code> with explicit keys. Combined with build constraints and parallel <code>go test</code>, builds become near-instantaneous.</p>
 
@@ -4999,15 +4512,9 @@ jobs:
 
 <p><strong>Trade-offs:</strong> GHA cache is 10 GB per repo branch and evicts old entries &mdash; very large monorepos may need a dedicated cache backend (BuildKit with S3, Actuated). Module cache hit ratio drops to zero on go.sum churn; group dep updates via Renovate or Dependabot weekly batching. Build cache is content-addressed so flag-only changes (e.g., <code>-tags=integration</code>) get a fresh cache slot.</p>
 
-<p><strong>Production polish:</strong> add <code>govulncheck</code> as a required check &mdash; it scans both modules <em>and</em> the build call graph, surfacing only actually-reachable CVEs. Use <code>-trimpath</code> in builds for reproducible binaries. For arm64 deploys (Graviton, Cloud Run, Fargate) build with <code>--platform=linux/arm64</code> on <code>ubuntu-24.04-arm</code> runners &mdash; native arm64 builds are dramatically faster than QEMU emulation. Keep test binaries with <code>go test -c</code> for parallel sharding across runners on huge suites.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q69">
-  <div class="qa__number">Question 69</div>
-  <h3 class="qa__question">You need to implement security best practices for Docker images in the CI/CD pipeline. Explain how you would configure this in Jenkins.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> Jenkins ships container images to production and the security team requires defence-in-depth: signing, SBOM, vulnerability scanning, base-image hygiene, and admission policy &mdash; not just &ldquo;Trivy on the side&rdquo;.</p>
+<p><strong>Production polish:</strong> add <code>govulncheck</code> as a required check &mdash; it scans both modules <em>and</em> the build call graph, surfacing only actually-reachable CVEs. Use <code>-trimpath</code> in builds for reproducible binaries. For arm64 deploys (Graviton, Cloud Run, Fargate) build with <code>--platform=linux/arm64</code> on <code>ubuntu-24.04-arm</code> runners &mdash; native arm64 builds are dramatically faster than QEMU emulation. Keep test binaries with <code>go test -c</code> for parallel sharding across runners on huge suites.</p>'''
+
+ANSWERS[69] = r'''<p><strong>Situation:</strong> Jenkins ships container images to production and the security team requires defence-in-depth: signing, SBOM, vulnerability scanning, base-image hygiene, and admission policy &mdash; not just &ldquo;Trivy on the side&rdquo;.</p>
 
 <p><strong>Approach:</strong> implement five gates in the Jenkinsfile &mdash; (1) build with a hardened base (Chainguard, distroless, or scratch) using BuildKit, (2) generate SBOM with Syft and store it as a build artefact, (3) scan with Trivy for CVEs and Grype as a second opinion, (4) sign with Cosign keyless via OIDC, (5) attest provenance via SLSA build-level statements. At admission, Kyverno verifies the signature and SBOM against policy.</p>
 
@@ -5067,15 +4574,9 @@ jobs:
 
 <p><strong>Trade-offs:</strong> aggressive policy (block on HIGH+CRITICAL) breaks builds frequently and creates pressure to suppress findings; pair scanning with auto-remediation via Renovate to keep dependencies fresh. Keyless Cosign requires Rekor uptime; keyed Cosign needs KMS. Distroless is excellent for production but inconvenient for debugging &mdash; ship a debug variant that includes a shell.</p>
 
-<p><strong>Production polish:</strong> store SBOMs in your registry alongside images via Cosign attestations &mdash; consumers can fetch them with <code>cosign download attestation</code>. Wire Falco or Tetragon at runtime to detect anomalous syscalls and feed alerts to your SIEM. Audit base image age weekly; pin to digests, not tags, in Dockerfiles. Rotate sigstore certificates by re-signing on every build &mdash; ephemeral keys with auditable transparency log entries are the modern best practice.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q70">
-  <div class="qa__number">Question 70</div>
-  <h3 class="qa__question">Your organization wants to enforce compliance checks for Kubernetes deployments in the CI/CD pipeline. How would you set this up using GitHub Actions?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> the org needs continuous compliance for Kubernetes &mdash; CIS Benchmarks, NIST 800-190, internal policies (no privileged pods, all images from approved registries, mandatory labels) &mdash; enforced both at PR time and at admission, with evidence for auditors.</p>
+<p><strong>Production polish:</strong> store SBOMs in your registry alongside images via Cosign attestations &mdash; consumers can fetch them with <code>cosign download attestation</code>. Wire Falco or Tetragon at runtime to detect anomalous syscalls and feed alerts to your SIEM. Audit base image age weekly; pin to digests, not tags, in Dockerfiles. Rotate sigstore certificates by re-signing on every build &mdash; ephemeral keys with auditable transparency log entries are the modern best practice.</p>'''
+
+ANSWERS[70] = r'''<p><strong>Situation:</strong> the org needs continuous compliance for Kubernetes &mdash; CIS Benchmarks, NIST 800-190, internal policies (no privileged pods, all images from approved registries, mandatory labels) &mdash; enforced both at PR time and at admission, with evidence for auditors.</p>
 
 <p><strong>Approach:</strong> stack three layers &mdash; (1) static manifest scanning in GitHub Actions before merge, (2) admission control on the cluster, (3) continuous reporting and drift detection. The 2026 leaders are Kyverno (YAML policies, easier than Rego), Gatekeeper (OPA, more flexible), and KubeLinter for static analysis. Layer Kubescape or Trivy K8s for compliance reports.</p>
 
@@ -5136,15 +4637,9 @@ jobs:
 
 <p><strong>Trade-offs:</strong> Kyverno is far easier to write than Gatekeeper but slightly less expressive; for cross-resource invariants (e.g., &ldquo;every Deployment has a matching ServiceMonitor&rdquo;) Gatekeeper&rsquo;s ConstraintTemplates are more powerful. Audit-only mode is essential during rollout &mdash; turning on enforcement immediately on a busy cluster generates ticket storms.</p>
 
-<p><strong>Production polish:</strong> ship policy reports to a SIEM (Splunk, Elastic, Datadog) so auditors can pull evidence on demand. Use the Kyverno reports controller to expose violations as Prometheus metrics; alert on policy regression. For multi-cluster, push policies via Argo CD ApplicationSets so all clusters share the same baseline. Run Kubescape weekly against every cluster and stash the reports as long-lived artefacts &mdash; auditors love a date-stamped trail. Consider Cluster Compliance Operator (OpenShift) or Polaris for a UI-driven view.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q71">
-  <div class="qa__number">Question 71</div>
-  <h3 class="qa__question">You are asked to set up a CI/CD pipeline for a Phoenix application with automated tests and deployment to AWS Lambda. Describe your approach.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> an Elixir/Phoenix application needs to run on AWS Lambda. BEAM and Lambda&rsquo;s execution model are awkward together &mdash; Lambda expects per-request handlers, while Phoenix is built around long-lived processes. Two viable paths: package <code>mix release</code> with a custom runtime layer, or front Lambda with API Gateway and run Phoenix inside a container function image.</p>
+<p><strong>Production polish:</strong> ship policy reports to a SIEM (Splunk, Elastic, Datadog) so auditors can pull evidence on demand. Use the Kyverno reports controller to expose violations as Prometheus metrics; alert on policy regression. For multi-cluster, push policies via Argo CD ApplicationSets so all clusters share the same baseline. Run Kubescape weekly against every cluster and stash the reports as long-lived artefacts &mdash; auditors love a date-stamped trail. Consider Cluster Compliance Operator (OpenShift) or Polaris for a UI-driven view.</p>'''
+
+ANSWERS[71] = r'''<p><strong>Situation:</strong> an Elixir/Phoenix application needs to run on AWS Lambda. BEAM and Lambda&rsquo;s execution model are awkward together &mdash; Lambda expects per-request handlers, while Phoenix is built around long-lived processes. Two viable paths: package <code>mix release</code> with a custom runtime layer, or front Lambda with API Gateway and run Phoenix inside a container function image.</p>
 
 <p><strong>Approach:</strong> use Lambda container images with the AWS Lambda Runtime Interface Emulator for local testing. Compile a <code>mix release</code> with a custom <code>bootstrap</code> shim that calls Phoenix&rsquo;s endpoint module per invocation. For most production cases, Fly.io or AWS App Runner is a far better fit &mdash; Lambda for Phoenix is a niche choice you should justify explicitly.</p>
 
@@ -5203,15 +4698,9 @@ jobs:
 
 <p><strong>Trade-offs:</strong> you lose most of what makes Phoenix special &mdash; LiveView, presence, Channels, distributed Erlang &mdash; if you go to Lambda. The use case where this makes sense is short-lived REST APIs that happen to be in Elixir. For real Phoenix workloads, Fly.io maps almost 1:1 to releases with multi-region distributed Erlang and per-app machines that scale to zero. AWS App Runner (or ECS Fargate) is the next-best fit on AWS.</p>
 
-<p><strong>Production polish:</strong> use Provisioned Concurrency for predictable latency, Lambda SnapStart isn&rsquo;t yet available for custom runtimes. Use RDS Proxy to absorb connection bursts to Postgres. Wire OpenTelemetry Lambda layer to push traces to X-Ray or Tempo. Honestly evaluate Fly.io as an alternative &mdash; if cold start, Channels, or Cluster.distribute matter at all to your app, Lambda is the wrong target.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q72">
-  <div class="qa__number">Question 72</div>
-  <h3 class="qa__question">Your team wants to implement automated rollbacks for failed deployments in a multi-service application using Kubernetes. How would you configure this in Jenkins?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a microservice fleet on Kubernetes deploys via Jenkins. A bad rollout in any service should self-heal &mdash; rollback automatically when health metrics regress, before the on-call notices. The challenge is detecting failure quickly across services without false-positive rollbacks during legitimate deploys.</p>
+<p><strong>Production polish:</strong> use Provisioned Concurrency for predictable latency, Lambda SnapStart isn&rsquo;t yet available for custom runtimes. Use RDS Proxy to absorb connection bursts to Postgres. Wire OpenTelemetry Lambda layer to push traces to X-Ray or Tempo. Honestly evaluate Fly.io as an alternative &mdash; if cold start, Channels, or Cluster.distribute matter at all to your app, Lambda is the wrong target.</p>'''
+
+ANSWERS[72] = r'''<p><strong>Situation:</strong> a microservice fleet on Kubernetes deploys via Jenkins. A bad rollout in any service should self-heal &mdash; rollback automatically when health metrics regress, before the on-call notices. The challenge is detecting failure quickly across services without false-positive rollbacks during legitimate deploys.</p>
 
 <p><strong>Approach:</strong> use Argo Rollouts per service with an <em>analysis template</em> that queries Prometheus for error rate and latency, plus a <em>kayenta-style</em> comparison against the baseline. Jenkins triggers the rollout (image bump in Git or direct CRD update), then the in-cluster controller drives the canary and rollback &mdash; Jenkins doesn&rsquo;t make the rollback decision because Jenkins doesn&rsquo;t see real production traffic.</p>
 
@@ -5278,15 +4767,9 @@ spec:
 
 <p><strong>Trade-offs:</strong> letting Jenkins drive rollback (poll <code>kubectl rollout undo</code>) is brittle &mdash; the Jenkins agent might lose connectivity at the worst moment. Argo Rollouts owns this in-cluster, so even if Jenkins crashes, rollback completes. The trade is an extra controller; for a single service this might be overkill, but for 20+ services the consistency is invaluable. Flagger is the Flux-based alternative with similar features.</p>
 
-<p><strong>Production polish:</strong> standardise the AnalysisTemplate across services so every team gets the same SLO-based gate; tune <code>failureLimit</code> per service tier. Wire Argo Rollouts notifications to Slack so the team sees auto-rollback events with reasoning. Keep the previous ReplicaSet warm so rollback is instant (no image pull). For multi-region or multi-cluster, use Kargo to coordinate promotion across stages so a regression in staging blocks production.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q73">
-  <div class="qa__number">Question 73</div>
-  <h3 class="qa__question">You need to set up a CI/CD pipeline for a Vue.js application with unit tests, integration tests, and deployment to Netlify. Explain your approach.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a Vue.js (Nuxt or plain) SPA needs CI/CD that runs unit tests with Vitest, integration tests with Cypress or Playwright, builds the static bundle, and deploys to Netlify with branch previews and atomic deploys.</p>
+<p><strong>Production polish:</strong> standardise the AnalysisTemplate across services so every team gets the same SLO-based gate; tune <code>failureLimit</code> per service tier. Wire Argo Rollouts notifications to Slack so the team sees auto-rollback events with reasoning. Keep the previous ReplicaSet warm so rollback is instant (no image pull). For multi-region or multi-cluster, use Kargo to coordinate promotion across stages so a regression in staging blocks production.</p>'''
+
+ANSWERS[73] = r'''<p><strong>Situation:</strong> a Vue.js (Nuxt or plain) SPA needs CI/CD that runs unit tests with Vitest, integration tests with Cypress or Playwright, builds the static bundle, and deploys to Netlify with branch previews and atomic deploys.</p>
 
 <p><strong>Approach:</strong> use GitHub Actions with cached <code>node_modules</code> via pnpm, run Vitest in parallel shards, run Playwright against the dev server, and deploy with <code>netlify-cli</code>. Netlify&rsquo;s GitHub integration handles preview deploys natively, so the workflow exists mainly for testing &mdash; the deploy step is optional if you use Netlify&rsquo;s built-in CI.</p>
 
@@ -5357,15 +4840,9 @@ jobs:
 
 <p><strong>Trade-offs:</strong> running deploys from GitHub Actions instead of Netlify&rsquo;s built-in CI gives you full control (matrix tests, parallel jobs) but loses some Netlify niceties (deploy previews on PR comments, build caching). For most teams the built-in CI plus a separate Actions workflow for tests is simpler than reproducing Netlify&rsquo;s deploy behaviour in Actions. Cloudflare Pages and Vercel offer comparable DX with often-cheaper egress.</p>
 
-<p><strong>Production polish:</strong> enable Netlify split testing for canary releases via traffic split. Use Netlify Edge Functions for personalisation without a backend. Configure Lighthouse CI with budgets to fail PRs that regress Core Web Vitals; add bundle-size guards via <code>size-limit</code>. For Nuxt SSR, deploy to Cloudflare Workers via Nitro for global edge serving with sub-50ms latency. Pre-warm Playwright browsers via <code>actions/cache</code> on <code>~/.cache/ms-playwright</code> to cut E2E startup time in half.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q74">
-  <div class="qa__number">Question 74</div>
-  <h3 class="qa__question">Your organization wants to use GitHub Actions for deploying blockchain applications to AWS. Describe the workflow you would create.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a blockchain application (smart contracts plus an off-chain indexer/API) needs CI/CD that compiles and tests Solidity contracts, runs static analysis and fuzzing, deploys to a testnet for verification, and ships the off-chain components to AWS via GitHub Actions.</p>
+<p><strong>Production polish:</strong> enable Netlify split testing for canary releases via traffic split. Use Netlify Edge Functions for personalisation without a backend. Configure Lighthouse CI with budgets to fail PRs that regress Core Web Vitals; add bundle-size guards via <code>size-limit</code>. For Nuxt SSR, deploy to Cloudflare Workers via Nitro for global edge serving with sub-50ms latency. Pre-warm Playwright browsers via <code>actions/cache</code> on <code>~/.cache/ms-playwright</code> to cut E2E startup time in half.</p>'''
+
+ANSWERS[74] = r'''<p><strong>Situation:</strong> a blockchain application (smart contracts plus an off-chain indexer/API) needs CI/CD that compiles and tests Solidity contracts, runs static analysis and fuzzing, deploys to a testnet for verification, and ships the off-chain components to AWS via GitHub Actions.</p>
 
 <p><strong>Approach:</strong> separate the on-chain and off-chain pipelines &mdash; contracts have different review cadence and immutability constraints than services. For Solidity in 2026 the toolchain is Foundry (forge build/test/script with fuzzing and invariants), Slither and Aderyn for SAST, and optionally Halmos or Certora for symbolic execution. Off-chain components ship as containers via OIDC to ECR, deployed to ECS or EKS through standard pipelines.</p>
 
@@ -5437,15 +4914,9 @@ jobs:
 
 <p><strong>Trade-offs:</strong> mainnet deploys must never auto-deploy &mdash; gate behind manual approval and a hardware-key signing flow (Defender, Fireblocks). Foundry has eclipsed Hardhat for serious development; Hardhat remains useful for TypeScript-heavy testing. Symbolic execution (Halmos, Certora) is slow but catches bugs unit tests never will; budget for it on critical paths.</p>
 
-<p><strong>Production polish:</strong> sign every artefact (contracts and indexer images) with Cosign and store SBOMs in a transparent log. Use OpenZeppelin Defender for safe upgradeable proxies and timelocked admin actions. Rate-limit the indexer&rsquo;s RPC calls via dedicated nodes (Alchemy, Infura, QuickNode) with separate API keys per environment. Always run a full mainnet fork test in CI before any deploy &mdash; integration regressions hide in real on-chain state.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q75">
-  <div class="qa__number">Question 75</div>
-  <h3 class="qa__question">You are asked to implement CI/CD for an IoT application using Docker and Kubernetes. Explain your approach.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> an IoT product has thousands of devices in the field and needs CI/CD that builds firmware-equivalent containers, signs them, and ships to edge sites running K3s or KubeEdge, plus a cloud-side data ingest pipeline. Bandwidth is constrained, devices may be offline, and rollback must work without an operator visiting the site.</p>
+<p><strong>Production polish:</strong> sign every artefact (contracts and indexer images) with Cosign and store SBOMs in a transparent log. Use OpenZeppelin Defender for safe upgradeable proxies and timelocked admin actions. Rate-limit the indexer&rsquo;s RPC calls via dedicated nodes (Alchemy, Infura, QuickNode) with separate API keys per environment. Always run a full mainnet fork test in CI before any deploy &mdash; integration regressions hide in real on-chain state.</p>'''
+
+ANSWERS[75] = r'''<p><strong>Situation:</strong> an IoT product has thousands of devices in the field and needs CI/CD that builds firmware-equivalent containers, signs them, and ships to edge sites running K3s or KubeEdge, plus a cloud-side data ingest pipeline. Bandwidth is constrained, devices may be offline, and rollback must work without an operator visiting the site.</p>
 
 <p><strong>Approach:</strong> hub-and-spoke architecture &mdash; build and sign in cloud CI (GitHub Actions), publish to a global registry with edge mirrors, and let each edge site pull via GitOps. Use K3s (or MicroK8s) for the edge runtime with KubeEdge or OpenYurt for offline tolerance. Akri exposes IoT hardware as K8s resources. SOCI image streaming reduces cold-pull time on slow links.</p>
 
@@ -5502,15 +4973,9 @@ jobs:
 
 <p><strong>Trade-offs:</strong> push-based deploy from CI to thousands of edges is fragile &mdash; pull-based GitOps with Flux or Rancher Fleet is the correct primitive. Image size matters far more than at cloud scale; use distroless or chiseled bases and ship arm64-native (RPi, Jetson) rather than emulating amd64. Without SOCI, a 200 MB image over a 4G link is a 5-minute outage. KubeEdge is great for offline but adds operational complexity; many shops use plain Flux with longer reconcile windows instead.</p>
 
-<p><strong>Production polish:</strong> stagger rollouts heavily &mdash; never push the same image to all sites simultaneously. Use Flux <code>ImagePolicy</code> with <code>ImageRepository</code> for deterministic version progression and Rancher Fleet&rsquo;s <code>maxUnavailable</code> for fleet-wide control. Ingest device telemetry via OpenTelemetry Collector at the edge, batched to cloud Prometheus or Tempo. For firmware-style updates (where containers aren&rsquo;t enough), pair with Mender or RAUC. Always design for offline: edge clusters must reconcile from a known state and never trust partial syncs.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q76">
-  <div class="qa__number">Question 76</div>
-  <h3 class="qa__question">Your team wants to enforce code quality and security checks for mobile applications in the CI/CD pipeline. How would you set this up using GitHub Actions?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a mobile app (iOS Swift, Android Kotlin, or React Native/Flutter cross-platform) needs CI checks for code quality and security. Mobile adds platform-specific concerns &mdash; SAST for Swift/Kotlin, supply chain via CocoaPods/Gradle, secrets in <code>Info.plist</code> or <code>AndroidManifest.xml</code>, and obfuscation/anti-tamper requirements.</p>
+<p><strong>Production polish:</strong> stagger rollouts heavily &mdash; never push the same image to all sites simultaneously. Use Flux <code>ImagePolicy</code> with <code>ImageRepository</code> for deterministic version progression and Rancher Fleet&rsquo;s <code>maxUnavailable</code> for fleet-wide control. Ingest device telemetry via OpenTelemetry Collector at the edge, batched to cloud Prometheus or Tempo. For firmware-style updates (where containers aren&rsquo;t enough), pair with Mender or RAUC. Always design for offline: edge clusters must reconcile from a known state and never trust partial syncs.</p>'''
+
+ANSWERS[76] = r'''<p><strong>Situation:</strong> a mobile app (iOS Swift, Android Kotlin, or React Native/Flutter cross-platform) needs CI checks for code quality and security. Mobile adds platform-specific concerns &mdash; SAST for Swift/Kotlin, supply chain via CocoaPods/Gradle, secrets in <code>Info.plist</code> or <code>AndroidManifest.xml</code>, and obfuscation/anti-tamper requirements.</p>
 
 <p><strong>Approach:</strong> stack five gates in GitHub Actions &mdash; (1) static analysis (SwiftLint + SwiftFormat for iOS, ktlint + Detekt for Android), (2) dependency scanning (CocoaPods Audit, Gradle dependency-check, Renovate for updates), (3) SAST (Semgrep with mobile rulesets, MobSF for binary analysis), (4) secret scanning (gitleaks), (5) IPA/APK signing verification. Use macOS runners for iOS (Apple silicon now standard) and Linux for Android.</p>
 
@@ -5576,15 +5041,9 @@ jobs:
 
 <p><strong>Trade-offs:</strong> macOS runners on GitHub-hosted are pricey (10x Linux); for high-volume iOS, self-hosted Apple silicon Macs or Xcode Cloud may pay back. MobSF is brilliant but slow &mdash; run it nightly rather than per-PR. SAST tools can be noisy on mobile-specific patterns; tune rulesets aggressively to keep false positives manageable.</p>
 
-<p><strong>Production polish:</strong> require code-signing on every build with Match (Fastlane) for shared signing identity. Use App Store Connect API keys (not Apple ID passwords) for upload &mdash; rotate quarterly. Layer Crashlytics and OpenTelemetry for runtime observability. For React Native or Flutter cross-platform, run unit tests once on Linux and reserve macOS runners for iOS-specific build/test only &mdash; significant cost savings. Add ProGuard/R8 (Android) and Strip (iOS) for code shrinking and basic obfuscation.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q77">
-  <div class="qa__number">Question 77</div>
-  <h3 class="qa__question">You need to set up a CI/CD pipeline for an Angular application with automated tests and deployment to AWS Amplify. Explain your approach.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> an Angular SPA (likely Angular 18+ with standalone components and signals) needs CI/CD that runs Karma/Jest unit tests, Cypress or Playwright E2E, and deploys to AWS Amplify Hosting with branch-aware preview deployments and atomic releases.</p>
+<p><strong>Production polish:</strong> require code-signing on every build with Match (Fastlane) for shared signing identity. Use App Store Connect API keys (not Apple ID passwords) for upload &mdash; rotate quarterly. Layer Crashlytics and OpenTelemetry for runtime observability. For React Native or Flutter cross-platform, run unit tests once on Linux and reserve macOS runners for iOS-specific build/test only &mdash; significant cost savings. Add ProGuard/R8 (Android) and Strip (iOS) for code shrinking and basic obfuscation.</p>'''
+
+ANSWERS[77] = r'''<p><strong>Situation:</strong> an Angular SPA (likely Angular 18+ with standalone components and signals) needs CI/CD that runs Karma/Jest unit tests, Cypress or Playwright E2E, and deploys to AWS Amplify Hosting with branch-aware preview deployments and atomic releases.</p>
 
 <p><strong>Approach:</strong> Amplify Hosting handles build and deploy natively when wired to GitHub via <code>amplify.yml</code>; you can leave the entire pipeline to Amplify or use GitHub Actions for richer testing and let Amplify pull pre-built artefacts. The hybrid pattern &mdash; tests in Actions, deploy in Amplify &mdash; is the most common in 2026.</p>
 
@@ -5661,15 +5120,9 @@ frontend:
 
 <p><strong>Trade-offs:</strong> Amplify Hosting is convenient but slightly opinionated &mdash; very custom build setups (server-side rendering with custom edge logic, mixed monorepos) sometimes outgrow it. CloudFront + S3 with a custom GitHub Actions deploy gives identical performance with more control but more wiring. Amplify&rsquo;s pricing per build minute can stack up on large repos &mdash; offload tests to Actions to avoid double-billing.</p>
 
-<p><strong>Production polish:</strong> enable Amplify&rsquo;s rewrite rules for SPA routing (<code>404 -&gt; /index.html</code>). Configure Lighthouse CI against the Amplify preview URL on every PR &mdash; perf regressions get blocked before merge. Use Amplify environment variables tied to branch (staging vs prod API URLs). For SSR, evaluate Vercel or Cloudflare Pages with Pages Functions; Amplify SSR works but has rougher edges than dedicated SSR hosts. Pair with WAF and Bot Control if the app is consumer-facing.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q78">
-  <div class="qa__number">Question 78</div>
-  <h3 class="qa__question">Your organization wants to use GitHub Actions for deploying AI/ML models to Azure Kubernetes Service (AKS). Describe the workflow you would create.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> the team trains ML models offline (or fine-tunes LLMs) and wants to deploy them to AKS with proper versioning, rollback, GPU scheduling, and monitoring. The pipeline must handle model artefacts (large files in registries) and serve them with autoscaling under bursty traffic.</p>
+<p><strong>Production polish:</strong> enable Amplify&rsquo;s rewrite rules for SPA routing (<code>404 -&gt; /index.html</code>). Configure Lighthouse CI against the Amplify preview URL on every PR &mdash; perf regressions get blocked before merge. Use Amplify environment variables tied to branch (staging vs prod API URLs). For SSR, evaluate Vercel or Cloudflare Pages with Pages Functions; Amplify SSR works but has rougher edges than dedicated SSR hosts. Pair with WAF and Bot Control if the app is consumer-facing.</p>'''
+
+ANSWERS[78] = r'''<p><strong>Situation:</strong> the team trains ML models offline (or fine-tunes LLMs) and wants to deploy them to AKS with proper versioning, rollback, GPU scheduling, and monitoring. The pipeline must handle model artefacts (large files in registries) and serve them with autoscaling under bursty traffic.</p>
 
 <p><strong>Approach:</strong> separate the artefact pipeline (model in MLflow or Hugging Face Hub) from the service pipeline (KServe InferenceService manifest). GitHub Actions builds the inference container, packages the model reference, then bumps the InferenceService manifest in a GitOps repo &mdash; Argo CD deploys to AKS. KServe handles autoscaling (scale-to-zero, GPU sharing) and provides a standard prediction protocol.</p>
 
@@ -5748,15 +5201,9 @@ spec:
 
 <p><strong>Trade-offs:</strong> KServe&rsquo;s scale-to-zero saves cost but has cold-start cost (model load can be minutes for large LLMs) &mdash; for low-latency consumer apps keep <code>minReplicas: 1</code>. AKS spot node pools dramatically cut GPU cost but eviction is brutal mid-inference; use them for batch/training, not online serving. NVIDIA H100/A100 capacity is constrained &mdash; reserve quota in advance and consider AMD MI300X as the 2026 alternative.</p>
 
-<p><strong>Production polish:</strong> instrument with OpenTelemetry to capture token-level latency and KV-cache hit rate. Layer drift detection via Evidently AI on prediction distribution; alert when drift exceeds a baseline. Use vLLM or TensorRT-LLM for throughput &mdash; raw HuggingFace pipelines are 5-10x slower. For multi-model serving, consider Triton with concurrent model execution. Always shadow-deploy new model versions before flipping traffic; ML changes that look fine in offline eval can regress in production distribution.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q79">
-  <div class="qa__number">Question 79</div>
-  <h3 class="qa__question">You are asked to set up a CI/CD pipeline for a Perl application with unit tests, integration tests, and deployment to Google Cloud Functions. Explain your approach.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a Perl service needs to ship to Google Cloud Functions with unit and integration tests. Cloud Functions doesn&rsquo;t natively support Perl, so the only viable path in 2026 is the second-generation runtime (Cloud Run-backed) with a custom container image &mdash; effectively running Cloud Run with Functions-Framework semantics layered on top.</p>
+<p><strong>Production polish:</strong> instrument with OpenTelemetry to capture token-level latency and KV-cache hit rate. Layer drift detection via Evidently AI on prediction distribution; alert when drift exceeds a baseline. Use vLLM or TensorRT-LLM for throughput &mdash; raw HuggingFace pipelines are 5-10x slower. For multi-model serving, consider Triton with concurrent model execution. Always shadow-deploy new model versions before flipping traffic; ML changes that look fine in offline eval can regress in production distribution.</p>'''
+
+ANSWERS[79] = r'''<p><strong>Situation:</strong> a Perl service needs to ship to Google Cloud Functions with unit and integration tests. Cloud Functions doesn&rsquo;t natively support Perl, so the only viable path in 2026 is the second-generation runtime (Cloud Run-backed) with a custom container image &mdash; effectively running Cloud Run with Functions-Framework semantics layered on top.</p>
 
 <p><strong>Approach:</strong> use Plack/Starman or Mojolicious as the HTTP layer, package as a container with the Functions-Framework HTTP contract (listen on <code>$PORT</code>, plain HTTP), and deploy via gen2 Functions or directly to Cloud Run. Test in CI with <code>prove</code> for unit tests and Test::Mojo or <code>plackup</code> + curl for integration tests; coverage via Devel::Cover.</p>
 
@@ -5826,15 +5273,9 @@ jobs:
 
 <p><strong>Trade-offs:</strong> Perl is a niche choice for greenfield serverless and not officially supported &mdash; expect to maintain the runtime image yourself. The Functions-Framework HTTP contract is straightforward, so practically any language that speaks HTTP works on gen2. Cold start is meaningful (Perl startup + module load); pay for <code>min-instances: 1</code> if latency matters.</p>
 
-<p><strong>Production polish:</strong> use Carton or cpanfile.snapshot for reproducible dependency installs &mdash; Perl&rsquo;s <code>cpanm</code> without a snapshot can pull different versions per build. Layer OpenTelemetry::SDK for traces (instrumentation is lightweight but needs manual wiring). Cache CPAN modules in a separate base image rebuilt weekly; the bulk of build time is dependency resolution. Honestly evaluate whether a Perl rewrite to Go or Python would be cheaper than maintaining a custom Perl serverless runtime &mdash; for most teams it would be.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q80">
-  <div class="qa__number">Question 80</div>
-  <h3 class="qa__question">Your team wants to implement continuous integration for a Dart application with dependency caching. How would you configure this in GitHub Actions?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a Dart application (likely a Flutter mobile app or a server-side Dart binary) needs CI with dependency caching to keep <code>dart pub get</code> and Flutter tool downloads off the critical path. Without caching every PR re-fetches the SDK and pub packages, adding 60&ndash;90 seconds per job.</p>
+<p><strong>Production polish:</strong> use Carton or cpanfile.snapshot for reproducible dependency installs &mdash; Perl&rsquo;s <code>cpanm</code> without a snapshot can pull different versions per build. Layer OpenTelemetry::SDK for traces (instrumentation is lightweight but needs manual wiring). Cache CPAN modules in a separate base image rebuilt weekly; the bulk of build time is dependency resolution. Honestly evaluate whether a Perl rewrite to Go or Python would be cheaper than maintaining a custom Perl serverless runtime &mdash; for most teams it would be.</p>'''
+
+ANSWERS[80] = r'''<p><strong>Situation:</strong> a Dart application (likely a Flutter mobile app or a server-side Dart binary) needs CI with dependency caching to keep <code>dart pub get</code> and Flutter tool downloads off the critical path. Without caching every PR re-fetches the SDK and pub packages, adding 60&ndash;90 seconds per job.</p>
 
 <p><strong>Approach:</strong> cache three things &mdash; the Flutter/Dart SDK install (heavy, ~1GB), the pub-cache directory (<code>~/.pub-cache</code>), and the per-project <code>.dart_tool</code> build cache. The <code>subosito/flutter-action</code> handles SDK caching automatically; pub and build caches need explicit <code>actions/cache</code> entries keyed on <code>pubspec.lock</code> and <code>pubspec.yaml</code>.</p>
 
@@ -5890,15 +5331,9 @@ jobs:
 
 <p><strong>Trade-offs:</strong> aggressive caching can mask issues &mdash; a build that works in CI may break for new contributors who do clean checkouts. Run a weekly &ldquo;clean-cache&rdquo; job that wipes caches and rebuilds from scratch to catch this early. Cache size on GHA is 10GB per repo branch; large Flutter projects with both iOS and Android caches can exceed this &mdash; consider self-hosted runners or BuildKit registry caching for monorepos.</p>
 
-<p><strong>Production polish:</strong> use <code>flutter pub get --enforce-lockfile</code> in CI to fail on lockfile drift. Run <code>dart pub deps</code> against an allow-list to catch unauthorised dependencies. For Android release builds, configure ProGuard/R8 with shrinking and obfuscation; for iOS, use Match (Fastlane) for shared signing identity. Consider Codemagic or Bitrise for mobile-specific CI &mdash; they handle Apple silicon, signing, and store uploads more elegantly than DIY GitHub Actions, especially for Flutter where you build for two platforms simultaneously.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q81">
-  <div class="qa__number">Question 81</div>
-  <h3 class="qa__question">You need to implement security best practices for Kubernetes clusters in the CI/CD pipeline. Explain how you would configure this using GitHub Actions.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> the security team requires hardened Kubernetes clusters with continuous evidence: every cluster passes CIS benchmarks, runs only signed images, denies privileged pods by default, and exports compliance reports for auditors &mdash; all enforced and validated through GitHub Actions before merges hit production.</p>
+<p><strong>Production polish:</strong> use <code>flutter pub get --enforce-lockfile</code> in CI to fail on lockfile drift. Run <code>dart pub deps</code> against an allow-list to catch unauthorised dependencies. For Android release builds, configure ProGuard/R8 with shrinking and obfuscation; for iOS, use Match (Fastlane) for shared signing identity. Consider Codemagic or Bitrise for mobile-specific CI &mdash; they handle Apple silicon, signing, and store uploads more elegantly than DIY GitHub Actions, especially for Flutter where you build for two platforms simultaneously.</p>'''
+
+ANSWERS[81] = r'''<p><strong>Situation:</strong> the security team requires hardened Kubernetes clusters with continuous evidence: every cluster passes CIS benchmarks, runs only signed images, denies privileged pods by default, and exports compliance reports for auditors &mdash; all enforced and validated through GitHub Actions before merges hit production.</p>
 
 <p><strong>Approach:</strong> three-layer defence &mdash; (1) IaC scan for cluster bootstrap (Terraform/CDKTF) via Checkov and tfsec, (2) manifest-time policy via Kyverno test in PRs, (3) admission-time enforcement via Kyverno or Gatekeeper plus Pod Security Admission baseline/restricted. Run kube-bench against each cluster nightly and ship results to the SIEM.</p>
 
@@ -5972,15 +5407,9 @@ jobs:
 
 <p><strong>Trade-offs:</strong> turning on Pod Security Admission &ldquo;restricted&rdquo; on a brownfield cluster breaks workloads that ran as root or required hostPath volumes &mdash; phased rollout with audit-only mode first is essential. Kyverno is easier to author but has fewer cross-resource invariants than Gatekeeper. Falco generates significant volume; tune rules and pipe through a SIEM to avoid alert fatigue.</p>
 
-<p><strong>Production polish:</strong> stitch results into a single dashboard via SARIF upload to GitHub Code Scanning &mdash; auditors get a per-PR security view. Schedule kube-bench and Kubescape nightly across every cluster and archive reports to S3 or GCS with object-lock for audit trails. For multi-cluster fleets, push policies via Argo CD ApplicationSets so the baseline is identical everywhere. Layer Cilium Tetragon for kernel-level observability and runtime enforcement; it catches things admission control alone cannot.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q82">
-  <div class="qa__number">Question 82</div>
-  <h3 class="qa__question">Your organization wants to enforce compliance checks for serverless deployments in the CI/CD pipeline. How would you set this up using Jenkins?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> serverless deploys (Lambda, Cloud Functions, Azure Functions) skip the OS layer but still need compliance &mdash; least-privilege IAM, encrypted env vars, scoped triggers, no over-permissioned roles, no plaintext secrets, no internet egress unless required. The goal: enforce these in Jenkins before deploy, with evidence stored centrally.</p>
+<p><strong>Production polish:</strong> stitch results into a single dashboard via SARIF upload to GitHub Code Scanning &mdash; auditors get a per-PR security view. Schedule kube-bench and Kubescape nightly across every cluster and archive reports to S3 or GCS with object-lock for audit trails. For multi-cluster fleets, push policies via Argo CD ApplicationSets so the baseline is identical everywhere. Layer Cilium Tetragon for kernel-level observability and runtime enforcement; it catches things admission control alone cannot.</p>'''
+
+ANSWERS[82] = r'''<p><strong>Situation:</strong> serverless deploys (Lambda, Cloud Functions, Azure Functions) skip the OS layer but still need compliance &mdash; least-privilege IAM, encrypted env vars, scoped triggers, no over-permissioned roles, no plaintext secrets, no internet egress unless required. The goal: enforce these in Jenkins before deploy, with evidence stored centrally.</p>
 
 <p><strong>Approach:</strong> Jenkinsfile gates four checks before the deploy stage &mdash; (1) IaC scan via Checkov on SAM/Serverless Framework/CDK templates, (2) IAM policy review via cfn-lint custom rules and IAM Access Analyzer, (3) function-level SAST via Semgrep with serverless rules, (4) secret scan via gitleaks. After deploy, an AWS Config or Azure Policy rule continuously verifies drift.</p>
 
@@ -6048,15 +5477,9 @@ pipeline {
 
 <p><strong>Trade-offs:</strong> blocking builds on every Checkov finding generates pressure to suppress; pair with a triage workflow that classifies findings by severity. IAM Access Analyzer&rsquo;s validate-policy is gold for catching wildcard actions before deploy &mdash; surprisingly many production policies fail the basic check. Semgrep&rsquo;s serverless ruleset misses some platform-specific concerns; complement with custom rules for your patterns.</p>
 
-<p><strong>Production polish:</strong> store SARIF outputs in S3 or GCS with object-lock for audit retention. Use AWS Config conformance packs (or Azure Policy initiatives) for continuous evaluation; alert via SNS/EventBridge on drift. Wire Lambda Powertools idempotency to avoid duplicate side effects on retries. For very strict environments use AWS GovCloud + STIG-hardened AMIs for self-hosted Jenkins; for less strict, the standard AWS region with VPC endpoints is fine. Always rotate Jenkins-to-AWS roles with short-lived OIDC tokens, never static keys.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q83">
-  <div class="qa__number">Question 83</div>
-  <h3 class="qa__question">You are asked to set up a CI/CD pipeline for a Rust application with automated tests and deployment to AWS Lambda. Describe your approach.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a Rust service (Actix Web, Axum, or Rocket) needs CI/CD with cargo-based unit and integration tests and deployment to AWS Lambda. Rust is excellent on Lambda &mdash; tiny cold starts, low memory, and the <code>provided.al2023</code> custom runtime is straightforward via <code>cargo lambda</code>.</p>
+<p><strong>Production polish:</strong> store SARIF outputs in S3 or GCS with object-lock for audit retention. Use AWS Config conformance packs (or Azure Policy initiatives) for continuous evaluation; alert via SNS/EventBridge on drift. Wire Lambda Powertools idempotency to avoid duplicate side effects on retries. For very strict environments use AWS GovCloud + STIG-hardened AMIs for self-hosted Jenkins; for less strict, the standard AWS region with VPC endpoints is fine. Always rotate Jenkins-to-AWS roles with short-lived OIDC tokens, never static keys.</p>'''
+
+ANSWERS[83] = r'''<p><strong>Situation:</strong> a Rust service (Actix Web, Axum, or Rocket) needs CI/CD with cargo-based unit and integration tests and deployment to AWS Lambda. Rust is excellent on Lambda &mdash; tiny cold starts, low memory, and the <code>provided.al2023</code> custom runtime is straightforward via <code>cargo lambda</code>.</p>
 
 <p><strong>Approach:</strong> use <code>cargo lambda</code> (the maintained tool replacing older <code>aws-lambda-rust-runtime</code> manual setups) for build/test/deploy, run cargo nextest for parallel test execution, cache <code>~/.cargo</code> and <code>target/</code> aggressively, and deploy via OIDC. Build for arm64 (Graviton) by default &mdash; ~25% cost savings with no compatibility issues.</p>
 
@@ -6118,15 +5541,9 @@ jobs:
 
 <p><strong>Trade-offs:</strong> Rust&rsquo;s build times in CI are notoriously slow without aggressive caching &mdash; <code>Swatinem/rust-cache@v2</code> is essential. arm64 native runners (<code>ubuntu-24.04-arm</code>) avoid cross-compile pain; before they existed you had to use <code>cargo zigbuild</code>. Fewer crates have arm64 support than amd64, but the gap has narrowed dramatically; check <code>cargo build --target aarch64-unknown-linux-gnu</code> for any runtime-loaded native libraries.</p>
 
-<p><strong>Production polish:</strong> use Axum + Lambda runtime extension for routing, with <code>tower-http</code> for middleware (tracing, compression). Wire <code>tracing-opentelemetry</code> with the OTLP exporter pointed at Tempo or X-Ray. Use Lambda function URLs for simple HTTP endpoints (no API Gateway needed). For background work, pair with SQS or EventBridge triggers; Rust is excellent for high-throughput stream processing on Lambda. Add cargo-deny config files to enforce licence restrictions and dependency provenance &mdash; supply-chain hygiene matters more in compiled languages where one transitive dep can pull in unexpected code.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q84">
-  <div class="qa__number">Question 84</div>
-  <h3 class="qa__question">Your team wants to implement automated canary releases for a real-time application using Kubernetes. How would you configure this in Jenkins?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a real-time application (WebSocket-based chat, live video signalling, IoT command channel) needs canary releases on Kubernetes orchestrated by Jenkins. The challenge: long-lived connections don&rsquo;t round-robin across versions cleanly, and abrupt termination on traffic shift breaks user sessions. Standard HTTP canary techniques don&rsquo;t apply directly.</p>
+<p><strong>Production polish:</strong> use Axum + Lambda runtime extension for routing, with <code>tower-http</code> for middleware (tracing, compression). Wire <code>tracing-opentelemetry</code> with the OTLP exporter pointed at Tempo or X-Ray. Use Lambda function URLs for simple HTTP endpoints (no API Gateway needed). For background work, pair with SQS or EventBridge triggers; Rust is excellent for high-throughput stream processing on Lambda. Add cargo-deny config files to enforce licence restrictions and dependency provenance &mdash; supply-chain hygiene matters more in compiled languages where one transitive dep can pull in unexpected code.</p>'''
+
+ANSWERS[84] = r'''<p><strong>Situation:</strong> a real-time application (WebSocket-based chat, live video signalling, IoT command channel) needs canary releases on Kubernetes orchestrated by Jenkins. The challenge: long-lived connections don&rsquo;t round-robin across versions cleanly, and abrupt termination on traffic shift breaks user sessions. Standard HTTP canary techniques don&rsquo;t apply directly.</p>
 
 <p><strong>Approach:</strong> use Argo Rollouts with a service mesh (Istio or Linkerd) for header-based traffic split &mdash; route a subset of new connections to the canary while existing connections drain naturally. Jenkins triggers the rollout; Argo Rollouts manages traffic shifting based on connection success rate and disconnection rate. Connection-affinity ensures returning users hit the same version for a session.</p>
 
@@ -6204,15 +5621,9 @@ spec:
 
 <p><strong>Trade-offs:</strong> WebSocket canary is harder than HTTP canary because metrics observe the connection lifecycle, not request rate &mdash; tune analysis templates accordingly. Without a service mesh, you can&rsquo;t do header-based routing cleanly; Linkerd is lighter than Istio if you don&rsquo;t need Istio&rsquo;s extra features. For very latency-sensitive use cases, consider Centrifugo or Phoenix Channels which were designed for this; standard rolling updates are often acceptable if your protocol gracefully reconnects.</p>
 
-<p><strong>Production polish:</strong> set <code>terminationGracePeriodSeconds: 600</code> with a preStop hook that closes the listener but lets in-flight connections finish. Emit metrics from the application: connections, connection_errors, message_latency, reconnect_count &mdash; these are the canary&rsquo;s real signals. Layer client-side exponential backoff so users reconnect without thundering. For multi-region setups, use AnyCast IPs (Cloudflare, AWS Global Accelerator) and shift traffic at the DNS or LB layer rather than at the cluster.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q85">
-  <div class="qa__number">Question 85</div>
-  <h3 class="qa__question">You need to set up a CI/CD pipeline for a Next.js application with unit tests, integration tests, and deployment to Heroku. Explain your approach.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a Next.js application (React with SSR/SSG/RSC) needs CI/CD with unit tests, integration tests, and deployment to Heroku. Heroku is awkward for Next.js because the framework is tightly coupled to Vercel&rsquo;s edge runtime; deploying to Heroku means giving up some optimisations but keeping the deployment story simple.</p>
+<p><strong>Production polish:</strong> set <code>terminationGracePeriodSeconds: 600</code> with a preStop hook that closes the listener but lets in-flight connections finish. Emit metrics from the application: connections, connection_errors, message_latency, reconnect_count &mdash; these are the canary&rsquo;s real signals. Layer client-side exponential backoff so users reconnect without thundering. For multi-region setups, use AnyCast IPs (Cloudflare, AWS Global Accelerator) and shift traffic at the DNS or LB layer rather than at the cluster.</p>'''
+
+ANSWERS[85] = r'''<p><strong>Situation:</strong> a Next.js application (React with SSR/SSG/RSC) needs CI/CD with unit tests, integration tests, and deployment to Heroku. Heroku is awkward for Next.js because the framework is tightly coupled to Vercel&rsquo;s edge runtime; deploying to Heroku means giving up some optimisations but keeping the deployment story simple.</p>
 
 <p><strong>Approach:</strong> build a standalone Next.js output (<code>output: 'standalone'</code> in <code>next.config.js</code>) so the deploy artefact is self-contained. Use the Heroku Container Registry for full runtime control, run Vitest or Jest for unit tests, Playwright for integration. The honest 2026 alternative is Vercel, Cloudflare Pages, or Netlify &mdash; Next.js works best where the host knows the framework.</p>
 
@@ -6291,15 +5702,9 @@ jobs:
 
 <p><strong>Trade-offs:</strong> Heroku for Next.js gives up the Vercel platform&rsquo;s edge runtime, automatic ISR cache invalidation, image optimisation CDN, and middleware-at-edge &mdash; you&rsquo;ll re-implement these with CloudFront or Cloudflare in front of Heroku. Pricing: Heroku Performance dynos for an SSR site can be more expensive than Vercel Pro for similar traffic. Render or Fly.io are better Heroku alternatives in 2026 with comparable simplicity and lower costs.</p>
 
-<p><strong>Production polish:</strong> wire OpenTelemetry (<code>@vercel/otel</code> works on any host) for traces. Use a CDN in front of Heroku (Cloudflare, Fastly) for static asset caching and image optimisation. Configure middleware for auth/redirects judiciously &mdash; on Heroku, middleware runs in the Node.js process, not at edge, so it adds latency to every request. Honestly evaluate Vercel or Cloudflare Pages with Next.js on Pages Functions: for a Next.js app, the Vercel-native experience saves engineering time worth the platform cost.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q86">
-  <div class="qa__number">Question 86</div>
-  <h3 class="qa__question">Your organization wants to use GitHub Actions for deploying IoT applications to AWS. Describe the workflow you would create.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> an IoT solution sends device telemetry to AWS through GitHub Actions-driven pipelines that build the device-side firmware containers, deploy AWS IoT Core rules, and ship the cloud ingest services (Lambda for filtering, Kinesis for streaming, Timestream/InfluxDB for storage). The deploy must be auditable and reversible across thousands of devices.</p>
+<p><strong>Production polish:</strong> wire OpenTelemetry (<code>@vercel/otel</code> works on any host) for traces. Use a CDN in front of Heroku (Cloudflare, Fastly) for static asset caching and image optimisation. Configure middleware for auth/redirects judiciously &mdash; on Heroku, middleware runs in the Node.js process, not at edge, so it adds latency to every request. Honestly evaluate Vercel or Cloudflare Pages with Next.js on Pages Functions: for a Next.js app, the Vercel-native experience saves engineering time worth the platform cost.</p>'''
+
+ANSWERS[86] = r'''<p><strong>Situation:</strong> an IoT solution sends device telemetry to AWS through GitHub Actions-driven pipelines that build the device-side firmware containers, deploy AWS IoT Core rules, and ship the cloud ingest services (Lambda for filtering, Kinesis for streaming, Timestream/InfluxDB for storage). The deploy must be auditable and reversible across thousands of devices.</p>
 
 <p><strong>Approach:</strong> separate the device-side and cloud-side pipelines. Cloud side uses CDK or SAM for IoT Core rules, Lambda functions, and IAM. Device side builds container images for edge runtimes (Greengrass v2 component or KubeEdge); shipping to fleets uses Greengrass deployment groups or AWS Systems Manager. OIDC federation eliminates static credentials.</p>
 
@@ -6362,15 +5767,9 @@ jobs:
 
 <p><strong>Trade-offs:</strong> Greengrass v2 is opinionated &mdash; it works beautifully if you fit the model (component-based, MQTT-centric, AWS-locked). For non-AWS or polyglot fleets, KubeEdge or pure K3s + Flux is more portable but heavier. AWS IoT Core MQTT pricing is per-message and adds up at scale; Kinesis Data Streams has shard limits that can throttle bursty fleets. Always test deployments on a canary device group before fleet-wide release.</p>
 
-<p><strong>Production polish:</strong> use Greengrass deployment policies with safe-deploy rollout (success threshold, time-based promotion). Layer Sigstore signing on Greengrass component artefacts; the device verifies before installing. For data tier, partition Timestream by tenant and use S3 Glacier for cold tiers. Wire AWS IoT Device Defender for anomaly detection (auth failures, unusual message rates). Plan for offline operation: edge components must function without cloud connectivity and reconcile when reconnected. Stagger deployments heavily &mdash; pushing to 10,000 devices simultaneously is the most expensive outage you&rsquo;ll experience.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q87">
-  <div class="qa__number">Question 87</div>
-  <h3 class="qa__question">You are asked to implement CI/CD for a hybrid cloud environment using Docker and Kubernetes. Explain your approach.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> the org runs workloads across on-prem and one or more clouds (AWS + Azure, or AWS + on-prem). The CI/CD pipeline must deploy the same containerised workload to all targets with consistent observability, security policy, and rollback semantics &mdash; without forking pipelines per environment.</p>
+<p><strong>Production polish:</strong> use Greengrass deployment policies with safe-deploy rollout (success threshold, time-based promotion). Layer Sigstore signing on Greengrass component artefacts; the device verifies before installing. For data tier, partition Timestream by tenant and use S3 Glacier for cold tiers. Wire AWS IoT Device Defender for anomaly detection (auth failures, unusual message rates). Plan for offline operation: edge components must function without cloud connectivity and reconcile when reconnected. Stagger deployments heavily &mdash; pushing to 10,000 devices simultaneously is the most expensive outage you&rsquo;ll experience.</p>'''
+
+ANSWERS[87] = r'''<p><strong>Situation:</strong> the org runs workloads across on-prem and one or more clouds (AWS + Azure, or AWS + on-prem). The CI/CD pipeline must deploy the same containerised workload to all targets with consistent observability, security policy, and rollback semantics &mdash; without forking pipelines per environment.</p>
 
 <p><strong>Approach:</strong> abstract behind GitOps with Argo CD ApplicationSets &mdash; each cluster registers itself, and ApplicationSets generate per-cluster Applications from a single template. Build once in CI, push to a globally accessible registry (Harbor with replication, or per-cloud mirrors), and let each cluster pull. Crossplane abstracts cloud-specific resources (RDS vs Azure Database) behind composite resources so manifests reference logical infrastructure, not vendor APIs.</p>
 
@@ -6442,15 +5841,9 @@ jobs:
 
 <p><strong>Trade-offs:</strong> &ldquo;same workload everywhere&rdquo; is harder than it sounds &mdash; cloud-specific managed services (RDS, CosmosDB, Cloud SQL) inevitably differ in behaviour. Crossplane levels the API surface but doesn&rsquo;t hide all behavioural differences. Per-cloud Helm value overrides remain necessary. For data-heavy workloads, the network latency between on-prem and cloud often forces co-locating data and compute &mdash; full active/active is rare in practice; active/passive with controlled failover is more common.</p>
 
-<p><strong>Production polish:</strong> establish a clear network topology &mdash; ClusterMesh (Cilium) or Submariner for pod-to-pod across clusters, with strict NetworkPolicies. Use SPIRE/SPIFFE for cross-cluster mTLS identity. Centralise observability via OTEL Collector on every cluster pushing to a single Grafana stack with cluster-aware labelling. Run drift detection in Argo CD with self-heal off in production until you trust the pattern; once trusted, turn it on cluster-by-cluster. Plan failover drills quarterly; the first cross-cloud failover always reveals overlooked dependencies.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q88">
-  <div class="qa__number">Question 88</div>
-  <h3 class="qa__question">Your team wants to enforce security and compliance checks for blockchain applications in the CI/CD pipeline. How would you set this up using GitHub Actions?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> blockchain applications need stricter security and compliance than typical web services &mdash; smart contracts are immutable post-deployment, fund loss is direct, and regulatory frameworks (MiCA in EU, evolving US rules) require AML/KYC checks. GitHub Actions must enforce contract auditing, key management hygiene, and on-chain compliance gates.</p>
+<p><strong>Production polish:</strong> establish a clear network topology &mdash; ClusterMesh (Cilium) or Submariner for pod-to-pod across clusters, with strict NetworkPolicies. Use SPIRE/SPIFFE for cross-cluster mTLS identity. Centralise observability via OTEL Collector on every cluster pushing to a single Grafana stack with cluster-aware labelling. Run drift detection in Argo CD with self-heal off in production until you trust the pattern; once trusted, turn it on cluster-by-cluster. Plan failover drills quarterly; the first cross-cloud failover always reveals overlooked dependencies.</p>'''
+
+ANSWERS[88] = r'''<p><strong>Situation:</strong> blockchain applications need stricter security and compliance than typical web services &mdash; smart contracts are immutable post-deployment, fund loss is direct, and regulatory frameworks (MiCA in EU, evolving US rules) require AML/KYC checks. GitHub Actions must enforce contract auditing, key management hygiene, and on-chain compliance gates.</p>
 
 <p><strong>Approach:</strong> stack four mandatory gates &mdash; (1) static analysis with Slither, Aderyn, and Mythril; (2) formal verification via Halmos or Certora on critical paths; (3) gas analysis to catch DoS vectors; (4) dependency provenance via Cosign signatures and SBOMs. For deployment, never auto-deploy to mainnet &mdash; gate behind a Gnosis Safe / OpenZeppelin Defender multi-sig with timelock.</p>
 
@@ -6534,15 +5927,9 @@ jobs:
 
 <p><strong>Trade-offs:</strong> formal verification (Certora especially) is expensive but catches classes of bugs unit tests never will &mdash; budget for it on critical financial logic. Multi-sig timelock slows incident response when a critical bug needs urgent patching; balance speed against guard-rails carefully. Sanctions screening is a moving target; subscribe to a service rather than maintaining your own list.</p>
 
-<p><strong>Production polish:</strong> require a documented audit (Trail of Bits, OpenZeppelin, ConsenSys Diligence, Spearbit) before any mainnet deploy holding meaningful TVL. Use OpenZeppelin Defender Sentinels for runtime monitoring of contract state. Layer The Graph or Subsquid for indexing &mdash; CI must verify subgraph queries against new contract versions before deploy. Always run a full mainnet fork test in CI for upgradeable proxies; storage layout breaks are catastrophic and silent.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q89">
-  <div class="qa__number">Question 89</div>
-  <h3 class="qa__question">You need to set up a CI/CD pipeline for a Haskell application with automated tests and deployment to AWS Lambda. Explain your approach.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a Haskell service needs CI/CD with cabal/stack-based tests and deployment to AWS Lambda. Haskell on Lambda is unusual but viable &mdash; the JVM-style cold start is mitigated by GHC&rsquo;s native compilation, and the strong type system catches a class of errors before runtime.</p>
+<p><strong>Production polish:</strong> require a documented audit (Trail of Bits, OpenZeppelin, ConsenSys Diligence, Spearbit) before any mainnet deploy holding meaningful TVL. Use OpenZeppelin Defender Sentinels for runtime monitoring of contract state. Layer The Graph or Subsquid for indexing &mdash; CI must verify subgraph queries against new contract versions before deploy. Always run a full mainnet fork test in CI for upgradeable proxies; storage layout breaks are catastrophic and silent.</p>'''
+
+ANSWERS[89] = r'''<p><strong>Situation:</strong> a Haskell service needs CI/CD with cabal/stack-based tests and deployment to AWS Lambda. Haskell on Lambda is unusual but viable &mdash; the JVM-style cold start is mitigated by GHC&rsquo;s native compilation, and the strong type system catches a class of errors before runtime.</p>
 
 <p><strong>Approach:</strong> use Cabal or Stack as the build tool, package as a Lambda container image based on <code>provided.al2023</code>, and use the <code>aws-lambda-haskell-runtime</code> library for the handler shim. Test with HSpec and tasty in CI; deploy via OIDC. Build for arm64 (Graviton) for cost savings.</p>
 
@@ -6620,15 +6007,9 @@ jobs:
 
 <p><strong>Trade-offs:</strong> Haskell on Lambda is a niche choice &mdash; few production references, smaller library ecosystem for AWS SDKs. The build is slow (Cabal solver + GHC) and benefits dramatically from caching. For high-throughput services, GHC&rsquo;s garbage collector can pause longer than Go&rsquo;s; tune <code>+RTS -A256m -RTS</code> for short pauses. Most teams using Haskell run it on Fargate or EKS rather than Lambda &mdash; long-lived containers play to Haskell&rsquo;s strengths.</p>
 
-<p><strong>Production polish:</strong> use HLS (Haskell Language Server) and ormolu/fourmolu for consistent formatting in CI. Add weeder to detect dead code. Use Servant&rsquo;s type-level routes to enforce API contracts at compile time &mdash; this is one of Haskell&rsquo;s strongest cards. Wire OpenTelemetry via <code>otel-exporter-otlp</code> for traces. Honestly evaluate whether Lambda is the right target; for any sustained traffic, ECS Fargate with auto-scaling tasks is usually cheaper and a better cultural fit for Haskell&rsquo;s strengths.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q90">
-  <div class="qa__number">Question 90</div>
-  <h3 class="qa__question">Your organization wants to use GitHub Actions for continuous delivery to Google Cloud Run. Describe the workflow you would create.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> the team wants continuous delivery to Google Cloud Run from GitHub Actions. Cloud Run is the simpler GCP target for stateless containers &mdash; scale-to-zero, request-based billing, automatic HTTPS &mdash; and pairs beautifully with GitHub Actions via Workload Identity Federation.</p>
+<p><strong>Production polish:</strong> use HLS (Haskell Language Server) and ormolu/fourmolu for consistent formatting in CI. Add weeder to detect dead code. Use Servant&rsquo;s type-level routes to enforce API contracts at compile time &mdash; this is one of Haskell&rsquo;s strongest cards. Wire OpenTelemetry via <code>otel-exporter-otlp</code> for traces. Honestly evaluate whether Lambda is the right target; for any sustained traffic, ECS Fargate with auto-scaling tasks is usually cheaper and a better cultural fit for Haskell&rsquo;s strengths.</p>'''
+
+ANSWERS[90] = r'''<p><strong>Situation:</strong> the team wants continuous delivery to Google Cloud Run from GitHub Actions. Cloud Run is the simpler GCP target for stateless containers &mdash; scale-to-zero, request-based billing, automatic HTTPS &mdash; and pairs beautifully with GitHub Actions via Workload Identity Federation.</p>
 
 <p><strong>Approach:</strong> three-step pipeline &mdash; (1) authenticate with WIF (no JSON keys ever), (2) build and push to Artifact Registry, (3) deploy via <code>gcloud run deploy</code>. For canary releases, use Cloud Run revisions with traffic splitting (<code>--no-traffic</code> on deploy, then progressive shift). For more elaborate progressive delivery, layer Cloud Deploy.</p>
 
@@ -6697,15 +6078,9 @@ jobs:
 
 <p><strong>Trade-offs:</strong> Cloud Run scale-to-zero saves cost dramatically for low-traffic services but introduces 1&ndash;5 second cold starts for cold instances; <code>--min-instances=1</code> eliminates this at the cost of a continuous bill. Cloud Run service-to-service via Cloud Run gen2 (sidecar) is GCP-locked but enables internal-only services and zero-trust networking. For very long-running connections (WebSockets), Cloud Run supports them but ALB-style health checks and request timeouts behave differently than on EKS &mdash; test carefully.</p>
 
-<p><strong>Production polish:</strong> enable Binary Authorization to block unsigned images at deploy. Use VPC connector for private IP access to Cloud SQL or Memorystore. Wire Cloud Trace via OpenTelemetry &mdash; the GCP OpenTelemetry exporter integrates seamlessly. For multi-region failover, deploy the same service to multiple regions and front with a Global External Load Balancer; Cloud Run regional services don&rsquo;t auto-failover. Always set <code>--max-instances</code> to bound runaway billing during traffic spikes; the default cap is generous enough to bankrupt a side project overnight.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q91">
-  <div class="qa__number">Question 91</div>
-  <h3 class="qa__question">You are asked to set up a CI/CD pipeline for a C# application with unit tests, integration tests, and deployment to Heroku. Explain your approach.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a team has a <strong>C# / ASP.NET Core 9</strong> service. Leadership prefers <strong>Heroku</strong> as the runtime for fast iteration, with <strong>unit tests</strong>, <strong>integration tests</strong>, and gated promotion through review and production apps.</p>
+<p><strong>Production polish:</strong> enable Binary Authorization to block unsigned images at deploy. Use VPC connector for private IP access to Cloud SQL or Memorystore. Wire Cloud Trace via OpenTelemetry &mdash; the GCP OpenTelemetry exporter integrates seamlessly. For multi-region failover, deploy the same service to multiple regions and front with a Global External Load Balancer; Cloud Run regional services don&rsquo;t auto-failover. Always set <code>--max-instances</code> to bound runaway billing during traffic spikes; the default cap is generous enough to bankrupt a side project overnight.</p>'''
+
+ANSWERS[91] = r'''<p><strong>Situation:</strong> a team has a <strong>C# / ASP.NET Core 9</strong> service. Leadership prefers <strong>Heroku</strong> as the runtime for fast iteration, with <strong>unit tests</strong>, <strong>integration tests</strong>, and gated promotion through review and production apps.</p>
 
 <p><strong>Approach:</strong> build with <strong>GitHub Actions</strong> using the official <strong>setup-dotnet</strong> action, run tests with <strong>xUnit</strong> plus <strong>Testcontainers for .NET</strong> for real Postgres/Redis dependencies, publish the app, and deploy via the <strong>Heroku Container Registry</strong> (more flexible than Heroku&rsquo;s Git buildpack for .NET). Use a <strong>chiseled distroless</strong> base image to keep the container tiny and reduce CVE surface. Production polish: <strong>Heroku Review Apps</strong> for every PR, <strong>Pipeline Promotion</strong> from staging to prod so the same image hash crosses environments, <strong>Heroku Postgres</strong> for the DB, and structured logging to <strong>Datadog</strong> via the log drain.</p>
 
@@ -6763,15 +6138,9 @@ jobs:
 <tr><td>Review Apps</td><td>Each PR gets a real URL reviewers can poke</td><td>Burns dyno hours</td></tr>
 </table>
 
-<p><strong>Production polish:</strong> enable <strong>Heroku Auto-Scaling</strong> on web dynos (Performance tier), wire <strong>Datadog APM</strong> with the .NET tracer, set <strong>health checks</strong> via the <strong>release phase</strong> to run EF Core migrations safely, gate deploys on <strong>required status checks</strong> (test + Trivy + Snyk SCA) with branch protection, and keep the <strong>Heroku API key</strong> short-lived by rotating via GitHub <strong>OIDC + Heroku Federated Identity</strong> where possible. In 2026 many shops have moved off Heroku entirely &mdash; if cost or container limits start hurting, the natural migration path is <strong>Render</strong>, <strong>Fly.io</strong>, or <strong>Railway</strong>; all three accept the same Dockerfile with minimal config change.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q92">
-  <div class="qa__number">Question 92</div>
-  <h3 class="qa__question">Your team wants to implement continuous integration for a Dart application with dependency caching. How would you configure this in GitHub Actions?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a team writes <strong>Dart</strong> services (server-side Dart or Flutter web/mobile) and needs <strong>continuous integration</strong> with aggressive <strong>dependency caching</strong> so each CI run is fast despite <strong>pub.dev</strong> being slow over flaky network paths.</p>
+<p><strong>Production polish:</strong> enable <strong>Heroku Auto-Scaling</strong> on web dynos (Performance tier), wire <strong>Datadog APM</strong> with the .NET tracer, set <strong>health checks</strong> via the <strong>release phase</strong> to run EF Core migrations safely, gate deploys on <strong>required status checks</strong> (test + Trivy + Snyk SCA) with branch protection, and keep the <strong>Heroku API key</strong> short-lived by rotating via GitHub <strong>OIDC + Heroku Federated Identity</strong> where possible. In 2026 many shops have moved off Heroku entirely &mdash; if cost or container limits start hurting, the natural migration path is <strong>Render</strong>, <strong>Fly.io</strong>, or <strong>Railway</strong>; all three accept the same Dockerfile with minimal config change.</p>'''
+
+ANSWERS[92] = r'''<p><strong>Situation:</strong> a team writes <strong>Dart</strong> services (server-side Dart or Flutter web/mobile) and needs <strong>continuous integration</strong> with aggressive <strong>dependency caching</strong> so each CI run is fast despite <strong>pub.dev</strong> being slow over flaky network paths.</p>
 
 <p><strong>Approach:</strong> use <strong>GitHub Actions</strong> with <strong>dart-lang/setup-dart</strong>, cache the <strong>pub cache</strong> (<code>$HOME/.pub-cache</code>) keyed by <code>pubspec.lock</code>, cache the <strong>build_runner</strong> outputs (<code>.dart_tool/build</code>) keyed by source-tree hash, and run analyzer + tests + format check in parallel. For Flutter, also cache the Flutter SDK and the Gradle/Pods caches. Use the matrix strategy to run on multiple Dart channels (<code>stable</code>, <code>beta</code>) when releasing a package, single-channel for an app.</p>
 
@@ -6817,15 +6186,9 @@ jobs:
 <tr><td>matrix on channels</td><td>Catch breakage before stable upgrade</td><td>Doubles CI minutes</td></tr>
 </table>
 
-<p><strong>Production polish:</strong> for Flutter, run <strong>integration_test</strong> with <strong>Firebase Test Lab</strong> for real-device coverage; for backend Dart, pair with <strong>shelf_test</strong> or <strong>spanner_test</strong>. Add <strong>very_good_analysis</strong> as the lint baseline (stricter than <code>package:lints/recommended.yaml</code>), enforce <strong>dependabot</strong> for pub updates with grouped weekly PRs, and consider <strong>Bazel</strong> if the monorepo grows past 30 packages &mdash; melos hits a ceiling around there. For supply chain, run <strong>OSV-Scanner</strong> against <code>pubspec.lock</code> in every PR; vulnerability data for Dart improved a lot in 2025&ndash;2026 thanks to Google&rsquo;s OSV pipeline.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q93">
-  <div class="qa__number">Question 93</div>
-  <h3 class="qa__question">You need to implement security best practices for Docker containers in the CI/CD pipeline. Explain how you would configure this using Jenkins.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a security team wants <strong>Docker container security best practices</strong> enforced consistently across every Jenkins pipeline &mdash; not just &ldquo;recommendations in a Confluence page&rdquo; but actually <strong>failing builds</strong> when policy is violated, with a clear path for engineers to fix issues.</p>
+<p><strong>Production polish:</strong> for Flutter, run <strong>integration_test</strong> with <strong>Firebase Test Lab</strong> for real-device coverage; for backend Dart, pair with <strong>shelf_test</strong> or <strong>spanner_test</strong>. Add <strong>very_good_analysis</strong> as the lint baseline (stricter than <code>package:lints/recommended.yaml</code>), enforce <strong>dependabot</strong> for pub updates with grouped weekly PRs, and consider <strong>Bazel</strong> if the monorepo grows past 30 packages &mdash; melos hits a ceiling around there. For supply chain, run <strong>OSV-Scanner</strong> against <code>pubspec.lock</code> in every PR; vulnerability data for Dart improved a lot in 2025&ndash;2026 thanks to Google&rsquo;s OSV pipeline.</p>'''
+
+ANSWERS[93] = r'''<p><strong>Situation:</strong> a security team wants <strong>Docker container security best practices</strong> enforced consistently across every Jenkins pipeline &mdash; not just &ldquo;recommendations in a Confluence page&rdquo; but actually <strong>failing builds</strong> when policy is violated, with a clear path for engineers to fix issues.</p>
 
 <p><strong>Approach:</strong> shift security left in three layers: <strong>build-time</strong> (small base image, no root, no shell, pinned packages, build attestations), <strong>scan-time</strong> (vulnerability + secret + license + IaC scanning), and <strong>admission-time</strong> (signed images only, policies via OPA/Kyverno on the cluster). Drive it through a <strong>Jenkins Shared Library</strong> so every team gets the same policy by importing one line.</p>
 
@@ -6886,15 +6249,9 @@ def call(Map args) {
 <tr><td>Kyverno admission</td><td>Cluster refuses unsigned/unscanned images</td><td>Bricks deploys if signing is broken</td></tr>
 </table>
 
-<p><strong>Production polish:</strong> wire the cluster side &mdash; <strong>Kyverno</strong> with <code>verifyImages</code> and <code>imageReferences</code> rules ensures only signed images from your registry deploy; <strong>Falco</strong> watches runtime behaviour for syscall anomalies; <strong>Tetragon</strong> (eBPF) does the same with less overhead. For the policy lifecycle, store Kyverno policies in their own repo synced via Argo CD so policy changes also go through PR review. Wave new policies in <strong>audit mode</strong> first, then promote to <strong>enforce</strong> after a quiet week.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q94">
-  <div class="qa__number">Question 94</div>
-  <h3 class="qa__question">Your organization wants to enforce compliance checks for Kubernetes deployments in the CI/CD pipeline. How would you set this up using GitHub Actions?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> the security and platform teams want <strong>compliance checks</strong> (CIS Kubernetes Benchmark, PCI DSS, SOC 2 controls) enforced for every Kubernetes deployment &mdash; with auditable evidence trails &mdash; using <strong>GitHub Actions</strong> as the CI engine.</p>
+<p><strong>Production polish:</strong> wire the cluster side &mdash; <strong>Kyverno</strong> with <code>verifyImages</code> and <code>imageReferences</code> rules ensures only signed images from your registry deploy; <strong>Falco</strong> watches runtime behaviour for syscall anomalies; <strong>Tetragon</strong> (eBPF) does the same with less overhead. For the policy lifecycle, store Kyverno policies in their own repo synced via Argo CD so policy changes also go through PR review. Wave new policies in <strong>audit mode</strong> first, then promote to <strong>enforce</strong> after a quiet week.</p>'''
+
+ANSWERS[94] = r'''<p><strong>Situation:</strong> the security and platform teams want <strong>compliance checks</strong> (CIS Kubernetes Benchmark, PCI DSS, SOC 2 controls) enforced for every Kubernetes deployment &mdash; with auditable evidence trails &mdash; using <strong>GitHub Actions</strong> as the CI engine.</p>
 
 <p><strong>Approach:</strong> compliance has three loops: <strong>pre-deploy</strong> (lint manifests, run policy as code), <strong>at-deploy</strong> (admission controller blocks non-compliant resources), and <strong>continuous</strong> (cluster auditor scans live resources, reports drift). GitHub Actions owns the pre-deploy loop with <strong>kube-linter</strong>, <strong>Kyverno CLI</strong>, <strong>Checkov</strong>, and <strong>kubescape</strong>; Argo CD applies manifests; <strong>Kyverno</strong> on cluster enforces at admission; <strong>kube-bench</strong> and <strong>Trivy Operator</strong> run continuous compliance scans.</p>
 
@@ -6959,15 +6316,9 @@ jobs:
 <tr><td>Gatekeeper / OPA</td><td>Rego is more expressive than Kyverno YAML</td><td>Higher learning curve; two tools to maintain</td></tr>
 </table>
 
-<p><strong>Production polish:</strong> for evidence, route SARIF outputs to <strong>GitHub Code Scanning</strong> (auditors see findings, fixes, and dismissals over time). On cluster, deploy <strong>Trivy Operator</strong> and <strong>Falco</strong> for continuous runtime compliance; reports flow to <strong>OpenPolicyAgent&rsquo;s policy reports</strong> or a SIEM (Splunk, Sumo Logic, Grafana). Run <strong>kube-bench</strong> as a CronJob to assess CIS controls hourly; alarm on regressions. For SOC 2 specifically, the audit trail benefits enormously from <strong>signed commits</strong> (Sigstore gitsign), <strong>required reviews</strong>, and <strong>Argo CD&rsquo;s sync history</strong> &mdash; auditors can correlate every cluster change to a reviewed, signed PR.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q95">
-  <div class="qa__number">Question 95</div>
-  <h3 class="qa__question">You are asked to set up a CI/CD pipeline for a Swift application with automated tests and deployment to AWS Lambda. Describe your approach.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a Swift codebase compiles a small set of <strong>microservice-style functions</strong> targeting <strong>AWS Lambda</strong> (image moderation, signed-URL generation, webhook ingestion). The team wants a <strong>CI/CD pipeline</strong> with unit tests on Linux and automatic deploys per environment.</p>
+<p><strong>Production polish:</strong> for evidence, route SARIF outputs to <strong>GitHub Code Scanning</strong> (auditors see findings, fixes, and dismissals over time). On cluster, deploy <strong>Trivy Operator</strong> and <strong>Falco</strong> for continuous runtime compliance; reports flow to <strong>OpenPolicyAgent&rsquo;s policy reports</strong> or a SIEM (Splunk, Sumo Logic, Grafana). Run <strong>kube-bench</strong> as a CronJob to assess CIS controls hourly; alarm on regressions. For SOC 2 specifically, the audit trail benefits enormously from <strong>signed commits</strong> (Sigstore gitsign), <strong>required reviews</strong>, and <strong>Argo CD&rsquo;s sync history</strong> &mdash; auditors can correlate every cluster change to a reviewed, signed PR.</p>'''
+
+ANSWERS[95] = r'''<p><strong>Situation:</strong> a Swift codebase compiles a small set of <strong>microservice-style functions</strong> targeting <strong>AWS Lambda</strong> (image moderation, signed-URL generation, webhook ingestion). The team wants a <strong>CI/CD pipeline</strong> with unit tests on Linux and automatic deploys per environment.</p>
 
 <p><strong>Approach:</strong> use the <strong>Swift AWS Lambda Runtime</strong>, compile in a Linux build container (Lambda is Linux-only), package as a <code>provided.al2023</code> custom runtime ZIP or a container image, run tests with <strong>swift-testing</strong>, and deploy via <strong>AWS SAM</strong> or <strong>Serverless Framework</strong>. Build on <strong>arm64</strong> (Graviton) for ~30% cost savings &mdash; native Swift on aarch64 is rock-solid as of 2026.</p>
 
@@ -7034,15 +6385,9 @@ jobs:
 <tr><td>swift-testing</td><td>Modern (Swift 5.10+) macro-based testing</td><td>Some XCTest features still nicer</td></tr>
 </table>
 
-<p><strong>Production polish:</strong> add <strong>X-Ray</strong> tracing via the Lambda extension (or OpenTelemetry Lambda layer for cross-vendor portability), pipe logs to <strong>CloudWatch Logs Insights</strong> with structured JSON, set CloudWatch alarms on <code>Errors</code>, <code>Throttles</code>, and p99 <code>Duration</code> &mdash; CodeDeploy hooks into those for auto-rollback. For cold start, enable <strong>Provisioned Concurrency</strong> on hot paths and consider <strong>SnapStart</strong>-equivalent techniques (preinitialise resources in a global) &mdash; the Swift runtime starts fast enough that most workloads don&rsquo;t need PC, saving cost over Java/.NET equivalents.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q96">
-  <div class="qa__number">Question 96</div>
-  <h3 class="qa__question">Your team wants to implement automated rollbacks for failed deployments in a real-time application using Kubernetes. How would you configure this in Jenkins?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a <strong>real-time application</strong> (chat, collaboration, live tracking) on Kubernetes with <strong>WebSockets</strong> and <strong>persistent in-memory sessions</strong>. A bad deploy causes user-visible disconnects, so the team needs <strong>automated rollback</strong> on health regression &mdash; orchestrated by Jenkins.</p>
+<p><strong>Production polish:</strong> add <strong>X-Ray</strong> tracing via the Lambda extension (or OpenTelemetry Lambda layer for cross-vendor portability), pipe logs to <strong>CloudWatch Logs Insights</strong> with structured JSON, set CloudWatch alarms on <code>Errors</code>, <code>Throttles</code>, and p99 <code>Duration</code> &mdash; CodeDeploy hooks into those for auto-rollback. For cold start, enable <strong>Provisioned Concurrency</strong> on hot paths and consider <strong>SnapStart</strong>-equivalent techniques (preinitialise resources in a global) &mdash; the Swift runtime starts fast enough that most workloads don&rsquo;t need PC, saving cost over Java/.NET equivalents.</p>'''
+
+ANSWERS[96] = r'''<p><strong>Situation:</strong> a <strong>real-time application</strong> (chat, collaboration, live tracking) on Kubernetes with <strong>WebSockets</strong> and <strong>persistent in-memory sessions</strong>. A bad deploy causes user-visible disconnects, so the team needs <strong>automated rollback</strong> on health regression &mdash; orchestrated by Jenkins.</p>
 
 <p><strong>Approach:</strong> use <strong>Argo Rollouts</strong> as the deployment engine (Jenkins doesn&rsquo;t roll back deployments itself &mdash; it triggers them and watches outcomes), with <strong>AnalysisTemplates</strong> that compare error rate, connection failure rate, and p95 message latency against the previous version. Rollouts auto-aborts and reverts on regression. Jenkins drives the pipeline: build, push, update the Rollout, wait for promotion or abort, report status to the team.</p>
 
@@ -7122,15 +6467,9 @@ spec:
 <tr><td>Jenkins role</td><td>Trigger + watch only</td><td>Rollback decision lives in Rollouts, not in Groovy</td></tr>
 </table>
 
-<p><strong>Production polish:</strong> add a <strong>shadow traffic</strong> step before any user-visible canary &mdash; replay 5% of production traffic through the new version with no response delivered to clients, comparing message processing rate and error patterns. WebSocket-specific: ensure the <strong>load balancer</strong> supports <strong>sticky sessions</strong> by pod hash, and that <strong>cluster autoscaler / Karpenter</strong> doesn&rsquo;t drain canary pods mid-canary. For observability, push WebSocket lifecycle events (<code>connect</code>, <code>disconnect</code>, <code>error</code>) to Prometheus with the rollouts_pod_template_hash label &mdash; that&rsquo;s how Argo Rollouts attributes signal to the canary vs stable side. Run <strong>chaos tests</strong> via <strong>Chaos Mesh</strong> on staging to validate the rollback path actually works before relying on it in prod.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q97">
-  <div class="qa__number">Question 97</div>
-  <h3 class="qa__question">You need to set up a CI/CD pipeline for a Golang application with unit tests, integration tests, and deployment to Netlify. Explain your approach.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a team has a <strong>Go backend</strong> built with <strong>go-chi</strong> or <strong>fiber</strong>, paired with a <strong>static frontend</strong> that lives on <strong>Netlify</strong>. Strictly speaking Netlify hosts the SPA/frontend; the Go API runs elsewhere &mdash; but the pipeline must build, test, and ship both in lockstep.</p>
+<p><strong>Production polish:</strong> add a <strong>shadow traffic</strong> step before any user-visible canary &mdash; replay 5% of production traffic through the new version with no response delivered to clients, comparing message processing rate and error patterns. WebSocket-specific: ensure the <strong>load balancer</strong> supports <strong>sticky sessions</strong> by pod hash, and that <strong>cluster autoscaler / Karpenter</strong> doesn&rsquo;t drain canary pods mid-canary. For observability, push WebSocket lifecycle events (<code>connect</code>, <code>disconnect</code>, <code>error</code>) to Prometheus with the rollouts_pod_template_hash label &mdash; that&rsquo;s how Argo Rollouts attributes signal to the canary vs stable side. Run <strong>chaos tests</strong> via <strong>Chaos Mesh</strong> on staging to validate the rollback path actually works before relying on it in prod.</p>'''
+
+ANSWERS[97] = r'''<p><strong>Situation:</strong> a team has a <strong>Go backend</strong> built with <strong>go-chi</strong> or <strong>fiber</strong>, paired with a <strong>static frontend</strong> that lives on <strong>Netlify</strong>. Strictly speaking Netlify hosts the SPA/frontend; the Go API runs elsewhere &mdash; but the pipeline must build, test, and ship both in lockstep.</p>
 
 <p><strong>Approach:</strong> use <strong>GitHub Actions</strong> with two parallel jobs: <strong>backend</strong> builds Go, runs <code>go test ./... -race -cover</code>, builds a Linux binary, pushes to <strong>Fly.io</strong> or <strong>Render</strong> (or AWS ECS if you must), and <strong>frontend</strong> builds the static bundle and deploys to <strong>Netlify</strong> via the <strong>Netlify CLI</strong>. A third <strong>integration</strong> job runs after both, hitting the deployed services with <strong>k6</strong> smoke tests.</p>
 
@@ -7203,15 +6542,9 @@ jobs:
 <tr><td>Codecov + race detector</td><td>Catches concurrency bugs early</td><td>Race tests are 2&ndash;5x slower</td></tr>
 </table>
 
-<p><strong>Production polish:</strong> use <strong>Netlify Deploy Previews</strong> for every PR &mdash; reviewers get a real URL. For the Go API, point <strong>OpenTelemetry</strong> at <strong>Grafana Cloud</strong> or <strong>Honeycomb</strong> for traces + metrics + logs in one place; export structured logs with <strong>slog</strong>. Use <strong>GoReleaser</strong> if you also distribute CLI binaries &mdash; it integrates with Cosign for signed releases. Schedule <strong>govulncheck</strong> daily against the codebase to catch newly disclosed Go ecosystem CVEs without waiting for a release. For breaking API changes, run a <strong>contract test</strong> (Pact or Schemathesis against the OpenAPI spec) in the integration job so frontend and backend stay in sync.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q98">
-  <div class="qa__number">Question 98</div>
-  <h3 class="qa__question">Your organization wants to use GitHub Actions for deploying AI/ML models to Google Kubernetes Engine (GKE). Describe the workflow you would create.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a data science team wants to <strong>continuously deploy AI/ML models</strong> &mdash; classifiers, embedders, fine-tuned LLMs &mdash; to <strong>Google Kubernetes Engine (GKE)</strong> via <strong>GitHub Actions</strong>. They need GPU-aware deploys, model versioning, drift monitoring, and easy rollback.</p>
+<p><strong>Production polish:</strong> use <strong>Netlify Deploy Previews</strong> for every PR &mdash; reviewers get a real URL. For the Go API, point <strong>OpenTelemetry</strong> at <strong>Grafana Cloud</strong> or <strong>Honeycomb</strong> for traces + metrics + logs in one place; export structured logs with <strong>slog</strong>. Use <strong>GoReleaser</strong> if you also distribute CLI binaries &mdash; it integrates with Cosign for signed releases. Schedule <strong>govulncheck</strong> daily against the codebase to catch newly disclosed Go ecosystem CVEs without waiting for a release. For breaking API changes, run a <strong>contract test</strong> (Pact or Schemathesis against the OpenAPI spec) in the integration job so frontend and backend stay in sync.</p>'''
+
+ANSWERS[98] = r'''<p><strong>Situation:</strong> a data science team wants to <strong>continuously deploy AI/ML models</strong> &mdash; classifiers, embedders, fine-tuned LLMs &mdash; to <strong>Google Kubernetes Engine (GKE)</strong> via <strong>GitHub Actions</strong>. They need GPU-aware deploys, model versioning, drift monitoring, and easy rollback.</p>
 
 <p><strong>Approach:</strong> separate the <strong>model artefact pipeline</strong> (training, evaluation, registry promotion) from the <strong>serving pipeline</strong> (container build, GKE rollout). Use <strong>MLflow</strong> or <strong>Vertex AI Model Registry</strong> for model versioning, <strong>KServe</strong> for serving (or <strong>vLLM</strong> for LLMs specifically), <strong>Argo CD</strong> for GitOps deploy, and <strong>Workload Identity Federation</strong> so GitHub Actions auths to GCP without static keys.</p>
 
@@ -7290,15 +6623,9 @@ jobs:
 <tr><td>Evaluation gate in CI</td><td>Bad model never reaches a canary</td><td>Eval suite must be representative</td></tr>
 </table>
 
-<p><strong>Production polish:</strong> wire <strong>Evidently AI</strong> or <strong>NannyML</strong> for drift detection &mdash; both prediction drift and feature drift &mdash; with alerts to Slack and an automated rollback hook into Argo CD. Add <strong>shadow inference</strong> so the new model scores live traffic without affecting users, then compare distributions. For LLMs specifically, run <strong>regression evals</strong> (Promptfoo, LangSmith) on each deploy with a fixed prompt set so prompt-level quality is part of the gate. Cost guard rail: a <strong>VPA in Off mode</strong> recommends GPU sizing changes, and <strong>Karpenter consolidation</strong> packs GPU pods tightly so you&rsquo;re not paying for idle accelerators. Finally, sign model artefacts and container images with <strong>Cosign</strong> &mdash; ML supply chain is an emerging attack surface, and provenance over training data + weights is increasingly demanded by EU AI Act compliance.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q99">
-  <div class="qa__number">Question 99</div>
-  <h3 class="qa__question">You are asked to implement CI/CD for a multi-tenant application using Docker and Kubernetes. Explain your approach.</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> a SaaS team runs a <strong>multi-tenant application</strong> on Kubernetes &mdash; one codebase, many customer organisations &mdash; with strict requirements for <strong>tenant isolation</strong>, <strong>per-tenant scaling</strong>, and <strong>blast-radius control</strong> when shipping changes. CI/CD must accommodate all three.</p>
+<p><strong>Production polish:</strong> wire <strong>Evidently AI</strong> or <strong>NannyML</strong> for drift detection &mdash; both prediction drift and feature drift &mdash; with alerts to Slack and an automated rollback hook into Argo CD. Add <strong>shadow inference</strong> so the new model scores live traffic without affecting users, then compare distributions. For LLMs specifically, run <strong>regression evals</strong> (Promptfoo, LangSmith) on each deploy with a fixed prompt set so prompt-level quality is part of the gate. Cost guard rail: a <strong>VPA in Off mode</strong> recommends GPU sizing changes, and <strong>Karpenter consolidation</strong> packs GPU pods tightly so you&rsquo;re not paying for idle accelerators. Finally, sign model artefacts and container images with <strong>Cosign</strong> &mdash; ML supply chain is an emerging attack surface, and provenance over training data + weights is increasingly demanded by EU AI Act compliance.</p>'''
+
+ANSWERS[99] = r'''<p><strong>Situation:</strong> a SaaS team runs a <strong>multi-tenant application</strong> on Kubernetes &mdash; one codebase, many customer organisations &mdash; with strict requirements for <strong>tenant isolation</strong>, <strong>per-tenant scaling</strong>, and <strong>blast-radius control</strong> when shipping changes. CI/CD must accommodate all three.</p>
 
 <p><strong>Approach:</strong> pick a tenancy model first &mdash; <strong>namespace-per-tenant</strong> (shared cluster, RBAC + NetworkPolicy + ResourceQuota), <strong>cluster-per-tenant</strong> (full isolation, highest cost), or <strong>vCluster-per-tenant</strong> (virtual clusters, balanced). Most B2B SaaS lands on namespace-per-tenant with strong defaults; high-compliance shops use vCluster or full clusters. Use <strong>Argo CD ApplicationSets</strong> to project the same app across all tenants from one template, then ship <strong>progressive rollouts</strong> per tenant tier (canary tenants first, then GA wave).</p>
 
@@ -7355,15 +6682,9 @@ spec:
 <tr><td>Noisy neighbours</td><td>ResourceQuota + LimitRange + priority classes; topology spread</td></tr>
 </table>
 
-<p><strong>Production polish:</strong> instrument with <strong>per-tenant Prometheus labels</strong> so dashboards and alerts attribute usage and errors correctly &mdash; without this, on-call gets paged for &ldquo;errors&rdquo; that are actually one bad tenant. Use <strong>OpenCost</strong> to break down cluster spend by namespace so finance can attribute COGS per customer. For data plane isolation, run a <strong>Cilium NetworkPolicy</strong> at L7 (FQDN egress allow-lists, no east-west by default) and verify with <strong>Hubble</strong>. Onboarding/offboarding: write a tenant lifecycle operator that creates/deletes a Git folder in the config repo; ApplicationSet picks up the change automatically. For data residency, pair the multi-tenant app with <strong>region-specific clusters</strong> federated via Argo CD ApplicationSets with cluster generators &mdash; that&rsquo;s how you serve EU/US/IN customers from in-region clusters from one codebase.</p>
-    
-  </div>
-</article>
-<article class="qa" id="q100">
-  <div class="qa__number">Question 100</div>
-  <h3 class="qa__question">Your team wants to enforce code quality and security checks for AI/ML models in the CI/CD pipeline. How would you set this up using GitHub Actions?</h3>
-  <div class="qa__answer">
-    <p><strong>Situation:</strong> an ML platform team wants to apply the same <strong>code quality and security rigour</strong> to model code, training pipelines, and inference services as they do to any application &mdash; lint, type-check, unit-test, security-scan, model-evaluate, all gated through <strong>GitHub Actions</strong>.</p>
+<p><strong>Production polish:</strong> instrument with <strong>per-tenant Prometheus labels</strong> so dashboards and alerts attribute usage and errors correctly &mdash; without this, on-call gets paged for &ldquo;errors&rdquo; that are actually one bad tenant. Use <strong>OpenCost</strong> to break down cluster spend by namespace so finance can attribute COGS per customer. For data plane isolation, run a <strong>Cilium NetworkPolicy</strong> at L7 (FQDN egress allow-lists, no east-west by default) and verify with <strong>Hubble</strong>. Onboarding/offboarding: write a tenant lifecycle operator that creates/deletes a Git folder in the config repo; ApplicationSet picks up the change automatically. For data residency, pair the multi-tenant app with <strong>region-specific clusters</strong> federated via Argo CD ApplicationSets with cluster generators &mdash; that&rsquo;s how you serve EU/US/IN customers from in-region clusters from one codebase.</p>'''
+
+ANSWERS[100] = r'''<p><strong>Situation:</strong> an ML platform team wants to apply the same <strong>code quality and security rigour</strong> to model code, training pipelines, and inference services as they do to any application &mdash; lint, type-check, unit-test, security-scan, model-evaluate, all gated through <strong>GitHub Actions</strong>.</p>
 
 <p><strong>Approach:</strong> treat ML code as code &mdash; same Python linting and typing rigour &mdash; but add ML-specific gates: <strong>data validation</strong> (Great Expectations, Pandera), <strong>model evaluation</strong> on a held-out set, <strong>fairness/bias checks</strong> (Fairlearn), <strong>model artefact security</strong> (model signing, supply-chain attestation), and <strong>prompt regression</strong> for LLM use. Quality gates run in parallel; the slowest path defines critical path.</p>
 
@@ -7454,24 +6775,4 @@ jobs:
 <tr><td>OSV-Scanner</td><td>PyTorch, transformers, vLLM CVEs</td><td>~10 s</td></tr>
 </table>
 
-<p><strong>Production polish:</strong> add <strong>model card</strong> generation as a required artefact &mdash; auto-populated from eval results with metrics, fairness slice analysis, intended use, and limitations. Sign final model files with <strong>Cosign</strong> and store SBOMs that include <em>dataset</em> versions (not just package versions) &mdash; lineage matters for EU AI Act and similar regimes. For LLMs specifically, run <strong>guardrails</strong> tests (toxicity, PII leakage, prompt injection resistance via Garak or PyRIT) in the CI flow. For long-term safety, instrument the deployed model with <strong>NannyML</strong> or <strong>Evidently AI</strong> so production drift triggers a regression CI run that compares current vs baseline distribution &mdash; closing the loop between training-time quality and serving-time reality. Finally, treat model promotion as a <strong>change-controlled deployment</strong>: model version bumps are PRs in the config repo, signed and reviewed, with Argo CD applying them &mdash; the same audit-trail discipline you&rsquo;d apply to a database schema change.</p>
-    
-  </div>
-</article>
-
-    <nav class="chapter-nav" aria-label="Chapter navigation">
-      <a class="chapter-nav__prev" href="cicd-pipeline-advanced.html">
-      <span class="chapter-nav__dir">← Previous</span>
-      <span class="chapter-nav__title">CI/CD Pipeline — Advanced</span>
-    </a>
-      <div></div>
-    </nav>
-
-  </section>
-
-</main>
-</div>
-
-<script src="../assets/script.js"></script>
-</body>
-</html>
+<p><strong>Production polish:</strong> add <strong>model card</strong> generation as a required artefact &mdash; auto-populated from eval results with metrics, fairness slice analysis, intended use, and limitations. Sign final model files with <strong>Cosign</strong> and store SBOMs that include <em>dataset</em> versions (not just package versions) &mdash; lineage matters for EU AI Act and similar regimes. For LLMs specifically, run <strong>guardrails</strong> tests (toxicity, PII leakage, prompt injection resistance via Garak or PyRIT) in the CI flow. For long-term safety, instrument the deployed model with <strong>NannyML</strong> or <strong>Evidently AI</strong> so production drift triggers a regression CI run that compares current vs baseline distribution &mdash; closing the loop between training-time quality and serving-time reality. Finally, treat model promotion as a <strong>change-controlled deployment</strong>: model version bumps are PRs in the config repo, signed and reviewed, with Argo CD applying them &mdash; the same audit-trail discipline you&rsquo;d apply to a database schema change.</p>'''
